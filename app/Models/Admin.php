@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
+    protected $connection = 'mysql';
     use HasFactory,Notifiable;
     protected $guarded=[];
 }

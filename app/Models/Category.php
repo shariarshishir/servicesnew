@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
     // public function getStatusAttribute($value)
     // {
@@ -27,7 +29,7 @@ class Category extends Model
 
     public static function boot()
     {
-        
+
         parent::boot();
     }
 

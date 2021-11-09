@@ -11,6 +11,8 @@ class ProductWishlist extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $connection = 'mysql';
+
     public function product()
     {
         return $this->belongsTo(Product::class);

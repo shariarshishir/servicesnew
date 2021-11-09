@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShipmentType extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
 }

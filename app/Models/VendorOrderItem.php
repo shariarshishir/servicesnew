@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VendorOrderItem extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
     protected $guarded=['id'];
     public function order()
     {

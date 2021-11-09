@@ -10,6 +10,8 @@ class ProductImage extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $connection = 'mysql';
+
     protected $guarded=['id'];
     public function product()
     {

@@ -10,5 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RelatedProduct extends Model
 {
     use HasFactory , SoftDeletes;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
 }

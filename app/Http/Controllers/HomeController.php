@@ -13,6 +13,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
 use Helper;
+use DB;
 
 
 class HomeController extends Controller
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         //$products = Product::with('images')->where('is_featured', 1)->paginate(9);
         return view('shoplanding');
     }
@@ -297,8 +299,8 @@ class HomeController extends Controller
                 foreach($results as $result){
                     array_push($averageRatings, productRating($result->id));
                 }
-               
-               
+
+
                 $resultCount=count($results);
                 return response()->json([
                     'data' => $results,

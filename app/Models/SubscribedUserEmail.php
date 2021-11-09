@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubscribedUserEmail extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
 }

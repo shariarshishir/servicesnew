@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class OrderModificationComment extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
     /**
      * The has Many Relationship

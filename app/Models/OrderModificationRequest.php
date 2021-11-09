@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class OrderModificationRequest extends Model
 {
     use HasFactory ,Notifiable;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
 
     public function product()

@@ -10,6 +10,8 @@ use Illuminate\Support\Collection;
 class ProductCategory extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mysql';
     protected $guarded=[];
 
     // public function getStatusAttribute($value)

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class OrderModification extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mysql';
     protected $guarded=['id'];
 
     public function orderItem()

@@ -9,6 +9,8 @@ class UserVerify extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     public $table = "users_verify";
 
     /**

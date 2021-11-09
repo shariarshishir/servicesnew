@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $connection = 'mysql';
+
     protected $guarded=[];
 
     public function vendor()

@@ -12,7 +12,7 @@ class Vendor extends Model
 {
     use HasFactory, SoftDeletes;
 
-
+    protected $connection = 'mysql';
     protected $guarded=[];
     public function user()
     {

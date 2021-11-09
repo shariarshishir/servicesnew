@@ -9,6 +9,8 @@ class UOM extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'uom';
 
     protected $guarded=[];

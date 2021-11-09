@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingMethod extends Model
 {
     use HasFactory;
-
+    protected $connection = 'mysql';
     protected $guarded=[];
 }

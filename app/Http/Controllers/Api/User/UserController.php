@@ -1,0 +1,585 @@
+<?php
+
+namespace App\Http\Controllers\Api\User;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Vendor;
+use App\Models\UserVerify;
+use Illuminate\Support\Facades\Hash;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Image;
+use App\Events\NewUserHasRegisteredEvent;
+use Illuminate\Support\Facades\Http;
+
+class UserController extends Controller
+{
+
+    public function index()
+    {
+        $users=User::where('is_email_verified',1)->all();
+        return response()->json(['users'=>$users,'code'=>'True'],200);
+    }
+
+    public function show($userId)
+    {
+        $user = User::with('vendor')->where('id',$userId)->where('is_email_verified',1)->first();
+        $totalWishlist=count($user->productWishlist);
+        if(isset($user))
+        {
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'message'=>'user found','code'=>'True'],200);
+        }
+        else
+        {
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'message'=>'user not found','code'=>"False"],200);
+        }
+
+    }
+
+
+    //store user from merchant bay
+
+    public function storeUserFromMerchantBay(Request $request,$userType)
+    {
+        $data=json_decode($request->form_data);
+        //return response()->json(dd($data));
+        $userExistOrNot = User::where('email',$data->email)->first();
+        if(!$userExistOrNot){
+
+            if($request->hasFile('profile_image'))
+            {
+                $userEmail=$data->email;
+                $uniqueUserName=[];
+                $uniqueUserName=explode("@",$userEmail);
+                $filename = $request->profile_image->store('images/'.$uniqueUserName[0].'/profile','public');
+                $image_resize = Image::make(public_path('storage/'.$filename));
+                $image_resize->fit(250, 250);
+                $image_resize->save(public_path('storage/'.$filename));
+            }
+
+           // generating unique user id uisng id generattor package
+            $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+            if($userType == 'buyer'){
+                $data->is_group = 0;
+            }
+
+            $user = User::create([
+                    'user_id'=>$user_id,
+                    'name' => $data->uname,
+                    'email' => $data->email,
+                    'phone' => $data->contact_info->telephone_no,
+                    'user_type' => $userType,
+                    'password' => Hash::make($data->password),
+                    'user_from_manufacture' => 1,
+                    'is_email_verified' => 0,
+                    'image'=>$filename,
+                    'created_by'=>NULL,
+                    'updated_by'=>NULL,
+                ]);
+
+            $token=$user->createToken('merchantbayshop')->plainTextToken;
+            $user=User::latest()->first();
+
+            //after creating user will create vendor as well as
+            $date=Carbon::today()->toDateString();
+            $date=Carbon::parse($date)->format('dmY');
+            $number=mt_rand(0,9999999);
+            $name= Str::slug($data->company_name,'-');
+            $vendorUId='mbs-'.$name.'-'.$date.$number;
+
+            $vendor = Vendor::create([
+                'user_id'=>$user->id,
+                'vendor_uid' => $vendorUId,
+                'vendor_name' => $data->company_name,
+                'vendor_address' =>($data->is_group==1) ? NULL : (($userType=='buyer') ? ($data->contact_info->street.' '.$data->contact_info->city.' '.$data->contact_info->region) : ($data->company_info->address.' '.$data->company_info->country)),
+                'created_by'=>$user->id,
+                'updated_by'=>NULL,
+            ]);
+
+
+            $email_verification_OTP = mt_rand(100000,999999);
+
+            UserVerify::create([
+                'user_id' => $user->id,
+                'token' => $email_verification_OTP
+              ]);
+
+
+           //event(new NewUserHasRegisteredEvent($user));
+
+            // Mail::send('emails.apiEmailVerificationEmail', ['token' => $email_verification_OTP], function($message) use($request){
+            //     $message->to($request->email);
+            //     $message->subject('Welcome to Merchantbay Shop');
+            // });
+
+            if($vendor && $user){
+                return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
+            }
+            else{
+                return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'message' => 'There is somthing wrong','code'=>False),204);
+            }
+
+        }
+        else{
+
+            return response()->json([
+                'error' => 'User already exists',
+                'code' =>204
+            ]);
+
+        }
+
+    }
+
+    //registration from sso for app user
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'user_type' => 'required',
+            'company_name' => 'required',
+            'sso_reference_id' =>'required',
+            'phone'           => 'required',
+        ]);
+
+        $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+        $user = User::create([
+            'user_id'=>$user_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_type' => $request->user_type == 'buyer' ? 'buyer' : 'wholesaler',
+            'sso_reference_id' =>$request->sso_reference_id,
+            'phone'    => $request->phone,
+        ]);
+
+        //After creating user will create vendor as weel as
+        $date=Carbon::today()->toDateString();
+        $date=Carbon::parse($date)->format('dmY');
+        $number=mt_rand(0,9999999);
+        $name= Str::slug($request->vendor_name,'-');
+        $vendorUId='mbs-'.$name.'-'.$date.$number;
+
+        $vendor=Vendor::create([
+            'user_id'=>$user->id,
+            'vendor_uid' => $vendorUId,
+            'vendor_name' => $request->company_name,
+            'created_by'=>$user->id,
+            'updated_by'=>NULL,
+        ]);
+        $email_verification_OTP = mt_rand(100000,999999);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $email_verification_OTP
+          ]);
+        $token=$user->createToken('merchantbayshop')->plainTextToken;
+
+        Mail::send('emails.apiEmailVerificationEmail', ['token' => $email_verification_OTP], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Welcome to Merchantbay Shop');
+        });
+
+        if($vendor && $user){
+            return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
+        }
+        else{
+            return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'message' => 'There is somthing wrong','code'=>False),204);
+        }
+
+
+    }
+
+    public function storeBk(Request $request)
+    {
+
+        if($request->user_type=='buyer')
+        {
+            $this->validateRequestForBuyer();
+        }
+        else
+        {
+            $this->validateRequestForWholesaler();
+        }
+
+        if($request->hasFile('image'))
+        {
+            $userEmail=$request->email;
+            $uniqueUserName=[];
+            $uniqueUserName=explode("@",$userEmail);
+            $filename = $request->image->store('images/'.$uniqueUserName[0].'/profile','public');
+            $image_resize = Image::make(public_path('storage/'.$filename));
+            $image_resize->fit(250, 250);
+            $image_resize->save(public_path('storage/'.$filename));
+        }
+
+        //generating unique user id uisng id generattor package
+        $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+
+        //for authenticated user
+        if (Auth::check())
+        {
+            $created_by=auth()->user()->id;
+        }
+
+        //for unauthenticated user
+        else
+        {
+            $created_by=NULL;
+        }
+
+        $user = User::create([
+                'user_id'=>$user_id,
+                'name' => $request->full_name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'user_type' => $request->user_type,
+                'password' => Hash::make($request->password),
+                'image'=>$filename,
+                'created_by'=>$created_by,
+                'updated_by'=>NULL,
+            ]);
+        $token=$user->createToken('merchantbayshop')->plainTextToken;
+        //$user=User::latest()->first();
+
+
+        //after creating user will create vendor as weel as
+        $date=Carbon::today()->toDateString();
+        $date=Carbon::parse($date)->format('dmY');
+        $number=mt_rand(0,9999999);
+        $name= Str::slug($request->vendor_name,'-');
+        $vendorUId='mbs-'.$name.'-'.$date.$number;
+
+        $vendor = Vendor::create([
+            'user_id'=>$user->id,
+            'vendor_uid' => $vendorUId,
+            'vendor_name' => $request->vendor_name,
+            'vendor_address' => $request->vendor_address,
+            'created_by'=>$user->id,
+            'updated_by'=>NULL,
+        ]);
+        $email_verification_OTP = mt_rand(100000,999999);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $email_verification_OTP
+          ]);
+
+      //  event(new NewUserHasRegisteredEvent($user));
+
+        Mail::send('emails.apiEmailVerificationEmail', ['token' => $email_verification_OTP], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Welcome to Merchantbay Shop');
+        });
+
+        if($vendor && $user){
+            return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
+        }
+        else{
+            return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'message' => 'There is somthing wrong','code'=>False),204);
+        }
+
+
+    }
+
+    public function verifyAccount($userId,$token)
+    {
+        $verifyUser = UserVerify::where('user_id',$userId)->where('token', $token)->first();
+        $user=User::where('id',$userId)->first();
+        $message = 'Sorry your email cannot be identified.';
+
+        if(!is_null($verifyUser) ){
+            $user = $verifyUser->user;
+            if(!$user->is_email_verified) {
+
+                $verifyUser->user->is_email_verified = 1;
+                $verifyUser->user->save();
+
+                $manufacture_base_url=env('MANUFACTURE_BASE_URL');
+                $response = Http::post( $manufacture_base_url.'/api/verify', ['user' => $user]);
+
+                $message = "Your email have been verified successfully. Please Click here to login";
+            } else {
+                $message = "Your email have been verified successfully.";
+            }
+            return response()->json(array('message' =>  $message,'code'=>'True','user'=>$user),200);
+        }else{
+            return response()->json(array('message' =>  $message,'code'=>'false','user'=>$user),200);
+
+        }
+
+    }
+
+    public function resendVerificationEmail(Request $request){
+
+        $user=User::where('email',$request->email)->first();
+        $message="Email verfication mail has resent successfully";
+        if($user && $user->is_email_verified==0){
+
+            $verifyUser = UserVerify::where('user_id', $user->id)->first();
+            Mail::send('emails.apiEmailVerificationEmail', ['token' => $verifyUser->token], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('Email Verification Mail');
+            });
+            return response()->json(array('message' => $message,'code'=>'True'),200);
+        }
+        else{
+            return response()->json(array('message' => "User not registered",'code'=>'false'),200);
+        }
+
+    }
+
+    //delete single user by uisng unique user id
+    public function destroy($userId)
+    {
+        $user = User::where('id',$userId)->first();
+        if(isset($user)){
+            $user->delete();
+            return response()->json(array('message' => 'User Deleted Successfully','code'=>'True'),200);
+
+        }else{
+            return response()->json(array('message' => 'User Not found','code'=>'False'),204);
+
+        }
+
+
+    }
+
+   //validate buyer registration from
+    private function validateRequestForBuyer()
+    {
+        return request()->validate([
+            'full_name' => 'required|string|max:255',
+            'email'=> 'required|string|email|max:255|unique:users',
+            'phone'=> 'required',
+            'vendor_name'=>'nullable',
+            'vendor_address'=>'nullable',
+            'password'=> 'required|string|min:8|confirmed',
+            'user_type'=>'required|string',
+            'image'=>'image|max:5000',
+        ]);
+    }
+
+    //validate wholesaler registration from
+    private function validateRequestForWholesaler()
+    {
+        return request()->validate([
+            'full_name' => 'required|string|max:255',
+            'email'=> 'required|string|email|max:255|unique:users',
+            'phone'=> 'required',
+            'vendor_name'=>'required|unique:vendors',
+            'vendor_address'=>'required',
+            'password'=> 'required|string|min:8|confirmed',
+            'user_type'=>'required|string',
+            'image'=>'image|max:5000',
+        ]);
+    }
+
+    public function login(Request $request){
+
+        request()->validate([
+
+            'email'=> 'required',
+            'password'=> 'required',
+
+        ]);
+        $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        if($sso->successful()){
+
+            $user = User::where('email',$request->email)->first();
+            $message = "Email verfication mail has resent successfully";
+            $token=$user->createToken('merchantbayshop')->plainTextToken;
+            if($user && $user->is_email_verified == 0 && Hash::check($request->password, $user->password)){
+
+                $verifyUser = UserVerify::where('user_id', $user->id)->first();
+                $email_verification_OTP = $email_verification_OTP = mt_rand(100000,999999);
+                $verifyUser = UserVerify::where('user_id',$verifyUser->user_id)->update([
+                    'user_id' => $user->id,
+                    'token' => $email_verification_OTP
+                ]);
+                $verifyUser = UserVerify::where('user_id', $user->id)->first();
+
+                Mail::send('emails.apiEmailVerificationEmail', ['token' => $verifyUser->token], function($message) use($request){
+                    $message->to($request->email);
+                    $message->subject('Email Verification Mail');
+                });
+                return response()->json(array('message' => $message,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>'True','user'=>$user),200);
+            }
+            elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
+
+
+                return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>"True"],201);
+
+            }
+            else{
+
+                return response()->json(['message' => 'Wrong email or password','code'=>'False' ,'user'=>$user],401);
+
+            }
+
+        }
+        else{
+
+            return response()->json(['message' => 'Wrong email or password','code'=>'False'],401);
+
+        }
+
+
+    }
+
+
+
+
+    public function logout(Request $request){
+        auth()->user()->tokens()->delete();
+        return response()->json(['message'=>"Logout successful",'code'=>"true"],200);
+
+    }
+
+
+    public function updateImage(Request $request)
+    {
+
+        $user=User::where('id',$request->user_id)->first();
+        if ($request->hasFile('image'))
+        {
+            $userEmail=$user->email;
+            $uniqueUserName=[];
+            $uniqueUserName=explode("@",$userEmail);
+            $filename = $request->image->store('images/'.$uniqueUserName[0].'/profile','public');
+            $image_resize = Image::make(public_path('storage/'.$filename));
+            $image_resize->fit(250, 250);
+            $image_resize->save(public_path('storage/'.$filename));
+        }
+
+        $user->image= $filename;
+        $user->save();
+        $message="Image uploaded successfully";
+        return response()->json(['user'=>$user,'message'=>$message,'code'=>true],200);
+    }
+
+    public function verifyUserFromManufacture(Request $request){
+
+        $user = User::where('email',$request->email)->first();
+        if( $user ){
+             $user->is_email_verified = 1;
+             $user->save();
+             return response()->json(['message'=>'user verified successfully'],200);
+        }
+        else{
+             return response()->json(['message'=>'user verification failed'],204);
+        }
+
+    }
+
+    // user registration from sso
+    public function signUp(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'user_type' => 'required',
+            'company_name' => 'required',
+            'sso_reference_id' =>'required',
+            'phone'           => 'required',
+        ]);
+
+        $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+        $user = User::create([
+            'user_id'=>$user_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_type' => $request->user_type == 'buyer' ? 'buyer' : 'wholesaler',
+            'sso_reference_id' =>$request->sso_reference_id,
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->header('User-Agent'),
+            'phone'     => $request->phone,
+        ]);
+
+        //After creating user will create vendor as weel as
+        $date=Carbon::today()->toDateString();
+        $date=Carbon::parse($date)->format('dmY');
+        $number=mt_rand(0,9999999);
+        $name= Str::slug($request->company_name,'-');
+        $vendorUId='mbs-'.$name.'-'.$date.$number;
+
+        Vendor::create([
+            'user_id'=>$user->id,
+            'vendor_uid' => $vendorUId,
+            'vendor_name' => $request->company_name,
+            'created_by'=>$user->id,
+            'updated_by'=>NULL,
+        ]);
+
+        event(new NewUserHasRegisteredEvent($user));
+        $token = Str::random(64);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $token
+          ]);
+
+        Mail::send('emails.emailVerificationEmail', ['token' => $token, 'user' => $user], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Welcome to merchant Bay Ltd');
+        });
+
+        return response()->json(['msg' => 'successful'], 200);
+    }
+
+
+    public function  notificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+                if($notification->type == "App\Notifications\OrderQueryFromAdminNotification" && $notification->data['notification_data']['order_modification_request_id']==$request->notificationId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
+
+                elseif($notification->type == "App\Notifications\QueryCommuncationNotification" && $notification->data['notification_data']==$request->notificationId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
+                elseif($notification->type == "App\Notifications\QueryWithModificationToUserNotification" && $notification->data['notification_data']==$request->notificationId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
+                elseif($notification->type == "App\Notifications\NewOrderHasApprovedNotification" && $notification->data['notification_data']==$request->notificationId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
+                elseif($notification->type == "App\Notifications\ProductAvailabilityNotification" && $notification->data['notification_data']['id']==$request->notificationId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
+                elseif($notification->type == "App\Notifications\PaymentSuccessNotification" && $notification->data['notification_data']==$request->notificationId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
+
+        }
+        return response()->json(["message"=>"notification marked as read successfully ","code"=>true],200);
+    }
+
+
+
+
+
+}

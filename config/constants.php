@@ -23,6 +23,14 @@
          'confirm' => 2,
       ],
 
+      'profile_business_type' => [
+        'manufacturer' => 1,
+        'wholesaler' => 2,
+        'design_studio' => 3,
+     ],
+
+
+
 
 
  ];

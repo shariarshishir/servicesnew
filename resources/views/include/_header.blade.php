@@ -266,6 +266,9 @@ $priceChart = json_decode(file_get_contents('https://www.merchantbay.com/api/pri
                                                 <a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
                                             </li>
                                             <li tabindex="0">
+                                                <a class="grey-text text-darken-1" href="{{route('business.profile')}}"><i class="material-icons">store</i>My Business</a>
+                                            </li>
+                                            <li tabindex="0">
                                                 <a class="grey-text text-darken-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i> Logout</a>
                                             </li>
                                         </ul>

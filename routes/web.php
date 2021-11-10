@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\ProductReviewController;
@@ -123,6 +124,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('order-delivered/{orderNumber}',[UserOrderController::class, 'orderDelivered'])->middleware(['auth','sso.verified']);
     Route::get('order-type-filter', [UserOrderController::class, 'orderTypeFilter'])->name('order.type.filter');
     //end order
+    //business profile
+    Route::get('/business/profile', [BusinessProfileController::class, 'index'])->name('business.profile');
+    Route::get('/business/profile/create', [BusinessProfileController::class, 'create'])->name('business.profile.create');
+    Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
+    Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
 
 
 });

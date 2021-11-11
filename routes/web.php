@@ -129,7 +129,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile/create', [BusinessProfileController::class, 'create'])->name('business.profile.create');
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
-
+    Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
 });
 

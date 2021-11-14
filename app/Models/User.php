@@ -57,6 +57,11 @@ class User extends Authenticatable
         return $this->hasMany(ProductWishlist::class);
     }
 
+    public function businessProfile()
+    {
+        return $this->hasMany(BusinessProfile::class);
+    }
+
 
 
 

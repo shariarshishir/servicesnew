@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BusinessProfileController as AdminBusinessProfileController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductController;
@@ -13,8 +14,10 @@ use App\Http\Controllers\Admin\ShipmentTypeController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\UomContorller;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\ProductReviewController;
@@ -125,7 +128,12 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('order-delivered/{orderNumber}',[UserOrderController::class, 'orderDelivered'])->middleware(['auth','sso.verified']);
     Route::get('order-type-filter', [UserOrderController::class, 'orderTypeFilter'])->name('order.type.filter');
     //end order
-
+    //business profile
+    Route::get('/business/profile', [BusinessProfileController::class, 'index'])->name('business.profile');
+    Route::get('/business/profile/create', [BusinessProfileController::class, 'create'])->name('business.profile.create');
+    Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
+    Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
+    Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
 });
 
@@ -239,9 +247,15 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('shipment-type', ShipmentTypeController::class);
         Route::get('shipping-charge/change/status/{order_id}', [ShippingChargeController::class, 'changeStatus'])->name('shipping.charge.change.status');
         Route::resource('shipping-charge', ShippingChargeController::class);
-        
+
         // Blogs api start
         Route::resource('blogs', BlogController::class);
+        //users
+        Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
+        Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
+        Route::get('user/business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
+        Route::post('user/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
+
 
 
 

@@ -71,7 +71,7 @@ $priceChart = json_decode(file_get_contents('https://www.merchantbay.com/api/pri
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);">Blogs</a>
+                                <a href="{{route('industry.blogs')}}">Blogs</a>
                             </li>
                         </ul>
                     </div>

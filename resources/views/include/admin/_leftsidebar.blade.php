@@ -106,6 +106,12 @@
                     </li>
                 </ul>
           </li>
+          <li class="nav-item">
+            <a href="{{ Route('blogs.index')}}" class="nav-link {{ Route::is('blogs.index')? 'active' : ''}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Blogs</p>
+            </a>
+          </li>
           {{-- end shipping --}}
         </ul>
       </nav>

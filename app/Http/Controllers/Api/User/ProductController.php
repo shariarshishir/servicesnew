@@ -29,7 +29,7 @@ class ProductController extends Controller
 
                 if($product->product_type==1 ){
                     foreach(json_decode($product->attribute) as $attribute){
-                        $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'lead_time'=>$attribute[2],'price'=>$attribute[3]);
+                        $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
                     }
                 }else{
                     foreach(json_decode($product->attribute) as $attribute){
@@ -170,7 +170,7 @@ class ProductController extends Controller
             foreach($buyDesignProducts as $product){
 
                 foreach(json_decode($product->attribute) as $attribute){
-                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'lead_time'=>$attribute[2],'price'=>$attribute[3]);
+                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
                 }
                 $newFormatedProduct= new stdClass();
 
@@ -270,7 +270,7 @@ class ProductController extends Controller
 
             if($product->product_type==1 ){
                 foreach(json_decode($product->attribute) as $attribute){
-                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'lead_time'=>$attribute[2],'price'=>$attribute[3]);
+                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
                 }
             }
             else if($product->product_type==2){
@@ -335,7 +335,7 @@ class ProductController extends Controller
 
             if($product->product_type==1 ){
                 foreach(json_decode($product->attribute) as $attribute){
-                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'lead_time'=>$attribute[2],'price'=>$attribute[3]);
+                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
                 }
             }else if($product->product_type==2 ){
                 foreach(json_decode($product->attribute) as $attribute){
@@ -400,12 +400,18 @@ class ProductController extends Controller
 
                     if($product->product_type==1 ){
                         foreach(json_decode($product->attribute) as $attribute){
-                            $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'lead_time'=>$attribute[2],'price'=>$attribute[3]);
+                            $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2] ,'lead_time'=>$attribute[3]);
                         }
-                    }else{
+                    }else if($product->product_type==2 ){
                         foreach(json_decode($product->attribute) as $attribute){
                             $attribute_array[] = (object) array('ready_quantity_min' =>$attribute[0], 'ready_quantity_max' => $attribute[1],'ready_price'=>$attribute[2]);
                         }
+                    }
+                    else{
+                        foreach(json_decode($product->attribute) as $attribute){
+                            $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
+                        }
+        
                     }
 
 
@@ -419,7 +425,7 @@ class ProductController extends Controller
                     $newFormatedProduct->full_stock= $product->full_stock;
                     $newFormatedProduct->full_stock_price= $product->full_stock_price;
                     $newFormatedProduct->attribute=  $attribute_array;
-                    $newFormatedProduct->colors_sizes=$product->product_type==2 ?  json_decode($product->colors_sizes):[];
+                    $newFormatedProduct->colors_sizes=$product->product_type==1 ? [] :json_decode($product->colors_sizes);
                     $newFormatedProduct->product_category_id=$product->product_category_id;
                     $newFormatedProduct->product_type=$product->product_type;
                     $newFormatedProduct->moq=$product->moq;

@@ -75,4 +75,10 @@ if (!function_exists('productRating')) {
                 $averageRating = $averageRating/5;
                 return $averageRating;
     }
+
+    if (!function_exists('make_slug')){
+        function make_slug($string) {
+            return preg_replace('/\s+/u', '-', strtolower(trim($string)));
+        }
+    }
 }

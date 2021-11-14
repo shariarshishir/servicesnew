@@ -790,7 +790,7 @@ class UserController extends Controller
             }
             $request->session()->put('sso_password', $request->password);
 
-            return redirect()->route('users.profile');
+            return redirect()->route('home');
          }
          return redirect()->back()->with('message' , 'Something Went Wrong');
          //return response()->json(['msg' => 'something went wrong']);

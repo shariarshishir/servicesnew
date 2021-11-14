@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\ProductReviewController;
@@ -72,7 +73,8 @@ Route::get('/liveSearch',[HomeController::class,'liveSearchByProductOrVendor'])-
 Route::get('/search',[HomeController::class,'searchByProductOrVendor'])->name("onsubmit.search");
 
 
-
+Route::get('/industry-blogs',[HomeController::class,'blogs'])->name('industry.blogs');
+Route::get('/press-room/details/{slug}',[HomeController::class,'blogDetails'])->name('blogs.details');
 
 //user API's endpoint start
 Route::get('/add-to-cart',[ProductCartController::class,'addToCart'])->name('add.cart');
@@ -237,7 +239,9 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('shipment-type', ShipmentTypeController::class);
         Route::get('shipping-charge/change/status/{order_id}', [ShippingChargeController::class, 'changeStatus'])->name('shipping.charge.change.status');
         Route::resource('shipping-charge', ShippingChargeController::class);
-
+        
+        // Blogs api start
+        Route::resource('blogs', BlogController::class);
 
 
 

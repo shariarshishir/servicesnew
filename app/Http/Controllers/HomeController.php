@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Models\Blog;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
@@ -445,6 +446,31 @@ class HomeController extends Controller
                'data'    => $data,
         ],200);
 
+    }
+
+    public function blogs(){
+
+        $blogs=Blog::latest()->paginate(10);
+        return view('blog.index',compact('blogs'));
+
+    }
+    public function blogDetails($slug)
+    {
+        $blog = Blog::where('slug',$slug)->firstOrFail();
+        $data = [];
+      
+        $blogs = $blog->source;
+        foreach((array)$blogs as $blo)
+        {
+            if(!is_null($blo['name']) && $blo['name'] != "")
+            {
+               $data[] = ['name' => $blo['name'],'link' => $blo['link']];
+            }
+        }
+      
+        $blog['sourcedata'] = $data;
+      
+        return view('blog.show',compact('blog'));
     }
 
 

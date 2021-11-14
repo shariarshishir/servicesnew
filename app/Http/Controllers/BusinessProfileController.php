@@ -18,6 +18,12 @@ class BusinessProfileController extends Controller
     public function index()
     {
         $business_profile=BusinessProfile::where('user_id',auth()->id())->get();
+
+        if($business_profile->isEmpty())
+        {
+            $business_profile=BusinessProfile::where('representative_user_id',auth()->id())->get();
+        }
+
         return view('business_profile.index',['business_profile' => $business_profile]);
     }
 
@@ -135,7 +141,12 @@ class BusinessProfileController extends Controller
     public function show($id)
     {
         $business_profile= BusinessProfile::with('companyOverview')->findOrFail($id);
-        return view('business_profile.show',['business_profile' => $business_profile]);
+        if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
+        {
+            return view('business_profile.show',['business_profile' => $business_profile]);
+
+        }
+        abort(401);
 
     }
 

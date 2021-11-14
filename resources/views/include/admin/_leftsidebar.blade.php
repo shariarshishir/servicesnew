@@ -107,6 +107,15 @@
                 </ul>
           </li>
           {{-- end shipping --}}
+          {{-- users --}}
+          <li class="nav-item">
+            <a href="{{ Route('users.index')}}" class="nav-link {{ Route::is('users.*')? 'active' : ''}}">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <p>Users</p>
+            </a>
+          </li>
+          {{-- end users --}}
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

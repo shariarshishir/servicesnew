@@ -16,6 +16,7 @@ class AddNidAndIsRepresentativeColumnToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('nid_passport')->nullable()->after('fcm_token');
             $table->boolean('is_representative')->default(false)->after('fcm_token');
+            $table->string('company_name')->nullable()->after('fcm_token');
         });
     }
 
@@ -29,6 +30,7 @@ class AddNidAndIsRepresentativeColumnToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('nid_passport');
             $table->dropColumn('is_representative');
+            $table->dropColumn('company_name');
         });
     }
 }

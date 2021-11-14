@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BusinessProfileController as AdminBusinessProfileController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\ShipmentTypeController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\UomContorller;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\SellerProductController;
@@ -243,6 +245,11 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('shipment-type', ShipmentTypeController::class);
         Route::get('shipping-charge/change/status/{order_id}', [ShippingChargeController::class, 'changeStatus'])->name('shipping.charge.change.status');
         Route::resource('shipping-charge', ShippingChargeController::class);
+        //users
+        Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
+        Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
+        Route::get('business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
+        Route::post('/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
 
 
 

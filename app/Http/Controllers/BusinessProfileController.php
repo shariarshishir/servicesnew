@@ -159,14 +159,6 @@ class BusinessProfileController extends Controller
     {
         try{
             $company_overview= CompanyOverview::findOrFail($id);
-            $status=[];
-            $full_data=[];
-            foreach(json_decode($company_overview->data) as $data){
-                array_push($status,$data->status);
-                array_push($full_data,$data);
-
-            }
-
             $data=[];
             $count=0;
             foreach($request->name as $key => $value){
@@ -175,7 +167,7 @@ class BusinessProfileController extends Controller
                         array_push($data,['name' => $key, 'value' => $value, 'status' => 0]);
                     }
                     if($data2->name == $key && $value == $data2->value){
-                        array_push($data,['name' => $key, 'value' => $value, 'status' =>  $status[$count]]);
+                        array_push($data,['name' => $key, 'value' => $value, 'status' =>  $data2->status]);
                     }
                 }
 

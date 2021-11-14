@@ -40,7 +40,7 @@
                                 <div class="row">
                                     @foreach ($user->businessProfile as $profile )
                                         <div class="col-md-6">
-                                            <p>Business Type : {{$profile->business_type}}
+                                            <p>Business Type :
                                                 @switch($profile->business_type)
                                                     @case(1)
                                                         Manufacturer

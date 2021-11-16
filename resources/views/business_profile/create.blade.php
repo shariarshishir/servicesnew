@@ -47,8 +47,16 @@
                         <label for="trade_license">Trade License</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="industry_type" type="text" class="validate" name="industry_type" value="{{old('industry_type')}}">
-                        <label for="industry_type">Industry Type</label>
+                        <select  class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this.value)">
+                            <option value="" disabled selected>Choose your industry type</option>
+                            <option value="apparel" >Apparel</option>
+                            <option value="non-apparel" >Non-Apparel</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12 business-category-div" style="display: none">
+                        <select  class="select2 browser-default business-category"  name="business_category_id" id="categoryList">
+
+                        </select>
                     </div>
                </div>
                <a href="javascript:void(0)" class="next">Next</a>

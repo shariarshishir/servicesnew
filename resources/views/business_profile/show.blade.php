@@ -10,7 +10,7 @@
           <ul class="tabs">
             <li class="tab col s3"><a href="#test1">Home</a></li>
             <li class="tab col s3"><a class="active" href="#test2">Profile</a></li>
-            <li class="tab col s3"><a href="#test3">Product</a></li>
+            <li class="tab col s3"><a href="#product">Product</a></li>
           </ul>
         </div>
         <div id="test1" class="col s12">Test 1</div>
@@ -64,11 +64,24 @@
             {{-- end company modal --}}
 
         </div>
-        <div id="test3" class="col s12">Test 3</div>
+        <div id="product" class="col s12">
+            <div class="col m12 add-new-product-button">
+                <a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
+                    <i class="material-icons dp48">add</i> Add New product
+                </a>
+            </div>
+            <div id="manufacture_edit_errors"></div>
+            <div class="manufacture-product-table-data">
+                 @include('business_profile._product_table_data')
+            </div>
+
+
+        </div>
     </div>
 
 </div>
-
+@include('business_profile._add_product_modal')
+@include('business_profile._edit_product_modal')
 @endsection
 
 @include('business_profile._scripts')

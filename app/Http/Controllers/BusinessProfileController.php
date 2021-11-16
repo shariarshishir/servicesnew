@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BusinessProfile;
 use App\Models\CompanyOverview;
+use App\Models\Manufacture\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -56,6 +57,7 @@ class BusinessProfileController extends Controller
             'phone' => 'required_if:has_representative,0',
             'nid_passport' => 'required_if:has_representative,0',
             'representive_name' =>'required_if:has_representative,0',
+            'business_category_id' => 'required_if:business_type,1',
 
          ]);
          if ($validator->fails())
@@ -74,6 +76,9 @@ class BusinessProfileController extends Controller
                     'has_representative'=> $request->has_representative,
                     'number_of_outlets' => $request->number_of_outlets,
                     'number_of_factories' => $request->number_of_factories,
+                    'business_category_id' => $request->business_category_id,
+                    'industry_type' => $request->industry_type,
+
                 ];
 
                 if($request->has_representative == true){
@@ -143,7 +148,11 @@ class BusinessProfileController extends Controller
         $business_profile= BusinessProfile::with('companyOverview')->findOrFail($id);
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-            return view('business_profile.show',['business_profile' => $business_profile]);
+            $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
+            $sizes=['S','M','XL','XXL','XXXL'];
+            $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
+
+            return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products'));
 
         }
         abort(401);
@@ -153,8 +162,8 @@ class BusinessProfileController extends Controller
     //company overview data
     public function createCompanyOverview(Request $request, $profile_id)
     {
-        $name=['industry_type','annual_revenue','number_of_worker','number_of_female_worker','trade_license_number','year_of_establishment','opertaing_hours','shift_details','main_products'];
-        $value=[$request->industry_type,null,null,null,$request->trade_license,null,null,null,null,null];
+        $name=['annual_revenue','number_of_worker','number_of_female_worker','trade_license_number','year_of_establishment','opertaing_hours','shift_details','main_products'];
+        $value=[null,null,null,$request->trade_license,null,null,null,null,null];
         $data=[];
         foreach($name as $key => $value2){
             array_push($data,['name' => $value2, 'value' => $value[$key], 'status' => 0]);

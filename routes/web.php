@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\BusinessProfileController;
+use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\ProductReviewController;
@@ -187,6 +188,15 @@ Route::post('login-from-merchantbay',[UserController::class, 'loginFromMerchantb
 Route::post('tiny-mc-file-uplaod', [SellerProductController::class, 'tinyMcFileUpload'])->name('tinymc.file.upload');
 Route::get('tinymc-untracked-file-delete',[SellerProductController::class, 'tinyMcUntrackedFileDelete']);
 //endtinymc
+//manufacture
+Route::group(['prefix'=>'/manufacture'],function (){
+    //product
+    Route::post('product/store',[ManufactureProductController::class, 'store'])->name('manufacture.product.store');
+    Route::get('product/edit/{product_id}',[ManufactureProductController::class, 'edit'])->name('manufacture.product.edit');
+    Route::post('product/update/{product_id}',[ManufactureProductController::class, 'update'])->name('manufacture.product.update');
+    Route::get('product/delete/{product_id}/{business_profile_id}',[ManufactureProductController::class, 'delete'])->name('manufacture.product.delete');
+
+});
 
 //SSLCOMMERZ END
 // Frontend API's endpoint end

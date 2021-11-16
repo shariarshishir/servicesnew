@@ -20,6 +20,8 @@ class CreateBusinessProfilesTable extends Migration
             $table->string('location')->nullable();
             $table->tinyInteger('business_type');
             $table->boolean('has_representative');
+            $table->string('industry_type');
+            $table->unsignedBigInteger('business_category_id')->nullable();
             $table->unsignedBigInteger('representative_user_id')->nullable();
             $table->string('number_of_factories')->nullable();
             $table->string('number_of_outlets')->nullable();

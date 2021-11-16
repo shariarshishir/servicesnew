@@ -7,7 +7,7 @@ use App\Models\ProductCategory;
 use App\Models\CartItem;
 use Auth;
 use App\Models\Config;
-
+use App\Models\Manufacture\ProductCategory as ManufactureProductCategory;
 use Illuminate\Support\Facades\Cache;
 
 class ViewServiceProvider extends ServiceProvider
@@ -96,6 +96,18 @@ class ViewServiceProvider extends ServiceProvider
                 }
 
             }
+        });
+
+        //For Manufacture Product Category
+        view()->composer('*', function($view) {
+            $categories=ManufactureProductCategory::with('subcategories')->get();
+            $view->with([
+                'manufacture_product_categories'=>$categories,
+                'manufacture_product_categories_type'=>[
+                    'apparel'   => ManufactureProductCategory::where(['industry'=>'apparel'])->get(),
+                    'non-apparel'=> ManufactureProductCategory::where(['industry'=>'non-apparel'])->get()
+                ],
+            ]);
         });
     }
 

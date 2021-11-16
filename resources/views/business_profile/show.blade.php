@@ -981,9 +981,20 @@
 
     </div>
 
-    <div id="product" class="col s12">Product</div>
+    <div id="product" class="col s12">
+            <div class="col m12 add-new-product-button">
+                <a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
+                    <i class="material-icons dp48">add</i> Add New product
+                </a>
+            </div>
+            <div id="manufacture_edit_errors"></div>
+            <div class="manufacture-product-table-data">
+                 @include('business_profile._product_table_data')
+            </div>
+    </div>
 
-
+    @include('business_profile._add_product_modal')
+    @include('business_profile._edit_product_modal')
 @endsection
 
 @include('business_profile._scripts')

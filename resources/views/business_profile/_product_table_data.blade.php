@@ -1,0 +1,85 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Product Name</th>
+            <th style="text-align:center;">Code</th>
+            <th style="text-align:center;">Price</th>
+            <th style="text-align:center;">MOQ</th>
+            <th style="text-align:center;">Lead Time</th>
+            <th style="text-align:center;"></th>
+        </tr>
+    </thead>
+    <tbody id="tbbdy">
+        @foreach($products as $mk => $product)
+            <tr style="cursor: pointer;" onclick="selecttr(this);">
+                <td>
+                    {{ $product->category->name }}
+                </td>
+                <td style="cursor:pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">
+                    <span style="font-weight:bold; color:#55A860;">{{ $product->title }}</span>
+                    <div class="clear5"></div>
+                    <div class="col-md-12">
+                        <div class="row prd-lt-con-list">
+                            <div class="col-md-12 plr0">Colors</div>
+                            <div class="col-md-12 plr0">
+                                @if(isset($product->colors))
+                                    @if(in_array('Red',$product->colors))
+                                        <i class="fa fa-square fa-lg red" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Blue',$product->colors))
+                                        <i class="fa fa-square fa-lg blue" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Green',$product->colors))
+                                        <i class="fa fa-square fa-lg green" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Black',$product->colors))
+                                        <i class="fa fa-square fa-lg black" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Brown',$product->colors))
+                                        <i class="fa fa-square fa-lg brown" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Pink',$product->colors))
+                                        <i class="fa fa-square fa-lg pink" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Yellow',$product->colors))
+                                        <i class="fa fa-square fa-lg yellow" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Orange',$product->colors))
+                                        <i class="fa fa-square fa-lg orange" aria-hidden="true"></i>
+                                    @endif
+                                    @if(in_array('Lightblue',$product->colors))
+                                        <i class="fa fa-square fa-lg lightblue" aria-hidden="true"></i>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear5"></div>
+                    <div class="col-md-12">
+                        <div class="row prd-lt-con-list bbn">
+                            <div class="col-md-12 plr0">Sizes</div>
+                            <div class="col-md-12 plr0">
+                                @if(isset($product->sizes))
+                                    @foreach($product->sizes as $size)
+                                        <span>{{ $size }}</span>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">MB-{{$product->id}}</td>
+                <td style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->price_unit }} {{ $product->price_per_unit }}</td>
+                <td style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->moq }} {{ $product->qty_unit }}</td>
+                <td style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->lead_time }}</td>
+                <td style="text-align:center;cursor: pointer;">
+                    <a href="javascript:void(0);" style="color:#ff0000;" onclick="editproduct('{{ $product->id }}')">Edit</a> | <a href="javascript:void(0);" onclick="deleteProduct('{{ $product->id }}, {{$product->business_profile_id}}')" style="color:#ff0000;">Delete</a>
+                </td>
+            </tr>
+        @endforeach
+
+
+
+    </tbody>
+</table>

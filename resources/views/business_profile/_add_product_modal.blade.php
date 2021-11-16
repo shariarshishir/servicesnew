@@ -72,15 +72,15 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 form-group">
                             <label for="product-colors">Colors <small>EXP: Red,Blue,...</small></label>
-                            <select class="select2 browser-default product-colors" name="colors[]" multiple>
+                            <select class="select2 browser-default product-colors" name="colors[]" id="colors" multiple>
                                 @foreach ($colors as $color)
-                                <option value="{{ $color }}">{{ ucfirst($color) }}</option>
+                                    <option value="{{ $color }}">{{ ucfirst($color) }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-6 form-group">
                             <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small></label>
-                                <select class="select2 browser-default product-sizes" name="sizes[]"  multiple="multiple">
+                                <select class="select2 browser-default product-sizes" name="sizes[]" id="sizes"  multiple="multiple">
                                     @foreach ($sizes as $size)
                                         <option value="{{ $size }}">{{ ucfirst($size) }}</option>
                                     @endforeach

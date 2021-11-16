@@ -74,7 +74,7 @@
                 <td style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->moq }} {{ $product->qty_unit }}</td>
                 <td style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->lead_time }}</td>
                 <td style="text-align:center;cursor: pointer;">
-                    <a href="javascript:void(0);" style="color:#ff0000;" onclick="editproduct('{{ $product->id }}')">Edit</a> | <a href="javascript:void(0);" onclick="deleteProduct('{{ $product->id }}, {{$product->business_profile_id}}')" style="color:#ff0000;">Delete</a>
+                    <a href="javascript:void(0);" style="color:#ff0000;" onclick="editproduct('{{ $product->id }}')">Edit</a> | <a href="javascript:void(0);" onclick="deleteProduct('{{ $product->id }}', '{{$product->business_profile_id}}')" style="color:#ff0000;">Delete</a>
                 </td>
             </tr>
         @endforeach

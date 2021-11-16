@@ -193,7 +193,7 @@ public function delete($product_id, $business_profile_id)
 
     $product=Product::where('id',$product_id)->first();
     $product->delete();
-    $products=Product::where('business_profile_id',$business_profile_id)->latest()->with(['product_images','category'])->get();
+    $products=Product::whereNotIn('id',[$product_id])->where('business_profile_id',$business_profile_id)->latest()->with(['product_images','category'])->get();
     $data=view('business_profile._product_table_data', compact('products'))->render();
 
         return response()->json([

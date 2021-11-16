@@ -123,6 +123,16 @@
     $(document).ready(function() {
         $('.product-add-modal-trigger').click(function(){
             $("#product-add-modal-block").modal('open');
+            $('#manufacture-product-upload-form')[0].reset();
+            $('#category_id').val('');
+            $('#category_id').trigger('change');
+            $('#colors').val('');
+            $('#colors').trigger('change');
+            $('#sizes').val('');
+            $('#sizes').trigger('change');
+            $('.file').val('');
+            $('.img-thumbnail').attr('src', 'https://placehold.it/80x80');
+            $('#manufacture-product-upload-errors').empty();
         });
     });
 
@@ -287,9 +297,10 @@
         //delete product
         function deleteProduct(productId,business_profile_id)
         {
-            var url = '{{ route("manufacture.product.delete", [":slug", ":slug2"]) }}';
+
+            var url = '{{ route("manufacture.product.delete", [":slug" , ":slugs"]) }}';
                 url = url.replace(':slug', productId);
-                url = url.replace(':slug2', business_profile_id);
+                url = url.replace(':slugs', business_profile_id);
             $.ajax({
                 method: 'get',
                 processData: false,
@@ -305,8 +316,8 @@
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#manufacture_edit_errors').empty();
-                        $('#product-edit-modal-block .modal-content').html('');
-                        $('#product-edit-modal-block .modal-content').html(data.data);
+                        $('.manufacture-product-table-data').html('');
+                        $('.manufacture-product-table-data').html(data.data);
                         swal("Done!", data.msg,"success");
 
                     },
@@ -386,7 +397,7 @@
       url: "/capacity-and-machineries-create-or-update",
       type:"POST",
       data: $('#capacity-machinaries-form').serialize(),
-     
+
       success:function(response){
         var machineriesDetails=response.machineriesDetails;
         var categoriesProduceds=response.categoriesProduceds;
@@ -429,8 +440,8 @@
             }
         }
 
-        
-        
+
+
         $('#capacity-and-machineries-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -439,7 +450,7 @@
                 $('#capacity-machineries-errors').empty();
                 $("#capacity-machineries-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
-                {   
+                {
                     $("#capacity-machineries-errors").append("<div class='danger'>"+item+"</div>");
                 });
             }

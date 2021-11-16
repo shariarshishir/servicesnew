@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\BusinessProfile;
 use App\Models\CompanyOverview;
+use App\Models\CategoriesProduced;
+use App\Models\MachineriesDetail;
+use App\Models\ProductionCapacity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use stdClass;
@@ -140,11 +144,10 @@ class BusinessProfileController extends Controller
 
     public function show($id)
     {
-        $business_profile= BusinessProfile::with('companyOverview')->findOrFail($id);
+        $business_profile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities')->findOrFail($id);
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             return view('business_profile.show',['business_profile' => $business_profile]);
-
         }
         abort(401);
 
@@ -202,6 +205,106 @@ class BusinessProfileController extends Controller
             ],500);
 
         }
+
+    }
+
+    public function capacityAndMachineriesCreateOrUpdate(Request $request){
+        
+      
+        $validator = Validator::make($request->all(), [
+            'machine_type.*' => 'string|min:1|max:50',
+            'annual_capacity.*' => 'integer',
+            'type.*' => 'string|min:1|max:50',
+            'percentage.*' => 'integer',
+            'machine_name.*' =>'string|min:1|max:50',
+            'quantity.*' => 'integer'
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        try{
+            
+            $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->delete();
+            $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->delete();
+            $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->delete();
+            if(isset($request->machine_type)){
+                $noOfMachineType=count($request->machine_type);
+                if($noOfMachineType>0){
+                    for($i=0;$i<$noOfMachineType ;$i++){
+                        $productionCapacity  =  new ProductionCapacity();
+                        $productionCapacity->machine_type = $request->machine_type[$i];
+                        $productionCapacity->annual_capacity = $request->annual_capacity[$i];
+                        $productionCapacity->business_profile_id = $request->business_profile_id;
+                        $productionCapacity->status = 0;
+                        $productionCapacity->created_by = Auth::user()->id;
+                        $productionCapacity->updated_by = NULL;
+                        $productionCapacity->save();
+                    }
+                }
+            }
+           
+            
+            if(isset($request->type)){
+                $noOftype=count($request->type);
+                if($noOftype>0){
+                    for($i=0;$i<$noOftype; $i++){
+                        $categoriesProduced  =  new CategoriesProduced();
+                        $categoriesProduced->type = $request->type[$i];
+                        $categoriesProduced->percentage = $request->percentage[$i];
+                        $categoriesProduced->business_profile_id = $request->business_profile_id;
+                        $categoriesProduced->status = 0;
+                        $categoriesProduced->created_by = Auth::user()->id;
+                        $categoriesProduced->updated_by = NULL;
+                        $categoriesProduced->save();
+                    }
+                }
+
+            }
+         
+            if(isset($request->machine_name)){
+                $noOfMachineName=count($request->machine_name);
+                if($noOfMachineName>0){
+                    for($i=0; $i<$noOfMachineName ;$i++){
+                    
+                        $machineriesDetail   =  new MachineriesDetail();
+                        $machineriesDetail->machine_name = $request->machine_name[$i];
+                        $machineriesDetail->quantity = $request->quantity[$i];
+                        $machineriesDetail->business_profile_id = $request->business_profile_id;
+                        $machineriesDetail->status = 0;
+                        $machineriesDetail->created_by = Auth::user()->id;
+                        $machineriesDetail->updated_by = NULL;
+                        $machineriesDetail->save();
+                    }
+
+                }
+            }
+           
+            $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
+            $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
+            $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Company information Updated',
+                'machineriesDetails'=>$machineriesDetails,
+                'categoriesProduceds'=>$categoriesProduceds,
+                'productionCapacities'=>$productionCapacities
+
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['msg' => $e->getLine()],
+            ],500);
+
+        }
+
 
     }
 

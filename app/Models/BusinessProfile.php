@@ -14,5 +14,17 @@ class BusinessProfile extends Model
     {
         return $this->hasOne(CompanyOverview::class);
     }
+    public function machineriesDetails()
+    {
+        return $this->hasMany(MachineriesDetail::class);
+    }
+    public function categoriesProduceds()
+    {
+        return $this->hasMany(CategoriesProduced::class);
+    }
+    public function productionCapacities()
+    {
+        return $this->hasMany(ProductionCapacity::class);
+    }
 
 }

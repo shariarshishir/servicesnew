@@ -134,7 +134,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
-
+    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('company.overview.update');
+    
 });
 
 //user API's endpoint start

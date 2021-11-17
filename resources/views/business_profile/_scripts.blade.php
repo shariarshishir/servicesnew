@@ -1,6 +1,69 @@
 @push('js')
     <script>
 
+    $(document).ready(function()
+    {
+        $(".next_to_business_profile_info, .last-step").click(function()
+        {
+            //alert("I am here");
+            var name = $("#business_name").val();
+            /*
+            var location = $("#location").val();
+
+            var businessType = $("#business_type").val();
+            var manufacturerType = $("#manufacturer_type").val();
+            var wholesalerType = $("#wholesaler_type").val();
+
+            var number_of_factories = $("#factories_number").val();
+            var outlets_number = $("#outlets_number").val();
+            var trade_license = $("#trade_license").val();
+            var industry_type = $("#industry_type").val();
+
+            var representative_name = $("#representatives_name").val();
+            var representatives_email = $("#representatives_email").val();
+            var representatives_contact = $("#representatives_contact").val();
+            var representative_nidPassport = $("#representative_nidPassport").val();
+            */
+
+            $("#review_name").html("<b>Name:</b> "+name);
+            /*
+            $("#review_location").html("<b>Location:</b> "+location);
+
+            $("#business_type").html("<b>Business Type:</b> "+businessType);
+            $("#manufacturer_type").html("<b>Manufacturer Type:</b> "+manufacturerType);
+            $("#wholesaler_type").html("<b>Wholesaler Type:</b> "+wholesalerType);
+
+            $("#number_of_factories").html("<b>Number of Factories:</b> "+number_of_factories);
+            $("#review_outlets_number").html("<b>Outlets NUmber:</b> "+outlets_number);
+            $("#review_trade_license").html("<b>Trade License:</b> "+trade_license);
+            $("#review_industry_type").html("<b>Industry Type:</b> "+industry_type);
+
+            $("#review_representative_name").html("<b>Representative Name:</b> "+representative_name);
+            $("#review_representatives_email").html("<b>Representative Email:</b> "+representatives_email);
+            $("#review_representatives_contact").html("<b>Representative Contact:</b> "+representatives_contact);
+            $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representative_nidPassport);
+            */
+
+            if(!name){
+                var alertHtml = '<div class="card-alert card orange lighten-5">';
+                alertHtml += '<div class="card-content orange-text">';
+                alertHtml += '<p>WARNING : Please fill all the required fields.</p>';
+                alertHtml += '</div>';
+                alertHtml += '</div>';
+                $("#information_message").html(alertHtml);
+                $("#review_name").hide();
+            } else {
+                var infoHtml = '<div class="card-alert card cyan lighten-5">';
+                infoHtml += '<div class="card-content cyan-text">';
+                infoHtml += '<p>INFO : Please verify your input data and hit submit button to create profile.</p>';
+                infoHtml += '</div>';
+                infoHtml += '</div>';			
+                $("#information_message").html(infoHtml);
+                $("#review_name").show();
+            }
+        });
+	});
+
     $(document).on('change', '.select-business-type', function(){
         var value =$('.select-business-type option:selected').val();
         if(value == 1){

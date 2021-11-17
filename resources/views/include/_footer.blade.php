@@ -1,57 +1,90 @@
-<div class="footer-outer-wrapper">
-    <div class="row bottom-block-outer-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 m12 s12 newsletter-info-block">
-                    <p>Get Trade Notification & Promotional Event Invitation - Receiving the latest deal, offer and trade news to your inbox</p>
-                </div>
-                <div class="col l6 m12 s12 newsletter-block">
-                    <form  action="#" method="post">
-                        <div class="input-field col s8">
-                            <input id="newsletter_email_address" type="text" class="validate" name="newsletter_email_address">
-                            <label for="newsletter_email_address">Email Address</label>
-                            <span>We’ll never disclose your email address with a third-party</span>
-                        </div>
-                        <div class="col m4">
-                            <button class="btn waves-effect waves-light green"  id="newsletter_signup" type="button">Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <div class="row top-footer">
-            <div class="container">
-                <div class="col m9 offset-m2 s12 offset-s0">
-                    <div class="col l4 m12 s12 footer-det">
-                        <span class="footer-det-hd">Merchant Bay Shop</span>
-                        <span class="footer-det-mhd">&copy; 2021 All rights reserved</span>
-                        <span class="footer-det-nhd">Developed By: <a href="javascript:void(0);" style="color: #ffffff;">Merchantbay.com</a></span>
-                    </div>
-                    <div class="col l8 m12 s12">
-                        <h5 class="follow-us">Follow Us</h5>
-                        <ul>
-                            <li><a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fab fa-pinterest-p"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fab fa-youtube"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row bottom-footer">
-            <div class="container">
-                &nbsp;
-            </div>
-        </div>
-    </footer>
-</div>
+<!-- Footer section start -->
+<footer class="footer_wrap">
+	<div class="footer_topWrap">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m6 l5 left">
+					<div class="center-align thumb_box"><img src="{{asset('images/frontendimages/new_layout_images/thumb.png')}}" alt=""></div>
+					<p>Your apparel will be ready <br /> on time or we work for free!</p>
+				</div>
+				<div class="col s12 m6 l5 right">
+					<p>Merchandising have never seemed so easy before.</p>
+					<div class="btn_talk ">
+						<a class="btn_white" href="javascript:void(0);">Talk to us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer_bottomWrap">
+		<div class="container">
+			<div class="row">
+				<div class="col m6 l6 footer_left_bottom">
+					<div class="addressWrap">
+						<div class="copyright_text">
+							<h3>Merchant Bay</h3>
+							<p>&copy 2019-2020 <br /> <span>All rights reserved.</span></p>
+						</div>
+						<div class="addressBox">
+							<h4>Office Address:</h4>
+							<p>Meem Tower, <br/ >
+								Floor: 8, House: 18, <br />
+								Road: 12, Sector: 6, <br />
+								Uttara, Dhaka. 
+							</p>
+						</div>
+						<a href="javascript:void(0);" class="btn_direct btn_grBorder">Get Direction</a>
+						<a href="javascript:void(0);" class="btn_tour btn_lightgr">Virtual Tour</a>
+					</div>
+				</div>
+				<div class="col m6 l6 footer_right_bottom">
+					<div class="footer_buttonWrap right-align">
+						<input type="text" class="industry_textbox" placeholder="Get the latest Industry Insights" />
+						<button type="submit" class="btn_lightgr btn_email"> <img src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
+					</div>
+					<div class="row">
+						<div class="col s12 m6 l4 help_menu">
+							<ul>
+								<li><a href="javascript:void(0);">Tools</a></li>
+								<li><a href="javascript:void(0);">Suppliers</a></li>
+								<li><a href="javascript:void(0);">Quick Query</a></li>
+								<li><a href="blog.html">Blogs/Insights</a></li>
+								<li><a href="javascript:void(0);">Policies</a></li>
+								<li><a href="helps.html">Helps</a></li>
+							</ul>
+						</div>
+						<div class="col s12 m6 l4 product_menu">
+							<h4>Products</h4>
+							<ul>
+								<li><a href="javascript:void(0);">New Designs</a></li>
+								<li><a href="javascript:void(0);">New Arrivals</a></li>
+								<li><a href="javascript:void(0);">Ready Stock</a></li>
+								<li><a href="javascript:void(0);">Low MOQ</a></li>
+								<li><a href="javascript:void(0);">Customizable</a></li>
+								<li><a href="javascript:void(0);">Shortest Lead Time</a></li>
+							</ul>
+						</div>
+						<div class="col s12 m6 l4 info_menu">
+							<ul>
+								<li><a href="javascript:void(0);">About us</a></li>
+								<li><a href="javascript:void(0);">Contact us</a></li>
+								<li><a href="javascript:void(0);">Tutorials</a></li>
+								<li><a href="javascript:void(0);">Submit a dispute</a></li>
+							</ul>
+							<div class="socialWrap">
+								<h4>Follow us on</h4>
+								<a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
+								<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
+								<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- Footer section end -->
 
 <div id="login-register-modal" class="modal modal-fixed-footer" tabindex="0">
     <div class="modal-content">
@@ -344,6 +377,44 @@
         slidesToShow: 4,
         slidesToScroll: 1
     });
+
+    // slick slider 
+    $('.product_slider').slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 1000,
+
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });    
+
     $(function () {
         $('#fileupload').fileupload({
             dataType: 'json',

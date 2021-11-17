@@ -431,9 +431,9 @@ class UserController extends Controller
 
         // return view('user.profile.index',compact('user','category','productList','productNewArrival','productFeatured','countries','orders','flag','vendorReviews','orderModificationRequestIds','orderIds','orderModificationRequest','notifications'));
 
-        $user=User::where('id',auth()->id())->with('vendor')->first();
-        $businessProfiles = BusinessProfile::where('id',auth()->id())->get();
-        
+        $user=User::where('id',auth()->id())->first();
+        $businessProfiles = BusinessProfile::where('user_id',auth()->id())->get();
+
         $countries=Country::all();
         $productFeatured=Product::where('vendor_id',$user->vendor->id)->where('is_featured',1)->where('state',1)->paginate(5);
         // //check whether vendor's all  information exist or not

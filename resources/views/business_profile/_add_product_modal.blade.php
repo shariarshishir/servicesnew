@@ -118,7 +118,7 @@
                                         <!--1-->
                                         <div class="col-md-3" style="width:20%; text-align:center;">
                                             <div class="col-md-12">
-                                              <img src="https://placehold.it/80x80" id="img1" class="img-thumbnail">
+                                              <img src="https://via.placeholder.com/80" id="img1" class="img-thumbnail">
                                             </div>
                                             <div class="clear10"></div>
                                             <div class="col-md-12" style="text-align:center;">
@@ -139,7 +139,7 @@
                                         <!--2-->
                                         <div class="col-md-3" style="width:20%; text-align:center;">
                                             <div class="col-md-12">
-                                              <img src="https://placehold.it/80x80" id="img2" class="img-thumbnail">
+                                              <img src="https://via.placeholder.com/80" id="img2" class="img-thumbnail">
                                             </div>
                                             <div class="clear10"></div>
                                             <div class="col-md-12" style="text-align:center;">
@@ -160,7 +160,7 @@
                                         <!--3-->
                                         <div class="col-md-3" style="width:20%; text-align:center;">
                                             <div class="col-md-12">
-                                              <img src="https://placehold.it/80x80" id="img3" class="img-thumbnail">
+                                              <img src="https://via.placeholder.com/80" id="img3" class="img-thumbnail">
                                             </div>
                                             <div class="clear10"></div>
                                             <div class="col-md-12" style="text-align:center;">
@@ -181,7 +181,7 @@
                                         <!--4-->
                                         <div class="col-md-3" style="width:20%; text-align:center;">
                                             <div class="col-md-12">
-                                              <img src="https://placehold.it/80x80" id="img4" class="img-thumbnail">
+                                              <img src="https://via.placeholder.com/80" id="img4" class="img-thumbnail">
                                             </div>
                                             <div class="clear10"></div>
                                             <div class="col-md-12" style="text-align:center;">
@@ -202,7 +202,7 @@
                                         <!--5-->
                                         <div class="col-md-3" style="width:20%; text-align:center;">
                                             <div class="col-md-12">
-                                              <img src="https://placehold.it/80x80" id="img5" class="img-thumbnail">
+                                              <img src="https://via.placeholder.com/80" id="img5" class="img-thumbnail">
                                             </div>
                                             <div class="clear10"></div>
                                             <div class="col-md-12" style="text-align:center;">

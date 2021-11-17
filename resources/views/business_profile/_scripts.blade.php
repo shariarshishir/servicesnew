@@ -194,7 +194,7 @@
             $('#sizes').val('');
             $('#sizes').trigger('change');
             $('.file').val('');
-            $('.img-thumbnail').attr('src', 'https://placehold.it/80x80');
+            $('.img-thumbnail').attr('src', 'https://via.placeholder.com/80');
             $('#manufacture-product-upload-errors').empty();
         });
     });

@@ -333,13 +333,14 @@
     //Add and remove row for production and capacity dynamically
     function addProductionCapacity()
     {
-    let totalChild = $('.production-capacity-table-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td><input name="machine_type[]" id="machine_type" type="text" class="form-control  value="" ></td>';
-    html += '<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control  value="" ></td>';
-    html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">remove</i></a></td>';
-    html += '</tr>';
-    $('.production-capacity-table-block tbody').append(html);
+        $('#production-capacity-table-no-data').hide();
+        let totalChild = $('.production-capacity-table-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td><input name="machine_type[]" id="machine_type" type="text" class="form-control  value="" ></td>';
+        html += '<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control  value="" ></td>';
+        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '</tr>';
+        $('.production-capacity-table-block tbody').append(html);
     }
     function removeProductionCapacity(el)
     {
@@ -349,6 +350,7 @@
     //Add and remove row for categories produced product dynamically
     function addCategoriesProduced()
     {
+        $('#categories-produced-table-no-data').hide();
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
         html += '<td><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
@@ -366,6 +368,7 @@
     //Add and remove row for categories produced product dynamically
     function addMachinariesDetails()
     {
+    $('#machinaries-details-table-no-data').hide();
     let totalChild = $('.machinaries-details-table-block tbody').children().length;
     var html = '<tr>';
     html += '<td><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
@@ -403,6 +406,12 @@
                 $('.machinaries-details-table-body').append(html)
             }
         }
+        else{
+            
+            $('.machinaries-details-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.machinaries-details-table-body').append(html);
+        }
 
         var nohtml="";
         if(categoriesProduceds.length >0){
@@ -413,8 +422,12 @@
                 html += '<td>'+categoriesProduceds[i].percentage+'</td>';
                 html += '<td>'+categoriesProduceds[i].status+'</td>';
                 html += '</tr>';
-                $('.categories-produced-table-body').append(html)
+                $('.categories-produced-table-body').append(html);
             }
+        }else{
+            $('.categories-produced-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.categories-produced-table-body').append(html);
         }
         var nohtml="";
         if(productionCapacities.length >0){
@@ -427,6 +440,11 @@
                 html += '</tr>';
                 $('.production-capacity-table-body').append(html)
             }
+        }else{
+
+            $('.production-capacity-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.production-capacity-table-body').append(html);
         }
 
         

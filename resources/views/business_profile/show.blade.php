@@ -51,7 +51,7 @@
 
             <div class="col s12 m6">
               <h4>Production Capacity (Annual)</h4>
-              <div class="overview_table box_shadow">
+              <div class="production-capacity-table-wrapper box_shadow">
                 <table class="production-capacity-table">
                   <thead>
                     <tr>
@@ -61,7 +61,7 @@
                     </tr>
                   </thead>
                   <tbody class="production-capacity-table-body">
-                   @if(count($business_profile->productionCapacities)>0)
+                  @if(count($business_profile->productionCapacities)>0)
                     @foreach($business_profile->productionCapacities as $productionCapacity)
                     <tr>
                       <td>{{$productionCapacity->machine_type}}</td>
@@ -69,6 +69,10 @@
                       <td>{{$productionCapacity->status}}</td>
                     </tr>
                     @endforeach
+                  @else
+                      <tr>
+                        <td>No data</td>
+                      </tr>
                   @endif
                   </tbody>
                 </table>
@@ -78,7 +82,7 @@
 
             <div class="col s12 m6">
               <h4>Categories Produced</h4>
-              <div class="overview_table box_shadow">
+              <div class="categories-produced-table-wrapper box_shadow">
                 <table class="categories-produced-table">
                   <thead>
                     <tr>
@@ -96,6 +100,10 @@
                       <td>{{$categoriesProduced->status}}</td>
                     </tr>
                     @endforeach
+                  @else
+                    <tr>
+                      <td>No data</td>
+                    </tr>
                   @endif
                   </tbody>
                 </table>
@@ -107,7 +115,7 @@
       
       <div class="overview_table_wrap machinery_table">
           <h3>Machinery Details</h3>
-          <div class="overview_table box_shadow">
+          <div class="machinaries-details-table-wrapper box_shadow">
             <table class="machinaries-details-table">
               <thead>
               <tr>
@@ -118,13 +126,17 @@
               </thead>
               <tbody class="machinaries-details-table-body">
               @if(count($business_profile->machineriesDetails)>0)
-              @foreach($business_profile->machineriesDetails as $machineriesDetail)
-              <tr>
-                <td>{{$machineriesDetail->machine_name}}</td>
-                <td>{{$machineriesDetail->quantity}}</td>
-                <td>{{$machineriesDetail->status}}</td>
-              </tr>
-              @endforeach
+                @foreach($business_profile->machineriesDetails as $machineriesDetail)
+                <tr>
+                  <td>{{$machineriesDetail->machine_name}}</td>
+                  <td>{{$machineriesDetail->quantity}}</td>
+                  <td>{{$machineriesDetail->status}}</td>
+                </tr>
+                @endforeach
+              @else
+                <tr>
+                  <td>No data</td>
+                </tr>
               @endif
               </tbody>
             </table>
@@ -821,163 +833,7 @@
       </div>
 
     </div>
-          {{-- company overview edit modal --}}
-                <div id="company-overview-modal" class="modal">
-                    <div class="modal-content">
-                      <div class="row">
-                          <div id="errors"></div>
-                          <form class="col s12" method="post" action="#" id="company-overview-update-form">
-                          @csrf
-                          <input type="hidden" name="company_overview_id" value="{{$business_profile->companyOverview->id}}">
-                              <div class="row">
-                                  @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-                                  <div class="input-field col s6">
-                                    <input id="{{$company_overview->name}}" type="text" class="validate" name="name[{{$company_overview->name}}]" value="{{$company_overview->value}}">
-                                  <label for="{{$company_overview->name}}">{{str_replace('_', ' ', ucfirst($company_overview->name))}}</label>
-                              </div>
-                                @endforeach
-                          </div>
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                              <i class="material-icons right">send</i>
-                            </button>
-                          </form>
-                      </div>
-                    </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
-            </div>
-          </div>
-          {{-- end company modal --}}
-
-
-        {{-- Capacity and machineries  modal --}}
-        <div id="capacity-and-machineries-modal" class="modal">
-            <div class="modal-content">
-            <div id="capacity-machineries-errors">
-               
-            </div>
-            
-            <form  method="post" action="#" id="capacity-machinaries-form">
-                @csrf
-                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="form-group  production-capacity-block">
-                            <label>Production Capacity (Annual)</label>
-                            <div class="production-capacity-block">
-                                <table class="production-capacity-table-block">
-                                    <thead>
-                                        <tr>
-                                            <th>Machine Type</th>
-                                            <th>Annual Capacity</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if(count($business_profile->productionCapacities)>0)
-                                          @foreach($business_profile->productionCapacities as $productionCapacity)
-                                          <tr>
-                                            <td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="{{$productionCapacity->machine_type}}" ></td>
-                                            <td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="{{$productionCapacity->annual_capacity}}" ></td>
-                                            <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">remove</i></a></td>
-                                          </tr>
-                                          @endforeach
-                                        @else
-                                          <tr>
-                                            <td>No data</td>
-                                          </tr>
-                                        @endif
-                                      
-                                       
-                                    </tbody>
-                                </table>
-                                <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addProductionCapacity()"><i class="material-icons dp48">add</i> Add More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col s12">
-                        <div class="form-group  categories-produced-block">
-                            <label>Categories Produced</label>
-                            <div class="categories-produced-block">
-                                <table class="categories-produced-table-block">
-                                    <thead>
-                                        <tr>
-                                            <th>Type</th>
-                                            <th>Percentage</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if(count($business_profile->categoriesProduceds)>0)
-                                          @foreach($business_profile->categoriesProduceds as $categoriesProduced)
-                                            <tr>
-                                            <td><input name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
-                                              <td><input name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
-                                              <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">remove</i></a></td>
-                                            </tr>
-                                          @endforeach
-                                        @else
-                                          <tr>
-                                            <td>No data</td>
-                                          </tr>
-                                        @endif
-                                       
-                                    </tbody>
-                                </table>
-                                <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addCategoriesProduced()"><i class="material-icons dp48">add</i> Add More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group  machinaries-details-block">
-                        <label>machinaries Details</label>
-                        <div class="machinaries-details-block">
-                            <table class="machinaries-details-table-block">
-                                <thead>
-                                    <tr>
-                                        <th>Machine Name</th>
-                                        <th>Quantity</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(count($business_profile->machineriesDetails)>0)
-                                      @foreach($business_profile->machineriesDetails as $machineriesDetail)
-                                          <tr>
-                                            <td><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
-                                            <td><input name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
-                                            <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">remove</i></a></td>
-                                        </tr>
-                                      @endforeach
-                                    @else
-                                        <tr>
-                                          <td>No data</td>
-                                        </tr>
-                                    @endif
-                                   
-                                </tbody>
-                            </table>
-                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addMachinariesDetails()"><i class="material-icons dp48">add</i> Add More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-                  
-            </form>
-                    
-                    
-            
-            <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
-            </div>
-      </div>
-      {{-- end capacity and machineries modal --}}
-
+         
 
     </div>
 
@@ -992,6 +848,14 @@
                  @include('business_profile._product_table_data')
             </div>
     </div>
+    {{-- company overview edit modal --}}
+          @include('business_profile._edit_company_overview_modal')
+          {{-- end company modal --}}
+
+
+          {{-- Capacity and machineries  modal --}}
+            @include('business_profile._edit_capacity_and_machineries_modal')
+          {{-- end capacity and machineries modal --}}
 
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')

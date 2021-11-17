@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserVerify;
 use App\Models\Country;
 use App\Models\VendorOrder;
+use App\Models\BusinessProfile;
 use App\Models\VendorReview;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -431,6 +432,8 @@ class UserController extends Controller
         // return view('user.profile.index',compact('user','category','productList','productNewArrival','productFeatured','countries','orders','flag','vendorReviews','orderModificationRequestIds','orderIds','orderModificationRequest','notifications'));
 
         $user=User::where('id',auth()->id())->with('vendor')->first();
+        $businessProfiles = BusinessProfile::where('id',auth()->id())->get();
+        
         $countries=Country::all();
         $productFeatured=Product::where('vendor_id',$user->vendor->id)->where('is_featured',1)->where('state',1)->paginate(5);
         // //check whether vendor's all  information exist or not
@@ -483,7 +486,7 @@ class UserController extends Controller
             }
         }
 
-        return view('user.profile.index',compact('user','countries','flag','orderModificationRequestIds','orderIds','productFeatured','orderQueryProcessedIds'));
+        return view('user.profile.index',compact('user','countries','flag','orderModificationRequestIds','orderIds','productFeatured','orderQueryProcessedIds','businessProfiles'));
     }
 
 

@@ -41,37 +41,7 @@
 
 					<div class="user-block">
 						@if(env('APP_ENV') == 'production')
-								@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
-									<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
-										<span class="avatar-status avatar-online">
-											<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
-										</span>
-									</a>
-									<ul id="profile-dropdown" class="dropdown-content">
-										<li tabindex="0">
-											<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
-										</li>
-										@if( auth()->user()->user_type!='buyer' )
-										<li tabindex="0">
-											<a class="grey-text text-darken-1" href="{{route('users.myshop',Auth::user()->vendor->vendor_uid)}}"><i class="material-icons">store</i>My shop</a>
-										</li>
-										@endif
-										<li tabindex="0">
-											<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
-										</li>
-										<li tabindex="0">
-											<a class="grey-text text-darken-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i> Logout</a>
-										</li>
-									</ul>
-									<form id="logout-form" action="{{ route('users.logout') }}" method="POST">
-										@csrf
-									</form>
-								@else
-									<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
-								@endif
-
-						@else
-								@if(Auth::guard('web')->check())
+							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online">
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
@@ -81,13 +51,14 @@
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
-									@if( auth()->user()->user_type!='buyer' )
 									<li tabindex="0">
-										<a class="grey-text text-darken-1" href="{{route('users.myshop',Auth::user()->vendor->vendor_uid)}}"><i class="material-icons">store</i>My shop</a>
+										<a class="grey-text text-darken-1" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
 									</li>
-									@endif
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
+									</li>
+									<li tabindex="0">
+										<a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">settings</i> Settings</a>
 									</li>
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i> Logout</a>
@@ -96,6 +67,37 @@
 								<form id="logout-form" action="{{ route('users.logout') }}" method="POST">
 									@csrf
 								</form>
+							@else
+								<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
+							@endif
+
+						@else
+							@if(Auth::guard('web')->check())
+							<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
+								<span class="avatar-status avatar-online">
+									<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+								</span>
+							</a>
+							<ul id="profile-dropdown" class="dropdown-content">
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
+								</li>
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
+								</li>
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
+								</li>
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">settings</i> Settings</a>
+								</li>
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i> Logout</a>
+								</li>
+							</ul>
+							<form id="logout-form" action="{{ route('users.logout') }}" method="POST">
+								@csrf
+							</form>
 							@else
 								<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
 							@endif

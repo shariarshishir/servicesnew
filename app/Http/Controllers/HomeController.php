@@ -29,7 +29,10 @@ class HomeController extends Controller
     {
 
         //$products = Product::with('images')->where('is_featured', 1)->paginate(9);
-        return view('shoplanding');
+        $readyStockProducts = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->get();
+        $buyDesignsProducts = Product::with('images')->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->get();
+        //dd($buyDesignsProducts);
+        return view('shoplanding', compact('readyStockProducts', 'buyDesignsProducts'));
     }
 
     public function productList()

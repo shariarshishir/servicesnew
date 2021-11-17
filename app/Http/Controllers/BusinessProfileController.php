@@ -155,8 +155,13 @@ class BusinessProfileController extends Controller
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
             $sizes=['S','M','XL','XXL','XXXL'];
             $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
+            if($business_profile->business_type == 1){
+                return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products'));
+            }
+            if($business_profile->business_type == 2){
+               return view('wholesaler_profile.index',compact('business_profile'));
+            }
 
-            return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products'));
 
         }
         abort(401);
@@ -219,8 +224,8 @@ class BusinessProfileController extends Controller
     }
 
     public function capacityAndMachineriesCreateOrUpdate(Request $request){
-        
-      
+
+
         $validator = Validator::make($request->all(), [
             'machine_type.*' => 'string|min:1|max:50',
             'annual_capacity.*' => 'integer',
@@ -238,7 +243,7 @@ class BusinessProfileController extends Controller
             400);
         }
         try{
-            
+
             $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->delete();
             $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->delete();
             $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->delete();
@@ -257,8 +262,8 @@ class BusinessProfileController extends Controller
                     }
                 }
             }
-           
-            
+
+
             if(isset($request->type)){
                 $noOftype=count($request->type);
                 if($noOftype>0){
@@ -275,12 +280,12 @@ class BusinessProfileController extends Controller
                 }
 
             }
-         
+
             if(isset($request->machine_name)){
                 $noOfMachineName=count($request->machine_name);
                 if($noOfMachineName>0){
                     for($i=0; $i<$noOfMachineName ;$i++){
-                    
+
                         $machineriesDetail   =  new MachineriesDetail();
                         $machineriesDetail->machine_name = $request->machine_name[$i];
                         $machineriesDetail->quantity = $request->quantity[$i];
@@ -293,7 +298,7 @@ class BusinessProfileController extends Controller
 
                 }
             }
-           
+
             $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
             $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
             $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();

@@ -30,7 +30,8 @@ use App\Http\Controllers\SubscribedUserEmailController;
 use App\Http\Controllers\OrderModificationRequestController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
-
+use App\Http\Controllers\TinyMcController;
+use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,7 @@ Route::get('/delete-wishlist-item',[ProductWishlistController::class,'wishListIt
 Route::get('/add-to-wishlist',[ProductWishlistController::class,'addToWishlist'])->name('add.wishlist');
 Route::get('/copyright-price',[ProductCartController::class,'copyRightPrice'])->name('copyright.price');
 Route::get('user/profile/vendor/{vendor}/order/{order}/notification/{notification}',[OrderController::class, 'showVendorOrderNotifactionFromFrontEnd'])->name('user.order.notification.show');
+
 Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/cart',[ProductCartController::class,'index'])->name('cart.index');
     Route::get('/cart-item-delete/{rowId}',[ProductCartController::class,'cartItemDelete'])->name('cart.delete');
@@ -135,8 +137,23 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
-    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('company.overview.update');
-    
+    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
+
+    //wholesaler  profile
+    Route::group(['prefix'=>'/wholesaler'],function (){
+        //product
+        Route::get('/product/{business_profile_id}', [WholesalerProductController::class, 'index'])->name('wholesaler.product.index');
+        Route::post('/product/store', [WholesalerProductController::class, 'store'])->name('wholesaler.product.store');
+        Route::get('/product/edit/{sku}', [WholesalerProductController::class, 'edit'])->name('wholesaler.product.edit');
+        Route::put('/product/update/{sku}', [WholesalerProductController::class, 'update'])->name('wholesaler.product.update');
+        Route::get('/product/publish-unpublish/{sku}',[WholesalerProductController::class, 'publishUnpublish'])->name('wholesaler.product.publish.unpublish');
+
+    });
+    //tinymc
+    Route::post('tiny-mc-file-uplaod', [TinyMcController::class, 'tinyMcFileUpload'])->name('tinymc.file.upload');
+    Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');
+    //endtinymc
+
 });
 
 //user API's endpoint start
@@ -185,10 +202,7 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 // sso
 Route::post('login-from-merchantbay',[UserController::class, 'loginFromMerchantbay']);
 // end sso
-//tinymc
-Route::post('tiny-mc-file-uplaod', [SellerProductController::class, 'tinyMcFileUpload'])->name('tinymc.file.upload');
-Route::get('tinymc-untracked-file-delete',[SellerProductController::class, 'tinyMcUntrackedFileDelete']);
-//endtinymc
+
 //manufacture
 Route::group(['prefix'=>'/manufacture'],function (){
     //product
@@ -198,6 +212,9 @@ Route::group(['prefix'=>'/manufacture'],function (){
     Route::get('product/delete/{product_id}/{business_profile_id}',[ManufactureProductController::class, 'delete'])->name('manufacture.product.delete');
 
 });
+
+
+
 
 //SSLCOMMERZ END
 // Frontend API's endpoint end

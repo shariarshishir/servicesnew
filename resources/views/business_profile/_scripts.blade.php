@@ -57,7 +57,7 @@
                 infoHtml += '<div class="card-content cyan-text">';
                 infoHtml += '<p>INFO : Please verify your input data and hit submit button to create profile.</p>';
                 infoHtml += '</div>';
-                infoHtml += '</div>';			
+                infoHtml += '</div>';
                 $("#information_message").html(infoHtml);
                 $("#review_name").show();
             }
@@ -161,7 +161,7 @@
                            $('.'+item.name+'_value').text(item.value);
                            $('.'+item.name+'_status').text(item.status);
                         });
-                        $('#company_overview_modal').modal('close');
+                        $('#company-overview-modal').modal('close');
                        //console.log(data);
                         swal("Done!", data.msg,"success");
                     },
@@ -481,7 +481,7 @@
             }
         }
         else{
-            
+
             $('.machinaries-details-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.machinaries-details-table-body').append(html);

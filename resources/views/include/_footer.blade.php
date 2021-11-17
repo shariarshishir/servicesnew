@@ -30,7 +30,7 @@
 							<p>Meem Tower, <br/ >
 								Floor: 8, House: 18, <br />
 								Road: 12, Sector: 6, <br />
-								Uttara, Dhaka. 
+								Uttara, Dhaka.
 							</p>
 						</div>
 						<a href="javascript:void(0);" class="btn_direct btn_grBorder">Get Direction</a>
@@ -159,30 +159,6 @@
     </div>
 </div>
 
-{{-- tinymc editor file upload modal --}}
-<div id="tiny-mc-file-upload-modal" class="modal modal-fixed-footer" tabindex="0">
-    <div class="modal-content">
-        <div class="row">
-            <div class="col m6 login-block">
-                <span class="text-danger error-text error-msg login-error-msg" style="display: none;"></span>
-                <form method="POST" action="#" enctype="multipart/form-data" id="tiny-mc-file-upload-form">
-                    @csrf
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="tiny_mc_file" type="file" name="tiny_mc_file" required />
-                        </div>
-                        <button class="btn green waves-effect waves-light tiny-mc-file-upload" type="button" >
-                            {{ __('Upload') }} <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat "><i class="material-icons green-text text-darken-1">close</i></a>
-    </div>
-</div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -378,7 +354,7 @@
         slidesToScroll: 1
     });
 
-    // slick slider 
+    // slick slider
     $('.product_slider').slick({
         dots: false,
         infinite: false,
@@ -413,7 +389,7 @@
                 }
             }
         ]
-    });    
+    });
 
     $(function () {
         $('#fileupload').fileupload({

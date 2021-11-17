@@ -58,6 +58,9 @@
 										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
 									</li>
 									<li tabindex="0">
+										<a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">settings</i> Settings</a>
+									</li>
+									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i> Logout</a>
 									</li>
 								</ul>
@@ -84,6 +87,9 @@
 								</li>
 								<li tabindex="0">
 									<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
+								</li>
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">settings</i> Settings</a>
 								</li>
 								<li tabindex="0">
 									<a class="grey-text text-darken-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i> Logout</a>

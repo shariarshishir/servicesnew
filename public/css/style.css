@@ -2264,4 +2264,26 @@ button:hover {
     padding-bottom: 0px;
     font-size: 14px;
 }
+
+legend {
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    padding: 10px;
+    display: block;
+}
+
+.card {
+    box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 44%);
+    border-radius: 10px;
+    padding: 20px !important;
+}
+
+.user-profile-basic-info-block {
+    margin: 50px 0px;
+}
+.user-profile-info-block {
+    margin: 30px 0px;
+}
 /* New style end */

@@ -161,7 +161,7 @@
                           <td>150 pcs</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -170,7 +170,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -179,7 +179,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -195,7 +195,7 @@
                           <td>150 pcs</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -204,7 +204,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -213,7 +213,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -229,7 +229,7 @@
                           <td>150 pcs</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -238,7 +238,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -247,7 +247,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -263,7 +263,7 @@
                           <td>150 pcs</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -272,7 +272,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -281,7 +281,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -297,7 +297,7 @@
                           <td>150 pcs</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -306,7 +306,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -315,7 +315,7 @@
                           <td>200</td>
                           <td>
                             <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
+                              <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                             </div>
                           </td>
                         </tr>
@@ -334,10 +334,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col m3 l3"><img src="./images/accord.png" alt=""></div>
-          <div class="col m3 l3"><img src="./images/sedex.png" alt=""></div>
-          <div class="col m3 l3"><img src="./images/iso.png" alt=""></div>
-          <div class="col m3 l3"><img src="./images/alliance.png" alt=""></div>
+          <div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/accord.png')}}" alt=""></div>
+          <div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/sedex.png')}}" alt=""></div>
+          <div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/iso.png')}}" alt=""></div>
+          <div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/alliance.png')}}" alt=""></div>
         </div>
       </div>
       <div class="main_buyers_wrap">
@@ -350,37 +350,37 @@
         </div>
         <div class="buyers_logo_wrap row">
           <div class="col s6 m4 l3">
-            <div class="logoBox"><a href="javascript:void(0);"><img src="./images/gemo.png" alt="" /> </a></div>
+            <div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/gemo.png')}}" alt="" /> </a></div>
             <h5>GEMO GMBH</h5>
           </div>
           <div class="col s6 m4 l3">
-            <div class="logoBox"><a href="javascript:void(0);"><img src="./images/newyork.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/newyork.png')}}" alt="" /></a> </div>
             <h5>Newyorker Corp.</h5>
           </div>
           <div class="col s6 m4 l3">
-            <div class="logoBox"><a href="javascript:void(0);"><img src="./images/marisa.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/marisa.png')}}" alt="" /></a> </div>
             <h5>Marisa Group</h5>
           </div>
           <div class="col s6 m4 l3">
-            <div class="logoBox"><a href="javascript:void(0);"><img src="./images/dansk.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/dansk.png')}}" alt="" /></a> </div>
             <h5>Dansk Supermarked</h5>
           </div>
         </div>
         <div class="buyers_logo_wrap row">
           <div class="col s6 m4 l3 center-align">
-            <div class="logoBox"><a href="javascript:void(0);"><img src="./images/tally_weijl.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/tally_weijl.png')}}" alt="" /></a> </div>
             <h5>Tally Weijl Fashion</h5>
           </div>
           <div class="col s6 m4 l3">
-            <div class="logoBox"><a href="javascript:void(0);"> <img src="./images/takko.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/takko.png')}}" alt="" /></a> </div>
             <h5>Takko Fashion</h5>
           </div>
           <div class="col s6 m4 l3">
-            <div class="logoBox"><a href="javascript:void(0);"> <img src="./images/us_polo_assn.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/us_polo_assn.png')}}" alt="" /></a> </div>
             <h5>US Polo Assosiation</h5>
           </div>
           <div class="col s6 m4 l3 center-align">
-            <div class="logoBox"><a href="javascript:void(0);"><img src="./images/suzy.png" alt="" /></a> </div>
+            <div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/suzy.png')}}" alt="" /></a> </div>
             <h5>Suzy Shier</h5>
           </div>
         </div>
@@ -395,27 +395,27 @@
         </div>
         <div class="row flag_wrap center-align">
           <div class="col s6 m4 l2 flagBox">
-            <div class="flag_img"><img src="./images/germany.png" alt=""> </div>
+            <div class="flag_img"><img src="{{asset('images/frontendimages/new_layout_images/germany.png')}}" alt=""> </div>
             <h5>DE: Germany</h5>
           </div>
           <div class="col s6 m4 l2 flagBox">
-            <div class="flag_img"><img src="./images/greece_gla.png" alt=""> </div>
+            <div class="flag_img"><img src="{{asset('images/frontendimages/new_layout_images/greece_gla.png')}}" alt=""> </div>
             <h5>EL: Grece</h5>
           </div>
           <div class="col s6 m4 l2 flagBox">
-            <div class="flag_img"><img src="./images/hungary.png" alt=""> </div>
+            <div class="flag_img"><img src="{{asset('images/frontendimages/new_layout_images/hungary.png')}}" alt=""> </div>
             <h5>HU: Hungary</h5>
           </div>
           <div class="col s6 m4 l2 flagBox">
-            <div class="flag_img"><img src="./images/ireland.png" alt=""> </div>
+            <div class="flag_img"><img src="{{asset('images/frontendimages/new_layout_images/ireland.png')}}" alt=""> </div>
             <h5>IE: Ireland</h5>
           </div>
           <div class="col s6 m4 l2 flagBox">
-            <div class="flag_img"><img src="./images/italy.png" alt=""> </div>
+            <div class="flag_img"><img src="{{asset('images/frontendimages/new_layout_images/italy.png')}}" alt=""> </div>
             <h5>IT: Italy</h5>
           </div>
           <div class="col s6 m4 l2 flagBox">
-            <div class="flag_img"><img src="./images/latvia.png" alt=""> </div>
+            <div class="flag_img"><img src="{{asset('images/frontendimages/new_layout_images/latvia.png')}}" alt=""> </div>
             <h5>LV: Latvia</h5>
           </div>
         </div>
@@ -436,7 +436,7 @@
                 <td>12 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -445,7 +445,7 @@
                 <td>44 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -454,7 +454,7 @@
                 <td>65 sets</td>
                   <td>
                     <div class="verified_img">
-                      <img class="right-align" src="./images/verified.png" />
+                      <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                     </div>
                   </td>
                 </td>
@@ -464,7 +464,7 @@
                 <td>164 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -473,7 +473,7 @@
                 <td>20 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -496,7 +496,7 @@
                 <td>12 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -505,7 +505,7 @@
                 <td>44 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -514,7 +514,7 @@
                 <td>65 sets</td>
                   <td>
                     <div class="verified_img">
-                      <img class="right-align" src="./images/verified.png" />
+                      <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                     </div>
                   </td>
                 </td>
@@ -524,7 +524,7 @@
                 <td>164 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -533,7 +533,7 @@
                 <td>20 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -542,7 +542,7 @@
                 <td>20 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -551,7 +551,7 @@
                 <td>20 sets</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -575,7 +575,7 @@
                 <td>&nbsp;</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -584,7 +584,7 @@
                 <td>&nbsp;</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -593,7 +593,7 @@
                 <td>&nbsp;</td>
                   <td>
                     <div class="verified_img">
-                      <img class="right-align" src="./images/verified.png" />
+                      <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                     </div>
                   </td>
                 </td>
@@ -603,7 +603,7 @@
                 <td>&nbsp;</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -754,7 +754,7 @@
                 <td>&nbsp;</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -763,7 +763,7 @@
                 <td>&nbsp;</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -772,7 +772,7 @@
                 <td>&nbsp;</td>
                   <td>
                     <div class="verified_img">
-                      <img class="right-align" src="./images/verified.png" />
+                      <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                     </div>
                   </td>
                 </td>
@@ -782,7 +782,7 @@
                 <td>&nbsp;</td>
                 <td>
                   <div class="verified_img">
-                    <img class="right-align" src="./images/verified.png" />
+                    <img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
                   </div>
                 </td>
               </tr>
@@ -801,11 +801,11 @@
         </div>
         <div class="row membership_textBox">
           <div class="col s12 m6 l5 center-align">
-            <div class="imgbox"><img src="./images/bgmea.png" alt="" /></div>
+            <div class="imgbox"><img src="{{asset('images/frontendimages/new_layout_images/bgmea.png')}}" alt="" /></div>
             <p>Bangladesh Garment Manufacturers and Exporters Association (BGMEA)</p>
           </div>
           <div class="col s12 m6 l5 center-align">
-            <div class="imgbox"><img src="./images/bkmes.png" alt="" /></div>
+            <div class="imgbox"><img src="{{asset('images/frontendimages/new_layout_images/bkmes.png')}}" alt="" /></div>
             <p>Bangladesh Knitwear Manufacturers and Exporters Association (BKMEA)</p>
           </div>
         </div>
@@ -822,13 +822,13 @@
         <div class="row">
           <div class="col s6 m4 l2 ">
             <div class="paper_img">
-              <img src="./images/fex.png" alt="" />
+              <img src="{{asset('images/frontendimages/new_layout_images/fex.png')}}" alt="" />
             </div>
           </div>
-          <div class="col s6 m4 l2 paper_img"><img src="./images/alo.png" alt="" /></div>
-          <div class="col s6 m4 l3 paper_img"><img src="./images/dtribune.png" alt="" /></div>
-          <div class="col s6 m4 l2 paper_img"><img src="./images/bs.png" alt="" /></div>
-          <div class="col s6 m4 l3 paper_img"><img src="./images/dstar.png" alt="" /></div>
+          <div class="col s6 m4 l2 paper_img"><img src="{{asset('images/frontendimages/new_layout_images/alo.png')}}" alt="" /></div>
+          <div class="col s6 m4 l3 paper_img"><img src="{{asset('images/frontendimages/new_layout_images/dtribune.png')}}" alt="" /></div>
+          <div class="col s6 m4 l2 paper_img"><img src="{{asset('images/frontendimages/new_layout_images/bs.png')}}" alt="" /></div>
+          <div class="col s6 m4 l3 paper_img"><img src="{{asset('images/frontendimages/new_layout_images/dstar.png')}}" alt="" /></div>
         </div>
       </div>
 

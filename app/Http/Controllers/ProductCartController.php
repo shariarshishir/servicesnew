@@ -30,14 +30,15 @@ class ProductCartController extends Controller
 
     public function index()
     {
+
         $addToCartItems = [];
         //Retrieve the list of cat_id's in use.
-        $cats = DB::table('cart_items')->where('user_id',auth()->user()->id)->select('vendor_id')->groupBy('vendor_id')->get();
+        $cats = DB::table('cart_items')->where('user_id',auth()->user()->id)->select('business_profile_id')->groupBy('business_profile_id')->get();
         //for each cat_id in use, find the products associated and then add a collection of those products to the relevant array element
         foreach($cats as $key=>$cat)
         {
             //$addToCartItems[$cat->vendor_id] = DB::table('cart_items')->where('vendor_id', $cat->vendor_id)->where('cookie_identifier',$getCookieIdentifier)->get()->toArray();
-            $addToCartItems[] = DB::table('cart_items')->where('vendor_id', $cat->vendor_id)->where('user_id',auth()->user()->id)->get()->toArray();
+            $addToCartItems[] = DB::table('cart_items')->where('business_profile_id', $cat->business_profile_id)->where('user_id',auth()->user()->id)->get()->toArray();
         }
         $cartData = DB::table('cart_items')->where('user_id',auth()->user()->id)->get();
         $orderedItem=VendorOrderItem::pluck('product_sku')->toArray();
@@ -83,7 +84,7 @@ class ProductCartController extends Controller
             $cartItem->name=$product->name;
             $cartItem->quantity=$request->quantity;
             $cartItem->unit_price=$request->unit_price;
-            $cartItem->vendor_id=$product->vendor_id;
+            $cartItem->business_profile_id=$product->business_profile_id;
             $cartItem->image= $product->images[0]->image;
             $cartItem->product_type=$product->product_type;
             $cartItem->color_attr=json_encode($request->color_attr);
@@ -339,13 +340,13 @@ class ProductCartController extends Controller
 
         try {
             $cartItem=CartItem::where('user_id',auth()->user()->id)->get();
-            $uniqueVendorId = DB::table('cart_items')->where('user_id',auth()->user()->id)->select([DB::raw("SUM(total_price) as price"), DB::raw("SUM(quantity) as quantity"),'vendor_id'])->groupBy('vendor_id')->get();
+            $uniqueVendorId = DB::table('cart_items')->where('user_id',auth()->user()->id)->select([DB::raw("SUM(total_price) as price"), DB::raw("SUM(quantity) as quantity"),'business_profile_id'])->groupBy('business_profile_id')->get();
             $order_number=[];
             foreach($uniqueVendorId as $item){
                 $orderNumber = IdGenerator::generate(['table' => 'vendor_orders', 'field' => 'order_number','reset_on_prefix_change' =>true,'length' => 12, 'prefix' => date('ymd')]);
                 $order=VendorOrder::create([
                     'user_id'         => auth()->user()->id,
-                    'vendor_id'       => $item->vendor_id,
+                    'business_profile_id' => $item->business_profile_id,
                     'order_number'    => $orderNumber,
                     'grand_total'     => $item->price,
                     'shipping_id'     => $shipping_address_id,
@@ -358,7 +359,7 @@ class ProductCartController extends Controller
                 ]);
                 array_push($order_number, $order->order_number);
                 foreach($cartItem as $list){
-                    if($list->vendor_id == $item->vendor_id){
+                    if($list->business_profile_id == $item->business_profile_id){
                         $orderItem=VendorOrderItem::create([
                             'order_id'      => $order->id,
                             'product_sku'   => $list->product_sku,
@@ -387,7 +388,7 @@ class ProductCartController extends Controller
 
                     }
                 }
-                event(new NewOrderHasPlacedEvent($order));
+               // event(new NewOrderHasPlacedEvent($order));
             }
 
 
@@ -537,14 +538,14 @@ class ProductCartController extends Controller
             }
         }
        //end checking moq
-    if($product->availability == 0 ){
-        event(new ProductAvailabilityEvent($product));
-    }else{
-        if(!empty($alert_array)){
+    // if($product->availability == 0 ){
+    //     event(new ProductAvailabilityEvent($product));
+    // }else{
+    //     if(!empty($alert_array)){
 
-            event(new ProductAvailabilityEvent($product, $alert_array));
-        }
-    }
+    //         event(new ProductAvailabilityEvent($product, $alert_array));
+    //     }
+    // }
 
     //    if(array_sum($total_colors_sizes) < $product->moq ){
     //        event(new ProductAvailabilityEvent($product));

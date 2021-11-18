@@ -50,7 +50,8 @@ $reviewsCount = count($productReviews);
     </div>
     <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col m8' @endphp single-product-details-wrapper">
         <div class="seller-store">
-            <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}"><i class="material-icons dp48">store</i> {{ $product->vendor->vendor_name }}</a>
+            <a href="#"> {{$product->businessProfile->business_name}}</a>
+            {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}"><i class="material-icons dp48">store</i> {{ $product->vendor->vendor_name }}</a> --}}
         </div>
         <h4>{{ $product->name }}</h4>
         <div class="row single-product-details-top">
@@ -178,7 +179,7 @@ $reviewsCount = count($productReviews);
                                     <textarea id="experience" name="experience" class="experience-textarea materialize-textarea"></textarea>
                                 </div>
                             </div>
-                            <input type="hidden" value="{{$product->vendor->id}}" name="vendor_id" />
+                            <input type="hidden" value="{{$product->businessProfile->id}}" name="vendor_id" />
                             <input type="hidden" value="{{$product->id}}" name="product_id" />
                             <button type="submit" class="btn green waves-effect waves-light" id="submitReview">Submit Review</button>
                         </form>
@@ -881,13 +882,13 @@ $reviewsCount = count($productReviews);
         <div class="card card-with-padding">
             <legend>Company Profile</legend>
             <div>
-                <b style="color:#4CAF50">Store name :</b> {{$product->vendor->vendor_name}}<p>
-                <b style="color:#4CAF50">Country / Region :</b> {{$product->vendor->vendor_country}}<p>
-                <b style="color:#4CAF50">Business Type :</b> {{$product->vendor->vendor_type}}<p>
-                <b style="color:#4CAF50">Main Products:</b> {{$product->vendor->vendor_mainproduct}}<p>
-                <b style="color:#4CAF50">Total Employees :</b> {{$product->vendor->vendor_totalemployees}}<p>
-                <b style="color:#4CAF50">Year Established :</b> {{$product->vendor->vendor_yearest}}<p>
-                <b style="color:#4CAF50">Certification :</b> {{$product->vendor->vendor_certification}}<p>
+                <b style="color:#4CAF50">Store name :</b> {{$product->businessProfile->business_name}}<p>
+                <b style="color:#4CAF50">Country / Region :</b> {{$product->businessProfile->location}}<p>
+                <b style="color:#4CAF50">Business Type :</b> Wholesaler<p>
+                {{-- <b style="color:#4CAF50">Main Products:</b> {{$product->business_profile->vendor_mainproduct}}<p>
+                <b style="color:#4CAF50">Total Employees :</b> {{$product->business_profile->vendor_totalemployees}}<p>
+                <b style="color:#4CAF50">Year Established :</b> {{$product->business_profile->vendor_yearest}}<p>
+                <b style="color:#4CAF50">Certification :</b> {{$product->business_profile->vendor_certification}}<p> --}}
 
             </div>
         </div>
@@ -943,7 +944,8 @@ $reviewsCount = count($productReviews);
                                     </div>
                                 </div>
                                 <div class="vendor_name">
-                                    <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}">{{$product->vendor->vendor_name}}</a>
+                                    {{-- <a href="#"> {{$product->businessProfile->business_name}}</a> --}}
+                                    {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}">{{$product->vendor->vendor_name}}</a> --}}
                                 </div>
                             </div>
                             <!-- Modal Structure -->

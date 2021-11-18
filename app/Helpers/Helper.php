@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\BusinessProfile;
 use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\ProductReview;
@@ -80,5 +82,14 @@ if (!function_exists('productRating')) {
         function make_slug($string) {
             return preg_replace('/\s+/u', '-', strtolower(trim($string)));
         }
+    }
+}
+
+if (!function_exists('businessProfileInfo')) {
+
+    function businessProfileInfo($business_profile_id)
+    {
+        $business_profile=BusinessProfile::where('id',$business_profile_id)->first();
+        return $business_profile;
     }
 }

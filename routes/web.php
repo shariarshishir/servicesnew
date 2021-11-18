@@ -52,6 +52,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'productList'])->name('products');
 Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name('readystockproducts');
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
+Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
+
+
 Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
@@ -157,10 +160,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');
     //endtinymc
 
-   
-    
-   
-    
+
+
+
+
 });
 
 //user API's endpoint start

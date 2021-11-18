@@ -136,6 +136,14 @@ class HomeController extends Controller
         return view('product.ready_stock_product',compact('products','total_cat_id'));
     }
     //end readystock products
+
+    //customizable products
+    public function customizable()
+    {
+        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        return view('product.customizable',compact('products'));
+    }
+
    //start buy design products
     public function buyDesignsProducts()
     {

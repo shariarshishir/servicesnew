@@ -52,6 +52,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'productList'])->name('products');
 Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name('readystockproducts');
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
+Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
+
+
 Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 

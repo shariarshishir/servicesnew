@@ -15,6 +15,12 @@ class CreateCertificationsTable extends Migration
     {
         Schema::create('certifications', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('business_profile_id')->nullable();
+            $table->string('title')->nullable();
+            $table->text('short_description')->nullable();
+            $table->text('image')->nullable();
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

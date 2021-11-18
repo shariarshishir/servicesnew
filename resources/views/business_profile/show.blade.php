@@ -525,7 +525,7 @@
 									<h3>Certifications</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_upload btn_green_White" ><span class="material-icons">file_upload</span></span> Upload</button>
+									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
 									<button type="button" class="btn_delete btn_green_White" ><span><span class="material-icons">delete</span></span> Delete</button>
 								</div>
 							</div>
@@ -1373,6 +1373,7 @@
     @include('business_profile._edit_company_overview_modal')
     @include('business_profile._edit_capacity_and_machineries_modal')
     @include('business_profile._edit_production_flow_and_manpower_modal')
+    @include('business_profile._upload_certifications_modal')
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')
 @endsection

@@ -626,9 +626,9 @@
     {
         $('#certification-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="certification-title" type="text" class="form-control "  value="" ></td>';
-        html +='<td><textarea class="form-control " name="cerification_short_description[]" id="certification-short-description" rows="4" cols="50">Enter text here...</textarea></td>';
-        html +='<td><input name="certification_image[]" id="certification-image" type="file"></td>';
+        html +='<td><input name="title[]" id="certification-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td><textarea class="input-field" name="cerification_short_description[]" id="certification-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td><input name="certification_image[]" class="input-field"  id="certification-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
         html +='</tr>';
         $('.certification-details-table-block tbody').append(html);
@@ -640,7 +640,7 @@
 
 
     //submit form for certification details
-    $('#production-flow-and-manpower-form').on('submit',function(e){
+    $('#certification-upload-form').on('submit',function(e){
     e.preventDefault();
     var url = '{{ route("certification.upload") }}';
     var formData = new FormData(this);

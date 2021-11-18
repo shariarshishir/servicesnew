@@ -42,6 +42,10 @@ h1,h2,h3,h4,h5,h6 {
 p{
     margin: 0 0 10px;
 }
+
+a {
+    color: #448547;
+}
 .overlay_hover {
     position: absolute;
     top: 0px;
@@ -2154,10 +2158,17 @@ button:hover {
 /* *************** Footer Container css end ***************** */
 
 /* New style start */
+.btn_profile {
+    display: inline-block;
+}
 .user-block {
-    position: absolute;
+    /* position: absolute;
     right: 20px;
-    top: 35px;
+    top: 35px; */
+    display: inline-block;
+}
+.btn_logRegi {
+    padding: 8px 15px;
 }
 .avatar-status {
     position: relative;
@@ -2291,3 +2302,72 @@ legend {
     display: none;
 }
 /* New style end */
+
+
+/* login-register-modal css start */
+
+#login-register-modal {
+    border-radius: 20px;
+} 
+.registration-block {
+    text-align: center;
+}
+.registration-block .company-logo {
+    margin-top: 50px;
+}
+.modal.modal-fixed-footer .modal-content {
+    padding: 50px 24px;
+}
+#login-register-modal .login-block {
+    padding-top: 50px;
+}
+.login-block .input-field input {
+    border: 1px solid #9e9e9e !important;
+    padding: 0px 10px;
+    width: 81%;
+}
+.login-block .input-field input:focus {
+    box-shadow: none !important;
+    border: 1px solid #448547 !important;
+}
+.login-block .input-field .prefix.active {
+    color: #448547;
+}
+.login-block .input-field .prefix ~ label {
+    margin-left: 3.8rem;
+}
+.login-block .input-field label.active {
+    color: #448547 !important;
+    margin-left: 3rem;
+    top: -10px;
+}
+.remember-me-block {
+    padding-left: 35px;
+}
+.password-block-wrap #hide-password,
+.password-block-wrap #show-password {
+    position: absolute;
+    top: 10px;
+    z-index: 99;
+    right: 20px;
+    color: #818181;
+}
+.remember-me-block .input-field label {
+    position: inherit;
+}
+.login-block .signin {
+    margin-left: 10px;
+}
+.login-block .btn-forgot-password,
+.login-block .signin {
+    border-radius: 5px;
+    padding: 0 20px;
+}
+
+.login-block [type="checkbox"]:checked+span:not(.lever):before {
+    border-right: 2pxsolid #448547;
+    border-bottom: 2px solid #448547;
+}
+
+
+/* login-register-modal css end */

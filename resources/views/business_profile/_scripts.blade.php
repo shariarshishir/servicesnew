@@ -538,5 +538,90 @@
       });
     });
 
+
+
+
+    //Add and remove row for production-flow-and-manpower dynamically
+    function addProductionFlowAndManpower()
+    {
+    
+        let totalChild = $('.production-flow-and-manpower-table-block tbody').children().length;
+        var html = '<tr>';
+        html +='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
+        html +='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
+        html +='<td><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
+        html +='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
+        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='</tr>';
+        $('.production-flow-and-manpower-table-block tbody').append(html);
+    }
+    function removeProductionFlowAndManpower(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+
+
+    //submit form for production flow and manpower
+     //submit form  FOR CAPACITY AND MECHINERIES
+    $('#production-flow-and-manpower-form').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/production-flow-and-manpower-create-or-update",
+      type:"POST",
+      data: $('#production-flow-and-manpower-form').serialize(),
+
+      success:function(response){
+        var productionFlowAndManpowers=response.productionFlowAndManpowers;
+        var nohtml="";
+        if(productionFlowAndManpowers.length >0){
+
+            $('.production-flow-and-manpower-table-body').html(nohtml);
+            for(let i = 0;i < productionFlowAndManpowers.length ;i++){
+
+                var html = '<tr>';
+                html += '<th>'+productionFlowAndManpowers[i].production_type+'</th>';
+                html += '<td>';
+                html += '<table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">';
+                $.each(JSON.parse(productionFlowAndManpowers[i].flow_and_manpower), function(index) {
+                    html += '<tr>';
+                    html += '<td>'+this.name+'</td>';
+                    html += '<td>'+this.value+'</td>';
+                    html += '<td>'+this.status+'</td>';
+                    html += '</tr>';
+                });
+                html += '</table>';
+                html += '</td>';
+                html += '</tr>';
+
+                $('.production-flow-and-manpower-table-body').append(html);
+                
+            }
+        }
+        else{
+            
+            $('.production-flow-and-manpower-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.production-flow-and-manpower-table-body').append(html);
+        }
+
+      
+
+        $('#production-flow-and-manpower-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#capacity-machineries-errors').empty();
+                $("#capacity-machineries-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#capacity-machineries-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+
+
     </script>
 @endpush

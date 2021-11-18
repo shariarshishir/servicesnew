@@ -84,28 +84,28 @@
               <h4>Categories Produced</h4>
               <div class="categories-produced-table-wrapper box_shadow">
                 <table class="categories-produced-table">
-                  <thead>
-                    <tr>
-                      <th>Type</th>
-                      <th>Percentage</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody class="categories-produced-table-body">
-                  @if(count($business_profile->categoriesProduceds)>0)
-                    @foreach($business_profile->categoriesProduceds as $categoriesProduced)
-                    <tr>
-                      <td>{{$categoriesProduced->type}}</td>
-                      <td>{{$categoriesProduced->percentage}}</td>
-                      <td>{{$categoriesProduced->status}}</td>
-                    </tr>
-                    @endforeach
-                  @else
-                    <tr>
-                      <td>No data</td>
-                    </tr>
-                  @endif
-                  </tbody>
+                    <thead>
+                        <tr>
+                        <th>Type</th>
+                        <th>Percentage</th>
+                        <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="categories-produced-table-body">
+                        @if(count($business_profile->categoriesProduceds)>0)
+                        @foreach($business_profile->categoriesProduceds as $categoriesProduced)
+                        <tr>
+                        <td>{{$categoriesProduced->type}}</td>
+                        <td>{{$categoriesProduced->percentage}}</td>
+                        <td>{{$categoriesProduced->status}}</td>
+                        </tr>
+                        @endforeach
+                        @else
+                        <tr>
+                        <td>No data</td>
+                        </tr>
+                        @endif
+                    </tbody>
                 </table>
               </div>
             </div>
@@ -113,215 +113,71 @@
           </div>
       </div>
       
-      <div class="overview_table_wrap machinery_table">
-          <h3>Machinery Details</h3>
-          <div class="machinaries-details-table-wrapper box_shadow">
-            <table class="machinaries-details-table">
-              <thead>
-              <tr>
-                <th>Machine Name</th>
-                <th>Quantity</th>
-                <th>Status</th>
-              </tr>
-              </thead>
-              <tbody class="machinaries-details-table-body">
-              @if(count($business_profile->machineriesDetails)>0)
-                @foreach($business_profile->machineriesDetails as $machineriesDetail)
-                <tr>
-                  <td>{{$machineriesDetail->machine_name}}</td>
-                  <td>{{$machineriesDetail->quantity}}</td>
-                  <td>{{$machineriesDetail->status}}</td>
-                </tr>
-                @endforeach
-              @else
-                <tr>
-                  <td>No data</td>
-                </tr>
-              @endif
-              </tbody>
-            </table>
-          </div>
-      </div>
+        <div class="overview_table_wrap machinery_table">
+            <h3>Machinery Details</h3>
+            <div class="machinaries-details-table-wrapper box_shadow">
+                <table class="machinaries-details-table">
+                    <thead>
+                        <tr>
+                            <th>Machine Name</th>
+                            <th>Quantity</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="machinaries-details-table-body">
+                        @if(count($business_profile->machineriesDetails)>0)
+                        @foreach($business_profile->machineriesDetails as $machineriesDetail)
+                        <tr>
+                            <td>{{$machineriesDetail->machine_name}}</td>
+                            <td>{{$machineriesDetail->quantity}}</td>
+                            <td>{{$machineriesDetail->status}}</td>
+                        </tr>
+                        @endforeach
+                        @else
+                        <tr>
+                            <td>No data</td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
       <div class="overview_table_wrap">
           <div class="row top_titleWrap">
             <div class="col s6 m6"><h3>Production Flow and Manpower</h3></div>
             <div class="col s6 m6 right-align editBox">
-              <button type="button" class="btn_edit btn_green_White" ><span class="material-icons">border_color</span></span> Edit</button>
+              <button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
             </div>
           </div>
-          <div class="overview_table box_shadow">
-            <table class="production_flow" style="width:100%">
-              <tr>
-                <th>Knitting</th>
-                <td>
-                  <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td>No of Jacquard Machines</td>
-                          <td>150 pcs</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Manpower</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Capacity Daily</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                    </table>
-                </td>
-              </tr>
-              <tr>
-                <th>Linking</th>
-                <td>
-                  <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td>No of Jacquard Machines</td>
-                          <td>150 pcs</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Manpower</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Capacity Daily</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                    </table>    
-                </td>
-              </tr>
-              <tr>
-                <th>Trimming and <br/> Mending</th>
-                <td>
-                  <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td>No of Jacquard Machines</td>
-                          <td>150 pcs</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Manpower</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Capacity Daily</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                    </table>    
-                </td>
-              </tr>
-              <tr>
-                <th>PQC</th>
-                <td>
-                  <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td>No of Jacquard Machines</td>
-                          <td>150 pcs</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Manpower</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Capacity Daily</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                    </table>    
-                </td>
-              </tr>
-              <tr>
-                <th>Packaging</th>
-                <td>
-                  <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td>No of Jacquard Machines</td>
-                          <td>150 pcs</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Manpower</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Capacity Daily</td>
-                          <td>200</td>
-                          <td>
-                            <div class="verified_img">
-                              <img class="right-align" src="./images/verified.png" />
-                            </div>
-                          </td>
-                        </tr>
-                    </table>    
-                </td>
-              </tr>
+          <div class="production-flow-and-manpower-table-wrapper box_shadow">
+            <table class="production-flow-and-manpower-table" style="width:100%">
+                <tbody class="production-flow-and-manpower-table-body">
+                    <!-- Html will comes from script -->
+
+                @if(count($business_profile->productionFlowAndManpowers)>0)
+                    @foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
+                    <tr>
+                        <th>{{$productionFlowAndManpower->production_type}}</th>
+                        <td>
+                            <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
+                            @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
+                            <tr>
+                                <td>{{$flowAndManpower->name}}</td>
+                                <td>{{$flowAndManpower->value}}</td>
+                                <td>{{$flowAndManpower->status}}</td>
+                            </tr>
+                            @endforeach
+                            </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                @else
+                <tr>
+                  <td>No data</td>
+                </tr>
+                @endif
+                </tbody>
             </table>
           </div>
       </div>
@@ -329,7 +185,7 @@
         <div class="row top_titleWrap upload_delete_wrap">
           <div class="col s6 m6"><h3>Certifications</h3></div>
           <div class="col s6 m6 right-align editBox">
-            <button type="button" class="btn_upload btn_green_White" ><span class="material-icons">file_upload</span></span> Upload</button>
+            <button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
             <button type="button" class="btn_delete btn_green_White" ><span><span class="material-icons">delete</span></span> Delete</button>
           </div>
         </div>
@@ -848,15 +704,10 @@
                  @include('business_profile._product_table_data')
             </div>
     </div>
-    {{-- company overview edit modal --}}
-          @include('business_profile._edit_company_overview_modal')
-          {{-- end company modal --}}
-
-
-          {{-- Capacity and machineries  modal --}}
-            @include('business_profile._edit_capacity_and_machineries_modal')
-          {{-- end capacity and machineries modal --}}
-
+    
+    @include('business_profile._edit_company_overview_modal')
+    @include('business_profile._edit_capacity_and_machineries_modal')
+    @include('business_profile._edit_production_flow_and_manpower_modal')
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')
 @endsection

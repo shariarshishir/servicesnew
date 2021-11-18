@@ -39,12 +39,12 @@
 </div>
 <div class="col s12 profile-menu-list">
     <ul class=" z-depth-1 profile-tabs">
-        <li class="profile-item-tab col m2 profile-tab"><a class="{{ Route::is('users.profile') ? 'active' : ''}}" href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
-        <li class="profile-item-tab col m2 products-tab"><a class="{{ Route::is('seller-product.index') ? 'active' : ''}}" href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
-        <li class="profile-item-tab col m2 orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Msodification</a></li>
-        <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('order.index') ? 'active' : ''}}" href="{{route('order.index')}}"><span class="orderApprovedCount"></span> Orders</a></li>
+        <li class="profile-item-tab col m2 profile-tab"><a class="{{ Route::is('business.profile.show') ? 'active' : ''}}" href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
+        <li class="profile-item-tab col m2 products-tab"><a class="{{ Route::is('wholesaler.product.index') ? 'active' : ''}}" href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
+        <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('wholesaler.order.index') ? 'active' : ''}}" href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
+        {{-- <li class="profile-item-tab col m2 orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Msodification</a></li>
         <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('user.order.query.index') ? 'active' : ''}}" href="{{route('user.order.query.index')}}"><span class="orderQueryProcessedCount"></span> Orders Query</a></li>
-        <li class="profile-item-tab col m2 reviews-tab"><a class="{{ Route::is('vendor.review.index') ? 'active' : ''}}" href="{{route('vendor.review.index')}}">Reviews</a></li>
+        <li class="profile-item-tab col m2 reviews-tab"><a class="{{ Route::is('vendor.review.index') ? 'active' : ''}}" href="{{route('vendor.review.index')}}">Reviews</a></li> --}}
     </ul>
 </div>
 

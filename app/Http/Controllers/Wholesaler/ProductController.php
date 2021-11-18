@@ -31,68 +31,78 @@ class ProductController extends Controller
 {
     public function index(Request $request, $business_profile_id)
    {
-       if ($request->ajax())
-        {
-            $data =Product::latest()->where('business_profile_id',$business_profile_id)->with('images');
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('image',function($row){
-                    if($row->images->isEmpty()){return '';}
-                        $source=asset('storage/'.$row->images[0]->image);
-                        if($row->availability==0 && ($row->product_type == 2 || $row->product_type == 3)){
-                            return $image='<span class="new badge red" data-badge-caption="sold"></span><img src="'.$source.'" class="responsive-img" alt="" width="150" height="80"/> ';
-                        }
-                        return $image='<img src="'.$source.'" class="responsive-img" alt="" width="150" height="80"/>';
 
-                })
-                ->addColumn('action', function($row){
-                    //$actionBtn = '<a href="javascript:void(0)" class="seller-edit-product btn waves-effect waves-light green" id="'.$row->sku.'"><i class="material-icons dp48">edit</i></a> <a href="javascript:void(0)" class="seller-delete-prodcut seller-publish-unpublish-prodcut btn waves-effect waves-light green" id="'.$row->sku.'"><i class="material-icons dp48">close</i></a>';
-                    $actionBtn = '<a href="javascript:void(0)" class="seller-edit-product btn waves-effect waves-light green" id="'.$row->sku.'">';
-                    $actionBtn .= '<i class="material-icons dp48">edit</i>';
-                    $actionBtn .= '</a>';
-                    if($row->state==1)
-                    {
-                        $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-status="1" class="seller-delete-prodcut seller-publish-unpublish-prodcut btn waves-effect waves-light red" id="'.$row->sku.'">';
-                        $actionBtn .= '<i class="material-icons dp48">close</i>';
-                        $actionBtn .= '</a>';
-                    }
-                    else
-                    {
-                        $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-status="0" class="seller-delete-prodcut seller-publish-unpublish-prodcut btn waves-effect waves-light green" id="'.$row->sku.'">';
-                        $actionBtn .= '<i class="material-icons dp48">check</i>';
-                        $actionBtn .= '</a>';
-                    }
-                    return $actionBtn;
-                })
-                ->editColumn('state', function($row) {
-                    if($row->state==1) return 'Published';
-                    else return 'Not Published';
-                })
-                ->editColumn('is_featured', function($row) {
-                    if($row->is_featured==1) return 'YES';
-                    else return 'NO';
-                })
-                ->editColumn('is_new_arrival', function($row) {
-                    if($row->is_new_arrival==1) return 'YES';
-                    else return 'NO';
-                })
-                ->filter(function ($instance) use ($request) {
-                    if ($request->get('state') == '0' || $request->get('state') == '1') {
-                        $instance->where('state', $request->get('state'));
-                    }
-                    if ($request->get('product_type')!= null) {
-                        $instance->where('product_type', $request->get('product_type'));
-                    }
-                    if (!empty($request->get('search'))) {
-                        $instance->where('name', 'like', "%{$request->get('search')}%");
-                    }
-
-                })
-                ->rawColumns(['action','image'])
-                ->make(true);
-        }
         $business_profile=BusinessProfile::where('id', $business_profile_id)->first();
-        return view('wholesaler_profile.products.index', compact('business_profile'));
+        if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
+        {
+            if ($request->ajax())
+            {
+                $data =Product::latest()->where('business_profile_id',$business_profile_id)->with('images');
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('image',function($row){
+                        if($row->images->isEmpty()){return '';}
+                            $source=asset('storage/'.$row->images[0]->image);
+                            if($row->availability==0 && ($row->product_type == 2 || $row->product_type == 3)){
+                                return $image='<span class="new badge red" data-badge-caption="sold"></span><img src="'.$source.'" class="responsive-img" alt="" width="150" height="80"/> ';
+                            }
+                            return $image='<img src="'.$source.'" class="responsive-img" alt="" width="150" height="80"/>';
+
+                    })
+                    ->addColumn('action', function($row){
+                        //$actionBtn = '<a href="javascript:void(0)" class="seller-edit-product btn waves-effect waves-light green" id="'.$row->sku.'"><i class="material-icons dp48">edit</i></a> <a href="javascript:void(0)" class="seller-delete-prodcut seller-publish-unpublish-prodcut btn waves-effect waves-light green" id="'.$row->sku.'"><i class="material-icons dp48">close</i></a>';
+                        $actionBtn = '<a href="javascript:void(0)" class="seller-edit-product btn waves-effect waves-light green" id="'.$row->sku.'">';
+                        $actionBtn .= '<i class="material-icons dp48">edit</i>';
+                        $actionBtn .= '</a>';
+                        if($row->state==1)
+                        {
+                            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-status="1" class="seller-delete-prodcut seller-publish-unpublish-prodcut btn waves-effect waves-light red" id="'.$row->sku.'">';
+                            $actionBtn .= '<i class="material-icons dp48">close</i>';
+                            $actionBtn .= '</a>';
+                        }
+                        else
+                        {
+                            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-status="0" class="seller-delete-prodcut seller-publish-unpublish-prodcut btn waves-effect waves-light green" id="'.$row->sku.'">';
+                            $actionBtn .= '<i class="material-icons dp48">check</i>';
+                            $actionBtn .= '</a>';
+                        }
+                        return $actionBtn;
+                    })
+                    ->editColumn('state', function($row) {
+                        if($row->state==1) return 'Published';
+                        else return 'Not Published';
+                    })
+                    ->editColumn('is_featured', function($row) {
+                        if($row->is_featured==1) return 'YES';
+                        else return 'NO';
+                    })
+                    ->editColumn('is_new_arrival', function($row) {
+                        if($row->is_new_arrival==1) return 'YES';
+                        else return 'NO';
+                    })
+                    ->filter(function ($instance) use ($request) {
+                        if ($request->get('state') == '0' || $request->get('state') == '1') {
+                            $instance->where('state', $request->get('state'));
+                        }
+                        if ($request->get('product_type')!= null) {
+                            $instance->where('product_type', $request->get('product_type'));
+                        }
+                        if (!empty($request->get('search'))) {
+                            $instance->where('name', 'like', "%{$request->get('search')}%");
+                        }
+
+                    })
+                    ->rawColumns(['action','image'])
+                    ->make(true);
+            }
+
+            return view('wholesaler_profile.products.index', compact('business_profile'));
+        }
+
+        abort(401);
+
+
+
 
    }
 

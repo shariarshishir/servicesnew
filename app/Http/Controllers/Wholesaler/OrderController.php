@@ -6,64 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VendorOrder;
 use Illuminate\Support\Facades\Mail;
+use App\Models\BusinessProfile;
 
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    public function index($business_profile_id)
    {
-
-        $notifications = auth()->user()->unreadNotifications;
-        $orderIds=[];
-        $orderModificationRequestIds=[];
-        $orderApprovedNotificationIds=[];
-        $orderModificationRequestNotificationIds=[];
-        $orderQueryProcessedIds=[];
-        foreach($notifications as $notification)
+        $business_profile=BusinessProfile::findOrFail($business_profile_id);
+        if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-            if($notification->type == "App\Notifications\NewOrderHasApprovedNotification"){
-                array_push($orderIds,$notification->data['notification_data']);
-            }
-            else if($notification->type == "App\Notifications\QueryWithModificationToUserNotification"){
-                array_push($orderModificationRequestIds,$notification->data['notification_data']);
-
-            }
-            else if($notification->type == "App\Notifications\OrderQueryFromAdminNotification"){
-                array_push($orderQueryProcessedIds,$notification->data['notification_data']['order_modification_request_id']);
-            }
-            else if($notification->type == "App\Notifications\QueryCommuncationNotification"){
-                if($notification->data['order_qurey_type'] == 2){
-                    array_push($orderModificationRequestIds,$notification->data['notification_data']);
-                }
-                if($notification->data['order_qurey_type'] == 1){
-                    array_push($orderQueryProcessedIds,$notification->data['notification_data']);
-                }
-            }
-            elseif($notification->type == "App\Notifications\PaymentSuccessNotification"){
-                array_push($orderIds,$notification->data['notification_data']);
-            }
+            $orders = VendorOrder::where('business_profile_id',$business_profile->id)->with(['billingAddress','shippingAddress'])->latest()->get();
+            return view('wholesaler_profile.orders.index',compact('orders','business_profile'));
         }
+        abort(401);
 
-        $countOrderApproved=array_count_values($orderIds);
-
-        if(auth()->user()->user_type=='buyer'){
-                $orders = VendorOrder::where('user_id',auth()->user()->id)->with(['billingAddress','shippingAddress'])->latest()->get();
-
-            }
-            else{
-                $receivedOrder = VendorOrder::where('vendor_id',auth()->user()->vendor->id)->whereNotIn('state', ['pending','cancel'])->with(['billingAddress','shippingAddress'])->latest()->get();
-                $givingOrder = VendorOrder::where('user_id',auth()->user()->id)->with(['billingAddress','shippingAddress'])->latest()->get();
-
-                $orders=$receivedOrder->merge($givingOrder);
-                foreach($orders as $data){
-                    if($data->vendor_id == auth()->user()->id){
-                        $data['order_type'] = 'received_order';
-                    }else{
-                        $data['order_type'] = 'giving_order';
-                    }
-                }
-            }
-
-        return view('user.profile.orders._partial_index',compact('orders','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderApproved'));
    }
 
    public function orderDelivered($orderNumber){

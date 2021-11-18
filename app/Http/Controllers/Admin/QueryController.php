@@ -21,19 +21,19 @@ class QueryController extends Controller
 {
    public function index($type)
    {
-       $query_request_list=OrderModificationRequest::latest()->where('type',$type)->with(['user','vendor','product'])->get();
+       $query_request_list=OrderModificationRequest::latest()->where('type',$type)->with(['user','businessProfile','product'])->get();
        return view('admin.query.index',['collection' => $query_request_list]);
    }
 
    public function edit($id)
-   {
-       $query_request=OrderModificationRequest::where('id',$id)->with(['user','vendor','product','orderModification'])->first();
+   {   
+       $query_request=OrderModificationRequest::where('id',$id)->with(['user','businessProfile','product','orderModification'])->first();
        return view('admin.query.edit',['collection' => $query_request]);
    }
 
    public function show($id)
    {
-       $query_request=OrderModificationRequest::where('id',$id)->with(['user','vendor','product','orderModification'])->first();
+       $query_request=OrderModificationRequest::where('id',$id)->with(['user','businessProfile','product','orderModification'])->first();
        return view('admin.query.show',['collection' => $query_request]);
    }
 
@@ -73,7 +73,7 @@ class QueryController extends Controller
         $OrderModificationRequest->update(['state' => config('constants.order_query_status.processed')]);
         if($request->hasFile('file'))
         {
-            $filename = $request->file->store('images/'.$OrderModificationRequest->vendor->vendor_name.'/products/modification_request','public');
+            $filename = $request->file->store('images/'.$OrderModificationRequest->businessProfile->business_name.'/products/modification_request','public');
             $image_resize = Image::make(public_path('storage/'.$filename));
             $image_resize->fit(300, 300);
             $image_resize->save(public_path('storage/'.$filename));
@@ -132,14 +132,14 @@ class QueryController extends Controller
    public function comment(Request $request)
    {
         $details=[];
-        $product=Product::where('id', $request->product_id)->first();
+        $product=Product::where('id', $request->product_id)->with('businessProfile')->first();
         foreach($request->ord_mod_replay as $key => $value)
                 {
                     foreach($value as $key2 => $value2 )
                         {
                             if($key== 'image')
                             {
-                                $filename = $value2->store('images/'.$product->vendor->vendor_name.'/products/modification_request','public');
+                                $filename = $value2->store('images/'.$product->businessProfile->business_name.'/products/modification_request','public');
                                 $image_resize = Image::make(public_path('storage/'.$filename));
                                 $image_resize->fit(300, 300);
                                 $image_resize->save(public_path('storage/'.$filename));
@@ -166,7 +166,7 @@ class QueryController extends Controller
 
    public function editModificationRequest($id)
    {
-       $query_request=OrderModificationRequest::where('id',$id)->with(['user','vendor','product','orderModification'])->first();
+       $query_request=OrderModificationRequest::where('id',$id)->with(['user','businessProfile','product','orderModification'])->first();
        return view('admin.query.edit_order_modification_query',['collection' => $query_request]);
    }
 

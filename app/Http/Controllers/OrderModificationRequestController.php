@@ -71,7 +71,9 @@ class OrderModificationRequestController extends Controller
         //     $orderModificationRequest=OrderModificationRequest::latest()->where('vendor_id',auth()->user()->vendor->id)->with(['comments.replies', 'orderModification'])->get();
         // }
 
-       return view('user.profile.orders_modification._partial_index',compact('orderModificationRequest','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderQueryMdf'));
+       //return view('user.profile.orders_modification._partial_index',compact('orderModificationRequest','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderQueryMdf'));
+       return view('my_order.orders_modification.index',compact('orderModificationRequest','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderQueryMdf'));
+
 
     }
     public function commentCreateShow($id)
@@ -156,7 +158,7 @@ class OrderModificationRequestController extends Controller
 
         try{
 
-            $product=Product::where('id',$request->product_id)->first();
+            $product=Product::where('id',$request->product_id)->with('businessProfile')->first();
             $details=[];
             foreach($request->prod_mod_req as $key => $value)
                     {
@@ -164,7 +166,7 @@ class OrderModificationRequestController extends Controller
                             {
                                 if($key== 'image')
                                 {
-                                    $filename = $value2->store('images/'.$product->vendor->vendor_name.'/products/modification_request','public');
+                                    $filename = $value2->store('images/'.$product->businessProfile->business_name.'/products/modification_request','public');
                                     $image_resize = Image::make(public_path('storage/'.$filename));
                                     $image_resize->fit(300, 300);
                                     $image_resize->save(public_path('storage/'.$filename));
@@ -182,7 +184,7 @@ class OrderModificationRequestController extends Controller
                     'type'      => config('constants.order_query_type.order_query_with_modification'),
                     'user_id'   => auth()->id(),
                     'product_id'=> $product->id,
-                    'vendor_id' => $product->vendor->id,
+                    'business_profile_id' => $product->business_profile_id,
                     'details'   => json_encode($details),
                     'ip_address' => $request->ip(),
                     'user_agent' => $request->header('User-Agent'),
@@ -190,7 +192,7 @@ class OrderModificationRequestController extends Controller
 
 
 
-                event(new NewOrderModificationRequestEvent($orderModificationRequest));
+                //event(new NewOrderModificationRequestEvent($orderModificationRequest));
                 return response()->json([
                     'success' => 'Request Created Successfully!',
                     'message' => 'Done!',
@@ -211,14 +213,14 @@ class OrderModificationRequestController extends Controller
 
        try{
             $details=[];
-            $product=Product::where('id', $request->product_id)->first();
+            $product=Product::where('id', $request->product_id)->with('businessProfile')->first();
             foreach($request->ord_mod_replay as $key => $value)
                     {
                         foreach($value as $key2 => $value2 )
                             {
                                 if($key== 'image')
                                 {
-                                    $filename = $value2->store('images/'.$product->vendor->vendor_name.'/products/modification_request','public');
+                                    $filename = $value2->store('images/'.$product->businessProfile->business_name.'/products/modification_request','public');
                                     $image_resize = Image::make(public_path('storage/'.$filename));
                                     $image_resize->fit(300, 300);
                                     $image_resize->save(public_path('storage/'.$filename));

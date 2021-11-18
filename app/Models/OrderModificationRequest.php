@@ -37,4 +37,9 @@ class OrderModificationRequest extends Model
     {
         return $this->hasOne(OrderModification::class);
     }
+
+    public function businessProfile()
+    {
+        return $this->belongsTo(BusinessProfile::class);
+    }
 }

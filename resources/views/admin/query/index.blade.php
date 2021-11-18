@@ -49,7 +49,7 @@
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $list->user->name }}</td>
                                             <td>{{ $list->product->name}}</td>
-                                            <td>{{ $list->vendor->user->name }}</td>
+                                            <td>{{ $list->businessProfile->business_name }}</td>
                                             <td>{{ \Carbon\Carbon::parse($list->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</td>
                                             <td>
                                                 @switch($list->state)

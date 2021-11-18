@@ -52,14 +52,14 @@
                         <p>{{$collection->user->name}}</p>
                         <p>{{$collection->user->email}}</p>
                         <p>{{$collection->user->phone}}</p>
-                        <p>{{$collection->user->vendor->vendor_address}}</p>
+                        {{-- <p>{{$collection->user->vendor->vendor_address}}</p> --}}
                     </div>
                     <div class="shipping-address-block col-md-6">
                         <h4><i class="fas fa-briefcase"></i> Vendor Info</h4>
-                        <p>{{$collection->vendor->user->name}}</p>
-                        <p>{{$collection->vendor->user->email}}</p>
-                        <p>{{$collection->vendor->user->phone}}</p>
-                        <p>{{$collection->vendor->vendor_address}}</p>
+                        <p>{{$collection->businessProfile->user->name}}</p>
+                        <p>{{$collection->businessProfile->user->email}}</p>
+                        <p>{{$collection->businessProfile->user->phone}}</p>
+                        <p>{{$collection->businessProfile->location}}</p>
                     </div>
                 </div>
 

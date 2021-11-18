@@ -179,7 +179,7 @@ $reviewsCount = count($productReviews);
                                     <textarea id="experience" name="experience" class="experience-textarea materialize-textarea"></textarea>
                                 </div>
                             </div>
-                            <input type="hidden" value="{{$product->businessProfile->id}}" name="vendor_id" />
+                            <input type="hidden" value="{{$product->businessProfile->id}}" name="business_profile_id" />
                             <input type="hidden" value="{{$product->id}}" name="product_id" />
                             <button type="submit" class="btn green waves-effect waves-light" id="submitReview">Submit Review</button>
                         </form>

@@ -383,7 +383,7 @@ $.ajaxSetup({
 function askForPrice($sku)
 {
     var sku=$sku;
-    var vendor_id=  $('input[name=vendor_id]').val();
+    var business_profile_id=  $('input[name=business_profile_id]').val();
     var product_id=  $('input[name=product_id]').val();
     var product_type =$('input[name=product_type]').val();
     var type = 1;
@@ -432,7 +432,7 @@ function askForPrice($sku)
                     type:'POST',
                     url: url,
                     dataType:'json',
-                    data:{ sku :sku ,vendor_id:vendor_id,product_id:product_id,color_attr:color_attr,type:type},
+                    data:{ sku :sku ,business_profile_id:business_profile_id,product_id:product_id,color_attr:color_attr,type:type},
                     success: function(data){
                         console.log(data.cartItems);
                         swal("Done!", data.msg,"success");

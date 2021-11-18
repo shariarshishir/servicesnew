@@ -20,9 +20,10 @@
 <div class="col s12 profile-menu-list">
     <ul class=" z-depth-1 profile-tabs">
         <li class="profile-item-tab col m2  orders-tab"><a class="{{ Route::is('myorder') ? 'active' : ''}}" href="{{route('myorder')}}">Orders</a></li>
-        <li class="profile-item-tab col m2  orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Msodification</a></li>
+        <li class="profile-item-tab col m2  orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Modification</a></li>
         <li class="profile-item-tab col m2  orders-tab"><a class="{{ Route::is('user.order.query.index') ? 'active' : ''}}" href="{{route('user.order.query.index')}}"><span class="orderQueryProcessedCount"></span> Orders Query</a></li>
-        <li class="profile-item-tab col m2  reviews-tab"><a class="{{ Route::is('vendor.review.index') ? 'active' : ''}}" href="{{route('vendor.review.index')}}">Reviews</a></li>
+        <li class="profile-item-tab col m2  inquiries-tab"><a class="" href="#"> Inquiries</a></li>
+        <li class="profile-item-tab col m2  quick-query-tab"><a class="" href="#"> Quick Query</a></li>
     </ul>
 </div>
 

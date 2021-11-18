@@ -53,7 +53,9 @@ class QueryController extends Controller
        $countOrderQuery=array_count_values($orderQueryProcessedIds);
 
 
-       return view('user.profile.orders_queries._partial_index',compact('orderQueries','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderQuery'));
+    //    return view('user.profile.orders_queries._partial_index',compact('orderQueries','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderQuery'));
+       return view('my_order.orders_queries.index',compact('orderQueries','orderIds','orderModificationRequestIds','notifications','orderQueryProcessedIds','countOrderQuery'));
+
 
     }
 
@@ -81,11 +83,11 @@ class QueryController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         $validator = Validator::make($request->all(), [
             'type' => 'required',
             'product_id' => 'required',
-            'vendor_id' => 'required',
+            'business_profile_id' => 'required',
             'color_attr' => 'required',
         ]);
 
@@ -100,12 +102,12 @@ class QueryController extends Controller
             'type'      => $request->type,
             'user_id'   => auth()->id(),
             'product_id'=> $request->product_id,
-            'vendor_id' => $request->vendor_id,
+            'business_profile_id' => $request->business_profile_id,
             'details'   => json_encode($request->color_attr),
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
         ]);
-        event(new OrderQueryEvent($orderModificationRequest));
+        //event(new OrderQueryEvent($orderModificationRequest));
         return response()->json(array('success' => true, 'msg' => 'Request Created Successfully'),200);
     }
     //show communication model
@@ -171,8 +173,8 @@ class QueryController extends Controller
         $details=[];
         $details[0]['details']=$request->details;
         if($request->hasFile('image')){
-            $orderModificationRequset=OrderModificationRequest::where('id',$request->order_modification_request_id)->with('product')->first();
-            $filename = $request->image->store('images/'.$orderModificationRequset->product->vendor->vendor_name.'/products/modification_request','public');
+            $orderModificationRequset=OrderModificationRequest::where('id',$request->order_modification_request_id)->with(['product','businessProfile'])->first();
+            $filename = $request->image->store('images/'.$orderModificationRequset->businessProfile->business_name.'/products/modification_request','public');
             $image_resize = Image::make(public_path('storage/'.$filename));
             $image_resize->fit(300, 300);
             $image_resize->save(public_path('storage/'.$filename));

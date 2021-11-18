@@ -26,5 +26,9 @@ class BusinessProfile extends Model
     {
         return $this->hasMany(ProductionCapacity::class);
     }
+    public function productionFlowAndManpowers()
+    {
+        return $this->hasMany(ProductionFlowAndManpower::class);
+    }
 
 }

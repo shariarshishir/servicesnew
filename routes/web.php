@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\BusinessProfileController;
+use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +140,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
     Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
+    Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
 
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
@@ -154,6 +157,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');
     //endtinymc
 
+   
+    
+   
+    
 });
 
 //user API's endpoint start

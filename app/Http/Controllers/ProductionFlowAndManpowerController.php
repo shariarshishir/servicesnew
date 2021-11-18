@@ -34,17 +34,17 @@ class ProductionFlowAndManpowerController extends Controller
                 
                         $flowAndManpowerArray=[];
                         $jacquardMachines = new stdClass();
-                        $jacquardMachines->name='no_of_jacquard_machines';
+                        $jacquardMachines->name='No of Jacquard Machines';
                         $jacquardMachines->value=$request->no_of_jacquard_machines[$i];
                         $jacquardMachines->status=0;
         
                         $manpower = new stdClass();
-                        $manpower->name='manpower';
+                        $manpower->name='Manpower';
                         $manpower->value=$request->manpower[$i];
                         $manpower->status=0;
         
                         $dailyCapacity = new stdClass();
-                        $dailyCapacity->name='daily_capacity';
+                        $dailyCapacity->name='Capacity Daily';
                         $dailyCapacity->value=$request->daily_capacity[$i];
                         $dailyCapacity->status=0;
         

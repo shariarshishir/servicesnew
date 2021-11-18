@@ -17,7 +17,7 @@
                                 <tr>
                                     <th class="product-thumbnail">Product Image</th>
                                     <th class="product-name">Product Name</th>
-                                    <th class="product-name">Vendor Name</th>
+                                    <th class="product-name">Business Name</th>
                                     <th class="product-price">Price</th>
                                     <th class="product-quantity">Quantity</th>
                                     <th class="product-subtotal">Subtotal</th>
@@ -28,7 +28,7 @@
                             @foreach($itemByVendorId as $item)
 
                                     @csrf
-                                    <tr class="cart_item" data-vendorId="{{$item->vendor_id}}">
+                                    <tr class="cart_item" data-vendorId="{{$item->business_profile_id}}">
 
                                         <td class="product-thumbnail">
                                             <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$item->image)}}" class="" alt="" loading="lazy"/></a>
@@ -43,8 +43,8 @@
                                             @endif
                                         </td>
                                         <td class="product-name" data-title="Product">
-                                            @php  $vendor= vendorInformation($item->vendor_id); @endphp
-                                            <div style="color: #4CAF50;">{{ $vendor->vendor_name }}</div>
+                                            @php  $business_profile= businessProfileInfo($item->business_profile_id); @endphp
+                                            <div style="color: #4CAF50;">{{ $business_profile->business_name }}</div>
                                         </td>
 
                                         <td class="product-price" data-title="Price">

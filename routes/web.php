@@ -157,10 +157,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');
     //endtinymc
 
-   
-    
-   
-    
+
+
+
+
 });
 
 //user API's endpoint start

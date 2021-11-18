@@ -11,8 +11,8 @@ class CartItem extends Model
 
     protected $connection = 'mysql';
     protected $guarded=[];
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class,'vendor_id');
-    }
+    // public function vendor()
+    // {
+    //     return $this->belongsTo(Vendor::class,'vendor_id');
+    // }
 }

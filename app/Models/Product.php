@@ -14,10 +14,10 @@ class Product extends Model
 
     protected $guarded=[];
 
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class);
-    }
+    // public function vendor()
+    // {
+    //     return $this->belongsTo(Vendor::class);
+    // }
 
     public function images()
     {
@@ -37,6 +37,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductReview::class);
     }
+
+    public function businessProfile()
+    {
+        return $this->belongsTo(BusinessProfile::class);
+    }
+
 
     // protected static $relations_to_cascade = ['images','productWishLists'];
 

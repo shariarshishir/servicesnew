@@ -563,13 +563,100 @@
 
 
     //submit form for production flow and manpower
-     //submit form  FOR CAPACITY AND MECHINERIES
+    //submit form  FOR CAPACITY AND MECHINERIES
     $('#production-flow-and-manpower-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
       url: "/production-flow-and-manpower-create-or-update",
       type:"POST",
       data: $('#production-flow-and-manpower-form').serialize(),
+
+      success:function(response){
+        var productionFlowAndManpowers=response.productionFlowAndManpowers;
+        var nohtml="";
+        if(productionFlowAndManpowers.length >0){
+
+            $('.production-flow-and-manpower-table-body').html(nohtml);
+            for(let i = 0;i < productionFlowAndManpowers.length ;i++){
+
+                var html = '<tr>';
+                html += '<th>'+productionFlowAndManpowers[i].production_type+'</th>';
+                html += '<td>';
+                html += '<table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">';
+                $.each(JSON.parse(productionFlowAndManpowers[i].flow_and_manpower), function(index) {
+                    html += '<tr>';
+                    html += '<td>'+this.name+'</td>';
+                    html += '<td>'+this.value+'</td>';
+                    html += '<td>'+this.status+'</td>';
+                    html += '</tr>';
+                });
+                html += '</table>';
+                html += '</td>';
+                html += '</tr>';
+
+                $('.production-flow-and-manpower-table-body').append(html);
+                
+            }
+        }
+        else{
+            
+            $('.production-flow-and-manpower-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.production-flow-and-manpower-table-body').append(html);
+        }
+
+      
+
+        $('#production-flow-and-manpower-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#capacity-machineries-errors').empty();
+                $("#capacity-machineries-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#capacity-machineries-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+    //add or remove certification details input row
+    function addCertificationDetails()
+    {
+        $('#certification-details-table-no-data').hide();
+        var html = '<tr>';
+        html +='<td><input name="title[]" id="certification-title" type="text" class="form-control "  value="" ></td>';
+        html +='<td><textarea class="form-control " name="cerification_short_description[]" id="certification-short-description" rows="4" cols="50">Enter text here...</textarea></td>';
+        html +='<td><input name="certification_image[]" id="certification-image" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='</tr>';
+        $('.certification-details-table-block tbody').append(html);
+    }
+    function removeCertificationDetails(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+
+    //submit form for certification details
+    $('#production-flow-and-manpower-form').on('submit',function(e){
+    e.preventDefault();
+    var url = '{{ route("certification.upload") }}';
+    var formData = new FormData(this);
+    formData.append('_token', "{{ csrf_token() }}");
+    $.ajax({
+        method: 'post',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData,
+        enctype: 'multipart/form-data',
+        url: url,
+        beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        },
 
       success:function(response){
         var productionFlowAndManpowers=response.productionFlowAndManpowers;

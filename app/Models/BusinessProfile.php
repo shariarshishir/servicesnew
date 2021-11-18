@@ -30,5 +30,9 @@ class BusinessProfile extends Model
     {
         return $this->hasMany(ProductionFlowAndManpower::class);
     }
+    public function certifications()
+    {
+        return $this->hasMany(Certification::class);
+    }
 
 }

@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
+use App\Http\Controllers\CertificationController;
+
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
@@ -141,6 +143,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
     Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
+    Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
 
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){

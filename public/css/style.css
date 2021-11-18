@@ -2286,4 +2286,8 @@ legend {
 .user-profile-info-block {
     margin: 30px 0px;
 }
+
+.tox-notifications-container {
+    display: none;
+}
 /* New style end */

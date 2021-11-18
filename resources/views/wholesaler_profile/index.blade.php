@@ -1,10 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.app_containerless')
 
 @section('content')
 @include('sweet::alert')
-@include('wholesaler_profile.partials._profile_list')
 
-<div id="profile" class="col s12">@include('wholesaler_profile.profile_info.index')</div>
+@include('wholesaler_profile.partials._profile_header')
+@include('wholesaler_profile.partials._profile_list')
+@include('wholesaler_profile.profile_info.index')
+@include('wholesaler_profile.partials._profile_footer')
 
 @endsection
 

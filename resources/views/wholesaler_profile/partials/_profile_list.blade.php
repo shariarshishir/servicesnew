@@ -55,6 +55,8 @@
         <li><a href="{{route('business.profile.show', $business_profile->id)}}">Home</a></li>
         <li><a href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
         <li><a href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
+        <li><a href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
+
     </ul>
 </div>
 

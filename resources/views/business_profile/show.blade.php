@@ -1035,7 +1035,18 @@
 						</div>
 					</div>
 					<div id="products" class="tabcontent">
-						<div class="profile_products_wrap">
+
+						<div class="col m12 add-new-product-button">
+							<a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
+								<i class="material-icons dp48">add</i> Add New product
+							</a>
+						</div>
+						<div id="manufacture_edit_errors"></div>
+						<div class="manufacture-product-table-data">
+							@include('business_profile._product_table_data')
+						</div>
+					
+						<!--div class="profile_products_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Main Products</h3>
@@ -1106,7 +1117,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div-->
 					</div>
 					<!--div id="womenproducts" class="tabcontent">
 						<div class="tab_navMenu">

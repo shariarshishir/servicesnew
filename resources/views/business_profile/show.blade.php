@@ -526,14 +526,16 @@
 								</div>
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" class="btn_delete btn_green_White delete-certification-button" ><span><span class="material-icons">delete</span></span> Delete</button>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/accord.png')}}" alt=""></div>
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/sedex.png')}}" alt=""></div>
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/iso.png')}}" alt=""></div>
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/alliance.png')}}" alt=""></div>
+							<div class="row certifications-block">
+								@foreach($business_profile->certifications as $certification)
+								<div class="col m3 l3 certificate_img">
+									<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+								</div>
+								@endforeach
 							</div>
 						</div>
 						<div class="main_buyers_wrap">
@@ -542,46 +544,20 @@
 									<h3>Main Buyers</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_upload btn_green_White" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White  delete-main-buyer-button" ><span><span class="material-icons">delete</span></span> Delete</button>
 								</div>
 							</div>
-							<div class="buyers_logo_wrap row">
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/gemo.png')}}" alt="" /> </a></div>
-									<h5>GEMO GMBH</h5>
+							<div class="buyers_logo_wrap row main-buyers-block">
+								@foreach($business_profile->mainBuyers as $mainBuyers)
+								<div class="col s6 m4 l3 main_buyer_img">
+									<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+									<h5>{{$mainBuyers->title}}</h5>
 								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/newyork.png')}}" alt="" /></a> </div>
-									<h5>Newyorker Corp.</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/marisa.png')}}" alt="" /></a> </div>
-									<h5>Marisa Group</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/dansk.png')}}" alt="" /></a> </div>
-									<h5>Dansk Supermarked</h5>
-								</div>
+								@endforeach
 							</div>
-							<div class="buyers_logo_wrap row">
-								<div class="col s6 m4 l3 center-align">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/tally_weijl.png')}}" alt="" /></a> </div>
-									<h5>Tally Weijl Fashion</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/takko.png')}}" alt="" /></a> </div>
-									<h5>Takko Fashion</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/us_polo_assn.png')}}" alt="" /></a> </div>
-									<h5>US Polo Assosiation</h5>
-								</div>
-								<div class="col s6 m4 l3 center-align">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/suzy.png')}}" alt="" /></a> </div>
-									<h5>Suzy Shier</h5>
-								</div>
-							</div>
+						
 						</div>
 						<div class="export_destination_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
@@ -589,35 +565,21 @@
 									<h3>Export Destinations</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_upload btn_green_White" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-export-destination-button" ><span><span class="material-icons">delete</span></span> Delete</button>
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/germany.png')}}" alt="" /></a></div>
-									<h5>DE: Germany</h5>
+								<div class="col s6 m4 l2 flagBox export-destination-block">
+								@foreach($business_profile->exportDestinations as $exportDestination)
+									<div class="flag_img export-destination-img">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+									</div>
+									<h5>{{$exportDestination->title}}</h5>
+								@endforeach
 								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/greece_gla.png')}}" alt="" /></a></div>
-									<h5>EL: Grece</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/hungary.png')}}" alt="" /></a></div>
-									<h5>HU: Hungary</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/ireland.png')}}" alt="" /></a></div>
-									<h5>IE: Ireland</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/italy.png')}}" alt="" /></a></div>
-									<h5>IT: Italy</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/latvia.png')}}" alt="" /></a></div>
-									<h5>LV: Latvia</h5>
-								</div>
+							
 							</div>
 						</div>
 						<div class="overview_table_wrap overview_table_alignLeft">
@@ -626,58 +588,33 @@
 									<h3>Business Terms</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_edit btn_green_White" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
 								</div>
 							</div>
-							<div class="overview_table box_shadow">
+							<div class="overview_table  box_shadow">
 								<table>
-									<tbody>
-										<tr>
-											<td>Average Lead Time</td>
-											<td>12 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Order Terms (FOB, CM)</td>
-											<td>44 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Accepted payment Methods (Cash, LC...)</td>
-											<td>65 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-											</td>
-										</tr>
-										<tr>
-											<td>Nearest Port</td>
-											<td>164 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Incoterms</td>
-											<td>20 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
+									<tbody class="business-term-table-body">
+									
+										@if(count($business_profile->businessTerms)>0)
+											@foreach($business_profile->businessTerms as $businessTerm)
+											<tr>
+												<td>{{$businessTerms->title}}</td>
+												<td>{{$businessTerms->quantity}}</td>
+												<td>{{$businessTerms->status}}</td>
+											</tr>
+											@endforeach
+										@else
+											<tr>
+												<td>
+													<div class="card-alert card cyan lighten-5">
+														<div class="card-content cyan-text">
+															<p>INFO : No data found.</p>
+														</div>
+													</div>															
+												</td>
+											</tr>
+										@endif
+										
 									</tbody>
 								</table>
 							</div>
@@ -1000,19 +937,18 @@
 									<h3>Association memberships</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_upload btn_green_White"><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White"><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger"><span class="material-icons">file_upload</span></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-association-membership-button"><span><span class="material-icons">delete</span></span> Delete</button>
 								</div>
 							</div>
-							<div class="row membership_textBox">
-								<div class="col s12 m6 l5 center-align">
-									<div class="imgbox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/bgmea.png')}}" alt="" /></a></div>
-									<p>Bangladesh Garment Manufacturers and Exporters Association (BGMEA)</p>
+							<div class="row membership_textBox association-membership-block">
+							    @foreach($business_profile->associationMemberships as $associationMembership)
+								<div class="col s12 m6 l5 center-align association-membership-img">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img  src="{{ asset('storage/'.$associationMembership->image) }}" alt="">
+										<p>{{$associationMembership->title}}</p>
 								</div>
-								<div class="col s12 m6 l5 center-align">
-									<div class="imgbox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/bkmes.png')}}" alt="" /></a></div>
-									<p>Bangladesh Knitwear Manufacturers and Exporters Association (BKMEA)</p>
-								</div>
+								@endforeach
 							</div>
 						</div>
 						<div class="pr_highlights_wrap">
@@ -1021,16 +957,19 @@
 									<h3>PR Highlights</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_upload btn_green_White" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger"  ><span class="material-icons">file_upload</span></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" ><span><span class="material-icons">delete</span></span> Delete</button>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col s6 m4 l2 paper_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/fex.png')}}" alt="" /></a></div>
-								<div class="col s6 m4 l2 paper_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/alo.png')}}" alt="" /></a></div>
-								<div class="col s6 m4 l3 paper_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/dtribune.png')}}" alt="" /></a></div>
-								<div class="col s6 m4 l2 paper_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/bs.png')}}" alt="" /></a></div>
-								<div class="col s6 m4 l3 paper_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/dstar.png')}}" alt="" /></a></div>
+							<div class="row press-highlight-block">
+							@foreach($business_profile->pressHighlights as $pressHighlight)
+								<div class="col s6 m4 l2 paper_img press-highlight-img">
+								<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+									</a>
+								</div>
+							@endforeach
+								
 							</div>
 						</div>
 					</div>
@@ -1385,6 +1324,11 @@
     @include('business_profile._edit_capacity_and_machineries_modal')
     @include('business_profile._edit_production_flow_and_manpower_modal')
     @include('business_profile._upload_certifications_modal')
+	@include('business_profile._upload_main_buyers_modal')
+	@include('business_profile._upload_export_destination_modal')
+	@include('business_profile._upload_association_membership_modal')
+	@include('business_profile._add_business_terms_modal')
+	@include('business_profile._upload_press_highlight_modal')
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')
 @endsection

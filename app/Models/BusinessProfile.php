@@ -34,5 +34,26 @@ class BusinessProfile extends Model
     {
         return $this->hasMany(Certification::class);
     }
+    public function mainBuyers()
+    {
+        return $this->hasMany(MainBuyer::class);
+    }
+    public function exportDestinations()
+    {
+        return $this->hasMany(ExportDestination::class);
+    }
+    public function associationMemberships()
+    {
+        return $this->hasMany(AssociationMembership::class);
+    }
+    public function pressHighlights()
+    {
+        return $this->hasMany(PressHighlight::class);
+    }
+
+    public function businessTerms()
+    {
+        return $this->hasMany(BusinessTerm::class);
+    }
 
 }

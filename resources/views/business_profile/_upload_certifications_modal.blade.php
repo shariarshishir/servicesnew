@@ -24,11 +24,11 @@
                                 @if(count($business_profile->machineriesDetails)>0)
                                 @foreach($business_profile->machineriesDetails as $machineriesDetail)
                                 <tr>
-                                    <td><input class="input-field" name="title[]" id="certification-title" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
+                                    <td><input class="input-field" name="title[]" id="certification-title" type="text"  ></td>
                                     <td>
-                                        <textarea class="input-field" name="cerification_short_description[]" id="certification-short-description" rows="4" cols="50"></textarea>
+                                        <textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea>
                                     </td>
-                                    <td><input class="input-field" name="certification_image[]" id="certification-image" type="file"></td>
+                                    <td><input class="input-field" name="image[]" id="certification-image" type="file"></td>
                                     <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">remove</i></a></td>
                                 </tr>
                                 @endforeach

@@ -20,6 +20,11 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
+use App\Http\Controllers\MainBuyerController;
+use App\Http\Controllers\ExportDestinationController;
+use App\Http\Controllers\AssociationMembershipController;
+use App\Http\Controllers\PressHighlightController;
+use App\Http\Controllers\BusinessTermController;
 
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\SellerProductController;
@@ -141,9 +146,29 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
+
     Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
+    
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
+    
+    Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate'])->name('business-terms.create-or-update');
+    
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
+    Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
+
+    Route::post('/main-buyers-details-upload', [MainBuyerController::class, 'mainBuyerDetailsUpload'])->name('mainbuyers.upload');
+    Route::get('/main-buyers-details-delete', [MainBuyerController::class, 'deleteMainBuyer'])->name('mainbuyers.delete');
+
+    Route::post('/export-destination-details-upload', [ExportDestinationController::class, 'exportDestinationDetailsUpload'])->name('exportdestinations.upload');
+    Route::get('/export-destination-details-delete', [ExportDestinationController::class, 'deleteExportDestination'])->name('exportdestinations.delete');
+
+    
+    Route::post('/association-membership-details-upload', [AssociationMembershipController::class, 'associationMembershipDetailsUpload'])->name('associationmemberships.upload');
+    Route::get('/association-membership-details-delete', [AssociationMembershipController::class, 'deleteAssociationMembership'])->name('associationmemberships.delete');
+
+    Route::post('/press-highlight-details-upload', [PressHighlightController::class, 'pressHighLightDetailsUpload'])->name('presshighlights.upload');
+    Route::get('/press-highlight-details-delete', [PressHighlightController::class, 'deletePressHighlight'])->name('presshighlights.delete');
+
 
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){

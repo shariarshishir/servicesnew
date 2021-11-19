@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Certification;
+use App\Models\PressHighlight;
 
-class CertificationController extends Controller
+class PressHighlightController extends Controller
 {
-    public function certificationDetailsUpload(Request $request ){
-       
+    public function pressHighlightDetailsUpload(Request $request ){
+     
         $validator = Validator::make($request->all(), [
             'title.*' => 'string|min:1|max:50',
             'image.*' => 'image',
@@ -30,33 +30,33 @@ class CertificationController extends Controller
             if(isset($request->title)){
                 if(count($request->title)>0){
                     for($i=0; $i<count($request->title) ;$i++){
-                        $certification=new Certification();
+                        $pressHighlight=new PressHighlight();
                         if ($request->hasFile('image'))
                         {
-                            $filename = $request->image[$i]->store('images/certificates','public');
+                            $filename = $request->image[$i]->store('images/press-highlight','public');
                             $image_resize = Image::make(public_path('storage/'.$filename));
                             $image_resize->fit(250, 250);
                             $image_resize->save(public_path('storage/'.$filename));
                         }
                       
-                        $certification->title=$request->title[$i];
-                        $certification->image=$filename;
-                        $certification->short_description=$request->short_description[$i];
-                        $certification->business_profile_id = $request->business_profile_id;
-                        $certification->created_by = Auth::user()->id;
-                        $certification->updated_by = NULL;
-                        $certification->save();
+                        $pressHighlight->title=$request->title[$i];
+                        $pressHighlight->image=$filename;
+                        $pressHighlight->short_description=$request->short_description[$i];
+                        $pressHighlight->business_profile_id = $request->business_profile_id;
+                        $pressHighlight->created_by = Auth::user()->id;
+                        $pressHighlight->updated_by = NULL;
+                        $pressHighlight->save();
                         
                     }
 
                 }
             }
             
-            $certifications = Certification::where('business_profile_id',$request->business_profile_id)->get();
+            $pressHighlights = PressHighlight::where('business_profile_id',$request->business_profile_id)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification Added',
-                'certifications'=>$certifications,
+                'message' => 'PR highlight Added',
+                'pressHighlights'=>$pressHighlights,
             ],200);
 
         }catch(\Exception $e){
@@ -66,16 +66,16 @@ class CertificationController extends Controller
             ],500);
         }  
     }
-    public function deleteCertificate(Request $request){
-        $certification=Certification::where('id',$request->id)->first();
-        $businessId=$certification->business_profile_id;
-        $result=$certification->delete();
+    public function deletePressHighlight(Request $request){
+        $pressHighlight=PressHighlight::where('id',$request->id)->first();
+        $businessId=$pressHighlight->business_profile_id;
+        $result=$pressHighlight->delete();
         if($result){
-            $certifications = Certification::where('business_profile_id',$businessId)->get();
+            $pressHighlights = PressHighlight::where('business_profile_id',$businessId)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification deleted successfully',
-                'certifications'=>$certifications,
+                'message' => 'PR highlight deleted successfully',
+                'pressHighlights'=>$pressHighlights,
             ],200);
         }else{
             return response()->json([
@@ -85,3 +85,4 @@ class CertificationController extends Controller
 
     }
 }
+

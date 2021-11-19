@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Certification;
+use App\Models\MainBuyer;
 
-class CertificationController extends Controller
+class MainBuyerController extends Controller
 {
-    public function certificationDetailsUpload(Request $request ){
-       
+    public function mainBuyerDetailsUpload(Request $request ){
+     
         $validator = Validator::make($request->all(), [
             'title.*' => 'string|min:1|max:50',
             'image.*' => 'image',
@@ -30,33 +30,33 @@ class CertificationController extends Controller
             if(isset($request->title)){
                 if(count($request->title)>0){
                     for($i=0; $i<count($request->title) ;$i++){
-                        $certification=new Certification();
+                        $mainBuyer=new MainBuyer();
                         if ($request->hasFile('image'))
                         {
-                            $filename = $request->image[$i]->store('images/certificates','public');
+                            $filename = $request->image[$i]->store('images/mainbuyers','public');
                             $image_resize = Image::make(public_path('storage/'.$filename));
                             $image_resize->fit(250, 250);
                             $image_resize->save(public_path('storage/'.$filename));
                         }
                       
-                        $certification->title=$request->title[$i];
-                        $certification->image=$filename;
-                        $certification->short_description=$request->short_description[$i];
-                        $certification->business_profile_id = $request->business_profile_id;
-                        $certification->created_by = Auth::user()->id;
-                        $certification->updated_by = NULL;
-                        $certification->save();
+                        $mainBuyer->title=$request->title[$i];
+                        $mainBuyer->image=$filename;
+                        $mainBuyer->short_description=$request->short_description[$i];
+                        $mainBuyer->business_profile_id = $request->business_profile_id;
+                        $mainBuyer->created_by = Auth::user()->id;
+                        $mainBuyer->updated_by = NULL;
+                        $mainBuyer->save();
                         
                     }
 
                 }
             }
             
-            $certifications = Certification::where('business_profile_id',$request->business_profile_id)->get();
+            $mainBuyers = MainBuyer::where('business_profile_id',$request->business_profile_id)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification Added',
-                'certifications'=>$certifications,
+                'message' => 'Main Buyer Added',
+                'mainBuyers'=>$mainBuyers,
             ],200);
 
         }catch(\Exception $e){
@@ -66,16 +66,16 @@ class CertificationController extends Controller
             ],500);
         }  
     }
-    public function deleteCertificate(Request $request){
-        $certification=Certification::where('id',$request->id)->first();
-        $businessId=$certification->business_profile_id;
-        $result=$certification->delete();
+    public function deleteMainBuyer(Request $request){
+        $mainBuyer=MainBuyer::where('id',$request->id)->first();
+        $businessId=$mainBuyer->business_profile_id;
+        $result=$mainBuyer->delete();
         if($result){
-            $certifications = Certification::where('business_profile_id',$businessId)->get();
+            $mainBuyers = MainBuyer::where('business_profile_id',$businessId)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification deleted successfully',
-                'certifications'=>$certifications,
+                'message' => 'Main Buyer deleted successfully',
+                'mainBuyers'=>$mainBuyers,
             ],200);
         }else{
             return response()->json([

@@ -37,4 +37,14 @@ class BusinessProfile extends Model
         return $this->hasMany(ProductionFlowAndManpower::class);
     }
 
+    public function businessCategory(){
+        return $this->belongsTo('App\Models\Manufacture\ProductCategory','business_category_id');
+    }
+    public function wholesalerProducts(){
+        return $this->hasMany(Product::class)->where(['state' => true, 'sold' => 0 ]);
+    }
+    public function manufactureProducts(){
+        return $this->hasMany('App\Models\\Manufacture\Product','business_profile_id');
+    }
+
 }

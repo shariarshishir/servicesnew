@@ -56,8 +56,9 @@ Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name(
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
 Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
 
-
-Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
+Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
+Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
+// Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
 Route::get('/products/{slug}', [HomeController::class, 'productsByCategory'])->name('categories.product');

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Blog;
+use App\Models\BusinessProfile;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
@@ -485,5 +486,33 @@ class HomeController extends Controller
         return view('blog.show',compact('blog'));
     }
 
+    //suppliers
+    public function suppliers()
+    {
+        $suppliers=BusinessProfile::with(['businessCategory'])->get();
+
+        return view('suppliers.index',compact('suppliers'));
+    }
+    //supplier profile
+    public function supplerProfile($id)
+    {
+        $business_profile=BusinessProfile::findOrFail($id);
+        //manufacture
+        if($business_profile->business_type == 1 )
+        {
+
+            $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','manufactureProducts.product_images'])->findOrFail($id);
+
+            return view('manufacture_profile_view_by_user.index',compact('business_profile'));
+        }
+        //wholesaler
+        if($business_profile->business_type == 2 )
+        {
+            $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','wholesalerProducts.images'])->findOrFail($id);
+
+            return view('wholesaler_profile_view_by_user.index',compact('business_profile'));
+        }
+
+    }
 
 }

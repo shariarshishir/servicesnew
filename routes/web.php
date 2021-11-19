@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
+use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\ProductReviewController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\OrderModificationRequestController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\TinyMcController;
+use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 
 
@@ -52,6 +54,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'productList'])->name('products');
 Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name('readystockproducts');
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
+Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
+
+
 Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
@@ -150,6 +155,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
         Route::get('/product/edit/{sku}', [WholesalerProductController::class, 'edit'])->name('wholesaler.product.edit');
         Route::put('/product/update/{sku}', [WholesalerProductController::class, 'update'])->name('wholesaler.product.update');
         Route::get('/product/publish-unpublish/{sku}',[WholesalerProductController::class, 'publishUnpublish'])->name('wholesaler.product.publish.unpublish');
+        //order
+        Route::get('order/{business_profile_id}',[WholesalerOrderController::class, 'index'])->name('wholesaler.order.index');
+        Route::get('order-delivered/{orderNumber}',[WholesalerOrderController::class, 'orderDelivered']);
+        Route::get('order-type-filter', [WholesalerOrderController::class, 'orderTypeFilter'])->name('wholesaler.order.type.filter');
 
     });
     //tinymc
@@ -157,10 +166,13 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');
     //endtinymc
 
-   
-    
-   
-    
+    //my order
+    Route::get('my-order',[MyOrderController::class, 'index'])->name('myorder');
+
+
+
+
+
 });
 
 //user API's endpoint start

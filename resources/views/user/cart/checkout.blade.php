@@ -41,7 +41,7 @@
 
                                 @foreach($cartData as $cartItem)
 
-                                    <tr class="cart_item" data-vendorId="{{$cartItem->vendor_id}}">
+                                    <tr class="cart_item" data-vendorId="{{$cartItem->business_profile_id}}">
 
                                         <td class="product-thumbnail">
                                             <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$cartItem->image)}}" class="" alt="" loading="lazy"/></a>

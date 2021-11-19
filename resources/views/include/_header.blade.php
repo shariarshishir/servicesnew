@@ -14,8 +14,8 @@
 									<li><a href="{{route('buydesignsproducts')}}">New Designs</a></li>
 									<li><a href="javascript:void(0);">Low MOQ</a></li>
 									<li><a href="javascript:void(0);">Shortest Lead Time</a></li>
-									<li><a href="javascript:void(0);">Customizablee</a></li>
-								</ul>							
+									<li><a href="{{route('customizable')}}">Customizablee</a></li>
+								</ul>
 							</li>
 							<li><a href="javascript:void(0);">Supliers</a></li>
 							<li><a href="javascript:void(0);">RFQ</a></li>
@@ -35,7 +35,7 @@
 				</div>
 				<div class="col m2 logo"><a href="{{route('home')}}"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
 				<div class="col m5 top_right ">
-					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile btn_green"> 
+					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile btn_green">
 					    <span class="material-icons"> assignment_ind </span> Business Profile
 					</a>
 
@@ -103,7 +103,7 @@
 							@endif
 
 						@endif
-					</div>					
+					</div>
 
 
 				</div>
@@ -132,10 +132,10 @@
 							</li>
 						</ul>
 					</div>
-					<a href="javascript:void(0);" data-target="slide-out" class="sidenav-trigger waves-effect waves-block waves-light btn green lighten-1 btn-floating btn-sidenav-left"><i class="material-icons">menu</i></a> 
+					<a href="javascript:void(0);" data-target="slide-out" class="sidenav-trigger waves-effect waves-block waves-light btn green lighten-1 btn-floating btn-sidenav-left"><i class="material-icons">menu</i></a>
 				</div>
-				<div class="col s6 right-align mobile_top_right"> 
-					<span class="material-icons"> assignment_ind </span> 
+				<div class="col s6 right-align mobile_top_right">
+					<span class="material-icons"> assignment_ind </span>
 					<span class="material-icons">login</span>
 				</div>
 			</div>

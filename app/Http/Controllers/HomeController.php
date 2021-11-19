@@ -136,6 +136,14 @@ class HomeController extends Controller
         return view('product.ready_stock_product',compact('products','total_cat_id'));
     }
     //end readystock products
+
+    //customizable products
+    public function customizable()
+    {
+        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        return view('product.customizable',compact('products'));
+    }
+
    //start buy design products
     public function buyDesignsProducts()
     {
@@ -188,7 +196,8 @@ class HomeController extends Controller
     public function productDetails($sku)
     {
         $category = ProductCategory::get();
-        $product = Product::with('vendor')->where('sku',$sku)->first();
+        $product = Product::with('businessProfile')->where('sku',$sku)->first();
+
         $orderModificationRequest=OrderModificationRequest::where(['product_id' => $product->id, 'type' => 2, 'user_id' =>auth()->id() ])->get();
         $productReviews = ProductReview::where('product_id',$product->id)->get();
         $overallRating = 0;
@@ -219,7 +228,7 @@ class HomeController extends Controller
         $colors_sizes = json_decode($product->colors_sizes);
         $attr = json_decode($product->attribute);
         //recommandiation products
-        $recommandProducts=Product::where('state',1)
+        $recommandProducts=Product::with('businessProfile')->where('state',1)
         ->where('id','!=',$product->id)
         ->whereHas('category', function($q) use ($product){
              $q->where('id',$product->product_category_id);
@@ -461,7 +470,7 @@ class HomeController extends Controller
     {
         $blog = Blog::where('slug',$slug)->firstOrFail();
         $data = [];
-      
+
         $blogs = $blog->source;
         foreach((array)$blogs as $blo)
         {
@@ -470,9 +479,9 @@ class HomeController extends Controller
                $data[] = ['name' => $blo['name'],'link' => $blo['link']];
             }
         }
-      
+
         $blog['sourcedata'] = $data;
-      
+
         return view('blog.show',compact('blog'));
     }
 

@@ -1,10 +1,10 @@
-@extends('layouts.app')
-
+@extends('layouts.app_containerless')
 @section('content')
 
+@include('wholesaler_profile.partials._profile_header')
 @include('wholesaler_profile.partials._profile_list')
-
- <div id="products" class="col s12">@include('wholesaler_profile.products._partial_index')</div>
+@include('wholesaler_profile.products._partial_index')
+@include('wholesaler_profile.partials._profile_footer')
 
 @endsection
 

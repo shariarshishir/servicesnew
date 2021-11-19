@@ -16,7 +16,8 @@
     }
 </style>
 @endsection
-<div class="col s12 shop-banner-wrapper">
+
+<!--div class="col s12 shop-banner-wrapper">
     <div class="shop-banner-img">
         @if(auth()->user()->user_banner)
         <img src="{{asset('storage/'.auth()->user()->user_banner)}}" id="preview-banner-before-upload" class="responsive-img" alt="Profile Banner Image" />
@@ -36,41 +37,52 @@
     <div class="shop-name">
         <i class="material-icons dp48">store</i>
     </div>
-</div>
-<div class="col s12 profile-menu-list">
+</div-->
+
+<!--div class="col s12 profile-menu-list">
     <ul class=" z-depth-1 profile-tabs">
-        <li class="profile-item-tab col m2 profile-tab"><a class="{{ Route::is('users.profile') ? 'active' : ''}}" href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
-        <li class="profile-item-tab col m2 products-tab"><a class="{{ Route::is('seller-product.index') ? 'active' : ''}}" href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
-        <li class="profile-item-tab col m2 orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Msodification</a></li>
-        <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('order.index') ? 'active' : ''}}" href="{{route('order.index')}}"><span class="orderApprovedCount"></span> Orders</a></li>
+        <li class="profile-item-tab col m2 profile-tab"><a class="{{ Route::is('business.profile.show') ? 'active' : ''}}" href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
+        <li class="profile-item-tab col m2 products-tab"><a class="{{ Route::is('wholesaler.product.index') ? 'active' : ''}}" href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
+        <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('wholesaler.order.index') ? 'active' : ''}}" href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
+        {{-- <li class="profile-item-tab col m2 orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Msodification</a></li>
         <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('user.order.query.index') ? 'active' : ''}}" href="{{route('user.order.query.index')}}"><span class="orderQueryProcessedCount"></span> Orders Query</a></li>
-        <li class="profile-item-tab col m2 reviews-tab"><a class="{{ Route::is('vendor.review.index') ? 'active' : ''}}" href="{{route('vendor.review.index')}}">Reviews</a></li>
+        <li class="profile-item-tab col m2 reviews-tab"><a class="{{ Route::is('vendor.review.index') ? 'active' : ''}}" href="{{route('vendor.review.index')}}">Reviews</a></li> --}}
+    </ul>
+</div-->
+
+<div class="profile_tab_menu">
+    <ul>
+        <li><a href="{{route('business.profile.show', $business_profile->id)}}">Home</a></li>
+        <li><a href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
+        <li><a href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
+        <li><a href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
+
     </ul>
 </div>
 
 {{-- banner model --}}
 
-<div id="banner-img-preview-modal" class="modal banner-img-preview-modal">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="img-container">
-                    <div class="row">
-                        <div class="col m8">
-                            {{-- <img id="image" src="https://avatars0.githubusercontent.com/u/3456749"> --}}
-                            <img id="profile-banner-image-preview" src="" />
-                        </div>
-                        <div class="col m4">
-                            <h4>Cropping Preview</h4>
-                            <div class="preview"></div>
-                        </div>
+<!--div id="banner-img-preview-modal" class="modal banner-img-preview-modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="img-container">
+                <div class="row">
+                    <div class="col m8">
+                        {{-- <img id="image" src="https://avatars0.githubusercontent.com/u/3456749"> --}}
+                        <img id="profile-banner-image-preview" src="" />
+                    </div>
+                    <div class="col m4">
+                        <h4>Cropping Preview</h4>
+                        <div class="preview"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <a href="javascript:void(0);" class="cropper-image-modal-close">
-                <i class="material-icons green-text text-darken-1">close</i>
-            </a>
-            <button type="button" class="btn btn-primary green" id="crop">Crop</button>
-        </div>
-</div>
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:void(0);" class="cropper-image-modal-close">
+            <i class="material-icons green-text text-darken-1">close</i>
+        </a>
+        <button type="button" class="btn btn-primary green" id="crop">Crop</button>
+    </div>
+</div-->

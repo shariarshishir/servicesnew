@@ -60,8 +60,11 @@
                     @endforeach
                 </div>
             </div>
-            @endif            
+            @endif
         </div>
+    </div>
+    <div>
+        <a href="{{route('myorder')}}">My Orders</a>
     </div>
 
 

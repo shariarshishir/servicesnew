@@ -487,9 +487,29 @@ class HomeController extends Controller
     }
 
     //suppliers
-    public function suppliers()
+    public function suppliers(Request $request)
     {
-        $suppliers=BusinessProfile::with(['businessCategory'])->get();
+        $suppliers=BusinessProfile::with(['businessCategory'])->where(function($query) use ($request){
+            if($request->business_type){
+                $query->whereIn('business_type',$request->business_type)->get();
+            }
+            if($request->industry_type){
+                $query->whereIn('industry_type',$request->industry_type)->get();
+            }
+            if(isset($request->business_name)){
+                $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
+            }
+        })
+        ->paginate(10);
+        // if($request->business_type){
+        //     $suppliers=BusinessProfile::with(['businessCategory'])->whereIn('business_type',$request->business_type)->get();
+        // }
+        // if($request->industry_type){
+        //     $suppliers=BusinessProfile::with(['businessCategory'])->whereIn('industry_type',$request->industry_type)->get();
+        // }
+        // if(isset($request->business_name)){
+        //     $suppliers=BusinessProfile::with(['businessCategory'])-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
+        // }
 
         return view('suppliers.index',compact('suppliers'));
     }

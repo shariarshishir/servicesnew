@@ -1037,7 +1037,7 @@
 					<div id="products" class="tabcontent">
 
 						<div class="col m12 add-new-product-button">
-							<a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
+							<a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green btn_green" data-position="top" data-tooltip="add new product">
 								<i class="material-icons dp48">add</i> Add New product
 							</a>
 						</div>

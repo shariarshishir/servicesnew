@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Certification;
+use App\Models\ExportDestination;
 
-class CertificationController extends Controller
+class ExportDestinationController extends Controller
 {
-    public function certificationDetailsUpload(Request $request ){
-       
+    public function exportDestinationDetailsUpload(Request $request ){
+     
         $validator = Validator::make($request->all(), [
             'title.*' => 'string|min:1|max:50',
             'image.*' => 'image',
@@ -30,33 +30,33 @@ class CertificationController extends Controller
             if(isset($request->title)){
                 if(count($request->title)>0){
                     for($i=0; $i<count($request->title) ;$i++){
-                        $certification=new Certification();
+                        $exportDestination=new ExportDestination();
                         if ($request->hasFile('image'))
                         {
-                            $filename = $request->image[$i]->store('images/certificates','public');
+                            $filename = $request->image[$i]->store('images/export-destinations','public');
                             $image_resize = Image::make(public_path('storage/'.$filename));
                             $image_resize->fit(250, 250);
                             $image_resize->save(public_path('storage/'.$filename));
                         }
                       
-                        $certification->title=$request->title[$i];
-                        $certification->image=$filename;
-                        $certification->short_description=$request->short_description[$i];
-                        $certification->business_profile_id = $request->business_profile_id;
-                        $certification->created_by = Auth::user()->id;
-                        $certification->updated_by = NULL;
-                        $certification->save();
+                        $exportDestination->title=$request->title[$i];
+                        $exportDestination->image=$filename;
+                        $exportDestination->short_description=$request->short_description[$i];
+                        $exportDestination->business_profile_id = $request->business_profile_id;
+                        $exportDestination->created_by = Auth::user()->id;
+                        $exportDestination->updated_by = NULL;
+                        $exportDestination->save();
                         
                     }
 
                 }
             }
             
-            $certifications = Certification::where('business_profile_id',$request->business_profile_id)->get();
+            $exportDestinations = ExportDestination::where('business_profile_id',$request->business_profile_id)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification Added',
-                'certifications'=>$certifications,
+                'message' => 'Export destination Added',
+                'exportDestinations'=>$exportDestinations,
             ],200);
 
         }catch(\Exception $e){
@@ -66,16 +66,16 @@ class CertificationController extends Controller
             ],500);
         }  
     }
-    public function deleteCertificate(Request $request){
-        $certification=Certification::where('id',$request->id)->first();
-        $businessId=$certification->business_profile_id;
-        $result=$certification->delete();
+    public function deleteExportDestination(Request $request){
+        $exportDestination=ExportDestination::where('id',$request->id)->first();
+        $businessId=$exportDestination->business_profile_id;
+        $result=$exportDestination->delete();
         if($result){
-            $certifications = Certification::where('business_profile_id',$businessId)->get();
+            $exportDestinations = ExportDestination::where('business_profile_id',$businessId)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification deleted successfully',
-                'certifications'=>$certifications,
+                'message' => 'Export destination deleted successfully',
+                'exportDestinations'=>$exportDestinations,
             ],200);
         }else{
             return response()->json([

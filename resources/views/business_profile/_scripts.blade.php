@@ -1367,6 +1367,307 @@
     });
 
 
+     //Add or remove sampling
+     function addSamplingDetails()
+    {
+
+        $('#sampling-details-table-no-data').hide();
+        var html = '<tr>';
+        html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '</tr>';
+        $('.sampling-table-block  tbody').append(html);
+    }
+    function removeSamplingDetails(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+
+
+
+    //submit form for sampling
+   
+    $('#sampling-form').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/sampling-create-or-update",
+      type:"POST",
+      data: $('#sampling-form').serialize(),
+
+      success:function(response){
+        var samplings=response.samplings;
+        var nohtml="";
+        if(samplings.length >0){
+            $('.sampling-table-body').html(nohtml);
+            for(let i=0;i<samplings.length ;i++){
+                var html = '<tr>';
+                html += '<td>'+samplings[i].title+'</td>';
+                html += '<td>'+samplings[i].quantity+'</td>';
+                html += '<td>'+samplings[i].status+'</td>';
+                html += '</tr>';
+                $('.sampling-table-body').append(html)
+            }
+        }
+        else{
+
+            $('.sampling-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.sampling-table-body').append(html);
+        }
+
+        $('#sampling-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#sampling-errors').empty();
+                $("#sampling-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#sampling-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+
+
+
+      //Add or remove special customization
+    function addSpecialCustomizationsDetails()
+    {
+
+        $('#special-customization-table-no-data').hide();
+        var html = '<tr>';
+        html += '<td><input name="special_customization_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeSpecialCustomizationDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '</tr>';
+        $('.special-customization-table-block  tbody').append(html);
+    }
+    function removeSpecialCustomizationDetails(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+
+    
+
+    //submit form for special customization
+   
+    $('#special-customization-form').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/special-customization-create-or-update",
+      type:"POST",
+      data: $('#special-customization-form').serialize(),
+
+      success:function(response){
+        var specialCustomizations=response.specialCustomizations;
+        var nohtml="";
+        if(specialCustomizations.length >0){
+            $('.special-customization-table-body').html(nohtml);
+            for(let i=0;i<specialCustomizations.length ;i++){
+                var html = '<tr>';
+                html += '<td>'+specialCustomizations[i].title+'</td>';
+                html += '<td>'+specialCustomizations[i].status+'</td>';
+                html += '</tr>';
+                $('.special-customization-table-body').append(html)
+            }
+        }
+        else{
+
+            $('.special-customization-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.special-customization-table-body').append(html);
+        }
+
+        $('#special-customization-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#special-customization-errors').empty();
+                $("#special-customization-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#special-customization-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+
+
+
+
+     //Add or remove Sustainability Commitment
+     function addSustainabilityCommitmentDetails()
+    {
+
+        $('#sustainability-commitment-table-no-data').hide();
+        var html = '<tr>';
+        html += '<td><input name="sustainability_commitment_title[]" id="sustainability-commitment-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeSustainabilityCommitmentDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '</tr>';
+        $('.sustainability-commitment-table-block  tbody').append(html);
+    }
+    function removeSustainabilityCommitmentDetails(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+
+
+    
+    //submit form for sustainability-commitment
+   
+    $('#sustainability-commitment-form').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/sustainability-commitment-create-or-update",
+      type:"POST",
+      data: $('#sustainability-commitment-form').serialize(),
+
+      success:function(response){
+        var sustainabilityCommitments=response.sustainabilityCommitments;
+        var nohtml="";
+        if(sustainabilityCommitments.length >0){
+            $('.sustainability-commitment-table-body').html(nohtml);
+            for(let i=0;i<sustainabilityCommitments.length ;i++){
+                var html = '<tr>';
+                html += '<td>'+sustainabilityCommitments[i].title+'</td>';
+                html += '<td>'+sustainabilityCommitments[i].status+'</td>';
+                html += '</tr>';
+                $('.sustainability-commitment-table-body').append(html)
+            }
+        }
+        else{
+
+            $('.sustainability-commitment-table-body').children().empty();
+            var html = '<tr><td><span>No Data</span></td></tr>';
+            $('.sustainability-commitment-table-body').append(html);
+        }
+
+        $('#sustainability-commitment-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#sustainability-commitment-errors').empty();
+                $("#sustainability-commitment-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#sustainability-commitment-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+
+
+
+
+    //submit form for worker walfare and csr
+   
+    $('#worker-walfare-form').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/worker-walfare-form-create-or-update",
+      type:"POST",
+      data: $('#worker-walfare-form').serialize(),
+
+      success:function(response){
+        var walfare=response.walfare;
+        $.each(JSON.parse(walfare.walfare_and_csr), function(index) {
+                 
+                    if(this.value == 1 && this.name == 'healthcare_facility'){
+                            //$('#health-care').attr('checked', 'checked');
+                            $('input[name=healthcare_facility][value=1]').attr('checked', true); 
+                    }else if(this.value == 1 && this.name == 'doctor'){
+                        //    $('#doctor').attr('checked', 'checked');
+                        $('input[name=doctor][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'day_care'){
+                           //$('#day-care').attr('checked', 'checked');
+                           $('input[name=day_care][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'playground'){
+                           //$('#play-ground').attr('checked', 'checked');
+                           $('input[name=playground][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'maternity_leave'){
+                        //    $('#maternity-leave-form').attr('checked', 'checked');
+                        $('input[name=maternity_leave][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'social_work'){
+                           //$('#health-care').attr('checked', 'checked');
+                           $('input[name=social_work][value=1]').attr('checked', true);
+                    }
+                    
+                });
+        
+
+        $('#worker-walfare-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#walfare-errors').empty();
+                $("#walfare-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#walfare-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+
+
+     //submit form for worker walfare and csr
+   
+     $('#security-form').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/securtiy-create-or-update",
+      type:"POST",
+      data: $('#security-form').serialize(),
+
+      success:function(response){
+        var security=response.security;
+        $.each(JSON.parse(security.security_and_others), function(index) {
+                 
+                    if(this.value == 1 && this.name == 'fire_exit'){
+                            $('input[name=fire_exit][value=1]').attr('checked', true); 
+                    }
+                    else if(this.value == 0 && this.name == 'fire_exit'){
+                        $('fire-exit-form-unchecked').attr('checked', true);
+                    }
+                    else if(this.value == 1 && this.name == 'fire_hydrant'){
+                        $('input[name=fire_hydrant][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'water_source'){
+                           $('input[name=water_source][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'protocols'){
+                           $('input[name=protocols][value=1]').attr('checked', true);
+                    }
+                    
+                });
+        
+
+        $('#security-modal').modal('close');
+        swal("Done!", response.message,"success");
+      },
+      error: function(xhr, status, error)
+            {
+                $('#security-errors').empty();
+                $("#security-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#security-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
+
+
+
+
+
+
 
     
      

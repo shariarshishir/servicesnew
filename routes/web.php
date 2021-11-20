@@ -25,6 +25,13 @@ use App\Http\Controllers\ExportDestinationController;
 use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
+use App\Http\Controllers\SamplingController;
+use App\Http\Controllers\SpecialCustomizationController;
+use App\Http\Controllers\SustainabilityCommitmentController;
+use App\Http\Controllers\WalfareController;
+use App\Http\Controllers\SecurityController;
+
+
 
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\SellerProductController;
@@ -152,7 +159,12 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
     
     Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate'])->name('business-terms.create-or-update');
-    
+    Route::post('/sampling-create-or-update', [SamplingController::class, 'samplingCreateOrUpdate'])->name('sampling.create-or-update');
+    Route::post('/special-customization-create-or-update', [SpecialCustomizationController::class, 'specialCustomizationCreateOrUpdate'])->name('specialcustomizations.create-or-update');
+    Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate'])->name('sustainabilitycommitments.create-or-update');
+    Route::post('/worker-walfare-form-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate'])->name('walfare.create-or-update');
+    Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate'])->name('security.create-or-update');
+   
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 

@@ -22,7 +22,7 @@
 							@if(count($business_profile->businessTerms)>0)
 							@foreach($business_profile->businessTerms as $businessTerm)
 							<tr>
-								<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->machine_name}}" ></td>
+								<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->title}}" ></td>
 								<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="{{$businessTerm->quantity}}" ></td>
 								<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">remove</i></a></td>
 							</tr>

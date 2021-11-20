@@ -55,5 +55,26 @@ class BusinessProfile extends Model
     {
         return $this->hasMany(BusinessTerm::class);
     }
+    public function samplings()
+    {
+        return $this->hasMany(Sampling::class);
+    }
+    public function specialCustomizations()
+    {
+        return $this->hasMany(SpecialCustomization::class);
+    }
+    public function sustainabilityCommitments()
+    {
+        return $this->hasMany(SustainabilityCommitment::class);
+    }
+    public function walfare()
+    {
+        return $this->hasOne(Walfare::class);
+    }
+    public function security()
+    {
+        return $this->hasOne(Security::class);
+    }
+    
 
 }

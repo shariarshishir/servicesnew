@@ -598,9 +598,9 @@
 										@if(count($business_profile->businessTerms)>0)
 											@foreach($business_profile->businessTerms as $businessTerm)
 											<tr>
-												<td>{{$businessTerms->title}}</td>
-												<td>{{$businessTerms->quantity}}</td>
-												<td>{{$businessTerms->status}}</td>
+												<td>{{$businessTerm->title}}</td>
+												<td>{{$businessTerm->quantity}}</td>
+												<td>{{$businessTerm->status}}</td>
 											</tr>
 											@endforeach
 										@else
@@ -625,76 +625,32 @@
 									<h3>Sampling and R&D</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_edit btn_green_White" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
 								</div>
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
-									<tbody>
-										<tr>
-											<td>Sampling facility space</td>
-											<td>12 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Manpower</td>
-											<td>44 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Sampling lead time (in weeks)</td>
-											<td>65 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-											</td>
-										</tr>
-										<tr>
-											<td>SMS capacity/Lead Time (in weeks</td>
-											<td>164 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Daily sample capacity</td>
-											<td>20 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Design Studio facility</td>
-											<td>20 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Design Studio manpower</td>
-											<td>20 sets</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
+									<tbody class="sampling-table-body">
+											@if(count($business_profile->samplings))
+												@foreach($business_profile->samplings as $sampling)
+												<tr>
+													<td>{{$sampling->title}}</td>
+													<td>{{$sampling->quantity}}</td>
+													<td>{{$sampling->status}}</td>
+												</tr>
+												@endforeach
+											@else
+											<tr>
+												<td>
+													<div class="card-alert card cyan lighten-5">
+														<div class="card-content cyan-text">
+															<p>INFO : No data found.</p>
+														</div>
+													</div>															
+												</td>
+											</tr>
+										@endif
+										
 									</tbody>
 								</table>
 							</div>
@@ -705,49 +661,31 @@
 									<h3>Special customization ability</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_edit btn_green_White" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
 								</div>
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
-									<tbody>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
+								<tbody class="special-customization-table-body">
+											@if(count($business_profile->specialCustomizations))
+												@foreach($business_profile->specialCustomizations as $specialCustomization)
+												<tr>
+													<td>{{$specialCustomization->title}}</td>
+													<td>{{$specialCustomization->status}}</td>
+												</tr>
+												@endforeach
+											@else
+											<tr>
+												<td>
+													<div class="card-alert card cyan lighten-5">
+														<div class="card-content cyan-text">
+															<p>INFO : No data found.</p>
+														</div>
+													</div>															
+												</td>
+											</tr>
+										@endif
+										
 									</tbody>
 								</table>
 							</div>
@@ -755,110 +693,273 @@
 						<div class="worker_welfare_wrap">
 							<div class="row worker_welfare_box">
 								<h3>Worker welfare and CSR</h3>
+								<div class="col s6 m6 right-align editBox">
+									<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+								</div>
+								@if($business_profile->walfare)
 								<div class="col s12 m6 l7">
+									@foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
+								    @if($walfareAndCsr->name == 'healthcare_facility')
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Healthcare Facility</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group1" type="radio" checked="">
+										<input class="with-gap" name="healthcare_facility"  class="health-facility-form-checked"  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group1" type="radio">
+										<input class="with-gap" name="healthcare_facility" class="health-facility-form-unchecked"    value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
+							
 									</div>
+									@endif
+									@if($walfareAndCsr->name == 'doctor')
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">On sight Doctor</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group2" type="radio" checked="">
+										<input class="with-gap" name="doctor"  class="doctor-form-checked"  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group2" type="radio">
+										<input class="with-gap" name="doctor" class="doctor-form-unchecked"  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
+									@endif
+									@if($walfareAndCsr->name == 'day_care')
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6 ">On sight Day Care</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group3" type="radio" checked="">
+										<input class="with-gap" name="day_care" class="day-care-from-checked" type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group3" type="radio">
+										<input class="with-gap" name="day_care" class="day-care-from-unchecked" value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
+									@endif
+									@endforeach
 								</div>
+
 								<div class="col s12 m6 l5">
+									@foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
+								    @if($walfareAndCsr->name == 'playground')
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Playground</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group4" type="radio" checked="">
+										<input class="with-gap" name="playground" class="playground-form-checked"   type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group4" type="radio">
+										<input class="with-gap" name="playground"  class="playground-form-unchecked"  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
+									@endif
+									@if($walfareAndCsr->name == 'maternity_leave')
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Maternity Leave</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group5" type="radio" checked="">
+										<input class="with-gap" name="maternity_leave" class="maternity-leave-form-checked" type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group5" type="radio">
+										<input class="with-gap" name="maternity_leave" class="maternity-leave-form-unchecked" type="radio" value="0" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
+									@endif
+									@if($walfareAndCsr->name == 'social_work')
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Social work</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group6" type="radio" checked="">
+										<input class="with-gap" name="social_work"  class="social-work-form-checked" type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group6" type="radio">
+										<input class="with-gap" name="social_work"  class="social-work-form-unchecked" type="radio" value="0" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }} >
 										<span>No</span>
 										</label>
 									</div>
+									@endif
+									@endforeach
+								</div>
+								@else
+								<div class="col s12 m6 l6">
+								<div class="welfare_box row">
+									<span class="title col s8 m6 l6">Healthcare Facility</span>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="healthcare_facility"  class="health-facility-form-checked"  type="radio" value="1" checked="">
+									<span>Yes</span>
+									</label>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="healthcare_facility" class="health-facility-form-unchecked"    value="0" type="radio">
+									<span>No</span>
+									</label>
+								</div>
+								<div class="welfare_box row">
+									<span class="title col s8 m6 l6">On sight Doctor</span>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="doctor"  class="doctor-form-checked"  type="radio" value="1" checked="">
+									<span>Yes</span>
+									</label>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="doctor" class="doctor-form-unchecked"  value="0" type="radio">
+									<span>No</span>
+									</label>
+								</div>
+								<div class="welfare_box row">
+									<span class="title col s8 m6 l6 ">On sight Day Care</span>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="day_care" class="day-care-from-checked" type="radio" value="1" checked="">
+									<span>Yes</span>
+									</label>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="day_care" class="day-care-from-unchecked" value="0" type="radio">
+									<span>No</span>
+									</label>
 								</div>
 							</div>
+							<div class="col s12 m6 l6">
+								<div class="welfare_box row">
+									<span class="title col s8 m6 l6">Playground</span>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="playground" class="playground-form-checked"   type="radio" value="1" checked="">
+									<span>Yes</span>
+									</label>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="playground"  class="playground-form-unchecked"  value="0" type="radio">
+									<span>No</span>
+									</label>
+								</div>
+								<div class="welfare_box row">
+									<span class="title col s8 m6 l6">Maternity Leave</span>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="maternity_leave" class="maternity-leave-form-checked" type="radio" value="1" checked="">
+									<span>Yes</span>
+									</label>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="maternity_leave" class="maternity-leave-form-unchecked" type="radio" value="0">
+									<span>No</span>
+									</label>
+								</div>
+								<div class="welfare_box row">
+									<span class="title col s8 m6 l6">Social work</span>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="social_work"  class="social-work-form-checked" type="radio" value="1" checked="">
+									<span>Yes</span>
+									</label>
+									<label class="radio_box col s2 m2 l2">
+									<input class="with-gap" name="social_work"  class="social-work-form-unchecked" type="radio" value="0" >
+									<span>No</span>
+									</label>
+								</div>
+							</div>
+							@endif
+                            </div>
+
+								
 							<div class="row worker_welfare_box">
 								<h3>Security and others</h3>
+								<div class="col s6 m6 right-align editBox">
+									<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+								</div>
+								@if($business_profile->security)
+								<div class="col s12 m6 l7">
+								    @foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
+									@if($securityAndOther->name == 'fire_exit')
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">Fire Exit</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="fire_exit"  class="fire-exit-form-checked"  type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }}>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="fire_exit" class="fire-exit-form-unchecked"    value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} >
+										<span>No</span>
+										</label>
+							
+									</div>
+									@endif
+									@if($securityAndOther->name == 'fire_hydrant')
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">On sight Fire Hydrant</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="fire_hydrant"  class="fire-hydrant-checked"  type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }}>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="fire_hydrant" class="fire-hydrant-unchecked"  value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }}>
+										<span>No</span>
+										</label>
+									</div>
+									@endif
+									@if($securityAndOther->name == 'water_source')
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6 ">Onsight water source</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="water_source" class="water-source-from-checked" type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }} >
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="water_source" class="water-source-from-unchecked" value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }}>
+										<span>No</span>
+										</label>
+									</div>
+									@endif
+								    @endforeach
+							    </div>
+
+								<div class="col s12 m6 l5">
+									@foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
+									@if($securityAndOther->name == 'protocols')
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">Other protocols</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="protocols" class="protocols-form-checked"   type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }}>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap" name="protocols"  class="protocols-form-unchecked"  value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }}>
+										<span>No</span>
+										</label>
+									</div>
+									@endif
+									@endforeach
+								</div>
+								@else
 								<div class="col s12 m6 l7">
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Fire Exit</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group7" type="radio" checked="">
+										<input class="with-gap" name="fire-exit" class="fire-exit-form-checked"   type="radio" value="1" checked="">
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group7" type="radio">
+										<input class="with-gap" name="fire-exit" class="fire-exit-form-unchecked"   type="radio" value="0">
 										<span>No</span>
 										</label>
 									</div>
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">On sight Fire Hydrant</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group8" type="radio" checked="">
+										<input class="with-gap" name="fire-hydrant" class="fire-hydrant-form-checked"   type="radio" value="1" checked="">
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group8" type="radio">
+										<input class="with-gap"  name="fire-hydrant" class="fire-hydrant-form-unchecked"   type="radio" value="0" >
 										<span>No</span>
 										</label>
 									</div>
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Onsight water source</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group9" type="radio" checked="">
+										<input class="with-gap"  name="water-source" class="water-source-form-checked"   type="radio" value="1"  checked="">
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group9" type="radio">
+										<input class="with-gap" name="water-source" class="water-source-form-unchecked"   type="radio" value="0" >
 										<span>No</span>
 										</label>
 									</div>
@@ -867,15 +968,16 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Other protocols</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group10" type="radio" checked="">
+										<input class="with-gap" name="protocols" id="protocols-form-checked"   type="radio" value="1" checked="">
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="group10" type="radio">
+										<input class="with-gap" name="protocols" id="protocols-form-unchecked"   type="radio" value="0" >
 										<span>No</span>
 										</label>
 									</div>
 								</div>
+								@endif
 							</div>
 						</div>
 						<div class="overview_table_wrap blank_overview_table_">
@@ -884,49 +986,31 @@
 									<h3>Sustainability commitments</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" class="btn_edit btn_green_White" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
 								</div>
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
-									<tbody>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<div class="verified_img">
-													<img class="right-align" src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" />
-												</div>
-											</td>
-										</tr>
+									<tbody class="sustainability-commitment-table-body">
+											@if(count($business_profile->sustainabilityCommitments))
+												@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
+												<tr>
+													<td>{{$sustainabilityCommitment->title}}</td>
+													<td>{{$sustainabilityCommitment->status}}</td>
+												</tr>
+												@endforeach
+											@else
+											<tr>
+												<td>
+													<div class="card-alert card cyan lighten-5">
+														<div class="card-content cyan-text">
+															<p>INFO : No data found.</p>
+														</div>
+													</div>															
+												</td>
+											</tr>
+										@endif
+										
 									</tbody>
 								</table>
 							</div>
@@ -1328,6 +1412,11 @@
 	@include('business_profile._upload_export_destination_modal')
 	@include('business_profile._upload_association_membership_modal')
 	@include('business_profile._add_business_terms_modal')
+	@include('business_profile._add_sampling_modal')
+	@include('business_profile._add_special_customization_modal')t
+	@include('business_profile._add_sustainability_commitment_modal')
+	@include('business_profile._add_worker_walfare_and_csr_modal')
+	@include('business_profile._add_security_modal')
 	@include('business_profile._upload_press_highlight_modal')
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')

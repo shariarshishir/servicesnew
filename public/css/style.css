@@ -1421,9 +1421,21 @@ textarea:focus {
 /* .suppliers_container {
     padding-top: 40px;
 } */
+
+.suppliers_container {
+    padding: 50px 0;
+}
 .suppliers_container .suppliers_filter_wrap {
     padding-bottom: 50px;
+    display: block;
+    clear: both;
+    width: 100%;
+    float: left;
 } 
+
+.filter_box_wrap {
+    float: left;
+}
 .suppliers_container .suppliers_filter_wrap .title {
     font-size: 20px;
     color: #464545;
@@ -1433,9 +1445,18 @@ textarea:focus {
     display: inline-block;
     font-size: 18px;
     font-weight: 400;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     box-shadow: none;
     border: 1px solid #448547;
+    min-height: 45px;
+    margin: 0 3px;
+}
+
+.suppliers_filter_wrap .filter_dropMenu a:link,
+.suppliers_filter_wrap .filter_dropMenu a:active,
+.suppliers_filter_wrap .filter_dropMenu a:visited {
+    color: #54A958;
+    font-size: 18px;
 }
 .suppliers_container .suppliers_filter_wrap .dropdown-content {
     background: #fff;
@@ -1444,12 +1465,14 @@ textarea:focus {
     border-radius: 10px;
 }
 .suppliers_container .suppliers_filter_wrap .dropdown-content li label {
-    float: right;
-    text-align: right;
+    /* float: right;
+    text-align: right; */
     margin-left: 5px;
+    padding: 12px 10px;
+    display: block;
 }
 .suppliers_container .suppliers_filter_wrap .dropdown-content li label span{
-    padding: 0 10px 0 0;
+    /* padding: 0 10px 0 0; */
 }
 .suppliers_container .suppliers_filter_wrap .dropdown-content li a:link,
 .suppliers_container .suppliers_filter_wrap .dropdown-content li a:active,
@@ -1464,8 +1487,16 @@ textarea:focus {
 }
 .suppliers_filter_wrap .filter_dropMenu .material-icons {
     float: right;
-    margin-top: 5px;
     margin-left: 5px;
+    margin-top: 0;
+    margin-left: 5px;
+    font-size: 25px;
+}
+.suppliers_filter_wrap .filter_dropMenu .dropdown-content {
+    background: #fff;
+    border: 1px solid #448547;
+    min-width: 200px;
+    border-radius: 10px;
 }
 .suppliers_filter_wrap .filter_search {
     width: 360px;
@@ -1475,6 +1506,7 @@ textarea:focus {
     border: 1px solid #448547;
     padding: 5px 132px 5px 38px;
     border-radius: 10px;
+    margin-left: 3px;
 }
 .suppliers_filter_wrap .filter_search .material-icons {
     position: absolute;
@@ -1503,7 +1535,9 @@ textarea:focus {
     right: 3px;
     top: 4px;
     margin: 0;
-    line-height: 24px;
+    line-height: 20px;
+    min-height: 36px;
+    font-size: 18px;
 }
  .suppliers_content_wrap .industries_boxWrap {
     padding-bottom: 50px;
@@ -1513,7 +1547,7 @@ textarea:focus {
 .suppliers_content_wrap .industries_boxWrap .box_shadow {
     border-radius: 20px;
     padding: 20px 20px 0 20px;
-    margin: 0 15px;
+    margin: 0 15px 50px;
 }
 .suppliers_content_wrap .industries_boxWrap .industry_logobox img {
     max-height: 60px;
@@ -1556,8 +1590,14 @@ textarea:focus {
 .suppliers_content_wrap .industry_view a:active,
 .suppliers_content_wrap .industry_view a:visited {
     color: #fff;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
+}
+.suppliers_filter_wrap .btn_clear {
+    font-size: 18px;
+    font-weight: 400;
+    min-width: auto;
+    margin: 0 3px;
 }
 /********************* suppliers page End **************************/
 
@@ -2085,7 +2125,8 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-top: 50px;
 }
 .business_stepper_wrap .next_to_representative_details_info:hover {
-    d: #397B3D;
+    background: #397B3D;
+    color: #FFFFFF;
 }
 .business_stepper_wrap .previous-step {
     color: #397B3D;

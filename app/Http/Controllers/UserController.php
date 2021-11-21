@@ -440,24 +440,26 @@ class UserController extends Controller
 
 
         $countries=Country::all();
-        $productFeatured=Product::where('vendor_id',$user->vendor->id)->where('is_featured',1)->where('state',1)->paginate(5);
+        //$productFeatured=Product::where('vendor_id',$user->vendor->id)->where('is_featured',1)->where('state',1)->paginate(5);
         // //check whether vendor's all  information exist or not
-        if($user->user_type=='wholesaler'){
-            if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees && $user->vendor->vendor_mainproduct && $user->vendor->vendor_yearest){
-                $flag=1;
-            }
-            else{
-                $flag=0;
-            }
-        }
-        else{
-            if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees  && $user->vendor->vendor_yearest){
-                $flag=1;
-            }
-            else{
-                $flag=0;
-            }
-        }
+        // if($user->user_type=='wholesaler'){
+        //     if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees && $user->vendor->vendor_mainproduct && $user->vendor->vendor_yearest){
+        //         $flag=1;
+        //     }
+        //     else{
+        //         $flag=0;
+        //     }
+        // }
+        // else{
+        //     if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees  && $user->vendor->vendor_yearest){
+        //         $flag=1;
+        //     }
+        //     else{
+        //         $flag=0;
+        //     }
+        // }
+
+        $flag=1;
 
         $notifications = auth()->user()->unreadNotifications;
        // dd($notifications);
@@ -491,7 +493,7 @@ class UserController extends Controller
             }
         }
 
-        return view('user.profile.index',compact('user','countries','flag','orderModificationRequestIds','orderIds','productFeatured','orderQueryProcessedIds','businessProfiles'));
+        return view('user.profile.index',compact('user','countries','flag','orderModificationRequestIds','orderIds','orderQueryProcessedIds','businessProfiles'));
     }
 
 

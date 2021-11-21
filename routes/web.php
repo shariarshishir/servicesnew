@@ -25,6 +25,7 @@ use App\Http\Controllers\ExportDestinationController;
 use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\SamplingController;
 use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
@@ -61,6 +62,9 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 | contains the "web" middleware group. Now create something great!
 |
 */
+//excel,csv user import
+Route::get('import',[ImportController::class, 'importView'])->name('import.view');
+Route::post('import',[ImportController::class, 'import'])->name('import');
 
 // Frontend API's endpoint start
 Auth::routes();
@@ -161,16 +165,16 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
     Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
-    
+
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
-    
+
     Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate'])->name('business-terms.create-or-update');
     Route::post('/sampling-create-or-update', [SamplingController::class, 'samplingCreateOrUpdate'])->name('sampling.create-or-update');
     Route::post('/special-customization-create-or-update', [SpecialCustomizationController::class, 'specialCustomizationCreateOrUpdate'])->name('specialcustomizations.create-or-update');
     Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate'])->name('sustainabilitycommitments.create-or-update');
     Route::post('/worker-walfare-form-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate'])->name('walfare.create-or-update');
     Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate'])->name('security.create-or-update');
-   
+
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 
@@ -180,7 +184,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/export-destination-details-upload', [ExportDestinationController::class, 'exportDestinationDetailsUpload'])->name('exportdestinations.upload');
     Route::get('/export-destination-details-delete', [ExportDestinationController::class, 'deleteExportDestination'])->name('exportdestinations.delete');
 
-    
+
     Route::post('/association-membership-details-upload', [AssociationMembershipController::class, 'associationMembershipDetailsUpload'])->name('associationmemberships.upload');
     Route::get('/association-membership-details-delete', [AssociationMembershipController::class, 'deleteAssociationMembership'])->name('associationmemberships.delete');
 

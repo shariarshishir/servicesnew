@@ -487,10 +487,20 @@ class HomeController extends Controller
     }
 
     //suppliers
-    public function suppliers()
+    public function suppliers(Request $request)
     {
-        $suppliers=BusinessProfile::with(['businessCategory'])->get();
-
+        $suppliers=BusinessProfile::with(['businessCategory'])->where(function($query) use ($request){
+            if($request->business_type){
+                $query->whereIn('business_type',$request->business_type)->get();
+            }
+            if($request->industry_type){
+                $query->whereIn('industry_type',$request->industry_type)->get();
+            }
+            if(isset($request->business_name)){
+                $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
+            }
+        })
+        ->paginate(10);
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile
@@ -500,16 +510,13 @@ class HomeController extends Controller
         //manufacture
         if($business_profile->business_type == 1 )
         {
-
             $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','manufactureProducts.product_images'])->findOrFail($id);
-
             return view('manufacture_profile_view_by_user.index',compact('business_profile'));
         }
         //wholesaler
         if($business_profile->business_type == 2 )
         {
             $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','wholesalerProducts.images'])->findOrFail($id);
-
             return view('wholesaler_profile_view_by_user.index',compact('business_profile'));
         }
 

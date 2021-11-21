@@ -2486,6 +2486,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 .footer_right_bottom .socialWrap img {
     margin-right: 10px;
+    display: inline-block;
 }
 .footer_right_bottom .socialWrap h4 {
     font-size: 20px;
@@ -2793,11 +2794,36 @@ legend {
     float: right;
 }
 
-div.dataTables_wrapper table..box_shadow_radius {
+div.dataTables_wrapper table.box_shadow_radius {
     overflow: hidden;
 }
-div.dataTables_wrapper div.dataTables_info{
+div.dataTables_wrapper div.dataTables_info {
     color: #448547;
     font-size: 18px;
 }
+.mdc-layout-grid__inner {
+
+}
+#seller-product-datatable_wrapper .mdc-layout-grid__cell--span-4 {
+    float: left;
+}
+
+#seller-product-datatable_wrapper #seller-product-datatable_paginate {
+    float: right;
+    padding-top: 15px;
+}
+.pagination button{
+    border: 1px solid #448547;
+    padding: 3px 10px;
+    margin: 0 3px;
+    border-radius: 3px;
+}
+.pagination button.next,
+.pagination button.previous  {
+    background: #448547;
+    box-shadow: none;
+    color: #FFFFFF;
+}
 /* order css start */
+
+

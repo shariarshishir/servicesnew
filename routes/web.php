@@ -25,6 +25,7 @@ use App\Http\Controllers\ExportDestinationController;
 use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\SamplingController;
 use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
@@ -61,6 +62,9 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 | contains the "web" middleware group. Now create something great!
 |
 */
+//excel,csv user import
+Route::get('import',[ImportController::class, 'importView'])->name('import.view');
+Route::post('import',[ImportController::class, 'import'])->name('import');
 
 // Frontend API's endpoint start
 Auth::routes();

@@ -343,6 +343,14 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
         Route::get('user/business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
         Route::post('user/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
+        Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
+        Route::post('user/business/profile/capacity-terms/verify',[AdminBusinessProfileController::class, 'businessTermsInformationVerify'])->name('business.terms.verify');
+        Route::post('user/business/profile/samplings/verify',[AdminBusinessProfileController::class, 'samplingsInformationVerify'])->name('samplings.verify');
+        Route::post('user/business/profile/special-customization/verify',[AdminBusinessProfileController::class, 'specialCustomizationInformationVerify'])->name('special.customizations.verify');
+        Route::post('user/business/profile/sustainability-commitments/verify',[AdminBusinessProfileController::class, 'sustainabilityCommitmentsInformationVerify'])->name('sustainability.commitments.verify');
+        Route::post('user/business/profile/productionflow-manpower/verify',[AdminBusinessProfileController::class, 'productionflowAndManpowerInformationVerify'])->name('productionflow.manpower.verify');
+        Route::post('user/business/profile/walfare/verify',[AdminBusinessProfileController::class, 'walfareInformationVerify'])->name('worker.walfare.verify');
+        Route::post('user/business/profile/security/verify',[AdminBusinessProfileController::class, 'securityInformationVerify'])->name('worker.security.verify');
 
 
 

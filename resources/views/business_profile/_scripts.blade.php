@@ -1635,26 +1635,26 @@
                             $('input[name=fire_exit][value=1]').attr('checked', true); 
                     }
                     else if(this.value == 0 && this.name == 'fire_exit'){
-                        $('fire-exit-form-unchecked').attr('checked', true);
+                        $('.fire-exit-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'fire_hydrant'){
                         $('input[name=fire_hydrant][value=1]').attr('checked', true);
                     
                     }
                     else if(this.value == 0 && this.name == 'fire_hydrant'){
-                        $('fire-hydrant-form-unchecked').attr('checked', true);
+                        $('.fire-hydrant-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'water_source'){
                            $('input[name=water_source][value=1]').attr('checked', true);
                     }
                     else if(this.value == 0 && this.name == 'water_source'){
-                        $('water-source-form-unchecked').attr('checked', true);
+                        $('.water-source-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'protocols'){
                            $('input[name=protocols][value=1]').attr('checked', true);
                     }
                     else if(this.value == 0 && this.name == 'protocols'){
-                        $('protocols-form-unchecked').attr('checked', true);
+                        $('.protocols-unchecked').attr('checked','checked');
                     }
                     
                 });

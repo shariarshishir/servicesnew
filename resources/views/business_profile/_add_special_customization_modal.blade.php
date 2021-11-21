@@ -13,7 +13,7 @@
 					<table class="special-customization-table-block">
 						<thead>
 							<tr>
-								<th>Term Name</th>
+								<th>Name</th>
 								<th>&nbsp;</th>
 							</tr>
 						</thead>

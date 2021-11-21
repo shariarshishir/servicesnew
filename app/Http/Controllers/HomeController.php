@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Blog;
 use App\Models\BusinessProfile;
+use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
@@ -519,7 +520,22 @@ class HomeController extends Controller
             $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','wholesalerProducts.images'])->findOrFail($id);
             return view('wholesaler_profile_view_by_user.index',compact('business_profile'));
         }
-
     }
+    //low moq
+    public function lowMoq(Request $request)
+    {
+        $wholesaler_products=collect(Product::with(['images'])->where('moq','!=', null)->get());
+        $manufacture_products=collect(ManufactureProduct::with(['product_images'])->where('moq','!=', null)->get());
+        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+        return $merged;
+        $sorted=$merged->sortBy('moq');
+        $sorted_value= $sorted->values()->all();
+
+        $page=isset($request->page) ? $request->page : 1;
+        $collection=  $sorted->forPage($page,3);
+        return $collection;
+    }
+
+
 
 }

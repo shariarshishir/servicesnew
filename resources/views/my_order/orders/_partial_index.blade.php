@@ -1,8 +1,8 @@
 @if(count($orders) > 0)
     <div class="col-md-12">
-        <div class="card card-with-padding order-list-block">
+        <div class="card-with-padding order-list-block">
             <legend>Orders List</legend>
-            <table class="table striped" id="ordertable">
+            <table class="table striped box_shadow_radius order_data_table" id="ordertable">
                 <thead>
                     <tr>
                         <th width="28%" class="text-center">#Order No.</th>

@@ -50,7 +50,7 @@
     </ul>
 </div-->
 
-<div class="profile_tab_menu">
+<div class="profile_tab_menu profile_wholesaler_tab_menu">
     <ul>
         <li><a href="{{route('business.profile.show', $business_profile->id)}}">Home</a></li>
         <li><a href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>

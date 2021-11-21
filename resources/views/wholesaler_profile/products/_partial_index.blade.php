@@ -2,53 +2,67 @@
     <div class="container-fluid">
         <div class="product-list-block">
             <div class="col-md-12">
-                    <div class="card card-with-padding">
-                        <legend>Products List</legend>
+                    <div class="card-with-padding profile_wholesaler_inner">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col m12 add-new-product-button">
-                                    <a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
+                                    <a href="javascript:void(0);" class="btn_green modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
                                         <i class="material-icons dp48">add</i> Add New product
                                     </a>
                                 </div>
                             </div>
                         <div>
-
+                        <legend>Products List</legend>
                         <div class="seller-product-list">
                             <div class="exists-seller-product-list">
                                 <div class="col m12 product-search-block">
                                     <div class="row">
                                         <div class="col m4">
-                                            <label for="status">Status</label>
-                                            <select class="select2 browser-default" name="status_id" id="filter_state" >
-                                                <option value=""  selected>Choose your option</option>
-                                                <option value="1" >Publish</option>
-                                                <option value="0" >UnPublish</option>
-                                            </select>
+                                            <div class="input-field">
+                                                <div class="col s12">
+                                                    <label for="status">Status</label>
+                                                </div>
+                                                <select class="select2 browser-default" name="status_id" id="filter_state" >
+                                                    <option value=""  selected>Choose your option</option>
+                                                    <option value="1" >Publish</option>
+                                                    <option value="0" >UnPublish</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="col m4">
-                                            <label for="new_arrival">Product Type</label>
-                                            <select class="select2 browser-default" name="filter_product_type" id="filter_product_type">
-                                                <option value="" selected>Choose your option</option>
-                                                <option value="1">Fresh Order</option>
-                                                <option value="2">Ready Stock</option>
-                                                <option value="3">Non Clothing Item</option>
-                                            </select>
+                                            <div class="input-field">
+                                                <div class="col s12">
+                                                    <label for="new_arrival">Product Type</label>
+                                                </div>
+                                                <select class="select2 browser-default" name="filter_product_type" id="filter_product_type">
+                                                    <option value="" selected>Choose your option</option>
+                                                    <option value="1">Fresh Order</option>
+                                                    <option value="2">Ready Stock</option>
+                                                    <option value="3">Non Clothing Item</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col m4">
+                                            <div class="input-field">
+                                                <div class="col s12">
+                                                    <label>Search</label>
+                                                </div>
+                                                <input type="search" class="form-control input-sm" placeholder="Enter Product Name" id="dt-product-name-search" autocomplete="off">
+                                            </div>
                                         </div>
                                     </div>
-                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="Enter Product Name" id="dt-product-name-search" autocomplete="off"></label>
                                 </div>
-                                <div class="table-content">
-                                    <table class="table striped" width="100%" id="seller-product-datatable">
+                                <div class="table-content product_data_table_wrap">
+                                    <table class="table striped box_shadow_radius" width="100%" id="seller-product-datatable">
                                         <thead>
-                                          <tr>
+                                        <tr>
                                             <th>Image</th>
                                             <th>Product Name</th>
                                             <th>Status</th>
                                             <th>Featured</th>
                                             <th>New Arrival</th>
                                             <th>Action</th>
-                                          </tr>
+                                        </tr>
                                         </thead>
                                         <tbody>
                                         </tbody>

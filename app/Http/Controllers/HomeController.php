@@ -524,15 +524,15 @@ class HomeController extends Controller
     //low moq
     public function lowMoq(Request $request)
     {
-        $wholesaler_products=Product::with(['images'])->where('moq','!=', null)->get();
+        $wholesaler_products=Product::with(['images'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0])->get();
         $manufacture_products=ManufactureProduct::with(['product_images'])->where('moq','!=', null)->get();
         $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
         $sorted=$merged->sortBy('moq');
         $sorted_value= $sorted->values()->all();
-
-        $page=isset($request->page) ? $request->page : 1;
-        $collection=  $sorted->forPage($page,3);
-        return $collection;
+        return $sorted_value;
+        // $page=isset($request->page) ? $request->page : 1;
+        // $collection=  $sorted->forPage($page,3);
+        // return $collection;
     }
 
 

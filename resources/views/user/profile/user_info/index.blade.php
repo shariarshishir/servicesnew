@@ -12,11 +12,13 @@
             <legend style="margin-bottom: 20px;">Profile Information</legend>
         </div>
         <div class="col m3 profile-image-block">
-            <img src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
+            <div class="profile_image">
+                <img src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
+            </div>
             <div class="change_photo">
                 <form method="post" id="upload-image-form" enctype="multipart/form-data">
                     @csrf
-                    <a href="javascript:void(0)" class="btn profile-image-upload-trigger waves-effect waves-light green">
+                    <a href="javascript:void(0)" class="btn profile-image-upload-trigger waves-effect waves-light btn_white">
                         <i class="material-icons">create</i> Change Photo
                     </a>
                     <div class="form-group" style="display: none;">
@@ -50,21 +52,24 @@
                 <div class="col m12">
                     <legend>My Businesses</legend>
                 </div>
-                <div class="col m12">
+                <div class="col m12 my_businesses_wrap">
                     @foreach($businessProfiles as $key=>$businessprofile)
-                    <div class="card user-business-profile-short-info <?php echo $className; ?>">
-                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
-                        <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
-                        <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+                    <div class="<?php echo $className; ?>">
+                        <div class="my_businesses_box card user-business-profile-short-info ">
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                            <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
+                            <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+                        </div>
                     </div>
+                    
                     @endforeach
                 </div>
             </div>
             @endif
         </div>
     </div>
-    <div>
-        <a href="{{route('myorder')}}">My Orders</a>
+    <div class="user_my_order_btnwrap">
+        <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
     </div>
 
 

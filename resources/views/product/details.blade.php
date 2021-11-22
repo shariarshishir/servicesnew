@@ -739,10 +739,10 @@ $reviewsCount = count($productReviews);
                             <input type="hidden" name="total_price" value="">
                             <input type="hidden" name="product_type" value="{{$product->product_type}}">
                             @if(Auth::check())
-                            <button id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart" onclick="addToCart('{{$product->sku}}')" disabled="disabled">ADD TO CART</button>
+                            <button id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart" onclick="addToCart('{{$product->sku}}')" disabled="disabled">Add to cart</button>
                             <button id="ask_for_price" data-id="{{$product->sku}}"class="btn waves-effect waves-light green askForPrice" onclick="askForPrice('{{$product->sku}}')" style="display: none">Ask For Price</button>
                             @else
-                            <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_green" disabled="disabled">ADD TO CART</a>
+                            <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_green" disabled="disabled">Add to cart</a>
                             @endif
                         </div>
                     </div>
@@ -892,8 +892,8 @@ $reviewsCount = count($productReviews);
         <div class="col m12">
             <div class="card card-with-padding">
                 <legend>Company Profile</legend>
-                <div>
-                    <b style="color:#4CAF50">Store name :</b> {{$product->businessProfile->business_name}}<p>
+                <div class="company_profile_details">
+                    <p><b style="color:#4CAF50">Store name :</b> {{$product->businessProfile->business_name}}<p>
                     <b style="color:#4CAF50">Country / Region :</b> {{$product->businessProfile->location}}<p>
                     <b style="color:#4CAF50">Business Type :</b> Wholesaler<p>
                     {{-- <b style="color:#4CAF50">Main Products:</b> {{$product->business_profile->vendor_mainproduct}}<p>

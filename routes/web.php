@@ -25,6 +25,7 @@ use App\Http\Controllers\ExportDestinationController;
 use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\SamplingController;
 use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
@@ -61,6 +62,9 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 | contains the "web" middleware group. Now create something great!
 |
 */
+//excel,csv user import
+Route::get('import',[ImportController::class, 'importView'])->name('import.view');
+Route::post('import',[ImportController::class, 'import'])->name('import');
 
 // Frontend API's endpoint start
 Auth::routes();
@@ -69,11 +73,15 @@ Route::get('/products', [HomeController::class, 'productList'])->name('products'
 Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name('readystockproducts');
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
 Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
+Route::get('/low-moq', [HomeController::class, 'lowMoq'])->name('low.moq');
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
 Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
+
+//low moq details
+Route::get('prodcut/details/{flag}/{id}',[HomeController::class, 'mixProductDetails'])->name('mix.product.details');
 
 Route::get('/products/{slug}', [HomeController::class, 'productsByCategory'])->name('categories.product');
 Route::get('/products/{category}/{subcategory}', [HomeController::class, 'productsBySubCategory'])->name('subcategories.product');
@@ -161,16 +169,16 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
     Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
-    
+
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
-    
+
     Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate'])->name('business-terms.create-or-update');
     Route::post('/sampling-create-or-update', [SamplingController::class, 'samplingCreateOrUpdate'])->name('sampling.create-or-update');
     Route::post('/special-customization-create-or-update', [SpecialCustomizationController::class, 'specialCustomizationCreateOrUpdate'])->name('specialcustomizations.create-or-update');
     Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate'])->name('sustainabilitycommitments.create-or-update');
     Route::post('/worker-walfare-form-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate'])->name('walfare.create-or-update');
     Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate'])->name('security.create-or-update');
-   
+
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 
@@ -180,7 +188,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/export-destination-details-upload', [ExportDestinationController::class, 'exportDestinationDetailsUpload'])->name('exportdestinations.upload');
     Route::get('/export-destination-details-delete', [ExportDestinationController::class, 'deleteExportDestination'])->name('exportdestinations.delete');
 
-    
+
     Route::post('/association-membership-details-upload', [AssociationMembershipController::class, 'associationMembershipDetailsUpload'])->name('associationmemberships.upload');
     Route::get('/association-membership-details-delete', [AssociationMembershipController::class, 'deleteAssociationMembership'])->name('associationmemberships.delete');
 
@@ -343,6 +351,14 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
         Route::get('user/business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
         Route::post('user/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
+        Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
+        Route::post('user/business/profile/capacity-terms/verify',[AdminBusinessProfileController::class, 'businessTermsInformationVerify'])->name('business.terms.verify');
+        Route::post('user/business/profile/samplings/verify',[AdminBusinessProfileController::class, 'samplingsInformationVerify'])->name('samplings.verify');
+        Route::post('user/business/profile/special-customization/verify',[AdminBusinessProfileController::class, 'specialCustomizationInformationVerify'])->name('special.customizations.verify');
+        Route::post('user/business/profile/sustainability-commitments/verify',[AdminBusinessProfileController::class, 'sustainabilityCommitmentsInformationVerify'])->name('sustainability.commitments.verify');
+        Route::post('user/business/profile/productionflow-manpower/verify',[AdminBusinessProfileController::class, 'productionflowAndManpowerInformationVerify'])->name('productionflow.manpower.verify');
+        Route::post('user/business/profile/walfare/verify',[AdminBusinessProfileController::class, 'walfareInformationVerify'])->name('worker.walfare.verify');
+        Route::post('user/business/profile/security/verify',[AdminBusinessProfileController::class, 'securityInformationVerify'])->name('worker.security.verify');
 
 
 

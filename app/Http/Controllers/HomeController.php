@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Blog;
 use App\Models\BusinessProfile;
+use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
@@ -519,7 +520,77 @@ class HomeController extends Controller
             $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','wholesalerProducts.images'])->findOrFail($id);
             return view('wholesaler_profile_view_by_user.index',compact('business_profile'));
         }
-
     }
+    //low moq
+    public function lowMoq(Request $request)
+    {
+        $wholesaler_products=Product::with(['images'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0])->get();
+        $manufacture_products=ManufactureProduct::with(['product_images'])->where('moq','!=', null)->get();
+        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+        $sorted=$merged->sortBy('moq');
+        $sorted_value= $sorted->values()->all();
+        return view('product.low_moq',['products' => $sorted_value]);
+        // $page=isset($request->page) ? $request->page : 1;
+        // $collection=  $sorted->forPage($page,3);
+        // return $collection;
+    }
+    //low moq details
+    public function mixProductDetails($flag, $id)
+    {
+        if($flag == 'mb'){
+            $product = ManufactureProduct::findOrFail($id);
+            return view('product.manufactrue_product_details',compact('product'));
+        }
+        else if($flag == 'shop'){
+            $category = ProductCategory::get();
+            $product = Product::with('businessProfile')->where('id',$id)->first();
+
+            $orderModificationRequest=OrderModificationRequest::where(['product_id' => $product->id, 'type' => 2, 'user_id' =>auth()->id() ])->get();
+            $productReviews = ProductReview::where('product_id',$product->id)->get();
+            $overallRating = 0;
+            $communicationRating = 0;
+            $ontimeDeliveryRating = 0;
+            $sampleSupportRating = 0;
+            $productQualityRating = 0;
+
+            foreach($productReviews as $productReview){
+                $overallRating = $productReview->overall_rating+$overallRating;
+                $communicationRating = $productReview->communication_rating+$communicationRating;
+                $ontimeDeliveryRating = $productReview->ontime_delivery_rating+$ontimeDeliveryRating;
+                $sampleSupportRating = $productReview->sample_support_rating+$sampleSupportRating;
+                $productQualityRating = $productReview->product_quality_rating+$productQualityRating;
+
+            }
+            $ratingSum = $overallRating+$communicationRating+$ontimeDeliveryRating+$sampleSupportRating+$productQualityRating;
+            if(count($productReviews)==0){
+                $averageRating=0;
+            }
+            else{
+                $averageRating = $ratingSum / count($productReviews) ;
+            }
+
+            $averageRating = $averageRating/5;
+
+            $productReviewExistsOrNot = ProductReview::where('created_by',auth()->id())->where('product_id',$product->id)->first();
+            $colors_sizes = json_decode($product->colors_sizes);
+            $attr = json_decode($product->attribute);
+            //recommandiation products
+            $recommandProducts=Product::with('businessProfile')->where('state',1)
+            ->where('id','!=',$product->id)
+            ->whereHas('category', function($q) use ($product){
+                 $q->where('id',$product->product_category_id);
+
+            })
+            ->orWhere(function($query) use ($product){
+                $query->where('product_type',$product->product_type)
+                      ->where('id', '!=', $product->id);
+            })
+            ->with(['images'])
+            ->get();
+            return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
+        }
+    }
+
+
 
 }

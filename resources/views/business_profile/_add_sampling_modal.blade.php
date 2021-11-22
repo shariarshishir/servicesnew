@@ -13,7 +13,7 @@
 					<table class="sampling-table-block">
 						<thead>
 							<tr>
-								<th>Term Name</th>
+								<th> Name</th>
 								<th>Quantity</th>
 								<th>&nbsp;</th>
 							</tr>

@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function businessProfileDetails($profile_id)
     {
-        $business_profile=BusinessProfile::where('id', $profile_id)->with('companyOverview')->first();
+        $business_profile=BusinessProfile::where('id', $profile_id)->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->first();
         if(!$business_profile)
         {
             abort(404);

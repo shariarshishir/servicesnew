@@ -1075,24 +1075,41 @@ textarea:focus {
 .profile_tabNav_wrap .main_buyers_wrap h5 {
     font-size: 18px;
     color: #3D3D3D;
+    text-transform: capitalize;
 }
 .profile_tabNav_wrap .export_destination_wrap {
     padding-bottom: 120px ;
+}
+.export_destination_wrap .flagBox {
+    padding-bottom: 20px;
 }
 .export_destination_wrap .flag_img {
     background: #fff;
     height: 130px;
     width: 130px;
+    position: relative;
+    margin: 0 auto;
+}
+.export_destination_wrap .flag_img img {
     border-radius: 50%;
     -webkit-box-shadow: 0px 7px 13px -3px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 7px 13px -3px rgba(0,0,0,0.75);
     box-shadow: 0px 7px 13px -3px rgba(0,0,0,0.75);
-    margin: 0 auto 20px;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.export_destination_wrap .flag_img a.remove-export-destination {
+    position: absolute;
+    top: 0;
+    right: -10px;
 }
 .export_destination_wrap h5 {
     font-size: 20px;
     font-weight: 500;
+    margin-top: 20px;
+    line-height: 25px;
+    height: 45px;
+    font-size: 18px;
 }
 .owner_info_wrap .owner_info_box {
     padding-bottom: 80px;
@@ -1110,6 +1127,8 @@ textarea:focus {
     height: auto;
     width: 100%;
 }
+
+
 
 /* Profile page tab_Home_menu css end */
 
@@ -1372,6 +1391,15 @@ textarea:focus {
 .product_data_table_wrap td, th {
     padding: 15px 10px;
 }
+.production-flow-and-manpower-table {
+    border: 1px solid rgba(0,0,0,0.12);
+}
+.production-flow-and-manpower-table tr {
+    border-top: none !important;
+}
+.production-flow-and-manpower-table th {
+    border-right: 1px solid rgba(0,0,0,0.12);
+}
 .product_data_table_wrap td:first-child, 
 .product_data_table_wrap th:first-child {
     padding-left: 20px;
@@ -1441,7 +1469,6 @@ textarea:focus {
 .product-search-block {
     padding: 30px 0;
 }
-
 .product_data_table_wrap .material-icons {
     color: #ffffff;
 }
@@ -2787,11 +2814,31 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     padding-bottom: 40px;
 }
 
+
+/* ************************************** */
+
+.capacity_block_box {
+    padding-bottom: 20px !important;
+}
+.profile_form_modal label {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+    padding: 0 0 10px 0;
+    position: inherit;
+    display: block;
+    text-transform: capitalize;
+    font-weight: 500;
+}
 .profile_form_modal .btn {
     float: right;
     margin-top: 20px;  
     font-size: 18px;
     line-height: 24px;
+}
+.profile_form_modal .red {
+    line-height: 23px;
+    height: 25px;
 }
 .profile_form_modal .btn .material-icons {
     float: left;
@@ -2800,6 +2847,61 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .profile_form_modal .submit_btn_wrap .btn  {
     float: none;
     margin-right: 5px;
+}
+.profile_form_modal tbody tr{
+    border-bottom: none;
+}
+
+.profile_form_modal .input-field.col label {
+    position: inherit !important;
+    position: inherit;
+    left: inherit;
+    top: inherit;
+    margin: 0; 
+    float: left;
+    display: block;
+    -webkit-transform: none;
+    transform: none;
+    -webkit-transform-origin: inherit;
+    transform-origin: inherit;
+}
+.profile_form_modal .input-field>label:not(.label-icon).active {
+    -webkit-transform: none;
+    transform: none;
+    -webkit-transform-origin: inherit;
+    transform-origin: inherit;
+    margin: 0;
+}
+.certificate_img {
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.main_buyer_img a.remove-main-buyer,
+.certificate_img a.remove-certificate {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 27px;
+}
+.certificate_img img {
+    height: 200px;
+    width: auto;
+}
+
+.profile_form_modal textarea {
+    padding: 5px 10px;
+    height: 90px;
+}
+.main_buyer_img {
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+.main_buyer_img img{
+    height: auto;
+    width: 100%;
+    width: 90px;
 }
 
 /* *************** Footer Container css start ***************** */

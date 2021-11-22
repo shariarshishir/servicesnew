@@ -554,9 +554,11 @@
 							</div>
 							<div class="row certifications-block">
 								@foreach($business_profile->certifications as $certification)
-								<div class="col m3 l3 certificate_img">
-									<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
-									<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+								<div class="col m3 l3">
+									<div class="certificate_img">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+									</div>
 								</div>
 								@endforeach
 							</div>
@@ -573,10 +575,12 @@
 							</div>
 							<div class="buyers_logo_wrap row main-buyers-block">
 								@foreach($business_profile->mainBuyers as $mainBuyers)
-								<div class="col s6 m4 l3 main_buyer_img">
-									<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
-									<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
-									<h5>{{$mainBuyers->title}}</h5>
+								<div class="col s6 m4 l3">
+									<div class="main_buyer_img">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+										<h5>{{$mainBuyers->title}}</h5>
+									</div>
 								</div>
 								@endforeach
 							</div>
@@ -593,6 +597,20 @@
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
+								<div class="flagBox export-destination-block">
+									@foreach($business_profile->exportDestinations as $exportDestination)
+									<div class="col s6 m4 l2">
+										<div class="flag_img export-destination-img">
+											<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+											<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+										</div>
+										<h5>{{$exportDestination->title}}</h5>
+									</div>
+									@endforeach
+								</div>
+							</div>
+
+							<!-- <div class="row flag_wrap center-align">
 								<div class="col s6 m4 l2 flagBox export-destination-block">
 								@foreach($business_profile->exportDestinations as $exportDestination)
 									<div class="flag_img export-destination-img">
@@ -602,8 +620,8 @@
 									<h5>{{$exportDestination->title}}</h5>
 								@endforeach
 								</div>
+							</div> -->
 							
-							</div>
 						</div>
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">

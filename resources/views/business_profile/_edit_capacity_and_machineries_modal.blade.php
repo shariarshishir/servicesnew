@@ -6,8 +6,8 @@
 		@csrf
 		<input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
 		<div class="row">
-			<div class="col s12">
-				<div class="form-group  production-capacity-block">
+			<div class="col s12 capacity_block_box">
+				<div class="form-group production-capacity-block">
 					<label>Production Capacity (Annual)</label>
 					<div class="production-capacity-block">
 						<table class="production-capacity-table-block">
@@ -38,8 +38,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col s12">
-				<div class="form-group  categories-produced-block">
+			<div class="col s12 capacity_block_box">
+				<div class="form-group categories-produced-block">
 					<label>Categories Produced</label>
 					<div class="categories-produced-block">
 						<table class="categories-produced-table-block">
@@ -71,8 +71,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="form-group  machinaries-details-block">
+		<div class="row capacity_block_box">
+			<div class="form-group machinaries-details-block">
 				<label>machinaries Details</label>
 				<div class="machinaries-details-block">
 					<table class="machinaries-details-table-block">

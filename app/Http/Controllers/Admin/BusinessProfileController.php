@@ -302,22 +302,22 @@ class BusinessProfileController extends Controller
         $fireExit = new stdClass();
         $fireExit->name='fire_exit';
         $fireExit->checked=$request->fire_exit;
-        $fireExit->status=0;
+        $fireExit->status=$request->fire_exit_status;
         
         $fireHydrant = new stdClass();
         $fireHydrant->name='fire_hydrant';
         $fireHydrant->checked=$request->fire_hydrant;
-        $fireHydrant->status=0;
+        $fireHydrant->status=$request->fire_hydrant_status;
 
         $waterSource = new stdClass();
         $waterSource->name='water_source';
         $waterSource->checked=$request->water_source;
-        $waterSource->status=0;
+        $waterSource->status=$request->water_source_status;
 
         $protocols = new stdClass();
         $protocols->name='protocols';
         $protocols->checked=$request->protocols;
-        $protocols->status=0;
+        $protocols->status=$request->water_source_status;
 
         array_push($securityArray,$fireExit,$fireHydrant,$waterSource,$protocols);
         

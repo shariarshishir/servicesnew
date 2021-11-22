@@ -29,7 +29,7 @@ class WalfareController extends Controller
 
             $doctor = new stdClass();
             $doctor->name='doctor';
-            $doctor->checked=$request->social_work;
+            $doctor->checked=$request->doctor;
             $doctor->status=0;
 
             $maternityLeave = new stdClass();

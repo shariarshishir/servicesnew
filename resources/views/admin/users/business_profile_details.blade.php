@@ -451,9 +451,8 @@
 
 
 
-                        <div class="worker-welfare-and-csr">
-                            <h3>Worker welfare and CSR</h3>
-                            <div class="row">
+                            <div class="worker-welfare-and-csr">
+                                <h3>Worker welfare and CSR</h3>
                                 @if($business_profile->walfare)
                                 <div class="row">
                                     <form  method="POST" action="{{route('worker.walfare.verify')}}" >
@@ -495,11 +494,11 @@
                                             <input  name="day_care"   type="hidden" value="{{$walfareAndCsr->checked}}">
 
                                             <label class="">
-                                                <input  name="day_care_status" class="day-care--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
+                                                <input  name="day_care_status" class="day-care-verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
                                                 <span>Yes</span>
                                             </label>
                                             <label class="">
-                                                <input  name="day_care_status" class="day-care--verified" value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                                <input  name="day_care_status" class="day-care-verified" value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
                                                 <span>No</span>
                                             </label>
                                         </div>
@@ -510,11 +509,11 @@
                                             <input  name="playground"   type="hidden" value="{{$walfareAndCsr->checked}}">
 
                                             <label class="">
-                                                <input  name="playground_status" class="playground--verified"   type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
+                                                <input  name="playground_status" class="playground-verified"   type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
                                                 <span>Yes</span>
                                             </label>
                                             <label class="">
-                                                <input  name="playground_status"  class="playground--verified"  value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                                <input  name="playground_status"  class="playground-verified"  value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
                                                 <span>No</span>
                                             </label>
                                         </div>
@@ -555,20 +554,16 @@
                                     </form>
                                 </div>
                                 @else
-                                <div class="">
                                     <div class="">
                                         <p>INFO : No data found.</p>
                                     </div>
-                                </div>
                                 @endif
                             </div>
-                            
-                        </div>
-
+          
                         <div class="worker-security-and-others">
                             <h3>Worker Security and others</h3>
-                            <div class="row">
-                                @if($business_profile->securtiy)
+                                @if(isset($business_profile->security))
+
                                 <div class="row">
                                     <form  method="POST" action="{{route('worker.security.verify')}}" >
                                         @csrf
@@ -584,7 +579,7 @@
                                                     <span>Verify</span>
                                                 </label>
                                                 <label class="">
-                                                    <input class="" name="fire_hydrant_status" class="fire-exit-facility-unverified"    value="0" type="radio" {{  ($securityAndOther->status == "0" ? ' checked' : '') }}>
+                                                    <input class="" name="fire_exit_status" class="fire-exit-facility-unverified"    value="0" type="radio" {{  ($securityAndOther->status == "0" ? ' checked' : '') }}>
                                                     <span>Unverify</span>
                                                 </label>
                                             </div>
@@ -595,11 +590,11 @@
                                                 <input  name="fire_hydrant"   type="hidden" value="{{$securityAndOther->checked}}">
                                                 <label class="">
                                                     <input  name="fire_hydrant_status"  class="fire-hydrant-verified"  type="radio" value="1" {{  ($securityAndOther->status == "1" ? ' checked' : '') }}>
-                                                    <span>Yes</span>
+                                                    <span>Verify</span>
                                                 </label>
                                                 <label class="">
                                                     <input  name="fire_hydrant_status" class="fire-hydrant-verified"  value="0" type="radio" {{  ($securityAndOther->status == "0" ? ' checked' : '') }}>
-                                                    <span>No</span>
+                                                    <span>Unverify</span>
                                                 </label>
                                             </div>
                                             @endif
@@ -610,11 +605,11 @@
 
                                                 <label class="">
                                                     <input  name="water_source_status" class="water-source-verified" type="radio" value="1" {{  ($securityAndOther->status == "1" ? ' checked' : '') }} >
-                                                    <span>Yes</span>
+                                                    <span>Verify</span>
                                                 </label>
                                                 <label class="">
                                                     <input  name="water_source_status" class="water-source-verified" value="0" type="radio" {{  ($securityAndOther->status == "0" ? ' checked' : '') }}>
-                                                    <span>No</span>
+                                                    <span>Unverify</span>
                                                 </label>
                                             </div>
                                             @endif
@@ -625,11 +620,11 @@
 
                                                 <label class="">
                                                     <input  name="protocols_status" class="protocols-verified"   type="radio" value="1" {{  ($securityAndOther->status == "1" ? ' checked' : '') }}>
-                                                    <span>Yes</span>
+                                                    <span>Verify</span>
                                                 </label>
                                                 <label class="">
                                                     <input  name="protocols_status"  class="protocols-verified"  value="0" type="radio" {{  ($securityAndOther->status == "0" ? ' checked' : '') }}>
-                                                    <span>No</span>
+                                                    <span>Unerify</span>
                                                 </label>
                                             </div>
                                             @endif
@@ -646,7 +641,6 @@
                                     </div>
                                 </div>
                                 @endif
-                            </div>
                             
                         </div>
 

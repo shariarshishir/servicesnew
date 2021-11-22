@@ -348,7 +348,11 @@
 										<tr>
 											<td>{{str_replace('_', ' ', ucfirst($company_overview->name))}}</td>
 											<td class="{{$company_overview->name}}_value">{{$company_overview->value}}</td>
-											<td class="{{$company_overview->name}}_status">{{$company_overview->status}}</td>
+											@if($company_overview->status==1)
+											<td><i class="material-icons {{$company_overview->name}}_status" style="color:green">check_circle</i></td>
+											@else
+											<td><i class="material-icons {{$company_overview->name}}_status"style="color:gray">check_circle</i></td>
+											@endif
 										</tr>
 										@endforeach
 									</tbody>
@@ -382,7 +386,14 @@
 														<tr>
 															<td>{{$productionCapacity->machine_type}}</td>
 															<td>{{$productionCapacity->annual_capacity}}</td>
-															<td>{{$productionCapacity->status}}</td>
+															@if($productionCapacity->status==1)
+															<td><i class="material-icons" style="color:green">check_circle</i></td>
+															@else
+															<td><i class="material-icons "style="color:gray">check_circle</i></td>
+															@endif
+
+
+															
 														</tr>
 													@endforeach
 												@else
@@ -417,7 +428,11 @@
 													<tr>
 														<td>{{$categoriesProduced->type}}</td>
 														<td>{{$categoriesProduced->percentage}}</td>
-														<td>{{$categoriesProduced->status}}</td>
+														@if($categoriesProduced->status==1)
+														<td><i class="material-icons" style="color:green">check_circle</i></td>
+														@else
+														<td><i class="material-icons "style="color:gray">check_circle</i></td>
+														@endif
 													</tr>
 													@endforeach
 												@else
@@ -454,7 +469,11 @@
 											<tr>
 												<td>{{$machineriesDetail->machine_name}}</td>
 												<td>{{$machineriesDetail->quantity}}</td>
-												<td>{{$machineriesDetail->status}}</td>
+												@if($machineriesDetail->status==1)
+												<td><i class="material-icons" style="color:green">check_circle</i></td>
+												@else
+												<td><i class="material-icons "style="color:gray">check_circle</i></td>
+												@endif
 											</tr>
 											@endforeach
 										@else
@@ -497,7 +516,11 @@
 													<tr>
 														<td>{{$flowAndManpower->name}}</td>
 														<td>{{$flowAndManpower->value}}</td>
-														<td>{{$flowAndManpower->status}}</td>
+														@if($flowAndManpower->status==1)
+														<td><i class="material-icons" style="color:green">check_circle</i></td>
+														@else
+														<td><i class="material-icons "style="color:gray">check_circle</i></td>
+														@endif
 													</tr>
 													@endforeach
 													</table>
@@ -600,7 +623,11 @@
 											<tr>
 												<td>{{$businessTerm->title}}</td>
 												<td>{{$businessTerm->quantity}}</td>
-												<td>{{$businessTerm->status}}</td>
+												@if($businessTerm->status==1)
+												<td><i class="material-icons" style="color:green">check_circle</i></td>
+												@else
+												<td><i class="material-icons "style="color:gray">check_circle</i></td>
+												@endif
 											</tr>
 											@endforeach
 										@else
@@ -636,7 +663,11 @@
 												<tr>
 													<td>{{$sampling->title}}</td>
 													<td>{{$sampling->quantity}}</td>
-													<td>{{$sampling->status}}</td>
+													@if($sampling->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
 												</tr>
 												@endforeach
 											@else
@@ -671,7 +702,11 @@
 												@foreach($business_profile->specialCustomizations as $specialCustomization)
 												<tr>
 													<td>{{$specialCustomization->title}}</td>
-													<td>{{$specialCustomization->status}}</td>
+													@if($specialCustomization->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
 												</tr>
 												@endforeach
 											@else
@@ -703,12 +738,12 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Healthcare Facility</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="healthcare_facility"  class="health-facility-form-checked"  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
-										<span>Yes</span>
+											<input class="with-gap" name="healthcare_facility"  class="health-facility-checked" disabled  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
+											<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="healthcare_facility" class="health-facility-form-unchecked"    value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
-										<span>No</span>
+											<input class="with-gap" name="healthcare_facility" class="health-facility-unchecked"  disabled  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+											<span>No</span>
 										</label>
 							
 									</div>
@@ -717,11 +752,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">On sight Doctor</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="doctor"  class="doctor-form-checked"  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap" name="doctor"  class="doctor-checked"  type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="doctor" class="doctor-form-unchecked"  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="doctor" class="doctor-unchecked"  value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -730,11 +765,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6 ">On sight Day Care</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="day_care" class="day-care-from-checked" type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
+										<input class="with-gap" name="day_care" class="day-care-checked" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="day_care" class="day-care-from-unchecked" value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="day_care" class="day-care-unchecked" value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -748,11 +783,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Playground</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="playground" class="playground-form-checked"   type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap" name="playground" class="playground-checked"   type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="playground"  class="playground-form-unchecked"  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="playground"  class="playground-unchecked"  value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -761,11 +796,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Maternity Leave</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="maternity_leave" class="maternity-leave-form-checked" type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
+										<input class="with-gap" name="maternity_leave" class="maternity-leave-checked" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="maternity_leave" class="maternity-leave-form-unchecked" type="radio" value="0" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="maternity_leave" class="maternity-leave-unchecked" type="radio" value="0" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -774,11 +809,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Social work</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="social_work"  class="social-work-form-checked" type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
+										<input class="with-gap" name="social_work"  class="social-work-checked" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="social_work"  class="social-work-form-unchecked" type="radio" value="0" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }} >
+										<input class="with-gap" name="social_work"  class="social-work-unchecked" type="radio" value="0" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }} >
 										<span>No</span>
 										</label>
 									</div>
@@ -790,33 +825,33 @@
 								<div class="welfare_box row">
 									<span class="title col s8 m6 l6">Healthcare Facility</span>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="healthcare_facility"  class="health-facility-form-checked"  type="radio" value="1" checked="">
+									<input class="with-gap" name="healthcare_facility"  class="health-facility-checked"  type="radio" value="1" checked="" disabled>
 									<span>Yes</span>
 									</label>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="healthcare_facility" class="health-facility-form-unchecked"    value="0" type="radio">
+									<input class="with-gap" name="healthcare_facility" class="health-facility-unchecked"  disabled  value="0" type="radio" disabled>
 									<span>No</span>
 									</label>
 								</div>
 								<div class="welfare_box row">
 									<span class="title col s8 m6 l6">On sight Doctor</span>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="doctor"  class="doctor-form-checked"  type="radio" value="1" checked="">
+									<input class="with-gap" name="doctor"  class="doctor-checked"  type="radio" value="1" checked="" disabled>
 									<span>Yes</span>
 									</label>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="doctor" class="doctor-form-unchecked"  value="0" type="radio">
+									<input class="with-gap" name="doctor" class="doctor-unchecked"  value="0" type="radio" disabled>
 									<span>No</span>
 									</label>
 								</div>
 								<div class="welfare_box row">
 									<span class="title col s8 m6 l6 ">On sight Day Care</span>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="day_care" class="day-care-from-checked" type="radio" value="1" checked="">
+									<input class="with-gap" name="day_care" class="day-care-checked" type="radio" value="1" checked="" disabled>
 									<span>Yes</span>
 									</label>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="day_care" class="day-care-from-unchecked" value="0" type="radio">
+									<input class="with-gap" name="day_care" class="day-care-unchecked" value="0" type="radio" disabled>
 									<span>No</span>
 									</label>
 								</div>
@@ -825,33 +860,33 @@
 								<div class="welfare_box row">
 									<span class="title col s8 m6 l6">Playground</span>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="playground" class="playground-form-checked"   type="radio" value="1" checked="">
+									<input class="with-gap" name="playground" class="playground-checked"   type="radio" value="1" checked="" disabled>
 									<span>Yes</span>
 									</label>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="playground"  class="playground-form-unchecked"  value="0" type="radio">
+									<input class="with-gap" name="playground"  class="playground-unchecked"  value="0" type="radio" disabled>
 									<span>No</span>
 									</label>
 								</div>
 								<div class="welfare_box row">
 									<span class="title col s8 m6 l6">Maternity Leave</span>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="maternity_leave" class="maternity-leave-form-checked" type="radio" value="1" checked="">
+									<input class="with-gap" name="maternity_leave" class="maternity-leave-checked" type="radio" value="1" checked="" disabled>
 									<span>Yes</span>
 									</label>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="maternity_leave" class="maternity-leave-form-unchecked" type="radio" value="0">
+									<input class="with-gap" name="maternity_leave" class="maternity-leave-unchecked" type="radio" value="0" disabled>
 									<span>No</span>
 									</label>
 								</div>
 								<div class="welfare_box row">
 									<span class="title col s8 m6 l6">Social work</span>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="social_work"  class="social-work-form-checked" type="radio" value="1" checked="">
+									<input class="with-gap" name="social_work"  class="social-work-checked" type="radio" value="1" checked="" disabled>
 									<span>Yes</span>
 									</label>
 									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="social_work"  class="social-work-form-unchecked" type="radio" value="0" >
+									<input class="with-gap" name="social_work"  class="social-work-unchecked" type="radio" value="0"disabled >
 									<span>No</span>
 									</label>
 								</div>
@@ -872,11 +907,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Fire Exit</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire_exit"  class="fire-exit-form-checked"  type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap" name="fire_exit"  class="fire-exit-checked"  type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }} disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire_exit" class="fire-exit-form-unchecked"    value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} >
+										<input class="with-gap" name="fire_exit" class="fire-exit-unchecked"    value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} disabled>
 										<span>No</span>
 										</label>
 							
@@ -886,11 +921,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">On sight Fire Hydrant</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire_hydrant"  class="fire-hydrant-checked"  type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap" name="fire_hydrant"  class="fire-hydrant-checked"  type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }} disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire_hydrant" class="fire-hydrant-unchecked"  value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="fire_hydrant" class="fire-hydrant-unchecked"  value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} disabled>
 										<span>No</span>
 										</label>
 									</div>
@@ -899,11 +934,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6 ">Onsight water source</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="water_source" class="water-source-from-checked" type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }} >
+										<input class="with-gap" name="water_source" class="water-source-checked" type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }} disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="water_source" class="water-source-from-unchecked" value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="water_source" class="water-source-unchecked" value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} disabled>
 										<span>No</span>
 										</label>
 									</div>
@@ -917,11 +952,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Other protocols</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="protocols" class="protocols-form-checked"   type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap" name="protocols" class="protocols-checked"   type="radio" value="1" {{  ($securityAndOther->checked == "1" ? ' checked' : '') }} disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="protocols"  class="protocols-form-unchecked"  value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap" name="protocols"  class="protocols-unchecked"  value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} disabled>
 										<span>No</span>
 										</label>
 									</div>
@@ -933,33 +968,33 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Fire Exit</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire-exit" class="fire-exit-form-checked"   type="radio" value="1" checked="">
+										<input class="with-gap" name="fire-exit" class="fire-exit-checked"   type="radio" value="1" checked="" disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire-exit" class="fire-exit-form-unchecked"   type="radio" value="0">
+										<input class="with-gap" name="fire-exit" class="fire-exit-unchecked"   type="radio" value="0" disabled>
 										<span>No</span>
 										</label>
 									</div>
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">On sight Fire Hydrant</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="fire-hydrant" class="fire-hydrant-form-checked"   type="radio" value="1" checked="">
+										<input class="with-gap" name="fire-hydrant" class="fire-hydrant-checked"   type="radio" value="1" checked="" disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap"  name="fire-hydrant" class="fire-hydrant-form-unchecked"   type="radio" value="0" >
+										<input class="with-gap"  name="fire-hydrant" class="fire-hydrant-unchecked"   type="radio" value="0" disabled>
 										<span>No</span>
 										</label>
 									</div>
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Onsight water source</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap"  name="water-source" class="water-source-form-checked"   type="radio" value="1"  checked="">
+										<input class="with-gap"  name="water-source" class="water-source-checked"   type="radio" value="1"  checked="" disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="water-source" class="water-source-form-unchecked"   type="radio" value="0" >
+										<input class="with-gap" name="water-source" class="water-source-unchecked"   type="radio" value="0" disabled>
 										<span>No</span>
 										</label>
 									</div>
@@ -968,11 +1003,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Other protocols</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="protocols" id="protocols-form-checked"   type="radio" value="1" checked="">
+										<input class="with-gap" name="protocols" class="protocols-checked"   type="radio" value="1" checked="" disabled>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="protocols" id="protocols-form-unchecked"   type="radio" value="0" >
+										<input class="with-gap" name="protocols" class="protocols-unchecked"   type="radio" value="0" disabled>
 										<span>No</span>
 										</label>
 									</div>
@@ -996,7 +1031,11 @@
 												@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
 												<tr>
 													<td>{{$sustainabilityCommitment->title}}</td>
-													<td>{{$sustainabilityCommitment->status}}</td>
+													@if($sustainabilityCommitment->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
 												</tr>
 												@endforeach
 											@else

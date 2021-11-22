@@ -695,6 +695,8 @@
         $('.remove-certificate').show();
     });
 
+
+    //delete certification 
     $(document).on('click', '.remove-certificate',function(e)
     {
         e.preventDefault();
@@ -732,6 +734,9 @@
                                         $('.certifications-block').append(html);
                                     }
                                 }
+                                else{
+                                    $('.certifications-block').html(nohtml);
+                                }
                                 $('#certification-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
                             },
@@ -767,10 +772,6 @@
     }
 
     //submit form for main buyers details
-
-
-
-
 
     $('#main-buyer-upload-form').on('submit',function(e){
     e.preventDefault();
@@ -833,7 +834,7 @@
         $('.remove-main-buyer').show();
     });
 
-
+     //delete main buyer from list
     $(document).on('click', '.remove-main-buyer',function(e)
     {
         e.preventDefault();
@@ -871,6 +872,9 @@
                                         html +='</div>';
                                         $('.main-buyers-block').append(html);
                                     }
+                                }
+                                else{
+                                    $('.main-buyers-block').html(nohtml);
                                 }
                                 $('#main-buyers-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1008,6 +1012,9 @@
                                         $('.export-destination-block').append(html);
                                     }
                                 }
+                                else{
+                                    $('.export-destination-block').html(nohtml);
+                                }
                                 $('#export-destination-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
                             },
@@ -1109,7 +1116,7 @@
         $('.remove-association-membership').show();
     });
 
-
+    //delete association membership
     $(document).on('click', '.remove-association-membership',function(e)
     {
         e.preventDefault();
@@ -1132,6 +1139,7 @@
                         data:{id:id},
                         success:function(response)
                             {
+
                                 var associationMemberships=response.associationMemberships;
                                 console.log(associationMemberships);
                                 var nohtml="";
@@ -1147,6 +1155,9 @@
                                         html +='</div>';
                                         $('.association-membership-block').append(html);
                                     }
+                                }
+                                else{
+                                    $('.association-membership-block').html(nohtml);
                                 }
                                 $('#association-membership-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1184,7 +1195,8 @@
     {
         $(el).parent().parent().remove();
     }
-
+    
+    //remove press highlight
     $('#press-highlight-upload-form').on('submit',function(e){
     e.preventDefault();
     var url = '{{ route("presshighlights.upload") }}';
@@ -1221,6 +1233,10 @@
                 $('.press-highlight-block').append(html);
 
             }
+        }
+        else{
+            $('.press-highlight-block').html(nohtml);
+
         }
         
         $('#press-highlight-upload-form-modal').modal('close');
@@ -1635,26 +1651,26 @@
                             $('input[name=fire_exit][value=1]').attr('checked', true); 
                     }
                     else if(this.value == 0 && this.name == 'fire_exit'){
-                        $('fire-exit-form-unchecked').attr('checked', true);
+                        $('.fire-exit-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'fire_hydrant'){
                         $('input[name=fire_hydrant][value=1]').attr('checked', true);
                     
                     }
                     else if(this.value == 0 && this.name == 'fire_hydrant'){
-                        $('fire-hydrant-form-unchecked').attr('checked', true);
+                        $('.fire-hydrant-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'water_source'){
                            $('input[name=water_source][value=1]').attr('checked', true);
                     }
                     else if(this.value == 0 && this.name == 'water_source'){
-                        $('water-source-form-unchecked').attr('checked', true);
+                        $('.water-source-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'protocols'){
                            $('input[name=protocols][value=1]').attr('checked', true);
                     }
                     else if(this.value == 0 && this.name == 'protocols'){
-                        $('protocols-form-unchecked').attr('checked', true);
+                        $('.protocols-unchecked').attr('checked','checked');
                     }
                     
                 });

@@ -471,6 +471,9 @@ class UserController extends Controller
     public function verifyUserFromManufacture(Request $request){
 
         $user = User::where('email',$request->email)->first();
+        if($user->is_email_verified == 1){
+            return response()->json(['message' => 'already this email varified']);
+        }
         if( $user ){
              $user->is_email_verified = 1;
              $user->save();
@@ -481,7 +484,24 @@ class UserController extends Controller
         }
 
     }
+    //email verify
+    public function emailVerify(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+        ]);
+        $user = User::where('email',$request->email)->first();
+        if(!$user){
+            return response()->json(['message'=>'user not exists'],404);
+        }
+        if($user->is_email_verified == 1){
+            return response()->json(['message' => 'already this email have varified'],409);
+        }
+        $user->is_email_verified = 1;
+        $user->save();
+        return response()->json(['message'=>'user verified successfully'],200);
 
+    }
     // user registration from sso
     public function signUp(Request $request)
     {
@@ -489,53 +509,41 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'user_type' => 'required',
+            // 'user_type' => 'required',
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
         ]);
-
+        $checkExistingUser=User::Where('email', $request->email)->first();
+        if($checkExistingUser){
+            return response()->json('user already exists', 403);
+        }
         $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
         $user = User::create([
             'user_id'=>$user_id,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type' => $request->user_type == 'buyer' ? 'buyer' : 'wholesaler',
+            'user_type' => 'buyer',
             'sso_reference_id' =>$request->sso_reference_id,
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
             'phone'     => $request->phone,
+            'company_name' => $request->company_name,
         ]);
 
-        //After creating user will create vendor as weel as
-        $date=Carbon::today()->toDateString();
-        $date=Carbon::parse($date)->format('dmY');
-        $number=mt_rand(0,9999999);
-        $name= Str::slug($request->company_name,'-');
-        $vendorUId='mbs-'.$name.'-'.$date.$number;
+       if($request->user_flag == 'service'){
 
-        Vendor::create([
-            'user_id'=>$user->id,
-            'vendor_uid' => $vendorUId,
-            'vendor_name' => $request->company_name,
-            'created_by'=>$user->id,
-            'updated_by'=>NULL,
-        ]);
+            $token = Str::random(64);
+            UserVerify::create([
+                'user_id' => $user->id,
+                'token' => $token
+            ]);
+            event(new NewUserHasRegisteredEvent($user, $token));
+       }
 
-        event(new NewUserHasRegisteredEvent($user));
-        $token = Str::random(64);
-        UserVerify::create([
-            'user_id' => $user->id,
-            'token' => $token
-          ]);
 
-        Mail::send('emails.emailVerificationEmail', ['token' => $token, 'user' => $user], function($message) use($request){
-            $message->to($request->email);
-            $message->subject('Welcome to merchant Bay Ltd');
-        });
-
-        return response()->json(['msg' => 'successful'], 200);
+        return response()->json(['msg' => 'user created successfully'], 200);
     }
 
 

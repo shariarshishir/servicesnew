@@ -230,7 +230,7 @@ Route::group(['prefix'=>'/user'],function (){
     Route::post('/register', [UserController::class, 'create'])->name('users.create');
     Route::post('/login', [UserController::class, 'login'])->name('users.login');
     Route::get('/login', [UserController::class, 'showLoginForm'])->name('users.showLoginForm');
-    Route::get('/login-from-sso', [UserController::class, 'showSSOLoginForm'])->name('users.showSSOLoginForm');
+    Route::get('/login-from-sso', [UserController::class, 'loginFromSso'])->name('user.login.from.sso');
     Route::get('/verify/{token}', [UserController::class, 'verifyAccount'])->name('user.verify');
     Route::get('/unverified', [UserController::class, 'unverifiedAccount'])->name('user.unverify');
     Route::get('/profile', [UserController::class, 'profile'])->name('users.profile')->middleware(['auth', 'is_verify_email','sso.verified']);

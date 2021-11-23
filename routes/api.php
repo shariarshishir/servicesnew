@@ -41,6 +41,7 @@ Route::post('/login', [UserController::class, 'login']);
 //email verification api
 Route::get('user/{userId}/verify/{token}', [UserController::class, 'verifyAccount']);
 Route::post('/verify-user-from-manufacture',[UserController::class, 'verifyUserFromManufacture']);
+Route::get('/email/verify',[UserController::class, 'emailVerify']);
 //api with authentication
 
 

@@ -180,7 +180,7 @@ class UserController extends Controller
 
         //After registration an email will send to mechant bay
 
-        event(new NewUserHasRegisteredEvent($user));
+        //event(new NewUserHasRegisteredEvent($user));
         $token = Str::random(64);
         UserVerify::create([
             'user_id' => $user->id,
@@ -220,7 +220,10 @@ class UserController extends Controller
             if(!$user->is_email_verified) {
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
-                $response = Http::get( $manufacture_base_url.'/api/verify', ['email' => $user->email]);
+                $response_manufacture = Http::get( $manufacture_base_url.'/api/verify', ['email' => $user->email]);
+                $response_shop = Http::post( env('SHOP_BASE_URL').'/verify-user-from-manufacture', ['email' => $user->email]);
+                Auth::login($user);
+                return redirect()->route('users.profile');
                 $message = "Your email have been verified successfully. Please Click here to login";
             } else {
                 $message = "Your email have been verified successfully.";
@@ -326,7 +329,7 @@ class UserController extends Controller
         return view('auth.login');
     }
     //user login from sso
-    public function showSSOLoginForm(Request $request)
+    public function loginFromSso(Request $request)
     {
         if(!isset($request->token)){
             abort(404);
@@ -348,7 +351,6 @@ class UserController extends Controller
         $current=strtotime(date('d.m.Y H:i:s'));
         $totalSecondsDiff = abs($get_time-$current);
         $totalMinutesDiff = $totalSecondsDiff/60;
-
         //check user exists
         $user=User::where('email', $email)->first();
         if(!$user){
@@ -440,24 +442,26 @@ class UserController extends Controller
 
 
         $countries=Country::all();
-        $productFeatured=Product::where('vendor_id',$user->vendor->id)->where('is_featured',1)->where('state',1)->paginate(5);
+        //$productFeatured=Product::where('vendor_id',$user->vendor->id)->where('is_featured',1)->where('state',1)->paginate(5);
         // //check whether vendor's all  information exist or not
-        if($user->user_type=='wholesaler'){
-            if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees && $user->vendor->vendor_mainproduct && $user->vendor->vendor_yearest){
-                $flag=1;
-            }
-            else{
-                $flag=0;
-            }
-        }
-        else{
-            if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees  && $user->vendor->vendor_yearest){
-                $flag=1;
-            }
-            else{
-                $flag=0;
-            }
-        }
+        // if($user->user_type=='wholesaler'){
+        //     if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees && $user->vendor->vendor_mainproduct && $user->vendor->vendor_yearest){
+        //         $flag=1;
+        //     }
+        //     else{
+        //         $flag=0;
+        //     }
+        // }
+        // else{
+        //     if($user->vendor->vendor_name && $user->vendor->vendor_ownername && $user->vendor->vendor_address && $user->vendor->vendor_type && $user->vendor->vendor_country &&$user->vendor->vendor_totalemployees  && $user->vendor->vendor_yearest){
+        //         $flag=1;
+        //     }
+        //     else{
+        //         $flag=0;
+        //     }
+        // }
+
+        $flag=1;
 
         $notifications = auth()->user()->unreadNotifications;
        // dd($notifications);
@@ -491,7 +495,7 @@ class UserController extends Controller
             }
         }
 
-        return view('user.profile.index',compact('user','countries','flag','orderModificationRequestIds','orderIds','productFeatured','orderQueryProcessedIds','businessProfiles'));
+        return view('user.profile.index',compact('user','countries','flag','orderModificationRequestIds','orderIds','orderQueryProcessedIds','businessProfiles'));
     }
 
 
@@ -845,25 +849,11 @@ class UserController extends Controller
            'name' => $data->name,
            'email' => $data->email,
            'password' => Hash::make($data->password),
-           'user_type' => $data->user_type == 'buyer' ? 'buyer' : 'wholesaler',
+           'user_type' => 'buyer',
            'sso_reference_id' =>$data->sso_reference_id,
            'phone'     => $data->phone ?? null,
+           'company_name' => $data->company_name,
            'is_email_verified' => 1,
-       ]);
-
-       //After creating user will create vendor as weel as
-       $date=Carbon::today()->toDateString();
-       $date=Carbon::parse($date)->format('dmY');
-       $number=mt_rand(0,9999999);
-       $name= Str::slug($data->company_name,'-');
-       $vendorUId='mbs-'.$name.'-'.$date.$number;
-
-       Vendor::create([
-           'user_id'=>$user->id,
-           'vendor_uid' => $vendorUId,
-           'vendor_name' => $data->company_name,
-           'created_by'=>$user->id,
-           'updated_by'=>NULL,
        ]);
 
    }

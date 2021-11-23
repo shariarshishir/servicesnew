@@ -1,13 +1,14 @@
-<div id="worker-walfare-modal" class="modal">
+<div id="worker-walfare-modal" class="modal profile_form_modal">
 <div class="modal-content">
 	<div id="worker-walfare-modal-errors">
 	</div>
 	<form  method="post" action="#" id="worker-walfare-form">
+		<label>Create Worker welfare and CSR</label>
 		@csrf
 		<input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
 		@if($business_profile->walfare)
 		<div class="row">
-            <div class="col s12 m6 l7">
+            <div class="col s12 m6 l6">
                 @foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
                     @if($walfareAndCsr->name == 'healthcare_facility')
                     <div class="welfare_box row">
@@ -52,7 +53,7 @@
                 @endforeach
             </div>
 
-            <div class="col s12 m6 l5">
+            <div class="col s12 m6 l6">
                 @foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
                 @if($walfareAndCsr->name == 'playground')
                 <div class="welfare_box row">
@@ -171,12 +172,14 @@
             </div>
         </div>
         @endif
-		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-		<i class="material-icons right">send</i>
-		</button>
+        <div class="center-align submit_btn_wrap">
+            <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+		</div>
 	</form>
 	<div class="modal-footer">
-		<a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
 	</div>
 </div>
 </div>

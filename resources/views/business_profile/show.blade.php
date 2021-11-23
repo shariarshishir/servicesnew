@@ -437,7 +437,7 @@
 													@endforeach
 												@else
 													<tr>
-														<td>
+														<td colspan="3">
 															<div class="card-alert card cyan lighten-5">
 																<div class="card-content cyan-text">
 																	<p>INFO : No data found.</p>
@@ -478,7 +478,7 @@
 											@endforeach
 										@else
 											<tr>
-												<td>
+												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
@@ -501,7 +501,7 @@
 								</div>
 							</div>
 
-							<div class="production-flow-and-manpower-table-wrapper box_shadow">
+							<div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">
 								<table class="production-flow-and-manpower-table" style="width:100%">
 									<tbody class="production-flow-and-manpower-table-body">
 										<!-- Html will comes from script -->
@@ -529,7 +529,7 @@
 											@endforeach
 										@else
 											<tr>
-												<td>
+												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
@@ -554,9 +554,11 @@
 							</div>
 							<div class="row certifications-block">
 								@foreach($business_profile->certifications as $certification)
-								<div class="col m3 l3 certificate_img">
-									<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
-									<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+								<div class="col m3 l3">
+									<div class="certificate_img">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+									</div>
 								</div>
 								@endforeach
 							</div>
@@ -573,10 +575,12 @@
 							</div>
 							<div class="buyers_logo_wrap row main-buyers-block">
 								@foreach($business_profile->mainBuyers as $mainBuyers)
-								<div class="col s6 m4 l3 main_buyer_img">
-									<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
-									<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
-									<h5>{{$mainBuyers->title}}</h5>
+								<div class="col s6 m4 l3">
+									<div class="main_buyer_img">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
+										<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+										<h5>{{$mainBuyers->title}}</h5>
+									</div>
 								</div>
 								@endforeach
 							</div>
@@ -593,6 +597,20 @@
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
+								<div class="flagBox export-destination-block">
+									@foreach($business_profile->exportDestinations as $exportDestination)
+									<div class="col s6 m4 l2">
+										<div class="flag_img export-destination-img">
+											<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+											<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+										</div>
+										<h5>{{$exportDestination->title}}</h5>
+									</div>
+									@endforeach
+								</div>
+							</div>
+
+							<!-- <div class="row flag_wrap center-align">
 								<div class="col s6 m4 l2 flagBox export-destination-block">
 								@foreach($business_profile->exportDestinations as $exportDestination)
 									<div class="flag_img export-destination-img">
@@ -602,8 +620,8 @@
 									<h5>{{$exportDestination->title}}</h5>
 								@endforeach
 								</div>
+							</div> -->
 							
-							</div>
 						</div>
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
@@ -632,7 +650,7 @@
 											@endforeach
 										@else
 											<tr>
-												<td>
+												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
@@ -672,7 +690,7 @@
 												@endforeach
 											@else
 											<tr>
-												<td>
+												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
@@ -711,7 +729,7 @@
 												@endforeach
 											@else
 											<tr>
-												<td>
+												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
@@ -727,10 +745,15 @@
 						</div>
 						<div class="worker_welfare_wrap">
 							<div class="row worker_welfare_box">
-								<h3>Worker welfare and CSR</h3>
-								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+								<div class="row top_titleWrap">
+									<div class="col s6 m6">
+										<h3>Worker welfare and CSR</h3>
+									</div>
+									<div class="col s6 m6 right-align editBox">
+										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									</div>
 								</div>
+
 								@if($business_profile->walfare)
 								<div class="col s12 m6 l7">
 									@foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
@@ -896,10 +919,15 @@
 
 								
 							<div class="row worker_welfare_box">
-								<h3>Security and others</h3>
-								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+								<div class="row top_titleWrap">
+									<div class="col s6 m6">
+										<h3>Security and others</h3>
+									</div>
+									<div class="col s6 m6 right-align editBox">
+										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									</div>
 								</div>
+
 								@if($business_profile->security)
 								<div class="col s12 m6 l7">
 								    @foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
@@ -1040,7 +1068,7 @@
 												@endforeach
 											@else
 											<tr>
-												<td>
+												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
@@ -1067,9 +1095,9 @@
 							<div class="row membership_textBox association-membership-block">
 							    @foreach($business_profile->associationMemberships as $associationMembership)
 								<div class="col s12 m6 l5 center-align association-membership-img">
-										<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
-										<img  src="{{ asset('storage/'.$associationMembership->image) }}" alt="">
-										<p>{{$associationMembership->title}}</p>
+									<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
+									<p>{{$associationMembership->title}}</p>
 								</div>
 								@endforeach
 							</div>
@@ -1087,9 +1115,10 @@
 							<div class="row press-highlight-block">
 							@foreach($business_profile->pressHighlights as $pressHighlight)
 								<div class="col s6 m4 l2 paper_img press-highlight-img">
-								<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<div class="press_img">
 										<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
-									</a>
+									</div>
 								</div>
 							@endforeach
 								

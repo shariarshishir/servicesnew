@@ -12,9 +12,11 @@ class NewUserRegistrationMailToUser extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
-    public function __construct($user)
+    public $token;
+    public function __construct($user, $token)
     {
         $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -24,6 +26,6 @@ class NewUserRegistrationMailToUser extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.new-user-to-user')->subject('Welcome to merchant Bay Ltd')->with('user',$this->user);
+        return $this->markdown('emails.emailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token]);
     }
 }

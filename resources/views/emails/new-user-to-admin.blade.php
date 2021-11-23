@@ -15,9 +15,9 @@
                 <p style="font-family:verdana;font-size:13px;margin:0px;color:#000;line-height:normal;">A new user is registered to Merchant Bay Shop.</p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;">User type: {{ $user->user_type }}</p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;">User name: {{ $user->name }}</p>
-                <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;">Business name: {{ $user->vendor->vendor_name }}</p>
+                <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;">Business name: {{ $user->company_name }}</p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;line-height:normal;">......</p>
-                <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Contact: <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>. Call:{{ $user->phone }}. Address: {{ $user->vendor->vendor_address }} </p>
+                <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Contact: <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>. Call:{{ $user->phone }} </p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Thank you</p>
             </td>
         </tr>

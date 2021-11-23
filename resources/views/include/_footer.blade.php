@@ -96,7 +96,7 @@
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>
                     {{-- Want to be a <a href="{{route('user.register', 'buyer')}}">Buyer</a> or <a href="{{route('user.register', 'wholesaler')}}">Wholesaler</a> --}}
-                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=shop'}}" > Click here to Register</a>
+                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}" > Click here to Register</a>
                 </div>
             </div>
             <div class="col m6 login-block">

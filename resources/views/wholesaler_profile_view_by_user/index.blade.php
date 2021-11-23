@@ -473,7 +473,7 @@
 								</div>
 							</div>
 
-							<div class="production-flow-and-manpower-table-wrapper box_shadow">
+							<div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">
 								<table class="production-flow-and-manpower-table" style="width:100%">
 									<tbody class="production-flow-and-manpower-table-body">
 										<!-- Html will comes from script -->

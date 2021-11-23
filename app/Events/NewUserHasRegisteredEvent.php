@@ -15,10 +15,12 @@ class NewUserHasRegisteredEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public  $user;
-    public function __construct($user)
+    public  $token;
+    public function __construct($user, $token)
     {
 
         $this->user=$user;
+        $this->token=$token;
     }
 
     public function broadcastOn()

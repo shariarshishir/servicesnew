@@ -7,7 +7,8 @@
 <section class="bannerwrap">
 	<div class="banner_slider">
 		<div class="banner_inner">
-			<h2>Search with Trust</h2>
+			<h2>Apparel Sourcing Made Easy</h2>
+			<h3>Find Ready Products, Designs, Raw Materials, Manufacturers</h3>
 			<div class="banner_search">
 
 				@php
@@ -32,7 +33,7 @@
 				</div>
 				
 			</div>
-			<span class="search_verified">Search with trust from the largest verified supplier database of Bangladesh.</span>
+			<span class="search_verified">Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc.</span>
 		</div>
 	</div>
 </section>

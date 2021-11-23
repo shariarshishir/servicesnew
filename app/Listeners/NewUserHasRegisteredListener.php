@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUserRegistrationMailToUser;
 
 
-class NewUserHasRegisteredListener
+class NewUserHasRegisteredListener implements ShouldQueue
 {
 
     public function handle($event)
@@ -20,7 +20,7 @@ class NewUserHasRegisteredListener
         //mail to admin
         Mail::to('success@merchantbay.com')->send(new NewUserRegistrationMail($event->user));
         //mail to user
-        //Mail::to($user->email)->send(new NewUserRegistrationMailToUser($user));
+        Mail::to($event->user->email)->send(new NewUserRegistrationMailToUser($event->user, $event->token));
 
     }
 }

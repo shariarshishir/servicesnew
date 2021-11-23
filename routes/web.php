@@ -25,6 +25,7 @@ use App\Http\Controllers\ExportDestinationController;
 use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\SamplingController;
 use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
@@ -62,6 +63,9 @@ use App\Http\Controllers\Wholesaler\ProfileInfoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//excel,csv user import
+Route::get('import',[ImportController::class, 'importView'])->name('import.view');
+Route::post('import',[ImportController::class, 'import'])->name('import');
 
 // Frontend API's endpoint start
 Auth::routes();
@@ -70,11 +74,15 @@ Route::get('/products', [HomeController::class, 'productList'])->name('products'
 Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name('readystockproducts');
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
 Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
+Route::get('/low-moq', [HomeController::class, 'lowMoq'])->name('low.moq');
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
 Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
+
+//low moq details
+Route::get('prodcut/details/{flag}/{id}',[HomeController::class, 'mixProductDetails'])->name('mix.product.details');
 
 Route::get('/products/{slug}', [HomeController::class, 'productsByCategory'])->name('categories.product');
 Route::get('/products/{category}/{subcategory}', [HomeController::class, 'productsBySubCategory'])->name('subcategories.product');
@@ -162,16 +170,16 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
     Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
-    
+
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
-    
+
     Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate'])->name('business-terms.create-or-update');
     Route::post('/sampling-create-or-update', [SamplingController::class, 'samplingCreateOrUpdate'])->name('sampling.create-or-update');
     Route::post('/special-customization-create-or-update', [SpecialCustomizationController::class, 'specialCustomizationCreateOrUpdate'])->name('specialcustomizations.create-or-update');
     Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate'])->name('sustainabilitycommitments.create-or-update');
     Route::post('/worker-walfare-form-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate'])->name('walfare.create-or-update');
     Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate'])->name('security.create-or-update');
-   
+
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 
@@ -181,7 +189,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/export-destination-details-upload', [ExportDestinationController::class, 'exportDestinationDetailsUpload'])->name('exportdestinations.upload');
     Route::get('/export-destination-details-delete', [ExportDestinationController::class, 'deleteExportDestination'])->name('exportdestinations.delete');
 
-    
+
     Route::post('/association-membership-details-upload', [AssociationMembershipController::class, 'associationMembershipDetailsUpload'])->name('associationmemberships.upload');
     Route::get('/association-membership-details-delete', [AssociationMembershipController::class, 'deleteAssociationMembership'])->name('associationmemberships.delete');
 
@@ -226,7 +234,7 @@ Route::group(['prefix'=>'/user'],function (){
     Route::post('/register', [UserController::class, 'create'])->name('users.create');
     Route::post('/login', [UserController::class, 'login'])->name('users.login');
     Route::get('/login', [UserController::class, 'showLoginForm'])->name('users.showLoginForm');
-    Route::get('/login-from-sso', [UserController::class, 'showSSOLoginForm'])->name('users.showSSOLoginForm');
+    Route::get('/login-from-sso', [UserController::class, 'loginFromSso'])->name('user.login.from.sso');
     Route::get('/verify/{token}', [UserController::class, 'verifyAccount'])->name('user.verify');
     Route::get('/unverified', [UserController::class, 'unverifiedAccount'])->name('user.unverify');
     Route::get('/profile', [UserController::class, 'profile'])->name('users.profile')->middleware(['auth', 'is_verify_email','sso.verified']);

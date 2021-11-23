@@ -49,6 +49,7 @@ use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
+use App\Http\Controllers\Wholesaler\ProfileInfoController;
 
 
 /*
@@ -191,6 +192,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
         //product
+        Route::get('/profile/show/{id}', [ProfileInfoController::class, 'show'])->name('wholesaler.profile.show');
         Route::get('/product/{business_profile_id}', [WholesalerProductController::class, 'index'])->name('wholesaler.product.index');
         Route::post('/product/store', [WholesalerProductController::class, 'store'])->name('wholesaler.product.store');
         Route::get('/product/edit/{sku}', [WholesalerProductController::class, 'edit'])->name('wholesaler.product.edit');
@@ -200,6 +202,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
         Route::get('order/{business_profile_id}',[WholesalerOrderController::class, 'index'])->name('wholesaler.order.index');
         Route::get('order-delivered/{orderNumber}',[WholesalerOrderController::class, 'orderDelivered']);
         Route::get('order-type-filter', [WholesalerOrderController::class, 'orderTypeFilter'])->name('wholesaler.order.type.filter');
+        //profile info
+        Route::get('profile-details/{business_profile_id}',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
 
     });
     //tinymc

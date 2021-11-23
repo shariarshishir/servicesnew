@@ -29,7 +29,11 @@
                         @endswitch
                     </p>
                     <p><span>Location:</span> {{$profile->location}}</p>
+                    @if($profile->business_type==1)
                     <a class="business_view" href="{{route('business.profile.show',$profile->id)}}">View Details</a>
+                    @else
+                    <a class="business_view" href="{{route('wholesaler.profile.show',$profile->id)}}">View Details</a>
+                    @endif
                 </div>
             </div>
             @endforeach

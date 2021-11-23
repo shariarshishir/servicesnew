@@ -16,11 +16,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            //return route('login');
-           return 'http://dev.accounts.merchantbay.com/login';
-
-
-
+            return route('login');
         }
     }
 }

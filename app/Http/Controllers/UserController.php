@@ -213,15 +213,14 @@ class UserController extends Controller
         $verifyUser = UserVerify::where('token', $token)->first();
 
         $message = 'Sorry your email cannot be identified.';
-        $manufacture_base_url=env('MANUFACTURE_BASE_URL');
-
+        // $manufacture_base_url=env('MANUFACTURE_BASE_URL');
         if(!is_null($verifyUser) ){
             $user = $verifyUser->user;
             if(!$user->is_email_verified) {
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
-                $response_manufacture = Http::get( $manufacture_base_url.'/api/verify', ['email' => $user->email]);
-                $response_shop = Http::post( env('SHOP_BASE_URL').'/verify-user-from-manufacture', ['email' => $user->email]);
+                // $response_manufacture = Http::get( $manufacture_base_url.'/api/verify', ['email' => $user->email]);
+                // $response_shop = Http::post( env('SHOP_BASE_URL').'/verify-user-from-manufacture', ['email' => $user->email]);
                 Auth::login($user);
                 return redirect()->route('users.profile');
                 $message = "Your email have been verified successfully. Please Click here to login";

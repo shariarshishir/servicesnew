@@ -938,15 +938,17 @@
         var nohtml="";
         if(exportDestinations.length >0){
             $('.export-destination-block').html(nohtml);
-          
+
             for(let i = 0;i < exportDestinations.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
+                html +='<div class="col s6 m4 l2">';
                 html +='<div class="flag_img export-destination-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<img src="'+image+'" alt="">';
                 html +='</div>';
                 html +='<h5>'+exportDestinations[i].title+'</h5>';
+                html +='</div>';
                 $('.export-destination-block').append(html);
             }
         }
@@ -1004,11 +1006,13 @@
                                     for(let i = 0;i < exportDestinations.length ;i++){
                                         var html='';
                                         var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
+                                        html +='<div class="col s6 m4 l2">';
                                         html +='<div class="flag_img export-destination-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<img src="'+image+'" alt="">';
                                         html +='</div>';
                                         html +='<h5>'+exportDestinations[i].title+'</h5>';
+                                        html +='</div>';
                                         $('.export-destination-block').append(html);
                                     }
                                 }
@@ -1086,7 +1090,9 @@
                 var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
                 html +='<div class="col s12 m6 l5 center-align association-membership-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                html +='<div class="imgbox">'; 
                 html +='<img src="'+image+'" alt="">';
+                html +='</div>';
                 html +='<p>'+associationMemberships[i].title+'</p>';
                 html +='</div>';
                 
@@ -1150,7 +1156,9 @@
                                         var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
                                         html +='<div class="col s12 m6 l5 center-align association-membership-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                        html +='<div class="imgbox">'; 
                                         html +='<img src="'+image+'" alt="">';
+                                        html +='</div>';
                                         html +='<p>'+associationMemberships[i].title+'</p>';
                                         html +='</div>';
                                         $('.association-membership-block').append(html);
@@ -1227,7 +1235,9 @@
                 var image="{{asset('storage/')}}"+'/'+pressHighlights[i].image;
                 html +='<div class="col s6 m4 l2 paper_img press-highlight-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+pressHighlights[i].id+'" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                html +='<div class="press_img">';
                 html +='<img src="'+image+'" alt="">';
+                html +='</div>';
                 html +='</div>';
                 
                 $('.press-highlight-block').append(html);
@@ -1293,7 +1303,9 @@
                                         var image="{{asset('storage/')}}"+'/'+pressHighlights[i].image;
                                         html +='<div class="col s6 m4 l2 paper_img press-highlight-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+pressHighlights[i].id+'" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                        html +='<div class="press_img">';
                                         html +='<img src="'+image+'" alt="">';
+                                        html +='</div>';
                                         html +='</div>';
                                         $('.press-highlight-block').append(html);
                                     }

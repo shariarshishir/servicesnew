@@ -1,4 +1,4 @@
-<div id="sustainability-commitment-modal" class="modal">
+<div id="sustainability-commitment-modal" class="modal profile_form_modal">
 <div class="modal-content">
 	<div id="sustainability-commitment-errors">
 	</div>
@@ -8,7 +8,7 @@
 		
 		<div class="row">
 			<div class="form-group  sustainability-commitment-details-block">
-				<label>Create sampling</label>
+				<label>Create Sustainability commitments</label>
 				<div class="sustainability-commitment-block">
 					<table class="sustainability-commitment-table-block">
 						<thead>
@@ -32,16 +32,18 @@
 							@endif
 						</tbody>
 					</table>
-					<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addSustainabilityCommitmentDetails()"><i class="material-icons dp48">add</i> Add More</a>
+					<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addSustainabilityCommitmentDetails()"><i class="material-icons dp48">add</i> Add More</a>
 				</div>
 			</div>
 		</div>
-		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-		<i class="material-icons right">send</i>
-		</button>
+		<div class="center-align submit_btn_wrap">
+			<button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
+				<i class="material-icons right">send</i>
+			</button>
+		</div>
 	</form>
 	<div class="modal-footer">
-		<a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+	<a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
 	</div>
 </div>
 </div>

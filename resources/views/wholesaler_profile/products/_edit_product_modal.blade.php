@@ -182,7 +182,7 @@
 
                                                 </tbody>
                                             </table>
-                                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+                                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -272,7 +272,7 @@
 
                                                 </tbody>
                                             </table>
-                                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
+                                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -325,7 +325,7 @@
 
                                             </tbody>
                                         </table>
-                                        <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
+                                        <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
                                 </div>
                             </div>

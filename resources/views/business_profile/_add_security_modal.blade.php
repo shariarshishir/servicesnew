@@ -1,13 +1,14 @@
-<div id="security-modal" class="modal">
+<div id="security-modal" class="modal profile_form_modal">
 <div class="modal-content">
 	<div id="security-modal-errors">
 	</div>
 	<form  method="post" action="#" id="security-form">
+        <label>Create Security and others</label>
 		@csrf
 		<input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
 		@if($business_profile->security)
 		<div class="row">
-            <div class="col s12 m6 l7">
+            <div class="col s12 m6 l6">
                 @foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
                     @if($securityAndOther->name == 'fire_exit')
                     <div class="welfare_box row">
@@ -52,7 +53,7 @@
                 @endforeach
             </div>
 
-            <div class="col s12 m6 l5">
+            <div class="col s12 m6 l6">
             @foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
                 @if($securityAndOther->name == 'protocols')
                 <div class="welfare_box row">
@@ -74,7 +75,7 @@
         @else
         <div class="row worker_welfare_box">
            
-            <div class="col s12 m6 l7">
+            <div class="col s12 m6 l6">
                 <div class="welfare_box row">
                     <span class="title col s8 m6 l6">Fire Exit</span>
                     <label class="radio_box col s2 m2 l2">
@@ -109,7 +110,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col s12 m6 l5">
+            <div class="col s12 m6 l6">
                 <div class="welfare_box row">
                     <span class="title col s8 m6 l6">Other protocols</span>
                     <label class="radio_box col s2 m2 l2">
@@ -124,12 +125,16 @@
             </div>
         </div>
         @endif
-		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-		<i class="material-icons right">send</i>
-		</button>
+
+        <div class="center-align submit_btn_wrap">
+            <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+		</div>
+		
 	</form>
 	<div class="modal-footer">
-		<a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
 	</div>
 </div>
 </div>

@@ -1095,9 +1095,9 @@
 							<div class="row membership_textBox association-membership-block">
 							    @foreach($business_profile->associationMemberships as $associationMembership)
 								<div class="col s12 m6 l5 center-align association-membership-img">
-										<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
-										<img  src="{{ asset('storage/'.$associationMembership->image) }}" alt="">
-										<p>{{$associationMembership->title}}</p>
+									<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
+									<p>{{$associationMembership->title}}</p>
 								</div>
 								@endforeach
 							</div>
@@ -1115,9 +1115,10 @@
 							<div class="row press-highlight-block">
 							@foreach($business_profile->pressHighlights as $pressHighlight)
 								<div class="col s6 m4 l2 paper_img press-highlight-img">
-								<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+									<div class="press_img">
 										<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
-									</a>
+									</div>
 								</div>
 							@endforeach
 								

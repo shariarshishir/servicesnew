@@ -1,7 +1,7 @@
 
-    
 
-    
+
+
 
 
 @if(count($products)>0)
@@ -16,11 +16,11 @@
                     <div class="favorite">
                         <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
                             <i class="material-icons dp48">favorite</i>
-                        </a>                        
+                        </a>
                     </div>
                     @if($product->availability==0 && ($product->product_type==2 || $product->product_type==3))
                     <div class="sold-out"><h4>Sold Out</h4></div>
-                    @endif                    
+                    @endif
                 </div>
                 <div class="priceBox row">
                     <div class="col m5 s5 apperal">Apperal</div>
@@ -28,10 +28,16 @@
                     <div class="price col m7 s7 right-align">@include('product._product_price')</div>
                 </div>
                 <h4>
-                    <a href="{{route('productdetails',$product->sku)}}">
-                        {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
-                    </a>                     
-                </h4>      
+                    @if($product->businessProfile()->exists())
+                        <a href="{{route('productdetails',$product->sku)}}">
+                            {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
+                        </a>
+                    @else
+                        <a href="javascript:void(0);">
+                            {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
+                        </a>
+                    @endif
+                </h4>
                 <div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
                 <div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
             </div>

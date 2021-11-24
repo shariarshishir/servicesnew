@@ -46,13 +46,13 @@
 
                         </div>
                         <div>
-                            @if(auth()->check() && in_array(auth()->user()->user_type, ['buyer', 'both']))
+                            {{-- @if(auth()->check() && in_array(auth()->user()->user_type, ['buyer', 'both']))
                                 @if(check_wishlist($product->id, 'product'))
                                     <a href="{{ action('WishListController@removeWishlist', ['id'=>$product->id, 'type'=>'product']) }}" class="btn btn-danger" style="margin-top: 10px;">Remove from wishlist</a>
                                 @else
                                     <a href="{{ action('WishListController@addToWishlist', ['id'=>$product->id, 'type'=>'product']) }}" class="btn btn-success" style="margin-top: 10px;">Add to wishlist</a>
                                 @endif
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
                                         <tr>
                                             <th>Price per Unit</th>
                                             <th>:</th>
-                                            <td>{{getlocalpriceunit()}} {{ getlocalprice($product->price_per_unit) }}</td>
+                                            <td>{{$product->price_unit}} {{ number_format($product->price_per_unit,2)}}</td>
                                         </tr>
                                         <tr>
                                             <th>Lead Time</th>
@@ -209,7 +209,7 @@
                                         @csrf
 
                                         <input type="hidden" id="total_qty2" name="quantity" value="0">
-                                        <button type="button" class="ic-btn js__btn" data-toggle="modal" data-target="#productOrderModal" disabled>Place order</button>
+                                        {{-- <button type="button" class="ic-btn js__btn" data-toggle="modal" data-target="#productOrderModal" disabled>Place order</button> --}}
 
                                     @else
 
@@ -218,27 +218,23 @@
 
 
                                     @endif
-                                    {{-- @if($user != null)
-                                        @if($user->user_type == "buyer")
-                                            <button type="button" class="ic-btn" onClick="sendmessage()">Contact supplier</button>
-                                        @endif
+                                    @if(Auth::guard('web')->check())
+                                        <button type="button" class="ic-btn" >Contact supplier</button>
                                     @else
-                                        <button type="button" class="ic-btn" data-toggle="modal" data-target="#contactSupplierModal">Contact supplier</button>
-                                    @endif --}}
+                                        <button type="button" class="modal-trigger" href="#contactSupplierModal">Contact supplier</button>
+                                    @endif
                                     <br/>
 
                                 </div>
-                            </form>
+                            {{-- </form> --}}
 
-                            <div class="samplebox">
-                                <div>
-                                    <a class="ic-sbtn" href="#requestSampleForm">Request Sample</a>
-                                    <p>contact for order customization or bulk volume rate-</p>
-                                </div>
-                                <form class="sampleformbox" id="requestSampleForm" action="{{ route('products.requestSample') }}" method="POST">
+                            {{-- contactSupplierModal --}}
+                            <div id="contactSupplierModal" class="modal">
+                                <form class="contact-supplier-form" id="contactSupplierForm" action="" method="POST">
                                     @csrf
-                                    <div class="inrsampleformbox">
-                                        <h5>Request Sample <button type="button" class="ic-btnclose">&times;</button></h5>
+                                    <div class="modal-content">
+                                        <h2>Contact Supplier</h2>
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="name" placeholder="Name*" required>
                                         </div>
@@ -249,13 +245,49 @@
                                             <input type="text" class="form-control" name="address" placeholder="Address*" required>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="sample_details" rows="3" placeholder="Sample details"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-success">SEND</button>
+                                            <textarea class="form-control" name="description" rows="3" placeholder="Description"></textarea>
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+                                        <button type="submit" class="btn btn-success">SEND</button>
+                                    </div>
                                 </form>
+                            </div>
+
+
+
+                            <div class="samplebox">
+                                <div>
+                                    <a class="modal-trigger" href="#requestSampleForm">Request Sample</a>
+                                    <p>contact for order customization or bulk volume rate-</p>
+                                </div>
+                                {{-- <form class="sampleformbox" id="requestSampleForm" action="{{ route('products.requestSample') }}" method="POST"> --}}
+                                    @csrf
+                                    <div class="modal" id="requestSampleForm">
+                                        <div class="modal-content">
+                                            <h5>Request Sample</h5>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="name" placeholder="Name*" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" name="email" placeholder="Email Address*" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="address" placeholder="Address*" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="sample_details" rows="3" placeholder="Sample details"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-success">SEND</button>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">cancel</a>
+                                          </div>
+                                    </div>
+                                {{-- </form> --}}
                             </div>
 
 
@@ -292,20 +324,151 @@
                             <p class="text-center">{{ @$supplier->profile->company_info['city'] }}, {{ @$supplier->profile->company_info['country'] }}</p>
 
                             <div class="ic-badges" style="padding-left: 16px;">
-                                @foreach($supplier->badges as $badge)
+                                {{-- @foreach($supplier->badges as $badge)
                                     <p><img src="{{ asset('storage/'.$badge->badge['image']) }}" alt="right" style="width:40px;">
                                     {{ $badge->badge->name }}</p>
-                                @endforeach
+                                @endforeach --}}
                             </div>
 
 
                             <br/><br/>
                             <span class="col-md-3"></span>
-                            <a href="#" class="text-center ic-primary">View Company Profile</a>
+                            @if(!empty($product->business_profile_id))
+                                <a href="{{ route('supplier.profile', $product->business_profile_id) }}" class="text-center ic-primary">View Company Profile</a>
+                            @else
+                                <a href="javascript:void(0);" class="text-center ic-primary">View Company Profile</a>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+{{-- product details, company profile, factory tour --}}
+    <section class="">
+        <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s3"><a class="active"  href="#product-details">Product Details</a></li>
+                <li class="tab col s3"><a href="#company-profile">Company Profile</a></li>
+                <li class="tab col s3"><a href="#factory-tour">Factory Tour</a></li>
+              </ul>
+            </div>
+            <div id="product-details" class="col s12">
+                <h3>Overview</h3>
+                <div class="ic-tabcontent-tbl ic-hz">
+                    <h4>Product Details</h4>
+                    {!! $product->product_details !!}
+                </div>
+                <div class="ic-tabcontent-tbl ic-hz">
+                    <h4>Full Specification</h4>
+                    {!! $product->product_specification !!}
+                </div>
+            </div>
+            <div id="company-profile" class="col s12">
+                <h3>Basic information <span class="ic-verified"><i class="icofont icofont-check"></i> Verified</span></h3>
+                <div class="ic-dbl-tbl">
+                    <div class="ic-company-tbl ic-hz">
+                        <table>
+                            <tr>
+                                <td>Company Name:</td>
+                                <td>{{ $product->businessProfile->business_name ?? 'Merchantbay D' }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>Business type:</td>
+                                <td>
+                                    @if($product->businessProfile)
+                                        @switch($product->businessProfile->business_type)
+                                            @case(1)
+                                                Manufacture
+                                                @break
+                                            @case(2)
+                                                Wholesaler
+                                                @break
+                                            @case(3)
+                                                Design Studio
+                                                @break
+
+                                            @default
+                                        @endswitch
+                                    @endif
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Main products:</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Total Annual Revenue:</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Top 3 Markets:</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ic-company-tbl ic-right-tbls ic-hz">
+                        <table>
+                            <tr>
+                                <td>Location:</td>
+                                <td>{{ $product->businessProfile ? $product->businessProfile->location : '' }}</td>
+
+                            </tr>
+                            <tr>
+                                <td>Total Employees:</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Year Established:</td>
+                                <td class="ic-primary"></td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ic-hr-devider"></div>
+                </div>
+                <h3 style="margin-top: 20px">Comapny Details</h3>
+
+                <div class="ic-product-detail">
+                    <div class="ic-product-overview">
+                        <div class="ic-product-description">
+                            <div class="ic-s-product-desc">
+
+                            </div>
+                        </div>
+                        <div class="ic-p-overview-video company-profile-intro-video" style="background-image:">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="factory-tour" class="col s12">   <h3>Overview</h3>
+                <div class="ic-factory-flex">
+                    <div class="ic-ff-left">
+                        <h4>Factory tour photos</h4>
+                    </div>
+                    <div class="ic-ff-right">
+
+                    </div>
+                </div>
+                <div class="ic-factory-flex">
+                    <div class="ic-ff-left">
+                        <h4>Factory &amp; machinery detail</h4>
+                    </div>
+                    <div class="ic-ff-right">
+                    </div>
+                </div></div>
+        </div>
+    </section>
 @endsection
+
+
+@push('js')
+    <script>
+
+    </script>
+@endpush

@@ -94,63 +94,8 @@ if (!function_exists('businessProfileInfo')) {
     }
 }
 
-if (!function_exists('getlocalprice')){
-    function getlocalprice($price)
-    {
-        $ip = request()->ip();
-        $ipinfo = ipInfo($ip);
-        $ipcode = $ipinfo->iso_code ?? "BD";
-        if($ipcode != "BD")
-        {
-            return ($price == "")?sprintf("%.2f", '0'):sprintf("%.2f", $price);
-        }
-        else
-        {
-            if($price != "")
-            {
-                //$data = json_decode(file_get_contents('https://www.freeforexapi.com/api/live?pairs=USDBDT'), true);
-
-                //return 1;
 
 
-                return sprintf("%.2f", (int)$price * 1);
-            }
-            else
-            {
-                return sprintf("%.2f", '0');
-            }
-        }
-    }
-}
 
-if (!function_exists('getlocalpriceunit')){
-    function getlocalpriceunit()
-    {
-        $ip = request()->ip();
-        $ipinfo = ipInfo($ip);
-        $ipcode = $ipinfo->iso_code ?? "BD";
-        if($ipcode != "BD")
-        {
-            return 'USD';
-        }
-        else
-        {
-            return 'USD';
 
-        }
-    }
-}
 
-if (!function_exists('ipInfo')){
-    function ipInfo($ip=null) {
-        $ip = $ip ?? request()->ip();
-
-        $ipdata = GeoIP::getLocation($ip);
-        //$ipdata = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip={$ip}"));
-        //$ipdata = @json_decode(file_get_contents("http://www.netip.de/search?query={$ip}"));
-        //$ipdata = @json_encode(file_get_contents("http://api.wipmania.com/{$ip}"));
-        //$ipdata = @json_decode(file_get_contents("http://ip-api.com/php/{$ip}"));
-        //$ipdata = @json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
-        return  $ipdata;
-    }
-}

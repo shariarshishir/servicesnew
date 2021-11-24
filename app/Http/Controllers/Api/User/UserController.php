@@ -530,6 +530,7 @@ class UserController extends Controller
             'user_agent' => $request->header('User-Agent'),
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
+            'is_email_verified' => 1,
         ]);
 
        if($request->user_flag == 'service'){

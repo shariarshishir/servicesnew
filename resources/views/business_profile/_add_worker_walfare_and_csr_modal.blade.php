@@ -172,14 +172,27 @@
             </div>
         </div>
         @endif
-        <div class="center-align submit_btn_wrap">
+
+        <!-- <div class="center-align submit_btn_wrap">
             <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
             </button>
+		</div> -->
+
+        <div class="submit_btn_wrap" style="padding-top: 30px;">
+			<div class="row">
+				<div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+				<div class="col s12 m6 l6 right-align">
+					<button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit</button>
+				</div>
+			</div>
 		</div>
 	</form>
-	<div class="modal-footer">
+
+
+	<!-- <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
-	</div>
+	</div> -->
+
+
 </div>
 </div>

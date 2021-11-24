@@ -24,7 +24,7 @@
 								<tr>
 									<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="{{$productionCapacity->machine_type}}" ></td>
 									<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="{{$productionCapacity->annual_capacity}}" ></td>
-									<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">remove</i></a></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 								</tr>
 								@endforeach
 								@else
@@ -34,7 +34,10 @@
 								@endif
 							</tbody>
 						</table>
-						<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addProductionCapacity()"><i class="material-icons dp48">add</i> Add More</a>
+						<div class="add_more_box">
+							<a href="javascript:void(0);" class="add-more-block" onclick="addProductionCapacity()"><i class="material-icons dp48">add</i> Add More</a>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -56,7 +59,7 @@
 								<tr>
 									<td><input name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
 									<td><input name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
-									<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">remove</i></a></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 								</tr>
 								@endforeach
 								@else
@@ -66,7 +69,11 @@
 								@endif
 							</tbody>
 						</table>
-						<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addCategoriesProduced()"><i class="material-icons dp48">add</i> Add More</a>
+
+						<div class="add_more_box">
+							<a href="javascript:void(0);" class="add-more-block" onclick="addCategoriesProduced()"><i class="material-icons dp48">add</i> Add More</a>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -89,7 +96,7 @@
 							<tr>
 								<td><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
 								<td><input name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
-								<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">remove</i></a></td>
+								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 							</tr>
 							@endforeach
 							@else
@@ -99,18 +106,28 @@
 							@endif
 						</tbody>
 					</table>
-					<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addMachinariesDetails()"><i class="material-icons dp48">add</i> Add More</a>
+					<div class="add_more_box">
+						<a href="javascript:void(0);" class="add-more-block" onclick="addMachinariesDetails()"><i class="material-icons dp48">add</i> Add More</a>
+					</div>
+					
 				</div>
 			</div>
 		</div>
-		<div class="center-align submit_btn_wrap">
-			<button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
-			<i class="material-icons right">send</i>
-			</button>
+
+		<div class="submit_btn_wrap">
+			<div class="row">
+				<div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+				<div class="col s12 m6 l6 right-align">
+					<button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit </button>
+				</div>
+			</div>
 		</div>
+
 	</form>
-	<div class="modal-footer">
+
+	<!-- <div class="modal-footer">
 		<a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
-	</div>
+	</div> -->
+	
 </div>
 </div>

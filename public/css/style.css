@@ -309,7 +309,7 @@ textarea:focus {
 
 .header_wrap .top_right {
     text-align: right;
-    padding-top: 23px;
+    padding-top: 12px;
 }
 .fixedHeader.header_wrap .top_right {
     padding-top: 18px;
@@ -318,11 +318,12 @@ textarea:focus {
 .header_wrap .top_right .material-icons {
     margin: 5px 15px 0 0;
     float: left;
+    font-size: 20px;
 }
 /* Header Top right css end  */
 /* ******* Nav css start ********** */
 .mainnav_wrap {
-    padding-top: 30px !important;
+    padding-top: 25px !important;
 }
 .fixedHeader .mainnav_wrap {
     padding-top: 25px !important;
@@ -664,7 +665,7 @@ textarea:focus {
 }
 .product_wrapper .imgBox .favorite .material-icons {
     font-size: 30px;
-    color: #707070;
+    color: #FCFCFC;
 }
 .product_wrapper .imgBox .active_favorite .material-icons {
     color: #257356;
@@ -853,18 +854,18 @@ textarea:focus {
 .leftCol_wrap .office_address {
     border-bottom: 1px solid #707070;
     padding-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
 }
 .profile_leftCol .office_address h3,
 .leftCol_wrap .office_address h3 {
-    font-size: 25px;
+    font-size: 22px;
     color: #464545;
     font-weight: 600;
     margin: 0 0 15px 0;
 }
 .profile_leftCol .office_address h4,
 .leftCol_wrap .office_address h4 {
-    font-size: 20px;
+    font-size: 18px;
     color: #464545;
     display: inline-flex;
     line-height: 32px;
@@ -936,6 +937,9 @@ textarea:focus {
     border-radius: 10px;
     border: none;
 }
+.profile_wholesaler_tab_menu ul li a.active {
+    color: #ffffff;
+}
 .profile_wholesaler_tab_menu ul li a:link,
 .profile_wholesaler_tab_menu ul li a:active,
 .profile_wholesaler_tab_menu ul li a:visited {
@@ -946,7 +950,7 @@ textarea:focus {
 .profile_contentCol .profile_tab_menu .tabs .tab a:hover, 
 .profile_contentCol .profile_tab_menu .tabs .tab a.active {
     background-color: #4E9C52;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     transition: none !important;
 }
 .profile_tab_menu button {
@@ -1580,9 +1584,10 @@ textarea:focus {
     margin-left: 10px;
 }
 
-.single-product-details-wrapper {
-    padding-left: 50px !important;
+.product_details_info_wrap {
+    padding: 0 40px !important;
 }
+.single-product-details-wrapper,
 .product_details_wrapper .seller-store {
     margin-bottom: 10px;
 }
@@ -2773,12 +2778,14 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 } */
 .input-field label.active {
     position: inherit;
+    background: none;
 }
 .input-field select,
 .sign-wrap .input-wrap input {
     font-size: 18px;
 }
 
+.modal table tr td input,
 .input-field input:not([type]), 
 .input-field input[type=text]:not(.browser-default), 
 .input-field input[type=password]:not(.browser-default), 
@@ -2797,9 +2804,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .input-field input {
     border: none;
     border-radius: 10px;
-    -webkit-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
-    -moz-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
-    box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
+    -webkit-box-shadow: 0px 2px 13px -7px rgba(0,0,0,0.75) !important;
+    -moz-box-shadow: 0px 2px 13px -7px rgba(0,0,0,0.75) !important;
+    box-shadow: 0px 2px 13px -7px rgba(0,0,0,0.75) !important;
     padding: 0 2% !important;
     float: right;
     height: 55px;
@@ -2811,9 +2818,20 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-bottom: 0;
 }
 
+.select2.product-colors {
+    height: 230px;
+    padding-top: 10px !important;
+}
+.select2.product-sizes {
+    height: 133px;
+    padding-top: 10px !important;
+}
+
 .modal table tr td input {
     width: 86% !important;
     text-align: center;
+    float: left;
+    border-radius: 5px !important;
 }
 
 .input-field .radio_box input {
@@ -2824,9 +2842,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .input-field textarea,
 .product_colorSizw_wrap .select2-container {
 /* .modal .select2-container--default .select2-selection--multiple .select2-selection__rendered { */
-    -webkit-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
-    -moz-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
-    box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
+    -webkit-box-shadow: 0px 2px 13px -7px rgba(0,0,0,0.75) !important;
+    -moz-box-shadow: 0px 2px 13px -7px rgba(0,0,0,0.75) !important; 
+    box-shadow: 0px 2px 13px -7px rgba(0,0,0,0.75) !important;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -2878,6 +2896,33 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     width: 100%;
     float: left;
 }
+.profile_form_modal .add_more_box {
+    padding: 30px 0;
+}
+.profile_form_modal .add_more_box .add-more-block {
+    font-weight: 500;
+    font-size: 18px;
+}
+.profile_form_modal .add_more_box .material-icons {
+    float: left;
+}
+.profile_form_modal .btn_delete {
+    text-align: center;
+    display: inline-block;
+    float: right;
+}
+.profile_form_modal .btn_delete .material-icons {
+    color:#DC143C;
+    font-size: 25px;
+    display: block;
+}
+.profile_form_modal .btn_delete span {
+    text-align: center;
+    display: block;
+    color:#DC143C;
+    font-size: 12px;
+    font-weight: 200;
+}
 
 
 /* ************************************** */
@@ -2889,18 +2934,23 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     font-size: 16px;
     color: #000000;
     font-weight: 400;
-    padding: 0 0 10px 0;
+    padding: 0 0 10px 10px;
     position: inherit;
     display: block;
     text-transform: capitalize;
     font-weight: 500;
+}
+.profile_form_modal .radio_box,
+.profile_form_modal .radio_box {
+    display: inline-block;
 }
 .modal .btn,
 .profile_form_modal .btn {
     float: right;
     margin-top: 20px;  
     font-size: 18px;
-    line-height: 24px;
+    line-height: 30px;
+    height: 40px;
 }
 .modal .red,
 .profile_form_modal .red {
@@ -2912,10 +2962,6 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     float: left;
 }
 
-.profile_form_modal .submit_btn_wrap .btn  {
-    /* float: none; */
-    margin-right: 5px;
-}
 .profile_form_modal tbody tr{
     border-bottom: none;
 }
@@ -2965,7 +3011,18 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 
 .profile_form_modal textarea {
     padding: 5px 10px;
-    height: 90px;
+    height: 48px;
+    -webkit-box-shadow: 0px 4px 12px -4px rgb(0 0 0 / 61%) !important;
+    -moz-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.61) !important;
+    box-shadow: 0px 4px 12px -4px rgb(0 0 0 / 61%) !important;
+    border: none !important;
+    float: left;
+    margin-top: 10px;
+} 
+.profile_form_modal .file_upload {
+    border: none !important;
+    box-shadow: none !important;
+    height: 62px;
 }
 .profile_tabNav_wrap .main_buyer_img {
     margin-bottom: 20px;
@@ -2977,9 +3034,18 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     width: 100%;
     width: 90px;
 }
+
+#company-overview-update-form  .submit_btn_wrap{
+    padding-top: 30px;
+}
 .profile_form_modal .welfare_box {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
+}
+
+.profile_form_modal .submit_btn_wrap .btn_green {
+    margin-top: 0;
+    height: 40px;
 }
 
 
@@ -3156,9 +3222,14 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .footer_right_bottom .socialWrap {
     padding-top: 40px;
 }
+.footer_right_bottom .socialWrap a {
+    display: inline-block;
+}
 .footer_right_bottom .socialWrap img {
     margin-right: 10px;
     display: inline-block;
+    width: auto;
+    height: 28px;
 }
 .footer_right_bottom .socialWrap h4 {
     font-size: 20px;
@@ -3170,15 +3241,16 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 /* New style start */
 .btn_profile {
     display: inline-block;
-    line-height: 30px;
-    min-height: 30px;
+    line-height: 26px;
+    font-size: 16px;
+    margin-right: 35px;
+    margin-top: 10px;
 }
 .user-block {
     /* position: absolute;
     right: 20px;
     top: 35px;  */
     display: inline-block;
-    margin-top: 5px;
     float: right;
 }
 .btn_logRegi {
@@ -3187,7 +3259,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .avatar-status {
     position: relative;
     display: inline-block;
-    width: 35px;
+    width: 60px;
     vertical-align: bottom;
     border-radius: 50px;
 }
@@ -3520,25 +3592,30 @@ div.dataTables_wrapper div.dataTables_info {
 }
 .pagination-block-wrapper nav .pagination li {
     float: inherit;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
 }
 .pagination-block-wrapper nav .pagination li.active {
     background: none;
 }
-.pagination-block-wrapper nav .pagination li .page-link {
-    font-size: 20px;
-}
+
 .pagination-block-wrapper nav .pagination li a:link,
 .pagination-block-wrapper nav .pagination li a:active,
 .pagination-block-wrapper nav .pagination li a:visited {
     font-size: 20px;
-    padding: 5px 20px;
+    height: 30px;
     line-height: 30px;
+    padding: 3px 15px;
+    border-radius: 5px;
 }
 
 .pagination-block-wrapper nav .pagination li.active .page-link {
     background: #448547;
     color: #fff;
-    padding: 5px 15px;
+    padding: 3px 15px;
+    border-radius: 5px;
+    font-size: 17px;
 }
 /* order css start */
 

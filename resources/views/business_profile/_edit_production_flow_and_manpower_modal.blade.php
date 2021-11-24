@@ -8,7 +8,7 @@
             @csrf
            <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
-                <div class="form-group  production-flow-and-manpower-block">
+                <div class="form-group production-flow-and-manpower-block">
                     <label>Production Capacity (Annual)</label>
                     <div class="production-flow-and-manpower-block">
                         <table class="production-flow-and-manpower-table-block">
@@ -37,28 +37,38 @@
                                             <td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
                                             @endif
                                         @endforeach
-                                        <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">remove</i></a></td>
+                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
                                     </tr>
                                     @endforeach
                                     
                                 @endif
                             </tbody>
                         </table>
-                        <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addProductionFlowAndManpower()"><i class="material-icons dp48">add</i> Add More</a>
+
+                        <div class="add_more_box">
+                            <a href="javascript:void(0);" class="add-more-block" onclick="addProductionFlowAndManpower()"><i class="material-icons dp48">add</i> Add More</a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
 
             
-            <div class="center-align submit_btn_wrap">
-                <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
+
+            <div class="submit_btn_wrap">
+                <div class="row">
+                    <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                    <div class="col s12 m6 l6 right-align">
+                        <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit</button>
+                    </div>
+                </div>
             </div>
+
+
         </form>
     
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
-        </div>
+        </div> -->
     </div>
 </div>

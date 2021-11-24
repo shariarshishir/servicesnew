@@ -1,4 +1,4 @@
-<div id="product-add-modal-block" class="modal modal-fixed-footer fullscreen-modal wholesaler_add_product_modal">
+<div id="product-add-modal-block" class="modal fullscreen-modal wholesaler_add_product_modal profile_form_modal">
     <div class="modal-content">
         <legend>Upload Product</legend>
 
@@ -130,13 +130,15 @@
                                             <td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
                                             <td><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
                                             <td><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>
-                                            {{-- <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">remove</i></a></td> --}}
+                                            {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td> --}}
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="right-align" style="padding-top: 20px">
-                                    <a href="javascript:void(0);" class="btn_green btn waves-effect waves-light green add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                <div class="add_more_box" style="padding-top: 20px">
+                                    <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -197,12 +199,12 @@
                                                 <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
                                                 <td><input type="text" value="0" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
                                                 <td><input type="text" value="0" class="form-control count-color-size" name="color_size[one_size][]" /></td>
-                                                {{-- <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductColorSize(this)"><i class="material-icons dp48">remove</i></a></td> --}}
+                                                {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td> --}}
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="right-align" style="padding-top: 20px">
-                                        <a href="javascript:void(0);" class="btn_green btn waves-effect waves-light green add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+                                    <div class="add_more_box" style="padding-top: 20px">
+                                        <a href="javascript:void(0);" class="add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
                                 </div>
                             </div>
@@ -260,13 +262,15 @@
                                             <td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
                                             <td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
                                             <td><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                            {{-- <td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">remove</i></a></td> --}}
+                                            {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td> --}}
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="right-align" style="padding-top: 20px">
-                                    <a href="javascript:void(0);" class="btn_green btm_green btn waves-effect waves-light green add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                <div class="add_more_box" style="padding-top: 20px">
+                                    <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>
+                                
                             </div>
                         </div> 
                     </div>
@@ -304,9 +308,11 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="right-align" style="padding-top: 20px">
-                                        <a href="javascript:void(0);" class="btn_green btn waves-effect waves-light green add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                    <div class="add_more_box" style="padding-top: 20px">
+                                        <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -363,9 +369,11 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="right-align" style="padding-top: 20px">
-                                <a href="javascript:void(0);" class="btn_green btn waves-effect waves-light green add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
+
+                            <div class="add_more_box" style="padding-top: 20px">
+                                <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
                             </div>
+
                         </div>
                     </div>
                     <div class="row input-field">
@@ -459,21 +467,33 @@
                         <select class="js-example-basic-multiple" name="related_products[]" multiple="multiple"></select>
                     </div>
                 </div>
-                <div class="row input-field right-align">
+
+                <div class="submit_btn_wrap" style="padding-top: 30px;">
+                    <div class="row">
+                        <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                        <div class="col s12 m6 l6 right-align">
+                            <button type="submit" class="btn_green seller_product_create">Save</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row input-field right-align">
                     <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>
                     <button type="button" class="btn_green btn modal-close waves-effect waves-light green btn-back-to-product-list">Cancel</button>
-                </div>
+                </div> -->
 
             </div>{{-- wholesaler_add_product_form end --}}
 
         </form>
     </div>
 
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
-    </div>
+    </div> -->
+
+    
 </div>
 
 {{-- tinymc editor file upload modal --}}
@@ -497,9 +517,12 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="col s12 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat "><i class="material-icons green-text text-darken-1">close</i></a>
-    </div>
+    </div> -->
+
 </div>
 
 

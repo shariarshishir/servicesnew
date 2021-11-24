@@ -412,7 +412,7 @@
         var html = '<tr>';
         html += '<td><input name="machine_type[]" id="machine_type" type="text" class="form-control  value="" ></td>';
         html += '<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control  value="" ></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.production-capacity-table-block tbody').append(html);
     }
@@ -429,7 +429,7 @@
         var html = '<tr>';
         html += '<td><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
         html += '<td><input name="percentage[]" id="percentage" type="number" class="form-control  value="" ></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.categories-produced-table-block tbody').append(html);
     }
@@ -447,7 +447,7 @@
     var html = '<tr>';
     html += '<td><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
     html += '<td><input name="quantity[]" id="quantity" type="number" class="form-control  value="" ></td>';
-    html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">remove</i></a></td>';
+    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('.machinaries-details-table-block tbody').append(html);
     }
@@ -551,7 +551,7 @@
         html +='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
         html +='<td><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
         html +='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
-        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.production-flow-and-manpower-table-block tbody').append(html);
     }
@@ -628,8 +628,8 @@
         var html = '<tr>';
         html +='<td><input name="title[]" id="certification-title" type="text" class="input-field"  value="" ></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field"  id="certification-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='<td><input name="image[]" class="input-field file_upload"  id="certification-image" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.certification-details-table-block tbody').append(html);
     }
@@ -760,8 +760,8 @@
         var html = '<tr>';
         html +='<td><input name="title[]" id="main-buyer-title" type="text" class="input-field"  value="" ></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field"  id="main-buyer-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='<td><input name="image[]" class="input-field file_upload"  id="main-buyer-image" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.main-buyers-details-table-block tbody').append(html);
     }
@@ -902,8 +902,8 @@
         var html = '<tr>';
         html +='<td><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field"  id="export-destination-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='<td><input name="image[]" class="input-field file_upload"  id="export-destination-image" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.export-destination-table-block tbody').append(html);
     }
@@ -1047,8 +1047,8 @@
         var html = '<tr>';
         html +='<td><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field"  id="association-membership-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='<td><input name="image[]" class="input-field file_upload"  id="association-membership-image" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.association-membership-details-table-block tbody').append(html);
     }
@@ -1193,8 +1193,8 @@
         var html = '<tr>';
         html +='<td><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field"  id="press-highlight-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removePressHighlightDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html +='<td><input name="image[]" class="input-field file_upload"  id="press-highlight-image" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removePressHighlightDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.press-highlight-details-table-block tbody').append(html);
     }
@@ -1337,7 +1337,7 @@
         var html = '<tr>';
         html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
         html += '<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.business-term-table-block tbody').append(html);
     }
@@ -1403,7 +1403,7 @@
         var html = '<tr>';
         html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
         html += '<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.sampling-table-block  tbody').append(html);
     }
@@ -1469,7 +1469,7 @@
         $('#special-customization-table-no-data').hide();
         var html = '<tr>';
         html += '<td><input name="special_customization_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeSpecialCustomizationDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSpecialCustomizationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.special-customization-table-block  tbody').append(html);
     }
@@ -1535,7 +1535,7 @@
         $('#sustainability-commitment-table-no-data').hide();
         var html = '<tr>';
         html += '<td><input name="sustainability_commitment_title[]" id="sustainability-commitment-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeSustainabilityCommitmentDetails(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSustainabilityCommitmentDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.sustainability-commitment-table-block  tbody').append(html);
     }

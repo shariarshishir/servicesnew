@@ -17,7 +17,7 @@
 									<li><a href="{{route('customizable')}}">Customizablee</a></li>
 								</ul>
 							</li>
-							<li><a href="{{route('suppliers')}}">Supliers</a></li>
+							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
 							<li><a href="javascript:void(0);">RFQ</a></li>
 							<li><a href="javascript:void(0);">Tools</a></li>
 							<li>

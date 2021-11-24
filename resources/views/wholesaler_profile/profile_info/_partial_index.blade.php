@@ -17,7 +17,11 @@
 					<tr>
 						<td>{{str_replace('_', ' ', ucfirst($company_overview->name))}}</td>
 						<td class="{{$company_overview->name}}_value">{{$company_overview->value}}</td>
-						<td class="{{$company_overview->name}}_status">{{$company_overview->status}}</td>
+						@if($company_overview->status==1)
+                        <td><i class="material-icons {{$company_overview->name}}_status" style="color:green">check_circle</i></td>
+                        @else
+                        <td><i class="material-icons {{$company_overview->name}}_status"style="color:gray">check_circle</i></td>
+                        @endif
 					</tr>
 					@endforeach
 				</tbody>

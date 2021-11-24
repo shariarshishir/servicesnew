@@ -699,87 +699,90 @@ $reviewsCount = count($productReviews);
 
                             <div class="col m12 single_product_review_wrap">
                                 <span>Rating</span>
-                                <div class="col s12 m6 l6">
-                                    <div class="single-product-review-stars">
-                                        <div class="star-rating" data-score="{{$averageRating}}"></div>
-                                        <span>{{$averageRating}} out of 5</span>
+                                <div class="row">
+                                    <div class="col s12 m6 l6">
+                                        <div class="single-product-review-stars">
+                                            <div class="star-rating" data-score="{{$averageRating}}"></div>
+                                            <span>{{$averageRating}} out of 5</span>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m6 l6">
+                                        <div class="single-product-review">
+                                            <div class="single-product-write-review">
+                                                <ul>
+                                                    @if(!$productReviewExistsOrNot && Auth::guard('web')->check())
+                                                    <li><a class="btn_grBorder waves-effect waves-light modal-trigger" href="#product-review-modal"><i class="material-icons dp48">edit</i> Write a review</a></li>
+                                                    @elseif (!$productReviewExistsOrNot && !Auth::guard('web')->check())
+                                                    <li><a class="btn_grBorder waves-effect waves-light modal-trigger" href="#login-register-modal"><i class="material-icons dp48">edit</i> Write a review</a></li>
+                                                    @else
+                                                    @endif
+                                                    <li><a href="javascript:void(0);" class="view-all-review-trigger">View all ({{$reviewsCount}}) review</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="product-review-modal" class="modal modal-fixed-footer">
+                                            <div class="modal-content">
+                                                <legend>Write your review</legend>
+                                                <!--div class="overall-star-rating" data-rateit-value="3.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div-->
+                                                <form action="{{route('product.review.store',$product->sku)}}" method="post" name="reviewForm" id="reviewForm">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <label>Overall : </label>
+                                                            <div id="overall-star-rating" class="score"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <label>Communication : </label>
+                                                            <div id="communication-star-rating" class="score"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <label>On Time Delivery : </label>
+                                                            <div id="ontimedelivery-star-rating" class="score"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <label>Sample Support : </label>
+                                                            <div id="samplesupport-star-rating" class="score"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <label>Product Quality : </label>
+                                                            <div id="productquality-star-rating" class="score"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <label>Share your experience : </label>
+                                                            <textarea id="experience" name="experience" class="experience-textarea materialize-textarea"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" value="{{$product->businessProfile->id}}" name="business_profile_id" />
+                                                    <input type="hidden" value="{{$product->id}}" name="product_id" />
+                                                    <button type="submit" class="btn green waves-effect waves-light" id="submitReview">Submit Review</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat "><i class="material-icons green-text text-darken-1">close</i></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col s12 m6 l6">
-                                    <div class="single-product-review">
-                                        <div class="single-product-write-review">
-                                            <ul>
-                                                @if(!$productReviewExistsOrNot && Auth::guard('web')->check())
-                                                <li><a class="btn_grBorder waves-effect waves-light modal-trigger" href="#product-review-modal"><i class="material-icons dp48">edit</i> Write a review</a></li>
-                                                @elseif (!$productReviewExistsOrNot && !Auth::guard('web')->check())
-                                                <li><a class="btn_grBorder waves-effect waves-light modal-trigger" href="#login-register-modal"><i class="material-icons dp48">edit</i> Write a review</a></li>
-                                                @else
-                                                @endif
-                                                <li><a href="javascript:void(0);" class="view-all-review-trigger">View all ({{$reviewsCount}}) review</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div id="product-review-modal" class="modal modal-fixed-footer">
-                                        <div class="modal-content">
-                                            <legend>Write your review</legend>
-                                            <!--div class="overall-star-rating" data-rateit-value="3.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div-->
-                                            <form action="{{route('product.review.store',$product->sku)}}" method="post" name="reviewForm" id="reviewForm">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="col s12">
-                                                        <label>Overall : </label>
-                                                        <div id="overall-star-rating" class="score"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col s12">
-                                                        <label>Communication : </label>
-                                                        <div id="communication-star-rating" class="score"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col s12">
-                                                        <label>On Time Delivery : </label>
-                                                        <div id="ontimedelivery-star-rating" class="score"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col s12">
-                                                        <label>Sample Support : </label>
-                                                        <div id="samplesupport-star-rating" class="score"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col s12">
-                                                        <label>Product Quality : </label>
-                                                        <div id="productquality-star-rating" class="score"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col s12">
-                                                        <label>Share your experience : </label>
-                                                        <textarea id="experience" name="experience" class="experience-textarea materialize-textarea"></textarea>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" value="{{$product->businessProfile->id}}" name="business_profile_id" />
-                                                <input type="hidden" value="{{$product->id}}" name="product_id" />
-                                                <button type="submit" class="btn green waves-effect waves-light" id="submitReview">Submit Review</button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat "><i class="material-icons green-text text-darken-1">close</i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         
                         </div>
                     </div>
 
                     <div class="col s12 m4 l4">
-                        <div class="single-product-store-information">
+                        <div class="single-product-store-information center-align">
                             <div class="card card-with-padding">
-                                <legend>Company Profile</legend>
+                                <h6>Company Profile</h6>
                                 <div class="company_profile_details">
                                     <p><b style="color:#4CAF50">Store name :</b> {{$product->businessProfile->business_name}}<p>
                                     <b style="color:#4CAF50">Country / Region :</b> {{$product->businessProfile->location}}<p>

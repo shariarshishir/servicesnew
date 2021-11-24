@@ -204,18 +204,17 @@
                                 <div id="review-profile-data" class="business_steps_content">
                                     <div id="information_message"></div>
                                     <div id="review_name"></div>
-                                    <!--div id="review_location"></div>
-                                    <div id="review_usiness_type"></div>
-                                    <div id="review_manufacturer_type"></div>
-                                    <div id="review_wholesaler_type"></div>
-                                    <div id="number_of_factories"></div>
-                                    <div id="review_outlets_number"></div>
+                                    <div id="review_location"></div>
+                                    <div id="review_business_type"></div>
+                                    <div id="review_number_of_factories"></div>
+                                    <div id="review_number_of_outlets"></div>
                                     <div id="review_trade_license"></div>
                                     <div id="review_industry_type"></div>
+                                    <div id="review_business_category_id"></div>
                                     <div id="review_representative_name"></div>
                                     <div id="review_representatives_email"></div>
                                     <div id="review_representatives_contact"></div>
-                                    <div id="review_representative_nidPassport"></div-->
+                                    <div id="review_representative_nidPassport"></div>
                                 </div>   
 
                                 <div class="step-actions">

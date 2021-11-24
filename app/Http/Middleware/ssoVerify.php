@@ -27,8 +27,7 @@ class ssoVerify
                 return $next($request);
             }
             Auth::guard('web')->logout();
-            return 'http://dev.accounts.merchantbay.com/login';
-            //return redirect('/login');
+            return redirect('/login');
         }
         return $next($request);
 

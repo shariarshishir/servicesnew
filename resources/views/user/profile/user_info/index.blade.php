@@ -55,10 +55,14 @@
                 <div class="col m12 my_businesses_wrap">
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
-                        <div class="my_businesses_box card user-business-profile-short-info ">
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
-                            <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
-                            <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+                        <div class="my_businesses_box card user-business-profile-short-info">
+                        @if($businessprofile->business_type==1)
+                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                        @else
+                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                        @endif
+                        <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
+                        <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
                         </div>
                     </div>
                     

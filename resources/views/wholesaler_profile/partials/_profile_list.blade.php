@@ -14,6 +14,10 @@
     .modal-lg{
         max-width: 1000px !important;
     }
+    .active{
+        background-color: #448547;
+        color:white;
+    }
 </style>
 @endsection
 
@@ -52,10 +56,10 @@
 
 <div class="profile_tab_menu profile_wholesaler_tab_menu">
     <ul>
-        <li><a href="{{route('business.profile.show', $business_profile->id)}}">Home</a></li>
-        <li><a href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
-        <li><a href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
-        <li><a href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
+        <li><a   class="{{ (request()->segment(2) == 'profile') ? 'active' : '' }}"  href="{{route('wholesaler.profile.show', $business_profile->id)}}" >Home</a></li>
+        <li><a   class="{{ (request()->segment(2) == 'profile-details') ? 'active' : '' }}"  href="{{route('wholesaler.profile.info', $business_profile->id)}}" >Profile</a></li>
+        <li><a   class="{{ (request()->segment(2) == 'product') ? 'active' : '' }}"   href="{{route('wholesaler.product.index', $business_profile->id)}}" >Products</a></li>
+        <li><a   class="{{ (request()->segment(2) == 'order') ? 'active' : '' }}"   href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
 
     </ul>
 </div>

@@ -538,7 +538,7 @@ class HomeController extends Controller
     public function mixProductDetails($flag, $id)
     {
         if($flag == 'mb'){
-            $product = ManufactureProduct::findOrFail($id);
+            $product = ManufactureProduct::with('category','product_images','businessProfile')->findOrFail($id);
             return view('product.manufactrue_product_details',compact('product'));
         }
         else if($flag == 'shop'){

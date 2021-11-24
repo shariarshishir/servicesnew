@@ -136,7 +136,7 @@
 									
 								</div>
 								<div class="row membership_textBox association-membership-block">
-									@if(count($business_profile->associationMemberships))>0)
+									@if(count($business_profile->associationMemberships)>0)
 										@foreach($business_profile->associationMemberships as $associationMembership)
 										<div class="col s12 m6 l5 center-align association-membership-img">
 											<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
@@ -165,7 +165,7 @@
 									
 								</div>
 								<div class="row press-highlight-block">
-									@if(count($business_profile->pressHighlights))>0)
+									@if(count($business_profile->pressHighlights)>0)
 										@foreach($business_profile->pressHighlights as $pressHighlight)
 											<div class="col s6 m4 l2 paper_img press-highlight-img">
 												<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>

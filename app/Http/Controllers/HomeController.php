@@ -511,13 +511,14 @@ class HomeController extends Controller
         //manufacture
         if($business_profile->business_type == 1 )
         {
-            $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','manufactureProducts.product_images'])->findOrFail($id);
+            
+            $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
             return view('manufacture_profile_view_by_user.index',compact('business_profile'));
         }
         //wholesaler
         if($business_profile->business_type == 2 )
         {
-            $business_profile=BusinessProfile::with(['companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','wholesalerProducts.images'])->findOrFail($id);
+            $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
             return view('wholesaler_profile_view_by_user.index',compact('business_profile'));
         }
     }

@@ -70,39 +70,51 @@
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<div class="company_stuff center-align row">
+						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+							@if($company_overview->name=='floor_space')
 							<div class="col s6 m3 l2">
 								<div class="company_stuff_img">
 									<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
 								</div>
 								<div class="title">Floor Space</div>
-								<div class="quantity">2,50,000 sqr ft</div>
+								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 							</div>
+							@endif
+							@if($company_overview->name=='no_of_machines')
 							<div class="col s6 m3 l2">
 								<div class="company_stuff_img">
 									<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
 								</div>
 								<div class="title">No. of Machines</div>
-								<div class="quantity">1470 pcs</div>
+								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 							</div>
+							@endif
+							@if($company_overview->name=='production_capacity')
 							<div class="col s6 m3 l3">
 								<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" /> 
 								<div class="title">Production Capacity</div>
-								<div class="quantity">3,50,000 pcs</div>
+								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 							</div>
+							@endif
+							@if($company_overview->name=='number_of_worker')
 							<div class="col s6 m3 l2">
 								<div class="company_stuff_img">
 									<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
 								</div>
 								<div class="title">No. of workers</div>
-								<div class="quantity">1300</div>
+								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 							</div>
+							@endif
+							@if($company_overview->name=='number_of_female_worker')
 							<div class="col s6 m3 l3">
 								<div class="company_stuff_img">
 									<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
 								</div>
 								<div class="title">No. of female workers</div>
-								<div class="quantity">1000</div>
+								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 							</div>
+							@endif
+						@endforeach
 						</div>
 						<!-- company_stuff -->
 						<div class="contentBox">
@@ -122,13 +134,22 @@
 						<!-- contentBox -->
 						<div class="certifications">
 							<h3>Certifications</h3>
-							<div class="row">
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/accord.png')}}" alt="" /></div>
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/sedex.png')}}" alt="" /></div>
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/iso.png')}}" alt="" /></div>
-								<div class="col m3 l3"><img src="{{asset('images/frontendimages/new_layout_images/alliance.png')}}" alt="" /></div>
+							<div class="row certifications-block">
+							@if(count($business_profile->certifications)>0)
+								@foreach($business_profile->certifications as $certification)
+								<div class="col m3 l3"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+								@endforeach
+							@else
+								<div class="card-alert card cyan lighten-5">
+									<div class="card-content cyan-text">
+										<p>INFO : No data found.</p>
+									</div>
+								</div>
+							@endif
 							</div>
+
 						</div>
+						
 						<!-- certifications -->
 						<div class="profile_product_wrap product_wrapper">
 							<div class="row top_titleWrap">
@@ -224,72 +245,48 @@
 						<!-- factory_images -->
 						<div class="main_buyers_wrap">
 							<h3>Main Buyers</h3>
-							<div class="buyers_logo_wrap row">
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/gemo.png')}}" alt="" /> </a></div>
-									<h5>GEMO GMBH</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/newyork.png')}}" alt="" /></a> </div>
-									<h5>Newyorker Corp.</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/marisa.png')}}" alt="" /></a> </div>
-									<h5>Marisa Group</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/dansk.png')}}" alt="" /></a> </div>
-									<h5>Dansk Supermarked</h5>
-								</div>
+							<div class="buyers_logo_wrap row main-buyers-block">
+								@if(count($business_profile->mainBuyers)>0)
+								@foreach($business_profile->mainBuyers as $mainBuyers)
+									<div class="col s6 m4 l3">
+										<div class="logoBox"><a href="javascript:void(0);"><img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt=""> </a></div>
+										<h5>{{$mainBuyers->title}}</h5>
+									</div>
+								@endforeach
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>
+								@endif
 							</div>
-							<div class="buyers_logo_wrap row">
-								<div class="col s6 m4 l3 center-align">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/tally_weijl.png')}}"  alt="" /></a> </div>
-									<h5>Tally Weijl Fashion</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/takko.png')}}" alt="" /></a> </div>
-									<h5>Takko Fashion</h5>
-								</div>
-								<div class="col s6 m4 l3">
-									<div class="logoBox"><a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/us_polo_assn.png')}}" alt="" /></a> </div>
-									<h5>US Polo Assosiation</h5>
-								</div>
-								<div class="col s6 m4 l3 center-align">
-									<div class="logoBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/suzy.png')}}" /></a> </div>
-									<h5>Suzy Shier</h5>
-								</div>
-							</div>
+							
 						</div>
 						<!-- main_buyers logo -->
 						<div class="export_destination_wrap">
 							<h3>Export Destinations</h3>
-							<div class="row flag_wrap center-align">
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/germany.png')}}" alt="" /></a></div>
-									<h5>DE: Germany</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/greece_gla.png')}}" alt="" /></a></div>
-									<h5>EL: Grece</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/hungary.png')}}" alt="" /></a></div>
-									<h5>HU: Hungary</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/ireland.png')}}" alt="" /></a></div>
-									<h5>IE: Ireland</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/italy.png')}}" alt="" /></a></div>
-									<h5>IT: Italy</h5>
-								</div>
-								<div class="col s6 m4 l2 flagBox">
-									<div class="flag_img"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/latvia.png')}}" alt="" /></a></div>
-									<h5>LV: Latvia</h5>
-								</div>
+							<div class="row flag_wrap center-align export-destination-block">
+								@if(count($business_profile->exportDestinations)>0)
+									@foreach($business_profile->exportDestinations as $exportDestination)
+										<div class="col s6 m4 l2">
+											<div class="flag_img export-destination-img">
+												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+											</div>
+											<h5>{{$exportDestination->title}}</h5>
+										</div>
+									@endforeach
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>
+								@endif
+								
 							</div>
+
+							
 						</div>
 						<!-- export_destination -->
 						<div  class="owner_info_wrap">

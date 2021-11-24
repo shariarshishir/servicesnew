@@ -1,5 +1,4 @@
-
-<!-- Home tabcontent end -->
+<!-- profile tabcontent end -->
 <div id="profile" class="tabcontent">
 <div class="overview_table_wrap">
 		<div class="row top_titleWrap">

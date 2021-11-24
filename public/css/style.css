@@ -122,8 +122,8 @@ a {
     color: #393939;
     max-width: 186px;
     border: 2px solid #73D578;
-    min-height: 45px;
-    line-height: 42px;
+    /* min-height: 45px;
+    line-height: 42px; */
     text-align: center;
     border-radius: 10px;
     font-weight: 500;
@@ -629,9 +629,10 @@ textarea:focus {
     font-size: 18px;
     font-weight: 500;
 }
-.productBox {
+.product_wrapper .productBox {
     padding: 0 30px !important;
     margin-bottom: 50px;
+    max-height: 400px;
 }
 
 .product_wrapper .slick-list {
@@ -677,10 +678,16 @@ textarea:focus {
     padding: 20px 0 10px;
 }
 .productBox .priceBox .price {
-    font-size: 15px;
     color: #0A0A0A;
-    padding-top: 8px;
+    font-size: 25px;
+    font-weight: 500;
     /*padding-right: 0;*/
+    line-height: 30px;
+}
+.productBox .priceBox .price .price_negotiable {
+    color: #448547;
+    font-size: 18px;
+    font-weight: 400;
 }
 .productBox h4,
 .productBox h4 a {
@@ -959,7 +966,10 @@ textarea:focus {
 
 .profile_contentCol .add-new-product-button .green {
     height: 45px;
-    line-height: 30px;
+    line-height: 35px;
+}
+.profile_contentCol .add-new-product-button .green .material-icons {
+    float: left;
 }
 .profile_contentCol .tabcontent h3 {
     font-size: 20px;
@@ -1008,6 +1018,8 @@ textarea:focus {
     padding: 0 15px;
 }
 .profile_tabNav_wrap .productBox .priceBox .apperal {
+
+
     /*
     padding-left: 15px;
     padding-top: 0;
@@ -1495,6 +1507,8 @@ textarea:focus {
 
 
 /* **************************************** */
+
+
 .product_details_wrapper {
     padding: 50px 0;
 }
@@ -3494,6 +3508,37 @@ div.dataTables_wrapper div.dataTables_info {
     background: #448547;
     box-shadow: none;
     color: #FFFFFF;
+}
+
+.pagination-block-wrapper nav {
+    background: none;
+    text-align: center;
+    box-shadow: none;
+}   
+.pagination-block-wrapper nav .pagination {
+    width: 100%;
+}
+.pagination-block-wrapper nav .pagination li {
+    float: inherit;
+}
+.pagination-block-wrapper nav .pagination li.active {
+    background: none;
+}
+.pagination-block-wrapper nav .pagination li .page-link {
+    font-size: 20px;
+}
+.pagination-block-wrapper nav .pagination li a:link,
+.pagination-block-wrapper nav .pagination li a:active,
+.pagination-block-wrapper nav .pagination li a:visited {
+    font-size: 20px;
+    padding: 5px 20px;
+    line-height: 30px;
+}
+
+.pagination-block-wrapper nav .pagination li.active .page-link {
+    background: #448547;
+    color: #fff;
+    padding: 5px 15px;
 }
 /* order css start */
 

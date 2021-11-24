@@ -159,7 +159,13 @@
                         $('#errors').empty();
                         $.each(data.data, function(key, item){
                            $('.'+item.name+'_value').text(item.value);
-                           $('.'+item.name+'_status').text(item.status);
+                           if(item.status == true){
+                            $('.'+item.name+'_status').css("color", "green");
+                           }else{
+                            $('.'+item.name+'_status').css("color", "gray");
+                           }
+
+
                         });
                         $('#company-overview-modal').modal('close');
                        //console.log(data);
@@ -544,7 +550,7 @@
     //Add and remove row for production-flow-and-manpower dynamically
     function addProductionFlowAndManpower()
     {
-    
+
         let totalChild = $('.production-flow-and-manpower-table-block tbody').children().length;
         var html = '<tr>';
         html +='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
@@ -595,17 +601,17 @@
                 html += '</tr>';
 
                 $('.production-flow-and-manpower-table-body').append(html);
-                
+
             }
         }
         else{
-            
+
             $('.production-flow-and-manpower-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.production-flow-and-manpower-table-body').append(html);
         }
 
-      
+
 
         $('#production-flow-and-manpower-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -664,7 +670,7 @@
         var nohtml="";
         if(certifications.length >0){
             $('.certifications-block').html(nohtml);
-          
+
             for(let i = 0;i <certifications.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+certifications[i].image;
@@ -674,7 +680,7 @@
                 html +='</div>';
                 $('.certifications-block').append(html);
             }
-          
+
         }
         $('#certification-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -696,7 +702,7 @@
     });
 
 
-    //delete certification 
+    //delete certification
     $(document).on('click', '.remove-certificate',function(e)
     {
         e.preventDefault();
@@ -711,7 +717,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("certification.delete") }}',
@@ -797,7 +803,7 @@
         var nohtml="";
         if(mainBuyers.length >0){
             $('.main-buyers-block').html(nohtml);
-          
+
             for(let i = 0;i < mainBuyers.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+mainBuyers[i].image;
@@ -809,7 +815,7 @@
                 $('.main-buyers-block').append(html);
             }
         }
-        
+
         $('#main-buyers-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -849,7 +855,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("mainbuyers.delete") }}',
@@ -897,7 +903,7 @@
 //export destination add remove
     function addExportDestinationDetails()
     {
-        
+
         $('#export-destination-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
@@ -912,7 +918,7 @@
     {
         $(el).parent().parent().remove();
     }
-     //submit form for export destination 
+     //submit form for export destination
 
      $('#export-destination-upload-form').on('submit',function(e){
     e.preventDefault();
@@ -952,7 +958,7 @@
                 $('.export-destination-block').append(html);
             }
         }
-        
+
         $('#export-destination-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -990,7 +996,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("exportdestinations.delete") }}',
@@ -1038,11 +1044,11 @@
 
 
 
-     // association membership add or remove 
+     // association membership add or remove
 
     function addAssociationMembershipDetails()
     {
-        
+
         $('#association-membership-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
@@ -1084,23 +1090,23 @@
         var nohtml="";
         if(associationMemberships.length >0){
             $('.association-membership-block').html(nohtml);
-          
+
             for(let i = 0;i < associationMemberships.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
                 html +='<div class="col s12 m6 l5 center-align association-membership-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                html +='<div class="imgbox">'; 
+                html +='<div class="imgbox">';
                 html +='<img src="'+image+'" alt="">';
                 html +='</div>';
                 html +='<p>'+associationMemberships[i].title+'</p>';
                 html +='</div>';
-                
+
                 $('.association-membership-block').append(html);
 
             }
         }
-        
+
         $('#association-membership-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -1137,7 +1143,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("associationmemberships.delete") }}',
@@ -1156,7 +1162,7 @@
                                         var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
                                         html +='<div class="col s12 m6 l5 center-align association-membership-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                        html +='<div class="imgbox">'; 
+                                        html +='<div class="imgbox">';
                                         html +='<img src="'+image+'" alt="">';
                                         html +='</div>';
                                         html +='<p>'+associationMemberships[i].title+'</p>';
@@ -1183,12 +1189,12 @@
                 return false;
             })
     });
-    
+
 
     //submit form of PR highlight
     function addPressHighlightDetails()
     {
-        
+
         $('#press-highlight-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
@@ -1203,7 +1209,7 @@
     {
         $(el).parent().parent().remove();
     }
-    
+
     //remove press highlight
     $('#press-highlight-upload-form').on('submit',function(e){
     e.preventDefault();
@@ -1229,7 +1235,7 @@
         var nohtml="";
         if(pressHighlights.length >0){
             $('.press-highlight-block').html(nohtml);
-          
+
             for(let i = 0;i < pressHighlights.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+pressHighlights[i].image;
@@ -1239,7 +1245,7 @@
                 html +='<img src="'+image+'" alt="">';
                 html +='</div>';
                 html +='</div>';
-                
+
                 $('.press-highlight-block').append(html);
 
             }
@@ -1248,7 +1254,7 @@
             $('.press-highlight-block').html(nohtml);
 
         }
-        
+
         $('#press-highlight-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -1285,7 +1291,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("presshighlights.delete") }}',
@@ -1350,7 +1356,7 @@
 
 
     //submit form for business terms
-   
+
     $('#business-term-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1416,7 +1422,7 @@
 
 
     //submit form for sampling
-   
+
     $('#sampling-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1479,10 +1485,10 @@
     }
 
 
-    
+
 
     //submit form for special customization
-   
+
     $('#special-customization-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1546,9 +1552,9 @@
 
 
 
-    
+
     //submit form for sustainability-commitment
-   
+
     $('#sustainability-commitment-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1595,7 +1601,7 @@
 
 
     //submit form for worker walfare and csr
-   
+
     $('#worker-walfare-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1606,10 +1612,10 @@
       success:function(response){
         var walfare=response.walfare;
         $.each(JSON.parse(walfare.walfare_and_csr), function(index) {
-                 
+
                     if(this.value == 1 && this.name == 'healthcare_facility'){
                             //$('#health-care').attr('checked', 'checked');
-                            $('input[name=healthcare_facility][value=1]').attr('checked', true); 
+                            $('input[name=healthcare_facility][value=1]').attr('checked', true);
                     }else if(this.value == 1 && this.name == 'doctor'){
                         //    $('#doctor').attr('checked', 'checked');
                         $('input[name=doctor][value=1]').attr('checked', true);
@@ -1626,9 +1632,9 @@
                            //$('#health-care').attr('checked', 'checked');
                            $('input[name=social_work][value=1]').attr('checked', true);
                     }
-                    
+
                 });
-        
+
 
         $('#worker-walfare-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1647,7 +1653,7 @@
 
 
      //submit form for worker walfare and csr
-   
+
      $('#security-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1658,16 +1664,16 @@
       success:function(response){
         var security=response.security;
         $.each(JSON.parse(security.security_and_others), function(index) {
-                 
+
                     if(this.value == 1 && this.name == 'fire_exit'){
-                            $('input[name=fire_exit][value=1]').attr('checked', true); 
+                            $('input[name=fire_exit][value=1]').attr('checked', true);
                     }
                     else if(this.value == 0 && this.name == 'fire_exit'){
                         $('.fire-exit-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'fire_hydrant'){
                         $('input[name=fire_hydrant][value=1]').attr('checked', true);
-                    
+
                     }
                     else if(this.value == 0 && this.name == 'fire_hydrant'){
                         $('.fire-hydrant-unchecked').attr('checked','checked');
@@ -1684,9 +1690,9 @@
                     else if(this.value == 0 && this.name == 'protocols'){
                         $('.protocols-unchecked').attr('checked','checked');
                     }
-                    
+
                 });
-        
+
 
         $('#security-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1709,7 +1715,7 @@
 
 
 
-    
-     
+
+
     </script>
 @endpush

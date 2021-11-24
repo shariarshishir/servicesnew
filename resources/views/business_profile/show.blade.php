@@ -553,14 +553,22 @@
 								</div>
 							</div>
 							<div class="row certifications-block">
-								@foreach($business_profile->certifications as $certification)
-								<div class="col m3 l3">
-									<div class="certificate_img">
-										<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
-										<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+								@if(count($business_profile->certifications)>0)
+									@foreach($business_profile->certifications as $certification)
+									<div class="col m3 l3">
+										<div class="certificate_img">
+											<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
+											<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+										</div>
 									</div>
-								</div>
-								@endforeach
+									@endforeach
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>
+								@endif
 							</div>
 						</div>
 						<div class="main_buyers_wrap">
@@ -574,15 +582,24 @@
 								</div>
 							</div>
 							<div class="buyers_logo_wrap row main-buyers-block">
-								@foreach($business_profile->mainBuyers as $mainBuyers)
-								<div class="col s6 m4 l3">
-									<div class="main_buyer_img">
-										<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
-										<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
-										<h5>{{$mainBuyers->title}}</h5>
+								@if(count($business_profile->mainBuyers)>0)
+									@foreach($business_profile->mainBuyers as $mainBuyers)
+									<div class="col s6 m4 l3">
+										<div class="main_buyer_img">
+											<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
+											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+											<h5>{{$mainBuyers->title}}</h5>
+										</div>
 									</div>
-								</div>
-								@endforeach
+									@endforeach
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>
+								@endif
+								
 							</div>
 						
 						</div>
@@ -597,17 +614,27 @@
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
+								
 								<div class="flagBox export-destination-block">
-									@foreach($business_profile->exportDestinations as $exportDestination)
-									<div class="col s6 m4 l2">
-										<div class="flag_img export-destination-img">
-											<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-											<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+									@if(count($business_profile->exportDestinations)>0)
+										@foreach($business_profile->exportDestinations as $exportDestination)
+										<div class="col s6 m4 l2">
+											<div class="flag_img export-destination-img">
+												<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+											</div>
+											<h5>{{$exportDestination->title}}</h5>
 										</div>
-										<h5>{{$exportDestination->title}}</h5>
+										@endforeach
+									@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
 									</div>
-									@endforeach
+									@endif
 								</div>
+								
 							</div>
 
 							<!-- <div class="row flag_wrap center-align">
@@ -761,11 +788,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Healthcare Facility</span>
 										<label class="radio_box col s2 m2 l2">
-											<input class="with-gap" name="healthcare_facility"  class="health-facility-checked" disabled  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
+											<input class="with-gap health-facility-checked" name="healthcare_facility_disable"   disabled  type="radio" value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 											<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-											<input class="with-gap" name="healthcare_facility" class="health-facility-unchecked"  disabled  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+											<input class="with-gap health-facility-unchecked" name="healthcare_facility_disable"   disabled  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 											<span>No</span>
 										</label>
 							
@@ -775,11 +802,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">On sight Doctor</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="doctor"  class="doctor-checked"  type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap doctor-checked" name="doctor_disable"   type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="doctor" class="doctor-unchecked"  value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap doctor-unchecked" name="doctor_disable"   value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -788,11 +815,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6 ">On sight Day Care</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="day_care" class="day-care-checked" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
+										<input class="with-gap day-care-checked" name="day_care_disable" class="" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="day_care" class="day-care-unchecked" value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap day-care-unchecked" name="day_care_disable" class="" value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -806,11 +833,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Playground</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="playground" class="playground-checked"   type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
+										<input class="with-gap playground-checked" name="playground_disable"    type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }}>
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="playground"  class="playground-unchecked"  value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap playground-unchecked" name="playground_disable"    value="0" type="radio" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -819,11 +846,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Maternity Leave</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="maternity_leave" class="maternity-leave-checked" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
+										<input class="with-gap maternity-leave-checked" name="maternity_leave_disable"  type="radio" disabled  value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="maternity_leave" class="maternity-leave-unchecked" type="radio" value="0" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
+										<input class="with-gap maternity-leave-unchecked" name="maternity_leave_disable" type="radio" disabled  value="0"  {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 										<span>No</span>
 										</label>
 									</div>
@@ -832,11 +859,11 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Social work</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="social_work"  class="social-work-checked" type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
+										<input class="with-gap social-work-checked" name="social_work_disable"   type="radio" value="1" disabled {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap" name="social_work"  class="social-work-unchecked" type="radio" value="0" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }} >
+										<input class="with-gap social-work-unchecked" name="social_work_disable"  type="radio" value="0" disabled {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }} >
 										<span>No</span>
 										</label>
 									</div>
@@ -845,76 +872,76 @@
 								</div>
 								@else
 								<div class="col s12 m6 l6">
-								<div class="welfare_box row">
-									<span class="title col s8 m6 l6">Healthcare Facility</span>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="healthcare_facility"  class="health-facility-checked"  type="radio" value="1" checked="" disabled>
-									<span>Yes</span>
-									</label>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="healthcare_facility" class="health-facility-unchecked"  disabled  value="0" type="radio" disabled>
-									<span>No</span>
-									</label>
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">Healthcare Facility</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap health-facility-checked" name="healthcare_facility_disable"    type="radio" value="1" checked="" disabled>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap health-facility-unchecked" name="healthcare_facility_disable"  disabled  value="0" type="radio" disabled>
+										<span>No</span>
+										</label>
+									</div>
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">On sight Doctor</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap doctor-checked" name="doctor_disable"   type="radio" value="1" checked="" disabled>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap doctor-unchecked" name="doctor_disable"   value="0" type="radio" disabled>
+										<span>No</span>
+										</label>
+									</div>
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6 ">On sight Day Care</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap day-care-checked" name="day_care_disable" class="" type="radio" value="1" checked="" disabled>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap day-care-unchecked" name="day_care_disable" class="" value="0" type="radio" disabled>
+										<span>No</span>
+										</label>
+									</div>
 								</div>
-								<div class="welfare_box row">
-									<span class="title col s8 m6 l6">On sight Doctor</span>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="doctor"  class="doctor-checked"  type="radio" value="1" checked="" disabled>
-									<span>Yes</span>
-									</label>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="doctor" class="doctor-unchecked"  value="0" type="radio" disabled>
-									<span>No</span>
-									</label>
+								<div class="col s12 m6 l6">
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">Playground</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap playground-checked" name="playground_disable"    type="radio" value="1" checked="" disabled>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap playground-unchecked" name="playground_disable"    value="0" type="radio" disabled>
+										<span>No</span>
+										</label>
+									</div>
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">Maternity Leave</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap maternity-leave-checked" name="maternity_leave_disable"  type="radio" value="1" >
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap maternity-leave-unchecked" name="maternity_leave_disable"  type="radio" value="0" >
+										<span>No</span>
+										</label>
+									</div>
+									<div class="welfare_box row">
+										<span class="title col s8 m6 l6">Social work</span>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap social-work-checked" name="social_work_disable"   type="radio" value="1" checked="" disabled>
+										<span>Yes</span>
+										</label>
+										<label class="radio_box col s2 m2 l2">
+										<input class="with-gap social-work-unchecked" name="social_work_disable"   type="radio" value="0"disabled >
+										<span>No</span>
+										</label>
+									</div>
 								</div>
-								<div class="welfare_box row">
-									<span class="title col s8 m6 l6 ">On sight Day Care</span>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="day_care" class="day-care-checked" type="radio" value="1" checked="" disabled>
-									<span>Yes</span>
-									</label>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="day_care" class="day-care-unchecked" value="0" type="radio" disabled>
-									<span>No</span>
-									</label>
-								</div>
-							</div>
-							<div class="col s12 m6 l6">
-								<div class="welfare_box row">
-									<span class="title col s8 m6 l6">Playground</span>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="playground" class="playground-checked"   type="radio" value="1" checked="" disabled>
-									<span>Yes</span>
-									</label>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="playground"  class="playground-unchecked"  value="0" type="radio" disabled>
-									<span>No</span>
-									</label>
-								</div>
-								<div class="welfare_box row">
-									<span class="title col s8 m6 l6">Maternity Leave</span>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="maternity_leave" class="maternity-leave-checked" type="radio" value="1" checked="" disabled>
-									<span>Yes</span>
-									</label>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="maternity_leave" class="maternity-leave-unchecked" type="radio" value="0" disabled>
-									<span>No</span>
-									</label>
-								</div>
-								<div class="welfare_box row">
-									<span class="title col s8 m6 l6">Social work</span>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="social_work"  class="social-work-checked" type="radio" value="1" checked="" disabled>
-									<span>Yes</span>
-									</label>
-									<label class="radio_box col s2 m2 l2">
-									<input class="with-gap" name="social_work"  class="social-work-unchecked" type="radio" value="0"disabled >
-									<span>No</span>
-									</label>
-								</div>
-							</div>
-							@endif
+								@endif
                             </div>
 
 								
@@ -1093,6 +1120,7 @@
 								</div>
 							</div>
 							<div class="row membership_textBox association-membership-block">
+								@if(count($business_profile->associationMemberships)>0)
 							    @foreach($business_profile->associationMemberships as $associationMembership)
 								<div class="col s12 m6 l5 center-align association-membership-img">
 									<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
@@ -1100,6 +1128,13 @@
 									<p>{{$associationMembership->title}}</p>
 								</div>
 								@endforeach
+								@else
+								<div class="card-alert card cyan lighten-5">
+									<div class="card-content cyan-text">
+										<p>INFO : No data found.</p>
+									</div>
+								</div>
+								@endif
 							</div>
 						</div>
 						<div class="pr_highlights_wrap">
@@ -1113,6 +1148,7 @@
 								</div>
 							</div>
 							<div class="row press-highlight-block">
+							@if(count($business_profile->pressHighlights)>0)
 							@foreach($business_profile->pressHighlights as $pressHighlight)
 								<div class="col s6 m4 l2 paper_img press-highlight-img">
 									<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
@@ -1121,6 +1157,13 @@
 									</div>
 								</div>
 							@endforeach
+							@else
+								<div class="card-alert card cyan lighten-5">
+									<div class="card-content cyan-text">
+										<p>INFO : No data found.</p>
+									</div>
+								</div>
+							@endif
 								
 							</div>
 						</div>

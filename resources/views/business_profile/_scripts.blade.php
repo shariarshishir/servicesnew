@@ -676,6 +676,15 @@
             }
           
         }
+        else{
+                $('.certifications-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.certifications-block').append(html);
+            }
         $('#certification-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -736,6 +745,12 @@
                                 }
                                 else{
                                     $('.certifications-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+                                    html +='<div class="card-content cyan-text">';
+                                    html +='<p>INFO : No data found.</p>';
+                                    html +='</div>';
+                                    $('.certifications-block').append(html);
                                 }
                                 $('#certification-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -809,6 +824,15 @@
                 $('.main-buyers-block').append(html);
             }
         }
+        else{
+                $('.main-buyers-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.main-buyers-block').append(html);
+            }
         
         $('#main-buyers-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -875,6 +899,12 @@
                                 }
                                 else{
                                     $('.main-buyers-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+                                    html +='<div class="card-content cyan-text">';
+                                    html +='<p>INFO : No data found.</p>';
+                                    html +='</div>';
+                                    $('.main-buyers-block').append(html);
                                 }
                                 $('#main-buyers-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -952,6 +982,15 @@
                 $('.export-destination-block').append(html);
             }
         }
+        else{
+                $('.export-destination-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.export-destination-block').append(html);
+            }
         
         $('#export-destination-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1018,6 +1057,12 @@
                                 }
                                 else{
                                     $('.export-destination-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+                                    html +='<div class="card-content cyan-text">';
+                                    html +='<p>INFO : No data found.</p>';
+                                    html +='</div>';
+                                    $('.export-destination-block').append(html);
                                 }
                                 $('#export-destination-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1100,6 +1145,15 @@
 
             }
         }
+        else{
+                $('.association-membership-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.association-membership-block').append(html);
+            }
         
         $('#association-membership-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1166,6 +1220,12 @@
                                 }
                                 else{
                                     $('.association-membership-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+									html +='<div class="card-content cyan-text">';
+									html +='<p>INFO : No data found.</p>';
+									html +='</div>';
+                                    $('.association-membership-block').append(html);
                                 }
                                 $('#association-membership-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1245,9 +1305,14 @@
             }
         }
         else{
-            $('.press-highlight-block').html(nohtml);
-
-        }
+                $('.press-highlight-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.press-highlight-block').append(html);
+            }
         
         $('#press-highlight-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1309,6 +1374,15 @@
                                         html +='</div>';
                                         $('.press-highlight-block').append(html);
                                     }
+                                }
+                                else{
+                                    $('.press-highlight-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+									html +='<div class="card-content cyan-text">';
+									html +='<p>INFO : No data found.</p>';
+									html +='</div>';
+                                    $('.press-highlight-block').append(html);
                                 }
                                 $('#press-highlight-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1608,23 +1682,31 @@
         $.each(JSON.parse(walfare.walfare_and_csr), function(index) {
                  
                     if(this.value == 1 && this.name == 'healthcare_facility'){
-                            //$('#health-care').attr('checked', 'checked');
-                            $('input[name=healthcare_facility][value=1]').attr('checked', true); 
-                    }else if(this.value == 1 && this.name == 'doctor'){
-                        //    $('#doctor').attr('checked', 'checked');
-                        $('input[name=doctor][value=1]').attr('checked', true);
+                            $('.health-care-checked').attr('checked', true);
+                            $('input[name=healthcare_facility][value=1]').attr('checked', true);  
+                            $('input[name=healthcare_facility_disable][value=1]').attr('checked', true);
+                           
+                    }
+                    else if(this.value == 1 && this.name == 'doctor'){
+                          $('.doctor-checked').attr('checked', true);
+                          $('input[name=doctor][value=1]').attr('checked', true);
+                          $('input[name=doctor_disable][value=1]').attr('checked', true);
                     }else if(this.value == 1 && this.name == 'day_care'){
-                           //$('#day-care').attr('checked', 'checked');
+                           $('.day-care-checked').attr('checked', true);
                            $('input[name=day_care][value=1]').attr('checked', true);
+                           $('input[name=day_care_disable][value=1]').attr('checked', true);
                     }else if(this.value == 1 && this.name == 'playground'){
-                           //$('#play-ground').attr('checked', 'checked');
+                           $('.play-ground-checked').attr('checked', true);
                            $('input[name=playground][value=1]').attr('checked', true);
+                           $('input[name=playground_disable][value=1]').attr('checked', true);
                     }else if(this.value == 1 && this.name == 'maternity_leave'){
-                        //    $('#maternity-leave-form').attr('checked', 'checked');
-                        $('input[name=maternity_leave][value=1]').attr('checked', true);
+                          $('.maternity-leave-checked').attr('checked', true);
+                          $('input[name=maternity_leave][value=1]').attr('checked', true);
+                          $('input[name=maternity_leave_disable][value=1]').attr('checked', true);
                     }else if(this.value == 1 && this.name == 'social_work'){
-                           //$('#health-care').attr('checked', 'checked');
+                           $('.health-care-checked').attr('checked', true);
                            $('input[name=social_work][value=1]').attr('checked', true);
+                           $('input[name=social_work_disable][value=1]').attr('checked', true);
                     }
                     
                 });

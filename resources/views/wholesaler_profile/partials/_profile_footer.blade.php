@@ -11,3 +11,5 @@
 @include('business_profile._edit_capacity_and_machineries_modal')
 @include('wholesaler_profile.profile_info._scripts')
 @include('business_profile._scripts')
+@include('business_profile._upload_press_highlight_modal')
+@include('business_profile._upload_association_membership_modal')

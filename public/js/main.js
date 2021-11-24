@@ -555,7 +555,7 @@ function addFreshOrderColorSize()
     html += '<td><input class="combat" type="text" value="0" name="xxxl" /></td>';
     html += '<td><input class="combat" type="text" value="0" name="four_xxl" /></td>';
     html += '<td><input class="combat" type="text" value="0" name="one_size" /></td>';
-    html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeFreshOrderColorSize(this)"><i class="material-icons dp48">remove</i></a></td>';
+    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderColorSize(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('#fresh_order_customize_block tbody').append(html);
 }

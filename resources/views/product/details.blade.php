@@ -61,7 +61,7 @@ $reviewsCount = count($productReviews);
             </div>
             <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m9 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
-                    <div class="col s12 m8 l8">
+                    <div class="col s12 m8 l8 product_details_info_wrap">
                         <div class="row">
                             <div class="col s12 m6 l6 left-align">
                                 <div class="seller-store">
@@ -73,9 +73,10 @@ $reviewsCount = count($productReviews);
                                 <!-- <button class="btn_grBorder">Full Stock only</button> -->
                             </div>
                         </div>
-                        <div class="product_description">
+
+                        <!-- <div class="product_description">
                             {!! $product->description !!}
-                        </div>
+                        </div> -->
 
                         
 
@@ -781,6 +782,9 @@ $reviewsCount = count($productReviews);
 
                     <div class="col s12 m4 l4">
                         <div class="single-product-store-information center-align">
+                            <div class="right-align">
+                                <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a>
+                            </div>
                             <div class="card card-with-padding">
                                 <h6>Company Profile</h6>
                                 <div class="company_profile_details">
@@ -858,7 +862,7 @@ $reviewsCount = count($productReviews);
     <div class="row single-product-description-block-wrapper">
         <div class="col s12">
             <ul class="tabs z-depth-1">
-                <li class="tab col m3"><a class="active" href="#product-desciprtion">Description</a></li>
+                <li class="tab col m3"><a class="active" href="#product-desciprtion">Product Description</a></li>
                 <li class="tab col m3"><a href="#product-additional-desciprtion">Additional Information</a></li>
                 <li class="tab col m3"><a href="#product-review" class="product-review-tab">Reviews</a></li>
             </ul>

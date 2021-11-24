@@ -1,5 +1,5 @@
 
-<div id="product-edit-modal-block" class="modal modal-fixed-footer fullscreen-modal">
+<div id="product-edit-modal-block" class="modal fullscreen-modal profile_form_modal">
     <div class="modal-content">
 
             <legend>Edit Product</legend>
@@ -128,9 +128,10 @@
                                             <tbody class="fresh-attr-tbody">
                                             </tbody>
                                         </table>
-                                        <div class="right-align" style="padding-top: 20px">
-                                            <a href="javascript:void(0);" class="btn_green btn waves-effect waves-light green add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
+                                        <div class="add_more_box" style="padding-top: 20px">
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +183,11 @@
 
                                                 </tbody>
                                             </table>
-                                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                            <div class="add_more_box" >
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -235,9 +240,11 @@
                                             <tbody class='ready-attr-tbody'>
                                             </tbody>
                                         </table>
-                                        <div class="right-align" style="padding-top: 20px">
-                                            <a href="javascript:void(0);" class=" btn_green btn waves-effect waves-light green add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                        <div class="add_more_box" style="padding-top: 20px">
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +279,11 @@
 
                                                 </tbody>
                                             </table>
-                                            <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                            <div class="add_more_box" style="padding-top: 20px">
+                                                <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -325,7 +336,11 @@
 
                                             </tbody>
                                         </table>
-                                        <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
+
+                                        <div class="add_more_box">
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -417,9 +432,21 @@
                         <div class="input-field row  right-align">
                             <input type="hidden" name="seller_p_edit_sku">
                             <input type="hidden" name="p_type">
-                            <button type="submit" class="btn_green btn waves-effect waves-light green ">Save</button>
-                            <button type="button" class="btn_green btn modal-close waves-effect waves-light green btn-back-to-product-list">Cancel</button>
+                            
+                           
                         </div>
+
+                        <div class="submit_btn_wrap">
+                            <div class="row">
+                                <div class="col s12 m6 l6 left-align">
+                                    <button type="button" class="modal-close btn_grBorder btn-back-to-product-list">Cancel</button>
+                                </div>
+                                <div class="col s12 m6 l6 right-align">
+                                    <button type="submit" class="btn_green btn waves-effect waves-light green ">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
                         
 
                     </div>  <!-- End product-details-block -->
@@ -444,11 +471,13 @@
     </div>
 
     
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
-    </div>
+    </div> -->
+
+    
 </div>
 
 

@@ -312,7 +312,7 @@
                             $('#product-edit-modal-block .moq-unit-block').show();
                             $.each(data.attr, function (key, item)
                             {
-                                var html='<tr><td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td><td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td> <td><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ></td><td><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="'+item[3]+'" placeholder="Days"></td><td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">remove</i></a></td></tr>';
+                                var html='<tr><td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td><td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td> <td><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ></td><td><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="'+item[3]+'" placeholder="Days"></td><td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td></tr>';
                                 $(".fresh-attr-tbody").append(html);
                             });
 
@@ -333,7 +333,7 @@
                             $(".ready-attr-tbody").html('');
                             $.each(data.attr, function (key, item)
                             {
-                                var html='<tr><td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td><td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td><td><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ></td><td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">remove</i></a></td></tr>';
+                                var html='<tr><td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td><td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td><td><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ></td><td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td></tr>';
                                 $(".ready-attr-tbody").append(html);
                             });
                             $(".ready-attr-tbody-colors-sizes").html('');
@@ -351,7 +351,7 @@
                                     html+='<td><input type="text" value="'+item.xxxl+'" class="form-control " name="color_size[xxxl][]" /></td>';
                                     html+='<td><input type="text" value="'+item.four_xxl+'" class="form-control " name="color_size[four_xxl][]" /></td>';
                                     html+='<td><input type="text" value="'+item.one_size+'" class="form-control " name="color_size[one_size][]" /></td>';
-                                    html+='<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductColorSize(this)"><i class="material-icons dp48">remove</i></a></td>';
+                                    html+='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                                     html+='</tr>';
                                  $(".ready-attr-tbody-colors-sizes").append(html);
                             });
@@ -394,7 +394,7 @@
                                 var html = '<tr>';
                                     html += '<td><input type="text" value="'+item.color+'" class="form-control" name="non_clothing_attr[color][]" /></td>';
                                     html += '<td><input type="text" value="'+item.quantity+'" class="form-control check-price-range-value" name="non_clothing_attr[quantity][]" /></td>';
-                                    html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeNonClothingAttr(this)"><i class="material-icons dp48">remove</i></a></td>';
+                                    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingAttr(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                                     html += '</tr>';
 
                                 $(".non-clothing-color-quantity-tbody").append(html);
@@ -408,7 +408,7 @@
                                     html += '<td><input  name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td>';
                                     html += '<td><input  name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td>';
                                     html += '<td><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$"></td>';
-                                    html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">remove</i></a></td>';
+                                    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                                     html += '</tr>';
                                 $(".edit-non-clothing-prices-breakdown-tbody").append(html);
                             });

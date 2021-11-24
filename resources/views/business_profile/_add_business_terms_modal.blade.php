@@ -24,7 +24,7 @@
 							<tr>
 								<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->title}}" ></td>
 								<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="{{$businessTerm->quantity}}" ></td>
-								<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">remove</i></a></td>
+								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 							</tr>
 							@endforeach
 							@else
@@ -34,19 +34,29 @@
 							@endif
 						</tbody>
 					</table>
-					<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block btn_green" onclick="addBusinessTermDetails()"><i class="material-icons dp48">add</i> Add More</a>
+					<div class="add_more_box">
+						<a href="javascript:void(0);" class="add-more-block" onclick="addBusinessTermDetails()"><i class="material-icons dp48">add</i> Add More</a>
+					</div>
+					
 				</div>
 			</div>
 		</div>
-		
-		<div class="center-align submit_btn_wrap">
-			<button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit
-				<i class="material-icons right">send</i>
-			</button>
+	
+		<div class="submit_btn_wrap">
+			<div class="row">
+				<div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+				<div class="col s12 m6 l6 right-align">
+					<button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit </button>
+				</div>
+			</div>
 		</div>
+
+
 	</form>
-	<div class="modal-footer">
+
+	<!-- <div class="modal-footer">
 		<a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
-	</div>
+	</div> -->
+
 </div>
 </div>

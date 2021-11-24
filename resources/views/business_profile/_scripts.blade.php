@@ -6,43 +6,35 @@
         $(".next_to_business_profile_info, .last-step").click(function()
         {
             //alert("I am here");
+            //collecting values
             var name = $("#business_name").val();
-            /*
             var location = $("#location").val();
+            var businessType = $('select[name="business_type"]').val();
+            var numberOfFactories = $("#number_of_factories").val();
+            var numberOfOutlets = $("#number_of_outlets").val();
+            var tradeLicense = $("#trade_license").val();
+            var industryType = $('select[name="industry_type"]').val();
+            var businessCategoryId = $('select[name="business_category_id"]').val();
+            var representiveName = $("#representive_name").val();
+            var representiveEmail = $("#email").val();
+            var representivePhone = $("#phone").val();
+            var representiveNidPassport = $("#nid_passport").val();
 
-            var businessType = $("#business_type").val();
-            var manufacturerType = $("#manufacturer_type").val();
-            var wholesalerType = $("#wholesaler_type").val();
-
-            var number_of_factories = $("#factories_number").val();
-            var outlets_number = $("#outlets_number").val();
-            var trade_license = $("#trade_license").val();
-            var industry_type = $("#industry_type").val();
-
-            var representative_name = $("#representatives_name").val();
-            var representatives_email = $("#representatives_email").val();
-            var representatives_contact = $("#representatives_contact").val();
-            var representative_nidPassport = $("#representative_nidPassport").val();
-            */
-
+            //setting values
             $("#review_name").html("<b>Name:</b> "+name);
-            /*
             $("#review_location").html("<b>Location:</b> "+location);
+            $("#review_business_type").html("<b>Business Type:</b> "+businessType);
+            $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
+            $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
+            $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
+            $("#review_industry_type").html("<b>Industry Type:</b> "+industryType);
+            $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
 
-            $("#business_type").html("<b>Business Type:</b> "+businessType);
-            $("#manufacturer_type").html("<b>Manufacturer Type:</b> "+manufacturerType);
-            $("#wholesaler_type").html("<b>Wholesaler Type:</b> "+wholesalerType);
+            $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
+            $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
+            $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
+            $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
 
-            $("#number_of_factories").html("<b>Number of Factories:</b> "+number_of_factories);
-            $("#review_outlets_number").html("<b>Outlets NUmber:</b> "+outlets_number);
-            $("#review_trade_license").html("<b>Trade License:</b> "+trade_license);
-            $("#review_industry_type").html("<b>Industry Type:</b> "+industry_type);
-
-            $("#review_representative_name").html("<b>Representative Name:</b> "+representative_name);
-            $("#review_representatives_email").html("<b>Representative Email:</b> "+representatives_email);
-            $("#review_representatives_contact").html("<b>Representative Contact:</b> "+representatives_contact);
-            $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representative_nidPassport);
-            */
 
             if(!name){
                 var alertHtml = '<div class="card-alert card orange lighten-5">';
@@ -51,7 +43,7 @@
                 alertHtml += '</div>';
                 alertHtml += '</div>';
                 $("#information_message").html(alertHtml);
-                $("#review_name").hide();
+                $("#review_name, #review_location, #review_business_type, #review_number_of_factories, #review_number_of_outlets, #review_trade_license, #review_industry_type, #review_business_category_id, #review_representative_name, #review_representatives_email, #review_representatives_contact, #review_representative_nidPassport").hide();
             } else {
                 var infoHtml = '<div class="card-alert card cyan lighten-5">';
                 infoHtml += '<div class="card-content cyan-text">';
@@ -59,10 +51,18 @@
                 infoHtml += '</div>';
                 infoHtml += '</div>';
                 $("#information_message").html(infoHtml);
-                $("#review_name").show();
+                $("#review_name, #review_location, #review_business_type, #review_number_of_factories, #review_number_of_outlets, #review_trade_license, #review_industry_type, #review_business_category_id, #review_representative_name, #review_representatives_email, #review_representatives_contact, #review_representative_nidPassport").show();
             }
         });
 	});
+
+    $(document).on('change', 'input[name="has_representative"]', function(){
+        if($(this).val()==1) {
+            $(".representive_info").hide();
+        } else {
+            $(".representive_info").show();            
+        }
+    })
 
     $(document).on('change', '.select-business-type', function(){
         var value =$('.select-business-type option:selected').val();
@@ -159,7 +159,13 @@
                         $('#errors').empty();
                         $.each(data.data, function(key, item){
                            $('.'+item.name+'_value').text(item.value);
-                           $('.'+item.name+'_status').text(item.status);
+                           if(item.status == true){
+                            $('.'+item.name+'_status').css("color", "green");
+                           }else{
+                            $('.'+item.name+'_status').css("color", "gray");
+                           }
+
+
                         });
                         $('#company-overview-modal').modal('close');
                        //console.log(data);
@@ -544,7 +550,7 @@
     //Add and remove row for production-flow-and-manpower dynamically
     function addProductionFlowAndManpower()
     {
-    
+
         let totalChild = $('.production-flow-and-manpower-table-block tbody').children().length;
         var html = '<tr>';
         html +='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
@@ -595,17 +601,17 @@
                 html += '</tr>';
 
                 $('.production-flow-and-manpower-table-body').append(html);
-                
+
             }
         }
         else{
-            
+
             $('.production-flow-and-manpower-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.production-flow-and-manpower-table-body').append(html);
         }
 
-      
+
 
         $('#production-flow-and-manpower-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -664,7 +670,7 @@
         var nohtml="";
         if(certifications.length >0){
             $('.certifications-block').html(nohtml);
-          
+
             for(let i = 0;i <certifications.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+certifications[i].image;
@@ -674,8 +680,17 @@
                 html +='</div>';
                 $('.certifications-block').append(html);
             }
-          
+
         }
+        else{
+                $('.certifications-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.certifications-block').append(html);
+            }
         $('#certification-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -696,7 +711,7 @@
     });
 
 
-    //delete certification 
+    //delete certification
     $(document).on('click', '.remove-certificate',function(e)
     {
         e.preventDefault();
@@ -711,7 +726,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("certification.delete") }}',
@@ -736,6 +751,12 @@
                                 }
                                 else{
                                     $('.certifications-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+                                    html +='<div class="card-content cyan-text">';
+                                    html +='<p>INFO : No data found.</p>';
+                                    html +='</div>';
+                                    $('.certifications-block').append(html);
                                 }
                                 $('#certification-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -797,7 +818,7 @@
         var nohtml="";
         if(mainBuyers.length >0){
             $('.main-buyers-block').html(nohtml);
-          
+
             for(let i = 0;i < mainBuyers.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+mainBuyers[i].image;
@@ -809,6 +830,15 @@
                 $('.main-buyers-block').append(html);
             }
         }
+        else{
+                $('.main-buyers-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.main-buyers-block').append(html);
+            }
         
         $('#main-buyers-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -849,7 +879,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("mainbuyers.delete") }}',
@@ -875,6 +905,12 @@
                                 }
                                 else{
                                     $('.main-buyers-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+                                    html +='<div class="card-content cyan-text">';
+                                    html +='<p>INFO : No data found.</p>';
+                                    html +='</div>';
+                                    $('.main-buyers-block').append(html);
                                 }
                                 $('#main-buyers-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -897,7 +933,7 @@
 //export destination add remove
     function addExportDestinationDetails()
     {
-        
+
         $('#export-destination-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
@@ -912,7 +948,7 @@
     {
         $(el).parent().parent().remove();
     }
-     //submit form for export destination 
+     //submit form for export destination
 
      $('#export-destination-upload-form').on('submit',function(e){
     e.preventDefault();
@@ -952,6 +988,15 @@
                 $('.export-destination-block').append(html);
             }
         }
+        else{
+                $('.export-destination-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.export-destination-block').append(html);
+            }
         
         $('#export-destination-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -990,7 +1035,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("exportdestinations.delete") }}',
@@ -1018,6 +1063,12 @@
                                 }
                                 else{
                                     $('.export-destination-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+                                    html +='<div class="card-content cyan-text">';
+                                    html +='<p>INFO : No data found.</p>';
+                                    html +='</div>';
+                                    $('.export-destination-block').append(html);
                                 }
                                 $('#export-destination-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1038,11 +1089,11 @@
 
 
 
-     // association membership add or remove 
+     // association membership add or remove
 
     function addAssociationMembershipDetails()
     {
-        
+
         $('#association-membership-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
@@ -1084,22 +1135,31 @@
         var nohtml="";
         if(associationMemberships.length >0){
             $('.association-membership-block').html(nohtml);
-          
+
             for(let i = 0;i < associationMemberships.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
                 html +='<div class="col s12 m6 l5 center-align association-membership-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                html +='<div class="imgbox">'; 
+                html +='<div class="imgbox">';
                 html +='<img src="'+image+'" alt="">';
                 html +='</div>';
                 html +='<p>'+associationMemberships[i].title+'</p>';
                 html +='</div>';
-                
+
                 $('.association-membership-block').append(html);
 
             }
         }
+        else{
+                $('.association-membership-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.association-membership-block').append(html);
+            }
         
         $('#association-membership-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1137,7 +1197,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("associationmemberships.delete") }}',
@@ -1156,7 +1216,7 @@
                                         var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
                                         html +='<div class="col s12 m6 l5 center-align association-membership-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                        html +='<div class="imgbox">'; 
+                                        html +='<div class="imgbox">';
                                         html +='<img src="'+image+'" alt="">';
                                         html +='</div>';
                                         html +='<p>'+associationMemberships[i].title+'</p>';
@@ -1166,6 +1226,12 @@
                                 }
                                 else{
                                     $('.association-membership-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+									html +='<div class="card-content cyan-text">';
+									html +='<p>INFO : No data found.</p>';
+									html +='</div>';
+                                    $('.association-membership-block').append(html);
                                 }
                                 $('#association-membership-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1183,12 +1249,12 @@
                 return false;
             })
     });
-    
+
 
     //submit form of PR highlight
     function addPressHighlightDetails()
     {
-        
+
         $('#press-highlight-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
@@ -1203,7 +1269,7 @@
     {
         $(el).parent().parent().remove();
     }
-    
+
     //remove press highlight
     $('#press-highlight-upload-form').on('submit',function(e){
     e.preventDefault();
@@ -1229,7 +1295,7 @@
         var nohtml="";
         if(pressHighlights.length >0){
             $('.press-highlight-block').html(nohtml);
-          
+
             for(let i = 0;i < pressHighlights.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+pressHighlights[i].image;
@@ -1239,15 +1305,20 @@
                 html +='<img src="'+image+'" alt="">';
                 html +='</div>';
                 html +='</div>';
-                
+
                 $('.press-highlight-block').append(html);
 
             }
         }
         else{
-            $('.press-highlight-block').html(nohtml);
-
-        }
+                $('.press-highlight-block').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.press-highlight-block').append(html);
+            }
         
         $('#press-highlight-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1285,7 +1356,7 @@
                 cancelButtonText: "No, cancel!",
                 reverseButtons: !0
             }).then(function (e) {
-                if (e.value === true) 
+                if (e.value === true)
                 {
                     $.ajax({
                         url: '{{ route("presshighlights.delete") }}',
@@ -1309,6 +1380,15 @@
                                         html +='</div>';
                                         $('.press-highlight-block').append(html);
                                     }
+                                }
+                                else{
+                                    $('.press-highlight-block').html(nohtml);
+                                    var html='';
+                                    html +='<div class="card-alert card cyan lighten-5">';
+									html +='<div class="card-content cyan-text">';
+									html +='<p>INFO : No data found.</p>';
+									html +='</div>';
+                                    $('.press-highlight-block').append(html);
                                 }
                                 $('#press-highlight-upload-form-modal').modal('close');
                                 swal("Done!", response.message,"success");
@@ -1350,7 +1430,7 @@
 
 
     //submit form for business terms
-   
+
     $('#business-term-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1416,7 +1496,7 @@
 
 
     //submit form for sampling
-   
+
     $('#sampling-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1479,10 +1559,10 @@
     }
 
 
-    
+
 
     //submit form for special customization
-   
+
     $('#special-customization-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1546,9 +1626,9 @@
 
 
 
-    
+
     //submit form for sustainability-commitment
-   
+
     $('#sustainability-commitment-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1595,7 +1675,7 @@
 
 
     //submit form for worker walfare and csr
-   
+
     $('#worker-walfare-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1606,29 +1686,37 @@
       success:function(response){
         var walfare=response.walfare;
         $.each(JSON.parse(walfare.walfare_and_csr), function(index) {
-                 
+
                     if(this.value == 1 && this.name == 'healthcare_facility'){
-                            //$('#health-care').attr('checked', 'checked');
-                            $('input[name=healthcare_facility][value=1]').attr('checked', true); 
-                    }else if(this.value == 1 && this.name == 'doctor'){
-                        //    $('#doctor').attr('checked', 'checked');
-                        $('input[name=doctor][value=1]').attr('checked', true);
-                    }else if(this.value == 1 && this.name == 'day_care'){
-                           //$('#day-care').attr('checked', 'checked');
-                           $('input[name=day_care][value=1]').attr('checked', true);
-                    }else if(this.value == 1 && this.name == 'playground'){
-                           //$('#play-ground').attr('checked', 'checked');
-                           $('input[name=playground][value=1]').attr('checked', true);
-                    }else if(this.value == 1 && this.name == 'maternity_leave'){
-                        //    $('#maternity-leave-form').attr('checked', 'checked');
-                        $('input[name=maternity_leave][value=1]').attr('checked', true);
-                    }else if(this.value == 1 && this.name == 'social_work'){
-                           //$('#health-care').attr('checked', 'checked');
-                           $('input[name=social_work][value=1]').attr('checked', true);
+                            $('.health-care-checked').attr('checked', true);
+                            $('input[name=healthcare_facility][value=1]').attr('checked', true);  
+                            $('input[name=healthcare_facility_disable][value=1]').attr('checked', true);
+                           
                     }
-                    
+                    else if(this.value == 1 && this.name == 'doctor'){
+                          $('.doctor-checked').attr('checked', true);
+                          $('input[name=doctor][value=1]').attr('checked', true);
+                          $('input[name=doctor_disable][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'day_care'){
+                           $('.day-care-checked').attr('checked', true);
+                           $('input[name=day_care][value=1]').attr('checked', true);
+                           $('input[name=day_care_disable][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'playground'){
+                           $('.play-ground-checked').attr('checked', true);
+                           $('input[name=playground][value=1]').attr('checked', true);
+                           $('input[name=playground_disable][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'maternity_leave'){
+                          $('.maternity-leave-checked').attr('checked', true);
+                          $('input[name=maternity_leave][value=1]').attr('checked', true);
+                          $('input[name=maternity_leave_disable][value=1]').attr('checked', true);
+                    }else if(this.value == 1 && this.name == 'social_work'){
+                           $('.health-care-checked').attr('checked', true);
+                           $('input[name=social_work][value=1]').attr('checked', true);
+                           $('input[name=social_work_disable][value=1]').attr('checked', true);
+                    }
+
                 });
-        
+
 
         $('#worker-walfare-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1647,7 +1735,7 @@
 
 
      //submit form for worker walfare and csr
-   
+
      $('#security-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
@@ -1658,16 +1746,16 @@
       success:function(response){
         var security=response.security;
         $.each(JSON.parse(security.security_and_others), function(index) {
-                 
+
                     if(this.value == 1 && this.name == 'fire_exit'){
-                            $('input[name=fire_exit][value=1]').attr('checked', true); 
+                            $('input[name=fire_exit][value=1]').attr('checked', true);
                     }
                     else if(this.value == 0 && this.name == 'fire_exit'){
                         $('.fire-exit-unchecked').attr('checked','checked');
                     }
                     else if(this.value == 1 && this.name == 'fire_hydrant'){
                         $('input[name=fire_hydrant][value=1]').attr('checked', true);
-                    
+
                     }
                     else if(this.value == 0 && this.name == 'fire_hydrant'){
                         $('.fire-hydrant-unchecked').attr('checked','checked');
@@ -1684,9 +1772,9 @@
                     else if(this.value == 0 && this.name == 'protocols'){
                         $('.protocols-unchecked').attr('checked','checked');
                     }
-                    
+
                 });
-        
+
 
         $('#security-modal').modal('close');
         swal("Done!", response.message,"success");
@@ -1709,7 +1797,7 @@
 
 
 
-    
-     
+
+
     </script>
 @endpush

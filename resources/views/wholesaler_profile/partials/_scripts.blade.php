@@ -94,6 +94,9 @@ $(document).on('click', '.cropper-image-modal-close', function () {
     cropper.destroy();
     cropper = null;
 });
+
+
 </script>
+
 
 @endpush

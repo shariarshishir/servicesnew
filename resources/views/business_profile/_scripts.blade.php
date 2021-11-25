@@ -154,6 +154,7 @@
                 },
                 success:function(data)
                     {
+                        console.log(data.about_company);
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#errors').empty();
@@ -167,6 +168,7 @@
 
 
                         });
+                        $('#about-company-information').text(data.about_company);
                         $('#company-overview-modal').modal('close');
                        //console.log(data);
                         swal("Done!", data.msg,"success");
@@ -773,6 +775,27 @@
             }, function (dismiss) {
                 return false;
             })
+    });
+
+    //delete certification
+    $(document).on('click', '.download-certificate',function(e)
+    {
+    e.preventDefault();
+    var id=$(this).attr("data-id");
+    console.log(id);
+    $.ajax({
+        url: '{{ route("certification.dowload") }}',
+        type: "GET",
+        data:{id:id},
+        success:function(response)
+            {
+                var certifications=response.certifications;
+                console.log(certifications);
+               
+            }
+                
+        });                    
+                
     });
 
     function addMainBuyersDetails()

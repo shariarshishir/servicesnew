@@ -13,6 +13,12 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="row">
+                    <label for="about_company">About company</label>
+                    <td>
+                        <textarea class="about-company" name="about_company" value="{{$business_profile->companyOverview->about_company}}" type="text" id="about-company-short-description" rows="20" cols="50">{{$business_profile->companyOverview->about_company ?? ''}}</textarea>
+                    </td>
+                </div>
                 
                 <div class="submit_btn_wrap">
                     <div class="row">

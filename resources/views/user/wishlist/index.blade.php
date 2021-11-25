@@ -3,7 +3,7 @@
 <section class="content">
     <div class="container-fluid">
        @if(count($wishListItems) > 0)
-            <div class="row">
+            <div class="row wishlist_products_wrap">
                 <div class="col-md-12">
                     <div class="card card-with-padding">
                         <legend>Wish List</legend>
@@ -44,8 +44,14 @@
                                                 {!! $item->product->description !!}
                                             </div>
 
-                                            <a href="{{route('productdetails',$item->product->sku)}}" class="product-more-details">More Details</a> /
-                                            <a href="javascript:void(0);" data-wishListItemId="{{$item->id}}" class="deleteWishListItem">Remove item from wishlist</a>
+                                            <div class="wishlist_more_details">
+                                                <span class="btn_view_wishlist">
+                                                    <a href="{{route('productdetails',$item->product->sku)}}" class="product-more-details">View Details</a>
+                                                </span>
+                                                <span class="btn_remove">
+                                                    <a href="javascript:void(0);" data-wishListItemId="{{$item->id}}" class="deleteWishListItem "> <i class="material-icons dp48">delete_outline</i> <span>Remove </span></a>
+                                                </span>
+                                            </div>
 
                                         </div>
                                     </div>

@@ -27,7 +27,7 @@ $reviewsCount = count($productReviews);
                 <div class="single-product-availability">Availability: <span>instock</span></div>
             </div>
         </div>
-        <div class="row">
+        <div class="row product_details_content_wrap">
             <div class="col m3 product_preview_wrap">
                 <div class="product-images">
                     <div class="product-main-image">

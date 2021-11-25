@@ -60,7 +60,7 @@
         <div class="suppliers_content_wrap">
             <div class="row industries_boxWrap">
                 @foreach ($suppliers as $supplier )
-                    <div class="col s1 m2 l3 industry_infoBox">
+                    <div class="col s12 m6 l4 xl3 industry_infoBox">
                         <div class="box_shadow">
                             <p>Business Name: {{$supplier->business_name}}</p>
                             <p>Business Type:

@@ -60,7 +60,7 @@
                                         <tr>
                                             <th>Price per Unit</th>
                                             <th>:</th>
-                                            <td>{{$product->price_unit}} {{ number_format($product->price_per_unit,2)}}</td>
+                                            <td>{{$product->price_unit}} {{ $product->price_per_unit}}</td>
                                         </tr>
                                         <tr>
                                             <th>Lead Time</th>
@@ -269,7 +269,7 @@
                         <table>
                             <tr>
                                 <td>Company Name:</td>
-                                <td>{{ $product->businessProfile->business_name ?? 'Merchantbay D' }}</td>
+                                <td>{{ $product->businessProfile->business_name}}</td>
 
                             </tr>
                             <tr>

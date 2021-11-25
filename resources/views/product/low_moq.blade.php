@@ -18,9 +18,15 @@
                                 @endif
                             @endif
                             <p>moq: {{$product->moq}}</p>
-                            @php $businss_profile_id= $product->business_profile_id ?? 1 ; @endphp
-                            <a href="{{route('supplier.profile',$businss_profile_id)}}">{{ $product->businessProfile ? $product->businessProfile->business_name : 'merchantbay demo' }}</a>
-                            <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">View details</a>
+
+                            @if($product->businessProfile()->exists())
+                                <a href="{{route('supplier.profile',$product->business_profile_id)}}">{{ $product->businessProfile->business_name }}</a>
+                                <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">View details</a>
+                            @else
+                                <a href="javascript:void(0);">merchantbay demo</a>
+                                <a href="javascript:void(0);">View details</a>
+                            @endif
+
                         </div>
                     @endforeach
 

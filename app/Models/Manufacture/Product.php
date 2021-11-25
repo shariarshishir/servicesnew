@@ -2,6 +2,7 @@
 
 namespace App\Models\Manufacture;
 
+use App\Models\BusinessProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,4 +25,10 @@ class Product extends Model
     public function product_images(){
         return $this->hasMany('App\Models\\Manufacture\ProductImage','product_id');
     }
+
+    public function businessProfile()
+    {
+        return $this->belongsTo(BusinessProfile::class);
+    }
+
 }

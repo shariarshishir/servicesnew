@@ -82,7 +82,7 @@ Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
 //low moq details
-Route::get('prodcut/details/{flag}/{id}',[HomeController::class, 'mixProductDetails'])->name('mix.product.details');
+Route::get('product/details/{flag}/{id}',[HomeController::class, 'mixProductDetails'])->name('mix.product.details');
 
 Route::get('/products/{slug}', [HomeController::class, 'productsByCategory'])->name('categories.product');
 Route::get('/products/{category}/{subcategory}', [HomeController::class, 'productsBySubCategory'])->name('subcategories.product');

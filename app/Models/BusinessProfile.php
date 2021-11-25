@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BusinessProfile extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
     protected $guarded=[];
 
 
@@ -81,7 +82,7 @@ class BusinessProfile extends Model
     {
         return $this->hasOne(Security::class);
     }
-    
+
 
     public function businessCategory(){
         return $this->belongsTo('App\Models\Manufacture\ProductCategory','business_category_id');

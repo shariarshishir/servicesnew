@@ -21,7 +21,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($business_profile->exportDestinations)>0)
                                 <tr>
                                     <td><input class="input-field" name="title[]" id="export-destination-title" type="text"  ></td>
                                     <td>
@@ -30,11 +29,6 @@
                                     <td><input class="input-field file_upload" name="image[]" id="export-destination-image" type="file"></td>
                                     <td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
                                 </tr>
-                                @else
-                                <tr id="export-destination-details-table-no-data">
-                                    <td>No data</td>
-                                </tr>
-                                @endif
                             </tbody>
                         </table>
                         <div class="add_more_box">

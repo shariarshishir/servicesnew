@@ -21,8 +21,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($business_profile->machineriesDetails)>0)
-                                @foreach($business_profile->machineriesDetails as $machineriesDetail)
+                               
                                 <tr>
                                     <td><input class="input-field" name="title[]" id="certification-title" type="text"  ></td>
                                     <td>
@@ -31,12 +30,7 @@
                                     <td><input class="input-field file_upload" name="image[]" id="certification-image" type="file"></td>
                                     <td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
                                 </tr>
-                                @endforeach
-                                @else
-                                <tr id="certification-details-table-no-data">
-                                    <td>No data</td>
-                                </tr>
-                                @endif
+                                
                             </tbody>
                         </table>
                         <div class="add_more_box">

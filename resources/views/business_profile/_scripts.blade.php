@@ -489,7 +489,6 @@
             }
         }
         else{
-
             $('.machinaries-details-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.machinaries-details-table-body').append(html);
@@ -667,8 +666,8 @@
         },
 
       success:function(response){
+        $('#certification-upload-form')[0].reset();
         var certifications=response.certifications;
-        //console.log(certifications);
         var nohtml="";
         if(certifications.length >0){
             $('.certifications-block').html(nohtml);
@@ -688,7 +687,7 @@
                     html +='</div>';
                 } else {
                     html +='<div class="col m3 l3 certificate_img">';
-                    html +='<a href="javascript:void(0)" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                    html +='<a href="javascript:void(0)"  style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<img src="'+image+'" alt="">';
                     html +='</div>';
                 }
@@ -756,10 +755,22 @@
                                     for(let i = 0;i <certifications.length ;i++){
                                         var html='';
                                         var image="{{asset('storage/')}}"+'/'+certifications[i].image;
-                                        html +='<div class="col m3 l3 certificate_img">';
-                                        html +='<a style="display: none;" href="javascript:void(0)" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                        html +='<img src="'+image+'" alt="">';
-                                        html +='</div>';
+                                        var strArray = image.split(".");
+                                        
+                                        if(strArray[4] == 'pdf'){
+                                            html +='<div class="col m3 l3 certificate_img">';
+                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                            html +='<span>'+certifications[i].title+'</span>';
+                                            html +='<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>';
+                                            html +='<br>';
+                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a>';
+                                            html +='</div>';
+                                        } else {
+                                            html +='<div class="col m3 l3 certificate_img">';
+                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                            html +='<img src="'+image+'" alt="">';
+                                            html +='</div>';
+                                        }
                                         $('.certifications-block').append(html);
                                     }
                                 }
@@ -827,6 +838,7 @@
         },
 
       success:function(response){
+        $('#main-buyer-upload-form')[0].reset();
         var mainBuyers=response.mainBuyers;
         console.log(mainBuyers);
         var nohtml="";
@@ -983,6 +995,7 @@
         },
 
       success:function(response){
+        $('#export-destination-upload-form')[0].reset();
         var exportDestinations=response.exportDestinations;
         console.log(exportDestinations);
         var nohtml="";
@@ -1144,6 +1157,7 @@
         },
 
       success:function(response){
+        $('#association-membership-upload-form')[0].reset();
         var associationMemberships=response.associationMemberships;
         console.log(associationMemberships);
         var nohtml="";
@@ -1304,6 +1318,7 @@
         },
 
       success:function(response){
+        $('#press-highlight-upload-form')[0].reset();
         var pressHighlights=response.pressHighlights;
         console.log(pressHighlights);
         var nohtml="";

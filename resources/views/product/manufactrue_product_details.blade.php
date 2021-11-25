@@ -40,30 +40,16 @@
                                     </a>
                                 @endforeach
 
-
                                 @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
                             </div>
-
-                        </div>
-                        <div>
-                            {{-- @if(auth()->check() && in_array(auth()->user()->user_type, ['buyer', 'both']))
-                                @if(check_wishlist($product->id, 'product'))
-                                    <a href="{{ action('WishListController@removeWishlist', ['id'=>$product->id, 'type'=>'product']) }}" class="btn btn-danger" style="margin-top: 10px;">Remove from wishlist</a>
-                                @else
-                                    <a href="{{ action('WishListController@addToWishlist', ['id'=>$product->id, 'type'=>'product']) }}" class="btn btn-success" style="margin-top: 10px;">Add to wishlist</a>
-                                @endif
-                            @endif --}}
                         </div>
                     </div>
 
 
                     <div class="col-md-5 col-sm-12 ic-product-infobox">
                         <div class="ic-product-details">
-
                             {{-- <form id="productOrderForm" action="{{ route('orders.placeing', $product->id) }}" method="POST" style="padding:10px 15px"> --}}
-
                                 <h2 class="ic-product-title">{{ $product->title }}</h2>
-
                                 <table class="table table-bordered-less">
                                     <tbody>
                                         <tr>
@@ -90,110 +76,36 @@
                                 </table>
 
 
-                                <div>
-
                                 @php
                                     $colors = $product->colors ?? [];
                                     $sizes = $product->sizes ?? [];
                                 @endphp
 
                                 @if( !empty($colors) && is_array($colors) && !empty($sizes) && is_array($sizes) )
-
                                     <div class="mycolorwrapper">
                                         <h3>Colors: <span id="mycolorboxColor">&nbsp;</span></h3>
                                         <div class="mycolorboxs">
-
                                             @foreach($colors as $idx=>$color)
                                             <label class="mycolorbox">
                                                 <input type="hidden" class="mycolorbox-input{{ ($idx===0)? ' active' : '' }}" id="colorbox_{{ $color }}" name="colors[]" value="{{ $color }}" data-target="#mysizeboxPanel_{{ $color }}">
                                                 <span class="mycolorbox-color" style="background-color:{{ strtolower($color) }}">&nbsp;</span>
                                             </label>
                                             @endforeach
-
                                         </div>
                                     </div>
 
                                     <div class="mysizewrapper">
                                         <h3>Sizes</h3>
                                         <div class="mysizeboxs">
-
                                             @foreach($colors as $idx=>$color)
-
-                                            <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
-
-                                                @foreach($sizes as $size)
-
-                                                <div class="mysizebox" data-size="{{ $size }}">
-                                                    <h5>{{ strtoupper($size) }}</h5>
-                                                    <div class="inr-mysizebox" data-size="{{ $size }}">
-                                                        <button type="button" class="js-increment" data-type="increment"><i class="fa fa-fw fa-plus"></i></button>
-                                                        <input type="number" name="sizes[{{ str_replace(' ', '_', $color) }}][{{  str_replace(' ', '_', $size) }}]" data-color="{{ $color }}" data-size="{{ $size }}" value="0" min="0">
-                                                        <button type="button" class="js-decrement" data-type="decrement"><i class="fa fa-fw fa-minus"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                @endforeach
-
-
-                                            </div>
-
-                                            @endforeach
-                                        </div>
-
-                                        <div style="padding:20px 0;display:none">
-                                            <table id="quantityTable" class="table table-qty">
-                                                <thead>
-                                                    <tr>
-                                                        <th>COLOR</th>
-
-                                                        @foreach ($sizes as $size)
-                                                            <th>{{ strtoupper($size) }}</th>
-                                                        @endforeach
-
-                                                        <th>QTY</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    @foreach ($colors as $color)
-
-                                                        <tr class="row_{{ $color }}" data-color="{{ $color }}">
-                                                            <th>{{ ucfirst($color) }}</th>
-
-                                                            @foreach($sizes as $size)
-
-                                                                <td class="{{ $color }}_{{ $size }}" data-color="{{ $color }}" data-size="{{ $size }}">0</td>
-
-                                                            @endforeach
-
-                                                            <td class="{{ $color }}_QTY" data-color="{{ $color }}" data-size="QTY">0</td>
-                                                        </tr>
-
+                                                <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
+                                                    @foreach($sizes as $size)
+                                                        <div class="mysizebox" data-size="{{ $size }}">
+                                                            <h5>{{ strtoupper($size) }}</h5>
+                                                        </div>
                                                     @endforeach
-
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr class="row_total">
-                                                        <th>Totoal</th>
-
-                                                        @foreach($sizes as $size)
-
-                                                            <td class="total_{{ $size }}" data-size="{{ $size }}">0</td>
-
-                                                        @endforeach
-
-                                                        <td class="total_QTY" data-size="QTY">0</td>
-                                                    </tr>
-                                                </tfoot>
-
-                                                {{-- <tfoot>
-                                                    <tr>
-                                                        <td><input type="text" size="1" name="total_qty" id="total_qty" value="0" readonly required></td>
-                                                        <td>${{ $product->price_per_unit }}</td>
-                                                        <td>$<input type="text" size="1" name="total_price" id="total_price" value="0" readonly required></td>
-                                                    </tr>
-                                                </tfoot> --}}
-                                            </table>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
 
@@ -221,7 +133,7 @@
                                     @if(Auth::guard('web')->check())
                                         <button type="button" class="ic-btn" >Contact supplier</button>
                                     @else
-                                        <button type="button" class="modal-trigger" href="#contactSupplierModal">Contact supplier</button>
+                                        <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
                                     @endif
                                     <br/>
 
@@ -256,13 +168,13 @@
                             </div>
 
 
-
+                            {{-- send request sample --}}
                             <div class="samplebox">
                                 <div>
-                                    <a class="modal-trigger" href="#requestSampleForm">Request Sample</a>
+                                    <a class="modal-trigger" href="javascript:void(0);">Request Sample</a>
                                     <p>contact for order customization or bulk volume rate-</p>
                                 </div>
-                                {{-- <form class="sampleformbox" id="requestSampleForm" action="{{ route('products.requestSample') }}" method="POST"> --}}
+                                <form class="sampleformbox" id="requestSampleForm" action="" method="POST">
                                     @csrf
                                     <div class="modal" id="requestSampleForm">
                                         <div class="modal-content">
@@ -287,21 +199,7 @@
                                             <a href="#!" class="modal-close waves-effect waves-green btn-flat">cancel</a>
                                           </div>
                                     </div>
-                                {{-- </form> --}}
-                            </div>
-
-
-                            <div class="ic-product-footer" style="">
-
-                                <button class="ic-btn" data-toggle="modal" data-target="#merchantAssistanceModal">Merchant Assistance </button>
-
-
-                                <p style="margin-left:40px; color:white;">
-                                    <img src="{{ asset('storage/images/trade-security.png') }}" width="40px" height="40px" alt=""/> <span style="font-size:12px;" >Get Trade Security</span>
-
-                                    <img src="{{ asset('storage/images/best-price.png') }}" width="40px" height="40px" alt=""/> <span   style="font-size:12px;">Best Price</span>
-                                </p>
-
+                                </form>
                             </div>
 
                         </div>
@@ -309,8 +207,6 @@
 
                     <div class="col-md-3 col-sm-12">
                         <div style="height: 320px; background-color: #f9f9f9;">
-
-
                             <div class="row" style="height:90px; background-image: url({{ asset('images/single-product-logo-background.jpg') }}); background-repeat: no-repeat;">
                                 <div class="col-md-12">
                                     @if(isset($supplier->profile->company_logo))

@@ -187,6 +187,7 @@ class BusinessProfileController extends Controller
     public function companyOverviewUpdate(Request $request, $id)
     {
         try{
+            
             $company_overview= CompanyOverview::findOrFail($id);
             $data=[];
             $count=0;
@@ -204,11 +205,12 @@ class BusinessProfileController extends Controller
                 $count++;
             }
 
-            $company_overview->update(['data' => json_encode($data)]);
+            $company_overview->update(['data' => json_encode($data),'about_company'=>$request->about_company]);
             return response()->json([
                 'success' => false,
                 'msg'     => 'Company Overview Updated',
                 'data'    => json_decode($company_overview->data),
+                'about_company'=>$company_overview->about_company
 
             ],200);
 

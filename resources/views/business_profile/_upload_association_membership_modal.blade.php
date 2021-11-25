@@ -21,7 +21,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($business_profile->associationMemberships)>0)
                                 <tr>
                                     <td><input class="input-field" name="title[]" id="association-membership-title" type="text"  ></td>
                                     <td>
@@ -30,11 +29,7 @@
                                     <td><input class="input-field file_upload" name="image[]" id="association-membership-image" type="file"></td>
                                     <td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
                                 </tr>
-                                @else
-                                <tr id="association-membership-details-table-no-data">
-                                    <td>No data</td>
-                                </tr>
-                                @endif
+                              
                             </tbody>
                         </table>
                         <div class="add_more_box">

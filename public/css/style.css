@@ -230,7 +230,28 @@ textarea:focus {
 .img_shadow_radius img {
     border-radius: 12px;
 }
-.
+#loadingProgressContainer {
+    background: rgba(255, 255, 255, 0.9) repeat;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+}
+#loadingProgressElement {
+    left: 50%;
+    position: fixed;
+    top: 20%;
+    text-align: center;
+    transform: translate(-50%, -20%);
+}
+.loading-message {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -20px;
+}
 /************************** common style css start  ************************************/
 .page_content_wrap {
     border-radius: 30px;
@@ -565,6 +586,7 @@ textarea:focus {
     font-weight: 600;
     margin: 0 0 10px;
 }
+.product_wrapper .product_boxwrap .low_moq_products_wrap,
 .product_wrapper .product_boxwrap .active_grid {
     margin: 0 -30px;
 }
@@ -639,7 +661,7 @@ textarea:focus {
 .product_wrapper .productBox {
     padding: 0 30px !important;
     margin-bottom: 30px;
-    max-height: 400px;
+    min-height: 410px;
 }
 .product_wrapper .product_slider .productBox {
     margin-bottom: 0px;
@@ -3743,3 +3765,6 @@ div.dataTables_wrapper div.dataTables_info {
 
 
 
+.manufactrue_product_details_wrap {
+    padding: 50px 0;
+}

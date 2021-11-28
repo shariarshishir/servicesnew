@@ -415,7 +415,7 @@
     //Add and remove row for production and capacity dynamically
     function addProductionCapacity()
     {
-        $('#production-capacity-table-no-data').hide();
+        
         let totalChild = $('.production-capacity-table-block tbody').children().length;
         var html = '<tr>';
         html += '<td><input name="machine_type[]" id="machine_type" type="text" class="form-control  value="" ></td>';
@@ -432,7 +432,7 @@
     //Add and remove row for categories produced product dynamically
     function addCategoriesProduced()
     {
-        $('#categories-produced-table-no-data').hide();
+       
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
         html += '<td><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
@@ -450,7 +450,7 @@
     //Add and remove row for categories produced product dynamically
     function addMachinariesDetails()
     {
-    $('#machinaries-details-table-no-data').hide();
+    
     let totalChild = $('.machinaries-details-table-block tbody').children().length;
     var html = '<tr>';
     html += '<td><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
@@ -473,6 +473,7 @@
       data: $('#capacity-machinaries-form').serialize(),
 
       success:function(response){
+        
         var machineriesDetails=response.machineriesDetails;
         var categoriesProduceds=response.categoriesProduceds;
         var productionCapacities=response.productionCapacities;
@@ -483,15 +484,29 @@
                 var html = '<tr>';
                 html += '<td>'+machineriesDetails[i].machine_name+'</td>';
                 html += '<td>'+machineriesDetails[i].quantity+'</td>';
-                html += '<td>'+machineriesDetails[i].status+'</td>';
+                if(machineriesDetails[i].status==1)
+                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                else{
+                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.machinaries-details-table-body').append(html)
             }
         }
         else{
+            //append in table 
             $('.machinaries-details-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.machinaries-details-table-body').append(html);
+
+            //append in form
+            $('.machinaries-details-table-block tbody').children().empty();
+            var html='<tr id="production-capacity-table-no-data">';
+                html +='<td><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
+                html +='<td><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                html +='</tr>';
+                $('.machinaries-details-table-block tbody').append(html);
         }
 
         var nohtml="";
@@ -501,14 +516,31 @@
                 var html = '<tr>';
                 html += '<td>'+categoriesProduceds[i].type+'</td>';
                 html += '<td>'+categoriesProduceds[i].percentage+'</td>';
-                html += '<td>'+categoriesProduceds[i].status+'</td>';
+                if(categoriesProduceds[i].status==1)
+                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                else{
+                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.categories-produced-table-body').append(html);
             }
         }else{
+
+            //append in table
             $('.categories-produced-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.categories-produced-table-body').append(html);
+
+         
+
+            //append in form
+            $('.categories-produced-table-block tbody').children().empty();
+            var html='  <tr id="categories-produced-table-no-data">';
+                html +='<td><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
+                html +='<td><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                html +='</tr>';
+                $('.categories-produced-table-block tbody').append(html);
         }
         var nohtml="";
         if(productionCapacities.length >0){
@@ -517,15 +549,28 @@
                 var html = '<tr>';
                 html += '<td>'+productionCapacities[i].machine_type+'</td>';
                 html += '<td>'+productionCapacities[i].annual_capacity+'</td>';
-                html += '<td>'+productionCapacities[i].status+'</td>';
+                if(productionCapacities[i].status==1)
+                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                else{
+                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.production-capacity-table-body').append(html)
             }
         }else{
-
+            //append in table
             $('.production-capacity-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.production-capacity-table-body').append(html);
+
+            //append in form
+            $('.production-capacity-table-block tbody').children().empty();
+            var html='  <tr id="production-capacity-table-no-data">';
+                html +='<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>';
+                html +='<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+                html +='</tr>';
+                $('.production-capacity-table-block tbody').append(html);
         }
 
 
@@ -594,7 +639,12 @@
                     html += '<tr>';
                     html += '<td>'+this.name+'</td>';
                     html += '<td>'+this.value+'</td>';
-                    html += '<td>'+this.status+'</td>';
+                    if(this.status==1){
+                        html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                    }
+                    else{
+                        html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                    }
                     html += '</tr>';
                 });
                 html += '</table>';
@@ -606,10 +656,21 @@
             }
         }
         else{
-
+            //append in table
             $('.production-flow-and-manpower-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.production-flow-and-manpower-table-body').append(html);
+
+            //append in form
+            $('.production-flow-and-manpower-table-block  tbody').children().empty();
+            var html='<tr id="production-flow-and-manpower-table-no-data">';
+                html+='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
+                html+='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>';
+                html+='<td><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>';
+                html+='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>';
+                html+='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+                html+='</tr>';
+                $('.production-flow-and-manpower-table-block tbody').append(html);
         }
 
 
@@ -675,9 +736,10 @@
             for(let i = 0;i <certifications.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+certifications[i].image;
-                var strArray = image.split(".");
+                var strArray = image.slice(-3);
                 
-                if(strArray[4] == 'pdf'){
+                if(strArray == 'pdf' || strArray == 'PDF'){
+                    
                     html +='<div class="col m3 l3 certificate_img">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<span>'+certifications[i].title+'</span>';
@@ -755,9 +817,9 @@
                                     for(let i = 0;i <certifications.length ;i++){
                                         var html='';
                                         var image="{{asset('storage/')}}"+'/'+certifications[i].image;
-                                        var strArray = image.split(".");
+                                        var strArray = image.slice(-3);
                                         
-                                        if(strArray[4] == 'pdf'){
+                                        if(strArray == 'pdf'|| strArray == 'PDF'){
                                             html +='<div class="col m3 l3 certificate_img">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<span>'+certifications[i].title+'</span>';
@@ -855,8 +917,19 @@
                 html +='</div>';
                 $('.main-buyers-block').append(html);
             }
+
+             //append in form
+             $('.main-buyers-details-table-block tbody').children().empty();
+                var html='<tr>';
+                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+                html +='<tr>';
+                $('.main-buyers-details-table-block  tbody').append(html);
         }
         else{
+                //append in block
                 $('.main-buyers-block').html(nohtml);
                 var html='';
                 html +='<div class="card-alert card cyan lighten-5">';
@@ -864,6 +937,8 @@
                 html +='<p>INFO : No data found.</p>';
                 html +='</div>';
                 $('.main-buyers-block').append(html);
+
+               
             }
         
         $('#main-buyers-upload-form-modal').modal('close');
@@ -1014,6 +1089,16 @@
                 html +='</div>';
                 $('.export-destination-block').append(html);
             }
+
+            //append in form
+            $('.export-destination-table-block tbody').children().empty();
+                var html='<tr>';
+                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+                html +='<tr>';
+                $('.export-destination-table-block  tbody').append(html);
         }
         else{
                 $('.export-destination-block').html(nohtml);
@@ -1178,6 +1263,15 @@
                 $('.association-membership-block').append(html);
 
             }
+             //append in form
+             $('.association-membership-details-table-block tbody').children().empty();
+                var html='<tr>';
+                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+                html +='<tr>';
+                $('.association-membership-details-table-block  tbody').append(html);
         }
         else{
                 $('.association-membership-block').html(nohtml);
@@ -1338,6 +1432,15 @@
                 $('.press-highlight-block').append(html);
 
             }
+            $('.press-highlight-details-table-block tbody').children().empty();
+                var html='<tr>';
+                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+                html +='<tr>';
+                $('.press-highlight-details-table-block  tbody').append(html);
+
         }
         else{
                 $('.press-highlight-block').html(nohtml);
@@ -1442,7 +1545,6 @@
     function addBusinessTermDetails()
     {
 
-        $('#business-term-details-table-no-data').hide();
         var html = '<tr>';
         html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
         html += '<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
@@ -1468,6 +1570,7 @@
       data: $('#business-term-form').serialize(),
 
       success:function(response){
+        
         var businessTerms=response.businessTerms;
         var nohtml="";
         if(businessTerms.length >0){
@@ -1476,16 +1579,30 @@
                 var html = '<tr>';
                 html += '<td>'+businessTerms[i].title+'</td>';
                 html += '<td>'+businessTerms[i].quantity+'</td>';
-                html += '<td>'+businessTerms[i].status+'</td>';
+                if(businessTerms[i].status==1)
+                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                else{
+                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.business-term-table-body').append(html)
             }
         }
         else{
 
+            //append in table
             $('.business-term-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.business-term-table-body').append(html);
+
+            //append in form
+            $('.business-term-table-block tbody').children().html(nohtml);
+            var html='<tr id="business-term-details-table-no-data">';
+            html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>';
+            html +='<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
+            html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+            html +='</tr>';
+            $('.business-term-table-block tbody').append(html);
         }
 
         $('#business-term-modal').modal('close');
@@ -1542,7 +1659,11 @@
                 var html = '<tr>';
                 html += '<td>'+samplings[i].title+'</td>';
                 html += '<td>'+samplings[i].quantity+'</td>';
-                html += '<td>'+samplings[i].status+'</td>';
+                if(samplings[i].status==1)
+                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                else{
+                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.sampling-table-body').append(html)
             }
@@ -1552,6 +1673,15 @@
             $('.sampling-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.sampling-table-body').append(html);
+
+            //append in form
+            $('.sampling-table-block tbody').children().html(nohtml);
+            var html='<tr id="sampling-details-table-no-data">';
+            html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
+            html +='<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+            html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+            html +='</tr>';
+            $('.sampling-table-block tbody').append(html);
         }
 
         $('#sampling-modal').modal('close');
@@ -1607,16 +1737,29 @@
             for(let i=0;i<specialCustomizations.length ;i++){
                 var html = '<tr>';
                 html += '<td>'+specialCustomizations[i].title+'</td>';
-                html += '<td>'+specialCustomizations[i].status+'</td>';
+                if(specialCustomizations[i].status==1)
+                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                else{
+                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.special-customization-table-body').append(html)
             }
         }
         else{
 
+            //append in form
             $('.special-customization-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.special-customization-table-body').append(html);
+
+            //append in table
+            $('.special-customization-table-block tbody').children().html(nohtml);
+            var html='<tr class="special-customization-table-no-data">';
+            html +='<td><input name="special_customization_title[]" id="special-customizations-title" type="text" class="input-field" value="" ></td>';
+            html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSpecialCustomizationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+            html +='</tr>';
+            $('.special-customization-table-block tbody').append(html);
         }
 
         $('#special-customization-modal').modal('close');
@@ -1641,7 +1784,6 @@
      function addSustainabilityCommitmentDetails()
     {
 
-        $('#sustainability-commitment-table-no-data').hide();
         var html = '<tr>';
         html += '<td><input name="sustainability_commitment_title[]" id="sustainability-commitment-title" type="text" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSustainabilityCommitmentDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
@@ -1666,6 +1808,7 @@
       data: $('#sustainability-commitment-form').serialize(),
 
       success:function(response){
+        // $('#sustainability-commitment-form')[0].reset();
         var sustainabilityCommitments=response.sustainabilityCommitments;
         var nohtml="";
         if(sustainabilityCommitments.length >0){
@@ -1673,16 +1816,30 @@
             for(let i=0;i<sustainabilityCommitments.length ;i++){
                 var html = '<tr>';
                 html += '<td>'+sustainabilityCommitments[i].title+'</td>';
-                html += '<td>'+sustainabilityCommitments[i].status+'</td>';
+                if(sustainabilityCommitments[i].status==1){
+                    html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                }
+                else{
+                    html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                }
                 html += '</tr>';
                 $('.sustainability-commitment-table-body').append(html)
             }
         }
         else{
 
+            //append in table
             $('.sustainability-commitment-table-body').children().empty();
             var html = '<tr><td><span>No Data</span></td></tr>';
             $('.sustainability-commitment-table-body').append(html);
+
+            //append in form
+            $('.sustainability-commitment-table-block tbody').children().html(nohtml);
+            var html = '<tr id="sustainability-commitment-table-no-data">';
+            html += '<td><input name="sustainability_commitment_title[]" id="sustainability-Commitment-title" type="text" class="input-field" value="" ></td>';
+            html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSustainabilityCommitmentDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+            html += '</tr>';
+            $('.sustainability-commitment-table-block tbody').append(html);
         }
 
         $('#sustainability-commitment-modal').modal('close');

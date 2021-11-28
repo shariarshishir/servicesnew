@@ -29,7 +29,9 @@
 								@endforeach
 								@else
 								<tr id="production-capacity-table-no-data">
-									<td>No data</td>
+									<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>
+									<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 								</tr>
 								@endif
 							</tbody>
@@ -64,7 +66,9 @@
 								@endforeach
 								@else
 								<tr id="categories-produced-table-no-data">
-									<td>No data</td>
+									<td><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>
+									<td><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 								</tr>
 								@endif
 							</tbody>
@@ -101,7 +105,9 @@
 							@endforeach
 							@else
 							<tr id="machinaries-details-table-no-data">
-								<td>No data</td>
+								<td><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>
+								<td><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>
+								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 							</tr>
 							@endif
 						</tbody>

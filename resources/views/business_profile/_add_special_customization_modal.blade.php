@@ -27,7 +27,8 @@
 							@endforeach
 							@else
 							<tr id="special-customization-table-no-data">
-								<td>No data</td>
+								<td><input name="special_customization_title[]" id="special-customizations-title" type="text" class="input-field" value="" ></td>
+								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSpecialCustomizationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 							</tr>
 							@endif
 						</tbody>

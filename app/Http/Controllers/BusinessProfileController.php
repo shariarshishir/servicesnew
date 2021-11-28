@@ -229,12 +229,12 @@ class BusinessProfileController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'machine_type.*' => 'string|min:1|max:50',
-            'annual_capacity.*' => 'integer',
-            'type.*' => 'string|min:1|max:50',
-            'percentage.*' => 'integer',
-            'machine_name.*' =>'string|min:1|max:50',
-            'quantity.*' => 'integer'
+            'machine_type.*' => 'required_with:annual_capacity|string|min:1|max:50',
+            'annual_capacity.*' => 'required_with:machine_type|integer',
+            'type.*' => 'required_with:percentage|string|min:1|max:50',
+            'percentage.*' => 'required_with:type|integer',
+            'machine_name.*' =>'required_with:quantity|string|min:1|max:50',
+            'quantity.*' => 'required_with:machine_name|integer'
 
         ]);
         if ($validator->fails())

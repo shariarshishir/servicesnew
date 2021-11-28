@@ -13,7 +13,7 @@
 									<li><a href="{{route('readystockproducts')}}">Ready Stock</a></li>
 									<li><a href="{{route('buydesignsproducts')}}">New Designs</a></li>
 									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
-									<li><a href="javascript:void(0);">Shortest Lead Time</a></li>
+									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
 									<li><a href="{{route('customizable')}}">Customizablee</a></li>
 								</ul>
 							</li>

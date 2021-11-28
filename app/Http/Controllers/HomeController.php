@@ -17,6 +17,7 @@ use App\Models\ProductImage;
 use App\Models\ProductReview;
 use Helper;
 use DB;
+use Illuminate\Support\Facades\Http;
 
 
 class HomeController extends Controller
@@ -511,7 +512,7 @@ class HomeController extends Controller
         //manufacture
         if($business_profile->business_type == 1 )
         {
-            
+
             $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
             return view('manufacture_profile_view_by_user.index',compact('business_profile'));
         }
@@ -523,17 +524,23 @@ class HomeController extends Controller
         }
     }
     //low moq
-    public function lowMoq(Request $request)
+    public function lowMoqData(Request $request)
     {
-        $wholesaler_products=Product::with(['images'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0])->get();
-        $manufacture_products=ManufactureProduct::with(['product_images'])->where('moq','!=', null)->get();
+        $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
+        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
         $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
         $sorted=$merged->sortBy('moq');
         $sorted_value= $sorted->values()->all();
-        return view('product.low_moq',['products' => $sorted_value]);
+        return $sorted_value;
+        //return view('product.low_moq',['products' => $sorted_value]);
         // $page=isset($request->page) ? $request->page : 1;
         // $collection=  $sorted->forPage($page,3);
         // return $collection;
+    }
+
+    public function lowMoq()
+    {
+        return view('product.low_moq');
     }
     //low moq details
     public function mixProductDetails($flag, $id)
@@ -590,6 +597,19 @@ class HomeController extends Controller
             ->get();
             return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
         }
+    }
+
+    public function demoData()
+    {
+    //    $data=Http::get('http://dummy.restapiexample.com/api/v1/employees');
+       $data=[
+           ['employee_name' => 1, 'employee_salary' => 122, 'employee_age' => 23],
+           ['employee_name' => 2, 'employee_salary' => 233, 'employee_age' => 24]
+
+       ];
+       return $data;
+       return response()->json($data);
+
     }
 
 

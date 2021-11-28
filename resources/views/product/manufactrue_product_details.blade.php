@@ -111,7 +111,19 @@
 
                                         @endif
 
-                                
+
+
+
+                                        <div id="place_order_buttons" class="ic-place-order">
+                                            {{-- <a href="{{ route('wishlist.store',[$product->id,'product']) }}" class="ic-btn" style="margin-right:10px"><i class="fa fa-heart-o"></i></a> --}}
+
+                                            @if( !empty($colors) && is_array($colors) && !empty($sizes) && is_array($sizes) )
+                                                @csrf
+
+                                                <input type="hidden" id="total_qty2" name="quantity" value="0">
+                                                {{-- <button type="button" class="ic-btn js__btn" data-toggle="modal" data-target="#productOrderModal" disabled>Place order</button> --}}
+
+                                            @else
 
                                         
                                     {{-- </form> --}}
@@ -142,12 +154,16 @@
                                             </div>
                                         </form>
                                     </div>
+
+
+
+
                                 </div>
                             </div>
 
                         </div>
-                            
-                        
+
+
                         </div>
                         <div class="col s12 m4 l4">
                             <div id="place_order_buttons" class="ic-place-order">
@@ -241,8 +257,8 @@
                 </div>
 
 
-                
-                
+
+
             </div> <!-- row ic-pg-container emd -->
         </div>
     </section>
@@ -275,7 +291,7 @@
                         <table>
                             <tr>
                                 <td>Company Name:</td>
-                                <td>{{ $product->businessProfile->business_name ?? 'Merchantbay D' }}</td>
+                                <td>{{ $product->businessProfile->business_name}}</td>
 
                             </tr>
                             <tr>

@@ -197,6 +197,10 @@
 <script src="{{asset('upload-js/jquery.iframe-transport.js')}}"></script>
 <script src="{{asset('upload-js/jquery.fileupload.js')}}"></script>
 <script src="{{asset('js/image-uploader.min.js')}}"></script>
+{{-- pagination js --}}
+{{--<script  src="{{asset('js/pagination.js')}}" ></script> --}}
+{{-- twbs pagination --}}
+<script src="{{asset('js/twbsPagination.js')}}"></script>
 {{-- jquery ui --}}
 {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 

@@ -127,16 +127,27 @@
 							<h3>Certifications</h3>
 							<div class="row certifications-block">
 							@if(count($business_profile->certifications)>0)
-								@foreach($business_profile->certifications as $certification)
-								<div class="col m3 l3"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
-								@endforeach
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
+									@foreach($business_profile->certifications as $certification)
+									<div class="col m3 l3">
+										<div class="certificate_img">
+											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
+											<span>{{$certification->title}}</span>
+											<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br>
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
+											@else
+											<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+											@endif
+										</div>
 									</div>
-								</div>
-							@endif
+									@endforeach
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>
+								@endif
 							</div>
 
 						</div>

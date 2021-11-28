@@ -47,7 +47,7 @@
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
-                <div class="product_boxwrap row"  id="low_moq_body">
+                <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
 
 
                 </div>

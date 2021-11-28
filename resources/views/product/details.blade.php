@@ -101,21 +101,23 @@ $reviewsCount = count($productReviews);
                                                 $count= count(json_decode($product->attribute));
                                                 $count = $count-2;
                                             @endphp
-                                            @foreach (json_decode($product->attribute) as $k => $v)
-                                                @if($k == 0 && $v[2] == 'Negotiable')
-                                                {{ '(Negotiable)' }}
-                                                @endif
-                                                @if($loop->last && $v[2] != 'Negotiable')
-                                                    ${{ $v[2] }}
-                                                @endif
-                                                @if($loop->last && $v[2] == 'Negotiable')
-                                                    @foreach (json_decode($product->attribute) as $k => $v)
-                                                            @if($k == $count)
-                                                                ${{ $v[2]  }} {{ '(Negotiable)' }}
-                                                            @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
+                                            <span class="price_negotiable">
+                                                @foreach (json_decode($product->attribute) as $k => $v)
+                                                    @if($k == 0 && $v[2] == 'Negotiable')
+                                                    {{ 'Negotiable' }}
+                                                    @endif
+                                                    @if($loop->last && $v[2] != 'Negotiable')
+                                                        ${{ $v[2] }}
+                                                    @endif
+                                                    @if($loop->last && $v[2] == 'Negotiable')
+                                                        @foreach (json_decode($product->attribute) as $k => $v)
+                                                                @if($k == $count)
+                                                                    ${{ $v[2]  }} {{ 'Negotiable' }}
+                                                                @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </span>
                                             <!-- <a href="javascript:void(0);" class="show_attr_trigger show_more_price_options btn_grBorder">Show more</a>
                                             <div class="col-md-12" id="attr-block" style="display: none;"> -->
                                             <div class="col-md-12" id="attr-block">
@@ -839,7 +841,7 @@ $reviewsCount = count($productReviews);
                                             @if($loop->last && $v[2] == 'Negotiable')
                                                 @foreach (json_decode($product->attribute) as $k => $v)
                                                         @if($k == $count)
-                                                            {{ $v[2]  }} {{ '(Negotiable)' }}
+                                                            {{ $v[2]  }} {{ 'Negotiable' }}
                                                         @endif
                                                 @endforeach
                                             @endif
@@ -944,7 +946,7 @@ $reviewsCount = count($productReviews);
     </div>
     <div class="row single-product-related-products">
         <div class="related-products col m12">
-            <div class="card card-with-padding">
+            <div class="card-with-padding">
                 <legend>Recommended products for you</legend>
 
                 @if(count($recommandProducts)>0)

@@ -43,6 +43,7 @@
             </div>
         </div>
     </div> --}}
+    
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
@@ -113,12 +114,15 @@
                             //business name
                                 var business_profile_url='{{ route("supplier.profile",":business_profile_id") }}';
                                     business_profile_url= business_profile_url.replace(':business_profile_id', displayRecords[i].business_profile_id);
-                            tr = $('<div class="col m3">');
-                            tr.append("<p>" +title+ "</p");
-                            tr.append('<img src='+img+'>');
-                            tr.append("<p>Moq:" + displayRecords[i].moq  + "</p>");
-                            tr.append("<a href="+business_profile_url+">"+displayRecords[i].business_profile.business_name+"</a>")
-                            tr.append("<a href="+details_url+">View Details </a>");
+                            tr = $('<div class="col m3 productBox">');
+                            tr.append('<div class="imgBox"><img src='+img+'> </div>');
+                            tr.append('<h4>' +title+ '</h4');
+                            tr.append('<div class="moqBox">MOQ:' + displayRecords[i].moq  + '</div>');
+                            tr.append('<div class="moq_view_details">');
+                            tr.append('<a class="moq_buss_name moq_left left" href="+business_profile_url+">'+displayRecords[i].business_profile.business_name+'</a>')
+                            tr.append('<a class="moq_view moq_right right" href='+details_url+'>View Details </a>');
+                            tr.append('</div>');
+                            tr.append('</div>');
                             $('#low_moq_body').append(tr);
                     }
                 }

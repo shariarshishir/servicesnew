@@ -61,7 +61,7 @@
                                                 <tr>
                                                     <th>Price per Unit</th>
                                                     <th>:</th>
-                                                    <td>{{$product->price_unit}} {{ number_format($product->price_per_unit,2)}}</td>
+                                                    <td>{{$product->price_unit}} {{$product->price_per_unit}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Lead Time</th>
@@ -114,17 +114,7 @@
 
 
 
-                                        <div id="place_order_buttons" class="ic-place-order">
-                                            {{-- <a href="{{ route('wishlist.store',[$product->id,'product']) }}" class="ic-btn" style="margin-right:10px"><i class="fa fa-heart-o"></i></a> --}}
-
-                                            @if( !empty($colors) && is_array($colors) && !empty($sizes) && is_array($sizes) )
-                                                @csrf
-
-                                                <input type="hidden" id="total_qty2" name="quantity" value="0">
-                                                {{-- <button type="button" class="ic-btn js__btn" data-toggle="modal" data-target="#productOrderModal" disabled>Place order</button> --}}
-
-                                            @else
-
+                                       
                                         
                                     {{-- </form> --}}
 

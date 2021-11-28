@@ -664,6 +664,9 @@ textarea:focus {
     min-height: 410px;
     max-height: 410px;
 }
+.product_wrapper .low_moq_products_wrap .productBox {
+    margin-bottom: 50px;
+}
 .product_wrapper .product_slider .productBox {
     margin-bottom: 0px;
 }
@@ -737,13 +740,14 @@ textarea:focus {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size: 17px;
-    height: 45px;
+    max-height: 45px;
     font-weight: 500;
     margin: 0;
     line-height: 24px;
     margin-bottom: 15px;
     color: #0A0A0A;
     text-transform: capitalize;
+    overflow: hidden;
 }
 .product_slider .productBox h4,
 .product_slider .productBox h4 a {
@@ -752,6 +756,27 @@ textarea:focus {
 .productBox h4 a:hover {
     color: #448547;
 }
+
+.low_moq_products_wrap .productBox h4 {
+    margin-top: 20px;
+}
+.low_moq_products_wrap .moqBox {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.low_moq_products_wrap .moq_view_details {
+    padding: 10px 0;
+    text-transform: capitalize;
+}
+.low_moq_products_wrap .moq_view {
+    font-size: 15px;
+    border-bottom: 1px solid #448547;
+    line-height: 20px;
+    display: inline-block;
+}
+
+
 .productBox .sold-out {
     position: absolute;
     top: 0;

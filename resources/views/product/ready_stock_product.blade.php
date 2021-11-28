@@ -5,7 +5,7 @@
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
-                <div class="product_boxwrap row">
+                <div class="product_boxwrap">
                     <h3>Ready Stock Products</h3>
                     @include('product._products_list')
                 </div>    

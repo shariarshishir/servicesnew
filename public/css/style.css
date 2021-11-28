@@ -662,6 +662,7 @@ textarea:focus {
     padding: 0 30px !important;
     margin-bottom: 30px;
     min-height: 410px;
+    max-height: 410px;
 }
 .product_wrapper .product_slider .productBox {
     margin-bottom: 0px;

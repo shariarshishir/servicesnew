@@ -5,9 +5,9 @@
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
-                <div class="product_boxwrap row">
+                <div class="product_boxwrap">
                     <h3>Low Moq Products</h3>
-                    <div class="low_moq_products_wrap">
+                    <div class="low_moq_products_wrap row">
                         @foreach ($products as $product)
                             <div class="col m3 productBox">
                                 <p>{{$product->title ?? $product->name }}</p>

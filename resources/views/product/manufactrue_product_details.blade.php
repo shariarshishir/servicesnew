@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @include('sweet::alert')
+
     <div class="row">
     <section class="">
         <div class="container">
@@ -45,7 +46,6 @@
                 <div class="col s12 m9 l9">
                     <div class="row">
                         <div class="col s12 m8 l8">
-
                         <div class="ic-pg-container">
                             <div class="col-md-5 col-sm-12 ic-product-infobox">
                                 <div class="ic-product-details">
@@ -114,30 +114,7 @@
                                         
 
 
-                                        <div id="place_order_buttons" class="ic-place-order">
-                                            {{-- <a href="{{ route('wishlist.store',[$product->id,'product']) }}" class="ic-btn" style="margin-right:10px"><i class="fa fa-heart-o"></i></a> --}}
-
-                                            @if( !empty($colors) && is_array($colors) && !empty($sizes) && is_array($sizes) )
-                                                @csrf
-
-                                                <input type="hidden" id="total_qty2" name="quantity" value="0">
-                                                {{-- <button type="button" class="ic-btn js__btn" data-toggle="modal" data-target="#productOrderModal" disabled>Place order</button> --}}
-
-                                            @else
-
-                                                {{-- <a href="#" class="ic-btn" data-toggle="modal" data-target="#product-order"></a> --}}
-                                                {{-- <a href="{{ action('ProductController@contactSupplier', $product->id) }}" class="ic-btn">Place order</a> --}}
-
-
-                                            @endif
-                                            @if(Auth::guard('web')->check())
-                                                <button type="button" class="ic-btn" >Contact supplier</button>
-                                            @else
-                                                <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
-                                            @endif
-                                            <br/>
-
-                                        </div>
+                                        
                                     {{-- </form> --}}
 
                                     {{-- contactSupplierModal --}}
@@ -178,6 +155,30 @@
                         
                         </div>
                         <div class="col s12 m4 l4">
+                            <div id="place_order_buttons" class="ic-place-order">
+                                {{-- <a href="{{ route('wishlist.store',[$product->id,'product']) }}" class="ic-btn" style="margin-right:10px"><i class="fa fa-heart-o"></i></a> --}}
+
+                                @if( !empty($colors) && is_array($colors) && !empty($sizes) && is_array($sizes) )
+                                    @csrf
+
+                                    <input type="hidden" id="total_qty2" name="quantity" value="0">
+                                    {{-- <button type="button" class="ic-btn js__btn" data-toggle="modal" data-target="#productOrderModal" disabled>Place order</button> --}}
+
+                                @else
+
+                                    {{-- <a href="#" class="ic-btn" data-toggle="modal" data-target="#product-order"></a> --}}
+                                    {{-- <a href="{{ action('ProductController@contactSupplier', $product->id) }}" class="ic-btn">Place order</a> --}}
+
+
+                                @endif
+                                @if(Auth::guard('web')->check())
+                                    <button type="button" class="ic-btn" >Contact supplier</button>
+                                @else
+                                    <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
+                                @endif
+                                <br/>
+
+                            </div>
                             {{-- send request sample --}}
                             <div class="samplebox">
                                 <div>

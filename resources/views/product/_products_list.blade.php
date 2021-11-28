@@ -1,11 +1,6 @@
 
-
-
-
-
-
 @if(count($products)>0)
-    <div class="active_grid">
+    <div class="active_grid row">
         @foreach($products as $key=>$product)
             <div class="productBox col s6 m3 l3">
                 <div class="imgBox">

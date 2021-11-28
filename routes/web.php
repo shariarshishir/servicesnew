@@ -74,7 +74,9 @@ Route::get('/products', [HomeController::class, 'productList'])->name('products'
 Route::get('/ready-stock', [HomeController::class, 'readyStockProducts'])->name('readystockproducts');
 Route::get('/buy-designs', [HomeController::class, 'buyDesignsProducts'])->name('buydesignsproducts');
 Route::get('/customizable', [HomeController::class, 'customizable'])->name('customizable');
+Route::get('/low-moq-data', [HomeController::class, 'lowMoqData'])->name('low.moq.data');
 Route::get('/low-moq', [HomeController::class, 'lowMoq'])->name('low.moq');
+
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
 Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');

@@ -727,6 +727,8 @@
         },
 
       success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
         $('#certification-upload-form')[0].reset();
         var certifications=response.certifications;
         var nohtml="";
@@ -900,6 +902,8 @@
         },
 
       success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
         $('#main-buyer-upload-form')[0].reset();
         var mainBuyers=response.mainBuyers;
         console.log(mainBuyers);
@@ -1070,6 +1074,8 @@
         },
 
       success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
         $('#export-destination-upload-form')[0].reset();
         var exportDestinations=response.exportDestinations;
         console.log(exportDestinations);
@@ -1242,6 +1248,8 @@
         },
 
       success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
         $('#association-membership-upload-form')[0].reset();
         var associationMemberships=response.associationMemberships;
         console.log(associationMemberships);
@@ -1412,6 +1420,8 @@
         },
 
       success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
         $('#press-highlight-upload-form')[0].reset();
         var pressHighlights=response.pressHighlights;
         console.log(pressHighlights);

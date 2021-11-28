@@ -29,7 +29,9 @@
 							@endforeach
 							@else
 							<tr id="sampling-details-table-no-data">
-								<td>No data</td>
+								<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>
+								<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>
+								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 							</tr>
 							@endif
 						</tbody>

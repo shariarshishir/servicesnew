@@ -29,7 +29,9 @@
 							@endforeach
 							@else
 							<tr id="business-term-details-table-no-data">
-								<td>No data</td>
+							<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>
+								<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>
+								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 							</tr>
 							@endif
 						</tbody>

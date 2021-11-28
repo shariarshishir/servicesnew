@@ -24,23 +24,30 @@
                             <tbody>
                                 @if(count($business_profile->productionFlowAndManpowers)>0)
                                     @foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
-                                    <tr>
+                                    <tr id="production-flow-and-manpower-table-no-data">
                                         <td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="{{$productionFlowAndManpower->production_type}}" ></td>
                                         @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
-                                            @if($flowAndManpower->name=='no_of_jacquard_machines')
+                                            @if($flowAndManpower->name=='No of Jacquard Machines')
                                             <td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
                                             @endif
-                                            @if($flowAndManpower->name=='manpower')
+                                            @if($flowAndManpower->name=='Manpower')
                                             <td><input name="manpower[]" id="manpower" type="number" class="form-control " value="{{$flowAndManpower->value}}"></td>
                                             @endif
-                                            @if($flowAndManpower->name=='daily_capacity')
+                                            @if($flowAndManpower->name=='Capacity Daily')
                                             <td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
                                             @endif
                                         @endforeach
                                         <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
                                     </tr>
                                     @endforeach
-                                    
+                                @else
+                                <tr id="production-flow-and-manpower-table-no-data">
+                                    <td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>
+                                    <td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>
+                                    <td><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>
+                                    <td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>
+                                    <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+                                </tr>
                                 @endif
                             </tbody>
                         </table>

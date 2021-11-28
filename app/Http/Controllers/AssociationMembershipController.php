@@ -35,7 +35,6 @@ class AssociationMembershipController extends Controller
                         {
                             $filename = $request->image[$i]->store('images/association-memberships','public');
                             $image_resize = Image::make(public_path('storage/'.$filename));
-                            $image_resize->fit(250, 250);
                             $image_resize->save(public_path('storage/'.$filename));
                         }
                       

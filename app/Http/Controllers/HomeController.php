@@ -598,18 +598,11 @@ class HomeController extends Controller
             return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
         }
     }
-
-    public function demoData()
+    //shortest lead time
+    public function shortestLeadTime()
     {
-    //    $data=Http::get('http://dummy.restapiexample.com/api/v1/employees');
-       $data=[
-           ['employee_name' => 1, 'employee_salary' => 122, 'employee_age' => 23],
-           ['employee_name' => 2, 'employee_salary' => 233, 'employee_age' => 24]
-
-       ];
-       return $data;
-       return response()->json($data);
-
+        $products=ManufactureProduct::with(['product_images','businessProfile'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->orderBy('lead_time')->paginate(12);
+        return view('product.shortest_lead_time',compact('products'));
     }
 
 

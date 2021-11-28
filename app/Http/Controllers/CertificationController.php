@@ -35,13 +35,12 @@ class CertificationController extends Controller
                         {
                             
                             $extension = $request->image[$i]->getClientOriginalExtension();
-                            if($extension=='pdf'){
+                            if($extension=='pdf' ||$extension=='PDF'){
                                 $filename = $request->image[$i]->store('images/certificates','public');
 
                             }else{
                                 $filename = $request->image[$i]->store('images/certificates','public');
                                 $image_resize = Image::make(public_path('storage/'.$filename));
-                                $image_resize->fit(250, 250);
                                 $image_resize->save(public_path('storage/'.$filename));
                             }
                             

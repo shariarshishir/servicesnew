@@ -471,9 +471,13 @@
       url: "/capacity-and-machineries-create-or-update",
       type:"POST",
       data: $('#capacity-machinaries-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+      },
       success:function(response){
-        
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         var machineriesDetails=response.machineriesDetails;
         var categoriesProduceds=response.categoriesProduceds;
         var productionCapacities=response.productionCapacities;
@@ -622,8 +626,13 @@
       url: "/production-flow-and-manpower-create-or-update",
       type:"POST",
       data: $('#production-flow-and-manpower-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+      },
       success:function(response){
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();          
         var productionFlowAndManpowers=response.productionFlowAndManpowers;
         var nohtml="";
         if(productionFlowAndManpowers.length >0){
@@ -809,8 +818,14 @@
                         url: '{{ route("certification.delete") }}',
                         type: "GET",
                         data:{id:id},
+                        beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                        },                        
                         success:function(response)
                             {
+                                $('.loading-message').html("");
+                                $('#loadingProgressContainer').hide();
                                 var certifications=response.certifications;
                                 console.log(certifications);
                                 var nohtml="";
@@ -990,8 +1005,14 @@
                         url: '{{ route("mainbuyers.delete") }}',
                         type: "GET",
                         data:{id:id},
+                        beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                        },                        
                         success:function(response)
                             {
+                                $('.loading-message').html("");
+                                $('#loadingProgressContainer').hide();
                                 var mainBuyers=response.mainBuyers;
                                 console.log(mainBuyers);
                                 var nohtml="";
@@ -1159,8 +1180,14 @@
                         url: '{{ route("exportdestinations.delete") }}',
                         type: "GET",
                         data:{id:id},
+                        beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                        },                        
                         success:function(response)
                             {
+                                $('.loading-message').html("");
+                                $('#loadingProgressContainer').hide();
                                 var exportDestinations=response.exportDestinations;
                                 console.log(exportDestinations);
                                 var nohtml="";
@@ -1333,8 +1360,14 @@
                         url: '{{ route("associationmemberships.delete") }}',
                         type: "GET",
                         data:{id:id},
+                        beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                        },                        
                         success:function(response)
                             {
+                                $('.loading-message').html("");
+                                $('#loadingProgressContainer').hide();
 
                                 var associationMemberships=response.associationMemberships;
                                 console.log(associationMemberships);
@@ -1504,8 +1537,14 @@
                         url: '{{ route("presshighlights.delete") }}',
                         type: "GET",
                         data:{id:id},
+                        beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                        },                        
                         success:function(response)
                             {
+                                $('.loading-message').html("");
+                                $('#loadingProgressContainer').hide();
                                 var pressHighlights=response.pressHighlights;
                                 console.log(pressHighlights);
                                 var nohtml="";
@@ -1578,9 +1617,13 @@
       url: "/business-term-create-or-update",
       type:"POST",
       data: $('#business-term-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        }, 
       success:function(response){
-        
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         var businessTerms=response.businessTerms;
         var nohtml="";
         if(businessTerms.length >0){
@@ -1659,8 +1702,13 @@
       url: "/sampling-create-or-update",
       type:"POST",
       data: $('#sampling-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        }, 
       success:function(response){
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         var samplings=response.samplings;
         var nohtml="";
         if(samplings.length >0){
@@ -1738,8 +1786,13 @@
       url: "/special-customization-create-or-update",
       type:"POST",
       data: $('#special-customization-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        }, 
       success:function(response){
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         var specialCustomizations=response.specialCustomizations;
         var nohtml="";
         if(specialCustomizations.length >0){
@@ -1816,8 +1869,13 @@
       url: "/sustainability-commitment-create-or-update",
       type:"POST",
       data: $('#sustainability-commitment-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        }, 
       success:function(response){
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         // $('#sustainability-commitment-form')[0].reset();
         var sustainabilityCommitments=response.sustainabilityCommitments;
         var nohtml="";
@@ -1878,8 +1936,13 @@
       url: "/worker-walfare-form-create-or-update",
       type:"POST",
       data: $('#worker-walfare-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        }, 
       success:function(response){
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         var walfare=response.walfare;
         $.each(JSON.parse(walfare.walfare_and_csr), function(index) {
 
@@ -1938,8 +2001,13 @@
       url: "/securtiy-create-or-update",
       type:"POST",
       data: $('#security-form').serialize(),
-
+      beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        }, 
       success:function(response){
+        $('.loading-message').html("");
+        $('#loadingProgressContainer').hide();
         var security=response.security;
         $.each(JSON.parse(security.security_and_others), function(index) {
 

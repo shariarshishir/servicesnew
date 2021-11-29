@@ -14,7 +14,7 @@ class BusinessTermController extends Controller
 {
     public function businessTermsCreateOrUpdate(Request $request){
         $validator = Validator::make($request->all(), [
-            'business_term_title.*' => 'string|min:1|max:500',
+            'business_term_title.*' => 'string|min:1|max:255',
             'business_term_quantity.*' => 'integer'
         ]);
         if ($validator->fails())

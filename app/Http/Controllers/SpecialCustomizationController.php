@@ -14,7 +14,7 @@ class SpecialCustomizationController extends Controller
 {
     public function specialCustomizationCreateOrUpdate(Request $request){
         $validator = Validator::make($request->all(), [
-            'special_customization_title.*' => 'string|min:1|max:500',
+            'special_customization_title.*' => 'string|min:1|max:255',
         ]);
         if ($validator->fails())
         {

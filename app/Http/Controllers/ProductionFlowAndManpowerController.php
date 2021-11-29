@@ -13,7 +13,7 @@ class ProductionFlowAndManpowerController extends Controller
     public function productionFlowAndManpowerCreateOrUpdate(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'production_type.*' => 'string|min:1|max:50',
+            'production_type.*' => 'string|min:1|max:255',
             'manpower.*' => 'integer',
             'no_of_jacquard_machines.*' => 'integer',
             'daily_capacity.*' => 'integer'

@@ -14,8 +14,8 @@ class CertificationController extends Controller
     public function certificationDetailsUpload(Request $request ){
        
         $validator = Validator::make($request->all(), [
-            'title.*' => 'string|min:1|max:50',
-            'image.*' => 'mimes:jpeg,bmp,png,gif,svg,pdf',
+            'title.*' => 'string|min:1|max:255',
+            'image.*' => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF|max:5120',
             'short_description.*' => 'string|max:500',
         ]);
         if ($validator->fails())

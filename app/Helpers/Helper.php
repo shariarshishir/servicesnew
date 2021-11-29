@@ -94,6 +94,27 @@ if (!function_exists('businessProfileInfo')) {
     }
 }
 
+if (!function_exists('units')){
+
+    function units(){
+        return [
+            'cm'=>'cm',
+            'mm'=>'mm',
+            'mtr'=>'mtr',
+            'kg'=>'kg',
+            'pcs'=>'pcs',
+            'ft'=>'ft',
+            'inch'=>'inch',
+            'ton'=>'ton',
+            'pound'=>'pound',
+            'ounce'=>'ounce',
+			'yarn'=>'yarn',
+			'yard' => 'yard',
+        ];
+    }
+
+}
+
 
 
 

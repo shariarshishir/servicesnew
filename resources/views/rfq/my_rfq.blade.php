@@ -15,7 +15,7 @@
 <div class="box_shadow_radius rfq_content_box">
 	<div class="rfq_info_wrap right-align">
 		<ul>
-			<li><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
+            <li><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
 			<li><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
 			<li><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
 		</ul>
@@ -89,12 +89,29 @@
 			</div>
 			<div class="responses_wrap right-align">
 				<!--span><i class="material-icons">favorite</i> Saved</span-->
-                @if($rfqSentList->user->id != auth()->id())
-                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a>
-                @endif
+				{{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a> --}}
 				<button class="none_button btn_responses" id="rfqResponse" >
 					Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
 				</button>
+                @if($rfqSentList->bids()->exists())
+                    @foreach ($rfqSentList->bids as $bid)
+                        <div class="col m3">
+                            <p>Company Name: {{$bid->businessProfile->business_name}}</p>
+                            <p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
+                            <p>Description:{{$bid->description}}</p>
+                            <p>Quantity: {{$bid->quantity}}</p>
+                            <p>Unit Price: {{$bid->unit_price}}</p>
+                            <p>Total Price: {{$bid->total_price}}</p>
+                            <p>Payment Method: {{$bid->payment_method}}</p>
+                            <p>Delivery Time: {{$bid->delivery_time}}</p>
+                            @if(isset($bid->media))
+                                @foreach (json_decode($bid->media) as $image)
+                                    <img src="{{asset('storage/'.$image)}}" alt="">
+                                @endforeach
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
 			</div>
 			<!--div class="respones_detail_wrap">
 				<div class="row respones_box">

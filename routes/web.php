@@ -52,6 +52,7 @@ use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
+use App\Http\Controllers\RfqBidController;
 
 
 /*
@@ -228,6 +229,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
+    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
+    //bid rfq
+    Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
+    Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
 
 
 

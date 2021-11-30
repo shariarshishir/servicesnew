@@ -14,7 +14,7 @@ class RfqController extends Controller
 {
     public function index()
     {
-        $rfqLists=Rfq::latest()->paginate(10);
+        $rfqLists=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
         return view('rfq.index',compact('rfqLists'));
     }
 
@@ -56,5 +56,11 @@ class RfqController extends Controller
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 
+    }
+
+    public function myRfq()
+    {
+        $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(10);
+        return view('rfq.my_rfq',compact('rfqLists'));
     }
 }

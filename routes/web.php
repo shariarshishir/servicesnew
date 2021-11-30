@@ -187,6 +187,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 
+    Route::post('/factory-details-upload', [CertificationController::class, 'factoryDetailsUpload'])->name('factoryinfo.upload');
+    Route::get('/factory-details-delete', [CertificationController::class, 'factoryDetailsDelete'])->name('factoryinfo.delete');
+
     Route::post('/main-buyers-details-upload', [MainBuyerController::class, 'mainBuyerDetailsUpload'])->name('mainbuyers.upload');
     Route::get('/main-buyers-details-delete', [MainBuyerController::class, 'deleteMainBuyer'])->name('mainbuyers.delete');
 

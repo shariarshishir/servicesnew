@@ -31,6 +31,7 @@ use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
 use App\Http\Controllers\WalfareController;
 use App\Http\Controllers\SecurityController;
+use App\Http\Controllers\MessageController;
 
 
 
@@ -228,10 +229,24 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
+    //message center
 
-
-
-
+    Route::get('/message-center',[MessageController::class,'message_center']);
+    Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
+    Route::get('/message-center/getchatdata',[MessageController::class,'getchatdata']);
+    Route::get('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity']);
+    Route::get('/message-center/notificationforuser',[MessageController::class,'notificationforuser']);
+    Route::get('/merchant-message',[MessageController::class,'merchant_message']);
+    Route::get('rfq-merchant-message',[MessageController::class,'rfq_merchant_message']);
+    Route::get('/supplier-message',[MessageController::class,'supplier_message']);
+    Route::get('/message-center/getUsers',[MessageController::class,'getUsers']);
+    Route::get('/message-center/getMerchants',[MessageController::class,'getMerchants']);
+    Route::get('/message-center/getSuppliers',[MessageController::class,'getSupplier']);
+    Route::get('/message-center/getMessages',[MessageController::class,'getMessages']);
+    Route::get('/message-center/send-message',[MessageController::class,'sendMessage']);
+    Route::get('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
+    Route::get('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct']);
+    Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
 
 });
 

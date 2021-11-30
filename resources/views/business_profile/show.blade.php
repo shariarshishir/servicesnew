@@ -332,7 +332,7 @@
 						</div>
 					</div>
 					<!-- Home tabcontent end -->
-					<div id="profile" class="tabcontent">
+					<div id="profile" class="tabcontent profile_table_design">
 						<div class="overview_table_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
@@ -454,7 +454,7 @@
 							</div>
 						</div>
 						<div class="overview_table_wrap machinery_table">
-							<h3>Machinery Details</h3>
+							<h4>Machinery Details</h4>
 							<div class="overview_table box_shadow">
 								<table>
 									<thead>
@@ -1442,73 +1442,84 @@
 					</div-->
 					<div id="factorytour" class="tabcontent">
 						<div class="profile_factory_tourWrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Virtual Tour</h3>
-								</div>
-								<div class="col s6 m6 right-align">
-									<a href="javascript:void(0);">Watch on YouTube</a>
-								</div>
-							</div>
-							<div class="factory_video_box">
-								<img src="{{asset('images/frontendimages/new_layout_images/video_img.png')}}" />
-							</div>
-							<div class="factory_imgbox_wrap video_gallery_box">
-								<div class="row top_titleWrap">
-									<div class="col s6 m6 gallery_navbar">
-										<ul>
-											<li class="active"><a href="javascript:void(0);">Factory Images</a></li>
-											<li><a href="javascript:void(0);">360 Degree Images</a></li>
-										</ul>
+							@if(count($business_profile->companyFactoryTour)>0)
+							@foreach($business_profile->companyFactoryTour as $companyFactoryTour)
+								<!--div class="row top_titleWrap">
+									<div class="col s6 m6">
+										<h3>Virtual Tour</h3>
 									</div>
-									<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
-								</div>
-								<div class="row factory_image_gallery">
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_2.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_3.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_4.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_5.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
+									<div class="col s6 m6 right-align">
+										<a href="javascript:void(0);">Watch on YouTube</a>
 									</div>
 								</div>
-							</div>
-							<div class="factory_imgbox_wrap video_gallery_box">
-								<div class="row top_titleWrap">
-									<div class="col s6 m6 gallery_navbar">
-										<ul>
-											<li><a href="javascript:void(0);">Factory Images</a></li>
-											<li class="active"><a href="javascript:void(0);">360 Degree Images</a></li>
-										</ul>
-									</div>
-									<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
+								<div class="factory_video_box">
+									<img src="{{asset('images/frontendimages/new_layout_images/video_img.png')}}" />
 								</div>
-								<div class="row 360_degree_video_gallery">
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img1.png')}}" alt=""></div>
+								<div class="factory_imgbox_wrap video_gallery_box">
+									<div class="row top_titleWrap">
+										<div class="col s6 m6 gallery_navbar">
+											<ul>
+												<li class="active"><a href="javascript:void(0);">Factory Images</a></li>
+												<li><a href="javascript:void(0);">360 Degree Images</a></li>
+											</ul>
+										</div>
+										<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
 									</div>
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img2.png')}}" alt=""></div>
-									</div>
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img3.png')}}" alt=""></div>
-									</div>
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img4.png')}}" alt=""></div>
+									<div class="row factory_image_gallery">
+										<div class="col s6 m4 l4">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
+										</div>
+										<div class="col s6 m4 l4">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_2.jpg')}}" alt=""></div>
+										</div>
+										<div class="col s6 m4 l4">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_3.jpg')}}" alt=""></div>
+										</div>
+										<div class="col s6 m4 l4">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_4.jpg')}}" alt=""></div>
+										</div>
+										<div class="col s6 m4 l4">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_5.jpg')}}" alt=""></div>
+										</div>
+										<div class="col s6 m4 l4">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
+										</div>
 									</div>
 								</div>
-							</div>
+								<div class="factory_imgbox_wrap video_gallery_box">
+									<div class="row top_titleWrap">
+										<div class="col s6 m6 gallery_navbar">
+											<ul>
+												<li><a href="javascript:void(0);">Factory Images</a></li>
+												<li class="active"><a href="javascript:void(0);">360 Degree Images</a></li>
+											</ul>
+										</div>
+										<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
+									</div>
+									<div class="row 360_degree_video_gallery">
+										<div class="col s12 m6 l6">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img1.png')}}" alt=""></div>
+										</div>
+										<div class="col s12 m6 l6">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img2.png')}}" alt=""></div>
+										</div>
+										<div class="col s12 m6 l6">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img3.png')}}" alt=""></div>
+										</div>
+										<div class="col s12 m6 l6">
+											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img4.png')}}" alt=""></div>
+										</div>
+									</div>
+								</div-->								
+							@endforeach
+							@else
+								<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
+								<div class="card-alert card cyan lighten-5">
+									<div class="card-content cyan-text">
+										<p>INFO : No data found.</p>
+									</div>
+								</div>
+							@endif							
 						</div>
 					</div>
 					<div id="termsservice" class="tabcontent">
@@ -1538,6 +1549,7 @@
 	@include('business_profile._upload_press_highlight_modal')
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')
+	@include('business_profile._add_factorytour_modal')
 @endsection
 
 @include('business_profile._scripts')

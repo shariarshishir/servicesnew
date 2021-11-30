@@ -58,6 +58,11 @@ class BusinessProfile extends Model
         return $this->hasMany(PressHighlight::class);
     }
 
+    public function companyFactoryTour()
+    {
+        return $this->hasMany(CompanyFactoryTour::class);
+    }
+
     public function businessTerms()
     {
         return $this->hasMany(BusinessTerm::class);

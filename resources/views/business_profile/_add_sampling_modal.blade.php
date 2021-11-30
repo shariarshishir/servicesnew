@@ -8,7 +8,7 @@
 		
 		<div class="row">
 			<div class="form-group  sampling-details-block">
-				<label>Create sampling</label>
+				<legend>Create sampling</legend>
 				<div class="sampling-block">
 					<table class="sampling-table-block">
 						<thead>

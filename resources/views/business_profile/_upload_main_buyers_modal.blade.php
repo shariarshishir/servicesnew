@@ -9,7 +9,7 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  main-buyers-details-block">
-                    <label>Main buyers Details</label>
+                    <legend>Main buyers Details</legend>
                     <div class="main-buyers-details-block">
                         <table class="main-buyers-details-table-block">
                             <thead>

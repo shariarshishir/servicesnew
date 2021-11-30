@@ -2761,20 +2761,20 @@ textarea:focus {
     font-size: 18px;
     line-height: 28px;
 }
-.rfq_content_box .quick_rfq_wrap {
+.quick_rfq_wrap {
     -webkit-box-shadow: 0px 11px 10px -4px rgba(0,0,0,0.45);
     -moz-box-shadow: 0px 11px 10px -4px rgba(0,0,0,0.45);
     box-shadow: 0px 11px 10px -4px rgba(0,0,0,0.45);
     padding: 35px;
     border-radius: 20px;
 }
-.rfq_content_box .quick_rfqForm_wrap {
+.quick_rfqForm_wrap {
     position: relative;
     border: 2px solid #448547;
     border-radius: 20px;
     padding: 40px;
 }
-.rfq_content_box .quick_rfqForm_wrap h4 {
+.quick_rfqForm_wrap h4 {
     position: absolute;
     top: -22px;
     left: 22px;
@@ -2784,12 +2784,12 @@ textarea:focus {
     font-weight: 300;
     margin: 0;
 }
-.rfq_content_box .rfq_select {
+.rfq_select {
     position: absolute;
     top: -22px;
     right: 20px;
 }
-.rfq_content_box .rfq_select .btn_filter_dropMenu {
+.rfq_select .btn_filter_dropMenu {
     background: #fff;
     font-size: 13px;
     color: #448547;
@@ -2798,53 +2798,45 @@ textarea:focus {
     line-height: 35px;
     border: 1px solid #448547;
 }
-.rfq_content_box .rfq_select .btn_filter_dropMenu span {
+.rfq_select .btn_filter_dropMenu span {
     font-size: 18px;
     font-weight: 600;
     padding-right: 20px;
 }
-.rfq_content_box .rfq_select .btn_filter_dropMenu .material-icons {
+.rfq_select .btn_filter_dropMenu .material-icons {
     float: right;
     margin-top: 3px;
     font-size: 30px;
     margin-left: 10px;
 }
-.rfq_content_box .file_attach {
+.file_attach {
     position: absolute;
     bottom: -25px;
     right: 200px;
     background: #fff;
     padding: 5px 10px;
 }
-.rfq_content_box .file_attach img {
+.file_attach img {
     margin: 0 10px;
 }
-.rfq_content_box .btn_rfq_post {
-    position: absolute;
+.btn_rfq_post {
+    /* position: absolute;
     bottom: -22px;
     right: 25px;
-    box-shadow: none;
+    box-shadow: none; */
+    padding: 8px 20px;
 }
-.rfq_content_box .rfq_from .input-field {
+.rfq_from .input-field {
     margin: 0;
 }
-.rfq_content_box .rfq_from textarea {
+.rfq_from textarea {
     min-height: 80px;
     padding: 5px;
     border: none;
 }
-.rfq_content_box .rfq_detail_from .input-field {
-    margin: 0 0 20px;
-    padding: 0;
-}
-.rfq_content_box .rfq_detail_from label {
-    font-size: 18px;
-    font-weight: 500;
-    color: #448547;
-}
-.rfq_content_box .rfq_detail_from .select2-container--default .select2-selection--single,
-.rfq_content_box .rfq_detail_from textarea,
-.rfq_content_box .rfq_detail_from input {
+.rfq_detail_from .select2-container--default .select2-selection--single,
+.rfq_detail_from textarea,
+.rfq_detail_from input {
     border: 1px solid #448547 !important;
     border-radius: 8px;
     font-size: 18px;
@@ -2852,19 +2844,19 @@ textarea:focus {
     line-height: 40px;
     padding: 3px 2%;
 }
-.rfq_content_box .rfq_detail_from input {
+.rfq_detail_from input {
     padding: 3px 2%;
     width: 96%;
 }
-.rfq_content_box .select2-container--default .select2-selection--single .select2-selection__rendered {
+.select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 38px;
 }
-.rfq_content_box .rfq_detail_from textarea {
+.rfq_detail_from textarea {
     padding: 5px 10px;
     min-height: 150px;
 }
 
-.rfq_content_box .quick_rfqForm_wrap .btn_detailed_rfq {
+.quick_rfqForm_wrap .btn_detailed_rfq {
     background: url('../images/frontendimages/new_layout_images/rfq_detaile_arrow_down.png.png') no-repeat center bottom;
 }
 
@@ -3000,7 +2992,6 @@ textarea:focus {
     background: #707070;
     color: #fff;
 }
-
 .rfq_content_box .file_attach {
     position: absolute;
     bottom: -25px; 
@@ -3014,49 +3005,101 @@ textarea:focus {
     right: 25px;
     box-shadow: none;
 }
-.rfq_content_box .rfq_from .input-field {
+
+.rfq_from .input-field {
     margin: 0;
 }
-.rfq_content_box .rfq_from textarea {
+.rfq_from textarea {
     min-height: 80px;
     padding: 5px;
     border: none;
     line-height: 30px;
 }
-.rfq_content_box .rfq_detail_from .input-field {
+
+/* **************** rfq_detail_from_wrap modal start ******************** */
+.rfq_detail_from .input-field {
     margin: 0 0 20px;
     padding: 0;
 }
-.rfq_content_box .rfq_detail_from label {
-    font-size: 18px;
+.rfq_detail_from .input-field label {
+    font-size: 16px;
     font-weight: 500;
     color: #448547;
+    padding-top: 0;
 }
-.rfq_content_box .rfq_detail_from .select2-container--default .select2-selection--single,
-.rfq_content_box .rfq_detail_from textarea,
-.rfq_content_box .rfq_detail_from input {
+.rfq_detail_from .input-field label span {
+    color: rgb(255, 0, 0);
+}
+.rfq_detail_from .input-field input[type=date]:not(.browser-default),
+.rfq_detail_from .input-field input[type=number]:not(.browser-default), 
+.rfq_detail_from .input-field .select2-container--default .select2-selection--single,
+.rfq_detail_from .input-field input[type=text]:not(.browser-default), 
+.rfq_detail_from .select2-container--default .select2-selection--single,
+.rfq_detail_from .input-field textarea,
+.rfq_detail_from .input-field input {
     border: 1px solid #448547 !important;
     border-radius: 8px;
-    font-size: 18px;
-    height: 45px;
+    font-size: 16px;
+    height: 48px;
     line-height: 40px;
     padding: 3px 2%;
+    box-shadow: none !important;
 }
-.rfq_content_box .rfq_detail_from input {
+.rfq_detail_from input {
     padding: 3px 2%;
     width: 96%;
 }
-.rfq_content_box .select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 38px;
+.rfq_detail_from .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 46px;
 }
-.rfq_content_box .select2-container--default .select2-selection--single .select2-selection__arrow {
-    top: 9px;
+.rfq_detail_from .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 10px;
     right: 7px;
 }
-.rfq_content_box .rfq_detail_from textarea {
+.rfq_detail_from textarea {
     padding: 5px 10px;
     min-height: 150px;
 }
+
+.rfq_detail_from .short_description {
+    min-height: 100px;
+}
+
+.rfq_detail_from_wrap .submit_btn_wrap {
+    padding: 50px 0 0;
+}
+
+.rfq_img_upload_wrap {
+    padding-top: 30px;
+}
+.rfq_img_upload_wrap .thumbnail_img {
+    height: 80px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 10px;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.rfq_img_upload_wrap .thumbnail_img img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.rfq_img_upload_wrap .btn_upload {
+    border: none;
+    width: 38px;
+    height: 32px;
+    margin-top: 10px;
+}
+.rfq_detail_from_wrap .modal-close {
+    margin-top: 5px;
+}
+/* **************** rfq_detail_from_wrap modal end ******************** */
+
+
+/************************************* */
 .rfq_content_box .rfq_btn_wrap {
     padding: 30px 0 0;
 }

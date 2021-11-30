@@ -1,139 +1,121 @@
-<div id="create-rfq-form" class="modal">
+<div id="create-rfq-form" class="modal rfq_detail_from_wrap">
     <div class="modal-content">
         <section class="ic-buying-req">
             <div class="container">
-                <div class="col-md-12 my-prd-hd-cont">
+                <!-- <div class="col-md-12 my-prd-hd-cont">
                     <div class="row">
                         <div class="col-md-12 plr0">
                             <h5 class="my-prd-hd">Request For Quote</h5>
                             <p>Submit Your Request for Quotation and let Merchant Bay source the best Supplier for you</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-12">
                     <div class="row">
-                        <span style="font-size: 12px; color: rgb(255, 0, 0);">* Indicates Mandatory field</span>
+                        <span style="font-size: 12px; color: rgb(255, 0, 0); padding-bottom: 15px; display:block;">* Indicates Mandatory field</span>
                     </div>
                 </div>
                 <!--Add Product Form-->
-                <form action="{{route('rfq.store')}}" class="createRfqForm" method="post" enctype="multipart/form-data">
+                <form action="{{route('rfq.store')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
                 @csrf
-                    <div class="col-md-12" style="margin-top: 20px;">
+                    <div class="rfq_detail_from">
                         <!--3-->
+                        <div class="row input-field input-wrapper">
+                            <div class="col s12 m4 l3">
+                                <label>Select Product Category <span >*</span></label>
+                            </div>
+                            <div class=" col s12 m8 l9">
+                                <select class="select2" name="category_id" required>
+                                    <option>Select an option</option>
+                                    @foreach($manufacture_product_categories as $product_category)
+                                        <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row input-field input-wrapper">
+                            <div class="col s12 m4 l3">
+                                <label>Title <span>*</span></label>
+                            </div>
+                            <div class=" col s12 m8 l9">
+                                <input type="text" class="form-control- ig-new-rgt" name="title" required/>
+                            </div>
+                        </div>
+
+                        <div class="row input-field input-wrapper">
+                            <div class="col s12 m4 l3">
+                                <label>Short Description</label>
+                            </div>
+                            <div class=" col s12 m8 l9">
+                                <textarea class="ig-new-rgt prd-txta short_description" style="height:88px;" name="short_description"></textarea> 
+                            </div>
+                        </div>
+                        <div class="row input-field input-wrapper">
+                            <div class="col s12 m4 l3">
+                                <label>Full Description</label>
+                            </div>
+                            <div class=" col s12 m8 l9">
+                                <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
+                            </div>
+                        </div>
+
                         <div class="row">
-                            <div class="col-md-6 pr0 mb15 input-wrapper">
-                                <label>Select Product Category <span style="color:red;font-weight:bold;">*</span></label>
-                                <div class="ig-new">
-                                    <i class="ig-new-lft3"><img src="images/category16.png"></i>
-                                    <div class="ig-new-rgt3">
-                                        <select class="select2" name="category_id" required>
-                                            <option>Select an option</option>
-                                            @foreach($manufacture_product_categories as $product_category)
-                                                <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
+                            <div class="col s12 m6 l6">
+                                <div class="input-field row input-wrapper">
+                                    <div class="col s12 m6 l6">
+                                        <label>Quantity <span>*</span></label>
+                                    </div>
+                                    <div class="col s12 m6 l6">
+                                        <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col s12 m6 l6">
+                                <div class="input-field row input-wrapper">
+                                    <div class="col s12 m6 l6">
+                                        <label>Select Unit <span>*</span></label>
+                                    </div>
+                                    <div class="col s12 m6 l6">
+                                        <select class="select2" name="unit">
+                                            <option value="">Select an option</option>
+                                            @php $units = units(); @endphp
+                                            @foreach($units as $unit=>$value)
+                                                <option value="{{$unit}}">{{ $value }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <!--/3-->
-
-                        <!--4-->
                         <div class="row">
-
-                            <div class="col-md-6 pl0 mb15 input-wrapper">
-                                <label>Title <span style="color:red;font-weight:bold;">*</span></label>
-                                <div class="ig-new">
-                                    <i class="ig-new-lft3"><img src="images/category16.png"></i>
-                                    <div class="ig-new-rgt3"><input type="text" class="form-control- ig-new-rgt" name="title" required/></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 pr0 mb15 input-wrapper">
-                                <!--left-->
-                                <div class="col-md-6 pl0 mb15">
-                                    <label>Quantity <span style="color:red;font-weight:bold;">*</span></label>
-                                    <div class="ig-new">
-                                        <i class="ig-new-lft2"><img src="images/quantity.png"></i>
-                                        <div class="ig-new-rgt2"><input type="number" class="form-control- ig-new-rgt" name="quantity" required/></div>
+                            <div class="col s12 m6 l6">
+                                <div class="input-field row input-wrapper">
+                                    <div class="col s12 m6 l6">
+                                        <label>Target Price <span>*</span></label>
                                     </div>
-                                </div>
-                                <!--left-->
-
-                                <!--right-->
-                                <div class="col-md-6 pr0 mb15 input-wrapper">
-                                    <label>Select Unit <span style="color:red;font-weight:bold;">*</span></label>
-                                    <div class="ig-new">
-                                        <i class="ig-new-lft2"><img src="images/t-shirt.png"></i>
-                                        <div class="ig-new-rgt2">
-                                            <select class="select2" name="unit">
-                                                <option value="">Select an option</option>
-                                                @php $units = units(); @endphp
-                                                @foreach($units as $unit=>$value)
-                                                    <option value="{{$unit}}">{{ $value }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/right-->
-
-                            </div>
-
-                        </div>
-                        <!--/4-->
-
-                        <!--5-->
-                        <div class="row">
-                            <div class="col-md-6 pl0 mb15 input-wrapper">
-                                <label>Short Description</label>
-                                <div class="ig-new100">
-                                    <i class="ig-new-lft3"><img src="images/category16.png"></i>
-                                    <div class="ig-new-rgt3">
-                                        <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="short_description"></textarea>
+                                    <div class="col s12 m6 l6">
+                                        <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 pr0 mb15 input-wrapper">
-                                <label>Full Description</label>
-                                <div class="ig-new100">
-                                    <i class="ig-new-lft3"><img src="images/category16.png"></i>
-                                    <div class="ig-new-rgt3">
-                                        <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
+                            <div class=" col s12 m6 l6">
+                                <div class="input-field row input-wrapper">
+                                    <div class="col s12 m6 l6">
+                                        <label>Destination <span>*</span></label>
+                                    </div>
+                                    <div class="col s12 m6 l6">
+                                        <input type="text" class="form-control- ig-new-rgt" name="destination" required/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--/5-->
-
-                        <!--6-->
                         <div class="row">
-                            <div class="col-md-6 pl0 mb15 input-wrapper">
-                                <label>Target Price <span style="color:red;font-weight:bold;">*</span></label>
-                                <div class="ig-new">
-                                    <i class="ig-new-lft3"><img src="images/dollar.png"></i>
-                                    <div class="ig-new-rgt3"><input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" /></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 pr0 mb15 input-wrapper">
-                                <label>Destination <span style="color:red;font-weight:bold;">*</span></label>
-                                <div class="ig-new">
-                                    <i class="ig-new-lft3"><img src="images/Map16.png"></i>
-                                    <div class="ig-new-rgt3"><input type="text" class="form-control- ig-new-rgt" name="destination" required/></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/6-->
-
-                        <!--7-->
-                        <div class="row">
-                            <div class="col-md-6 pl0 mb15 input-wrapper">
-                                <label>Select Payment Method <span style="color:red;font-weight:bold;">*</span></label>
-                                <div class="ig-new">
-                                    <i class="ig-new-lft3"><img src="images/dollar.png"></i>
-                                    <div class="ig-new-rgt3">
+                            <div class="col s12 m6 l6">
+                                <div class="input-field row input-wrapper">
+                                    <div class="col s12 m6 l6">
+                                        <label>Select Payment Method <span>*</span></label>
+                                    </div>
+                                    <div class="col s12 m6 l6">
                                         <select class="select2" name="payment_method" required>
                                             <option>Select an option</option>
                                             <option value="cash">Cash</option>
@@ -144,35 +126,35 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-6 pr0 mb15 input-wrapper">
-                                <label>Expected Delivery Time <span style="color:red;font-weight:bold;">*</span></label>
-                                <div class="ig-new">
-                                    <i class="ig-new-lft3"><img src="images/clock16.png"></i>
-                                    <div class="ig-new-rgt3"><input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/></div>
+                            <div class=" col s12 m6 l6">
+                                <div class="input-field row input-wrapper">
+                                    <div class="col s12 m6 l6">
+                                        <label>Expected Delivery Time <span>*</span></label>
+                                    </div>
+                                    <div class="col s12 m6 l6">
+                                        <input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--/7-->
 
-                        <div class="clear30"></div>
 
-                        <!--8-->
-                        <div class="row">
+                       
+
+                        <div class="row rfq_img_upload_wrap">
 
                             <!--1-->
-                            <div class="col-md-3" style="width:20%; text-align:center;">
-                                <div class="col-md-12">
+                            <div class="col s5 m4 l2">
+                                <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img1">
                                 </div>
-                                <div class="clear10"></div>
-                                <div class="col-md-12" style="text-align:center;">
+                                <div class="upload_img_box center-align">
                                     <div id="msg"></div>
                                     <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img1')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
-                                        <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
                                       </div>
                                     </div>
                                 </div>
@@ -180,18 +162,17 @@
                             <!--/1-->
 
                             <!--2-->
-                            <div class="col-md-3" style="width:20%; text-align:center;">
-                                <div class="col-md-12">
+                            <div class="col s5 m4 l2">
+                                <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img2">
                                 </div>
-                                <div class="clear10"></div>
-                                <div class="col-md-12" style="text-align:center;">
+                                <div class="upload_img_box center-align">
                                     <div id="msg"></div>
                                     <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img2')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
-                                        <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
                                       </div>
                                     </div>
                                 </div>
@@ -199,18 +180,17 @@
                             <!--/2-->
 
                             <!--3-->
-                            <div class="col-md-3" style="width:20%; text-align:center;">
-                                <div class="col-md-12">
+                            <div class="col s5 m4 l2">
+                                <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img3">
                                 </div>
-                                <div class="clear10"></div>
-                                <div class="col-md-12" style="text-align:center;">
+                                <div class="upload_img_box center-align">
                                     <div id="msg"></div>
                                     <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img3')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
-                                        <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
                                       </div>
                                     </div>
                                 </div>
@@ -218,18 +198,17 @@
                             <!--/3-->
 
                             <!--4-->
-                            <div class="col-md-3" style="width:20%; text-align:center;">
-                                <div class="col-md-12">
+                            <div class="col s5 m4 l2">
+                                <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img4">
                                 </div>
-                                <div class="clear10"></div>
-                                <div class="col-md-12" style="text-align:center;">
+                                <div class="upload_img_box center-align">
                                     <div id="msg"></div>
                                     <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img4')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
-                                        <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
                                       </div>
                                     </div>
                                 </div>
@@ -237,25 +216,24 @@
                             <!--/4-->
 
                             <!--5-->
-                            <div class="col-md-3" style="width:20%; text-align:center;">
-                                <div class="col-md-12">
+                            <div class="col s5 m4 l2">
+                                <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img5">
                                 </div>
-                                <div class="clear10"></div>
-                                <div class="col-md-12" style="text-align:center;">
+                                <div class="upload_img_box center-align">
                                     <div id="msg"></div>
                                     <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img5')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
-                                        <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
                                       </div>
                                     </div>
                                 </div>
                             </div>
                             <!--/5-->
 
-                            <div class="clear10"></div>
+                            
 
                         </div>
 
@@ -271,10 +249,25 @@
                             {{-- <button type="button" class="btn-red mr15" onclick="location.reload();">
                                 <i aria-hidden="true" class="fa fa-times-circle fa-lg"></i>&nbsp;&nbsp;Cancel
                             </button> --}}
-                            <button type="button" class="btn-green" onclick="onSubmit()">
+                            
+                            
+
+                            <!-- <button type="button" class="btn-green" onclick="onSubmit()">
                                 <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="padding-right: 6px; line-height: 18px;"></i>Submit
-                            </button>
+                            </button> -->
+
                             <button type="submit" id="page_button" style="display: none;"></button>
+
+                            <div class="submit_btn_wrap">
+                                <div class="row">
+                                    <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                                    <div class="col s12 m6 l6 right-align">
+                                        <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit()">
+                                            Post
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         </div>
@@ -288,9 +281,9 @@
             </div>
         </section>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-    </div>
+    </div> -->
 </div>
 
 

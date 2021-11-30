@@ -764,6 +764,7 @@
                     html +='<div class="certificate_img">';
                     html +='<img src="'+image+'" alt="">';
                     html +='</div>';
+                    html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                     html +='</div>';
                 }
                 $('.certifications-block').append(html);
@@ -852,6 +853,7 @@
                                             html +='<div class="certificate_img">';
                                             html +='<img src="'+image+'" alt="">';
                                             html +='</div>';
+                                            html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                                             html +='</div>';
                                         }
                                         $('.certifications-block').append(html);

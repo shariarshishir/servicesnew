@@ -135,9 +135,8 @@
 										<br>
 										<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
 										@else
-										<div class="certificate_img">
-											<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
-										</div>
+										<div class="certificate_img"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+										<span class="certificate_title" >{{$certification->title}}</span>
 										@endif
 									</div>
 									@endforeach
@@ -566,6 +565,7 @@
 										<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
 										@else
 										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+										<span class="certificate_title" >{{$certification->title}}</span>
 										@endif
 									</div>
 									@endforeach

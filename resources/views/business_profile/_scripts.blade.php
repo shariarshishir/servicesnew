@@ -742,7 +742,7 @@
                 
                 if(strArray == 'pdf' || strArray == 'PDF'){
                     
-                    html +='<div class="col m3 l3 certificate_img">';
+                    html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<span>'+certifications[i].title+'</span>';
                     html +='<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>';
@@ -750,9 +750,11 @@
                     html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a>';
                     html +='</div>';
                 } else {
-                    html +='<div class="col m3 l3 certificate_img">';
+                    html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)"  style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                    html +='<div class="certificate_img">';
                     html +='<img src="'+image+'" alt="">';
+                    html +='</div>';
                     html +='</div>';
                 }
                 $('.certifications-block').append(html);
@@ -822,7 +824,7 @@
                                         var strArray = image.slice(-3);
                                         
                                         if(strArray == 'pdf'|| strArray == 'PDF'){
-                                            html +='<div class="col m3 l3 certificate_img">';
+                                            html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<span>'+certifications[i].title+'</span>';
                                             html +='<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>';
@@ -830,9 +832,11 @@
                                             html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a>';
                                             html +='</div>';
                                         } else {
-                                            html +='<div class="col m3 l3 certificate_img">';
+                                            html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                            html +='<div class="certificate_img">';
                                             html +='<img src="'+image+'" alt="">';
+                                            html +='</div>';
                                             html +='</div>';
                                         }
                                         $('.certifications-block').append(html);
@@ -914,9 +918,11 @@
             for(let i = 0;i < mainBuyers.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+mainBuyers[i].image;
-                html +='<div class="col m3 l3 main_buyer_img">';
+                html +='<div class="col m3 l3 main_buyer_box">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+mainBuyers[i].id+'" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                html +='<div class="main_buyer_img">';
                 html +='<img src="'+image+'" alt="">';
+                html +='</div>';
                 html +='<h5>'+mainBuyers[i].title+'</h5>';
                 html +='</div>';
                 $('.main-buyers-block').append(html);
@@ -1000,9 +1006,11 @@
                                     for(let i = 0;i < mainBuyers.length ;i++){
                                         var html='';
                                         var image="{{asset('storage/')}}"+'/'+mainBuyers[i].image;
-                                        html +='<div class="col m3 l3 main_buyer_img">';
+                                        html +='<div class="col m3 l3 main_buyer_box">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+mainBuyers[i].id+'" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                        html +='<div class="main_buyer_img">';
                                         html +='<img src="'+image+'" alt="">';
+                                        html +='</div>';
                                         html +='<h5>'+mainBuyers[i].title+'</h5>';
                                         html +='</div>';
                                         $('.main-buyers-block').append(html);
@@ -1260,7 +1268,7 @@
             for(let i = 0;i < associationMemberships.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
-                html +='<div class="col s12 m6 l5 center-align association-membership-img">';
+                html +='<div class="center-align association-membership-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<div class="imgbox">';
                 html +='<img src="'+image+'" alt="">';
@@ -1344,7 +1352,7 @@
                                     for(let i = 0;i < associationMemberships.length ;i++){
                                         var html='';
                                         var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
-                                        html +='<div class="col s12 m6 l5 center-align association-membership-img">';
+                                        html +='<div class="center-align association-membership-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<div class="imgbox">';
                                         html +='<img src="'+image+'" alt="">';

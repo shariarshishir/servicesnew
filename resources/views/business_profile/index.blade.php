@@ -9,9 +9,9 @@
     </div>
     <div class="col m12 box_shadow_radius business_list_innar_wrapper">
         <div class="list_title"><legend>My Business List</legend></div>
-        <div class="row">
+        <div class="business_list_inner_wrap">
             @foreach ($business_profile  as $profile )
-            <div class="col m3">
+            <div class="business_list_itembox">
                 <div class="box_shadow list_box">
                     <p><span>Business Name:</span> {{$profile->business_name}}</p>
                     <p><span>Business Type:</span>

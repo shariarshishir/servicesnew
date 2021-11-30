@@ -134,10 +134,14 @@
 						<!-- contentBox -->
 						<div class="certifications">
 							<h3>Certifications</h3>
-							<div class="row certifications-block">
+							<div class="certifications-block">
 							@if(count($business_profile->certifications)>0)
 								@foreach($business_profile->certifications as $certification)
-								<div class="col m3 l3"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+								<div class="certificate_img_wrap">
+									<div class="certificate_img">
+										<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
+									</div>
+								</div>
 								@endforeach
 							@else
 								<div class="card-alert card cyan lighten-5">
@@ -248,8 +252,11 @@
 							<div class="buyers_logo_wrap row main-buyers-block">
 								@if(count($business_profile->mainBuyers)>0)
 								@foreach($business_profile->mainBuyers as $mainBuyers)
-									<div class="col s6 m4 l3">
-										<div class="logoBox"><a href="javascript:void(0);"><img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt=""> </a></div>
+									<div class="col s6 m4 l3 main_buyer_box">
+										<a href="javascript:void(0);"></a>
+										<div class="main_buyer_img">
+											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+										</div>
 										<h5>{{$mainBuyers->title}}</h5>
 									</div>
 								@endforeach
@@ -538,10 +545,10 @@
 								</div>
 								
 							</div>
-							<div class="row certifications-block">
+							<div class="certifications-block">
 								@if(count($business_profile->certifications)>0)
 									@foreach($business_profile->certifications as $certification)
-									<div class="col m3 l3">
+									<div class="certificate_img_wrap">
 										<div class="certificate_img">
 											<a href="javascript:void(0)" style="display: none;"data-id="{{$certification->id}}"class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>
 											<img  src="{{ asset('storage/'.$certification->image) }}" alt="">
@@ -567,12 +574,12 @@
 							<div class="buyers_logo_wrap row main-buyers-block">
 								@if(count($business_profile->mainBuyers)>0)
 									@foreach($business_profile->mainBuyers as $mainBuyers)
-									<div class="col s6 m4 l3">
+									<div class="col s6 m4 l3 main_buyer_box">
+										<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
 										<div class="main_buyer_img">
-											<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
 											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
-											<h5>{{$mainBuyers->title}}</h5>
 										</div>
+										<h5>{{$mainBuyers->title}}</h5>
 									</div>
 									@endforeach
 								@else
@@ -757,7 +764,7 @@
 								</div>
 
 								@if($business_profile->walfare)
-								<div class="col s12 m6 l7">
+								<div class="col s12 m6 l6">
 									@foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
 								    @if($walfareAndCsr->name == 'healthcare_facility')
 									<div class="welfare_box row">
@@ -802,7 +809,7 @@
 									@endforeach
 								</div>
 
-								<div class="col s12 m6 l5">
+								<div class="col s12 m6 l6">
 									@foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
 								    @if($walfareAndCsr->name == 'playground')
 									<div class="welfare_box row">
@@ -929,7 +936,7 @@
 								</div>
 
 								@if($business_profile->security)
-								<div class="col s12 m6 l7">
+								<div class="col s12 m6 l6">
 								    @foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
 									@if($securityAndOther->name == 'fire_exit')
 									<div class="welfare_box row">
@@ -974,7 +981,7 @@
 								    @endforeach
 							    </div>
 
-								<div class="col s12 m6 l5">
+								<div class="col s12 m6 l6">
 									@foreach(json_decode($business_profile->security->security_and_others) as $securityAndOther)
 									@if($securityAndOther->name == 'protocols')
 									<div class="welfare_box row">
@@ -992,7 +999,7 @@
 									@endforeach
 								</div>
 								@else
-								<div class="col s12 m6 l7">
+								<div class="col s12 m6 l6">
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Fire Exit</span>
 										<label class="radio_box col s2 m2 l2">
@@ -1027,7 +1034,7 @@
 										</label>
 									</div>
 								</div>
-								<div class="col s12 m6 l5">
+								<div class="col s12 m6 l6">
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Other protocols</span>
 										<label class="radio_box col s2 m2 l2">
@@ -1087,10 +1094,10 @@
 								</div>
 								
 							</div>
-							<div class="row membership_textBox association-membership-block">
+							<div class="membership_textBox association-membership-block">
 								@if(count($business_profile->associationMemberships)>0)
 							    @foreach($business_profile->associationMemberships as $associationMembership)
-								<div class="col s12 m6 l5 center-align association-membership-img">
+								<div class="center-align association-membership-img">
 									<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
 									<div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
 									<p>{{$associationMembership->title}}</p>

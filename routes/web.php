@@ -52,6 +52,7 @@ use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
+use App\Http\Controllers\RfqBidController;
 
 
 /*
@@ -187,6 +188,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 
+    Route::post('/factory-details-upload', [CertificationController::class, 'factoryDetailsUpload'])->name('factoryinfo.upload');
+    Route::get('/factory-details-delete', [CertificationController::class, 'factoryDetailsDelete'])->name('factoryinfo.delete');
+
     Route::post('/main-buyers-details-upload', [MainBuyerController::class, 'mainBuyerDetailsUpload'])->name('mainbuyers.upload');
     Route::get('/main-buyers-details-delete', [MainBuyerController::class, 'deleteMainBuyer'])->name('mainbuyers.delete');
 
@@ -228,6 +232,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
+    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
+    //bid rfq
+    Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
+    Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
 
 
 

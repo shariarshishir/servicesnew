@@ -9,7 +9,7 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  certification-details-block">
-                    <label>Certification Details</label>
+                    <legend>Certification Details</legend>
                     <div class="certification-details-block">
                         <table class="certification-details-table-block">
                             <thead>

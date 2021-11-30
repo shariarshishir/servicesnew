@@ -9,7 +9,7 @@
            <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group production-flow-and-manpower-block">
-                    <label>Production Capacity (Annual)</label>
+                    <legend>Production Capacity (Annual)</legend>
                     <div class="production-flow-and-manpower-block">
                         <table class="production-flow-and-manpower-table-block">
                             <thead>

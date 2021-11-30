@@ -8,7 +8,7 @@
 		<div class="row">
 			<div class="col s12 capacity_block_box">
 				<div class="form-group production-capacity-block">
-					<label>Production Capacity (Annual)</label>
+					<legend>Production Capacity (Annual)</legend>
 					<div class="production-capacity-block">
 						<table class="production-capacity-table-block">
 							<thead>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="col s12 capacity_block_box">
 				<div class="form-group categories-produced-block">
-					<label>Categories Produced</label>
+					<legend>Categories Produced</legend>
 					<div class="categories-produced-block">
 						<table class="categories-produced-table-block">
 							<thead>
@@ -84,7 +84,7 @@
 		</div>
 		<div class="row capacity_block_box">
 			<div class="form-group machinaries-details-block">
-				<label>machinaries Details</label>
+				<legend>machinaries Details</legend>
 				<div class="machinaries-details-block">
 					<table class="machinaries-details-table-block">
 						<thead>

@@ -9,7 +9,7 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  export-destination-details-block">
-                    <label>Export Destinations</label>
+                    <legend>Export Destinations</legend>
                     <div class="export-destination-details-block">
                         <table class="export-destination-table-block">
                             <thead>

@@ -332,7 +332,7 @@
 						</div>
 					</div>
 					<!-- Home tabcontent end -->
-					<div id="profile" class="tabcontent">
+					<div id="profile" class="tabcontent profile_table_design">
 						<div class="overview_table_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
@@ -454,7 +454,7 @@
 							</div>
 						</div>
 						<div class="overview_table_wrap machinery_table">
-							<h3>Machinery Details</h3>
+							<h4>Machinery Details</h4>
 							<div class="overview_table box_shadow">
 								<table>
 									<thead>

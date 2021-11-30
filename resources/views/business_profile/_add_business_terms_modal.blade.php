@@ -8,7 +8,7 @@
 		
 		<div class="row">
 			<div class="form-group  business-term-details-block">
-				<label>Create Business Terms</label>
+				<legend>Create Business Terms</legend>
 				<div class="business-term-block">
 					<table class="business-term-table-block">
 						<thead>

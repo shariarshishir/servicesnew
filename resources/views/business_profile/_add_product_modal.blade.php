@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="title">
                         <legend>Upload Product</legend>
-                        <p>Upload your new product</p>
+                        <!-- <p>Upload your new product</p> -->
                     </div>
                 </div>
                 <div id="manufacture-product-upload-errors"></div>
@@ -141,8 +141,8 @@
                             <div class="row center-align" style="padding-top: 25px;">
                                 <!--1-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
-                                    <img src="https://via.placeholder.com/80" id="img1" class="img-thumbnail">
+                                    <div class="media_img">
+                                        <img src="https://via.placeholder.com/80" id="img1" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
                                     <div class="col-md-12" style="text-align:center;">
@@ -162,7 +162,7 @@
 
                                 <!--2-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img2" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -183,7 +183,7 @@
 
                                 <!--3-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img3" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -204,7 +204,7 @@
 
                                 <!--4-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img4" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -225,7 +225,7 @@
 
                                 <!--5-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img5" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>

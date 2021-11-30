@@ -2223,7 +2223,8 @@ textarea:focus {
 .product_details_tab_wrap table {
     border: 1px solid rgba(0,0,0,0.12);
 }
-.product_details_tab_wrap table td, th {
+.product_details_tab_wrap table td, 
+.product_details_tab_wrap table th {
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 0;
@@ -4616,3 +4617,17 @@ nav .pagination li.active .page-link {
     font-size: 17px;
 }
 
+#order-details-modal_2 {
+    width: 80%;
+    min-height: 80%;
+}
+#orders {
+    padding-bottom: 50px;
+}
+
+#orders table th {
+    padding: 5px 20px;
+}
+#orders table td {
+    padding: 10px 20px;
+}

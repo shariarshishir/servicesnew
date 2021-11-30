@@ -14,7 +14,7 @@ class SustainabilityCommitmentController extends Controller
 {
     public function sustainabilityCommitmentCreateOrUpdate(Request $request){
         $validator = Validator::make($request->all(), [
-            'sustainability_commitment_title.*' => 'string|min:1|max:500',
+            'sustainability_commitment_title.*' => 'string|min:1|max:255',
         ]);
         if ($validator->fails())
         {

@@ -14,7 +14,7 @@ class SamplingController extends Controller
 {
     public function samplingCreateOrUpdate(Request $request){
         $validator = Validator::make($request->all(), [
-            'sampling_title.*' => 'string|min:1|max:500',
+            'sampling_title.*' => 'string|min:1|max:255',
             'sampling_quantity.*' => 'integer'
         ]);
         if ($validator->fails())

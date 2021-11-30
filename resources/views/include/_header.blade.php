@@ -18,8 +18,8 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="javascript:void(0);">RFQ</a></li>
 							<li><a href="javascript:void(0);">Tools</a></li>
+							<li><a href="{{route('rfq.index')}}">Rfq</a></li>
 							<li>
 								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->

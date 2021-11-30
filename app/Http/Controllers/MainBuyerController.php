@@ -14,7 +14,7 @@ class MainBuyerController extends Controller
     public function mainBuyerDetailsUpload(Request $request ){
      
         $validator = Validator::make($request->all(), [
-            'title.*' => 'string|min:1|max:50',
+            'title.*' => 'string|min:1|max:255',
             'image.*' => 'image',
             'short_description.*' => 'string|max:500',
         ]);

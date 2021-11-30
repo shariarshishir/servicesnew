@@ -46,6 +46,7 @@ use App\Http\Controllers\ProductWishlistController;
 use App\Http\Controllers\SubscribedUserEmailController;
 use App\Http\Controllers\OrderModificationRequestController;
 use App\Http\Controllers\OrderController as UserOrderController;
+use App\Http\Controllers\RfqController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
@@ -224,6 +225,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     //my order
     Route::get('my-order',[MyOrderController::class, 'index'])->name('myorder');
+    //rfq
+    Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
+    Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
 
 
 

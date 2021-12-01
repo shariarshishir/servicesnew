@@ -15,6 +15,19 @@ class RfqController extends Controller
     public function index()
     {
         $rfqLists=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+
+        foreach($rfqLists as $list){
+            $bid_user_id=[];
+            if($list->bids()->exists()){
+                foreach($list->bids as $user){
+                    array_push($bid_user_id,$user->supplier_id);
+                }
+                $list['bid_user_id'] = array_unique($bid_user_id);
+
+            }
+
+        }
+
         return view('rfq.index',compact('rfqLists'));
     }
 

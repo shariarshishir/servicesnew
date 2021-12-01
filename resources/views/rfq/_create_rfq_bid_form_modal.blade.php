@@ -145,6 +145,8 @@
                 </div>
             </div>
 
+            <div class="previous-image-show"></div>
+
             <div class="submit_btn_wrap">
                 <div class="row">
                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>

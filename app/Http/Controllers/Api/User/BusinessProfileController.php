@@ -23,18 +23,35 @@ class BusinessProfileController extends Controller
 {
     public function show($id){
         $businessProfile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
+        
         if( $businessProfile){
+
+            //company overview without json
             $companyOverview = new stdClass();
             $companyOverview->data=$businessProfile->companyOverview->id;
             $companyOverview->data=json_decode($businessProfile->companyOverview->data);
             $companyOverview->about_company=$businessProfile->companyOverview->about_company;
             $companyOverview->status=$businessProfile->companyOverview->status;
-            return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"success"=>true],200);
+
+            //production flow and manpower without json
+            $productionFlowAndManpowerArray = [];
+            foreach($businessProfile->productionFlowAndManpowers as $key => $productionFlowAndManpower){
+                $productionFlowAndManpowerObject = new stdClass();
+                $productionFlowAndManpowerObject->id =  $productionFlowAndManpower->id;
+                $productionFlowAndManpowerObject->business_profile_id = $productionFlowAndManpower->business_profile_id;
+                $productionFlowAndManpowerObject->production_type = $productionFlowAndManpower->production_type;
+                $productionFlowAndManpowerObject->flow_and_manpower = json_decode($productionFlowAndManpower->flow_and_manpower);
+                array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
+            }
+
+            return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"productionFlowAndManpower"=>$productionFlowAndManpowerArray,"success"=>true],200);
+            
         }
         else{
             return response()->json(["success"=>false],404);
         }
     }
+
     public function manufactureProductCategories(){
         $manufactureProductCategories=ProductCategory::with('subcategories')->get();
         if( count($manufactureProductCategories)>0){
@@ -45,6 +62,7 @@ class BusinessProfileController extends Controller
         }
 
     }
+    
     public function manufactureProductCategoriesByIndustryType(Request $request){
         $manufactureProductCategoriesByInduestryType=ProductCategory::with('subcategories')->where('industry',$request->industry)->get();
         if( count($manufactureProductCategoriesByInduestryType)>0){

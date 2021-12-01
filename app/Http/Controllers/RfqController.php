@@ -51,8 +51,8 @@ class RfqController extends Controller
             event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         }
 
-        // $selectedUserToSendMail="success@merchantbay.com";
-        // event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        $selectedUserToSendMail="success@merchantbay.com";
+        event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 

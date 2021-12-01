@@ -25,5 +25,9 @@ class Rfq extends Model
         return $this->hasMany('App\Models\Manufacture\SupplierBid', 'rfq_id')->withTrashed();
     }
 
+    public function category(){
+        return $this->belongsTo('App\Models\Manufacture\ProductCategory','category_id');
+    }
+
 
 }

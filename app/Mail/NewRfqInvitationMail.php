@@ -11,14 +11,10 @@ class NewRfqInvitationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $data;
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -26,8 +22,10 @@ class NewRfqInvitationMail extends Mailable
      *
      * @return $this
      */
+
     public function build()
     {
-        return $this->view('view.name');
+
+        return $this->markdown('emails.rfq_invitation')->with('data', $this->data);
     }
 }

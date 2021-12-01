@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div>
+<!-- <div>
     <a class="waves-effect waves-light btn modal-trigger" href="#create-rfq-form">Create Rfq</a>
-</div>
+</div> -->
 @include('rfq._create_rfq_form_modal')
 <div id="errors">
 
@@ -13,11 +13,12 @@
 <!-- RFQ html start -->
 
 <div class="box_shadow_radius rfq_content_box">
-	<div class="rfq_info_wrap right-align">
+	<div class="rfq_info_wrap right-align rfq_top_navbar">
 		<ul>
             <li><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
 			<li><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
 			<li><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
+			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
 		</ul>
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->

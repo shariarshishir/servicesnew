@@ -142,8 +142,6 @@
                        
 
                         <div class="row rfq_img_upload_wrap">
-
-                            <!--1-->
                             <div class="col s5 m4 l2">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img1">

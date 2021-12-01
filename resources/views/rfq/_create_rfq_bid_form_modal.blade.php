@@ -1,65 +1,128 @@
 <div id="rfq-bid-modal" class="modal">
     <div class="modal-content">
         <form action="" method="post" enctype="multipart/form-data" id="rfq-bid-form">
-            @csrf
-            <div id="rfq_bid_store_errors"></div>
-            <input type="hidden" name="rfq_id" value="">
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <label for="producut-title">Select Business</label>
-                    <select class="select2" name="business_profile_id" id="my_business_list" required>
+            <div class="rfq_detail_from">
+                @csrf
+                <div id="rfq_bid_store_errors"></div>
+                <input type="hidden" name="rfq_id" value="">
 
-                    </select>
+                <div class="row input-field input-wrapper">
+                    <div class="col s12 m4 l3">
+                        <label for="producut-title">Select Business</label>
+                    </div>
+                    <div class=" col s12 m8 l9">
+                        <select class="select2" name="business_profile_id" id="my_business_list" required>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-8 col-sm-12">
-                    <label for="producut-title">Title</label>
-                    <input type="text" id="producut-title" name="title" class="form-control" placeholder="What you want to buy..." value="" disabled>
+                <div class="row input-field input-wrapper">
+                    <div class="col s12 m4 l3">
+                        <label for="producut-title">Title</label>
+                    </div>
+                    <div class=" col s12 m8 l9">
+                        <input type="text" id="producut-title" name="title" class="form-control" placeholder="What you want to buy..." value="" disabled>
+                    </div>
                 </div>
-                <div class="col-md-2 col-sm-6">
-                    <label for="producut-quality">Quantity</label>
-                    <input type="number" id="producut-quality" name="quantity" class="form-control" placeholder="Quantity">
+                <div class="row input-field input-wrapper">
+                    <div class="col s12 m4 l3">
+                        <label for="product-bidding-desc">Short description</label>
+                    </div>
+                    <div class=" col s12 m8 l9">
+                        <textarea name="description" id="product-bidding-desc" for="product-bidding-desc" class="editor product-bidding-desc" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="producut-quality">Quantity</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <input type="number" id="producut-quality" name="quantity" class="form-control" placeholder="Quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="product-unit">Unit</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <input type="text" id="product-unit" name="unit" class="form-control" placeholder="Unit" value="" disabled="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="product-unit-price">Unit price</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <input type="number" id="product-unit-price" class="form-control" name="unit_price" placeholder="Unit Price">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="product-total-price">Total price</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <input type="number" id="product-total-price" class="form-control" name="total_price" placeholder="Total Price">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-2 col-sm-6">
-                    <label for="product-unit">Unit</label>
-                    <input type="text" id="product-unit" name="unit" class="form-control" placeholder="Unit" value="" disabled="">
+
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="product-payment-method" class="select-icon">Payment method</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <select name="payment_method" class="select2" id="product-payment-method">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="product-destination" class="select-icon">Destination</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <input type="text" name="destination" class="form-control appearance-none" id="product-destination" value="" disabled="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col s12 m6 l6">
+                        <div class="input-field row input-wrapper">
+                            <div class="col s12 m6 l6">
+                                <label for="delivery-time" class="select-icon">Delivery Time</label>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <input type="date" name="delivery_time" class="form-control appearance-none" id="delivery-time">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <label for="product-bidding-desc">Short description</label>
-                    <textarea name="description" id="product-bidding-desc" for="product-bidding-desc" class="editor product-bidding-desc" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <label for="product-unit-price">Unit price</label>
-                    <input type="number" id="product-unit-price" class="form-control" name="unit_price" placeholder="Unit Price">
-                </div>
-                <div class="col-sm-4">
-                    <label for="product-total-price">Total price</label>
-                    <input type="number" id="product-total-price" class="form-control" name="total_price" placeholder="Total Price">
-                </div>
-                <div class="col-sm-4">
-                    <label for="product-destination" class="select-icon">Destination</label>
-                    <input type="text" name="destination" class="form-control appearance-none" id="product-destination" value="" disabled="">
-                </div>
-                <div class="col-sm-4">
-                    <label for="product-payment-method" class="select-icon">Payment method</label>
-                    <select name="payment_method" class="select2" id="product-payment-method">
-                        <option value="cash">Cash</option>
-                        <option value="card">Card</option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label for="delivery-time" class="select-icon">Delivery Time</label>
-                    <input type="date" name="delivery_time" class="form-control appearance-none" id="delivery-time">
-                </div>
-            </div>
+            <!-- rfq_detail_from end -->
+            
+            
 
 
-            <div class="row">
+
+
+            <div class="row rfq_img_upload_wrap">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="">
                         <label for="product-upload">Media</label>
@@ -81,18 +144,29 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+
+            <div class="submit_btn_wrap">
+                <div class="row">
+                    <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                    <div class="col s12 m6 l6 right-align">
+                        <button type="submit" class="btn_green rfq-replay-submit right">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="row">
                 <div class="col-xs-12">
                     <div class="ic-form-btn ic-buying-req-btn">
                         <button type="submit" class="btn btn-default rfq-replay-submit">Submit</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </form>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-    </div>
+    </div> -->
 </div>
 
 @push('js')

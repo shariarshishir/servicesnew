@@ -46,10 +46,10 @@ class RfqController extends Controller
             }
         }
 
-        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->where(['business_category_id' => $request->category_id])->get();
-        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        // }
+        $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
+        foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        }
 
         // $selectedUserToSendMail="success@merchantbay.com";
         // event(new NewRfqHasAddedEvent($selectedUserToSendMail));

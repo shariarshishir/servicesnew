@@ -14,14 +14,10 @@ class NewRfqHasAddedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public  $selectedUserToSendMail;
+    public function __construct($selectedUserToSendMail)
     {
-        //
+        $this->selectedUserToSendMail=$selectedUserToSendMail;
     }
 
     /**

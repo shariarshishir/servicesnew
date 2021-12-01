@@ -31,16 +31,16 @@
 	<div class="membership_wrap">
 		<div class="row top_titleWrap upload_delete_wrap">
 			<div class="col s6 m6">
-				<h3>Association memberships</h3>
+				<h3>Association memberships test</h3>
 			</div>
 			<div class="col s6 m6 right-align editBox">
 				<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger"><span class="material-icons">file_upload</span></span> Upload</button>
 				<button type="button" class="btn_delete btn_green_White delete-association-membership-button"><span><span class="material-icons">delete</span></span> Delete</button>
 			</div>
 		</div>
-		<div class="row membership_textBox association-membership-block">
+		<div class="membership_textBox association-membership-block">
 			@foreach($business_profile->associationMemberships as $associationMembership)
-			<div class="col s12 m6 l5 center-align association-membership-img">
+			<div class="center-align association-membership-img">
 				<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
 				<div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
 				<p>{{$associationMembership->title}}</p>

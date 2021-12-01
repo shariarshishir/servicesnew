@@ -529,11 +529,15 @@
 											</tr>
 											@endforeach
 										@else
-										<div class="card-alert card cyan lighten-5">
-											<div class="card-content cyan-text">
-												<p>INFO : No data found.</p>
-											</div>
-										</div>
+											<tr style="display: block;">
+												<td colspan="3" style="display: block;">
+													<div class="card-alert card cyan lighten-5">
+														<div class="card-content cyan-text">
+															<p>INFO : No data found.</p>
+														</div>
+													</div>													
+												</td>
+											</tr>
 										@endif										
 									</tbody>
 								</table>

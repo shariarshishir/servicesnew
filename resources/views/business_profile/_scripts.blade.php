@@ -500,7 +500,7 @@
         else{
             //append in table 
             $('.machinaries-details-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
             $('.machinaries-details-table-body').append(html);
 
             //append in form
@@ -532,7 +532,7 @@
 
             //append in table
             $('.categories-produced-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
             $('.categories-produced-table-body').append(html);
 
          
@@ -564,7 +564,7 @@
         }else{
             //append in table
             $('.production-capacity-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
             $('.production-capacity-table-body').append(html);
 
             //append in form
@@ -667,7 +667,7 @@
         else{
             //append in table
             $('.production-flow-and-manpower-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<tr><td><span class="manpower_empty_table">INFO : No data found.</span></td></tr>';
             $('.production-flow-and-manpower-table-body').append(html);
 
             //append in form
@@ -1655,7 +1655,7 @@
 
             //append in table
             $('.business-term-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
             $('.business-term-table-body').append(html);
 
             //append in form
@@ -1739,7 +1739,7 @@
         else{
 
             $('.sampling-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
             $('.sampling-table-body').append(html);
 
             //append in form
@@ -1823,7 +1823,7 @@
 
             //append in form
             $('.special-customization-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
             $('.special-customization-table-body').append(html);
 
             //append in table
@@ -1908,7 +1908,7 @@
 
             //append in table
             $('.sustainability-commitment-table-body').children().empty();
-            var html = '<tr><td><span>No Data</span></td></tr>';
+            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
             $('.sustainability-commitment-table-body').append(html);
 
             //append in form

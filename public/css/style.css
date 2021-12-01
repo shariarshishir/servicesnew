@@ -47,6 +47,9 @@ p{
 a {
     color: #448547;
 }
+td, th {
+    border-radius: 0 !important;
+}
 
 .btn_green {
     background: #448547;
@@ -251,6 +254,25 @@ textarea:focus {
     font-weight: bold;
     font-size: 16px;
     margin-top: -20px;
+}
+
+.main_content_wrapper {
+    padding: 50px 0;
+}
+.btn_delete {
+    text-align: center;
+    color: #DC143C;
+    display: inline-block;
+}
+.btn_delete span {
+    text-align: center;
+    display: block;
+    color: #DC143C;
+    font-size: 12px;
+}
+form input:read-only {
+    background: #e3e3e3;
+    color: #ccc;
 }
 /************************** common style css start  ************************************/
 .page_content_wrap {
@@ -671,14 +693,17 @@ textarea:focus {
     max-height: 410px;
 }
 
-.product_wrapper .profile_contentCol .productBox {
-
+.product_wrapper .low_moq_products_wrap .productBox {
+    min-height: 425px;
+    max-height: 425px;
 }
 .product_wrapper .low_moq_products_wrap .productBox {
     margin-bottom: 50px;
 }
 .product_wrapper .product_slider .productBox {
     margin-bottom: 0px;
+    min-height: inherit;
+    max-height: inherit;
 }
 
 .product_wrapper .slick-list {
@@ -1635,9 +1660,11 @@ textarea:focus {
     background: #448547;
     color: #ffffff;
 }
-.product_data_table_wrap td, th {
+.product_data_table_wrap td,
+.product_data_table_wrap th {
     padding: 15px 10px;
 }
+
 .production-flow-and-manpower-table {
     border: 1px solid rgba(19, 112, 10, 0.3);
     border-bottom: none;
@@ -2555,6 +2582,8 @@ textarea:focus {
     line-height: 20px;
     min-height: 35px;
     font-size: 18px;
+    background: #448547;
+    color: #fff;
 }
  .suppliers_content_wrap .industries_boxWrap {
     padding-bottom: 50px;
@@ -4010,6 +4039,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     height: 150px;
     border-radius: 10px;
 }
+.profile_contentCol .contentBox,
 #about-company-information {
     padding-bottom: 50px;
 }
@@ -4648,3 +4678,88 @@ nav .pagination li.active .page-link {
 #orders table td {
     padding: 10px 20px;
 }
+
+.no_data_box {
+    margin-top: 10px;
+    color: #00bcd4;
+}
+.manpower_empty_table {
+    color: #00bcd4;
+    background-color: #e0f7fa;
+    display: block;
+    padding: 8px 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 2px 14px -4px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 14px -4px rgb(0 0 0 / 75%);
+    margin: 10px 0;
+}
+
+
+/* ******************** Cart style start*********************** */
+.add_more_colors_sizes {
+    padding: 10px 0 40px;
+}
+.cart_add_more {
+    padding-left: 10px;
+}
+.cart_add_more .material-icons {
+    float: left;
+}
+.cart_item_edit {
+    color: #448547;
+    font-weight: 500;
+}
+.cart_totals  {
+    width: 50%;
+    float: right;
+    margin: 0px;
+    clear: right;
+}
+.checkout_address_block_wrap {
+    padding-top: 30px;
+}
+.checkout_address_block_wrap .submit_order {
+    height: 40px;
+    padding: 5px 10px 8px;
+    display: inline-block;
+}
+.billing_and_shipping_address_block label {
+    display: block;
+    padding: 0;
+    margin: 0 0 10px;
+    position: inherit !important;
+    top: inherit !important;
+    left: inherit !important;
+    text-transform: capitalize;
+    -webkit-transform: inherit !important;
+    transform: inherit !important;
+    -webkit-transform-origin: inherit !important;
+    transform-origin: inherit !important;
+}
+.input-field>label:not(.label-icon).active {
+    -webkit-transform: inherit !important;
+    transform: inherit !important;
+    -webkit-transform-origin: inherit !important;
+    transform-origin: inherit !important;
+}
+.shipping_address_block {
+    padding-top: 20px;
+}
+
+.order-confirmation-block {
+    margin: 50px 0;
+}
+.order-confirmation-block h4 {
+    color: #448547;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.confirm-order-row {
+    padding: 20px;
+    background: #e3e3e3;
+    border-radius: 10px;
+}
+
+/* ******************** Cart style end*********************** */

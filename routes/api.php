@@ -27,6 +27,9 @@ use App\Http\Controllers\Api\User\SamplingController;
 use App\Http\Controllers\Api\User\SpecialCustomizationController;
 use App\Http\Controllers\Api\User\SustainabilityCommitmentController;
 use App\Http\Controllers\Api\User\WalfareController;
+use App\Http\Controllers\Api\User\SecurityController;
+use App\Http\Controllers\Api\User\RFQController;
+use App\Http\Controllers\Api\User\ManufactureProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,7 +104,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/special-customization-create-or-update', [SpecialCustomizationController::class, 'specialCustomizationCreateOrUpdate']);
     Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate']);
     Route::post('/worker-walfare-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate']);
-   //Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate']);
+    Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate']);
    
    
     //store api
@@ -120,7 +123,16 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/add-to-wishlist',[WishlistController::class,'addToWishlist']);
     Route::get('/wishlist',[WishlistController::class,'index']);
     Route::post('/delete-wishlist-item',[WishlistController::class,'wishListItemDelete']);
+    
 
+    //rfq api
+    Route::post('/rfqs', [RFQController::class, 'store']);
+    Route::get('/rfqs', [RFQController::class, 'index']);
+
+    //manufacture product api
+    Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);
+    Route::get('/business-profile/{businessProfileID}/manufacture-products', [ManufactureProductController::class, 'index']);
+    Route::get('/business-profile/{businessProfileID}/manufacture-products/{productId}', [ManufactureProductController::class, 'delete']);
     //cart api
     Route::post('/add-to-cart',[CartController::class,'addToCart']);
     Route::get('/cart',[CartController::class,'index']);

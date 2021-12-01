@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<section class="content">
+<section class="content checkout_content_wrap main_content_wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row checkout_address_block_wrap">
                     <div class="col m6 billing_and_shipping_address_block">
                         <div class="billing_address_block">
                             <legend>Billing Address</legend>
@@ -303,7 +303,7 @@
                                         <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G"></div>
                                         <div class="messageContent" style="color: red; text-align: left;"></div>
                                     </div>
-                                    <button type="button" class="submit_order btn waves-effect waves-light green" name="checkout_place_order" id="place_order" value="Place order" data-value="Place order">Place order</button>
+                                    <button type="button" class="submit_order btn_green" name="checkout_place_order" id="place_order" value="Place order" data-value="Place order">Place order</button>
                                     <button type="submit" id="page_button" style="display: none;">Place order</button>
                                 </div>
                             </div>

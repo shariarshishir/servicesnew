@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\UserController;
+use App\Http\Controllers\Api\User\BusinessProfileController;
+use App\Http\Controllers\Api\User\CompanyOverviewController;
+use App\Http\Controllers\Api\User\CapacityAndMachineriesController;
+use App\Http\Controllers\Api\User\ProductionFlowAndManpowerController;
+use App\Http\Controllers\Api\User\CertificationController;
 use App\Http\Controllers\Api\User\VendorController;
 use App\Http\Controllers\Api\User\ProductController;
 use App\Http\Controllers\Api\User\ProductCategoryController;
@@ -13,6 +18,16 @@ use App\Http\Controllers\Api\User\CartController;
 use App\Http\Controllers\Api\User\OrderQueryController;
 use App\Http\Controllers\Api\User\OrderModificationRequestController;
 use App\Http\Controllers\Api\User\OrderModificationCommentController;
+use App\Http\Controllers\Api\User\MainBuyerController;
+use App\Http\Controllers\Api\User\AssociationMembershipController;
+use App\Http\Controllers\Api\User\ExportDestinationController;
+use App\Http\Controllers\Api\User\PressHighlightController;
+use App\Http\Controllers\Api\User\BusinessTermController;
+use App\Http\Controllers\Api\User\SamplingController;
+use App\Http\Controllers\Api\User\SpecialCustomizationController;
+use App\Http\Controllers\Api\User\SustainabilityCommitmentController;
+use App\Http\Controllers\Api\User\WalfareController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,13 +60,50 @@ Route::get('/email/verify',[UserController::class, 'emailVerify']);
 //api with authentication
 
 
+
 Route::group(['middleware'=>['auth:sanctum']],function () {
     //user api
     Route::get('/users', [UserController::class, 'index']);
     Route::delete('/user/{userId}', [UserController::class, 'destroy']);
     Route::post('/logout', [UserController::class, 'logout']);
     Route::post('/profile-image-upload', [UserController::class, 'updateImage']);
+  
+    //business profile
+    Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
+    Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
+    Route::get('/business-profile-count',[BusinessProfileController::class,'businessProfileCount']);
+    Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
+    Route::post('/business-profile',[BusinessProfileController::class,'store']);
+    Route::put('/company-overview',[CompanyOverviewController::class,'companyOverviewUpdate']);
+    Route::post('/capacity-and-machineries',[CapacityAndMachineriesController::class,'capacityAndMachineriesCreateOrUpdate']);
+    Route::post('/production-flow-and-manpower', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate']);
 
+
+
+    Route::post('/certifications', [CertificationController::class, 'certificationDetailsUpload']);
+    Route::get('/certifications/{id}', [CertificationController::class, 'deleteCertificate']);
+    
+    Route::post('/main-buyers', [MainBuyerController::class, 'mainBuyerDetailsUpload']);
+    Route::get('/main-buyers/{id}', [MainBuyerController::class, 'deleteMainBuyer']);
+
+    Route::post('/association-memberships', [AssociationMembershipController::class, 'associationMembershipDetailsUpload']);
+    Route::get('/association-memberships/{id}', [AssociationMembershipController::class, 'deleteAssociationMembership']);
+    
+    Route::post('/export-destinations', [ExportDestinationController::class, 'exportDestinationDetailsUpload']);
+    Route::get('/export-destinations/{id}', [ExportDestinationController::class, 'deleteExportDestination']);
+    
+    Route::post('/press-highlights', [PressHighlightController::class, 'pressHighlightDetailsUpload']);
+    Route::get('/press-highlights/{id}', [PressHighlightController::class, 'deletePressHighlight']);
+    
+
+    Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate']);
+    Route::post('/sampling-create-or-update', [SamplingController::class, 'samplingCreateOrUpdate']);
+    Route::post('/special-customization-create-or-update', [SpecialCustomizationController::class, 'specialCustomizationCreateOrUpdate']);
+    Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate']);
+    Route::post('/worker-walfare-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate']);
+   //Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate']);
+   
+   
     //store api
     Route::put('/store/{vendorUId}',[VendorController::class,'update']);
     Route::post('/store/{storeId}/products', [ProductController::class, 'store']);
@@ -63,7 +115,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/product/reviews',[ReviewController::class,'createProductReview']);
     Route::post('/store/reviews',[ReviewController::class,'createVendorReview']);
 
-
+    
     //wishlist api
     Route::post('/add-to-wishlist',[WishlistController::class,'addToWishlist']);
     Route::get('/wishlist',[WishlistController::class,'index']);

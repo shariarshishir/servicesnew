@@ -208,6 +208,8 @@
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 {{-- croper js --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+{{-- jasny-bootstrap --}}
+<script src="{{asset('js/jasny-bootstrap.js')}}"></script>
 
 @stack('js')
 <script>

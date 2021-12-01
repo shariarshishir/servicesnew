@@ -31,7 +31,7 @@
                         <textarea name="description" id="product-bidding-desc" for="product-bidding-desc" class="editor product-bidding-desc" cols="30" rows="10"></textarea>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col s12 m6 l6">
                         <div class="input-field row input-wrapper">
@@ -116,8 +116,8 @@
 
             </div>
             <!-- rfq_detail_from end -->
-            
-            
+
+
 
 
 
@@ -209,6 +209,7 @@
                 '                                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>\n' +
                 '                                        </div>\n' +
                 '                                        <span class="ic-remove-btn remove-product" onclick="if (confirm(\'Are You Sure ?\')){ $(this).parent().remove();}" ></span>\n' +
+                                                        '<a href="#" onclick="if (confirm(\'Are You Sure ?\')){ $(this).parent().remove();}" class="btn-small">remove</a>'
                 '                                    </div>';
 
             $('.product-images').append(data);

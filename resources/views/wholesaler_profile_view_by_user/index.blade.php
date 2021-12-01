@@ -89,7 +89,7 @@
 						
 					</div>
 					<!-- Home tabcontent end -->
-					<div id="profile" class="tabcontent">
+					<div id="profile" class="tabcontent profile_table_design">
 						<div class="overview_table_wrap">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
@@ -114,15 +114,11 @@
 												</tr>
 												@endforeach
 											@else
-												<tr>
-													<td colspan="3">
-														<div class="card-alert card cyan lighten-5">
-															<div class="card-content cyan-text">
-																<p>INFO : No data found.</p>
-															</div>
-														</div>													
-													</td>
-												</tr>
+												<div class="card-alert card cyan lighten-5">
+													<div class="card-content cyan-text">
+														<p>INFO : No data found.</p>
+													</div>
+												</div>
 											@endif	
 										</tbody>
 									</table>
@@ -145,15 +141,11 @@
 										</div>
 										@endforeach
 									@else
-										<tr>
-											<td colspan="3">
-												<div class="card-alert card cyan lighten-5">
-													<div class="card-content cyan-text">
-														<p>INFO : No data found.</p>
-													</div>
-												</div>													
-											</td>
-										</tr>
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>	
 									@endif	
 								</div>
 							</div>
@@ -175,15 +167,11 @@
 											</div>
 										@endforeach
 									@else
-										<tr>
-											<td colspan="3">
-												<div class="card-alert card cyan lighten-5">
-													<div class="card-content cyan-text">
-														<p>INFO : No data found.</p>
-													</div>
-												</div>													
-											</td>
-										</tr>
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>
 									@endif	
 									
 								</div>

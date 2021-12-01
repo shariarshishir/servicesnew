@@ -398,7 +398,7 @@
 														</tr>
 													@endforeach
 												@else
-													<tr>
+													<tr style="display: block;">
 														<td colspan="3">
 															<div class="card-alert card cyan lighten-5">
 																<div class="card-content cyan-text">
@@ -437,7 +437,7 @@
 													</tr>
 													@endforeach
 												@else
-													<tr>
+													<tr style="display: block;">
 														<td colspan="3">
 															<div class="card-alert card cyan lighten-5">
 																<div class="card-content cyan-text">
@@ -478,7 +478,7 @@
 											</tr>
 											@endforeach
 										@else
-											<tr>
+											<tr style="display: block;">
 												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
@@ -529,15 +529,11 @@
 											</tr>
 											@endforeach
 										@else
-											<tr>
-												<td colspan="3">
-													<div class="card-alert card cyan lighten-5">
-														<div class="card-content cyan-text">
-															<p>INFO : No data found.</p>
-														</div>
-													</div>													
-												</td>
-											</tr>
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>
 										@endif										
 									</tbody>
 								</table>
@@ -683,7 +679,7 @@
 											</tr>
 											@endforeach
 										@else
-											<tr>
+											<tr style="display: block;">
 												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
@@ -723,7 +719,7 @@
 												</tr>
 												@endforeach
 											@else
-											<tr>
+											<tr style="display: block;">
 												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
@@ -762,7 +758,7 @@
 												</tr>
 												@endforeach
 											@else
-											<tr>
+											<tr style="display: block;">
 												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
@@ -1101,7 +1097,7 @@
 												</tr>
 												@endforeach
 											@else
-											<tr>
+											<tr style="display: block;">
 												<td colspan="3">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">

@@ -1,5 +1,5 @@
 <!-- profile tabcontent end -->
-<div id="profile" class="tabcontent">
+<div id="profile" class="tabcontent profile_table_design ">
 <div class="overview_table_wrap">
 		<div class="row top_titleWrap">
 			<div class="col s6 m6">

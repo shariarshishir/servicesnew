@@ -2808,6 +2808,14 @@ textarea:focus {
 }
 
 
+.rfq_top_navbar ul li {
+    display: inline-block;
+    margin-left: 10px;
+}
+.rfq_top_navbar ul li .btn_green {
+    margin-left: 0;
+}
+
 .rfq_leftCol .rfq_follow_wrap {
     padding-top: 20px;
 }
@@ -2826,6 +2834,7 @@ textarea:focus {
 .rfq_content_box {
     font-size: 18px;
     line-height: 28px;
+    margin: 50px 0;
 }
 .quick_rfq_wrap {
     -webkit-box-shadow: 0px 11px 10px -4px rgba(0,0,0,0.45);
@@ -3928,6 +3937,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     align-items: center;
     margin: 0 -20px;
 }
+.profile_tabNav_wrap .certifications-block .card-alert.card {
+    margin: 0 20px;
+}
 .profile_tabNav_wrap .certificate_img_wrap {
     position: relative;
     padding: 10px 20px;
@@ -3997,6 +4009,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .profile_form_modal textarea.about-company {
     height: 150px;
     border-radius: 10px;
+}
+#about-company-information {
+    padding-bottom: 50px;
 }
 .profile_tabNav_wrap .main_buyer_box {
     margin-bottom: 40px;

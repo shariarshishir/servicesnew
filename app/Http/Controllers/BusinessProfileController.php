@@ -187,7 +187,6 @@ class BusinessProfileController extends Controller
     public function companyOverviewUpdate(Request $request, $id)
     {
         try{
-            
             $company_overview= CompanyOverview::findOrFail($id);
             $data=[];
             $count=0;
@@ -226,8 +225,6 @@ class BusinessProfileController extends Controller
     }
 
     public function capacityAndMachineriesCreateOrUpdate(Request $request){
-
-
         $validator = Validator::make($request->all(), [
             'machine_type.*' => 'required_with:annual_capacity|string|min:1|max:50',
             'annual_capacity.*' => 'required_with:machine_type|integer',

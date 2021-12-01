@@ -39,6 +39,30 @@
 					    <span class="material-icons"> assignment_ind </span> Business Profile
 					</a>
 
+                    <div class="cart-icon-outer-wrapper">
+                        <div class="cart-icon-wrapper">
+                            <a href="javascript:void(0);" class="btn waves-effect waves-light green lighten-1 cart-btn">
+                                <i class="material-icons dp48">shopping_cart</i>
+                                <span id="cartItems"class="cart_counter">{{$cartItems}}</span>
+                            </a>
+                            <ul id="cart-dropdown" class="card" style="display: none;">
+                                {{-- @if(Cart::content()->count() > 0) --}}
+
+                                <li tabindex="0">
+                                    <a class="grey-text text-darken-1" href="{{route('cart.index')}}"><i class="material-icons">shopping_basket</i> My Cart</a>
+                                </li>
+                                <li tabindex="0">
+                                    <a class="grey-text text-darken-1" href="{{route('cart.destroy')}}"><i class="material-icons">delete</i> Delete all cart item</a>
+                                </li>
+                                {{-- @else
+                                <li tabindex="0">
+                                    <a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">shopping_basket</i> Basket is empty</a>
+                                </li>
+                                @endif --}}
+                            </ul>
+                        </div>
+                    </div>
+
 					<div class="user-block">
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))

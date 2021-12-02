@@ -182,6 +182,24 @@ class ManufactureProductController extends Controller
             ],500);
         }
     }
+    public function show($productId){
+       
+        $product=Product::where('id',$productId)->first();
+        if($product){
+            return response()->json([
+                'success' => true,
+                'message' => 'Product deleted Successfully',
+                'products' => $product,
+                ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Product not found',
+                ],404);
+        }
+       
+    } 
 
     public function delete($businessProfileId,$productId)
     {

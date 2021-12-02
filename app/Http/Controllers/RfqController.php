@@ -15,6 +15,19 @@ class RfqController extends Controller
     public function index()
     {
         $rfqLists=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+
+        foreach($rfqLists as $list){
+            $bid_user_id=[];
+            if($list->bids()->exists()){
+                foreach($list->bids as $user){
+                    array_push($bid_user_id,$user->supplier_id);
+                }
+                $list['bid_user_id'] = array_unique($bid_user_id);
+
+            }
+
+        }
+
         return view('rfq.index',compact('rfqLists'));
     }
 
@@ -46,13 +59,13 @@ class RfqController extends Controller
             }
         }
 
-        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->where(['business_category_id' => $request->category_id])->get();
-        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        // }
+        $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
+        foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        }
 
-        // $selectedUserToSendMail="success@merchantbay.com";
-        // event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        $selectedUserToSendMail="success@merchantbay.com";
+        event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 

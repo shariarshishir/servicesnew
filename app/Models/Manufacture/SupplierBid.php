@@ -16,5 +16,8 @@ class SupplierBid extends Model
         return $this->belongsTo('App\Models\BusinessProfile', 'business_profile_id', 'id');
     }
 
+    public function user(){
+        return $this->belongsTo('App\Models\user', 'supplier_id', 'id');
+    }
 
 }

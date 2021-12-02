@@ -91,10 +91,14 @@
 			<div class="responses_wrap right-align">
 				<!--span><i class="material-icons">favorite</i> Saved</span-->
                 @if($rfqSentList->user->id != auth()->id())
+                    @if(isset($rfqSentList->bid_user_id))
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">{{ in_array(auth()->id(), $rfqSentList->bid_user_id) ? 'Replied' : 'Replay On this RFQ' }}</a>
+                    @else
                         <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a>
+                    @endif
                 @endif
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
+					Responses <span class="respons_count  res_count_{{$rfqSentList->id}}_">{{$rfqSentList->bids_count}}</span>
 				</button>
 			</div>
 			<!--div class="respones_detail_wrap">

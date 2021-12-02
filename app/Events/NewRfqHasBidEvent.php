@@ -10,16 +10,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewRfqHasAddedEvent
+class NewRfqHasBidEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public  $selectedUserToSendMail;
-    public function __construct($selectedUserToSendMail)
+    public  $bidData;
+    public function __construct($selectedUserToSendMail, $bidData)
     {
         $this->selectedUserToSendMail=$selectedUserToSendMail;
+        $this->bidData= $bidData;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *

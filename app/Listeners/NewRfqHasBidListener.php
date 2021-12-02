@@ -2,14 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Providers\NewRfqHasAddedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Manufacture\Rfq;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NewRfqInvitationMail;
+use App\Mail\NewRfqHasBidMail;
 
-class NewRfqInvitationListener implements ShouldQueue
+class NewRfqHasBidListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -24,27 +23,23 @@ class NewRfqInvitationListener implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  NewRfqHasAddedEvent  $event
+     * @param  object  $event
      * @return void
      */
     public function handle($event)
     {
-
         $supplier=$event->selectedUserToSendMail;
-        $latestRfq=Rfq::with('category','images')->latest()->first();
-        //$rfq=Rfq::with('category','images')->findOrFail($latestRfq->id);
         $data=[
             'supplier'=>$supplier,
-            'rfq'=>$latestRfq,
-            'url'=>"/manage-rfq"
+            'bidData'=>$event->bidData,
         ];
         if($supplier=="success@merchantbay.com"){
-            Mail::to($supplier)->send(new NewRfqInvitationMail($data));
+            Mail::to($supplier)->send(new NewRfqHasBidMail($data));
             // Notification::send($supplier,new NewRfqNotification($data));
         }
         else{
             // Notification::send($supplier,new NewRfqNotification($data));
-            Mail::to($event->selectedUserToSendMail->user->email)->send(new NewRfqInvitationMail($data));
+            Mail::to($event->selectedUserToSendMail->user->email)->send(new NewRfqHasBidMail($data));
         }
 
     }

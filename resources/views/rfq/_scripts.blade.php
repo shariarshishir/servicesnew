@@ -23,6 +23,8 @@
                             $('#rfq-bid-modal').modal('open');
                             $('#rfq-bid-form')[0].reset();
                             $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", false);
+                            $('#rfq-bid-modal .rfq_img_upload_wrap').show();
+                            $('#rfq-bid-modal .previous-image-show').hide();
 
                             $('#rfq-bid-modal input[name=rfq_id]').val(data.data.id);
                             $('#rfq-bid-modal input[name=title]').val(data.data.title);
@@ -47,6 +49,16 @@
                                 $('#product-payment-method').trigger('change');
                                 $('#rfq-bid-modal input[name=delivery_time]').val(data.bid.delivery_time);
                                 $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
+                                $('#rfq-bid-modal .rfq_img_upload_wrap').hide();
+                                $('#rfq-bid-modal .previous-image-show').show();
+                                $('#rfq-bid-modal .previous-image-show').html('');
+                                $.each(JSON.parse(data.bid.media) ,function(key, item){
+                                    var image="{{asset('storage')}}"+"/"+item;
+                                    var html='<div>';
+                                        html+='<img src="'+image+'" width="100%" alt="media">';
+                                        html+= '</div>';
+                                    $('#rfq-bid-modal .previous-image-show').append(html);
+                                });
 
                             }
 
@@ -93,6 +105,11 @@
 		                $('#loadingProgressContainer').hide();
                         $('#rfq_bid_store_errors').empty();
                         $('#rfq-bid-modal').modal('close');
+                        var rfq_id=$('#rfq-bid-modal input[name=rfq_id]').val();
+                        var res_count=$(".res_count_"+rfq_id+"_").text();
+                            res_count=parseInt(res_count);
+                        $(".res_count_"+rfq_id+"_").text(res_count+1);
+                        $(".res_count_"+rfq_id+"_").closest('.responses_wrap').find('.bid_rfq').text('Replied');
                         swal("Done!", data.msg,"success");
 
                     },

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewRfqInvitationMail extends Mailable
+class NewRfqHasBidMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -26,6 +26,6 @@ class NewRfqInvitationMail extends Mailable
     public function build()
     {
 
-        return $this->markdown('emails.rfq_invitation')->with('data', $this->data);
+        return $this->markdown('emails.rfq_new_bid')->subject('New Rfq Quotation Mail')->with('data', $this->data);
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Manufacture\SupplierBid;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Events\NewRfqHasBidEvent;
 
 class RfqBidController extends Controller
 {
@@ -91,7 +92,13 @@ class RfqBidController extends Controller
             }
 
             $allData['media'] = json_encode($image_path);
-            SupplierBid::create($allData);
+            $bidData=SupplierBid::create($allData);
+
+            $selectedUserToSendMail= $rfq;
+            event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
 
             return response()->json([
                 'success' => true,

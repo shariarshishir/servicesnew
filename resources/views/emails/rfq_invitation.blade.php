@@ -21,7 +21,7 @@
             @if($data['supplier']=="success@merchantbay.com")
                 <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Dear Merchant Bay,</p>
             @else
-            <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Dear {{ $data['supplier']->name}},</p>
+            <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Dear {{ $data['supplier']->user->name}},</p>
             @endif
 
             <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:25px;line-height:normal;">There is a new business opportunity:</p>
@@ -42,7 +42,7 @@
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:25px;line-height:normal;"><b>Delivery time:</b> {{ $data['rfq']->delivery_time }}</p>
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:25px;line-height:normal;">To reply, please login to your MerchantBay account and find the request in your RFQ menu.</p>
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:25px;line-height:normal;">You are receiving this email because your profile information matches with the buyer's request for quotation. If you think this request does not fit to your business, please update your company profile.</p>
-            <p style="display:block;text-align:center;margin:0px;padding-bottom:25px;line-height:normal;"><a  href="{{URL::to('/rfq-invited-supplier-login',$rfq=1) }}" class="button button-green">Login</a></p>
+            <p style="display:block;text-align:center;margin:0px;padding-bottom:25px;line-height:normal;"><a  href="{{URL::to('/rfq')}}" class="button button-green">Login</a></p>
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;">In case of any questions, please contact us: <a href="https://www.merchantbay.com" style="color:#5181ec">www.merchantbay.com</a></p>
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">Best regards,</p>
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">your Merchant Bay team</p>

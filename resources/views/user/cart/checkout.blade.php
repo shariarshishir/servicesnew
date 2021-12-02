@@ -136,14 +136,16 @@
                             </div>
 
                             <div class="billing_adrs" style="display: none;">
-                                <label for="billing_address_id" class="">Select Billing Address</label>
-                                <select class="select2 browser-default " name="billing_address_id" id="billing_adrs_select">
-                                    <option value="" disabled selected>Select</option>
-                                    @foreach($billing_address as $address)
-                                    <option value="{{$address->id}}">{{$address->name}}-{{$address->address}}</option>
-                                    @endforeach
-                                </select>
-                                <a href="javascript:void(0);" class="add_new_billing_adrs">Add New</a>
+                                <div class="input-field">
+                                    <label for="billing_address_id" class="">Select Billing Address</label>
+                                    <select class="select2 browser-default " name="billing_address_id" id="billing_adrs_select">
+                                        <option value="" disabled selected>Select</option>
+                                        @foreach($billing_address as $address)
+                                        <option value="{{$address->id}}">{{$address->name}}-{{$address->address}}</option>
+                                        @endforeach
+                                    </select>
+                                    <a href="javascript:void(0);" class="add_new_billing_adrs"> <i class="material-icons dp48">add</i> Add New</a>
+                                </div>
                             </div>
                         </div>
                         <legend>Shipping Address</legend>

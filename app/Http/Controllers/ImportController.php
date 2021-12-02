@@ -19,15 +19,29 @@ class ImportController extends Controller
         $request->validate([
             'import_file' => 'required',
         ]);
+        $file = $request->file('import_file');
 
-        try{
+        $import = new ImportUser;
+        $import->import($file);
 
-            Excel::import(new ImportUser, $request->file('import_file') );
-            return redirect()->back()->with('success', 'file inserted successfully');
+        // $import=Excel::import(new ImportUser, $request->file('import_file') );
 
-        }catch(\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+
+        // if ($import->failures()->isNotEmpty()) {
+        //     return back()->withFailures($import->failures());
+        // }
+        return back()->withStatus('Import successfull.');
+
+
+        // try{
+
+        //     $import=Excel::import(new ImportUser, $request->file('import_file') );
+        //     return $import;
+        //     return redirect()->back()->with('success', 'file inserted successfully');
+
+        // }catch(\Exception $e) {
+        //     return redirect()->back()->with('error', $e->getMessage());
+        // }
     }
 
 

@@ -41,17 +41,21 @@ class MessageController extends Controller
         $user=Auth::user();
         $allusers=[];
 
+        /*
         if($user->is_group == 1)
         {
             $allusers = User::with('profile','badges','tour_photos')->where(['group_id' => Auth::id(), 'is_active' => 1])->get();
             $user=User::with('profile','badges','tour_photos')->where('id', $allusers[0]->id)->first();
         }
+        */
+        $allusers = User::where('id', $user->id)->get();
+        //dd($allusers);
         $chatdatas = Userchat::all();
         $chatusers = [];
         $users = [];
         foreach($chatdatas as $chat)
         {
-            if(in_array($user->id, $chat->participates))
+            if(in_array(38, $chat->participates))
             {
                 foreach($chat->participates as $participate)
                 {
@@ -62,10 +66,10 @@ class MessageController extends Controller
                 }
             }
         }
-        $userData = User::with('profile','badges','tour_photos')->whereIn('id',$users)->orderBy('last_activity', 'desc')->get();
+        $userData = User::whereIn('id',$users)->get();
         $chatusers = $userData;
         $buyers = [];
-        $allbuyers = User::with('profile','badges','tour_photos')->where('user_type','buyer');
+        $allbuyers = User::where('user_type','buyer');
         if($allbuyers->exists())
         {
             foreach($allbuyers->get() as $buyer)
@@ -98,7 +102,7 @@ class MessageController extends Controller
         $notification_data=['url'=>'/message-center'];
         Notification::send($userSupplier, new BuyerWantToContact($notification_data));
         */
-        
+
         return view('message.message_center', compact('user','chatusers','buyers','allusers'));
     }
 

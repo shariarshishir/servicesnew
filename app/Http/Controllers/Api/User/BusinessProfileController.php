@@ -10,6 +10,7 @@ use App\Models\CompanyOverview;
 use App\Models\CategoriesProduced;
 use App\Models\MachineriesDetail;
 use App\Models\ProductionCapacity;
+use App\Models\Product as WholesalerProduct;
 use App\Models\Manufacture\Product;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -28,7 +29,7 @@ class BusinessProfileController extends Controller
 
             //company overview without json
             $companyOverview = new stdClass();
-            $companyOverview->data=$businessProfile->companyOverview->id;
+            $companyOverview->id=$businessProfile->companyOverview->id;
             $companyOverview->data=json_decode($businessProfile->companyOverview->data);
             $companyOverview->about_company=$businessProfile->companyOverview->about_company;
             $companyOverview->status=$businessProfile->companyOverview->status;
@@ -200,5 +201,52 @@ class BusinessProfileController extends Controller
           return $companyOverview;
   
       }
+        public function lowMOQProducts(Request $request)
+        {
+            //select('name','business_profile_id','product_type','moq','product_unit','sold','full_stock','full_stock_price','full_stock_negotiable')
+            $wholesaler_products= WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get(['id','name','moq','product_type','moq','product_unit','sold','full_stock','flag']);
+            $manufacture_products=Product::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get(['id','title','moq','price_per_unit','price_unit','moq','qty_unit','industry','lead_time','flag']);
+            $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+            $sorted=$merged->sortBy('moq');
+            $sorted_value= $sorted->values()->all();
+
+
+            // $wholesaler_products=WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
+            // $manufacture_products=Product::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
+            // $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+            // $sorted=$merged->sortBy('moq');
+            // $sorted_value= $sorted->values()->all();
+            if(count($sorted_value)>0){
+                return response()->json([
+                    'success' => true,
+                    'products'=>$sorted_value
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'products'=>[]
+                ],404);
+            }
+           
+        }
+
+        public function productsWithShortestLeadTime()
+        {
+            $products=Product::with('product_images')->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->orderBy('lead_time')->paginate(20);
+            if(count($products)>0){
+                return response()->json([
+                    'success' => true,
+                    'products'=>$products
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'products'=>[]
+                ],200);
+            }
+            
+        }
 
 }

@@ -177,7 +177,8 @@ Route::get('/product-categories/{id}', [ProductCategoryController::class, 'subCa
 
 //products api
 Route::get('/ready-stock-products', [ProductController::class, 'readyStockProducts']);
-Route::get('/low-moq-products', [BusinessProfileController::class, 'lowMOQProducts']);
+Route::get('/wholesaler-low-moq-products', [BusinessProfileController::class, 'wholesalerLowMOQProducts']);
+Route::get('/manufacture-low-moq-products', [BusinessProfileController::class, 'manufactureLowMOQProducts']);
 Route::get('/customizable-products', [ProductController::class, 'customizableProducts']);
 Route::get('/products-with-shortest-lead-time', [BusinessProfileController::class, 'productsWithShortestLeadTime']);
 Route::get('/buy-design-products', [ProductController::class, 'buyDesignProducts']);

@@ -201,7 +201,7 @@ class BusinessProfileController extends Controller
           return $companyOverview;
   
       }
-        public function lowMOQProducts(Request $request)
+        public function LowMOQProducts(Request $request)
         {
             //select('name','business_profile_id','product_type','moq','product_unit','sold','full_stock','full_stock_price','full_stock_negotiable')
             $wholesaler_products= WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get(['id','name','moq','product_type','moq','product_unit','sold','full_stock','flag']);
@@ -220,6 +220,41 @@ class BusinessProfileController extends Controller
                 return response()->json([
                     'success' => true,
                     'products'=>$sorted_value
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'products'=>[]
+                ],404);
+            }
+           
+        }
+        public function wholesalerLowMOQProducts(Request $request)
+        {
+            $wholesalerProducts = WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->orderByDesc('moq')->paginate(10);
+            if(count($wholesalerProducts)>0){
+                return response()->json([
+                    'success' => true,
+                    'products'=>$wholesalerProducts
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'products'=>[]
+                ],404);
+            }
+           
+        }
+
+        public function manufactureLowMOQProducts(Request $request)
+        {
+            $manufactureProducts=Product::with(['businessProfile','product_images'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->orderByDesc('moq')->paginate(10);
+            if(count($manufactureProducts)>0){
+                return response()->json([
+                    'success' => true,
+                    'products'=>$manufactureProducts
                 ],200);
             }
             else{

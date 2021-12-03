@@ -246,90 +246,89 @@
 @endpush
 
 @section('content')
-
-<div class="container">
-    
-    <div class="col 12">
-        <!--Chat Window-->
-        <div class="row bu-ob">
-            <!--Buyer List Left-->
-            <div class="col 4 bu-rb" style="border-right: 0px;">
-                <div class="row buyerChatHdCont" style="border-right: 3px solid #FFF;height: 85px;">
-                    <h6 class="buyerChatHd2">Users Currently Online Now</h6>
-                </div>
-                
-                <div class="col 12 plr0 lft-cht-cont" id="allchatter">
-                    <!--1-->
-                    @foreach($chatusers as $cuser)
-                    @php 
-                    $src = !empty($cuser->profile['company_logo'])? 'storage/' .$cuser->profile['company_logo'] : "images/supplier.png";
-                    $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
-                    @endphp
-                    <div class="col 12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;">
-                        <div class="row byr-ncnt">
-                            <div class="col 4 pl0 byr-pb">
-                                <img src="{{ asset($src) }}" class="pimg"/>
-                            </div>
-                            <div class="col 8 plr0">
-                                <div class="byr-pb-nm">{{ $cuser->name }}</div>
-                                <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
-                                <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div>
-                                <div class="clear10"></div>
-                                <div class="byr-pb-ld user_last_activity">
-                                    {{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}
-                                </div>
-                            </div>
-                        
+<div class="col m12">
+    <!--Chat Window-->
+    <div class="row bu-ob">
+        <!--Buyer List Left-->
+        <div class="col m4 bu-rb" style="border-right: 0px;">
+            <div class="row buyerChatHdCont" style="border-right: 3px solid #FFF;height: 85px;">
+                <h6 class="buyerChatHd2">Users Currently Online Now</h6>
+            </div>
+            
+            <div class="col m12 plr0 lft-cht-cont" id="allchatter">
+                <!--1-->
+                @foreach($chatusers as $cuser)
+                @php 
+                $src = !empty($cuser->profile['company_logo'])? 'storage/' .$cuser->profile['company_logo'] : "images/supplier.png";
+                $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
+                @endphp
+                <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;">
+                    <div class="row byr-ncnt">
+                        <div class="col m4 pl0 byr-pb">
+                            <img src="{{ asset($src) }}" class="pimg"/>
                         </div>
+                        <div class="col m8 plr0">
+                            <div class="byr-pb-nm">{{ $cuser->name }}</div>
+                            <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
+                            <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div>
+                            <div class="clear10"></div>
+                            <div class="byr-pb-ld user_last_activity">
+                                {{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}
+                            </div>
+                        </div>
+                    
                     </div>
-                    <!--/1-->
-                    @endforeach
-                
                 </div>
+                <!--/1-->
+                @endforeach
+            
             </div>
-            <!--/Buyer List Left-->
-            
-            <!--Buyer Chat right-->
-            <div class="col 8" style="border-left: 3px solid #55A860;">
-                <div class="row buyerChatHdCont"  id="chatheader" style="min-height: 85px;margin-bottom: 20px;">
-
-                    
-                </div>
-                @if(auth()->check() && in_array(auth()->user()->user_type, ['supplier']) && Request::get('uid'))
-                <!--a href="{{ action('PoController@add', Request::get('uid')) }}" class="btn btn-success" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a-->
-                <a href="{{ env('APP_URL') }}/po/add/toid={{ Request::get('uid') }}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
-                @endif
-                <div class="col 12 plr0 rgt-cht-cont" id="messagedata">
-                    
-                </div>
-                
-                <!--Sent Box-->
-                <div class="col 12 sent-bx" style="margin-top: 20px;margin-bottom: 20px;">
-                    <div class="col 9">
-                        <input type="text" class="ig-new-rgt" style="margin-bottom:0px; padding-left:0; border:0; width:100%; font-weight:normal;" placeholder="Enter Message Here" id="messagebox" disabled/>
-                        <input type="hidden" id="to_id" value="">
-                    </div>
-                    <div class="col 1">
-                        <a href="javascript:void(0);" class="ic-btn4" style="border-radius: 5px;padding-top: 7px;">
-                            <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <div class="col 2 plr0">
-                        <a href="javascript:void(0);" class="ic-btn3 messageSendButton">Send</a>
-                    </div>
-                    
-                </div>
-                <!--/Sent Box-->
-                
-            </div>
-            
-            
-            
-            
-            
         </div>
-        <!--Chat Window-->
-    </div>
-</div>
+        <!--/Buyer List Left-->
+        
+        <!--Buyer Chat right-->
+        <div class="col m8" style="border-left: 3px solid #55A860;">
+            <div class="row buyerChatHdCont"  id="chatheader" style="min-height: 85px;margin-bottom: 20px;">
 
+                
+            </div>
+            @if(auth()->check() && in_array(auth()->user()->user_type, ['supplier']) && Request::get('uid'))
+            <!--a href="{{ action('PoController@add', Request::get('uid')) }}" class="btn btn-success" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a-->
+            <a href="{{ env('APP_URL') }}/po/add/toid={{ Request::get('uid') }}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
+            @endif
+            <div class="col m12 plr0 rgt-cht-cont" id="messagedata">
+                
+            </div>
+            
+            <!--Sent Box-->
+            <div class="col m12 sent-bx" style="margin-top: 20px;margin-bottom: 20px;">
+                <div class="col m9">
+                    <input type="text" class="ig-new-rgt" style="margin-bottom:0px; padding-left:0; border:0; width:100%; font-weight:normal;" placeholder="Enter Message Here" id="messagebox" />
+                    <input type="hidden" id="to_id" value="">
+                </div>
+                <div class="col m1">
+                    <a href="javascript:void(0);" class="ic-btn4" style="border-radius: 5px;padding-top: 7px;">
+                        <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="col m2 plr0">
+                    <a href="javascript:void(0);" class="ic-btn3 messageSendButton">Send</a>
+                </div>
+            </div>
+            <!--/Sent Box-->
+        </div>
+    </div>
+    <!--Chat Window-->
+</div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $(".scrollabled").each(function(){
+                $(this).tinyscrollbar();
+            });
+        });
+    </script>
 @endsection

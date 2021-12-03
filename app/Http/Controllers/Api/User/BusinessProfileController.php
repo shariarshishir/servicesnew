@@ -75,9 +75,9 @@ class BusinessProfileController extends Controller
     }
 
     public function businessProfileList(){
-        $busenssProfiles = BusenssProfile::where('user_id',auth()->user()->id)->get();
-        if(count($busenssProfiles)>0){
-            return response()->json(["busenssProfiles"=>$busenssProfiles,"success"=>true],200);
+        $businessProfiles = BusinessProfile::where('user_id',auth()->user()->id)->get();
+        if(count($businessProfiles)>0){
+            return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true],200);
         }
         else{
             return response()->json(["success"=>false],404);

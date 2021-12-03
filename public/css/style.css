@@ -4631,12 +4631,13 @@ legend {
 }
 .registration-block .company-logo {
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 .modal.modal-fixed-footer .modal-content {
     padding: 40px 24px;
 }
 #login-register-modal .login-block {
-    padding-top: 32px;
+    padding-top: 40px;
 }
 .login-block .input-field {
     margin-bottom: 55px;
@@ -5071,3 +5072,13 @@ nav .pagination li.active .page-link {
     margin: 0;
 }
 /* ******************** Cart style end*********************** */
+
+
+.business_profile_login {
+    padding: 80px 0;
+    max-width: 770px;
+    margin: 0 auto;
+}
+.registration-block .company-logo {
+    margin-top: 20px;
+}

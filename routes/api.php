@@ -74,7 +74,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     //business profile
     Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
-    Route::get('/business-profile-count',[BusinessProfileController::class,'businessProfileCount']);
+    Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
     Route::post('/business-profile',[BusinessProfileController::class,'store']);
     Route::put('/company-overview',[CompanyOverviewController::class,'companyOverviewUpdate']);

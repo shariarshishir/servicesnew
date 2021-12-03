@@ -131,8 +131,10 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //manufacture product api
     Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);
+    
     Route::get('/business-profile/{businessProfileID}/manufacture-products', [ManufactureProductController::class, 'index']);
     Route::get('/business-profile/{businessProfileID}/manufacture-products/{productId}', [ManufactureProductController::class, 'delete']);
+    Route::get('/manufacture-products/{productId}', [ManufactureProductController::class,'show']);
     //cart api
     Route::post('/add-to-cart',[CartController::class,'addToCart']);
     Route::get('/cart',[CartController::class,'index']);
@@ -175,14 +177,18 @@ Route::get('/product-categories/{id}', [ProductCategoryController::class, 'subCa
 
 //products api
 Route::get('/ready-stock-products', [ProductController::class, 'readyStockProducts']);
+Route::get('/wholesaler-low-moq-products', [BusinessProfileController::class, 'wholesalerLowMOQProducts']);
+Route::get('/manufacture-low-moq-products', [BusinessProfileController::class, 'manufactureLowMOQProducts']);
+Route::get('/customizable-products', [ProductController::class, 'customizableProducts']);
+Route::get('/products-with-shortest-lead-time', [BusinessProfileController::class, 'productsWithShortestLeadTime']);
 Route::get('/buy-design-products', [ProductController::class, 'buyDesignProducts']);
 Route::get('/non-clothing-products', [ProductController::class, 'nonClothingProducts']);
 Route::get('/recommanded-products/{productId}', [ProductController::class, 'recommandedProducts']);
-Route::get('/store/{storeId}/products', [ProductController::class, 'index']);
+Route::get('business-profile/{businessProfileID}/wholesaler-products', [ProductController::class, 'index']);
 Route::get('/store/{storeId}/productlist', [ProductController::class, 'productList']);
 Route::get('/store/{storeId}/products/{productId}', [ProductController::class, 'show']);
 Route::post('/search-product-by-name', [ProductController::class, 'searchByProductName']);
-Route::get('/products/{productId}', [ProductController::class, 'productById']);
+Route::get('/wholesaler-products/{productId}', [ProductController::class, 'productById']);
 //store api
 Route::get('/stores',[VendorController::class,'index']);
 Route::get('/store/{vendorUId}',[VendorController::class,'show']);

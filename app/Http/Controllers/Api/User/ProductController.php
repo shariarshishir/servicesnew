@@ -20,9 +20,9 @@ use Helper;
 
 class ProductController extends Controller
 {
-    public function index($storeId){
+    public function index($businessProfileId){
 
-        $products=Product::with('images','productReview')->where('vendor_id',$storeId)->where('state',1)->where('sold',0)->paginate(9);
+        $products=Product::with('images','productReview')->where('business_profile_id',$businessProfileId)->where('state',1)->where('sold',0)->paginate(20);
         $productsArray=[];
         if($products->total()>0){
             foreach($products as $product){
@@ -40,8 +40,8 @@ class ProductController extends Controller
                 $newFormatedProduct= new stdClass();
                 $newFormatedProduct->id=$product->id;
                 $newFormatedProduct->name=$product->name;
-                $newFormatedProduct->vendor_id=$product->vendor_id;
-                $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+                $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->business_name=$product->businessProfile->business_name;
                 $newFormatedProduct->sku=$product->sku;
                 $newFormatedProduct->copyright_price=$product->copyright_price;
                 $newFormatedProduct->full_stock= $product->full_stock;
@@ -126,8 +126,8 @@ class ProductController extends Controller
                 $newFormatedProduct= new stdClass();
                 $newFormatedProduct->id=$product->id;
                 $newFormatedProduct->name=$product->name;
-                $newFormatedProduct->vendor_id=$product->vendor_id;
-                $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+                $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->business_name=$product->businessProfile->business_name;
                 $newFormatedProduct->sku=$product->sku;
                 $newFormatedProduct->copyright_price=$product->copyright_price;
                 $newFormatedProduct->full_stock= $product->full_stock;
@@ -176,8 +176,8 @@ class ProductController extends Controller
 
                 $newFormatedProduct->id=$product->id;
                 $newFormatedProduct->name=$product->name;
-                $newFormatedProduct->vendor_id=$product->vendor_id;
-                $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+                $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->business_name=$product->businessProfile->business_name;
                 $newFormatedProduct->sku=$product->sku;
                 $newFormatedProduct->copyright_price=$product->copyright_price;
                 $newFormatedProduct->full_stock= $product->full_stock;
@@ -227,8 +227,8 @@ class ProductController extends Controller
 
                 $newFormatedProduct->id=$product->id;
                 $newFormatedProduct->name=$product->name;
-                $newFormatedProduct->vendor_id=$product->vendor_id;
-                $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+                $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->business_name=$product->businessProfile->business_name;
                 $newFormatedProduct->sku=$product->sku;
                 $newFormatedProduct->copyright_price=$product->copyright_price;
                 $newFormatedProduct->full_stock= $product->full_stock;
@@ -289,8 +289,8 @@ class ProductController extends Controller
             $newFormatedProduct= new stdClass();
             $newFormatedProduct->id=$product->id;
             $newFormatedProduct->name=$product->name;
-            $newFormatedProduct->vendor_id=$product->vendor_id;
-            $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+            $newFormatedProduct->business_profile_id=$product->business_profile_id;
+            $newFormatedProduct->business_name=$product->businessProfile->business_name;
             $newFormatedProduct->sku=$product->sku;
             $newFormatedProduct->copyright_price=$product->copyright_price;
             $newFormatedProduct->full_stock= $product->full_stock;
@@ -353,8 +353,8 @@ class ProductController extends Controller
             $newFormatedProduct= new stdClass();
             $newFormatedProduct->id=$product->id;
             $newFormatedProduct->name=$product->name;
-            $newFormatedProduct->vendor_id=$product->vendor_id;
-            $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+            $newFormatedProduct->business_profile_id=$product->business_profile_id;
+            $newFormatedProduct->business_name=$product->businessProfile->business_name;
             $newFormatedProduct->sku=$product->sku;
             $newFormatedProduct->copyright_price=$product->copyright_price;
             $newFormatedProduct->full_stock= $product->full_stock;
@@ -389,6 +389,57 @@ class ProductController extends Controller
 
     }
 
+    //customizable products
+    public function customizableProducts()
+    {
+        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $customizableProductsArray=[];
+        if($products->total()>0){
+            foreach($products as $product){
+
+                foreach(json_decode($product->attribute) as $attribute){
+                    $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
+                }
+                $newFormatedProduct= new stdClass();
+
+                $newFormatedProduct->id=$product->id;
+                $newFormatedProduct->name=$product->name;
+                $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->business_name=$product->businessProfile->business_name;
+                $newFormatedProduct->sku=$product->sku;
+                $newFormatedProduct->copyright_price=$product->copyright_price;
+                $newFormatedProduct->full_stock= $product->full_stock;
+                $newFormatedProduct->full_stock_price= $product->full_stock_price;
+                $newFormatedProduct->attribute=  $attribute_array;
+                $newFormatedProduct->colors_sizes=$product->product_type==1 ? [] :json_decode($product->colors_sizes);
+                $newFormatedProduct->product_category_id=$product->product_category_id;
+                $newFormatedProduct->product_type=$product->product_type;
+                $newFormatedProduct->moq=$product->moq;
+                $newFormatedProduct->product_unit=$product->product_unit;
+                $newFormatedProduct->is_new_arrival=$product->is_new_arrival;
+                $newFormatedProduct->is_featured=$product->is_featured;
+                $newFormatedProduct->description=$product->description;
+                $newFormatedProduct->state= $product->state;
+                $newFormatedProduct->sold= $product->sold;
+                $newFormatedProduct->additional_description=$product->additional_description;
+                $newFormatedProduct->availability=$product->availability;
+                $newFormatedProduct->images=$product->images;
+                $newFormatedProduct->productReviews=$product->productReview;
+                $newFormatedProduct->productTotalAverageRating=productRating($product->id);
+                array_push($customizableProductsArray,$newFormatedProduct);
+                $attribute_array=[];
+
+            }
+        }
+
+        if(count($customizableProductsArray)>0){
+            return response()->json(array('success' => true, 'products' => $customizableProductsArray),200);
+        }
+        else{
+            return response()->json(array('success' => false, 'products' => $customizableProductsArray,'message' => "No products found"),200);
+        }
+    }
+
 
 
     public function showProductByCategoryId($categoryId){
@@ -418,8 +469,8 @@ class ProductController extends Controller
                     $newFormatedProduct= new stdClass();
                     $newFormatedProduct->id=$product->id;
                     $newFormatedProduct->name=$product->name;
-                    $newFormatedProduct->vendor_id=$product->vendor_id;
-                    $newFormatedProduct->vendor_name=$product->vendor->vendor_name;
+                    $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                    $newFormatedProduct->business_name=$product->businessProfile->business_name;
                     $newFormatedProduct->sku=$product->sku;
                     $newFormatedProduct->copyright_price=$product->copyright_price;
                     $newFormatedProduct->full_stock= $product->full_stock;
@@ -819,6 +870,8 @@ class ProductController extends Controller
         }
 
     }
+
+
 
 
 

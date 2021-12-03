@@ -11,7 +11,6 @@ class CompanyOverviewController extends Controller
     public function companyOverviewUpdate(Request $request)
     {
         try{
-            
             $company_overview= CompanyOverview::findOrFail($request->company_overview_id);
             $data=[];
             $count=0;

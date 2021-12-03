@@ -118,30 +118,26 @@
             <!-- rfq_detail_from end -->
 
 
-
-
-
-
             <div class="row rfq_img_upload_wrap">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="">
-                        <label for="product-upload">Media</label>
-                        <div class="box-body product-images">
-                            <div class="fileinput fileinput-new product-image ic-thumb-item" data-provides="fileinput" >
-                                <div class="fileinput-new thumbnail" style="max-width: 150px; max-height: 150px;">
-                                    <img src="https://via.placeholder.com/200" width="100%" alt="media">
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 150px; max-height: 150px;"></div>
-                                <div class="text-center">
-                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-                                        <input type="file" name="rfq_images[]">
-                                    </span>
-                                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                </div>
+                <div class="input-field col s12"> 
+                    <label for="product-upload">Media</label>
+                </div>
+                <div class="rfq_img_upload_box">
+                    <div class="row box-body product-images">
+                        <div class="fileinput fileinput-new product-image ic-thumb-item" data-provides="fileinput" >
+                            <div class="fileinput-new thumbnail">
+                                <img src="https://via.placeholder.com/200" width="100%" alt="media">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div class="select_img_box">
+                                <span class="btn-file btn_media"><span class="fileinput-new select_img"> <i class="material-icons">photo_size_select_large</i> Select Image </span><span class="fileinput-exists btn_media"> <i class="material-icons">find_replace</i> Change</span>
+                                    <input class="" type="file" name="rfq_images[]">
+                                </span>
+                                <a href="#" class="btn_delete fileinput-exists" data-dismiss="fileinput"><i class="material-icons">delete_outline</i> Delete</a>
                             </div>
                         </div>
-                        <button id="add-image" type="button" class="btn btn-green" style="margin: 10px 0px">Add</button>
                     </div>
+                    <button id="add-image" type="button" class="btn_add_image">  <i class="material-icons">add</i> Add</button>
                 </div>
             </div>
 
@@ -204,14 +200,15 @@
                 '                                            <img src="https://via.placeholder.com/200" width="100%" alt="header image">\n' +
                 '                                        </div>\n' +
                 '                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 150px; max-height: 150px;"></div>\n' +
-                '                                        <div class="text-center">\n' +
-                '                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>\n' +
+                '                                        <div class="rfq_img_upload_box">\n' +
+
+                '                                            <span class="btn-default btn-file btn_media"><span class="fileinput-new select_img"><i class="material-icons">photo_size_select_large</i> Select image</span><span class="fileinput-exists btn_media"> <i class="material-icons">find_replace</i> Change</span>\n' +
                 '                                                <input type="file" name="rfq_images[]" required>\n' +
                 '                                            </span>\n' +
-                '                                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>\n' +
+                '                                            <a href="#" class="btn_delete btn-default fileinput-exists" data-dismiss="fileinput"><i class="material-icons">delete_outline</i> Remove</a>\n' +
                 '                                        </div>\n' +
                 '                                        <span class="ic-remove-btn remove-product" onclick="if (confirm(\'Are You Sure ?\')){ $(this).parent().remove();}" ></span>\n' +
-                                                        '<a href="#" onclick="if (confirm(\'Are You Sure ?\')){ $(this).parent().remove();}" class="btn-small">remove</a>'
+                                                        '<a href="#" onclick="if (confirm(\'Are You Sure ?\')){ $(this).parent().remove();}" class="btn-small btn_remove"> <i class="material-icons">close</i></a>'
                 '                                    </div>';
 
             $('.product-images').append(data);

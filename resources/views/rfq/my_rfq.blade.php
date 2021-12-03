@@ -50,7 +50,7 @@
                         @if($key == 4)
                             @break
                         @endif
-                        <div class="col s12 m6 l4"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
+                        <div class="col s12 m4 l3"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
                     @endforeach
                 @endif
 			</div>
@@ -94,25 +94,53 @@
 				<button class="none_button btn_responses" id="rfqResponse" >
 					Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
 				</button>
-                @if($rfqSentList->bids()->exists())
-                    @foreach ($rfqSentList->bids as $bid)
-                        <div class="col m3">
-                            <p>Company Name: {{$bid->businessProfile->business_name}}</p>
-                            <p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
-                            <p>Description:{{$bid->description}}</p>
-                            <p>Quantity: {{$bid->quantity}}</p>
-                            <p>Unit Price: {{$bid->unit_price}}</p>
-                            <p>Total Price: {{$bid->total_price}}</p>
-                            <p>Payment Method: {{$bid->payment_method}}</p>
-                            <p>Delivery Time: {{$bid->delivery_time}}</p>
-                            @if(isset($bid->media))
-                                @foreach (json_decode($bid->media) as $image)
-                                    <img src="{{asset('storage/'.$image)}}" alt="">
-                                @endforeach
-                            @endif
-                        </div>
-                    @endforeach
-                @endif
+				<div class="respones_detail_wrap">
+					<div class="responses_open">&nbsp;</div>
+					@if($rfqSentList->bids()->exists())
+						@foreach ($rfqSentList->bids as $bid)
+							
+							<div class="row respones_box">
+								<div class="col s12 m2 l2">
+									<div class="rfq_profile_img"><img src="images/ic-logo.png" alt=""></div>
+								</div>
+								<div class="col s12 m10 l10 rfq_profile_info">
+									<div class="row">
+										<div class="col m7 l7 profile_info">
+											<h4>Company Name: {{$bid->businessProfile->business_name}} </h4>
+											<p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
+										</div>
+										<div class="col m5 l5 right-align"><a href="javascript:void(0);" class="btn_white btn_supplier">Contact Supplier</a></div>
+									</div>
+
+									<p>Description:{{$bid->description}}</p>
+									<p>Quantity: {{$bid->quantity}}</p>
+									<p>Unit Price: {{$bid->unit_price}}</p>
+									<p>Total Price: {{$bid->total_price}}</p>
+									<p>Payment Method: {{$bid->payment_method}}</p>
+									<p>Delivery Time: {{$bid->delivery_time}}</p>
+									<div class="respones_img_wrap">
+										@if(isset($bid->media))
+											@foreach (json_decode($bid->media) as $image)
+												<div class="respones_img">
+													<img src="{{asset('storage/'.$image)}}" alt="">
+												</div>		
+											@endforeach
+										@endif
+									</div>
+									
+
+								</div>
+
+								
+
+
+		
+
+							</div>
+						@endforeach
+					@endif
+				</div>
+
 			</div>
 			<!--div class="respones_detail_wrap">
 				<div class="row respones_box">

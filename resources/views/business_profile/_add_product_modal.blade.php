@@ -1,4 +1,4 @@
-<div id="product-add-modal-block" class="modal modal-fixed-footer ">
+<div id="product-add-modal-block" class="modal ">
 
     <div class="modal-content">
         <section class="ic-buying-req">
@@ -251,20 +251,28 @@
                         </div>
                     </div><br>
 
-                    <div class="submit_wrap right-align">
+                    <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>
                         <button type="button" class="btn_green btn modal-close waves-effect waves-light green btn-back-to-product-list">Cancel</button>
+                    </div> -->
+                    <div class="submit_btn_wrap">
+                        <div class="row">
+                            <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                            <div class="col s12 m6 l8 right-align">
+                                <button type="submit" class="btn_green  seller_product_create">Save</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </section>
     </div>
 
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
-    </div>
+    </div> -->
 
 </div>
 

@@ -50,7 +50,7 @@
                         @if($key == 4)
                             @break
                         @endif
-                        <div class="col s12 m6 l4"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
+                        <div class="col s12 m4 l3"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
                     @endforeach
                 @endif
 			</div>

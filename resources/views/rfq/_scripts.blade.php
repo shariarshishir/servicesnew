@@ -54,7 +54,7 @@
                                 $('#rfq-bid-modal .previous-image-show').html('');
                                 $.each(JSON.parse(data.bid.media) ,function(key, item){
                                     var image="{{asset('storage')}}"+"/"+item;
-                                    var html='<div>';
+                                    var html='<div class="replied_image">';
                                         html+='<img src="'+image+'" width="100%" alt="media">';
                                         html+= '</div>';
                                     $('#rfq-bid-modal .previous-image-show').append(html);

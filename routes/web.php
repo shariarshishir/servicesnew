@@ -26,6 +26,7 @@ use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\Manufacture\PoController;
 use App\Http\Controllers\SamplingController;
 use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
@@ -236,7 +237,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
-
+    //poforma
+    Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
+    Route::post('/po/store', [PoController::class,'store'])->name('po.store');
+    Route::get('/po',[PoController::class,'index'])->name('po.index');
+    Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat']);
 
 
 

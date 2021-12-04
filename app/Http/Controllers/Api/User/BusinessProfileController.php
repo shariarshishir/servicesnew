@@ -23,29 +23,63 @@ use stdClass;
 class BusinessProfileController extends Controller
 {
     public function show($id){
+        
         $businessProfile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
         
         if( $businessProfile){
 
             //company overview without json
-            $companyOverview = new stdClass();
-            $companyOverview->id=$businessProfile->companyOverview->id;
-            $companyOverview->data=json_decode($businessProfile->companyOverview->data);
-            $companyOverview->about_company=$businessProfile->companyOverview->about_company;
-            $companyOverview->status=$businessProfile->companyOverview->status;
-
-            //production flow and manpower without json
-            $productionFlowAndManpowerArray = [];
-            foreach($businessProfile->productionFlowAndManpowers as $key => $productionFlowAndManpower){
-                $productionFlowAndManpowerObject = new stdClass();
-                $productionFlowAndManpowerObject->id =  $productionFlowAndManpower->id;
-                $productionFlowAndManpowerObject->business_profile_id = $productionFlowAndManpower->business_profile_id;
-                $productionFlowAndManpowerObject->production_type = $productionFlowAndManpower->production_type;
-                $productionFlowAndManpowerObject->flow_and_manpower = json_decode($productionFlowAndManpower->flow_and_manpower);
-                array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
+            if($businessProfile->companyOverview){
+                $companyOverview = new stdClass();
+                $companyOverview->id=$businessProfile->companyOverview->id;
+                $companyOverview->data=json_decode($businessProfile->companyOverview->data);
+                $companyOverview->about_company=$businessProfile->companyOverview->about_company;
+                $companyOverview->status=$businessProfile->companyOverview->status;
             }
+            else{
+                $companyOverview=[];
+            }
+           
+            //production flow and manpower without json
+            if(count($businessProfile->productionFlowAndManpowers)>0){
+                $productionFlowAndManpowerArray = [];
+                foreach($businessProfile->productionFlowAndManpowers as $key => $productionFlowAndManpower){
+                    $productionFlowAndManpowerObject = new stdClass();
+                    $productionFlowAndManpowerObject->id =  $productionFlowAndManpower->id;
+                    $productionFlowAndManpowerObject->business_profile_id = $productionFlowAndManpower->business_profile_id;
+                    $productionFlowAndManpowerObject->production_type = $productionFlowAndManpower->production_type;
+                    $productionFlowAndManpowerObject->flow_and_manpower = json_decode($productionFlowAndManpower->flow_and_manpower);
+                    array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
+                }
+            }
+            else{
+                $productionFlowAndManpowerArray=[];
 
-            return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"productionFlowAndManpower"=>$productionFlowAndManpowerArray,"success"=>true],200);
+            }
+                
+
+            //walfare and csr
+            if($businessProfile->walfare){
+                $walfareObject = new stdClass();
+                $walfareObject->id= $businessProfile->walfare->id;
+                $walfareObject->walfare_and_csr=json_decode($businessProfile->walfare->walfare_and_csr);
+                $walfareObject->business_profile_id=$businessProfile->walfare->business_profile_id;
+            }
+            else{
+                $walfareObject=[];
+            }
+           
+            //security and others
+            if($businessProfile->security){
+                $securityObject = new stdClass();
+                $securityObject->id= $businessProfile->security->id;
+                $securityObject->security_and_others=json_decode($businessProfile->security->security_and_others);
+                $securityObject->business_profile_id=$businessProfile->security->business_profile_id;
+            }
+            else{
+                $securityObject=[];
+            }
+            return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"productionFlowAndManpower"=>$productionFlowAndManpowerArray,"walfare"=>$walfareObject,"security"=>$securityObject,"success"=>true],200);
             
         }
         else{
@@ -237,11 +271,64 @@ class BusinessProfileController extends Controller
         }
         public function wholesalerLowMOQProducts(Request $request)
         {
-            $wholesalerProducts = WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->orderByDesc('moq')->paginate(10);
-            if(count($wholesalerProducts)>0){
+           
+            $products = WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->orderByDesc('moq')->paginate(10);
+            
+            $productsArray=[];
+            if($products->total()>0){
+            
+                foreach($products as $product){
+
+                    if($product->product_type==1 ){
+                        foreach(json_decode($product->attribute) as $attribute){
+                            $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
+                        }
+                    }
+                    else if($product->product_type==2){
+                        foreach(json_decode($product->attribute) as $attribute){
+                            $attribute_array[] = (object) array('ready_quantity_min' =>$attribute[0], 'ready_quantity_max' => $attribute[1],'ready_price'=>$attribute[2]);
+                        }
+                    }
+                    else{
+                        foreach(json_decode($product->attribute) as $attribute){
+                            $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
+                        }
+
+                    }
+
+                    $newFormatedProduct= new stdClass();
+                    $newFormatedProduct->id=$product->id;
+                    $newFormatedProduct->name=$product->name;
+                    $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                    $newFormatedProduct->business_name=$product->businessProfile->business_name;
+                    $newFormatedProduct->sku=$product->sku;
+                    $newFormatedProduct->copyright_price=$product->copyright_price;
+                    $newFormatedProduct->full_stock= $product->full_stock;
+                    $newFormatedProduct->full_stock_price= $product->full_stock_price;
+                    $newFormatedProduct->attribute=  $attribute_array;
+                    $newFormatedProduct->colors_sizes=$product->product_type==1 ? [] :json_decode($product->colors_sizes);
+                    $newFormatedProduct->product_category_id=$product->product_category_id;
+                    $newFormatedProduct->product_type=$product->product_type;
+                    $newFormatedProduct->moq=$product->moq;
+                    $newFormatedProduct->product_unit=$product->product_unit;
+                    $newFormatedProduct->is_new_arrival=$product->is_new_arrival;
+                    $newFormatedProduct->is_featured=$product->is_featured;
+                    $newFormatedProduct->description=$product->description;
+                    $newFormatedProduct->state= $product->state;
+                    $newFormatedProduct->sold= $product->sold;
+                    $newFormatedProduct->additional_description=$product->additional_description;
+                    $newFormatedProduct->availability=$product->availability;
+                    $newFormatedProduct->productReview=$product->productReview;
+                    $newFormatedProduct->productTotalAverageRating=productRating($product->id);
+                    $newFormatedProduct->images=$product->images;
+                    array_push($productsArray,$newFormatedProduct);
+                    $attribute_array=[];
+
+                }
+              
                 return response()->json([
                     'success' => true,
-                    'products'=>$wholesalerProducts
+                    'products'=>$productsArray
                 ],200);
             }
             else{

@@ -184,12 +184,11 @@ class ManufactureProductController extends Controller
     }
     public function show($productId){
        
-        $product=Product::where('id',$productId)->first();
+        $product=Product::with('product_images')->where('id',$productId)->first();
         if($product){
             return response()->json([
                 'success' => true,
-                'message' => 'Product deleted Successfully',
-                'products' => $product,
+                'product' => $product,
                 ],200);
         }
         else{

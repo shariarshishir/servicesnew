@@ -112,7 +112,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/store/{storeId}/products', [ProductController::class, 'store']);
     Route::post('/store/{storeId}/products/{productId}', [ProductController::class, 'update']);
     Route::delete('/store/{storeId}/products/{productId}', [ProductController::class, 'destroy']);
-    Route::get('/store/{storeId}/orders', [OrderController::class, 'orderByVendorId']);
+    Route::get('/store/{storeId}/orders', [OrderController::class, 'orderByBusinessProfileId']);
     Route::get('/store/{storeId}/orders/{orderId}', [OrderController::class, 'vendorOrderByOrderId']);
     Route::get('/related-products', [ProductController::class, 'relatedProducts']);
     Route::post('/product/reviews',[ReviewController::class,'createProductReview']);

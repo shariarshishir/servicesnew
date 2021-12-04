@@ -397,7 +397,7 @@ class UserController extends Controller
             ]);
         }
 
-        //if($sso->successful()){
+        if($sso->successful()){
 
             $user = User::where('email',$request->email)->first();
             $message = "Email verfication mail has resent successfully";
@@ -416,14 +416,14 @@ class UserController extends Controller
                     $message->to($request->email);
                     $message->subject('Email Verification Mail');
                 });
-                //return response()->json(array('message' => $message,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>'True','user'=>$user),200);
-                return response()->json(array('message' => $message,'auth_token'=> $token,'code'=>'True','user'=>$user),200);
+                return response()->json(array('message' => $message,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>'True','user'=>$user),200);
+                // return response()->json(array('message' => $message,'auth_token'=> $token,'code'=>'True','user'=>$user),200);
             }
             elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
 
 
-                //return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>"True"],201);
-                return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
+                return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>"True"],201);
+                // return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
 
             }
             else{
@@ -432,12 +432,12 @@ class UserController extends Controller
 
             }
 
-        // }
-        // else{
+        }
+        else{
 
-        //     return response()->json(['message' => 'Wrong email or password','code'=>'False'],401);
+            return response()->json(['message' => 'Wrong email or password','code'=>'False'],401);
 
-        // }
+        }
 
 
     }

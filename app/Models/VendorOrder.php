@@ -39,6 +39,10 @@ class VendorOrder extends Model
     public function shippingCharge(){
         return $this->hasOne(ShippingCharge::class,'order_id');
     }
+    public function businessProfile()
+    {
+        return $this->belongsTo(BusinessProfile::class,'business_profile_id');
+    }
 
 
 }

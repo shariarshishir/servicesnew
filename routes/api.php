@@ -74,7 +74,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     //business profile
     Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
-    Route::get('/business-profile-count',[BusinessProfileController::class,'businessProfileCount']);
+    Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
     Route::post('/business-profile',[BusinessProfileController::class,'store']);
     Route::put('/company-overview',[CompanyOverviewController::class,'companyOverviewUpdate']);
@@ -131,10 +131,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //manufacture product api
     Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);
-    
     Route::get('/business-profile/{businessProfileID}/manufacture-products', [ManufactureProductController::class, 'index']);
     Route::get('/business-profile/{businessProfileID}/manufacture-products/{productId}', [ManufactureProductController::class, 'delete']);
-    Route::get('/manufacture-products/{productId}', [ManufactureProductController::class,'show']);
     //cart api
     Route::post('/add-to-cart',[CartController::class,'addToCart']);
     Route::get('/cart',[CartController::class,'index']);
@@ -189,6 +187,8 @@ Route::get('/store/{storeId}/productlist', [ProductController::class, 'productLi
 Route::get('/store/{storeId}/products/{productId}', [ProductController::class, 'show']);
 Route::post('/search-product-by-name', [ProductController::class, 'searchByProductName']);
 Route::get('/wholesaler-products/{productId}', [ProductController::class, 'productById']);
+Route::get('/manufacture-products/{productId}', [ManufactureProductController::class,'show']);
+
 //store api
 Route::get('/stores',[VendorController::class,'index']);
 Route::get('/store/{vendorUId}',[VendorController::class,'show']);

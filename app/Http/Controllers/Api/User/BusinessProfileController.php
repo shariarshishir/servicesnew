@@ -360,7 +360,7 @@ class BusinessProfileController extends Controller
 
         public function productsWithShortestLeadTime()
         {
-            $products=Product::with('product_images')->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->orderBy('lead_time')->paginate(20);
+            $products=Product::with('product_images','businessProfile')->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->orderBy('lead_time')->paginate(20);
             if(count($products)>0){
                 return response()->json([
                     'success' => true,

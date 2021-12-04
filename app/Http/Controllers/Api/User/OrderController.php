@@ -106,8 +106,6 @@ class OrderController extends Controller
 
     public function orderCreate(Request $request)
     {
-
-    
         $response = Http::withToken($request->sso_token)->get(env('SSO_URL').'/api/auth/token/verify');
        
         if(!$response->successful()){
@@ -184,19 +182,19 @@ class OrderController extends Controller
         try {
 
 
-            $vendorIds=[];
+            $businessProfileIds=[];
             foreach($request->cart_items as $item){
-                array_push($vendorIds,$item['vendor_id']);
+                array_push($businessProfileIds,$item['business_profile_id']);
             }
-            $unique_vendorIds=array_unique($vendorIds);
+            $uniqueBusinessProfileIds=array_unique($businessProfileIds);
 
 
 
 
-            foreach($unique_vendorIds as $vendorId){
+            foreach($uniqueBusinessProfileIds as $businessProfileId){
                 $sum_price=0;
                 foreach($request->cart_items  as $item){
-                    if($item['vendor_id'] == $vendorId)
+                    if($item['business_profile_id'] == $businessProfileId)
                     {
                         $sum_price=$item['unit_price']*$item['quantity']+$sum_price;
                     }
@@ -206,7 +204,7 @@ class OrderController extends Controller
                 $orderNumber = IdGenerator::generate(['table' => 'vendor_orders', 'field' => 'order_number','reset_on_prefix_change' =>true,'length' => 12, 'prefix' => date('ymd')]);
                 $order=VendorOrder::create([
                         'user_id'         => auth()->user()->id,
-                        'vendor_id'       => $item['vendor_id'],
+                        'business_profile_id'       => $item['business_profile_id'],
                         'order_number'    => $orderNumber,
                         'grand_total'     => $sum_price,
                         'shipping_id'     => $shipping_address_id,
@@ -221,7 +219,7 @@ class OrderController extends Controller
 
 
                 foreach($request->cart_items  as $item){
-                    if($item['vendor_id'] == $vendorId)
+                    if($item['business_profile_id'] == $businessProfileId)
                     {
                         $orderItem=VendorOrderItem::create([
                             'order_id'      => $order->id,

@@ -22,9 +22,9 @@ class OrderController extends Controller
 {
     //received order by a store
 
-    public function orderByVendorId($vendorId){
-        $orders=VendorOrder::where('vendor_id',$vendorId)->whereNotIn('state', ['pending','cancel'])->get();
-        $vendor=Vendor::with('user')->where('id',$vendorId)->first();
+    public function orderByBusinessProfileId($businessProfileId){
+        $orders=VendorOrder::where('vendor_id',$businessProfileId)->whereNotIn('state', ['pending','cancel'])->get();
+        $businessProfile=BusinessProfile::with('user')->where('id',$businessProfileId)->first();
 
 
         $orderArray=[];
@@ -33,13 +33,13 @@ class OrderController extends Controller
             $newFormatedOrder=new stdClass;
             $newFormatedOrder->id=$order->id;
             $newFormatedOrder->order_number=$order->order_number;
-            $newFormatedOrder->vendor_id=$order->vendor_id;
+            $newFormatedOrder->business_profile_id=$order->business_profile_id;
             $newFormatedOrder->order_by=$order->user->name;
             $newFormatedOrder->email=$order->user->email;
             $newFormatedOrder->grand_total=$order->grand_total;
             $newFormatedOrder->created_at=$order->created_at;
             $newFormatedOrder->state=$order->state;
-            $notifications = $vendor->user->unreadNotifications->where('read_at',null)->where('type','App\Notifications\NewOrderHasApprovedNotification');
+            $notifications = $businessProfile->user->unreadNotifications->where('read_at',null)->where('type','App\Notifications\NewOrderHasApprovedNotification');
             foreach($notifications as $notification)
             {
                 if($notification->data['notification_data'] == $order->id){
@@ -72,7 +72,7 @@ class OrderController extends Controller
             $newFormatedOrder=new stdClass;
             $newFormatedOrder->id=$order->id;
             $newFormatedOrder->order_number=$order->order_number;
-            $newFormatedOrder->vendor_id=$order->vendor_id;
+            $newFormatedOrder->business_profile_id=$order->business_profile_id;
             $newFormatedOrder->order_by=$order->user->name;
             $newFormatedOrder->email=$order->user->email;
             $newFormatedOrder->grand_total=$order->grand_total;

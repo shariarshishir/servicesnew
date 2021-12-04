@@ -5073,7 +5073,7 @@ nav .pagination li.active .page-link {
 }
 /* ******************** Cart style end*********************** */
 
-
+/* ******************** business_profile_login style start*********************** */
 .business_profile_login {
     padding: 80px 0;
     max-width: 770px;
@@ -5115,3 +5115,120 @@ nav .pagination li.active .page-link {
     min-width: 85px;
     line-height: 34px;
 }
+
+/* ******************** business_profile_login style end*********************** */
+
+
+
+/* ******************** Media css style start *********************** */
+
+@media only screen and (max-width: 1400px) {}
+
+
+
+
+@media only screen and (min-device-width: 769px) and (max-device-width: 1280px) {}
+
+
+
+@media only screen and (max-width: 1280px) {
+    .top_right .btn_white,
+    .top_right .btn_green {
+        padding: 7px 15px;
+    }
+}
+
+
+@media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
+    .logo img {
+        max-width: 60px;
+    }
+    .mainnav_wrap {
+        padding-top: 19px !important;
+    }
+    .btn_profile {
+        margin-right: 5px;
+    }
+    
+    .header_wrap .top_right .material-icons {
+        font-size: 16px;
+    }
+    .cart-icon-outer-wrapper .cart-icon-wrapper a.cart-btn {
+        margin-right: 0;
+    }
+    .top_right .btn_white, .top_right .btn_green {
+        padding: 5px 10px;
+        font-size: 14px;
+        margin: 0;
+        line-height: 24px;
+    }
+    .cart-icon-wrapper .material-icons {
+        line-height: 45px;
+    }
+    .cart_counter {
+        top: 0;
+    }
+}
+
+@media only screen and (max-width: 1024px) {}
+
+@media only screen and (max-width: 992px) {}
+
+@media only screen and (max-width: 768px) {
+    .bannerwrap {
+        height: 400px;
+    }
+    .banner_slider {
+        padding: 30px;
+    }
+    .banner_slider .banner_inner {
+        width: 100%;
+    }
+    .bannerwrap .banner_slider h2 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+    .bannerwrap .banner_slider h3 {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .banner_search .search-btn {
+        height: 49px !important;
+    }
+
+    
+
+
+    .footer_right_bottom .btn_email {
+        margin-top: -5px !important;
+    }
+    .footer_bottomWrap {
+        background: #000;
+    }
+
+
+        
+}
+
+@media only screen and (max-width: 480px) {
+
+    .banner_search .material-icons {
+        font-size: 1.5rem !important;
+    }
+
+    .footer_right_bottom .btn_email {
+        height: 50px;
+    }
+    .footer_right_bottom .footer_buttonWrap .industry_textbox {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    
+}
+
+@media only screen and (max-width: 320px) {
+
+}
+
+
+/* ******************** Media css style end *********************** */

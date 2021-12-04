@@ -141,9 +141,12 @@
 			</div>
 		</div>
 	</header>
+
 	<header class="mobile_header header_wrap">
 		<div class="container">
-			<div class="col m2 logo center-align"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
+			<div class="col m2 logo center-align">
+				<a href="{{route('home')}}"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a>
+			</div>
 			<div class="row">
 				<div class="col s6 mainNav">
 					<div id="slide-out" class="sidenav">

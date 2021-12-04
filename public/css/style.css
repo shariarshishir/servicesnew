@@ -5118,6 +5118,40 @@ nav .pagination li.active .page-link {
 
 /* ******************** business_profile_login style end*********************** */
 
+.invoice_container_wrap .card {
+    padding: 50px !important;
+}
+
+#buyerdata h3 {
+    font-size: 20px;
+    font-weight: 500;
+}
+.line_item_wrap {
+    padding: 50px 0;
+}
+
+.required_star {
+    color: rgb(255, 0, 0);
+    font-size: 20px;
+}
+.pro_porma_invoice .btn_green {
+    height: 40px;
+    margin: 50px 0 0;
+}
+.pro_porma_invoice .btn_green i {
+    margin-right: 10px;
+}
+
+.terms_conditions_list .form-control {
+    float: left !important;
+    width: 84% !important;
+    margin-bottom: 20px !important;
+}
+.terms_conditions_list .input-group-prepend {
+    width: 11%;
+    float: right;
+    padding-top: 5px;
+}
 
 
 /* ******************** Media css style start *********************** */
@@ -5149,7 +5183,7 @@ nav .pagination li.active .page-link {
     .btn_profile {
         margin-right: 5px;
     }
-    
+
     .header_wrap .top_right .material-icons {
         font-size: 16px;
     }

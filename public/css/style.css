@@ -5082,3 +5082,36 @@ nav .pagination li.active .page-link {
 .registration-block .company-logo {
     margin-top: 20px;
 }
+
+.business_login_inner {
+    padding: 50px 30px !important;
+}
+
+.business_login_inner .login-block .input-field input {
+    font-size: 16px;
+}
+.business_login_inner .login-block .input-field label {
+    z-index: inherit;
+    padding-left: 10px;
+    position: inherit;
+    opacity: inherit;
+    -webkit-transform: inherit;
+    transform: inherit;
+    padding: 0 0 10px 50px;
+    margin: 0;
+    color: #448547;
+}
+.business_login_inner .login-block .remember-me-block .input-field label {
+    padding-left: 12px;
+}
+.business_login_inner .input_box_wrap {
+    position: relative;
+}
+.business_login_inner .login-block .input-field {
+    margin-bottom: 25px;
+}
+
+.business_login_inner .login-block .signin {
+    min-width: 85px;
+    line-height: 34px;
+}

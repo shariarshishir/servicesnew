@@ -29,7 +29,7 @@ class SecurityController extends Controller
             $fireHydrant->status=0;
 
             $waterSource = new stdClass();
-            $waterSource->name='maternity_leave';
+            $waterSource->name='water_source';
             $waterSource->checked=$request->water_source;
             $waterSource->status=0;
 

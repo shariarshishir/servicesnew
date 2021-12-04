@@ -23,9 +23,9 @@
 				<div class="left_top">
 					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
 					<div class="office_address center-align ">
-						<h3>Sayem Group</h3>
-						<h4><span class="material-icons">pin_drop</span> Dhaka, BD <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
-						<p>Manufacturer, Sweater</p>
+						<h3>{{$business_profile->business_name}}</h3>
+						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
+						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->business_category_id}}</p>
 					</div>
 					<div class="center-align">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>

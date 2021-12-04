@@ -30,7 +30,7 @@ class CartController extends Controller
 
                 $newFormatedCart= new stdClass();
                 $newFormatedCart->id=$cartItem->id;
-                $newFormatedCart->vendor_id=$cartItem->vendor_id;
+                $newFormatedCart->business_profile_id=$cartItem->business_profile_id;
                 $newFormatedCart->user_id= $cartItem->user_id;
                 $newFormatedCart->sku=$cartItem->sku;
                 $newFormatedCart->name= $cartItem->name;
@@ -80,7 +80,7 @@ class CartController extends Controller
         $cartItem->name=$product->name;
         $cartItem->quantity=$request->quantity;
         $cartItem->unit_price=$request->unit_price;
-        $cartItem->vendor_id=$product->vendor_id;
+        $cartItem->business_profile_id=$product->business_profile_id;
         $cartItem->image= $product->images[0]->image;
         $cartItem->product_type=$product->product_type;
         $cartItem->color_attr=json_encode($request->color_attribute);
@@ -99,7 +99,7 @@ class CartController extends Controller
 
                 $newFormatedCart= new stdClass();
                 $newFormatedCart->id=$cartItem->id;
-                $newFormatedCart->vendor_id=$cartItem->vendor_id;
+                $newFormatedCart->business_profile_id=$cartItem->business_profile_id;
                 $newFormatedCart->user_id= $cartItem->user_id;
                 $newFormatedCart->sku=$cartItem->sku;
                 $newFormatedCart->name= $cartItem->name;
@@ -177,7 +177,7 @@ class CartController extends Controller
 
                 $newFormatedCart= new stdClass();
                 $newFormatedCart->id=$cartItem->id;
-                $newFormatedCart->vendor_id=$cartItem->vendor_id;
+                $newFormatedCart->business_profile_id=$cartItem->business_profile_id;
                 $newFormatedCart->user_id= $cartItem->user_id;
                 $newFormatedCart->sku=$cartItem->sku;
                 $newFormatedCart->name= $cartItem->name;

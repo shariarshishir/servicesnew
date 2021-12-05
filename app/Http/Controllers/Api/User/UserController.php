@@ -292,10 +292,6 @@ class UserController extends Controller
 
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
-
-                $manufacture_base_url=env('MANUFACTURE_BASE_URL');
-                $response = Http::post( $manufacture_base_url.'/api/verify', ['user' => $user]);
-
                 $message = "Your email have been verified successfully. Please Click here to login";
             } else {
                 $message = "Your email have been verified successfully.";

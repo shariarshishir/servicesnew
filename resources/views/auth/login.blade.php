@@ -6,7 +6,7 @@
     <div class="row justify-content-center business_profile_login">
 
         <div class="row card business_login_inner">
-            <div class="col m5 registration-block">
+            <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
                     <img src="http://127.0.0.1:8000/images/frontendimages/merchantbay_logoX200.png" alt="Merchant Bay Logo">
                 </div>
@@ -16,7 +16,7 @@
                     <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}"> Click here to Register</a>
                 </div>
             </div>
-                <div class="col m7 login-block">
+                <div class="col s12 m8 l7 login-block">                    
                     <!-- <div class="card-header">{{ __('Login') }}</div> -->
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">

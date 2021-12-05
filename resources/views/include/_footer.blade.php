@@ -89,7 +89,7 @@
 <div id="login-register-modal" class="modal modal-fixed-footer" tabindex="0">
     <div class="modal-content">
         <div class="row">
-            <div class="col m6 registration-block">
+            <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
                     <img src="{{asset('images/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
                 </div>
@@ -99,7 +99,7 @@
                     <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}" > Click here to Register</a>
                 </div>
             </div>
-            <div class="col m6 login-block">
+            <div class="col s12 m8 l7 login-block">
                 <span class="text-danger error-text error-msg login-error-msg" style="display: none;"></span>
                 <form method="POST" action="#">
                     @csrf

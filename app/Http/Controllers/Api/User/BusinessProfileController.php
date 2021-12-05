@@ -376,4 +376,20 @@ class BusinessProfileController extends Controller
             
         }
 
+        public function allBusinessProfile(){
+            $allBusinessProfiles = BusinessProfile::with('user')->paginate(10);
+            if(count($allBusinessProfiles)){
+                return response()->json([
+                    'success' => true,
+                    'allBusinessProfiles'=>$allBusinessProfiles
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'allBusinessProfiles'=>[]
+                ],200);
+            }
+        }
+
 }

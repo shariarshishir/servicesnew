@@ -10,6 +10,7 @@ use App\Models\VendorOrder;
 use App\Models\Country;
 use App\Models\VendorOrderItem;
 use App\Models\UserAddress;
+use App\Models\CartItem;
 use DB;
 use Exception;
 use App\Models\Product;
@@ -23,7 +24,7 @@ class OrderController extends Controller
     //received order by a store
 
     public function orderByBusinessProfileId($businessProfileId){
-        $orders=VendorOrder::where('vendor_id',$businessProfileId)->whereNotIn('state', ['pending','cancel'])->get();
+        $orders=VendorOrder::where('business_profile_id',$businessProfileId)->whereNotIn('state', ['pending','cancel'])->get();
         $businessProfile=BusinessProfile::with('user')->where('id',$businessProfileId)->first();
 
 
@@ -92,8 +93,8 @@ class OrderController extends Controller
 
     }
 
-    public function vendorOrderByOrderId($vendorId,$orderId){
-        $order=VendorOrder::where('vendor_id',$vendorId)->where('id',$orderId)->first();
+    public function vendorOrderByOrderId($businessProfileId,$orderId){
+        $order=VendorOrder::where('business_profile_id',$businessProfileId)->where('id',$orderId)->first();
         if(count($order)>0){
             return response()->json(array('success' => true, 'orders' => $order),200);
         }
@@ -183,7 +184,7 @@ class OrderController extends Controller
 
 
             $businessProfileIds=[];
-            foreach($request->cart_items as $item){
+            foreach($request->cartItems as $item){
                 array_push($businessProfileIds,$item['business_profile_id']);
             }
             $uniqueBusinessProfileIds=array_unique($businessProfileIds);
@@ -193,7 +194,7 @@ class OrderController extends Controller
 
             foreach($uniqueBusinessProfileIds as $businessProfileId){
                 $sum_price=0;
-                foreach($request->cart_items  as $item){
+                foreach($request->cartItems  as $item){
                     if($item['business_profile_id'] == $businessProfileId)
                     {
                         $sum_price=$item['unit_price']*$item['quantity']+$sum_price;
@@ -204,7 +205,7 @@ class OrderController extends Controller
                 $orderNumber = IdGenerator::generate(['table' => 'vendor_orders', 'field' => 'order_number','reset_on_prefix_change' =>true,'length' => 12, 'prefix' => date('ymd')]);
                 $order=VendorOrder::create([
                         'user_id'         => auth()->user()->id,
-                        'business_profile_id'       => $item['business_profile_id'],
+                        'business_profile_id'       => $businessProfileId,
                         'order_number'    => $orderNumber,
                         'grand_total'     => $sum_price,
                         'shipping_id'     => $shipping_address_id,
@@ -217,8 +218,7 @@ class OrderController extends Controller
                     ]);
 
 
-
-                foreach($request->cart_items  as $item){
+                foreach($request->cartItems  as $item){
                     if($item['business_profile_id'] == $businessProfileId)
                     {
                         $orderItem=VendorOrderItem::create([
@@ -241,7 +241,7 @@ class OrderController extends Controller
             CartItem::where('user_id',auth()->user()->id)->delete();
 
 
-            DB::commit();
+           DB::commit();
             return response()->json(["message"=>"Order created successfully","order"=>$order,"code"=>true],200);
         }catch(Exception $e){
             DB::rollback();

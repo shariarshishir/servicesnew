@@ -179,7 +179,7 @@ class UserController extends Controller
             $message->subject('Welcome to Merchantbay Shop');
         });
 
-        if($vendor && $user){
+        if($user){
             return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
         }
         else{

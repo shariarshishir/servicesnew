@@ -12,8 +12,8 @@
                 </div>
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>
-                    
-                    <a href="/?flag=service"> Click here to Register</a>
+
+                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}"> Click here to Register</a>
                 </div>
             </div>
                 <div class="col s12 m8 l7 login-block">                    
@@ -61,20 +61,17 @@
                                 </div>
                             </div>
 
-                            <div class="login_button_wrap">
-                                <button type="submit" class="btn_green signin right">
-                                    {{ __('Login') }}
-                                </button>
-                                @if (Route::has('password.request'))
-                                    <a class="btn_green right btn-forgot-password" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                            
+                            <button type="submit" class="btn_green signin right">
+                                {{ __('Login') }}
+                            </button>
+                            {{-- @if (Route::has('password.request'))
+                                <a class="btn_green right btn-forgot-password" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif --}}
                         </form>
                     </div>
-              
+
             </div>
         </div>
 

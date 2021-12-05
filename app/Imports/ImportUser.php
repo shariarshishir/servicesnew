@@ -51,14 +51,14 @@ WithValidation
                 'password' => $row['password'],
                 'phone'   => $row['phone'],
                 'user_type' => 'buyer',
-                'company_name' => $row['company_name'],
+                'company_name' => $row['company_name'] ?? $row['name'],
                 'is_email_verified' => 1,
                 'sso_reference_id'  => $row['sso_reference_id'],
             ]);
             //create business profile
             $business_profile=BusinessProfile::create([
                 'user_id' => $user->id,
-                'business_name' => $row['business_name'],
+                'business_name' => $row['business_name'] ?? $user->name,
                 'location'   => $row['location'],
                 'business_type' => 1,
                 'has_representative' => 1,

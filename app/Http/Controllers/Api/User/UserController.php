@@ -179,7 +179,7 @@ class UserController extends Controller
             $message->subject('Welcome to Merchantbay Shop');
         });
 
-        if($vendor && $user){
+        if($user){
             return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
         }
         else{
@@ -292,10 +292,6 @@ class UserController extends Controller
 
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
-
-                $manufacture_base_url=env('MANUFACTURE_BASE_URL');
-                $response = Http::post( $manufacture_base_url.'/api/verify', ['user' => $user]);
-
                 $message = "Your email have been verified successfully. Please Click here to login";
             } else {
                 $message = "Your email have been verified successfully.";

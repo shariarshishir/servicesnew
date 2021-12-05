@@ -142,18 +142,14 @@
                         </div>
                     </div>
 
-                    <div class="login_button_wrap">
-                        <button class="btn green waves-effect waves-light right signin" type="submit" name="log-in">
-                            {{ __('Sign In') }} <i class="material-icons right">send</i>
-                        </button>
-                        @if (Route::has('password.request'))
-                            <a class="btn green right btn-forgot-password" href="{{ route('password.request') }}">
-                                {{ __('Forgot Password?') }}
-                            </a>
-                        @endif
-                    </div>
-
-                    
+                    <button class="btn green waves-effect waves-light right signin" type="submit" name="log-in">
+                        {{ __('Sign In') }} <i class="material-icons right">send</i>
+                    </button>
+                    {{-- @if (Route::has('password.request'))
+                        <a class="btn green right btn-forgot-password" href="{{ route('password.request') }}">
+                            {{ __('Forgot Password?') }}
+                        </a>
+                    @endif --}}
                 </form>
             </div>
         </div>

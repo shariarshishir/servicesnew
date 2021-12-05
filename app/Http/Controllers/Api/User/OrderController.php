@@ -11,6 +11,7 @@ use App\Models\Country;
 use App\Models\VendorOrderItem;
 use App\Models\UserAddress;
 use App\Models\CartItem;
+use App\Models\BusinessProfile;
 use DB;
 use Exception;
 use App\Models\Product;

@@ -57,8 +57,8 @@
         </div>
         <div class="suppliers_content_wrap">
             <div class="industries_boxWrap">
-                @foreach ($suppliers as $supplier )
-                @php echo "<pre>"; print_r($supplier); echo "</pre>";  @endphp
+                <!-- @foreach ($suppliers as $supplier )
+                @php echo "<pre>"; print_r($supplier); echo "</pre>";  @endphp -->
                     <div class="industry_infoBox">
                         <div class="box_shadow">
                             <div class="industry_logobox row">
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                <!-- @endforeach -->
             </div>
         </div>
     </div>

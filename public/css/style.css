@@ -173,17 +173,21 @@ button:hover {
     background: none;
 }
 .box_shadow {
-    -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
+    /* -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
     -moz-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
-    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
+    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30); */
+
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
 }
 .box_radius {
     border-radius: 20px;
 }
 .box_shadow_radius {
-    -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
-    -moz-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
-    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     border-radius: 20px;
 }
 .radio_box {
@@ -764,9 +768,9 @@ form input:read-only {
 .productBox .imgBox img {
     width: auto;
     border-radius: 10px;
-    -webkit-box-shadow: 0px 3px 9px 4px rgb(0 0 0 / 30%);
-    -moz-box-shadow: 0px 3px 9px 4px rgba(0,0,0,0.30);
-    box-shadow: 0px 3px 9px 4px rgb(0 0 0 / 30%);
+    -webkit-box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0px 3px 12px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
 }
 .product_wrapper .imgBox .favorite {
     position: absolute;
@@ -810,7 +814,6 @@ form input:read-only {
 }
 .productBox h4,
 .productBox h4 a {
-    overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -850,14 +853,27 @@ form input:read-only {
     border-bottom: 1px solid #448547;
     line-height: 20px;
     display: inline-block;
+    width: 32%;
+    text-align: center;
 }
 .low_moq_products_wrap .moq_view:hover {
     border: none;
+}
+.low_moq_products_wrap .moq_buss_name {
+    width: 65%;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    overflow: hidden;
 }
 
 .load_time_box {
     display: block;
     text-transform: capitalize;
+    margin-bottom: 10px;
 }
 
 .load_time_box .load_time {
@@ -934,6 +950,7 @@ form input:read-only {
     color: #fff;
     border-radius: 5px;
 }
+
 
 /* *** Main Container css end ***** */
 /*********************8 Landing page css End  **************************/
@@ -5283,7 +5300,6 @@ nav .pagination li.active .page-link {
     width: auto;
 }
 
-
 /* ******************** Media css style start *********************** */
 
 @media only screen and (min-width: 1500px) {
@@ -5439,9 +5455,9 @@ nav .pagination li.active .page-link {
     .registration-content {
         padding-bottom: 30px;
     }
-    .business_login_inner .login-block .signin {
+    /* .business_login_inner .login-block .signin {
         min-width: 60px;
-    }
+    } */
 
     .modal {
         width: 90%;
@@ -5580,6 +5596,11 @@ nav .pagination li.active .page-link {
 
     .logo {
         margin-bottom: 10px;
+    }
+
+    .modal.modal-fixed-footer .modal-content,
+    .business_login_inner {
+        padding: 20px 10px !important;
     }
 
     

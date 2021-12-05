@@ -34,7 +34,9 @@
 					</nav>
 				</div>
 				<div class="col m2 logo"><a href="{{route('home')}}"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
+				
 				<div class="col m5 top_right ">
+
 					<div class="user-block">
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
@@ -134,7 +136,7 @@
 					</div> -->
 
 					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile btn_green">
-					    <span class="material-icons"> person_add_alt </span> Business Profile
+					    <span class="material-icons"> add </span> Business Profile
 					</a>
 					
 				</div>
@@ -168,46 +170,23 @@
 					</div>
 					<a href="javascript:void(0);" data-target="slide-out" class="sidenav-trigger waves-effect waves-block waves-light btn green lighten-1 btn-floating btn-sidenav-left"><i class="material-icons">menu</i></a>
 				</div>
+
+
 				<div class="col s6 right-align mobile_top_right">
-					
 					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile_mobile">
-						<span class="material-icons"> assignment_ind </span>
+						<span class="material-icons"> add </span>
 					</a>
 
-					<div class="cart-icon-outer-wrapper cart-icon-outer-wrapper-mobile">
-                        <div class="cart-icon-wrapper cart-icon-wrapper-mobile">
-                            <a href="javascript:void(0);" class="cart-btn_mobile">
-                                <i class="material-icons dp48">shopping_cart</i>
-                                <span id="cartItems"class="cart_counter">{{$cartItems}}</span>
-                            </a>
-                            <ul id="cart-dropdown" class="card" style="display: none;">
-                                {{-- @if(Cart::content()->count() > 0) --}}
 
-                                <li tabindex="0">
-                                    <a class="grey-text text-darken-1" href="{{route('cart.index')}}"><i class="material-icons">shopping_basket</i> My Cart</a>
-                                </li>
-                                <li tabindex="0">
-                                    <a class="grey-text text-darken-1" href="{{route('cart.destroy')}}"><i class="material-icons">delete</i> Delete all cart item</a>
-                                </li>
-                                {{-- @else
-                                <li tabindex="0">
-                                    <a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">shopping_basket</i> Basket is empty</a>
-                                </li>
-                                @endif --}}
-                            </ul>
-                        </div>
-                    </div>
-					
-					
-					<div class="user-block user-block_mobile">
+					<div class="user-block user-block-mobile">
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
-								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
+								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online">
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
 									</span>
 								</a>
-								<ul id="profile-dropdown" class="dropdown-content">
+								<ul id="profile-dropdown-mobile" class="dropdown-content profile_dropdown_mobile">
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
@@ -228,17 +207,17 @@
 									@csrf
 								</form>
 							@else
-								<a href="#login-register-modal" class="btn_logRegi modal-trigger"><span class="material-icons">login</span></a>
+								<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
 							@endif
 
 							@else
 								@if(Auth::guard('web')->check())
-								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
+								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online">
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
 									</span>
 								</a>
-								<ul id="profile-dropdown" class="dropdown-content">
+								<ul id="profile-dropdown-mobile" class="dropdown-content">
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
@@ -259,14 +238,39 @@
 									@csrf
 								</form>
 								@else
-									<a href="#login-register-modal" class="btn_logRegi modal-trigger"><span class="material-icons">login</span></a>
+									<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
 							@endif
 
 						@endif
 					</div>
 
+							
 
+					
 
+					<div class="cart-icon-outer-wrapper ">
+                        <div class="cart-icon-wrapper cart-icon-wrapper-mobile">
+							<a class='dropdown-trigger' href='#' data-target='cart-dropdown-mobile'>
+								<i class="material-icons dp48">shopping_cart</i>
+								<span id="cartItems"class="cart_counter">{{$cartItems}}</span>
+							</a>
+							<!-- Dropdown Structure -->
+							<ul id="cart-dropdown-mobile" class="card dropdown-content">
+								{{-- @if(Cart::content()->count() > 0) --}}
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="{{route('cart.index')}}"><i class="material-icons">shopping_basket</i> My Cart</a>
+								</li>
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="{{route('cart.destroy')}}"><i class="material-icons">delete</i> Delete all cart item</a>
+								</li>
+								{{-- @else
+								<li tabindex="0">
+									<a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">shopping_basket</i> Basket is empty</a>
+								</li>
+								@endif --}}
+							</ul>
+                        </div>
+                    </div>
 
 
 				</div>

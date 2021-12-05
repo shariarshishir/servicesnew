@@ -12,11 +12,11 @@
                 </div>
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>
-                    
-                    <a href="/?flag=service"> Click here to Register</a>
+
+                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}"> Click here to Register</a>
                 </div>
             </div>
-                <div class="col m7 login-block">                    
+                <div class="col m7 login-block">
                     <!-- <div class="card-header">{{ __('Login') }}</div> -->
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -71,7 +71,7 @@
                             @endif
                         </form>
                     </div>
-              
+
             </div>
         </div>
 

@@ -23,8 +23,9 @@ class RfqBidController extends Controller
         if(count($business_profile) <= 0 ){
             return response()->json(array(
                 'success' => false,
-                'error' => ['errors' => 'you do not have business']),
+                'error' => ['errors' => 'you do not have any business']),
                 401);
+
         }
         $rfq=Rfq::findOrFail($rfq_id);
         // if($rfq->bids()->exists()){

@@ -74,7 +74,7 @@
 							@if($company_overview->name=='floor_space')
 							<div class="col s6 m3 l2">
 								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
+									<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" />
 								</div>
 								<div class="title">Floor Space</div>
 								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -83,7 +83,7 @@
 							@if($company_overview->name=='no_of_machines')
 							<div class="col s6 m3 l2">
 								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
+									<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
 								</div>
 								<div class="title">No. of Machines</div>
 								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
@@ -91,7 +91,7 @@
 							@endif
 							@if($company_overview->name=='production_capacity')
 							<div class="col s6 m3 l3">
-								<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" /> 
+								<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" />
 								<div class="title">Production Capacity</div>
 								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 							</div>
@@ -99,7 +99,7 @@
 							@if($company_overview->name=='number_of_worker')
 							<div class="col s6 m3 l2">
 								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+									<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" />
 								</div>
 								<div class="title">No. of workers</div>
 								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -108,7 +108,7 @@
 							@if($company_overview->name=='number_of_female_worker')
 							<div class="col s6 m3 l3">
 								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+									<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" />
 								</div>
 								<div class="title">No. of female workers</div>
 								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -118,18 +118,15 @@
 						</div>
 						<!-- company_stuff -->
 						<div class="contentBox">
-							<p>Sayem Fashions LTD. & Radiant Sweater Ind. Ltd are two units of manufacturing within Sayem Group, aspiring for complete customer satisfaction owing 
-								to the high quality Sweater at competitive prices with an on-schedule delivery and perfection in service. It firmly believes that the satisfaction of the valued 
-								customers is the focal point of its business. In no time, the brand has become a name to reckon within the manufactures of Pullovers, Cardigans, Sweaters, 
-								Jumpers, Vests, Scarves and Woolen Cap etc, for men, women and children. Manufacturing around 280,000 to 300,000 pcs of both Basic and Fashionable, 
-								Fancy sweaters of valued customers from 3gg – 12gg.
-							</p>
-							<p>The factory premises are run by experienced workers since year 2000. The company proudly stands with the lowest employee turnover rate and high 
-								employee satisfaction. All resources and facilities are available within the premises around the clock.
-							</p>
-							<p>Specials team works on Fire Safety measures and everyone regularly practicing fire drills to avoid panic attack during any accidents. All fire safety measures
-								are taken and necessary training and fire fighters are managed on the floors.
-							</p>
+                            @if($business_profile->companyOverview->about_company)
+							    {{$business_profile->companyOverview->about_company}}
+                            @else
+                                <div class="card-alert card cyan lighten-5">
+                                    <div class="card-content cyan-text">
+                                        <p>INFO : company details is not available.</p>
+                                    </div>
+                                </div>
+                            @endif
 						</div>
 						<!-- contentBox -->
 						<div class="certifications">
@@ -153,7 +150,7 @@
 							</div>
 
 						</div>
-						
+
 						<!-- certifications -->
 						<div class="profile_product_wrap product_wrapper">
 							<div class="row top_titleWrap">
@@ -268,7 +265,7 @@
 									</div>
 								@endif
 							</div>
-							
+
 						</div>
 						<!-- main_buyers logo -->
 						<div class="export_destination_wrap">
@@ -290,22 +287,22 @@
 										</div>
 									</div>
 								@endif
-								
+
 							</div>
 
-							
+
 						</div>
 						<!-- export_destination -->
 						<div  class="owner_info_wrap">
 							<div class="row">
 								<div class="col s12 m8 l9 owner_info_box">
 									<h3>Chairman's word</h3>
-									<p>“From the beginning of the company to the very present, the consistent motto and objective is to work with 
-										sincerity and maintain growth effectively. Giving employment to people and serving the society has always 
+									<p>“From the beginning of the company to the very present, the consistent motto and objective is to work with
+										sincerity and maintain growth effectively. Giving employment to people and serving the society has always
 										been the core value and motive for expanding business. We take care of the production in our establishment
 										standing in our own land at kamarjuri, National University, Joydevpur, Gazipur. We never believe in giving sub-
 										contract hence, we can keep our commitment of quality and lead time. We also have always taken care of our
-										employees and labor in terms of safety, benefits and hence invested in to stay compliant. This year we plan to 
+										employees and labor in terms of safety, benefits and hence invested in to stay compliant. This year we plan to
 										bring more machinery in the RMG units and also looking forward to enter new industries to create employment
 										and increase the contribution to the society."
 									</p>
@@ -319,12 +316,12 @@
 									<h3>Director's word</h3>
 									<p>"It all started out of passion and a vision in 1999 and since 2014 it became my core duty to leverage the business
 										into further heights with only one motto, “ Efficient and Uncompromising Service to our Customers”. Completing
-										my Masters in International business and a diploma in Fashion and Merchandising I stepped in the scenario of 
+										my Masters in International business and a diploma in Fashion and Merchandising I stepped in the scenario of
 										this business in 2014 and since then we have focused a lot in Research, Design and Development to serve synergistic
 										services to our customers and also bring full efficiency to meet their demands. Successfully we have maintained
-										our core value of on time shipment even under immense pressure, yet keeping our staff and workers highly 
-										motivated to love their work and workplace. Currently, we are working on the mission to make business of 
-										manufacturing come with even more to it, where we can deliver our customer updated design collection 
+										our core value of on time shipment even under immense pressure, yet keeping our staff and workers highly
+										motivated to love their work and workplace. Currently, we are working on the mission to make business of
+										manufacturing come with even more to it, where we can deliver our customer updated design collection
 										development, fast sampling and a faster lead time for gaining market competitive advantage."
 									</p>
 								</div>
@@ -341,7 +338,7 @@
 								<div class="col s6 m6">
 									<h3>Company Overview</h3>
 								</div>
-								
+
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
@@ -392,7 +389,7 @@
 															@endif
 
 
-															
+
 														</tr>
 													@endforeach
 												@else
@@ -441,7 +438,7 @@
 																<div class="card-content cyan-text">
 																	<p>INFO : No data found.</p>
 																</div>
-															</div>															
+															</div>
 														</td>
 													</tr>
 												@endif
@@ -482,10 +479,10 @@
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
 														</div>
-													</div>															
+													</div>
 												</td>
 											</tr>
-										@endif										
+										@endif
 									</tbody>
 								</table>
 							</div>
@@ -525,15 +522,15 @@
 											@endforeach
 										@else
 											<tr>
-												<td colspan="3" style="display: block;"> 
+												<td colspan="3" style="display: block;">
 													<div class="card-alert card cyan lighten-5">
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
 														</div>
-													</div>													
+													</div>
 												</td>
 											</tr>
-										@endif										
+										@endif
 									</tbody>
 								</table>
 							</div>
@@ -543,7 +540,7 @@
 								<div class="col s6 m6">
 									<h3>Certifications</h3>
 								</div>
-								
+
 							</div>
 							<div class="certifications-block">
 								@if(count($business_profile->certifications)>0)
@@ -569,7 +566,7 @@
 								<div class="col s6 m6">
 									<h3>Main Buyers</h3>
 								</div>
-								
+
 							</div>
 							<div class="buyers_logo_wrap row main-buyers-block">
 								@if(count($business_profile->mainBuyers)>0)
@@ -589,9 +586,9 @@
 										</div>
 									</div>
 								@endif
-								
+
 							</div>
-						
+
 						</div>
 						<div class="export_destination_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
@@ -604,7 +601,7 @@
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
-								
+
 								<div class="flagBox export-destination-block">
 									@if(count($business_profile->exportDestinations)>0)
 										@foreach($business_profile->exportDestinations as $exportDestination)
@@ -624,7 +621,7 @@
 									</div>
 									@endif
 								</div>
-								
+
 							</div>
 
 							<!-- <div class="row flag_wrap center-align">
@@ -638,19 +635,19 @@
 								@endforeach
 								</div>
 							</div> -->
-							
+
 						</div>
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Business Terms</h3>
 								</div>
-								
+
 							</div>
 							<div class="overview_table  box_shadow">
 								<table>
 									<tbody class="business-term-table-body">
-									
+
 										@if(count($business_profile->businessTerms)>0)
 											@foreach($business_profile->businessTerms as $businessTerm)
 											<tr>
@@ -670,11 +667,11 @@
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
 														</div>
-													</div>															
+													</div>
 												</td>
 											</tr>
 										@endif
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -684,7 +681,7 @@
 								<div class="col s6 m6">
 									<h3>Sampling and R&D</h3>
 								</div>
-								
+
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
@@ -708,11 +705,11 @@
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
 														</div>
-													</div>															
+													</div>
 												</td>
 											</tr>
 										@endif
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -722,7 +719,7 @@
 								<div class="col s6 m6">
 									<h3>Special customization ability</h3>
 								</div>
-								
+
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
@@ -745,11 +742,11 @@
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
 														</div>
-													</div>															
+													</div>
 												</td>
 											</tr>
 										@endif
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -760,7 +757,7 @@
 									<div class="col s6 m6">
 										<h3>Worker welfare and CSR</h3>
 									</div>
-									
+
 								</div>
 
 								@if($business_profile->walfare)
@@ -777,7 +774,7 @@
 											<input class="with-gap health-facility-unchecked" name="healthcare_facility_disable"   disabled  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 											<span>No</span>
 										</label>
-							
+
 									</div>
 									@endif
 									@if($walfareAndCsr->name == 'doctor')
@@ -828,7 +825,7 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Maternity Leave</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap maternity-leave-checked" name="maternity_leave_disable"  type="radio" disabled  value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
+										<input class="with-gap maternity-leave-checked" name="maternity_leave_disable"  type="radio" disabled  value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
@@ -926,13 +923,13 @@
 								@endif
                             </div>
 
-								
+
 							<div class="row worker_welfare_box">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
 										<h3>Security and others</h3>
 									</div>
-									
+
 								</div>
 
 								@if($business_profile->security)
@@ -949,7 +946,7 @@
 										<input class="with-gap" name="fire_exit" class="fire-exit-unchecked"    value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} disabled>
 										<span>No</span>
 										</label>
-							
+
 									</div>
 									@endif
 									@if($securityAndOther->name == 'fire_hydrant')
@@ -1055,7 +1052,7 @@
 								<div class="col s6 m6">
 									<h3>Sustainability commitments</h3>
 								</div>
-								
+
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
@@ -1078,11 +1075,11 @@
 														<div class="card-content cyan-text">
 															<p>INFO : No data found.</p>
 														</div>
-													</div>															
+													</div>
 												</td>
 											</tr>
 										@endif
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -1092,7 +1089,7 @@
 								<div class="col s6 m6">
 									<h3>Association memberships</h3>
 								</div>
-								
+
 							</div>
 							<div class="membership_textBox association-membership-block">
 								@if(count($business_profile->associationMemberships)>0)
@@ -1117,7 +1114,7 @@
 								<div class="col s6 m6">
 									<h3>PR Highlights</h3>
 								</div>
-								
+
 							</div>
 							<div class="row press-highlight-block">
 							@if(count($business_profile->pressHighlights)>0)
@@ -1136,7 +1133,7 @@
 									</div>
 								</div>
 							@endif
-								
+
 							</div>
 						</div>
 					</div>

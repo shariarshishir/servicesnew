@@ -55,7 +55,7 @@ class MessageController extends Controller
         $users = [];
         foreach($chatdatas as $chat)
         {
-            if(in_array(38, $chat->participates))
+            if(in_array($user->id, $chat->participates))
             {
                 foreach($chat->participates as $participate)
                 {
@@ -97,7 +97,7 @@ class MessageController extends Controller
         ]);
 
         Chat::insert([['message_id'=>$message->id, 'user_id'=>$user->id,'type'=>0 ],
-        ['message_id'=>$message->id, 'user_id'=>$userSupplier->id,'type'=>1 ]]);        
+        ['message_id'=>$message->id, 'user_id'=>$userSupplier->id,'type'=>1 ]]);
 
         $notification_data=['url'=>'/message-center'];
         Notification::send($userSupplier, new BuyerWantToContact($notification_data));
@@ -150,12 +150,14 @@ class MessageController extends Controller
     {
         $user=Auth::user();
         $allusers=[];
+        $allusers = User::get();
+        $user=User::where('id', $id)->first();
 
-        if($user->is_group == 1)
-        {
-            $allusers = User::with('profile','badges','tour_photos')->where(['group_id' => Auth::id(), 'is_active' => 1])->get();
-            $user=User::with('profile','badges','tour_photos')->where('id', $id)->first();
-        }
+        // if($user->is_group == 1)
+        // {
+        //     $allusers = User::with('profile','badges','tour_photos')->where(['group_id' => Auth::id(), 'is_active' => 1])->get();
+        //     $user=User::with('profile','badges','tour_photos')->where('id', $id)->first();
+        // }
         $chatdatas = Userchat::all();
         $chatusers = [];
         $users = [];
@@ -172,10 +174,10 @@ class MessageController extends Controller
                 }
             }
         }
-        $userData = User::with('profile','badges','tour_photos')->whereIn('id',$users)->get();
+        $userData = User::whereIn('id',$users)->get();
         $chatusers = $userData;
         $buyers = [];
-        $allbuyers = User::with('profile','badges','tour_photos')->where('user_type','buyer');
+        $allbuyers = User::where('user_type','buyer');
         if($allbuyers->exists())
         {
             foreach($allbuyers->get() as $buyer)
@@ -227,7 +229,7 @@ class MessageController extends Controller
     {
         //$notification_form = $response->message_notification_form_id;
         $user=Auth::user();
-        
+
         if ($user && in_array(\auth()->user()->user_type, ['buyer', 'both']))
         {
             $nofifySupplier = User::find($response->message_notification_to_id);
@@ -262,8 +264,8 @@ class MessageController extends Controller
             'title'=>'',
             'url'=>'/message-center'
         ];
-        Notification::send($user, new BuyerWantToContact($notification_data));        
-    }    
+        Notification::send($user, new BuyerWantToContact($notification_data));
+    }
 
     public function contactwithsupplier($id)
     {
@@ -328,7 +330,7 @@ class MessageController extends Controller
         } else {
             abort(404);
         }
-    }  
+    }
 
     public function contactSupplierFromProduct(Request $request)
     {
@@ -358,7 +360,7 @@ class MessageController extends Controller
         } else {
             abort(404);
         }
-    }      
+    }
 
     public function getUsers(){
         $from_users=UserSessionResource::collection(UserSession::select('id', 'user2_id as user_id', 'rfq_id')->where('user1_id',Auth::id())
@@ -408,7 +410,7 @@ class MessageController extends Controller
             $notification_data=[
                 'title'=>'New Bid reply',
                 'url'=>'/message-center?uid='.$supplier_id
-            ];        
+            ];
         Notification::send($user, new RfqBidNotification($notification_data));
 
 
@@ -420,7 +422,7 @@ class MessageController extends Controller
     public function merchant_message(){
         return view('message.merchant_message');
     }
-    
+
     public function rfq_merchant_message()
     {
         return view('message.rfq_merchant_message');
@@ -431,7 +433,7 @@ class MessageController extends Controller
 
         return $merchants;
     }
-    
+
     public function getRFQMerchants(){
         $rfqMerchants = RfqMerchantMessageResource::collection(RfqMerchantAssistanceMessage::where('to',Auth::id())->groupBy('request_id')->get());
 
@@ -451,7 +453,7 @@ class MessageController extends Controller
     {
         //session('order_info');
         //dd(session('order_info'));
-       
+
         return view('message.supplier_message');
     }
 
@@ -474,7 +476,7 @@ class MessageController extends Controller
                     ->groupBy('product_id')
                     ->orderBy('id', 'desc')
                     ->get());
-                    
+
         }
         return $suppliers;
     }

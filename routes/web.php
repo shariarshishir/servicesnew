@@ -233,19 +233,19 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     Route::get('/message-center',[MessageController::class,'message_center']);
     Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
-    Route::get('/message-center/getchatdata',[MessageController::class,'getchatdata']);
-    Route::get('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity']);
-    Route::get('/message-center/notificationforuser',[MessageController::class,'notificationforuser']);
+    Route::post('/message-center/getchatdata',[MessageController::class,'getchatdata']);
+    Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity']);
+    Route::post('/message-center/notificationforuser',[MessageController::class,'notificationforuser']);
     Route::get('/merchant-message',[MessageController::class,'merchant_message']);
     Route::get('rfq-merchant-message',[MessageController::class,'rfq_merchant_message']);
     Route::get('/supplier-message',[MessageController::class,'supplier_message']);
     Route::get('/message-center/getUsers',[MessageController::class,'getUsers']);
     Route::get('/message-center/getMerchants',[MessageController::class,'getMerchants']);
     Route::get('/message-center/getSuppliers',[MessageController::class,'getSupplier']);
-    Route::get('/message-center/getMessages',[MessageController::class,'getMessages']);
-    Route::get('/message-center/send-message',[MessageController::class,'sendMessage']);
-    Route::get('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
-    Route::get('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct']);
+    Route::post('/message-center/getMessages',[MessageController::class,'getMessages']);
+    Route::post('/message-center/send-message',[MessageController::class,'sendMessage']);
+    Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
+    Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct']);
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
 
 });

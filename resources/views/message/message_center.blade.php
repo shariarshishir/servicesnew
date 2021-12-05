@@ -7,7 +7,7 @@
 
         function extractEmails (text) {
             return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-        }        
+        }
         var message_formid;
         var message_toid;
         $( document ).ready(function() {
@@ -27,11 +27,11 @@
                             $(this).click();
                             message_formid = $(this).data("formid");
                             message_toid = $(this).data("toid");
-                            
+
                             var s = new Array;
                             var i = 0;
                             var x = $("#allchatter .col-md-12").length;
-                            
+
                             $("#allchatter .col-md-12").each( function() {
                                 s[i] = $(this).data("toid");
                                 i++;
@@ -42,8 +42,8 @@
                                 var d = $("#allchatter .col-md-12[data-toid="+selectedSupplierId+"]").clone();
                                 var s = $("#allchatter .col-md-12[data-toid="+selectedSupplierId+"]").remove();
                                 $("#allchatter").prepend(d);
-                            } 
-                        }  
+                            }
+                        }
                     });
 
                     $('#allchatter').children('div.col-md-12').click(function()
@@ -52,17 +52,17 @@
                         $(this).addClass('active');
                         $('.generate-po-btn').attr("href", "{{ env('APP_URL') }}/po/add/toid="+$(this).data('toid'));
                         message_formid = $(this).data("formid");
-                        message_toid = $(this).data("toid");                          
+                        message_toid = $(this).data("toid");
                     });
                 }
                 $('#allchatter').children('div.col-md-12').click(function()
                 {
                     $('#allchatter').children('div.col-md-12').removeClass('active');
-                    $(this).addClass('active'); 
+                    $(this).addClass('active');
                     message_formid = $(this).data("formid");
-                    message_toid = $(this).data("toid");                 
-                })                
-                
+                    message_toid = $(this).data("toid");
+                })
+
             });
             $('#messagebox').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -72,7 +72,7 @@
                     {
                         alert('You will not be able to share any phone number or email address.');
                         return false;
-                    }                    
+                    }
                     event.preventDefault();
                     let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                     socket.emit('new message', message);
@@ -88,7 +88,7 @@
                     $('#messagedata').animate({scrollTop: (height + 10)});
 
                     updateUserLastActivity( message_formid, message_toid );
-                    
+
                     var message_notification_form_id = "{{Auth::user()->id}}";
                     var message_notification_to_id = "{{Request::get('uid')}}";
                     var csrftoken = $("[name=_token]").val();
@@ -97,21 +97,21 @@
                         "message_notification_form_id": message_notification_form_id,
                         "message_notification_to_id": message_notification_to_id,
                         "csrftoken": csrftoken
-                    }            
-                    
+                    }
+
                     jQuery.ajax({
                         method: "POST",
                         url: "/message-center/notificationforuser",
                         headers:{
                             "X-CSRF-TOKEN": csrftoken
-                        },                
+                        },
                         data: data_json,
                         dataType:"json",
 
                         success: function(data){
                             console.log(data);
-                        }                
-                    });                
+                        }
+                    });
                 }
             });
             $('.messageSendButton').click(function(){
@@ -120,7 +120,7 @@
                 {
                     alert('You will not be able to share any phone number or email address.');
                     return false;
-                }                
+                }
                 event.preventDefault();
                 let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                 socket.emit('new message', message);
@@ -195,11 +195,11 @@
                 url : "/message-center/getchatdata",
                 cache : false,
                 beforeSend: function(){
-                },  
+                },
                 complete: function(){
-                },               
+                },
                 success : function(msg){
-                    $("#messagedata").html(msg);        
+                    $("#messagedata").html(msg);
                     $("#messagebox").removeAttr("disabled");
                     $("#chatheader").html('<div class="col-md-12 plr0" style="color: #FFF;"><div class="byr-pb-nm"><p>'+company_name+'</p><p style="font-size:11px;">In-Chat : '+name+'</p><p style="font-size:13px;font-style:italic;">'+position+'</p></div></div>');
                     $("#chatheader").css('border-bottom', '2px solid #55A860');
@@ -212,7 +212,7 @@
             setTimeout(() => {
                 $('#messageCenterLoaderOuter').hide();
             }, 2500)
-        }    
+        }
 
         function updateUserLastActivity(form_id, to_id)
         {
@@ -224,23 +224,23 @@
                 "form_id": form_id,
                 "to_id": to_id,
                 "csrftoken": csrftoken
-            }            
-            
+            }
+
             jQuery.ajax({
                 method: "POST",
                 url: "/message-center/updateuserlastactivity",
                 headers:{
                     "X-CSRF-TOKEN": csrftoken
-                },                
+                },
                 data: data_json,
                 dataType:"json",
 
                 success: function(data){
                     console.log(data);
-                }                
+                }
             });
-            
-        }            
+
+        }
 
     </script>
 @endpush
@@ -254,52 +254,54 @@
             <div class="row buyerChatHdCont" style="border-right: 3px solid #FFF;height: 85px;">
                 <h6 class="buyerChatHd2">Users Currently Online Now</h6>
             </div>
-            
+
             <div class="col m12 plr0 lft-cht-cont" id="allchatter">
                 <!--1-->
                 @foreach($chatusers as $cuser)
-                @php 
+                @php
                 $src = !empty($cuser->profile['company_logo'])? 'storage/' .$cuser->profile['company_logo'] : "images/supplier.png";
                 $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
                 @endphp
-                <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;">
+                {{-- <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;"> --}}
+                <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
+
                     <div class="row byr-ncnt">
                         <div class="col m4 pl0 byr-pb">
                             <img src="{{ asset($src) }}" class="pimg"/>
                         </div>
                         <div class="col m8 plr0">
                             <div class="byr-pb-nm">{{ $cuser->name }}</div>
-                            <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
-                            <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div>
+                            {{-- <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
+                            <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div> --}}
                             <div class="clear10"></div>
                             <div class="byr-pb-ld user_last_activity">
                                 {{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
                 <!--/1-->
                 @endforeach
-            
+
             </div>
         </div>
         <!--/Buyer List Left-->
-        
+
         <!--Buyer Chat right-->
         <div class="col m8" style="border-left: 3px solid #55A860;">
             <div class="row buyerChatHdCont"  id="chatheader" style="min-height: 85px;margin-bottom: 20px;">
 
-                
+
             </div>
             @if(auth()->check() && in_array(auth()->user()->user_type, ['supplier']) && Request::get('uid'))
             <!--a href="{{ action('PoController@add', Request::get('uid')) }}" class="btn btn-success" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a-->
             <a href="{{ env('APP_URL') }}/po/add/toid={{ Request::get('uid') }}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
             @endif
             <div class="col m12 plr0 rgt-cht-cont" id="messagedata">
-                
+
             </div>
-            
+
             <!--Sent Box-->
             <div class="col m12 sent-bx" style="margin-top: 20px;margin-bottom: 20px;">
                 <div class="col m9">

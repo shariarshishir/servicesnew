@@ -20,6 +20,7 @@
                             //console.log(data);
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
+
                             $('#rfq-bid-modal').modal('open');
                             $('#rfq-bid-form')[0].reset();
                             $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", false);
@@ -68,11 +69,13 @@
                         {
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
-                            $('#errors').empty();
-                            $("#errors").append("<li class='alert alert-danger'>"+error+"</li>")
+
+                            // $('#errors').empty();
+                            // $("#errors").append("<li class='alert alert-danger'>"+error+"</li>")
                             $.each(xhr.responseJSON.error, function (key, item)
                             {
-                                $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
+                                swal("Done!",item,"error");
+                                // $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
                             });
 
                         }

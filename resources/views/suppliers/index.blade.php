@@ -57,8 +57,7 @@
         </div>
         <div class="suppliers_content_wrap">
             <div class="industries_boxWrap">
-                <!-- @foreach ($suppliers as $supplier )
-                @php echo "<pre>"; print_r($supplier); echo "</pre>";  @endphp -->
+                @foreach ($suppliers as $supplier )
                     <div class="industry_infoBox">
                         <div class="box_shadow">
                             <div class="industry_logobox row">
@@ -72,7 +71,7 @@
                             <div class="industry_details">
                                 <p><img src="{{asset('images/frontendimages/new_layout_images/icon_factory.png')}}" alt=""> {{$supplier->industry_type}}</p>
                                 <p><img src="{{asset('images/frontendimages/new_layout_images/icon_t_shirt.png')}}" alt=""> {{$supplier->businessCategory ? $supplier->businessCategory->name : ''}} </p>
-                                <p><img src="{{asset('images/frontendimages/new_layout_images/icon_year.png')}}" alt=""> Established : </p>
+                                <!--p><img src="{{asset('images/frontendimages/new_layout_images/icon_year.png')}}" alt=""> Established : </p-->
                             </div>
                            
                            

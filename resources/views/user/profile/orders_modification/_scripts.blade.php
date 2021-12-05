@@ -235,7 +235,7 @@
             var discount_amount =  $('.confirm-order-modification-details-modal input[name=ord_mod_discount_amount]').val();
             var total_price =  $('.confirm-order-modification-details-modal input[name=ord_mod_total_price]').val();
             var order_modification_req_id =  $('.confirm-order-modification-details-modal input[name=ord_mod_req_id]').val();
-            var url = "/add-to-cart";
+            var url = '{{ route("add.cart") }}';
             var color_attr=[];
             $('.confirm-ord-mod-color-sizes tr').each(function(idx,ele){
             color_attr.push({'color' : $('input[name="color"]').eq(idx).val(),

@@ -89,7 +89,7 @@
 <div id="login-register-modal" class="modal modal-fixed-footer" tabindex="0">
     <div class="modal-content">
         <div class="row">
-            <div class="col m6 registration-block">
+            <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
                     <img src="{{asset('images/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
                 </div>
@@ -99,7 +99,7 @@
                     <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}" > Click here to Register</a>
                 </div>
             </div>
-            <div class="col m6 login-block">
+            <div class="col s12 m8 l7 login-block">
                 <span class="text-danger error-text error-msg login-error-msg" style="display: none;"></span>
                 <form method="POST" action="#">
                     @csrf
@@ -142,14 +142,18 @@
                         </div>
                     </div>
 
-                    <button class="btn green waves-effect waves-light right signin" type="submit" name="log-in">
-                        {{ __('Sign In') }} <i class="material-icons right">send</i>
-                    </button>
-                    @if (Route::has('password.request'))
-                        <a class="btn green right btn-forgot-password" href="{{ route('password.request') }}">
-                            {{ __('Forgot Password?') }}
-                        </a>
-                    @endif
+                    <div class="login_button_wrap">
+                        <button class="btn green waves-effect waves-light right signin" type="submit" name="log-in">
+                            {{ __('Sign In') }} <i class="material-icons right">send</i>
+                        </button>
+                        @if (Route::has('password.request'))
+                            <a class="btn green right btn-forgot-password" href="{{ route('password.request') }}">
+                                {{ __('Forgot Password?') }}
+                            </a>
+                        @endif
+                    </div>
+
+                    
                 </form>
             </div>
         </div>

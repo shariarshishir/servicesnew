@@ -70,8 +70,9 @@
                 recPerPage = 12,
                 page = 1,
                 totalPages = 0;
+                var url = '{{ route("low.moq.data") }}';
                 $.ajax({
-                    url: '/low-moq-data',
+                    url: url,
                     async: true,
                     crossDomain: true,
                     dataType: 'json',

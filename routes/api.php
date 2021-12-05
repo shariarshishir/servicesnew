@@ -189,6 +189,8 @@ Route::post('/search-product-by-name', [ProductController::class, 'searchByProdu
 Route::get('/wholesaler-products/{productId}', [ProductController::class, 'productById']);
 Route::get('/manufacture-products/{productId}', [ManufactureProductController::class,'show']);
 
+//business profile
+Route::get('/all-business-profiles',[BusinessProfileController::class,'allBusinessProfile']);
 //store api
 Route::get('/stores',[VendorController::class,'index']);
 Route::get('/store/{vendorUId}',[VendorController::class,'show']);

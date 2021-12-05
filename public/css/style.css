@@ -257,7 +257,7 @@ textarea:focus {
 }
 
 .main_content_wrapper {
-    padding: 50px 0;
+    padding: 50px 0px;
 }
 .btn_delete {
     text-align: center;
@@ -444,6 +444,7 @@ form input:read-only {
 /* Mobile header css :start */
 .mobile_header {
     display: none;
+    padding: 10px 0;
 }
 .mobile_header .material-icons {
     background: #448547;
@@ -456,10 +457,13 @@ form input:read-only {
 }
 .mobile_header .mobile_top_right .material-icons {
     margin-left: 5px;
+    color: #ffffff;
 }
 .mobile_header .sidenav {
     padding: 50px 35px;
 }
+
+
 /* Mobile header css end */
 
 /* ******* Nav css end ********** */
@@ -4994,6 +4998,11 @@ nav .pagination li.active .page-link {
     font-size: 26px !important;
     line-height: 65px;
 }
+
+.cart-icon-wrapper-mobile .material-icons {
+    font-size: 20px !important;
+    line-height: 43px;
+}
 .cart_counter {
     position: absolute;
     top: 10px;
@@ -5007,6 +5016,11 @@ nav .pagination li.active .page-link {
     line-height: 20px;
     display: inline-block;
     font-size: 10px;
+    text-align: center;
+}
+.cart-icon-wrapper-mobile .cart_counter {
+    top: -4px;
+    right: -10px;
 }
 .cart-icon-outer-wrapper .card {
     text-align: left;
@@ -5118,6 +5132,9 @@ nav .pagination li.active .page-link {
 
 /* ******************** business_profile_login style end*********************** */
 
+.invoice_container_wrap {
+
+}
 .invoice_container_wrap .card {
     padding: 50px !important;
 }
@@ -5151,6 +5168,9 @@ nav .pagination li.active .page-link {
     width: 11%;
     float: right;
     padding-top: 5px;
+}
+.terms_conditions_list .input-group-prepend input {
+    width: auto;
 }
 
 
@@ -5206,7 +5226,11 @@ nav .pagination li.active .page-link {
 
 @media only screen and (max-width: 1024px) {}
 
-@media only screen and (max-width: 992px) {}
+@media only screen and (max-width: 992px) {
+    .logo img {
+        max-width: 70px;
+    }
+}
 
 @media only screen and (max-width: 768px) {
     .bannerwrap {

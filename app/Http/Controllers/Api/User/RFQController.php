@@ -74,14 +74,40 @@ class RFQController extends Controller
             ],500);
         }
     }
+    
     public function storeRfqFromOMD(Request $request){
+        
+        $token=$request->token;
+        $decode_token= base64_decode($token);
+        $json_decode_token=json_decode($decode_token);
+        $user_obj=$json_decode_token->user;
 
-        $user = User::where('sso_reference_id',$request->sso_reference_id)->first();
+        //user loging credential
+        $email=$user_obj->email;
+        $password=base64_decode($user_obj->password);
+
+        //check user exists or not
+        $user=User::where('email', $email)->first();
+        if(!$user){
+            $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+            $user = User::create([
+                'user_id'=>$user_id,
+                'name' => $user_obj->name,
+                'email' => $email,
+                'password' => Hash::make($password),
+                'user_type' => 'buyer',
+                'sso_reference_id' =>$user_obj->sso_reference_id,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->header('User-Agent'),
+                'phone'     => $user_obj->phone,
+                'company_name' => $user_obj->compoany->name,
+                'is_email_verified' => 1,
+            ]);
+        }
        
-        $rfqData = $request->all();
+        $rfqData = $request->except(['token','product_images','company']);
         $rfqData['created_by']=$user->id;
         $rfqData['status']='approved';
-        //$rfqData['rfq_deal_status'] = 1;
         $rfq=Rfq::create($rfqData);
 
         if ($request->hasFile('product_images')){
@@ -95,14 +121,10 @@ class RFQController extends Controller
 
         $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         if($rfq){
-
            return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"success"=>true],200);
         }
         else{
           return response()->json(["success"=>false],500);
         }
-        
-      
-
     }
 }

@@ -74,7 +74,7 @@ class RFQController extends Controller
             ],500);
         }
     }
-    
+
     public function storeRfqFromOMD(Request $request){
         
         $token=$request->token;
@@ -105,7 +105,7 @@ class RFQController extends Controller
             ]);
         }
        
-        $rfqData = $request->except(['token','product_images','company']);
+        $rfqData = $request->except(['token','product_images','user']);
         $rfqData['created_by']=$user->id;
         $rfqData['status']='approved';
         $rfq=Rfq::create($rfqData);

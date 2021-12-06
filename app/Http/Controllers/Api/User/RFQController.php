@@ -76,7 +76,7 @@ class RFQController extends Controller
     }
 
     public function storeRfqFromOMD(Request $request){
-        
+        dd($request->all());
         $token=$request->token;
         $decode_token= base64_decode($token);
         $json_decode_token=json_decode($decode_token);

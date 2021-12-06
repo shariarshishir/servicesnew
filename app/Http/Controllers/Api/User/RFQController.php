@@ -77,14 +77,16 @@ class RFQController extends Controller
 
     public function storeRfqFromOMD(Request $request){
         // dd($request->all());
+        /*
         $token=$request->token;
         $decode_token= base64_decode($token);
         $json_decode_token=json_decode($decode_token);
         $user_obj=$json_decode_token->user;
+        */
 
         //user loging credential
-        $email=$user_obj->email;
-        $password=base64_decode($user_obj->password);
+        $email = $request->user->email;
+        $password = base64_decode($request->user->password);
 
         //check user exists or not
         $user=User::where('email', $email)->first();
@@ -92,15 +94,15 @@ class RFQController extends Controller
             $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
             $user = User::create([
                 'user_id'=>$user_id,
-                'name' => $user_obj->name,
+                'name' => $request->user->name,
                 'email' => $email,
                 'password' => Hash::make($password),
                 'user_type' => 'buyer',
-                'sso_reference_id' =>$user_obj->sso_reference_id,
+                'sso_reference_id' =>$request->user->id,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->header('User-Agent'),
-                'phone'     => $user_obj->phone,
-                'company_name' => $user_obj->compoany->name,
+                'phone'     => $request->user->phone,
+                'company_name' => $request->user->company->name,
                 'is_email_verified' => 1,
             ]);
         }

@@ -10,6 +10,7 @@ use App\Models\Rfq;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\RfqImage;
+use App\Models\User;
 
 
 class RFQController extends Controller
@@ -76,13 +77,7 @@ class RFQController extends Controller
     }
 
     public function storeRfqFromOMD(Request $request){
-        // dd($request->all());
-        /*
-        $token=$request->token;
-        $decode_token= base64_decode($token);
-        $json_decode_token=json_decode($decode_token);
-        $user_obj=$json_decode_token->user;
-        */
+      
         try{  
             $userObj = json_decode($request->user);
             //user loging credential
@@ -108,7 +103,7 @@ class RFQController extends Controller
                 ]);
             }
         
-            $rfqData = $request->except(['token','product_images','user']);
+            $rfqData = $request->except(['product_images','user','sso_reference_id']);
             $rfqData['created_by']=$user->id;
             $rfqData['status']='approved';
             $rfq=Rfq::create($rfqData);
@@ -124,16 +119,13 @@ class RFQController extends Controller
 
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){
-            return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"success"=>true],200);
+                return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"success"=>true],200);
             }
-            else{
-            return response()->json(["success"=>false],500);
-            }
-        
+
         }catch(\Exception $e){
             return response()->json([
                 'success' => false,
-                'error'   => ['msg' => $e->getLine()],
+                'error'   => ['msg' => $e->getMessage()],
             ],500);
         }
     }

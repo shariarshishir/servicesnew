@@ -173,17 +173,21 @@ button:hover {
     background: none;
 }
 .box_shadow {
-    -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
+    /* -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
     -moz-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
-    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
+    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30); */
+
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
 }
 .box_radius {
     border-radius: 20px;
 }
 .box_shadow_radius {
-    -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
-    -moz-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
-    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.30);
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     border-radius: 20px;
 }
 .radio_box {
@@ -407,6 +411,7 @@ form input:read-only {
 
 .mainNav ul li .material-icons {
     font-size: 30px;
+    line-height: 22px;
     line-height: initial;
     height: auto;
     margin-left: 0;
@@ -464,6 +469,40 @@ form input:read-only {
 }
 .mobile_header .sidenav {
     padding: 50px 35px;
+}
+
+.header_wrap nav {
+    background: none;
+    text-align: center;
+    box-shadow: none;
+    height: auto;
+    line-height: inherit;
+}
+
+.mainNav_mobile .sidenav-trigger {
+    height: auto;
+    margin: 0;
+}
+
+.mainNav_mobile ul {
+    width: 250px !important;
+}
+.mainNav_mobile ul li {
+    min-height: inherit !important;
+}
+.mainNav_mobile ul li a {
+    font-size: 16px;
+    color: #448547;
+    font-weight: 500;
+}
+.mainNav_mobile ul .subNav {
+    padding-left: 20px;
+}
+.mainNav_mobile ul .subNav li {
+    width: auto;
+}
+.mainNav_mobile ul .subNav li a {
+    padding: 5px 10px;
 }
 
 
@@ -697,14 +736,12 @@ form input:read-only {
 .product_wrapper .productBox {
     padding: 0 30px !important;
     margin-bottom: 30px;
-    min-height: 410px;
-    max-height: 410px;
 }
 
-.product_wrapper .low_moq_products_wrap .productBox {
+/* .product_wrapper .low_moq_products_wrap .productBox {
     min-height: 425px;
     max-height: 425px;
-}
+} */
 .product_wrapper .low_moq_products_wrap .productBox {
     margin-bottom: 50px;
 }
@@ -718,17 +755,11 @@ form input:read-only {
     padding: 10px 0;
 }
 .productBox .imgBox {
-    height: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     position: relative;
-    /* -webkit-box-shadow: 0px 0px 8px -3px rgb(84 169 88);
-    -moz-box-shadow: 0px 0px 8px -3px rgb(84 169 88);
-    box-shadow: 0px 0px 8px -3px rgb(84 169 88); */
-    min-height: 285px;
-    /* border: 1px solid rgb(128,128,128, 0.1); */
+    text-align: center;
 }
 .slick-initialized .productBox .imgBox {
     display: inherit;
@@ -736,11 +767,10 @@ form input:read-only {
 }
 .productBox .imgBox img {
     width: auto;
-    /*max-height: 250px;*/
     border-radius: 10px;
-    -webkit-box-shadow: 0px 3px 9px 4px rgb(0 0 0 / 30%);
-    -moz-box-shadow: 0px 3px 9px 4px rgba(0,0,0,0.30);
-    box-shadow: 0px 3px 9px 4px rgb(0 0 0 / 30%);
+    -webkit-box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0px 3px 12px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
 }
 .product_wrapper .imgBox .favorite {
     position: absolute;
@@ -784,7 +814,6 @@ form input:read-only {
 }
 .productBox h4,
 .productBox h4 a {
-    overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -816,7 +845,7 @@ form input:read-only {
 }
 
 .low_moq_products_wrap .moq_view_details {
-    padding: 10px 0;
+    padding: 0px 0 10px;
     text-transform: capitalize;
 }
 .low_moq_products_wrap .moq_view {
@@ -824,14 +853,27 @@ form input:read-only {
     border-bottom: 1px solid #448547;
     line-height: 20px;
     display: inline-block;
+    width: 32%;
+    text-align: center;
 }
 .low_moq_products_wrap .moq_view:hover {
     border: none;
+}
+.low_moq_products_wrap .moq_buss_name {
+    width: 65%;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    overflow: hidden;
 }
 
 .load_time_box {
     display: block;
     text-transform: capitalize;
+    margin-bottom: 10px;
 }
 
 .load_time_box .load_time {
@@ -909,6 +951,7 @@ form input:read-only {
     border-radius: 5px;
 }
 
+
 /* *** Main Container css end ***** */
 /*********************8 Landing page css End  **************************/
 
@@ -962,6 +1005,7 @@ form input:read-only {
     padding: 18px 28px 18px 35px;
     font-size: 18px;
     line-height: 30px;
+    display: none;
 }
 .profile_bannerwrap .leftText {
     text-decoration: underline;
@@ -1076,6 +1120,7 @@ form input:read-only {
 }
 .profile_contentCol .profile_tab_menu .tabs {
     background: none !important;
+    white-space: inherit;
 }
 .profile_contentCol .profile_tab_menu .tabs .indicator {
     background: none;
@@ -1328,8 +1373,6 @@ form input:read-only {
 .profile_contentCol .productBox {
     position: relative;
     margin-bottom: 20px;
-    max-height: 340px;
-    min-height: 340px;
 }
 .profile_contentCol .productBox .favorite {
     position: absolute;
@@ -1995,6 +2038,7 @@ form input:read-only {
 
 .single-product-description-block-wrapper {
     margin-bottom: 50px;
+    line-height: 30px;
 }
 .single-product-description-block-wrapper ul {
     border-radius: 10px;
@@ -2600,6 +2644,7 @@ form input:read-only {
     flex-flow: row wrap;
     align-content: stretch;
     clear: both;
+    justify-content: center;
 }
 .suppliers_content_wrap .industry_infoBox {
     text-transform: capitalize;
@@ -2615,7 +2660,7 @@ form input:read-only {
     margin-bottom: 30px;
 }
 .suppliers_content_wrap .industries_boxWrap .industry_logobox img {
-    max-height: 60px;
+    max-height: 50px;
 }
 .suppliers_content_wrap .industries_boxWrap .industry_logobox .right img {
     max-height: 45px;
@@ -3890,6 +3935,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 
 .modal {
     border-radius: 20px;
+    width: 60%;
 }
 .modal legend {
     margin-bottom: 40px;
@@ -4270,6 +4316,15 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     height: 40px;
 }
 
+.order-top-block {
+    padding-bottom: 30px;
+}
+
+.ready-to-ship-label {
+    color: #ffffff !important;
+    border-radius: 5px;
+}
+
 
 
 /* *************** Footer Container css start ***************** */
@@ -4482,6 +4537,10 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     position: relative;
     margin-left: 15px;
 }
+.user-block-mobile .btn_login_mobile {
+    margin-top: 3px;
+    display: block;
+}
 .btn_logRegi {
     padding: 7px 15px;
     margin-top: 10px;
@@ -4529,12 +4588,18 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     right: 0 !important;
     left: inherit !important;
 }
+#profile-dropdown .material-icons {
+    color: #448547;
+    margin-right: 10px !important;
+    font-size: 22px;
+}
 .user-block-mobile ul.dropdown-content .material-icons {
     color: #448547;
     background: none;
     width: auto;
-    height:auto;
+    height: auto;
     line-height: 20px;
+    margin-right: 10px !important;
 }
 .user-block-mobile ul.dropdown-content li {
     min-height: inherit;
@@ -4708,6 +4773,7 @@ legend {
     position: absolute;
     width: auto;
     z-index: -1;
+    left: 30px;
 }
 .login-block .input-field .prefix ~ label {
     margin-left: 4rem;
@@ -4719,6 +4785,13 @@ legend {
     margin-left: 4rem;
     top: -40px;
     opacity: 1;
+}
+.login-block .error-text {
+    font-size: 14px;
+    color: red;
+    padding: 5px 0 0 65px;
+    display: block;
+    float: left;
 }
 .remember-me-block {
     padding-left: 35px;
@@ -4867,13 +4940,13 @@ div.dataTables_wrapper div.dataTables_info {
     color: #FFFFFF;
 }
 
-#main nav {
+nav {
     background: none;
-    text-align: center;
     box-shadow: none;
 }
 nav .pagination {
     width: 100%;
+    text-align: center;
 }
 nav .pagination li {
     float: inherit;
@@ -5106,8 +5179,6 @@ nav .pagination li.active .page-link {
     background: none;
 }
 
-
-
 .notifications_icon_wrap {
     float: right;
     display: inline-block;
@@ -5181,12 +5252,12 @@ nav .pagination li.active .page-link {
     opacity: inherit;
     -webkit-transform: inherit;
     transform: inherit;
-    padding: 0 0 10px 50px;
+    padding: 0 0 10px 28px;
     margin: 0;
     color: #448547;
 }
 .business_login_inner .login-block .remember-me-block .input-field label {
-    padding-left: 12px;
+    padding-left: 0;
 }
 .business_login_inner .input_box_wrap {
     position: relative;
@@ -5199,6 +5270,11 @@ nav .pagination li.active .page-link {
     min-width: 85px;
     line-height: 34px;
 }
+
+.login_button_wrap {
+    text-align: center;
+}
+
 
 /* ******************** business_profile_login style end*********************** */
 
@@ -5243,25 +5319,96 @@ nav .pagination li.active .page-link {
     width: auto;
 }
 
-
 /* ******************** Media css style start *********************** */
 
-@media only screen and (max-width: 1400px) {}
+@media only screen and (min-width: 1500px) {
+    .suppliers_content_wrap .industries_boxWrap {
+        justify-content: left;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox,
+    .product_wrapper .active_grid .productBox {
+        height: 420px;
+    }
+}
+@media only screen and (max-width: 1499px) {
+    .slick-initialized .productBox .imgBox {
+        min-height: 215px;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox,
+    .product_wrapper .active_grid .productBox {
+        height: 420px;
+    }
+    .profile-image-block .profile-image-upload-trigger {
+        margin-bottom: 12px;
+    }
+}
+@media only screen and (min-device-width: 769px) and (max-device-width: 1280px) {
+    .profile_tabNav_wrap .col.s6.m4,
+    .profile_contentCol .productBox {
+        /* height: 340px; */
+        width: 50% !important;
+    }
+    
 
 
-
-
-@media only screen and (min-device-width: 769px) and (max-device-width: 1280px) {}
-
-
+}
 
 @media only screen and (max-width: 1280px) {
     .top_right .btn_white,
     .top_right .btn_green {
         padding: 7px 15px;
     }
-}
+    .modal {
+        width: 70%;
+    }
+    .productBox h4, .productBox h4 a {
+        font-size: 15px;
+        line-height: 20px;
+    }
 
+    .suppliers_container .suppliers_filter_wrap {
+        text-align: center;
+    }
+    .suppliers_filter_wrap .filter_search,
+    .filter_box_wrap {
+        float: none;
+        display: block;
+    }
+    .suppliers_filter_wrap .filter_search {
+        margin: 10px auto 0;
+    }
+
+    .product_wrapper .low_moq_products_wrap .productBox,
+    .product_wrapper .active_grid .productBox {
+        width: 32%;
+        height: 400px;  
+    }
+
+    .product_wrapper .low_moq_products_wrap .productBox .imgBox,
+    .product_wrapper .active_grid .productBox .imgBox {
+        height: 290px;
+        margin-bottom: 10px;
+        min-height: auto !important;
+        max-height: inherit !important;
+        text-align: center;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox .imgBox img,
+    .product_wrapper .active_grid .productBox .imgBox img {
+        height: 100%;
+    }
+    .user-profile-basic-info-block .profile_image {
+        min-height: auto;
+    }
+    .user-profile-basic-info-block .profile_image img {
+        height: auto;
+        width: auto;
+        min-height: auto;
+    }
+    .profile-image-block .change_photo {
+        text-align: center;
+    }
+
+}
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
     .logo img {
@@ -5269,6 +5416,11 @@ nav .pagination li.active .page-link {
     }
     .mainnav_wrap {
         padding-top: 19px !important;
+    }
+    .mainNav ul li a:link, 
+    .mainNav ul li a:active, 
+    .mainNav ul li a:visited {
+        font-size: 16px;
     }
     .btn_profile {
         margin-right: 5px;
@@ -5280,11 +5432,23 @@ nav .pagination li.active .page-link {
     .cart-icon-outer-wrapper .cart-icon-wrapper a.cart-btn {
         margin-right: 0;
     }
-    .top_right .btn_white, .top_right .btn_green {
-        padding: 5px 10px;
+    .user-block {
+        margin-top: -5px;
+    }
+    .top_right .btn_white, 
+    .top_right .btn_green {
+        padding: 5px 10px 3px;
         font-size: 14px;
         margin: 0;
         line-height: 24px;
+    }
+
+    .top_right .btn_logRegi {
+        margin-top: 6px;
+    }
+    .avatar-status {
+        width: 45px;
+        height: 45px
     }
     .cart-icon-wrapper .material-icons {
         line-height: 45px;
@@ -5292,17 +5456,119 @@ nav .pagination li.active .page-link {
     .cart_counter {
         top: 0;
     }
+    
+    .product_wrapper .productBox {
+        padding: 0 20px !important;
+    }
+    .product_wrapper .productBox .imgBox {
+        padding: 0!important;
+        min-height: 218px;
+    }
+    .slick-initialized .productBox .imgBox {
+        min-height: 170px;
+    }
+
+    .suppliers_content_wrap .industry_infoBox {
+        width: 32%;
+    }
 }
 
-@media only screen and (max-width: 1024px) {}
+@media only screen and (max-width: 1024px) {
+    .product_wrapper .low_moq_products_wrap .productBox .imgBox,
+    .product_wrapper .active_grid .productBox .imgBox {
+        height: 260px;
+        text-align: center;
+    }
+}
 
 @media only screen and (max-width: 992px) {
     .logo img {
         max-width: 70px;
     }
+    .login_button_wrap .signin,
+    .login_button_wrap .btn-forgot-password,
+    .login_button_wrap .btn_green {
+        float: none !important;
+        display: inline-block;
+        margin: 0 5px 10px;
+        font-size: 14px;
+        padding: 0px 10px;
+    }
+    .registration-content {
+        padding-bottom: 30px;
+    }
+
+    .modal {
+        width: 90%;
+    }
+    .slick-initialized .productBox .imgBox {
+        min-height: 190px;
+    }
+    .suppliers_content_wrap .industry_infoBox {
+        width: 50%;
+    }
+
+    .slick-initialized .productBox .imgBox{
+        text-align: center;
+    }
+    .productBox .imgBox img {
+        display: inline-block;
+        border: 1px solid rgb(0 0 0 / 30%);
+        box-shadow: none;
+    }
+
+    .product_wrapper .low_moq_products_wrap .productBox,
+    .product_wrapper .active_grid .productBox {
+        width: 44%;
+        height: 410px;
+        -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+        -moz-box-shadow:0px 2px 15px 0px rgba(0,0,0,0.20);
+        box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+        margin: 0 20px 40px;
+        border-radius: 10px;
+        padding: 20px !important;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox {
+        height: 432px;
+    }
+
+    .profile-block .profile-image-block,
+    .profile-block .profile-info-block,
+    .profile_contentCol,
+    .profile_leftCol {
+        width: 100% !important;
+    }
+
+    .profile_container .profile_leftCol {
+        margin-bottom: 50px;
+        border-radius: 50px;
+        margin-top: -55px;
+    }
+
+    .profile_contentCol .tabcontent {
+        padding-left: 0;
+    }
+    .user-profile-info-block,
+    .profile-image-block .change_photo,
+    .user-profile-basic-info-block .profile_image {
+        text-align: center;
+    }
+    .user-profile-basic-info-block .profile_image img {
+        height: 180px;
+        width: auto;
+        display: inline-block;
+    }
+
+    .user-profile-basic-info-block .my_businesses_wrap .col.m4 {
+        width: 100% !important;
+    }
+
+
+
 }
 
 @media only screen and (max-width: 768px) {
+
     .bannerwrap {
         height: 400px;
     }
@@ -5324,9 +5590,6 @@ nav .pagination li.active .page-link {
         height: 49px !important;
     }
 
-    
-
-
     .footer_right_bottom .btn_email {
         margin-top: -5px !important;
     }
@@ -5334,8 +5597,94 @@ nav .pagination li.active .page-link {
         background: #000;
     }
 
+    .modal .left-align,
+    .modal .right-align {
+        text-align: center;
+    }
+    .btn_green {
+        margin: 5px  !important;
+    }
+    .mainContainer .product_innrer_wrap {
+        padding: 40px 20px 20px;
+    }
+    .suppliers_content_wrap .industry_infoBox {
+        width: 100%;
+    }
 
-        
+    .suppliers_filter_wrap .filter_search .btn_search {
+        top: 0;
+        margin: 4px 0 !important;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox,
+    .product_wrapper .active_grid .productBox {
+        width: 94%;
+        height: auto;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox .imgBox,
+    .product_wrapper .active_grid .productBox .imgBox {
+        height: auto;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox .imgBox img,
+    .product_wrapper .active_grid .productBox .imgBox img {
+        height: auto;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox {
+        min-height: auto;
+        max-height: inherit !important;
+    }
+    .product_wrapper .low_moq_products_wrap .productBox {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    .low_moq_products_wrap .moq_view,
+    .low_moq_products_wrap .moq_buss_name {
+        float: none !important;
+        display: block;
+        border: none;
+    }
+    .product_wrapper h3 {
+        text-align: center;
+        line-height: 32px;
+    }
+
+    .profile_tabNav_wrap .col.s6.m4,
+    .profile_contentCol .productBox {
+        width: 50% !important;
+    }
+    .profile_contentCol .tabcontent h3 {
+        text-align: center;
+    }
+    .profile_contentCol .tabcontent .top_titleWrap h3 {
+        padding-top: 0;
+    }
+    .owner_info_wrap .owner_info_box {
+        padding-bottom: 40px;
+    }
+
+    .owner_info_wrap .owner_img {
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    
+    .owner_info_wrap div.row {
+        display: flex; 
+        flex-direction: column-reverse;
+    }
+
+    .owner_info_wrap .col.s12.m8.l9,
+    .owner_info_wrap .col.s12.m4.l3,
+    .owner_info_wrap .owner_info_box {
+        width: 100% !important;
+    }
+
+    .user-profile-basic-info-block {
+        width: 100%;
+    }
+    .profile-block .col {
+        width: 100%;
+    }
+
+ 
 }
 
 @media only screen and (max-width: 480px) {
@@ -5350,6 +5699,20 @@ nav .pagination li.active .page-link {
     .footer_right_bottom .footer_buttonWrap .industry_textbox {
         width: 90%;
         margin-bottom: 20px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .modal.modal-fixed-footer .modal-content,
+    .business_login_inner {
+        padding: 20px 10px !important;
+    }
+
+    .profile_tabNav_wrap .col.s6.m4,
+    .profile_contentCol .productBox {
+        width: 100% !important;
     }
     
 }

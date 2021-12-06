@@ -89,17 +89,17 @@
 <div id="login-register-modal" class="modal modal-fixed-footer" tabindex="0">
     <div class="modal-content">
         <div class="row">
-            <div class="col m6 registration-block">
+            <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
                     <img src="{{asset('images/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
                 </div>
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>
                     {{-- Want to be a <a href="{{route('user.register', 'buyer')}}">Buyer</a> or <a href="{{route('user.register', 'wholesaler')}}">Wholesaler</a> --}}
-                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}" > Click here to Register</a>
+                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" > Click here to Register</a>
                 </div>
             </div>
-            <div class="col m6 login-block">
+            <div class="col s12 m8 l7 login-block">
                 <span class="text-danger error-text error-msg login-error-msg" style="display: none;"></span>
                 <form method="POST" action="#">
                     @csrf
@@ -741,9 +741,10 @@ $(document).on("keyup",".search_input",function(){
 var searchInput = $(this).val();
 var selectedSearchOption = $("#searchOption").children("option:selected").val();
 $("#system_search .search_type").val(selectedSearchOption);
+var url = '{{ route("live.search") }}';
 $.ajax({
     type:'GET',
-    url: '/liveSearch',
+    url: url,
     dataType:'json',
     data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
     beforeSend: function() {
@@ -962,6 +963,252 @@ $.ajax({
         $('#submit-to-manufacturers-form').submit();
     });
 
+
+    function addToCart($sku)
+{
+    var sku=$sku;
+    var unit_price=  $('input[name=unit_price]').val();
+    var quantity =  $('input[name=quantity]').val();
+    var total_price=  $('input[name=total_price]').val();
+    var full_stock= $('input[name=full_stock]').val();
+    var product_type =$('input[name=product_type]').val();
+    var color_attr= [];
+    //var check_value=$('input[name="color"]').val();
+    if(product_type== 1 || product_type == 2)
+    {
+        $('.tr').each(function(idx,ele){
+            color_attr.push({'color' :$('input[name="color"]').eq(idx).val(),
+                            'xxs' : Number($('input[name="xxs"]').eq(idx).val()) || 0,
+                            'xs' : Number($('input[name="xs"]').eq(idx).val()) || 0,
+                            'small' :Number($('input[name="small"]').eq(idx).val())  || 0,
+                            'medium' : Number($('input[name="medium"]').eq(idx).val()) || 0,
+                            'large' : Number($('input[name="large"]').eq(idx).val()) ||0,
+                            'extra_large' : Number($('input[name="extra_large"]').eq(idx).val()) || 0,
+                            'xxl' : Number($('input[name="xxl"]').eq(idx).val()) || 0,
+                            'xxxl' : Number($('input[name="xxxl"]').eq(idx).val()) || 0,
+                            'four_xxl' : Number($('input[name="four_xxl"]').eq(idx).val()) || 0,
+                            'one_size' : Number($('input[name="one_size"]').eq(idx).val()) || 0,
+                            });
+            });
+    }
+    if(product_type == 3)
+    {
+        $('.tr').each(function(idx,ele){
+            color_attr.push({'color' :$('input[name="color"]').eq(idx).val(),
+                            'quantity' : Number($('input[name="non_clothing_quantity"]').eq(idx).val()) || 0,
+                            });
+            });
+    }
+
+
+    var url = '{{ route("add.cart") }}';
+    swal({
+        title: "Want to add this product into cart?",
+        text: "Please ensure and then confirm!",
+        type: "warning",
+        showCancelButton: !0,
+        confirmButtonText: "Yes, add it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: !0
+    }).then(function (e) {
+        if (e.value === true) {
+
+                // if(check_value){
+                //     $('.tr').each(function(idx,ele){
+                //     color_attr.push({'color' : $('input[name="color"]').eq(idx).val(),
+                //                     'small' : $('input[name="small"]').eq(idx).val(),
+                //                     'medium' : $('input[name="medium"]').eq(idx).val(),
+                //                     'large' : $('input[name="large"]').eq(idx).val(),
+                //                     'extra_large' : $('input[name="extra_large"]').eq(idx).val(),
+                //                     });
+                //     });
+                // }
+
+                $.ajax({
+                    type:'GET',
+                    url: url,
+                    dataType:'json',
+                    data:{ sku :sku ,unit_price:unit_price,total_price:total_price,quantity:quantity,color_attr:color_attr,full_stock: full_stock},
+                    success: function(data){
+                        //console.log(data.cartItems);
+                        swal(data.message, data.success,data.type);
+                        $('#cartItems').html('');
+                        $("#cartItems").html(data.cartItems);
+                        $('#product-details-modal').hide();
+                    }
+                });
+            }
+            // else {
+            //     e.dismiss;
+            // }
+    }, function (dismiss) {
+        return false;
+    })
+}
+
+//askforprice
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+function askForPrice($sku)
+{
+    var sku=$sku;
+    var business_profile_id=  $('input[name=business_profile_id]').val();
+    var product_id=  $('input[name=product_id]').val();
+    var product_type =$('input[name=product_type]').val();
+    var type = 1;
+    var color_attr= [];
+
+    if(product_type == 1 || product_type == 2)
+    {
+        $('.tr').each(function(idx,ele){
+            color_attr.push({'color' :$('input[name="color"]').eq(idx).val(),
+                            'xxs' : Number($('input[name="xxs"]').eq(idx).val()) || 0,
+                            'xs' : Number($('input[name="xs"]').eq(idx).val()) || 0,
+                            'small' :Number($('input[name="small"]').eq(idx).val())  || 0,
+                            'medium' : Number($('input[name="medium"]').eq(idx).val()) || 0,
+                            'large' : Number($('input[name="large"]').eq(idx).val()) ||0,
+                            'extra_large' : Number($('input[name="extra_large"]').eq(idx).val()) || 0,
+                            'xxl' : Number($('input[name="xxl"]').eq(idx).val()) || 0,
+                            'xxxl' : Number($('input[name="xxxl"]').eq(idx).val()) || 0,
+                            'four_xxl' : Number($('input[name="four_xxl"]').eq(idx).val()) || 0,
+                            'one_size' : Number($('input[name="one_size"]').eq(idx).val()) || 0,
+                            });
+        });
+    }
+    if(product_type == 3)
+    {
+        $('.tr').each(function(idx,ele){
+            color_attr.push({'color' :$('input[name="color"]').eq(idx).val(),
+                            'quantity' : Number($('input[name="non_clothing_quantity"]').eq(idx).val()) || 0,
+                            });
+        });
+    }
+
+    var url = '{{ route("user.order.query.store") }}';
+    swal({
+        title: "Want to query about this product?",
+        text: "Please ensure and then confirm!",
+        type: "warning",
+        showCancelButton: !0,
+        confirmButtonText: "Yes, add it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: !0
+    }).then(function (e) {
+        if (e.value === true) {
+
+                $.ajax({
+                    type:'POST',
+                    url: url,
+                    dataType:'json',
+                    data:{ sku :sku ,business_profile_id:business_profile_id,product_id:product_id,color_attr:color_attr,type:type},
+                    success: function(data){
+                        console.log(data.cartItems);
+                        swal("Done!", data.msg,"success");
+                        $('#product-details-modal').hide();
+                    }
+                });
+        }
+
+    }, function (dismiss) {
+        return false;
+    })
+}
+// $(window).on('load', function() {
+//     var selectedSearchOption = $("#searchOption").children("option:selected").val();
+//     $("#system_search .search_type").val(selectedSearchOption);
+// })
+
+//on change input field set
+$("#searchOption").change(function(){
+    var nohtml = "";
+    $('#search-results').html(nohtml).hide();
+    var selectedSearchOption = $("#searchOption").children("option:selected").val();
+    $("#system_search .search_type").val(selectedSearchOption);
+
+    if($(this).val() == "product"){
+        $(".search_input").attr("placeholder", "Type products name");
+    }
+    else if($(this).val() == "vendor"){
+        $(".search_input").attr("placeholder", "Type vendors name");
+    }
+
+    var searchInput = $("#system_search .search_input").val();
+    console.log(searchInput);
+    var url = '{{ route("live.search") }}';
+    $.ajax({
+        type:'GET',
+        url: url,
+        dataType:'json',
+        data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
+        success: function(response)
+        {
+            var html="";
+            var nohtml = "";
+            if(response.resultCount > 0)
+            {
+                if(response.searchType=='product' && response.data.length > 0)
+                {
+                    $('.product-item').html(nohtml);
+                    for(var i=0; i<response.data.length; i++)
+                    {
+                        html+='<div class="product-item">';
+                        $.each(response.data[i].images,function(key,item){
+                            if(key==0){
+                                var url  = window.location.origin;
+                                var image=url+'/storage/'+item.image;
+                                html+='<div class="product-img"><img src="'+image+'"></div>';
+                            }
+                        })
+                        html+= '<div class="product-short-intro">';
+                        html+= '<h4>'+response.data[i].name+'</h4>';
+                        html+= '<div class="details"><p><i class="material-icons pink-text"> star </i>' +response.averageRatings[i]+'</p></div>';
+                        html+='<h5>Tk (';
+
+                        var last1=JSON.parse(response.data[i].attribute).length;
+                        $.each(JSON.parse(response.data[i].attribute),function(key,item){
+
+                                            if(key == (last1 -1)){
+                                                html+= item[2];
+                                            }
+                                        })
+
+                        html+='<span>/ lot '+response.data[i].moq+' pieces / lot)</span></h5>';
+
+                        var url  = window.location.origin;
+                        html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details">See details</a>';
+                        html+= '</div><br>';
+                        html+= '</div>';
+                    }
+                    $('#search-results').append(html);
+                    $('#search-results').show();
+                }
+                else if(response.searchType=='vendor' && response.data.length > 0)
+                {
+                    $('.vendor-info').html(nohtml);
+                    for(var i=0;i<response.data.length;i++){
+                        html+='<div class="vendor-info">';
+                        console.log('hi');
+                        html+= '<h4>'+response.data[i].vendor_name+'</h4>';
+                        html+= '<div class="details"><p>'+response.data[i].vendor_address+'</p></div>';
+                        html+= '<a href="#">'+response.data[i].vendor_name+'</a>';
+                        html+= '</div>';
+                        }
+                    $('#search-results').append(html);
+                    $('#search-results').show();
+                }
+            }
+            else
+            {
+                $('#search-results').html(nohtml).hide();
+            }
+        }
+
+    });
+});
 
 
   </script>

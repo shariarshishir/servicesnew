@@ -14,7 +14,7 @@
 									<li><a href="{{route('buydesignsproducts')}}">New Designs</a></li>
 									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
 									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
-									<li><a href="{{route('customizable')}}">Customizablee</a></li>
+									<li><a href="{{route('customizable')}}">Customizable</a></li>
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
@@ -36,7 +36,6 @@
 				<div class="col m2 logo"><a href="{{route('home')}}"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
 				
 				<div class="col m5 top_right ">
-
 					<div class="user-block">
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
@@ -150,9 +149,36 @@
 				<a href="{{route('home')}}"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a>
 			</div>
 			<div class="row">
-				<div class="col s6 mainNav">
-					<div id="slide-out" class="sidenav">
-						<!-- <a href="javascript:void(0)" class="sideNavCloseBtn" onclick="closeSideNavFromLeft()">×</a> -->
+				<div class="col s2 mainNav_mobile_wrap">
+					<nav class="mainNav_mobile">
+						<a href="javascript:void(0);" data-target='mainDropdownNav' class="dropdown-trigger sidenav-trigger btn-sidenav-left"><i class="material-icons">menu</i></a>
+						<ul id='mainDropdownNav' class='dropdown-content card'>
+							<li>
+								<a class="" href="javascript:void(0);" >Products</a>
+								<ul class="subNav">
+									<li><a href="{{route('readystockproducts')}}">Ready Stock</a></li>
+									<li><a href="{{route('buydesignsproducts')}}">New Designs</a></li>
+									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
+									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
+									<li><a href="{{route('customizable')}}">Customizablee</a></li>
+								</ul>
+							</li>
+							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
+							<li><a href="javascript:void(0);">Tools</a></li>
+							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
+							<li>
+								<a class="" href="javascript:void(0);" >More</a>
+								<ul class="subNav">
+									<li><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="javascript:void(0);">Insights</a></li>
+									<li><a href="javascript:void(0);">Helps</a></li>
+									<li><a href="javascript:void(0);">FAQs</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+					<!-- <div id="slide-out" class="sidenav">
+						<a href="javascript:void(0)" class="sideNavCloseBtn" onclick="closeSideNavFromLeft()">×</a>
 						<ul>
 							<li><a href="javascript:void(0);">Products</a></li>
 							<li><a href="javascript:void(0);">Supliers</a></li>
@@ -167,16 +193,15 @@
 								</ul>
 							</li>
 						</ul>
-					</div>
-					<a href="javascript:void(0);" data-target="slide-out" class="sidenav-trigger waves-effect waves-block waves-light btn green lighten-1 btn-floating btn-sidenav-left"><i class="material-icons">menu</i></a>
+					</div> -->
+					
 				</div>
 
 
-				<div class="col s6 right-align mobile_top_right">
+				<div class="col s10 right-align mobile_top_right">
 					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile_mobile">
 						<span class="material-icons"> add </span>
 					</a>
-
 
 					<div class="user-block user-block-mobile">
 						@if(env('APP_ENV') == 'production')
@@ -207,7 +232,9 @@
 									@csrf
 								</form>
 							@else
-								<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
+								<a href="#login-register-modal" class="btn_login_mobile modal-trigger">
+									<span class="material-icons">login</span>
+								</a>
 							@endif
 
 							@else
@@ -238,15 +265,13 @@
 									@csrf
 								</form>
 								@else
-									<a href="#login-register-modal" class="btn_logRegi btn_white modal-trigger">Login / Register</a>
+									<a href="#login-register-modal" class="btn_login_mobile modal-trigger">
+										<span class="material-icons">login</span>
+									</a>
 							@endif
 
 						@endif
 					</div>
-
-							
-
-					
 
 					<div class="cart-icon-outer-wrapper ">
                         <div class="cart-icon-wrapper cart-icon-wrapper-mobile">
@@ -279,3 +304,6 @@
 	</header>
 </section>
 <!-- Header section end -->
+
+
+

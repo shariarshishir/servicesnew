@@ -64,7 +64,7 @@
                 </div>
             </div>
         @else
-            <div class="row">
+            <div class="row wishlist_products_wrap">
                 <div class="col-md-12">
                     <div class="card card-with-padding">
                         <div class="card-alert card cyan">

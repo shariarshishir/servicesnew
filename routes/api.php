@@ -62,7 +62,7 @@ Route::post('/verify-user-from-manufacture',[UserController::class, 'verifyUserF
 Route::get('/email/verify',[UserController::class, 'emailVerify']);
 //api with authentication
 
-
+Route::post('/omd-rfqs', [RFQController::class, 'storeRfqFromOMD']);
 
 Route::group(['middleware'=>['auth:sanctum']],function () {
     //user api
@@ -127,7 +127,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //rfq api
     Route::post('/rfqs', [RFQController::class, 'store']);
-    Route::post('/omd-rfqs', [RFQController::class, 'storeRfqFromOMD']);
+    
     Route::get('/rfqs', [RFQController::class, 'index']);
 
     //manufacture product api

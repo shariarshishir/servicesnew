@@ -124,16 +124,18 @@
 						</div>
 						<!-- contentBox -->
 						<div class="certifications">
-							<h3>Certifications</h3>
+							<h3>Certifications test</h3>
 							<div class="certifications-block">
 							@if(count($business_profile->certifications)>0)
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
-										<span>{{$certification->title}}</span>
-										<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-										<br>
-										<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
 										<div class="certificate_img"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>
@@ -339,7 +341,7 @@
 									<h3>Company Overview</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger"><span class="material-icons">border_color</span></span> Edit</button>
+									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger"><span><i class="material-icons">border_color</i></span>Edit</button>
 								</div>
 							</div>
 							<div class="overview_table box_shadow">
@@ -366,7 +368,7 @@
 									<h3>Capacity and Machineries</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger"><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger"><span><i class="material-icons">border_color</i></span> Edit</button>
 								</div>
 							</div>
 							<div class="row capacity_table">
@@ -391,10 +393,7 @@
 														<td><i class="material-icons" style="color:green">check_circle</i></td>
 														@else
 														<td><i class="material-icons "style="color:gray">check_circle</i></td>
-														@endif
-
-
-														
+														@endif 
 													</tr>
 												@endforeach
 											</tbody>
@@ -486,7 +485,7 @@
 									<h3>Production Flow and Manpower</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger"><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger"><span><i class="material-icons">border_color</i></span> Edit</button>
 								</div>
 							</div>
 							@if(count($business_profile->productionFlowAndManpowers)>0)
@@ -531,8 +530,8 @@
 									<h3>Certifications</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-certification-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span><i class="material-icons">file_upload</i></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-certification-button" ><span><i class="material-icons">delete</i></span> Delete</button>
 								</div>
 							</div>
 							<div class="certifications-block">
@@ -541,10 +540,12 @@
 									<div class="certificate_img_wrap">
 										<a href="javascript:void(0)" style="display: none;" data-id="{{$certification->id}}" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
-										<span>{{$certification->title}}</span>
-										<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-										<br>
-										<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title">{{$certification->title}}</span>
 										@else
 										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>
@@ -566,8 +567,8 @@
 									<h3>Main Buyers</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White  delete-main-buyer-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span><i class="material-icons">file_upload</i></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White  delete-main-buyer-button" ><span><i class="material-icons">delete</i></span> Delete</button>
 								</div>
 							</div>
 							<div class="buyers_logo_wrap row main-buyers-block">
@@ -598,8 +599,8 @@
 									<h3>Export Destinations</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-export-destination-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span><i class="material-icons">file_upload</i></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-export-destination-button" ><span><i class="material-icons">delete</i></span> Delete</button>
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
@@ -645,7 +646,7 @@
 									<h3>Business Terms</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" ><span><i class="material-icons">border_color</i></span> Edit</button>
 								</div>
 							</div>
 							@if(count($business_profile->businessTerms)>0)
@@ -680,7 +681,7 @@
 									<h3>Sampling and R&D</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger"> <span><i class="material-icons">border_color</i></span> Edit</button>
 								</div>
 							</div>
 							@if(count($business_profile->samplings) > 0)
@@ -715,7 +716,7 @@
 									<h3>Special customization ability</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger"> <span><i class="material-icons">border_color</i></span> Edit</button>
 								</div>
 							</div>
 							@if(count($business_profile->specialCustomizations) > 0)
@@ -750,7 +751,7 @@
 										<h3>Worker welfare and CSR</h3>
 									</div>
 									<div class="col s6 m6 right-align editBox">
-										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" ><span><i class="material-icons">border_color</i></span> Edit</button>
 									</div>
 								</div>
 
@@ -924,7 +925,7 @@
 										<h3>Security and others</h3>
 									</div>
 									<div class="col s6 m6 right-align editBox">
-										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" ><span><i class="material-icons">border_color</i></span> Edit</button>
 									</div>
 								</div>
 
@@ -1049,7 +1050,7 @@
 									<h3>Sustainability commitments</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" ><span><i class="material-icons">border_color</i></span> Edit</button>
 								</div>
 							</div>
 							@if(count($business_profile->sustainabilityCommitments) > 0)
@@ -1083,8 +1084,8 @@
 									<h3>Association memberships</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger"><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-association-membership-button"><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger"><span><i class="material-icons">file_upload</i></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-association-membership-button"><span><i class="material-icons">delete</i></span> Delete</button>
 								</div>
 							</div>
 							<div class="membership_textBox association-membership-block">
@@ -1111,8 +1112,8 @@
 									<h3>PR Highlights</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger"  ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger"  ><span><i class="material-icons">file_upload</i></span> Upload</button>
+									<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" ><span> <i class="material-icons">delete</i></span> Delete</button>
 								</div>
 							</div>
 							<div class="row press-highlight-block">
@@ -1503,7 +1504,7 @@
 	@include('business_profile._upload_association_membership_modal')
 	@include('business_profile._add_business_terms_modal')
 	@include('business_profile._add_sampling_modal')
-	@include('business_profile._add_special_customization_modal')t
+	@include('business_profile._add_special_customization_modal')
 	@include('business_profile._add_sustainability_commitment_modal')
 	@include('business_profile._add_worker_walfare_and_csr_modal')
 	@include('business_profile._add_security_modal')

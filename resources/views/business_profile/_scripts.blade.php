@@ -753,10 +753,10 @@
                     
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
-                    html +='<span>'+certifications[i].title+'</span>';
-                    html +='<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>';
-                    html +='<br>';
-                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a>';
+                    html +='<div class="certificate_img">';
+                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down"> &nbsp; </a>';
+                    html +='</div>';
+                    html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                     html +='</div>';
                 } else {
                     html +='<div class="certificate_img_wrap">';
@@ -841,11 +841,11 @@
                                         
                                         if(strArray == 'pdf'|| strArray == 'PDF'){
                                             html +='<div class="certificate_img_wrap">';
-                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                            html +='<span>'+certifications[i].title+'</span>';
-                                            html +='<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>';
-                                            html +='<br>';
-                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a>';
+                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';                                            
+                                            html +='<div class="certificate_img">';
+                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down" >&nbsp;</a>';
+                                            html +='</div>';
+                                            html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                                             html +='</div>';
                                         } else {
                                             html +='<div class="certificate_img_wrap">';
@@ -1908,7 +1908,7 @@
 
             //append in table
             $('.sustainability-commitment-table-body').children().empty();
-            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
+            var html = '<span class="no_data_box manpower_empty_table">INFO : No data found.</span>';
             $('.sustainability-commitment-table-body').append(html);
 
             //append in form

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Manufacture\Rfq;
+use App\Models\Rfq;
 use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
-use App\Models\Manufacture\SupplierBid;
+use App\Models\SupplierBid;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;

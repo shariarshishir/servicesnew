@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Manufacture;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Rfq extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $connection = 'mysql2';
+
     protected $guarded=[];
 
     public function images(){
-        return $this->hasMany('App\Models\Manufacture\RfqImage','rfq_id');
+        return $this->hasMany('App\Models\RfqImage','rfq_id');
     }
 
     public function user(){
@@ -22,12 +22,10 @@ class Rfq extends Model
 
     public function bids()
     {
-        return $this->hasMany('App\Models\Manufacture\SupplierBid', 'rfq_id')->withTrashed();
+        return $this->hasMany('App\Models\SupplierBid', 'rfq_id')->withTrashed();
     }
 
     public function category(){
         return $this->belongsTo('App\Models\Manufacture\ProductCategory','category_id');
     }
-
-
 }

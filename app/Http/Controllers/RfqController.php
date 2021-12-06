@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Manufacture\Rfq;
+use App\Models\Rfq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use App\Models\Manufacture\RfqImage;
+use App\Models\RfqImage;
 use App\Events\NewRfqHasAddedEvent;
 use App\Models\BusinessProfile;
 

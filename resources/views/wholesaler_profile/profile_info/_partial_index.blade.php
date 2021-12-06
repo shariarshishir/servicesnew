@@ -31,13 +31,14 @@
 	<div class="membership_wrap">
 		<div class="row top_titleWrap upload_delete_wrap">
 			<div class="col s6 m6">
-				<h3>Association memberships test</h3>
+				<h3>Association memberships</h3>
 			</div>
 			<div class="col s6 m6 right-align editBox">
 				<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger"><span class="material-icons">file_upload</span></span> Upload</button>
 				<button type="button" class="btn_delete btn_green_White delete-association-membership-button"><span><span class="material-icons">delete</span></span> Delete</button>
 			</div>
 		</div>
+		@if(count($business_profile->associationMemberships) > 0)
 		<div class="membership_textBox association-membership-block">
 			@foreach($business_profile->associationMemberships as $associationMembership)
 			<div class="center-align association-membership-img">
@@ -47,6 +48,13 @@
 			</div>
 			@endforeach
 		</div>
+		@else
+		<div class="card-alert card cyan lighten-5">
+			<div class="card-content cyan-text">
+				<p>INFO : No data found.</p>
+			</div>
+		</div>	
+		@endif
 	</div>
 	<div class="pr_highlights_wrap">
 		<div class="row top_titleWrap upload_delete_wrap">
@@ -58,6 +66,7 @@
 				<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" ><span><span class="material-icons">delete</span></span> Delete</button>
 			</div>
 		</div>
+		@if(count($business_profile->pressHighlights) > 0)
 		<div class="row press-highlight-block">
 		@foreach($business_profile->pressHighlights as $pressHighlight)
 			<div class="col s6 m4 l2 paper_img press-highlight-img">
@@ -67,7 +76,13 @@
 				</div>
 			</div>
 		@endforeach
-			
 		</div>
+		@else
+		<div class="card-alert card cyan lighten-5">
+			<div class="card-content cyan-text">
+				<p>INFO : No data found.</p>
+			</div>
+		</div>
+		@endif
 	</div>
 </div>

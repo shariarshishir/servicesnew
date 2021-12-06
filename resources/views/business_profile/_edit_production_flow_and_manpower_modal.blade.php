@@ -15,7 +15,7 @@
                             <thead>
                                 <tr>
                                     <th>Production Type</th>
-                                    <th>No of Jacquard Machines</th>
+                                    <th>Number of Machines</th>
                                     <th>Manpower</th>
                                     <th>Daily Capacity</th>
                                     <th>&nbsp;</th>

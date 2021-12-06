@@ -13,7 +13,7 @@
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>
 
-                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=service'}}"> Click here to Register</a>
+                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}"> Click here to Register</a>
                 </div>
             </div>
                 <div class="col s12 m8 l7 login-block">                    

@@ -751,7 +751,7 @@
 								</table>
 							</div>
 						</div>
-						<div class="worker_welfare_wrap">
+						<div class="worker_welfare_wrap" style="display: none;">
 							<div class="row worker_welfare_box">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\RfqImage;
 use App\Models\User;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 
 class RFQController extends Controller
@@ -92,7 +93,7 @@ class RFQController extends Controller
                     'user_id'=>$user_id,
                     'name' => $userObj->name,
                     'email' => $email,
-                    'password' => Hash::make($password),
+                    'password' => bcrypt($password),
                     'user_type' => 'buyer',
                     'sso_reference_id' =>$userObj->id,
                     'ip_address' => $request->ip(),

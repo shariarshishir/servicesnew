@@ -60,9 +60,10 @@ class RfqController extends Controller
         }
 
         $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
-        foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        }
+        event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail));
+        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
+        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        // }
 
         $selectedUserToSendMail="success@merchantbay.com";
         event(new NewRfqHasAddedEvent($selectedUserToSendMail));

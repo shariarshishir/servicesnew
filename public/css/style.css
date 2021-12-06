@@ -1005,6 +1005,7 @@ form input:read-only {
     padding: 18px 28px 18px 35px;
     font-size: 18px;
     line-height: 30px;
+    display: none;
 }
 .profile_bannerwrap .leftText {
     text-decoration: underline;
@@ -1119,6 +1120,7 @@ form input:read-only {
 }
 .profile_contentCol .profile_tab_menu .tabs {
     background: none !important;
+    white-space: inherit;
 }
 .profile_contentCol .profile_tab_menu .tabs .indicator {
     background: none;
@@ -1371,8 +1373,6 @@ form input:read-only {
 .profile_contentCol .productBox {
     position: relative;
     margin-bottom: 20px;
-    max-height: 340px;
-    min-height: 340px;
 }
 .profile_contentCol .productBox .favorite {
     position: absolute;
@@ -2038,6 +2038,7 @@ form input:read-only {
 
 .single-product-description-block-wrapper {
     margin-bottom: 50px;
+    line-height: 30px;
 }
 .single-product-description-block-wrapper ul {
     border-radius: 10px;
@@ -3934,6 +3935,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 
 .modal {
     border-radius: 20px;
+    width: 60%;
 }
 .modal legend {
     margin-bottom: 40px;
@@ -4312,6 +4314,15 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .profile_form_modal .submit_btn_wrap .btn_green {
     margin-top: 0;
     height: 40px;
+}
+
+.order-top-block {
+    padding-bottom: 30px;
+}
+
+.ready-to-ship-label {
+    color: #ffffff !important;
+    border-radius: 5px;
 }
 
 
@@ -4762,6 +4773,7 @@ legend {
     position: absolute;
     width: auto;
     z-index: -1;
+    left: 30px;
 }
 .login-block .input-field .prefix ~ label {
     margin-left: 4rem;
@@ -4773,6 +4785,13 @@ legend {
     margin-left: 4rem;
     top: -40px;
     opacity: 1;
+}
+.login-block .error-text {
+    font-size: 14px;
+    color: red;
+    padding: 5px 0 0 65px;
+    display: block;
+    float: left;
 }
 .remember-me-block {
     padding-left: 35px;
@@ -5233,12 +5252,12 @@ nav .pagination li.active .page-link {
     opacity: inherit;
     -webkit-transform: inherit;
     transform: inherit;
-    padding: 0 0 10px 50px;
+    padding: 0 0 10px 28px;
     margin: 0;
     color: #448547;
 }
 .business_login_inner .login-block .remember-me-block .input-field label {
-    padding-left: 12px;
+    padding-left: 0;
 }
 .business_login_inner .input_box_wrap {
     position: relative;
@@ -5319,8 +5338,20 @@ nav .pagination li.active .page-link {
     .product_wrapper .active_grid .productBox {
         height: 420px;
     }
+    .profile-image-block .profile-image-upload-trigger {
+        margin-bottom: 12px;
+    }
 }
-@media only screen and (min-device-width: 769px) and (max-device-width: 1280px) {}
+@media only screen and (min-device-width: 769px) and (max-device-width: 1280px) {
+    .profile_tabNav_wrap .col.s6.m4,
+    .profile_contentCol .productBox {
+        /* height: 340px; */
+        width: 50% !important;
+    }
+    
+
+
+}
 
 @media only screen and (max-width: 1280px) {
     .top_right .btn_white,
@@ -5350,8 +5381,7 @@ nav .pagination li.active .page-link {
     .product_wrapper .low_moq_products_wrap .productBox,
     .product_wrapper .active_grid .productBox {
         width: 32%;
-        height: 400px;
-        
+        height: 400px;  
     }
 
     .product_wrapper .low_moq_products_wrap .productBox .imgBox,
@@ -5366,6 +5396,18 @@ nav .pagination li.active .page-link {
     .product_wrapper .active_grid .productBox .imgBox img {
         height: 100%;
     }
+    .user-profile-basic-info-block .profile_image {
+        min-height: auto;
+    }
+    .user-profile-basic-info-block .profile_image img {
+        height: auto;
+        width: auto;
+        min-height: auto;
+    }
+    .profile-image-block .change_photo {
+        text-align: center;
+    }
+
 }
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
@@ -5455,9 +5497,6 @@ nav .pagination li.active .page-link {
     .registration-content {
         padding-bottom: 30px;
     }
-    /* .business_login_inner .login-block .signin {
-        min-width: 60px;
-    } */
 
     .modal {
         width: 90%;
@@ -5492,6 +5531,38 @@ nav .pagination li.active .page-link {
     .product_wrapper .low_moq_products_wrap .productBox {
         height: 432px;
     }
+
+    .profile-block .profile-image-block,
+    .profile-block .profile-info-block,
+    .profile_contentCol,
+    .profile_leftCol {
+        width: 100% !important;
+    }
+
+    .profile_container .profile_leftCol {
+        margin-bottom: 50px;
+        border-radius: 50px;
+        margin-top: -55px;
+    }
+
+    .profile_contentCol .tabcontent {
+        padding-left: 0;
+    }
+    .user-profile-info-block,
+    .profile-image-block .change_photo,
+    .user-profile-basic-info-block .profile_image {
+        text-align: center;
+    }
+    .user-profile-basic-info-block .profile_image img {
+        height: 180px;
+        width: auto;
+        display: inline-block;
+    }
+
+    .user-profile-basic-info-block .my_businesses_wrap .col.m4 {
+        width: 100% !important;
+    }
+
 
 
 }
@@ -5544,13 +5615,11 @@ nav .pagination li.active .page-link {
         top: 0;
         margin: 4px 0 !important;
     }
-
     .product_wrapper .low_moq_products_wrap .productBox,
     .product_wrapper .active_grid .productBox {
         width: 94%;
         height: auto;
     }
-
     .product_wrapper .low_moq_products_wrap .productBox .imgBox,
     .product_wrapper .active_grid .productBox .imgBox {
         height: auto;
@@ -5577,7 +5646,45 @@ nav .pagination li.active .page-link {
         text-align: center;
         line-height: 32px;
     }
-        
+
+    .profile_tabNav_wrap .col.s6.m4,
+    .profile_contentCol .productBox {
+        width: 50% !important;
+    }
+    .profile_contentCol .tabcontent h3 {
+        text-align: center;
+    }
+    .profile_contentCol .tabcontent .top_titleWrap h3 {
+        padding-top: 0;
+    }
+    .owner_info_wrap .owner_info_box {
+        padding-bottom: 40px;
+    }
+
+    .owner_info_wrap .owner_img {
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    
+    .owner_info_wrap div.row {
+        display: flex; 
+        flex-direction: column-reverse;
+    }
+
+    .owner_info_wrap .col.s12.m8.l9,
+    .owner_info_wrap .col.s12.m4.l3,
+    .owner_info_wrap .owner_info_box {
+        width: 100% !important;
+    }
+
+    .user-profile-basic-info-block {
+        width: 100%;
+    }
+    .profile-block .col {
+        width: 100%;
+    }
+
+ 
 }
 
 @media only screen and (max-width: 480px) {
@@ -5603,6 +5710,10 @@ nav .pagination li.active .page-link {
         padding: 20px 10px !important;
     }
 
+    .profile_tabNav_wrap .col.s6.m4,
+    .profile_contentCol .productBox {
+        width: 100% !important;
+    }
     
 }
 

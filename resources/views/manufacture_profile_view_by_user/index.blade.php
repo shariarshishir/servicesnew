@@ -118,18 +118,11 @@
 						</div>
 						<!-- company_stuff -->
 						<div class="contentBox">
-							<p>Sayem Fashions LTD. & Radiant Sweater Ind. Ltd are two units of manufacturing within Sayem Group, aspiring for complete customer satisfaction owing 
-								to the high quality Sweater at competitive prices with an on-schedule delivery and perfection in service. It firmly believes that the satisfaction of the valued 
-								customers is the focal point of its business. In no time, the brand has become a name to reckon within the manufactures of Pullovers, Cardigans, Sweaters, 
-								Jumpers, Vests, Scarves and Woolen Cap etc, for men, women and children. Manufacturing around 280,000 to 300,000 pcs of both Basic and Fashionable, 
-								Fancy sweaters of valued customers from 3gg – 12gg.
-							</p>
-							<p>The factory premises are run by experienced workers since year 2000. The company proudly stands with the lowest employee turnover rate and high 
-								employee satisfaction. All resources and facilities are available within the premises around the clock.
-							</p>
-							<p>Specials team works on Fire Safety measures and everyone regularly practicing fire drills to avoid panic attack during any accidents. All fire safety measures
-								are taken and necessary training and fire fighters are managed on the floors.
-							</p>
+							@if($business_profile->companyOverview->about_company)
+							<p>{{$business_profile->companyOverview->about_company}}</p>
+							@else
+							<p>No information added</p>
+							@endif
 						</div>
 						<!-- contentBox -->
 						<div class="certifications">
@@ -163,58 +156,39 @@
 								<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
 							</div>
 							<div class="product_boxwrap row">
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_01.jpg')}}" alt=""></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
+								@if(count($mainProducts)>0)
+									@foreach($mainProducts as $product)
+									<div class="productBox col s6 m3 l3">
+										<div class="imgBox">
+											@foreach($product->product_images as $image)
+												<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+												@break
+											@endforeach
+											<div class="favorite">
+												<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+													<i class="material-icons dp48">favorite</i>
+												</a>
+											</div>
+										</div>
+										<div class="priceBox row">
+
+										</div>
+										<h4>
+											<a href="#">
+												{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+											</a>
+										</h4>
+										<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+										<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
+								@endforeach
+								@else
+								    <div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Main Products.</p>
+										</div>
 									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_02.jpeg')}}" alt=""></a>
-										<div class="favorite active_favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_03.jpeg')}}" alt=""></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_04.jpeg')}}"></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
+								@endif
 							</div>
 						</div>
 						<!-- profile_product_wrap -->
@@ -390,9 +364,6 @@
 															@else
 															<td><i class="material-icons "style="color:gray">check_circle</i></td>
 															@endif
-
-
-															
 														</tr>
 													@endforeach
 												@else
@@ -754,7 +725,7 @@
 								</table>
 							</div>
 						</div>
-						<div class="worker_welfare_wrap">
+						<div class="worker_welfare_wrap" style="display:none">
 							<div class="row worker_welfare_box">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">

@@ -127,6 +127,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //rfq api
     Route::post('/rfqs', [RFQController::class, 'store']);
+    Route::post('/omd-rfqs', [RFQController::class, 'storeRfqFromOMD']);
     Route::get('/rfqs', [RFQController::class, 'index']);
 
     //manufacture product api

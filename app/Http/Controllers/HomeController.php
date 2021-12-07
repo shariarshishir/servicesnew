@@ -514,13 +514,19 @@ class HomeController extends Controller
         {
 
             $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
-            return view('manufacture_profile_view_by_user.index',compact('business_profile'));
+            $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+            ->limit(4)
+            ->get();
+            return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts'));
         }
         //wholesaler
         if($business_profile->business_type == 2 )
         {
             $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
-            return view('wholesaler_profile_view_by_user.index',compact('business_profile'));
+            $mainProducts=Product::with('images')->where('business_profile_id',$id)->inRandomOrder()
+            ->limit(4)
+            ->get();
+            return view('wholesaler_profile_view_by_user.index',compact('business_profile','mainProducts'));
         }
     }
     //low moq

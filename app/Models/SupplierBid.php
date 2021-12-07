@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Manufacture;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SupplierBid extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $connection = 'mysql2';
+
     protected $guarded=[];
 
     public function businessProfile(){
@@ -19,5 +19,4 @@ class SupplierBid extends Model
     public function user(){
         return $this->belongsTo('App\Models\user', 'supplier_id', 'id');
     }
-
 }

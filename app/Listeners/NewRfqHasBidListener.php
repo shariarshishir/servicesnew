@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Models\Manufacture\Rfq;
+use App\Models\Rfq;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqHasBidMail;
 

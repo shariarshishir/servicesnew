@@ -6,7 +6,7 @@
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
 	<div class="banner_overlay">
-		<h1>Sayem Group</h1>
+		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
@@ -23,19 +23,16 @@
 				<div class="left_top">
 					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
 					<div class="office_address center-align ">
-						<h3>Sayem Group</h3>
-						<h4><span class="material-icons">pin_drop</span> Dhaka, BD <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
-						<p>Manufacturer, Sweater</p>
+						<h3>{{$business_profile->business_name}}</h3>
+						<h4><span class="material-icons">pin_drop</span>{{$business_profile->location}}, BD <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
+						<p>Wholesaler, {{$business_profile->industry_type}}</p>
 					</div>
 					<div class="center-align">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
-						<p>House#27, Road# 16, Sector#4, <br/>
-							Uttara, Dhaka-1230. <br/>
-							Bangladesh.
-						</p>
+						<p>{{$business_profile->companyOverview->address}}</p>
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
@@ -46,11 +43,12 @@
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>Men & Women's Sweater, Men &
-						Women's Dress, Plus Size Women's
-						Clothing, Men & Women's Coats,
-						Men & Women's Hoodies
-						& Sweatshirts, Downjackets.
+					<p>
+						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+							@if($company_overview->name=="main_products")
+								<p>	{{$company_overview->value}}</p>
+							@endif
+						@endforeach
 					</p>
 				</div>
 			</div>
@@ -71,18 +69,13 @@
 						<h3>About the Company</h3>
 						<!-- company_stuff -->
 						<div class="contentBox">
-							<p>Sayem Fashions LTD. & Radiant Sweater Ind. Ltd are two units of manufacturing within Sayem Group, aspiring for complete customer satisfaction owing
-								to the high quality Sweater at competitive prices with an on-schedule delivery and perfection in service. It firmly believes that the satisfaction of the valued
-								customers is the focal point of its business. In no time, the brand has become a name to reckon within the manufactures of Pullovers, Cardigans, Sweaters,
-								Jumpers, Vests, Scarves and Woolen Cap etc, for men, women and children. Manufacturing around 280,000 to 300,000 pcs of both Basic and Fashionable,
-								Fancy sweaters of valued customers from 3gg – 12gg.
-							</p>
-							<p>The factory premises are run by experienced workers since year 2000. The company proudly stands with the lowest employee turnover rate and high
-								employee satisfaction. All resources and facilities are available within the premises around the clock.
-							</p>
-							<p>Specials team works on Fire Safety measures and everyone regularly practicing fire drills to avoid panic attack during any accidents. All fire safety measures
-								are taken and necessary training and fire fighters are managed on the floors.
-							</p>
+							@if($business_profile->companyOverview->about_company)
+							<p>{{$business_profile->companyOverview->about_company}}</p>
+							@else
+							<p>No information added</p>
+							@endif
+
+							
 						</div>
 						<!-- contentBox -->
 						

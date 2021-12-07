@@ -1,7 +1,7 @@
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
 	<div class="banner_overlay">
-		<h1>Sayem Group</h1>
+		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
@@ -34,18 +34,18 @@
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
-						<p>Kamarjhuri, National University, 
-							Gazipur, Bangladesh.
+						<p>{{$business_profile->companyOverview->address}} 
 						</p>
 					</div>
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>Men & Women's Sweater, Men & 
-						Women's Dress, Plus Size Women's 
-						Clothing, Men & Women's Coats, 
-						Men & Women's Hoodies
-						& Sweatshirts, Downjackets.
+					<p>
+						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+							@if($company_overview->name=="main_products")
+								<p>	{{$company_overview->value}}</p>
+							@endif
+						@endforeach
 					</p>
 				</div>
 			</div>

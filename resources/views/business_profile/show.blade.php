@@ -32,7 +32,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
-						<p>{{$business_profile->companyOverview->address}} </p>
+						<div id="head-office">
+							@if($business_profile->companyOverview->address)
+								<p>{{$business_profile->companyOverview->address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
@@ -43,13 +53,21 @@
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>
+					<div id="main-products">
 						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
 							@if($company_overview->name=="main_products")
-								<p>	{{$company_overview->value}}</p>
+								@if($company_overview->value)
+									<p>{{$company_overview->value}}</p>
+								@else
+								<div class="card-alert card cyan lighten-5 no-info-message">
+									<div class="card-content cyan-text">
+										INFO : No data found.
+									</div>
+								</div>
+								@endif
 							@endif
 						@endforeach
-					</p>
+					</div>
 				</div>
 			</div>
 			<!-- Container section start -->

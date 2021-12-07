@@ -27,23 +27,29 @@
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
-						<p>House#27, Road# 16, Sector#4, <br/> 
-							Uttara, Dhaka-1230. <br/>
-							Bangladesh.
-						</p>
+						<p id="address">{{$business_profile->companyOverview->address}} </p>
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
-						<p>{{$business_profile->companyOverview->address}} 
+						<p>Kamarjhuri, National University, 
+							Gazipur, Bangladesh.
 						</p>
 					</div>
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>
+					<p id="main-products">
 						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
 							@if($company_overview->name=="main_products")
-								<p>	{{$company_overview->value}}</p>
+								@if($company_overview->value)
+								<p>{{$company_overview->value}}</p>
+								@else
+								<div class="card-alert card cyan lighten-5">
+									<div class="card-content cyan-text">
+										<p>INFO : No data found.</p>
+									</div>
+								</div>
+								@endif
 							@endif
 						@endforeach
 					</p>

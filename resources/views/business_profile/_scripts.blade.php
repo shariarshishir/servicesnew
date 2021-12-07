@@ -167,11 +167,29 @@
                            }else{
                             $('.'+item.name+'_status').css("color", "gray");
                            }
-
-
+                           if(item.name=="main_products"){
+                               if(item.value==null){
+                                $('#main-products').children(".no-info-message").show();
+                                $('#main-products').children("p").hide();
+                               } else {
+                                $('#main-products').children(".no-info-message").hide();
+                                $('#main-products').append("<p>"+item.value+"</p>");
+                               }
+                           }
                         });
+
                         $('#about-company-information').text(data.about_company);
-                        $('#address').text(data.address);
+                        /*
+                        if(data.address == null) {
+                            $('#head-office').children(".no-officeinfo-message").show();
+                            $('#head-office').children("p").hide();                            
+                        } else {
+                            $('#head-office').children(".no-officeinfo-message").hide();
+                            $('#head-office').append("<p>"+data.address+"</p>");
+                        }
+                        */
+
+                        //$('#address').text(data.address);
                         $('#company-overview-modal').modal('close');
                        //console.log(data);
                         swal("Done!", data.msg,"success");

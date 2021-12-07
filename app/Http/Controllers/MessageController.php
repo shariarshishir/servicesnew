@@ -38,6 +38,7 @@ class MessageController extends Controller
     }
 
     public function message_center(){
+
         $user=Auth::user();
         $allusers=[];
 
@@ -148,6 +149,7 @@ class MessageController extends Controller
 
     public function message_center_selected_supplier($id)
     {
+        return $id;
         $user=Auth::user();
         $allusers=[];
         $allusers = User::get();

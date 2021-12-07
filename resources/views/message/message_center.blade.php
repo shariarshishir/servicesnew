@@ -20,7 +20,7 @@
                 var selectedSupplierId = "{{ Request::get('uid') }}";
                 if(selectedSupplierId > 0)
                 {
-                    $('#allchatter').children('div.col-md-12').each(function()
+                    $('#allchatter').children('div.all-chatter-div').each(function()
                     {
                         if($(this).data('toid') == selectedSupplierId) {
                             $(this).addClass('active');
@@ -30,34 +30,34 @@
 
                             var s = new Array;
                             var i = 0;
-                            var x = $("#allchatter .col-md-12").length;
+                            var x = $("#allchatter .all-chatter-div").length;
 
-                            $("#allchatter .col-md-12").each( function() {
+                            $("#allchatter .all-chatter-div").each( function() {
                                 s[i] = $(this).data("toid");
                                 i++;
                             });
                             var g = s.sort(function(a,b){return a-b});
                             for(var c = 0; c < x; c++) {
                                 var div = g[c];
-                                var d = $("#allchatter .col-md-12[data-toid="+selectedSupplierId+"]").clone();
-                                var s = $("#allchatter .col-md-12[data-toid="+selectedSupplierId+"]").remove();
-                                $("#allchatter").prepend(d);
+                                var d = $("#allchatter .all-chatter-div[data-toid="+selectedSupplierId+"]").clone();
+                                var s = $("#allchatter .all-chatter-div[data-toid="+selectedSupplierId+"]").remove();
+                                $("#all-chatter-div").prepend(d);
                             }
                         }
                     });
 
-                    $('#allchatter').children('div.col-md-12').click(function()
+                    $('#allchatter').children('div.all-chatter-div').click(function()
                     {
-                        $('#allchatter').children('div.col-md-12').removeClass('active');
+                        $('#allchatter').children('div.all-chatter-div').removeClass('active');
                         $(this).addClass('active');
                         $('.generate-po-btn').attr("href", "{{ env('APP_URL') }}/po/add/toid="+$(this).data('toid'));
                         message_formid = $(this).data("formid");
                         message_toid = $(this).data("toid");
                     });
                 }
-                $('#allchatter').children('div.col-md-12').click(function()
+                $('#allchatter').children('div.all-chatter-div').click(function()
                 {
-                    $('#allchatter').children('div.col-md-12').removeClass('active');
+                    $('#allchatter').children('div.all-chatter-div').removeClass('active');
                     $(this).addClass('active');
                     message_formid = $(this).data("formid");
                     message_toid = $(this).data("toid");
@@ -255,33 +255,33 @@
                 <h6 class="buyerChatHd2">Users Currently Online Now</h6>
             </div>
 
-            <div class="col m12 plr0 lft-cht-cont" id="allchatter">
+            <div class="col m12 plr0 lft-cht-cont all-chatter-div" id="allchatter">
                 <!--1-->
                 @foreach($chatusers as $cuser)
-                @php
-                $src = !empty($cuser->profile['company_logo'])? 'storage/' .$cuser->profile['company_logo'] : "images/supplier.png";
-                $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
-                @endphp
-                {{-- <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;"> --}}
-                <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
+                    @php
+                    $src = !empty($cuser->profile['company_logo'])? 'storage/' .$cuser->profile['company_logo'] : "images/supplier.png";
+                    $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
+                    @endphp
+                    {{-- <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;"> --}}
+                    <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
 
-                    <div class="row byr-ncnt">
-                        <div class="col m4 pl0 byr-pb">
-                            <img src="{{ asset($src) }}" class="pimg"/>
-                        </div>
-                        <div class="col m8 plr0">
-                            <div class="byr-pb-nm">{{ $cuser->name }}</div>
-                            {{-- <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
-                            <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div> --}}
-                            <div class="clear10"></div>
-                            <div class="byr-pb-ld user_last_activity">
-                                {{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}
+                        <div class="row byr-ncnt">
+                            <div class="col m4 pl0 byr-pb">
+                                <img src="{{ asset($src) }}" class="pimg"/>
                             </div>
-                        </div>
+                            <div class="col m8 plr0">
+                                <div class="byr-pb-nm">{{ $cuser->name }}</div>
+                                {{-- <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
+                                <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div> --}}
+                                <div class="clear10"></div>
+                                <div class="byr-pb-ld user_last_activity">
+                                    {{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <!--/1-->
+                    <!--/1-->
                 @endforeach
 
             </div>

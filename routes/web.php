@@ -234,7 +234,6 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
-<<<<<<< HEAD
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center']);
@@ -253,7 +252,6 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
     Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct']);
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
-=======
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
@@ -266,7 +264,6 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
 
 
->>>>>>> dev
 
 });
 

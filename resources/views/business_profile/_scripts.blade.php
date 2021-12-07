@@ -481,11 +481,23 @@
         var machineriesDetails=response.machineriesDetails;
         var categoriesProduceds=response.categoriesProduceds;
         var productionCapacities=response.productionCapacities;
+
         var nohtml="";
         if(machineriesDetails.length >0){
-            $('.machinaries-details-table-body').html(nohtml);
+            $('.machinery_table_inner_wrap').html(nohtml);
+            var  html ='<div class="overview_table box_shadow">';
+            html +='<table>';
+            html +='<thead>';
+            html +='<tr>';
+            html +='<th>Machine Name</th>';
+            html +='<th>Quantity</th>';
+            html +='<th>&nbsp;</th>';
+            html +='</tr>';
+            html +='</thead>';
+            html +='<tbody class="machinaries-details-table-body">';
+
             for(let i=0;i<machineriesDetails.length ;i++){
-                var html = '<tr>';
+                html += '<tr>';
                 html += '<td>'+machineriesDetails[i].machine_name+'</td>';
                 html += '<td>'+machineriesDetails[i].quantity+'</td>';
                 if(machineriesDetails[i].status==1)
@@ -494,14 +506,22 @@
                 html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                $('.machinaries-details-table-body').append(html)
+                
             }
+            html+='</tbody>';
+            html +='</table>';
+            html +='</div>';
+            $('.machinery_table_inner_wrap').append(html);
         }
         else{
             //append in table 
-            $('.machinaries-details-table-body').children().empty();
-            var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
-            $('.machinaries-details-table-body').append(html);
+            $('.machinery_table_inner_wrap').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.machinery_table_inner_wrap').append(html);
 
             //append in form
             $('.machinaries-details-table-block tbody').children().empty();
@@ -515,9 +535,20 @@
 
         var nohtml="";
         if(categoriesProduceds.length >0){
-            $('.categories-produced-table-body').html(nohtml);
+            $('.categories_produced_wrapper').html(nohtml);
+            var  html ='<div class="overview_table box_shadow">';
+            html +='<table>';
+            html +='<thead>';
+            html +='<tr>';
+            html +='<th>Type</th>';
+            html +='<th>Percentage</th>';
+            html +='<th>&nbsp;</th>';
+            html +='</tr>';
+            html +='</thead>';
+            html +='<tbody class="categories-produced-table-body">';
+
             for(let i=0;i<categoriesProduceds.length ;i++){
-                var html = '<tr>';
+                html += '<tr>';
                 html += '<td>'+categoriesProduceds[i].type+'</td>';
                 html += '<td>'+categoriesProduceds[i].percentage+'</td>';
                 if(categoriesProduceds[i].status==1)
@@ -526,16 +557,22 @@
                 html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                $('.categories-produced-table-body').append(html);
             }
+
+            html+='</tbody>';
+            html +='</table>';
+            html +='</div>';
+            $('.categories_produced_wrapper').append(html);
+
         }else{
 
-            //append in table
-            $('.categories-produced-table-body').children().empty();
-            var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
-            $('.categories-produced-table-body').append(html);
-
-         
+            $('.categories_produced_wrapper').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.categories_produced_wrapper').append(html);
 
             //append in form
             $('.categories-produced-table-block tbody').children().empty();
@@ -546,36 +583,61 @@
                 html +='</tr>';
                 $('.categories-produced-table-block tbody').append(html);
         }
-        var nohtml="";
-        if(productionCapacities.length >0){
-            $('.production-capacity-table-body').html(nohtml);
-            for(let i=0;i<productionCapacities.length ;i++){
-                var html = '<tr>';
-                html += '<td>'+productionCapacities[i].machine_type+'</td>';
-                html += '<td>'+productionCapacities[i].annual_capacity+'</td>';
-                if(productionCapacities[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
-                }
-                html += '</tr>';
-                $('.production-capacity-table-body').append(html)
-            }
-        }else{
-            //append in table
-            $('.production-capacity-table-body').children().empty();
-            var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
-            $('.production-capacity-table-body').append(html);
 
-            //append in form
-            $('.production-capacity-table-block tbody').children().empty();
-            var html='  <tr id="production-capacity-table-no-data">';
-                html +='<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>';
-                html +='<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-                html +='</tr>';
-                $('.production-capacity-table-block tbody').append(html);
-        }
+
+        // var nohtml="";
+        // if(productionCapacities.length >0){
+        //     $('.production-capacity-wrapper').html(nohtml);
+        //     var  html ='<div class="overview_table box_shadow">';
+        //     html +='<table>';
+        //     html +='<thead>';
+        //     html +='<tr>';
+        //     html +='<th>Machine Type</th>';
+        //     html +='<th>Annual Capacity</th>';
+        //     html +='<th>&nbsp;</th>';
+        //     html +='</tr>';
+        //     html +='</thead>';
+        //     html +='<tbody class="production-capacity-table-body">';
+
+        //     for(let i=0;i<productionCapacities.length ;i++){
+        //         html += '<tr>';
+        //         html += '<td>'+productionCapacities[i].machine_type+'</td>';
+        //         html += '<td>'+productionCapacities[i].annual_capacity+'</td>';
+        //         if(productionCapacities[i].status==1)
+        //         html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+        //         else{
+        //         html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+        //         }
+        //         html += '</tr>';
+               
+        //     }
+        //     html+='</tbody>';
+        //     html +='</table>';
+		// 	html +='</div>';
+        //     $('.production-capacity-wrapper').append(html);
+        // }else{
+        //     //append in table
+        //     // $('.production-capacity-table-body').children().empty();
+        //     // var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
+        //     // $('.production-capacity-table-body').append(html);
+
+        //     $('.production-capacity-wrapper').html(nohtml);
+        //     var html='';
+        //     html +='<div class="card-alert card cyan lighten-5">';
+        //     html +='<div class="card-content cyan-text">';
+        //     html +='<p>INFO : No data found.</p>';
+        //     html +='</div>';
+        //     $('.production-capacity-wrapper').append(html);
+
+        //     //append in form
+        //     $('.production-capacity-table-block tbody').children().empty();
+        //     var html='  <tr id="production-capacity-table-no-data">';
+        //         html +='<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>';
+        //         html +='<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>';
+        //         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        //         html +='</tr>';
+        //         $('.production-capacity-table-block tbody').append(html);
+        // }
 
 
 
@@ -637,10 +699,13 @@
         var nohtml="";
         if(productionFlowAndManpowers.length >0){
 
-            $('.production-flow-and-manpower-table-body').html(nohtml);
-            for(let i = 0;i < productionFlowAndManpowers.length ;i++){
+            $('.manpower_table_wrapper').html(nohtml);
+            var  html ='<div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">';
+            html +='<table class="production-flow-and-manpower-table">';
+            html +='<tbody class="production-flow-and-manpower-table-body">';
 
-                var html = '<tr>';
+            for(let i = 0;i < productionFlowAndManpowers.length ;i++){
+                html += '<tr>';
                 html += '<th>'+productionFlowAndManpowers[i].production_type+'</th>';
                 html += '<td>';
                 html += '<table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">';
@@ -659,16 +724,23 @@
                 html += '</table>';
                 html += '</td>';
                 html += '</tr>';
-
-                $('.production-flow-and-manpower-table-body').append(html);
-
             }
+            html += '</tbody>';
+            html += '</table>';
+
+            $('.manpower_table_wrapper').append(html);
         }
         else{
-            //append in table
-            $('.production-flow-and-manpower-table-body').children().empty();
-            var html = '<tr><td><span class="manpower_empty_table">INFO : No data found.</span></td></tr>';
-            $('.production-flow-and-manpower-table-body').append(html);
+
+            $('.manpower_table_wrapper').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.manpower_table_wrapper').append(html);
+
+
 
             //append in form
             $('.production-flow-and-manpower-table-block  tbody').children().empty();
@@ -1637,9 +1709,14 @@
         var businessTerms=response.businessTerms;
         var nohtml="";
         if(businessTerms.length >0){
-            $('.business-term-table-body').html(nohtml);
+
+            $('.business_terms_table_wrap').html(nohtml);
+            var html ='<div class="overview_table box_shadow">';
+            html +='<table>';
+            html +='<tbody class="business-term-table-body">';
+
             for(let i=0;i<businessTerms.length ;i++){
-                var html = '<tr>';
+                html += '<tr>';
                 html += '<td>'+businessTerms[i].title+'</td>';
                 html += '<td>'+businessTerms[i].quantity+'</td>';
                 if(businessTerms[i].status==1)
@@ -1648,15 +1725,20 @@
                 html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                $('.business-term-table-body').append(html)
             }
+            $('.business_terms_table_wrap').append(html)
         }
         else{
 
             //append in table
-            $('.business-term-table-body').children().empty();
-            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
-            $('.business-term-table-body').append(html);
+            $('.business_terms_table_wrap').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.business_terms_table_wrap').append(html);
+
 
             //append in form
             $('.business-term-table-block tbody').children().html(nohtml);
@@ -1722,9 +1804,14 @@
         var samplings=response.samplings;
         var nohtml="";
         if(samplings.length >0){
-            $('.sampling-table-body').html(nohtml);
+
+            $('.sampling_table_wrapper').html(nohtml);
+            var  html ='<div class="overview_table box_shadow">';
+            html +='<table>';
+            html +='<tbody class="sampling-table-body">';
+
             for(let i=0;i<samplings.length ;i++){
-                var html = '<tr>';
+                html += '<tr>';
                 html += '<td>'+samplings[i].title+'</td>';
                 html += '<td>'+samplings[i].quantity+'</td>';
                 if(samplings[i].status==1)
@@ -1733,14 +1820,18 @@
                 html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                $('.sampling-table-body').append(html)
             }
+            $('.sampling_table_wrapper').append(html)
         }
         else{
 
-            $('.sampling-table-body').children().empty();
-            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
-            $('.sampling-table-body').append(html);
+            $('.sampling_table_wrapper').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.sampling_table_wrapper').append(html);
 
             //append in form
             $('.sampling-table-block tbody').children().html(nohtml);
@@ -1806,9 +1897,14 @@
         var specialCustomizations=response.specialCustomizations;
         var nohtml="";
         if(specialCustomizations.length >0){
-            $('.special-customization-table-body').html(nohtml);
+
+            $('.special_customization_table_wrap').html(nohtml);
+            var  html ='<div class="overview_table box_shadow">';
+            html +='<table>';
+            html +='<tbody class="special-customization-table-body">';
+
             for(let i=0;i<specialCustomizations.length ;i++){
-                var html = '<tr>';
+                html += '<tr>';
                 html += '<td>'+specialCustomizations[i].title+'</td>';
                 if(specialCustomizations[i].status==1)
                 html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
@@ -1816,15 +1912,19 @@
                 html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                $('.special-customization-table-body').append(html)
             }
+            $('.special_customization_table_wrap').append(html)
         }
         else{
 
             //append in form
-            $('.special-customization-table-body').children().empty();
-            var html = '<span class="no_data_box manpower_empty_table">No Data</span>';
-            $('.special-customization-table-body').append(html);
+            $('.special_customization_table_wrap').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.special_customization_table_wrap').append(html);
 
             //append in table
             $('.special-customization-table-block tbody').children().html(nohtml);
@@ -1890,9 +1990,14 @@
         var sustainabilityCommitments=response.sustainabilityCommitments;
         var nohtml="";
         if(sustainabilityCommitments.length >0){
-            $('.sustainability-commitment-table-body').html(nohtml);
+
+            $('.sustainability_commitment_table_wrap').html(nohtml);
+            var  html ='<div class="overview_table box_shadow">';
+            html +='<table>';
+            html +='<tbody class="sustainability-commitment-table-body">';
+
             for(let i=0;i<sustainabilityCommitments.length ;i++){
-                var html = '<tr>';
+                html += '<tr>';
                 html += '<td>'+sustainabilityCommitments[i].title+'</td>';
                 if(sustainabilityCommitments[i].status==1){
                     html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
@@ -1901,15 +2006,21 @@
                     html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                $('.sustainability-commitment-table-body').append(html)
             }
+
+            $('.sustainability_commitment_table_wrap').append(html)
         }
+
         else{
 
             //append in table
-            $('.sustainability-commitment-table-body').children().empty();
-            var html = '<span class="no_data_box manpower_empty_table">INFO : No data found.</span>';
-            $('.sustainability-commitment-table-body').append(html);
+            $('.sustainability_commitment_table_wrap').html(nohtml);
+            var html='';
+            html +='<div class="card-alert card cyan lighten-5">';
+            html +='<div class="card-content cyan-text">';
+            html +='<p>INFO : No data found.</p>';
+            html +='</div>';
+            $('.sustainability_commitment_table_wrap').append(html);
 
             //append in form
             $('.sustainability-commitment-table-block tbody').children().html(nohtml);

@@ -7,7 +7,10 @@
                     <div class="row top_titleWrap">
                       <div class="col s6 m6"><h3>Company Overview</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button data-target="modal1" type="button" class="btn_edit btn_green_White modal-trigger" ><i class="material-icons">border_color</i>Edit</button>
+                        <button data-target="modal1" type="button" class="btn_edit btn_green_White modal-trigger" >
+                          <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                          <span class="btn_edit_white"> Edit</span>
+                        </button>
                       </div>
                     </div>
                     <div class="overview_table box_shadow">
@@ -102,7 +105,10 @@
                     <div class="row top_titleWrap">
                       <div class="col s6 m6"><h3>Capacity and Machineries</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_edit btn_green_White" ><i class="material-icons">border_color</i> Edit</button>
+                        <button type="button" class="btn_edit btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                          <span class="btn_edit_white"> Edit</span>
+                        </button>
                       </div>
                     </div>
                     <div class="row capacity_table">
@@ -257,7 +263,10 @@
                       <div class="row top_titleWrap">
                         <div class="col s6 m6"><h3>Production Flow and Manpower</h3></div>
                         <div class="col s6 m6 right-align editBox">
-                          <button type="button" class="btn_edit btn_green_White" ><i class="material-icons">border_color</i> Edit</button>
+                          <button type="button" class="btn_edit btn_green_White" >
+                            <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                            <span class="btn_edit_white"> Edit</span>
+                          </button>
                         </div>
                       </div>
                       <div class="overview_table box_shadow">
@@ -439,8 +448,14 @@
                     <div class="row top_titleWrap upload_delete_wrap">
                       <div class="col s6 m6"><h3>Certifications</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_upload btn_green_White" ><i class="material-icons">file_upload</i> Upload</button>
-                        <button type="button" class="btn_delete btn_green_White" ><i class="material-icons">delete</i> Delete</button>
+                        <button type="button" class="btn_upload btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">file_upload</i></span>
+                          <span class="btn_edit_white"> Upload</span>
+                        </button>
+                        <button type="button" class="btn_delete btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">delete</i></span>
+                          <span class="btn_edit_white"> Delete</span>
+                        </button>
                       </div>
                     </div>
                     <div class="row">
@@ -454,8 +469,14 @@
                     <div class="row top_titleWrap upload_delete_wrap">
                       <div class="col s6 m6"><h3>Main Buyers</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_upload btn_green_White" ><i class="material-icons">file_upload</i> Upload</button>
-                        <button type="button" class="btn_delete btn_green_White" ><i class="material-icons">delete</i>Delete</button>
+                        <button type="button" class="btn_upload btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">file_upload</i></span>
+                          <span class="btn_edit_white"> Upload</span>
+                        </button>
+                        <button type="button" class="btn_delete btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">delete</i></span>
+                          <span class="btn_edit_white"> Delete</span>
+                        </button>
                       </div>
                     </div>
                     <div class="buyers_logo_wrap row">
@@ -499,8 +520,14 @@
                     <div class="row top_titleWrap upload_delete_wrap">
                       <div class="col s6 m6"><h3>Export Destinations</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_upload btn_green_White" ><i class="material-icons">file_upload</i> Upload</button>
-                        <button type="button" class="btn_delete btn_green_White" ><i class="material-icons">delete</i> Delete</button>
+                        <button type="button" class="btn_upload btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">file_upload</i></span>
+                          <span class="btn_edit_white"> Upload</span>
+                        </button>
+                        <button type="button" class="btn_delete btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">delete</i></span>
+                          <span class="btn_edit_white"> Delete</span>
+                        </button>
                       </div>
                     </div>
                     <div class="row flag_wrap center-align">
@@ -535,7 +562,10 @@
                     <div class="row top_titleWrap">
                       <div class="col s6 m6"><h3>Business Terms</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_edit btn_green_White" ><i class="material-icons">border_color</i>Edit</button>
+                        <button type="button" class="btn_edit btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                          <span class="btn_edit_white"> Edit</span>
+                        </button>
                       </div>
                     </div>
                     <div class="overview_table box_shadow">
@@ -595,7 +625,10 @@
                     <div class="row top_titleWrap">
                       <div class="col s6 m6"><h3>Sampling and R&D</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_edit btn_green_White" ><i class="material-icons">border_color</i> Edit</button>
+                        <button type="button" class="btn_edit btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                          <span class="btn_edit_white"> Edit</span>
+                        </button>
                       </div>
                     </div>
                     <div class="overview_table box_shadow">
@@ -670,11 +703,13 @@
                     </div>
                   </div>
 
-                  <div class="overview_table_wrap blank_overview_table_">
+                  <div class="overview_table_wrap blank_overview_table_wrap">
                     <div class="row top_titleWrap">
                       <div class="col s6 m6"><h3>Special customization ability</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_edit btn_green_White" ><i class="material-icons">border_color</i> Edit</button>
+                        <button type="button" class="btn_edit btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                          <span class="btn_edit_white"> Edit</span>
                       </div>
                     </div>
                     <div class="overview_table box_shadow">
@@ -849,11 +884,14 @@
                     </div>
                   </div>
 
-                  <div class="overview_table_wrap blank_overview_table_">
+                  <div class="overview_table_wrap blank_overview_table_wrap">
                     <div class="row top_titleWrap">
                       <div class="col s6 m6"><h3>Sustainability commitments</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_edit btn_green_White" ><i class="material-icons">border_color</i> Edit</button>
+                        <button type="button" class="btn_edit btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                          <span class="btn_edit_white"> Edit</span>
+                        </button>
                       </div>
                     </div>
                     <div class="overview_table box_shadow">
@@ -905,8 +943,14 @@
                     <div class="row top_titleWrap upload_delete_wrap">
                       <div class="col s6 m6"><h3>Association memberships</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_upload btn_green_White"><i class="material-icons">file_upload</i> Upload</button>
-                        <button type="button" class="btn_delete btn_green_White"><i class="material-icons">delete</i> Delete</button>
+                        <button type="button" class="btn_upload btn_green_White">
+                          <span class="btn_icon"><i class="material-icons">file_upload</i></span>
+                          <span class="btn_edit_white"> Upload</span>
+                        </button>
+                        <button type="button" class="btn_delete btn_green_White">
+                          <span class="btn_icon"><i class="material-icons">delete</i></span>
+                          <span class="btn_edit_white"> Delete</span>
+                        </button>
                       </div>
                     </div>
                     <div class="row membership_textBox">
@@ -925,8 +969,14 @@
                     <div class="row top_titleWrap upload_delete_wrap">
                       <div class="col s6 m6"><h3>PR Highlights</h3></div>
                       <div class="col s6 m6 right-align editBox">
-                        <button type="button" class="btn_upload btn_green_White" ><i class="material-icons">file_upload</i> Upload</button>
-                        <button type="button" class="btn_delete btn_green_White" ><i class="material-icons">delete</i> Delete</button>
+                        <button type="button" class="btn_upload btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">file_upload</i></span>
+                          <span class="btn_edit_white"> Upload</span>
+                        </button>
+                        <button type="button" class="btn_delete btn_green_White" >
+                          <span class="btn_icon"><i class="material-icons">delete</i></span>
+                          <span class="btn_edit_white"> Delete</span>
+                        </button>
                       </div>
                     </div>
                     <div class="row">

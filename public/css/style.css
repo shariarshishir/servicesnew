@@ -1425,12 +1425,12 @@ form input:read-only {
     box-shadow: 0px 0px 19px -3px rgba(68,133,71,1);
 }
 .profile_tabNav_wrap .editBox .btn_green_White.btn_delete {
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .profile_tabNav_wrap .editBox .btn_green_White:focus {
     background: #fff;
 }
-.profile_tabNav_wrap .editBox .btn_green_White span {
+.profile_tabNav_wrap .editBox .btn_green_White .btn_icon {
     background: #4E9C52;
     padding: 0;
     float: left;
@@ -1443,6 +1443,11 @@ form input:read-only {
     line-height: 38px;
     margin-top: 0;
 }
+
+.profile_tabNav_wrap .editBox .btn_green_White .btn_edit_white {
+    font-size: 16px;
+}
+
 .profile_tabNav_wrap .editBox .btn_green_White .material-icons {
     font-size: 18px;
 }
@@ -1468,7 +1473,6 @@ form input:read-only {
 .overview_table .production-flow-and-manpower-table-body table tr {
     display: flow-root;
 }
-
 
 .profile_tabNav_wrap table td, 
 .profile_tabNav_wrap table th {
@@ -1503,6 +1507,7 @@ form input:read-only {
 
 .card .card-content {
     padding: 0;
+    text-align: center;
 }
 .profile_tabNav_wrap .verified_img {
     float: right;
@@ -5707,6 +5712,11 @@ nav .pagination li.active .page-link {
     }
     .profile-block .col {
         width: 100%;
+    }
+
+    .profile_form_modal .submit_btn_wrap .btn_green {
+        float: none;
+        margin-top: 10px !important;
     }
 
  

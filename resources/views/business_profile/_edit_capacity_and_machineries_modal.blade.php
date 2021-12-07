@@ -6,7 +6,8 @@
 		@csrf
 		<input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
 		<div class="row">
-			<div class="col s12 capacity_block_box">
+
+			<!-- <div class="col s12 capacity_block_box">
 				<div class="form-group production-capacity-block">
 					<legend>Production Capacity (Annual)</legend>
 					<div class="production-capacity-block">
@@ -42,7 +43,8 @@
 						
 					</div>
 				</div>
-			</div>
+			</div> -->
+
 			<div class="col s12 capacity_block_box">
 				<div class="form-group categories-produced-block">
 					<legend>Categories Produced</legend>

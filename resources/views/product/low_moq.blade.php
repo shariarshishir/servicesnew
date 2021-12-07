@@ -10,7 +10,7 @@
                     <div class="low_moq_products_wrap row">
                         @foreach ($products as $product)
                             <div class="col m3 productBox">
-                                
+
                                 @if($product->flag == 'shop')
                                     <div class="imgBox">
                                         <img src="{{asset('storage/'.$product->images[0]['image'])}}" alt="">
@@ -22,7 +22,7 @@
                                         </div>
                                     @endif
                                 @endif
-                                
+
                                 <h4>{{$product->title ?? $product->name }}</h4>
                                 <div class="moqBox">MOQ: {{$product->moq}}</div>
 
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div> --}}
-    
+
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
@@ -70,8 +70,9 @@
                 recPerPage = 12,
                 page = 1,
                 totalPages = 0;
+                var url = '{{ route("low.moq.data") }}';
                 $.ajax({
-                    url: '/low-moq-data',
+                    url: url,
                     async: true,
                     crossDomain: true,
                     dataType: 'json',
@@ -119,7 +120,7 @@
                             tr.append('<h4>' +title+ '</h4');
                             tr.append('<div class="moqBox">MOQ:' + displayRecords[i].moq  + '</div>');
                             tr.append('<div class="moq_view_details">');
-                            tr.append('<a class="moq_buss_name moq_left left" href="+business_profile_url+">'+displayRecords[i].business_profile.business_name+'</a>')
+                            tr.append('<a class="moq_buss_name moq_left left" href="'+business_profile_url+'">'+displayRecords[i].business_profile.business_name+'</a>')
                             tr.append('<a class="moq_view moq_right right" href='+details_url+'>View Details </a>');
                             tr.append('</div>');
                             tr.append('</div>');

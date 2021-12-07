@@ -2,20 +2,23 @@
 
 @section('content')
 
-<div>
+<!-- <div>
     <a class="waves-effect waves-light btn modal-trigger" href="#create-rfq-form">Create Rfq</a>
-</div>
+</div> -->
 @include('rfq._create_rfq_form_modal')
+<div id="errors">
 
+</div>
 
 <!-- RFQ html start -->
 
-<div class="box_shadow_radius rfq_content_box">
-	<div class="rfq_info_wrap right-align">
+<div class="box_shadow_radius rfq_content_box ">
+	<div class="rfq_info_wrap right-align rfq_top_navbar">
 		<ul>
-			<li><a href="javascript:void(0);" class="btn_grBorder">RFQ Home</a></li>
-			<li><a href="javascript:void(0);" class="btn_grBorder">My RFQs</a></li>
+			<li><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
+			<li><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
 			<li><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
+			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
 		</ul>
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
@@ -29,7 +32,7 @@
 		<div class="col s12 m9 l10 rfq_profile_info">
 			<div class="row">
 				<div class="profile_info col s12 m8 l8">
-					<h4>Adbul Kuddus <img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" /> </h4>
+					<h4>{{ $rfqSentList->user->name}}<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" /> </h4>
 					<p>Merchandiser, <br/> Fashion Tex Ltd.</p>
 				</div>
 				<!--div class="profile_view_time right-align col s12 m4 l4">
@@ -42,8 +45,14 @@
 				<a href="javascript:void(0);"> #Sweater</a> <a href="javascript:void(0);"> #Apparel</a>
 			</div-->
 			<div class="row rfq_thum_imgs">
-				<div class="col s12 m6 l4"><img src="{{asset('images/frontendimages/new_layout_images/sweater_3.png')}}" alt="" /> </div>
-				<div class="col s12 m6 l4"><img src="{{asset('images/frontendimages/new_layout_images/sweater_2.png')}}" alt="" /> </div>
+                @if($rfqSentList->images()->exists())
+                    @foreach ($rfqSentList->images as  $key => $rfqImage )
+                        @if($key == 4)
+                            @break
+                        @endif
+                        <div class="col s12 m4 l3"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
+                    @endforeach
+                @endif
 			</div>
 			<div class="rfq_view_detail_wrap center-align">
 				<button class="none_button btn_view_detail" onclick="myFunction()" id="rfqViewDetail">View Detail</button>
@@ -81,9 +90,15 @@
 			</div>
 			<div class="responses_wrap right-align">
 				<!--span><i class="material-icons">favorite</i> Saved</span-->
-				<a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+                @if($rfqSentList->user->id != auth()->id())
+                    @if(isset($rfqSentList->bid_user_id))
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">{{ in_array(auth()->id(), $rfqSentList->bid_user_id) ? 'Replied' : 'Replay On this RFQ' }}</a>
+                    @else
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a>
+                    @endif
+                @endif
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">2</span> 
+					Responses <span class="respons_count  res_count_{{$rfqSentList->id}}_">{{$rfqSentList->bids_count}}</span>
 				</button>
 			</div>
 			<!--div class="respones_detail_wrap">
@@ -129,7 +144,7 @@
         {!! $rfqLists->links() !!}
     </div>
 </div>
-
+@include('rfq._create_rfq_bid_form_modal')
 @endsection
 
 @include('rfq._scripts')

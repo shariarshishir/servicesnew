@@ -26,6 +26,7 @@ use App\Http\Controllers\AssociationMembershipController;
 use App\Http\Controllers\PressHighlightController;
 use App\Http\Controllers\BusinessTermController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\Manufacture\PoController;
 use App\Http\Controllers\SamplingController;
 use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
@@ -53,6 +54,7 @@ use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
+use App\Http\Controllers\RfqBidController;
 
 
 /*
@@ -188,6 +190,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/certification-details-upload', [CertificationController::class, 'certificationDetailsUpload'])->name('certification.upload');
     Route::get('/certification-details-delete', [CertificationController::class, 'deleteCertificate'])->name('certification.delete');
 
+    Route::post('/factory-details-upload', [CertificationController::class, 'factoryDetailsUpload'])->name('factoryinfo.upload');
+    Route::get('/factory-details-delete', [CertificationController::class, 'factoryDetailsDelete'])->name('factoryinfo.delete');
+
     Route::post('/main-buyers-details-upload', [MainBuyerController::class, 'mainBuyerDetailsUpload'])->name('mainbuyers.upload');
     Route::get('/main-buyers-details-delete', [MainBuyerController::class, 'deleteMainBuyer'])->name('mainbuyers.delete');
 
@@ -229,6 +234,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
+<<<<<<< HEAD
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center']);
@@ -247,6 +253,20 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
     Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct']);
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
+=======
+    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
+    //bid rfq
+    Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
+    Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
+    //poforma
+    Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
+    Route::post('/po/store', [PoController::class,'store'])->name('po.store');
+    Route::get('/po',[PoController::class,'index'])->name('po.index');
+    Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat']);
+
+
+
+>>>>>>> dev
 
 });
 

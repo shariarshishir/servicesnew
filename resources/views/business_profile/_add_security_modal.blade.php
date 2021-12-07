@@ -3,7 +3,7 @@
 	<div id="security-modal-errors">
 	</div>
 	<form  method="post" action="#" id="security-form">
-        <label>Create Security and others</label>
+        <legend>Create Security and others</legend>
 		@csrf
 		<input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
 		@if($business_profile->security)

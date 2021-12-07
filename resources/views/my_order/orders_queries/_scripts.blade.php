@@ -17,7 +17,7 @@
             var order_modification_req_id =  $('#add-to-cart-order-query-modal input[name=order_modification_req_id]').val();
             var discount_amount =  $('#add-to-cart-order-query-modal input[name=ord_mod_discount]').val();
             var product_type =  $('#add-to-cart-order-query-modal input[name=ord_req_product_type]').val();
-            var url = "/add-to-cart";
+            var url = '{{ route("add.cart") }}';
             var color_attr=[];
             // for ready stock and buy design
             if(product_type == 1 || product_type == 2)

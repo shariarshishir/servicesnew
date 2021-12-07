@@ -16,6 +16,10 @@ class BusinessProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 
     public function companyOverview()
     {
@@ -56,6 +60,11 @@ class BusinessProfile extends Model
     public function pressHighlights()
     {
         return $this->hasMany(PressHighlight::class);
+    }
+
+    public function companyFactoryTour()
+    {
+        return $this->hasMany(CompanyFactoryTour::class);
     }
 
     public function businessTerms()

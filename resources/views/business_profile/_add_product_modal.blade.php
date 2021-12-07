@@ -1,4 +1,4 @@
-<div id="product-add-modal-block" class="modal modal-fixed-footer ">
+<div id="product-add-modal-block" class="modal ">
 
     <div class="modal-content">
         <section class="ic-buying-req">
@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="title">
                         <legend>Upload Product</legend>
-                        <p>Upload your new product</p>
+                        <!-- <p>Upload your new product</p> -->
                     </div>
                 </div>
                 <div id="manufacture-product-upload-errors"></div>
@@ -141,8 +141,8 @@
                             <div class="row center-align" style="padding-top: 25px;">
                                 <!--1-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
-                                    <img src="https://via.placeholder.com/80" id="img1" class="img-thumbnail">
+                                    <div class="media_img">
+                                        <img src="https://via.placeholder.com/80" id="img1" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
                                     <div class="col-md-12" style="text-align:center;">
@@ -162,7 +162,7 @@
 
                                 <!--2-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img2" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -183,7 +183,7 @@
 
                                 <!--3-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img3" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -204,7 +204,7 @@
 
                                 <!--4-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img4" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -225,7 +225,7 @@
 
                                 <!--5-->
                                 <div class="col s6 m2 l2 center-align">
-                                    <div class="col-md-12">
+                                    <div class="media_img">
                                     <img src="https://via.placeholder.com/80" id="img5" class="img-thumbnail">
                                     </div>
                                     <div class="clear10"></div>
@@ -251,20 +251,28 @@
                         </div>
                     </div><br>
 
-                    <div class="submit_wrap right-align">
+                    <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>
                         <button type="button" class="btn_green btn modal-close waves-effect waves-light green btn-back-to-product-list">Cancel</button>
+                    </div> -->
+                    <div class="submit_btn_wrap">
+                        <div class="row">
+                            <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                            <div class="col s12 m6 l8 right-align">
+                                <button type="submit" class="btn_green  seller_product_create">Save</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </section>
     </div>
 
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
-    </div>
+    </div> -->
 
 </div>
 

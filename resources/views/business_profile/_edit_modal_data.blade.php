@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 title">
-                <legend>Upload Product test</legend>
-                <p>Upload your new product</p>
+                <legend>Upload Product</legend>
+                <!-- <p>Upload your new product</p> -->
             </div>
         </div>
 
@@ -148,7 +148,7 @@
                 @foreach($product->product_images as $product_image)
                     <!--1-->
                     <div class="col s6 m2 l2 center-align">
-                        <div class="col s12">
+                        <div class="media_img">
                             <img src="{{ asset('storage/' .$product_image->product_image) }}" id="img{{ $product_image->id }}" class="img-thumbnail">
                         </div>
                         <div class="clear10"></div>
@@ -169,7 +169,7 @@
                     @for($i = 1; $i <= (5 - count($product->product_images)); $i++)
                         @php $rand = rand();@endphp
                         <div class="col s6 m2 l2 center-align">
-                            <div class="col-md-12">
+                            <div class="media_img">
                                 <img src="https://placehold.it/80x80" id="img{{ $rand }}" class="img-thumbnail">
                             </div>
                             <div class="clear10"></div>
@@ -188,10 +188,20 @@
                 @endif
 
             </div>
-            <div class="col s12 submit_wrap right-align">
+
+            <!-- <div class="col s12 submit_wrap right-align">
                 <button type="submit" class="btn waves-effect waves-light green seller_product_create btn_green">Update</button>
                 <button type="button" class="btn modal-close waves-effect waves-light green btn-back-to-product-list btn_green">Cancel</button>
+            </div> -->
+            <div class="submit_btn_wrap">
+                <div class="row">
+                    <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                    <div class="col s12 m6 l8 right-align">
+                        <button type="submit" class="seller_product_create btn_green">Update</button>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </div>
 </section>

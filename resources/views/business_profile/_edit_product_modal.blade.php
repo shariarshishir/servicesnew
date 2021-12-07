@@ -1,4 +1,4 @@
-<div id="product-edit-modal-block" class="modal modal-fixed-footer ">
+<div id="product-edit-modal-block" class="modal ">
 
     <form action="" method="post" enctype="multipart/form-data" id="manufacture-product-update-form">
         @csrf
@@ -12,10 +12,11 @@
 
 
     </form>
-    <div class="modal-footer">
+
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
-    </div>
+    </div> -->
 
 </div>

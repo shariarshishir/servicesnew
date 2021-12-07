@@ -9,7 +9,7 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  press-highlight-details-block">
-                    <label>Press Highlight</label>
+                    <legend>Press Highlight</legend>
                     <div class="press-highlight-details-block">
                         <table class="press-highlight-details-table-block">
                             <thead>

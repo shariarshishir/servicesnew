@@ -33,9 +33,9 @@
 
 
 @media only screen and (max-width: 1280px) {
-    .logo img {
+    /* .logo img {
         max-width: 80px;
-    }
+    } */
     .mainnav_wrap {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -49,11 +49,6 @@
     .mainNav ul li a:link, 
     .mainNav ul li a:active, 
     .mainNav ul li a:visited {
-        font-size: 16px;
-    }
-    .top_right .btn_white,
-    .top_right .btn_green {
-        padding: 0 10px;
         font-size: 16px;
     }
 }

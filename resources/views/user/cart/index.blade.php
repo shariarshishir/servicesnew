@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @include('sweet::alert')
-<section class="content">
+<section class="content cart_content_wrap main_content_wrapper">
     <div class="container-fluid">
        @if(count($addToCartItems) > 0)
         <div class="row">
@@ -102,7 +102,7 @@
                                             </span>
                                         </td>
                                         <td class="product-remove">
-                                            <a href="{{route('cart.delete',$item->id)}}" class="btn waves-effect waves-light green" aria-label="Remove this item" data-cartRowId="{{$item->id}}" data-product_sku="{{$item->product_sku}}"><i class="material-icons dp48">delete</i></a>
+                                            <a href="{{route('cart.delete',$item->id)}}" class="btn_delete" aria-label="Remove this item" data-cartRowId="{{$item->id}}" data-product_sku="{{$item->product_sku}}"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                         </td>
                                     </tr>
                                     {{-- <input type="hidden" name="rowId" value="{{$item->cart_row_id}}" >
@@ -140,7 +140,7 @@
                                 </table>
                                 <br>
                                 <div class="proceed-to-checkout">
-                                    <a href="{{route('cart.checkout')}}" class="btn waves-effect waves-light green">Proceed to checkout</a>
+                                    <a href="{{route('cart.checkout')}}" class="btn_green waves-effect waves-light green">Proceed to checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -327,7 +327,7 @@
                         }
                         $("#cart_item_customize_block .add_more_colors_sizes").html('');
                        if(data.data.product_type==1){
-                         var add_more='<a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addFreshOrderColorSizeInCart()"><i class="material-icons dp48">add</i> Add More</a>';
+                         var add_more='<a href="javascript:void(0);" class="cart_add_more" onclick="addFreshOrderColorSizeInCart()"><i class="material-icons dp48">add</i> Add More</a>';
                          $("#cart_item_customize_block .add_more_colors_sizes").html(add_more);
                          $('.check_copyright_price').html('');
                          if(data.data.copyright== true){
@@ -412,7 +412,7 @@ function addFreshOrderColorSizeInCart()
         html+='<td><input class="combat" type="text"  class="form-control " name="color_size[xxxl][]" /></td>';
         html+='<td><input class="combat" type="text"  class="form-control " name="color_size[four_xxl][]" /></td>';
         html+='<td><input class="combat" type="text"  class="form-control " name="color_size[one_size][]" /></td>';
-        html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeFreshOrderColorSizeInCart(this)"><i class="material-icons dp48">remove</i></a></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderColorSizeInCart(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
     $('#cart_item_customize_block tbody').append(html);
 }

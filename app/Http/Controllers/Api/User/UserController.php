@@ -144,37 +144,29 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'user_type' => 'required',
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
         ]);
-
+        $checkExistingUser=User::Where('email', $request->email)->first();
+        if($checkExistingUser){
+            return response()->json('user already exists', 403);
+        }
+    
         $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
         $user = User::create([
             'user_id'=>$user_id,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type' => $request->user_type == 'buyer' ? 'buyer' : 'wholesaler',
+            'user_type' => 'buyer',
             'sso_reference_id' =>$request->sso_reference_id,
-            'phone'    => $request->phone,
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->header('User-Agent'),
+            'phone'     => $request->phone,
+            'company_name' => $request->company_name,
         ]);
 
-        //After creating user will create vendor as weel as
-        $date=Carbon::today()->toDateString();
-        $date=Carbon::parse($date)->format('dmY');
-        $number=mt_rand(0,9999999);
-        $name= Str::slug($request->vendor_name,'-');
-        $vendorUId='mbs-'.$name.'-'.$date.$number;
-
-        $vendor=Vendor::create([
-            'user_id'=>$user->id,
-            'vendor_uid' => $vendorUId,
-            'vendor_name' => $request->company_name,
-            'created_by'=>$user->id,
-            'updated_by'=>NULL,
-        ]);
         $email_verification_OTP = mt_rand(100000,999999);
         UserVerify::create([
             'user_id' => $user->id,
@@ -187,7 +179,7 @@ class UserController extends Controller
             $message->subject('Welcome to Merchantbay Shop');
         });
 
-        if($vendor && $user){
+        if($user){
             return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
         }
         else{
@@ -300,10 +292,6 @@ class UserController extends Controller
 
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
-
-                $manufacture_base_url=env('MANUFACTURE_BASE_URL');
-                $response = Http::post( $manufacture_base_url.'/api/verify', ['user' => $user]);
-
                 $message = "Your email have been verified successfully. Please Click here to login";
             } else {
                 $message = "Your email have been verified successfully.";
@@ -389,10 +377,13 @@ class UserController extends Controller
             'password'=> 'required',
 
         ]);
-        $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
+        if(env('APP_ENV') == 'production')
+        {
+            $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
+        }
 
         if($sso->successful()){
 
@@ -414,11 +405,13 @@ class UserController extends Controller
                     $message->subject('Email Verification Mail');
                 });
                 return response()->json(array('message' => $message,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>'True','user'=>$user),200);
+                // return response()->json(array('message' => $message,'auth_token'=> $token,'code'=>'True','user'=>$user),200);
             }
             elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
 
 
                 return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>"True"],201);
+                // return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
 
             }
             else{

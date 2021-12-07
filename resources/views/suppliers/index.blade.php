@@ -44,8 +44,6 @@
                             </li>
                         </ul>
                     </span>
-                    
-
                     <a class='dropdown-trigger btn btn_green btn_clear' href="{{route('suppliers')}}"> Clear </a>
                 </form>
             </span>
@@ -62,7 +60,22 @@
                 @foreach ($suppliers as $supplier )
                     <div class="industry_infoBox">
                         <div class="box_shadow">
-                            <p>Business Name: {{$supplier->business_name}}</p>
+                            <div class="industry_logobox row">
+                                <div class="col m8 l9 left"><img src="{{asset('images/frontendimages/new_layout_images/logo_global_organic.png')}}" alt=""> </div>
+                                <div class="col m4 l3 right right-align"><img src="{{asset('images/frontendimages/new_layout_images/premium_badge.png')}}" alt=""></div>
+                            </div>
+                            <div class="industry_address">
+                                <h5>{{$supplier->business_name}}</h5>
+                                <p><span><img src="{{asset('images/frontendimages/new_layout_images/icon_indus_location.png')}}"></span> {{$supplier->location}}</p>
+                            </div>
+                            <div class="industry_details">
+                                <p><img src="{{asset('images/frontendimages/new_layout_images/icon_factory.png')}}" alt=""> {{$supplier->industry_type}}</p>
+                                <p><img src="{{asset('images/frontendimages/new_layout_images/icon_t_shirt.png')}}" alt=""> {{$supplier->businessCategory ? $supplier->businessCategory->name : ''}} </p>
+                                <!--p><img src="{{asset('images/frontendimages/new_layout_images/icon_year.png')}}" alt=""> Established : </p-->
+                            </div>
+                           
+                           
+                            <!-- <p>Business Name: {{$supplier->business_name}}</p>
                             <p>Business Type:
                                 @switch($supplier->business_type)
                                     @case(1)
@@ -82,7 +95,9 @@
                             <p>Industry Type: {{$supplier->industry_type}}</p>
                             <p>Business Category: {{$supplier->businessCategory ? $supplier->businessCategory->name : ''}} </p>
                             <p>Established: </p>
-                            <p>Location: {{$supplier->location}}</p>
+                            <p>Location: {{$supplier->location}}</p> -->
+
+
                             <div class="industry_view">
                                 <a href="{{route('supplier.profile', $supplier->id)}}">View Details</a>
                             </div>

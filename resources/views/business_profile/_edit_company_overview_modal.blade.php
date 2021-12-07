@@ -1,5 +1,6 @@
 <div id="company-overview-modal" class="modal profile_form_modal">
     <div class="modal-content">
+        <legend>Company Overview</legend>
         <div class="row">
             <div id="errors"></div>
             <form class="col s12" method="post" action="#" id="company-overview-update-form">
@@ -13,11 +14,13 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="row">
-                    <label for="about_company">About company</label>
-                    <td>
-                        <textarea class="about-company" name="about_company" value="{{$business_profile->companyOverview->about_company}}" type="text" id="about-company-short-description" rows="20" cols="50">{{$business_profile->companyOverview->about_company ?? ''}}</textarea>
-                    </td>
+                <div class="row ">
+                    <div class="col s12">
+                        <label for="about_company">About company</label>
+                        <td>
+                            <textarea class="about-company" name="about_company" value="{{$business_profile->companyOverview->about_company}}" type="text" id="about-company-short-description" rows="20" cols="50">{{$business_profile->companyOverview->about_company ?? ''}}</textarea>
+                        </td>
+                    </div>
                 </div>
                 
                 <div class="submit_btn_wrap">

@@ -8,7 +8,7 @@
 		
 		<div class="row">
 			<div class="form-group  sustainability-commitment-details-block">
-				<label>Create Sustainability commitments</label>
+				<legend>Create Sustainability commitments</legend>
 				<div class="sustainability-commitment-block">
 					<table class="sustainability-commitment-table-block">
 						<thead>

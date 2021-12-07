@@ -149,7 +149,7 @@ class BusinessProfileController extends Controller
 
     public function show($id)
     {
-        $business_profile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
+        $business_profile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
@@ -187,7 +187,6 @@ class BusinessProfileController extends Controller
     public function companyOverviewUpdate(Request $request, $id)
     {
         try{
-            
             $company_overview= CompanyOverview::findOrFail($id);
             $data=[];
             $count=0;
@@ -226,8 +225,6 @@ class BusinessProfileController extends Controller
     }
 
     public function capacityAndMachineriesCreateOrUpdate(Request $request){
-
-
         $validator = Validator::make($request->all(), [
             'machine_type.*' => 'required_with:annual_capacity|string|min:1|max:255',
             'annual_capacity.*' => 'required_with:machine_type|integer',

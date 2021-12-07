@@ -3,7 +3,7 @@
 	<div id="worker-walfare-modal-errors">
 	</div>
 	<form  method="post" action="#" id="worker-walfare-form">
-		<label>Create Worker welfare and CSR</label>
+		<legend>Create Worker welfare and CSR</legend>
 		@csrf
 		<input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
 		@if($business_profile->walfare)

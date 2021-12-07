@@ -22,7 +22,8 @@
 <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <link href="{{asset('css/media.css')}}" rel="stylesheet">
 <link href="{{asset('css/image-uploader.min.css')}}" rel="stylesheet">
-
+{{-- jasny-bootstrap.min --}}
+<link href="{{asset('css/jasny-bootstrap.min.css')}}" rel="stylesheet">
 {{-- <link rel="stylesheet" href="http://demo.discoverprograming.com/plugin/bootstrap-3.min.css">
 <script src="http://demo.discoverprograming.com/plugin/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />

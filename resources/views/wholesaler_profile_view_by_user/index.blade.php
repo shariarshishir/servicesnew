@@ -71,25 +71,20 @@
 						<h3>About the Company</h3>
 						<!-- company_stuff -->
 						<div class="contentBox">
-							<p>Sayem Fashions LTD. & Radiant Sweater Ind. Ltd are two units of manufacturing within Sayem Group, aspiring for complete customer satisfaction owing
-								to the high quality Sweater at competitive prices with an on-schedule delivery and perfection in service. It firmly believes that the satisfaction of the valued
-								customers is the focal point of its business. In no time, the brand has become a name to reckon within the manufactures of Pullovers, Cardigans, Sweaters,
-								Jumpers, Vests, Scarves and Woolen Cap etc, for men, women and children. Manufacturing around 280,000 to 300,000 pcs of both Basic and Fashionable,
-								Fancy sweaters of valued customers from 3gg – 12gg.
-							</p>
-							<p>The factory premises are run by experienced workers since year 2000. The company proudly stands with the lowest employee turnover rate and high
-								employee satisfaction. All resources and facilities are available within the premises around the clock.
-							</p>
-							<p>Specials team works on Fire Safety measures and everyone regularly practicing fire drills to avoid panic attack during any accidents. All fire safety measures
-								are taken and necessary training and fire fighters are managed on the floors.
-							</p>
+							@if($business_profile->companyOverview->about_company)
+							<p>{{$business_profile->companyOverview->about_company}}</p>
+							@else
+							<p>No information added</p>
+							@endif
+
+							
 						</div>
 						<!-- contentBox -->
 						
 						
 					</div>
 					<!-- Home tabcontent end -->
-					<div id="profile" class="tabcontent">
+					<div id="profile" class="tabcontent profile_table_design">
 						<div class="overview_table_wrap">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
@@ -114,15 +109,11 @@
 												</tr>
 												@endforeach
 											@else
-												<tr>
-													<td colspan="3">
-														<div class="card-alert card cyan lighten-5">
-															<div class="card-content cyan-text">
-																<p>INFO : No data found.</p>
-															</div>
-														</div>													
-													</td>
-												</tr>
+												<div class="card-alert card cyan lighten-5">
+													<div class="card-content cyan-text">
+														<p>INFO : No data found.</p>
+													</div>
+												</div>
 											@endif	
 										</tbody>
 									</table>
@@ -145,15 +136,11 @@
 										</div>
 										@endforeach
 									@else
-										<tr>
-											<td colspan="3">
-												<div class="card-alert card cyan lighten-5">
-													<div class="card-content cyan-text">
-														<p>INFO : No data found.</p>
-													</div>
-												</div>													
-											</td>
-										</tr>
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>	
 									@endif	
 								</div>
 							</div>
@@ -175,15 +162,11 @@
 											</div>
 										@endforeach
 									@else
-										<tr>
-											<td colspan="3">
-												<div class="card-alert card cyan lighten-5">
-													<div class="card-content cyan-text">
-														<p>INFO : No data found.</p>
-													</div>
-												</div>													
-											</td>
-										</tr>
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>
 									@endif	
 									
 								</div>

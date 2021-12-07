@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Manufacture\Rfq;
+use App\Models\Rfq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use App\Models\Manufacture\RfqImage;
+use App\Models\RfqImage;
 use App\Events\NewRfqHasAddedEvent;
 use App\Models\BusinessProfile;
 
@@ -14,7 +14,20 @@ class RfqController extends Controller
 {
     public function index()
     {
-        $rfqLists=Rfq::latest()->paginate(10);
+        $rfqLists=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+
+        foreach($rfqLists as $list){
+            $bid_user_id=[];
+            if($list->bids()->exists()){
+                foreach($list->bids as $user){
+                    array_push($bid_user_id,$user->supplier_id);
+                }
+                $list['bid_user_id'] = array_unique($bid_user_id);
+
+            }
+
+        }
+
         return view('rfq.index',compact('rfqLists'));
     }
 
@@ -46,7 +59,8 @@ class RfqController extends Controller
             }
         }
 
-        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->where(['business_category_id' => $request->category_id])->get();
+        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
+        // event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail));
         // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
         //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         // }
@@ -56,5 +70,11 @@ class RfqController extends Controller
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 
+    }
+
+    public function myRfq()
+    {
+        $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(10);
+        return view('rfq.my_rfq',compact('rfqLists'));
     }
 }

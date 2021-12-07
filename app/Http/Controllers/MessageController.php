@@ -67,6 +67,7 @@ class MessageController extends Controller
                 }
             }
         }
+
         $userData = User::whereIn('id',$users)->get();
         $chatusers = $userData;
         $buyers = [];

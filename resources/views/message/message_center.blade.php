@@ -41,7 +41,7 @@
                                 var div = g[c];
                                 var d = $("#allchatter .all-chatter-div[data-toid="+selectedSupplierId+"]").clone();
                                 var s = $("#allchatter .all-chatter-div[data-toid="+selectedSupplierId+"]").remove();
-                                $("#all-chatter-div").prepend(d);
+                                $("#allchatter").prepend(d);
                             }
                         }
                     });
@@ -255,7 +255,7 @@
                 <h6 class="buyerChatHd2">Users Currently Online Now</h6>
             </div>
 
-            <div class="col m12 plr0 lft-cht-cont all-chatter-div" id="allchatter">
+            <div class="col m12 plr0 lft-cht-cont col-md-12" id="allchatter">
                 <!--1-->
                 @foreach($chatusers as $cuser)
                     @php
@@ -263,7 +263,7 @@
                     $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
                     @endphp
                     {{-- <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;"> --}}
-                    <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
+                    <div class="col m12 chatted_user all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
 
                         <div class="row byr-ncnt">
                             <div class="col m4 pl0 byr-pb">

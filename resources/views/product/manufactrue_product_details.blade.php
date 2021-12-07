@@ -118,8 +118,8 @@
 
 
 
-                                        
-                                            
+
+
                                         {{-- </form> --}}
 
                                         {{-- contactSupplierModal --}}
@@ -358,7 +358,7 @@
                     </div>
                 </div>
             </div>
-            <div id="factory-tour" class="col s12">   
+            <div id="factory-tour" class="col s12">
                 <div class="card product_details_tab">
                     <h3>Overview</h3>
                     <div class="ic-factory-flex">
@@ -385,7 +385,7 @@
 
 @push('js')
     <script>
-    
+
         var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
         var socket = io.connect(serverURL);
         socket.on('connect', function(data) {
@@ -412,23 +412,23 @@
             "form_id": form_id,
             "to_id": to_id,
             "csrftoken": csrftoken
-        }            
+        }
 
         jQuery.ajax({
             method: "POST",
             url: "/message-center/updateuserlastactivity",
             headers:{
                 "X-CSRF-TOKEN": csrftoken
-            },                
+            },
             data: data_json,
             dataType:"json",
 
             success: function(data){
                 console.log(data);
-            }                
+            }
         });
 
-        } 
+        }
 
         function contactSupplierFromProduct(supplierId)
         {
@@ -440,19 +440,19 @@
             "supplier_id": supplier_id,
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
-        }            
+        }
 
         jQuery.ajax({
             method: "POST",
             url: "/message-center/contactsupplierfromproduct",
             headers:{
                 "X-CSRF-TOKEN": csrftoken
-            },                
+            },
             data: data_json,
             dataType:"json",
             success: function(data){
                 console.log(data);
-            }                
+            }
         });
 
         /*
@@ -462,7 +462,7 @@
             window.location.href = "/message-center?uid="+supplierId;
         }, 1000);
         */
-        }        
+        }
 
         function sendsamplemessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
         {

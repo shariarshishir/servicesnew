@@ -21,7 +21,7 @@
             @if($data['supplier']=="success@merchantbay.com")
                 <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Dear Merchant Bay,</p>
             @else
-            <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Dear {{ $data['supplier']->user->name}},</p>
+            <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Dear {{ $data['supplier']}},</p>
             @endif
 
             <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:25px;line-height:normal;">There is a new business opportunity:</p>

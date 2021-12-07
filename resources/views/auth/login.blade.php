@@ -16,7 +16,7 @@
                     <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}"> Click here to Register</a>
                 </div>
             </div>
-                <div class="col s12 m8 l7 login-block">                    
+                <div class="col s12 m8 l7 login-block">
                     <!-- <div class="card-header">{{ __('Login') }}</div> -->
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn_green signin right">
+                            <button type="submit" class="btn_green right">
                                 {{ __('Login') }}
                             </button>
                             {{-- @if (Route::has('password.request'))

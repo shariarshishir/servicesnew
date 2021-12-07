@@ -59,13 +59,14 @@ class RfqController extends Controller
             }
         }
 
-        $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
-        foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        }
+        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
+        // event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail));
+        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
+        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        // }
 
-        $selectedUserToSendMail="success@merchantbay.com";
-        event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        // $selectedUserToSendMail="success@merchantbay.com";
+        // event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
-use App\Models\Product as ManufactureProduct;
+use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\User;
 use App\Models\ProductImage;
 use App\Models\RelatedProduct;
@@ -857,8 +857,8 @@ class ProductController extends Controller
 
     public function searchByProductName(Request $request){
           
-        if(!empty($request->search_input) && $request->type="wholesaler"){
-            $products=Product::with('images','businessProfile','productReview')->where('name', 'like', '%'.$request->search_input.'%')->paginate(10);
+        if(!empty($request->search_input) && $request->type=="wholesaler"){
+            $products=Product::with('images','businessProfile','productReview')->where('name', 'like', '%'.$request->search_input.'%')->paginate(20);
                 if($products->total()>0){
                     return response()->json(['products' => $products, 'message' => 'Products found','code'=>false], 200);
                 }
@@ -866,8 +866,8 @@ class ProductController extends Controller
                     return response()->json(['products' => $products, 'message' => 'Products not found','code'=>False], 200);
                 }
         }
-        elseif(!empty($request->search_input) && $request->type="manufacture"){
-            $products=ManufactureProduct::with('product_images','businessProfile')->where('name', 'like', '%'.$request->search_input.'%')->paginate(10);
+        elseif(!empty($request->search_input) && $request->type=="manufacture"){
+            $products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->search_input.'%')->paginate(20);
             if($products->total()>0){
                 return response()->json(['products' => $products, 'message' => 'Products found','code'=>false], 200);
             }

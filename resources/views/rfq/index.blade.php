@@ -15,8 +15,8 @@
 <div class="box_shadow_radius rfq_content_box ">
 	<div class="rfq_info_wrap right-align rfq_top_navbar">
 		<ul>
-			<li><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
-			<li><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
+			<li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
+			<li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
 			<li><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
 			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
 		</ul>
@@ -55,9 +55,9 @@
                 @endif
 			</div>
 			<div class="rfq_view_detail_wrap center-align">
-				<button class="none_button btn_view_detail" onclick="myFunction()" id="rfqViewDetail">View Detail</button>
-				<div class="rfq_view_detail_info">
-					<h6>Query for {{$rfqSentList->category_id}}</h6>
+				<button class="none_button btn_view_detail" id="rfqViewDetail">View Detail</button>
+				<div class="rfq_view_detail_info" style="display: none;">
+					<h6>Query for {{$rfqSentList->category->name}}</h6>
 					<table class="detail_table">
 						<tbody>
 							<tr>
@@ -70,7 +70,7 @@
 							</tr>
 							<tr>
 								<td>Target price:</td>
-								<td>{{$rfqSentList->unit_price}}</td>
+								<td>$ {{$rfqSentList->unit_price}}</td>
 							</tr>
 							<tr>
 								<td>Deliver to:</td>
@@ -78,7 +78,7 @@
 							</tr>
 							<tr>
 								<td>Within:</td>
-								<td>{{$rfqSentList->delivery_time}}</td>
+								<td>{{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}</td>
 							</tr>
 							<tr>
 								<td>Payment method:</td>

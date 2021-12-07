@@ -16,4 +16,5 @@ class ProductCategory extends Model
         return $this->hasMany('App\Models\Manufacture\ProductSubcategory','product_category_id');
 
     }
+    
 }

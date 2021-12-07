@@ -140,6 +140,8 @@
                 url = url.replace(':slug', id);
             var formData = new FormData(this);
             formData.append('_token', "{{ csrf_token() }}");
+          
+
             $.ajax({
                 method: 'post',
                 processData: false,
@@ -169,6 +171,7 @@
 
                         });
                         $('#about-company-information').text(data.about_company);
+                        $('#address').text(data.address);
                         $('#company-overview-modal').modal('close');
                        //console.log(data);
                         swal("Done!", data.msg,"success");

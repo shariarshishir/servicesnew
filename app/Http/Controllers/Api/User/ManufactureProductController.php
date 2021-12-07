@@ -14,8 +14,8 @@ use DB;
 class ManufactureProductController extends Controller
 {
     public function index($businessProfileID){
-        $products=Product::with('product_images')->where('business_profile_id',$businessProfileID)->latest()->paginate(9);
-        if(count($products)>0){
+        $products=Product::with('product_images')->where('business_profile_id',$businessProfileID)->latest()->paginate(20);
+        if($products->total()>0){
             return response()->json([
                 'success' => true,
                 'message' => 'Product Uploaded Successfully',

@@ -132,8 +132,9 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //manufacture product api
     Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);
-    Route::get('/business-profile/{businessProfileID}/manufacture-products', [ManufactureProductController::class, 'index']);
     Route::get('/business-profile/{businessProfileID}/manufacture-products/{productId}', [ManufactureProductController::class, 'delete']);
+
+
     //cart api
     Route::post('/add-to-cart',[CartController::class,'addToCart']);
     Route::get('/cart',[CartController::class,'index']);
@@ -183,12 +184,16 @@ Route::get('/products-with-shortest-lead-time', [BusinessProfileController::clas
 Route::get('/buy-design-products', [ProductController::class, 'buyDesignProducts']);
 Route::get('/non-clothing-products', [ProductController::class, 'nonClothingProducts']);
 Route::get('/recommanded-products/{productId}', [ProductController::class, 'recommandedProducts']);
-Route::get('business-profile/{businessProfileID}/wholesaler-products', [ProductController::class, 'index']);
+
 Route::get('/store/{storeId}/productlist', [ProductController::class, 'productList']);
 Route::get('/store/{storeId}/products/{productId}', [ProductController::class, 'show']);
 Route::post('/search-product-by-name', [ProductController::class, 'searchByProductName']);
+//products show or manufacture or wholesaler
+Route::get('business-profile/{businessProfileID}/wholesaler-products', [ProductController::class, 'index']);
 Route::get('/wholesaler-products/{productId}', [ProductController::class, 'productById']);
 Route::get('/manufacture-products/{productId}', [ManufactureProductController::class,'show']);
+Route::get('/business-profile/{businessProfileID}/manufacture-products', [ManufactureProductController::class, 'index']);
+
 
 //business profile
 Route::get('/all-business-profiles',[BusinessProfileController::class,'allBusinessProfile']);

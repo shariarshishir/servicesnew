@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\User\SustainabilityCommitmentController;
 use App\Http\Controllers\Api\User\WalfareController;
 use App\Http\Controllers\Api\User\SecurityController;
 use App\Http\Controllers\Api\User\RFQController;
+use App\Http\Controllers\Api\User\RfqBidController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
 
 /*
@@ -127,8 +128,11 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //rfq api
     Route::post('/rfqs', [RFQController::class, 'store']);
-    
+    Route::post('/rfq-bids', [RfqBidController::class, 'store']);
+
     Route::get('/rfqs', [RFQController::class, 'index']);
+    Route::get('/my-rfq-list', [RFQController::class, 'myRfqList']);
+    
 
     //manufacture product api
     Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);

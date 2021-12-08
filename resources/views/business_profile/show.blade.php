@@ -32,7 +32,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
-						<p>{{$business_profile->companyOverview->address}} </p>
+						<div id="head-office">
+							@if($business_profile->companyOverview->address)
+								<p>{{$business_profile->companyOverview->address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
@@ -43,13 +53,21 @@
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>
+					<div id="main-products">
 						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
 							@if($company_overview->name=="main_products")
-								<p>	{{$company_overview->value}}</p>
+								@if($company_overview->value)
+									<p>{{$company_overview->value}}</p>
+								@else
+								<div class="card-alert card cyan lighten-5 no-info-message">
+									<div class="card-content cyan-text">
+										INFO : No data found.
+									</div>
+								</div>
+								@endif
 							@endif
 						@endforeach
-					</p>
+					</div>
 				</div>
 			</div>
 			<!-- Container section start -->
@@ -160,58 +178,39 @@
 								<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
 							</div>
 							<div class="product_boxwrap row">
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_01.jpg')}}" alt=""></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
+								@if(count($mainProducts)>0)
+									@foreach($mainProducts as $product)
+									<div class="productBox col s6 m3 l3">
+										<div class="imgBox">
+											@foreach($product->product_images as $image)
+												<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+												@break
+											@endforeach
+											<div class="favorite">
+												<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+													<i class="material-icons dp48">favorite</i>
+												</a>
+											</div>
+										</div>
+										<div class="priceBox row">
+
+										</div>
+										<h4>
+											<a href="#">
+												{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+											</a>
+										</h4>
+										<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+										<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
+								@endforeach
+								@else
+								    <div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Main Products.</p>
+										</div>
 									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_02.jpeg')}}" alt=""></a>
-										<div class="favorite active_favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_03.jpeg')}}" alt=""></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_04.jpeg')}}"></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
+								@endif
 							</div>
 						</div>
 						<!-- profile_product_wrap -->

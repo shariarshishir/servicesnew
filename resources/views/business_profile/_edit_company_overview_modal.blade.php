@@ -18,7 +18,7 @@
                     <div class="col s12">
                         <label for="address">Address</label>
                         <td>
-                            <textarea class="address" name="address" value="{{$business_profile->companyOverview->address}}" type="text" id="address" rows="20" cols="50">{{$business_profile->companyOverview->address ?? ''}}</textarea>
+                            <textarea class="address" name="address" value="{{$business_profile->companyOverview->address}}" type="text"  rows="20" cols="50">{{$business_profile->companyOverview->address ?? ''}}</textarea>
                         </td>
                     </div>
                 </div>

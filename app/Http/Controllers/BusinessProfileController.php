@@ -156,9 +156,14 @@ class BusinessProfileController extends Controller
             $sizes=['S','M','XL','XXL','XXXL'];
             $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
-                return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products'));
+                $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+                ->limit(4)
+                ->get();
+    
+                return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products','mainProducts'));
             }
             if($business_profile->business_type == 2){
+    
                return view('wholesaler_profile.index',compact('business_profile'));
             }
 

@@ -3566,14 +3566,14 @@ form input:read-only {
     font-weight: 500;
 }
 .rfq_content_box .rfq_view_detail_wrap .btn_view_detail {
-    background: url(../images/rfq_detaile_arrow_down.png) no-repeat center bottom !important;
+    background: url('../images/frontendimages/new_layout_images/rfq_detaile_arrow_down.png') no-repeat center bottom !important;
     padding-bottom: 30px;
     font-size: 20px;
     color: #448547;
     font-weight: 500;
 }
 .rfq_content_box .rfq_view_detail_wrap .rfq_view_detail_info_open {
-    background: url(../images/rfq_detaile_arrow_up.png) no-repeat center top !important;
+    background: url('../images/frontendimages/new_layout_images/rfq_detaile_arrow_up.png') no-repeat center top !important;
     padding-top: 30px;
 }
 .rfq_content_box .rfq_view_detail_info {

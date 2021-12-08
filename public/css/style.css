@@ -1066,10 +1066,10 @@ form input:read-only {
 }
 .profile_leftCol .office_address h4,
 .leftCol_wrap .office_address h4 {
-    font-size: 18px;
+    font-size: 16px;
     color: #464545;
     display: inline-flex;
-    line-height: 32px;
+    line-height: 20px;
 }
 .profile_leftCol .office_address h4 span,
 .leftCol_wrap .office_address h4 span {
@@ -1080,6 +1080,9 @@ form input:read-only {
 .profile_leftCol .office_address h4 img,
 .leftCol_wrap .office_address h4 img {
     margin-left: 10px;
+    float: right;
+    margin-top: -8px;
+    display: inline-block;
 }
 .profile_leftCol .left_top .btn_supplier,
 .leftCol_wrap .left_top .btn_supplier {
@@ -2522,6 +2525,26 @@ form input:read-only {
 .profile_factory_tourWrap  .gallery_navbar ul li.active a,
 .profile_factory_tourWrap  .gallery_navbar ul li a:hover {
     text-decoration: underline;
+}
+
+.profile_factory_tourWrap .gallery_navbar {
+    padding-bottom: 20px;
+}
+.profile_factory_tourWrap .factory_image_gallery .imgBox {
+    height: 200px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.profile_factory_tourWrap .col.m6.l6 .imgBox {
+    height: 230px;
+    margin-bottom: 20px;
+}
+
+.profile_factory_tourWrap .factory_imgbox_wrap .imgBox img {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
 }
 
 /*************** Profile factory tour page start *******************/
@@ -5378,6 +5401,24 @@ nav .pagination li.active .page-link {
         /* height: 340px; */
         width: 50% !important;
     }
+
+    .profile_factory_tourWrap .factory_image_gallery .imgBox {
+        height: 130px;
+    }
+    .profile_factory_tourWrap .col.m6.l6 .imgBox {
+        height: 170px;
+    }
+    .profile_factory_tourWrap .gallery_navbar ul li {
+        margin-right: 10px;
+    }
+    .profile_factory_tourWrap .gallery_navbar ul li a:link, 
+    .profile_factory_tourWrap .gallery_navbar ul li a:active, 
+    .profile_factory_tourWrap .gallery_navbar ul li a:visited,
+    .profile_factory_tourWrap .top_titleWrap a:link, 
+    .profile_factory_tourWrap .top_titleWrap a:active, 
+    .profile_factory_tourWrap .top_titleWrap a:visited {
+        font-size: 15px;
+    }
     
 
 
@@ -5571,7 +5612,7 @@ nav .pagination li.active .page-link {
 
     .profile_container .profile_leftCol {
         margin-bottom: 50px;
-        border-radius: 50px;
+        border-radius: 50px 50px 20px 20px;
         margin-top: -55px;
     }
 
@@ -5591,6 +5632,12 @@ nav .pagination li.active .page-link {
 
     .user-profile-basic-info-block .my_businesses_wrap .col.m4 {
         width: 100% !important;
+    } 
+
+
+
+    .profile_contentCol .tabcontent .top_titleWrap h3 {
+        text-align: left;
     }
 
 
@@ -5718,6 +5765,54 @@ nav .pagination li.active .page-link {
         float: none;
         margin-top: 10px !important;
     }
+
+
+    .profile_factory_tourWrap .factory_video_box {
+        padding-bottom: 0;
+    }
+    .profile_factory_tourWrap .factory_imgbox_wrap  {
+        padding-top: 40px;
+    }
+    .profile_factory_tourWrap .factory_image_gallery .s6.m4.l4 {
+        width: 100% !important;
+    }
+    .profile_factory_tourWrap .col.m6.l6 .imgBox,
+    .profile_factory_tourWrap .factory_image_gallery .imgBox {
+        height: inherit;
+        margin-bottom: 5px;
+    }
+
+    .profile_factory_tourWrap .factory_imgbox_wrap .imgBox img {
+        height: auto;
+        width: auto;
+        display: inline-block;
+    }
+
+    .profile_factory_tourWrap .gallery_navbar {
+        padding-bottom: 6px;
+    }
+    .profile_factory_tourWrap .product_view {
+        padding-bottom: 10px;
+    }
+    .profile_factory_tourWrap .gallery_navbar ul li {
+        margin: 0 5px;
+    }
+    .profile_factory_tourWrap .top_titleWrap a:link, 
+    .profile_factory_tourWrap .top_titleWrap a:active, 
+    .profile_factory_tourWrap .top_titleWrap a:visited {
+        font-size: 15px;
+    }
+    .profile_factory_tourWrap .gallery_navbar ul li a:link, 
+    .profile_factory_tourWrap .gallery_navbar ul li a:active, 
+    .profile_factory_tourWrap .gallery_navbar ul li a:visited {
+        font-size: 14px;
+    }
+    .profile_factory_tourWrap .product_view,
+    .profile_factory_tourWrap .gallery_navbar {
+        text-align: center;
+        width: 100% !important;
+    }
+
 
  
 }

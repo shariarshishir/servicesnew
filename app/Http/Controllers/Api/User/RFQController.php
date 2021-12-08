@@ -27,6 +27,17 @@ class RFQController extends Controller
             return response()->json(['rfqs'=>[],"success"=>false],204);
         }
     }
+    public function myRfqList()
+    {
+        $rfqs=Rfq::withCount('bids')->with('images','user')->where('created_by',auth()->id())->latest()->paginate(10);
+        if($rfqs->total()>0){
+
+            return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
+        }
+        else{
+            return response()->json(['rfqs'=>[],"success"=>false],204);
+        }
+    }
     public function store(Request $request){
         
         // $validator = Validator::make($request->all(), [
@@ -72,7 +83,7 @@ class RFQController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'success' => false,
-                'error'   => ['message' => $e->getLine()],
+                'error'   => ['message' => $e->getMessage()],
             ],500);
         }
     }

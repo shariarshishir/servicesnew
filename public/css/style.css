@@ -540,6 +540,9 @@ form input:read-only {
     text-align: center;
 }
 
+.bannerwrap .banner_slider {
+    height: 350px;
+}
 .bannerwrap .banner_search {
     margin-bottom: 15px;
 }
@@ -5433,6 +5436,9 @@ nav .pagination li.active .page-link {
 
 /* ****************************** */
 
+
+
+
 #homepage {
 	font-family: 'Poppins', sans-serif !important;
 	color: #707070;
@@ -5517,6 +5523,7 @@ nav .pagination li.active .page-link {
 
 #homepage .banner .banner-image {
 	height: 100%;
+    width: 100%;
 }
 
 #homepage .banner .banner-image span {
@@ -5851,6 +5858,123 @@ nav .pagination li.active .page-link {
 	text-transform: capitalize;
 }
 
+#homepage .perform-header h1 {
+    font-size: 54px;
+    font-weight: 700;
+    color: #40874c;
+    text-align: center;
+    color: #217156;
+}
+
+#homepage .htbcont {
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+}
+#homepage .htbcont-lft {
+    border-right: 1px solid #e5e5e5;
+}
+#homepage .tbm {
+    width: 100%;
+    display: block;
+    margin-bottom: 190px;
+}
+#homepage .tbm li {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #e5e5e5;
+}
+#homepage .tbm li a {
+    padding: 15px;
+    display: block;
+    background: #fff;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+}
+#homepage .tbm li a span {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#homepage .tbm li a:hover,
+#homepage .tbm li a.active, 
+#homepage .tbm li a:first-child:hover {
+    background: transparent linear-gradient(90deg, #217156 0%, #81A95A 100%) 0% 0% no-repeat padding-box;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 6px 0 0 0;
+}
+#homepage .homebHd-sm {
+    font-size: 34px;
+    font-weight: 700;
+    color: #217156;
+    text-align: center;
+    padding: 30px 50px 20px;
+
+}
+#homepage .homepgp-sm {
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    padding: 0 75px;
+}
+
+#homepage .homepgp {
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+}
+
+#homepage .carousel-inner>.item>a>img, 
+#homepage .carousel-inner>.item>img, 
+#homepage .img-responsive, 
+#homepage .thumbnail a>img, 
+#homepage .thumbnail>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+#homepage #ordercontent,
+#homepage #merchandisingcontent,
+#homepage #thirdpartycontent {
+    padding-top: 30px;
+}
+
+#homepage .about_icon_wrap {
+    margin-left: 33% !important;
+}
+#homepage .perform_tab_table  {
+    margin: 0 auto;
+    float: none;
+}
+
+#homepage .jb {
+    background-color: #217156;
+    border-radius: 6px;
+    padding: 15px 30px;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    display: inline-block;
+}
+#homepage .book_call {
+    padding: 40px;
+}
+#homepage .book_call .material-icons {
+    float: left;
+    margin-top: 1px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
 /* ******************** Media css style start *********************** */
 
 @media only screen and (min-width: 1500px) {
@@ -6128,9 +6252,9 @@ nav .pagination li.active .page-link {
 
 @media only screen and (max-width: 768px) {
 
-    .bannerwrap {
+    /* .bannerwrap {
         height: 400px;
-    }
+    } */
     .banner_slider {
         padding: 30px;
     }

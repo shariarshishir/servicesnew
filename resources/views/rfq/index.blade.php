@@ -18,7 +18,7 @@
 			<li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
 			<li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
 			<li><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
-			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
+			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create RFQ</a></li>
 		</ul>
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
@@ -33,44 +33,64 @@
 			<div class="row">
 				<div class="profile_info col s12 m8 l8">
 					<h4>{{ $rfqSentList->user->name}}<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" /> </h4>
-					<p>Merchandiser, <br/> Fashion Tex Ltd.</p>
+					<p>Merchandiser, Fashion Tex Ltd.</p>
 				</div>
 				<!--div class="profile_view_time right-align col s12 m4 l4">
 					<span> <i class="material-icons"> watch_later </i> 35 mins</span>
 				</div-->
 			</div>
-			<p>{{$rfqSentList->title}}</p>
-			<p>{{$rfqSentList->short_description}}</p>
+
+			<!-- <h6>{{$rfqSentList->title}}</h6>
+			<div class="short_description">{{$rfqSentList->short_description}}</div> -->
+
+			<div class="rfq_view_detail_wrap">
+				<h5>{{$rfqSentList->title}}</h5>
+				<span class="short_description">{{$rfqSentList->short_description}}</span>
+				<button class="none_button btn_view_detail" id="rfqViewDetail">View Detail</button>
+				<div class="rfq_view_detail_info" style="display: none;">
+					<h6>Query for {{$rfqSentList->category->name}}</h6>
+					<div class="full_specification">Details: {{$rfqSentList->full_specification}} </p> 
+					<div class="full_details"> 
+						<span class="title">Qty:</span>   {{$rfqSentList->quantity}} {{$rfqSentList->unit}}, 
+						<span class="title">Target Price:</span>  $ {{$rfqSentList->unit_price}}, 
+						<span class="title">Deliver to:</span>  {{$rfqSentList->destination}}, 
+						<span class="title">Within:</span>  {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}, 
+						<span class="title">Payment method:</span>  {{$rfqSentList->payment_method}} </p>
+					</div>
+				</div>
+			</div>
 			<!--div class="tagS">
 				<a href="javascript:void(0);"> #Sweater</a> <a href="javascript:void(0);"> #Apparel</a>
 			</div-->
-			<div class="row rfq_thum_imgs">
+			<div class="row rfq_thum_imgs left-align">
                 @if($rfqSentList->images()->exists())
                     @foreach ($rfqSentList->images as  $key => $rfqImage )
 						@if(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'PDF')
-							<div class="col s12 m4 l3">
+							<div class="rfq_thum_img">
 								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" >&nbsp; PDF</a> 
 							</div>
 						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'docx')
-							<div class="col s12 m4 l3">
+							<div class="rfq_thum_img">
 								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="doc_icon" >&nbsp; DOC</a> 
 							</div>
 						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'xlsx')
-							<div class="col s12 m4 l3">
+							<div class="rfq_thum_img">
 								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="xlsx_icon" >&nbsp; XLSX</a> 
 							</div>							
 						@else						
-							<div class="col s12 m4 l3">
+							<div class="rfq_thum_img">
 								<img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />
 							</div>
 						@endif
                     @endforeach
                 @endif
 			</div>
-			<div class="rfq_view_detail_wrap center-align">
+
+			<!-- <div class="rfq_view_detail_wrap center-align">
 				<button class="none_button btn_view_detail" id="rfqViewDetail">View Detail</button>
 				<div class="rfq_view_detail_info" style="display: none;">
 					<h6>Query for {{$rfqSentList->category->name}}</h6>
+					<p>Details: {{$rfqSentList->full_specification}}, Qty:{{$rfqSentList->quantity}} {{$rfqSentList->unit}}, Target price: $ {{$rfqSentList->unit_price}}, Deliver to: {{$rfqSentList->destination}}, Within: {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}, Payment method: {{$rfqSentList->payment_method}} </p>
 					<table class="detail_table">
 						<tbody>
 							<tr>
@@ -100,7 +120,8 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div> -->
+
 			<div class="responses_wrap right-align">
 				<!--span><i class="material-icons">favorite</i> Saved</span-->
                 @if($rfqSentList->user->id != auth()->id())

@@ -413,10 +413,10 @@
             "to_id": to_id,
             "csrftoken": csrftoken
         }
-
+        var url= '{{route("message.center.update.user.last.activity")}}';
         jQuery.ajax({
             method: "POST",
-            url: "/message-center/updateuserlastactivity",
+            url: url,
             headers:{
                 "X-CSRF-TOKEN": csrftoken
             },
@@ -441,10 +441,10 @@
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
         }
-
+        var url='{{route("message.center.contact.supplier.from.product")}}';
         jQuery.ajax({
             method: "POST",
-            url: "/message-center/contactsupplierfromproduct",
+            url:url,
             headers:{
                 "X-CSRF-TOKEN": csrftoken
             },

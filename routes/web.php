@@ -239,7 +239,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/message-center',[MessageController::class,'message_center']);
     Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
     Route::post('/message-center/getchatdata',[MessageController::class,'getchatdata']);
-    Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity']);
+    Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity'])->name('message.center.update.user.last.activity');
     Route::post('/message-center/notificationforuser',[MessageController::class,'notificationforuser']);
     Route::get('/merchant-message',[MessageController::class,'merchant_message']);
     Route::get('rfq-merchant-message',[MessageController::class,'rfq_merchant_message']);
@@ -250,7 +250,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/message-center/getMessages',[MessageController::class,'getMessages']);
     Route::post('/message-center/send-message',[MessageController::class,'sendMessage']);
     Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
-    Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct']);
+    Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct'])->name('message.center.contact.supplier.from.product');
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     //bid rfq

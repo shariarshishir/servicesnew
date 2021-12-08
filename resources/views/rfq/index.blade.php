@@ -47,10 +47,23 @@
 			<div class="row rfq_thum_imgs">
                 @if($rfqSentList->images()->exists())
                     @foreach ($rfqSentList->images as  $key => $rfqImage )
-                        @if($key == 4)
-                            @break
-                        @endif
-                        <div class="col s12 m4 l3"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
+						@if(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'PDF')
+							<div class="col s12 m4 l3">
+								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" >&nbsp; PDF</a> 
+							</div>
+						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'docx')
+							<div class="col s12 m4 l3">
+								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="doc_icon" >&nbsp; DOC</a> 
+							</div>
+						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'xlsx')
+							<div class="col s12 m4 l3">
+								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="xlsx_icon" >&nbsp; XLSX</a> 
+							</div>							
+						@else						
+							<div class="col s12 m4 l3">
+								<img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />
+							</div>
+						@endif
                     @endforeach
                 @endif
 			</div>

@@ -161,33 +161,41 @@
 		                $('#loadingProgressContainer').hide();
                         $('#errors').empty();
                         $.each(data.data, function(key, item){
-                           $('.'+item.name+'_value').text(item.value);
-                           if(item.status == true){
-                            $('.'+item.name+'_status').css("color", "green");
-                           }else{
-                            $('.'+item.name+'_status').css("color", "gray");
-                           }
-                           if(item.name=="main_products"){
-                               if(item.value==null){
-                                $('#main-products').children(".no-info-message").show();
-                                $('#main-products').children("p").hide();
-                               } else {
-                                $('#main-products').children(".no-info-message").hide();
-                                $('#main-products').append("<p>"+item.value+"</p>");
-                               }
-                           }
+                            $('.'+item.name+'_value').text(item.value);
+                            if(item.status == true){
+                                $('.'+item.name+'_status').css("color", "green");
+                            }else{
+                                $('.'+item.name+'_status').css("color", "gray");
+                            }
+                            if(item.name=="main_products"){
+                                if(item.value==null){
+                                    $('#main-products').children(".no-info-message").show();
+                                    $('#main-products').children("p").hide();
+                                } else {
+                                    $('#main-products').children(".no-info-message").hide();
+                                    $('#main-products').append("<p>"+item.value+"</p>");
+                                }
+                            }
                         });
 
                         $('#about-company-information').text(data.about_company);
-                        /*
+                        var nohtml="";
                         if(data.address == null) {
-                            $('#head-office').children(".no-officeinfo-message").show();
-                            $('#head-office').children("p").hide();                            
+                            $('#head-office').empty();
+                            var html ='<div class="card-alert card cyan lighten-5">';
+                            html+='<div class="card-content cyan-text">';
+                            html+='INFO : No data found.';
+                            html+='</div>';
+                            html+='</div>';
+                            $('#head-office').append(html);
+                                                      
                         } else {
-                            $('#head-office').children(".no-officeinfo-message").hide();
-                            $('#head-office').append("<p>"+data.address+"</p>");
+                            $('#head-office').empty();
+                            var html ='<p>'+data.address+'</p>';
+                            $('#head-office').append(html); 
+                           
                         }
-                        */
+                        
 
                         //$('#address').text(data.address);
                         $('#company-overview-modal').modal('close');

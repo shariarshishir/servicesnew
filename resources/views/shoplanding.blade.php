@@ -59,10 +59,10 @@
                             <li>Managing your orders in an efficient way through our Order Management Dashboard. </li>
                         </ul>
                         <a href="javascript:void(0);" class="button talk-to-us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">TALK TO US</a>
-                        <img src="{{asset('storage/images/homepage/circle.svg')}}" alt="circle"/>
+                        <img src="{{asset('images/homepage/circle.svg')}}" alt="circle"/>
                     </div>
                 </div>
-                <img class="line" src="{{asset('storage/images/homepage/banner-line.png')}}" alt="line">
+                <img class="line" src="{{asset('images/homepage/banner-line.png')}}" alt="line">
                 <div class="col s12 m6 l6 shop_banner_img_wrap">
                     <div class="banner-image">
                         <span>
@@ -82,7 +82,7 @@
         <div class="container">
             <div class="row about-item mb-30">
                 <div class="col s12 m2 d-none d-md-block">
-                    <img class="full-image" src="{{asset('storage/images/homepage/about-icon-1.svg')}}" alt="icon">
+                    <img class="full-image" src="{{asset('images/homepage/about-icon-1.svg')}}" alt="icon">
                     <!-- <div class="icon-box">
                         <div class="icon-box-inner-circle">
                             <img src="images/homepage/about-icon-1.png" alt="icon">
@@ -93,7 +93,7 @@
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
-                            <img src="{{asset('storage/images/homepage/about-index-1.svg')}}" alt="index" />
+                            <img src="{{asset('images/homepage/about-index-1.svg')}}" alt="index" />
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Connect you with 1000+ suppliers</h4>
@@ -105,7 +105,7 @@
             </div>
             <div class="row about-item mb-30 d-flex justify-content-end">
                 <div class="col s12 m2 l2 d-none d-md-block about_icon_wrap">
-                    <img class="full-image" src="{{asset('storage/images/homepage/about-icon-2.svg')}}" alt="icon">
+                    <img class="full-image" src="{{asset('images/homepage/about-icon-2.svg')}}" alt="icon">
                     <!-- <div class="icon-box">
                         <div class="icon-box-inner-circle">
                             <img src="images/homepage/about-icon-2.png" alt="icon">
@@ -116,7 +116,7 @@
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
-                            <img src="{{asset('storage/images/homepage/about-index-2.svg')}}" alt="index" />
+                            <img src="{{asset('images/homepage/about-index-2.svg')}}" alt="index" />
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Make Your Sourcing Easy</h4>
@@ -128,7 +128,7 @@
             </div>
             <div class="row about-item">
                 <div class="col s12 m2 l2 d-none d-md-block">
-                    <img class="full-image" src="{{asset('storage/images/homepage/about-icon-3.svg')}}" alt="icon">
+                    <img class="full-image" src="{{asset('images/homepage/about-icon-3.svg')}}" alt="icon">
                     <!-- <div class="icon-box">
                         <div class="icon-box-inner-circle">
                             <img src="images/homepage/about-icon-3.png" alt="icon">
@@ -139,7 +139,7 @@
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
-                            <img src="{{asset('storage/images/homepage/about-index-3.svg')}}" alt="index" />
+                            <img src="{{asset('images/homepage/about-index-3.svg')}}" alt="index" />
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
@@ -165,7 +165,7 @@
     <section class="delivaryTime pt-60">
         <div class="container">
             <div class="guarantee">
-                <img src="{{asset('storage/images/homepage/five-star-rate.svg')}}" alt="rate">
+                <img src="{{asset('images/homepage/five-star-rate.svg')}}" alt="rate">
                 <h3>Merchant Bay Guarantee</h3>
                 <p>Your Apparel Will Be Ready On Time Or We Work For Free</p>
             </div>
@@ -175,7 +175,7 @@
                     <div class="col s12 m6 l6">
                         <div class="banner-image">
                             <span>
-                                <img src="{{asset('storage/images/homepage/delivaryTime-img-apparels.png')}}" alt="banner-img">
+                                <img src="{{asset('images/homepage/delivaryTime-img-apparels.png')}}" alt="banner-img">
                             </span>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
                             <p class="homepgp-sm mb30">Open a Digital Profile on Merchant Bay to be on the niche Search Engine of Bangladesh manufacturing industry and get Verified to be noticed and win trust of buyers.</P>
                         </div>
                         <div class="clear"></div>
-                        <img src="{{asset('storage/images/homepage/buyers-tab-img.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/buyers-tab-img.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
                     <div class="col s12 m8 plr0" id="buyercontent" style="display: none;">
@@ -271,7 +271,7 @@
                             <p class="homepgp-sm mb30">Send your inquiry through RFQ (Request For Quotation) and let our smart matching system find the best matched suppliers to quote you, along with instant quotation you will have the advantage of connecting to Verified Suppliers, Order Management Dashboard and Merchandising Assistance.</P>
                         </div>
                         <div class="clear"></div>
-                        <img src="{{asset('storage/images/homepage/supplier-tab.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/supplier-tab.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
                     <!-- <div class="col-md-8 plr0" id="normalcontent">
@@ -306,7 +306,7 @@
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Third Party Verification<br></b></P>
                         <p class="homepgp-sm mb15">Know how we verify our suppliers</P>
-                        <img src="{{asset('storage/images/homepage/Thirdparty-verification.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/Thirdparty-verification.jpg')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                         <div class="col s12 m10 col-md-offset-1 perform_tab_table">
                             <table class="table table-borderless ">
@@ -388,7 +388,7 @@
                         <p class="homepgp-sm mb15">
                             With our expert merchandiser getting tagged with your sourcing requirement, you will receive
                         </P>
-                        <img src="{{asset('storage/images/homepage/Merchandising-assistance.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/Merchandising-assistance.jpg')}}" alt="" class="img-responsive">
                         <div class="clear"></div>
                         <div class="col s12 m10 col-md-offset-1 perform_tab_table">
                             <table class="table table-borderless">
@@ -424,7 +424,7 @@
                         <p class="homepgp-sm mb15">
                             With our Smart Order Management Dashboard you can
                         </P>
-                        <img src="{{asset('storage/images/homepage/dashboard.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/dashboard.jpg')}}" alt="" class="img-responsive">
 
                         <div class="clear10"></div>
                         <div class="col m10 s12 col-md-offset-1 perform_tab_table">

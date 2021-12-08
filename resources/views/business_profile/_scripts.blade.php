@@ -169,11 +169,18 @@
                             }
                             if(item.name=="main_products"){
                                 if(item.value==null){
-                                    $('#main-products').children(".no-info-message").show();
-                                    $('#main-products').children("p").hide();
+                                    $('#main-products').empty();
+                                    var html ='<div class="card-alert card cyan lighten-5">';
+                                    html+='<div class="card-content cyan-text">';
+                                    html+='INFO : No data found.';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    $('#main-products').append(html);
                                 } else {
-                                    $('#main-products').children(".no-info-message").hide();
-                                    $('#main-products').append("<p>"+item.value+"</p>");
+                                    $('#main-products').empty();
+                                    var html ='<p>'+item.value+'</p>';
+                                    $('#main-products').append(html); 
+                                   
                                 }
                             }
                         });

@@ -27,6 +27,7 @@
 
 <!-- Header -->
 @include('include._footer')
+@yield('style')
 <!-- /.Header -->
 </body>
 </html>

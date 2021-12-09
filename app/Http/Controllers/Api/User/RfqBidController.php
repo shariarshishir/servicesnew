@@ -44,30 +44,23 @@ class RfqBidController extends Controller
         if ($request->hasFile('rfq_images')){
             foreach ($request->file('rfq_images') as $product_image){
                 $extension = $product_image->getClientOriginalExtension();
-                if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'||$extension=='xlsx'||$extension=='xl'){
-                    
-                    $path=$product_image->store('images','public');
+                if($extension =='pdf' || $extension =='PDF' || $extension =='doc'||$extension =='docx'||$extension =='xlsx'||$extension =='xl'){
+                    $path = $product_image->store('images','public');
                 }
                 else{
-                    $path=$product_image->store('images','public');
+                    $path = $product_image->store('images','public');
                     $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
                     Storage::put($path, $image);
                 }
-               
                 $image_path[] = $path;
-                
             }
-
             //if images exist in rfq bid form then take new images as rfq bid image
             unset($allData['rfq_images']);
-
         }else{
-
             //if images does not exist in rfq bid form then take old images as rfq bid image
             foreach($rfq->images as $item){
                 $image_path[] = $item->image;
             }
-
         }
 
         $allData['media'] = json_encode($image_path);
@@ -75,14 +68,23 @@ class RfqBidController extends Controller
 
         // $selectedUserToSendMail= $rfq;
         // event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
-
         // $selectedUserToSendMail="success@merchantbay.com";
         // event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+        
+        if($bidData){
+            return response()->json([
+                'success' => true,
+                'rfqBid' => $bidData,
+                'msg'    => 'Congratulations!!! Your Quotation has been successfully submitted. Buyer will contact you upon interest for further communication'
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+            ],200);
 
-        return response()->json([
-            'success' => true,
-            'msg'    => 'Congratulations!!! Your Quotation has been successfully submitted. Buyer will contact you upon interest for further communication'
-        ]);
+        }
+        
 
     }
 }

@@ -47,8 +47,8 @@
 <main id="homepage">
     <section class="banner pt-50">
         <div class="container">
-            <div class="banner-inner align-items-stretch d-flex flex-wrap">
-                <div class="col-md-6 col-xs-12">
+            <div class="row banner-inner align-items-stretch d-flex flex-wrap">
+                <div class="col s12 m6 l6 shop_banner_info_wrap">
                     <div class="description p-50">
                         <span>Find Your Next</span>
                         <h2 class="text-color-brand">Apparel Manufacturer</h2>
@@ -59,11 +59,11 @@
                             <li>Managing your orders in an efficient way through our Order Management Dashboard. </li>
                         </ul>
                         <a href="javascript:void(0);" class="button talk-to-us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">TALK TO US</a>
-                        <img src="images/homepage/circle.svg" alt="circle"/>
+                        <img src="{{asset('images/homepage/circle.svg')}}" alt="circle"/>
                     </div>
                 </div>
-                <img class="line" src="images/homepage/banner-line.png" alt="line">
-                <div class="col-md-6 col-xs-12">
+                <img class="line" src="{{asset('images/homepage/banner-line.png')}}" alt="line">
+                <div class="col s12 m6 l6 shop_banner_img_wrap">
                     <div class="banner-image">
                         <span>
                             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/8z7uqq_Zqzg" allowfullscreen></iframe>
@@ -81,19 +81,19 @@
         </div>
         <div class="container">
             <div class="row about-item mb-30">
-                <div class="col-md-2 d-none d-md-block">
-                    <img class="full-image" src="images/homepage/about-icon-1.svg" alt="icon">
+                <div class="col s12 m2 d-none d-md-block">
+                    <img class="full-image" src="{{asset('images/homepage/about-icon-1.svg')}}" alt="icon">
                     <!-- <div class="icon-box">
                         <div class="icon-box-inner-circle">
                             <img src="images/homepage/about-icon-1.png" alt="icon">
                         </div>
                     </div> -->
                 </div>
-                <div class="col-md-8 col-lg-6">
+                <div class="col s12 m8 l6 ">
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
-                            <img src="images/homepage/about-index-1.svg" alt="index" />
+                            <img src="{{asset('images/homepage/about-index-1.svg')}}" alt="index" />
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Connect you with 1000+ suppliers</h4>
@@ -104,19 +104,19 @@
                 </div>
             </div>
             <div class="row about-item mb-30 d-flex justify-content-end">
-                <div class="col-md-2 d-none d-md-block">
-                    <img class="full-image" src="images/homepage/about-icon-2.svg" alt="icon">
+                <div class="col s12 m2 l2 d-none d-md-block about_icon_wrap">
+                    <img class="full-image" src="{{asset('images/homepage/about-icon-2.svg')}}" alt="icon">
                     <!-- <div class="icon-box">
                         <div class="icon-box-inner-circle">
                             <img src="images/homepage/about-icon-2.png" alt="icon">
                         </div>
                     </div> -->
                 </div>
-                <div class="col-md-8 col-lg-6">
+                <div class="col s12 m8 l6">
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
-                            <img src="images/homepage/about-index-2.svg" alt="index" />
+                            <img src="{{asset('images/homepage/about-index-2.svg')}}" alt="index" />
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Make Your Sourcing Easy</h4>
@@ -127,19 +127,19 @@
                 </div>
             </div>
             <div class="row about-item">
-                <div class="col-md-2 d-none d-md-block">
-                    <img class="full-image" src="images/homepage/about-icon-3.svg" alt="icon">
+                <div class="col s12 m2 l2 d-none d-md-block">
+                    <img class="full-image" src="{{asset('images/homepage/about-icon-3.svg')}}" alt="icon">
                     <!-- <div class="icon-box">
                         <div class="icon-box-inner-circle">
                             <img src="images/homepage/about-icon-3.png" alt="icon">
                         </div>
                     </div> -->
                 </div>
-                <div class="col-md-8 col-lg-6">
+                <div class="col s12 m8 l6">
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
-                            <img src="images/homepage/about-index-3.svg" alt="index" />
+                            <img src="{{asset('images/homepage/about-index-3.svg')}}" alt="index" />
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
@@ -165,21 +165,21 @@
     <section class="delivaryTime pt-60">
         <div class="container">
             <div class="guarantee">
-                <img src="images/homepage/five-star-rate.svg" alt="rate">
+                <img src="{{asset('images/homepage/five-star-rate.svg')}}" alt="rate">
                 <h3>Merchant Bay Guarantee</h3>
                 <p>Your Apparel Will Be Ready On Time Or We Work For Free</p>
             </div>
             <hr/>
             <div class="ontimeDescription">
                 <div class="align-items-center d-flex flex-wrap align-items-md-stretch">
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col s12 m6 l6">
                         <div class="banner-image">
                             <span>
-                                <img src="images/homepage/delivaryTime-img-apparels.png" alt="banner-img">
+                                <img src="{{asset('images/homepage/delivaryTime-img-apparels.png')}}" alt="banner-img">
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col s12 m6 l6">
                         <div class="description p-50">
                             <h2 class="text-color-brand">On Time Or Freeeeee.</h2>
                             <p>Imagine having access to a digital marketplace of over 1000 independently verified apparel manufacturers in Bangladesh. And using an intelligent order management system to track your products’ progress. That’s Merchant Bay. And, we’re so confident in our manufacturers and system that</p>
@@ -198,7 +198,7 @@
             <div class="clear30" style="height: 0px; margin-bottom: 48px;"></div>
             <div>
                 <h1 class="homebHd mb20">PERFORM AT YOUR BEST WITH EASE</h1>
-                <p class="homepgp mb50">Over 1000 suppliers and buyers can search, connect and manage their business with our 3 dimensional  sourcing platform</P>
+                <p class="homepgp mb50" style="margin-bottom: 50px;" >Over 1000 suppliers and buyers can search, connect and manage their business with our 3 dimensional  sourcing platform</P>
             </div>
         </div>
     </section>
@@ -206,10 +206,10 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-12 plr0 htbcont">
+                <div class="col m12 plr0 htbcont">
 
                     <!--left-->
-                    <div class="col-md-4 plr0 htbcont-lft">
+                    <div class="col s12 m4 plr0 htbcont-lft">
                         <ul class="tbm">
                             <li>
                                 <a href="javascript:void(0);" id="supplier" onclick="makeactive('suppliercontent',this)" class="active">
@@ -256,22 +256,22 @@
                     <!--/left-->
 
                     <!--right-->
-                    <div class="col-md-8 plr0" id="suppliercontent">
+                    <div class="col s12 m8 plr0" id="suppliercontent">
                         <div class="row">
                             <h1 class="homebHd-sm mb20 mtop30">Adapt to the Smart and Credible way to present your business</h1>
                             <p class="homepgp-sm mb30">Open a Digital Profile on Merchant Bay to be on the niche Search Engine of Bangladesh manufacturing industry and get Verified to be noticed and win trust of buyers.</P>
                         </div>
                         <div class="clear"></div>
-                        <img src="images/buyers-tab-img.png" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/buyers-tab-img.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
-                    <div class="col-md-8 plr0" id="buyercontent" style="display: none;">
+                    <div class="col s12 m8 plr0" id="buyercontent" style="display: none;">
                         <div class="row">
                             <h1 class="homebHd-sm mb20 mtop30">The most reliable way to find and manage a supplier in Bangladesh</h1>
                             <p class="homepgp-sm mb30">Send your inquiry through RFQ (Request For Quotation) and let our smart matching system find the best matched suppliers to quote you, along with instant quotation you will have the advantage of connecting to Verified Suppliers, Order Management Dashboard and Merchandising Assistance.</P>
                         </div>
                         <div class="clear"></div>
-                        <img src="images/supplier-tab.png" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/supplier-tab.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
                     <!-- <div class="col-md-8 plr0" id="normalcontent">
@@ -302,14 +302,14 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="col-md-8 plr0" style="display: none;" id="thirdpartycontent">
+                    <div class="col s12 m8 plr0" style="display: none;" id="thirdpartycontent">
                         <div class="clear30"></div>
-                        <p class="homepgp-sm"><strong style="color:#217156; font-size:20px;">Third Party Verification<br></strong></P>
+                        <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Third Party Verification<br></b></P>
                         <p class="homepgp-sm mb15">Know how we verify our suppliers</P>
-                        <img src="images/Thirdparty-verification.jpg" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/Thirdparty-verification.jpg')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
-                        <div class="col-md-10 col-md-offset-1">
-                            <table class="table table-borderless">
+                        <div class="col s12 m10 col-md-offset-1 perform_tab_table">
+                            <table class="table table-borderless ">
                                 <thead>
                                     <tr>
                                         <th colspan="2" class="homepgp-sm" style="text-align:left; padding-bottom:5px;"><strong>Protocol of Verification Process</strong></th>
@@ -336,7 +336,7 @@
                             </table>
                         </div>
                         <div class="clear30"></div>
-                        <div class="col-md-10 col-md-offset-1">
+                        <div class="col s12 m10 col-md-offset-1 perform_tab_table">
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
@@ -374,23 +374,23 @@
 
 
                         <div class="clear30"></div>
-                        <div class="col-md-12">
+                        <div class="com m12">
                             <p class="homepgp-sm mb30">
                                 <strong style="color:#217156;">Awarding the Verification Badge<br></strong>
                                 After our verification process, we provide the badge with which a supplier can be trusted
                             </P>
                         </div>
                     </div>
-                    <div class="col-md-8 plr0" style="display: none;" id="merchandisingcontent">
+                    <div class="col s12 m8 plr0" style="display: none;" id="merchandisingcontent">
                         <div class="clear30"></div>
-                        <p class="homepgp-sm"><strong style="color:#217156; font-size:20px;">Merchandising Assistance<br></strong></P>
+                        <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Merchandising Assistance<br></b></P>
                         <div class="clear"></div>
                         <p class="homepgp-sm mb15">
                             With our expert merchandiser getting tagged with your sourcing requirement, you will receive
                         </P>
-                        <img src="images/Merchandising-assistance.jpg" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/Merchandising-assistance.jpg')}}" alt="" class="img-responsive">
                         <div class="clear"></div>
-                        <div class="col-md-10 col-md-offset-1">
+                        <div class="col s12 m10 col-md-offset-1 perform_tab_table">
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
@@ -417,18 +417,18 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-md-8 plr0" style="display: none;" id="ordercontent">
+                    <div class="col s12 m8 plr0" style="display: none;" id="ordercontent">
                         <div class="clear30"></div>
-                        <p class="homepgp-sm"><strong style="color:#217156; font-size:20px;">Order Management Dashboard<br></strong></P>
+                        <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Order Management Dashboard<br></b></P>
                         <div class="clear"></div>
                         <p class="homepgp-sm mb15">
                             With our Smart Order Management Dashboard you can
                         </P>
-                        <img src="images/dashboard.jpg" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/dashboard.jpg')}}" alt="" class="img-responsive">
 
                         <div class="clear10"></div>
-                        <div class="col-md-10 col-md-offset-1">
-                            <table class="table table-borderless">
+                        <div class="col m10 s12 col-md-offset-1 perform_tab_table">
+                            <table class="table table-borderless ">
                                 <tbody>
                                     <tr>
                                         <td style="width:4%;"><i class="fa fa-circle homepgp-sm2-bullet" aria-hidden="true"></i></td>
@@ -462,13 +462,13 @@
                             </table>
                         </div>
                         <div class="clear30"></div>
-                        <div class="col-md-12 text-center mtop40">
+                        <div class="col s12 m12 text-center mtop40">
 
                             <!-- Calendly link widget begin -->
                                 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
                                 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
                                 <!--<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/abrarsayem'});return false;">Book a Call</a>-->
-                                <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="jb"><i class="glyphicon glyphicon-phone-alt" style="color: rgb(255, 255, 255); font-size: 20px;"></i> &nbsp;Book a Call </a>
+                                <div class="center-align book_call"> <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="jb"> <span class="material-icons">phone</span> &nbsp;Book a Call </a></div>
                                 <!-- Calendly link widget end -->
 
 
@@ -530,11 +530,11 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="row">
-                    <div class="col-md-6 position-relative">
+                    <div class="col s12 m6 position-relative">
                         <button type="button" class="close d-md-none d-block" data-dismiss="modal" style="position: absolute;top: 15px;right: 32px;"><i class="fa fa-times" aria-hidden="true"></i></button>
                         <img src="{{ url('images/subscribe_newsletter.png') }}" class="w-100">
                     </div>
-                    <div class="col-md-6 subscription-form-block">
+                    <div class="col s12 m6 subscription-form-block">
                         <button type="button" class="close d-md-block" data-dismiss="modal" style="position: absolute;top: 15px;right: 32px;"><i class="fa fa-times" aria-hidden="true"></i></button>
                         <div class="ic-signup-form">
                             <div class="subscribe-form">
@@ -632,6 +632,13 @@
     .mb-100{
         margin-bottom: 100px;
     }
+    .mb30 {
+        margin-bottom: 30px;
+    }
+    .mb30 {
+        margin-bottom: 50px;
+    }
+    
     .d-flex{
         display: flex;
     } 
@@ -798,4 +805,22 @@
     }
 </style>
 @endsection
-
+@push('js')
+<script>
+function makeactive(id,el)
+{
+    $('#buyercontent').css('display','none');
+    $('#suppliercontent').css('display','none');
+    $('#thirdpartycontent').css('display','none');
+    $('#merchandisingcontent').css('display','none');
+    $('#ordercontent').css('display','none');
+    $('#thirdparty').removeClass('active');
+    $('#merchandising').removeClass('active');
+    $('#order').removeClass('active');
+    $('#supplier').removeClass('active');
+    $('#buyer').removeClass('active');
+    $('#'+id).css('display','block');
+    $(el).addClass('active');
+}
+</script>
+@endpush

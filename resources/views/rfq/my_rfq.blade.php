@@ -64,16 +64,8 @@
 				<a href="javascript:void(0);"> #Sweater</a> <a href="javascript:void(0);"> #Apparel</a>
 			</div-->
 			<div class="row rfq_thum_imgs left-align">
+				
 				@if($rfqSentList->images()->exists())
-					@foreach ($rfqSentList->images as  $key => $rfqImage )
-						@if($key == 4)
-							@break
-						@endif
-						<div class="rfq_thum_img"><img src="{{asset('storage/'.$rfqImage->image)}}" alt="" /> </div>
-					@endforeach
-				@endif
-
-				<!-- @if($rfqSentList->images()->exists())
 					@foreach ($rfqSentList->images as  $key => $rfqImage )
 						@if(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'PDF')
 							<div class="rfq_thum_img">
@@ -93,7 +85,7 @@
 							</div>
 						@endif
 					@endforeach
-				@endif -->
+				@endif
                 
 			</div>
 

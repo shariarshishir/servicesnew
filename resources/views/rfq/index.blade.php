@@ -46,16 +46,16 @@
 			<div class="rfq_view_detail_wrap">
 				<h5>{{$rfqSentList->title}}</h5>
 				<span class="short_description">{{$rfqSentList->short_description}}</span>
-				<button class="none_button btn_view_detail" id="rfqViewDetail">View Detail</button>
+				<button class="none_button btn_view_detail" id="rfqViewDetail">Show More</button>
 				<div class="rfq_view_detail_info" style="display: none;">
 					<h6>Query for {{$rfqSentList->category->name}}</h6>
-					<div class="full_specification">Details: {{$rfqSentList->full_specification}} </p> 
+					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}}</div> 
 					<div class="full_details"> 
-						<span class="title">Qty:</span>   {{$rfqSentList->quantity}} {{$rfqSentList->unit}}, 
-						<span class="title">Target Price:</span>  $ {{$rfqSentList->unit_price}}, 
-						<span class="title">Deliver to:</span>  {{$rfqSentList->destination}}, 
-						<span class="title">Within:</span>  {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}, 
-						<span class="title">Payment method:</span>  {{$rfqSentList->payment_method}} </p>
+						<span class="title">Qty:</span> {{$rfqSentList->quantity}} {{$rfqSentList->unit}}, 
+						<span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}}, 
+						<span class="title">Deliver to:</span> {{$rfqSentList->destination}}, 
+						<span class="title">Within:</span> {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}, 
+						<span class="title">Payment method:</span> {{$rfqSentList->payment_method}} </p>
 					</div>
 				</div>
 			</div>

@@ -209,49 +209,52 @@
                 <div class="col m12 plr0 htbcont">
 
                     <!--left-->
-                    <div class="col s12 m4 plr0 htbcont-lft">
-                        <ul class="tbm">
-                            <li>
-                                <a href="javascript:void(0);" id="supplier" onclick="makeactive('suppliercontent',this)" class="active">
-                                    Suppliers<br>
-                                    <span>Adapt to the Smart and Credible way to present your business</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" id="buyer" onclick="makeactive('buyercontent',this)">
-                                    Buyers<br>
-                                    <span>The most reliable way to find and manage a supplier in Bangladesh</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" id="thirdparty" onclick="makeactive('thirdpartycontent',this)">
-                                    Third Party Verification<br>
-                                    <span>Know how we verify our suppliers</span>
-                                </a>
-                            </li>
+                    <div class="col s12 m4 plr0">
+                        <div class="htbcont-lft">
+                            <ul class="tbm">
+                                <li>
+                                    <a href="javascript:void(0);" id="supplier" onclick="makeactive('suppliercontent',this)" class="active">
+                                        Suppliers<br>
+                                        <span>Adapt to the Smart and Credible way to present your business</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" id="buyer" onclick="makeactive('buyercontent',this)">
+                                        Buyers<br>
+                                        <span>The most reliable way to find and manage a supplier in Bangladesh</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" id="thirdparty" onclick="makeactive('thirdpartycontent',this)">
+                                        Third Party Verification<br>
+                                        <span>Know how we verify our suppliers</span>
+                                    </a>
+                                </li>
 
-                            <li>
-                                <a href="javascript:void(0);" id="merchandising" onclick="makeactive('merchandisingcontent',this)">
-                                    Merchandising Assistance&nbsp;<sup><i class="fa fa-plus" aria-hidden="true"></i></sup><br>
-                                    <span>With our expert Merchandising Assistance learn how we solve your problem</span>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="javascript:void(0);" id="merchandising" onclick="makeactive('merchandisingcontent',this)">
+                                        Merchandising Assistance&nbsp;<sup><i class="fa fa-plus" aria-hidden="true"></i></sup><br>
+                                        <span>With our expert Merchandising Assistance learn how we solve your problem</span>
+                                    </a>
+                                </li>
 
-                            <li>
-                                <a href="javascript:void(0);" id="order" onclick="makeactive('ordercontent',this)">
-                                    Order Management Dashboard<br>
-                                    <span>Book a demo call to see how our Dashboard makes your life super easy</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="col-md-9">
-                            <p>“We believe that to expand our markets, reach out to the right business partners, we need to level up our digital footprint with credibility as that is now the best way of finding and being found.”</p>
-                            <div class="clear30"></div>
-                            <p><strong>Abrar H Sayem</strong></p>
-                            <p>Founder, Merchant Bay Ltd.</p>
+                                <li>
+                                    <a href="javascript:void(0);" id="order" onclick="makeactive('ordercontent',this)">
+                                        Order Management Dashboard<br>
+                                        <span>Book a demo call to see how our Dashboard makes your life super easy</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="col-md-9 left_bottom_note">
+                                <p>“We believe that to expand our markets, reach out to the right business partners, we need to level up our digital footprint with credibility as that is now the best way of finding and being found.”</p>
+                                <div class="clear30"></div>
+                                <p><strong>Abrar H Sayem</strong></p>
+                                <p>Founder, Merchant Bay Ltd.</p>
+                            </div>
+                            <div class="clear50 d-none d-md-block"></div>
+                            <div class="clear20 d-none d-md-block"></div>
                         </div>
-                        <div class="clear50 d-none d-md-block"></div>
-                        <div class="clear20 d-none d-md-block"></div>
+                        
                     </div>
                     <!--/left-->
 

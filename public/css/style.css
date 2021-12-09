@@ -2942,6 +2942,13 @@ form input:read-only {
     display: inline-block;
     margin-left: 10px;
 }
+
+.rfq_top_navbar ul li.active a {
+    background: #73D578;
+    color: #ffffff;
+}
+
+
 .rfq_top_navbar ul li .btn_green {
     margin-left: 0;
 }
@@ -2965,6 +2972,7 @@ form input:read-only {
     font-size: 18px;
     line-height: 28px;
     margin: 50px 0;
+    padding: 0 50px 10px;
 }
 .quick_rfq_wrap {
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
@@ -3240,10 +3248,6 @@ form input:read-only {
     display: block;
 }
 
-.rfq_content_box {
-    font-size: 18px;
-    line-height: 28px;
-}
 .rfq_content_box .quick_rfq_wrap {
     -webkit-box-shadow: 0px 11px 15px -6px rgba(68,133,71,0.61);
     -moz-box-shadow: 0px 11px 15px -6px rgba(68,133,71,0.61);
@@ -3374,9 +3378,13 @@ form input:read-only {
     font-weight: 500;
     color: #448547;
     padding-top: 0;
+    position: relative;
 }
 .rfq_detail_from .input-field label span {
     color: rgb(255, 0, 0);
+    position: absolute;
+    top: -3px;
+    right: -10px;
 }
 .rfq_detail_from .input-field input[type=date]:not(.browser-default),
 .rfq_detail_from .input-field input[type=number]:not(.browser-default), 
@@ -3411,6 +3419,7 @@ form input:read-only {
 
 .rfq_detail_from .short_description {
     min-height: 100px;
+
 }
 
 .rfq_detail_from_wrap .submit_btn_wrap {
@@ -3502,6 +3511,11 @@ form input:read-only {
 
 .rfq_content_box .rfq_profile_detail {
     padding: 35px;
+    -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
+    -moz-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12);
+    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
+    border-radius: 10px;
+    margin-bottom: 50px;
 }
 
 .rfq_content_box .rfq_profile_detail .profile_info {
@@ -3572,6 +3586,7 @@ form input:read-only {
     font-size: 20px;
     color: #448547;
     font-weight: 500;
+    padding: 0;
 }
 /* .rfq_content_box .rfq_view_detail_wrap .rfq_view_detail_info_open {
     background: url('../images/frontendimages/new_layout_images/rfq_detaile_arrow_up.png') no-repeat center bottom !important;
@@ -3672,7 +3687,9 @@ form input:read-only {
 .rfq_profile_info .short_description {
     font-size: 22px;
     color: #000000;
+    line-height: 32px;
     font-weight: 400;
+    padding-right: 10px;
 }
 .respones_img_wrap {
     padding: 15px 0;
@@ -3728,7 +3745,13 @@ form input:read-only {
     display: block;
     font-size: 0;
 }
-
+.rfq_view_detail_info .full_specification {
+    padding-bottom: 10px;
+    font-weight: 300;
+}
+.rfq_view_detail_info .full_specification .title {
+    font-weight: 500;
+}
 .rfq_view_detail_info .full_details {
     text-transform: capitalize;
 }
@@ -5861,7 +5884,6 @@ nav .pagination li.active .page-link {
 #homepage .perform-header h1 {
     font-size: 54px;
     font-weight: 700;
-    color: #40874c;
     text-align: center;
     color: #217156;
 }
@@ -5872,6 +5894,8 @@ nav .pagination li.active .page-link {
 }
 #homepage .htbcont-lft {
     border-right: 1px solid #e5e5e5;
+    margin-left: -22px;
+    width: 100%;
 }
 #homepage .tbm {
     width: 100%;
@@ -5884,7 +5908,7 @@ nav .pagination li.active .page-link {
     border-bottom: 1px solid #e5e5e5;
 }
 #homepage .tbm li a {
-    padding: 15px;
+    padding: 15px 30px;
     display: block;
     background: #fff;
     color: #000;
@@ -5901,7 +5925,7 @@ nav .pagination li.active .page-link {
 #homepage .tbm li a:first-child:hover {
     background: transparent linear-gradient(90deg, #217156 0%, #81A95A 100%) 0% 0% no-repeat padding-box;
     text-decoration: none;
-    padding: 15px;
+    padding: 15px 30px;
     display: block;
     color: #fff;
     font-size: 20px;
@@ -5973,6 +5997,10 @@ nav .pagination li.active .page-link {
     margin-top: 1px;
     display: inline-block;
     margin-right: 10px;
+}
+
+#homepage .left_bottom_note {
+    padding: 0px 30px 30px;
 }
 
 /* ******************** Media css style start *********************** */

@@ -60,7 +60,7 @@
 							<li class="tab"><a href="#profile">Profile</a></li>
 							<li class="tab"><a href="#products">Products</a></li>
 							<!--li class="tab col m2"><a href="#womenproducts">Women</a></li-->
-							<!--li class="tab"><a href="#factorytour">Factory Tour</a></li-->
+							<li class="tab"><a href="#factorytour">Factory Tour</a></li>
 							<li class="tab"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
@@ -193,7 +193,7 @@
 							</div>
 						</div>
 						<!-- profile_product_wrap -->
-						<div class="factory_imgbox_wrap" style="display: none;">
+						<div class="factory_imgbox_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Factory Images</h3>
@@ -271,7 +271,7 @@
 
 						</div>
 						<!-- export_destination -->
-						<div  class="owner_info_wrap" style="display: none;">
+						<div  class="owner_info_wrap">
 							<div class="row">
 								<div class="col s12 m8 l9 owner_info_box">
 									<h3>Chairman's word</h3>
@@ -1162,7 +1162,7 @@
 						</div>
 
 					</div>
-					<div id="factorytour" class="tabcontent" style="display: none;">
+					<div id="factorytour" class="tabcontent">
 						<div class="profile_factory_tourWrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">

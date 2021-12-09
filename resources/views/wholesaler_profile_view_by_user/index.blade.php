@@ -61,7 +61,7 @@
 							<li class="tab"><a href="#profile">Profile</a></li>
 							<li class="tab"><a href="#products">Products</a></li>
 							<!--li class="tab col m2"><a href="#womenproducts">Women</a></li-->
-							<!--li class="tab"><a href="#factorytour">Factory Tour</a></li-->
+							<li class="tab"><a href="#factorytour">Factory Tour</a></li>
 							<li class="tab"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
@@ -179,7 +179,7 @@
 						</div>
 
 					</div>
-					<div id="factorytour" class="tabcontent" style="display: none;">
+					<div id="factorytour" class="tabcontent">
 							<div class="profile_factory_tourWrap">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">

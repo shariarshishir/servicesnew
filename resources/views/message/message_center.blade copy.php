@@ -66,12 +66,6 @@
             });
             $('#messagebox').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
-                var check_exists_image= "{{$user->image}}";
-                if(check_exists_image){
-                    var user_image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
-                }else{
-                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
-                }
                 if(keycode == '13'){
                     var intRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
                     if( intRegex.test($('#messagebox').val()) || extractEmails($('#messagebox').val()) )
@@ -83,8 +77,7 @@
                     let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                     socket.emit('new message', message);
                     $('#messagebox').val('');
-                    // $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
-                        $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+user_image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
+                    $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
                     var height = 0;
                     $('#messagedata div').each(function(i, value){
                         height += parseInt($(this).height());
@@ -105,10 +98,10 @@
                         "message_notification_to_id": message_notification_to_id,
                         "csrftoken": csrftoken
                     }
-                    var url = '{{route("message.center.notification.user")}}';
+
                     jQuery.ajax({
                         method: "POST",
-                        url: url,
+                        url: "/message-center/notificationforuser",
                         headers:{
                             "X-CSRF-TOKEN": csrftoken
                         },
@@ -200,11 +193,10 @@
         function getchatdata(user, to_id, image, name, company_name, position, lastchated)
         {
             var param = 'user='+user+'&to_id='+to_id;
-            var url='{{route("message.center.getchatdata")}}';
             jQuery.ajax({
                 type : "POST",
                 data : param,
-                url : url,
+                url : "/message-center/getchatdata",
                 cache : false,
                 beforeSend: function(){
                 },
@@ -213,10 +205,9 @@
                 success : function(msg){
                     $("#messagedata").html(msg);
                     $("#messagebox").removeAttr("disabled");
-                    $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">'+name+'</p><p class="m-0 chat-text truncate"></p></div></div>');
-                    // $("#chatheader").css('border-bottom', '2px solid #55A860');
+                    $("#chatheader").html('<div class="col-md-12 plr0" style="color: #FFF;"><div class="byr-pb-nm"><p>'+company_name+'</p><p style="font-size:11px;">In-Chat : '+name+'</p><p style="font-size:13px;font-style:italic;">'+position+'</p></div></div>');
+                    $("#chatheader").css('border-bottom', '2px solid #55A860');
                     $("#messagedata").animate({ scrollTop: $('#messagedata').prop("scrollHeight")});
-
                 }
             });
         }
@@ -238,10 +229,10 @@
                 "to_id": to_id,
                 "csrftoken": csrftoken
             }
-            var url='{{route("message.center.update.user.last.activity")}}';
+
             jQuery.ajax({
                 method: "POST",
-                url: url,
+                url: "/message-center/updateuserlastactivity",
                 headers:{
                     "X-CSRF-TOKEN": csrftoken
                 },
@@ -259,148 +250,85 @@
 @endpush
 
 @section('content')
-<div class="main_wrapper home_wrap">
-
-    <!-- Main Container start -->
-    <div class="container">
-      <div class="chatting_app_wrapper">
-        <div class="chat-application">
-          <div class="app-chat">
-            <div class="content-area content-right">
-              <div class="app-wrapper">
-                <!-- Sidebar menu for small screen -->
-                <a href="#" data-target="chat-sidenav" class="sidenav-trigger hide-on-large-only">
-                  <i class="material-icons">menu</i>
-                </a>
-                <!--/ Sidebar menu for small screen -->
-
-                <div class="card card card-default scrollspy border-radius-6 fixed-width">
-                  <div class="card-content chat-content p-0">
-                    <!-- Sidebar Area -->
-                    <div class="sidebar-left sidebar-fixed animate fadeUp animation-fast">
-                      <div class="sidebar animate fadeUp">
-                        <div class="sidebar-content">
-                          <div id="sidebar-list" class="sidebar-menu chat-sidebar list-group position-relative">
-                            <div class="sidebar-list-padding app-sidebar" id="chat-sidenav">
-                              <!-- Sidebar Header -->
-                              <div class="sidebar-header">
-                                <div class="row valign-wrapper">
-                                  <div class="col s2 media-image pr-0">
-                                    <img src="../images/img.jpg" alt="" class="circle z-depth-2 responsive-img">
-                                  </div>
-                                  <div class="col s10">
-                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Users </p>
-                                    <p class="m-0 info-text left-align">Currently online</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <!--/ Sidebar Header -->
-
-                              <!-- Sidebar Content List -->
-                              <div class="sidebar-content sidebar-chat ps ps--active-y">
-                                @if(count($chatusers) > 0)
-                                    <div class="chat-list" id="allchatter">
-                                        @foreach($chatusers as $cuser)
-                                            @php
-                                            $src = !empty($cuser->image) ? 'storage/' .$cuser->image : "storage/images/supplier.png";
-                                            $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
-                                            @endphp
-                                            <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
-                                                <div class="user-section">
-                                                <div class="row valign-wrapper">
-                                                    <div class="col s2 media-image online pr-0">
-                                                    <img src="{{ asset($src) }}" alt="" class="circle z-depth-2 responsive-img">
-                                                    </div>
-                                                    <div class="col s10">
-                                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser->name }}</p>
-                                                    <p class="m-0 info-text"></p>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                <div class="info-section">
-                                                <div class="star-timing">
-                                                    <div class="time">
-                                                    <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <div class="no-data-found">
-                                        <h6 class="center">No Results Found</h6>
-                                    </div>
-                                @endif
-                              <div class="ps__rail-x" style="left: 0px; bottom: -236px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 236px; height: 356px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 142px; height: 213px;"></div></div></div>
-                              <!--/ Sidebar Content List -->
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!--/ Sidebar Area -->
-
-                    <!-- Content Area -->
-                    <div class="chat-content-area animate fadeUp">
-                      <!-- Chat header -->
-                      <div class="chat-header" id="chatheader">
-
-                      </div>
-                      @if(auth()->check() && auth()->user()->businessProfile()->exists() && Request::get('uid'))
-                            {{-- <a href="{{ env('APP_URL') }}po/add/toid={{ Request::get('uid') }}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a> --}}
-                            <a href="{{route('po.add',Request::get('uid'))}}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
-
-                      @endif
-                      <!--/ Chat header -->
-
-                      <!-- Chat content area -->
-                      <div class="chat-area ps ps--active-y">
-                        <div class="chats">
-                          <div class="chats" id="messagedata">
-
-
-                          </div>
-                        </div>
-                        <div class="ps__rail-x" style="">
-                          <div class="ps__thumb-x" tabindex="0" style=""></div>
-                        </div>
-                        <div class="ps__rail-y" style="">
-                          <div class="ps__thumb-y" tabindex="0" style=""></div>
-                        </div>
-                      </div>
-                      <!--/ Chat content area -->
-
-                      <!-- Chat footer <-->
-                      <div class="chat-footer">
-
-                        <!-- <form onsubmit="enter_chat();" action="javascript:void(0);" class="chat-input"> -->
-                          <i class="material-icons mr-2">face</i>
-                          <i class="material-icons mr-2">attachment</i>
-                          <input type="text" placeholder="Type message here.." class="message mb-0" id="messagebox">
-                          <input type="hidden" id="to_id" value="">
-                          <a class="btn_green send messageSendButton" >Send</a>
-                       <!--  </form> -->
-                      </div>
-                      <!--/ Chat footer -->
-                    </div>
-                    <!--/ Content Area -->
-                  </div>
-                </div>
-              </div>
+<div class="col m12">
+    <!--Chat Window-->
+    <div class="row bu-ob">
+        <!--Buyer List Left-->
+        <div class="col m4 bu-rb" style="border-right: 0px;">
+            <div class="row buyerChatHdCont" style="border-right: 3px solid #FFF;height: 85px;">
+                <h6 class="buyerChatHd2">Users Currently Online Now</h6>
             </div>
-          </div>
+
+            <div class="col m12 plr0 lft-cht-cont col-md-12" id="allchatter">
+                <!--1-->
+                @foreach($chatusers as $cuser)
+                    @php
+                    $src = !empty($cuser->profile['company_logo'])? 'storage/' .$cuser->profile['company_logo'] : "images/supplier.png";
+                    $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
+                    @endphp
+                    {{-- <div class="col m12 chatted_user" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '{{ $cuser->profile['company_name'] }}', '{{ $userRole }}', '08 September 2020')" style="cursor: pointer;"> --}}
+                    <div class="col m12 chatted_user all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
+
+                        <div class="row byr-ncnt">
+                            <div class="col m4 pl0 byr-pb">
+                                <img src="{{ asset($src) }}" class="pimg"/>
+                            </div>
+                            <div class="col m8 plr0">
+                                <div class="byr-pb-nm">{{ $cuser->name }}</div>
+                                {{-- <div class="byr-pb-dsg">{{ $cuser->profile['personal_info']['job_title'] ?? '' }}</div>
+                                <div class="byr-pb-dsg">{{ $cuser->profile['company_name'] ?? '' }}</div> --}}
+                                <div class="clear10"></div>
+                                <div class="byr-pb-ld user_last_activity">
+                                    {{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/1-->
+                @endforeach
+
+            </div>
         </div>
-      </div>
+        <!--/Buyer List Left-->
+
+        <!--Buyer Chat right-->
+        <div class="col m8" style="border-left: 3px solid #55A860;">
+            <div class="row buyerChatHdCont"  id="chatheader" style="min-height: 85px;margin-bottom: 20px;">
+
+
+            </div>
+            @if(auth()->check() && in_array(auth()->user()->user_type, ['supplier']) && Request::get('uid'))
+            <!--a href="{{ action('PoController@add', Request::get('uid')) }}" class="btn btn-success" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a-->
+            <a href="{{ env('APP_URL') }}/po/add/toid={{ Request::get('uid') }}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
+            @endif
+            <div class="col m12 plr0 rgt-cht-cont" id="messagedata">
+
+            </div>
+
+            <!--Sent Box-->
+            <div class="col m12 sent-bx" style="margin-top: 20px;margin-bottom: 20px;">
+                <div class="col m9">
+                    <input type="text" class="ig-new-rgt" style="margin-bottom:0px; padding-left:0; border:0; width:100%; font-weight:normal;" placeholder="Enter Message Here" id="messagebox" />
+                    <input type="hidden" id="to_id" value="">
+                </div>
+                <div class="col m1">
+                    <a href="javascript:void(0);" class="ic-btn4" style="border-radius: 5px;padding-top: 7px;">
+                        <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="col m2 plr0">
+                    <a href="javascript:void(0);" class="ic-btn3 messageSendButton">Send</a>
+                </div>
+            </div>
+            <!--/Sent Box-->
+        </div>
     </div>
-     <!-- Main Container end -->
-
-
-
-  </div>
+    <!--Chat Window-->
+</div>
 @endsection
 
-@push('js')
+@section('script')
     <script src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
     <script>
         $(document).ready(function(){
@@ -409,4 +337,4 @@
             });
         });
     </script>
-@endpush
+@endsection

@@ -200,6 +200,11 @@ class MessageController extends Controller
     {
         $user = $request->user;
         $to_id = $request->to_id;
+        $from_user=User::find($user);
+        $to_user=User::find($to_id);
+        $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
+        $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
+
         $chats = Userchat::whereIn('participates', [$user])->whereIn('participates', [$to_id]);
         if($chats->exists())
         {
@@ -211,12 +216,12 @@ class MessageController extends Controller
                 $chatdata[$key]['message'] = $messageStr;
                 //echo "<pre>"; print_r($chatdataAllData[$key]); exit();
             }
-            return view('message.chatdata', compact('user','chatdata'));
+            return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
         }
         else
         {
             $chatdata = [];
-            return view('message.chatdata', compact('user','chatdata'));
+            return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
         }
     }
 

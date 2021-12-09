@@ -5974,8 +5974,12 @@ nav .pagination li.active .page-link {
     margin-left: 33% !important;
 }
 #homepage .perform_tab_table  {
-    margin: 0 auto;
+    margin: 0 auto 30px;
     float: none;
+}
+
+#homepage .perform_tab_table .homepgp-sm {
+    padding: 0;
 }
 
 #homepage .jb {
@@ -6000,7 +6004,7 @@ nav .pagination li.active .page-link {
 }
 
 #homepage .left_bottom_note {
-    padding: 0px 30px 30px;
+    padding: 0px 30px;
 }
 
 /* ******************** Media css style start *********************** */

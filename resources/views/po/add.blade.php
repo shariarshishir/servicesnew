@@ -7,14 +7,6 @@
             <legend class="">
                 <i class="fa fa-table fa-fw "></i> Create Pro-Forma Invoice
             </legend>
-            @if($message = Session::get('success'))
-                <div class="alert alert-info alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <strong>Success!</strong> {{ $message }}
-                </div>
-            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -44,7 +36,7 @@
                     {{-- @include('flash::message') --}}
                     <!-- Widget ID (each widget will need unique ID)-->
                     <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
-                        
+
                         <!-- widget content -->
                         <div class="widget-body p-0">
                             <form action="{{route('po.store')}}" method="post" >
@@ -130,7 +122,7 @@
                                                     <input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/> 
+                                                    <input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/>
                                                     <input type="hidden" class="taxprice" name="tax[]" value="0" />
                                                 </td>
                                                 <td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td>
@@ -230,7 +222,7 @@
                             </form>
                         </div>
                         <!-- end widget content -->
-                       
+
                     </div>
                     <!-- end widget -->
                 </article>
@@ -244,11 +236,11 @@
         <!-- end widget grid -->
 
     </div>
-    
 
 
-        
-       
+
+
+
 
 </div>
 
@@ -259,7 +251,6 @@
         <!--Modal Header-->
         <div class="modal-header modal-hdr-custum" style="background:#55A860; border-radius:4px 4px 0 0;">
             <div class="col-md-11"><h4 class="modal-title" style="color:#fff;"><b>Select Supplier</b></h4></div>
-            <div class="col-md-1"><button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button></div>
         </div>
         <!--Modal Header-->
 

@@ -146,7 +146,7 @@ ul, label {
 									<td style="color:#000; padding:0.1%;">{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: {{ @$po->buyer->profile->contact_info['telephone_no'] }} Email: {{ @$po->buyer->profile->contact_info['email'] }}</td>
+									<td style="color:#000; padding:0.1%;">Ph: {{ @$po->buyer->phone }} Email: {{ @$po->buyer->email }}</td>
 								</tr>
 							</table>
 						</td>

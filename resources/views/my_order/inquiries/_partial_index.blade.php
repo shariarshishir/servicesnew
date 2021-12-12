@@ -18,7 +18,7 @@
                 @php $total_price_wt += $item->tax_total_price; @endphp
             @endforeach
             <tr>
-                <td>{{$po->id}}</td>
+                <td>{{$index+1}}</td>
                 <td>{{ $po->proforma_id }}<br>
                     @if($po->status == 1)
                         PO ID: {{$po->po_no}}

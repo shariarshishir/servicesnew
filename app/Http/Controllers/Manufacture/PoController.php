@@ -10,8 +10,8 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Manufacture\Product;
-use App\Models\Manufacture\Proforma;
-use App\Models\Manufacture\ProformaProduct;
+use App\Models\Proforma;
+use App\Models\ProformaProduct;
 use Carbon\Carbon;
 
 use PDF;

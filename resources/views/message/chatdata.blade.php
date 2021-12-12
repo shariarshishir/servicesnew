@@ -109,7 +109,7 @@
                             echo html_entity_decode($data['message']);
                             @endphp
                         </p>
-                        {{-- <div class="byr-pb-ld text-right">{{ date('d M Y h:i a', strtotime($data['datetime'])) }}</div> --}}
+                        <div class="byr-pb-ld text-right">{{ date('d M Y h:i a', strtotime($data['datetime'])) }}</div>
                     </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                             echo html_entity_decode($data['message']);
                             @endphp
                         </p>
-                        {{-- <div class="byr-pb-ld text-right">{{ date('d M Y h:i a', strtotime($data['datetime'])) }}</div> --}}
+                        <div class="byr-pb-ld text-right">{{ date('d M Y h:i a', strtotime($data['datetime'])) }}</div>
                     </div>
                     </div>
                 </div>

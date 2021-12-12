@@ -131,7 +131,7 @@
     {
         selectedel = el;
         let product = encodeURIComponent(el.value);
-        $.get( "{{ env('APP_URL') }}getsupplierbycat/"+product, function( data ) {
+        $.get( "{{ env('APP_URL') }}/getsupplierbycat/"+product, function( data ) {
               $( "#modal_body" ).html( data );
         });
         $('#selectcat').modal('open');

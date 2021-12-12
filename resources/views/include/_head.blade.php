@@ -21,6 +21,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <link href="{{asset('css/media.css')}}" rel="stylesheet">
+<link href="{{asset('css/app-chat.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/image-uploader.min.css')}}" rel="stylesheet">
 {{-- jasny-bootstrap.min --}}
 <link href="{{asset('css/jasny-bootstrap.min.css')}}" rel="stylesheet">
@@ -33,7 +34,6 @@
 {{-- cropper css --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
 {{-- chat css --}}
-<link rel="stylesheet" href="{{asset('css/chat_css/app-chat.min.css')}}">
 <link href="{{asset('css/chat_css/style.css')}}" rel="stylesheet">
 <link href="{{asset('css/chat_css/icon.css')}}" rel="stylesheet">
 @yield('css')

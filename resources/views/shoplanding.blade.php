@@ -97,7 +97,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Connect you with 1000+ suppliers</h4>
                             <p class="mb-15">We have over 20 years’ worth of experience in the apparel industry in Bangladesh, with extensive industry knowledge. We have <span>1000+ suppliers</span> ready to create your products. Your designs + our manufacturing = a match made in apparel heaven.</p>
-                            <a href="/create-rfq" class="button">Submit RFQ</a>
+                            <a href="/rfq" class="button">Submit RFQ</a>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
                             <p class="mb-15">With our <a href="#">3D virtual sampling</a> support we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
-                            <a href="https://www.merchantbay.com/3d-studio" class="button">Shop Designs</a>
+                            <a href="/3d-studio" class="button">Shop Designs</a>
                         </div>
                     </div>
                 </div>

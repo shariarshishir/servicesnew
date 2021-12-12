@@ -32,6 +32,7 @@ use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
 use App\Http\Controllers\WalfareController;
 use App\Http\Controllers\SecurityController;
+use App\Http\Controllers\MessageController;
 
 
 
@@ -80,6 +81,7 @@ Route::get('/customizable', [HomeController::class, 'customizable'])->name('cust
 Route::get('/low-moq-data', [HomeController::class, 'lowMoqData'])->name('low.moq.data');
 Route::get('/low-moq', [HomeController::class, 'lowMoq'])->name('low.moq');
 Route::get('/shortest-lead-time', [HomeController::class, 'shortestLeadTime'])->name('shortest.lead.time');
+Route::get('/3d-studio', [HomeController::class, 'studio3dPage'])->name('front.3d-studio');
 
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
@@ -175,7 +177,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
-    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
+    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacityAndMachineriesCreateOrUpdate');
 
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
 
@@ -233,15 +235,40 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
+    //message center
+
+    Route::get('/message-center',[MessageController::class,'message_center']);
+    Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
+    Route::post('/message-center/getchatdata',[MessageController::class,'getchatdata'])->name('message.center.getchatdata');
+    Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity'])->name('message.center.update.user.last.activity');
+    Route::post('/message-center/notificationforuser',[MessageController::class,'notificationforuser'])->name('message.center.notification.user');
+    Route::get('/merchant-message',[MessageController::class,'merchant_message']);
+    Route::get('rfq-merchant-message',[MessageController::class,'rfq_merchant_message']);
+    Route::get('/supplier-message',[MessageController::class,'supplier_message']);
+    Route::get('/message-center/getUsers',[MessageController::class,'getUsers']);
+    Route::get('/message-center/getMerchants',[MessageController::class,'getMerchants']);
+    Route::get('/message-center/getSuppliers',[MessageController::class,'getSupplier']);
+    Route::post('/message-center/getMessages',[MessageController::class,'getMessages']);
+    Route::post('/message-center/send-message',[MessageController::class,'sendMessage']);
+    Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
+    Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct'])->name('message.center.contact.supplier.from.product');
+    Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
     //poforma
     Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
+    Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');
     Route::post('/po/store', [PoController::class,'store'])->name('po.store');
     Route::get('/po',[PoController::class,'index'])->name('po.index');
     Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat']);
+    Route::get('/open-proforma-single-html/{id}', [PoController::class, 'openProformaSingleHtml'])->name('open.proforma.single.html');
+    Route::post('/pro-forma-invoice-accept', [PoController::class, 'acceptProformaInvoice'])->name('accept.proforma.invoice');
+    Route::post('/pro-forma-invoice-reject',[PoController::class, 'rejectProformaInvoice'])->name('reject.proforma.invoice');
+    Route::get('/pro-forma-invoices',[PoController::class, 'proformaInvoices'])->name('proforma.invoice');
+    Route::get('/open-proforma-single/{id}',[PoController::class, 'openProformaSingle'])->name('open.proforma.single');
+
 
 
 

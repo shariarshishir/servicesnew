@@ -25,19 +25,25 @@
                                             <div class="product-title">{{$item->product->name}}</div>
 
                                             <div class="product_price">
-                                                $ @foreach (json_decode($item->product->attribute) as $k => $v)
-                                                        @if($loop->last)
-                                                            {{ $v[2] }}
-                                                        @endif
-                                                    @endforeach
-                                            </div>
-
-                                            <div class="product_info_details">
-                                                <div class="shipping_label">Free Shipping</div>
-                                                <div class="rating_label">
-                                                    <i class="material-icons pink-text"> star </i>
-                                                    <span>4.5</span>
-                                                </div>
+                                                @php
+                                                    $count= count(json_decode($item->product->attribute));
+                                                    $count = $count-2;
+                                                @endphp
+                                                @foreach (json_decode($item->product->attribute) as $k => $v)
+                                                    @if($k == 0 && $v[2] == 'Negotiable')
+                                                    <span class="price_negotiable">{{ 'Negotiable' }}</span>
+                                                    @endif
+                                                    @if($loop->last && $v[2] != 'Negotiable')
+                                                        ${{ $v[2] }} {{-- $ is the value for price unite --}}
+                                                    @endif
+                                                    @if($loop->last && $v[2] == 'Negotiable')
+                                                        @foreach (json_decode($item->product->attribute) as $k => $v)
+                                                                @if($k == $count)
+                                                                    ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
+                                                                @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach                                                    
                                             </div>
 
                                             <div class="product_info_short_details">
@@ -102,6 +108,7 @@
                     success: function(data){
                         swal(data.message);
                         obj.parent().parent().remove();
+                        window.location.reload();
                     }
                 });
             }

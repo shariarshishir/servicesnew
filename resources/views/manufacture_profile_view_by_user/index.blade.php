@@ -28,7 +28,11 @@
 						<p>Manufacturer, {{$business_profile->businessCategory->name}}</p>
 					</div>
 					<div class="center-align">
-						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
+                        @if(Auth::guard('web')->check())
+                            <a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
+                        @else
+                            <a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
+                        @endif
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
@@ -421,7 +425,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="overview_table_wrap machinery_table">
 							<h4>Machinery Details</h4>
 							<div class="machinery_table_inner_wrap">
@@ -446,7 +450,7 @@
 												<td><i class="material-icons "style="color:gray">check_circle</i></td>
 												@endif
 											</tr>
-											@endforeach									
+											@endforeach
 										</tbody>
 									</table>
 								</div>
@@ -455,7 +459,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
@@ -497,7 +501,7 @@
 													</table>
 												</td>
 											</tr>
-											@endforeach									
+											@endforeach
 										</tbody>
 									</table>
 								</div>
@@ -506,7 +510,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
@@ -536,7 +540,7 @@
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
 										</div>
 										<span class="certificate_title">{{$certification->title}}</span>
 										@else
@@ -554,7 +558,7 @@
 								@endif
 							</div>
 						</div>
-						
+
 						<div class="main_buyers_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s6 m6">
@@ -678,14 +682,14 @@
 							</div>
 						</div>
 
-						
+
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Sampling and R&D</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger"> 
+									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
 									</button>
@@ -715,19 +719,19 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
 
-						
+
 						<div class="overview_table_wrap blank_overview_table_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Special customization ability</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger"> 
+									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
                           				<span class="btn_edit_white"> Edit</span>
 									</button>
@@ -1096,7 +1100,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>

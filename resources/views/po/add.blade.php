@@ -266,7 +266,7 @@
         <!-- Modal body -->
         <div class="clear"></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-secondary modal-close" >No</button>
             <button type="button" class="btn btn-danger" onclick="addsupplier()">Ok</button>
         </div>
     </div>

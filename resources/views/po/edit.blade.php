@@ -133,7 +133,7 @@ foreach($selectedproduct as $item)
                                             </tr>
                                         </thead>
                                         <tbody id="lineitems" class="input-field">
-                                            @foreach($editProductArray['productitem'] as $selectedProInfo)
+                                            @foreach($editProductArray['productitem'] as $key =>  $selectedProInfo)
                                                 <tr>
                                                     <td>1</td>
                                                     <td>
@@ -165,7 +165,11 @@ foreach($selectedproduct as $item)
                                                         <input type="hidden" class="taxprice" name="tax[]" value="0" />
                                                     </td>
                                                     <td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]"  value="{{$selectedProInfo['tax_total_price']}}" readonly/></td>
-                                                    <td><a href="javascript:void(0);" class="ic-btn4" onclick="addlineitem()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
+                                                    @if($key == 0)
+                                                        <td><a href="javascript:void(0);" class="ic-btn4" onclick="addlineitem()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
+                                                    @else
+                                                        <td><a href="javascript:void(0);" class="ic-btn4red" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -310,7 +314,7 @@ foreach($selectedproduct as $item)
         <!-- Modal body -->
         <div class="clear"></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-secondary modal-close" >No</button>
             <button type="button" class="btn btn-danger" onclick="addsupplier()">Ok</button>
         </div>
     </div>

@@ -611,6 +611,10 @@ class HomeController extends Controller
         return view('product.shortest_lead_time',compact('products'));
     }
 
+    public function studio3dPage(){
+        return view('studio.index');
+    }
+
 
 
 }

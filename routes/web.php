@@ -176,7 +176,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
-    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate']);
+    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacityAndMachineriesCreateOrUpdate');
 
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
 
@@ -258,9 +258,16 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
     //poforma
     Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
+    Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');
     Route::post('/po/store', [PoController::class,'store'])->name('po.store');
     Route::get('/po',[PoController::class,'index'])->name('po.index');
     Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat']);
+    Route::get('/open-proforma-single-html/{id}', [PoController::class, 'openProformaSingleHtml'])->name('open.proforma.single.html');
+    Route::post('/pro-forma-invoice-accept', [PoController::class, 'acceptProformaInvoice'])->name('accept.proforma.invoice');
+    Route::post('/pro-forma-invoice-reject',[PoController::class, 'rejectProformaInvoice'])->name('reject.proforma.invoice');
+    Route::get('/pro-forma-invoices',[PoController::class, 'proformaInvoices'])->name('proforma.invoice');
+    Route::get('/open-proforma-single/{id}',[PoController::class, 'openProformaSingle'])->name('open.proforma.single');
+
 
 
 

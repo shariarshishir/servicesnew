@@ -7,10 +7,9 @@
 <section class="bannerwrap">
 	<div class="banner_slider">
 		<div class="banner_inner">
-			<h2>Apparel Sourcing Made Easy</h2>
+			<!-- <h2>Apparel Sourcing Made Easy</h2> -->
 			<h3>Find Ready Products, Designs, Raw Materials, Manufacturers</h3>
 			<div class="banner_search">
-
 				@php
 					$searchType= request()->get('search_type');
 				@endphp
@@ -22,9 +21,9 @@
 					</select>
 					<form name="system_search" action="{{route('onsubmit.search')}}" id="system_search" method="get">
 						@if(Route::is('onsubmit.search'))
-						<input type="text" placeholder="Type products name" value="{{$searchInputValue}}" class="search_input"  name="search_input"/>
+						<input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="{{$searchInputValue}}" class="search_input"  name="search_input"/>
 						@else
-						<input type="text" placeholder="Type products name" value="" class="search_input"  name="search_input"/>
+						<input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="" class="search_input"  name="search_input"/>
 						@endif
 						<input type="hidden" name="search_type" class="search_type" value="" />
 						<button class="btn waves-effect waves-light green darken-1 search-btn" type="submit" ><i class="material-icons dp48">search</i></button>
@@ -33,7 +32,7 @@
 				</div>
 				
 			</div>
-			<span class="search_verified">Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc.</span>
+			<!-- <span class="search_verified">Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc.</span> -->
 		</div>
 	</div>
 </section>

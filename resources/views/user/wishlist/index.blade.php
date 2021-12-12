@@ -10,9 +10,9 @@
                         @foreach($wishListItems as $item)
                         <div class="cart-wrapper-{{$item->id}} wishlist-product">
                             <div class="row">
-                                <div class="col m12">
+                                <div class="col s12 m12">
                                     <div class="content row">
-                                        <div class="product_img col m3">
+                                        <div class="product_img col s12 m5 l3">
                                             @foreach($item->product->images as $key=>$image)
                                                 @if($key==0)
                                                     <img src="{{URL::asset('storage/'.$image->image)}}" class="responsive-img" alt="" />
@@ -20,7 +20,7 @@
                                             @endforeach
                                         </div>
 
-                                        <div class="product_short_details col m9">
+                                        <div class="product_short_details col s12 m7 l9">
 
                                             <div class="product-title">{{$item->product->name}}</div>
 
@@ -65,12 +65,10 @@
             </div>
         @else
             <div class="row wishlist_products_wrap">
-                <div class="col-md-12">
-                    <div class="card card-with-padding">
-                        <div class="card-alert card cyan">
-                            <div class="card-content white-text">
-                                <p>INFO : Your wishlist is empty</p>
-                            </div>
+                <div class="card card-with-padding">
+                    <div class="card-alert card cyan">
+                        <div class="card-content white-text">
+                            <p>INFO : Your wishlist is empty</p>
                         </div>
                     </div>
                 </div>

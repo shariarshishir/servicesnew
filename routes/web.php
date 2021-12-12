@@ -81,6 +81,7 @@ Route::get('/customizable', [HomeController::class, 'customizable'])->name('cust
 Route::get('/low-moq-data', [HomeController::class, 'lowMoqData'])->name('low.moq.data');
 Route::get('/low-moq', [HomeController::class, 'lowMoq'])->name('low.moq');
 Route::get('/shortest-lead-time', [HomeController::class, 'shortestLeadTime'])->name('shortest.lead.time');
+Route::get('/3d-studio', [HomeController::class, 'studio3dPage'])->name('front.3d-studio');
 
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');

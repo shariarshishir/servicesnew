@@ -146,6 +146,12 @@
             });
             socket.on('new message', function(data) {
                 console.log(data);
+                var check_exists_image= "{{$user->image}}";
+                if(check_exists_image){
+                    var user_image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
+                }else{
+                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
+                }
                 if(data.to_id == "{{$user->id}}" && data.from_id == $('#to_id').val())
                 {
                     let msg = "";
@@ -159,7 +165,8 @@
                     }
                     else
                     {
-                        msg = '<div class="col-md-8 rgt-cb"><p class="prd-gr2">'+data.message+'</p><div class="col-md-12" style="color: rgb(85, 168, 96);"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        // msg = '<div class="col-md-8 rgt-cb"><p class="prd-gr2">'+data.message+'</p><div class="col-md-12" style="color: rgb(85, 168, 96);"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        msg= '<div class="chat"><div class="chat-avatar"><a class="avatar"><img src="'+user_image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+data.message+'</p> </div></div><p>Just Now</p></div>';
                     }
                     $('#messagedata').append(msg);
                     var height = 0;

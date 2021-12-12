@@ -377,13 +377,13 @@ class UserController extends Controller
             'password'=> 'required',
 
         ]);
-        if(env('APP_ENV') == 'production')
-        {
+        // if(env('APP_ENV') == 'production')
+        // {
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-        }
+        // }
 
         if($sso->successful()){
 

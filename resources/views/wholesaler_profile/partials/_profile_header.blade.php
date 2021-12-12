@@ -1,7 +1,7 @@
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
 	<div class="banner_overlay">
-		<h1>Sayem Group</h1>
+		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
@@ -27,10 +27,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
-						<p>House#27, Road# 16, Sector#4, <br/> 
-							Uttara, Dhaka-1230. <br/>
-							Bangladesh.
-						</p>
+						<div id="head-office">
+							@if($business_profile->companyOverview->address)
+								<p>{{$business_profile->companyOverview->address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
@@ -41,12 +48,21 @@
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>Men & Women's Sweater, Men & 
-						Women's Dress, Plus Size Women's 
-						Clothing, Men & Women's Coats, 
-						Men & Women's Hoodies
-						& Sweatshirts, Downjackets.
-					</p>
+					<div id="main-products">
+						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+							@if($company_overview->name=="main_products")
+								@if($company_overview->value)
+									<p>{{$company_overview->value}}</p>
+								@else
+								<div class="card-alert card cyan lighten-5 no-info-message">
+									<div class="card-content cyan-text">
+										INFO : No data found.
+									</div>
+								</div>
+								@endif
+							@endif
+						@endforeach
+					</div>
 				</div>
 			</div>
 

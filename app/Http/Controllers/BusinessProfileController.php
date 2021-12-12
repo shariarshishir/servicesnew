@@ -156,9 +156,14 @@ class BusinessProfileController extends Controller
             $sizes=['S','M','XL','XXL','XXXL'];
             $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
-                return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products'));
+                $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+                ->limit(4)
+                ->get();
+    
+                return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products','mainProducts'));
             }
             if($business_profile->business_type == 2){
+    
                return view('wholesaler_profile.index',compact('business_profile'));
             }
 
@@ -204,11 +209,12 @@ class BusinessProfileController extends Controller
                 $count++;
             }
 
-            $company_overview->update(['data' => json_encode($data),'about_company'=>$request->about_company]);
+            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'about_company'=>$request->about_company]);
             return response()->json([
                 'success' => false,
                 'msg'     => 'Company Overview Updated',
                 'data'    => json_decode($company_overview->data),
+                'address'=>$company_overview->address,
                 'about_company'=>$company_overview->about_company
 
             ],200);

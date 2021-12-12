@@ -16,6 +16,14 @@
                 </div>
                 <div class="row ">
                     <div class="col s12">
+                        <label for="address">Address</label>
+                        <td>
+                            <textarea class="address" name="address" value="{{$business_profile->companyOverview->address}}" type="text"  rows="20" cols="50">{{$business_profile->companyOverview->address ?? ''}}</textarea>
+                        </td>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col s12">
                         <label for="about_company">About company</label>
                         <td>
                             <textarea class="about-company" name="about_company" value="{{$business_profile->companyOverview->about_company}}" type="text" id="about-company-short-description" rows="20" cols="50">{{$business_profile->companyOverview->about_company ?? ''}}</textarea>

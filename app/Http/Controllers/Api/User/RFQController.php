@@ -19,12 +19,23 @@ class RFQController extends Controller
     public function index()
     {
         $rfqs=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
-        if(count($rfqs)>0){
+        if(($rfqs->total())>0){
 
             return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
         }
         else{
-            return response()->json(['rfqs'=>[],"success"=>false],204);
+            return response()->json(['rfqs'=>[],"success"=>false],200);
+        }
+    }
+    public function myRfqList()
+    {
+        $rfqs=Rfq::withCount('bids')->with('images','user')->where('created_by',auth()->id())->latest()->paginate(10);
+        if($rfqs->total()>0){
+
+            return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
+        }
+        else{
+            return response()->json(['rfqs'=>[],"success"=>false],200);
         }
     }
     public function store(Request $request){
@@ -53,10 +64,15 @@ class RFQController extends Controller
             $rfq = Rfq::create($rfqData);
             if ($request->hasFile('product_images')){
                 foreach ($request->file('product_images') as $index=>$product_image){
-                    $path=$product_image->store('images','public');
-                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                    Storage::put($path, $image);
-                    RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
+                    $extension = $product_image->getClientOriginalExtension();
+                    if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'||$extension=='xlsx'||$extension=='xl'){
+                        $path=$product_image->store('images','public');
+                    }
+                    else{
+                        $path=$product_image->store('images','public');
+                        $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+                        Storage::put($path, $image);
+                    }
                 }
             }
             
@@ -67,12 +83,12 @@ class RFQController extends Controller
                 return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"message"=>$message,"success"=>true],200);
             }
             else{
-                return response()->json(["success"=>false],204);
+                return response()->json(["success"=>false],200);
             }
         }catch(\Exception $e){
             return response()->json([
                 'success' => false,
-                'error'   => ['message' => $e->getLine()],
+                'error'   => ['message' => $e->getMessage()],
             ],500);
         }
     }

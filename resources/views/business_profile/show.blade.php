@@ -6,7 +6,7 @@
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
 	<div class="banner_overlay">
-		<h1>Sayem Group</h1>
+		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
@@ -32,10 +32,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
-						<p>House#27, Road# 16, Sector#4, <br/> 
-							Uttara, Dhaka-1230. <br/>
-							Bangladesh.
-						</p>
+						<div id="head-office">
+							@if($business_profile->companyOverview->address)
+								<p>{{$business_profile->companyOverview->address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
@@ -46,12 +53,21 @@
 				</div>
 				<div class="left_bottom">
 					<h3 class="center-align" >Main Products</h3>
-					<p>Men & Women's Sweater, Men & 
-						Women's Dress, Plus Size Women's 
-						Clothing, Men & Women's Coats, 
-						Men & Women's Hoodies
-						& Sweatshirts, Downjackets.
-					</p>
+					<div id="main-products">
+						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+							@if($company_overview->name=="main_products")
+								@if($company_overview->value)
+									<p>{{$company_overview->value}}</p>
+								@else
+								<div class="card-alert card cyan lighten-5 no-info-message">
+									<div class="card-content cyan-text">
+										INFO : No data found.
+									</div>
+								</div>
+								@endif
+							@endif
+						@endforeach
+					</div>
 				</div>
 			</div>
 			<!-- Container section start -->
@@ -124,16 +140,18 @@
 						</div>
 						<!-- contentBox -->
 						<div class="certifications">
-							<h3>Certifications</h3>
+							<h3>Certifications test</h3>
 							<div class="certifications-block">
 							@if(count($business_profile->certifications)>0)
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
-										<span>{{$certification->title}}</span>
-										<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-										<br>
-										<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
 										<div class="certificate_img"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>
@@ -160,58 +178,39 @@
 								<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
 							</div>
 							<div class="product_boxwrap row">
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_01.jpg')}}" alt=""></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
+								@if(count($mainProducts)>0)
+									@foreach($mainProducts as $product)
+									<div class="productBox col s6 m3 l3">
+										<div class="imgBox">
+											@foreach($product->product_images as $image)
+												<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+												@break
+											@endforeach
+											<div class="favorite">
+												<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+													<i class="material-icons dp48">favorite</i>
+												</a>
+											</div>
+										</div>
+										<div class="priceBox row">
+
+										</div>
+										<h4>
+											<a href="#">
+												{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+											</a>
+										</h4>
+										<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+										<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
+								@endforeach
+								@else
+								    <div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Main Products.</p>
+										</div>
 									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_02.jpeg')}}" alt=""></a>
-										<div class="favorite active_favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_03.jpeg')}}" alt=""></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
-								<div class="productBox col s6 m3 l3">
-									<div class="imgBox">
-										<a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/sayem_04.jpeg')}}"></a>
-										<div class="favorite"><span class="material-icons">favorite</span></div>
-									</div>
-									<div class="priceBox row">
-										<div class="col m5 s5 apperal">Apperal</div>
-										<div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div>
-									</div>
-									<h4>Winter Autumn Casual Outwear Casual Knitted Crew Neck Winter Autumn Casual Outwear Casual Knitted Crew Neck</h4>
-									<div class="moq">MOQ  150 <span>pcs</span></div>
-									<div class="leadTime">Lead time 10 <span>days</span></div>
-								</div>
+								@endif
 							</div>
 						</div>
 						<!-- profile_product_wrap -->
@@ -339,7 +338,10 @@
 									<h3>Company Overview</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger"><span class="material-icons">border_color</span></span> Edit</button>
+									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger">
+										<span class="btn_icon"><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white"> Edit</span> 
+									</button>
 								</div>
 							</div>
 							<div class="overview_table box_shadow">
@@ -366,173 +368,195 @@
 									<h3>Capacity and Machineries</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger"><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
+										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+										<span class="btn_edit_white"> Edit</span> 
+									</button>
 								</div>
 							</div>
 							<div class="row capacity_table">
-								<div class="col s12 m6">
+
+								<!-- <div class="col s12 m6">
 									<h4>Production Capacity (Annual)</h4>
-									@if(count($business_profile->productionCapacities)>0)
-									<div class="overview_table box_shadow">
-										<table>
-											<thead>
-												<tr>
-													<th>Machine Type</th>
-													<th>Annual Capacity</th>
-													<th>&nbsp;</th>
-												</tr>
-											</thead>
-											<tbody class="production-capacity-table-body">
-												@foreach($business_profile->productionCapacities as $productionCapacity)
+									<div class="production-capacity-wrapper">
+										@if(count($business_profile->productionCapacities)>0)
+										<div class="overview_table box_shadow">
+											<table>
+												<thead>
 													<tr>
-														<td>{{$productionCapacity->machine_type}}</td>
-														<td>{{$productionCapacity->annual_capacity}}</td>
-														@if($productionCapacity->status==1)
-														<td><i class="material-icons" style="color:green">check_circle</i></td>
-														@else
-														<td><i class="material-icons "style="color:gray">check_circle</i></td>
-														@endif
-
-
-														
+														<th>Machine Type</th>
+														<th>Annual Capacity</th>
+														<th>&nbsp;</th>
 													</tr>
-												@endforeach
-											</tbody>
-										</table>
-									</div>
-									@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
+												</thead>
+												<tbody class="production-capacity-table-body">
+													@foreach($business_profile->productionCapacities as $productionCapacity)
+														<tr>
+															<td>{{$productionCapacity->machine_type}}</td>
+															<td>{{$productionCapacity->annual_capacity}}</td>
+															@if($productionCapacity->status==1)
+															<td><i class="material-icons" style="color:green">check_circle</i></td>
+															@else
+															<td><i class="material-icons "style="color:gray">check_circle</i></td>
+															@endif 
+														</tr>
+													@endforeach
+												</tbody>
+											</table>
 										</div>
-									</div>
-									@endif
-								</div>
-								<div class="col s12 m6">
-									<h4>Categories Produced</h4>
-									@if(count($business_profile->categoriesProduceds)>0)
-									<div class="overview_table box_shadow">
-										<table>
-											<thead>
-												<tr>
-													<th>Type</th>
-													<th>Percentage</th>
-													<th>&nbsp;</th>
-												</tr>
-											</thead>
-											<tbody class="categories-produced-table-body">
-												@foreach($business_profile->categoriesProduceds as $categoriesProduced)
-												<tr>
-													<td>{{$categoriesProduced->type}}</td>
-													<td>{{$categoriesProduced->percentage}}</td>
-													@if($categoriesProduced->status==1)
-													<td><i class="material-icons" style="color:green">check_circle</i></td>
-													@else
-													<td><i class="material-icons "style="color:gray">check_circle</i></td>
-													@endif
-												</tr>
-												@endforeach
-											</tbody>
-										</table>
-									</div>
-									@else
+										@else
 										<div class="card-alert card cyan lighten-5">
 											<div class="card-content cyan-text">
 												<p>INFO : No data found.</p>
 											</div>
 										</div>
-									@endif
+										@endif
+									</div>
+								</div> -->
+
+								<div class="col s12 m12">
+									<h4>Categories Produced</h4>
+									<div class="categories_produced_wrapper">
+										@if(count($business_profile->categoriesProduceds)>0)
+										<div class="overview_table box_shadow">
+											<table>
+												<thead>
+													<tr>
+														<th>Type</th>
+														<th>Percentage</th>
+														<th>&nbsp;</th>
+													</tr>
+												</thead>
+												<tbody class="categories-produced-table-body">
+													@foreach($business_profile->categoriesProduceds as $categoriesProduced)
+													<tr>
+														<td>{{$categoriesProduced->type}}</td>
+														<td>{{$categoriesProduced->percentage}}</td>
+														@if($categoriesProduced->status==1)
+														<td><i class="material-icons" style="color:green">check_circle</i></td>
+														@else
+														<td><i class="material-icons "style="color:gray">check_circle</i></td>
+														@endif
+													</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+										@else
+											<div class="card-alert card cyan lighten-5">
+												<div class="card-content cyan-text">
+													<p>INFO : No data found.</p>
+												</div>
+											</div>
+										@endif
+									</div>
 								</div>
 							</div>
 						</div>
+
 						<div class="overview_table_wrap machinery_table">
 							<h4>Machinery Details</h4>
-							@if(count($business_profile->machineriesDetails)>0)
-							<div class="overview_table box_shadow">
-								<table>
-									<thead>
-										<tr>
-											<th>Machine Name</th>
-											<th>Quantity</th>
-											<th>&nbsp;</th>
-										</tr>
-									</thead>
-									<tbody class="machinaries-details-table-body">
-										@foreach($business_profile->machineriesDetails as $machineriesDetail)
-										<tr>
-											<td>{{$machineriesDetail->machine_name}}</td>
-											<td>{{$machineriesDetail->quantity}}</td>
-											@if($machineriesDetail->status==1)
-											<td><i class="material-icons" style="color:green">check_circle</i></td>
-											@else
-											<td><i class="material-icons "style="color:gray">check_circle</i></td>
-											@endif
-										</tr>
-										@endforeach									
-									</tbody>
-								</table>
+							<div class="machinery_table_inner_wrap">
+								@if(count($business_profile->machineriesDetails)>0)
+								<div class="overview_table box_shadow">
+									<table>
+										<thead>
+											<tr>
+												<th>Machine Name</th>
+												<th>Quantity</th>
+												<th>&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody class="machinaries-details-table-body">
+											@foreach($business_profile->machineriesDetails as $machineriesDetail)
+											<tr>
+												<td>{{$machineriesDetail->machine_name}}</td>
+												<td>{{$machineriesDetail->quantity}}</td>
+												@if($machineriesDetail->status==1)
+												<td><i class="material-icons" style="color:green">check_circle</i></td>
+												@else
+												<td><i class="material-icons "style="color:gray">check_circle</i></td>
+												@endif
+											</tr>
+											@endforeach									
+										</tbody>
+									</table>
+								</div>
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>	
+								@endif
 							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
-									</div>
-								</div>	
-							@endif
 						</div>
+
 						<div class="overview_table_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Production Flow and Manpower</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger"><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger">
+										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+										<span class="btn_edit_white"> Edit</span> 
+									</button>
 								</div>
 							</div>
-							@if(count($business_profile->productionFlowAndManpowers)>0)
-							<div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">
-								<table class="production-flow-and-manpower-table" style="width:100%">
-									<tbody class="production-flow-and-manpower-table-body">
-										<!-- Html will comes from script -->
-										@foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
-										<tr>
-											<th>{{$productionFlowAndManpower->production_type}}</th>
-											<td>
-												<table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-												@foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
-												<tr>
-													<td>{{$flowAndManpower->name}}</td>
-													<td>{{$flowAndManpower->value}}</td>
-													@if($flowAndManpower->status==1)
-													<td><i class="material-icons" style="color:green">check_circle</i></td>
-													@else
-													<td><i class="material-icons "style="color:gray">check_circle</i></td>
-													@endif
-												</tr>
-												@endforeach
-												</table>
-											</td>
-										</tr>
-										@endforeach									
-									</tbody>
-								</table>
+							<div class="manpower_table_wrapper">
+								@if(count($business_profile->productionFlowAndManpowers)>0)
+								<div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">
+									<table class="production-flow-and-manpower-table" style="width:100%">
+										<tbody class="production-flow-and-manpower-table-body">
+											<!-- Html will comes from script -->
+											@foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
+											<tr>
+												<th>{{$productionFlowAndManpower->production_type}}</th>
+												<td>
+													<table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
+													@foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
+													<tr>
+														<td>{{$flowAndManpower->name}}</td>
+														<td>{{$flowAndManpower->value}}</td>
+														@if($flowAndManpower->status==1)
+														<td><i class="material-icons" style="color:green">check_circle</i></td>
+														@else
+														<td><i class="material-icons "style="color:gray">check_circle</i></td>
+														@endif
+													</tr>
+													@endforeach
+													</table>
+												</td>
+											</tr>
+											@endforeach									
+										</tbody>
+									</table>
+								</div>
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>	
+								@endif
 							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
-									</div>
-								</div>	
-							@endif
 						</div>
+
 						<div class="certifications">
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s6 m6">
 									<h3>Certifications</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-certification-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_edit_white">Upload</span>
+									</button>
+									<button type="button" class="btn_delete btn_green_White delete-certification-button" >
+										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_edit_white">Delete</span>
+									</button>
 								</div>
 							</div>
 							<div class="certifications-block">
@@ -541,10 +565,12 @@
 									<div class="certificate_img_wrap">
 										<a href="javascript:void(0)" style="display: none;" data-id="{{$certification->id}}" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
-										<span>{{$certification->title}}</span>
-										<i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-										<br>
-										<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="btn" ><i class="fas fa-arrow-alt-circle-down"></i></a> 
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title">{{$certification->title}}</span>
 										@else
 										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>
@@ -560,14 +586,21 @@
 								@endif
 							</div>
 						</div>
+
 						<div class="main_buyers_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s6 m6">
 									<h3>Main Buyers</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White  delete-main-buyer-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_edit_white"> Upload</span>
+									</button>
+									<button type="button" class="btn_delete btn_green_White  delete-main-buyer-button" >
+										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_edit_white"> Delete</span>
+									</button>
 								</div>
 							</div>
 							<div class="buyers_logo_wrap row main-buyers-block">
@@ -598,8 +631,14 @@
 									<h3>Export Destinations</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-export-destination-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_edit_white"> Upload</span>
+									</button>
+									<button type="button" class="btn_delete btn_green_White delete-export-destination-button" >
+										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_edit_white"> Delete</span>
+									</button>
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
@@ -637,112 +676,130 @@
 								@endforeach
 								</div>
 							</div> -->
-							
 						</div>
+
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Business Terms</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" >
+										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+										<span class="btn_edit_white"> Edit</span> 
+									</button>
 								</div>
 							</div>
-							@if(count($business_profile->businessTerms)>0)
-							<div class="overview_table  box_shadow">
-								<table>
-									<tbody class="business-term-table-body">
-										@foreach($business_profile->businessTerms as $businessTerm)
-										<tr>
-											<td>{{$businessTerm->title}}</td>
-											<td>{{$businessTerm->quantity}}</td>
-											@if($businessTerm->status==1)
-											<td><i class="material-icons" style="color:green">check_circle</i></td>
-											@else
-											<td><i class="material-icons "style="color:gray">check_circle</i></td>
-											@endif
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
-							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
+							<div class="business_terms_table_wrap">
+								@if(count($business_profile->businessTerms)>0)
+								<div class="overview_table box_shadow">
+									<table>
+										<tbody class="business-term-table-body">
+											@foreach($business_profile->businessTerms as $businessTerm)
+											<tr>
+												<td>{{$businessTerm->title}}</td>
+												<td>{{$businessTerm->quantity}}</td>
+												@if($businessTerm->status==1)
+												<td><i class="material-icons" style="color:green">check_circle</i></td>
+												@else
+												<td><i class="material-icons "style="color:gray">check_circle</i></td>
+												@endif
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
 									</div>
-								</div>
-							@endif
+								@endif
+							</div>
 						</div>
+
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Sampling and R&D</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger"> 
+										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+										<span class="btn_edit_white"> Edit</span> 
+									</button>
 								</div>
 							</div>
-							@if(count($business_profile->samplings) > 0)
-							<div class="overview_table box_shadow">
-								<table>
-									<tbody class="sampling-table-body">
-										@foreach($business_profile->samplings as $sampling)
+							<div class="sampling_table_wrapper">
+								@if(count($business_profile->samplings) > 0)
+								<div class="overview_table box_shadow">
+									<table>
+										<tbody class="sampling-table-body">
+											@foreach($business_profile->samplings as $sampling)
+											<tr>
+												<td>{{$sampling->title}}</td>
+												<td>{{$sampling->quantity}}</td>
+												@if($sampling->status==1)
+												<td><i class="material-icons" style="color:green">check_circle</i></td>
+												@else
+												<td><i class="material-icons "style="color:gray">check_circle</i></td>
+												@endif
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>	
+								@endif
+							</div>
+						</div>
+
+						<div class="overview_table_wrap blank_overview_table_wrap">
+							<div class="row top_titleWrap">
+								<div class="col s6 m6">
+									<h3>Special customization ability</h3>
+								</div>
+								<div class="col s6 m6 right-align editBox">
+									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger"> 
+										<span class="btn_icon" ><i class="material-icons">border_color</i></span> 
+										<span class="btn_edit_white" > Edit</span> 
+									</button>
+								</div>
+							</div>
+							<div class="special_customization_table_wrap">
+								@if(count($business_profile->specialCustomizations) > 0)
+								<div class="overview_table box_shadow">
+									<table>
+									<tbody class="special-customization-table-body">
+										@foreach($business_profile->specialCustomizations as $specialCustomization)
 										<tr>
-											<td>{{$sampling->title}}</td>
-											<td>{{$sampling->quantity}}</td>
-											@if($sampling->status==1)
+											<td>{{$specialCustomization->title}}</td>
+											@if($specialCustomization->status==1)
 											<td><i class="material-icons" style="color:green">check_circle</i></td>
 											@else
 											<td><i class="material-icons "style="color:gray">check_circle</i></td>
 											@endif
 										</tr>
 										@endforeach
-									</tbody>
-								</table>
-							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
+										</tbody>
+									</table>
+								</div>
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
 									</div>
-								</div>	
-							@endif
-						</div>
-						<div class="overview_table_wrap blank_overview_table_">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Special customization ability</h3>
-								</div>
-								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
-								</div>
+								@endif
 							</div>
-							@if(count($business_profile->specialCustomizations) > 0)
-							<div class="overview_table box_shadow">
-								<table>
-								<tbody class="special-customization-table-body">
-									@foreach($business_profile->specialCustomizations as $specialCustomization)
-									<tr>
-										<td>{{$specialCustomization->title}}</td>
-										@if($specialCustomization->status==1)
-										<td><i class="material-icons" style="color:green">check_circle</i></td>
-										@else
-										<td><i class="material-icons "style="color:gray">check_circle</i></td>
-										@endif
-									</tr>
-									@endforeach
-									</tbody>
-								</table>
-							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
-									</div>
-								</div>
-							@endif
 						</div>
+
 						<div class="worker_welfare_wrap" style="display: none;">
 							<div class="row worker_welfare_box">
 								<div class="row top_titleWrap">
@@ -750,7 +807,10 @@
 										<h3>Worker welfare and CSR</h3>
 									</div>
 									<div class="col s6 m6 right-align editBox">
-										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" >
+											<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+											<span class="btn_edit_white" > Edit</span> 
+										</button>
 									</div>
 								</div>
 
@@ -924,7 +984,10 @@
 										<h3>Security and others</h3>
 									</div>
 									<div class="col s6 m6 right-align editBox">
-										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" >
+											<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+											<span class="btn_edit_white" > Edit</span> 
+										</button>
 									</div>
 								</div>
 
@@ -1043,48 +1106,61 @@
 								@endif
 							</div>
 						</div>
-						<div class="overview_table_wrap blank_overview_table_">
+
+						<div class="overview_table_wrap blank_overview_table_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Sustainability commitments</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" ><span class="material-icons">border_color</span></span> Edit</button>
+									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" >
+										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
+										<span class="btn_edit_white" > Edit</span> 
+									</button>
 								</div>
 							</div>
-							@if(count($business_profile->sustainabilityCommitments) > 0)
-							<div class="overview_table box_shadow">
-								<table>
-									<tbody class="sustainability-commitment-table-body">
-										@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
-										<tr>
-											<td>{{$sustainabilityCommitment->title}}</td>
-											@if($sustainabilityCommitment->status==1)
-											<td><i class="material-icons" style="color:green">check_circle</i></td>
-											@else
-											<td><i class="material-icons "style="color:gray">check_circle</i></td>
-											@endif
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
+							<div class="sustainability_commitment_table_wrap">
+								@if(count($business_profile->sustainabilityCommitments) > 0)
+								<div class="overview_table box_shadow">
+									<table>
+										<tbody class="sustainability-commitment-table-body">
+											@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
+											<tr>
+												<td>{{$sustainabilityCommitment->title}}</td>
+												@if($sustainabilityCommitment->status==1)
+												<td><i class="material-icons" style="color:green">check_circle</i></td>
+												@else
+												<td><i class="material-icons "style="color:gray">check_circle</i></td>
+												@endif
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No data found.</p>
+										</div>
+									</div>	
+								@endif
 							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
-									</div>
-								</div>	
-							@endif
 						</div>
+
 						<div class="membership_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s6 m6">
 									<h3>Association memberships</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger"><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-association-membership-button"><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_edit_white" > Upload</span>
+									</button>
+									<button type="button" class="btn_delete btn_green_White delete-association-membership-button">
+										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_edit_white"> Delete</span>
+									</button>
 								</div>
 							</div>
 							<div class="membership_textBox association-membership-block">
@@ -1111,8 +1187,14 @@
 									<h3>PR Highlights</h3>
 								</div>
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger"  ><span class="material-icons">file_upload</span></span> Upload</button>
-									<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" ><span><span class="material-icons">delete</span></span> Delete</button>
+									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_edit_white"> Upload</span>
+									</button>
+									<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" >
+										<span class="btn_icon"> <i class="material-icons">delete</i></span>
+										<span class="btn_edit_white"> Delete</span>
+									</button>
 								</div>
 							</div>
 							<div class="row press-highlight-block">
@@ -1503,7 +1585,7 @@
 	@include('business_profile._upload_association_membership_modal')
 	@include('business_profile._add_business_terms_modal')
 	@include('business_profile._add_sampling_modal')
-	@include('business_profile._add_special_customization_modal')t
+	@include('business_profile._add_special_customization_modal')
 	@include('business_profile._add_sustainability_commitment_modal')
 	@include('business_profile._add_worker_walfare_and_csr_modal')
 	@include('business_profile._add_security_modal')

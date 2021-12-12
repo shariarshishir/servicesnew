@@ -52,9 +52,19 @@ class RfqController extends Controller
 
         if ($request->hasFile('product_images')){
             foreach ($request->file('product_images') as $index=>$product_image){
-                $path=$product_image->store('images','public');
-                $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                Storage::put($path, $image);
+                
+                $extension = $product_image->getClientOriginalExtension();
+                if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'||$extension=='xlsx'){
+                   
+                    $path=$product_image->store('images','public');
+                   
+
+                }
+                else{
+                    $path=$product_image->store('images','public');
+                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+                    Storage::put($path, $image);
+                }
                 RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
             }
         }

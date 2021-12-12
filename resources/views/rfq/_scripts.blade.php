@@ -132,5 +132,23 @@
             });
         });
 
+        $(document).ready(function(){
+            $(".btn_view_detail").click(function(e){
+                $(this).toggleClass("rfq_view_detail_info_open");
+                $(this).next(".rfq_view_detail_info").slideToggle('slow');
+
+                if($(this).text() == 'Show More')
+                {
+                    $(this).text('Show Less');
+                }
+                else
+                {
+                    $(this).text('Show More');
+                }
+           
+            });
+        });
+
+
 </script>
 @endpush

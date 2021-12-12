@@ -34,6 +34,7 @@ class BusinessProfileController extends Controller
                 $companyOverview->id=$businessProfile->companyOverview->id;
                 $companyOverview->data=json_decode($businessProfile->companyOverview->data);
                 $companyOverview->about_company=$businessProfile->companyOverview->about_company;
+                $companyOverview->address=$businessProfile->companyOverview->address;
                 $companyOverview->status=$businessProfile->companyOverview->status;
             }
             else{

@@ -1482,7 +1482,9 @@
 					<div id="factorytour" class="tabcontent">
 						<div class="profile_factory_tourWrap">							
 							@if(count($business_profile->companyFactoryTour)>0)	
-								<a href="javascript:void(0);" data-target="factory-tour-edit-modal-block" class="factory_tour_edit_modal_trigger modal-trigger">Edit Factory Tour</a>					
+								<div class="right-align">
+									<a href="javascript:void(0);" data-target="factory-tour-edit-modal-block" class="factory_tour_edit_modal_trigger modal-trigger btn_green">Edit Factory Tour</a>
+								</div> 					
 								@if($companyFactoryTour->virtual_tour)
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
@@ -1497,50 +1499,50 @@
 								</div>
 								@endif
 								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->
-								<div class="row">
-									<div class="col s12">
+								<div class="row top_titleWrap">
+									<div class="col s12 gallery_navbar">
 										<ul class="tabs">
 											<li class="tab col m3"><a class="active" href="#factory_images">Factory Images</a></li>
 											<li class="tab col m3"><a href="#factory_degree_images">360 Degree Images</a></li>
 										</ul>
 									</div>
-									<div id="factory_images" class="col s12">
-										<div class="row factory_image_gallery">
-										@if(count($companyFactoryTour->companyFactoryTourImages)>0)
-											@foreach($companyFactoryTour->companyFactoryTourImages as $image)
-												<div class="col s6 m4 l4">
-													<div class="imgBox"><img src="{{asset('storage/'.$image->factory_image)}}" alt=""></div>
-												</div>
-											@endforeach
-										@else
-										<div class="card-alert card cyan lighten-5">
-											<div class="card-content cyan-text">
-												<p>INFO : No Image found.</p>
-											</div>
-										</div>
-										@endif
-
-										</div>										
-									</div>
-									<div id="factory_degree_images" class="col s12">
-										<div class="row 360_degree_video_gallery">
-										@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
-										@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
-											<div class="col s12 m6 l6">
-												<div class="imgBox"><img src="{{asset('storage/'.$image->factory_large_image)}}" alt=""></div>
+								</div>	
+								<div id="factory_images" class="col s12 factory_imgbox_wrap">
+									<div class="row factory_image_gallery">
+									@if(count($companyFactoryTour->companyFactoryTourImages)>0)
+										@foreach($companyFactoryTour->companyFactoryTourImages as $image)
+											<div class="col s6 m4 l4">
+												<div class="imgBox"><img src="{{asset('storage/'.$image->factory_image)}}" alt=""></div>
 											</div>
 										@endforeach
-										@else
-										<div class="card-alert card cyan lighten-5">
-											<div class="card-content cyan-text">
-												<p>INFO : No Image found.</p>
-											</div>
+									@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Image found.</p>
 										</div>
-										@endif
-										
-										</div>										
 									</div>
-								</div>							
+									@endif
+
+									</div>										
+								</div>
+								<div id="factory_degree_images" class="col s12 video_gallery_box">
+									<div class="row degree_360_video_gallery">
+									@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
+									@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
+										<div class="col s12 m6 l6">
+											<div class="imgBox"><img src="{{asset('storage/'.$image->factory_large_image)}}" alt=""></div>
+										</div>
+									@endforeach
+									@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Image found.</p>
+										</div>
+									</div>
+									@endif
+									
+									</div>										
+								</div>						
 							@else
 								<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
 								<div class="card-alert card cyan lighten-5">

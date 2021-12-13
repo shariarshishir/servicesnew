@@ -284,7 +284,7 @@
                 <div class="card card card-default scrollspy border-radius-6 fixed-width">
                   <div class="card-content chat-content p-0">
                     <!-- Sidebar Area -->
-                    <div class="sidebar-left sidebar-fixed animate fadeUp animation-fast">
+                    <div class="sidebar-left sidebar-fixed animate fadeUp animation-fast messagedata_leftbar">
                       <div class="sidebar animate fadeUp">
                         <div class="sidebar-content">
                           <div id="sidebar-list" class="sidebar-menu chat-sidebar list-group position-relative">
@@ -349,14 +349,14 @@
                     <!--/ Sidebar Area -->
 
                     <!-- Content Area -->
-                    <div class="chat-content-area animate fadeUp">
+                    <div class="chat-content-area animate fadeUp messagedata_content_wrap">
                       <!-- Chat header -->
                       <div class="chat-header" id="chatheader">
 
                       </div>
                       @if(auth()->check() && auth()->user()->businessProfile()->exists() && Request::get('uid'))
                             {{-- <a href="{{ env('APP_URL') }}po/add/toid={{ Request::get('uid') }}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a> --}}
-                            <a href="{{route('po.add',Request::get('uid'))}}" class="btn btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
+                            <a href="{{route('po.add',Request::get('uid'))}}" class="btn_green btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
 
                       @endif
                       <!--/ Chat header -->
@@ -364,7 +364,7 @@
                       <!-- Chat content area -->
                       <div class="chat-area ps ps--active-y">
                         <div class="chats">
-                          <div class="chats" id="messagedata">
+                          <div class="chats chat_messagedata" id="messagedata">
 
 
                           </div>
@@ -382,12 +382,13 @@
                       <div class="chat-footer">
 
                         <!-- <form onsubmit="enter_chat();" action="javascript:void(0);" class="chat-input"> -->
+                        <form class="chat-input">
                           <i class="material-icons mr-2">face</i>
                           <i class="material-icons mr-2">attachment</i>
                           <input type="text" placeholder="Type message here.." class="message mb-0" id="messagebox">
                           <input type="hidden" id="to_id" value="">
                           <a class="btn_green send messageSendButton" >Send</a>
-                       <!--  </form> -->
+                        </form>
                       </div>
                       <!--/ Chat footer -->
                     </div>

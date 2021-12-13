@@ -165,7 +165,7 @@ class ProductController extends Controller
 
     public function buyDesignProducts(){
 
-        $buyDesignProducts=Product::with('images','productReview')->where('product_type',1)->where('state',1)->where('sold',0)->paginate(9);
+        $buyDesignProducts=Product::with('images','productReview')->where('business_profile_id', '!=', null)->where('product_type',1)->where('state',1)->where('sold',0)->paginate(9);
         $buyDesignProductsArray=[];
         if($buyDesignProducts->total()>0){
             foreach($buyDesignProducts as $product){

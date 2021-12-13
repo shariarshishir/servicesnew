@@ -504,7 +504,7 @@
     $('#capacity-machinaries-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/capacity-and-machineries-create-or-update",
+      url: '{{ route("capacity-and-machineries.create-or-update")}}' ,
       type:"POST",
       data: $('#capacity-machinaries-form').serialize(),
       beforeSend: function() {
@@ -721,7 +721,8 @@
     $('#production-flow-and-manpower-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/production-flow-and-manpower-create-or-update",
+        
+      url: '{{ route("production-flow-and-manpower.create-or-update")}}',
       type:"POST",
       data: $('#production-flow-and-manpower-form').serialize(),
       beforeSend: function() {
@@ -1732,7 +1733,7 @@
     $('#business-term-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/business-term-create-or-update",
+      url: '{{route("business-terms.create-or-update")}}',
       type:"POST",
       data: $('#business-term-form').serialize(),
       beforeSend: function() {
@@ -1827,7 +1828,7 @@
     $('#sampling-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/sampling-create-or-update",
+      url: '{{route("sampling.create-or-update")}}',
       type:"POST",
       data: $('#sampling-form').serialize(),
       beforeSend: function() {
@@ -1920,7 +1921,7 @@
     $('#special-customization-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/special-customization-create-or-update",
+      url: '{{route("specialcustomizations.create-or-update")}}',
       type:"POST",
       data: $('#special-customization-form').serialize(),
       beforeSend: function() {
@@ -2012,7 +2013,7 @@
     $('#sustainability-commitment-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/sustainability-commitment-create-or-update",
+      url: '{{route("sustainabilitycommitments.create-or-update")}}',
       type:"POST",
       data: $('#sustainability-commitment-form').serialize(),
       beforeSend: function() {
@@ -2090,7 +2091,7 @@
     $('#worker-walfare-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/worker-walfare-form-create-or-update",
+      url: '{{route("walfare.create-or-update")}}',
       type:"POST",
       data: $('#worker-walfare-form').serialize(),
       beforeSend: function() {
@@ -2155,7 +2156,7 @@
      $('#security-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-      url: "/securtiy-create-or-update",
+      url: '{{route("security.create-or-update")}}',
       type:"POST",
       data: $('#security-form').serialize(),
       beforeSend: function() {
@@ -2215,10 +2216,169 @@
 
 
 
+    function addFactoryImageBlock()
+    {
+
+        var html ='<div class="col l2">';
+        html +='<label for="product-upload">Media</label>';
+        html +='</div>';
+        html +='<br>';
+        html +='<div class="col-md-12 mb-2">';
+        html +='<img id="preview-large-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='</div>';
+        html +='<div class="col-md-12">';
+        html +='<div class="form-group">';
+        html +='<input type="file" name="factory_images[]" placeholder="Choose image" id="factory-large-image">';
+        html +='</div>';
+        html +='</div>';
+        $('.factory-image-block').append(html);
+    }
+    function removeFactoryLargeImage(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+    
+    function addFactoryLargeImageBlock()
+    {
+
+        var html ='<div class="col l2">';
+        html +='<label for="product-upload">Media</label>';
+        html +='</div>';
+        html +='<br>';
+        html +='<div class="col-md-12 mb-2">';
+        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='</div>';
+        html +='<div class="col-md-12">';
+        html +='<div class="form-group">';
+        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" id="factory-image">';
+        html +='</div>';
+        html +='</div>';
+        $('.factory-large-image-block').append(html);
+    }
+    function removeFactoryImage(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+    $(document).ready(function (e) {
+       
+        $('#factory-image').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => { 
+                $('#preview-image-before-upload').attr('src', e.target.result); 
+            }
+            reader.readAsDataURL(this.files[0]); 
+        });
+        
+    });
 
 
+    $('#factory-tour-form').on('submit',function(e){
+    e.preventDefault();
+    var url = '{{ route("factory-tour.upload") }}';
+    var formData = new FormData(this);
+    formData.append('_token', "{{ csrf_token() }}");
+    $.ajax({
+        method: 'post',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData,
+        enctype: 'multipart/form-data',
+        url: url,
+        beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        },
 
+      success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
+        $('#factory-tour-form')[0].reset();
+        var factoryTours=response.factoryTours;
+        console.log(factoryTours);
+        $('#factory-tour-add-modal-block').modal('close');
+        swal("Done!", response.message,"success");
+        setTimeout(function(){
+           location.reload();
+        }, 1000)
+      },
+      error: function(xhr, status, error)
+            {
+                $('#factory-tour-form-errors').empty();
+                $("#factory-tour-form-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#factory-tour-form-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+        });
+    });
 
+    var imageIds= new Array();
+    $(document).on('click', '.delete-factory-image',function(e){
+        e.preventDefault();
+        var id=$(this).attr("data-imageId");
+        imageIds.push(id);
+        console.log(imageIds);
+        $('input:hidden[name=company_factory_tour_image_ids]').val(JSON.stringify(imageIds));
+        $(this).parent().remove();
+    });
+    var largeImageIds= new Array();
+    $(document).on('click', '.delete-factory-large-image',function(e){
+        e.preventDefault();
+        var id=$(this).attr("data-largeImageId");
+        largeImageIds.push(id);
+        console.log(largeImageIds);
+        $('input:hidden[name=company_factory_tour_large_image_ids]').val(JSON.stringify(largeImageIds));
+        $(this).parent().remove();
+        
+    });
+
+    $('#factory-tour-edit-form').on('submit',function(e){
+    e.preventDefault();
+    var url = '{{ route("factory-tour.edit") }}';
+    var formData = new FormData(this);
+    console.log(formData);
+  
+    formData.append('_token', "{{ csrf_token() }}");
+    $.ajax({
+        method: 'post',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData,
+        enctype: 'multipart/form-data',
+        url: url,
+        beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        },
+
+      success:function(response){
+        $('.loading-message').html("");
+		$('#loadingProgressContainer').hide();
+        $('#factory-tour-edit-form')[0].reset();
+        var factoryTours=response.factoryTours;
+        console.log(factoryTours);
+        $('#factory-tour-edit-modal-block').modal('close');
+        swal("Done!", response.message,"success");
+        setTimeout(function(){
+           location.reload();
+        }, 1000)
+      },
+      error: function(xhr, status, error)
+            {
+                $('#factory-tour-edit-form-errors').empty();
+                $("#factory-tour-edit-form-errors").append("<div class=''>"+error+"</div>");
+                $.each(xhr.responseJSON.error, function (key, item)
+                {
+                    $("#factory-tour-edit-form-errors").append("<div class='danger'>"+item+"</div>");
+                });
+            }
+      });
+    });
 
     </script>
 @endpush

@@ -7,16 +7,18 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Certification;
+use App\Models\CompanyFactoryTour;
+use App\Models\CompanyFactoryTourImage;
+use App\Models\CompanyFactoryTourLargeImage;
 
 class CompanyFactoryTourController extends Controller
 {
-    public function factoryDetailsUpload(Request $request ){
+    public function createFactoryTour(Request $request){
        
         $validator = Validator::make($request->all(), [
-            'title.*' => 'string|min:1|max:255',
-            'image.*' => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF|max:5120',
-            'short_description.*' => 'string|max:500',
+            'virtual_tour.*' => 'string|min:1|max:255',
+            'factory_images.*' => 'image',
+            'factory_large_images.*' => 'image',
         ]);
         if ($validator->fails())
         {
@@ -27,68 +29,167 @@ class CompanyFactoryTourController extends Controller
         }
         try{
         
-            if(isset($request->title)){
-                if(count($request->title)>0){
-                    for($i=0; $i<count($request->title) ;$i++){
-                        $certification=new Certification();
-                        if ($request->hasFile('image'))
-                        {
-                            
-                            $extension = $request->image[$i]->getClientOriginalExtension();
-                            if($extension=='pdf' ||$extension=='PDF'){
-                                $filename = $request->image[$i]->store('images/certificates','public');
-
-                            }else{
-                                $filename = $request->image[$i]->store('images/certificates','public');
-                                $image_resize = Image::make(public_path('storage/'.$filename));
-                                $image_resize->save(public_path('storage/'.$filename));
-                            }
-                            
-                        }
-                      
-                        $certification->title=$request->title[$i];
-                        $certification->image=$filename;
-                        $certification->short_description=$request->short_description[$i];
-                        $certification->business_profile_id = $request->business_profile_id;
-                        $certification->created_by = Auth::user()->id;
-                        $certification->updated_by = NULL;
-                        $certification->save();
-                        
+                $companyFactoryTour=new CompanyFactoryTour();
+                $companyFactoryTour->business_profile_id = $request->business_profile_id;
+                $companyFactoryTour->virtual_tour = $request->virtual_tour;
+                $companyFactoryTour->save();
+                
+                if ($request->hasFile('factory_images')){
+                
+                    foreach($request->factory_images as $image){
+                        $companyFactoryTourImage = new CompanyFactoryTourImage();
+                        $companyFactoryTourImage->company_factory_tour_id = $companyFactoryTour->id;
+                        $filename = $image->store('images/factory','public');
+                        $image = Image::make(public_path('storage/'.$filename));
+                        $image->save(public_path('storage/'.$filename));
+                        $companyFactoryTourImage->factory_image = $filename;
+                        $companyFactoryTourImage->save();
                     }
-
-                }
-            }
+                } 
+                if ($request->hasFile('factory_large_images')){
+                   
+                    foreach($request->factory_large_images as $image){
+                        $companyFactoryTourLargeImage = new CompanyFactoryTourLargeImage();
+                        $companyFactoryTourLargeImage->company_factory_tour_id = $companyFactoryTour->id;
+                        $filename = $image->store('images/factory','public');
+                        $image = Image::make(public_path('storage/'.$filename));
+                        $image->save(public_path('storage/'.$filename));
+                        $companyFactoryTourLargeImage->factory_large_image = $filename;
+                        $companyFactoryTourLargeImage->save();
+                    }
+                } 
             
-            $certifications = Certification::where('business_profile_id',$request->business_profile_id)->get();
-            return response()->json([
-                'success' => true,
-                'message' => 'Certification Added',
-                'certifications'=>$certifications,
-            ],200);
+                $companyFactoyrTour = CompanyFactoryTour::where('id',$companyFactoryTour->id)->first();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Factory tour created',
+                    'companyFactoryTour'=>$companyFactoryTour,
+                ],200);
 
         }catch(\Exception $e){
             return response()->json([
                 'success' => false,
-                'error'   => ['error_line' => $e->getLine()],
+                'error'   => ['error_line' => $e->getMessage()],
             ],500);
         }  
+        
     }
-    public function factoryDetailsDelete(Request $request){
-        $certification=Certification::where('id',$request->id)->first();
-        $businessId=$certification->business_profile_id;
-        $result=$certification->delete();
+
+
+
+    public function updateFactoryTour(Request $request){
+       
+        // $validator = Validator::make($request->all(), [
+        //     'virtual_tour.*' => 'string|min:1|max:255',
+        //     'factory_images.*' => 'image',
+        //     'factory_large_images.*' => 'image',
+        // ]);
+        // if ($validator->fails())
+        // {
+        //     return response()->json(array(
+        //     'success' => false,
+        //     'error' => $validator->getMessageBag()),
+        //     400);
+        // }
+        try{
+        
+                $companyFactoryTour = CompanyFactoryTour::where('id',$request->company_factory_tour_id)->first();
+                // dd($companyFactoryTour);
+                $companyFactoryTour->business_profile_id = $request->business_profile_id;
+                $companyFactoryTour->virtual_tour = $request->virtual_tour;
+                $companyFactoryTour->save();
+                if(isset($request->company_factory_tour_image_ids)){
+                    if(count(json_decode($request->company_factory_tour_image_ids))>0){
+                            CompanyFactoryTourImage::whereIn('id', json_decode($request->company_factory_tour_image_ids))->delete();
+                    }
+                }
+                if ($request->hasFile('factory_images')){
+                
+                    foreach($request->factory_images as $image){
+                        $companyFactoryTourImage = new CompanyFactoryTourImage();
+                        $companyFactoryTourImage->company_factory_tour_id = $companyFactoryTour->id;
+                        $filename = $image->store('images/factory','public');
+                        $image = Image::make(public_path('storage/'.$filename));
+                        $image->save(public_path('storage/'.$filename));
+                        $companyFactoryTourImage->factory_image = $filename;
+                        $companyFactoryTourImage->save();
+                    }
+                }
+                if(isset($request->company_factory_tour_large_image_ids)){
+                    if( count(json_decode($request->company_factory_tour_large_image_ids))>0){
+                        CompanyFactoryTourLargeImage::whereIn('id', json_decode($request->company_factory_tour_large_image_ids))->delete();
+                    }
+                }
+               
+                if ($request->hasFile('factory_large_images')){
+                   
+                    foreach($request->factory_large_images as $image){
+                        $companyFactoryTourLargeImage = new CompanyFactoryTourLargeImage();
+                        $companyFactoryTourLargeImage->company_factory_tour_id = $companyFactoryTour->id;
+                        $filename = $image->store('images/factory','public');
+                        $image = Image::make(public_path('storage/'.$filename));
+                        $image->save(public_path('storage/'.$filename));
+                        $companyFactoryTourLargeImage->factory_large_image = $filename;
+                        $companyFactoryTourLargeImage->save();
+                    }
+                } 
+            
+                $companyFactoyrTour = CompanyFactoryTour::where('id',$companyFactoryTour->id)->first();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Factory tour updated',
+                    'companyFactoryTour'=>$companyFactoryTour,
+                ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['error_message' => $e->getMessage(),'error_line' => $e->getLine()],
+            ],500);
+        }  
+        
+    }
+
+    public function factoryTourImageDelete(Request $request){
+        
+        $companyFactoryTourImage = CompanyFactoryTourImage::where('id',$request->id)->first();
+        $companyFactoryTourId = $companyFactoryTourImage->company_factory_tour_id;
+        $result = $companyFactoryTourImage->delete();
         if($result){
-            $certifications = Certification::where('business_profile_id',$businessId)->get();
+            $companyFactoryTourImages = CompanyFactoryTourImage::where('company_factory_tour_id',$companyFactoryTourId)->get();
             return response()->json([
                 'success' => true,
-                'message' => 'Certification deleted successfully',
-                'certifications'=>$certifications,
+                'message' => 'Image deleted successfully',
+                'companyFactoryTourImages'=>$companyFactoryTourImages,
             ],200);
         }else{
             return response()->json([
                 'success' => false,
-            ],500);
+                'message' => 'Failed to  delete image',
+            ],200);
         }
 
     }
+
+    public function factoryTourLargeImageDelete(Request $request){
+        $companyFactoryTourLargeImage = CompanyFactoryTourLargeImage::where('id',$request->id)->first();
+        $companyFactoryTourId = $companyFactoryTourLargeImage->company_factory_tour_id;
+        $result=$companyFactoryTourLargeImage->delete();
+        if($result){
+            $companyFactoryTourLargeImages = CompanyFactoryTourLargeImage::where('company_factory_tour_id',$companyFactoryTourId)->get();
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully',
+                'companyFactoryTourLargeImages'=>$companyFactoryTourLargeImages,
+            ],200);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to  delete image',
+            ],200);
+        }
+
+    }
+  
+  
 }

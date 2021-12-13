@@ -12,6 +12,7 @@ use App\Models\Vendor;
 use App\Models\Blog;
 use App\Models\BusinessProfile;
 use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\CompanyFactoryTour;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
@@ -514,10 +515,11 @@ class HomeController extends Controller
         {
 
             $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
             $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
-            return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts'));
+            return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour'));
         }
         //wholesaler
         if($business_profile->business_type == 2 )

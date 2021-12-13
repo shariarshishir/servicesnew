@@ -35,7 +35,7 @@ class ProductionFlowAndManpowerController extends Controller
                 
                         $flowAndManpowerArray=[];
                         $jacquardMachines = new stdClass();
-                        $jacquardMachines->name='No of Jacquard Machines';
+                        $jacquardMachines->name='No of Machines';
                         $jacquardMachines->value=$request->no_of_jacquard_machines[$i];
                         $jacquardMachines->status=0;
         

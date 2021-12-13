@@ -24,21 +24,35 @@
 					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
 					<div class="office_address center-align ">
 						<h3>{{$business_profile->business_name}}</h3>
-						<h4><span class="material-icons">pin_drop</span>{{$business_profile->location}}, BD <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
-						<p>Wholesaler, {{$business_profile->industry_type}}</p>
+						<h4><span class="material-icons">pin_drop</span>{{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" style="display: none;" /> </h4>
+						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 					</div>
 					<div class="center-align">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
+						@if($business_profile->companyOverview->address)
 						<p>{{$business_profile->companyOverview->address}}</p>
+						@else
+						<div class="card-alert card cyan lighten-5">
+							<div class="card-content cyan-text">
+								<p>INFO : No data found.</p>
+							</div>
+						</div>
+						@endif
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
-						<p>Kamarjhuri, National University,
-							Gazipur, Bangladesh.
-						</p>
+						@if($business_profile->companyOverview->factory_address)
+						<p>{{$business_profile->companyOverview->factory_address}}</p>
+						@else
+						<div class="card-alert card cyan lighten-5">
+							<div class="card-content cyan-text">
+								<p>INFO : No data found.</p>
+							</div>
+						</div>
+						@endif
 					</div>
 				</div>
 				<div class="left_bottom">
@@ -61,7 +75,7 @@
 							<li class="tab"><a href="#profile">Profile</a></li>
 							<li class="tab"><a href="#products">Products</a></li>
 							<!--li class="tab col m2"><a href="#womenproducts">Women</a></li-->
-							<li class="tab"><a href="#factorytour">Factory Tour</a></li>
+							<!--li class="tab"><a href="#factorytour">Factory Tour</a></li-->
 							<li class="tab"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
@@ -179,7 +193,7 @@
 						</div>
 
 					</div>
-					<div id="factorytour" class="tabcontent">
+					<div id="factorytour" class="tabcontent" style="display: none;">
 							<div class="profile_factory_tourWrap">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">

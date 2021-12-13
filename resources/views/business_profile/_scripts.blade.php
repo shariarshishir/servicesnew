@@ -202,6 +202,22 @@
                             $('#head-office').append(html); 
                            
                         }
+
+                        if(data.factory_address == null) {
+                            $('#factory-address').empty();
+                            var html ='<div class="card-alert card cyan lighten-5">';
+                            html+='<div class="card-content cyan-text">';
+                            html+='INFO : No data found.';
+                            html+='</div>';
+                            html+='</div>';
+                            $('#factory-address').append(html);
+                                                      
+                        } else {
+                            $('#factory-address').empty();
+                            var html ='<p>'+data.factory_address+'</p>';
+                            $('#factory-address').append(html); 
+                           
+                        }
                         
 
                         //$('#address').text(data.address);

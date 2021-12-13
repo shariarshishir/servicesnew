@@ -211,12 +211,13 @@ class BusinessProfileController extends Controller
                 $count++;
             }
 
-            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'about_company'=>$request->about_company]);
+            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
             return response()->json([
                 'success' => false,
                 'msg'     => 'Company Overview Updated',
                 'data'    => json_decode($company_overview->data),
                 'address'=>$company_overview->address,
+                'factory_address'=>$company_overview->factory_address,
                 'about_company'=>$company_overview->about_company
 
             ],200);

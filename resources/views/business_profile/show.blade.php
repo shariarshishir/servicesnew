@@ -24,8 +24,8 @@
 					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
 					<div class="office_address center-align ">
 						<h3>{{$business_profile->business_name}}</h3>
-						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
-						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->business_category_id}}</p>
+						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
+						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 					</div>
 					<div class="center-align">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
@@ -46,9 +46,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
-						<p>Kamarjhuri, National University, 
-							Gazipur, Bangladesh.
-						</p>
+						<div id="factory-address">
+							@if($business_profile->companyOverview->factory_address)
+								<p>{{$business_profile->companyOverview->factory_address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 				</div>
 				<div class="left_bottom">
@@ -113,22 +121,26 @@
 							</div>
 							@endif
 							@if($company_overview->name=='number_of_worker')
-							<div class="col s6 m3 l2">
-								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+								@if(isset($company_overview->value))
+								<div class="col s6 m3 l2">
+									<div class="company_stuff_img">
+										<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+									</div>
+									<div class="title">No. of workers</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 								</div>
-								<div class="title">No. of workers</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-							</div>
+								@endif
 							@endif
 							@if($company_overview->name=='number_of_female_worker')
-							<div class="col s6 m3 l3">
-								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+								@if(isset($company_overview->value))
+								<div class="col s6 m3 l3">
+									<div class="company_stuff_img">
+										<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+									</div>
+									<div class="title">No. of female workers</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 								</div>
-								<div class="title">No. of female workers</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-							</div>
+								@endif
 							@endif
 						@endforeach
 						</div>

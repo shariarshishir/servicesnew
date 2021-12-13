@@ -89,7 +89,7 @@ class BusinessProfileController extends Controller
     }
 
     public function manufactureProductCategories(){
-        $manufactureProductCategories=ProductCategory::with('subcategories')->get();
+        $manufactureProductCategories = ProductCategory::with('subcategories')->get();
         if( count($manufactureProductCategories)>0){
             return response()->json(["productCategories"=>$manufactureProductCategories,"success"=>true],200);
         }
@@ -109,15 +109,53 @@ class BusinessProfileController extends Controller
         }
     }
 
+    //business profile list of auth user
     public function businessProfileList(){
-        $businessProfiles = BusinessProfile::with('businessCategory')->where('user_id',auth()->user()->id)->get();
+        $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->get();
         if(count($businessProfiles)>0){
-            return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true],200);
+            $companyOverviewArray=[];
+            foreach($businessProfiles as $businessProfile){
+                   //company overview without json
+                    if($businessProfile->companyOverview){
+                        $companyOverview = new stdClass();
+                        $companyOverview->id = $businessProfile->companyOverview->id;
+                        $companyOverview->business_profile_id = $businessProfile->companyOverview->business_profile_id;
+                        $companyOverview->data = json_decode($businessProfile->companyOverview->data);
+                        $companyOverview->about_company = $businessProfile->companyOverview->about_company;
+                        $companyOverview->address = $businessProfile->companyOverview->address;
+                        $companyOverview->factory_address = $businessProfile->companyOverview->factory_address;
+                        $companyOverview->status = $businessProfile->companyOverview->status;
+                    }
+                    else{
+                        $companyOverview=[];
+                    }
+                    array_push($companyOverviewArray,$companyOverview);
+           
+            }
+            return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true,"companyOverviews"=>$companyOverviewArray],200);
         }
         else{
-            return response()->json(["success"=>false],404);
+            return response()->json(["businessProfiles"=>[],"success"=>false],200);
         }
     }
+
+    //All business profile list
+    public function allBusinessProfile(){
+        $allBusinessProfiles = BusinessProfile::with('user','businessCategory')->paginate(10);
+        if(count($allBusinessProfiles)){
+            return response()->json([
+                'success' => true,
+                'allBusinessProfiles'=>$allBusinessProfiles
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'allBusinessProfiles'=>[]
+            ],200);
+        }
+    }
+
 
     public function store(Request $request)
     {
@@ -377,20 +415,5 @@ class BusinessProfileController extends Controller
             
         }
 
-        public function allBusinessProfile(){
-            $allBusinessProfiles = BusinessProfile::with('user')->paginate(10);
-            if(count($allBusinessProfiles)){
-                return response()->json([
-                    'success' => true,
-                    'allBusinessProfiles'=>$allBusinessProfiles
-                ],200);
-            }
-            else{
-                return response()->json([
-                    'success' => false,
-                    'allBusinessProfiles'=>[]
-                ],200);
-            }
-        }
-
+       
 }

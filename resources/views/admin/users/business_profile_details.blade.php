@@ -386,7 +386,7 @@
                                                 <table class="table">
                                                     @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $key=>$flowAndManpower)
                                                     <tr>
-                                                        @if($flowAndManpower->name=='No of Jacquard Machines')
+                                                        @if($flowAndManpower->name=='No of Machines')
                                                         <td>{{$flowAndManpower->name}}</td>
                                                         <td>{{$flowAndManpower->value}}</td>
                                                         <td><input  name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="hidden" class="form-control "  value="{{$flowAndManpower->value}}"></td>

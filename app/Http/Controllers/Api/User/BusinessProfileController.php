@@ -110,7 +110,7 @@ class BusinessProfileController extends Controller
     }
 
     public function businessProfileList(){
-        $businessProfiles = BusinessProfile::where('user_id',auth()->user()->id)->get();
+        $businessProfiles = BusinessProfile::with('businessCategory')->where('user_id',auth()->user()->id)->get();
         if(count($businessProfiles)>0){
             return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true],200);
         }

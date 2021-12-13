@@ -24,8 +24,8 @@
 					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
 					<div class="office_address center-align ">
 						<h3>{{$business_profile->business_name}}</h3>
-						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
-						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->business_category_id}}</p>
+						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
+						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 					</div>
 					<div class="center-align">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
@@ -46,9 +46,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
-						<p>Kamarjhuri, National University, 
-							Gazipur, Bangladesh.
-						</p>
+						<div id="factory-address">
+							@if($business_profile->companyOverview->factory_address)
+								<p>{{$business_profile->companyOverview->factory_address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 				</div>
 				<div class="left_bottom">
@@ -113,22 +121,26 @@
 							</div>
 							@endif
 							@if($company_overview->name=='number_of_worker')
-							<div class="col s6 m3 l2">
-								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+								@if(isset($company_overview->value))
+								<div class="col s6 m3 l2">
+									<div class="company_stuff_img">
+										<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+									</div>
+									<div class="title">No. of workers</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 								</div>
-								<div class="title">No. of workers</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-							</div>
+								@endif
 							@endif
 							@if($company_overview->name=='number_of_female_worker')
-							<div class="col s6 m3 l3">
-								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+								@if(isset($company_overview->value))
+								<div class="col s6 m3 l3">
+									<div class="company_stuff_img">
+										<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+									</div>
+									<div class="title">No. of female workers</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
 								</div>
-								<div class="title">No. of female workers</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-							</div>
+								@endif
 							@endif
 						@endforeach
 						</div>
@@ -140,7 +152,7 @@
 						</div>
 						<!-- contentBox -->
 						<div class="certifications">
-							<h3>Certifications test</h3>
+							<h3>Certifications</h3>
 							<div class="certifications-block">
 							@if(count($business_profile->certifications)>0)
 									@foreach($business_profile->certifications as $certification)
@@ -175,7 +187,7 @@
 								<div class="col s6 m6">
 									<h3>Main Products</h3>
 								</div>
-								<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
+								<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
 							</div>
 							<div class="product_boxwrap row">
 								@if(count($mainProducts)>0)
@@ -196,7 +208,7 @@
 
 										</div>
 										<h4>
-											<a href="#">
+											<a href="{{route('mix.product.details', ['mb', $product->id])}}">
 												{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
 											</a>
 										</h4>
@@ -219,28 +231,31 @@
 								<div class="col s6 m6">
 									<h3>Factory Images</h3>
 								</div>
-								<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
+								<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
 							</div>
+							@if(count($business_profile->companyFactoryTour)>0)
 							<div class="row">
-								<div class="col s6 m4">
-									<div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt="" /></a></div>
-								</div>
-								<div class="col s6 m4">
-									<div class="imgBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/factory_2.jpg')}}" alt="" /></a></div>
-								</div>
-								<div class="col s6 m4">
-									<div class="imgBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/factory_3.jpg')}}" alt="" /></a></div>
-								</div>
-								<div class="col s6 m4">
-									<div class="imgBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/factory_4.jpg')}}" alt="" /></a></div>
-								</div>
-								<div class="col s6 m4">
-									<div class="imgBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/factory_5.jpg')}}" alt="" /></a></div>
-								</div>
-								<div class="col s6 m4">
-									<div class="imgBox"><a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt="" /></a></div>
-								</div>
+								@if(count($companyFactoryTour->companyFactoryTourImages)>0)
+									@foreach($companyFactoryTour->companyFactoryTourImages as $image)
+										<div class="col s6 m4">
+											<div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->factory_image)}}" alt="" /></a></div>
+										</div>										
+									@endforeach
+								@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Image found.</p>
+										</div>
+									</div>								
+								@endif
 							</div>
+							@else
+								<div class="card-alert card cyan lighten-5">
+									<div class="card-content cyan-text">
+										<p>INFO : No Image found.</p>
+									</div>
+								</div>
+							@endif
 						</div>
 						<!-- factory_images -->
 						<div class="main_buyers_wrap">
@@ -292,43 +307,6 @@
 							
 						</div>
 						<!-- export_destination -->
-						<div  class="owner_info_wrap">
-							<div class="row">
-								<div class="col s12 m8 l9 owner_info_box">
-									<h3>Chairman's word</h3>
-									<p>“From the beginning of the company to the very present, the consistent motto and objective is to work with 
-										sincerity and maintain growth effectively. Giving employment to people and serving the society has always 
-										been the core value and motive for expanding business. We take care of the production in our establishment
-										standing in our own land at kamarjuri, National University, Joydevpur, Gazipur. We never believe in giving sub-
-										contract hence, we can keep our commitment of quality and lead time. We also have always taken care of our
-										employees and labor in terms of safety, benefits and hence invested in to stay compliant. This year we plan to 
-										bring more machinery in the RMG units and also looking forward to enter new industries to create employment
-										and increase the contribution to the society."
-									</p>
-								</div>
-								<div class="col s12 m4 l3">
-									<div class="owner_img"><img src="{{asset('images/frontendimages/new_layout_images/chairman.jpg')}}" alt="" /></div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col s12 m8 l9">
-									<h3>Director's word</h3>
-									<p>"It all started out of passion and a vision in 1999 and since 2014 it became my core duty to leverage the business
-										into further heights with only one motto, “ Efficient and Uncompromising Service to our Customers”. Completing
-										my Masters in International business and a diploma in Fashion and Merchandising I stepped in the scenario of 
-										this business in 2014 and since then we have focused a lot in Research, Design and Development to serve synergistic
-										services to our customers and also bring full efficiency to meet their demands. Successfully we have maintained
-										our core value of on time shipment even under immense pressure, yet keeping our staff and workers highly 
-										motivated to love their work and workplace. Currently, we are working on the mission to make business of 
-										manufacturing come with even more to it, where we can deliver our customer updated design collection 
-										development, fast sampling and a faster lead time for gaining market competitive advantage."
-									</p>
-								</div>
-								<div class="col s12 m4 l3">
-									<div class="owner_img"><img src="{{asset('images/frontendimages/new_layout_images/director.jpg')}}" alt="" /></div>
-								</div>
-							</div>
-						</div>
 					</div>
 					<!-- Home tabcontent end -->
 					<div id="profile" class="tabcontent profile_table_design">
@@ -337,12 +315,14 @@
 								<div class="col s6 m6">
 									<h3>Company Overview</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="overview_table box_shadow">
 								<table>
@@ -367,12 +347,14 @@
 								<div class="col s6 m6">
 									<h3>Capacity and Machineries</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 										<span class="btn_edit_white"> Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="row capacity_table">
 
@@ -497,12 +479,14 @@
 								<div class="col s6 m6">
 									<h3>Production Flow and Manpower</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 										<span class="btn_edit_white"> Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="manpower_table_wrapper">
 								@if(count($business_profile->productionFlowAndManpowers)>0)
@@ -683,12 +667,14 @@
 								<div class="col s6 m6">
 									<h3>Business Terms</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 										<span class="btn_edit_white"> Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="business_terms_table_wrap">
 								@if(count($business_profile->businessTerms)>0)
@@ -724,12 +710,14 @@
 								<div class="col s6 m6">
 									<h3>Sampling and R&D</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger"> 
 										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 										<span class="btn_edit_white"> Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="sampling_table_wrapper">
 								@if(count($business_profile->samplings) > 0)
@@ -765,12 +753,14 @@
 								<div class="col s6 m6">
 									<h3>Special customization ability</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger"> 
 										<span class="btn_icon" ><i class="material-icons">border_color</i></span> 
 										<span class="btn_edit_white" > Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="special_customization_table_wrap">
 								@if(count($business_profile->specialCustomizations) > 0)
@@ -806,12 +796,14 @@
 									<div class="col s6 m6">
 										<h3>Worker welfare and CSR</h3>
 									</div>
+									@if(Auth::check())
 									<div class="col s6 m6 right-align editBox">
 										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" >
 											<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 											<span class="btn_edit_white" > Edit</span> 
 										</button>
 									</div>
+									@endif
 								</div>
 
 								@if($business_profile->walfare)
@@ -983,12 +975,14 @@
 									<div class="col s6 m6">
 										<h3>Security and others</h3>
 									</div>
+									@if(Auth::check())
 									<div class="col s6 m6 right-align editBox">
 										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" >
 											<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 											<span class="btn_edit_white" > Edit</span> 
 										</button>
 									</div>
+									@endif
 								</div>
 
 								@if($business_profile->security)
@@ -1112,12 +1106,14 @@
 								<div class="col s6 m6">
 									<h3>Sustainability commitments</h3>
 								</div>
+								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
 										<span class="btn_edit_white" > Edit</span> 
 									</button>
 								</div>
+								@endif
 							</div>
 							<div class="sustainability_commitment_table_wrap">
 								@if(count($business_profile->sustainabilityCommitments) > 0)
@@ -1484,77 +1480,67 @@
 						</div>
 					</div-->
 					<div id="factorytour" class="tabcontent">
-						<div class="profile_factory_tourWrap">
-							@if(count($business_profile->companyFactoryTour)>0)
-							@foreach($business_profile->companyFactoryTour as $companyFactoryTour)
-								<!--div class="row top_titleWrap">
+						<div class="profile_factory_tourWrap">							
+							@if(count($business_profile->companyFactoryTour)>0)	
+								<a href="javascript:void(0);" data-target="factory-tour-edit-modal-block" class="factory_tour_edit_modal_trigger modal-trigger">Edit Factory Tour</a>					
+								@if($companyFactoryTour->virtual_tour)
+								<div class="row top_titleWrap">
 									<div class="col s6 m6">
 										<h3>Virtual Tour</h3>
 									</div>
-									<div class="col s6 m6 right-align">
+									<!-- <div class="col s6 m6 right-align">
 										<a href="javascript:void(0);">Watch on YouTube</a>
-									</div>
+									</div> -->
 								</div>
 								<div class="factory_video_box">
-									<img src="{{asset('images/frontendimages/new_layout_images/video_img.png')}}" />
+									<iframe class="embed-responsive-item" src="{{$companyFactoryTour->virtual_tour}}" allowfullscreen></iframe>
 								</div>
-								<div class="factory_imgbox_wrap video_gallery_box">
-									<div class="row top_titleWrap">
-										<div class="col s6 m6 gallery_navbar">
-											<ul>
-												<li class="active"><a href="javascript:void(0);">Factory Images</a></li>
-												<li><a href="javascript:void(0);">360 Degree Images</a></li>
-											</ul>
-										</div>
-										<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
+								@endif
+								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->
+								<div class="row">
+									<div class="col s12">
+										<ul class="tabs">
+											<li class="tab col m3"><a class="active" href="#factory_images">Factory Images</a></li>
+											<li class="tab col m3"><a href="#factory_degree_images">360 Degree Images</a></li>
+										</ul>
 									</div>
-									<div class="row factory_image_gallery">
-										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
+									<div id="factory_images" class="col s12">
+										<div class="row factory_image_gallery">
+										@if(count($companyFactoryTour->companyFactoryTourImages)>0)
+											@foreach($companyFactoryTour->companyFactoryTourImages as $image)
+												<div class="col s6 m4 l4">
+													<div class="imgBox"><img src="{{asset('storage/'.$image->factory_image)}}" alt=""></div>
+												</div>
+											@endforeach
+										@else
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No Image found.</p>
+											</div>
 										</div>
-										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_2.jpg')}}" alt=""></div>
-										</div>
-										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_3.jpg')}}" alt=""></div>
-										</div>
-										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_4.jpg')}}" alt=""></div>
-										</div>
-										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_5.jpg')}}" alt=""></div>
-										</div>
-										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
-										</div>
+										@endif
+
+										</div>										
 									</div>
-								</div>
-								<div class="factory_imgbox_wrap video_gallery_box">
-									<div class="row top_titleWrap">
-										<div class="col s6 m6 gallery_navbar">
-											<ul>
-												<li><a href="javascript:void(0);">Factory Images</a></li>
-												<li class="active"><a href="javascript:void(0);">360 Degree Images</a></li>
-											</ul>
+									<div id="factory_degree_images" class="col s12">
+										<div class="row 360_degree_video_gallery">
+										@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
+										@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
+											<div class="col s12 m6 l6">
+												<div class="imgBox"><img src="{{asset('storage/'.$image->factory_large_image)}}" alt=""></div>
+											</div>
+										@endforeach
+										@else
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No Image found.</p>
+											</div>
 										</div>
-										<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
+										@endif
+										
+										</div>										
 									</div>
-									<div class="row 360_degree_video_gallery">
-										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img1.png')}}" alt=""></div>
-										</div>
-										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img2.png')}}" alt=""></div>
-										</div>
-										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img3.png')}}" alt=""></div>
-										</div>
-										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img4.png')}}" alt=""></div>
-										</div>
-									</div>
-								</div-->								
-							@endforeach
+								</div>							
 							@else
 								<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
 								<div class="card-alert card cyan lighten-5">
@@ -1562,7 +1548,7 @@
 										<p>INFO : No data found.</p>
 									</div>
 								</div>
-							@endif							
+							@endif
 						</div>
 					</div>
 					<div id="termsservice" class="tabcontent">
@@ -1592,7 +1578,8 @@
 	@include('business_profile._upload_press_highlight_modal')
     @include('business_profile._add_product_modal')
     @include('business_profile._edit_product_modal')
-	@include('business_profile._add_factorytour_modal')
+	@include('business_profile._add_factory_tour_modal')
+	@include('business_profile._edit_factory_tour_modal')
 @endsection
 
 @include('business_profile._scripts')

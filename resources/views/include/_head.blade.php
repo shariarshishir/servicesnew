@@ -22,6 +22,7 @@
 <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <link href="{{asset('css/media.css')}}" rel="stylesheet">
 <link href="{{asset('css/app-chat.min.css')}}" rel="stylesheet">
+<link href="{{asset('css/icon.css')}}" rel="stylesheet">
 <link href="{{asset('css/image-uploader.min.css')}}" rel="stylesheet">
 {{-- jasny-bootstrap.min --}}
 <link href="{{asset('css/jasny-bootstrap.min.css')}}" rel="stylesheet">
@@ -33,9 +34,6 @@
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
 {{-- cropper css --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
-{{-- chat css --}}
-<link href="{{asset('css/chat_css/style.css')}}" rel="stylesheet">
-<link href="{{asset('css/chat_css/icon.css')}}" rel="stylesheet">
 @yield('css')
 {{-- jquery ui --}}
 {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> --}}

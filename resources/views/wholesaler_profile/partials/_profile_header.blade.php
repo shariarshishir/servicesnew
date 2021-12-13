@@ -19,7 +19,7 @@
 					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
 					<div class="office_address center-align ">
 						<h3>{{$business_profile->business_name}}</h3>
-						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" /> </h4>
+						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 					</div>
 					<div class="center-align">
@@ -41,9 +41,17 @@
 					</div>
 					<div class="addressBox">
 						<span>Factory Address</span> <br/>
-						<p>Kamarjhuri, National University, 
-							Gazipur, Bangladesh.
-						</p>
+						<div id="factory-address">
+							@if($business_profile->companyOverview->factory_address)
+								<p>{{$business_profile->companyOverview->factory_address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									INFO : No data found.
+								</div>
+							</div>
+							@endif
+						</div>
 					</div>
 				</div>
 				<div class="left_bottom">

@@ -191,7 +191,7 @@ class BusinessProfileController extends Controller
                             array_push($jacquardMachinesStatusArray,$status);
                     }
                     $jacquardMachines = new stdClass();
-                    $jacquardMachines->name='No of Jacquard Machines';
+                    $jacquardMachines->name='No of Machines';
                     foreach($jacquardMachinesStatusArray as $key=>$status){
                         if($key==$i){
                             $jacquardMachines->status=$status;

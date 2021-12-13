@@ -44,7 +44,7 @@
                             </li>
                         </ul>
                     </span>
-                    <a class='dropdown-trigger btn btn_green btn_clear' href="{{route('suppliers')}}"> Clear </a>
+                    <a class='btn btn_green btn_clear' href="{{route('suppliers')}}"> Clear </a>
                 </form>
             </span>
             <span class="filter_search">

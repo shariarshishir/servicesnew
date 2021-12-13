@@ -27,7 +27,7 @@
                                     <tr id="production-flow-and-manpower-table-no-data">
                                         <td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="{{$productionFlowAndManpower->production_type}}" ></td>
                                         @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
-                                            @if($flowAndManpower->name=='No of Jacquard Machines')
+                                            @if($flowAndManpower->name=='No of Machines')
                                             <td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
                                             @endif
                                             @if($flowAndManpower->name=='Manpower')

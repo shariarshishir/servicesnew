@@ -201,7 +201,11 @@
 
         function changecompany(value)
         {
-            location.href = "{{ url('message-center')}}/"+value;
+            var url = '{{ route("message.center") }}'+value;
+                // url = url.replace(':slug', sku);
+                window.location.href = url;
+            // location.href = "{{ url('message-center')}}/"+value;
+            location.href =url;
         }
 
         function getchatdata(user, to_id, image, name, company_name, position, lastchated)

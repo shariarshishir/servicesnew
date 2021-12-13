@@ -530,7 +530,9 @@ foreach($selectedproduct as $item)
         let message = {'message': 'Please see the PO at {{ $app->make('url')->to('/') }}/pro-forma-invoices and let me know your comments.','from_id' : "{{Auth::user()->id}}", 'to_id' : selectedBuyerId};
         socket.emit('new message', message);
         setTimeout(function(){
-            window.location.href = "/message-center?uid="+selectedBuyerId;
+            url= "{{ url('message-center')}}?uid="+selectedBuyerId;
+            // window.location.href = "/message-center?uid="+selectedBuyerId;
+            window.location.href =url ;
         }, 1000);
     }
 

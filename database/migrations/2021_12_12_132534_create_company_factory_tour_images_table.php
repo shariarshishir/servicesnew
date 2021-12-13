@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyFactoryTourTable extends Migration
+class CreateCompanyFactoryTourImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCompanyFactoryTourTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_factory_tour', function (Blueprint $table) {
+        Schema::create('company_factory_tour_images', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('business_profile_id')->nullable();
-            $table->text('virtual_tour')->nullable();
-            $table->text('factory_images')->nullable();
-            $table->text('factory_large_images')->nullable();
+            $table->unsignedBigInteger('company_factory_tour_id')->nullable();
+            $table->text('factory_image')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCompanyFactoryTourTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_factory_tour');
+        Schema::dropIfExists('company_factory_tour_images');
     }
 }

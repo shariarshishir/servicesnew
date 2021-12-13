@@ -32,6 +32,7 @@ use App\Http\Controllers\SpecialCustomizationController;
 use App\Http\Controllers\SustainabilityCommitmentController;
 use App\Http\Controllers\WalfareController;
 use App\Http\Controllers\SecurityController;
+use App\Http\Controllers\CompanyFactoryTourController;
 use App\Http\Controllers\MessageController;
 
 
@@ -177,7 +178,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
-    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacityAndMachineriesCreateOrUpdate');
+    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
 
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
 
@@ -207,7 +208,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/press-highlight-details-upload', [PressHighlightController::class, 'pressHighLightDetailsUpload'])->name('presshighlights.upload');
     Route::get('/press-highlight-details-delete', [PressHighlightController::class, 'deletePressHighlight'])->name('presshighlights.delete');
 
+    Route::post('/factory-tour',[CompanyFactoryTourController::class,'createFactoryTour'])->name('factory-tour.upload');
+    Route::post('/factory-tour-edit',[CompanyFactoryTourController::class,'updateFactoryTour'])->name('factory-tour.edit');
 
+    Route::get('/factory-tour-image-delete',[CompanyFactoryTourController::class,'factoryTourImageDelete'])->name('factory-image.delete');
+    Route::get('/factory-tour-large-image-delete',[CompanyFactoryTourController::class,'factoryTourLargeImageDelete'])->name('factory-large-image.delete');
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
         //product
@@ -237,7 +242,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     //message center
 
-    Route::get('/message-center',[MessageController::class,'message_center']);
+    Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
     Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
     Route::post('/message-center/getchatdata',[MessageController::class,'getchatdata'])->name('message.center.getchatdata');
     Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity'])->name('message.center.update.user.last.activity');

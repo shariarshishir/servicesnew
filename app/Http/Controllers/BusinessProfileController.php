@@ -6,6 +6,7 @@ use App\Models\BusinessProfile;
 use App\Models\CompanyOverview;
 use App\Models\CategoriesProduced;
 use App\Models\MachineriesDetail;
+use App\Models\CompanyFactoryTour;
 use App\Models\ProductionCapacity;
 use App\Models\Manufacture\Product;
 use Illuminate\Http\Request;
@@ -150,6 +151,7 @@ class BusinessProfileController extends Controller
     public function show($id)
     {
         $business_profile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
+        $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
@@ -160,7 +162,7 @@ class BusinessProfileController extends Controller
                 ->limit(4)
                 ->get();
     
-                return view('business_profile.show',compact('business_profile', 'colors', 'sizes','products','mainProducts'));
+                return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts'));
             }
             if($business_profile->business_type == 2){
     
@@ -209,12 +211,13 @@ class BusinessProfileController extends Controller
                 $count++;
             }
 
-            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'about_company'=>$request->about_company]);
+            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
             return response()->json([
                 'success' => false,
                 'msg'     => 'Company Overview Updated',
                 'data'    => json_decode($company_overview->data),
                 'address'=>$company_overview->address,
+                'factory_address'=>$company_overview->factory_address,
                 'about_company'=>$company_overview->about_company
 
             ],200);

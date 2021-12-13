@@ -9,9 +9,14 @@ class CompanyFactoryTour extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    protected $table='company_factory_tour';
     public function businessProfile()
     {
         return $this->belongsTo(BusinessProfile::class);
+    }
+    public function companyFactoryTourImages(){
+        return $this->hasMany(CompanyFactoryTourImage::class);
+    }
+    public function companyFactoryTourLargeImages(){
+        return $this->hasMany(CompanyFactoryTourLargeImage::class);
     }
 }

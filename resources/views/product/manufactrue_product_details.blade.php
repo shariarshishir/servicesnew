@@ -398,7 +398,10 @@
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            window.location.href = "/message-center?uid="+createdBy;
+            var url = '{{ route("message.center") }}?uid='+createdBy;
+                // url = url.replace(':slug', sku);
+                window.location.href = url;
+            // window.location.href = "/message-center?uid="+createdBy;
         }, 1000);
         }
 

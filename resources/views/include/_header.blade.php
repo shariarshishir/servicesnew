@@ -41,7 +41,11 @@
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown" class="dropdown-content">
@@ -72,7 +76,11 @@
 								@if(Auth::guard('web')->check())
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown" class="dropdown-content">
@@ -208,7 +216,11 @@
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown-mobile" class="dropdown-content profile_dropdown_mobile">
@@ -241,7 +253,11 @@
 								@if(Auth::guard('web')->check())
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown-mobile" class="dropdown-content">

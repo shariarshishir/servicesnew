@@ -21,7 +21,7 @@ class ProductReviewController extends Controller
 
             $productReview = new ProductReview();
             $productReview->product_id = $request->product_id;
-            $productReview->vendor_id = $request->vendor_id;
+            $productReview->business_profile_id = $request->business_profile_id;
             $productReview->overall_rating = isset($request->overall_rating) ? $request->overall_rating : 0;
             $productReview->communication_rating = isset($request->communication_rating) ? $request->communication_rating : 0 ;
             $productReview->ontime_delivery_rating = isset($request->ontime_delivery_rating) ? $request->ontime_delivery_rating : 0;

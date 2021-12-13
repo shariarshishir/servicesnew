@@ -180,7 +180,7 @@ $reviewsCount = count($productReviews);
                                                 <button type="button" id="trigger_plus" class="trigger_plus btn green"><i class="material-icons dp48">add</i></button>
                                             </div> --}}
                                             <div class="fresh_order_block_wrapper">
-                                                <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#fresh_order_customize_block">Customaize Your Order</a>
+                                                <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#fresh_order_customize_block">Customize Your Order</a>
                                                 @if(auth::check())
                                                     <a class="waves-effect waves-light modal-trigger request_order_modification_trigger" href="#product-modification-modal">Request for Modification</a>
                                                 @else
@@ -266,7 +266,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customaize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
@@ -543,7 +543,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customaize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">

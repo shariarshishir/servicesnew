@@ -207,7 +207,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     Route::post('/press-highlight-details-upload', [PressHighlightController::class, 'pressHighLightDetailsUpload'])->name('presshighlights.upload');
     Route::get('/press-highlight-details-delete', [PressHighlightController::class, 'deletePressHighlight'])->name('presshighlights.delete');
-   
+
     Route::post('/factory-tour',[CompanyFactoryTourController::class,'createFactoryTour'])->name('factory-tour.upload');
     Route::post('/factory-tour-edit',[CompanyFactoryTourController::class,'updateFactoryTour'])->name('factory-tour.edit');
 
@@ -242,7 +242,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     //message center
 
-    Route::get('/message-center',[MessageController::class,'message_center']);
+    Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
     Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
     Route::post('/message-center/getchatdata',[MessageController::class,'getchatdata'])->name('message.center.getchatdata');
     Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity'])->name('message.center.update.user.last.activity');

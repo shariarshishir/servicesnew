@@ -7,10 +7,9 @@
 <section class="bannerwrap">
 	<div class="banner_slider">
 		<div class="banner_inner">
-			<h2>Apparel Sourcing Made Easy</h2>
+			<!-- <h2>Apparel Sourcing Made Easy</h2> -->
 			<h3>Find Ready Products, Designs, Raw Materials, Manufacturers</h3>
 			<div class="banner_search">
-
 				@php
 					$searchType= request()->get('search_type');
 				@endphp
@@ -22,9 +21,9 @@
 					</select>
 					<form name="system_search" action="{{route('onsubmit.search')}}" id="system_search" method="get">
 						@if(Route::is('onsubmit.search'))
-						<input type="text" placeholder="Type products name" value="{{$searchInputValue}}" class="search_input"  name="search_input"/>
+						<input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="{{$searchInputValue}}" class="search_input"  name="search_input"/>
 						@else
-						<input type="text" placeholder="Type products name" value="" class="search_input"  name="search_input"/>
+						<input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="" class="search_input"  name="search_input"/>
 						@endif
 						<input type="hidden" name="search_type" class="search_type" value="" />
 						<button class="btn waves-effect waves-light green darken-1 search-btn" type="submit" ><i class="material-icons dp48">search</i></button>
@@ -33,7 +32,7 @@
 				</div>
 				
 			</div>
-			<span class="search_verified">Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc.</span>
+			<!-- <span class="search_verified">Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc.</span> -->
 		</div>
 	</div>
 </section>
@@ -48,7 +47,7 @@
     <section class="banner pt-50">
         <div class="container">
             <div class="row banner-inner align-items-stretch d-flex flex-wrap">
-                <div class="col s12 m6 l6 shop_banner_info_wrap">
+                <div class="col s12 m12 l6 shop_banner_info_wrap">
                     <div class="description p-50">
                         <span>Find Your Next</span>
                         <h2 class="text-color-brand">Apparel Manufacturer</h2>
@@ -63,7 +62,7 @@
                     </div>
                 </div>
                 <img class="line" src="{{asset('images/homepage/banner-line.png')}}" alt="line">
-                <div class="col s12 m6 l6 shop_banner_img_wrap">
+                <div class="col s12 m12 l6 shop_banner_img_wrap">
                     <div class="banner-image">
                         <span>
                             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/8z7uqq_Zqzg" allowfullscreen></iframe>
@@ -89,7 +88,7 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="col s12 m8 l6 ">
+                <div class="col s12 m12 l6">
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
@@ -98,7 +97,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Connect you with 1000+ suppliers</h4>
                             <p class="mb-15">We have over 20 years’ worth of experience in the apparel industry in Bangladesh, with extensive industry knowledge. We have <span>1000+ suppliers</span> ready to create your products. Your designs + our manufacturing = a match made in apparel heaven.</p>
-                            <a href="/create-rfq" class="button">Submit RFQ</a>
+                            <a href="/rfq" class="button">Submit RFQ</a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +111,7 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="col s12 m8 l6">
+                <div class="col s12 m12 l6">
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
@@ -135,7 +134,7 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="col s12 m8 l6">
+                <div class="col s12 m12 l6">
                     <div class="item-body">
                         <span class="index-visible-circle"></span>
                         <div class="index-transparent-circle">
@@ -144,7 +143,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
                             <p class="mb-15">With our <a href="#">3D virtual sampling</a> support we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
-                            <a href="https://www.merchantbay.com/3d-studio" class="button">Shop Designs</a>
+                            <a href="/3d-studio" class="button">Shop Designs</a>
                         </div>
                     </div>
                 </div>
@@ -172,14 +171,14 @@
             <hr/>
             <div class="ontimeDescription">
                 <div class="align-items-center d-flex flex-wrap align-items-md-stretch">
-                    <div class="col s12 m6 l6">
+                    <div class="col s12 m12 l6">
                         <div class="banner-image">
                             <span>
                                 <img src="{{asset('images/homepage/delivaryTime-img-apparels.png')}}" alt="banner-img">
                             </span>
                         </div>
                     </div>
-                    <div class="col s12 m6 l6">
+                    <div class="col s12 m12 l6">
                         <div class="description p-50">
                             <h2 class="text-color-brand">On Time Or Freeeeee.</h2>
                             <p>Imagine having access to a digital marketplace of over 1000 independently verified apparel manufacturers in Bangladesh. And using an intelligent order management system to track your products’ progress. That’s Merchant Bay. And, we’re so confident in our manufacturers and system that</p>
@@ -209,54 +208,57 @@
                 <div class="col m12 plr0 htbcont">
 
                     <!--left-->
-                    <div class="col s12 m4 plr0 htbcont-lft">
-                        <ul class="tbm">
-                            <li>
-                                <a href="javascript:void(0);" id="supplier" onclick="makeactive('suppliercontent',this)" class="active">
-                                    Suppliers<br>
-                                    <span>Adapt to the Smart and Credible way to present your business</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" id="buyer" onclick="makeactive('buyercontent',this)">
-                                    Buyers<br>
-                                    <span>The most reliable way to find and manage a supplier in Bangladesh</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" id="thirdparty" onclick="makeactive('thirdpartycontent',this)">
-                                    Third Party Verification<br>
-                                    <span>Know how we verify our suppliers</span>
-                                </a>
-                            </li>
+                    <div class="col s12 m12 l4 plr0">
+                        <div class="htbcont-lft">
+                            <ul class="tbm">
+                                <li>
+                                    <a href="javascript:void(0);" id="supplier" onclick="makeactive('suppliercontent',this)" class="active">
+                                        Suppliers<br>
+                                        <span>Adapt to the Smart and Credible way to present your business</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" id="buyer" onclick="makeactive('buyercontent',this)">
+                                        Buyers<br>
+                                        <span>The most reliable way to find and manage a supplier in Bangladesh</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" id="thirdparty" onclick="makeactive('thirdpartycontent',this)">
+                                        Third Party Verification<br>
+                                        <span>Know how we verify our suppliers</span>
+                                    </a>
+                                </li>
 
-                            <li>
-                                <a href="javascript:void(0);" id="merchandising" onclick="makeactive('merchandisingcontent',this)">
-                                    Merchandising Assistance&nbsp;<sup><i class="fa fa-plus" aria-hidden="true"></i></sup><br>
-                                    <span>With our expert Merchandising Assistance learn how we solve your problem</span>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="javascript:void(0);" id="merchandising" onclick="makeactive('merchandisingcontent',this)">
+                                        Merchandising Assistance&nbsp;<sup><i class="fa fa-plus" aria-hidden="true"></i></sup><br>
+                                        <span>With our expert Merchandising Assistance learn how we solve your problem</span>
+                                    </a>
+                                </li>
 
-                            <li>
-                                <a href="javascript:void(0);" id="order" onclick="makeactive('ordercontent',this)">
-                                    Order Management Dashboard<br>
-                                    <span>Book a demo call to see how our Dashboard makes your life super easy</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="col-md-9">
-                            <p>“We believe that to expand our markets, reach out to the right business partners, we need to level up our digital footprint with credibility as that is now the best way of finding and being found.”</p>
-                            <div class="clear30"></div>
-                            <p><strong>Abrar H Sayem</strong></p>
-                            <p>Founder, Merchant Bay Ltd.</p>
+                                <li>
+                                    <a href="javascript:void(0);" id="order" onclick="makeactive('ordercontent',this)">
+                                        Order Management Dashboard<br>
+                                        <span>Book a demo call to see how our Dashboard makes your life super easy</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="col-md-9 left_bottom_note">
+                                <p>“We believe that to expand our markets, reach out to the right business partners, we need to level up our digital footprint with credibility as that is now the best way of finding and being found.”</p>
+                                <div class="clear30"></div>
+                                <p><strong>Abrar H Sayem</strong></p>
+                                <p>Founder, Merchant Bay Ltd.</p>
+                            </div>
+                            <div class="clear50 d-none d-md-block"></div>
+                            <div class="clear20 d-none d-md-block"></div>
                         </div>
-                        <div class="clear50 d-none d-md-block"></div>
-                        <div class="clear20 d-none d-md-block"></div>
+                        
                     </div>
                     <!--/left-->
 
                     <!--right-->
-                    <div class="col s12 m8 plr0" id="suppliercontent">
+                    <div class="col s12 m12 l8 plr0" id="suppliercontent">
                         <div class="row">
                             <h1 class="homebHd-sm mb20 mtop30">Adapt to the Smart and Credible way to present your business</h1>
                             <p class="homepgp-sm mb30">Open a Digital Profile on Merchant Bay to be on the niche Search Engine of Bangladesh manufacturing industry and get Verified to be noticed and win trust of buyers.</P>
@@ -265,7 +267,7 @@
                         <img src="{{asset('images/homepage/buyers-tab-img.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
-                    <div class="col s12 m8 plr0" id="buyercontent" style="display: none;">
+                    <div class="col s12 m12 l8 plr0" id="buyercontent" style="display: none;">
                         <div class="row">
                             <h1 class="homebHd-sm mb20 mtop30">The most reliable way to find and manage a supplier in Bangladesh</h1>
                             <p class="homepgp-sm mb30">Send your inquiry through RFQ (Request For Quotation) and let our smart matching system find the best matched suppliers to quote you, along with instant quotation you will have the advantage of connecting to Verified Suppliers, Order Management Dashboard and Merchandising Assistance.</P>
@@ -302,7 +304,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="col s12 m8 plr0" style="display: none;" id="thirdpartycontent">
+                    <div class="col s12 m12 l8 plr0" style="display: none;" id="thirdpartycontent">
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Third Party Verification<br></b></P>
                         <p class="homepgp-sm mb15">Know how we verify our suppliers</P>
@@ -381,7 +383,7 @@
                             </P>
                         </div>
                     </div>
-                    <div class="col s12 m8 plr0" style="display: none;" id="merchandisingcontent">
+                    <div class="col s12 m12 l8 plr0" style="display: none;" id="merchandisingcontent">
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Merchandising Assistance<br></b></P>
                         <div class="clear"></div>
@@ -417,7 +419,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col s12 m8 plr0" style="display: none;" id="ordercontent">
+                    <div class="col s12 m12 l8 plr0" style="display: none;" id="ordercontent">
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Order Management Dashboard<br></b></P>
                         <div class="clear"></div>
@@ -530,11 +532,11 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="row">
-                    <div class="col s12 m6 position-relative">
+                    <div class="col s12 m6 l6 position-relative">
                         <button type="button" class="close d-md-none d-block" data-dismiss="modal" style="position: absolute;top: 15px;right: 32px;"><i class="fa fa-times" aria-hidden="true"></i></button>
                         <img src="{{ url('images/subscribe_newsletter.png') }}" class="w-100">
                     </div>
-                    <div class="col s12 m6 subscription-form-block">
+                    <div class="col s12 m6 l6 subscription-form-block">
                         <button type="button" class="close d-md-block" data-dismiss="modal" style="position: absolute;top: 15px;right: 32px;"><i class="fa fa-times" aria-hidden="true"></i></button>
                         <div class="ic-signup-form">
                             <div class="subscribe-form">

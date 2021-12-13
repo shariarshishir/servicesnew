@@ -10,9 +10,9 @@
                         @foreach($wishListItems as $item)
                         <div class="cart-wrapper-{{$item->id}} wishlist-product">
                             <div class="row">
-                                <div class="col m12">
+                                <div class="col s12 m12">
                                     <div class="content row">
-                                        <div class="product_img col m3">
+                                        <div class="product_img col s12 m5 l3">
                                             @foreach($item->product->images as $key=>$image)
                                                 @if($key==0)
                                                     <img src="{{URL::asset('storage/'.$image->image)}}" class="responsive-img" alt="" />
@@ -20,24 +20,30 @@
                                             @endforeach
                                         </div>
 
-                                        <div class="product_short_details col m9">
+                                        <div class="product_short_details col s12 m7 l9">
 
                                             <div class="product-title">{{$item->product->name}}</div>
 
                                             <div class="product_price">
-                                                $ @foreach (json_decode($item->product->attribute) as $k => $v)
-                                                        @if($loop->last)
-                                                            {{ $v[2] }}
-                                                        @endif
-                                                    @endforeach
-                                            </div>
-
-                                            <div class="product_info_details">
-                                                <div class="shipping_label">Free Shipping</div>
-                                                <div class="rating_label">
-                                                    <i class="material-icons pink-text"> star </i>
-                                                    <span>4.5</span>
-                                                </div>
+                                                @php
+                                                    $count= count(json_decode($item->product->attribute));
+                                                    $count = $count-2;
+                                                @endphp
+                                                @foreach (json_decode($item->product->attribute) as $k => $v)
+                                                    @if($k == 0 && $v[2] == 'Negotiable')
+                                                    <span class="price_negotiable">{{ 'Negotiable' }}</span>
+                                                    @endif
+                                                    @if($loop->last && $v[2] != 'Negotiable')
+                                                        ${{ $v[2] }} {{-- $ is the value for price unite --}}
+                                                    @endif
+                                                    @if($loop->last && $v[2] == 'Negotiable')
+                                                        @foreach (json_decode($item->product->attribute) as $k => $v)
+                                                                @if($k == $count)
+                                                                    ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
+                                                                @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach                                                    
                                             </div>
 
                                             <div class="product_info_short_details">
@@ -65,12 +71,10 @@
             </div>
         @else
             <div class="row wishlist_products_wrap">
-                <div class="col-md-12">
-                    <div class="card card-with-padding">
-                        <div class="card-alert card cyan">
-                            <div class="card-content white-text">
-                                <p>INFO : Your wishlist is empty</p>
-                            </div>
+                <div class="card card-with-padding">
+                    <div class="card-alert card cyan">
+                        <div class="card-content white-text">
+                            <p>INFO : Your wishlist is empty</p>
                         </div>
                     </div>
                 </div>
@@ -104,6 +108,7 @@
                     success: function(data){
                         swal(data.message);
                         obj.parent().parent().remove();
+                        window.location.reload();
                     }
                 });
             }

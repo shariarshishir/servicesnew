@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Models\Manufacture;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProformaProduct extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    protected $connection = 'mysql2';
-    protected $table='proforma_product';
+    use HasFactory;
 
     protected $fillable=['performa_id ', 'supplier_id', 'product_id', 'unit', 'unit_price', 'tax', 'total_price', 'tax_total_price', 'created_at', 'updated_at','price_unit'];
 
@@ -22,5 +18,4 @@ class ProformaProduct extends Model
     public function product(){
         return $this->belongsTo('App\Models\Manufacture\Product','product_id');
     }
-
 }

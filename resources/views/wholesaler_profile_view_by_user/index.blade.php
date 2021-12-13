@@ -28,7 +28,11 @@
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 					</div>
 					<div class="center-align">
-						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
+                        @if(Auth::guard('web')->check())
+                        <a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
+                        @else
+                            <a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
+                        @endif
 					</div>
 					<div class="addressBox">
 						<span>Head Office </span><br/>
@@ -89,11 +93,11 @@
 							<p>No information added</p>
 							@endif
 
-							
+
 						</div>
 						<!-- contentBox -->
-						
-						
+
+
 					</div>
 					<!-- Home tabcontent end -->
 					<div id="profile" class="tabcontent profile_table_design">
@@ -102,9 +106,9 @@
 									<div class="col s6 m6">
 										<h3>Company Overview</h3>
 									</div>
-								
+
 								</div>
-								
+
 								<div class="overview_table box_shadow">
 									<table>
 										<tbody>
@@ -126,7 +130,7 @@
 														<p>INFO : No data found.</p>
 													</div>
 												</div>
-											@endif	
+											@endif
 										</tbody>
 									</table>
 								</div>
@@ -136,7 +140,7 @@
 									<div class="col s6 m6">
 										<h3>Association memberships</h3>
 									</div>
-									
+
 								</div>
 								<div class="row membership_textBox association-membership-block">
 									@if(count($business_profile->associationMemberships)>0)
@@ -152,8 +156,8 @@
 											<div class="card-content cyan-text">
 												<p>INFO : No data found.</p>
 											</div>
-										</div>	
-									@endif	
+										</div>
+									@endif
 								</div>
 							</div>
 							<div class="pr_highlights_wrap">
@@ -161,7 +165,7 @@
 									<div class="col s6 m6">
 										<h3>PR Highlights</h3>
 									</div>
-									
+
 								</div>
 								<div class="row press-highlight-block">
 									@if(count($business_profile->pressHighlights)>0)
@@ -179,8 +183,8 @@
 												<p>INFO : No data found.</p>
 											</div>
 										</div>
-									@endif	
-									
+									@endif
+
 								</div>
 							</div>
 						</div>

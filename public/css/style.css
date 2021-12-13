@@ -6037,6 +6037,87 @@ nav .pagination li.active .page-link {
     padding: 0px 30px;
 }
 
+
+/* ************************* chat message style start ******************************  */
+.blue-grey-text.text-darken-4 {
+    text-transform: capitalize;
+    line-height: 22px;
+}
+.messagedata_leftbar .valign-wrapper {
+    line-height: 40px;
+}
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section .star-timing {
+   width: 140px !important;
+}
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section .star-timing .time {
+    white-space: nowrap;
+    line-height: 40px;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-avatar .avatar {
+    width: 45px;
+    height: 45px;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-avatar .avatar img {
+    width: 100%;
+    height: 100%;
+}
+.chat_messagedata .chat_sms_box {
+    position: relative;
+    padding-bottom: 30px;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat_sms_box p {
+    min-height: 40px;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text .sms_strtotime {
+    position: absolute;
+    left: 18px;
+    color: #757575;
+    bottom: 0;
+    font-size: 14px; 
+    white-space: nowrap;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat-right .chat-text .sms_strtotime {
+    left: 0px !important;
+}
+.chat_messagedata .chat_sms {
+    color: #fff;
+    background-color: #4E9C52;
+    max-width: 500px;
+    padding: 15px 5px 10px 0px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 14%);
+}
+.chat_messagedata .left_chat_sms {
+    max-width: 500px;
+    padding: 15px 5px 10px 0px;
+    color: #757575;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 14%);
+}
+.chat_messagedata .chat_sms_left {
+    text-transform: capitalize;
+}
+.chat_messagedata .chat_product_message {
+    padding-top: 10px;
+    text-transform: initial;
+}
+.chat_messagedata .sms_product_img {
+    text-align: right;
+}
+.chat_messagedata .sms_product_img img {
+    border-radius: 5px;
+    height: 100px;
+    display: inline-block;
+    width: auto;
+}
+
+/* ************************* chat message style end ******************************  */
+
 /* ******************** Media css style start *********************** */
 
 @media only screen and (min-width: 1500px) {

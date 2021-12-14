@@ -250,6 +250,15 @@
                             </div>
                         </div>
                     </div><br>
+                    {{-- video --}}
+                    <div class="row input-field product-upload-block">
+                        <div class="col s12 m3 l3">
+                            <label class="active">Video:</label>
+                        </div>
+                        <div class="col s12 m9 l9" id="lineitems">
+                            <input type="file" name="videos[]"><p onclick="addMoreVideo(this);">Add more</p>
+                        </div>
+                    </div>
 
                     <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>
@@ -290,5 +299,19 @@
                 reader.readAsDataURL(input.files[0]); // convert to base64 string
             }
         }
+
+    //add more video
+    var  lineitemcontent= '<input type="file" name="videos[]"><p onclick="removeVideoEl(this);">Remove</p>';
+    function addMoreVideo(obj)
+        {
+            $(obj).parent().append(lineitemcontent);
+            // $('#lineitems').append(lineitemcontent);
+        }
+
+    function removeVideoEl(el)
+    {
+        $(el).prev('input').remove();
+        $(el).remove();
+    }
     </script>
 @endpush

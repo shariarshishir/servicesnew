@@ -33,6 +33,7 @@ class ProductController extends Controller
             'colors'=>'required|array',
             'sizes'=>'required|array',
             'industry' => 'required',
+
         ]);
 
         if ($validator->fails())

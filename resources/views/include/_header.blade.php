@@ -18,7 +18,7 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
+							<li><a href="{{route('front.tools')}}">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
@@ -181,7 +181,7 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
+							<li><a href="{{route('front.tools')}}">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="" href="javascript:void(0);" >More</a>

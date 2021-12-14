@@ -15,7 +15,7 @@
                         <ul id='business_type' class='dropdown-content'>
                             <li><label>
                                 <input type="checkbox" value="1" name="business_type[]" {{ (in_array(1, $business_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                <span>Manufactue</span>
+                                <span>Manufacture</span>
                             </label>
                             </li>
 

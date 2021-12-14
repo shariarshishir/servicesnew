@@ -43,9 +43,9 @@ class Product extends Model
         return $this->belongsTo(BusinessProfile::class);
     }
 
-    public function videos()
+    public function video()
     {
-        return $this->hasMany(ProductVideo::class);
+        return $this->hasOne(ProductVideo::class);
     }
 
 

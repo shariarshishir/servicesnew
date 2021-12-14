@@ -51,11 +51,9 @@
                         <label class="active">Video:</label>
                     </div>
                     <div class="col s12 m9 l9" id="lineitems">
-                        <input type="file" name="videos[]">
+                        <input type="file" name="video">
                     </div>
                 </div>
-                {{-- <p onclick="addMoreVideo(this);">Add more</p> --}}
-
                 <div class="row input-field product-details-block">
                     <div class="col s12 m3 l3">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }}</label>

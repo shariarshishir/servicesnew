@@ -60,7 +60,7 @@
         if($(this).val()==1) {
             $(".representive_info").hide();
         } else {
-            $(".representive_info").show();            
+            $(".representive_info").show();
         }
     })
 
@@ -140,7 +140,7 @@
                 url = url.replace(':slug', id);
             var formData = new FormData(this);
             formData.append('_token', "{{ csrf_token() }}");
-          
+
 
             $.ajax({
                 method: 'post',
@@ -179,8 +179,8 @@
                                 } else {
                                     $('#main-products').empty();
                                     var html ='<p>'+item.value+'</p>';
-                                    $('#main-products').append(html); 
-                                   
+                                    $('#main-products').append(html);
+
                                 }
                             }
                         });
@@ -195,12 +195,12 @@
                             html+='</div>';
                             html+='</div>';
                             $('#head-office').append(html);
-                                                      
+
                         } else {
                             $('#head-office').empty();
                             var html ='<p>'+data.address+'</p>';
-                            $('#head-office').append(html); 
-                           
+                            $('#head-office').append(html);
+
                         }
 
                         if(data.factory_address == null) {
@@ -211,14 +211,14 @@
                             html+='</div>';
                             html+='</div>';
                             $('#factory-address').append(html);
-                                                      
+
                         } else {
                             $('#factory-address').empty();
                             var html ='<p>'+data.factory_address+'</p>';
-                            $('#factory-address').append(html); 
-                           
+                            $('#factory-address').append(html);
+
                         }
-                        
+
 
                         //$('#address').text(data.address);
                         $('#company-overview-modal').modal('close');
@@ -341,11 +341,13 @@
                 },
                 success:function(data)
                     {
+                        console.log(data);
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#manufacture_edit_errors').empty();
                         $('#product-edit-modal-block').modal('open');
                         $('#product-edit-modal-block .modal-content').html('');
+                        $('input[name=remove_video_id]').val('');
                         $('#product-edit-modal-block .modal-content').html(data.data);
 
                     },
@@ -467,7 +469,7 @@
     //Add and remove row for production and capacity dynamically
     function addProductionCapacity()
     {
-        
+
         let totalChild = $('.production-capacity-table-block tbody').children().length;
         var html = '<tr>';
         html += '<td><input name="machine_type[]" id="machine_type" type="text" class="form-control  value="" ></td>';
@@ -484,7 +486,7 @@
     //Add and remove row for categories produced product dynamically
     function addCategoriesProduced()
     {
-       
+
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
         html += '<td><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
@@ -502,7 +504,7 @@
     //Add and remove row for categories produced product dynamically
     function addMachinariesDetails()
     {
-    
+
     let totalChild = $('.machinaries-details-table-block tbody').children().length;
     var html = '<tr>';
     html += '<td><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
@@ -558,7 +560,7 @@
                 html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
                 html += '</tr>';
-                
+
             }
             html+='</tbody>';
             html +='</table>';
@@ -566,7 +568,7 @@
             $('.machinery_table_inner_wrap').append(html);
         }
         else{
-            //append in table 
+            //append in table
             $('.machinery_table_inner_wrap').html(nohtml);
             var html='';
             html +='<div class="card-alert card cyan lighten-5">';
@@ -661,7 +663,7 @@
         //         html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
         //         }
         //         html += '</tr>';
-               
+
         //     }
         //     html+='</tbody>';
         //     html +='</table>';
@@ -737,7 +739,7 @@
     $('#production-flow-and-manpower-form').on('submit',function(e){
     e.preventDefault();
     $.ajax({
-        
+
       url: '{{ route("production-flow-and-manpower.create-or-update")}}',
       type:"POST",
       data: $('#production-flow-and-manpower-form').serialize(),
@@ -747,7 +749,7 @@
       },
       success:function(response){
         $('.loading-message').html("");
-        $('#loadingProgressContainer').hide();          
+        $('#loadingProgressContainer').hide();
         var productionFlowAndManpowers=response.productionFlowAndManpowers;
         var nohtml="";
         if(productionFlowAndManpowers.length >0){
@@ -875,9 +877,9 @@
                 // var strArray = image.slice(-3);
                 var strArray = image.split(".");
                 var file_extension = strArray[strArray.length - 1];
-                
+
                 if(file_extension == 'pdf' || file_extension == 'PDF'){
-                    
+
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<div class="certificate_img">';
@@ -887,7 +889,7 @@
                     html +='</div>';
                 }
                 else if(file_extension == 'DOC' || file_extension == 'DOCX' || file_extension == 'docx' || file_extension == 'doc'){
-                    
+
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<div class="certificate_img">';
@@ -895,7 +897,7 @@
                     html +='</div>';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                     html +='</div>';
-                } 
+                }
                 else {
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)"  style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
@@ -962,7 +964,7 @@
                         beforeSend: function() {
                         $('.loading-message').html("Please Wait.");
                         $('#loadingProgressContainer').show();
-                        },                        
+                        },
                         success:function(response)
                             {
                                 $('.loading-message').html("");
@@ -977,9 +979,9 @@
                                         var image="{{asset('storage/')}}"+'/'+certifications[i].image;
                                         var strArray = image.split(".");
                                         var file_extension = strArray[strArray.length - 1];
-                                        
+
                                         if(file_extension == 'pdf' || file_extension == 'PDF'){
-                                            
+
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';
@@ -989,7 +991,7 @@
                                             html +='</div>';
                                         }
                                         else if(file_extension == 'DOC' || file_extension == 'DOCX' || file_extension == 'docx' || file_extension == 'doc'){
-                                            
+
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';
@@ -997,7 +999,7 @@
                                             html +='</div>';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                                             html +='</div>';
-                                        } 
+                                        }
                                         else {
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
@@ -1116,9 +1118,9 @@
                 html +='</div>';
                 $('.main-buyers-block').append(html);
 
-               
+
             }
-        
+
         $('#main-buyers-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -1167,7 +1169,7 @@
                         beforeSend: function() {
                         $('.loading-message').html("Please Wait.");
                         $('#loadingProgressContainer').show();
-                        },                        
+                        },
                         success:function(response)
                             {
                                 $('.loading-message').html("");
@@ -1297,7 +1299,7 @@
                 html +='</div>';
                 $('.export-destination-block').append(html);
             }
-        
+
         $('#export-destination-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -1344,7 +1346,7 @@
                         beforeSend: function() {
                         $('.loading-message').html("Please Wait.");
                         $('#loadingProgressContainer').show();
-                        },                        
+                        },
                         success:function(response)
                             {
                                 $('.loading-message').html("");
@@ -1478,7 +1480,7 @@
                 html +='</div>';
                 $('.association-membership-block').append(html);
             }
-        
+
         $('#association-membership-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -1524,7 +1526,7 @@
                         beforeSend: function() {
                         $('.loading-message').html("Please Wait.");
                         $('#loadingProgressContainer').show();
-                        },                        
+                        },
                         success:function(response)
                             {
                                 $('.loading-message').html("");
@@ -1655,7 +1657,7 @@
                 html +='</div>';
                 $('.press-highlight-block').append(html);
             }
-        
+
         $('#press-highlight-upload-form-modal').modal('close');
         swal("Done!", response.message,"success");
       },
@@ -1701,7 +1703,7 @@
                         beforeSend: function() {
                         $('.loading-message').html("Please Wait.");
                         $('#loadingProgressContainer').show();
-                        },                        
+                        },
                         success:function(response)
                             {
                                 $('.loading-message').html("");
@@ -1781,7 +1783,7 @@
       beforeSend: function() {
         $('.loading-message').html("Please Wait.");
         $('#loadingProgressContainer').show();
-        }, 
+        },
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
@@ -1876,7 +1878,7 @@
       beforeSend: function() {
         $('.loading-message').html("Please Wait.");
         $('#loadingProgressContainer').show();
-        }, 
+        },
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
@@ -1969,7 +1971,7 @@
       beforeSend: function() {
         $('.loading-message').html("Please Wait.");
         $('#loadingProgressContainer').show();
-        }, 
+        },
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
@@ -2061,7 +2063,7 @@
       beforeSend: function() {
         $('.loading-message').html("Please Wait.");
         $('#loadingProgressContainer').show();
-        }, 
+        },
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
@@ -2139,7 +2141,7 @@
       beforeSend: function() {
         $('.loading-message').html("Please Wait.");
         $('#loadingProgressContainer').show();
-        }, 
+        },
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
@@ -2148,9 +2150,9 @@
 
                     if(this.value == 1 && this.name == 'healthcare_facility'){
                             $('.health-care-checked').attr('checked', true);
-                            $('input[name=healthcare_facility][value=1]').attr('checked', true);  
+                            $('input[name=healthcare_facility][value=1]').attr('checked', true);
                             $('input[name=healthcare_facility_disable][value=1]').attr('checked', true);
-                           
+
                     }
                     else if(this.value == 1 && this.name == 'doctor'){
                           $('.doctor-checked').attr('checked', true);
@@ -2204,7 +2206,7 @@
       beforeSend: function() {
         $('.loading-message').html("Please Wait.");
         $('#loadingProgressContainer').show();
-        }, 
+        },
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
@@ -2280,7 +2282,7 @@
         $(el).parent().parent().remove();
     }
 
-    
+
     function addFactoryLargeImageBlock()
     {
 
@@ -2304,15 +2306,15 @@
     }
 
     $(document).ready(function (e) {
-       
+
         $('#factory-image').change(function(){
             let reader = new FileReader();
-            reader.onload = (e) => { 
-                $('#preview-image-before-upload').attr('src', e.target.result); 
+            reader.onload = (e) => {
+                $('#preview-image-before-upload').attr('src', e.target.result);
             }
-            reader.readAsDataURL(this.files[0]); 
+            reader.readAsDataURL(this.files[0]);
         });
-        
+
     });
 
 
@@ -2367,7 +2369,7 @@
         $('input:hidden[name=company_factory_tour_image_ids]').val(JSON.stringify(imageIds));
         $(this).parent().remove();
     });
-    
+
     var largeImageIds= new Array();
     $(document).on('click', '.delete-factory-large-image',function(e){
         e.preventDefault();
@@ -2376,7 +2378,7 @@
         console.log(largeImageIds);
         $('input:hidden[name=company_factory_tour_large_image_ids]').val(JSON.stringify(largeImageIds));
         $(this).parent().remove();
-        
+
     });
 
     $('#factory-tour-edit-form').on('submit',function(e){
@@ -2384,7 +2386,7 @@
     var url = '{{ route("factory-tour.edit") }}';
     var formData = new FormData(this);
     console.log(formData);
-  
+
     formData.append('_token', "{{ csrf_token() }}");
     $.ajax({
         method: 'post',
@@ -2422,6 +2424,17 @@
             }
       });
     });
+
+    //video
+
+    function removeEditVideoEl(el)
+    {
+        var remove_video_id=[];
+        $(el).prev('video').remove();
+        $(el).remove();
+        remove_video_id.push($(el).attr('data-id'));
+        $('input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+    }
 
     </script>
 @endpush

@@ -29,15 +29,13 @@ $reviewsCount = count($productReviews);
         </div>
         <div class="row product_details_content_wrap">
             <div class="col m3 product_preview_wrap">
-                @if(count($product->videos)> 0)
-                @foreach ($product->videos as $video)
+                @if($product->video)
                     <div>
                         <center>
-                            <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$video->video)}}" /></video>
+                            <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->video->video)}}" /></video>
                         </center>
                     </div>
-                @endforeach
-            @endif
+                @endif
                 <div class="product-images">
                     <div class="product-main-image">
                         <div class="product-large-image-block product_details_imgwrap">
@@ -67,7 +65,6 @@ $reviewsCount = count($productReviews);
                         @endif
                     </ul>
                 </div>
-
             </div>
             <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m9 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">

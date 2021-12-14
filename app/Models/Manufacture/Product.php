@@ -3,6 +3,7 @@
 namespace App\Models\Manufacture;
 
 use App\Models\BusinessProfile;
+use App\Models\ManufactureProductVideo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,5 +37,9 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    // public function product_videos(){
+    //     return $this->hasMany(ManufactureProductVideo::class);
+    // }
 
 }

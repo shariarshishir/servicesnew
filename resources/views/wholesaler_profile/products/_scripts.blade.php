@@ -236,24 +236,18 @@
                         $('#edit_category_id').trigger('change');
                         $('.product_unit').val(data.product.product_unit);
                         $('.product_unit').trigger('change');
-
-
                         // video
                         $('#product-edit-modal-block input[name=remove_video_id]').val('');
-                        $('.edit-video-show-block').html('');
-                        $('#product-edit-modal-block #lineitems').html('');
-                        var add_video_html= '<input type="file" name="videos[]">';
-                        $('#product-edit-modal-block #lineitems').html(add_video_html);
-                        if(data.product.videos){
-                            $.each(data.product.videos, function(index,item){
-                                var asset='{{asset("storage")}}'+'/'+item.video;
-                                // var ext= item.video.split(".");
+                        $('#product-edit-modal-block .edit-video-upload-block').show();
+                        $('#product-edit-modal-block .edit-video-show-block').html('');
+                        if(data.product.video){
+                                $('#product-edit-modal-block .edit-video-upload-block').hide();
+                                var asset='{{asset("storage")}}'+'/'+data.product.video.video;
                                 var html='<video controls autoplay width="320" height="240">';
                                     html+='<source src="'+asset+'" />';
                                     html+='</video>';
-                                    html+='<p  onclick="removeEditVideoEl(this);" data-id="'+item.id+'">remove</p>';
-                                $('.edit-video-show-block').append(html);
-                            })
+                                    html+='<p  onclick="wholesalerRemoveEditVideoEl(this);" data-id="'+data.product.video.id+'">remove</p>';
+                                $('#product-edit-modal-block .edit-video-show-block').append(html);
                         }
 
                         var preloaded=data.product_image;
@@ -845,26 +839,16 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
 });
 
 //add more video
-    var  lineitemcontent= '<input type="file" name="videos[]"><p onclick="removeVideoEl(this);">Remove</p>';
-    function addMoreVideo(obj)
-        {
-            $(obj).parent().append(lineitemcontent);
-            // $('#lineitems').append(lineitemcontent);
-        }
 
-    function removeVideoEl(el)
+    function wholesalerRemoveEditVideoEl(el)
     {
-        $(el).prev('input').remove();
-        $(el).remove();
-    }
-
-    var remove_video_id=[];
-    function removeEditVideoEl(el)
-    {
+        var remove_video_id=[];
         $(el).prev('video').remove();
         $(el).remove();
         remove_video_id.push($(el).attr('data-id'));
-        $('input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+        $('#product-edit-modal-block input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+        $('#product-edit-modal-block .edit-video-upload-block').show();
+
     }
 
 

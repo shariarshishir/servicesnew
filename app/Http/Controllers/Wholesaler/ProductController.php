@@ -134,7 +134,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
-            'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
 
 
         ]);
@@ -307,16 +307,15 @@ class ProductController extends Controller
             }
 
             //upload video
-            if($request->hasFile('videos')){
+            if($request->hasFile('video')){
                 $folder='video/'.$business_profile_name;
-                foreach ($request->videos as $video) {
-                    $filename = $video->store($folder,'public');
-                        $product_video = ProductVideo::create([
-                            'product_id' => $product->id,
-                            'video' => $filename,
-                        ]);
-                    }
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                    ]);
             }
+
             DB::commit();
 
             return response()->json(array('success' => true, 'msg' => 'Product Created Successfully'),200);
@@ -333,7 +332,7 @@ class ProductController extends Controller
     public function edit($sku)
     {
        try{
-            $product=Product::with('videos')->where('sku',$sku)->first();
+            $product=Product::with('video')->where('sku',$sku)->first();
             $colors_sizes=json_decode($product->colors_sizes);
             $attr=json_decode($product->attribute);
             $preloaded=array();
@@ -385,7 +384,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->p_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->p_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
-            'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
 
         ]);
 
@@ -555,27 +554,23 @@ class ProductController extends Controller
             if(isset($request->remove_video_id)){
                if( count(json_decode($request->remove_video_id)) > 0 )
                {
-                $productVideos=ProductVideo::whereIn('id',json_decode($request->remove_video_id))->get();
-                if($productVideos->isNotEmpty()){
-                     foreach($productVideos as $video){
-                         if(Storage::exists($video->video)){
-                             Storage::delete($video->video);
-                         }
-                         $video->delete();
-                     }
-                 }
+                    $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+                    if($productVideo){
+                        if(Storage::exists($productVideo->video)){
+                            Storage::delete($productVideo->video);
+                        }
+                        $productVideo->delete();
+                    }
                }
             }
 
-            if($request->hasFile('videos')){
+            if($request->hasFile('video')){
                 $folder='video/'.$business_profile_name;
-                foreach ($request->videos as $video) {
-                $filename = $video->store($folder,'public');
-                    $product_video = ProductVideo::create([
-                        'product_id' => $product->id,
-                        'video' => $filename,
-                    ]);
-                }
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
             }
             //related products
             if(!isset($request->related_products))

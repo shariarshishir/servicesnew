@@ -101,14 +101,28 @@
 
 						@endif
 					</div>
+
+					<div class="notifications_icon_wrap">
+						<a href="javascript:void(0);">
+							<i class="material-icons">notifications</i>
+							<span id="" class="noticication_counter">0</span>
+						</a>
+					</div>
+
+					<div class="header_message_box">
+						<a href="javascript:void(0);">
+							<i class="material-icons">message</i>
+							<span class="sms_counter">0</span>
+						</a>
+					</div>
 					
 
                     <div class="cart-icon-outer-wrapper">
                         <div class="cart-icon-wrapper">
                             <a href="javascript:void(0);" class="btn waves-effect waves-light green lighten-1 cart-btn">
                                 <i class="material-icons dp48">shopping_cart</i>
-                                <span id="cartItems"class="cart_counter">{{$cartItems}}</span>
                             </a>
+							<span id="cartItems"class="cart_counter">{{$cartItems}}</span>
                             <ul id="cart-dropdown" class="card" style="display: none;">
                                 {{-- @if(Cart::content()->count() > 0) --}}
 
@@ -126,13 +140,6 @@
                             </ul>
                         </div>
                     </div>
-
-					<!-- <div class="notifications_icon_wrap">
-						<a href="javascript:void(0);">
-							<span class="material-icons">notifications</span>
-							<span id="" class="noticication_counter">0</span>
-						</a>
-					</div> -->
 
 					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile btn_green">
 					    <span class="material-icons"> add </span> Business Profile
@@ -273,7 +280,15 @@
 						@endif
 					</div>
 
-					<div class="cart-icon-outer-wrapper ">
+					<div class="header_message_box">
+						<a href="javascript:void(0);"> 
+							<i class="material-icons dp48">message</i>
+							<span class="sms_counter">0</span>
+						</a>
+					</div>
+
+				
+					<div class="cart-icon-outer-wrapper">
                         <div class="cart-icon-wrapper cart-icon-wrapper-mobile">
 							<a class='dropdown-trigger' href='#' data-target='cart-dropdown-mobile'>
 								<i class="material-icons dp48">shopping_cart</i>

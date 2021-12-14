@@ -38,9 +38,26 @@ $reviewsCount = count($productReviews);
                                         <center>
                                             <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
                                                 <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
-                                                
+
                                                 <div class="click-to-zoom">
-                                                    <i class="material-icons dp48">zoom_in</i> 
+                                                    <i class="material-icons dp48">zoom_in</i>
+                                                    <!-- Click on image to view large size. -->
+                                                </div>
+                                            </a>
+                                        </center>
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if(count($product->videos)> 0)
+                                @foreach ($product->videos as $video)
+                                    <div>
+                                        <center>
+                                            @php $ext=explode(".",$video->video); @endphp
+                                            <a data-fancybox="gallery" href="{{asset('storage/'.$video->video)}}">
+                                                <video controls autoplay><source src="{{asset('storage/'.$video->video)}}" type="video/{{$ext[1]}}"></video>
+
+                                                <div class="click-to-zoom">
+                                                    <i class="material-icons dp48">zoom_in</i>
                                                     <!-- Click on image to view large size. -->
                                                 </div>
                                             </a>
@@ -54,6 +71,12 @@ $reviewsCount = count($productReviews);
                     @if(count($product->images)> 0)
                         @foreach ($product->images as $image)
                             <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
+                        @endforeach
+                    @endif
+                    @if(count($product->videos)> 0)
+                        @foreach ($product->videos as $video)
+                            @php $ext=explode(".",$video->video); @endphp
+                            <li><video controls autoplay><a href="javascript:void(0);"><source src="{{asset('storage/'.$video->video)}}" type="video/{{$ext[1]}}"></a></video></li>
                         @endforeach
                     @endif
                     </ul>
@@ -78,12 +101,12 @@ $reviewsCount = count($productReviews);
                             {!! $product->description !!}
                         </div> -->
 
-                        
+
 
                         <!-- <h4>{{ $product->name }}</h4> -->
                         <div class="row single-product-details-top">
                             <div class="col m12">
-                                
+
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
                                     <span class="new badge red" data-badge-caption="Sold Out"></span>
                                 @endif
@@ -776,9 +799,9 @@ $reviewsCount = count($productReviews);
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                        
+
                         </div>
                     </div>
 
@@ -1286,6 +1309,7 @@ $reviewsCount = count($productReviews);
                     }
             });
         });
+
     </script>
 @endpush
 

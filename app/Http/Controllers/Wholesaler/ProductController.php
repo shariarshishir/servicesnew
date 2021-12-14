@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use DB;
 use App\Models\ProductCategory;
+use App\Models\ProductVideo;
 use App\Models\Vendor;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
@@ -108,6 +109,7 @@ class ProductController extends Controller
 
    public function store(Request $request)
    {
+
         $validator = Validator::make($request->all(), [
             'business_profile_id' => 'required',
             'images'  => 'required',
@@ -132,6 +134,8 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+            'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+
 
         ]);
 
@@ -301,6 +305,18 @@ class ProductController extends Controller
                 }
 
             }
+
+            //upload video
+            if($request->hasFile('videos')){
+                $folder='video/'.$business_profile_name;
+                foreach ($request->videos as $video) {
+                    $filename = $video->store($folder,'public');
+                        $product_video = ProductVideo::create([
+                            'product_id' => $product->id,
+                            'video' => $filename,
+                        ]);
+                    }
+            }
             DB::commit();
 
             return response()->json(array('success' => true, 'msg' => 'Product Created Successfully'),200);
@@ -317,7 +333,7 @@ class ProductController extends Controller
     public function edit($sku)
     {
        try{
-            $product=Product::where('sku',$sku)->first();
+            $product=Product::with('videos')->where('sku',$sku)->first();
             $colors_sizes=json_decode($product->colors_sizes);
             $attr=json_decode($product->attribute);
             $preloaded=array();
@@ -369,6 +385,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->p_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->p_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
+            'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
 
         ]);
 
@@ -530,6 +547,33 @@ class ProductController extends Controller
                         'product_id' => $product->id,
                         'image' => $filename,
                         'original' => $original,
+                    ]);
+                }
+            }
+
+            //video
+            if(isset($request->remove_video_id)){
+               if( count(json_decode($request->remove_video_id)) > 0 )
+               {
+                $productVideos=ProductVideo::whereIn('id',json_decode($request->remove_video_id))->get();
+                if($productVideos->isNotEmpty()){
+                     foreach($productVideos as $video){
+                         if(Storage::exists($video->video)){
+                             Storage::delete($video->video);
+                         }
+                         $video->delete();
+                     }
+                 }
+               }
+            }
+
+            if($request->hasFile('videos')){
+                $folder='video/'.$business_profile_name;
+                foreach ($request->videos as $video) {
+                $filename = $video->store($folder,'public');
+                    $product_video = ProductVideo::create([
+                        'product_id' => $product->id,
+                        'video' => $filename,
                     ]);
                 }
             }

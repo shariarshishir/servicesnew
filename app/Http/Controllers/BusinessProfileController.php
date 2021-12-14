@@ -40,6 +40,9 @@ class BusinessProfileController extends Controller
         if($total_business_count >= 3){
             abort( response('Not Permit To More Than 3 Business', 401) );
         }
+        if($user->is_representative	== true){
+            abort(response('representative does not permit to open business', 401) );
+        }
 
         return view('business_profile.create');
     }
@@ -161,11 +164,11 @@ class BusinessProfileController extends Controller
                 $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
                 ->limit(4)
                 ->get();
-    
+
                 return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts'));
             }
             if($business_profile->business_type == 2){
-    
+
                return view('wholesaler_profile.index',compact('business_profile'));
             }
 

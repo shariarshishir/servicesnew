@@ -56,7 +56,8 @@
                             <label class="active">Video:</label>
                         </div>
                         <div class="col s12 m9 l9" id="lineitems">
-                            <input type="file" name="videos[]"><a href="javascript:void(0);" onclick="addMoreVideo(this);">Add more</a>
+                            <input type="file" name="videos[]">
+                            {{-- <a href="javascript:void(0);" onclick="addMoreVideo(this);">Add more</a> --}}
                         </div>
                     </div>
                     <input type="hidden" name="remove_video_id"  value="">

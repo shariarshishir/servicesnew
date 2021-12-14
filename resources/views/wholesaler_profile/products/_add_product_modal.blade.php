@@ -51,9 +51,10 @@
                         <label class="active">Video:</label>
                     </div>
                     <div class="col s12 m9 l9" id="lineitems">
-                        <input type="file" name="videos[]"><p onclick="addMoreVideo(this);">Add more</p>
+                        <input type="file" name="videos[]">
                     </div>
                 </div>
+                {{-- <p onclick="addMoreVideo(this);">Add more</p> --}}
 
                 <div class="row input-field product-details-block">
                     <div class="col s12 m3 l3">

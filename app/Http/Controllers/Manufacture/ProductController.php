@@ -114,7 +114,7 @@ public function edit($product_id)
         ],401);
     }
     $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
-    $sizes=['S','M','XL','XXL','XXXL'];
+    $sizes=['S','M','L','XL','XXL','XXXL'];
     $data=view('business_profile._edit_modal_data',compact('product','colors','sizes'))->render();
     return response()->json([
         'success' => true,

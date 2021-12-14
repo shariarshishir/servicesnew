@@ -111,6 +111,7 @@
 					</div>
 
 					@if(auth()->user())
+
 					<div class="notifications_icon_wrap">
 						<a href="javascript:void(0);">
 							<i class="material-icons">notifications</i>
@@ -215,11 +216,8 @@
 
 
 				<div class="col s10 right-align mobile_top_right">
-					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile_mobile">
-						<span class="material-icons"> add </span>
-					</a>
 
-					<div class="user-block user-block-mobile">
+					<div class="user-block user-block-mobile mobile_top_icon_box">
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
@@ -296,16 +294,20 @@
 
 						@endif
 					</div>
-
-					<div class="header_message_box">
+					<div class="notifications_icon_wrap mobile_top_icon_box">
+						<a href="javascript:void(0);">
+							<i class="material-icons">notifications</i>
+							<span id="" class="noticication_counter">0</span>
+						</a>
+					</div>
+					<div class="header_message_box mobile_top_icon_box">
 						<a href="javascript:void(0);"> 
 							<i class="material-icons dp48">message</i>
 							<span class="sms_counter">0</span>
 						</a>
 					</div>
 
-				
-					<div class="cart-icon-outer-wrapper">
+					<div class="cart-icon-outer-wrapper mobile_top_icon_box">
                         <div class="cart-icon-wrapper cart-icon-wrapper-mobile">
 							<a class='dropdown-trigger' href='#' data-target='cart-dropdown-mobile'>
 								<i class="material-icons dp48">shopping_cart</i>
@@ -329,6 +331,11 @@
                         </div>
                     </div>
 
+					<div class="mobile_top_icon_box">
+						<a href="{{route('business.profile.create')}}" type="button" class="btn_profile_mobile">
+							<span class="material-icons"> add </span>
+						</a>
+					</div>
 
 				</div>
 			</div>

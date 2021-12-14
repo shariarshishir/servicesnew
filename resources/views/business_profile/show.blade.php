@@ -1517,7 +1517,7 @@
 									</div> -->
 								</div>
 								<div class="factory_video_box">
-									<iframe class="embed-responsive-item" src="{{$companyFactoryTour->virtual_tour}}" allowfullscreen></iframe>
+									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/8z7uqq_Zqzg" allowfullscreen></iframe>
 								</div>
 								@endif
 								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->

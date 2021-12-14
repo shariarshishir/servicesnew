@@ -21,7 +21,13 @@
 		<div class="row">
 			<div class="col s12 m5 l3 profile_leftCol leftCol_wrap">
 				<div class="left_top">
-					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
+					<div class="profile_pic center-align">
+						@if(auth()->user()->image)
+						<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+						@else
+						<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+						@endif						
+					</div>
 					<div class="office_address center-align ">
 						<h3>{{$business_profile->business_name}}</h3>
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
@@ -157,11 +163,19 @@
 							@if(count($business_profile->certifications)>0)
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
-										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
+										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
 											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title" >{{$certification->title}}</span>
+										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+										
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
@@ -548,13 +562,21 @@
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										<a href="javascript:void(0)" style="display: none;" data-id="{{$certification->id}}" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>
-										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
+										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
 											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
 										</div>
 										<span class="certificate_title">{{$certification->title}}</span>
+										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+										
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
 										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>

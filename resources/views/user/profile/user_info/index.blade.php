@@ -13,7 +13,11 @@
         </div>
         <div class="col m3 profile-image-block">
             <div class="profile_image">
+                @if($user->image)
                 <img src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
+                @else
+                <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" width="300px">
+                @endif                
             </div>
             <div class="change_photo">
                 <form method="post" id="upload-image-form" enctype="multipart/form-data">

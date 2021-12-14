@@ -170,7 +170,7 @@
 
                                 @endif
                                 @if(Auth::guard('web')->check())
-                                    <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->created_by }}); updateUserLastActivity('{{Auth::id()}}', '{{$product->created_by}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{$product->category['name']}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->created_by}}')"">Contact supplier</button>
+                                    <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{$product->category['name']}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
                                 @else
                                     <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
                                 @endif

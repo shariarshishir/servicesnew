@@ -9,6 +9,11 @@ use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\User;
 use App\Models\ProductImage;
 use App\Models\RelatedProduct;
+use App\Rules\MoqUnitRule;
+use App\Rules\ReadyStockPriceBreakDownRule;
+use App\Rules\NonClothingPriceBreakDownRule;
+use App\Rules\NonClothingFullStockRule;
+use App\Rules\ReadyStockFullStockRule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -512,21 +517,198 @@ class ProductController extends Controller
 
     public function destroy($storeId,$productId)
     {
-      $product=Product::where('id',$productId)->first();
-      if($product->state==1){
-          $product->update(['state' => 0]);
-          return response()->json(array('success' => true, 'msg' => 'Product Unpublish Successfully'),200);
+        $product=Product::where('id',$productId)->first();
+        if($product->state==1){
+            $product->update(['state' => 0]);
+            return response()->json(array('success' => true, 'msg' => 'Product Unpublish Successfully'),200);
+            }
+        else{
+            $product->update(['state' => 1]);
+            return response()->json(array('success' => true, 'msg' => 'Product Publish Successfully'),200);
         }
-      else{
-        $product->update(['state' => 1]);
-        return response()->json(array('success' => true, 'msg' => 'Product Publish Successfully'),200);
-      }
+    }
+
+    public function store(Request $request,$storeId)
+    {
+
+        
+        $validator = Validator::make($request->all(), [
+            'business_profile_id' => 'required',
+            'images'  => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
+            'name'      => 'required',
+            'category_id' => 'required',
+            'product_type' => 'required',
+            'description'  => 'required',
+            'moq'         => [new MoqUnitRule($request, $request->product_type)],
+            'product_unit'  =>[new MoqUnitRule($request, $request->product_type)],
+            'ready_stock_availability'  => 'required_if:product_type,2',
+            'non_clothing_availability'  => 'required_if:product_type,3',
+            'quantity_min.*' => 'required_if:product_type,1',
+            'quantity_max.*' => 'required_if:product_type,1',
+            'price.*' => 'required_if:product_type,1',
+            'lead_time.*' => 'required_if:product_type,1',
+            'ready_quantity_min.*' => [new ReadyStockPriceBreakDownRule($request, $request->product_type)],
+            'ready_quantity_max.*' => [new ReadyStockPriceBreakDownRule($request, $request->product_type)],
+            'ready_price.*' => [new ReadyStockPriceBreakDownRule($request, $request->product_type)],
+            'non_clothing_min.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
+            'non_clothing_max.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
+            'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
+            'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
+            'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+
+
+
+         DB::beginTransaction();
+
+         try {
+            $date=Carbon::now()->timestamp;
+            $number=mt_rand(0,9999);
+            $remove[] = "'";
+            $remove[] = '"';
+            $remove[] = "-";
+            $FileName = str_replace($remove, "", $request->name);
+            $name= explode(' ',strtolower($FileName));
+            $sku=$name[0].$date.$number;
+
+            $full_stock_negotiable=false;
+            $full_stock = false;
+            $full_stock_price = null;
+            $availability=null;
+
+            if($request->product_type==1){
+                $price_break_down=[];
+                for($i=0; $i < count($request->quantity_min); $i++){
+                    array_push($price_break_down,[(int)$request->quantity_min[$i],(int)$request->quantity_max[$i],is_numeric($request->price[$i]) ? $request->price[$i] : 'Negotiable',$request->lead_time[$i]]);
+                }
+
+            }
+
+            if($request->product_type==2){
+                $colors_sizes=[];
+                if(isset($request->color_size)){
+
+                    for($i=0; $i < count($request->color_size); $i++){
+                        array_push($colors_sizes,$request->color_size[$i]);
+
+                    }
+                }
+
+                $price_break_down=[];
+                for($i=0; $i < count($request->ready_quantity_min); $i++){
+                    array_push($price_break_down,[(int)$request->ready_quantity_min[$i],(int)$request->ready_quantity_max[$i],is_numeric($request->ready_price[$i]) ? $request->ready_price[$i] : 'Negotiable']);
+                }
+
+                $full_stock= isset($request->full_stock) ? true : false;
+                $full_stock_price = isset($request->full_stock_price) ? $request->full_stock_price : null;
+                $availability=$request->ready_stock_availability;
+                $full_stock_negotiable= isset($request->ready_full_stock_negotiable) ? true : false;
+            }
+
+            if($request->product_type==3)
+            {
+                $colors_sizes=[];
+                if(isset($request->color_size)){
+
+                    for($i=0; $i < count($request->color_size); $i++){
+                        array_push($colors_sizes,$request->color_size[$i]);
+                    }
+                }
+
+                $price_break_down=[];
+                for($i=0; $i < count($request->non_clothing_quantity_min); $i++){
+                    array_push($price_break_down,[(int)$request->non_clothing_quantity_min[$i],(int)$request->non_clothing_quantity_max[$i],is_numeric($request->non_clothing_price[$i]) ? $request->non_clothing_price[$i] : 'Negotiable']);
+                }
+
+                $full_stock= isset($request->non_clothing_full_stock) ? true : false;
+                $full_stock_price = isset($request->non_clothing_full_stock_price) ? $request->non_clothing_full_stock_price : null;
+                $availability=$request->non_clothing_availability;
+                $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
+            }
+           
+            $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+            $business_profile_name=$business_profile->business_name;
+
+            $product=Product::create([
+                'business_profile_id' => $business_profile->id,
+                'name'      => $request->name,
+                'sku'       => $sku,
+                'product_category_id' => $request->product_category_id,
+                'product_type'  => $request->product_type,
+                'attribute' => json_encode($price_break_down) ?? null,
+                'is_featured' => $request->is_featured=='on'? 1:0,
+                'is_new_arrival' => $request->is_new_arrival=='on'? 1:0,
+                'state'   => $request->published=='on'? 1:0,
+                'description' => $request->description,
+                'additional_description' => $request->additional_description,
+                'colors_sizes'  => isset($colors_sizes)  ? json_encode($colors_sizes): null,
+                'moq'         => $request->moq,
+                'product_unit'     => $request->product_unit,
+                'availability'     => $availability,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->header('User-Agent'),
+                'copyright_price'  => $request->product_type==1 ? $request->copyright_price : null,
+                'full_stock'     => $full_stock,
+                'full_stock_price' =>  $full_stock_price,
+                'full_stock_negotiable' => $full_stock_negotiable,
+                'customize'      => isset($request->customize) ? true : false,
+                'created_by'  => auth()->id(),
+
+            ]);
+
+            // $user=User::where('id',auth()->id())->first();
+            // $vendorName=Str::slug($user->vendor->vendor_name,'-');
+            foreach ($request->images as $image) {
+                $filename = $image->store('images/'.$business_profile_name.'/products/small','public');
+                $image_resize = Image::make(public_path('storage/'.$filename));
+                $image_resize->fit(300, 300);
+                $image_resize->save(public_path('storage/'.$filename));
+                $original=$image->store('images/'.$business_profile_name.'/products/original','public');
+                $product_image = ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => $filename,
+                    'original' => $original,
+                ]);
+            }
+             //related products
+            if($request->related_products)
+            {
+                foreach($request->related_products as $item){
+                    RelatedProduct::create([
+                        'business_profile_id'  => auth()->user()->businessProfile->id,
+                        'product_id' => $product->id,
+                        'related_product_id' => $item,
+                    ]);
+                }
+
+            }
+            DB::commit();
+            // all good
+            return response()->json(array('success' => true, 'message' => 'Product Created Successfully','product'=>$product),200);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(array(
+                'success' => false,
+                'error' => $e->getMessage(),
+                'line'=>$e->getLine(),),
+                500);
+        }
+
     }
 
 
 
-
-    public function store(Request $request,$storeId)
+    public function storeBk(Request $request,$storeId)
     {
 
         

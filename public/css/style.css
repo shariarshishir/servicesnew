@@ -3777,6 +3777,7 @@ form input:read-only {
     height: 135px;
     overflow: hidden;
 }
+
 .rfq_thum_imgs .rfq_thum_img img {
     height: 200px;
 }
@@ -4432,7 +4433,22 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 .profile_tabNav_wrap .certification_pdf_down {
     background : url('../images/frontendimages/new_layout_images/pdf-bg.png') no-repeat center;
-    background-size: 228px;
+    background-size: 210px;
+    width: auto;
+    height: 250px;
+    display: block;
+}
+
+.certificate_img_wrap .certificate_img .xlsx_icon {
+    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
+    background-size: 210px;
+    width: auto;
+    height: 250px;
+    display: block;
+}
+.certificate_img_wrap .certificate_img .doc_icon {
+    background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
+    background-size: 210px;
     width: auto;
     height: 250px;
     display: block;

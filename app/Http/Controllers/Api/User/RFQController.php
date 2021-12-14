@@ -20,11 +20,11 @@ class RFQController extends Controller
     {
         $rfqs=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
         if(($rfqs->total())>0){
-
             return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
         }
         else{
-            return response()->json(['rfqs'=>[],"success"=>false],200);
+            $rfqs = [];
+            return response()->json(['rfqs'=>$rfqs,"success"=>false],200);
         }
     }
     public function myRfqList()
@@ -35,7 +35,8 @@ class RFQController extends Controller
             return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
         }
         else{
-            return response()->json(['rfqs'=>[],"success"=>false],200);
+            $rfqs=[];
+            return response()->json(['rfqs'=>$rfqs,"success"=>false],200);
         }
     }
     public function store(Request $request){

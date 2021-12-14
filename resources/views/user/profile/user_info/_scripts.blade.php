@@ -134,7 +134,7 @@
                         this.reset();
                         var image="{{asset('storage/')}}"+'/'+response.user.image;
                         $(".profile-image-block  #profile_image").attr('src', image);
-
+                        $(".user-block .avatar-online img").attr('src', image);
                         }
                     },
                     error: function(response){
@@ -166,6 +166,7 @@
         reader.onload = (e) => {
 
           $('#profile_image').attr('src', e.target.result);
+          $('.user-block .avatar-status img').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(this.files[0]);

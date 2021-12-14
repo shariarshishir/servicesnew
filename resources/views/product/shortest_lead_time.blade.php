@@ -12,7 +12,7 @@
                             <div class="col m3 productBox">
                                 @if($product->product_images()->exists())
                                     <div class="imgBox">
-                                        <img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt="">
+                                        <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}"><img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt=""></a>
                                     </div>
                                 @endif
                                 

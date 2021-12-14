@@ -41,7 +41,7 @@ class HomeController extends Controller
 
     public function productList()
     {
-        $products = Product::with('images')->where('is_featured', 1)->where('state',1)->where('sold',0)->paginate(9);
+        $products = Product::with('images')->where('is_featured', 1)->where('state',1)->where('sold',0)->paginate(12);
         return view('products',compact('products'));
     }
     //start products by category sub category and subsub category
@@ -91,14 +91,14 @@ class HomeController extends Controller
 
     public function products($id)
     {
-      $products=Product::with('images')->whereIn('product_category_id', $id)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+      $products=Product::with('images')->whereIn('product_category_id', $id)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
       return $products;
     }
     //end products category
     //start readystock products
     public function readyStockProducts()
     {
-        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.ready_stock_product',compact('products'));
     }
 
@@ -116,7 +116,7 @@ class HomeController extends Controller
                 }
             }
         }
-        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.ready_stock_product',compact('products', 'total_cat_id'));
     }
 
@@ -129,13 +129,13 @@ class HomeController extends Controller
                 array_push($total_cat_id,$child->id);
             }
         }
-        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.ready_stock_product',compact('products','total_cat_id'));
     }
 
     public function  readyStockProductsBySubSubcategory($category,$subcategory,$subsubcategory){
         $category=ProductCategory::where('slug',$subsubcategory)->first();
-        $products = Product::with('images')->where('product_category_id', $category->id)->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->where('product_category_id', $category->id)->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         $total_cat_id[]=$category->id;
         return view('product.ready_stock_product',compact('products','total_cat_id'));
     }
@@ -144,14 +144,14 @@ class HomeController extends Controller
     //customizable products
     public function customizable()
     {
-        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.customizable',compact('products'));
     }
 
    //start buy design products
     public function buyDesignsProducts()
     {
-        $products = Product::with('images')->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.buy_design_product',compact('products'));
     }
 
@@ -169,7 +169,7 @@ class HomeController extends Controller
                 }
             }
         }
-        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.buy_design_product',compact('products','total_cat_id'));
     }
     public function  buyDesignProductsBySubcategory($category,$subcategory){
@@ -180,12 +180,12 @@ class HomeController extends Controller
                 array_push($total_cat_id,$child->id);
             }
         }
-        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->whereIn('product_category_id', $total_cat_id)->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.buy_design_product',compact('products','total_cat_id'));
     }
     public function  buyDesignProductsBySubSubcategory($category,$subcategory,$subsubcategory){
         $category=ProductCategory::where('slug',$subsubcategory)->first();
-        $products = Product::with('images')->where('product_category_id', $category->id)->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->where('product_category_id', $category->id)->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         $total_cat_id[]=$category->id;
         return view('product.buy_design_product',compact('products','total_cat_id'));
     }
@@ -193,7 +193,7 @@ class HomeController extends Controller
     public function vendorList()
     {
         $userIds=User::where('user_type','wholesaler')->pluck('id');
-        $vendors = Vendor::with('user')->whereIn('user_id',$userIds)->paginate(9);
+        $vendors = Vendor::with('user')->whereIn('user_id',$userIds)->paginate(12);
         return view('vendors',compact('vendors'));
     }
 
@@ -254,20 +254,20 @@ class HomeController extends Controller
       if($cat_id != 'null' && ($slug != 'buy-designs' && $slug != 'ready-stock') ){
                 $cat_ids= explode(",", $cat_id);
                 if($value == 'name'){
-                    $products=Product::whereIn('product_category_id',$cat_ids)->orderBy($value)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+                    $products=Product::whereIn('product_category_id',$cat_ids)->orderBy($value)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
                 }
                 else{
-                    $products=Product::whereIn('product_category_id',$cat_ids)->orderBy($value, 'desc')->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+                    $products=Product::whereIn('product_category_id',$cat_ids)->orderBy($value, 'desc')->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
                 }
         }
       //product type wise product
       if($cat_id == 'null' && ($slug == 'buy-designs' || $slug == 'ready-stock' ) ){
             $type= $slug == 'buy-designs' ? [1] : [2,3] ;
             if($value == 'name'){
-                $products=Product::whereIn('product_type', $type)->orderBy($value)->where('state',1)->where('sold',0)->paginate(9);
+                $products=Product::whereIn('product_type', $type)->orderBy($value)->where('state',1)->where('sold',0)->paginate(12);
             }
             else{
-                $products=Product::whereIn('product_type', $type)->orderBy($value, 'desc')->where('state',1)->where('sold',0)->paginate(9);
+                $products=Product::whereIn('product_type', $type)->orderBy($value, 'desc')->where('state',1)->where('sold',0)->paginate(12);
             }
 
         }
@@ -276,10 +276,10 @@ class HomeController extends Controller
             $type= $slug == 'buy-designs' ? [1] : [2,3];
             $cat_ids= explode(",", $cat_id);
             if($value == 'name'){
-                $products=Product::whereIn('product_category_id',$cat_ids)->whereIn('product_type', $type)->orderBy($value)->where('state',1)->where('sold',0)->paginate(9);
+                $products=Product::whereIn('product_category_id',$cat_ids)->whereIn('product_type', $type)->orderBy($value)->where('state',1)->where('sold',0)->paginate(12);
             }
             else{
-                $products=Product::whereIn('product_category_id',$cat_ids)->whereIn('product_type', $type)->orderBy($value, 'desc')->where('state',1)->where('sold',0)->paginate(9);
+                $products=Product::whereIn('product_category_id',$cat_ids)->whereIn('product_type', $type)->orderBy($value, 'desc')->where('state',1)->where('sold',0)->paginate(12);
             }
         }
 
@@ -294,10 +294,10 @@ class HomeController extends Controller
     {
         $userIds=User::where('user_type','wholesaler')->pluck('id');
         if($value == 'name'){
-            $vendors = Vendor::with('user')->whereIn('user_id',$userIds)->orderBy('vendor_name')->paginate(9);
+            $vendors = Vendor::with('user')->whereIn('user_id',$userIds)->orderBy('vendor_name')->paginate(12);
         }
         else{
-            $vendors = Vendor::with('user')->whereIn('user_id',$userIds)->orderBy($value, 'desc')->paginate(9);
+            $vendors = Vendor::with('user')->whereIn('user_id',$userIds)->orderBy($value, 'desc')->paginate(12);
         }
         $data=view('include.partials._vendor_list',compact('vendors'))->render();
 
@@ -455,7 +455,7 @@ class HomeController extends Controller
 
         }
 
-        $productList=Product::whereIn('id',array_unique($search_id))->paginate(9);
+        $productList=Product::whereIn('id',array_unique($search_id))->paginate(12);
         $data=view('product._products_list',['products' => $productList])->with('products', $productList)->render();
         return response()->json([
                'success' => true,
@@ -515,20 +515,22 @@ class HomeController extends Controller
         {
 
             $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $userObj = User::where('id',$business_profile->user_id)->get();
             $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
             $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
-            return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour'));
+            return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour','userObj'));
         }
         //wholesaler
         if($business_profile->business_type == 2 )
         {
             $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $userObj = User::where('id',$business_profile->user_id)->get();
             $mainProducts=Product::with('images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
-            return view('wholesaler_profile_view_by_user.index',compact('business_profile','mainProducts'));
+            return view('wholesaler_profile_view_by_user.index',compact('business_profile','mainProducts','userObj'));
         }
     }
     //low moq

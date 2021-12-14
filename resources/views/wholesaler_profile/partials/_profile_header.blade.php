@@ -28,7 +28,7 @@
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 					</div>
-					<div class="center-align">
+					<div class="center-align" style="display: none;">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
 					<div class="addressBox">

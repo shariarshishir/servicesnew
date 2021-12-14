@@ -154,8 +154,8 @@ class BusinessProfileController extends Controller
         $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-            $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
-            $sizes=['S','M','XL','XXL','XXXL'];
+            $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
+            $sizes=['S','M','L','XL','XXL','XXXL'];
             $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
                 $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()

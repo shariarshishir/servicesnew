@@ -30,8 +30,6 @@ class ProductController extends Controller
             'product_details'=>'required',
             'product_specification'=>'required',
             'lead_time'=>'required',
-            'colors'=>'required|array',
-            'sizes'=>'required|array',
             'industry' => 'required',
         ]);
 
@@ -55,8 +53,8 @@ class ProductController extends Controller
                 'product_details'=>$request->product_details,
                 'product_specification'=>$request->product_specification,
                 'lead_time'=>$request->lead_time,
-                'colors'=>$request->colors,
-                'sizes'=>$request->sizes,
+                'colors'=>$request->colors?? [],
+                'sizes'=>$request->sizes?? [],
                 'industry' => $request->industry== 'apparel' ? 'apparel' : 'non-apparel',
                 'price_per_unit' => $request->price_per_unit,
                 'price_unit'   => $request->price_unit,
@@ -115,8 +113,8 @@ public function edit($product_id)
             'error'   => 'Product Not Found',
         ],401);
     }
-    $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
-    $sizes=['S','M','XL','XXL','XXXL'];
+    $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
+    $sizes=['S','M','L','XL','XXL','XXXL'];
     $data=view('business_profile._edit_modal_data',compact('product','colors','sizes'))->render();
     return response()->json([
         'success' => true,
@@ -134,8 +132,7 @@ public function update(Request $request, $product_id)
         'product_details'=>'required',
         'product_specification'=>'required',
         'lead_time'=>'required',
-        'colors'=>'required|array',
-        'sizes'=>'required|array',
+        
     ]);
 
     if ($validator->fails())

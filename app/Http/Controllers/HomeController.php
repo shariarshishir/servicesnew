@@ -619,6 +619,10 @@ class HomeController extends Controller
         return view('studio.index');
     }
 
+    public function toolsLandingPage(){
+        return view('tools.index');
+    }
+
 
 
 }

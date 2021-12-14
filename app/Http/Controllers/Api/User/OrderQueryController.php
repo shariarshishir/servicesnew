@@ -80,7 +80,7 @@ class OrderQueryController extends Controller
         $validator = Validator::make($request->all(), [
             'type' => 'required',
             'product_id' => 'required',
-            'vendor_id' => 'required',
+            'business_profile_id' => 'required',
             'color_attr' => 'required',
         ]);
 
@@ -95,7 +95,7 @@ class OrderQueryController extends Controller
             'type'      => $request->type,
             'user_id'   => auth()->user()->id,
             'product_id'=> $request->product_id,
-            'vendor_id' => $request->vendor_id,
+            'business_profile_id' => $request->business_profile_id,
             'details'   => json_encode($request->color_attr),
             'state'=> config('constants.order_query_status.pending')
         ]);

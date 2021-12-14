@@ -26,7 +26,7 @@
                     @endif
                 </div>
                 <div class="priceBox row">
-                    <div class="col m5 s5 apperal">Apperal</div>
+                    <div class="col m5 s5 apperal">Apparel</div>
                     <!--div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div-->
                     <div class="price col m7 s7 right-align">@include('product._product_price')</div>
                 </div>

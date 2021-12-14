@@ -1027,6 +1027,7 @@ form input:read-only {
     font-weight: 600;
     color: #fff;
     letter-spacing: 1px;
+    display: none;
 }
 .profile_bannerwrap .erified {
     background : url('../images/frontendimages/new_layout_images/mark_icon.png') no-repeat left 8px;
@@ -6530,6 +6531,7 @@ nav .pagination li.active .page-link {
     }
     .profile_bannerwrap h2 {
         font-size: 16px;
+        display: none;
     }
     .profile_leftCol .left_top .btn_supplier, 
     .leftCol_wrap .left_top .btn_supplier {

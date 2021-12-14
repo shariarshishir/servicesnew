@@ -18,16 +18,16 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="javascript:void(0);">Tools</a></li>
+							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-links" class="dropdown-content subNav">
-									<li><a href="javascript:void(0);">Blogs</a></li>
-									<li><a href="javascript:void(0);">Insights</a></li>
-									<li><a href="javascript:void(0);">Helps</a></li>
-									<li><a href="javascript:void(0);">FAQs</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -186,10 +186,10 @@
 							<li>
 								<a class="" href="javascript:void(0);" >More</a>
 								<ul class="subNav">
-									<li><a href="javascript:void(0);">Blogs</a></li>
-									<li><a href="javascript:void(0);">Insights</a></li>
-									<li><a href="javascript:void(0);">Helps</a></li>
-									<li><a href="javascript:void(0);">FAQs</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
 								</ul>
 							</li>
 						</ul>

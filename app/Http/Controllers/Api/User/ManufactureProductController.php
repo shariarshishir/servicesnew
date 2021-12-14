@@ -25,7 +25,8 @@ class ManufactureProductController extends Controller
         else{
             return response()->json([
                 'success' => false,
-            ],404);
+                'products' => $products,
+            ],200);
         }
     }
 
@@ -112,7 +113,7 @@ class ManufactureProductController extends Controller
     }
 
 
-    public function update(Request $request, $productId)
+    public function update(Request $request,$productId)
     {
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
@@ -135,7 +136,7 @@ class ManufactureProductController extends Controller
         DB::beginTransaction();
 
         try{
-            $product=Product::find($productId);
+            $product = Product::find($productId);
             $product->created_by=auth()->id();
             $product->title=$request->title;
             $product->price_per_unit=$request->price_per_unit;

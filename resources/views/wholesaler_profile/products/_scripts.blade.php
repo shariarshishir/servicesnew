@@ -858,9 +858,10 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
         $(el).remove();
     }
 
-    var remove_video_id=[];
+
     function removeEditVideoEl(el)
     {
+        var remove_video_id=[];
         $(el).prev('video').remove();
         $(el).remove();
         remove_video_id.push($(el).attr('data-id'));

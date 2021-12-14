@@ -33,7 +33,7 @@ class ProductController extends Controller
             'product_specification'=>'required',
             'lead_time'=>'required',
             'industry' => 'required',
-            'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'videos' => 'mimes:mp4,3gp,mkv,mov|max:20000',
 
 
         ]);
@@ -156,7 +156,7 @@ public function update(Request $request, $product_id)
         'lead_time'=>'required',
         'colors'=>'required|array',
         'sizes'=>'required|array',
-        'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+        'videos' => 'mimes:mp4,3gp,mkv,mov|max:20000',
     ]);
 
     if ($validator->fails())
@@ -216,7 +216,7 @@ public function update(Request $request, $product_id)
          }
 
          if($request->hasFile('videos')){
-            $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+            $business_profile=BusinessProfile::where('id', $product->businessProfile->id)->first();
             $business_profile_name=$business_profile->business_name;
             $folder='video/'.$business_profile_name;
             $filename = $request->videos->store($folder,'public');

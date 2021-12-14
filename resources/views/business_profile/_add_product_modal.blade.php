@@ -259,7 +259,7 @@
                             <input type="file" name="videos">
                         </div>
                     </div>
-                    <input type="hidden" name="remove_video_id">
+
 
                     <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>

@@ -341,12 +341,13 @@
                 },
                 success:function(data)
                     {
+                        console.log(data);
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#manufacture_edit_errors').empty();
                         $('#product-edit-modal-block').modal('open');
                         $('#product-edit-modal-block .modal-content').html('');
-                        console.log(data);
+                        $('input[name=remove_video_id]').val('');
                         $('#product-edit-modal-block .modal-content').html(data.data);
 
                     },
@@ -2425,9 +2426,10 @@
     });
 
     //video
-    var remove_video_id=[];
+
     function removeEditVideoEl(el)
     {
+        var remove_video_id=[];
         $(el).prev('video').remove();
         $(el).remove();
         remove_video_id.push($(el).attr('data-id'));

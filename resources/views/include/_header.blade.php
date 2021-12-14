@@ -120,7 +120,7 @@
 					</div>
 
 					<div class="header_message_box">
-						<a href="javascript:void(0);">
+						<a href="{{route('message.center')}}">
 							<i class="material-icons">message</i>
 							<span class="sms_counter">0</span>
 						</a>
@@ -301,7 +301,7 @@
 						</a>
 					</div>
 					<div class="header_message_box mobile_top_icon_box">
-						<a href="javascript:void(0);"> 
+						<a href="{{route('message.center')}}"> 
 							<i class="material-icons dp48">message</i>
 							<span class="sms_counter">0</span>
 						</a>

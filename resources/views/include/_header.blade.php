@@ -110,6 +110,7 @@
 						@endif
 					</div>
 
+					@if(auth()->user())
 					<div class="notifications_icon_wrap">
 						<a href="javascript:void(0);">
 							<i class="material-icons">notifications</i>
@@ -123,7 +124,7 @@
 							<span class="sms_counter">0</span>
 						</a>
 					</div>
-					
+					@endif					
 
                     <div class="cart-icon-outer-wrapper">
                         <div class="cart-icon-wrapper">
@@ -179,7 +180,7 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="javascript:void(0);">Tools</a></li>
+							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="" href="javascript:void(0);" >More</a>

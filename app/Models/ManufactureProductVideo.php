@@ -9,8 +9,8 @@ class ManufactureProductVideo extends Model
 {
     use HasFactory;
     protected $guarded=['id'];
-    public function product()
-    {
-        return $this->belongsTo('App\Models\Manufacture\Product','product_id');
-    }
+    // public function product()
+    // {
+    //     return $this->belongsTo('App\Models\Manufacture\Product','product_id');
+    // }
 }

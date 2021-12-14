@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Manufacture\ProductImage;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use App\Models\BusinessProfile;
+use App\Models\ManufactureProductVideo;
 
 class ProductController extends Controller
 {
@@ -31,6 +33,8 @@ class ProductController extends Controller
             'product_specification'=>'required',
             'lead_time'=>'required',
             'industry' => 'required',
+            'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+
 
         ]);
 
@@ -82,6 +86,22 @@ class ProductController extends Controller
                     ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
                 }
             }
+
+            //upload video
+
+            if($request->hasFile('videos')){
+                $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+                $business_profile_name=$business_profile->business_name;
+                $folder='video/'.$business_profile_name;
+                $filename = $request->videos->store($folder,'public');
+                $product_video = ManufactureProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
+
+            }
+
+
             DB::commit();
             $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
             $data=view('business_profile._product_table_data', compact('products'))->render();
@@ -108,6 +128,7 @@ class ProductController extends Controller
 public function edit($product_id)
 {
     $product=Product::where('id', $product_id)->with('product_images')->first();
+    $product_video=ManufactureProductVideo::where('product_id',$product->id)->first();
     if(!$product){
         return response()->json([
             'success' => false,
@@ -116,7 +137,7 @@ public function edit($product_id)
     }
     $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
     $sizes=['S','M','XL','XXL','XXXL'];
-    $data=view('business_profile._edit_modal_data',compact('product','colors','sizes'))->render();
+    $data=view('business_profile._edit_modal_data',compact('product','colors','sizes','product_video'))->render();
     return response()->json([
         'success' => true,
         'data'    => $data,
@@ -135,6 +156,7 @@ public function update(Request $request, $product_id)
         'lead_time'=>'required',
         'colors'=>'required|array',
         'sizes'=>'required|array',
+        'videos.*' => 'mimes:mp4,3gp,mkv,mov|max:20000',
     ]);
 
     if ($validator->fails())
@@ -177,6 +199,32 @@ public function update(Request $request, $product_id)
                 ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
             }
         }
+        //video
+        if(isset($request->remove_video_id)){
+            if( count(json_decode($request->remove_video_id)) > 0 )
+            {
+             $productVideos=ManufactureProductVideo::whereIn('id',json_decode($request->remove_video_id))->get();
+             if($productVideos->isNotEmpty()){
+                  foreach($productVideos as $video){
+                      if(Storage::exists($video->video)){
+                          Storage::delete($video->video);
+                      }
+                      $video->delete();
+                  }
+              }
+            }
+         }
+
+         if($request->hasFile('videos')){
+            $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+            $business_profile_name=$business_profile->business_name;
+            $folder='video/'.$business_profile_name;
+            $filename = $request->videos->store($folder,'public');
+            $product_video = ManufactureProductVideo::create([
+                'product_id' => $product->id,
+                'video' => $filename,
+            ]);
+         }
         $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
         $data=view('business_profile._product_table_data', compact('products'))->render();
         return response()->json([

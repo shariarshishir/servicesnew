@@ -256,9 +256,10 @@
                             <label class="active">Video:</label>
                         </div>
                         <div class="col s12 m9 l9" id="lineitems">
-                            <input type="file" name="videos[]"><p onclick="addMoreVideo(this);">Add more</p>
+                            <input type="file" name="videos">
                         </div>
                     </div>
+                    <input type="hidden" name="remove_video_id">
 
                     <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>

@@ -237,6 +237,25 @@
                         $('.product_unit').val(data.product.product_unit);
                         $('.product_unit').trigger('change');
 
+
+                        // video
+                        $('#product-edit-modal-block input[name=remove_video_id]').val('');
+                        $('.edit-video-show-block').html('');
+                        $('#product-edit-modal-block #lineitems').html('');
+                        var add_video_html= '<input type="file" name="videos[]"><a href="javascript:void(0);" onclick="addMoreVideo(this);">Add more</a>';
+                        $('#product-edit-modal-block #lineitems').html(add_video_html);
+                        if(data.product.videos){
+                            $.each(data.product.videos, function(index,item){
+                                var asset='{{asset("storage")}}'+'/'+item.video;
+                                var ext= item.video.split(".");
+                                var html='<video controls autoplay class="edit-video-tag">';
+                                    html+='<source src="'+asset+'" type="video/'+ext[1]+'">';
+                                    html+='</video>';
+                                    html+='<p  onclick="removeEditVideoEl(this);" data-id="'+item.id+'">remove</p>';
+                                $('.edit-video-show-block').append(html);
+                            })
+                        }
+
                         var preloaded=data.product_image;
                         $('.edit-image-block .input-images-2').imageUploader({
                             preloaded:preloaded
@@ -824,6 +843,30 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
         }
     });
 });
+
+//add more video
+    var  lineitemcontent= '<input type="file" name="videos[]"><p onclick="removeVideoEl(this);">Remove</p>';
+    function addMoreVideo(obj)
+        {
+            $(obj).parent().append(lineitemcontent);
+            // $('#lineitems').append(lineitemcontent);
+        }
+
+    function removeVideoEl(el)
+    {
+        $(el).prev('input').remove();
+        $(el).remove();
+    }
+
+    var remove_video_id=[];
+    function removeEditVideoEl(el)
+    {
+        $(el).prev('video').remove();
+        $(el).remove();
+        remove_video_id.push($(el).attr('data-id'));
+        $('input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+    }
+
 
 </script>
 

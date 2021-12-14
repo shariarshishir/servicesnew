@@ -45,6 +45,15 @@
                         <div class="image-upload-message">Minimum image size 300 X 300</div>
                     </div>
                 </div>
+                {{-- video --}}
+                <div class="row input-field product-upload-block">
+                    <div class="col s12 m3 l3">
+                        <label class="active">Video:</label>
+                    </div>
+                    <div class="col s12 m9 l9" id="lineitems">
+                        <input type="file" name="videos[]"><p onclick="addMoreVideo(this);">Add more</p>
+                    </div>
+                </div>
 
                 <div class="row input-field product-details-block">
                     <div class="col s12 m3 l3">
@@ -81,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row input-field ">
                     <div class="col s12 m3 l3">
                         <label for="product_category_id">{{ __('Product Category') }}</label>
@@ -270,9 +279,9 @@
                                 <div class="add_more_box" style="padding-top: 20px">
                                     <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>
-                                
+
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <div class="row input-field">
                         <div class="col s12 m3 l3">
@@ -312,7 +321,7 @@
                                     <div class="add_more_box" style="padding-top: 20px">
                                         <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -493,7 +502,7 @@
         </a>
     </div> -->
 
-    
+
 </div>
 
 {{-- tinymc editor file upload modal --}}

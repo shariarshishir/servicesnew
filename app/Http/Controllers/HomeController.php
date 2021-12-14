@@ -200,8 +200,7 @@ class HomeController extends Controller
     public function productDetails($sku)
     {
         $category = ProductCategory::get();
-        $product = Product::with('businessProfile')->where('sku',$sku)->first();
-
+        $product = Product::with('businessProfile','videos')->where('sku',$sku)->first();
         $orderModificationRequest=OrderModificationRequest::where(['product_id' => $product->id, 'type' => 2, 'user_id' =>auth()->id() ])->get();
         $productReviews = ProductReview::where('product_id',$product->id)->get();
         $overallRating = 0;

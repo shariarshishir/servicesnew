@@ -47,6 +47,19 @@
                         </div>
                     </div>
 
+                     {{-- video --}}
+                     <div class="edit-video-show-block">
+
+                     </div>
+                    <div class="row input-field edit-video-upload-block">
+                        <div class="col s12 m3 l3">
+                            <label class="active">Video:</label>
+                        </div>
+                        <div class="col s12 m9 l9" id="lineitems">
+                            <input type="file" name="videos[]"><a href="javascript:void(0);" onclick="addMoreVideo(this);">Add more</a>
+                        </div>
+                    </div>
+                    <input type="hidden" name="remove_video_id"  value="">
                     <div class="product-details-block">
                         <div class="row input-field">
                             <div class="col s12 m3 l3">
@@ -59,7 +72,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div> 
+                            </div>
                         </div>
 
                         <div class="row input-field">
@@ -187,7 +200,7 @@
                                             <div class="add_more_box" >
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +353,7 @@
                                         <div class="add_more_box">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -432,8 +445,8 @@
                         <div class="input-field row  right-align">
                             <input type="hidden" name="seller_p_edit_sku">
                             <input type="hidden" name="p_type">
-                            
-                           
+
+
                         </div>
 
                         <div class="submit_btn_wrap">
@@ -447,7 +460,7 @@
                             </div>
                         </div>
 
-                        
+
 
                     </div>  <!-- End product-details-block -->
 
@@ -458,7 +471,7 @@
                         {{-- end non clothing item --}}
                         <div class="input-field row moq-unit-block">
                             <div class="row">
-                                
+
                             </div>
                         </div>
                     </div> -->
@@ -466,18 +479,18 @@
 
             </form>
 
-    
+
         </div>
     </div>
 
-    
+
     <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
     </div> -->
 
-    
+
 </div>
 
 

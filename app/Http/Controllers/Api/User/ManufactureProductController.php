@@ -25,12 +25,14 @@ class ManufactureProductController extends Controller
         else{
             return response()->json([
                 'success' => false,
-            ],404);
+                'products' => $products,
+            ],200);
         }
     }
 
     public function store(Request $request)
     {
+        dd($request->all);
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'business_profile_id' => 'required',
@@ -39,8 +41,6 @@ class ManufactureProductController extends Controller
             'product_details'=>'required',
             'product_specification'=>'required',
             'lead_time'=>'required',
-            'colors'=>'required|array',
-            'sizes'=>'required|array',
             'industry' => 'required',
         ]);
 
@@ -64,8 +64,8 @@ class ManufactureProductController extends Controller
                 'product_details'=>$request->product_details,
                 'product_specification'=>$request->product_specification,
                 'lead_time'=>$request->lead_time,
-                'colors'=>$request->colors,
-                'sizes'=>$request->sizes,
+                'colors'=>$request->colors??null,
+                'sizes'=>$request->sizes ?? null,
                 'industry' => $request->industry== 'apparel' ? 'apparel' : 'non-apparel',
                 'price_per_unit' => $request->price_per_unit,
                 'price_unit'   => $request->price_unit,
@@ -112,7 +112,7 @@ class ManufactureProductController extends Controller
     }
 
 
-    public function update(Request $request, $productId)
+    public function update(Request $request,$productId)
     {
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
@@ -135,7 +135,7 @@ class ManufactureProductController extends Controller
         DB::beginTransaction();
 
         try{
-            $product=Product::find($productId);
+            $product = Product::find($productId);
             $product->created_by=auth()->id();
             $product->title=$request->title;
             $product->price_per_unit=$request->price_per_unit;

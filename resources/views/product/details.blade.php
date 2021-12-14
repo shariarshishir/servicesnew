@@ -48,39 +48,25 @@ $reviewsCount = count($productReviews);
                                     </div>
                                 @endforeach
                             @endif
-                            @if(count($product->videos)> 0)
-                                @foreach ($product->videos as $video)
-                                    <div>
-                                        <center>
-                                            @php $ext=explode(".",$video->video); @endphp
-                                            <a data-fancybox="gallery" href="{{asset('storage/'.$video->video)}}">
-                                                <video controls autoplay><source src="{{asset('storage/'.$video->video)}}" type="video/{{$ext[1]}}"></video>
-
-                                                <div class="click-to-zoom">
-                                                    <i class="material-icons dp48">zoom_in</i>
-                                                    <!-- Click on image to view large size. -->
-                                                </div>
-                                            </a>
-                                        </center>
-                                    </div>
-                                @endforeach
-                            @endif
                         </div>
                     </div>
                     <ul class="product-list-images-block">
-                    @if(count($product->images)> 0)
-                        @foreach ($product->images as $image)
-                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
-                        @endforeach
-                    @endif
-                    @if(count($product->videos)> 0)
-                        @foreach ($product->videos as $video)
-                            @php $ext=explode(".",$video->video); @endphp
-                            <li><video controls autoplay><a href="javascript:void(0);"><source src="{{asset('storage/'.$video->video)}}" type="video/{{$ext[1]}}"></a></video></li>
-                        @endforeach
-                    @endif
+                        @if(count($product->images)> 0)
+                            @foreach ($product->images as $image)
+                                <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
+                @if(count($product->videos)> 0)
+                    @foreach ($product->videos as $video)
+                        <div>
+                            <center>
+                                <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$video->video)}}" /></video>
+                            </center>
+                        </div>
+                    @endforeach
+                @endif
             </div>
             <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m9 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
@@ -203,7 +189,7 @@ $reviewsCount = count($productReviews);
                                                 <button type="button" id="trigger_plus" class="trigger_plus btn green"><i class="material-icons dp48">add</i></button>
                                             </div> --}}
                                             <div class="fresh_order_block_wrapper">
-                                                <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#fresh_order_customize_block">Customaize Your Order</a>
+                                                <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#fresh_order_customize_block">Customize Your Order</a>
                                                 @if(auth::check())
                                                     <a class="waves-effect waves-light modal-trigger request_order_modification_trigger" href="#product-modification-modal">Request for Modification</a>
                                                 @else
@@ -289,7 +275,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customaize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
@@ -566,7 +552,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customaize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">

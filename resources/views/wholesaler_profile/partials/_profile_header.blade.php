@@ -16,13 +16,19 @@
 		<div class="row">
 			<div class="col s12 m5 l3 profile_leftCol leftCol_wrap">
 				<div class="left_top">
-					<div class="profile_pic center-align"><img src="{{asset('images/frontendimages/new_layout_images/ic-logo.png')}}" alt="Ic logo" /> </div>
+					<div class="profile_pic center-align">
+						@if(auth()->user()->image)
+						<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+						@else
+						<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+						@endif
+					</div>
 					<div class="office_address center-align ">
 						<h3>{{$business_profile->business_name}}</h3>
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 					</div>
-					<div class="center-align">
+					<div class="center-align" style="display: none;">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
 					<div class="addressBox">

@@ -116,7 +116,7 @@
                                 var business_profile_url='{{ route("supplier.profile",":business_profile_id") }}';
                                     business_profile_url= business_profile_url.replace(':business_profile_id', displayRecords[i].business_profile_id);
                             tr = $('<div class="col m3 productBox">');
-                            tr.append('<div class="imgBox"><img src='+img+'> </div>');
+                            tr.append('<div class="imgBox"><a href='+details_url+'><img src='+img+'></a></div>');
                             tr.append('<h4>' +title+ '</h4');
                             tr.append('<div class="moqBox">MOQ:' + displayRecords[i].moq  + '</div>');
                             tr.append('<div class="moq_view_details">');

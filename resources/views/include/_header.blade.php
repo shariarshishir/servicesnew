@@ -18,16 +18,16 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="javascript:void(0);">Tools</a></li>
+							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-links" class="dropdown-content subNav">
-									<li><a href="javascript:void(0);">Blogs</a></li>
-									<li><a href="javascript:void(0);">Insights</a></li>
-									<li><a href="javascript:void(0);">Helps</a></li>
-									<li><a href="javascript:void(0);">FAQs</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -41,7 +41,11 @@
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown" class="dropdown-content">
@@ -72,7 +76,11 @@
 								@if(Auth::guard('web')->check())
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown" class="dropdown-content">
@@ -101,14 +109,30 @@
 
 						@endif
 					</div>
-					
+
+					@if(auth()->user())
+
+					<div class="notifications_icon_wrap">
+						<a href="javascript:void(0);">
+							<i class="material-icons">notifications</i>
+							<span id="" class="noticication_counter">0</span>
+						</a>
+					</div>
+
+					<div class="header_message_box">
+						<a href="javascript:void(0);">
+							<i class="material-icons">message</i>
+							<span class="sms_counter">0</span>
+						</a>
+					</div>
+					@endif					
 
                     <div class="cart-icon-outer-wrapper">
                         <div class="cart-icon-wrapper">
                             <a href="javascript:void(0);" class="btn waves-effect waves-light green lighten-1 cart-btn">
                                 <i class="material-icons dp48">shopping_cart</i>
-                                <span id="cartItems"class="cart_counter">{{$cartItems}}</span>
                             </a>
+							<span id="cartItems"class="cart_counter">{{$cartItems}}</span>
                             <ul id="cart-dropdown" class="card" style="display: none;">
                                 {{-- @if(Cart::content()->count() > 0) --}}
 
@@ -126,13 +150,6 @@
                             </ul>
                         </div>
                     </div>
-
-					<!-- <div class="notifications_icon_wrap">
-						<a href="javascript:void(0);">
-							<span class="material-icons">notifications</span>
-							<span id="" class="noticication_counter">0</span>
-						</a>
-					</div> -->
 
 					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile btn_green">
 					    <span class="material-icons"> add </span> Business Profile
@@ -164,15 +181,15 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="javascript:void(0);">Tools</a></li>
+							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="" href="javascript:void(0);" >More</a>
 								<ul class="subNav">
-									<li><a href="javascript:void(0);">Blogs</a></li>
-									<li><a href="javascript:void(0);">Insights</a></li>
-									<li><a href="javascript:void(0);">Helps</a></li>
-									<li><a href="javascript:void(0);">FAQs</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -199,16 +216,17 @@
 
 
 				<div class="col s10 right-align mobile_top_right">
-					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile_mobile">
-						<span class="material-icons"> add </span>
-					</a>
 
-					<div class="user-block user-block-mobile">
+					<div class="user-block user-block-mobile mobile_top_icon_box">
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown-mobile" class="dropdown-content profile_dropdown_mobile">
@@ -241,7 +259,11 @@
 								@if(Auth::guard('web')->check())
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online">
+										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif
 									</span>
 								</a>
 								<ul id="profile-dropdown-mobile" class="dropdown-content">
@@ -272,8 +294,20 @@
 
 						@endif
 					</div>
+					<div class="notifications_icon_wrap mobile_top_icon_box">
+						<a href="javascript:void(0);">
+							<i class="material-icons">notifications</i>
+							<span id="" class="noticication_counter">0</span>
+						</a>
+					</div>
+					<div class="header_message_box mobile_top_icon_box">
+						<a href="javascript:void(0);"> 
+							<i class="material-icons dp48">message</i>
+							<span class="sms_counter">0</span>
+						</a>
+					</div>
 
-					<div class="cart-icon-outer-wrapper ">
+					<div class="cart-icon-outer-wrapper mobile_top_icon_box">
                         <div class="cart-icon-wrapper cart-icon-wrapper-mobile">
 							<a class='dropdown-trigger' href='#' data-target='cart-dropdown-mobile'>
 								<i class="material-icons dp48">shopping_cart</i>
@@ -297,6 +331,11 @@
                         </div>
                     </div>
 
+					<div class="mobile_top_icon_box">
+						<a href="{{route('business.profile.create')}}" type="button" class="btn_profile_mobile">
+							<span class="material-icons"> add </span>
+						</a>
+					</div>
 
 				</div>
 			</div>

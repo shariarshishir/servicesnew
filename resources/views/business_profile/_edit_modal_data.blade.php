@@ -96,9 +96,15 @@
             </div>
             <div class="col s12 m9 l9">
                 <select class="select2 browser-default product-colors" name="colors[]" multiple>
-                    @foreach ($colors as $color)
-                        <option value="{{ $color }}" {{ (in_array($color, $product->colors))?'selected':'' }}>{{ ucfirst($color) }}</option>
-                    @endforeach
+                    @if(isset($product->colors))
+                        @foreach ($colors as $color)
+                            <option value="{{ $color }}" {{ (in_array($color, $product->colors))?'selected':'' }}>{{ ucfirst($color) }}</option>
+                        @endforeach
+                    @else
+                        @foreach ($colors as $color)
+                            <option value="{{ $color }}">{{ ucfirst($color) }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
         </div>
@@ -108,9 +114,15 @@
             </div>
             <div class="col s12 m9 l9">
                 <select class="select2 browser-default product-sizes" name="sizes[]"  multiple="multiple">
-                    @foreach ($sizes as $size)
-                            <option value="{{ $size }}" {{ (in_array($size, $product->sizes))?'selected':'' }}>{{ ucfirst($size) }}</option>
-                    @endforeach
+                    @if(isset($product->colors))
+                        @foreach ($sizes as $size)
+                                <option value="{{ $size }}" {{ (in_array($size, $product->sizes))?'selected':'' }}>{{ ucfirst($size) }}</option>
+                        @endforeach
+                    @else
+                        @foreach ($sizes as $size)
+                            <option value="{{ $size }}">{{ ucfirst($size) }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
         </div>

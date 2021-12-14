@@ -242,14 +242,14 @@
                         $('#product-edit-modal-block input[name=remove_video_id]').val('');
                         $('.edit-video-show-block').html('');
                         $('#product-edit-modal-block #lineitems').html('');
-                        var add_video_html= '<input type="file" name="videos[]"><a href="javascript:void(0);" onclick="addMoreVideo(this);">Add more</a>';
+                        var add_video_html= '<input type="file" name="videos[]">';
                         $('#product-edit-modal-block #lineitems').html(add_video_html);
                         if(data.product.videos){
                             $.each(data.product.videos, function(index,item){
                                 var asset='{{asset("storage")}}'+'/'+item.video;
-                                var ext= item.video.split(".");
-                                var html='<video controls autoplay class="edit-video-tag">';
-                                    html+='<source src="'+asset+'" type="video/'+ext[1]+'">';
+                                // var ext= item.video.split(".");
+                                var html='<video controls autoplay width="320" height="240">';
+                                    html+='<source src="'+asset+'" />';
                                     html+='</video>';
                                     html+='<p  onclick="removeEditVideoEl(this);" data-id="'+item.id+'">remove</p>';
                                 $('.edit-video-show-block').append(html);

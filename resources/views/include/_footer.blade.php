@@ -10,7 +10,7 @@
 				<div class="col s12 m6 l5 right">
 					<p>Merchandising have never seemed so easy before.</p>
 					<div class="btn_talk ">
-						<a class="btn_white" href="javascript:void(0);">Talk to us</a>
+						<a class="btn_white" href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a>
 					</div>
 				</div>
 			</div>
@@ -34,7 +34,6 @@
 							</p>
 						</div>
 						<a href="javascript:void(0);" class="btn_direct btn_grBorder">Get Direction</a>
-						<a href="javascript:void(0);" class="btn_tour btn_lightgr">Virtual Tour</a>
 					</div>
 				</div>
 				<div class="col m6 l6 footer_right_bottom">

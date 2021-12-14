@@ -5,7 +5,15 @@
             <div class="productBox col s6 m3 l3">
                 <div class="imgBox">
                     @foreach($product->images as $key=>$image)
-                        <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                        @if($product->businessProfile()->exists())
+                            <a href="{{route('productdetails',$product->sku)}}">
+                                <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                            </a>
+                        @else
+                            <a href="javascript:void(0);">
+                                <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                            </a>
+                        @endif
                         @break
                     @endforeach
                     <div class="favorite">
@@ -18,7 +26,7 @@
                     @endif
                 </div>
                 <div class="priceBox row">
-                    <div class="col m5 s5 apperal">Apperal</div>
+                    <div class="col m5 s5 apperal">Apparel</div>
                     <!--div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div-->
                     <div class="price col m7 s7 right-align">@include('product._product_price')</div>
                 </div>

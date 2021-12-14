@@ -10,6 +10,6 @@
 
 @section('content')
 <div class="block3d-wrapper">
-<center><img src="images/frontendimages/3d_studio_banner.jpeg" alt="3d-Studio"></center>
+<center><img src="{{asset('images/frontendimages/3d_studio_banner.jpeg')}}" alt="3d-Studio"></center>
 </div>
 @endsection

@@ -256,7 +256,7 @@
                             <label class="active">Video:</label>
                         </div>
                         <div class="col s12 m9 l9" id="lineitems">
-                            <input type="file" name="videos">
+                            <input type="file" name="video">
                         </div>
                     </div>
 

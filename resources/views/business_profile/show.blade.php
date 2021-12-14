@@ -163,11 +163,19 @@
 							@if(count($business_profile->certifications)>0)
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
-										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
+										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
 											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title" >{{$certification->title}}</span>
+										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+										
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
@@ -554,13 +562,21 @@
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										<a href="javascript:void(0)" style="display: none;" data-id="{{$certification->id}}" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>
-										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf')
+										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
 											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
 										</div>
 										<span class="certificate_title">{{$certification->title}}</span>
+										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+										
+										<div class="certificate_img">
+											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+											<br> -->
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
+										</div>
+										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
 										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>

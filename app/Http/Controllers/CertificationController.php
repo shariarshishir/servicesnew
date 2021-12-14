@@ -15,7 +15,7 @@ class CertificationController extends Controller
        
         $validator = Validator::make($request->all(), [
             'title.*' => 'string|min:1|max:255',
-            'image.*' => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF|max:5120',
+            'image.*' => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF,doc,docx,DOC,DOCX|max:5120',
             'short_description.*' => 'string|max:500',
         ]);
         if ($validator->fails())
@@ -35,7 +35,7 @@ class CertificationController extends Controller
                         {
                             
                             $extension = $request->image[$i]->getClientOriginalExtension();
-                            if($extension=='pdf' ||$extension=='PDF'){
+                            if($extension=='pdf' ||$extension=='PDF' || $extension=='doc'||$extension=='docx'||$extension=='DOC'||$extension=='DOCX'){
                                 $filename = $request->image[$i]->store('images/certificates','public');
 
                             }else{

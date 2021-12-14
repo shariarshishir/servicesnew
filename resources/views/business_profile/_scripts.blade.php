@@ -872,9 +872,11 @@
             for(let i = 0;i <certifications.length ;i++){
                 var html='';
                 var image="{{asset('storage/')}}"+'/'+certifications[i].image;
-                var strArray = image.slice(-3);
+                // var strArray = image.slice(-3);
+                var strArray = image.split(".");
+                var file_extension = strArray[strArray.length - 1];
                 
-                if(strArray == 'pdf' || strArray == 'PDF'){
+                if(file_extension == 'pdf' || file_extension == 'PDF'){
                     
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
@@ -883,7 +885,18 @@
                     html +='</div>';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                     html +='</div>';
-                } else {
+                }
+                else if(file_extension == 'DOC' || file_extension == 'DOCX' || file_extension == 'docx' || file_extension == 'doc'){
+                    
+                    html +='<div class="certificate_img_wrap">';
+                    html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
+                    html +='<div class="certificate_img">';
+                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="doc_icon"> &nbsp; </a>';
+                    html +='</div>';
+                    html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                    html +='</div>';
+                } 
+                else {
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)"  style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<div class="certificate_img">';
@@ -962,17 +975,30 @@
                                     for(let i = 0;i <certifications.length ;i++){
                                         var html='';
                                         var image="{{asset('storage/')}}"+'/'+certifications[i].image;
-                                        var strArray = image.slice(-3);
+                                        var strArray = image.split(".");
+                                        var file_extension = strArray[strArray.length - 1];
                                         
-                                        if(strArray == 'pdf'|| strArray == 'PDF'){
+                                        if(file_extension == 'pdf' || file_extension == 'PDF'){
+                                            
                                             html +='<div class="certificate_img_wrap">';
-                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';                                            
+                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';
-                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down" >&nbsp;</a>';
+                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down"> &nbsp; </a>';
                                             html +='</div>';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                                             html +='</div>';
-                                        } else {
+                                        }
+                                        else if(file_extension == 'DOC' || file_extension == 'DOCX' || file_extension == 'docx' || file_extension == 'doc'){
+                                            
+                                            html +='<div class="certificate_img_wrap">';
+                                            html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
+                                            html +='<div class="certificate_img">';
+                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="doc_icon"> &nbsp; </a>';
+                                            html +='</div>';
+                                            html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                                            html +='</div>';
+                                        } 
+                                        else {
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';

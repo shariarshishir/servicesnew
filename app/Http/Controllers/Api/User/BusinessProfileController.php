@@ -135,7 +135,8 @@ class BusinessProfileController extends Controller
             return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true,"companyOverviews"=>$companyOverviewArray],200);
         }
         else{
-            return response()->json(["businessProfiles"=>[],"success"=>false],200);
+            $businessProfiles=[];
+            return response()->json(["businessProfiles"=>$businessProfiles,"success"=>false],200);
         }
     }
 

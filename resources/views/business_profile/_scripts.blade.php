@@ -2367,6 +2367,7 @@
         $('input:hidden[name=company_factory_tour_image_ids]').val(JSON.stringify(imageIds));
         $(this).parent().remove();
     });
+    
     var largeImageIds= new Array();
     $(document).on('click', '.delete-factory-large-image',function(e){
         e.preventDefault();

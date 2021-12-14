@@ -38,8 +38,8 @@ class Product extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    // public function product_videos(){
-    //     return $this->hasMany(ManufactureProductVideo::class);
-    // }
+    public function product_video(){
+        return $this->hasOne('App\Models\\Manufacture\ProductVideo','product_id','id');
+    }
 
 }

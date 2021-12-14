@@ -13,7 +13,7 @@ class CreateManufactureProductVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('manufacture_product_videos', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('product_videos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('video');
@@ -29,6 +29,6 @@ class CreateManufactureProductVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manufacture_product_videos');
+        Schema::dropIfExists('product_videos');
     }
 }

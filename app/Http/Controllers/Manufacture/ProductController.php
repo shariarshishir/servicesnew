@@ -11,7 +11,7 @@ use App\Models\Manufacture\ProductImage;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use App\Models\BusinessProfile;
-use App\Models\ManufactureProductVideo;
+use App\Models\Manufacture\ProductVideo;
 
 class ProductController extends Controller
 {
@@ -33,7 +33,7 @@ class ProductController extends Controller
             'product_specification'=>'required',
             'lead_time'=>'required',
             'industry' => 'required',
-            'videos' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
 
 
         ]);
@@ -89,12 +89,12 @@ class ProductController extends Controller
 
             //upload video
 
-            if($request->hasFile('videos')){
+            if($request->hasFile('video')){
                 $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
                 $business_profile_name=$business_profile->business_name;
                 $folder='video/'.$business_profile_name;
-                $filename = $request->videos->store($folder,'public');
-                $product_video = ManufactureProductVideo::create([
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
                     'product_id' => $product->id,
                     'video' => $filename,
                 ]);
@@ -127,8 +127,7 @@ class ProductController extends Controller
 //get business type by industy type
 public function edit($product_id)
 {
-    $product=Product::where('id', $product_id)->with('product_images')->first();
-    $product_video=ManufactureProductVideo::where('product_id',$product->id)->first();
+    $product=Product::where('id', $product_id)->with('product_images','product_video')->first();
     if(!$product){
         return response()->json([
             'success' => false,
@@ -137,7 +136,7 @@ public function edit($product_id)
     }
     $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue'];
     $sizes=['S','M','XL','XXL','XXXL'];
-    $data=view('business_profile._edit_modal_data',compact('product','colors','sizes','product_video'))->render();
+    $data=view('business_profile._edit_modal_data',compact('product','colors','sizes'))->render();
     return response()->json([
         'success' => true,
         'data'    => $data,
@@ -156,7 +155,7 @@ public function update(Request $request, $product_id)
         'lead_time'=>'required',
         'colors'=>'required|array',
         'sizes'=>'required|array',
-        'videos' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+        'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
     ]);
 
     if ($validator->fails())
@@ -203,24 +202,23 @@ public function update(Request $request, $product_id)
         if(isset($request->remove_video_id)){
             if( count(json_decode($request->remove_video_id)) > 0 )
             {
-             $productVideos=ManufactureProductVideo::whereIn('id',json_decode($request->remove_video_id))->get();
-             if($productVideos->isNotEmpty()){
-                  foreach($productVideos as $video){
-                      if(Storage::exists($video->video)){
-                          Storage::delete($video->video);
+             $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+             if($productVideo){
+
+                      if(Storage::exists($productVideo->video)){
+                          Storage::delete($productVideo->video);
                       }
-                      $video->delete();
-                  }
+                      $productVideo->delete();
               }
             }
          }
 
-         if($request->hasFile('videos')){
+         if($request->hasFile('video')){
             $business_profile=BusinessProfile::where('id', $product->businessProfile->id)->first();
             $business_profile_name=$business_profile->business_name;
             $folder='video/'.$business_profile_name;
-            $filename = $request->videos->store($folder,'public');
-            $product_video = ManufactureProductVideo::create([
+            $filename = $request->video->store($folder,'public');
+            $product_video = ProductVideo::create([
                 'product_id' => $product->id,
                 'video' => $filename,
             ]);

@@ -2427,13 +2427,15 @@
 
     //video
 
-    function removeEditVideoEl(el)
+    function manufactureRemoveEditVideoEl(el)
     {
         var remove_video_id=[];
         $(el).prev('video').remove();
         $(el).remove();
         remove_video_id.push($(el).attr('data-id'));
-        $('input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+        $('#product-edit-modal-block input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+        $('.manufacture-product-upload-block').show();
+
     }
 
     </script>

@@ -14,8 +14,8 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="row ">
-                    <div class="col s12">
+                <div class="row">
+                    <div class="col s12 input-field">
                         <label for="address">Address</label>
                         <td>
                             <textarea class="address" name="address" value="{{$business_profile->companyOverview->address}}" type="text"  rows="20" cols="50">{{$business_profile->companyOverview->address ?? ''}}</textarea>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="row ">
-                    <div class="col s12">
+                    <div class="col s12 input-field">
                         <label for="address">Factory Address</label>
                         <td>
                             <textarea class="factory_address" name="factory_address" value="{{$business_profile->companyOverview->factory_address}}" type="text"  rows="20" cols="50">{{$business_profile->companyOverview->factory_address ?? ''}}</textarea>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="row ">
-                    <div class="col s12">
+                    <div class="col s12 input-field">
                         <label for="about_company">About company</label>
                         <td>
                             <textarea class="about-company" name="about_company" value="{{$business_profile->companyOverview->about_company}}" type="text" id="about-company-short-description" rows="20" cols="50">{{$business_profile->companyOverview->about_company ?? ''}}</textarea>

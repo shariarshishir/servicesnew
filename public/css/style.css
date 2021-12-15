@@ -315,6 +315,15 @@ form input:read-only {
     transition:all 0.5s;
     z-index: 9;
 }
+.header_wrap.fixed {
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 999;
+    animation: slide-down 0.7s;
+}
 .main_wrapper .fixedHeader {
     position: fixed;
     top:0; left:0;
@@ -6402,25 +6411,35 @@ nav .pagination li.active .page-link {
 /* ************************* chat message style end ******************************  */
 
 /* ************************* policy_content_wrap style start ******************************  */
+.about_content_container,
 .policy_content_wrap {
     padding: 50px 0;
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
 }
+.about_content_container .card,
 .policy_content_wrap .card {
     padding: 50px !important;
 }
+.about_content_wrap h2,
 .policy_content_wrap h2 {
     font-size: 35px;
     color: #448547;
     font-weight: 600;
     margin-bottom: 30px;
+    text-align: center;
 }
+.about_content_wrap h3,
 .policy_content_wrap h3 {
     font-size: 25px;
     font-weight: 600;
 }
+.about_content_wrap h3 {
+    margin-top: 50px;
+    text-align: center;
+}
+
 /* ************************* policy_content_wrap style end ******************************  */
 
 /* ******************** Media css style start *********************** */
@@ -7027,8 +7046,6 @@ nav .pagination li.active .page-link {
     .mobile_header .mobile_top_right .user-block-mobile {
         margin-top: -6px;
     }
-
-
     
     #homepage #ordercontent .img-responsive{
         margin: 50px 0;
@@ -7036,6 +7053,14 @@ nav .pagination li.active .page-link {
     #homepage #buyercontent .img-responsive,
     #homepage #suppliercontent .img-responsive {
        margin: 0;
+    }
+
+    .avatar-status {
+        width: 40px;
+        height: 40px;
+    }
+    .mobile_header .container {
+        padding: 0 !important;
     }
 
 }

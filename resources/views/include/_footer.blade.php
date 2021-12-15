@@ -65,7 +65,7 @@
 						</div>
 						<div class="col s12 m6 l4 info_menu">
 							<ul>
-								<li style="display: none;"><a href="{{route('front.aboutus')}}">About us</a></li>
+								<li><a href="{{route('front.aboutus')}}">About us</a></li>
 								<li><a href="mailto:success@merchantbay.com">Contact us</a></li>
 								<li style="display: none;"><a href="javascript:void(0);">Tutorials</a></li>
 								<li style="display: none;"><a href="javascript:void(0);">Submit a dispute</a></li>
@@ -1209,5 +1209,14 @@ $("#searchOption").change(function(){
     });
 });
 
+
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 180) {
+            $(".header_wrap").addClass("fixed");
+        } else {
+            $(".header_wrap").removeClass("fixed");
+        }
+    });
 
   </script>

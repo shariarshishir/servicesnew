@@ -1052,6 +1052,23 @@ form input:read-only {
     border-radius: 10px;
 }
 
+.profile_bannerwrap .edit_profile_option {
+    position: absolute;
+    top: 58px;
+    right: 100px;
+}
+.profile_bannerwrap .edit_profile_option .edit_profile_trigger {
+    color: #ffffff;
+    background: #448547;
+    padding: 10px 15px 7px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.profile_bannerwrap .edit_profile_option .edit_profile_trigger i {
+    line-height: 22px;
+    font-size: 20px;
+}
+
 /* profile banner css end */
 
 .profile_container {
@@ -1473,7 +1490,7 @@ form input:read-only {
 }
 .profile_not_updated .btn_green {
     text-decoration: none;
-    margin-top: 50px;
+    margin-top: 20px;
     text-transform: inherit;
 }
 
@@ -3069,7 +3086,7 @@ form input:read-only {
     color: #448547;
 }
 .blog_detail_info_wrap h3 {
-    font-size: 35px;
+    font-size: 25px;
     color: #448547;
     font-weight: 600;
     margin-bottom: 30px;
@@ -6271,6 +6288,15 @@ nav .pagination li.active .page-link {
     padding: 0px 30px;
 }
 
+#homepage #ordercontent .img-responsive {
+    height: 440px;
+    margin: 50px auto;
+}
+#homepage #buyercontent .img-responsive,
+#homepage #suppliercontent .img-responsive {
+    height: 500px;
+}
+
 
 /* ************************* chat message style start ******************************  */
 .blue-grey-text.text-darken-4 {
@@ -6375,6 +6401,28 @@ nav .pagination li.active .page-link {
 
 /* ************************* chat message style end ******************************  */
 
+/* ************************* policy_content_wrap style start ******************************  */
+.policy_content_wrap {
+    padding: 50px 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.policy_content_wrap .card {
+    padding: 50px !important;
+}
+.policy_content_wrap h2 {
+    font-size: 35px;
+    color: #448547;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.policy_content_wrap h3 {
+    font-size: 25px;
+    font-weight: 600;
+}
+/* ************************* policy_content_wrap style end ******************************  */
+
 /* ******************** Media css style start *********************** */
 
 @media only screen and (min-width: 1500px) {
@@ -6390,6 +6438,7 @@ nav .pagination li.active .page-link {
     .profile_tabNav_wrap .membership_wrap .membership_textBox .imgbox {
         padding: 0 30px;
     }
+    
 }
 @media only screen and (max-width: 1499px) {
     .slick-initialized .productBox .imgBox {
@@ -6407,6 +6456,14 @@ nav .pagination li.active .page-link {
 
     .profile_tabNav_wrap #home .product_boxwrap .productBox .imgBox {
         height: 175px;
+    }
+
+    #homepage #ordercontent .img-responsive,
+    #homepage #buyercontent .img-responsive,
+    #homepage #suppliercontent .img-responsive {
+        height: auto;
+        margin: 10% auto;
+        width: auto;
     }
 
 
@@ -6526,9 +6583,6 @@ nav .pagination li.active .page-link {
         line-height: 45px;
     }
 
-
-
-    
     .blog_content_box h3 a:link, 
     .blog_content_box h3 a:active, 
     .blog_content_box h3 a:visited {
@@ -6976,6 +7030,13 @@ nav .pagination li.active .page-link {
 
 
     
+    #homepage #ordercontent .img-responsive{
+        margin: 50px 0;
+    }
+    #homepage #buyercontent .img-responsive,
+    #homepage #suppliercontent .img-responsive {
+       margin: 0;
+    }
 
 }
 

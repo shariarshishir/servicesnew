@@ -136,29 +136,44 @@
 
 							<div class="row respones_box">
 								<div class="col s12 m2 l2">
-									<div class="rfq_profile_img"><img src="images/ic-logo.png" alt=""></div>
+									<div class="rfq_profile_img">
+										@if(auth()->user()->image)
+										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif										
+									</div>
 								</div>
 								<div class="col s12 m10 l10 rfq_profile_info">
 									<div class="row">
 										<div class="col m7 l7 profile_info">
-											<h4>Company Name: {{$bid->businessProfile->business_name}} </h4>
+											<h4>{{$bid->businessProfile->business_name}} </h4>
 											<p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
 										</div>
-                                        {{-- @if(Auth::guard('web')->check()) --}}
-                                            {{-- <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->created_by }}); updateUserLastActivity('{{Auth::id()}}', '{{$product->created_by}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{$product->category['name']}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->created_by}}')"">Contact supplier</button> --}}
-                                            {{-- <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="btn_white btn_supplier" onClick="contactSupplierFromProduct({{ $bid->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{$bid->supplier_id}}')">Contact Supplier</a></div>
+                                        @if(Auth::guard('web')->check())
+                                            <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{$bid->supplier_id}}')">Contact Supplier</a></div>
                                         @else
-                                            <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="btn_white btn_supplier">Contact Supplier</a></div>
-                                        @endif --}}
+                                            <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green">Contact Supplier</a></div>
+                                        @endif
 
 									</div>
 
-									<p>Description:{{$bid->description}}</p>
+									<div class="full_specification"><span class="title">Description:</span> {!! $bid->description !!} </div>
+									<div class="full_details">
+										<span class="title">Quantity:</span> {{$bid->quantity}},
+										<span class="title">Unit Price:</span> {{$bid->unit_price}},
+										<span class="title">Total Price:</span>  {{$bid->total_price}},
+										<span class="title">Payment Method:</span> {{$bid->payment_method}},
+										<span class="title">Delivery Time:</span> {{$bid->delivery_time}} 
+									</div>
+
+									<!-- <p>Description: {{$bid->description}}</p>
 									<p>Quantity: {{$bid->quantity}}</p>
 									<p>Unit Price: {{$bid->unit_price}}</p>
 									<p>Total Price: {{$bid->total_price}}</p>
 									<p>Payment Method: {{$bid->payment_method}}</p>
-									<p>Delivery Time: {{$bid->delivery_time}}</p>
+									<p>Delivery Time: {{$bid->delivery_time}}</p> -->
+
 									<div class="respones_img_wrap">
 										@if(isset($bid->media))
 											@foreach (json_decode($bid->media) as $image)
@@ -238,7 +253,10 @@
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            window.location.href = "/message-center?uid="+supplier_id;
+            var url = '{{ route("message.center") }}?uid='+supplier_id;
+                // url = url.replace(':slug', sku);
+                window.location.href = url;
+            // window.location.href = "/message-center?uid="+supplier_id;
         }, 1000);
         }
 

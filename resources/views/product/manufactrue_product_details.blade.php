@@ -23,35 +23,53 @@
         <div class="container">
             <div class="row ic-pg-container">
                 <div class="col s12 m3 l3 product_preview_wrap">
-                    @if($product->product_video)
-                        <div>
-                            <center>
-                                <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video>
-                            </center>
-                        </div>
-                     @endif
-                    <div class="simpleLens-gallery-container" id="ic-gallery">
-                        @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
-                            <div class="simpleLens-container">
-                                <div class="simpleLens-big-image-container">
-                                    <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
-                                        <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
-                                    </a>
-                                </div>
-                            </div>
-                        @endif
-                        <div class="simpleLens-thumbnails-container">
-                            @foreach($product->product_images as $product_image)
-                                <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
-                                    data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
-                                    data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
-                                    <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
-                                </a>
-                            @endforeach
 
-                            @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
+                    @if($product->video)
+                        <div class="simpleLens-gallery-container" id="ic-gallery">
+                            <div class="video_content">
+                                <center>
+                                    <video controls height="245" width="300">
+                                        <source src="{{asset('storage/'.$product->product_video->video)}}" />
+                                    </video>
+                                </center>
+                            </div>
+                            <div class="simpleLens-thumbnails-container">
+                                @foreach($product->product_images as $product_image)
+                                    <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
+                                        data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
+                                        data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
+                                        <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                    </a>
+                                @endforeach
+
+                                @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="simpleLens-gallery-container" id="ic-gallery">
+                            @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
+                                <div class="simpleLens-container">
+                                    <div class="simpleLens-big-image-container">
+                                        <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
+                                            <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="simpleLens-thumbnails-container">
+                                @foreach($product->product_images as $product_image)
+                                    <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
+                                        data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
+                                        data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
+                                        <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                    </a>
+                                @endforeach
+
+                                @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
                 <div class="col s12 m9 l9 product_preview_info_wrap">
                     <div class="row">
@@ -112,7 +130,7 @@
                                                 <div class="mysizewrapper">
                                                     <h3>Sizes</h3>
                                                     <div class="mysizeboxs">
-                                                      
+
                                                             <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
                                                                 @foreach($sizes as $size)
                                                                     <div class="mysizebox" data-size="{{ $size }}">
@@ -120,7 +138,7 @@
                                                                     </div>
                                                                 @endforeach
                                                             </div>
-                                                      
+
                                                     </div>
                                                 </div>
 
@@ -183,7 +201,7 @@
                                 @if(Auth::guard('web')->check())
                                     <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{$product->category['name']}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
                                 @else
-                                    <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
+                                    <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                                 @endif
                                 <br/>
 

@@ -246,7 +246,8 @@
                                 var html='<video controls autoplay width="320" height="240">';
                                     html+='<source src="'+asset+'" />';
                                     html+='</video>';
-                                    html+='<p  onclick="wholesalerRemoveEditVideoEl(this);" data-id="'+data.product.video.id+'">remove</p>';
+                                    html+='<a class="btn_delete" onclick="wholesalerRemoveEditVideoEl(this);" data-id="'+data.product.video.id+'"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>';
+                                    
                                 $('#product-edit-modal-block .edit-video-show-block').append(html);
                         }
 

@@ -51,7 +51,7 @@
                         <label class="active">Video:</label>
                     </div>
                     <div class="col s12 m9 l9" id="lineitems">
-                        <input type="file" name="video">
+                        <input class="uplodad_video_box" type="file" name="video">
                     </div>
                 </div>
                 <div class="row input-field product-details-block">

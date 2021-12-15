@@ -120,7 +120,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Make Your Sourcing Easy</h4>
                             <p class="mb-15">We offer a balance of technology and traditional offline support. <a href="#">Our order management dashboard</a> lets clients stay connected with multiple stakeholders in one place. But we also have boots on the ground in Bangladesh so we can provide real-time updates too.</p>
-                            <a href="https://tools.merchantbay.com/" class="button">Explore Order Management Dashboard</a>
+                            <a href="{{route('front.tools')}}" class="button">Explore Order Management Dashboard</a>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                 <p>Merchandising have never seemed so easy before.</p>
                 <div class="button-group">
                 <a href="javascript:void(0);" class="button talk-to-us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">TALK TO US</a>
-                <a href="https://tools.merchantbay.com/" class="button outline">Explore Dashboard</a>
+                <a href="{{route('front.tools')}}" class="button outline">Explore Dashboard</a>
                 </div>
             </div>
         </div>
@@ -264,7 +264,7 @@
                             <p class="homepgp-sm mb30">Open a Digital Profile on Merchant Bay to be on the niche Search Engine of Bangladesh manufacturing industry and get Verified to be noticed and win trust of buyers.</P>
                         </div>
                         <div class="clear"></div>
-                        <img src="{{asset('images/homepage/buyers-tab-img.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/profile_mockup.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
                     <div class="col s12 m12 l8 plr0" id="buyercontent" style="display: none;">
@@ -273,7 +273,7 @@
                             <p class="homepgp-sm mb30">Send your inquiry through RFQ (Request For Quotation) and let our smart matching system find the best matched suppliers to quote you, along with instant quotation you will have the advantage of connecting to Verified Suppliers, Order Management Dashboard and Merchandising Assistance.</P>
                         </div>
                         <div class="clear"></div>
-                        <img src="{{asset('images/homepage/supplier-tab.png')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/profile_mockup.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
                     <!-- <div class="col-md-8 plr0" id="normalcontent">
@@ -308,7 +308,7 @@
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Third Party Verification<br></b></P>
                         <p class="homepgp-sm mb15">Know how we verify our suppliers</P>
-                        <img src="{{asset('images/homepage/Thirdparty-verification.jpg')}}" alt="" class="img-responsive">
+                            <img src="{{asset('images/homepage/Thirdparty-verification.jpg')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                         <div class="col s12 m10 col-md-offset-1 perform_tab_table">
                             <table class="table table-borderless ">
@@ -426,7 +426,7 @@
                         <p class="homepgp-sm mb15">
                             With our Smart Order Management Dashboard you can
                         </P>
-                        <img src="{{asset('images/homepage/dashboard.jpg')}}" alt="" class="img-responsive">
+                        <img src="{{asset('images/homepage/omd_on_mac.png')}}" alt="" class="img-responsive">
 
                         <div class="clear10"></div>
                         <div class="col m10 s12 col-md-offset-1 perform_tab_table">

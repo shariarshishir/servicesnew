@@ -503,7 +503,7 @@ class HomeController extends Controller
                 $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
             }
         })
-        ->orderBy('is_business_profile_verified', 'DESC')->paginate(10);
+        ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile
@@ -672,6 +672,18 @@ class HomeController extends Controller
     public function toolsLandingPage(){
         return view('tools.index');
     }
+
+    public function policyLandingPage(){
+        return view('policy.index');
+    }    
+
+    public function aboutusLandingPage(){
+        return view('aboutus.index');
+    }   
+    
+    public function contactusLandingPage(){
+        return view('contactus.index');
+    }   
 
 
 

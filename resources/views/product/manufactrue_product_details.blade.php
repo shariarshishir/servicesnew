@@ -43,7 +43,7 @@
                                 @endforeach
 
                                 @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
-                            </div>                      
+                            </div>
                         </div>
                     @else
                         <div class="simpleLens-gallery-container" id="ic-gallery">
@@ -67,7 +67,7 @@
 
                                 @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
                             </div>
-                        </div>                        
+                        </div>
                     @endif
 
                 </div>
@@ -130,7 +130,7 @@
                                                 <div class="mysizewrapper">
                                                     <h3>Sizes</h3>
                                                     <div class="mysizeboxs">
-                                                      
+
                                                             <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
                                                                 @foreach($sizes as $size)
                                                                     <div class="mysizebox" data-size="{{ $size }}">
@@ -138,7 +138,7 @@
                                                                     </div>
                                                                 @endforeach
                                                             </div>
-                                                      
+
                                                     </div>
                                                 </div>
 
@@ -201,7 +201,7 @@
                                 @if(Auth::guard('web')->check())
                                     <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{$product->category['name']}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
                                 @else
-                                    <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
+                                    <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                                 @endif
                                 <br/>
 

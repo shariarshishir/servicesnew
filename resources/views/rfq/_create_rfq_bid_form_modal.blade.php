@@ -62,7 +62,7 @@
                                 <label for="product-unit-price">Unit price</label>
                             </div>
                             <div class="col s12 m6 l6">
-                                <input type="number" id="product-unit-price" class="form-control" name="unit_price" placeholder="Unit Price">
+                                <input type="text" id="product-unit-price" class="form-control bid-price-range-value" name="unit_price" placeholder="Unit Price">
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 <label for="product-total-price">Total price</label>
                             </div>
                             <div class="col s12 m6 l6">
-                                <input type="number" id="product-total-price" class="form-control" name="total_price" placeholder="Total Price">
+                                <input type="text" id="product-total-price" class="form-control bid-price-range-value" name="total_price" placeholder="Total Price">
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
 
 
             <div class="row rfq_img_upload_wrap">
-                <div class="input-field col s12"> 
+                <div class="input-field col s12">
                     <label for="product-upload">Media</label>
                 </div>
                 <div class="rfq_img_upload_box">
@@ -214,6 +214,17 @@
             $('.product-images').append(data);
         });
 
+    })
+    $(document).on('change', '.bid-price-range-value', function(){
+        var num = $(this).val();
+        if($.isNumeric(num) == true){
+            value = parseFloat(num).toFixed(2);
+        }
+        else{
+            num=0;
+            value = parseFloat(num).toFixed(2);
+        }
+        $(this).val(value);
     })
 </script>
 

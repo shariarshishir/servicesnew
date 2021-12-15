@@ -48,7 +48,7 @@
 								<li><a href="javascript:void(0);">Suppliers</a></li>
 								<li><a href="javascript:void(0);">Quick Query</a></li>
 								<li><a href="blog.html">Blogs/Insights</a></li>
-								<li><a href="javascript:void(0);">Policies</a></li>
+								<li><a href="{{route('front.policy')}}">Policies</a></li>
 								<li><a href="helps.html">Helps</a></li>
 							</ul>
 						</div>

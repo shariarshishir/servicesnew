@@ -9,14 +9,15 @@ use Intervention\Image\Facades\Image;
 use App\Models\RfqImage;
 use App\Events\NewRfqHasAddedEvent;
 use App\Models\BusinessProfile;
+use Illuminate\Pagination\Paginator;
 
 class RfqController extends Controller
 {
     public function index()
     {
-        $rfqLists=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+        $rfqList=Rfq::withCount('bids')->with('images','user')->latest()->get();
 
-        foreach($rfqLists as $list){
+        foreach($rfqList as $list){
             $bid_user_id=[];
             if($list->bids()->exists()){
                 foreach($list->bids as $user){
@@ -28,8 +29,19 @@ class RfqController extends Controller
 
         }
 
+        $page = Paginator::resolveCurrentPage() ?: 1;
+        $perPage = 6;
+        $rfqLists = new \Illuminate\Pagination\LengthAwarePaginator(
+            $rfqList->forPage($page, $perPage),
+            $rfqList->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
+
         return view('rfq.index',compact('rfqLists'));
     }
+
 
     public function store(Request $request)
     {
@@ -52,12 +64,12 @@ class RfqController extends Controller
 
         if ($request->hasFile('product_images')){
             foreach ($request->file('product_images') as $index=>$product_image){
-                
+
                 $extension = $product_image->getClientOriginalExtension();
                 if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'||$extension=='xlsx'){
-                   
+
                     $path=$product_image->store('images','public');
-                   
+
 
                 }
                 else{

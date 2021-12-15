@@ -46,7 +46,7 @@ $reviewsCount = count($productReviews);
                                     </li>
                                 @endforeach
                             @endif
-                        </ul>                        
+                        </ul>
                     </div>
                 @else
                     <div class="product-images">
@@ -86,7 +86,7 @@ $reviewsCount = count($productReviews);
                         <div class="row">
                             <div class="col s12 m6 l6 left-align">
                                 <div class="seller-store">
-                                    <a href="#"> {{$product->businessProfile->business_name}}</a>
+                                    <a href="{{route('supplier.profile', $product->businessProfile->id)}}">{{$product->businessProfile->business_name}}</a>
                                     {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}"><i class="material-icons dp48">store</i> {{ $product->vendor->vendor_name }}</a> --}}
                                 </div>
                             </div>
@@ -806,7 +806,12 @@ $reviewsCount = count($productReviews);
                     <div class="col s12 m4 l4">
                         <div class="single-product-store-information center-align">
                             <div class="right-align">
-                                <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a>
+                                {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
+                                @if(Auth::guard('web')->check())
+                                    <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{$product->category['name']}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
+                                @else
+                                    <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
+                                @endif
                             </div>
                             <div class="card card-with-padding">
                                 <h6>Company Profile</h6>
@@ -1307,6 +1312,99 @@ $reviewsCount = count($productReviews);
                     }
             });
         });
+
+
+        //message center
+        var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
+        var socket = io.connect(serverURL);
+        socket.on('connect', function(data) {
+        //alert('connect');
+        });
+        @if(Auth::check())
+        function sendmessage(productId,productTitle,productCategory,productImage,createdBy)
+        {
+        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MS-"+productId,'name': productTitle,'category': productCategory,'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
+        socket.emit('new message', message);
+        setTimeout(function(){
+            //window.location.href = "/message-center";
+            var url = '{{ route("message.center") }}?uid='+createdBy;
+                // url = url.replace(':slug', sku);
+                window.location.href = url;
+            // window.location.href = "/message-center?uid="+createdBy;
+        }, 1000);
+        }
+
+        function updateUserLastActivity(form_id, to_id)
+        {
+        var form_id = form_id;
+        var to_id = to_id;
+        var csrftoken = $("[name=_token]").val();
+
+        data_json = {
+            "form_id": form_id,
+            "to_id": to_id,
+            "csrftoken": csrftoken
+        }
+        var url= '{{route("message.center.update.user.last.activity")}}';
+        jQuery.ajax({
+            method: "POST",
+            url: url,
+            headers:{
+                "X-CSRF-TOKEN": csrftoken
+            },
+            data: data_json,
+            dataType:"json",
+
+            success: function(data){
+                console.log(data);
+            }
+        });
+
+        }
+
+        function contactSupplierFromProduct(supplierId)
+        {
+
+        var supplier_id = supplierId;
+        var csrftoken = $("[name=_token]").val();
+        var buyer_id = "{{Auth::id()}}";
+        data_json = {
+            "supplier_id": supplier_id,
+            "buyer_id": buyer_id,
+            "csrftoken": csrftoken
+        }
+        var url='{{route("message.center.contact.supplier.from.product")}}';
+        jQuery.ajax({
+            method: "POST",
+            url:url,
+            headers:{
+                "X-CSRF-TOKEN": csrftoken
+            },
+            data: data_json,
+            dataType:"json",
+            success: function(data){
+                console.log(data);
+            }
+        });
+
+        /*
+        let message = {'message': 'Hi I would like to discuss More about your Product', 'product': null, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplierId};
+        socket.emit('new message', message);
+        setTimeout(function(){
+            window.location.href = "/message-center?uid="+supplierId;
+        }, 1000);
+        */
+        }
+
+        function sendsamplemessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
+        {
+        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
+        socket.emit('new message', message);
+        setTimeout(function(){
+            window.location.href = "/message-center";
+        }, 1000);
+        }
+        @endif
 
     </script>
 @endpush

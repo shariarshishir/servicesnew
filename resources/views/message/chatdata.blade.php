@@ -55,12 +55,14 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col m12">
-                                        <div class="row prd-lt-con-list bbdis">
-                                            <div class="col m6 plr0">Unit Price</div>
-                                            <div class="col m6 pr0">: {{ $data['product']['price'] }}</div>
+                                    @if(array_key_exists('price', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list bbdis">
+                                                <div class="col m6 plr0">Unit Price</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['price'] }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                     @if(array_key_exists('destination', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
@@ -169,12 +171,14 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col m12">
-                                        <div class="row prd-lt-con-list bbdis">
-                                            <div class="col m6 plr0">Unit Price</div>
-                                            <div class="col m6 pr0">: {{ $data['product']['price'] }}</div>
+                                    @if(array_key_exists('price', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list bbdis">
+                                                <div class="col m6 plr0">Unit Price</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['price'] }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                     @if(array_key_exists('destination', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">

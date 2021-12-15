@@ -24,20 +24,6 @@
                 <div class="col-md-12">
                     <div class="card">
                         <legend>Business Profile</legend>
-                        <ul class="nav">
-                            <li class="nav-item">
-                            <a class="nav-link active" href="#company_overview">Company Overview</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#capacity-and-machineries">Link</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                            </li>
-                        </ul>
                         <div id="company_overview">
                             <form action="{{route('company.overview.varifie', $business_profile->companyOverview->id)}}" method="post">
                                 @csrf
@@ -59,10 +45,10 @@
                                                 </td>
                                                 <td class="{{$company_overview->name}}_status">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="status[{{$company_overview->name}}]" {{ $company_overview->status == true ? 'checked' : '' }} value="1">verified
+                                                        <input type="radio" name="status[{{$company_overview->name}}]" {{ $company_overview->status == true ? 'checked' : '' }} value=1>verified
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="status[{{$company_overview->name}}]" {{ $company_overview->status == false ? 'checked' : '' }} value="0">unverified
+                                                        <input type="radio" name="status[{{$company_overview->name}}]" {{ $company_overview->status == false ? 'checked' : '' }} value=0>unverified
                                                     </label>
                                                 </td>
                                             </tr>
@@ -73,13 +59,13 @@
                             </form>
                         </div>
 
-
+                        @if($business_profile->business_type == 1)
                         <div class="capacity-and-machineries">
                         <h5>Capacity and machineries</h5>
                             <form action="{{route('capacity.machineries.verify')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                <div clas="row production-capacity">
+                                <!-- <div clas="row production-capacity">
                                     <label>Production Capacity (Annual)</label>
                                     <br>
                                     <table class="table">
@@ -114,7 +100,7 @@
                                                 @endif
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> -->
 
                                 <div class="row categories-produced">
                                     <label>Categories Produced</label>
@@ -192,9 +178,6 @@
                             </form>
                         <div>
 
-
-
-
                         <div class="business-terms">
                             <form action="{{route('business.terms.verify')}}" method="post">
                                 @csrf
@@ -238,7 +221,6 @@
                             </form>
                         <div>
 
-
                         <div class="samplings">
                             <form action="{{route('samplings.verify')}}" method="post">
                                 @csrf
@@ -281,10 +263,6 @@
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
                         <div>
-
-
-                     
-
 
                         <div class="special-customizations">
                             <form action="{{route('special.customizations.verify')}}" method="post">
@@ -448,119 +426,116 @@
                             </form>
                         </div>
 
-
-
-
-                            <div class="worker-welfare-and-csr">
-                                <h3>Worker welfare and CSR</h3>
-                                @if($business_profile->walfare)
-                                <div class="row">
-                                    <form  method="POST" action="{{route('worker.walfare.verify')}}" >
-                                        @csrf
-                                        <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                        @foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
-                                        @if($walfareAndCsr->name == 'healthcare_facility')
-                                        <div class="row">
-                                            <span class="">Healthcare Facility</span>
-                                            <input  name="healthcare_facility"   type="hidden" value="{{$walfareAndCsr->checked}}">
-                                        
-                                            <label class="">
-                                                <input class="" name="healthcare_facility_status"  class="health-facility-verified"  type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
-                                                <span>Verify</span>
-                                            </label>
-                                            <label class="">
-                                                <input class="" name="healthcare_facility_status" class="health-facility-unverified"    value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
-                                                <span>Unverify</span>
-                                            </label>
-                                        </div>
-                                        @endif
-                                        @if($walfareAndCsr->name == 'doctor')
-                                        <div class="row">
-                                            <span class="">On sight Doctor</span>
-                                            <input  name="doctor"   type="hidden" value="{{$walfareAndCsr->checked}}">
-                                            <label class="">
-                                                <input  name="doctor_status"  class="doctor-verified"  type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
-                                                <span>Yes</span>
-                                            </label>
-                                            <label class="">
-                                                <input  name="doctor_status" class="doctor-verified"  value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
-                                                <span>No</span>
-                                            </label>
-                                        </div>
-                                        @endif
-                                        @if($walfareAndCsr->name == 'day_care')
-                                        <div class="row">
-                                            <span class=" ">On sight Day Care</span>
-                                            <input  name="day_care"   type="hidden" value="{{$walfareAndCsr->checked}}">
-
-                                            <label class="">
-                                                <input  name="day_care_status" class="day-care-verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
-                                                <span>Yes</span>
-                                            </label>
-                                            <label class="">
-                                                <input  name="day_care_status" class="day-care-verified" value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
-                                                <span>No</span>
-                                            </label>
-                                        </div>
-                                        @endif
-                                        @if($walfareAndCsr->name == 'playground')
-                                        <div class="row">
-                                            <span class="">Playground</span>
-                                            <input  name="playground"   type="hidden" value="{{$walfareAndCsr->checked}}">
-
-                                            <label class="">
-                                                <input  name="playground_status" class="playground-verified"   type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
-                                                <span>Yes</span>
-                                            </label>
-                                            <label class="">
-                                                <input  name="playground_status"  class="playground-verified"  value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
-                                                <span>No</span>
-                                            </label>
-                                        </div>
-                                        @endif
-                                        @if($walfareAndCsr->name == 'maternity_leave')
-                                        <div class="row">
-                                            <span class="">Maternity Leave</span>
-                                            <input  name="maternity_leave"   type="hidden" value="{{$walfareAndCsr->checked}}">
-
-                                            <label class="">
-                                                <input name="maternity_leave_status" class="maternity-leave--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} > 
-                                                <span>Yes</span>
-                                            </label>
-                                            <label ">
-                                                <input  name="maternity_leave_status" class="maternity-leave--verified" type="radio" value="0" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
-                                                <span>No</span>
-                                            </label>
-                                        </div>
-                                        @endif
-                                        @if($walfareAndCsr->name == 'social_work')
-                                        <div class="row">
-                                            <span class="">Social work</span>
-                                            <input  name="social_work"   type="hidden" value="{{$walfareAndCsr->checked}}">
-
-                                            <label class="">
-                                                <input class="" name="social_work_status"  class="social-work--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
-                                                <span>Yes</span>
-                                            </label>
-                                            <label class="">
-                                                <input  name="social_work_status"  class="social-work--verified" type="radio" value="0" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }} >
-                                                <span>No</span>
-                                            </label>
-                                        </div>
-                                        @endif
-                                        @endforeach
-                                        <button class="btn btn-success" type="submit">Submit
-                                        </button>
-                                    </form>
-                                </div>
-                                @else
-                                    <div class="">
-                                        <p>INFO : No data found.</p>
+                        <div class="worker-welfare-and-csr" style="display: none;">
+                            <h3>Worker welfare and CSR</h3>
+                            @if($business_profile->walfare)
+                            <div class="row">
+                                <form  method="POST" action="{{route('worker.walfare.verify')}}" >
+                                    @csrf
+                                    <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
+                                    @foreach(json_decode($business_profile->walfare->walfare_and_csr) as $walfareAndCsr)
+                                    @if($walfareAndCsr->name == 'healthcare_facility')
+                                    <div class="row">
+                                        <span class="">Healthcare Facility</span>
+                                        <input  name="healthcare_facility"   type="hidden" value="{{$walfareAndCsr->checked}}">
+                                    
+                                        <label class="">
+                                            <input class="" name="healthcare_facility_status"  class="health-facility-verified"  type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
+                                            <span>Verify</span>
+                                        </label>
+                                        <label class="">
+                                            <input class="" name="healthcare_facility_status" class="health-facility-unverified"    value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                            <span>Unverify</span>
+                                        </label>
                                     </div>
-                                @endif
+                                    @endif
+                                    @if($walfareAndCsr->name == 'doctor')
+                                    <div class="row">
+                                        <span class="">On sight Doctor</span>
+                                        <input  name="doctor"   type="hidden" value="{{$walfareAndCsr->checked}}">
+                                        <label class="">
+                                            <input  name="doctor_status"  class="doctor-verified"  type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
+                                            <span>Yes</span>
+                                        </label>
+                                        <label class="">
+                                            <input  name="doctor_status" class="doctor-verified"  value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                            <span>No</span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                    @if($walfareAndCsr->name == 'day_care')
+                                    <div class="row">
+                                        <span class=" ">On sight Day Care</span>
+                                        <input  name="day_care"   type="hidden" value="{{$walfareAndCsr->checked}}">
+
+                                        <label class="">
+                                            <input  name="day_care_status" class="day-care-verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
+                                            <span>Yes</span>
+                                        </label>
+                                        <label class="">
+                                            <input  name="day_care_status" class="day-care-verified" value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                            <span>No</span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                    @if($walfareAndCsr->name == 'playground')
+                                    <div class="row">
+                                        <span class="">Playground</span>
+                                        <input  name="playground"   type="hidden" value="{{$walfareAndCsr->checked}}">
+
+                                        <label class="">
+                                            <input  name="playground_status" class="playground-verified"   type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
+                                            <span>Yes</span>
+                                        </label>
+                                        <label class="">
+                                            <input  name="playground_status"  class="playground-verified"  value="0" type="radio" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                            <span>No</span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                    @if($walfareAndCsr->name == 'maternity_leave')
+                                    <div class="row">
+                                        <span class="">Maternity Leave</span>
+                                        <input  name="maternity_leave"   type="hidden" value="{{$walfareAndCsr->checked}}">
+
+                                        <label class="">
+                                            <input name="maternity_leave_status" class="maternity-leave--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} > 
+                                            <span>Yes</span>
+                                        </label>
+                                        <label ">
+                                            <input  name="maternity_leave_status" class="maternity-leave--verified" type="radio" value="0" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }}>
+                                            <span>No</span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                    @if($walfareAndCsr->name == 'social_work')
+                                    <div class="row">
+                                        <span class="">Social work</span>
+                                        <input  name="social_work"   type="hidden" value="{{$walfareAndCsr->checked}}">
+
+                                        <label class="">
+                                            <input class="" name="social_work_status"  class="social-work--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
+                                            <span>Yes</span>
+                                        </label>
+                                        <label class="">
+                                            <input  name="social_work_status"  class="social-work--verified" type="radio" value="0" {{  ($walfareAndCsr->status == "0" ? ' checked' : '') }} >
+                                            <span>No</span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                    <button class="btn btn-success" type="submit">Submit
+                                    </button>
+                                </form>
                             </div>
+                            @else
+                                <div class="">
+                                    <p>INFO : No data found.</p>
+                                </div>
+                            @endif
+                        </div>
           
-                        <div class="worker-security-and-others">
+                        <div class="worker-security-and-others" style="display: none;">
                             <h3>Worker Security and others</h3>
                                 @if(isset($business_profile->security))
 
@@ -643,8 +618,13 @@
                                 @endif
                             
                         </div>
+                        @endif
 
-
+                        @if($business_profile->is_business_profile_verified == 0 || $business_profile->is_business_profile_verified == NULL)
+                        <a href="javascript:void(0)" class="btn btn-primary verification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-verified="1">Click to verify this profile</a>
+                        @else
+                        <a href="javascript:void(0)" class="btn btn-danger unverification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-verified="0">Click to unverify this profile</a>
+                        @endif
 
 
                         
@@ -657,3 +637,54 @@
 
 @endsection
 
+@push('js')
+<script>
+    $(document).ready(function(){
+        $('.verification_trigger_from_backend').on('click',function(){
+            //e.preventDefault();
+            var url = '{{ route("business.profile.verify") }}';
+            var verifyVal = $(this).attr("data-verified");
+            var profileId = $(this).attr("data-businessprofileid");
+            $.ajax({
+                method: 'get',
+                data: {verifyVal:verifyVal, profileId:profileId},
+                url: url,
+                beforeSend: function() {
+                    //$('.loading-message').html("Please Wait.");
+                    //$('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                {
+                    if(data.status==1){
+                        $(".verification_trigger_from_backend").hide();
+                        $(".unverification_trigger_from_backend").show();
+                    }
+                }
+            });
+        });
+
+        $('.unverification_trigger_from_backend').on('click',function(){
+            //e.preventDefault();
+            var url = '{{ route("business.profile.verify") }}';
+            var verifyVal = $(this).attr("data-verified");
+            var profileId = $(this).attr("data-businessprofileid");
+            $.ajax({
+                method: 'get',
+                data: {verifyVal:verifyVal, profileId:profileId},
+                url: url,
+                beforeSend: function() {
+                    //$('.loading-message').html("Please Wait.");
+                    //$('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                {
+                    if(data.status==1){
+                        $(".verification_trigger_from_backend").show();
+                        $(".unverification_trigger_from_backend").hide();
+                    }
+                }
+            });
+        });        
+    });
+</script>
+@endpush

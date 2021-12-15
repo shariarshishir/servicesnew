@@ -8,9 +8,11 @@
 	<div class="banner_overlay">
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
+		@if($business_profile->is_business_profile_verified == 1)
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
 		</div>
+		@endif
 	</div>
 </section>
 <!-- Profile section end -->
@@ -33,7 +35,7 @@
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 					</div>
-					@if($flag==0)
+					@if($flag==1)
 						<div class="center-align">
 							@if(Auth::guard('web')->check())
 								<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>

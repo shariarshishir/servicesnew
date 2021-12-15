@@ -1037,7 +1037,6 @@ form input:read-only {
     padding: 18px 28px 18px 35px;
     font-size: 18px;
     line-height: 30px;
-    display: none;
 }
 .profile_bannerwrap .leftText {
     text-decoration: underline;

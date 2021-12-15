@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\BusinessTerm;
+use App\Models\BusinessProfileVerification;
 
 
 class BusinessTermController extends Controller
@@ -44,6 +45,10 @@ class BusinessTermController extends Controller
             }
 
             $businessTerms = BusinessTerm::where('business_profile_id',$request->business_profile_id)->get();
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            $businessProfileVerification->business_terms = 0 ;
+            $businessProfileVerification->save();
             return response()->json([
                 'success' => true,
                 'message' => 'Business term information Updated',

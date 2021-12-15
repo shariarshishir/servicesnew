@@ -542,20 +542,28 @@ class HomeController extends Controller
             $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
-            $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
-            if($businessVerification){
-                if( ($businessVerification->company_overview == 1) &&  ($businessVerification->capacity_and_machineries == 1) &&  ($businessVerification->business_terms == 1) &&  ($businessVerification->sampling == 1) &&  ($businessVerification->special_customizations == 1) &&  ($businessVerification->sustainability_commitments == 1) &&  ($businessVerification->production_capacity == 1) ){
-                    $flag = 0;
-                }
-                else{
-                    $flag = 1;
+            // $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
+            // if($businessVerification){
+            //     if( ($businessVerification->company_overview == 1) &&  ($businessVerification->capacity_and_machineries == 1) &&  ($businessVerification->business_terms == 1) &&  ($businessVerification->sampling == 1) &&  ($businessVerification->special_customizations == 1) &&  ($businessVerification->sustainability_commitments == 1) &&  ($businessVerification->production_capacity == 1) ){
+            //         $flag = 0;
+            //     }
+            //     else{
+            //         $flag = 1;
     
-                }
+            //     }
+            // }
+            // else{
+            //     $flag = 1;
+
+            // }
+            if( $business_profile->is_business_profile_verified == 1){
+                $flag = 0;
             }
             else{
                 $flag = 1;
 
             }
+
            
 
             return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour','userObj','flag'));
@@ -568,17 +576,24 @@ class HomeController extends Controller
             $mainProducts=Product::with('images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
-            $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
-            if($businessVerification){
-                if( $businessVerification->company_overview == 1 ){
-                    $flag=0;
-                }
-                else{
-                    $flag=1;
-                }
+            // $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
+            // if($businessVerification){
+            //     if( $businessVerification->company_overview == 1 ){
+            //         $flag=0;
+            //     }
+            //     else{
+            //         $flag=1;
+            //     }
+            // }
+            // else{
+            //     $flag=1;
+            // }
+            if( $business_profile->is_business_profile_verified == 1){
+                $flag = 0;
             }
             else{
-                $flag=1;
+                $flag = 1;
+
             }
             return view('wholesaler_profile_view_by_user.index',compact('business_profile','mainProducts','userObj','flag'));
         }

@@ -23,35 +23,53 @@
         <div class="container">
             <div class="row ic-pg-container">
                 <div class="col s12 m3 l3 product_preview_wrap">
-                    @if($product->product_video)
-                        <div>
-                            <center>
-                                <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video>
-                            </center>
-                        </div>
-                     @endif
-                    <div class="simpleLens-gallery-container" id="ic-gallery">
-                        @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
-                            <div class="simpleLens-container">
-                                <div class="simpleLens-big-image-container">
-                                    <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
-                                        <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
-                                    </a>
-                                </div>
-                            </div>
-                        @endif
-                        <div class="simpleLens-thumbnails-container">
-                            @foreach($product->product_images as $product_image)
-                                <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
-                                    data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
-                                    data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
-                                    <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
-                                </a>
-                            @endforeach
 
-                            @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
+                    @if($product->video)
+                        <div class="simpleLens-gallery-container" id="ic-gallery">
+                            <div class="video_content">
+                                <center>
+                                    <video controls height="245" width="300">
+                                        <source src="{{asset('storage/'.$product->product_video->video)}}" />
+                                    </video>
+                                </center>
+                            </div>
+                            <div class="simpleLens-thumbnails-container">
+                                @foreach($product->product_images as $product_image)
+                                    <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
+                                        data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
+                                        data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
+                                        <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                    </a>
+                                @endforeach
+
+                                @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
+                            </div>                      
                         </div>
-                    </div>
+                    @else
+                        <div class="simpleLens-gallery-container" id="ic-gallery">
+                            @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
+                                <div class="simpleLens-container">
+                                    <div class="simpleLens-big-image-container">
+                                        <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
+                                            <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="simpleLens-thumbnails-container">
+                                @foreach($product->product_images as $product_image)
+                                    <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
+                                        data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
+                                        data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
+                                        <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                    </a>
+                                @endforeach
+
+                                @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
+                            </div>
+                        </div>                        
+                    @endif
+
                 </div>
                 <div class="col s12 m9 l9 product_preview_info_wrap">
                     <div class="row">

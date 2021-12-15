@@ -79,18 +79,18 @@ class CompanyFactoryTourController extends Controller
 
     public function updateFactoryTour(Request $request){
        
-        // $validator = Validator::make($request->all(), [
-        //     'virtual_tour.*' => 'string|min:1|max:255',
-        //     'factory_images.*' => 'image',
-        //     'factory_large_images.*' => 'image',
-        // ]);
-        // if ($validator->fails())
-        // {
-        //     return response()->json(array(
-        //     'success' => false,
-        //     'error' => $validator->getMessageBag()),
-        //     400);
-        // }
+        $validator = Validator::make($request->all(), [
+            'virtual_tour.*' => 'string|min:1|max:255',
+            'factory_images.*' => 'image',
+            'factory_large_images.*' => 'image',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
         try{
         
                 $companyFactoryTour = CompanyFactoryTour::where('id',$request->company_factory_tour_id)->first();

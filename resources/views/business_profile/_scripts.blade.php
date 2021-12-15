@@ -2403,7 +2403,7 @@
 
       success:function(response){
         $('.loading-message').html("");
-		$('#loadingProgressContainer').hide();
+        $('#loadingProgressContainer').hide();
         $('#factory-tour-edit-form')[0].reset();
         var factoryTours=response.factoryTours;
         console.log(factoryTours);
@@ -2418,7 +2418,7 @@
                 $('#factory-tour-edit-form-errors').empty();
                 $("#factory-tour-edit-form-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
-                {
+                {  
                     $("#factory-tour-edit-form-errors").append("<div class='danger'>"+item+"</div>");
                 });
             }

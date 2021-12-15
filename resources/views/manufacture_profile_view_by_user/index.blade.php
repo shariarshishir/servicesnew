@@ -33,15 +33,16 @@
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 					</div>
-					<div class="center-align">
-                        @if(Auth::guard('web')->check())
-                            <a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
-                        @else
-                            <a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
-                        @endif
-					</div>
 					@if($flag==0)
-					<div class="addressBox">
+						<div class="center-align">
+							@if(Auth::guard('web')->check())
+								<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
+							@else
+								<a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
+							@endif
+						</div>
+				
+						<div class="addressBox">
 							<span>Head Office </span><br/>
 							@if($business_profile->companyOverview->address)
 							<p>{{$business_profile->companyOverview->address}}</p>

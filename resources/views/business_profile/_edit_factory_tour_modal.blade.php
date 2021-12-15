@@ -25,7 +25,7 @@
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourImages)>0 )
                         @foreach($companyFactoryTour->companyFactoryTourImages as $image)
-                        <div class="col-md-12 mb-2 factory-image-block">
+                        <div class="col-md-12 mb-2 uploaded-factory-image-block">
                             <a href="javascript:void(0)"  data-imageId="{{$image->id}}" class="delete-factory-image" ><i class="material-icons dp48">remove_circle_outline</i></a>
                             <img id="previous-uploaded-factory-image" src="{{asset('storage/'.$image->factory_image)}}" alt="preview image" style="max-height: 80px;min-height:80px">
                         </div>
@@ -62,7 +62,7 @@
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourLargeImages)>0 )
                             @foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
-                                <div class="col-md-12 mb-2 factory-large-image-block">
+                                <div class="col-md-12 mb-2 uploaded-factory-large-image-block">
                                     <a href="javascript:void(0)"  data-largeImageId="{{$image->id}}" class="delete-factory-large-image" ><i class="material-icons dp48">remove_circle_outline</i></a>
                                     <img id="previous-uploaded-factory-image" src="{{asset('storage/'.$image->factory_large_image)}}" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>

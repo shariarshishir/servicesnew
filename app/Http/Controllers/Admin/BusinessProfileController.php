@@ -13,8 +13,10 @@ use App\Models\Sampling;
 use App\Models\SpecialCustomization;
 use App\Models\SustainabilityCommitment;
 use App\Models\ProductionFlowAndManpower;
+use App\Models\BusinessProfileVerification;
 use App\Models\Walfare;
 use App\Models\Security;
+use App\Models\BusinessProfile;
 use stdClass;
 class BusinessProfileController extends Controller
 {
@@ -27,6 +29,48 @@ class BusinessProfileController extends Controller
             array_push($data,['name' => $key, 'value' => $value, 'status' => $request->status[$key]]);
         }
         $company_overview->update(['data' => $data]);
+
+        $flag=0;
+        foreach ($company_overview->data as $data){
+            if($data['status']==1){
+                $flag=1;
+            }
+            else{
+                $flag=0;
+                break;
+            }
+        }
+        if($flag==1){
+
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
+            if( $businessProfileVerification )
+            {
+                $businessProfileVerification->company_overview = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
+                $businessProfileVerification->company_overview = 1;
+                $businessProfileVerification->save();
+            }
+
+        }
+        else{
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
+            if( $businessProfileVerification )
+            {
+                $businessProfileVerification->company_overview = 0;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
+                $businessProfileVerification->company_overview = 0;
+                $businessProfileVerification->save();
+            }
+        }
+        
         return redirect()->back()->with('success', 'company overview updated');
     }
     public function capacityAndMachineriesInformationVerify(Request $request)
@@ -34,20 +78,21 @@ class BusinessProfileController extends Controller
         
         $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->delete();
         $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->delete();
-        $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->delete();
-        if(isset($request->machine_type)){
-            $noOfMachineType=count($request->machine_type);
-            if($noOfMachineType>0){
-                for($i=0;$i<$noOfMachineType ;$i++){
-                    $productionCapacity  =  new ProductionCapacity();
-                    $productionCapacity->machine_type = $request->machine_type[$i];
-                    $productionCapacity->annual_capacity = $request->annual_capacity[$i];
-                    $productionCapacity->business_profile_id = $request->business_profile_id;
-                    $productionCapacity->status = $request->production_capacity_status[$i];
-                    $productionCapacity->save();
-                }
-            }
-        }
+        // $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->delete();
+        // if(isset($request->machine_type)){
+        //     $noOfMachineType=count($request->machine_type);
+        //     if($noOfMachineType>0){
+        //         for($i=0;$i<$noOfMachineType ;$i++){
+        //             $productionCapacity  =  new ProductionCapacity();
+        //             $productionCapacity->machine_type = $request->machine_type[$i];
+        //             $productionCapacity->annual_capacity = $request->annual_capacity[$i];
+        //             $productionCapacity->business_profile_id = $request->business_profile_id;
+        //             $productionCapacity->status = $request->production_capacity_status[$i];
+        //             $productionCapacity->save();
+        //         }
+        //     }
+        // }
+       
 
 
         if(isset($request->type)){
@@ -64,7 +109,7 @@ class BusinessProfileController extends Controller
             }
 
         }
-
+        
         if(isset($request->machine_name)){
             $noOfMachineName=count($request->machine_name);
             if($noOfMachineName>0){
@@ -80,10 +125,74 @@ class BusinessProfileController extends Controller
 
             }
         }
-
+        
         $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
         $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
-        $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
+        // $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
+        $machineriesDetailsVerified = 0;
+      
+        foreach($machineriesDetails as $machineriesDetail){
+            if($machineriesDetail->status == 1){
+                $machineriesDetailsVerified = 1;
+            }
+            else{
+                $machineriesDetailsVerified = 0;
+                break;
+            }
+
+        }
+        
+       
+        $categoriesProducedsVerified = 0;
+        foreach($categoriesProduceds as $categoriesProduceds){
+            if($categoriesProduceds->status == 1){
+                $categoriesProducedsVerified = 1;
+            }
+            else{
+                $categoriesProducedsVerified = 0;
+                break;
+            }
+
+        }
+       
+        // $productionCapacitiesVerified = 0;
+        // foreach($productionCapacities as $productionCapacity){
+        //     if($productionCapacity->status == 1){
+        //         $productionCapacitiesVerified=1;
+        //     }
+        //     else{
+        //         $productionCapacitiesVerified = 0;
+
+        //     }
+
+        // }
+        if( ($machineriesDetailsVerified == 1) && ( $categoriesProducedsVerified == 1)){
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->capacity_and_machineries = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->capacity_and_machineries = 1;
+                $businessProfileVerification->save();
+            }
+        }
+        else{
+                $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+                if( $businessProfileVerification ){
+                    $businessProfileVerification->capacity_and_machineries = 0;
+                    $businessProfileVerification->save();
+                }
+                else{
+                    $businessProfileVerification =new BusinessProfileVerification();
+                    $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                    $businessProfileVerification->capacity_and_machineries = 0;
+                    $businessProfileVerification->save();
+                }
+
+            }
         return redirect()->back()->with('success', 'capacity and machineries information  updated');
     }
 
@@ -107,6 +216,45 @@ class BusinessProfileController extends Controller
         }
 
         $businessTerms = BusinessTerm::where('business_profile_id',$request->business_profile_id)->get();
+
+        $flag = 0;
+        foreach($businessTerms as $businessTerm){
+            if($businessTerm->status == 1){
+                $flag = 1;
+
+            }
+            else{
+                $flag = 0;
+                break;
+            }
+        }
+       
+        if($flag==1){
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->business_terms = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->business_terms = 1;
+                $businessProfileVerification->save();
+            }
+        }
+        else{
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->business_terms = 0;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->business_terms = 0;
+                $businessProfileVerification->save();
+            }
+        }
         return redirect()->back()->with('success', 'BusinessTerm information  updated');
     }
 
@@ -124,6 +272,45 @@ class BusinessProfileController extends Controller
                     $sampling->business_profile_id = $request->business_profile_id;
                     $sampling->status = $request->sampling_status[$i];
                     $sampling->save();
+                }
+            }
+            $samplings = Sampling::where('business_profile_id',$request->business_profile_id)->get();
+            $flag = 0;
+            foreach($samplings as $sampling){
+                if($sampling->status == 1){
+                    $flag = 1;
+
+                }
+                else{
+                    $flag = 0;
+                    break;
+                }
+            }
+            if($flag==1){
+                $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+                if( $businessProfileVerification ){
+                    $businessProfileVerification->sampling = 1;
+                    $businessProfileVerification->save();
+                }
+                else{
+                    $businessProfileVerification =new BusinessProfileVerification();
+                    $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                    $businessProfileVerification->sampling = 1;
+                    $businessProfileVerification->save();
+                }
+
+            }
+            else{
+                $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+                if( $businessProfileVerification ){
+                    $businessProfileVerification->sampling = 0;
+                    $businessProfileVerification->save();
+                }
+                else{
+                    $businessProfileVerification =new BusinessProfileVerification();
+                    $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                    $businessProfileVerification->sampling = 0;
+                    $businessProfileVerification->save();
                 }
             }
         }
@@ -150,7 +337,44 @@ class BusinessProfileController extends Controller
             }
         }
         $specialCustomizations = SpecialCustomization::where('business_profile_id',$request->business_profile_id)->get();
+        $flag = 0;
+        foreach($specialCustomizations as $specialCustomization){
+            if($specialCustomization->status == 1){
+                $flag = 1;
 
+            }
+            else{
+                $flag = 0;
+                break;
+            }
+        }
+        if($flag==1){
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->special_customizations = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->special_customizations = 1;
+                $businessProfileVerification->save();
+            }
+
+        }
+        else{
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->special_customizations = 0;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->special_customizations = 0;
+                $businessProfileVerification->save();
+            }
+        }
         return redirect()->back()->with('success', 'Special Customization information  updated');
     }
 
@@ -172,6 +396,47 @@ class BusinessProfileController extends Controller
         }
 
         $sustainabilityCommitments = SustainabilityCommitment::where('business_profile_id',$request->business_profile_id)->get();
+       
+        $flag = 0;
+        foreach($sustainabilityCommitments as $sustainabilityCommitment){
+            if($sustainabilityCommitment->status == 1){
+                $flag  = 1;
+
+            }
+            else{
+                $flag = 0;
+                break;
+            }
+        }
+        
+
+        if($flag == 1){
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->sustainability_commitments = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->sustainability_commitments = 1;
+                $businessProfileVerification->save();
+            }
+
+        }
+        else{
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->sustainability_commitments = 0;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->sustainability_commitments = 0;
+                $businessProfileVerification->save();
+            }
+        }
         return redirect()->back()->with('success', 'Special Customization information  updated');
     }
 
@@ -240,7 +505,49 @@ class BusinessProfileController extends Controller
                     $productionFlowAndManpower->save();
                 }
 
-
+                //set verification status
+                $productionFlowAndManpowers = ProductionFlowAndManpower::where('business_profile_id',$request->business_profile_id)->get();
+                $flag = 0 ;
+                foreach($productionFlowAndManpowers as $productionFlowAndManpower){
+                   
+                    foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flow_and_manpower){
+                      
+                        if($flow_and_manpower->status == "1"){
+                            $flag = 1;
+                        }
+                        else{
+                            $flag = 0;
+                            break;
+                        }
+                    }
+                }
+               
+                if($flag==1){
+                    $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+                    if( $businessProfileVerification ){
+                        $businessProfileVerification->production_capacity = 1;
+                        $businessProfileVerification->save();
+                    }
+                    else{
+                        $businessProfileVerification =new BusinessProfileVerification();
+                        $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                        $businessProfileVerification->production_capacity = 1;
+                        $businessProfileVerification->save();
+                    }
+                }
+                else{
+                    $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+                    if( $businessProfileVerification ){
+                        $businessProfileVerification->production_capacity = 0;
+                        $businessProfileVerification->save();
+                    }
+                    else{
+                        $businessProfileVerification =new BusinessProfileVerification();
+                        $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                        $businessProfileVerification->production_capacity = 0;
+                        $businessProfileVerification->save();
+                    }
+                }
 
             }
         }
@@ -329,4 +636,14 @@ class BusinessProfileController extends Controller
         $security = Security::where('business_profile_id',$request->business_profile_id)->first();
         return redirect()->back()->with('success', 'Worker walfare information  updated');
     } 
+
+    public function verifyBusinessProfile(Request $request) {
+        //dd($request->verifyVal);
+
+        $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
+        $businessProfile->is_business_profile_verified = $request->verifyVal;
+        $businessProfile->save();
+
+        return response()->json(["status"=>1, "message"=>"verified successfully"]);
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\CategoriesProduced;
 use App\Models\MachineriesDetail;
 use App\Models\CompanyFactoryTour;
 use App\Models\ProductionCapacity;
+use App\Models\BusinessProfileVerification;
 use App\Models\Manufacture\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -199,7 +200,8 @@ class BusinessProfileController extends Controller
     public function companyOverviewUpdate(Request $request, $id)
     {
         try{
-            $company_overview= CompanyOverview::findOrFail($id);
+            $company_overview = CompanyOverview::findOrFail($id);
+            
             $data=[];
             $count=0;
             foreach($request->name as $key => $value){
@@ -217,6 +219,11 @@ class BusinessProfileController extends Controller
             }
 
             $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            $businessProfileVerification->company_overview = 0 ;
+            $businessProfileVerification->save();
+
             return response()->json([
                 'success' => false,
                 'msg'     => 'Company Overview Updated',
@@ -315,6 +322,10 @@ class BusinessProfileController extends Controller
             $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
             $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
             $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
+
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            $businessProfileVerification->capacity_and_machineries = 0 ;
+            $businessProfileVerification->save();
 
             return response()->json([
                 'success' => true,

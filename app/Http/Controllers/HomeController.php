@@ -16,6 +16,7 @@ use App\Models\CompanyFactoryTour;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
+use App\Models\BusinessProfileVerification;
 use Helper;
 use DB;
 use Illuminate\Support\Facades\Http;
@@ -502,7 +503,7 @@ class HomeController extends Controller
                 $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
             }
         })
-        ->paginate(12);
+        ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile
@@ -510,28 +511,28 @@ class HomeController extends Controller
     {
         $business_profile=BusinessProfile::findOrFail($id);
         //manufacture
-        $flag=0;
-        if( $business_profile->companyOverview->about_company == null){
-            $flag=1;
-        }
-        elseif( $business_profile->companyOverview->address == null ){
-            $flag=1;
-        }
-        elseif($business_profile->companyOverview->factory_address  == null ){
-            $flag=1;
-        }
-        else{
-            foreach (json_decode($business_profile->companyOverview->data) as $company_overview){
-                if($company_overview->value == null)
-                {
-                    $flag=1;
-                    break;
+        // $flag=0;
+        // if( $business_profile->companyOverview->about_company == null){
+        //     $flag=1;
+        // }
+        // elseif( $business_profile->companyOverview->address == null ){
+        //     $flag=1;
+        // }
+        // elseif($business_profile->companyOverview->factory_address  == null ){
+        //     $flag=1;
+        // }
+        // else{
+        //     foreach (json_decode($business_profile->companyOverview->data) as $company_overview){
+        //         if($company_overview->value == null)
+        //         {
+        //             $flag=1;
+        //             break;
     
-                }
+        //         }
               
-            }
+        //     }
 
-        }
+        // }
         if($business_profile->business_type == 1 )
         {
 
@@ -541,6 +542,22 @@ class HomeController extends Controller
             $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
+            $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
+            if($businessVerification){
+                if( ($businessVerification->company_overview == 1) &&  ($businessVerification->capacity_and_machineries == 1) &&  ($businessVerification->business_terms == 1) &&  ($businessVerification->sampling == 1) &&  ($businessVerification->special_customizations == 1) &&  ($businessVerification->sustainability_commitments == 1) &&  ($businessVerification->production_capacity == 1) ){
+                    $flag = 0;
+                }
+                else{
+                    $flag = 1;
+    
+                }
+            }
+            else{
+                $flag = 1;
+
+            }
+           
+
             return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour','userObj','flag'));
         }
         //wholesaler
@@ -551,6 +568,18 @@ class HomeController extends Controller
             $mainProducts=Product::with('images')->where('business_profile_id',$id)->inRandomOrder()
             ->limit(4)
             ->get();
+            $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
+            if($businessVerification){
+                if( $businessVerification->company_overview == 1 ){
+                    $flag=0;
+                }
+                else{
+                    $flag=1;
+                }
+            }
+            else{
+                $flag=1;
+            }
             return view('wholesaler_profile_view_by_user.index',compact('business_profile','mainProducts','userObj','flag'));
         }
     }

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Manufacture\ProductImage;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use App\Models\BusinessProfile;
+use App\Models\Manufacture\ProductVideo;
 
 class ProductController extends Controller
 {
@@ -31,6 +33,9 @@ class ProductController extends Controller
             'product_specification'=>'required',
             'lead_time'=>'required',
             'industry' => 'required',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+
+
         ]);
 
         if ($validator->fails())
@@ -81,6 +86,22 @@ class ProductController extends Controller
                     ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
                 }
             }
+
+            //upload video
+
+            if($request->hasFile('video')){
+                $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+                $business_profile_name=$business_profile->business_name;
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
+
+            }
+
+
             DB::commit();
             $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
             $data=view('business_profile._product_table_data', compact('products'))->render();
@@ -106,7 +127,7 @@ class ProductController extends Controller
 //get business type by industy type
 public function edit($product_id)
 {
-    $product=Product::where('id', $product_id)->with('product_images')->first();
+    $product=Product::where('id', $product_id)->with('product_images','product_video')->first();
     if(!$product){
         return response()->json([
             'success' => false,
@@ -132,7 +153,7 @@ public function update(Request $request, $product_id)
         'product_details'=>'required',
         'product_specification'=>'required',
         'lead_time'=>'required',
-        
+        'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
     ]);
 
     if ($validator->fails())
@@ -175,6 +196,31 @@ public function update(Request $request, $product_id)
                 ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
             }
         }
+        //video
+        if(isset($request->remove_video_id)){
+            if( count(json_decode($request->remove_video_id)) > 0 )
+            {
+             $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+             if($productVideo){
+
+                      if(Storage::exists($productVideo->video)){
+                          Storage::delete($productVideo->video);
+                      }
+                      $productVideo->delete();
+              }
+            }
+         }
+
+         if($request->hasFile('video')){
+            $business_profile=BusinessProfile::where('id', $product->businessProfile->id)->first();
+            $business_profile_name=$business_profile->business_name;
+            $folder='video/'.$business_profile_name;
+            $filename = $request->video->store($folder,'public');
+            $product_video = ProductVideo::create([
+                'product_id' => $product->id,
+                'video' => $filename,
+            ]);
+         }
         $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
         $data=view('business_profile._product_table_data', compact('products'))->render();
         return response()->json([

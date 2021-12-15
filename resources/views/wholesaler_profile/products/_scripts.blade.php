@@ -236,6 +236,19 @@
                         $('#edit_category_id').trigger('change');
                         $('.product_unit').val(data.product.product_unit);
                         $('.product_unit').trigger('change');
+                        // video
+                        $('#product-edit-modal-block input[name=remove_video_id]').val('');
+                        $('#product-edit-modal-block .edit-video-upload-block').show();
+                        $('#product-edit-modal-block .edit-video-show-block').html('');
+                        if(data.product.video){
+                                $('#product-edit-modal-block .edit-video-upload-block').hide();
+                                var asset='{{asset("storage")}}'+'/'+data.product.video.video;
+                                var html='<video controls autoplay width="320" height="240">';
+                                    html+='<source src="'+asset+'" />';
+                                    html+='</video>';
+                                    html+='<p  onclick="wholesalerRemoveEditVideoEl(this);" data-id="'+data.product.video.id+'">remove</p>';
+                                $('#product-edit-modal-block .edit-video-show-block').append(html);
+                        }
 
                         var preloaded=data.product_image;
                         $('.edit-image-block .input-images-2').imageUploader({
@@ -824,6 +837,20 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
         }
     });
 });
+
+//add more video
+
+    function wholesalerRemoveEditVideoEl(el)
+    {
+        var remove_video_id=[];
+        $(el).prev('video').remove();
+        $(el).remove();
+        remove_video_id.push($(el).attr('data-id'));
+        $('#product-edit-modal-block input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
+        $('#product-edit-modal-block .edit-video-upload-block').show();
+
+    }
+
 
 </script>
 

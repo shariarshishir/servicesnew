@@ -29,6 +29,13 @@ $reviewsCount = count($productReviews);
         </div>
         <div class="row product_details_content_wrap">
             <div class="col m3 product_preview_wrap">
+                @if($product->video)
+                    <div>
+                        <center>
+                            <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->video->video)}}" /></video>
+                        </center>
+                    </div>
+                @endif
                 <div class="product-images">
                     <div class="product-main-image">
                         <div class="product-large-image-block product_details_imgwrap">
@@ -38,9 +45,9 @@ $reviewsCount = count($productReviews);
                                         <center>
                                             <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
                                                 <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
-                                                
+
                                                 <div class="click-to-zoom">
-                                                    <i class="material-icons dp48">zoom_in</i> 
+                                                    <i class="material-icons dp48">zoom_in</i>
                                                     <!-- Click on image to view large size. -->
                                                 </div>
                                             </a>
@@ -51,11 +58,11 @@ $reviewsCount = count($productReviews);
                         </div>
                     </div>
                     <ul class="product-list-images-block">
-                    @if(count($product->images)> 0)
-                        @foreach ($product->images as $image)
-                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
-                        @endforeach
-                    @endif
+                        @if(count($product->images)> 0)
+                            @foreach ($product->images as $image)
+                                <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -78,12 +85,12 @@ $reviewsCount = count($productReviews);
                             {!! $product->description !!}
                         </div> -->
 
-                        
+
 
                         <!-- <h4>{{ $product->name }}</h4> -->
                         <div class="row single-product-details-top">
                             <div class="col m12">
-                                
+
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
                                     <span class="new badge red" data-badge-caption="Sold Out"></span>
                                 @endif
@@ -776,9 +783,9 @@ $reviewsCount = count($productReviews);
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                        
+
                         </div>
                     </div>
 
@@ -1286,6 +1293,7 @@ $reviewsCount = count($productReviews);
                     }
             });
         });
+
     </script>
 @endpush
 

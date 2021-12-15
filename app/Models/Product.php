@@ -43,6 +43,11 @@ class Product extends Model
         return $this->belongsTo(BusinessProfile::class);
     }
 
+    public function video()
+    {
+        return $this->hasOne(ProductVideo::class);
+    }
+
 
     // protected static $relations_to_cascade = ['images','productWishLists'];
 

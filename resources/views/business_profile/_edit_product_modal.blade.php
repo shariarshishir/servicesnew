@@ -10,7 +10,7 @@
 
 
 
-
+        <input type="hidden" name="remove_video_id">
     </form>
 
     <!-- <div class="modal-footer">

@@ -10,8 +10,8 @@
 								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-products">Products<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-products" class="dropdown-content subNav">
-									<li><a href="{{route('readystockproducts')}}">Ready Stock</a></li>
-									<li><a href="{{route('buydesignsproducts')}}">New Designs</a></li>
+									<li><a href="{{route('readystockproducts')}}">Ready to Ship</a></li>
+									<li><a href="{{route('buydesignsproducts')}}">Designs</a></li>
 									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
 									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
 									<li><a href="{{route('customizable')}}">Customizable</a></li>
@@ -173,8 +173,8 @@
 							<li>
 								<a class="" href="javascript:void(0);" >Products</a>
 								<ul class="subNav">
-									<li><a href="{{route('readystockproducts')}}">Ready Stock</a></li>
-									<li><a href="{{route('buydesignsproducts')}}">New Designs</a></li>
+									<li><a href="{{route('readystockproducts')}}">Ready to Ship</a></li>
+									<li><a href="{{route('buydesignsproducts')}}">Designs</a></li>
 									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
 									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
 									<li><a href="{{route('customizable')}}">Customizablee</a></li>

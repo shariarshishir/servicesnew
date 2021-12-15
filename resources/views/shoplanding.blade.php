@@ -120,7 +120,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Make Your Sourcing Easy</h4>
                             <p class="mb-15">We offer a balance of technology and traditional offline support. <a href="#">Our order management dashboard</a> lets clients stay connected with multiple stakeholders in one place. But we also have boots on the ground in Bangladesh so we can provide real-time updates too.</p>
-                            <a href="https://tools.merchantbay.com/" class="button">Explore Order Management Dashboard</a>
+                            <a href="{{route('front.tools')}}" class="button">Explore Order Management Dashboard</a>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                 <p>Merchandising have never seemed so easy before.</p>
                 <div class="button-group">
                 <a href="javascript:void(0);" class="button talk-to-us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">TALK TO US</a>
-                <a href="https://tools.merchantbay.com/" class="button outline">Explore Dashboard</a>
+                <a href="{{route('front.tools')}}" class="button outline">Explore Dashboard</a>
                 </div>
             </div>
         </div>

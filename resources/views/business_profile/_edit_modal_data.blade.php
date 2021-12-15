@@ -202,11 +202,23 @@
             </div>
 
             @if($product->product_video)
-                    <div>
+
+                <div class="row input-field video_upload_block">
+                    <div class="col s12 m3 l3">
+                        <label class="active">Video: </label>
+                    </div>
+                    <div class="col s12 m9 l9">
+                        <div class="edit-video-show-block">
+                            <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video><a class="btn_delete" onclick="manufactureRemoveEditVideoEl(this)" data-id="{{$product->product_video->id}}"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- <div>
                         <center>
                             <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video><p onclick="manufactureRemoveEditVideoEl(this)" data-id="{{$product->product_video->id}}">remove</p>
                         </center>
-                    </div>
+                    </div> -->
             @endif
              {{-- video --}}
              <div class="row input-field manufacture-product-upload-block"  {{$product->product_video ? 'style=display:none' :'' }}>
@@ -214,7 +226,7 @@
                     <label class="active">Video:</label>
                 </div>
                 <div class="col s12 m9 l9" id="lineitems">
-                    <input type="file" name="video">
+                    <input class="uplodad_video_box" type="file" name="video">
                 </div>
             </div>
 

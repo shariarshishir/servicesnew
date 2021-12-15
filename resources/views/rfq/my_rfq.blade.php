@@ -136,12 +136,18 @@
 
 							<div class="row respones_box">
 								<div class="col s12 m2 l2">
-									<div class="rfq_profile_img"><img src="images/ic-logo.png" alt=""></div>
+									<div class="rfq_profile_img">
+										@if(auth()->user()->image)
+										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+										@else
+										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+										@endif										
+									</div>
 								</div>
 								<div class="col s12 m10 l10 rfq_profile_info">
 									<div class="row">
 										<div class="col m7 l7 profile_info">
-											<h4>Company Name: {{$bid->businessProfile->business_name}} </h4>
+											<h4>{{$bid->businessProfile->business_name}} </h4>
 											<p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
 										</div>
                                         {{-- @if(Auth::guard('web')->check()) --}}
@@ -153,12 +159,22 @@
 
 									</div>
 
-									<p>Description:{{$bid->description}}</p>
+									<div class="full_specification"><span class="title">Description:</span> {!! $bid->description !!} </div>
+									<div class="full_details">
+										<span class="title">Quantity:</span> {{$bid->quantity}},
+										<span class="title">Unit Price:</span> {{$bid->unit_price}},
+										<span class="title">Total Price:</span>  {{$bid->total_price}},
+										<span class="title">Payment Method:</span> {{$bid->payment_method}},
+										<span class="title">Delivery Time:</span> {{$bid->delivery_time}} 
+									</div>
+
+									<!-- <p>Description: {{$bid->description}}</p>
 									<p>Quantity: {{$bid->quantity}}</p>
 									<p>Unit Price: {{$bid->unit_price}}</p>
 									<p>Total Price: {{$bid->total_price}}</p>
 									<p>Payment Method: {{$bid->payment_method}}</p>
-									<p>Delivery Time: {{$bid->delivery_time}}</p>
+									<p>Delivery Time: {{$bid->delivery_time}}</p> -->
+
 									<div class="respones_img_wrap">
 										@if(isset($bid->media))
 											@foreach (json_decode($bid->media) as $image)

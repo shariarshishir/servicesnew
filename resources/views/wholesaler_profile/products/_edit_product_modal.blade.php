@@ -48,17 +48,31 @@
                     </div>
 
                      {{-- video --}}
-                     <div class="edit-video-show-block">
+                     
+                     
+                     
+                     <div class="row input-field video_upload_block">
+                        <div class="col s12 m3 l3">
+                            <label class="active">Video: </label>
+                        </div>
+                        <div class="col s12 m9 l9">
+                            <div class="edit-video-show-block">
 
-                     </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="row input-field edit-video-upload-block">
                         <div class="col s12 m3 l3">
                             <label class="active">Video:</label>
                         </div>
                         <div class="col s12 m9 l9" id="lineitems">
-                            <input type="file" name="video">
+                            <input class="uplodad_video_box" type="file" name="video">
                         </div>
                     </div>
+
                     <input type="hidden" name="remove_video_id"  value="">
                     <div class="product-details-block">
                         <div class="row input-field">

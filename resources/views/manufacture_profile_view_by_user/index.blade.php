@@ -99,7 +99,7 @@
 							<span class="profile_not_updated_inner center-align">
 								<div class="annaouncement_icon">&nbsp;</div>
 								<p style="font-size: 25px;"> Access restricted! </p>
-								<p>Meanwhile, talk to us for more information.</p>
+								<p>For more information contact Merchant Bay</p>
 								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
 							</span>
 							

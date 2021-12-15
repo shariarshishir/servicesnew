@@ -86,7 +86,7 @@ $reviewsCount = count($productReviews);
                         <div class="row">
                             <div class="col s12 m6 l6 left-align">
                                 <div class="seller-store">
-                                    <a href="#"> {{$product->businessProfile->business_name}}</a>
+                                    <a href="{{route('supplier.profile', $product->businessProfile->id)}}">{{$product->businessProfile->business_name}}</a>
                                     {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}"><i class="material-icons dp48">store</i> {{ $product->vendor->vendor_name }}</a> --}}
                                 </div>
                             </div>

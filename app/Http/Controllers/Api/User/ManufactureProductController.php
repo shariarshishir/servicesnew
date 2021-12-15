@@ -148,7 +148,20 @@ class ManufactureProductController extends Controller
             $product->lead_time=$request->lead_time;
             $product->save();
 
+            $productImages=ProductImage::whereIn('id',$request->product_images_id)->get();
+            if(isset($productImages)){
+                foreach($productImages as $productImage){
+                    if(Storage::exists('public/'.$productImage->product_image)){
+                        Storage::delete('public/'.$productImage->product_image);
+                    }
+                    $productImage->delete();
+                }
+            }
+
             if ($request->hasFile('product_images')){
+                if(Storage::exists('upload/test.png')){
+                    Storage::delete('upload/test.png');
+                }
                 foreach ($request->file('product_images') as $index=>$product_image){
                     $path=$product_image->store('images','public');
 
@@ -165,11 +178,11 @@ class ManufactureProductController extends Controller
                     ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
                 }
             }
-            $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
+            $product=Product::with(['product_images','category'])->where('id',$productId)->first();
             return response()->json([
                 'success' => true,
-                'message' => 'Profile Updated Successfully',
-                'products' => $products,
+                'message' => 'Product Updated Successfully',
+                'product' => $product,
             ],200);
 
         }catch(\Exception $e){

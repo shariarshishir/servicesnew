@@ -136,7 +136,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //manufacture product api
     Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);
-    Route::put('/manufacture-products/{productId}', [ManufactureProductController::class, 'update']);
+    Route::post('/manufacture-products/{productId}', [ManufactureProductController::class, 'update']);
     Route::get('/business-profile/{businessProfileID}/manufacture-products/{productId}', [ManufactureProductController::class, 'delete']);
 
 

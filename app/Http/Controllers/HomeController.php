@@ -98,7 +98,8 @@ class HomeController extends Controller
     //start readystock products
     public function readyStockProducts()
     {
-        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        //$products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->paginate(12);
         return view('product.ready_stock_product',compact('products'));
     }
 
@@ -200,8 +201,7 @@ class HomeController extends Controller
     public function productDetails($sku)
     {
         $category = ProductCategory::get();
-        $product = Product::with('businessProfile')->where('sku',$sku)->first();
-
+        $product = Product::with('businessProfile','video')->where('sku',$sku)->first();
         $orderModificationRequest=OrderModificationRequest::where(['product_id' => $product->id, 'type' => 2, 'user_id' =>auth()->id() ])->get();
         $productReviews = ProductReview::where('product_id',$product->id)->get();
         $overallRating = 0;
@@ -578,7 +578,7 @@ class HomeController extends Controller
     public function mixProductDetails($flag, $id)
     {
         if($flag == 'mb'){
-            $product = ManufactureProduct::with('category','product_images','businessProfile')->findOrFail($id);
+            $product = ManufactureProduct::with('category','product_images','businessProfile','product_video')->findOrFail($id);
             return view('product.manufactrue_product_details',compact('product'));
         }
         else if($flag == 'shop'){

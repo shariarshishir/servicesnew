@@ -29,35 +29,56 @@ $reviewsCount = count($productReviews);
         </div>
         <div class="row product_details_content_wrap">
             <div class="col m3 product_preview_wrap">
-                <div class="product-images">
-                    <div class="product-main-image">
-                        <div class="product-large-image-block product_details_imgwrap">
+                @if($product->video)
+                    <div class="product-images">
+                        <div class="video_content">
+                            <center>
+                                <video controls height="245" width="300">
+                                    <source src="{{asset('storage/'.$product->video->video)}}" />
+                                </video>
+                            </center>
+                        </div>
+                        <ul class="product-list-images-block">
                             @if(count($product->images)> 0)
                                 @foreach ($product->images as $image)
-                                    <div>
-                                        <center>
-                                            <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
-                                                <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
-                                                
-                                                <div class="click-to-zoom">
-                                                    <i class="material-icons dp48">zoom_in</i> 
-                                                    <!-- Click on image to view large size. -->
-                                                </div>
-                                            </a>
-                                        </center>
-                                    </div>
+                                    <li>
+                                        <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a>
+                                    </li>
                                 @endforeach
                             @endif
-                        </div>
+                        </ul>                        
                     </div>
-                    <ul class="product-list-images-block">
-                    @if(count($product->images)> 0)
-                        @foreach ($product->images as $image)
-                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
-                        @endforeach
-                    @endif
-                    </ul>
-                </div>
+                @else
+                    <div class="product-images">
+                        <div class="product-main-image">
+                            <div class="product-large-image-block product_details_imgwrap">
+                                @if(count($product->images)> 0)
+                                    @foreach ($product->images as $image)
+                                        <div>
+                                            <center>
+                                                <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
+                                                    <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
+
+                                                    <div class="click-to-zoom">
+                                                        <i class="material-icons dp48">zoom_in</i>
+                                                        <!-- Click on image to view large size. -->
+                                                    </div>
+                                                </a>
+                                            </center>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <ul class="product-list-images-block">
+                            @if(count($product->images)> 0)
+                                @foreach ($product->images as $image)
+                                    <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                @endif
             </div>
             <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m9 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
@@ -78,12 +99,12 @@ $reviewsCount = count($productReviews);
                             {!! $product->description !!}
                         </div> -->
 
-                        
+
 
                         <!-- <h4>{{ $product->name }}</h4> -->
                         <div class="row single-product-details-top">
                             <div class="col m12">
-                                
+
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
                                     <span class="new badge red" data-badge-caption="Sold Out"></span>
                                 @endif
@@ -776,9 +797,9 @@ $reviewsCount = count($productReviews);
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                        
+
                         </div>
                     </div>
 
@@ -1286,6 +1307,7 @@ $reviewsCount = count($productReviews);
                     }
             });
         });
+
     </script>
 @endpush
 

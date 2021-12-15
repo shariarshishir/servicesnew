@@ -63,7 +63,7 @@
                     </select>
                 </div>
             </div>
-        </div>  
+        </div>
         <div class="row">
             <div class="col s12 m6 l6 input-field">
                 <div class="col s12">
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row input-field">
             <div class="col s12 m3 l3">
                 <label for="product-colors">Colors <small>EXP: Red,Blue,...</small></label>
@@ -201,6 +201,24 @@
 
             </div>
 
+            @if($product->product_video)
+                    <div>
+                        <center>
+                            <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video><p onclick="manufactureRemoveEditVideoEl(this)" data-id="{{$product->product_video->id}}">remove</p>
+                        </center>
+                    </div>
+            @endif
+             {{-- video --}}
+             <div class="row input-field manufacture-product-upload-block"  {{$product->product_video ? 'style=display:none' :'' }}>
+                <div class="col s12 m3 l3">
+                    <label class="active">Video:</label>
+                </div>
+                <div class="col s12 m9 l9" id="lineitems">
+                    <input type="file" name="video">
+                </div>
+            </div>
+
+
             <!-- <div class="col s12 submit_wrap right-align">
                 <button type="submit" class="btn waves-effect waves-light green seller_product_create btn_green">Update</button>
                 <button type="button" class="btn modal-close waves-effect waves-light green btn-back-to-product-list btn_green">Cancel</button>
@@ -213,7 +231,9 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
+
+

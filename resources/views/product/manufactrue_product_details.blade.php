@@ -23,6 +23,13 @@
         <div class="container">
             <div class="row ic-pg-container">
                 <div class="col s12 m3 l3 product_preview_wrap">
+                    @if($product->product_video)
+                        <div>
+                            <center>
+                                <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video>
+                            </center>
+                        </div>
+                     @endif
                     <div class="simpleLens-gallery-container" id="ic-gallery">
                         @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
                             <div class="simpleLens-container">

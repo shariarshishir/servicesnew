@@ -17,11 +17,11 @@
                         <div class="chat-text chat_sms_box">
                             <div class="left_chat_sms">
                                 <div class="col m8 chat_sms_left">
-                                    @if(array_key_exists('name', $data['product']))
+                                    @if(array_key_exists('rfq_bid_id', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Product Name</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['name'] }}</div>
+                                                <div class="col m6 plr0">Quotation Id</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['rfq_bid_id'] }}</div>
                                             </div>
                                         </div>
                                     @endif
@@ -33,12 +33,55 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col m12">
-                                        <div class="row prd-lt-con-list">
-                                            <div class="col m6 plr0">Category</div>
-                                            <div class="col m6 pr0">: {{ $data['product']['category'] }}</div>
+                                    @if(array_key_exists('unit_price', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Unit Price</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['unit_price'] }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if(array_key_exists('total_price', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Total Price</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['total_price'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(array_key_exists('delivery_time', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Delivery Time</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['delivery_time'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(array_key_exists('description', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Description</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['description'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(array_key_exists('name', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Product Name</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['name'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(array_key_exists('category', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Category</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['category'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if(array_key_exists('moq', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
@@ -71,11 +114,11 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if(array_key_exists('paymentmethod', $data['product']))
+                                    @if(array_key_exists('payment_method', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list bbdis">
                                                 <div class="col m6 plr0">Payement Method</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['paymentmethod'] }}</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['payment_method'] }}</div>
                                             </div>
                                         </div>
                                     @endif
@@ -83,9 +126,11 @@
                                     <div class="col m12 chat_product_message">{{ $data['message'] }}</div>
                                 </div>
                                 <div class="col m4 chat_sms_right">
-                                    <div class="sms_product_img">
-                                        <img src="{{ $data['product']['image'] }}" alt="" />
-                                    </div>
+                                    @if(array_key_exists('image', $data['product']))
+                                        <div class="sms_product_img">
+                                            <img src="{{ $data['product']['image'] }}" alt="" />
+                                        </div>
+                                    @endif
                                     @if(array_key_exists('id', $data['product']))
                                         <div class="row cer-ctxt2">Product ID: {{ $data['product']['id'] }}</div>
                                     @endif
@@ -133,11 +178,11 @@
                         <div class="chat-text chat_sms_box chat_sms_box_receiver">
                             <div class="chat_sms">
                                 <div class="col m8 chat_sms_left">
-                                    @if(array_key_exists('name', $data['product']))
+                                    @if(array_key_exists('rfq_bid_id', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Product Name</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['name'] }}</div>
+                                                <div class="col m6 plr0">Quotation Id</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['rfq_bid_id'] }}</div>
                                             </div>
                                         </div>
                                     @endif
@@ -149,12 +194,55 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col m12">
-                                        <div class="row prd-lt-con-list">
-                                            <div class="col m6 plr0">Category</div>
-                                            <div class="col m6 pr0">: {{ $data['product']['category'] }}</div>
+                                    @if(array_key_exists('unit_price', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Unit Price</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['unit_price'] }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if(array_key_exists('total_price', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Total Price</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['total_price'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(array_key_exists('delivery_time', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Delivery Time</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['delivery_time'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(array_key_exists('description', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Description</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['description'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(array_key_exists('name', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Product Name</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['name'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(array_key_exists('category', $data['product']))
+                                        <div class="col m12">
+                                            <div class="row prd-lt-con-list">
+                                                <div class="col m6 plr0">Category</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['category'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if(array_key_exists('moq', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
@@ -187,11 +275,11 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if(array_key_exists('paymentmethod', $data['product']))
+                                    @if(array_key_exists('payment_method', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list bbdis">
                                                 <div class="col m6 plr0">Payement Method</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['paymentmethod'] }}</div>
+                                                <div class="col m6 pr0">: {{ $data['product']['payment_method'] }}</div>
                                             </div>
                                         </div>
                                     @endif
@@ -199,9 +287,11 @@
                                     <div class="col m12 chat_product_message">{{ $data['message'] }}</div>
                                 </div>
                                 <div class="col m4 chat_sms_right">
-                                    <div class="sms_product_img">
-                                        <img src="{{ $data['product']['image'] }}" alt="" />
-                                    </div>
+                                    @if(array_key_exists('image', $data['product']))
+                                        <div class="sms_product_img">
+                                            <img src="{{ $data['product']['image'] }}" alt="" />
+                                        </div>
+                                    @endif
                                     @if(array_key_exists('id', $data['product']))
                                         <div class="row cer-ctxt2">Product ID: {{ $data['product']['id'] }}</div>
                                     @endif

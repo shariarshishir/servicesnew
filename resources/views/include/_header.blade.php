@@ -18,13 +18,13 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
+							<li><a href="{{route('front.tools')}}">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-links" class="dropdown-content subNav">
-									<li style="display: none;"><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="{{route('industry.blogs')}}">Blogs</a></li>
 									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
 									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
 									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
@@ -120,7 +120,7 @@
 					</div>
 
 					<div class="header_message_box">
-						<a href="javascript:void(0);">
+						<a href="{{route('message.center')}}">
 							<i class="material-icons">message</i>
 							<span class="sms_counter">0</span>
 						</a>
@@ -181,12 +181,12 @@
 								</ul>
 							</li>
 							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="https://tools.merchantbay.com/">Tools</a></li>
+							<li><a href="{{route('front.tools')}}">Tools</a></li>
 							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
 							<li>
 								<a class="" href="javascript:void(0);" >More</a>
 								<ul class="subNav">
-									<li style="display: none;"><a href="javascript:void(0);">Blogs</a></li>
+									<li><a href="{{route('industry.blogs')}}">Blogs</a></li>
 									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
 									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
 									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
@@ -301,7 +301,7 @@
 						</a>
 					</div>
 					<div class="header_message_box mobile_top_icon_box">
-						<a href="javascript:void(0);"> 
+						<a href="{{route('message.center')}}"> 
 							<i class="material-icons dp48">message</i>
 							<span class="sms_counter">0</span>
 						</a>

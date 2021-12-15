@@ -2843,6 +2843,9 @@ form input:read-only {
 /********************* suppliers page End **************************/
 
 /********************* Blog page css start **************************/
+.blog_container {
+    padding: 50px 0;
+}
 .blog_info_wrap {
     padding: 40px 30px 10px;
 }
@@ -2860,7 +2863,19 @@ form input:read-only {
 .blog_info_wrap .blog_content_box {
     position: relative;
     margin-bottom: 35px;
-    min-height: 308px;
+    min-height: 235px;
+}
+
+.blog_info_wrap .blog_content_box:hover {
+    -webkit-box-shadow: 0px 1px 14px -2px rgba(0,0,0,0.71);
+    -moz-box-shadow: 0px 1px 14px -2px rgba(0,0,0,0.71);
+    box-shadow: 0px 1px 14px -2px rgba(0,0,0,0.71);
+}
+.blog_content_box .blog_imgbox {
+    height: 100%;
+}
+.blog_content_box .blog_imgbox a {
+ 
 }
 .blog_content_box .blog_imgbox img {
     border-radius: 20px;
@@ -2894,7 +2909,7 @@ form input:read-only {
     background-size: 100% 100%;
 }
 .blog_content_box .rating_wrap {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 400;
     box-sizing: inherit;
     padding-bottom: 15px;
@@ -2903,6 +2918,7 @@ form input:read-only {
     float: left;
     color: #FFF941;
     margin-right: 10px;
+    font-size: 20px;
 }
 .blog_content_box .ratting_time {
     border-left: 1px solid #fff;
@@ -2910,10 +2926,12 @@ form input:read-only {
     margin-left: 15px;
 }
 .blog_content_box h3 {
-    font-size: 25px;
-    line-height: 35px;
+    font-size: 22px;
+    line-height: 28px;
     font-weight: 500;
     margin-bottom: 20px;
+    /* height: 58px;
+    overflow: hidden; */
 }
 .blog_content_box h3 a:link,
 .blog_content_box h3 a:active,
@@ -2923,6 +2941,7 @@ form input:read-only {
 }
 .blog_content_box .blog_review_wrap {
     box-sizing: inherit;
+    font-size: 13px;
 }
 .blog_content_lg_box .blog_inner_box .blog_review_wrap {
     border-bottom: 1px solid #fff;
@@ -2939,58 +2958,88 @@ form input:read-only {
     padding-left: 0;
     border: none;
 }
-.blog_review_wrap span.material-icons {
+.blog_review_wrap .material-icons {
     border-left: none;
     padding: 0;
     margin-right: 10px;
     display: inline-block;
     font-size: 20px;
     color: #6BC4FF;
+    float: left;
 }
-.blog_review_wrap .blog_likes span.material-icons {
+.blog_review_wrap .blog_likes .material-icons {
     color: #FF3939;
 }
 
-.blog_detail {
-    font-size: 18px;
+.blog_detail_info_wrap {
+    font-size: 16px;
     font-weight: 400;
-    line-height: 35px;
+    line-height: 30px;
 }
 
-.blog_detail .mainTitle {
+.blog_detail_info_wrap .mainTitle {
     background: #fff url('../images/frontendimages/new_layout_images/home_arrow.png') no-repeat 15px center;
     padding-left: 80px;
     background-size: 50px;
 }
 
-.blog_detail .mainTitle a {
+.blog_detail_info_wrap .mainTitle a {
     color: #448547;
 }
-.blog_detail h3 {
+.blog_detail_info_wrap h3 {
     font-size: 35px;
     color: #448547;
     font-weight: 600;
     margin-bottom: 30px;
 }
-.blog_detail h6 {
+.blog_detail_info_wrap h6 {
     font-size: 35px;
     font-size: 20px;
     font-weight: 600;
     line-height: 35px;
     margin-bottom: 20px;
 }
-.blog_detail p {
+.blog_detail_info_wrap p {
     margin-bottom: 20px;
 }
-.blog_detail .feature_img {
-    max-height: 330px;
-    overflow: hidden;
+.blog_detail_info_wrap .feature_img {
+    /* max-height: 300px; */
     margin-bottom: 40px;
+    text-align: center;
 }
-.blog_detail .feature_img img {
+.blog_detail_info_wrap .feature_img img {
     width: 100%;
-    display: block;
+    display: inline-block;
     border-radius: 20px;
+    -webkit-box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0px 3px 12px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
+}
+
+.blog_container .blog_info_details {
+    height: 75px;
+    overflow: hidden;
+}
+
+.blog_detail_info_wrap .mymedia {
+    padding-top: 50px;
+}
+.blog_detail_info_wrap .mymedia img {
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0px 3px 12px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 3px 12px 2px rgb(0 0 0 / 25%);
+}
+.blog_details_social_wrap ul li {
+    display: inline-block;
+    padding-right: 10px;
+}
+.blog_details_social_wrap ul li i {
+    font-size: 22px;
+    color: #448547;
+}
+.ic-press-caption #chatgen-embed-frame {
+    display: none;
 }
 /********************* Blog page css End **************************/
 

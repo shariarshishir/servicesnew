@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SpecialCustomization;
+use App\Models\BusinessProfileVerification;
 
 
 class SpecialCustomizationController extends Controller
@@ -42,6 +43,11 @@ class SpecialCustomizationController extends Controller
             }
 
             $specialCustomizations = SpecialCustomization::where('business_profile_id',$request->business_profile_id)->get();
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            $businessProfileVerification->special_customizations = 0 ;
+            $businessProfileVerification->save();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Special Customizations Updated',

@@ -419,6 +419,7 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::post('user/business/profile/productionflow-manpower/verify',[AdminBusinessProfileController::class, 'productionflowAndManpowerInformationVerify'])->name('productionflow.manpower.verify');
         Route::post('user/business/profile/walfare/verify',[AdminBusinessProfileController::class, 'walfareInformationVerify'])->name('worker.walfare.verify');
         Route::post('user/business/profile/security/verify',[AdminBusinessProfileController::class, 'securityInformationVerify'])->name('worker.security.verify');
+        Route::get('/user/business/profile/verify',[AdminBusinessProfileController::class, 'verifyBusinessProfile'])->name('business.profile.verify');
 
 
 

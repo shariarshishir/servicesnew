@@ -1047,7 +1047,6 @@ form input:read-only {
     padding: 18px 28px 18px 35px;
     font-size: 18px;
     line-height: 30px;
-    display: none;
 }
 .profile_bannerwrap .leftText {
     text-decoration: underline;
@@ -7437,6 +7436,14 @@ nav .pagination li.active .page-link {
         width: 100% !important;
     }
     
+}
+
+.overlay_hover {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }
 
 

@@ -19,6 +19,11 @@
     font-weight: 600;
   }
 
+  #home h2{
+    font-size: 36px;
+    line-height: 54px;
+  }
+
   /*============= Common CSS =============*/
   #home .pt-40 {
     padding-top: 40px;
@@ -84,6 +89,9 @@
 
   #home .mr-10 {
     margin-right: 10px;
+  }
+  #home .ms-auto {
+    margin-left: auto;
   }
 
   #home .w-50 {
@@ -180,7 +188,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("{{asset('images/frontendimages/tools_images/banner-bg.png')}}");
+    background-image: url("../../../images/frontendimages/tools_images/banner-bg.png");
     background-size: cover;
     background-position: bottom center;
   }
@@ -188,17 +196,15 @@
     width: 100%;
   }
   #home .banner .banner-inner .description h2 {
-    font-size: 36px;
-    line-height: 54px;
     color: #fff;
   }
-  #home .banner .banner-inner .description span {
+  #home .banner-inner .description span {
     color: #beffc6;
     font-size: 18px;
     margin-bottom: 18px;
     display: block;
   }
-  #home .banner .banner-inner .description p {
+  #home .banner-inner .description p {
     font-size: 15px;
     margin-bottom: 42px;
     color: #fff;
@@ -212,7 +218,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("{{asset('images/frontendimages/tools_images/banner-bg.png')}}");
+    background-image: url("../../../images/frontendimages/tools_images/banner-bg.png");
     background-size: cover;
     background-position: bottom center;
   }
@@ -220,19 +226,6 @@
     width: 100%;
   }
   #home .advance-tools .banner-inner .description h2 {
-    font-size: 36px;
-    line-height: 54px;
-    color: #fff;
-  }
-  #home .advance-tools .banner-inner .description span {
-    color: #beffc6;
-    font-size: 18px;
-    margin-bottom: 18px;
-    display: block;
-  }
-  #home .advance-tools .banner-inner .description p {
-    font-size: 15px;
-    margin-bottom: 30px;
     color: #fff;
   }
   #home .advance-tools .banner-inner .image img {
@@ -262,7 +255,7 @@
 
   /*============= Pricing table Section =============*/
   #home .pricing-table {
-    background-image: url("{{asset('images/frontendimages/tools_images/pricing-table-bg.png')}}");
+    background-image: url("../../../images/frontendimages/tools_images/pricing-table-bg.png");
     background-position: bottom center;
     background-size: cover;
     padding-bottom: 200px;
@@ -346,7 +339,7 @@
 
   /*============= Features Section =============*/
   #home .features {
-    background-image: url("{{asset('images/frontendimages/tools_images/features-bg.png')}}");
+    background-image: url("../../../images/frontendimages/tools_images/features-bg.png");
     background-position: bottom center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -413,6 +406,7 @@
 
   #home .display-web {
     display: flex;
+    width: 100%;
   }
   #home .display-mobile {
     display: none;
@@ -436,6 +430,116 @@
     transition: 0.2s ease-in;
   }
 
+  #home .flex-wrap{
+    flex-wrap: wrap;
+  }
+  #home .order-0{
+    order: 0;
+  }
+  #home .order-1{
+    order: 1;
+  }
+  #home .order-2{
+    order: 2;
+  }
+
+  @media only screen and (max-width: 992px) {
+    #home .order-l-0{
+    order: 0;
+    }
+    #home .order-l-1{
+      order: 1;
+    }
+    #home .order-l-2{
+      order: 2;
+    }
+
+    #home .mx-l-auto{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #home .mb-l-32{
+      margin-bottom: 2rem;
+    }
+    
+    #home .d-l-inline-flex{
+      display: inline-flex;
+    }
+    #home .justify-content-l-center{
+      justify-content: center;
+    }
+
+    #home .banner{
+      height: unset;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    #home .banner .right-side{
+      margin-bottom: 2rem;
+    }
+
+    #home .features, 
+    #home #pricing, 
+    #home .advance-tools{
+      height: unset;
+      min-height: unset;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    #home .features .tab-wrapper .link-div{
+      overflow: auto;
+    }
+    #home .features .tab-wrapper .link-div .tab-button{
+      height: 80px;
+      min-width: 190px;
+    }
+    #home .features .tab-wrapper .share-list .show-hide-content .content-img img{
+      height: auto;
+    }
+    #home .features .tab-wrapper .link-div .tab-button .tab-button-inner .icon img{
+      height: 30px;
+      width: 30px;
+    }
+    #home .features .tab-wrapper .link-div .tab-button .tab-button-inner .button-text{
+      font-size: 12px;
+    }
+    #home .features .tab-wrapper .share-list .show-hide-content .description p{
+      font-size: 16px;
+    }
+
+    #home #pricing{
+      padding-bottom: 4rem;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    #home h2{
+      font-size: 25px;
+      line-height: 35px;
+    }
+
+    #home .pt-s-40{
+      padding-top: 40px;
+    }
+    #home .mb-s-40{
+      margin-bottom: 40px;
+    }
+
+    #home .banner-inner .description span{
+      font-size: 16px;
+      margin-bottom: .75rem;
+    }
+    #home .banner-inner .description p{
+      font-size: 14px;
+      margin-bottom: 1.25rem;
+      color: #fff;
+    }
+
+    #home .features .tab-wrapper .share-list{
+      padding: 30px;
+    }
+  }
+
 </style>
 @endsection
 
@@ -445,8 +549,8 @@
     <section class="banner">
       <div class="banner-inner">
         <div class="container">
-          <div class="row d-flex align-items-center">
-            <div class="left-side w-50">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="left-side col s12 l6 order-l-1">
               <div class="description">
                 <h2>
                   Manage your orders with <br />
@@ -466,141 +570,143 @@
                 <button class="button light-hover cursor-pointer" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</button>
               </div>
             </div>
-            <div class="right-side w-50">
+            <div class="right-side col s12 l6 order-l-0">
                 <img src="{{asset('images/frontendimages/tools_images/banner.png')}}" alt="banner" />
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section id="features" class="features pt-75">
-      <div class="section-heading mb-75">
+    <section id="features" class="features pt-75 pt-s-40">
+      <div class="section-heading mb-75 mb-s-40">
         <h3>Our Top Features</h3>
       </div>
       <div class="container">
         <div class="tab-wrapper" id="id-3">
-          <div class="link-div display-web">
-            <div class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton1')" target-el="featureButton1">
-              <div class="tab-button-inner">
-                <div class="icon">
-                  <img src="{{asset('images/frontendimages/tools_images/icon-material-style.png')}}" alt="material-style" />
-                </div>
+          <div class="link-div">
+            <div class="display-web">
+              <div class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton1')" target-el="featureButton1">
+                <div class="tab-button-inner">
+                  <div class="icon">
+                    <img src="{{asset('images/frontendimages/tools_images/icon-material-style.png')}}" alt="material-style" />
+                  </div>
 
-                <div class="text-color-white ms-2 semi-bold button-text">
-                  Style-wise <br />
-                  Panel
+                  <div class="text-color-white ms-2 semi-bold button-text">
+                    Style-wise <br />
+                    Panel
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton2')" target-el="featureButton2"
-            >
-              <div class="tab-button-inner">
-                <div class="icon">
-                  <img src="{{asset('images/frontendimages/tools_images/icon-awesome-link.png')}}" alt="link icon" />
-                </div>
+              <div
+                class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton2')" target-el="featureButton2"
+              >
+                <div class="tab-button-inner">
+                  <div class="icon">
+                    <img src="{{asset('images/frontendimages/tools_images/icon-awesome-link.png')}}" alt="link icon" />
+                  </div>
 
-                <div class="text-color-white text-left ms-2 semi-bold button-text">
-                  Integrated Digital <br />
-                  Supply Chain
+                  <div class="text-color-white text-left ms-2 semi-bold button-text">
+                    Integrated Digital <br />
+                    Supply Chain
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton3')" target-el="featureButton3">
-              <div class="tab-button-inner">
-                <div class="icon">
-                  <img src="{{asset('images/frontendimages/tools_images/icon-awesome-calendar-check.png')}}" alt="calender" />
-                </div>
-                <div class="text-color-white ms-2 semi-bold button-text">
-                  Smart Calendar
-                  <br />
-                  Management
+              <div
+                class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton3')" target-el="featureButton3">
+                <div class="tab-button-inner">
+                  <div class="icon">
+                    <img src="{{asset('images/frontendimages/tools_images/icon-awesome-calendar-check.png')}}" alt="calender" />
+                  </div>
+                  <div class="text-color-white ms-2 semi-bold button-text">
+                    Smart Calendar
+                    <br />
+                    Management
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton4')" target-el="featureButton4">
-              <div class="tab-button-inner">
-                <div class="icon">
-                  <img
-                    src="{{asset('images/frontendimages/tools_images/icon-simple-campaignmonitor.png')}}"
-                    alt="Simple Compaignmonitor Icon"
-                  />
-                </div>
-                <div class="text-color-white ms-2 semi-bold button-text">
-                  Production & Quality
-                  <br />
-                  Monitoring
+              <div
+                class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton4')" target-el="featureButton4">
+                <div class="tab-button-inner">
+                  <div class="icon">
+                    <img
+                      src="{{asset('images/frontendimages/tools_images/icon-simple-campaignmonitor.png')}}"
+                      alt="Simple Compaignmonitor Icon"
+                    />
+                  </div>
+                  <div class="text-color-white ms-2 semi-bold button-text">
+                    Production & Quality
+                    <br />
+                    Monitoring
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           
-        <div class="share-list" id="featureButton1">
-            <div class="row show-hide-content">
-            <div class="col s6 content-img">
-                <img src="{{asset('images/frontendimages/tools_images/orderwise-panel.png')}}" alt="dashboard" />
-            </div>
-            <div class="col s6 gray-text description">
-                <h4 class="title-1">Style-wise Panel</h4>
-                <p>
-                Have all communication and files of a style organized in a
-                single window to be able to follow up instantly in an
-                organized way
-                </p>
-            </div>
-            </div>
-        </div>
+          <div class="share-list" id="featureButton1">
+              <div class="row show-hide-content">
+              <div class="col s12 l6 content-img">
+                  <img class="ms-auto mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/orderwise-panel.png')}}" alt="dashboard" />
+              </div>
+              <div class="col s12 l6 gray-text description">
+                  <h4 class="title-1">Style-wise Panel</h4>
+                  <p>
+                  Have all communication and files of a style organized in a
+                  single window to be able to follow up instantly in an
+                  organized way
+                  </p>
+              </div>
+              </div>
+          </div>
 
-        <div class="share-list" id="featureButton2">
-            <div class="row show-hide-content">
-            <div class="col s6 content-img">
-                <img  src="{{asset('images/frontendimages/tools_images/dashboard-2.png')}}" alt="dashboard" />
-            </div>
-            <div class="col s6 gray-text description">
-                <h4 class="title-1">Integrated Digital Supply Chain</h4>
-                <p>
-                Invite your buyers, suppliers and team with custom
-                permission in one place to streamline communication and
-                avoid any kind of delayed or miss communication.
-                </p>
-            </div>
-            </div>
-        </div>
+          <div class="share-list" id="featureButton2">
+              <div class="row show-hide-content">
+              <div class="col s12 l6 content-img">
+                  <img class="mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/dashboard-2.png')}}" alt="dashboard" />
+              </div>
+              <div class="col s12 l6 gray-text description">
+                  <h4 class="title-1">Integrated Digital Supply Chain</h4>
+                  <p>
+                  Invite your buyers, suppliers and team with custom
+                  permission in one place to streamline communication and
+                  avoid any kind of delayed or miss communication.
+                  </p>
+              </div>
+              </div>
+          </div>
 
-        <div class="share-list" id="featureButton3">
-            <div class="row show-hide-content">
-            <div class="col s6 content-img">
-                <img  src="{{asset('images/frontendimages/tools_images/T&A-calender.png')}}" alt="dashboard" />
-            </div>
-            <div class="col s6 gray-text description">
-                <h4 class="title-1">Smart Calendar Management</h4>
-                <p>
-                Manage time and action plan with integrated calendar
-                management tool. It gets super easy for the top management
-                to see pending tasks and tasks that needs instant attention.
-                </p>
-            </div>
-            </div>
-        </div>
+          <div class="share-list" id="featureButton3">
+              <div class="row show-hide-content">
+              <div class="col s12 l6 content-img">
+                  <img class="mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/T&A-calender.png')}}" alt="dashboard" />
+              </div>
+              <div class="col s12 l6 gray-text description">
+                  <h4 class="title-1">Smart Calendar Management</h4>
+                  <p>
+                  Manage time and action plan with integrated calendar
+                  management tool. It gets super easy for the top management
+                  to see pending tasks and tasks that needs instant attention.
+                  </p>
+              </div>
+              </div>
+          </div>
 
-        <div class="share-list" id="featureButton4">
-            <div class="row show-hide-content content-img">
-            <div class="col s6 content-img">
-                <img  src="{{asset('images/frontendimages/tools_images/production-report1.png')}}" alt="dashboard" />
-            </div>
-            <div class="col s6 gray-text description">
-                <h4 class="title-1">Production and Quality Monitoring</h4>
-                <p>
-                Stay updated with all production and quality updates in an
-                organized way inside the style cart. Simple hack that makes
-                everything significantly easy.
-                </p>
-            </div>
-            </div>
-        </div>
+          <div class="share-list" id="featureButton4">
+              <div class="row show-hide-content content-img">
+              <div class="col s12 l6 content-img">
+                  <img class="mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/production-report1.png')}}" alt="dashboard" />
+              </div>
+              <div class="col s12 l6 gray-text description">
+                  <h4 class="title-1">Production and Quality Monitoring</h4>
+                  <p>
+                  Stay updated with all production and quality updates in an
+                  organized way inside the style cart. Simple hack that makes
+                  everything significantly easy.
+                  </p>
+              </div>
+              </div>
+          </div>
         </div>
       </div>
     </section>
@@ -608,13 +714,13 @@
         <img src="{{asset('images/frontendimages/tools_images/problem-solve.svg')}}" alt="img" />
       <h3>Merchandising have never seemed so easy before.</h3>
     </section>
-    <section id="pricing" class="pricing-table pt-75">
-      <div class="section-heading mb-90">
+    <section id="pricing" class="pricing-table pt-75 pt-s-40">
+      <div class="section-heading mb-75 mb-s-40">
         <h3>Smart OMD Pricing</h3>
       </div>
       <div class="container">
         <div class="row align-items-stretch">
-          <div class="col s4">
+          <div class="col s12 m6 l4 d-l-inline-flex justify-content-l-center mb-l-32">
             <div class="price-card">
               <span class="nametag">Trial</span>
               <h5 class="package-name">30 DAYS</h5>
@@ -629,7 +735,7 @@
               <button class="button light-hover cursor-pointer" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</button>
             </div>
           </div>
-          <div class="col s4 d-inline-flex justify-content-center">
+          <div class="col s12 m6 l4 d-inline-flex justify-content-center mb-l-32">
             <div class="price-card popular">
               <span class="popular-badge">Most Populer</span>
               <span class="nametag">Premium</span>
@@ -646,7 +752,7 @@
               <button class="button light-hover cursor-pointer" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</button>
             </div>
           </div>
-          <div class="col s4 d-inline-flex justify-content-end">
+          <div class="col s12 m6 l4 d-inline-flex justify-content-end justify-content-l-center">
             <div class="price-card">
               <span class="nametag">PREMIUM</span>
               <h5 class="package-name">Paid Annually</h5>
@@ -668,8 +774,8 @@
     <section class="advance-tools" style="margin-bottom: 2rem;">
       <div class="banner-inner">
         <div class="container">
-          <div class="row d-flex align-items-center">
-            <div class="col s6">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col s12 l6 order-l-1">
               <div class="description">
                 <h2>M-Tools</h2>
                 <span>
@@ -689,7 +795,7 @@
                 </div>
               </div>
             </div>
-            <div class="col s6">
+            <div class="col s12 l6 order-l-0">
               <div class="image">
               <img src="{{asset('images/frontendimages/tools_images/mgmt-secret-weapon.png')}}" alt="secret weapon" />
               </div>

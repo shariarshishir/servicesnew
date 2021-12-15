@@ -17,7 +17,7 @@
 				<div class="module-search">
 					<select id="searchOption" class="select2 browser-default select-search-type">
 						<option value="product" name="search_key" {{ $searchType=="product" ? 'selected' : '' }}>Products</option>
-						<option value="vendor"  name="search_key" {{ $searchType=="vendor" ? 'selected' : '' }}>Stores</option>
+						<option value="vendor"  name="search_key" {{ $searchType=="vendor" ? 'selected' : '' }}>Manufacturers</option>
 					</select>
 					<form name="system_search" action="{{route('onsubmit.search')}}" id="system_search" method="get">
 						@if(Route::is('onsubmit.search'))

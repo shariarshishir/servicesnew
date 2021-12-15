@@ -32,7 +32,6 @@ class ManufactureProductController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all);
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'business_profile_id' => 'required',
@@ -64,8 +63,8 @@ class ManufactureProductController extends Controller
                 'product_details'=>$request->product_details,
                 'product_specification'=>$request->product_specification,
                 'lead_time'=>$request->lead_time,
-                'colors'=>$request->colors??null,
-                'sizes'=>$request->sizes ?? null,
+                'colors'=>$request->colors ?? [],
+                'sizes'=>$request->sizes ?? [],
                 'industry' => $request->industry== 'apparel' ? 'apparel' : 'non-apparel',
                 'price_per_unit' => $request->price_per_unit,
                 'price_unit'   => $request->price_unit,
@@ -121,8 +120,7 @@ class ManufactureProductController extends Controller
             'product_details'=>'required',
             'product_specification'=>'required',
             'lead_time'=>'required',
-            'colors'=>'required|array',
-            'sizes'=>'required|array',
+           
         ]);
 
         if ($validator->fails()){

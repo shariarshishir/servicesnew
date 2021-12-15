@@ -98,7 +98,11 @@
                                                         @foreach($colors as $idx=>$color)
                                                         <label class="mycolorbox">
                                                             <input type="hidden" class="mycolorbox-input{{ ($idx===0)? ' active' : '' }}" id="colorbox_{{ $color }}" name="colors[]" value="{{ $color }}" data-target="#mysizeboxPanel_{{ $color }}">
+                                                            @if($color== "Multicolor")
+                                                            <span class="mycolorbox-color" style="border: 2px solid  #2c3e50; color: black ">{{ strtolower($color) }}</span>
+                                                            @else
                                                             <span class="mycolorbox-color" style="border: 2px solid {{ strtolower($color) }}; color: {{ strtolower($color) }} ">{{ strtolower($color) }}</span>
+                                                            @endif
                                                             <!-- <span class="mycolorbox-color" style="background-color:{{ strtolower($color) }}; border: 1px solid {{ strtolower($color) }}">{{ strtolower($color) }}</span> -->
                                                         </label>
                                                         @endforeach
@@ -108,7 +112,7 @@
                                                 <div class="mysizewrapper">
                                                     <h3>Sizes</h3>
                                                     <div class="mysizeboxs">
-                                                        @foreach($colors as $idx=>$color)
+                                                      
                                                             <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
                                                                 @foreach($sizes as $size)
                                                                     <div class="mysizebox" data-size="{{ $size }}">
@@ -116,7 +120,7 @@
                                                                     </div>
                                                                 @endforeach
                                                             </div>
-                                                        @endforeach
+                                                      
                                                     </div>
                                                 </div>
 

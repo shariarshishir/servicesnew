@@ -40,41 +40,45 @@
                             <a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
                         @endif
 					</div>
-					<div class="addressBox">
-						<span>Head Office </span><br/>
-						@if($business_profile->companyOverview->address)
-						<p>{{$business_profile->companyOverview->address}}</p>
-						@else
-						<div class="card-alert card cyan lighten-5">
-							<div class="card-content cyan-text">
-								<p>INFO : No data found.</p>
+					@if($flag==0)
+						<div class="addressBox">
+							<span>Head Office </span><br/>
+							@if($business_profile->companyOverview->address)
+							<p>{{$business_profile->companyOverview->address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									<p>INFO : No data found.</p>
+								</div>
 							</div>
-						</div>
-						@endif
-					</div>
-					<div class="addressBox">
-						<span>Factory Address</span> <br/>
-						@if($business_profile->companyOverview->factory_address)
-						<p>{{$business_profile->companyOverview->factory_address}}</p>
-						@else
-						<div class="card-alert card cyan lighten-5">
-							<div class="card-content cyan-text">
-								<p>INFO : No data found.</p>
-							</div>
-						</div>
-						@endif
-					</div>
-				</div>
-				<div class="left_bottom">
-					<h3 class="center-align" >Main Products</h3>
-					<p>
-						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-							@if($company_overview->name=="main_products")
-								<p>	{{$company_overview->value}}</p>
 							@endif
-						@endforeach
-					</p>
+						</div>
+						<div class="addressBox">
+							<span>Factory Address</span> <br/>
+							@if($business_profile->companyOverview->factory_address)
+							<p>{{$business_profile->companyOverview->factory_address}}</p>
+							@else
+							<div class="card-alert card cyan lighten-5">
+								<div class="card-content cyan-text">
+									<p>INFO : No data found.</p>
+								</div>
+							</div>
+							@endif
+						</div>
+					@endif
 				</div>
+				@if($flag==0)
+					<div class="left_bottom">
+						<h3 class="center-align" >Main Products</h3>
+						<p>
+							@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+								@if($company_overview->name=="main_products")
+									<p>	{{$company_overview->value}}</p>
+								@endif
+							@endforeach
+						</p>
+					</div>
+				@endif
 			</div>
 			<!-- Container section start -->
 			<div class="col s12 m7 l9 profile_contentCol">
@@ -82,13 +86,16 @@
 					<div class="profile_tab_menu">
 						<ul class="tabs">
 							<li class="tab"><a href="#home">Home</a></li>
-							<li class="tab"><a href="#profile">Profile</a></li>
-							<li class="tab"><a href="#products">Products</a></li>
+							<li class="tab @php echo ($flag==1)?'disabled':''; @endphp"><a href="#profile">Profile</a></li>
+							<li class="tab @php echo ($flag==1)?'disabled':''; @endphp"><a href="#products">Products</a></li>
 							<!--li class="tab col m2"><a href="#womenproducts">Women</a></li-->
 							<!--li class="tab"><a href="#factorytour">Factory Tour</a></li-->
-							<li class="tab"><a href="#termsservice">Terms of Service</a></li>
+							<li class="tab @php echo ($flag==1)?'disabled':''; @endphp"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
+					@if($flag==1)
+						<div>Profile not Updated</div>
+					@else
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<!-- company_stuff -->
@@ -278,6 +285,7 @@
 						<h3>Terms of Service</h3>
 						<p>Who we are and what we do.</p>
 					</div>
+					@endif
 				</div>
 			</div>
 			<!-- Container section end -->

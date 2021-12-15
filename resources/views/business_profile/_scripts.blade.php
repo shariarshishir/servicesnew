@@ -2423,5 +2423,12 @@
       });
     });
 
+    $(document).ready(function(){
+        $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").hide();
+        $(".edit_profile_trigger").click(function() {
+            $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").toggle();
+        });
+    });
+
     </script>
 @endpush

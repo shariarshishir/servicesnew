@@ -46,7 +46,7 @@ $reviewsCount = count($productReviews);
                                     </li>
                                 @endforeach
                             @endif
-                        </ul>                        
+                        </ul>
                     </div>
                 @else
                     <div class="product-images">
@@ -810,7 +810,7 @@ $reviewsCount = count($productReviews);
                                 @if(Auth::guard('web')->check())
                                     <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{$product->category['name']}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
                                 @else
-                                    <button type="button" class="modal-trigger" href="javascript:void(0);">Contact supplier</button>
+                                    <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                                 @endif
                             </div>
                             <div class="card card-with-padding">

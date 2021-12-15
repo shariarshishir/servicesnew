@@ -33,15 +33,16 @@
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 					</div>
-					<div class="center-align">
-                        @if(Auth::guard('web')->check())
-                            <a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
-                        @else
-                            <a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
-                        @endif
-					</div>
 					@if($flag==0)
-					<div class="addressBox">
+						<div class="center-align">
+							@if(Auth::guard('web')->check())
+								<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
+							@else
+								<a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
+							@endif
+						</div>
+				
+						<div class="addressBox">
 							<span>Head Office </span><br/>
 							@if($business_profile->companyOverview->address)
 							<p>{{$business_profile->companyOverview->address}}</p>
@@ -93,7 +94,26 @@
 						</ul>
 					</div>
 					@if($flag==1)
-						<div>Profile not Updated</div>
+						
+						<div class="profile_not_updated"> 
+							<span class="profile_not_updated_inner center-align">
+								<div class="annaouncement_icon">&nbsp;</div>
+								<p style="font-size: 25px;"> Access restricted! </p>
+								<p>Meanwhile, talk to us for more information.</p>
+								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
+							</span>
+							
+							<!-- <span class="profile_not_updated_inner">
+								<div class="annaouncement_icon">&nbsp;</div>
+								<p>You do not have access to view this profile.</p>
+								<p>Become a verified buyer to get full access to Merchant Bay services.</p>
+								<p> Please <a href="#"> Book a Call </a> for any further information. </p>
+							</span> -->
+
+							<div class="center-align"> <a class="btn_green" href="#"> Book a Call </a></div>
+						</div>
+						
+						
 					@else
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>

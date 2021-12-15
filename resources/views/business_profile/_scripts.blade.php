@@ -2403,7 +2403,7 @@
 
       success:function(response){
         $('.loading-message').html("");
-		$('#loadingProgressContainer').hide();
+        $('#loadingProgressContainer').hide();
         $('#factory-tour-edit-form')[0].reset();
         var factoryTours=response.factoryTours;
         console.log(factoryTours);
@@ -2418,13 +2418,19 @@
                 $('#factory-tour-edit-form-errors').empty();
                 $("#factory-tour-edit-form-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
-                {
+                {  
                     $("#factory-tour-edit-form-errors").append("<div class='danger'>"+item+"</div>");
                 });
             }
       });
     });
 
+    $(document).ready(function(){
+        $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").hide();
+        $(".edit_profile_trigger").click(function() {
+            $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").toggle();
+        });
+    });
     //video
 
     function manufactureRemoveEditVideoEl(el)

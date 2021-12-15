@@ -1114,6 +1114,8 @@ form input:read-only {
     color: #54A958;
     font-size: 26px;
     padding-right: 10px;
+    margin-top: -3px;
+    padding-right: 5px;
 }
 .profile_leftCol .office_address h4 img,
 .leftCol_wrap .office_address h4 img {
@@ -1200,9 +1202,19 @@ form input:read-only {
 .profile_contentCol .profile_tab_menu .tabs .tab a:hover,
 .profile_contentCol .profile_tab_menu .tabs .tab a.active {
     background-color: #4E9C52;
-    color: #FFFFFF !important;
+    color: #ffffff !important;
     transition: none !important;
 }
+
+.profile_wholesaler_tab_menu ul li.disabled a,
+.profile_contentCol .profile_tab_menu .tabs .tab.disabled a,
+.profile_wholesaler_tab_menu ul li.disabled a:hover,
+.profile_contentCol .profile_tab_menu .tabs .tab.disabled a:hover {
+    background: none;
+    color: #464545 !important;
+    opacity: 0.5;
+}
+
 .profile_tab_menu button {
     font-size: 22px;
     font-weight: 600;
@@ -1265,7 +1277,7 @@ form input:read-only {
 
 .profile_contentCol .tabcontent .profile_product_wrap .product_boxwrap {
     padding-bottom: 80px;
-    margin: 0 -30px;
+    margin: 0;
 }
 .profile_tabNav_wrap .product_view {
     margin-bottom: 0;
@@ -1426,6 +1438,42 @@ form input:read-only {
     position: absolute;
     top: 5px;
     right: 5px;
+}
+
+.profile_not_updated {
+    padding: 50px 50px 50px 120px;
+    max-width: 740px;
+}
+.profile_not_updated_inner {
+    text-align: center;
+    border: 1px solid #4E9C52;
+    display: inline-block;
+    padding: 30px 50px 15px;
+    border-radius: 10px;
+    position: relative;
+    line-height: 30px;
+    display: block;
+    width: 100%;
+}
+.profile_not_updated_inner a {
+    font-weight: 500;
+}
+.profile_not_updated_inner a:hover {
+    text-decoration: none;
+}
+.annaouncement_icon {
+    background: url('../images/frontendimages/new_layout_images/annaouncement-icon.png') no-repeat left top;
+    background-size: 50px;
+    position: absolute;
+    top: -28px;
+    left: 21px;
+    width: 70px;
+    height: 70px;
+}
+.profile_not_updated .btn_green {
+    text-decoration: none;
+    margin-top: 50px;
+    text-transform: inherit;
 }
 
 
@@ -4577,10 +4625,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     box-shadow: none !important;
     height: 62px;
 }
-.profile_form_modal textarea.about-company {
-    height: 150px;
-    border-radius: 10px;
-}
+
 .profile_contentCol .contentBox,
 #about-company-information {
     padding-bottom: 50px;
@@ -4623,9 +4668,24 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     padding-bottom: 30px;
 }
 
-.ready-to-ship-label {
-    /* color: #ffffff !important; */
+.blue.ready-to-ship-label {
+    color: #ffffff !important;
     border-radius: 5px;
+    font-size: 15px;
+    padding: 5px 10px;
+    height: auto;
+    margin-top: 10px;
+}
+
+#company-overview-modal textarea {
+    height: 130px;
+    max-height: inherit;
+    margin: 0;
+}
+#company-overview-modal textarea.about-company,
+.profile_form_modal textarea.about-company {
+    height: 180px;
+    border-radius: 10px;
 }
 
 
@@ -7015,7 +7075,13 @@ nav .pagination li.active .page-link {
         width: 100%;
     }
 
-    
+    .profile_not_updated {
+        padding: 50px;
+    }
+    .profile_not_updated_inner {
+        max-width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 600px) {

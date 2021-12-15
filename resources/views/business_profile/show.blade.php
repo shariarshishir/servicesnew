@@ -11,6 +11,9 @@
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
 		</div>
+		<div class="edit_profile_option">
+			<a href="javascript:void(0);" class="edit_profile_trigger"><i class="material-icons">border_color</i></a>
+		</div>
 	</div>
 </section>
 <!-- Profile section end -->

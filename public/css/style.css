@@ -1265,7 +1265,7 @@ form input:read-only {
 
 .profile_contentCol .tabcontent .profile_product_wrap .product_boxwrap {
     padding-bottom: 80px;
-    margin: 0 -30px;
+    margin: 0;
 }
 .profile_tabNav_wrap .product_view {
     margin-bottom: 0;
@@ -4623,9 +4623,17 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     padding-bottom: 30px;
 }
 
-.ready-to-ship-label {
-    /* color: #ffffff !important; */
+.blue.ready-to-ship-label {
+    color: #ffffff !important;
     border-radius: 5px;
+    font-size: 15px;
+    padding: 5px 10px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.profile_form_modal .about_company_area_wrap textarea {
+    height: 130px;
 }
 
 

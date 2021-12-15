@@ -98,8 +98,7 @@ class HomeController extends Controller
     //start readystock products
     public function readyStockProducts()
     {
-        //$products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
-        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->paginate(12);
+        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.ready_stock_product',compact('products'));
     }
 
@@ -503,7 +502,7 @@ class HomeController extends Controller
                 $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
             }
         })
-        ->paginate(10);
+        ->paginate(12);
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile
@@ -644,6 +643,10 @@ class HomeController extends Controller
     public function toolsLandingPage(){
         return view('tools.index');
     }
+
+    public function policyLandingPage(){
+        return view('policy.index');
+    }    
 
 
 

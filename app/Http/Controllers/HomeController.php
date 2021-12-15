@@ -648,6 +648,14 @@ class HomeController extends Controller
         return view('policy.index');
     }    
 
+    public function aboutusLandingPage(){
+        return view('aboutus.index');
+    }   
+    
+    public function contactusLandingPage(){
+        return view('contactus.index');
+    }   
+
 
 
 }

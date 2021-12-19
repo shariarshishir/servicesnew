@@ -232,28 +232,30 @@
 							<div class="product_boxwrap row">
 								@if(count($mainProducts)>0)
 									@foreach($mainProducts as $product)
-									<div class="productBox col s6 m3 l3">
-										<div class="imgBox">
-											@foreach($product->product_images as $image)
-												<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
-												@break
-											@endforeach
-											<div class="favorite">
-												<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
-													<i class="material-icons dp48">favorite</i>
-												</a>
+									<div class="col s12 m4 l3">
+										<div class="productBox">
+											<div class="imgBox">
+												@foreach($product->product_images as $image)
+													<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+													@break
+												@endforeach
+												<div class="favorite">
+													<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+														<i class="material-icons dp48">favorite</i>
+													</a>
+												</div>
 											</div>
-										</div>
-										<div class="priceBox row">
+											<div class="priceBox row">
 
+											</div>
+											<h4>
+												<a href="{{route('mix.product.details', ['mb', $product->id])}}">
+													{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+												</a>
+											</h4>
+											<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+											<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 										</div>
-										<h4>
-											<a href="{{route('mix.product.details', ['mb', $product->id])}}">
-												{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
-											</a>
-										</h4>
-										<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
-										<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 									</div>
 								@endforeach
 								@else

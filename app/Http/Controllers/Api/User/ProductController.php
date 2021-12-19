@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\User;
 use App\Models\ProductImage;
+use App\Models\BusinessProfile;
 use App\Models\RelatedProduct;
 use App\Rules\MoqUnitRule;
 use App\Rules\ReadyStockPriceBreakDownRule;
@@ -398,7 +399,7 @@ class ProductController extends Controller
     //customizable products
     public function customizableProducts()
     {
-        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
+        $products = Product::with('images')->where('business_profile_id', '!=', null)->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(9);
         $customizableProductsArray=[];
         if($products->total()>0){
             foreach($products as $product){
@@ -528,7 +529,7 @@ class ProductController extends Controller
         }
     }
 
-    public function store(Request $request,$storeId)
+    public function store(Request $request)
     {
 
         
@@ -865,28 +866,47 @@ class ProductController extends Controller
     public function update(Request $request,$storeId,$productId)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'business_profile_id' => 'required',
             'images'  => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
             'name'      => 'required',
-            'product_category_id' => 'required',
+            'category_id' => 'required',
             'product_type' => 'required',
             'description'  => 'required',
-            'additional_description'  => 'required',
-            'moq'         => 'required',
-            'product_unit'         => 'required',
-            'availability'  => 'required_if:product_type,[2,3]',
+            'moq'         => [new MoqUnitRule($request, $request->product_type)],
+            'product_unit'  =>[new MoqUnitRule($request, $request->product_type)],
+            'ready_stock_availability'  => 'required_if:product_type,2',
+            'non_clothing_availability'  => 'required_if:product_type,3',
             'quantity_min.*' => 'required_if:product_type,1',
             'quantity_max.*' => 'required_if:product_type,1',
             'price.*' => 'required_if:product_type,1',
             'lead_time.*' => 'required_if:product_type,1',
-            'full_stock_price' => 'required_if:full_stock,on',
+            'ready_quantity_min.*' => [new ReadyStockPriceBreakDownRule($request, $request->product_type)],
+            'ready_quantity_max.*' => [new ReadyStockPriceBreakDownRule($request, $request->product_type)],
+            'ready_price.*' => [new ReadyStockPriceBreakDownRule($request, $request->product_type)],
+            'non_clothing_min.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
+            'non_clothing_max.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
+            'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
+            'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
+            'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
 
         ]);
 
-
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
         DB::beginTransaction();
         try {
+
+            $full_stock_negotiable=false;
+            $full_stock = false;
+            $full_stock_price = null;
+            $availability=null;
 
             //buy design products
             if($request->product_type==1){
@@ -894,10 +914,6 @@ class ProductController extends Controller
                 for($i=0; $i < count($request->quantity_min); $i++){
                     array_push($price_break_down,[(int)$request->quantity_min[$i],(int)$request->quantity_max[$i],is_numeric($request->price[$i]) ? $request->price[$i] : 'Negotiable',$request->lead_time[$i]]);
                 }
-
-                $full_stock = false;
-                $full_stock_price = null;
-                $availability=null;
             }
 
             //ready stock products
@@ -918,6 +934,7 @@ class ProductController extends Controller
 
                 $full_stock= isset($request->full_stock) ? true : false;
                 $full_stock_price = isset($request->full_stock_price) ? $request->full_stock_price : null;
+                $full_stock_negotiable= isset($request->ready_full_stock_negotiable) ? true : false;
                 $availability=$request->availability;
             }
 
@@ -940,6 +957,7 @@ class ProductController extends Controller
 
                 $full_stock= isset($request->full_stock) ? true : false;
                 $full_stock_price = isset($request->full_stock_price) ? $request->full_stock_price : null;
+                $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
                 $availability=$request->availability;
             }
 
@@ -961,12 +979,18 @@ class ProductController extends Controller
                 'copyright_price'  => $request->product_type==1 ? $request->copyright_price : null,
                 'full_stock'     => $full_stock,
                 'full_stock_price' =>  $full_stock_price,
+                'customize'      => isset($request->customize) ? true : false,
+                'full_stock_negotiable' => $full_stock_negotiable,
                 'updated_by'  => auth()->id(),
             ]);
+            $product=Product::where('sku',$sku)->first();
+            // $user=User::where('id',auth()->id())->first();
+            // $vendorName=Str::slug($user->vendor->vendor_name,'-');
 
+            $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
+            $business_profile_name=$business_profile->business_name;
             $product=Product::where('id',$productId)->first();
             $user=User::where('id',auth()->id())->first();
-            $vendorName=Str::slug($user->vendor->vendor_name,'-');
             $productImages=ProductImage::whereIn('id',$request->product_images_id)->get();
             if(isset($productImages)){
                 foreach($productImages as $productImage){
@@ -980,11 +1004,11 @@ class ProductController extends Controller
             if(isset($request->images))
             {
                 foreach ($request->images as $image) {
-                    $filename = $image->store('images/'.$vendorName.'/products/small','public');
+                    $filename = $image->store('images/'.$business_profile_name.'/products/small','public');
                     $image_resize = Image::make(public_path('storage/'.$filename));
                     $image_resize->fit(300, 300);
                     $image_resize->save(public_path('storage/'.$filename));
-                    $original=$image->store('images/'.$vendorName.'/products/original','public');
+                    $original=$image->store('images/'.$business_profile_name.'/products/original','public');
                     $product_image = ProductImage::create([
                         'product_id' => $product->id,
                         'image' => $filename,
@@ -993,9 +1017,9 @@ class ProductController extends Controller
                 }
             }
             //related products
-            if(!isset($request->related_products))
+             if(!isset($request->related_products))
             {
-                $relatedProduct=RelatedProduct::where('vendor_id',auth()->user()->vendor->id)->where('product_id',$product->id)->get();
+                $relatedProduct=RelatedProduct::where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->get();
                 if($relatedProduct){
                     foreach($relatedProduct as $rel_product)
                     {
@@ -1005,7 +1029,7 @@ class ProductController extends Controller
             }
             if($request->related_products)
             {
-                $relatedProduct=RelatedProduct::where('vendor_id',auth()->user()->vendor->id)->where('product_id',$product->id)->get();
+                $relatedProduct=RelatedProduct::where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->get();
                 if($relatedProduct){
                     foreach($relatedProduct as $rel_product)
                         {
@@ -1014,7 +1038,7 @@ class ProductController extends Controller
                 }
                 foreach($request->related_products as $item){
                     RelatedProduct::create([
-                        'vendor_id'  => auth()->user()->vendor->id,
+                        'business_profile_id' => $product->business_profile_id,
                         'product_id' => $product->id,
                         'related_product_id' => $item,
                     ]);

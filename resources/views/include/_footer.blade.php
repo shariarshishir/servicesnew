@@ -751,14 +751,14 @@ $.ajax({
     dataType:'json',
     data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
     beforeSend: function() {
-        $('.loading-message').html("Searching please Wait.");
-        $('#loadingProgressContainer').show();
+        //$('.loading-message').html("Searching please Wait.");
+        //$('#loadingProgressContainer').show();
     },
     success: function(response)
     {
         console.log(response.averageRatings);
-        $('.loading-message').html("");
-		$('#loadingProgressContainer').hide();
+        //$('.loading-message').html("");
+		//$('#loadingProgressContainer').hide();
         var html="";
         var nohtml = "";
         var url  = window.location.origin;

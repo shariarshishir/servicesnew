@@ -22,264 +22,275 @@ use stdClass;
 
 class BusinessProfileController extends Controller
 {
-    public function show($id){
-        
-        $businessProfile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
-        
-        if( $businessProfile){
-
-            //company overview without json
-            if($businessProfile->companyOverview){
-                $companyOverview = new stdClass();
-                $companyOverview->id=$businessProfile->companyOverview->id;
-                $companyOverview->data=json_decode($businessProfile->companyOverview->data);
-                $companyOverview->about_company=$businessProfile->companyOverview->about_company;
-                $companyOverview->address=$businessProfile->companyOverview->address;
-                $companyOverview->status=$businessProfile->companyOverview->status;
-            }
-            else{
-                $companyOverview=[];
-            }
-           
-            //production flow and manpower without json
-            if(count($businessProfile->productionFlowAndManpowers)>0){
-                $productionFlowAndManpowerArray = [];
-                foreach($businessProfile->productionFlowAndManpowers as $key => $productionFlowAndManpower){
-                    $productionFlowAndManpowerObject = new stdClass();
-                    $productionFlowAndManpowerObject->id =  $productionFlowAndManpower->id;
-                    $productionFlowAndManpowerObject->business_profile_id = $productionFlowAndManpower->business_profile_id;
-                    $productionFlowAndManpowerObject->production_type = $productionFlowAndManpower->production_type;
-                    $productionFlowAndManpowerObject->flow_and_manpower = json_decode($productionFlowAndManpower->flow_and_manpower);
-                    array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
-                }
-            }
-            else{
-                $productionFlowAndManpowerArray=[];
-
-            }
-                
-
-            //walfare and csr
-            if($businessProfile->walfare){
-                $walfareObject = new stdClass();
-                $walfareObject->id= $businessProfile->walfare->id;
-                $walfareObject->walfare_and_csr=json_decode($businessProfile->walfare->walfare_and_csr);
-                $walfareObject->business_profile_id=$businessProfile->walfare->business_profile_id;
-            }
-            else{
-                $walfareObject=[];
-            }
-           
-            //security and others
-            if($businessProfile->security){
-                $securityObject = new stdClass();
-                $securityObject->id= $businessProfile->security->id;
-                $securityObject->security_and_others=json_decode($businessProfile->security->security_and_others);
-                $securityObject->business_profile_id=$businessProfile->security->business_profile_id;
-            }
-            else{
-                $securityObject=[];
-            }
-            return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"productionFlowAndManpower"=>$productionFlowAndManpowerArray,"walfare"=>$walfareObject,"security"=>$securityObject,"success"=>true],200);
+        public function show($id){
             
-        }
-        else{
-            return response()->json(["success"=>false],404);
-        }
-    }
+            $businessProfile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
+            
+            if( $businessProfile){
 
-    public function manufactureProductCategories(){
-        $manufactureProductCategories = ProductCategory::with('subcategories')->get();
-        if( count($manufactureProductCategories)>0){
-            return response()->json(["productCategories"=>$manufactureProductCategories,"success"=>true],200);
-        }
-        else{
-            return response()->json(["productCategories"=>$manufactureProductCategories,"success"=>false],204);
-        }
-
-    }
-    
-    public function manufactureProductCategoriesByIndustryType(Request $request){
-        $manufactureProductCategoriesByInduestryType=ProductCategory::with('subcategories')->where('industry',$request->industry)->get();
-        if( count($manufactureProductCategoriesByInduestryType)>0){
-            return response()->json(["productCategories"=>$manufactureProductCategoriesByInduestryType,"success"=>true],200);
-        }
-        else{
-            return response()->json(["productCategories"=>$manufactureProductCategoriesByInduestryType,"success"=>false],204);
-        }
-    }
-
-    //business profile list of auth user
-    public function businessProfileList(){
-        $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->get();
-        if(count($businessProfiles)>0){
-            $companyOverviewArray=[];
-            foreach($businessProfiles as $businessProfile){
-                   //company overview without json
-                    if($businessProfile->companyOverview){
-                        $companyOverview = new stdClass();
-                        $companyOverview->id = $businessProfile->companyOverview->id;
-                        $companyOverview->business_profile_id = $businessProfile->companyOverview->business_profile_id;
-                        $companyOverview->data = json_decode($businessProfile->companyOverview->data);
-                        $companyOverview->about_company = $businessProfile->companyOverview->about_company;
-                        $companyOverview->address = $businessProfile->companyOverview->address;
-                        $companyOverview->factory_address = $businessProfile->companyOverview->factory_address;
-                        $companyOverview->status = $businessProfile->companyOverview->status;
-                    }
-                    else{
-                        $companyOverview=[];
-                    }
-                    array_push($companyOverviewArray,$companyOverview);
-           
-            }
-            return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true,"companyOverviews"=>$companyOverviewArray],200);
-        }
-        else{
-            $businessProfiles=[];
-            return response()->json(["businessProfiles"=>$businessProfiles,"success"=>false],200);
-        }
-    }
-
-    //All business profile list
-    public function allBusinessProfile(){
-        $allBusinessProfiles = BusinessProfile::with('user','businessCategory')->paginate(10);
-        if(count($allBusinessProfiles)){
-            return response()->json([
-                'success' => true,
-                'allBusinessProfiles'=>$allBusinessProfiles
-            ],200);
-        }
-        else{
-            return response()->json([
-                'success' => false,
-                'allBusinessProfiles'=>[]
-            ],200);
-        }
-    }
-
-
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'business_name' => 'required',
-            'location'      => 'required',
-            'business_type' => 'required',
-            'trade_license' => 'required',
-            'industry_type' => 'required',
-            'number_of_outlets' => Rule::requiredIf(function () use ($request) {
-                return $request->business_type == 2;
-            }),
-            'number_of_factories' => Rule::requiredIf(function () use ($request) {
-                return $request->business_type == 1;
-            }),
-            'email' => 'required_if:has_representative,0|unique:users',
-            'phone' => 'required_if:has_representative,0',
-            'nid_passport' => 'required_if:has_representative,0',
-            'representive_name' =>'required_if:has_representative,0',
-            'business_category_id' => 'required_if:business_type,1',
-
-        ]);
-        if($validator->fails()){
-             return response()->json(array(
-             'success' => false,
-             'error' => $validator->getMessageBag()),
-             400);
-        }
-         try{
-                $business_profile_data=[
-                    'business_name' => $request->business_name,
-                    'user_id'       => auth()->user()->id,
-                    'location'      => $request->location,
-                    'business_type' => $request->business_type,
-                    'has_representative'=> $request->has_representative,
-                    'number_of_outlets' => $request->number_of_outlets,
-                    'number_of_factories' => $request->number_of_factories,
-                    'business_category_id' => $request->business_category_id,
-                    'industry_type' => $request->industry_type,
-
-                ];
-
-                if($request->has_representative == true){
-                    $business_profile=BusinessProfile::create($business_profile_data);
-                    //create company overview
-                    $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
-                    return response()->json([
-                        'success' => true,
-                        'business_profile'=>$business_profile,
-                        'companyOverview'=>$companyOverview
-                       
-                    ],201);
+                //company overview without json
+                if($businessProfile->companyOverview){
+                    $companyOverview = new stdClass();
+                    $companyOverview->id=$businessProfile->companyOverview->id;
+                    $companyOverview->data=json_decode($businessProfile->companyOverview->data);
+                    $companyOverview->about_company=$businessProfile->companyOverview->about_company;
+                    $companyOverview->address=$businessProfile->companyOverview->address;
+                    $companyOverview->status=$businessProfile->companyOverview->status;
                 }
-                if($request->has_representative == false){
-                    $representive_data=[
-                        'name' => $request->representive_name,
-                        'email' => $request->email,
-                        'phone' => $request->phone,
-                        'password' =>'12345678',
-                        'nid_passport' => $request->nid_passport,
-                        'is_representative' => true,
-                        'user_type'      => 'buyer',
-                        'is_email_verified' => 1,
-                    ];
-                    // sso registration
-                    if(env('APP_ENV') == 'production')
-                    {
-                        $sso=Http::post(env('SSO_URL').'api/auth/signup/',$representive_data);
-                        if(!$sso->successful()){
-                            return response()->json([
-                                'success' => false,
-                                'error' => 'Internal Server Error',
-                            ],500);
+                else{
+                    $companyOverview=[];
+                }
+            
+                //production flow and manpower without json
+                if(count($businessProfile->productionFlowAndManpowers)>0){
+                    $productionFlowAndManpowerArray = [];
+                    foreach($businessProfile->productionFlowAndManpowers as $key => $productionFlowAndManpower){
+                        $productionFlowAndManpowerObject = new stdClass();
+                        $productionFlowAndManpowerObject->id =  $productionFlowAndManpower->id;
+                        $productionFlowAndManpowerObject->business_profile_id = $productionFlowAndManpower->business_profile_id;
+                        $productionFlowAndManpowerObject->production_type = $productionFlowAndManpower->production_type;
+                        $productionFlowAndManpowerObject->flow_and_manpower = json_decode($productionFlowAndManpower->flow_and_manpower);
+                        array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
+                    }
+                }
+                else{
+                    $productionFlowAndManpowerArray=[];
+
+                }
+                    
+
+                //walfare and csr
+                if($businessProfile->walfare){
+                    $walfareObject = new stdClass();
+                    $walfareObject->id= $businessProfile->walfare->id;
+                    $walfareObject->walfare_and_csr=json_decode($businessProfile->walfare->walfare_and_csr);
+                    $walfareObject->business_profile_id=$businessProfile->walfare->business_profile_id;
+                }
+                else{
+                    $walfareObject=[];
+                }
+            
+                //security and others
+                if($businessProfile->security){
+                    $securityObject = new stdClass();
+                    $securityObject->id= $businessProfile->security->id;
+                    $securityObject->security_and_others=json_decode($businessProfile->security->security_and_others);
+                    $securityObject->business_profile_id=$businessProfile->security->business_profile_id;
+                }
+                else{
+                    $securityObject=[];
+                }
+                return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"productionFlowAndManpower"=>$productionFlowAndManpowerArray,"walfare"=>$walfareObject,"security"=>$securityObject,"success"=>true],200);
+                
+            }
+            else{
+                return response()->json(["success"=>false],404);
+            }
+        }
+
+        public function manufactureProductCategories(){
+            $manufactureProductCategories = ProductCategory::with('subcategories')->get();
+            if( count($manufactureProductCategories)>0){
+                return response()->json(["productCategories"=>$manufactureProductCategories,"success"=>true],200);
+            }
+            else{
+                return response()->json(["productCategories"=>$manufactureProductCategories,"success"=>false],204);
+            }
+
+        }
+        
+        public function manufactureProductCategoriesByIndustryType(Request $request){
+            $manufactureProductCategoriesByInduestryType=ProductCategory::with('subcategories')->where('industry',$request->industry)->get();
+            if( count($manufactureProductCategoriesByInduestryType)>0){
+                return response()->json(["productCategories"=>$manufactureProductCategoriesByInduestryType,"success"=>true],200);
+            }
+            else{
+                return response()->json(["productCategories"=>$manufactureProductCategoriesByInduestryType,"success"=>false],204);
+            }
+        }
+
+        //business profile list of auth user
+        public function businessProfileList(){
+            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->get();
+            if(count($businessProfiles)>0){
+                $companyOverviewArray=[];
+                foreach($businessProfiles as $businessProfile){
+                    //company overview without json
+                        if($businessProfile->companyOverview){
+                            $companyOverview = new stdClass();
+                            $companyOverview->id = $businessProfile->companyOverview->id;
+                            $companyOverview->business_profile_id = $businessProfile->companyOverview->business_profile_id;
+                            $companyOverview->data = json_decode($businessProfile->companyOverview->data);
+                            $companyOverview->about_company = $businessProfile->companyOverview->about_company;
+                            $companyOverview->address = $businessProfile->companyOverview->address;
+                            $companyOverview->factory_address = $businessProfile->companyOverview->factory_address;
+                            $companyOverview->status = $businessProfile->companyOverview->status;
                         }
+                        else{
+                            $companyOverview=[];
+                        }
+                        array_push($companyOverviewArray,$companyOverview);
+            
+                }
+                return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true,"companyOverviews"=>$companyOverviewArray],200);
+            }
+            else{
+                $businessProfiles=[];
+                return response()->json(["businessProfiles"=>$businessProfiles,"success"=>false],200);
+            }
+        }
+
+        //All business profile list
+        public function allBusinessProfile(){
+            $allBusinessProfiles = BusinessProfile::with('user','businessCategory')->paginate(10);
+            if(count($allBusinessProfiles)){
+                return response()->json([
+                    'success' => true,
+                    'allBusinessProfiles'=>$allBusinessProfiles
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'allBusinessProfiles'=>[]
+                ],200);
+            }
+        }
+
+
+        public function store(Request $request)
+        {
+            $validator = Validator::make($request->all(), [
+                'business_name' => 'required',
+                'location'      => 'required',
+                'business_type' => 'required',
+                'trade_license' => 'required',
+                'industry_type' => 'required',
+                'number_of_outlets' => Rule::requiredIf(function () use ($request) {
+                    return $request->business_type == 2;
+                }),
+                'number_of_factories' => Rule::requiredIf(function () use ($request) {
+                    return $request->business_type == 1;
+                }),
+                'email' => 'required_if:has_representative,0|unique:users',
+                'phone' => 'required_if:has_representative,0',
+                'nid_passport' => 'required_if:has_representative,0',
+                'representive_name' =>'required_if:has_representative,0',
+                'business_category_id' => 'required_if:business_type,1',
+
+            ]);
+            if($validator->fails()){
+                return response()->json(array(
+                'success' => false,
+                'error' => $validator->getMessageBag()),
+                400);
+            }
+            try{
+                    $business_profile_data=[
+                        'business_name' => $request->business_name,
+                        'user_id'       => auth()->user()->id,
+                        'location'      => $request->location,
+                        'business_type' => $request->business_type,
+                        'has_representative'=> $request->has_representative,
+                        'number_of_outlets' => $request->number_of_outlets,
+                        'number_of_factories' => $request->number_of_factories,
+                        'business_category_id' => $request->business_category_id,
+                        'industry_type' => $request->industry_type,
+
+                    ];
+
+                    if($request->has_representative == true){
+                        $business_profile=BusinessProfile::create($business_profile_data);
+                        //create company overview
+                        $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+                        return response()->json([
+                            'success' => true,
+                            'business_profile'=>$business_profile,
+                            'companyOverview'=>$companyOverview
+                        
+                        ],201);
+                    }
+                    if($request->has_representative == false){
+                        $representive_info=[
+                            'name' => $request->representive_name,
+                            'company'=>auth()->user()->company_name,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                            'password' =>'mb12345678',
+                            'nid_passport' => $request->nid_passport,
+                            'is_representative' => true,
+                            'user_type'      => 'buyer',
+                            'is_email_verified' => 1,
+                        ];
+                        $representive_data=[
+                            'name' => $request->representive_name,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                            'password' =>'mb12345678',
+                            'nid_passport' => $request->nid_passport,
+                            'is_representative' => true,
+                            'user_type'      => 'buyer',
+                            'is_email_verified' => 1,
+                        ];
+                        // sso registration
+                        if(env('APP_ENV') == 'production')
+                        {
+                            $sso=Http::post(env('SSO_URL').'/api/auth/signup/',$representive_info);
+                            if(!$sso->successful()){
+                                return response()->json([
+                                    'success' => false,
+                                    'error' => 'Internal Server Error',
+                                ],500);
+                            }
+                        }
+
+                        //user registraion as represetative
+                        $representive_data['password'] =bcrypt($representive_data['password']);
+                        $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+                        $representive_data['user_id'] =$user_id;
+                        $user=User::create($representive_data);
+                        
+                        //profile create
+                        $business_profile_data['representative_user_id']= $user->id;
+                        $business_profile=BusinessProfile::create($business_profile_data);
+                        
+                        //create company overview
+                        $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+                        $newCompanyOverview = new stdClass();
+                        $newCompanyOverview->business_profile_id=$companyOverview->business_profile_id;
+                        $newCompanyOverview->business_profile_id=json_decode($companyOverview->data);
+
+                        return response()->json([
+                            'success' => true,
+                            'business_profile'=>$business_profile,
+                            'companyOverview'=>$newCompanyOverview
+                        ],201);
                     }
 
-                    //user registraion as represetative
-                    $representive_data['password'] =bcrypt($representive_data['password']);
-                    $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
-                    $representive_data['user_id'] =$user_id;
-                    $user=User::create($representive_data);
-                    
-                    //profile create
-                    $business_profile_data['representative_user_id']= $user->id;
-                    $business_profile=BusinessProfile::create($business_profile_data);
-                    
-                    //create company overview
-                    $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
-                    $newCompanyOverview = new stdClass();
-                    $newCompanyOverview->business_profile_id=$companyOverview->business_profile_id;
-                    $newCompanyOverview->business_profile_id=json_decode($companyOverview->data);
-
-                    return response()->json([
-                        'success' => true,
-                        'business_profile'=>$business_profile,
-                        'companyOverview'=>$newCompanyOverview
-                    ],201);
+                }catch(\Exception $e){
+                return response()->json([
+                    'success' => false,
+                    'error'   => ['msg' => $e->getMessage()],
+                ],500);
                 }
+        }
 
-            }catch(\Exception $e){
-               return response()->json([
-                   'success' => false,
-                   'error'   => ['msg' => $e->getMessage()],
-               ],500);
+        //company overview data
+        public function createCompanyOverview(Request $request, $profile_id)
+        {
+            $name=['annual_revenue','number_of_worker','number_of_female_worker','trade_license_number','year_of_establishment','opertaing_hours','shift_details','main_products'];
+            $value=[null,null,null,$request->trade_license,null,null,null,null,null];
+            $data=[];
+            foreach($name as $key => $value2){
+                array_push($data,['name' => $value2, 'value' => $value[$key], 'status' => 0]);
             }
-    }
-
-      //company overview data
-      public function createCompanyOverview(Request $request, $profile_id)
-      {
-          $name=['annual_revenue','number_of_worker','number_of_female_worker','trade_license_number','year_of_establishment','opertaing_hours','shift_details','main_products'];
-          $value=[null,null,null,$request->trade_license,null,null,null,null,null];
-          $data=[];
-          foreach($name as $key => $value2){
-              array_push($data,['name' => $value2, 'value' => $value[$key], 'status' => 0]);
-          }
-          $companyOverview=CompanyOverview::create([
-              'business_profile_id' => $profile_id,
-              'data'        => json_encode($data),
-          ]);
-          return $companyOverview;
-  
-      }
+            $companyOverview=CompanyOverview::create([
+                'business_profile_id' => $profile_id,
+                'data'        => json_encode($data),
+            ]);
+            return $companyOverview;
+    
+        }
         public function LowMOQProducts(Request $request)
         {
             //select('name','business_profile_id','product_type','moq','product_unit','sold','full_stock','full_stock_price','full_stock_negotiable')

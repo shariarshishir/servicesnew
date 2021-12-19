@@ -50,6 +50,25 @@
 
         <p><strong> Request for Quotation (RFQ) </strong></p>
         <p>Our dynamic RFQ system enables anyone from anywhere to source and compare price from Bangladesh manufacturing industry.</p>
+        <p>&nbsp;</p>
+
+        <h3><strong> We enable tech to make factories Data Driven </strong></h3>
+        <p>&nbsp;</p>
+        <p style="text-align: center;" >We believe data and business intelligence is the future of efficient operation of business to save time and cost. Our Smart Tools enable manufacturers to achieve efficiency in both micro and macro level. </p>
+        <p>&nbsp;</p>
+        
+        <h3><strong> Smart Tools</strong></h3>
+        <p>&nbsp;</p>
+        <p><strong>Order Management Dashboard (OMD)</strong></p>
+        <p>Our Smart Order Management Dashboard aim to solve the macro aspects of an order management. It integrates all the stakeholders in one place; making them able to connect with each other from anywhere instantly. Smart T&A system makes your task management lean and clean. With added features of quality and production tracking along with managing every order detail, this tool organizes the whole order management process to assure on time shipment and transparency. </p>
+        <p>&nbsp;</p>
+        
+        <p><strong>Production Intelligence</strong></p>
+        <p>Production Intelligence system brings production data from the floor to your hand. This tool is automating production follow up with various important business intel. This is saving 3 hours from a production manager’s work a day and keeping all data visually represented for informed data driven decision making. </p>
+
+
+
+
       </div>
     </div>
 </div>

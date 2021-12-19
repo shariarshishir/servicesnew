@@ -2263,19 +2263,16 @@
     function addFactoryImageBlock()
     {
 
-        var html ='<div class="col l2">';
-        html +='<label for="product-upload">Media</label>';
-        html +='</div>';
-        html +='<br>';
-        html +='<div class="col-md-12 mb-2">';
+        var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
+        // html +='<label for="product-upload">Media</label>';
+        html +='<div class="upload_imgage_box">';
         html +='<img id="preview-large-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='</div>';
-        html +='<div class="col-md-12">';
         html +='<div class="form-group">';
         html +='<input type="file" name="factory_images[]" placeholder="Choose image" id="factory-large-image">';
         html +='</div>';
         html +='</div>';
-        $('.factory-image-block').append(html);
+        $('.factory-image-block.row').append(html);
     }
     function removeFactoryLargeImage(el)
     {
@@ -2286,18 +2283,19 @@
     function addFactoryLargeImageBlock()
     {
 
-        var html ='<div class="col l2">';
-        html +='<label for="product-upload">Media</label>';
-        html +='</div>';
-        html +='<br>';
-        html +='<div class="col-md-12 mb-2">';
+        var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
-        html +='</div>';
-        html +='<div class="col-md-12">';
         html +='<div class="form-group">';
         html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" id="factory-image">';
         html +='</div>';
-        html +='</div>';
+
+        // html +='</div>';
+        // html +='<br>';
+        // html +='<div class="col-md-12 mb-2">';
+        // html +='</div>';
+        // html +='<div class="col-md-12">';
+        // html +='</div>';
+
         $('.factory-large-image-block').append(html);
     }
     function removeFactoryImage(el)

@@ -18,21 +18,22 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group factory-tour-photo factory_mages_box">
+                <div class="form-group factory-tour-photo factory_images_box">
                     <legend>Factory Images</legend>
                     
-                    <div class="row">
+                    <div class="row factory_images_box_wrap">
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourImages)>0 )
                         @foreach($companyFactoryTour->companyFactoryTourImages as $image)
-                        <div class="col-md-12 mb-2 uploaded-factory-image-block">
+                        <div class="col s6 m3 l2 uploaded-factory-image-block">
                             <a href="javascript:void(0)"  data-imageId="{{$image->id}}" class="delete-factory-image" ><i class="material-icons dp48">remove_circle_outline</i></a>
                             <img id="previous-uploaded-factory-image" src="{{asset('storage/'.$image->factory_image)}}" alt="preview image" style="max-height: 80px;min-height:80px">
                         </div>
                         @endforeach
                         @endif
                         @endif
-                        <div class="col 12 factory-image-block">
+
+                        <!-- <div class="col 12 factory-image-block">
                             <div class="col l2">
                                 <label for="product-upload">Media</label>
                             </div>
@@ -45,51 +46,64 @@
                                     <input type="file" name="factory_images[]" placeholder="Choose image"  id="factory-image">
                                 </div>
                             </div>
+                        </div> -->
+                    </div>
+                    <div class="factory_file_uploader">
+                        <label for="product-upload">Media</label>
+                        <div class="factory-image-block row">
+                            <div class="upload_img_box_wrap col s6 m3 l2">
+                                <div class="upload_imgage_box">
+                                    <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" name="factory_images[]" placeholder="Choose image"  id="factory-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="factory_add_more row">
+                            <a href="javascript:void(0);" class="add-more-factory-image-block" onclick="addFactoryImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <a href="javascript:void(0);" class="add-more-factory-image-block" onclick="addFactoryImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
-                    </div>
+                    
                 </div>
             </div>
             
             <div class="row">
-                <div class="form-group factory-tour-photo factory_large_mages_box">
+                <div class="form-group factory-tour-photo factory_large_images_box">
                     <legend>Factory Large Images</legend>
 
-                    <div class="row">
+                    <div class="row factory_images_box_wrap">
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourLargeImages)>0 )
                             @foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
-                                <div class="col-md-12 mb-2 uploaded-factory-large-image-block">
+                                <div class="col s6 m3 l2 uploaded-factory-large-image-block">
                                     <a href="javascript:void(0)"  data-largeImageId="{{$image->id}}" class="delete-factory-large-image" ><i class="material-icons dp48">remove_circle_outline</i></a>
                                     <img id="previous-uploaded-factory-image" src="{{asset('storage/'.$image->factory_large_image)}}" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>
                             @endforeach
                         @endif
                         @endif
-                        <div class="col 12 factory-large-image-block">
-                            <div class="col l2">
-                                <label for="product-upload">Media</label>
-                            </div>
-                            <br>
-                            <div class="col-md-12 mb-2">
-                                <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
-                            </div>
+                    </div>
 
-                            <div class="col-md-12">
+                    <div class="factory_file_uploader">
+                        <label for="product-upload">Media</label>
+                        <div class="factory-large-image-block row">
+                            <div class="upload_img_box_wrap col s6 m3 l2">
+                                <div class="upload_imgage_box">
+                                    <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
+                                </div>
                                 <div class="form-group">
                                     <input type="file" name="factory_large_images[]" placeholder="Choose image"  id="factory-large-image">
                                 </div>
                             </div>
-                            
+                        </div>
+                        <div class="factory_add_more row">
+                            <a href="javascript:void(0);" class="add-more-factory-large-image-block" onclick="addFactoryLargeImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <a href="javascript:void(0);" class="add-more-factory-large-image-block" onclick="addFactoryLargeImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
-                    </div>
+                    
+                    
+                    
                 </div>
             </div>
           

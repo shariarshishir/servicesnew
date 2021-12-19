@@ -38,12 +38,12 @@ class BusinessProfileController extends Controller
     {
         $user=User::where('id',auth()->id())->withCount('businessProfile')->first();
         $total_business_count=$user->business_profile_count;
-        if($total_business_count >= 3){
-            abort( response('Not Permit To More Than 3 Business', 401) );
-        }
-        if($user->is_representative	== true){
-            abort(response('representative does not permit to open business', 401) );
-        }
+        // if($total_business_count >= 3){
+        //     abort( response('Not Permit To More Than 3 Business', 401) );
+        // }
+        // if($user->is_representative	== true){
+        //     abort(response('representative does not permit to open business', 401) );
+        // }
 
         return view('business_profile.create');
     }
@@ -101,11 +101,22 @@ class BusinessProfileController extends Controller
                     ],200);
                 }
                 if($request->has_representative == false){
+                    $representive_info=[
+                        'name' => $request->representive_name,
+                        'company'=>auth()->user()->company_name,
+                        'email' => $request->email,
+                        'phone' => $request->phone,
+                        'password' =>'mb12345678',
+                        'nid_passport' => $request->nid_passport,
+                        'is_representative' => true,
+                        'user_type'      => 'buyer',
+                        'is_email_verified' => 1,
+                    ];
                     $representive_data=[
                         'name' => $request->representive_name,
                         'email' => $request->email,
                         'phone' => $request->phone,
-                        'password' =>'12345678',
+                        'password' =>'mb12345678',
                         'nid_passport' => $request->nid_passport,
                         'is_representative' => true,
                         'user_type'      => 'buyer',
@@ -114,7 +125,7 @@ class BusinessProfileController extends Controller
                     // sso registration
                     if(env('APP_ENV') == 'production')
                     {
-                        $sso=Http::post(env('SSO_URL').'api/auth/signup/',$representive_data);
+                        $sso=Http::post(env('SSO_URL').'/api/auth/signup/',$representive_info);
                         if(!$sso->successful()){
                             return response()->json([
                                 'success' => false,
@@ -122,6 +133,7 @@ class BusinessProfileController extends Controller
                             ],500);
                         }
                     }
+                    
                     //user registraion as represetative
                     $representive_data['password'] =bcrypt($representive_data['password']);
                     $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);

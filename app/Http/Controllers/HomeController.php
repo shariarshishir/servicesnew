@@ -494,14 +494,22 @@ class HomeController extends Controller
     public function suppliers(Request $request)
     {
         $suppliers=BusinessProfile::with(['businessCategory'])->where(function($query) use ($request){
-            if($request->business_type){
-                $query->whereIn('business_type',$request->business_type)->get();
-            }
+            // if($request->business_type){
+            //     $query->whereIn('business_type',$request->business_type)->get();
+            // }
             if($request->industry_type){
                 $query->whereIn('industry_type',$request->industry_type)->get();
             }
+            if($request->factory_type){
+                $query->whereHas('businessCategory', function ($sub_query) use ($request) {
+                    $sub_query->where('id', $request->factory_type);
+                })->get();
+            }
             if(isset($request->business_name)){
                 $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
+            }
+            if(isset($request->location)){
+                $query-> where('location', 'like', '%'.$request->location.'%')->get();
             }
         })
         ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
@@ -715,6 +723,19 @@ class HomeController extends Controller
 
     public function contactusLandingPage(){
         return view('contactus.index');
+    }
+
+    // get supplier location data
+    public function getSupplierLocationData(Request $request)
+    {
+        $data = BusinessProfile::select("location")
+        ->where("location","LIKE","%{$request->get('query')}%")
+        ->get();
+        $modify=[];
+        foreach($data as $d){
+            $modify[] = $d->location;
+        }
+        return response()->json($modify);
     }
 
 

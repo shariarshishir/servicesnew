@@ -212,6 +212,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
 {{-- jasny-bootstrap --}}
 <script src="{{asset('js/jasny-bootstrap.js')}}"></script>
+{{-- typehead js --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script> --}}
+{{-- <script src="{{asset('js/bootstrap3-typeahead.min.js')}}"></script> --}}
 
 @stack('js')
 <script>

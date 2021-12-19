@@ -8,7 +8,7 @@
 		
 		<div class="row">
 			<div class="form-group  special-customization-details-block">
-				<legend>Create sampling</legend>
+				<legend>Create special customaization</legend>
 				<div class="special-customization-block">
 					<table class="special-customization-table-block">
 						<thead>

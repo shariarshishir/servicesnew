@@ -67,8 +67,12 @@ class ProductionFlowAndManpowerController extends Controller
             $productionFlowAndManpowers = ProductionFlowAndManpower::where('business_profile_id',$request->business_profile_id)->get();
            
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
-            $businessProfileVerification->production_capacity = 0 ;
-            $businessProfileVerification->save();
+            if($businessProfileVerification){
+                $businessProfileVerification->production_capacity = 0 ;
+                $businessProfileVerification->save();
+
+            }
+            
 
             return response()->json([
                 'success' => true,

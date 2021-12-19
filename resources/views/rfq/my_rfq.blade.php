@@ -79,6 +79,10 @@
 							<div class="rfq_thum_img">
 								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="xlsx_icon" >&nbsp; XLSX</a>
 							</div>
+						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'TAR'|| pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'tar'|| pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'rar'|| pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'RAR' ||pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'zip' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'ZIP')
+						<div class="rfq_thum_img">
+							<a href="{{ asset('storage/'.$rfqImage->image) }}" class="zip_icon" >&nbsp; DOC</a>
+						</div>
 						@else
 							<div class="rfq_thum_img">
 								<img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />

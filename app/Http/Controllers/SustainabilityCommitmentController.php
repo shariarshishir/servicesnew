@@ -45,8 +45,10 @@ class SustainabilityCommitmentController extends Controller
             $sustainabilityCommitments = SustainabilityCommitment::where('business_profile_id',$request->business_profile_id)->get();
             
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
-            $businessProfileVerification->sustainability_commitments = 0 ;
-            $businessProfileVerification->save();
+            if($businessProfileVerification){
+                $businessProfileVerification->sustainability_commitments = 0 ;
+                $businessProfileVerification->save();
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Sustainability Commitment Updated',

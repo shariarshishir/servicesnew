@@ -38,8 +38,11 @@
 				</div>
 				<div class="col m6 l6 footer_right_bottom">
 					<div class="footer_buttonWrap right-align">
-						<input type="text" class="industry_textbox" placeholder="Get the latest Industry Insights" />
-						<button type="submit" class="btn_lightgr btn_email"> <img src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
+                        <form method="post" id="newsletter_signup_form">
+                            @csrf
+                            <input type="text" id="newsletter_email_address" class="industry_textbox" placeholder="Get the latest Industry Insights" required/>
+                            <button type="submit" id="newsletter_signup" class="btn_lightgr btn_email"> <img src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
+                        </form>
 					</div>
 					<div class="row">
 						<div class="col s12 m6 l4 help_menu">
@@ -230,7 +233,7 @@
             $(".main-header").removeClass("fixed");
         }
     });
-    $('#newsletter_signup').on('click',function(event){
+    $('#newsletter_signup_form').on('submit',function(event){
         event.preventDefault();
         let newsletter_email_address = $('#newsletter_email_address').val();
         $.ajax({
@@ -248,8 +251,6 @@
             },
             error:function (response) {
                 var error = response.responseJSON.errors.newsletter_email_address;
-                console.log();
-
                 swal(error[0],"Please try again", "error");
 
             }

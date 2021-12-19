@@ -43,26 +43,56 @@
             </div>
         </div>
     </div> --}}
-
+    @if(count($low_moq_lists)>0)
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
+                @foreach ($low_moq_lists  as $list )
+                    @php
+                        if($list->flag == 'shop'){
+                            $title=$list->name;
+                            $img= asset('storage').'/'.$list->images[0]->image;
+                        }else{
+                            $title=$list->title;
+                            $img= asset('storage/').'/'.$list->product_images[0]->product_image;
+                        }
+                    @endphp
 
+                    <div class="col m3 productBox">
+                        <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
+                        <h4>{{$title}}</h4>
+                        <div class="moqBox">{{$list->moq}}</div>
+                        <div class="moq_view_details">
+                            <a class="moq_buss_name moq_left left" href="{{ route("supplier.profile",$list->businessProfile->id) }}">{{$list->businessProfile->business_name}}</a>
+                            <a class="moq_view moq_right right" href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">View Details </a>
+                        </div>
+                    </div>
+
+                @endforeach
 
                 </div>
             </div>
         </div>
     </div>
-    <div id="pager">
-        <ul id="pagination" class="pagination-sm"></ul>
+    <div class="pagination-block-wrapper">
+        <div class="col s12 center">
+            {!! $low_moq_lists->links() !!}
+        </div>
     </div>
+    @else
+        <div class="card-alert card cyan">
+            <div class="card-content white-text">
+                <p>INFO : No products available.</p>
+            </div>
+        </div>
+    @endif
 
 @endsection
 
 @push('js')
     <script>
-        $(document).ready(function(){
+        /*$(document).ready(function(){
             var $pagination = $('#pagination'),
                 totalRecords = 0,
                 records = [],
@@ -142,7 +172,9 @@
                     });
                 }
 
-        });
+        });*/
+
+
 
     </script>
 @endpush

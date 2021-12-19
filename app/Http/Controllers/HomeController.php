@@ -20,6 +20,7 @@ use App\Models\BusinessProfileVerification;
 use Helper;
 use DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\Paginator;
 
 
 class HomeController extends Controller
@@ -527,9 +528,9 @@ class HomeController extends Controller
         //         {
         //             $flag=1;
         //             break;
-    
+
         //         }
-              
+
         //     }
 
         // }
@@ -549,7 +550,7 @@ class HomeController extends Controller
             //     }
             //     else{
             //         $flag = 1;
-    
+
             //     }
             // }
             // else{
@@ -564,7 +565,7 @@ class HomeController extends Controller
 
             }
 
-           
+
 
             return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour','userObj','flag'));
         }
@@ -601,12 +602,12 @@ class HomeController extends Controller
     //low moq
     public function lowMoqData(Request $request)
     {
-        $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
-        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
-        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
-        $sorted=$merged->sortBy('moq');
-        $sorted_value= $sorted->values()->all();
-        return $sorted_value;
+        // $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
+        // $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
+        // $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+        // $sorted=$merged->sortBy('moq');
+        // $sorted_value= $sorted->values()->all();
+        // return $sorted_value;
         //return view('product.low_moq',['products' => $sorted_value]);
         // $page=isset($request->page) ? $request->page : 1;
         // $collection=  $sorted->forPage($page,3);
@@ -615,7 +616,23 @@ class HomeController extends Controller
 
     public function lowMoq()
     {
-        return view('product.low_moq');
+        $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
+        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
+        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+        // $sorted=$merged->sortBy('moq');
+        // $low_moq= $sorted->values()->all();
+        // $object = (object) $low_moq;
+        $page = Paginator::resolveCurrentPage() ?: 1;
+        $perPage = 12;
+        $low_moq_lists = new \Illuminate\Pagination\LengthAwarePaginator(
+            $merged->forPage($page, $perPage),
+            $merged->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
+
+        return view('product.low_moq',compact('low_moq_lists'));
     }
     //low moq details
     public function mixProductDetails($flag, $id)
@@ -690,15 +707,15 @@ class HomeController extends Controller
 
     public function policyLandingPage(){
         return view('policy.index');
-    }    
+    }
 
     public function aboutusLandingPage(){
         return view('aboutus.index');
-    }   
-    
+    }
+
     public function contactusLandingPage(){
         return view('contactus.index');
-    }   
+    }
 
 
 

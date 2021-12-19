@@ -1851,7 +1851,7 @@
      function addSamplingDetails()
     {
 
-        $('#sampling-details-table-no-data').hide();
+        //$('#sampling-details-table-no-data').hide();
         var html = '<tr>';
         html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
         html += '<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
@@ -1945,7 +1945,7 @@
     function addSpecialCustomizationsDetails()
     {
 
-        $('#special-customization-table-no-data').hide();
+        //$('#special-customization-table-no-data').hide();
         var html = '<tr>';
         html += '<td><input name="special_customization_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSpecialCustomizationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
@@ -2426,6 +2426,9 @@
     $(document).ready(function(){
         $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").hide();
         $(".edit_profile_trigger").click(function() {
+            $(".tabs li a").removeClass("active");
+            $(".profile-tab a").addClass("active");
+            $('.tabs').tabs().find('a[href="#profile-tab"]').trigger('click');
             $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").toggle();
         });
     });

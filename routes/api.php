@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\User\SecurityController;
 use App\Http\Controllers\Api\User\RFQController;
 use App\Http\Controllers\Api\User\RfqBidController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
+use App\Http\Controllers\Api\User\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,10 @@ Route::get('/email/verify',[UserController::class, 'emailVerify']);
 //api with authentication
 
 Route::post('/omd-rfqs', [RFQController::class, 'storeRfqFromOMD']);
+
+//blogs
+Route::get('/blogs',[BlogController::class,'blogs'])->name('industry.blogs');
+Route::get('/blogs/{id}',[BlogController::class,'blogDetails'])->name('blogs.details');
 
 Route::group(['middleware'=>['auth:sanctum']],function () {
     //user api
@@ -108,9 +113,9 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate']);
    
    
-    //store api
+    //wholeslaer api
     Route::put('/store/{vendorUId}',[VendorController::class,'update']);
-    Route::post('/store/{storeId}/products', [ProductController::class, 'store']);
+    Route::post('/wholesaler-products', [ProductController::class, 'store']);
     Route::post('/store/{storeId}/products/{productId}', [ProductController::class, 'update']);
     Route::delete('/store/{storeId}/products/{productId}', [ProductController::class, 'destroy']);
     Route::get('/store/{businessProfileId}/orders', [OrderController::class, 'orderByBusinessProfileId']);

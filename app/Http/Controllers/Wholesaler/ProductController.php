@@ -195,7 +195,7 @@ class ProductController extends Controller
                 }
                 $full_stock= isset($request->full_stock) ? true : false;
                 $full_stock_price = isset($request->full_stock_price) ? $request->full_stock_price : null;
-                $availability=$request->ready_stock_availability;
+                $availability = $request->ready_stock_availability;
                 $full_stock_negotiable= isset($request->ready_full_stock_negotiable) ? true : false;
 
             }

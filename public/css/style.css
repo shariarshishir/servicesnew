@@ -916,6 +916,8 @@ form input:read-only {
     display: block;
     text-transform: capitalize;
     margin-bottom: 10px;
+    height: 30px;
+    overflow: hidden;
 }
 
 .load_time_box .load_time {
@@ -1042,7 +1044,7 @@ form input:read-only {
 .profile_bannerwrap .erified {
     background : url('../images/frontendimages/new_layout_images/mark_icon.png') no-repeat left 8px;
     position: absolute;
-    bottom: 55px;
+    bottom: 60px;
     right: 70px;
     padding: 18px 28px 18px 35px;
     font-size: 18px;
@@ -1634,6 +1636,9 @@ form input:read-only {
 .card .card-content {
     padding: 0;
     text-align: center;
+} 
+.related-products .card .card-content {
+    text-align: left;
 }
 .profile_tabNav_wrap .verified_img {
     float: right;
@@ -2697,6 +2702,10 @@ form input:read-only {
     padding-bottom: 40px;
 } */
 
+
+.profile_tabNav_wrap #home .factory_imgbox_wrap {
+    padding-bottom: 80px;
+}
 #factory_degree_images,
 #factory_images {
     margin: 0 -20px;
@@ -4003,6 +4012,14 @@ form input:read-only {
     display: block;
     font-size: 0;
 }
+.rfq_thum_img .zip_icon {
+    background: url(../images/frontendimages/new_layout_images/zip-bg.png) no-repeat center;
+    background-size: 120px;
+    width: auto;
+    height: 132px;
+    display: block;
+    font-size: 0;
+}
 .rfq_view_detail_info .full_specification {
     padding-bottom: 10px;
     font-weight: 300;
@@ -4743,6 +4760,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     padding-bottom: 30px;
 }
 
+.product-details-table-block .blue.accent-2,
 .cart_table .blue.ready-to-ship-label,
 .cart_content_wrap .blue.ready-to-ship-label {
     color: #ffffff !important;
@@ -4980,6 +4998,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 .mobile_top_right .avatar-status {
     margin-left: 0;
+    margin-top: 3px;
 }
 .avatar-status img {
     width: 100%;
@@ -4999,7 +5018,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     position: relative;
 }
 .user-block-mobile .btn_login_mobile {
-    margin-top: 3px;
+    margin-top: 6px;
     display: block;
 }
 
@@ -5260,13 +5279,6 @@ legend {
     font-size: 1rem;
 }
 
-#login-register-modal.modal.modal-fixed-footer {
-    height: 60%;
-    width: 50%;
-}
-#login-register-modal .modal-content {
-    overflow: hidden;
-}
 .login-block .btn_green {
     padding: 5px 15px 10px;
 }
@@ -6456,6 +6468,11 @@ nav .pagination li.active .page-link {
     .profile_tabNav_wrap .membership_wrap .membership_textBox .imgbox {
         padding: 0 30px;
     }
+
+    #login-register-modal.modal.modal-fixed-footer {
+        height: 60%;
+        width: 50%;
+    }
     
 }
 @media only screen and (max-width: 1499px) {
@@ -6691,8 +6708,6 @@ nav .pagination li.active .page-link {
         font-size: 28px !important;
         line-height: 48px;
     }
-
-    
     .product_wrapper .productBox {
         padding: 0 20px !important;
     }
@@ -6720,6 +6735,28 @@ nav .pagination li.active .page-link {
     .export_destination_wrap .flagBox .col.s6.m4.l2,
     .profile_tabNav_wrap .main_buyers_wrap .main_buyer_box.col.s6.m4 {
         width: 25% !important;
+    }
+
+    #homepage .perform-header h1,
+    #homepage .delivaryTime .ontimeDescription .description h2,
+    #homepage .banner .description h2 {
+        font-size: 35px;
+        line-height: 45px;
+    }
+    #homepage .homepgp {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    #homepage .homebHd-sm {
+        font-size: 22px;
+        line-height: 30px;
+    }
+    #homepage .tbm li a {
+        line-height: 20px;
+    }
+    #homepage .tbm li a span {
+        margin-top: 15px;
+        display: block;
     }
 }
 
@@ -6902,7 +6939,8 @@ nav .pagination li.active .page-link {
     #homepage .perform-header h1,
     #homepage .delivaryTime .ontimeDescription .description h2,
     #homepage .banner .description h2 {
-        font-size: 30px;
+        font-size: 30px !important;
+        line-height: 40px !important;
     }
     #homepage .delivaryTime .guarantee h3 {
         font-size: 25px;
@@ -6918,7 +6956,6 @@ nav .pagination li.active .page-link {
     .profile-menu-list ul {
         text-align: center;
     }
- 
     .profile_wholesaler_tab_menu ul li, 
     .profile_contentCol .profile_tab_menu .tabs .tab {
         margin: 3px;
@@ -6926,7 +6963,6 @@ nav .pagination li.active .page-link {
     .profile_container .container {
         padding: 0;
     }
-
     .profile_contentCol {
         padding: 0;
     }
@@ -6940,7 +6976,6 @@ nav .pagination li.active .page-link {
     .profile_tabNav_wrap .order-list-block {
         margin: 30px 0 0;
     }
-
     .seller-product-list .mdc-layout-grid__inner .mdc-layout-grid__cell--span-8,
     .seller-product-list .mdc-layout-grid__inner .mdc-layout-grid__cell--span-4 {
         float: none;
@@ -6952,7 +6987,6 @@ nav .pagination li.active .page-link {
         text-align: center !important;
         padding-top: 10px;
     }
-
     .profile_tabNav_wrap .editBox .btn_green_White .btn_edit_white {
         display: none;
     }
@@ -6964,7 +6998,6 @@ nav .pagination li.active .page-link {
         width: 40px;
         line-height: 40px;
     }
-
     .profile_contentCol .tabcontent .profile_product_wrap .product_boxwrap {
         margin: 0;
     }
@@ -6973,8 +7006,6 @@ nav .pagination li.active .page-link {
         background-size: 85px;
         height: 100px;
     }
-
-
     .manufacture-product-table-data .product_data_table_wrap table tr {
         display: block;
         width: 100%;
@@ -7006,18 +7037,6 @@ nav .pagination li.active .page-link {
     .bannerwrap .banner_slider h3 {
         font-size: 18px;
     }
-    /* .bannerwrap .banner_slider h2 {
-        font-size: 22px;
-        line-height: 28px;
-    }
-    .bannerwrap .banner_slider h3 {
-        font-size: 16px;
-        line-height: 22px;
-    }
-    .banner_search .search-btn {
-        height: 49px !important;
-    } */
-
     .profile_bannerwrap {
         padding-bottom: 0;
     }
@@ -7392,7 +7411,59 @@ nav .pagination li.active .page-link {
         box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     }
 
-    
+ 
+    #homepage .perform-header h1,
+    #homepage .delivaryTime .ontimeDescription .description h2,
+    #homepage .banner .description h2 {
+        font-size: 25px !important;
+        line-height: 30px !important;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    #homepage .perform-header h1 {
+        font-size: 20px !important;
+        line-height: 25px !important;
+    }
+
+    #homepage .about .about-item .item-body .item-description h4 {
+        font-size: 22px;
+        line-height: 28px !important;
+        text-align: center;
+    }
+
+    #homepage .about .about-item .item-body {
+        padding: 35px 20px;
+    }
+    #homepage .demoButton .content p {
+        font-size: 22px;
+        line-height: 28px;
+    }
+    #homepage .tbm li a:hover, 
+    #homepage .tbm li a.active, 
+    #homepage .tbm li a:first-child:hover {
+        font-size: 16px;
+    }
+    #homepage .homepgp-sm {
+        padding: 0;
+    }
+    #homepage .homebHd-sm {
+        padding: 30px 0px 20px;
+        line-height: 28px;
+    }
+
+    #homepage a.button:link, 
+    #homepage a.button:visited, 
+    #homepage a.button:active, 
+    #homepage a.button:hover {
+        text-align: center;
+    }
+    #homepage .book_call {
+        padding: 0;
+    }
+    #homepage .jb {
+        padding: 15px 15px 14px;
+    }
 
 }
 

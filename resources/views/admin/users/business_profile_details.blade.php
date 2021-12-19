@@ -1,4 +1,11 @@
 @extends('layouts.admin')
+@section('css')
+<style>
+    .card {
+        display: block;
+    }
+</style>
+@endsection
 @section('content')
 
 
@@ -23,8 +30,10 @@
            <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <legend>Business Profile</legend>
+                        <legend>Business Profile Details</legend>
+
                         <div id="company_overview">
+                            <h4>Company Overview</h4>
                             <form action="{{route('company.overview.varifie', $business_profile->companyOverview->id)}}" method="post">
                                 @csrf
                                 <table class="table">
@@ -45,10 +54,10 @@
                                                 </td>
                                                 <td class="{{$company_overview->name}}_status">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="status[{{$company_overview->name}}]" {{ $company_overview->status == true ? 'checked' : '' }} value=1>verified
+                                                        <input type="radio" name="status[{{$company_overview->name}}]" value="1" {{ $company_overview->status == true ? 'checked' : '' }}>verified
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="status[{{$company_overview->name}}]" {{ $company_overview->status == false ? 'checked' : '' }} value=0>unverified
+                                                        <input type="radio" name="status[{{$company_overview->name}}]" value="0" {{ $company_overview->status == false ? 'checked' : '' }}>unverified
                                                     </label>
                                                 </td>
                                             </tr>
@@ -61,7 +70,7 @@
 
                         @if($business_profile->business_type == 1)
                         <div class="capacity-and-machineries">
-                        <h5>Capacity and machineries</h5>
+                            <h5>Capacity and machineries</h5>
                             <form action="{{route('capacity.machineries.verify')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
@@ -105,7 +114,7 @@
                                 <div class="row categories-produced">
                                     <label>Categories Produced</label>
                                     <br>
-                                    <table class="categories-produced-table-block">
+                                    <table class="categories-produced-table-block table">
                                         <thead>
                                             <tr>
                                                 <th>Type</th>
@@ -121,10 +130,10 @@
                                                 <td><input readOnly name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
                                                 <td>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="categories_produced_status[{{$key2}}]" {{ $categoriesProduced->status == 1 ? 'checked' : '' }} value="1">verified
+                                                        <input type="radio" name="categories_produced_status[{{$key2}}]" value="1" {{ $categoriesProduced->status == 1 ? 'checked' : '' }}>verified
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="categories_produced_status[{{$key2}}]" {{ $categoriesProduced->status == 0 ? 'checked' : '' }} value="0">unverified
+                                                        <input type="radio" name="categories_produced_status[{{$key2}}]" value="0" {{ $categoriesProduced->status == 0 ? 'checked' : '' }}>unverified
                                                     </label>
                                                 </td>
                                             </tr>
@@ -142,7 +151,7 @@
                                 <div class="row machinaries-details">
                                     <label>machinaries Details</label>
                                     <br>
-                                    <table class="machinaries-details-table-block">
+                                    <table class="machinaries-details-table-block table">
                                         <thead>
                                             <tr>
                                                 <th>Machine Name</th>
@@ -158,10 +167,10 @@
                                                 <td><input readOnly name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
                                                 <td>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="machineries_detail_status[{{$key3}}]" {{ $machineriesDetail->status == 1 ? 'checked' : '' }} value="1">verified
+                                                        <input type="radio" name="machineries_detail_status[{{$key3}}]" value="1" {{ $machineriesDetail->status == 1 ? 'checked' : '' }}>verified
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="machineries_detail_status[{{$key3}}]" {{ $machineriesDetail->status == 0 ? 'checked' : '' }} value="0">unverified
+                                                        <input type="radio" name="machineries_detail_status[{{$key3}}]" value="0" {{ $machineriesDetail->status == 0 ? 'checked' : '' }}>unverified
                                                     </label>
                                                 </td>
                                             </tr>
@@ -178,179 +187,11 @@
                             </form>
                         <div>
 
-                        <div class="business-terms">
-                            <form action="{{route('business.terms.verify')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                    <label>Bsuiness terms</label>
-                                    <br>
-                                    <table class="business-terms-table-block">
-                                        <thead>
-                                            <tr>
-                                                <th>Machine Name</th>
-                                                <th>Quantity</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          
-                                            @if(count($business_profile->businessTerms)>0)
-                                            @foreach($business_profile->businessTerms as $key4 => $businessTerm)
-                                            <tr>
-
-                                                <td><input readOnly name="business_term_title[]" id="business-term-title" type="text" class="form-control "  value="{{$businessTerm->title}}" ></td>
-                                                <td><input readOnly name="business_term_quantity[]" id="business-term-quantity" type="number" class="form-control "  value="{{$businessTerm->quantity}}" ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="business_term_status[{{$key4}}]" {{ $businessTerm->status == 1 ? 'checked' : '' }} value="1">verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="business_term_status[{{$key4}}]" {{ $businessTerm->status == 0 ? 'checked' : '' }} value="0">unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="business-terms-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                <button type="submit" class="btn btn-success float-right">submit</button>
-                            </form>
-                        <div>
-
-                        <div class="samplings">
-                            <form action="{{route('samplings.verify')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                    <label>Samplings</label>
-                                    <br>
-                                    <table class="samplings-table-block">
-                                        <thead>
-                                            <tr>
-                                                <th> Name</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          
-                                        @if(count($business_profile->samplings)>0)
-							            @foreach($business_profile->samplings as $key5=>$sampling)
-                                            <tr>
-
-                                                <td><input readOnly name="sampling_title[]" id="sampling-title" type="text" class="form-control "  value="{{$sampling->title}}" ></td>
-                                                <td><input readOnly name="sampling_quantity[]" id="sampling-quantity" type="number" class="form-control "  value="{{$sampling->quantity}}" ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sampling_status[{{$key5}}]" {{ $sampling->status == 1 ? 'checked' : '' }} value="1">verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sampling_status[{{$key5}}]" {{ $sampling->status == 0 ? 'checked' : '' }} value="0">unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="sampling-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                <button type="submit" class="btn btn-success float-right">submit</button>
-                            </form>
-                        <div>
-
-                        <div class="special-customizations">
-                            <form action="{{route('special.customizations.verify')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                    <label>Special Customizations</label>
-                                    <br>
-                                    <table class="special-customizations-table-block">
-                                        <thead>
-                                            <tr>
-                                                <th> Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          
-                                        @if(count($business_profile->specialCustomizations)>0)
-							            @foreach($business_profile->specialCustomizations as $key=>$specialCustomization)
-                                            <tr>
-
-                                                <td><input readOnly name="special_customization_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$specialCustomization->title}}"  ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="special_customization_status[{{$key}}]" {{ $specialCustomization->status == 1 ? 'checked' : '' }} value="1">verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="special_customization_status[{{$key}}]" {{ $specialCustomization->status == 0 ? 'checked' : '' }} value="0">unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="special-customizations-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                <button type="submit" class="btn btn-success float-right">submit</button>
-                            </form>
-                        <div>
-
-                        <div class="sustainability-commitments">
-                            <form action="{{route('sustainability.commitments.verify')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                    <label>Sustainability Commitments</label>
-                                    <br>
-                                    <table class="sustainability-commitments-table-block">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          
-                                        @if(count($business_profile->sustainabilityCommitments)>0)
-							            @foreach($business_profile->sustainabilityCommitments as $key=>$sustainabilityCommitment)
-                                            <tr>
-
-                                                <td><input readOnly name="sustainability_commitment_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$sustainabilityCommitment->title}}"  ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sustainability_commitment_status[{{$key}}]" {{ $sustainabilityCommitment->status == 1 ? 'checked' : '' }} value="1">verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sustainability_commitment_status[{{$key}}]" {{ $sustainabilityCommitment->status == 0 ? 'checked' : '' }} value="0">unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="sustainability-commitments-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                <button type="submit" class="btn btn-success float-right">submit</button>
-                            </form>
-                        <div>
-
                         <div class="production-flow-and-manpower">
                             <form  method="POST" action="{{route('productionflow.manpower.verify')}}" id="production-flow-and-manpower-form">
                                 @csrf
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                                <h4>Production Capacity (Annual)</h4>
+                                <h4>Production Flow and Manpower</h4>
                                 <br>
                                 <tbody>
                                     @if(count($business_profile->productionFlowAndManpowers)>0)
@@ -370,10 +211,10 @@
                                                         <td><input  name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="hidden" class="form-control "  value="{{$flowAndManpower->value}}"></td>
                                                         <td>
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="no_of_jacquard_machines_status[{{$productionFlowAndManpower->id}}]" {{ $flowAndManpower->status == 1 ? 'checked' : '' }} value="1">verified
+                                                                <input type="radio" name="no_of_jacquard_machines_status[{{$productionFlowAndManpower->id}}]" value="1" {{ $flowAndManpower->status == 1 ? 'checked' : '' }}>verified
                                                             </label>
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="no_of_jacquard_machines_status[{{$productionFlowAndManpower->id}}]" {{ $flowAndManpower->status == 0 ? 'checked' : '' }} value="0">unverified
+                                                                <input type="radio" name="no_of_jacquard_machines_status[{{$productionFlowAndManpower->id}}]" value="0" {{ $flowAndManpower->status == 0 ? 'checked' : '' }}>unverified
                                                             </label>
                                                         </td>
                                                         @endif
@@ -383,10 +224,10 @@
                                                         <td><input  name="manpower[]" id="manpower" type="hidden"  value="{{$flowAndManpower->value}}"></td>
                                                         <td>
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="manpower_status[{{$productionFlowAndManpower->id}}]" {{ $flowAndManpower->status == 1 ? 'checked' : '' }} value="1">verified
+                                                                <input type="radio" name="manpower_status[{{$productionFlowAndManpower->id}}]" value="1" {{ $flowAndManpower->status == 1 ? 'checked' : '' }}>verified
                                                             </label>
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="manpower_status[{{$productionFlowAndManpower->id}}]" {{ $flowAndManpower->status == 0 ? 'checked' : '' }} value="0">unverified
+                                                                <input type="radio" name="manpower_status[{{$productionFlowAndManpower->id}}]" value="0" {{ $flowAndManpower->status == 0 ? 'checked' : '' }}>unverified
                                                             </label>
                                                         </td>
                                                         @endif
@@ -396,10 +237,10 @@
                                                         <td><input  name="daily_capacity[]" id="daily-capacity" type="hidden"  value="{{$flowAndManpower->value}}"></td>
                                                         <td>
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="daily_capacity_status[{{$productionFlowAndManpower->id}}]" {{ $flowAndManpower->status == 1 ? 'checked' : '' }} value="1">verified
+                                                                <input type="radio" name="daily_capacity_status[{{$productionFlowAndManpower->id}}]" value="1" {{ $flowAndManpower->status == 1 ? 'checked' : '' }}>verified
                                                             </label>
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="daily_capacity_status[{{$productionFlowAndManpower->id}}]" {{ $flowAndManpower->status == 0 ? 'checked' : '' }} value="0">unverified
+                                                                <input type="radio" name="daily_capacity_status[{{$productionFlowAndManpower->id}}]" value="0" {{ $flowAndManpower->status == 0 ? 'checked' : '' }}>unverified
                                                             </label>
                                                         </td>
                                                         @endif
@@ -424,7 +265,175 @@
                                 <button class="btn btn-success" type="submit">Submit
                                 </button>
                             </form>
-                        </div>
+                        </div>                        
+
+                        <div class="business-terms">
+                            <form action="{{route('business.terms.verify')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
+                                    <label>Bsuiness terms</label>
+                                    <br>
+                                    <table class="business-terms-table-block table">
+                                        <thead>
+                                            <tr>
+                                                <th>Machine Name</th>
+                                                <th>Quantity</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          
+                                            @if(count($business_profile->businessTerms)>0)
+                                            @foreach($business_profile->businessTerms as $key4 => $businessTerm)
+                                            <tr>
+
+                                                <td><input readOnly name="business_term_title[]" id="business-term-title" type="text" class="form-control "  value="{{$businessTerm->title}}" ></td>
+                                                <td><input readOnly name="business_term_quantity[]" id="business-term-quantity" type="number" class="form-control "  value="{{$businessTerm->quantity}}" ></td>
+                                                <td>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="business_term_status[{{$key4}}]" value="1" {{ $businessTerm->status == 1 ? 'checked' : '' }}>verified
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="business_term_status[{{$key4}}]" value="0" {{ $businessTerm->status == 0 ? 'checked' : '' }}>unverified
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @else
+                                            <tr id="business-terms-details-table-no-data">
+                                                <td>No data</td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                <button type="submit" class="btn btn-success float-right">submit</button>
+                            </form>
+                        <div>
+
+                        <div class="samplings">
+                            <form action="{{route('samplings.verify')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
+                                    <label>Sampling and R&D</label>
+                                    <br>
+                                    <table class="samplings-table-block table">
+                                        <thead>
+                                            <tr>
+                                                <th> Name</th>
+                                                <th>Quantity</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          
+                                        @if(count($business_profile->samplings)>0)
+							            @foreach($business_profile->samplings as $key5=>$sampling)
+                                            <tr>
+
+                                                <td><input readOnly name="sampling_title[]" id="sampling-title" type="text" class="form-control "  value="{{$sampling->title}}" ></td>
+                                                <td><input readOnly name="sampling_quantity[]" id="sampling-quantity" type="number" class="form-control "  value="{{$sampling->quantity}}" ></td>
+                                                <td>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="sampling_status[{{$key5}}]" value="1" {{ $sampling->status == 1 ? 'checked' : '' }}>verified
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="sampling_status[{{$key5}}]" value="0" {{ $sampling->status == 0 ? 'checked' : '' }}>unverified
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @else
+                                            <tr id="sampling-details-table-no-data">
+                                                <td>No data</td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                <button type="submit" class="btn btn-success float-right">submit</button>
+                            </form>
+                        <div>
+
+                        <div class="special-customizations">
+                            <form action="{{route('special.customizations.verify')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
+                                    <label>Special customization ability</label>
+                                    <br>
+                                    <table class="special-customizations-table-block table">
+                                        <thead>
+                                            <tr>
+                                                <th> Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          
+                                        @if(count($business_profile->specialCustomizations)>0)
+							            @foreach($business_profile->specialCustomizations as $key=>$specialCustomization)
+                                            <tr>
+
+                                                <td><input readOnly name="special_customization_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$specialCustomization->title}}"  ></td>
+                                                <td>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="special_customization_status[{{$key}}]" value="1" {{ $specialCustomization->status == 1 ? 'checked' : '' }}>verified
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="special_customization_status[{{$key}}]" value="0" {{ $specialCustomization->status == 0 ? 'checked' : '' }}>unverified
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @else
+                                            <tr id="special-customizations-details-table-no-data">
+                                                <td>No data</td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                <button type="submit" class="btn btn-success float-right">submit</button>
+                            </form>
+                        <div>
+
+                        <div class="sustainability-commitments">
+                            <form action="{{route('sustainability.commitments.verify')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
+                                    <label>Sustainability commitments</label>
+                                    <br>
+                                    <table class="sustainability-commitments-table-block table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          
+                                        @if(count($business_profile->sustainabilityCommitments)>0)
+							            @foreach($business_profile->sustainabilityCommitments as $key=>$sustainabilityCommitment)
+                                            <tr>
+
+                                                <td><input readOnly name="sustainability_commitment_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$sustainabilityCommitment->title}}"  ></td>
+                                                <td>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="sustainability_commitment_status[{{$key}}]" value="1" {{ $sustainabilityCommitment->status == 1 ? 'checked' : '' }}>verified
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="sustainability_commitment_status[{{$key}}]" value="0" {{ $sustainabilityCommitment->status == 0 ? 'checked' : '' }}>unverified
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @else
+                                            <tr id="sustainability-commitments-details-table-no-data">
+                                                <td>No data</td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                <button type="submit" class="btn btn-success float-right">submit</button>
+                            </form>
+                        <div>
 
                         <div class="worker-welfare-and-csr" style="display: none;">
                             <h3>Worker welfare and CSR</h3>
@@ -621,9 +630,9 @@
                         @endif
 
                         @if($business_profile->is_business_profile_verified == 0 || $business_profile->is_business_profile_verified == NULL)
-                        <a href="javascript:void(0)" class="btn btn-primary verification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-verified="1">Click to verify this profile</a>
+                        <a href="javascript:void(0)" class="btn btn-primary verification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="1">Click to verify this profile</a>
                         @else
-                        <a href="javascript:void(0)" class="btn btn-danger unverification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-verified="0">Click to unverify this profile</a>
+                        <a href="javascript:void(0)" class="btn btn-danger unverification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="0">Click to unverify this profile</a>
                         @endif
 
 
@@ -640,27 +649,32 @@
 @push('js')
 <script>
     $(document).ready(function(){
-        $('.verification_trigger_from_backend').on('click',function(){
+        $('.verification_trigger_from_backend').on('click',function(){            
             //e.preventDefault();
             var url = '{{ route("business.profile.verify") }}';
             var verifyVal = $(this).attr("data-verified");
             var profileId = $(this).attr("data-businessprofileid");
-            $.ajax({
-                method: 'get',
-                data: {verifyVal:verifyVal, profileId:profileId},
-                url: url,
-                beforeSend: function() {
-                    //$('.loading-message').html("Please Wait.");
-                    //$('#loadingProgressContainer').show();
-                },
-                success:function(data)
-                {
-                    if(data.status==1){
-                        $(".verification_trigger_from_backend").hide();
-                        $(".unverification_trigger_from_backend").show();
+            var companyId = $(this).attr("data-companyid");
+            if (confirm('Are you sure you want to make this company verfied?')) 
+            {
+                $.ajax({
+                    method: 'get',
+                    data: {verifyVal:verifyVal, profileId:profileId, companyId:companyId},
+                    url: url,
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
+                    success:function(data)
+                    {
+                        if(data.status==1){
+                            $(".verification_trigger_from_backend").hide();
+                            $(".unverification_trigger_from_backend").show();
+                        }
+                        window.location.reload();
                     }
-                }
-            });
+                });
+            }
         });
 
         $('.unverification_trigger_from_backend').on('click',function(){
@@ -668,22 +682,27 @@
             var url = '{{ route("business.profile.verify") }}';
             var verifyVal = $(this).attr("data-verified");
             var profileId = $(this).attr("data-businessprofileid");
-            $.ajax({
-                method: 'get',
-                data: {verifyVal:verifyVal, profileId:profileId},
-                url: url,
-                beforeSend: function() {
-                    //$('.loading-message').html("Please Wait.");
-                    //$('#loadingProgressContainer').show();
-                },
-                success:function(data)
-                {
-                    if(data.status==1){
-                        $(".verification_trigger_from_backend").show();
-                        $(".unverification_trigger_from_backend").hide();
+            var companyId = $(this).attr("data-companyid");
+            if (confirm('Are you sure you want to make this company unverfied?')) 
+            {            
+                $.ajax({
+                    method: 'get',
+                    data: {verifyVal:verifyVal, profileId:profileId, companyId:companyId},
+                    url: url,
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
+                    success:function(data)
+                    {
+                        if(data.status==1){
+                            $(".verification_trigger_from_backend").show();
+                            $(".unverification_trigger_from_backend").hide();
+                        }
+                        window.location.reload();
                     }
-                }
-            });
+                });
+            }
         });        
     });
 </script>

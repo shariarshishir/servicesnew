@@ -221,8 +221,12 @@ class BusinessProfileController extends Controller
             $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
             
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
-            $businessProfileVerification->company_overview = 0 ;
-            $businessProfileVerification->save();
+            if($businessProfileVerification){
+                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->save();
+
+            }
+            
 
             return response()->json([
                 'success' => false,
@@ -324,8 +328,10 @@ class BusinessProfileController extends Controller
             $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
 
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
-            $businessProfileVerification->capacity_and_machineries = 0 ;
-            $businessProfileVerification->save();
+            if($businessProfileVerification){
+                $businessProfileVerification->capacity_and_machineries = 0 ;
+                $businessProfileVerification->save();
+            }
 
             return response()->json([
                 'success' => true,

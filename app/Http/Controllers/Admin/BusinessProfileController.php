@@ -639,6 +639,57 @@ class BusinessProfileController extends Controller
 
     public function verifyBusinessProfile(Request $request) {
         //dd($request->verifyVal);
+        
+        // start update company overview table data and company_overview column in business_profile_verifications table
+        if($request->verifyVal == 1)
+        {
+            $company_overview = CompanyOverview::findOrFail($request->companyId);
+            $company_overview_data = json_decode($company_overview->data);
+            $data=[];
+            foreach($company_overview_data as $value)
+            {
+                array_push($data,['name' => $value->name, 'value' => $value->value, 'status' => "1"]);
+            }
+            $company_overview->update(['data' => $data]);  
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
+            if( $businessProfileVerification )
+            {
+                $businessProfileVerification->company_overview = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
+                $businessProfileVerification->company_overview = 1;
+                $businessProfileVerification->save();
+            }            
+        }
+        else 
+        {
+            $company_overview = CompanyOverview::findOrFail($request->companyId);
+            $company_overview_data = json_decode($company_overview->data);
+            $data=[];
+            foreach($company_overview_data as $value)
+            {
+                array_push($data,['name' => $value->name, 'value' => $value->value, 'status' => "0"]);
+            }
+            $company_overview->update(['data' => $data]); 
+
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
+            if( $businessProfileVerification )
+            {
+                $businessProfileVerification->company_overview = 0;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
+                $businessProfileVerification->company_overview = 0;
+                $businessProfileVerification->save();
+            }            
+        }
+        // end update company overview table data and company_overview column in business_profile_verifications table
 
         $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
         $businessProfile->is_business_profile_verified = $request->verifyVal;

@@ -294,18 +294,23 @@
 
 						@endif
 					</div>
-					<div class="notifications_icon_wrap mobile_top_icon_box">
-						<a href="javascript:void(0);">
-							<i class="material-icons">notifications</i>
-							<span id="" class="noticication_counter">0</span>
-						</a>
-					</div>
-					<div class="header_message_box mobile_top_icon_box">
-						<a href="{{route('message.center')}}"> 
-							<i class="material-icons dp48">message</i>
-							<span class="sms_counter">0</span>
-						</a>
-					</div>
+
+					@if(auth()->user())
+						<div class="notifications_icon_wrap mobile_top_icon_box">
+							<a href="javascript:void(0);">
+								<i class="material-icons">notifications</i>
+								<span id="" class="noticication_counter">0</span>
+							</a>
+						</div>
+
+						<div class="header_message_box mobile_top_icon_box">
+							<a href="{{route('message.center')}}">
+								<i class="material-icons">message</i>
+								<span class="sms_counter ">0</span>
+							</a>
+						</div>
+					@endif	
+
 
 					<div class="cart-icon-outer-wrapper mobile_top_icon_box">
                         <div class="cart-icon-wrapper cart-icon-wrapper-mobile">

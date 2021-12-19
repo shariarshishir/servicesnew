@@ -45,8 +45,10 @@ class SpecialCustomizationController extends Controller
             $specialCustomizations = SpecialCustomization::where('business_profile_id',$request->business_profile_id)->get();
             
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
-            $businessProfileVerification->special_customizations = 0 ;
-            $businessProfileVerification->save();
+            if($businessProfileVerification){
+                $businessProfileVerification->special_customizations = 0 ;
+                $businessProfileVerification->save();
+            }
 
             return response()->json([
                 'success' => true,

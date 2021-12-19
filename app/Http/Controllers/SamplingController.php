@@ -47,8 +47,10 @@ class SamplingController extends Controller
             $samplings = Sampling::where('business_profile_id',$request->business_profile_id)->get();
             
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
-            $businessProfileVerification->samplings = 0 ;
-            $businessProfileVerification->save();
+            if($businessProfileVerification){
+                $businessProfileVerification->samplings = 0 ;
+                $businessProfileVerification->save();
+            }
 
             return response()->json([
                 'success' => true,

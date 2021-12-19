@@ -45,6 +45,7 @@ class RfqController extends Controller
 
     public function store(Request $request)
     {
+       
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required',
@@ -66,7 +67,7 @@ class RfqController extends Controller
             foreach ($request->file('product_images') as $index=>$product_image){
 
                 $extension = $product_image->getClientOriginalExtension();
-                if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'||$extension=='xlsx'){
+                if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
                     $path=$product_image->store('images','public');
 

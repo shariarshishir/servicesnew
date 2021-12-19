@@ -122,7 +122,12 @@
 
 
                             <div class="industry_view">
-                                <a href="{{route('supplier.profile', $supplier->id)}}">View Details</a>
+                                @if(Auth::guard('web')->check())
+                                    <a href="{{route('supplier.profile', $supplier->id)}}">View Details</a>
+                                @else
+                                    <a href="#login-register-modal" class="modal-trigger">View Details</button>
+                                @endif
+
                             </div>
                         </div>
                     </div>

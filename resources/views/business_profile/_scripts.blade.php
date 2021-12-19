@@ -2428,6 +2428,9 @@
     $(document).ready(function(){
         $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").hide();
         $(".edit_profile_trigger").click(function() {
+            $(".tabs li a").removeClass("active");
+            $(".profile-tab a").addClass("active");
+            $('.tabs').tabs().find('a[href="#profile-tab"]').trigger('click');
             $(".profile_contentCol .btn_edit, .profile_contentCol .btn_upload, .profile_contentCol .btn_delete").toggle();
         });
     });

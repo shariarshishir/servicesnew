@@ -92,12 +92,12 @@
 				<div class="profile_tabNav_wrap">
 					<div class="profile_tab_menu">
 						<ul class="tabs">
-							<li class="tab"><a href="#home">Home</a></li>
-							<li class="tab"><a href="#profile">Profile</a></li>
-							<li class="tab"><a href="#products">Products</a></li>
+							<li class="tab home-tab"><a href="#home">Home</a></li>
+							<li class="tab profile-tab"><a href="#profile">Profile</a></li>
+							<li class="tab products-tab"><a href="#products">Products</a></li>
 							<!--li class="tab col m2"><a href="#womenproducts">Women</a></li-->
-							<li class="tab"><a href="#factorytour">Factory Tour</a></li>
-							<li class="tab"><a href="#termsservice">Terms of Service</a></li>
+							<li class="tab factorytour-tab"><a href="#factorytour">Factory Tour</a></li>
+							<li class="tab tos-tab"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
 					<div id="home" class="tabcontent">

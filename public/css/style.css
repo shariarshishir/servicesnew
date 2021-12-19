@@ -4012,6 +4012,14 @@ form input:read-only {
     display: block;
     font-size: 0;
 }
+.rfq_thum_img .zip_icon {
+    background: url(../images/frontendimages/new_layout_images/zip-bg.png) no-repeat center;
+    background-size: 120px;
+    width: auto;
+    height: 132px;
+    display: block;
+    font-size: 0;
+}
 .rfq_view_detail_info .full_specification {
     padding-bottom: 10px;
     font-weight: 300;

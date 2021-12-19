@@ -916,6 +916,8 @@ form input:read-only {
     display: block;
     text-transform: capitalize;
     margin-bottom: 10px;
+    height: 32px;
+    overflow: hidden;
 }
 
 .load_time_box .load_time {
@@ -1042,7 +1044,7 @@ form input:read-only {
 .profile_bannerwrap .erified {
     background : url('../images/frontendimages/new_layout_images/mark_icon.png') no-repeat left 8px;
     position: absolute;
-    bottom: 55px;
+    bottom: 60px;
     right: 70px;
     padding: 18px 28px 18px 35px;
     font-size: 18px;
@@ -1634,6 +1636,9 @@ form input:read-only {
 .card .card-content {
     padding: 0;
     text-align: center;
+} 
+.related-products .card .card-content {
+    text-align: left;
 }
 .profile_tabNav_wrap .verified_img {
     float: right;
@@ -2697,6 +2702,10 @@ form input:read-only {
     padding-bottom: 40px;
 } */
 
+
+.profile_tabNav_wrap #home .factory_imgbox_wrap {
+    padding-bottom: 80px;
+}
 #factory_degree_images,
 #factory_images {
     margin: 0 -20px;
@@ -4743,6 +4752,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     padding-bottom: 30px;
 }
 
+.product-details-table-block .blue.accent-2,
 .cart_table .blue.ready-to-ship-label,
 .cart_content_wrap .blue.ready-to-ship-label {
     color: #ffffff !important;

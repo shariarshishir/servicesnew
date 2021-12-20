@@ -298,7 +298,7 @@ Route::group(['prefix'=>'/user'],function (){
     Route::get('/unverified', [UserController::class, 'unverifiedAccount'])->name('user.unverify');
     Route::post('/resend-verification-email', [UserController::class, 'resendVerificationEmail'])->name('resend.verification_email');
     Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
-    Route::get('/related/products', [UserController::class, 'relatedProducts'])->name('users.related.products');
+    Route::get('/related/products/{business_profile_id}', [UserController::class, 'relatedProducts'])->name('users.related.products');
 
 
 });

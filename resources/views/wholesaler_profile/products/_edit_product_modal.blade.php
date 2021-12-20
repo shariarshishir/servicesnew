@@ -48,10 +48,10 @@
                     </div>
 
                      {{-- video --}}
-                     
-                     
-                     
-                     <div class="row input-field video_upload_block">
+
+
+
+                     <div class="row input-field edit-video-show-div">
                         <div class="col s12 m3 l3">
                             <label class="active">Video: </label>
                         </div>

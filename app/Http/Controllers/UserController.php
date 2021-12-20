@@ -741,9 +741,9 @@ class UserController extends Controller
         }
     }
 
-    public function relatedProducts()
+    public function relatedProducts($business_profile_id)
     {
-        $related_products=Product::where('vendor_id',auth()->user()->vendor->id)->get();
+        $related_products=Product::where('business_profile_id',$business_profile_id)->get();
         return response()->json($related_products,200);
     }
 

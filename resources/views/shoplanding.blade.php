@@ -466,12 +466,10 @@
                         <div class="clear30"></div>
                         <div class="col s12 m12 text-center mtop40">
 
-                            <!-- Calendly link widget begin -->
-                                <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-                                <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+                            
                                 <!--<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/abrarsayem'});return false;">Book a Call</a>-->
                                 <div class="center-align book_call"> <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="jb"> <span class="material-icons">phone</span> &nbsp;Book a Call </a></div>
-                                <!-- Calendly link widget end -->
+                                
 
 
                             </div>

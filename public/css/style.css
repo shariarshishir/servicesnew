@@ -7617,7 +7617,6 @@ nav .pagination li.active .page-link {
         margin: 0;
     }
 
- 
     #homepage .perform-header h1,
     #homepage .delivaryTime .ontimeDescription .description h2,
     #homepage .banner .description h2 {
@@ -7671,6 +7670,14 @@ nav .pagination li.active .page-link {
         padding: 15px 15px 14px;
         font-size: 16px;
     }
+
+    .purchase_order_wrap {
+        overflow: auto;
+    }
+    .purchase_order_top td {
+        display: flex;
+    }
+ 
 
 }
 

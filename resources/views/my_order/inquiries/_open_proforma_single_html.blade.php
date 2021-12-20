@@ -6,9 +6,9 @@
 
 <div class="col s12 purchase_order_wrap">
 	<table style="width: 100%;">
-		<tr>
-			<td style="width:50%;"><strong style="font-size: 25px;"> Purchase Order</strong></td>
-			<td style="width:50%; text-align: right;">
+		<tr class="purchase_order_top">
+			<td><strong style="font-size: 25px;"> Purchase Order</strong></td>
+			<td style="text-align: right;">
 				@if(auth()->id() == $po->buyer_id && $po->status != 1)
 				<button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
 				{{-- <a href="javascript:void(0);" class="btn btn_red rejectPiBtn" data-toggle="modal" data-target="#rejectOrderDetailsModal">Reject</a> &nbsp; --}}
@@ -31,12 +31,12 @@
 		</tr>
 		<tr style="border-bottom: none;">
 			<td style="width:50%; padding: 30px 0;">
-				<table style="width: 100%;" class="purchase_sub_table purchase_vernor_box" >
+				<table style="width: 100%;" class="purchase_sub_table" >
 					<tr>
-						<td><span style="color: #448547; font-weight: 600; font-size: 22px"> Vendor</span></td>
+						<td><span style="color: #448547; font-weight: 600; font-size: 18px"> Vendor</span></td>
 					</tr>
 					<tr>
-						<td>Merchant Bay</td>
+						<td style="font-weight: 500; font-size: 22px">Merchant Bay</td>
 					</tr>
 					<tr>
 						<td>House#27, Uttara Dhaka, 1230, Bangladesh</td>
@@ -49,13 +49,13 @@
 					</tr>
 				</table>
 			</td>
-			<td style="width:50%; padding: 30px 0;">
-				<table style="width: 100%;" class="purchase_sub_table purchase_buyer_box">
+			<td style="width:50%; padding: 30px 0 30px 15px;">
+				<table style="width: 100%;" class="purchase_sub_table">
 					<tr>
-						<td><span style="color: #448547; font-weight: 600; font-size: 22px">Buyer</td>
+						<td><span style="color: #448547; font-weight: 600; font-size: 18px">Buyer</td>
 					</tr>
 					<tr>
-						<td>{{$po->buyer->name}}</td>
+						<td style="font-weight: 500; font-size: 22px">{{$po->buyer->name}}</td>
 					</tr>
 					<tr>
 						<td>{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
@@ -69,7 +69,7 @@
 
 		<tr style="border-bottom: none;">
 			<td colspan="2">
-				<table style="width:100%;">
+				<table style="width:100%;" class="purchase_info_table">
 					<tr>
 						<td style="width:2%; background-color:#53AB57; color:#fff; padding:1%; font-weight:bold;">Sl.</td>
 						<td style="width:22%; background-color:#53AB57; color:#fff; padding:1%; font-weight:bold;">Product Category</td>

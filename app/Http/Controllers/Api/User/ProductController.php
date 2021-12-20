@@ -991,7 +991,7 @@ class ProductController extends Controller
             $business_profile_name=$business_profile->business_name;
             $product=Product::where('id',$productId)->first();
             $user=User::where('id',auth()->id())->first();
-            $productImages=ProductImage::whereIn('id',$request->product_images_id)->get();
+            $productImages = ProductImage::whereIn('id',$request->product_images_id)->get();
             if(isset($productImages)){
                 foreach($productImages as $productImage){
                     if(Storage::exists('public/'.$productImage->image) && Storage::exists('public/'.$productImage->original)){
@@ -1203,9 +1203,9 @@ class ProductController extends Controller
     }
 
 
-    public function relatedProducts()
+    public function relatedProducts($businessProfileId)
     {
-        $relatedProducts=Product::where('vendor_id',auth()->user()->vendor->id)->get();
+        $relatedProducts=Product::where('business_profile_id',$businessProfileId)->get();
         if(count($relatedProducts)>0){
             return response()->json([
                 'success' => true,

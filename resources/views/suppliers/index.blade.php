@@ -125,7 +125,7 @@
                                 @if(Auth::guard('web')->check())
                                     <a href="{{route('supplier.profile', $supplier->id)}}">View Details</a>
                                 @else
-                                    <a href="#login-register-modal" class="modal-trigger">View Details</button>
+                                    <a href="#supplier-view-auth-check-modal" class="modal-trigger">View Details</button>
                                 @endif
 
                             </div>
@@ -138,6 +138,17 @@
     <div>
         {{$suppliers->appends(request()->query())->links()}}
     </div>
+
+        <div id="supplier-view-auth-check-modal" class="modal">
+            <div class="modal-content">
+                <p>Become a verified buyer to view company profile</p>
+                <a href="{{route('login')}}">sign in</a>
+                <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" > sign up</a>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
 @endsection
 
 @include('suppliers._scripts')

@@ -43,7 +43,7 @@ class BusinessProfileController extends Controller
         // }
         if($user->is_representative	== true){
             $bf=BusinessProfile::where('representative_user_id', $user->id)->first();
-            \Session::flash('business_profile_create_permission', 'Your email already associated with '.$bf->business_name.' as a representative, you can not open your business with this email.');
+            \Session::flash('business_profile_create_permission', 'Your email already associated with <b>'.$bf->business_name.'</b> as a representative, you can not open your business with this email.');
             return redirect()->back();
             abort(response('Your email already associated with '.$bf->business_name.'as a representative. you can not open your business with this email', 401) );
         }

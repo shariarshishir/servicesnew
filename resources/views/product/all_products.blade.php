@@ -2,12 +2,12 @@
 
 @section('content')
 
-    @if(count($low_moq_lists)>0)
+    @if(count($products)>0)
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
-                @foreach ($low_moq_lists  as $list )
+                @foreach ($products  as $list )
                     @php
                         if($list->flag == 'shop'){
                             $title=$list->name;
@@ -46,7 +46,7 @@
     </div>
     <div class="pagination-block-wrapper">
         <div class="col s12 center">
-            {!! $low_moq_lists->links() !!}
+            {!! $products->links() !!}
         </div>
     </div>
     @else

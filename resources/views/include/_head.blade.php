@@ -38,6 +38,7 @@
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 <!-- Calendly link widget end -->
+<link rel="shortcut icon" href="{{ asset('images/frontendimages/favicon/favicon.png') }}" type="image/x-icon">
 @yield('css')
 {{-- jquery ui --}}
 {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> --}}

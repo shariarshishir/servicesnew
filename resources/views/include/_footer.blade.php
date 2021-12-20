@@ -755,32 +755,43 @@ $.ajax({
                 html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
                 for(var i=0; i<response.data.length; i++)
                 {
-                    html+='<div class="product-item">';
-                    html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
-                    $.each(response.data[i].images,function(key,item){
-                        if(key==0){
-                            var url  = window.location.origin;
-                            // var image=url+'/storage/'+item.image;
-                            var image="{{asset('storage/')}}"+'/'+item.image;
-                            html+='<div class="product-img"><img src="'+image+'"></div>';
-                        }
-                    })
-                    html+= '<div class="product-short-intro">';
-                    html+= '<h4>'+response.data[i].name+'</h4>';
-                    html+= '<div class="details"><p><i class="material-icons pink-text"> star </i>' +response.averageRatings[i]+'</p></div>';
-                    html+='<h5>$ ';
-
-                    var last1=JSON.parse(response.data[i].attribute).length;
-                    $.each(JSON.parse(response.data[i].attribute),function(key,item){
-
-                                        if(key == (last1 -1)){
-                                            html+= item[2];
-                                        }
-                                    })
-
-                    html+='</h5>';
-                    html+= '</div>';
-                    html+= '</div>';
+                    console.log(response.data[i]);
+                    if(response.data[i].name) // product for wholesaler
+                    {
+                        html+='<div class="product-item">';
+                        html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                        $.each(response.data[i].images,function(key,item){
+                            if(key==0){
+                                var url  = window.location.origin;
+                                // var image=url+'/storage/'+item.image;
+                                var image="{{asset('storage/')}}"+'/'+item.image;
+                                html+='<div class="product-img"><img src="'+image+'"></div>';
+                            }
+                        })
+                        html+= '<div class="product-short-intro">';
+                        html+= '<h4>'+response.data[i].name+'</h4>';
+                        html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                        html+= '</div>';
+                        html+= '</div>';
+                    } 
+                    else // product for manufacturer
+                    {
+                        html+='<div class="product-item">';
+                        html+= '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                        $.each(response.data[i].product_images,function(key,item){
+                            if(key==0){
+                                var url  = window.location.origin;
+                                // var image=url+'/storage/'+item.image;
+                                var image="{{asset('storage/')}}"+'/'+item.product_image;
+                                html+='<div class="product-img"><img src="'+image+'"></div>';
+                            }
+                        })
+                        html+= '<div class="product-short-intro">';
+                        html+= '<h4>'+response.data[i].title+'</h4>';
+                        html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                        html+= '</div>';
+                        html+= '</div>';
+                    }
                 }
                 $('#search-results').html(html);
                 $('#search-results').show();
@@ -791,9 +802,9 @@ $.ajax({
                 $('.vendor-info').html(nohtml);
                 for(var i=0;i<response.data.length;i++){
                     html+='<div class="vendor-info">';
-                    html+= '<a href="'+url+'/store/'+response.data[i].vendor_uid+'" class="overlay_hover">&nbsp;</a>';
-                    html+= '<h4>'+response.data[i].vendor_name+'</h4>';
-                    html+= '<div class="details"><p>'+response.data[i].vendor_address+'</p></div>';
+                    html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                    html+= '<h4>'+response.data[i].business_name+'</h4>';
+                    html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
                     html+= '</div>';
                     }
                 $('#search-results').html(html);

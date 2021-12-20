@@ -2845,7 +2845,7 @@ form input:read-only {
 } */
 
 .suppliers_container {
-    padding: 50px 15px 0px 10px;
+    padding: 50px 15px 50px 10px;
 }
 .suppliers_container .suppliers_filter_wrap {
     padding-bottom: 50px;
@@ -3043,6 +3043,199 @@ form input:read-only {
     display: block;
 }
 
+.suppliers_filter_list h3 {
+    font-size: 22px;
+    color: #464545;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+.suppliers_filter_list h4 {
+    font-size: 16px;
+    color: #464545;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.suppliers_filter_list .filter_box {
+    padding-bottom: 30px;
+}
+
+.suppliers_filter_list .filter_box label span {
+    font-size: 18px;
+    font-weight: 400;
+    color: #4E4E4E;
+}
+.suppliers_filter_list [type="checkbox"]+span:not(.lever):before, 
+.suppliers_filter_list [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    border: 2px solid #448547;
+}
+.suppliers_filter_list [type="checkbox"]:checked+span:not(.lever):before {
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid #448547;
+    border-bottom: 2px solid #448547;
+}
+.suppliers_filter_content {
+    padding-left: 50px;
+}
+
+.suppliers_filter_wrapper .filter_search {
+    padding-bottom: 30px;
+    clear: both;
+}
+.suppliers_filter_wrapper .filter_search .filter_search_inputbox {
+    position: relative;
+    border: 1px solid #606060;
+    padding: 0px 10px 0 30px;
+    border-radius: 10px;
+    height: 50px;
+}
+.suppliers_filter_wrapper .filter_search .material-icons {
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    color: #6D6D6D;
+    font-size: 30px;
+}
+.suppliers_filter_wrapper .filter_search_input {
+    font-size: 18px !important;
+    color: #202020;
+    text-align: center;
+    border: none !important;
+    position: absolute;
+    left: 40px;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    width: 83%!important;
+    font-weight: 300;    
+    background: none !important;
+    text-transform: capitalize;
+}
+.suppliers_filter_wrapper input[type=text]:not(.browser-default){
+    background: none !important;
+}
+.suppliers_filter_wrapper .filter_search_input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.suppliers_filter_wrapper .typeahead.dropdown-menu {
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    padding: 15px;
+    background: #ffffff;
+    position: absolute;
+    z-index: 9;
+    left: 0 !important;
+    right: 0;
+    border-radius: 0 0 10px 10px;
+}
+.suppliers_filter_wrapper .typeahead.dropdown-menu li a {
+    color: #4E4E4E;
+    font-size: 16px;
+    padding: 5px 10px;
+    display: block;
+    padding: 8px;
+    text-transform: capitalize;
+}
+.suppliers_filter_wrapper .suppliers_filter_content .filter_search_input {
+    text-align: left;
+    width: 68% !important;
+    left: 60px;
+}
+.suppliers_filter_wrapper .suppliers_filter_content .material-icons {
+    color: #448547;
+    left: 12px;
+}
+.suppliers_filter_wrapper .suppliers_filter_content .filter_search_inputbox {
+    width: 600px;
+    float: right;
+}
+.suppliers_filter_wrapper .suppliers_filter_content .btn_search {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    background: #448547;
+    color: #ffffff;
+    margin: 0;
+    font-size: 20px;
+}
+.suppliers_filter_content .industry_info_inner_box {
+    border: 1px solid #606060;
+    padding: 10px;
+    margin-bottom: 45px;
+    border-radius: 15px;
+}
+.suppliers_filter_content .supplier_profile_image_block {
+    text-align: center;
+}
+.suppliers_filter_content .supplier_profile_image_block img {
+    min-height: 165px;
+    display: block;
+    margin: 0 auto;
+}
+.suppliers_filter_content .supplier_profile_image_block a {
+    border-bottom: 1px solid #448547;
+    font-size: 15px;
+    font-weight: 500;
+}
+.suppliers_filter_content .supplier_profile_image_block a:hover {
+    border-bottom: none;
+}
+.suppliers_filter_content .supplier_profile_short_info_block {
+    border-left: 1px solid #606060;
+    padding-left: 30px !important;
+}
+.suppliers_filter_content .supplier_profile_short_info_block h5 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2D2D2D;
+    margin: 10px 0 20px;
+}
+.suppliers_filter_content .short_info_box {
+    clear: both;
+    box-sizing: inherit;
+    padding-bottom: 10px;
+    display: block;
+    float: left;
+    width: 100%;
+    font-size: 16px;
+    color: #2D2D2D;
+    line-height: 27px;
+    text-transform: capitalize;
+}
+.suppliers_filter_content .short_info_box .title_label {
+    width: 30%;
+    float: left;
+    font-weight: 300;
+}
+.suppliers_filter_content .short_info_box .info_details {
+    width: 70%;
+    float: left;
+    padding-left: 20px;
+}
+.supplier_view_left {
+    text-align: center;
+}
+.supplier_view_left img {
+    display: inline-block;
+}
+.supplier_view_right {
+    padding-top: 60px;
+}
+.supplier_view_right h5 {
+    margin-bottom: 25px;
+}
+
+#orders #rejectPoDetailsModal a.modal-close {
+    color: #343434 !important;
+}
+#orders #rejectPoDetailsModal a.modal-close:focus {
+    background: none !important;
+}
 /********************* suppliers page End **************************/
 
 /********************* Blog page css start **************************/
@@ -5565,6 +5758,9 @@ nav .pagination li.active .page-link {
 #orders table th {
     padding: 5px 20px;
 }
+#orders .order_inquiries_table {
+    overflow: auto;
+}
 #orders .order_inquiries_table table th {
     padding: 15px 20px;
 }
@@ -6587,6 +6783,18 @@ nav .pagination li.active .page-link {
     text-align: center;
 }
 
+
+.overlay_hover {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+#search-results .product-short-intro .details {
+    text-align: left;
+}
+
 /* ************************* policy_content_wrap style end ******************************  */
 
 /* ******************** Media css style start *********************** */
@@ -7271,6 +7479,24 @@ nav .pagination li.active .page-link {
         width: auto;
     }
 
+    .suppliers_filter_content {
+        padding-left: 0;
+    }
+
+    .suppliers_filter_wrapper .suppliers_filter_content .filter_search_inputbox {
+        width: 100%;
+    }
+    .suppliers_filter_content .supplier_profile_image_block {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+    .suppliers_filter_content .supplier_profile_image_block img {
+        min-height: inherit;
+        max-height: 150px;
+        margin-bottom: 20px;
+    }
+
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -7298,15 +7524,7 @@ nav .pagination li.active .page-link {
         top: 0;
         margin: 4px 0 !important;
     }
- 
-    .product_wrapper .low_moq_products_wrap .productBox .imgBox,
-    .product_wrapper .active_grid .productBox .imgBox {
-        /* height: auto; */
-    }
-    .product_wrapper .low_moq_products_wrap .productBox .imgBox img,
-    .product_wrapper .active_grid .productBox .imgBox img {
-        /* height: auto; */
-    }
+
     .product_wrapper .low_moq_products_wrap .productBox {
         min-height: auto;
         max-height: inherit !important;
@@ -7485,8 +7703,6 @@ nav .pagination li.active .page-link {
          text-align: center;
      }
 
-
-
     .product_wrapper .low_moq_products_wrap .col,
     .product_wrapper .active_grid .col {
         width: 50%;
@@ -7504,6 +7720,18 @@ nav .pagination li.active .page-link {
     .productBox .priceBox .price {
         font-size: 20px;
     }
+
+    .suppliers_filter_list {
+        padding-bottom: 50px;
+    }   
+    .suppliers_filter_wrapper .suppliers_filter_content .btn_search {
+        margin: 0 !important;
+    } 
+    
+    .suppliers_container {
+        padding: 50px 0;
+    }
+
 
 }
 
@@ -7824,13 +8052,6 @@ nav .pagination li.active .page-link {
 
 }
 
-.overlay_hover {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-}
 
 
 /* ******************** Media css style end *********************** */

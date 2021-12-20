@@ -35,7 +35,7 @@
 						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 					</div>
-					@if($flag==1)
+					@if($business_profile->is_business_profile_verified == 1)
 						<div class="center-align">
 							@if(Auth::guard('web')->check())
 								<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
@@ -70,15 +70,14 @@
 						</div>
 					@endif
 				</div>
-				@if($flag==0)
-					<div class="left_bottom">m
+				@if($business_profile->is_business_profile_verified == 1)
+					<div class="left_bottom">
 						<h3 class="center-align" >Main Products</h3>
 						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
 							@if($company_overview->name=="main_products")
 								<p>	{{$company_overview->value}}</p>
 							@endif
 						@endforeach
-
 					</div>
 				@endif
 			</div>
@@ -95,7 +94,7 @@
 							<li class="tab  @php echo ($flag==1)?'disabled':''; @endphp"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
-					@if($flag==1)
+					@if($business_profile->is_business_profile_verified == 0)
 						
 						<div class="profile_not_updated"> 
 							<span class="profile_not_updated_inner center-align">

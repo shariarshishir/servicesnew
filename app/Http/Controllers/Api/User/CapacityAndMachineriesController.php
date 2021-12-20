@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\CategoriesProduced;
 use App\Models\MachineriesDetail;
+use App\Models\BusinessProfileVerification;
 use App\Models\ProductionCapacity;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +94,13 @@ class CapacityAndMachineriesController extends Controller
             $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
             $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
             $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->save();
 
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Company information Updated',

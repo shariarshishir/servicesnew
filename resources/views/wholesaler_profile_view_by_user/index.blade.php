@@ -33,7 +33,7 @@
 						<h4><span class="material-icons">pin_drop</span>{{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" style="display: none;" /> </h4>
 						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 					</div>
-					@if($flag==0)
+					@if($business_profile->is_business_profile_verified == 1)
 						<div class="center-align">
 							@if(Auth::guard('web')->check())
 							<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
@@ -68,17 +68,25 @@
 						</div>
 					@endif
 				</div>
-				@if($flag==0)
-					<div class="left_bottom">
-						<h3 class="center-align" >Main Products</h3>
-						<p>
-							@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-								@if($company_overview->name=="main_products")
-									<p>	{{$company_overview->value}}</p>
+				@if($business_profile->is_business_profile_verified == 1)
+				<div class="left_bottom">
+					<h3 class="center-align" >Main Products</h3>
+					<div id="main-products">
+						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+							@if($company_overview->name=="main_products")
+								@if($company_overview->value)
+									<p>{{$company_overview->value}}</p>
+								@else
+								<div class="card-alert card cyan lighten-5 no-info-message">
+									<div class="card-content cyan-text">
+										INFO : No data found.
+									</div>
+								</div>
 								@endif
-							@endforeach
-						</p>
+							@endif
+						@endforeach
 					</div>
+				</div>
 				@endif
 			</div>
 			<!-- Container section start -->
@@ -94,7 +102,7 @@
 							<li class="tab @php echo ($flag==1)?'disabled':''; @endphp"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
-					@if($flag==1)
+					@if($business_profile->is_business_profile_verified == 0)
 
 						<div class="profile_not_updated"> 
 							<span class="profile_not_updated_inner center-align">
@@ -120,16 +128,72 @@
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<!-- company_stuff -->
-						<div class="contentBox">
-							@if($business_profile->companyOverview->about_company)
-							<p>{{$business_profile->companyOverview->about_company}}</p>
-							@else
-							<p>No information added</p>
-							@endif
-
-
-						</div>
+						
 						<!-- contentBox -->
+						<div class="contentBox">
+							<div class="company_stuff center-align row">
+								@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+								@if($company_overview->name=='floor_space')
+								<div class="col s6 m3 l2">
+									<div class="company_stuff_img">
+										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
+									</div>
+									<div class="title">Floor Space</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+								</div>
+								@endif
+								@if($company_overview->name=='no_of_machines')
+								<div class="col s6 m3 l2">
+									<div class="company_stuff_img">
+										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
+									</div>
+									<div class="title">No. of Machines</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+								</div>
+								@endif
+								@if($company_overview->name=='production_capacity')
+								<div class="col s6 m3 l3">
+									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" /> 
+									<div class="title">Production Capacity</div>
+									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+								</div>
+								@endif
+								@if($company_overview->name=='number_of_worker')
+									@if(isset($company_overview->value))
+									<div class="col s6 m3 l2">
+										<div class="company_stuff_img">
+											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+										</div>
+										<div class="title">No. of workers</div>
+										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+									</div>
+									@endif
+								@endif
+								@if($company_overview->name=='number_of_female_worker')
+									@if(isset($company_overview->value))
+									<div class="col s6 m3 l3">
+										<div class="company_stuff_img">
+											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+										</div>
+										<div class="title">No. of female workers</div>
+										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+									</div>
+									@endif
+								@endif
+							    @endforeach
+							</div>
+						</div>
+						<div class="contentBox">
+                            @if($business_profile->companyOverview->about_company)
+							    {{$business_profile->companyOverview->about_company}}
+                            @else
+                                <div class="card-alert card cyan lighten-5">
+                                    <div class="card-content cyan-text">
+                                        <p>INFO : company details is not available.</p>
+                                    </div>
+                                </div>
+                            @endif
+						</div>
 
 
 					</div>

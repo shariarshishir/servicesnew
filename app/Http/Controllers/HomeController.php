@@ -43,8 +43,25 @@ class HomeController extends Controller
 
     public function productList()
     {
-        $products = Product::with('images')->where('is_featured', 1)->where('state',1)->where('sold',0)->paginate(12);
-        return view('products',compact('products'));
+        //$products = Product::with('images')->where('is_featured', 1)->where('state',1)->where('sold',0)->paginate(12);
+        //return view('products',compact('products'));
+
+        $wholesaler_products=Product::with(['images','businessProfile'])->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
+        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('business_profile_id', '!=', null)->get();
+        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('id');
+        // $sorted=$merged->sortBy('moq');
+        // $low_moq= $sorted->values()->all();
+        // $object = (object) $low_moq;
+        $page = Paginator::resolveCurrentPage() ?: 1;
+        $perPage = 12;
+        $products = new \Illuminate\Pagination\LengthAwarePaginator(
+            $merged->forPage($page, $perPage),
+            $merged->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
+        return view('product.all_products',compact('products'));   
     }
     //start products by category sub category and subsub category
     public function productsByCategory($slug)
@@ -312,25 +329,30 @@ class HomeController extends Controller
         if(!empty($request->searchInput)) {
             if($request->selectedSearchOption=="product")
             {
-                $results=Product::with('images')->where('name', 'like', '%'.$request->searchInput.'%')->get();
-                $averageRatings=[];
-                foreach($results as $result){
-                    array_push($averageRatings, productRating($result->id));
-                }
+                //$results=Product::with('images')->where('name', 'like', '%'.$request->searchInput.'%')->get();
+                $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
+                $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
+                $results = $wholesaler_products->merge($manufacture_products)->sortBy('id');
+                //dd($results);
+                //$averageRatings=[];
+                //foreach($results as $result){
+                //    array_push($averageRatings, productRating($result->id));
+                //}
 
 
-                $resultCount=count($results);
+                $resultCount = count($results);
                 return response()->json([
                     'data' => $results,
                     'resultCount'=>$resultCount,
-                    'averageRatings'=>$averageRatings,
+                    //'averageRatings'=>$averageRatings,
                     'error' => 0,
                     'searchType' =>$request->selectedSearchOption,
                   ],200);
             }
             elseif($request->selectedSearchOption=="vendor")
             {
-                $results=Vendor::where('vendor_name', 'like', '%'.$request->searchInput.'%')->get();
+                //$results=Vendor::where('vendor_name', 'like', '%'.$request->searchInput.'%')->get();
+                $results = BusinessProfile::where('business_name', 'like', '%'.$request->searchInput.'%')->get();
                 $resultCount=count($results);
                 return response()->json([
                     'data' => $results,

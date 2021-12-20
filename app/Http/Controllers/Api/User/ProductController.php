@@ -863,7 +863,7 @@ class ProductController extends Controller
 
     }
 
-    public function update(Request $request,$storeId,$productId)
+    public function update(Request $request)
     {
 
         $validator = Validator::make($request->all(), [

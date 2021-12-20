@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SustainabilityCommitment;
+use App\Models\BusinessProfileVerification;
 
 
 class SustainabilityCommitmentController extends Controller
@@ -42,6 +43,13 @@ class SustainabilityCommitmentController extends Controller
             }
 
             $sustainabilityCommitments = SustainabilityCommitment::where('business_profile_id',$request->business_profile_id)->get();
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->save();
+
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Sustainability Commitment Updated',

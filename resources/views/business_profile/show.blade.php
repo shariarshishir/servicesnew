@@ -88,7 +88,7 @@
 				</div>
 			</div>
 			<!-- Container section start -->
-			<div class="col s12 m7 l9 profile_contentCol">
+			<div class="col s12 m7 l9 profile_contentCol manufacturer_profile_info_details">
 				<div class="profile_tabNav_wrap">
 					<div class="profile_tab_menu">
 						<ul class="tabs">

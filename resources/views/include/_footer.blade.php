@@ -748,14 +748,14 @@ $.ajax({
         var url  = window.location.origin;
         if(response.resultCount > 0)
         {
-            console.log(response.data);
+            //console.log(response.data);
             if(response.searchType=='product' && response.data.length > 0)
             {
                 $('.product-item').html(nohtml);
                 html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
                 for(var i=0; i<response.data.length; i++)
                 {
-                    console.log(response.data[i]);
+                    //console.log(response.data[i]);
                     if(response.data[i].name) // product for wholesaler
                     {
                         html+='<div class="product-item">';
@@ -798,7 +798,7 @@ $.ajax({
             }
             else if(response.searchType=='vendor' && response.data.length > 0)
             {
-                console.log(response.data);
+                //console.log(response.data);
                 $('.vendor-info').html(nohtml);
                 for(var i=0;i<response.data.length;i++){
                     html+='<div class="vendor-info">';

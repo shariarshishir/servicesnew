@@ -48,9 +48,10 @@
                             </div>
                         </div> -->
                     </div>
+                    
                     <div class="factory_file_uploader">
                         <label for="product-upload">Media</label>
-                        <div class="factory-image-block row">
+                        <div class="factory-image-block row ">
                             <div class="upload_img_box_wrap col s6 m3 l2">
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">

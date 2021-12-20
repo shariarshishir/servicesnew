@@ -21,7 +21,7 @@
 @endphp
 
     <div class="suppliers_container row">
-        <div class="col m3">
+        <div class="col s12 m4 l3 suppliers_filter_list">
             <form action="{{route('suppliers')}}" method="get">
                 {{--location search  --}}
                 <div class="filter_search">
@@ -60,7 +60,7 @@
                 <a class='btn btn_green btn_clear' href="{{route('suppliers')}}"> Clear </a>
             </form>
         </div>
-        <div class="col m9">
+        <div class="col s12 m8 m9 suppliers_filter_content">
             {{-- business name search --}}
             <div class="filter_search">
                 <form action="{{route('suppliers')}}" method="get">

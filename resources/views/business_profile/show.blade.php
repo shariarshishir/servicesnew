@@ -1575,7 +1575,9 @@
 									</div>										
 								</div>						
 							@else
-								<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
+								<div class="right-align" style="padding-bottom: 20px">
+									<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="btn_green factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
+								</div>
 								<div class="card-alert card cyan lighten-5">
 									<div class="card-content cyan-text">
 										<p>INFO : No data found.</p>

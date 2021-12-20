@@ -493,7 +493,7 @@ class HomeController extends Controller
     //suppliers
     public function suppliers(Request $request)
     {
-        $suppliers=BusinessProfile::with(['businessCategory'])->where(function($query) use ($request){
+        $suppliers=BusinessProfile::with(['businessCategory', 'user', 'companyOverview'])->where(function($query) use ($request){
             // if($request->business_type){
             //     $query->whereIn('business_type',$request->business_type)->get();
             // }

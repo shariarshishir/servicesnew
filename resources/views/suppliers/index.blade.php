@@ -31,36 +31,31 @@
                 </div>                
                 {{-- industry_type --}}
                 <div class="filter_box">
-                    <a class='dropdown-trigger btn btn_white filter_dropMenu' href='#' data-target='industry_type'>Industry Type
-                    <i class="material-icons">arrow_drop_down</i> </a>
-                    <ul id='industry_type' class='dropdown-content'>
-                        <li><label>
+                    <legend>Industry Type</legend>
+                    <p>
+                        <label>
                             <input type="checkbox" value="apparel"  name="industry_type[]" {{ (in_array('apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
                             <span>Apparel</span>
                         </label>
-                        </li>
-
-                        <li><label>
-                            <input type="checkbox" value="non-apparel" name="industry_type[]" {{ (in_array('non-apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
+                    </p>
+                    <p>
+                        <label>
+                        <input type="checkbox" value="non-apparel" name="industry_type[]" {{ (in_array('non-apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
                             <span>Non-Apparel</span>
                         </label>
-                        </li>
-                    </ul>
+                    </p>
                 </div>
                 {{-- factory type --}}
                 <div class="filter_box">
-                    <a class='dropdown-trigger btn btn_white filter_dropMenu' href='#' data-target='factory_type'>Factory Type
-                    <i class="material-icons">arrow_drop_down</i> </a>
-                    <ul id='factory_type' class='dropdown-content'>
-                        @foreach ($factory_type_array as $key => $list)
-                            <li>
-                                <label>
-                                    <input type="checkbox" value="{{$key}}"  name="factory_type[]" {{ (in_array($key, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                    <span>{{ucwords($list)}}</span>
-                                </label>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <legend>Factory Type</legend>
+                    @foreach ($factory_type_array as $key => $list)
+                    <p>
+                        <label>
+                            <input type="checkbox" value="{{$key}}"  name="factory_type[]" {{ (in_array($key, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
+                            <span>{{ucwords($list)}}</span>
+                        </label>
+                    </p>
+                    @endforeach
                 </div>
                 <a class='btn btn_green btn_clear' href="{{route('suppliers')}}"> Clear </a>
             </form>
@@ -75,11 +70,19 @@
                 </form>
             </div> 
             @foreach ($suppliers as $supplier)
+                @php
+                    $mainProductsJson = json_decode($supplier->companyOverview['data']);
+                @endphp
                 <div class="industry_infoBox">
                     <div class="box_shadow">
                         <div class="row">
                             <div class="supplier_profile_image_block col m3">
-                                <img src="{{asset('images/frontendimages/new_layout_images/logo_global_organic.png')}}" alt="">
+                                @if($supplier->user->image)
+                                <img src="{{ asset('storage/'.$supplier->user->image) }}" alt="">
+                                @else
+                                <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+                                @endif
+
                                 @if(Auth::guard('web')->check())
                                     <a href="{{route('supplier.profile', $supplier->id)}}">Visit Profile</a>
                                 @else
@@ -91,6 +94,11 @@
                                 <p class="industry_location">Location: {{$supplier->location}}</p>
                                 <p class="industry_type">Industry Type: {{$supplier->industry_type}}</p>
                                 <p class="factory_type">Factory Type: {{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</p>
+                                @foreach($mainProductsJson as $mainProducts)
+                                    @if($mainProducts->name == 'main_products')
+                                    <p class="main_products">Main Products: {{$mainProducts->value}}</p>
+                                    @endif
+                                @endforeach
                             </div>                            
                         </div>
                     </div>

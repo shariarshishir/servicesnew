@@ -54,8 +54,8 @@
                         <!-- <p>Save the hassle of sourcing by connecting with the right partner, cutting your lead time and managing your orders with transparency.</p> -->
                         <ul>
                             <li>Save the hassle of sourcing by connecting with the right partner.</li>
-                            <li>Cutting your lead time with 3D virtual sampling and</li>
-                            <li>Managing your orders in an efficient way through our Order Management Dashboard. </li>
+                            <li>Cut your lead time with 3D virtual sampling and</li>
+                            <li>Efficiently managing your orders through our Order Management Dashboard. </li>
                         </ul>
                         <a href="javascript:void(0);" class="button talk-to-us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">TALK TO US</a>
                         <img src="{{asset('images/homepage/circle.svg')}}" alt="circle"/>
@@ -142,7 +142,7 @@
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
-                            <p class="mb-15">With our <a href="#">3D virtual sampling</a> support we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
+                            <p class="mb-15">With our <a href="#">3D virtual sampling</a> support, we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
                             <a href="{{route('front.3d-studio')}}" class="button">Shop Designs</a>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
             <div class="clear30" style="height: 0px; margin-bottom: 48px;"></div>
             <div>
                 <h1 class="homebHd mb20">PERFORM AT YOUR BEST WITH EASE</h1>
-                <p class="homepgp mb50" style="margin-bottom: 50px;" >Over 1000 suppliers and buyers can search, connect and manage their business with our 3 dimensional  sourcing platform</P>
+                <p class="homepgp mb50" style="margin-bottom: 50px;" >Over 1000 suppliers and buyers can search, connect and manage their business with our 3-dimensional  sourcing platform</P>
             </div>
         </div>
     </section>

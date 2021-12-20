@@ -28,6 +28,9 @@
     <section class="content">
         <div class="container-fluid">
            <div class="row">
+                <div>
+                    <a href="{{route('business.profile.orders.index', $business_profile->id)}}">Orders <span>({{count($business_profile->wholesalerOrders)}})</span></a>
+                </div>
                 <div class="col-md-12">
                     <div class="card">
                         <legend>Business Profile Details</legend>
@@ -147,7 +150,7 @@
                                     </table>
                                 </div>
 
-                                
+
                                 <div class="row machinaries-details">
                                     <label>machinaries Details</label>
                                     <br>
@@ -257,15 +260,15 @@
                                                     <div class="card-content cyan-text">
                                                         <p>INFO : No data found.</p>
                                                     </div>
-                                                </div>													
+                                                </div>
                                             </td>
                                         </tr>
-                                    @endif										
+                                    @endif
                                 </tbody>
                                 <button class="btn btn-success" type="submit">Submit
                                 </button>
                             </form>
-                        </div>                        
+                        </div>
 
                         <div class="business-terms">
                             <form action="{{route('business.terms.verify')}}" method="post">
@@ -282,7 +285,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+
                                             @if(count($business_profile->businessTerms)>0)
                                             @foreach($business_profile->businessTerms as $key4 => $businessTerm)
                                             <tr>
@@ -325,7 +328,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+
                                         @if(count($business_profile->samplings)>0)
 							            @foreach($business_profile->samplings as $key5=>$sampling)
                                             <tr>
@@ -367,7 +370,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+
                                         @if(count($business_profile->specialCustomizations)>0)
 							            @foreach($business_profile->specialCustomizations as $key=>$specialCustomization)
                                             <tr>
@@ -408,7 +411,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+
                                         @if(count($business_profile->sustainabilityCommitments)>0)
 							            @foreach($business_profile->sustainabilityCommitments as $key=>$sustainabilityCommitment)
                                             <tr>
@@ -447,7 +450,7 @@
                                     <div class="row">
                                         <span class="">Healthcare Facility</span>
                                         <input  name="healthcare_facility"   type="hidden" value="{{$walfareAndCsr->checked}}">
-                                    
+
                                         <label class="">
                                             <input class="" name="healthcare_facility_status"  class="health-facility-verified"  type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }}>
                                             <span>Verify</span>
@@ -508,7 +511,7 @@
                                         <input  name="maternity_leave"   type="hidden" value="{{$walfareAndCsr->checked}}">
 
                                         <label class="">
-                                            <input name="maternity_leave_status" class="maternity-leave--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} > 
+                                            <input name="maternity_leave_status" class="maternity-leave--verified" type="radio" value="1" {{  ($walfareAndCsr->status == "1" ? ' checked' : '') }} >
                                             <span>Yes</span>
                                         </label>
                                         <label ">
@@ -543,7 +546,7 @@
                                 </div>
                             @endif
                         </div>
-          
+
                         <div class="worker-security-and-others" style="display: none;">
                             <h3>Worker Security and others</h3>
                                 @if(isset($business_profile->security))
@@ -557,7 +560,7 @@
                                             <div class="row">
                                                 <span class="">Fire exit</span>
                                                 <input  name="fire_exit"   type="hidden" value="{{$securityAndOther->checked}}">
-                                            
+
                                                 <label class="">
                                                     <input class="" name="fire_exit_status"  class="fire-exit-facility-verified"  type="radio" value="1" {{  ($securityAndOther->status == "1" ? ' checked' : '') }}>
                                                     <span>Verify</span>
@@ -612,7 +615,7 @@
                                                 </label>
                                             </div>
                                             @endif
-                                        
+
                                         @endforeach
                                         <button class="btn btn-success" type="submit">Submit
                                         </button>
@@ -625,7 +628,7 @@
                                     </div>
                                 </div>
                                 @endif
-                            
+
                         </div>
                         @endif
 
@@ -636,7 +639,7 @@
                         @endif
 
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -649,13 +652,13 @@
 @push('js')
 <script>
     $(document).ready(function(){
-        $('.verification_trigger_from_backend').on('click',function(){            
+        $('.verification_trigger_from_backend').on('click',function(){
             //e.preventDefault();
             var url = '{{ route("business.profile.verify") }}';
             var verifyVal = $(this).attr("data-verified");
             var profileId = $(this).attr("data-businessprofileid");
             var companyId = $(this).attr("data-companyid");
-            if (confirm('Are you sure you want to make this company verfied?')) 
+            if (confirm('Are you sure you want to make this company verfied?'))
             {
                 $.ajax({
                     method: 'get',
@@ -683,8 +686,8 @@
             var verifyVal = $(this).attr("data-verified");
             var profileId = $(this).attr("data-businessprofileid");
             var companyId = $(this).attr("data-companyid");
-            if (confirm('Are you sure you want to make this company unverfied?')) 
-            {            
+            if (confirm('Are you sure you want to make this company unverfied?'))
+            {
                 $.ajax({
                     method: 'get',
                     data: {verifyVal:verifyVal, profileId:profileId, companyId:companyId},
@@ -703,7 +706,7 @@
                     }
                 });
             }
-        });        
+        });
     });
 </script>
 @endpush

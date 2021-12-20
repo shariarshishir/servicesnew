@@ -15,7 +15,7 @@ class OrderController extends Controller
         $business_profile=BusinessProfile::findOrFail($business_profile_id);
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-            $orders = VendorOrder::where('business_profile_id',$business_profile->id)->with(['billingAddress','shippingAddress'])->latest()->get();
+            $orders = VendorOrder::where('business_profile_id',$business_profile->id)->whereNotIn('state', ['pending','cancel'])->with(['billingAddress','shippingAddress'])->latest()->get();
             return view('wholesaler_profile.orders.index',compact('orders','business_profile'));
         }
         abort(401);

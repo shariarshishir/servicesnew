@@ -777,7 +777,7 @@ $.ajax({
                         html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
                         html+= '</div>';
                         html+= '</div>';
-                    } 
+                    }
                     else // product for manufacturer
                     {
                         html+='<div class="product-item">';

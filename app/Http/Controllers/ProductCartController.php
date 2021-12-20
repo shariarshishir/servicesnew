@@ -51,6 +51,16 @@ class ProductCartController extends Controller
         if(Auth::check())
         {
             $product=Product::where('sku',$request->sku)->first();
+            if($product->businessProfile->user_id == auth()->id() || $product->businessProfile->representative_user_id == auth()->id()){
+                $cartItems=CartItem::Where('user_id',auth()->user()->id)->get();
+                $message="you can not order/cart your own product";
+                return response()->json([
+                    'success' => $message,
+                    'message' => 'Sorry',
+                    'type' => 'warning',
+                    'cartItems'=>count($cartItems)
+                ]);
+            }
             $cartItems=CartItem::Where('user_id',auth()->user()->id)->get();
             $checkProductExistsOrNot=CartItem::Where('user_id',auth()->user()->id)->where('product_sku',$product->sku)->get();
             foreach( $checkProductExistsOrNot as $checkItem){

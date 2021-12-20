@@ -3224,9 +3224,10 @@ form input:read-only {
     display: inline-block;
 }
 .supplier_view_right {
-    padding-top: 60px;
+    padding-top: 0px;
 }
 .supplier_view_right h5 {
+    font-size: 20px;
     margin-bottom: 25px;
 }
 
@@ -6793,6 +6794,9 @@ nav .pagination li.active .page-link {
 }
 #search-results .product-short-intro .details {
     text-align: left;
+}
+.verification-message-modal {
+    width: 40%;
 }
 
 /* ************************* policy_content_wrap style end ******************************  */

@@ -99,8 +99,8 @@
 						<div class="profile_not_updated"> 
 							<span class="profile_not_updated_inner center-align">
 								<div class="annaouncement_icon">&nbsp;</div>
-								<p style="font-size: 25px;"> Access restricted! </p>
-								<p>For more information contact Merchant Bay</p>
+								<p style="font-size: 25px;"> You do not have access to view this profile.</p>
+								<p>Become a verified buyer to get full access of Merchant Bay.</p>
 								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
 							</span>
 							
@@ -111,7 +111,9 @@
 								<p> Please <a href="#"> Book a Call </a> for any further information. </p>
 							</span> -->
 
-							<div class="center-align"> <a class="btn_green" href="#"> Book a Call </a></div>
+							<div class="center-align">
+							<a href="javascript:void(0);" class="button talk-to-us btn_green" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk To Us</a>
+							</div>
 						</div>
 						
 					@else

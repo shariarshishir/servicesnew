@@ -34,6 +34,10 @@
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
 {{-- cropper css --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+<!-- Calendly link widget begin -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+<!-- Calendly link widget end -->
 @yield('css')
 {{-- jquery ui --}}
 {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> --}}

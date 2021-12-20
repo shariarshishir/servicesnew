@@ -95,6 +95,13 @@ $(document).on('click', '.cropper-image-modal-close', function () {
     cropper = null;
 });
 
+$(document).ready(function(){
+    var businessProfileId = @php echo $business_profile->id @endphp;
+    $(".edit_wholesaler_profile_trigger").click(function(){
+        window.location.href = '/wholesaler/profile-details/'+businessProfileId+'?editmode=enabled';
+    })
+})
+
 
 </script>
 

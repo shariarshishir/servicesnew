@@ -1,3 +1,6 @@
+@php
+$profileEditMode = Request::get('editmode');
+@endphp
 <!-- profile tabcontent end -->
 <div id="profile" class="tabcontent profile_table_design ">
 <div class="overview_table_wrap">
@@ -5,12 +8,14 @@
 			<div class="col s6 m6">
 				<h3>Company Overview</h3>
 			</div>
+			@if($profileEditMode == 'enabled')
 			<div class="col s6 m6 right-align editBox">
 				<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger">
 					<span class="btn_icon"><i class="material-icons">border_color</i></span>
                     <span class="btn_edit_white"> Edit</span>
 				</button>
 			</div>
+			@endif
 		</div>
 		
 		<div class="overview_table box_shadow">
@@ -36,6 +41,7 @@
 			<div class="col s6 m6">
 				<h3>Association memberships</h3>
 			</div>
+			@if($profileEditMode == 'enabled')
 			<div class="col s6 m6 right-align editBox">
 				<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
 					<span class="btn_icon"><i class="material-icons">file_upload</i></span>
@@ -46,6 +52,7 @@
                     <span class="btn_edit_white"> Delete</span>
 				</button>
 			</div>
+			@endif
 		</div>
 		
 		<div class="membership_textBox association-membership-block">
@@ -72,6 +79,7 @@
 			<div class="col s6 m6">
 				<h3>PR Highlights</h3>
 			</div>
+			@if($profileEditMode == 'enabled')
 			<div class="col s6 m6 right-align editBox">
 				<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger"> 
 					<span class="btn_icon"><i class="material-icons">file_upload</i></span>
@@ -82,6 +90,7 @@
                     <span class="btn_edit_white"> Delete</span>
 				</button>
 			</div>
+			@endif
 		</div>
 
 		<div class="row press-highlight-block">

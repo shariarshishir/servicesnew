@@ -10,7 +10,7 @@
             <tr>
                 <td>
                     <label><input type="radio" name="exampleRadios" value="{{$product->id}}"><span></span></label>
-                    <input type="hidden" name="s_id" value="{{$product->user->id}}">
+                    <input type="hidden" name="s_id" value="{{$product->businessProfile->user->id}}">
                     <input type="hidden" name="p_price" value="{{ $product->price_per_unit }}">
                     <input type="hidden" name="p_unit" value="{{ $product->moq ?? 0 }}">
                     <input type="hidden" name="s_name" value="{{$product->businessProfile->business_name }}">

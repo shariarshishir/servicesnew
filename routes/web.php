@@ -90,6 +90,7 @@ Route::get('/contactus', [HomeController::class, 'contactusLandingPage'])->name(
 
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
+Route::get('/supplier/location/data',[HomeController::class,'getSupplierLocationData'])->name('get.supplier.location.data');
 Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
@@ -297,7 +298,7 @@ Route::group(['prefix'=>'/user'],function (){
     Route::get('/unverified', [UserController::class, 'unverifiedAccount'])->name('user.unverify');
     Route::post('/resend-verification-email', [UserController::class, 'resendVerificationEmail'])->name('resend.verification_email');
     Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
-    Route::get('/related/products', [UserController::class, 'relatedProducts'])->name('users.related.products');
+    Route::get('/related/products/{business_profile_id}', [UserController::class, 'relatedProducts'])->name('users.related.products');
 
 
 });

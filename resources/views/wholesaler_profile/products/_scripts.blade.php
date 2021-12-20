@@ -240,14 +240,16 @@
                         $('#product-edit-modal-block input[name=remove_video_id]').val('');
                         $('#product-edit-modal-block .edit-video-upload-block').show();
                         $('#product-edit-modal-block .edit-video-show-block').html('');
+                        $('#product-edit-modal-block .edit-video-show-div').hide();
                         if(data.product.video){
                                 $('#product-edit-modal-block .edit-video-upload-block').hide();
+                                $('#product-edit-modal-block .edit-video-show-div').show();
                                 var asset='{{asset("storage")}}'+'/'+data.product.video.video;
                                 var html='<video controls autoplay width="320" height="240">';
                                     html+='<source src="'+asset+'" />';
                                     html+='</video>';
                                     html+='<a class="btn_delete" onclick="wholesalerRemoveEditVideoEl(this);" data-id="'+data.product.video.id+'"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>';
-                                    
+
                                 $('#product-edit-modal-block .edit-video-show-block').append(html);
                         }
 
@@ -285,12 +287,15 @@
                         if(data.related_products.length != 0){
                             $('#product-edit-modal-block input[name=rel-products]').prop('checked', true);
                             $('#product-edit-modal-block .related-product').show();
+                            var business_profile_id='{{$business_profile->id}}';
+                            var url = '{{ route("users.related.products", ":business_profile_id") }}';
+                            url = url.replace(':business_profile_id', business_profile_id);
                             $.ajax({
                                 method: 'get',
                                 processData: false,
                                 contentType: false,
                                 cache: false,
-                                url: "{{route('users.related.products')}}",
+                                url: url,
                                 success:function(data)
                                     {
                                         $('#product-edit-modal-block .js-example-basic-multiple').html('');
@@ -716,13 +721,16 @@
    //related products
    $(document).on('change','input[name=rel-products]',function(){
         if ($(this).prop("checked") == true) {
+            var business_profile_id='{{$business_profile->id}}';
+            var url = '{{ route("users.related.products", ":business_profile_id") }}';
+            url = url.replace(':business_profile_id', business_profile_id);
             $('.related-product').show();
             $.ajax({
                 method: 'get',
                 processData: false,
                 contentType: false,
                 cache: false,
-                url: "{{route('users.related.products')}}",
+                url: url,
                 success:function(data)
                     {
                         $('.js-example-basic-multiple').html('');
@@ -849,6 +857,7 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
         remove_video_id.push($(el).attr('data-id'));
         $('#product-edit-modal-block input[name=remove_video_id]').val(JSON.stringify(remove_video_id));
         $('#product-edit-modal-block .edit-video-upload-block').show();
+        $('#product-edit-modal-block .edit-video-show-div').hide();
 
     }
 

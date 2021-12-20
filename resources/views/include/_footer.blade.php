@@ -1,21 +1,5 @@
 <!-- Footer section start -->
 <footer class="footer_wrap">
-	<div class="footer_topWrap">
-		<div class="container">
-			<div class="row">
-				<div class="col s12 m6 l5 left">
-					<div class="center-align thumb_box"><img src="{{asset('images/frontendimages/new_layout_images/thumb.png')}}" alt=""></div>
-					<p>Your apparel will be ready <br /> on time or we work for free!</p>
-				</div>
-				<div class="col s12 m6 l5 right">
-					<p>Merchandising have never seemed so easy before.</p>
-					<div class="btn_talk ">
-						<a class="btn_white" href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="footer_bottomWrap">
 		<div class="container">
 			<div class="row">

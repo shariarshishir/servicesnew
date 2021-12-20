@@ -41,9 +41,12 @@ class BusinessProfileController extends Controller
         // if($total_business_count >= 3){
         //     abort( response('Not Permit To More Than 3 Business', 401) );
         // }
-        // if($user->is_representative	== true){
-        //     abort(response('representative does not permit to open business', 401) );
-        // }
+        if($user->is_representative	== true){
+            $bf=BusinessProfile::where('representative_user_id', $user->id)->first();
+            \Session::flash('business_profile_create_permission', 'Your email already associated with '.$bf->business_name.' as a representative, you can not open your business with this email.');
+            return redirect()->back();
+            abort(response('Your email already associated with '.$bf->business_name.'as a representative. you can not open your business with this email', 401) );
+        }
 
         return view('business_profile.create');
     }
@@ -133,7 +136,7 @@ class BusinessProfileController extends Controller
                             ],500);
                         }
                     }
-                    
+
                     //user registraion as represetative
                     $representive_data['password'] =bcrypt($representive_data['password']);
                     $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
@@ -168,8 +171,8 @@ class BusinessProfileController extends Controller
     {
         $business_profile = BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
         $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
-     
-       
+
+
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
@@ -213,7 +216,7 @@ class BusinessProfileController extends Controller
     {
         try{
             $company_overview = CompanyOverview::findOrFail($id);
-            
+
             $data=[];
             $count=0;
             foreach($request->name as $key => $value){
@@ -231,14 +234,14 @@ class BusinessProfileController extends Controller
             }
 
             $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
-            
+
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
             if($businessProfileVerification){
                 $businessProfileVerification->company_overview = 0 ;
                 $businessProfileVerification->save();
 
             }
-            
+
 
             return response()->json([
                 'success' => false,

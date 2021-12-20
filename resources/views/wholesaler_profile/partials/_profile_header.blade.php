@@ -7,7 +7,7 @@
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
 		</div>
 		<div class="edit_profile_option">
-			<a href="javascript:void(0);" class="edit_profile_trigger"><i class="material-icons">border_color</i></a>
+			<a href="javascript:void(0);" class="edit_wholesaler_profile_trigger"><i class="material-icons">border_color</i></a>
 		</div>		
 	</div>
 </section>
@@ -84,5 +84,5 @@
 			</div>
 
 			<!-- Container section start -->
-			<div class="col s12 m7 l9 profile_contentCol">
+			<div class="col s12 m7 l9 profile_contentCol wholesaler_profile_info_details">
 				<div class="profile_tabNav_wrap"> <!-- div close in profile_footer file -->

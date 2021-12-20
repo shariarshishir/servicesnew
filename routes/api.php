@@ -32,6 +32,7 @@ use App\Http\Controllers\Api\User\RFQController;
 use App\Http\Controllers\Api\User\RfqBidController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
 use App\Http\Controllers\Api\User\BlogController;
+use App\Http\Controllers\Api\User\FactoryTourController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +113,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/worker-walfare-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate']);
     Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate']);
    
-   
+    Route::post('/factory-tour',[FactoryTourController::class,'createFactoryTour']);
+    Route::post('/factory-tour-edit',[FactoryTourController::class,'updateFactoryTour']);
     //wholeslaer api
     Route::put('/store/{vendorUId}',[VendorController::class,'update']);
     Route::post('/wholesaler-products', [ProductController::class, 'store']);
@@ -120,7 +122,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::delete('/store/{storeId}/products/{productId}', [ProductController::class, 'destroy']);
     Route::get('/store/{businessProfileId}/orders', [OrderController::class, 'orderByBusinessProfileId']);
     Route::get('/store/{businessProfileId}/orders/{orderId}', [OrderController::class, 'vendorOrderByOrderId']);
-    Route::get('/related-products', [ProductController::class, 'relatedProducts']);
+    Route::get('/business-profile/{businessProfileId}/related-products', [ProductController::class, 'relatedProducts']);
     Route::post('/product/reviews',[ReviewController::class,'createProductReview']);
     Route::post('/store/reviews',[ReviewController::class,'createVendorReview']);
 

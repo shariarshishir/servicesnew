@@ -4,123 +4,71 @@
 
 @include('my_order.partials._profile_list')
 
-<div class="tablecontainer">
-	<table style="width:100%;">
+<div class="col s12">
+	<table style="width: 100%;">
 		<tr>
-			<td style="background-color:#F3FFF4;">
-				<table style="width:100%;">
-
-					<tr>
-						<td style="width:5%">&nbsp;</td>
-						<td colspan="3" style="width:60%; font-size:24px; font-weight:bold; color:#53AB57; padding:30px 0 5px 0; text-transform:uppercase; vertical-align: top;">Purchase Order</td>
-
-						<td style="width:35%; padding: 30px;">
-							@if(auth()->id() == $po->buyer_id && $po->status != 1)
-							<button class="btn btn-success" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
-							{{-- <a href="javascript:void(0);" class="btn btn-danger rejectPiBtn" data-toggle="modal" data-target="#rejectOrderDetailsModal">Reject</a> &nbsp; --}}
-                            <a class="waves-effect waves-light btn modal-trigger" href="#rejectOrderDetailsModal">Reject</a>
-							@endif
-							<button onclick="window.print()" class="btn btn-success printPageButton">Print</button>
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td style="color:#53AB57; font-size:11px; font-weight:bold;">DATE</td>
-						<td>&nbsp;</td>
-						<td style="color:#000; font-size:11px;">{{$po->proforma_date}}</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td style="color:#53AB57; font-size:11px; font-weight:bold;">PO #</td>
-						<td>&nbsp;</td>
-						<td style="color:#000; font-size:11px;">{{$po->proforma_id}}</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-						<td style="height:3px;"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td style="font-size:14px; font-weight:bold;">Payment Due</td>
-						<td>&nbsp;</td>
-						<td style="font-size:14px; font-weight:bold;">{{$po->payment_within}}</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td style="height:10px;"></td>
-						<td style="height:10px;"></td>
-						<td style="height:10px;"></td>
-						<td style="height:10px;"></td>
-						<td style="height:10px;"></td>
-					</tr>
-				</table>
+			<td style="width:50%;">Purchase Order</td>
+			<td style="width:50%; text-align: right;">
+				@if(auth()->id() == $po->buyer_id && $po->status != 1)
+				<button class="btn btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
+				{{-- <a href="javascript:void(0);" class="btn btn_red rejectPiBtn" data-toggle="modal" data-target="#rejectOrderDetailsModal">Reject</a> &nbsp; --}}
+				<a class="waves-effect waves-light btn modal-trigger" href="#rejectOrderDetailsModal">Reject</a>
+				@endif
+				<button onclick="window.print()" class="btn btn_green printPageButton">Print</button>				
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<table style="width:100%;">
+			<td>DATE : {{$po->proforma_date}}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>PO # : {{$po->proforma_id}}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Payment Due : {{$po->payment_within}}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:50%;">
+				<table style="width: 100%;">
 					<tr>
-						<td colspan="4" style="height:15px;"></td>
+						<td>Vendor</td>
 					</tr>
 					<tr>
-						<td style="width:5%">&nbsp;</td>
-						<td style="width:45%">
-							<table style="width:100%; font-size:11px;">
-								<tr>
-									<td style="color:#53AB57; font-size:14px; padding:0.1%; font-weight:bold;">Vendor</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%; font-size:18px;">Merchant Bay</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">House#27, Uttara Dhaka, 1230, Bangladesh</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: +880 9611-677345 Email: info@merchantbay.com</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">www.merchantbay.com</td>
-								</tr>
-							</table>
-						</td>
-						<td style="width:45%">
-							<table style="width:100%; font-size:11px;">
-								<tr>
-									<td style="color:#53AB57; font-size:14px; padding:0.1%; font-weight:bold;">Buyer</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%; font-size:18px;">{{$po->buyer->name}}</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: {{ @$po->buyer->phone}} Email: {{ @$po->buyer->email }}</td>
-								</tr>
-							</table>
-						</td>
-						<td style="width:5%">&nbsp;</td>
+						<td>Merchant Bay</td>
 					</tr>
 					<tr>
-						<td colspan="4" style="height:15px;"></td>
+						<td>House#27, Uttara Dhaka, 1230, Bangladesh</td>
+					</tr>
+					<tr>
+						<td>Ph: +880 9611-677345 Email: info@merchantbay.com</td>
+					</tr>
+					<tr>
+						<td>www.merchantbay.com</td>
 					</tr>
 				</table>
 			</td>
+			<td style="width:50%;">
+				<table style="width: 100%;">
+					<tr>
+						<td>Buyer</td>
+					</tr>
+					<tr>
+						<td>{{$po->buyer->name}}</td>
+					</tr>
+					<tr>
+						<td>{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
+					</tr>
+					<tr>
+						<td>Ph: {{ @$po->buyer->phone}} Email: {{ @$po->buyer->email }}</td>
+					</tr>
+				</table>
+			</td>			
 		</tr>
+
 		<tr>
-			<td>
+			<td colspan="2">
 				<table style="width:100%;">
 					<tr>
 						<td style="width:2%; background-color:#53AB57; color:#fff; padding:1%; font-weight:bold;">Sl.</td>
@@ -203,47 +151,30 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="height:15px;"></td>
-		</tr>
-		<tr>
-			<td style="height:25px;"></td>
-		</tr>
-		<tr>
-			<td style="padding:1% 0 1% 5%;"><h3 style="font-size:15px; font-weight:bold; border-bottom:3px solid #000; padding-bottom:5px;">Terms & Conditions</h3></td>
-		</tr>
-		<tr>
-			<td style="height:5px;"></td>
+			<td colspan="2" style="padding:1% 0 1% 5%;"><h3 style="font-size:15px; font-weight:bold; border-bottom:3px solid #000; padding-bottom:5px;">Terms & Conditions</h3></td>
 		</tr>
 		@php $ti = 1; @endphp
 		@foreach(json_decode($po->condition) as $t)
             @if($t != '')
                 <tr>
-                    <td style="padding:1% 0 0.5% 5%;">{{ $ti }}. {{$t}}</td>
+                    <td colspan="2" style="padding:1% 0 0.5% 5%;">{{ $ti }}. {{$t}}</td>
                 </tr>
                 @php $ti += 1; @endphp
             @endif
 		@endforeach
 		<tr>
-			<td style="height:15px;"></td>
-		</tr>
-		<tr>
-			<td style="background-color:#53AB57;">
+			<td colspan="2" style="background-color:#53AB57;">
 				<table style="width:100%;">
 					<tr>
-						<td style="height:15px;"></td>
+						<td>If you have any questions, please contact</td>
 					</tr>
 					<tr>
-						<td style="color:#fff; font-size:18px; font-weight:bold; text-align:center; padding:0.5%;">If you have any questions, please contact</td>
-					</tr>
-					<tr>
-						<td style="color:#fff; font-size:13px; font-weight:bold; text-align:center; padding:0.5%;">Merchant Bay, +880-2-09611677345, info@merchantbay.com.com</td>
-					</tr>
-					<tr>
-						<td style="height:15px;"></td>
+						<td>Merchant Bay, +880-2-09611677345, info@merchantbay.com.com</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
+
 	</table>
 </div>
 

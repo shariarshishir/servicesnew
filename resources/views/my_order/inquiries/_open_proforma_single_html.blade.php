@@ -4,17 +4,17 @@
 
 @include('my_order.partials._profile_list')
 
-<div class="col s12">
+<div class="col s12 purchase_order_wrap">
 	<table style="width: 100%;">
 		<tr>
-			<td style="width:50%;">Purchase Order</td>
+			<td style="width:50%;"><strong style="font-size: 25px;"> Purchase Order</strong></td>
 			<td style="width:50%; text-align: right;">
 				@if(auth()->id() == $po->buyer_id && $po->status != 1)
-				<button class="btn btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
+				<button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
 				{{-- <a href="javascript:void(0);" class="btn btn_red rejectPiBtn" data-toggle="modal" data-target="#rejectOrderDetailsModal">Reject</a> &nbsp; --}}
-				<a class="waves-effect waves-light btn modal-trigger" href="#rejectOrderDetailsModal">Reject</a>
+				<a class="waves-effect waves-light btn_green modal-trigger" href="#rejectOrderDetailsModal">Reject</a>
 				@endif
-				<button onclick="window.print()" class="btn btn_green printPageButton">Print</button>				
+				<button onclick="window.print()" class="btn_green printPageButton">Print</button>				
 			</td>
 		</tr>
 		<tr>
@@ -26,14 +26,14 @@
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<td>Payment Due : {{$po->payment_within}}</td>
+			<td>Payment Due : <span style="color: #448547; font-weight: 600;"> {{$po->payment_within}}</span></td>
 			<td>&nbsp;</td>
 		</tr>
-		<tr>
-			<td style="width:50%;">
-				<table style="width: 100%;">
+		<tr style="border-bottom: none;">
+			<td style="width:50%; padding: 30px 0;">
+				<table style="width: 100%;" class="purchase_sub_table purchase_vernor_box" >
 					<tr>
-						<td>Vendor</td>
+						<td><span style="color: #448547; font-weight: 600; font-size: 22px"> Vendor</span></td>
 					</tr>
 					<tr>
 						<td>Merchant Bay</td>
@@ -49,10 +49,10 @@
 					</tr>
 				</table>
 			</td>
-			<td style="width:50%;">
-				<table style="width: 100%;">
+			<td style="width:50%; padding: 30px 0;">
+				<table style="width: 100%;" class="purchase_sub_table purchase_buyer_box">
 					<tr>
-						<td>Buyer</td>
+						<td><span style="color: #448547; font-weight: 600; font-size: 22px">Buyer</td>
 					</tr>
 					<tr>
 						<td>{{$po->buyer->name}}</td>
@@ -67,7 +67,7 @@
 			</td>			
 		</tr>
 
-		<tr>
+		<tr style="border-bottom: none;">
 			<td colspan="2">
 				<table style="width:100%;">
 					<tr>
@@ -150,21 +150,23 @@
 				</table>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" style="padding:1% 0 1% 5%;"><h3 style="font-size:15px; font-weight:bold; border-bottom:3px solid #000; padding-bottom:5px;">Terms & Conditions</h3></td>
+		<tr style="border-bottom: none;">
+			<td colspan="2" style="padding: 50px 0 10px;"><h3 style="font-size: 20px; font-weight: 600; border-bottom: 1px solid rgba(0,0,0,0.5); padding-bottom:5px;">Terms & Conditions</h3></td>
 		</tr>
 		@php $ti = 1; @endphp
 		@foreach(json_decode($po->condition) as $t)
             @if($t != '')
-                <tr>
-                    <td colspan="2" style="padding:1% 0 0.5% 5%;">{{ $ti }}. {{$t}}</td>
+                <tr >
+                    <td colspan="2" style="padding: 10px 50px;">{{ $ti }}. {{$t}}</td>
                 </tr>
                 @php $ti += 1; @endphp
             @endif
 		@endforeach
+
+		<tr><td>&nbsp;</td></tr>
 		<tr>
-			<td colspan="2" style="background-color:#53AB57;">
-				<table style="width:100%;">
+			<td colspan="2" style="background-color:#53AB57; border-radius: 10px !important;">
+				<table style="width:100%;" class="purchase_questions_table">
 					<tr>
 						<td>If you have any questions, please contact</td>
 					</tr>

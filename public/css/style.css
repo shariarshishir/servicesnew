@@ -67,6 +67,7 @@ td, th {
     min-width: 120px;
     display: inline-block;
     /* line-height: 22px; */
+    text-align: center;
 }
 .btn_green:focus,
 .btn_green:hover {
@@ -5360,6 +5361,7 @@ legend {
     border: none;
     background: #E4E4E4;
     padding: 10px;
+    border-radius: 10px;
 }
 .profile-menu-list ul li {
     padding: 0 5px;
@@ -5383,10 +5385,16 @@ legend {
     color: #FFFFFF;
 }
 
+#orders table {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+#orders thead,
 .order_data_table thead {
     background: #448547;
     color: #ffffff;
 }
+#orders table td,
 .order_data_table td {
     padding: 20px;
 }
@@ -5419,6 +5427,36 @@ legend {
     height: 35px;
     border: none !important;
 }
+
+.purchase_order_wrap {
+    padding-bottom: 50px !important;
+}
+.purchase_order_wrap .btn_green {
+    height: 38px;
+    line-height: 26px;
+    float: right;
+}
+.purchase_questions_table tr,
+.purchase_sub_table tr {
+    border: none;
+}
+.purchase_questions_table tr td {
+    text-align: center;
+    color: #ffffff;
+    padding: 5px 10px;
+}
+.purchase_sub_table tr td {
+    padding: 5px 0;
+}
+
+#rejectPoDetailsModal h4.modal-title {
+    padding: 15px ;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* *******************************************8888 */
 .dataTables_length label {
     font-size: 16px;
     color: #000000;
@@ -5505,6 +5543,18 @@ nav .pagination li.active .page-link {
 #orders table th {
     padding: 5px 20px;
 }
+#orders .order_inquiries_table table th {
+    padding: 15px 20px;
+}
+#orders .order_inquiries_table table .btn_green {
+    min-width: 205px;
+}
+#orders .order_inquiries_table table a {
+    color: #ffffff !important;
+    display: inline-block;
+    padding: 5px 20px;
+}
+
 #orders table td {
     padding: 10px 20px;
 }

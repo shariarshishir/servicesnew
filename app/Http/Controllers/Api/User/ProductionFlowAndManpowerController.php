@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductionFlowAndManpower;
+use App\Models\BusinessProfileVerification;
 use Illuminate\Support\Facades\Validator;
 use stdClass;
 
@@ -74,6 +75,13 @@ class ProductionFlowAndManpowerController extends Controller
                 $productionFlowAndManpowerObject->production_type = $productionFlowAndManpower->production_type;
                 $productionFlowAndManpowerObject->flow_and_manpower = json_decode($productionFlowAndManpower->flow_and_manpower);
                 array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
+            }
+
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->save();
+
             }
             
 

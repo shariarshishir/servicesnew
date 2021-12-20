@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyOverview;
+use App\Models\BusinessProfileVerification;
 use Illuminate\Http\Request;
 
 class CompanyOverviewController extends Controller
@@ -30,6 +31,12 @@ class CompanyOverviewController extends Controller
 
             $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'about_company'=>$request->about_company,'factory_address'=>$request->factory_address]);
             
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->save();
+
+            }
             return response()->json([
                 'success' =>true,
                 'message'     => 'Company Overview Updated',

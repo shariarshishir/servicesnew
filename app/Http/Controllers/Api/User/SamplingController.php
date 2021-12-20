@@ -9,7 +9,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Sampling;
-
+use App\Models\BusinessProfileVerification;
 
 class SamplingController extends Controller
 {
@@ -43,8 +43,16 @@ class SamplingController extends Controller
                     }
                 }
             }
+           
 
             $samplings = Sampling::where('business_profile_id',$request->business_profile_id)->get();
+            
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->save();
+
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Sampling  information Updated',

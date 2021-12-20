@@ -6825,6 +6825,11 @@ nav .pagination li.active .page-link {
         margin-top: 15px;
         display: block;
     }
+    .header_wrap .top_right .btn_profile .material-icons {
+        font-size: 18px;
+        margin-top: 3px;
+    }
+    
 
 
 }
@@ -7716,6 +7721,18 @@ nav .pagination li.active .page-link {
     }
     #homepage .tbm {
         margin-bottom: 20px;
+    }
+
+    .user-block-mobile .btn_login_mobile {
+        margin-top: 0;
+    }
+    .mobile_top_right .avatar-status {
+        width: 36px;
+        height: 36px;
+        margin-top: 0;
+    }
+    #homepage .perform_tab_table {
+        padding: 0;
     }
 
 }

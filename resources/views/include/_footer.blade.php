@@ -148,7 +148,7 @@
 
 @if (Session::has('business_profile_create_permission'))
     <script>
-        swal("Error",'{{session::get("business_profile_create_permission")}}',"error");
+        swal("",'{{session::get("business_profile_create_permission")}}',"warning");
     </script>
 @endif
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

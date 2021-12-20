@@ -771,7 +771,7 @@
         </div>
       </div>
     </section>
-    <section class="advance-tools" style="margin-bottom: 2rem;">
+    <section class="advance-tools" style="margin-bottom: 0px;">
       <div class="banner-inner">
         <div class="container">
           <div class="row d-flex align-items-center flex-wrap">

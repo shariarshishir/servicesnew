@@ -100,8 +100,8 @@
 						<div class="profile_not_updated"> 
 							<span class="profile_not_updated_inner center-align">
 								<div class="annaouncement_icon">&nbsp;</div>
-								<p style="font-size: 25px;"> Access restricted! </p>
-								<p>For more information contact Merchant Bay</p>
+								<p style="font-size: 25px;"> You do not have access to view this profile.</p>
+								<p>Become a verified buyer to get full access of Merchant Bay.</p>
 								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
 							</span>
 							
@@ -112,7 +112,9 @@
 								<p> Please <a href="#"> Book a Call </a> for any further information. </p>
 							</span> -->
 
-							<div class="center-align"> <a class="btn_green" href="#"> Book a Call </a></div>
+							<div class="center-align">
+							<a href="javascript:void(0);" class="button talk-to-us btn_green" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk To Us</a>
+							</div>
 						</div>
 						
 						
@@ -232,28 +234,30 @@
 							<div class="product_boxwrap row">
 								@if(count($mainProducts)>0)
 									@foreach($mainProducts as $product)
-									<div class="productBox col s6 m3 l3">
-										<div class="imgBox">
-											@foreach($product->product_images as $image)
-												<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
-												@break
-											@endforeach
-											<div class="favorite">
-												<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
-													<i class="material-icons dp48">favorite</i>
-												</a>
+									<div class="col s12 m4 l3">
+										<div class="productBox">
+											<div class="imgBox">
+												@foreach($product->product_images as $image)
+													<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+													@break
+												@endforeach
+												<div class="favorite">
+													<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+														<i class="material-icons dp48">favorite</i>
+													</a>
+												</div>
 											</div>
-										</div>
-										<div class="priceBox row">
+											<div class="priceBox row">
 
+											</div>
+											<h4>
+												<a href="{{route('mix.product.details', ['mb', $product->id])}}">
+													{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+												</a>
+											</h4>
+											<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+											<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 										</div>
-										<h4>
-											<a href="{{route('mix.product.details', ['mb', $product->id])}}">
-												{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
-											</a>
-										</h4>
-										<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
-										<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 									</div>
 								@endforeach
 								@else

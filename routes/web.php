@@ -90,6 +90,7 @@ Route::get('/contactus', [HomeController::class, 'contactusLandingPage'])->name(
 
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
+Route::get('/supplier/location/data',[HomeController::class,'getSupplierLocationData'])->name('get.supplier.location.data');
 Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');

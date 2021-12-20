@@ -2,33 +2,31 @@
 
 @section('content')
 @include('sweet::alert')
-@php $business_type = array_key_exists('business_type', app('request')->input())?app('request')->input('business_type'):[]; @endphp
-@php $industry_type = array_key_exists('industry_type', app('request')->input())?app('request')->input('industry_type'):[]; @endphp
+@php
+    $industry_type = array_key_exists('industry_type', app('request')->input())?app('request')->input('industry_type'):[];
+    $factory_type = array_key_exists('factory_type', app('request')->input())?app('request')->input('factory_type'):[];
+    $location = array_key_exists('location', app('request')->input())?app('request')->input('location'): '';
+    $business_name = array_key_exists('business_name', app('request')->input())?app('request')->input('business_name'): '';
+    $factory_type_array=[
+        '2'=>'woven',
+        '4'=>'knit',
+        '5'=>'sweater',
+        '6'=>'accessories',
+        '8'=>'denim',
+        '9'=>'lingerie',
+        '11'=>'textile',
+        '12'=>'yarn & spinning',
+        '33'=>'others',
+        ];
+@endphp
 
     <div class="suppliers_container">
         <div class="filter suppliers_filter_wrap">
             <span class="filter_box_wrap">
                 <form action="{{route('suppliers')}}" method="get">
+                    {{-- industry_type --}}
                     <span class="filter_box">
-                        <a class='dropdown-trigger btn btn_white filter_dropMenu' href='#' data-target='business_type'>Business Type 
-                        <i class="material-icons">arrow_drop_down</i></a>
-                        <ul id='business_type' class='dropdown-content'>
-                            <li><label>
-                                <input type="checkbox" value="1" name="business_type[]" {{ (in_array(1, $business_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                <span>Manufacturer</span>
-                            </label>
-                            </li>
-
-                            <li><label>
-                                <input type="checkbox" value="2" name="business_type[]" {{ (in_array(2, $business_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                <span>Wholesaler</span>
-                            </label>
-                            </li>
-                        </ul>
-                    </span>
-                    
-                    <span class="filter_box">
-                        <a class='dropdown-trigger btn btn_white filter_dropMenu' href='#' data-target='industry_type'>Industry Type 
+                        <a class='dropdown-trigger btn btn_white filter_dropMenu' href='#' data-target='industry_type'>Industry Type
                         <i class="material-icons">arrow_drop_down</i> </a>
                         <ul id='industry_type' class='dropdown-content'>
                             <li><label>
@@ -44,14 +42,39 @@
                             </li>
                         </ul>
                     </span>
+                    {{-- factory type --}}
+                    <span class="filter_box">
+                        <a class='dropdown-trigger btn btn_white filter_dropMenu' href='#' data-target='factory_type'>Factory Type
+                        <i class="material-icons">arrow_drop_down</i> </a>
+                        <ul id='factory_type' class='dropdown-content'>
+                            @foreach ($factory_type_array as $key => $list)
+                                <li>
+                                    <label>
+                                        <input type="checkbox" value="{{$key}}"  name="factory_type[]" {{ (in_array($key, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
+                                        <span>{{ucwords($list)}}</span>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </span>
+                    {{--location search  --}}
+                    <span class="filter_search">
+                            <i class="material-icons">search</i>
+                            <input class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
+                            <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
+                    </span>
+
                     <a class='btn btn_green btn_clear' href="{{route('suppliers')}}"> Clear </a>
+
                 </form>
             </span>
+
+            {{-- business name search --}}
             <span class="filter_search">
                 <form action="{{route('suppliers')}}" method="get">
                     <i class="material-icons">search</i>
-                    <input class="filter_search_input" type="text" name="business_name" placeholder="business name">
-                    <input class="btn_green btn_search" type="submit" value="search">
+                    <input class="filter_search_input" type="text" name="business_name" placeholder="business name" value="{{$business_name}}">
+                    <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
                 </form>
             </span>
         </div>
@@ -73,8 +96,8 @@
                                 <p><img src="{{asset('images/frontendimages/new_layout_images/icon_t_shirt.png')}}" alt=""> {{$supplier->businessCategory ? $supplier->businessCategory->name : ''}} </p>
                                 <!--p><img src="{{asset('images/frontendimages/new_layout_images/icon_year.png')}}" alt=""> Established : </p-->
                             </div>
-                           
-                           
+
+
                             <!-- <p>Business Name: {{$supplier->business_name}}</p>
                             <p>Business Type:
                                 @switch($supplier->business_type)
@@ -99,7 +122,12 @@
 
 
                             <div class="industry_view">
-                                <a href="{{route('supplier.profile', $supplier->id)}}">View Details</a>
+                                @if(Auth::guard('web')->check())
+                                    <a href="{{route('supplier.profile', $supplier->id)}}">View Details</a>
+                                @else
+                                    <a href="#supplier-view-auth-check-modal" class="modal-trigger">View Details</button>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -110,6 +138,17 @@
     <div>
         {{$suppliers->appends(request()->query())->links()}}
     </div>
+
+        <div id="supplier-view-auth-check-modal" class="modal">
+            <div class="modal-content">
+                <p>Become a verified buyer to view company profile</p>
+                <a href="{{route('login')}}">sign in</a>
+                <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" > sign up</a>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
 @endsection
 
 @include('suppliers._scripts')

@@ -466,12 +466,10 @@
                         <div class="clear30"></div>
                         <div class="col s12 m12 text-center mtop40">
 
-                            <!-- Calendly link widget begin -->
-                                <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-                                <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+                            
                                 <!--<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/abrarsayem'});return false;">Book a Call</a>-->
                                 <div class="center-align book_call"> <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="jb"> <span class="material-icons">phone</span> &nbsp;Book a Call </a></div>
-                                <!-- Calendly link widget end -->
+                                
 
 
                             </div>
@@ -482,6 +480,23 @@
             </div>
         </div>
     </section>
+
+	<div class="footer_topWrap">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m6 l5 left">
+					<div class="center-align thumb_box"><img src="{{asset('images/frontendimages/new_layout_images/thumb.png')}}" alt=""></div>
+					<p>Your apparel will be ready <br /> on time or we work for free!</p>
+				</div>
+				<div class="col s12 m6 l5 right">
+					<p>Merchandising have never seemed so easy before.</p>
+					<div class="btn_talk ">
+						<a class="btn_white" href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>    
 
     <div class="modal fade bs-example-modal-md" id="book-call-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-md" role="document">

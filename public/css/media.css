@@ -142,14 +142,7 @@
         height: 50px;
         line-height: 50px;
     }
-    .module-search .select2-container {
-        width: 110px!important;
-    }
-    .banner_search .search-btn {
-       width: 45px;
-       height: 48px;
-        line-height: 50px;
-    }
+
     .banner_search .material-icons {
         font-size: 2rem;
     }

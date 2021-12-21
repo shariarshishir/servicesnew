@@ -77,9 +77,9 @@ class ProductionFlowAndManpowerController extends Controller
                 array_push($productionFlowAndManpowerArray,$productionFlowAndManpowerObject);
             }
 
-            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
             if($businessProfileVerification){
-                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->production_capacity = 0 ;
                 $businessProfileVerification->save();
 
             }

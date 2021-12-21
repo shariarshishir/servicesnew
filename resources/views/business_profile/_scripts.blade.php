@@ -2264,7 +2264,7 @@
     {
 
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
-        // html +='<label for="product-upload">Media</label>';
+        html +='<a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>';
         html +='<div class="upload_imgage_box">';
         html +='<img id="preview-large-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='</div>';
@@ -2274,9 +2274,10 @@
         html +='</div>';
         $('.factory-image-block.row').append(html);
     }
-    function removeFactoryLargeImage(el)
+    
+    function removeFactoryImage(el)
     {
-        $(el).parent().parent().remove();
+        $(el).parent().remove();
     }
 
 
@@ -2284,25 +2285,19 @@
     {
 
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
+        html +='<a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>';
         html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='<div class="form-group">';
         html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" id="factory-image">';
         html +='</div>';
 
-        // html +='</div>';
-        // html +='<br>';
-        // html +='<div class="col-md-12 mb-2">';
-        // html +='</div>';
-        // html +='<div class="col-md-12">';
-        // html +='</div>';
-
         $('.factory-large-image-block').append(html);
     }
-    function removeFactoryImage(el)
+    function removeFactoryLargeImage(el)
     {
-        $(el).parent().parent().remove();
+        $(el).parent().remove();
     }
-
+   
     $(document).ready(function (e) {
 
         $('#factory-image').change(function(){

@@ -31,7 +31,7 @@ class CompanyOverviewController extends Controller
 
             $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'about_company'=>$request->about_company,'factory_address'=>$request->factory_address]);
             
-            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
             if($businessProfileVerification){
                 $businessProfileVerification->company_overview = 0 ;
                 $businessProfileVerification->save();

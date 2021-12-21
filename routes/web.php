@@ -125,6 +125,7 @@ Route::get('/search',[HomeController::class,'searchByProductOrVendor'])->name("o
 
 Route::get('/industry-blogs',[HomeController::class,'blogs'])->name('industry.blogs');
 Route::get('/press-room/details/{slug}',[HomeController::class,'blogDetails'])->name('blogs.details');
+Route::get('/selected-buyer-info-for-rfq',[HomeController::class,'selectedBuyerDetails'])->name('rfqbuyer.details');
 
 //user API's endpoint start
 Route::get('/add-to-cart',[ProductCartController::class,'addToCart'])->name('add.cart');
@@ -378,17 +379,17 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::delete('/vendor/{vendor}/product/{product}', [ProductController::class,'destroy'])->name('product.destroy');
         Route::get('/related/products', [ProductController::class, 'relatedProducts'])->name('admin.users.related.products');
         //vendor order
-        Route::get('/vendor/{vendor}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
-        Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
-        Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
-        Route::get('/vendor/{vendor}/order/{order}',[OrderController::class, 'show'])->name('vendor.order.show');
-        Route::get('/vendor/{vendor}/order/{order}/notification/{notification}',[OrderController::class, 'showFromNotifaction'])->name('vendor.order.show.notification');
-        Route::get('/vendor/{vendor}/order/{order}/edit',[OrderController::class, 'edit'])->name('vendor.order.edit');
-        Route::post('/vendor/{vendor}/order/{order}', [OrderController::class,'update'])->name('vendor.order.update');
-        Route::delete('/vendor/{vendor}/order/{order}', [OrderController::class,'destroy'])->name('vendor.order.destroy');
-        Route::get('/order/update/{id}', [OrderController::class, 'OrderUpdateByAdmin'])->name('order.updateby.admin');
-        Route::get('/order/update/status/delivered/{id}', [OrderController::class, 'statusToDelivered'])->name('order.status.change.delivered');
-        Route::get('/order/ask/payment/{order_no}', [OrderController::class, 'OrderAskPayment'])->name('order.ask.payment');
+        // Route::get('/vendor/{vendor}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
+        // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
+        // Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
+        // Route::get('/vendor/{vendor}/order/{order}',[OrderController::class, 'show'])->name('vendor.order.show');
+        // Route::get('/vendor/{vendor}/order/{order}/notification/{notification}',[OrderController::class, 'showFromNotifaction'])->name('vendor.order.show.notification');
+        // Route::get('/vendor/{vendor}/order/{order}/edit',[OrderController::class, 'edit'])->name('vendor.order.edit');
+        // Route::post('/vendor/{vendor}/order/{order}', [OrderController::class,'update'])->name('vendor.order.update');
+        // Route::delete('/vendor/{vendor}/order/{order}', [OrderController::class,'destroy'])->name('vendor.order.destroy');
+        // Route::get('/order/update/{id}', [OrderController::class, 'OrderUpdateByAdmin'])->name('order.updateby.admin');
+        // Route::get('/order/update/status/delivered/{id}', [OrderController::class, 'statusToDelivered'])->name('order.status.change.delivered');
+        // Route::get('/order/ask/payment/{order_no}', [OrderController::class, 'OrderAskPayment'])->name('order.ask.payment');
         //order queries
         Route::get('query/request/{type}',[QueryController::class, 'index'])->name('query.request.index');
        // Route::get('query/request/edit/{type}',[QueryController::class, 'edit'])->name('query.request.edit');
@@ -421,6 +422,19 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::post('user/business/profile/walfare/verify',[AdminBusinessProfileController::class, 'walfareInformationVerify'])->name('worker.walfare.verify');
         Route::post('user/business/profile/security/verify',[AdminBusinessProfileController::class, 'securityInformationVerify'])->name('worker.security.verify');
         Route::get('/user/business/profile/verify',[AdminBusinessProfileController::class, 'verifyBusinessProfile'])->name('business.profile.verify');
+        //order through business profile
+        Route::get('business-profile/{business_profile_id}/orders',[OrderController::class, 'index'])->name('business.profile.orders.index');
+        // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
+        // Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
+        Route::get('business-profile/{business_profile_id}/order/{order_id}',[OrderController::class, 'show'])->name('business.profile.order.show');
+        // Route::get('/vendor/{vendor}/order/{order}/notification/{notification}',[OrderController::class, 'showFromNotifaction'])->name('vendor.order.show.notification');
+        // Route::get('/vendor/{vendor}/order/{order}/edit',[OrderController::class, 'edit'])->name('vendor.order.edit');
+        // Route::post('/vendor/{vendor}/order/{order}', [OrderController::class,'update'])->name('vendor.order.update');
+        // Route::delete('/vendor/{vendor}/order/{order}', [OrderController::class,'destroy'])->name('vendor.order.destroy');
+        Route::get('/order/update/{id}', [OrderController::class, 'OrderUpdateByAdmin'])->name('order.updateby.admin');
+        Route::get('/order/update/status/delivered/{id}', [OrderController::class, 'statusToDelivered'])->name('order.status.change.delivered');
+        Route::get('/order/ask/payment/{order_no}', [OrderController::class, 'OrderAskPayment'])->name('order.ask.payment');
+
 
 
 

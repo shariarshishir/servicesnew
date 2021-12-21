@@ -15,7 +15,7 @@ class RfqController extends Controller
 {
     public function index()
     {
-        $rfqList=Rfq::withCount('bids')->with('images','user')->latest()->get();
+        $rfqList=Rfq::withCount('bids')->with('images','user','businessProfile')->latest()->get();
 
         foreach($rfqList as $list){
             $bid_user_id=[];
@@ -45,7 +45,7 @@ class RfqController extends Controller
 
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required',
@@ -97,7 +97,7 @@ class RfqController extends Controller
 
     public function myRfq()
     {
-        $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(10);
+        $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(6);
         return view('rfq.my_rfq',compact('rfqLists'));
     }
 }

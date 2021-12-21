@@ -134,7 +134,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
-            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
 
         ]);
@@ -384,7 +384,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->p_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->p_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
-            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
         ]);
 

@@ -14,6 +14,8 @@
     var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td style="position:relative;"><span class="required_star" style="position: absolute; top:10; right:11px;">*</span><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td style="position:relative;"><span class="required_star" style="position: absolute; top:10; right:11px;">*</span><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
     function getbuyerdetails(id)
     {
+        //alert(id);
+        /*
         var buyer = {};
         for(var i = 0; i < allbuyer.length; i++)
         {
@@ -27,6 +29,18 @@
             let html = '<h3>'+buyer.name+'</h3> <address> '+ buyer.street +'<br>'+ buyer.city +', '+ buyer.state +'<br>'+ buyer.country +', '+ buyer.zipcode +' </address>';
             $('#buyerdata').html(html);
         }
+        */
+        $.ajax({
+            method: 'get',
+            data: {selectedUserId:id},
+            url: '{{ route("rfqbuyer.details") }}',
+            beforeSend: function() {},
+            success:function(response){
+                //console.log(response.data[0]);
+                var html = '<h3>'+response.data[0].name+'</h3> <address> '+ response.data[0].email +'<br>'+ response.data[0].phone +' </address>';
+                $('#buyerdata').html(html);
+            }
+        });        
     }
     if(selectedBuyerId){
         getbuyerdetails(selectedBuyerId);

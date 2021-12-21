@@ -33,7 +33,7 @@ class ProductController extends Controller
             'product_specification'=>'required',
             'lead_time'=>'required',
             'industry' => 'required',
-            'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
 
         ]);
@@ -153,7 +153,7 @@ public function update(Request $request, $product_id)
         'product_details'=>'required',
         'product_specification'=>'required',
         'lead_time'=>'required',
-        'video' => 'mimes:mp4,3gp,mkv,mov|max:20000',
+        'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
     ]);
 
     if ($validator->fails())

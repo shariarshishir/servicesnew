@@ -397,7 +397,7 @@ class UserController extends Controller
         }
 
         Auth::guard('web')->logout();
-        return redirect('/');
+        return redirect(env('SSO_REGISTRATION_URL').'?type=logout&flag=global');
 
     }
 

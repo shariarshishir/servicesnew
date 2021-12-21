@@ -59,6 +59,10 @@ Route::post('/register', [UserController::class, 'store']);
 Route::post('/register-from-merchantbay/{userType}', [UserController::class, 'storeUserFromMerchantBay']);
 Route::post('/login', [UserController::class, 'login']);
 
+
+//user profile update from sso
+Route::post('/profile/update', [UserController::class, 'profileUpdate']);
+
 //email verification api
 Route::get('user/{userId}/verify/{token}', [UserController::class, 'verifyAccount']);
 Route::post('/verify-user-from-manufacture',[UserController::class, 'verifyUserFromManufacture']);
@@ -118,7 +122,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     //wholeslaer api
     Route::put('/store/{vendorUId}',[VendorController::class,'update']);
     Route::post('/wholesaler-products', [ProductController::class, 'store']);
-    Route::post('/wholesaler-products/{productId}', [ProductController::class, 'update']);
+    Route::post('/wholesaler-products-edit/{productId}', [ProductController::class, 'update']);
     Route::delete('/store/{storeId}/products/{productId}', [ProductController::class, 'destroy']);
     Route::get('/store/{businessProfileId}/orders', [OrderController::class, 'orderByBusinessProfileId']);
     Route::get('/store/{businessProfileId}/orders/{orderId}', [OrderController::class, 'vendorOrderByOrderId']);

@@ -728,108 +728,115 @@
   <script>
 //live search by product name or vendor name
 $(document).on("keyup",".search_input",function(){
-
-var searchInput = $(this).val();
-var selectedSearchOption = $("#searchOption").children("option:selected").val();
-$("#system_search .search_type").val(selectedSearchOption);
-var url = '{{ route("live.search") }}';
-$.ajax({
-    type:'GET',
-    url: url,
-    dataType:'json',
-    data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
-    beforeSend: function() {
-        //$('.loading-message').html("Searching please Wait.");
-        //$('#loadingProgressContainer').show();
-    },
-    success: function(response)
-    {
-        console.log(response.averageRatings);
-        //$('.loading-message').html("");
-		//$('#loadingProgressContainer').hide();
-        var html="";
-        var nohtml = "";
-        var url  = window.location.origin;
-        if(response.resultCount > 0)
+    var searchInput = $(this).val();
+    var selectedSearchOption = $("#searchOption").children("option:selected").val();
+    $("#system_search .search_type").val(selectedSearchOption);
+    var url = '{{ route("live.search") }}';
+    $.ajax({
+        type:'GET',
+        url: url,
+        dataType:'json',
+        data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
+        beforeSend: function() {
+            //$('.loading-message').html("Searching please Wait.");
+            //$('#loadingProgressContainer').show();
+        },
+        success: function(response)
         {
-            //console.log(response.data);
-            if(response.searchType=='product' && response.data.length > 0)
+            console.log(response.averageRatings);
+            //$('.loading-message').html("");
+            //$('#loadingProgressContainer').hide();
+            var html="";
+            var nohtml = "";
+            var url  = window.location.origin;
+            if(response.resultCount > 0)
             {
-                $('.product-item').html(nohtml);
-                html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
-                for(var i=0; i<response.data.length; i++)
+                console.log(response.data);
+                if(response.searchType=='all' && response.data.length > 0)
                 {
-                    //console.log(response.data[i]);
-                    if(response.data[i].name) // product for wholesaler
-                    {
-                        html+='<div class="product-item">';
-                        html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
-                        $.each(response.data[i].images,function(key,item){
-                            if(key==0){
-                                var url  = window.location.origin;
-                                // var image=url+'/storage/'+item.image;
-                                var image="{{asset('storage/')}}"+'/'+item.image;
-                                html+='<div class="product-img"><img src="'+image+'"></div>';
-                            }
-                        })
-                        html+= '<div class="product-short-intro">';
-                        html+= '<h4>'+response.data[i].name+'</h4>';
-                        html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
-                        html+= '</div>';
-                        html+= '</div>';
-                    }
-                    else // product for manufacturer
-                    {
-                        html+='<div class="product-item">';
-                        html+= '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
-                        $.each(response.data[i].product_images,function(key,item){
-                            if(key==0){
-                                var url  = window.location.origin;
-                                // var image=url+'/storage/'+item.image;
-                                var image="{{asset('storage/')}}"+'/'+item.product_image;
-                                html+='<div class="product-img"><img src="'+image+'"></div>';
-                            }
-                        })
-                        html+= '<div class="product-short-intro">';
-                        html+= '<h4>'+response.data[i].title+'</h4>';
-                        html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
-                        html+= '</div>';
-                        html+= '</div>';
-                    }
+                    // all search response will go here.
                 }
-                $('#search-results').html(html);
-                $('#search-results').show();
-            }
-            else if(response.searchType=='vendor' && response.data.length > 0)
-            {
-                //console.log(response.data);
-                $('.vendor-info').html(nohtml);
-                for(var i=0;i<response.data.length;i++){
-                    html+='<div class="vendor-info">';
-                    html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
-                    html+= '<h4>'+response.data[i].business_name+'</h4>';
-                    html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
-                    html+= '</div>';
+                else if(response.searchType=='product' && response.data.length > 0)
+                {
+                    $('.product-item').html(nohtml);
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
+                    for(var i=0; i<response.data.length; i++)
+                    {
+                        //console.log(response.data[i]);
+                        if(response.data[i].name) // product for wholesaler
+                        {
+                            html+='<div class="product-item">';
+                            html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].images,function(key,item){
+                                if(key==0){
+                                    var url  = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image="{{asset('storage/')}}"+'/'+item.image;
+                                    html+='<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html+= '<div class="product-short-intro">';
+                            html+= '<h4>'+response.data[i].name+'</h4>';
+                            html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html+= '</div>';
+                            html+= '</div>';
+                        }
+                        else // product for manufacturer
+                        {
+                            html+='<div class="product-item">';
+                            html+= '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].product_images,function(key,item){
+                                if(key==0){
+                                    var url  = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image="{{asset('storage/')}}"+'/'+item.product_image;
+                                    html+='<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html+= '<div class="product-short-intro">';
+                            html+= '<h4>'+response.data[i].title+'</h4>';
+                            html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html+= '</div>';
+                            html+= '</div>';
+                        }
                     }
-                $('#search-results').html(html);
-                $('#search-results').show();
+                    $('#search-results').html(html);
+                    $('#search-results').show();
+                }
+                else if(response.searchType=='vendor' && response.data.length > 0)
+                {
+                    //console.log(response.data);
+                    $('.vendor-info').html(nohtml);
+                    for(var i=0;i<response.data.length;i++){
+                        html+='<div class="vendor-info">';
+                        html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                        html+= '<h4>'+response.data[i].business_name+'</h4>';
+                        html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
+                        html+= '</div>';
+                        }
+                    $('#search-results').html(html);
+                    $('#search-results').show();
+                }
+            }
+            else
+            {
+                if(response.searchType=='all')
+                {
+                    $('#search-results').html("No Data found").show();
+                }
+                else if(response.searchType=='product')
+                {
+                    $('#search-results').html("No Product found").show();
+                }
+                else if(response.searchType=='vendor')
+                {
+                    $('#search-results').html("No Store found").show();
+                }
+                //$('#search-results').html(nohtml).hide();
             }
         }
-        else
-        {
-            if(response.searchType=='product')
-            {
-                $('#search-results').html("No Product found").show();
-            }
-            else if(response.searchType=='vendor')
-            {
-                $('#search-results').html("No Store found").show();
-            }
-            //$('#search-results').html(nohtml).hide();
-        }
-    }
 
-});
+    });
 });
 
 //filter search

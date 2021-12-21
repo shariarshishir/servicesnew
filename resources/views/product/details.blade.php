@@ -21,7 +21,7 @@ $reviewsCount = count($productReviews);
 
 <div class="product_details_wrapper">
     <div class="back_to">
-        <a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
+        <a href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
     </div>
     <div class="single-product-details-block-wrapper">
         

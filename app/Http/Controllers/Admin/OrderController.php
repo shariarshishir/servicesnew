@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Events\NewOrderHasApprovedEvent;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\AskForPaymentMail;
 use App\Models\ShipmentType;
 use App\Models\ShippingMethod;
@@ -121,7 +122,7 @@ class OrderController extends Controller
             if($vendorOrder->state == 'approved'){
                 return redirect()->back()->withSuccess('Order Already Approved');
             }
-            $vendorOrder->update(['state' => 'approved',]);
+            $vendorOrder->update(['state' => 'approved','approved_by_admin'=> Auth::guard('admin')->user()->id]);
             // $order=VendorOrder::find($id);
            // event(new NewOrderHasApprovedEvent($vendorOrder));
             return redirect()->back()->withSuccess('Order Status Updated Successfully');

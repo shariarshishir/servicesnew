@@ -17,6 +17,7 @@ use App\Models\BusinessProfileVerification;
 use App\Models\Walfare;
 use App\Models\Security;
 use App\Models\BusinessProfile;
+use Illuminate\Support\Facades\Auth;
 use stdClass;
 class BusinessProfileController extends Controller
 {
@@ -693,6 +694,7 @@ class BusinessProfileController extends Controller
 
         $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
         $businessProfile->is_business_profile_verified = $request->verifyVal;
+        $businessProfile->profile_verified_by_admin = Auth::guard('admin')->user()->id ;
         $businessProfile->save();
 
         return response()->json(["status"=>1, "message"=>"verified successfully"]);

@@ -760,6 +760,12 @@ class HomeController extends Controller
         return response()->json($modify);
     }
 
+    public function selectedBuyerDetails(Request $request)
+    {
+        $userObj = User::where('id', $request->selectedUserId)->get();
+        return response()->json(["status" => 1, "message" => "Success", "data" => $userObj]);
+    }
+
 
 
 }

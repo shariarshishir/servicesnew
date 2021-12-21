@@ -103,4 +103,9 @@ class BusinessProfile extends Model
         return $this->hasMany('App\Models\\Manufacture\Product','business_profile_id');
     }
 
+    public function wholesalerOrders()
+    {
+        return $this->hasMany(VendorOrder::class);
+    }
+
 }

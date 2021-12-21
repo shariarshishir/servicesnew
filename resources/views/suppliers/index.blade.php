@@ -124,18 +124,14 @@
         </div>
     </div>
 
-    <div id="supplier-view-auth-check-modal" class="modal">
+    <div id="supplier-view-auth-check-modal" class="modal verification-message-modal">
         <div class="modal-content">
 
             <div class="row">
-                <div class="col s12 m5 l5">
-                    <div class="supplier_view_left">
-                        <img src="http://127.0.0.1:8000/images/frontendimages/merchantbay_logoX200.png" alt="Merchant Bay Logo">
-                    </div>
-                </div>
-                <div class="col s12 m7 l7 ">
+                <div class="col s12 m12 l12 ">
                     <div class="supplier_view_right center-align">
-                        <h5>Become a verified buyer to view company profile</h5>
+                        <span class="material-icons" style="font-size: 45px;margin-bottom: 20px;">message</span>
+                        <h5>Become a verified buyer to view supplier profiles</h5>
                         <a class="btn_green" href="{{route('login')}}">sign in</a>
                         <a class="btn_green" href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" > sign up</a>
                     </div>

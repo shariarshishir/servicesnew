@@ -146,7 +146,11 @@
 </div>
 
 
-
+@if (Session::has('business_profile_create_permission'))
+    <script>
+        swal("",'{!!session::get("business_profile_create_permission")!!}',"warning");
+    </script>
+@endif
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
 <script
@@ -773,7 +777,7 @@ $.ajax({
                         html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
                         html+= '</div>';
                         html+= '</div>';
-                    } 
+                    }
                     else // product for manufacturer
                     {
                         html+='<div class="product-item">';

@@ -28,4 +28,9 @@ class Rfq extends Model
     public function category(){
         return $this->belongsTo('App\Models\Manufacture\ProductCategory','category_id');
     }
+
+    public function businessProfile()
+    {
+        return $this->belongsTo('App\Models\BusinessProfile', 'created_by');
+    }
 }

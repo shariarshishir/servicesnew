@@ -18,10 +18,10 @@ use App\Models\UOM;
 class OrderController extends Controller
 {
 
-    public function index($business_profile_id)
+    public function index($vendorId)
     {
-       $collection=VendorOrder::Where('business_profile_id',$business_profile_id)->latest()->paginate(10);
-       return view('admin.users.orders.index',compact('collection','business_profile_id'));
+       $collection=VendorOrder::Where('vendor_id',$vendorId)->latest()->paginate(10);
+       return view('admin.vendor.order.index',compact('collection','vendorId'));
     }
 
     public function create($vendorId)
@@ -54,14 +54,15 @@ class OrderController extends Controller
 
     }
 
-    public function show($business_profile_id,$order_id)
+    public function show($vendorId,$order_id)
     {
-        $vendorOrder=VendorOrder::where('business_profile_id',$business_profile_id)->where('id',$order_id)->with(['billingAddress','shippingAddress','orderItems','shippingCharge'])->first();
+        $vendorOrder=VendorOrder::where('vendor_id',$vendorId)->where('id',$order_id)->with(['billingAddress','shippingAddress','orderItems','shippingCharge'])->first();
+        $orderItems=VendorOrderItem::where('order_id',$order_id)->get();
         $shippingMethod=ShippingMethod::pluck('name');
         $shipMentType=ShipmentType::pluck('name');
         $uom=UOM::pluck('name');
 
-        return view('admin.users.orders.show',compact('vendorOrder','shippingMethod','shipMentType','uom'));
+        return view('admin.vendor.order.show',compact('vendorId','orderItems','vendorOrder','shippingMethod','shipMentType','uom'));
 
     }
 
@@ -123,7 +124,7 @@ class OrderController extends Controller
             }
             $vendorOrder->update(['state' => 'approved',]);
             // $order=VendorOrder::find($id);
-           // event(new NewOrderHasApprovedEvent($vendorOrder));
+            event(new NewOrderHasApprovedEvent($vendorOrder));
             return redirect()->back()->withSuccess('Order Status Updated Successfully');
         }catch(\Exception $e)
         {

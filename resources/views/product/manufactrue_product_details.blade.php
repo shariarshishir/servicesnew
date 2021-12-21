@@ -23,8 +23,7 @@
         <div class="container">
             <div class="row ic-pg-container">
                 <div class="col s12 m3 l3 product_preview_wrap">
-
-                    @if($product->video)
+                    @if($product->product_video->video)
                         <div class="simpleLens-gallery-container" id="ic-gallery">
                             <div class="video_content">
                                 <center>
@@ -35,7 +34,7 @@
                             </div>
                             <div class="simpleLens-thumbnails-container">
                                 @foreach($product->product_images as $product_image)
-                                    <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
+                                    <a href="{{ asset('storage/'.$product_image['product_image']) }}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
                                         data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
                                         data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
                                         <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
@@ -58,7 +57,7 @@
                             @endif
                             <div class="simpleLens-thumbnails-container">
                                 @foreach($product->product_images as $product_image)
-                                    <a href="javascript:void(0)" class="simpleLens-thumbnail-wrapper"
+                                    <a href="{{ asset('storage/'.$product_image['product_image']) }}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
                                         data-lens-image="{{ asset('storage/'.$product_image['product_image']) }}"
                                         data-big-image="{{ asset('storage/'.$product_image['product_image']) }}">
                                         <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />

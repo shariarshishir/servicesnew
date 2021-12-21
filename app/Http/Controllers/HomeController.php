@@ -327,12 +327,46 @@ class HomeController extends Controller
 
     public function liveSearchByProductOrVendor(Request $request){
         if(!empty($request->searchInput)) {
-            if($request->selectedSearchOption=="product")
+            if($request->selectedSearchOption=="all")
             {
                 //$results=Product::with('images')->where('name', 'like', '%'.$request->searchInput.'%')->get();
                 $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
                 $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
-                $results = $wholesaler_products->merge($manufacture_products)->sortBy('id');
+                $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
+                $suppliers = BusinessProfile::where('business_name', 'like', '%'.$request->searchInput.'%')->get();
+                //$results = $wholesaler_products->merge($manufacture_products);
+                
+                $allItems = new \Illuminate\Database\Eloquent\Collection;
+                $allItems = $allItems->merge($wholesaler_products);
+                $allItems = $allItems->merge($manufacture_products);
+                $allItems = $allItems->merge($blogs);
+                $allItems = $allItems->merge($suppliers);
+
+                //dd($allItems);
+                
+                //dd($results);
+                //$averageRatings=[];
+                //foreach($results as $result){
+                //    array_push($averageRatings, productRating($result->id));
+                //}
+
+
+                $resultCount = count($allItems);
+                return response()->json([
+                    'data' => $allItems,
+                    'datatype' => 'blog',
+                    'resultCount'=>$resultCount,
+                    //'averageRatings'=>$averageRatings,
+                    'error' => 0,
+                    'searchType' =>$request->selectedSearchOption,
+                  ],200);
+            }
+            elseif($request->selectedSearchOption=="product")
+            {
+                //$results=Product::with('images')->where('name', 'like', '%'.$request->searchInput.'%')->get();
+                $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
+                $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
+                $results = $wholesaler_products->merge($manufacture_products);
                 //dd($results);
                 //$averageRatings=[];
                 //foreach($results as $result){
@@ -343,6 +377,7 @@ class HomeController extends Controller
                 $resultCount = count($results);
                 return response()->json([
                     'data' => $results,
+                    'datatype' => 'product',
                     'resultCount'=>$resultCount,
                     //'averageRatings'=>$averageRatings,
                     'error' => 0,
@@ -356,6 +391,7 @@ class HomeController extends Controller
                 $resultCount=count($results);
                 return response()->json([
                     'data' => $results,
+                    'datatype' => 'manufacturer',
                     'resultCount'=>$resultCount,
                     'error' => 0,
                     'searchType' =>$request->selectedSearchOption,

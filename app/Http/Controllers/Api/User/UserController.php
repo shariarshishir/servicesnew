@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Image;
 use App\Events\NewUserHasRegisteredEvent;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -580,6 +581,60 @@ class UserController extends Controller
         }
         return response()->json(["message"=>"notification marked as read successfully ","code"=>true],200);
     }
+
+       //profile update from sso 
+        public function profileUpdate(Request $request)
+        {
+           
+            $validator = Validator::make($request->all(), [
+                'email'   => 'required',
+            ]);
+            
+            if($validator->fails()){
+                return response()->json(array(
+                'success' => false,
+                'error' => $validator->getMessageBag()->toArray()),
+                400);
+            }
+            
+            $user=User::where('email', $request->email)->first();
+            if($user){
+                if(isset($request->password)){
+                    $user->update([
+                        'password' => bcrypt( $request->password),
+                    ]);
+                }
+                $result = $user->update([
+                    'name' => $request->name ?? $user->name,
+                    'phone' => $request->phone ?? $user->phone,
+                    'company_name' => $request->company ?? $user->company_name
+                ]);
+                if($result){
+                    return response()->json([
+                        'success' => true,
+                        'message' =>'Profile updated successfully',
+                        200]);
+                }
+                else{
+                    return response()->json([
+                        'success' => false,
+                        'message' =>'Internal server error',
+                        500]);
+
+                }
+               
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'error' => 'user does not exit',
+                    404]);
+            }
+        }
+           
+    
+            
+           
 
 
 

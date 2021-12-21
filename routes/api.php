@@ -59,6 +59,10 @@ Route::post('/register', [UserController::class, 'store']);
 Route::post('/register-from-merchantbay/{userType}', [UserController::class, 'storeUserFromMerchantBay']);
 Route::post('/login', [UserController::class, 'login']);
 
+
+//user profile update from sso
+Route::post('/profile/update', [UserController::class, 'profileUpdate']);
+
 //email verification api
 Route::get('user/{userId}/verify/{token}', [UserController::class, 'verifyAccount']);
 Route::post('/verify-user-from-manufacture',[UserController::class, 'verifyUserFromManufacture']);

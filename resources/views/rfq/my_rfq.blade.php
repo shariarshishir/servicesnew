@@ -17,29 +17,33 @@
 		<ul>
             <li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
 			<li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
-			<li><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
+			<li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
 			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
 		</ul>
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
     @if(count($rfqLists)>0)
-        @foreach ($rfqLists as $rfqSentList)
-            <div class="rfq_profile_detail row">
-                <div class="col s12 m3 l2">
-                    <div class="rfq_profile_img">
-                        <img src="{{asset('images/frontendimages/new_layout_images/rfq_profile_img.png')}}" alt="" />
-                    </div>
-                </div>
-                <div class="col s12 m9 l10 rfq_profile_info">
-                    <div class="row">
-                        <div class="profile_info col s12 m8 l8">
-                            <h4>{{ $rfqSentList->user->name}}<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" /> </h4>
-                            <p>Merchandiser, Fashion Tex Ltd.</p>
-                        </div>
-                        <!--div class="profile_view_time right-align col s12 m4 l4">
-                            <span> <i class="material-icons"> watch_later </i> 35 mins</span>
-                        </div-->
-                    </div>
+	@foreach ($rfqLists as $rfqSentList)
+	<div class="rfq_profile_detail row">
+		<div class="col s12 m3 l2">
+			<div class="rfq_profile_img">
+				@if($rfqSentList->user->image)
+				<img src="{{ asset('storage/'.$rfqSentList->user->image) }}" alt="" />
+				@else
+				<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+				@endif
+			</div>
+		</div>
+		<div class="col s12 m9 l10 rfq_profile_info">
+			<div class="row">
+				<div class="profile_info col s12 m8 l8">
+					<h4>{{ $rfqSentList->user->name}}<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" /> </h4>
+					<p>Merchandiser, Fashion Tex Ltd.</p>
+				</div>
+				<!--div class="profile_view_time right-align col s12 m4 l4">
+					<span> <i class="material-icons"> watch_later </i> 35 mins</span>
+				</div-->
+			</div>
 
                     <div class="rfq_view_detail_wrap">
                         <h5>{{$rfqSentList->title}}</h5>

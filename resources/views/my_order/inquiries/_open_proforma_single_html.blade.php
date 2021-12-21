@@ -7,7 +7,7 @@
 <div class="col s12 purchase_order_wrap">
 	<table style="width: 100%;">
 		<tr class="purchase_order_top">
-			<td><strong style="font-size: 25px;"> Purchase Order</strong></td>
+			<td ><strong style="font-size: 25px;"> Purchase Order</strong></td>
 			<td style="text-align: right;">
 				@if(auth()->id() == $po->buyer_id && $po->status != 1)
 				<button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;

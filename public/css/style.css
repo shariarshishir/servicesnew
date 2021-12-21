@@ -1909,6 +1909,7 @@ form input:read-only {
 }
 #seller-product-datatable .btn {
     padding: 0 8px;
+    margin: 3px;
 }
 .product_data_table_wrap .red {
     color: red;
@@ -2628,6 +2629,7 @@ form input:read-only {
 }
 .product_details_wrapper .back_to img {
     box-shadow: none;
+    height: 22px;
 }
 
 
@@ -7697,6 +7699,11 @@ nav .pagination li.active .page-link {
     }
     .checkout_address_block_wrap .submit_order {
         padding-top: 10px;
+    }
+
+
+    #search-results {
+        width: 100% ;
     }
 
 

@@ -24,6 +24,7 @@
                         <label for="product-upload">Media</label>
                         <div class="factory-image-block row ">
                             <div class="upload_img_box_wrap col s6 m3 l2">
+                                <a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>
@@ -72,6 +73,7 @@
                         <label for="product-upload">Media</label>
                         <div class="factory-large-image-block row">
                             <div class="upload_img_box_wrap col s6 m3 l2">
+                            <a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>

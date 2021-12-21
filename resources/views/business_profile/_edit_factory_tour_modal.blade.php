@@ -33,26 +33,15 @@
                         @endif
                         @endif
 
-                        <!-- <div class="col 12 factory-image-block">
-                            <div class="col l2">
-                                <label for="product-upload">Media</label>
-                            </div>
-                            <br>
-                            <div class="col-md-12 mb-2">
-                                <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="file" name="factory_images[]" placeholder="Choose image"  id="factory-image">
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     
                     <div class="factory_file_uploader">
+
                         <label for="product-upload">Media</label>
+
                         <div class="factory-image-block row ">
                             <div class="upload_img_box_wrap col s6 m3 l2">
+                                <a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>
@@ -61,6 +50,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="factory_add_more row">
                             <a href="javascript:void(0);" class="add-more-factory-image-block" onclick="addFactoryImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
@@ -90,6 +80,7 @@
                         <label for="product-upload">Media</label>
                         <div class="factory-large-image-block row">
                             <div class="upload_img_box_wrap col s6 m3 l2">
+                                <a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>
@@ -102,19 +93,10 @@
                             <a href="javascript:void(0);" class="add-more-factory-large-image-block" onclick="addFactoryLargeImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>
-                    
-                    
-                    
+
                 </div>
             </div>
-          
-
-            
-            <!-- <div class="row">
-                <div class="col s12 m6 l6 right-align">
-                    <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit</button>
-                </div>
-            </div> -->
+           
             <div class="submit_btn_wrap" style="padding-top: 30px;">
                 <div class="row">
                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
@@ -125,14 +107,5 @@
             </div>
             
         </form>
-    
-        <!-- <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
-        </div> -->
     </div>
-    <!-- <div class="modal-footer">
-        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
-            <i class="material-icons green-text text-darken-1">close</i>
-        </a>
-    </div> -->
 </div>        

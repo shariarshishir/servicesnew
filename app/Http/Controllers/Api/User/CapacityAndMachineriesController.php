@@ -95,9 +95,9 @@ class CapacityAndMachineriesController extends Controller
             $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
             $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
             
-            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
             if($businessProfileVerification){
-                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->capacity_and_machineries = 0 ;
                 $businessProfileVerification->save();
 
             }

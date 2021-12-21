@@ -44,11 +44,11 @@ class BusinessTermController extends Controller
                 }
             }
 
-            $businessTerms = BusinessTerm::where('business_profile_id',$request->business_profile_id)->get();
+            $businessTerms = BusinessTerm::where('business_profile_id',$businessTerm->business_profile_id)->get();
             
-            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
             if($businessProfileVerification){
-                $businessProfileVerification->company_overview = 0 ;
+                $businessProfileVerification->business_terms = 0 ;
                 $businessProfileVerification->save();
 
             }

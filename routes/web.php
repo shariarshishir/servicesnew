@@ -125,6 +125,7 @@ Route::get('/search',[HomeController::class,'searchByProductOrVendor'])->name("o
 
 Route::get('/industry-blogs',[HomeController::class,'blogs'])->name('industry.blogs');
 Route::get('/press-room/details/{slug}',[HomeController::class,'blogDetails'])->name('blogs.details');
+Route::get('/selected-buyer-info-for-rfq',[HomeController::class,'selectedBuyerDetails'])->name('rfqbuyer.details');
 
 //user API's endpoint start
 Route::get('/add-to-cart',[ProductCartController::class,'addToCart'])->name('add.cart');

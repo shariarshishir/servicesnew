@@ -60,22 +60,22 @@
                         </div>
 
                         <div class="row">
-                            <div class="col s12 m6 l6">
+                            <div class="col s12 m12 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m4 l6">
                                         <label>Quantity <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m8 l6">
                                         <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m6 l6">
+                            <div class=" col s12 m12 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m4 l6">
                                         <label>Select Unit <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m8 l6">
                                         <select class="select2" name="unit">
                                             <option value="">Select an option</option>
                                             @php $units = units(); @endphp
@@ -88,34 +88,34 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m6 l6">
+                            <div class="col s12 m12 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m4 l6">
                                         <label>Target Price <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m8 l6">
                                         <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m6 l6">
+                            <div class=" col s12 m12 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m4 l6">
                                         <label>Destination <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m8 l6">
                                         <input type="text" class="form-control- ig-new-rgt" name="destination" required/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m6 l6">
+                            <div class="col s12 m12 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m4 l6">
                                         <label>Select Payment Method <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m8 l6">
                                         <select class="select2" name="payment_method" required>
                                             <option>Select an option</option>
                                             <option value="cash">Cash</option>
@@ -126,12 +126,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m6 l6">
+                            <div class=" col s12 m12 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m4 l6">
                                         <label>Expected Delivery Time <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m6 l6">
+                                    <div class="col s12 m8 l6">
                                         <input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                        
 
                         <div class="row rfq_img_upload_wrap">
-                            <div class="col s5 m4 l2">
+                            <div class="col s4 m3 l2">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img1">
                                 </div>
@@ -160,7 +160,7 @@
                             <!--/1-->
 
                             <!--2-->
-                            <div class="col s5 m4 l2">
+                            <div class="col s4 m3 l2">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img2">
                                 </div>
@@ -178,7 +178,7 @@
                             <!--/2-->
 
                             <!--3-->
-                            <div class="col s5 m4 l2">
+                            <div class="col s4 m3 l2">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img3">
                                 </div>
@@ -196,7 +196,7 @@
                             <!--/3-->
 
                             <!--4-->
-                            <div class="col s5 m4 l2">
+                            <div class="col s4 m3 l2">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img4">
                                 </div>
@@ -214,7 +214,7 @@
                             <!--/4-->
 
                             <!--5-->
-                            <div class="col s5 m4 l2">
+                            <div class="col s4 m3 l2">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img5">
                                 </div>

@@ -20,70 +20,85 @@ $reviewsCount = count($productReviews);
 @endif
 
 <div class="product_details_wrapper">
+    <div class="back_to">
+        <a href="javascript:void(0);"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
+    </div>
     <div class="single-product-details-block-wrapper">
-        <div class="product_details_title_box">
-            <h3>{{ $product->name }}</h3>
-            <div class="product_stock">
-                <div class="single-product-availability">Availability: <span>instock</span></div>
-            </div>
-        </div>
+        
         <div class="row product_details_content_wrap">
-            <div class="col m3 product_preview_wrap">
-                @if($product->video)
-                    <div class="product-images">
-                        <div class="video_content">
-                            <center>
-                                <video controls height="245" width="300">
-                                    <source src="{{asset('storage/'.$product->video->video)}}" />
-                                </video>
-                            </center>
-                        </div>
-                        <ul class="product-list-images-block">
-                            @if(count($product->images)> 0)
-                                @foreach ($product->images as $image)
-                                    <li>
-                                        <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a>
-                                    </li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </div>
-                @else
-                    <div class="product-images">
-                        <div class="product-main-image">
-                            <div class="product-large-image-block product_details_imgwrap">
-                                @if(count($product->images)> 0)
-                                    @foreach ($product->images as $image)
-                                        <div>
-                                            <center>
-                                                <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
-                                                    <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
-
-                                                    <div class="click-to-zoom">
-                                                        <i class="material-icons dp48">zoom_in</i>
-                                                        <!-- Click on image to view large size. -->
-                                                    </div>
-                                                </a>
-                                            </center>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                        <ul class="product-list-images-block">
-                            @if(count($product->images)> 0)
-                                @foreach ($product->images as $image)
-                                    <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </div>
-                @endif
-            </div>
-            <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m9 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
+            
+            <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m12 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
-                    <div class="col s12 m8 l8 product_details_info_wrap">
+                    <div class="col s12 m5 l4 product_preview_wrap">
+                        @if($product->video)
+                            <div class="product-images">
+                                <div class="video_content">
+                                    <center>
+                                        <video controls height="245" width="300">
+                                            <source src="{{asset('storage/'.$product->video->video)}}" />
+                                        </video>
+                                    </center>
+                                </div>
+                                <ul class="product-list-images-block">
+                                    @if(count($product->images)> 0)
+                                        @foreach ($product->images as $image)
+                                            <li>
+                                                <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        @else
+                            <div class="product-images">
+                                <div class="product-main-image">
+                                    <div class="product-large-image-block product_details_imgwrap">
+                                        @if(count($product->images)> 0)
+                                            @foreach ($product->images as $image)
+                                                <div>
+                                                    <center>
+                                                        <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
+                                                            <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
+
+                                                            <div class="click-to-zoom">
+                                                                <i class="material-icons dp48">zoom_in</i>
+                                                                <!-- Click on image to view large size. -->
+                                                            </div>
+                                                        </a>
+                                                    </center>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                                <ul class="product-list-images-block">
+                                    @if(count($product->images)> 0)
+                                        @foreach ($product->images as $image)
+                                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col s12 m7 l8 product_details_info_wrap">
                         <div class="row">
+                            <div class="col s12 m6 l6">
+                                <div class="seller-store">
+                                    <a href="{{route('supplier.profile', $product->businessProfile->id)}}">{{$product->businessProfile->business_name}}</a>
+                                </div>
+                            </div>
+
+                            <!-- <div class="product_stock col s12 m6 l6 right-align">
+                                <div class="single-product-availability">Availability: <span>instock</span></div>
+                            </div> -->
+
+                        </div>
+                        <div class="product_details_title_box">
+                            <h3>{{ $product->name }}</h3>
+                        </div>
+
+                        <!-- <div class="row">
                             <div class="col s12 m6 l6 left-align">
                                 <div class="seller-store">
                                     <a href="{{route('supplier.profile', $product->businessProfile->id)}}">{{$product->businessProfile->business_name}}</a>
@@ -91,9 +106,9 @@ $reviewsCount = count($productReviews);
                                 </div>
                             </div>
                             <div class="col s12 m6 l6 right-align">
-                                <!-- <button class="btn_grBorder">Full Stock only</button> -->
+                                <button class="btn_grBorder">Full Stock only</button>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="product_description">
                             {!! $product->description !!}
@@ -176,7 +191,7 @@ $reviewsCount = count($productReviews);
                         </div>
 
                         <div class="row single-product-details-bottom">
-                            <div class="col m12">
+                            <div class="col s12 m12">
                                 <div class="single-product-details" style="display: none;">
                                 {!! $product->description !!}
                                 </div>
@@ -721,7 +736,7 @@ $reviewsCount = count($productReviews);
                                 </div>
                             </div>
 
-                            <div class="col m12 single_product_review_wrap">
+                            <div class="col s12 single_product_review_wrap">
                                 <span>Rating</span>
                                 <div class="row">
                                     <div class="col s12 m6 l6">
@@ -802,29 +817,116 @@ $reviewsCount = count($productReviews);
 
                         </div>
                     </div>
+                </div>
 
-                    <div class="col s12 m4 l4">
-                        <div class="single-product-store-information center-align">
-                            <div class="right-align">
-                                {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
-                                @if(Auth::guard('web')->check())
-                                    <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{$product->category['name']}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
-                                @else
-                                    <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
-                                @endif
-                            </div>
-                            <div class="card card-with-padding">
-                                <h6>Company Profile</h6>
-                                <div class="company_profile_details">
-                                    <p><b style="color:#4CAF50">Store name :</b> {{$product->businessProfile->business_name}}<p>
-                                    <b style="color:#4CAF50">Country / Region :</b> {{$product->businessProfile->location}}<p>
-                                    <b style="color:#4CAF50">Business Type :</b> Wholesaler<p>
-                                    {{-- <b style="color:#4CAF50">Main Products:</b> {{$product->business_profile->vendor_mainproduct}}<p>
-                                    <b style="color:#4CAF50">Total Employees :</b> {{$product->business_profile->vendor_totalemployees}}<p>
-                                    <b style="color:#4CAF50">Year Established :</b> {{$product->business_profile->vendor_yearest}}<p>
-                                    <b style="color:#4CAF50">Certification :</b> {{$product->business_profile->vendor_certification}}<p> --}}
+                <div class="row single-product-description-block-wrapper">
+                    <div class="col s12">
+                        <ul class="tabs z-depth-1">
+                            <li class="tab col m4"><a class="active" href="#product-desciprtion">Product Description</a></li>
+                            <li class="tab col m4"><a href="#product-additional-desciprtion">Additional Information</a></li>
+                            <li class="tab col m4"><a href="#product-review" class="product-review-tab">Reviews</a></li>
+                        </ul>
+                    </div>
+                    <div id="product-desciprtion" class="col s12">
+                        <div class="card card-with-padding">
+                            {!! $product->description !!}
+                        </div>
+                    </div>
+                    <div id="product-additional-desciprtion" class="col s12">
+                        <div class="card card-with-padding">
+                            {!! $product->additional_description !!}
+                        </div>
+                    </div>
+                    <div id="product-review" class="col s12">
+                        <div class="card card-with-padding">
+
+                            @if($reviewsCount > 0)
+                            @foreach($productReviews as $productReview)
+                            <div class="review-item">
+                                <div class="reviewed-by">
+                                    <div class="user-image">
+                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" width="50px" />
+                                    </div>
+                                    <div class="user-name">
+                                        <span>Reviewd By</span>{{ $productReview->name }}
+                                    </div>
+                                </div>
+                                <div class="review-info">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label>Overall : </label>
+                                            <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label>Communication : </label>
+                                            <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label>On Time Delivery : </label>
+                                            <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label>Sample Support : </label>
+                                            <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label>Product Quality : </label>
+                                            <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label>Experience : </label>
+                                            {{ $productReview->experience }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            @endforeach
+                            @else
+                                <div class="card-alert card cyan">
+                                    <div class="card-content white-text">
+                                        <p>INFO : Don't have any reviews</p>
+                                    </div>
+                                </div>
+                        @endif
+                        </div>
+                    </div>
+                </div>
+                
+
+
+            </div>
+
+            <div class="col s12 m12 l3">
+                <div class="single-product-store-information center-align">
+                    <div class="right-align">
+                        {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
+                        @if(Auth::guard('web')->check())
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{$product->category['name']}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
+                        @else
+                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
+                        @endif
+                    </div>
+                    <div class="card card-with-padding">
+                        <h6>Company Profile</h6>
+                        <div class="company_profile_details">
+                            <p><b style="color:#4CAF50">Store name :</b> {{$product->businessProfile->business_name}}<p>
+                            <b style="color:#4CAF50">Country / Region :</b> {{$product->businessProfile->location}}<p>
+                            <b style="color:#4CAF50">Business Type :</b> Wholesaler<p>
+                            {{-- <b style="color:#4CAF50">Main Products:</b> {{$product->business_profile->vendor_mainproduct}}<p>
+                            <b style="color:#4CAF50">Total Employees :</b> {{$product->business_profile->vendor_totalemployees}}<p>
+                            <b style="color:#4CAF50">Year Established :</b> {{$product->business_profile->vendor_yearest}}<p>
+                            <b style="color:#4CAF50">Certification :</b> {{$product->business_profile->vendor_certification}}<p> --}}
                         </div>
                     </div>
                 </div>
@@ -887,184 +989,106 @@ $reviewsCount = count($productReviews);
         </div>
     </div>
 
-    <div class="row single-product-description-block-wrapper">
-        <div class="col s12">
-            <ul class="tabs z-depth-1">
-                <li class="tab col m3"><a class="active" href="#product-desciprtion">Product Description</a></li>
-                <li class="tab col m3"><a href="#product-additional-desciprtion">Additional Information</a></li>
-                <li class="tab col m3"><a href="#product-review" class="product-review-tab">Reviews</a></li>
-            </ul>
-        </div>
-        <div id="product-desciprtion" class="col s12">
-            <div class="card card-with-padding">
-                {!! $product->description !!}
-            </div>
-        </div>
-        <div id="product-additional-desciprtion" class="col s12">
-            <div class="card card-with-padding">
-                {!! $product->additional_description !!}
-            </div>
-        </div>
-        <div id="product-review" class="col s12">
-            <div class="card card-with-padding">
+    
 
-                @if($reviewsCount > 0)
-                @foreach($productReviews as $productReview)
-                <div class="review-item">
-                    <div class="reviewed-by">
-                        <div class="user-image">
-                            <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" width="50px" />
-                        </div>
-                        <div class="user-name">
-                            <span>Reviewd By</span>{{ $productReview->name }}
-                        </div>
-                    </div>
-                    <div class="review-info">
-                        <div class="row">
-                            <div class="col s12">
-                                <label>Overall : </label>
-                                <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <label>Communication : </label>
-                                <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <label>On Time Delivery : </label>
-                                <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <label>Sample Support : </label>
-                                <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <label>Product Quality : </label>
-                                <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <label>Experience : </label>
-                                {{ $productReview->experience }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                @else
-                    <div class="card-alert card cyan">
-                        <div class="card-content white-text">
-                            <p>INFO : Don't have any reviews</p>
-                        </div>
-                    </div>
-            @endif
-            </div>
-        </div>
-    </div>
     <div class="row single-product-related-products">
-        <div class="related-products col m12">
+        <div class="related-products col s12">
             <div class="card-with-padding">
                 <legend>Recommended products for you</legend>
 
                 @if(count($recommandProducts)>0)
-                <div class="row recommendation-products">
+                <div class="row recommendation-products related_products_slider">
                     @foreach($recommandProducts as $key=>$product)
 
-                    <div class="col s12 m3 l3">
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="product_img">
-                                    {{-- <a href="javascript:void();" class="overlay_hover"></a> --}}
-                                    @foreach($product->images as $key=>$image)
-                                        <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
-                                        @break
-                                    @endforeach
-                                    <div class="product_quick_options">
-                                        <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
-                                        <div class="poduct_quick_options_inside">
-                                            <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}"class="btn waves-effect waves-light green lighten-1 product-add-wishlist">
-                                                <i class="material-icons dp48">favorite</i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product_short_details">
-                                    <div class="product-title">
-                                        <a href="{{route('productdetails',$product->sku)}}">
-                                            {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
-                                        </a>
-                                    </div>
-                                    <div class="product_price">
-                                        @include('product._product_price')
+                    <!-- <div class="col s12 m3 l3"></div> -->
 
-                                        @if($product->availability==0 && $product->product_type==2)
-                                            <span class="new badge red sold-out" data-badge-caption="Sold Out"></span>
-                                        @endif
-                                    </div>
-                                    @php  $averageRating = productRating($product->id);@endphp
-                                    <div class="product_info_details">
-                                        <div class="shipping_label">Free Shipping</div>
-                                        <div class="rating_label">
-                                            <i class="material-icons pink-text"> star </i>
-                                            <span>{{$averageRating}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="vendor_name">
-                                        {{-- <a href="#"> {{$product->businessProfile->business_name}}</a> --}}
-                                        {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}">{{$product->vendor->vendor_name}}</a> --}}
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div  id="product-details-modal_{{$product->sku}}" class="modal modal-fixed-footer product-details-modal" tabindex="0">
-                                    <div class="modal-content">
-                                        <div class="row">
-                                            <div class="col m6 s12 modal-product-images">
-                                            @foreach($product->images as $key=>$image)
-                                                <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" alt="" />
-                                            @endforeach
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <h5>{{$product->name}}</h5>
-                                                <span class="new badge ml-0 mr-2 pink lighten-1 rating-badge" data-badge-caption="">
-
-                                                    <i class="material-icons white-text"> star </i> <span class="rating_value">{{$averageRating}}</span>
-                                                </span>
-                                                <p>Availability: <span class="green-text">Available</span></p>
-                                                <p class="pink-text">Free Shipping</p>
-                                                <div class="border-separator"></div>
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">{{$product->sku}}</li>
-                                                    <li class="list-item-bullet">{!! $product->description !!}</li>
-                                                </ul>
-                                                <h5>
-                                                    @include('product._product_price')
-                                                </h5>
-                                                <input type="hidden" value="{{$product->sku}}" name="sku">
-                                                <a href="{{route('productdetails',$product->sku)}}" class="waves-effect waves-light btn green mt-2">View Details</a>
-                                                <a href="javascript:void(0);" id="wishList" data-productSku={{$product->sku}} class="waves-effect waves-light btn green mt-2 wishlist-trigger">
-                                                    <i class="material-icons mr-3">favorite_border</i> Add to Wishlist
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">
-                                            <i class="material-icons mr-3">close</i>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="product_img">
+                                {{-- <a href="javascript:void();" class="overlay_hover"></a> --}}
+                                @foreach($product->images as $key=>$image)
+                                    <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                    @break
+                                @endforeach
+                                <div class="product_quick_options">
+                                    <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
+                                    <div class="poduct_quick_options_inside">
+                                        <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}"class="btn waves-effect waves-light green lighten-1 product-add-wishlist">
+                                            <i class="material-icons dp48">favorite</i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
+                            <div class="product_short_details">
+                                <div class="product-title">
+                                    <a href="{{route('productdetails',$product->sku)}}">
+                                        {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
+                                    </a>
+                                </div>
+                                <div class="product_price">
+                                    @include('product._product_price')
+
+                                    @if($product->availability==0 && $product->product_type==2)
+                                        <span class="new badge red sold-out" data-badge-caption="Sold Out"></span>
+                                    @endif
+                                </div>
+                                @php  $averageRating = productRating($product->id);@endphp
+                                <div class="product_info_details">
+                                    <div class="shipping_label">Free Shipping</div>
+                                    <div class="rating_label">
+                                        <i class="material-icons pink-text"> star </i>
+                                        <span>{{$averageRating}}</span>
+                                    </div>
+                                </div>
+                                <div class="vendor_name">
+                                    {{-- <a href="#"> {{$product->businessProfile->business_name}}</a> --}}
+                                    {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}">{{$product->vendor->vendor_name}}</a> --}}
+                                </div>
+                            </div>
+                            <!-- Modal Structure -->
+                            <div  id="product-details-modal_{{$product->sku}}" class="modal modal-fixed-footer product-details-modal" tabindex="0">
+                                <div class="modal-content">
+                                    <div class="row">
+                                        <div class="col m6 s12 modal-product-images">
+                                        @foreach($product->images as $key=>$image)
+                                            <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" alt="" />
+                                        @endforeach
+                                        </div>
+                                        <div class="col m6 s12">
+                                            <h5>{{$product->name}}</h5>
+                                            <span class="new badge ml-0 mr-2 pink lighten-1 rating-badge" data-badge-caption="">
+
+                                                <i class="material-icons white-text"> star </i> <span class="rating_value">{{$averageRating}}</span>
+                                            </span>
+                                            <p>Availability: <span class="green-text">Available</span></p>
+                                            <p class="pink-text">Free Shipping</p>
+                                            <div class="border-separator"></div>
+                                            <ul class="list-bullet">
+                                                <li class="list-item-bullet">{{$product->sku}}</li>
+                                                <li class="list-item-bullet">{!! $product->description !!}</li>
+                                            </ul>
+                                            <h5>
+                                                @include('product._product_price')
+                                            </h5>
+                                            <input type="hidden" value="{{$product->sku}}" name="sku">
+                                            <a href="{{route('productdetails',$product->sku)}}" class="waves-effect waves-light btn green mt-2">View Details</a>
+                                            <a href="javascript:void(0);" id="wishList" data-productSku={{$product->sku}} class="waves-effect waves-light btn green mt-2 wishlist-trigger">
+                                                <i class="material-icons mr-3">favorite_border</i> Add to Wishlist
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">
+                                        <i class="material-icons mr-3">close</i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
                     @endforeach
                 </div>
 
@@ -1156,6 +1180,48 @@ $reviewsCount = count($productReviews);
         //         }
         //     });
         // });
+
+        // $(document).ready(function() {
+        //     // slick slider 
+        //     $('.related_products_slider').slick({
+        //     dots: false,
+        //     infinite: false,
+        //     speed: 300,
+        //     slidesToShow: 3,
+        //     slidesToScroll: 1,
+        //     autoplay: false,
+        //     autoplaySpeed: 1000,
+
+        //     responsive: [
+        //         {
+        //         breakpoint: 1024,
+        //         settings: {
+        //             slidesToShow: 2,
+        //             slidesToScroll: 1,
+        //             infinite: true,
+        //             dots: false
+        //         }
+        //         },
+        //         {
+        //         breakpoint: 600,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             slidesToScroll: 1
+        //         }
+        //         },
+        //         {
+        //         breakpoint: 480,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             slidesToScroll: 1
+        //         }
+        //         }
+        //     ]
+        //     });
+        // });
+
+
+        
 
 
 

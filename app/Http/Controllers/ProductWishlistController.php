@@ -51,7 +51,7 @@ class ProductWishlistController extends Controller
 
     public function wishListItemDelete(Request $request){
         $wishListItem=ProductWishlist::where('id',$request->id)->first();
-        $wishListItem->delete();
+        $wishListItem->forceDelete();
         if($wishListItem){
             return response()->json(
                 ['message' => 'Deleted From Wishlist ..']

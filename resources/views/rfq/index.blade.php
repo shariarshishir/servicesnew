@@ -38,7 +38,7 @@
 				<div class="profile_info col s12 m8 l8">
 					<h4>
 						{{ $rfqSentList->user->name}}
-						@if($rfqSentList->businessProfile->is_business_profile_verified)
+						@if(isset($rfqSentList->businessProfile->is_business_profile_verified))
 						<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" />
 						@endif
 					</h4>

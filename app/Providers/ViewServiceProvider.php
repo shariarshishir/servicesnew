@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\ProductCategory;
+use App\Models\ProductWishlist;
 use App\Models\CartItem;
 use Auth;
 use App\Models\Config;
@@ -59,9 +60,17 @@ class ViewServiceProvider extends ServiceProvider
                 $cartItems=[];
             }
 
+            if(Auth()->check()){
+                $wishListProductsIds=ProductWishlist::where('user_id',auth()->user()->id)->pluck('product_id')->toArray();
+                
+            }
+            else{
+                $wishListProductsIds=[];
+            }
 
 
-            $view->with(['cartItems'=>count($cartItems),'categories'=>$categories]);
+
+            $view->with(['cartItems'=>count($cartItems),'categories'=>$categories,'wishListProductsIds'=>$wishListProductsIds]);
         });
 
 

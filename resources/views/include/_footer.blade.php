@@ -747,7 +747,7 @@ $(document).on("keyup",".search_input",function(){
         },
         success: function(response)
         {
-            console.log(response.averageRatings);
+            //console.log(response.averageRatings);
             //$('.loading-message').html("");
             //$('#loadingProgressContainer').hide();
             var html="";
@@ -758,7 +758,81 @@ $(document).on("keyup",".search_input",function(){
                 console.log(response.data);
                 if(response.searchType=='all' && response.data.length > 0)
                 {
-                    // all search response will go here.
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
+                    for(var i=0; i<response.data.length; i++)
+                    {
+                        if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
+                        {
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].images,function(key,item){
+                                if(key==0){
+                                    var url = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image="{{asset('storage/')}}"+'/'+item.image;
+                                    html += '<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].name+'</h4>';
+                            html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        else if(response.data[i].title && response.data[i].business_profile_id) // product for manufacturer
+                        {
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].product_images,function(key,item){
+                                if(key==0){
+                                    var url  = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image = "{{asset('storage/')}}"+'/'+item.product_image;
+                                    html += '<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].title+'</h4>';
+                            html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        else if(response.data[i].title && response.data[i].slug) // list for blog
+                        {
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/press-room/details/'+response.data[i].slug+'" class="overlay_hover">&nbsp;</a>';
+                            var image = "{{asset('storage/')}}"+'/'+response.data[i].feature_image;
+                            html += '<div class="product-img"><img src="'+image+'"></div>';                            
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].title+'</h4>';
+                            html += '<div class="details"><p>'+response.data[i].details.substring(0, 100)+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        else // list for supplier
+                        {
+                            var image;
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            if(response.data[i].user.image)
+                            {
+                            image = "{{asset('storage/')}}"+'/'+response.data[i].user.image;
+                            }
+                            else
+                            {
+                            image = "{{asset('images/frontendimages/no-image.png')}}";    
+                            }
+                            html += '<div class="product-img"><img src="'+image+'"></div>';
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].business_name+'</h4>';
+                            html += '<div class="details"><p>'+response.data[i].industry_type+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }                       
+                    }
+                    $('#search-results').html(html);
+                    $('#search-results').show();
                 }
                 else if(response.searchType=='product' && response.data.length > 0)
                 {
@@ -1143,10 +1217,10 @@ $("#searchOption").change(function(){
     $("#system_search .search_type").val(selectedSearchOption);
 
     if($(this).val() == "product"){
-        $(".search_input").attr("placeholder", "Type products name");
+        $(".search_input").attr("placeholder", " Search for ...");
     }
     else if($(this).val() == "vendor"){
-        $(".search_input").attr("placeholder", "Type vendors name");
+        $(".search_input").attr("placeholder", " Search for ...");
     }
 
     var searchInput = $("#system_search .search_input").val();

@@ -113,7 +113,7 @@
                         <form action="{{route('suppliers')}}" method="get">
                             <div class="filter_search_inputbox">
                                 <i class="material-icons">search</i>
-                                <input class="filter_search_input " type="text" name="business_name" placeholder="business name" value="{{$business_name}}">
+                                <input class="filter_search_input " type="text" name="business_name" placeholder="business name" value="{{$business_name_from_home ?? $business_name}}">
                                 <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
                             </div>
                         </form>

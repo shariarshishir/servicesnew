@@ -538,7 +538,7 @@ class ProductController extends Controller
             'images'  => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
             'name'      => 'required',
-            'category_id' => 'required',
+            'product_category_id' => 'required',
             'product_type' => 'required',
             'description'  => 'required',
             'moq'         => [new MoqUnitRule($request, $request->product_type)],

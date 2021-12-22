@@ -119,44 +119,55 @@
                         </form>
                     </div>
                 </div>
-                @foreach ($suppliers as $supplier)
-                    @php
-                        $mainProductsJson = json_decode($supplier->companyOverview['data']);
-                    @endphp
-                    <div class="industry_infoBox">
-                        <div class="industry_info_inner_box">
-                            <div class="row">
-                                <div class="supplier_profile_image_block col s12 m12 l3">
-                                    @if($supplier->user->image)
-                                    <img src="{{ asset('storage/'.$supplier->user->image) }}" alt="">
-                                    @else
-                                    <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
-                                    @endif
 
-                                    @if(Auth::guard('web')->check())
-                                        <a href="{{route('supplier.profile', $supplier->id)}}">Visit Profile</a>
-                                    @else
-                                        <a href="#supplier-view-auth-check-modal" class="modal-trigger">Visit Profile</button>
-                                    @endif
-                                </div>
-                                <div class="supplier_profile_short_info_block col s12 m12 l9">
-                                    <h5>{{$supplier->business_name}}</h5>
-                                    <div class="industry_location short_info_box"><span class="title_label">Location:</span> <span class="info_details">{{$supplier->location}}</span></div>
-                                    <div class="industry_type short_info_box"><span class="title_label">Industry Type: </span> <span class="info_details">{{$supplier->industry_type}}</span></div>
-                                    <div class="factory_type short_info_box"><span class="title_label">Factory Type:</span> <span class="info_details">{{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</span></div>
-                                    @foreach($mainProductsJson as $mainProducts)
-                                        @if($mainProducts->name == 'main_products')
-                                        <div class="main_products short_info_box"><span class="title_label">Main Products:</span> <span class="info_details">{{$mainProducts->value}}</span></div>
+                @if(count($suppliers)>0)
+                    @foreach ($suppliers as $supplier)
+                        @php
+                            $mainProductsJson = json_decode($supplier->companyOverview['data']);
+                        @endphp
+                        <div class="industry_infoBox">
+                            <div class="industry_info_inner_box">
+                                <div class="row">
+                                    <div class="supplier_profile_image_block col s12 m12 l3">
+                                        @if($supplier->user->image)
+                                        <img src="{{ asset('storage/'.$supplier->user->image) }}" alt="">
+                                        @else
+                                        <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
                                         @endif
-                                    @endforeach
+
+                                        @if(Auth::guard('web')->check())
+                                            <a href="{{route('supplier.profile', $supplier->id)}}">Visit Profile</a>
+                                        @else
+                                            <a href="#supplier-view-auth-check-modal" class="modal-trigger">Visit Profile</button>
+                                        @endif
+                                    </div>
+                                    <div class="supplier_profile_short_info_block col s12 m12 l9">
+                                        <h5>{{$supplier->business_name}}</h5>
+                                        <div class="industry_location short_info_box"><span class="title_label">Location:</span> <span class="info_details">{{$supplier->location}}</span></div>
+                                        <div class="industry_type short_info_box"><span class="title_label">Industry Type: </span> <span class="info_details">{{$supplier->industry_type}}</span></div>
+                                        <div class="factory_type short_info_box"><span class="title_label">Factory Type:</span> <span class="info_details">{{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</span></div>
+                                        @foreach($mainProductsJson as $mainProducts)
+                                            @if($mainProducts->name == 'main_products')
+                                            <div class="main_products short_info_box"><span class="title_label">Main Products:</span> <span class="info_details">{{$mainProducts->value}}</span></div>
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+                    <div>
+                        {{$suppliers->appends(request()->query())->links()}}
                     </div>
-                @endforeach
-                <div>
-                    {{$suppliers->appends(request()->query())->links()}}
-                </div>
+                @else
+                    <div class="card-alert card cyan">
+                        <div class="card-content white-text">
+                            <p>INFO : No data found.</p>
+                        </div>
+                    </div>
+                @endif
+
+
             </div>
         </div>
     </div>

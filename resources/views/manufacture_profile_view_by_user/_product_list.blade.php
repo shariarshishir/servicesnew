@@ -18,7 +18,7 @@
 
                 </div>
                 <h4>
-                    <a href="#">
+                    <a href="{{route('mix.product.details', ['mb', $product->id])}}">
                         {{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
                     </a>
                 </h4>

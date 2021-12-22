@@ -116,7 +116,7 @@
                                                     <tr>
                                                         <th>Min Quantity</th>
                                                         <th>:</th>
-                                                        <td>{{ $product->moq }}</td>
+                                                        <td>{{ $product->moq }} {{ $product->qty_unit }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

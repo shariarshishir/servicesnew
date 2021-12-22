@@ -13,7 +13,7 @@
                     <div class="product-item">
                         <a href="{{ route('mix.product.details', [$item->flag, $item->id]) }}" class="overlay_hover">&nbsp;</a>
                         <div class="product-img">
-                            <img src="">
+                            <img src="{{asset('storage').'/'.$item->images[0]->image}}">
                         </div>
                         <div class="product-short-intro">
                             <h4>name</h4>
@@ -26,7 +26,7 @@
                     <div class="product-item">
                         <a href="{{ route('mix.product.details', [$item->flag, $item->id]) }}" class="overlay_hover">&nbsp;</a>
                         <div class="product-img">
-                            <img src="{{asset('storage').'/'.$item->images[0]->image}}">
+                            <img src="{{asset('storage').'/'.$item->product_images[0]->product_image}}">
                         </div>
                         <div class="product-short-intro">
                             <h4>{{$item->title}}</h4>
@@ -36,26 +36,26 @@
                         </div>
                     </div>
                     @elseif( $item->title && $item->slug )
-                    <div class="product-item">
-                        <a href="{{route('blogs.details',$blog->slug)}}" class="overlay_hover">&nbsp;</a>
-                        <div class="product-img">
-                            <img src="'+image+'">
+                    <div class="blog-item">
+                        <a href="{{route('blogs.details',$item->slug)}}" class="overlay_hover">&nbsp;</a>
+                        <div class="blog-img">
+                            <img src="{{ asset('storage/'.$item->feature_image) }}">
                         </div>                       
-                        <div class="product-short-intro">
-                            <h4>'+response.data[i].title+'</h4>
+                        <div class="blog-short-intro">
+                            <h4>{{$item->title}}</h4>
                             <div class="details">
-                                <p>'+response.data[i].details.substring(0, 100)+'</p>
+                                <p>{!! \Illuminate\Support\Str::limit(strip_tags($item->details), 250, '(...)')  !!}</p>
                             </div>
                         </div>
                     </div>
                     @else
                     
-                    <div class="product-item">
+                    <div class="business-profile-item">
                         <a href="{{route('supplier.profile', $item->id)}}" class="overlay_hover">&nbsp;</a>
-                        <div class="product-img">
+                        <div class="business-profile-img">
                             <img src="{{ asset('storage/'.$item->feature_image) }}">
                         </div>
-                        <div class="product-short-intro">
+                        <div class="business-profile-short-intro">
                             <h4>{{$item->business_name}}</h4>
                             <div class="details">
                                 <p>{{$item->industry_type}}</p>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     @endif
-                    @endfor
+                    @endforeach
                 </div>    
             </div>    
         </div>
@@ -71,74 +71,7 @@
     
 @endsection
 @push('js')
-<script>
-    $(document).on("click", "#favorite" , function() {
-        //console.log('hi');
-        var id = $(this).attr("data-productSku");
 
-        swal({
-            title: "Want to add this product into wishlist ?",
-            type: "warning",
-            showCancelButton: !0,
-            confirmButtonText: "Yes, add it!",
-            cancelButtonText: "No, cancel!",
-            reverseButtons: !0
-        }).then(function (e) {
-            if (e.value === true) {
-                    $.ajax({
-                        type:'GET',
-                        url: "{{route('add.wishlist')}}",
-                        dataType:'json',
-                        data:{id :id },
-                        success: function(data){
-                            swal(data.message);
-                        }
-                    });
-                }
-            else {
-                e.dismiss;
-            }
-        }, function (dismiss) {
-            return false;
-        })
-
-
-    });
-  </script>
-
-<script>
-    $(document).on("click", "#wishList" , function() {
-        console.log('hi');
-        var id = $(this).attr("data-productSku");
-        swal({
-            title: "Want to add this product into wishlist ?",
-            type: "warning",
-            showCancelButton: !0,
-            confirmButtonText: "Yes, add it!",
-            cancelButtonText: "No, cancel!",
-            reverseButtons: !0
-        }).then(function (e) {
-            if (e.value === true) {
-                $.ajax({
-                    type:'GET',
-                    url: "{{route('add.wishlist')}}",
-                    dataType:'json',
-                    data:{id :id },
-                    success: function(data){
-                        swal(data.message);
-                    }
-                });
-            }
-            else {
-                e.dismiss;
-            }
-        }, function (dismiss) {
-            return false;
-        })
-
-
-    });
-  </script>
 @endpush
 
 

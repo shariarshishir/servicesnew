@@ -458,7 +458,6 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($suppliers);
                 $resultCount = count($allItems);
                 return view('system_search',compact('allItems'));
-              
             }
             else
             {

@@ -7,6 +7,9 @@
     $factory_type = array_key_exists('factory_type', app('request')->input())?app('request')->input('factory_type'):[];
     $location = array_key_exists('location', app('request')->input())?app('request')->input('location'): '';
     $business_name = array_key_exists('business_name', app('request')->input())?app('request')->input('business_name'): '';
+    $standard = array_key_exists('standard', app('request')->input())?app('request')->input('standard'): [];
+    $verified = array_key_exists('verified', app('request')->input())?app('request')->input('verified'): [];
+
     $factory_type_array=[
         '2'=>'woven',
         '4'=>'knit',
@@ -32,9 +35,9 @@
                             <i class="material-icons">pin_drop</i>
                             <input class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
                         </div>
-                    
+
                         <!-- <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();"> -->
-                    </div>                
+                    </div>
                     {{-- industry_type --}}
                     <div class="filter_box">
                         <h4>Industry Type</h4>
@@ -63,10 +66,44 @@
                         </p>
                         @endforeach
                     </div>
+
+                    {{-- standard --}}
+                    <div class="filter_box">
+                        <h4>Standard</h4>
+                        <p>
+                            <label>
+                                <input class="btn_radio" type="checkbox" value="compliance"  name="standard[]" {{ (in_array('compliance', $standard))?'checked':'' }} onclick="this.form.submit();"/>
+                                <span>Compliance</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input class="btn_radio" type="checkbox" value="non_compliance"  name="standard[]" {{ (in_array('non_compliance', $standard))?'checked':'' }} onclick="this.form.submit();"/>
+                                <span>Non-Compliance</span>
+                            </label>
+                        </p>
+                    </div>
+
+                    {{-- standard --}}
+                    <div class="filter_box">
+                        <h4>Badge</h4>
+                        <p>
+                            <label>
+                                <input class="btn_radio" type="checkbox" value="1"  name="verified[]" {{ (in_array('1', $verified))?'checked':'' }} onclick="this.form.submit();"/>
+                                <span>Verified</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input class="btn_radio" type="checkbox" value="0"  name="verified[]" {{ (in_array('0', $verified))?'checked':'' }} onclick="this.form.submit();"/>
+                                <span>Unverified</span>
+                            </label>
+                        </p>
+                    </div>
                     <a class='btn_green btn_clear' href="{{route('suppliers')}}"> Reset </a>
                 </form>
             </div>
-            
+
         </div>
         <div class="col s12 m8 l9">
             <div class="suppliers_filter_content">
@@ -81,7 +118,7 @@
                             </div>
                         </form>
                     </div>
-                </div> 
+                </div>
                 @foreach ($suppliers as $supplier)
                     @php
                         $mainProductsJson = json_decode($supplier->companyOverview['data']);
@@ -112,7 +149,7 @@
                                         <div class="main_products short_info_box"><span class="title_label">Main Products:</span> <span class="info_details">{{$mainProducts->value}}</span></div>
                                         @endif
                                     @endforeach
-                                </div>                            
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -46,7 +46,7 @@
 			</div>
 		</div>
         <div>
-            <a href="javascript:void(0);" class="btn grey" style="float: right;" onclick="editRfq({{$rfqSentList->id}});">Edit</a>
+            <a href="javascript:void(0);" class="btn_rfq_edit" style="float: right;" onclick="editRfq({{$rfqSentList->id}});"><i class="material-icons">border_color</i></a>
         </div>
 		<div class="col s12 m9 l10 rfq_profile_info">
 			<div class="row">
@@ -60,7 +60,7 @@
 			</div>
 
                     <div class="rfq_view_detail_wrap">
-                        <h5>{{$rfqSentList->title}} <span class="{{$rfqSentList->deleted_at ? 'red' : 'green' }}">{{$rfqSentList->deleted_at ? 'Inactive' : 'Active' }}</span></h5>
+                        <h5>{{$rfqSentList->title}} <span class="{{$rfqSentList->deleted_at ? 'btn_rfq_inactive' : 'green_active' }}">{{$rfqSentList->deleted_at ? '(Inactive)' : '(Active)' }}</span></h5>
                         <span class="short_description">{{$rfqSentList->short_description}}</span>
                         <button class="none_button btn_view_detail" id="rfqViewDetail">Show More</button>
                         <div class="rfq_view_detail_info" style="display: none;">

@@ -140,18 +140,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                        </div>
+
+                        <div class="row input-field input-wrapper rfq_input_checkbox">
+                            <div class="col s12 m4 l3">
                                 <label for="">Publish</label>
+                            </div>
+                            <div class="col s12 m8 l9 rfq_input_checkbox_right">
                                 <p>
                                     <label>
-                                      <input name="publish" type="radio" id="rfq-publish-yes" value="1"/>
-                                      <span>Yes</span>
+                                    <input name="publish" type="radio" id="rfq-publish-yes" value="1"/>
+                                    <span>Yes</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                      <input name="publish" type="radio"  id="rfq-publish-no" value="0"/>
-                                      <span>No</span>
+                                    <input name="publish" type="radio"  id="rfq-publish-no" value="0"/>
+                                    <span>No</span>
                                     </label>
                                 </p>
                             </div>

@@ -75,7 +75,15 @@
                                             </select>
                                         </div> --}}
                                     </div>
-                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="Enter Product Name" id="dt-product-name-search" autocomplete="off"></label>
+                                    <div class="row input-field">
+                                        <div class="col s12 m3">
+                                            <label>Search:</label>
+                                        </div>
+                                        <div class="col s12 m3">
+                                            <input type="search" class="form-control input-sm" placeholder="Enter Product Name" id="dt-product-name-search" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <div class="table-content">
                                     <table class="table striped" width="100%" id="seller-product-datatable">

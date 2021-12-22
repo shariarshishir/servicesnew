@@ -47,7 +47,9 @@
                                                 <div class="col s12">
                                                     <label>Search</label>
                                                 </div>
-                                                <input type="search" class="form-control input-sm" placeholder="Enter Product Name" id="dt-product-name-search" autocomplete="off">
+                                                <div class="col s12">
+                                                    <input type="search" class="form-control input-sm" placeholder="Enter Product Name" id="dt-product-name-search" autocomplete="off">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

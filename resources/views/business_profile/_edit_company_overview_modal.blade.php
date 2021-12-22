@@ -8,7 +8,7 @@
                 <input type="hidden" name="company_overview_id" value="{{$business_profile->companyOverview->id}}">
                 <div class="row">
                     @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m12 l6">
                             <label for="{{$company_overview->name}}">{{str_replace('_', ' ', ucfirst($company_overview->name))}}</label>
                             <input id="{{$company_overview->name}}" type="text" class="validate" name="name[{{$company_overview->name}}]" value="{{$company_overview->value}}">
                         </div>

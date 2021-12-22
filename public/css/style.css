@@ -63,7 +63,7 @@ button, input, optgroup, select, textarea {
     font-weight: 500;
     text-transform: capitalize;
     margin: 5px 10px;
-    padding: 5px 15px;
+    padding: 5px 15px 3px;
     -webkit-box-shadow: 0px 0px 14px -3px rgba(68,133,71,1);
     -moz-box-shadow: 0px 0px 14px -3px rgba(68,133,71,1);
     box-shadow: 0px 0px 14px -3px rgba(68,133,71,1);
@@ -303,6 +303,8 @@ form input:read-only {
 .contentCol_wrap {
     padding-left: 50px !important;
 }
+
+
 /************************** common style css End  ************************************/
 
 /* ****************** Header css start r********************* */
@@ -657,7 +659,7 @@ form input:read-only {
     height: 52px;
     font-size: 18px;
     font-weight: 300;
-    padding: 0 15px;
+    padding: 1px 15px;
 }
 .banner_search .module-search .search_input:focus {
     box-shadow: none !important;
@@ -836,6 +838,11 @@ form input:read-only {
 .product_wrapper .imgBox .favorite .material-icons:hover {
     color: #448547;
 }
+
+#favorite.active .material-icons {
+    color: #448547;
+}
+
 .product_wrapper .imgBox .active_favorite .material-icons {
     color: #257356;
 }
@@ -1151,7 +1158,7 @@ form input:read-only {
     font-size: 16px;
     color: #464545;
     display: inline-flex;
-    line-height: 20px;
+    line-height: 25px;
 }
 .profile_leftCol .office_address h4 span,
 .leftCol_wrap .office_address h4 span {
@@ -2540,7 +2547,7 @@ form input:read-only {
     margin-bottom: 20px;
 }
  .product_preview_right .ic-place-order .ic-btn {
-    padding: 8px 20px 10px;
+    padding: 8px 20px 6px;
     line-height: 22px;
 }
 
@@ -2822,7 +2829,11 @@ form input:read-only {
     text-align: center;
     border: 1px solid #ddd;
     margin: 5px;
-    float: none;
+}
+#factory-tour-edit-modal-block .uploaded-factory-large-image-block,
+#factory-tour-edit-modal-block .uploaded-factory-image-block {
+    width: 100px;
+    border: none;
 }
 
 #factory-tour-add-modal-block .uploaded-factory-large-image-block,
@@ -2851,6 +2862,8 @@ form input:read-only {
     border: 1px solid #ddd;
     margin: 2px 5px 5px;
     padding: 5px 5px 0 5px;
+    width: 115px;
+    float: none;
 }
 #factory-tour-add-modal-block .factory_file_uploader,
 #factory-tour-edit-modal-block .factory_file_uploader {
@@ -2885,6 +2898,17 @@ form input:read-only {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+#factory-tour-edit-modal-block .btn_close,
+#factory-tour-add-modal-block .btn_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#factory-tour-edit-modal-block .btn_close .material-icons, 
+#factory-tour-add-modal-block .btn_close .material-icons {
+    font-size: 18px;
 }
 
 /*************** Profile factory tour page start *******************/
@@ -3165,6 +3189,7 @@ form input:read-only {
 .suppliers_filter_wrapper input[type=text]:not(.browser-default){
     background: none !important;
     padding-top: 3px;
+    text-align: left;
 }
 .suppliers_filter_wrapper .filter_search_input:focus {
     border: none !important;
@@ -3543,11 +3568,17 @@ form input:read-only {
     color: #ffffff;
 }
 
-
 .rfq_top_navbar ul li .btn_green {
     margin-left: 0;
 }
 
+.rfq_top_navbar ul li.rfq_filter_select {
+    width: 120px;    
+}
+.rfq_top_navbar ul li.rfq_filter_select select {
+    text-align: left;
+    padding: 0 10px;
+}
 .rfq_leftCol .rfq_follow_wrap {
     padding-top: 20px;
 }
@@ -3652,10 +3683,11 @@ form input:read-only {
     line-height: 40px;
     padding: 3px 2%;
 }
-.rfq_detail_from input {
+.rfq_detail_from .inpuboxt_group_wrap input {
     padding: 3px 2%;
-    width: 96%;
+    width: 88% !important;
 }
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 38px;
 }
@@ -3996,12 +4028,12 @@ form input:read-only {
     padding: 3px 2%;
     box-shadow: none !important;
 }
-.rfq_detail_from input {
+/* .rfq_detail_from input {
     padding: 3px 2%;
     width: 96%;
-}
+} */
 .rfq_detail_from .select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 46px;
+    line-height: 48px;
 }
 .rfq_detail_from .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 10px;
@@ -4709,7 +4741,8 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-bottom: 30px;
 }
 .input-field {
-    margin: 0 0 20px;
+    margin-bottom: 20px;
+    margin-top: 0;
 }
 .input-field label {
     font-size: 16px;
@@ -4852,6 +4885,7 @@ input.input-field[type=text]:not(.browser-default) {
     align-items: center;
     justify-content: center;
     display: flex;
+    border: 1px solid #ddd;
 }
 .product_media_wrap .media_img img {
     height: auto;
@@ -5433,7 +5467,7 @@ input.input-field[type=text]:not(.browser-default) {
 }
 #search-results {
     position: absolute;
-    top: 65px;
+    top: 55px;
     left: 5px;
     width: 795px;
     background: #fff;
@@ -5620,7 +5654,7 @@ legend {
 .password-block-wrap #hide-password,
 .password-block-wrap #show-password {
     position: absolute;
-    top: 17px;
+    top: 15px;
     z-index: 99;
     right: 20px;
     color: #818181;
@@ -6961,6 +6995,10 @@ nav .pagination li.active .page-link {
         height: 60%;
         width: 50%;
     }
+
+    .suppliers_filter_wrapper input[type=text]:not(.browser-default){
+        padding-left: 10px;
+    }
     
 }
 @media only screen and (max-width: 1499px) {
@@ -7296,6 +7334,8 @@ nav .pagination li.active .page-link {
         font-size: 18px;
         margin-top: 3px;
     }
+
+
 
 }
 
@@ -7770,6 +7810,9 @@ nav .pagination li.active .page-link {
         text-align: center;
     }
 
+    .rfq_detail_from .inpuboxt_group_wrap input {
+        width: 96% !important;
+    }
 
 }
 
@@ -8068,6 +8111,15 @@ nav .pagination li.active .page-link {
         margin-left: 0;
     }
 
+    .factory-large-image-block,
+    .factory-image-block {
+        text-align: center;
+    }
+
+    .modal .modal-content {
+        padding: 40px 15px 20px;
+    }
+
 
 }
 
@@ -8363,7 +8415,6 @@ nav .pagination li.active .page-link {
     .suppliers_filter_wrapper .suppliers_filter_content .filter_search_input {
         width: 80% !important;
     }
-
 
     .profile_form_modal table {
         width: 500px;

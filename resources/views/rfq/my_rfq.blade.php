@@ -17,7 +17,7 @@
         @php $filter_type = array_key_exists('filter', app('request')->input())?app('request')->input('filter'):'';@endphp
         <div class="rfq_info_wrap right-align rfq_top_navbar">
             <ul>
-                <li>
+                <li class="rfq_filter_select">
                     <select class="btn_grBorder" name="filter" id="rfq_filter">
                         <option value="" disabled selected>Choose your option</option>
                         <option value="all" {{$filter_type == 'all' || $filter_type == '' ? 'selected' : ''}}>All</option>

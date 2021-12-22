@@ -32,92 +32,108 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="producut-quality">Quantity</label>
+                <div class="inpuboxt_group_wrap">
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="producut-quality">Quantity</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="number" id="producut-quality" name="quantity" class="form-control" placeholder="Quantity">
+                                </div>
                             </div>
-                            <div class="col s12 m8 l6">
-                                <input type="number" id="producut-quality" name="quantity" class="form-control" placeholder="Quantity">
+                        </div>
+                        <div class=" col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="product-unit">Unit</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="text" id="product-unit" name="unit" class="form-control" placeholder="Unit" value="" disabled="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class=" col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="product-unit">Unit</label>
+
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="product-unit-price">Unit price</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="text" id="product-unit-price" class="form-control bid-price-range-value" name="unit_price" placeholder="Unit Price">
+                                </div>
                             </div>
-                            <div class="col s12 m8 l6">
-                                <input type="text" id="product-unit" name="unit" class="form-control" placeholder="Unit" value="" disabled="">
+                        </div>
+                        <div class=" col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="product-total-price">Total price</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="text" id="product-total-price" class="form-control bid-price-range-value" name="total_price" placeholder="Total Price">
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="product-payment-method" class="select-icon">Payment method</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <select name="payment_method" class="select2" id="product-payment-method">
+                                        <option value="cash">Cash</option>
+                                        <option value="card">Card</option>
+                                        <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
+                                        <option value="pay order">Pay Order</option>
+                                        <option value="cheque">Cheque</option>
+                                        <option value="tt">TT</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="product-destination" class="select-icon">Destination</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="text" name="destination" class="form-control appearance-none" id="product-destination" value="" disabled="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class=" col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="delivery-time" class="select-icon">Delivery Time</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="date" name="delivery_time" class="form-control appearance-none" id="delivery-time">
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="row">
+                        <div class=" col s12 m12 l6">
+                            <div class="input-field row input-wrapper">
+                                <div class="col s12 m4 l5">
+                                    <label for="delivery-time" class="select-icon">Delivery Time</label>
+                                </div>
+                                <div class="col s12 m8 l7">
+                                    <input type="date" name="delivery_time" class="form-control appearance-none" id="delivery-time">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="row">
-                    <div class="col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="product-unit-price">Unit price</label>
-                            </div>
-                            <div class="col s12 m8 l6">
-                                <input type="text" id="product-unit-price" class="form-control bid-price-range-value" name="unit_price" placeholder="Unit Price">
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="product-total-price">Total price</label>
-                            </div>
-                            <div class="col s12 m8 l6">
-                                <input type="text" id="product-total-price" class="form-control bid-price-range-value" name="total_price" placeholder="Total Price">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="product-payment-method" class="select-icon">Payment method</label>
-                            </div>
-                            <div class="col s12 m8 l6">
-                                <select name="payment_method" class="select2" id="product-payment-method">
-                                    <option value="cash">Cash</option>
-                                    <option value="card">Card</option>
-                                    <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
-                                    <option value="pay order">Pay Order</option>
-                                    <option value="cheque">Cheque</option>
-                                    <option value="tt">TT</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="product-destination" class="select-icon">Destination</label>
-                            </div>
-                            <div class="col s12 m8 l6">
-                                <input type="text" name="destination" class="form-control appearance-none" id="product-destination" value="" disabled="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col s12 m12 l6">
-                        <div class="input-field row input-wrapper">
-                            <div class="col s12 m4 l6">
-                                <label for="delivery-time" class="select-icon">Delivery Time</label>
-                            </div>
-                            <div class="col s12 m8 l6">
-                                <input type="date" name="delivery_time" class="form-control appearance-none" id="delivery-time">
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
             <!-- rfq_detail_from end -->

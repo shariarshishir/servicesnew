@@ -127,18 +127,18 @@
             </div>
         </div>
         <div class="row input-field">
-            <div class="col s12">
+            <div class="col s12 m3 m3">
                 <label for="product-desc">Product Details</label>
             </div>
-            <div class="col s12">
+            <div class="col s12 m9 l9">
                 <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" >{!! $product->product_details !!}</textarea>
             </div>
         </div>
         <div class="row input-field">
-            <div class="col s12">
+            <div class="col s12 m3 l3">
                 <label for="product-spec">Full specification</label>
             </div>
-            <div class="col s12">
+            <div class="col s12 m9 l9">
                 <textarea name="product_specification" id="product-spec" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" >{!! $product->product_specification !!}</textarea>
             </div>
         </div>

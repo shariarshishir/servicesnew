@@ -6,7 +6,7 @@
 
 <div class="sign-wrap business_sign_wrap">
 	<div class="row">
-		<div class="col s5 m4 l4 leftbar">
+		<div class="col s12 m12 l4 leftbar">
 			<div class="logo-wrap">
 				<div class="logo-inner">
 					<img title="logo" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}">
@@ -14,7 +14,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col s7 m8 l8 rightbar">
+		<div class="col s12 m12 l8 rightbar">
 			<div class="signRight-innter business_stepper_wrap">
 				<div class="sign-from-wrap">
                     <h3>Creating Business Profile...</h3>
@@ -44,26 +44,26 @@
                             <div id="business_details_info" class="col s12">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label for="business_name">Name</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <input id="business_name" type="text" class="validate" name="business_name" value="{{old('business_name')}}">
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label for="location">Location</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <input id="location" type="text" class="validate" name="location" value="{{old('location')}}">
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label for="business_type">Business Type</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <select id="business_type" class="select2 browser-default select-business-type" name="business_type">
                                                 <option value="" disabled selected>Choose your business type</option>
                                                 <option value="1" {{old('business_type') == 1 ? 'selected' : ''}}>Manufacture</option>
@@ -73,48 +73,48 @@
                                         </div>
                                     </div>
                                     <div class="input-field col s12 number_of_outlets" style="display: none">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label>&nbsp;</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <div class="row">
-                                                <div class="col s5">
+                                                <div class="col s12 m5">
                                                     <label for="number_of_outlets">Number Of Outlets</label>
                                                 </div>
-                                                <div class="col s7">
+                                                <div class="col s12 m7">
                                                     <input id="number_of_outlets" type="text" class="validate" name="number_of_outlets" value="{{old('number_of_outlets')}}">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-field col s12 number_of_factories" style=" display:none">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label>&nbsp;</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <div class="row">
-                                                <div class="col s5">
+                                                <div class="col s12 m5">
                                                     <label for="number_of_factories">Number Of Factories</label>
                                                 </div>
-                                                <div class="col s7">
+                                                <div class="col s12 m7">
                                                     <input id="number_of_factories" type="text" class="validate" name="number_of_factories"  value="{{old('number_of_factories')}}">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label for="trade_license">Trade License</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <input id="trade_license" type="text" class="validate" value="{{old('trade_license')}}" name="trade_license">
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label for="industry_type">Industry Type</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <select id="industry_type" class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this.value)">
                                                 <option value="" disabled selected>Choose your industry type</option>
                                                 <option value="apparel" >Apparel</option>
@@ -123,15 +123,15 @@
                                         </div>
                                     </div>
                                     <div class="input-field col s12 business-category-div" style="display: none">
-                                        <div class="col s4">
+                                        <div class="col s12 m4">
                                             <label>&nbsp;</label>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s12 m8">
                                             <div class="row">
-                                                <div class="col s5">
+                                                <div class="col s12 m5">
                                                     <label for="categoryList">Category Type</label>
                                                 </div>
-                                                <div class="col s7">
+                                                <div class="col s12 m7">
                                                     <select  class="select2 browser-default business-category"  name="business_category_id" id="categoryList"></select>
                                                 </div>
                                             </div>
@@ -155,40 +155,40 @@
                                 <div class="representive_info">
                                     <div class="input-field col s12">
                                         <div class="row">
-                                            <div class="col s4">
+                                            <div class="col s12 m4">
                                                 <label for="representive_name">Representive Name</label>
                                             </div>
-                                            <div class="col s8">
+                                            <div class="col s12 m8">
                                                 <input id="representive_name" type="text" class="validate" value="{{old('representive_name')}}" name="representive_name">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
                                         <div class="row">
-                                            <div class="col s4">
+                                            <div class="col s12 m4">
                                                 <label for="email">Email Address</label>
                                             </div>
-                                            <div class="col s8">
+                                            <div class="col s12 m8">
                                                 <input id="email" type="text" class="validate" value="{{old('email')}}" name="email">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
                                         <div class="row">
-                                            <div class="col s4">
+                                            <div class="col s12 m4">
                                                 <label for="phone">Contact Number</label>
                                             </div>
-                                            <div class="col s8">
+                                            <div class="col s12 m8">
                                                 <input id="phone" type="text" class="validate" value="{{old('phone')}}" name="phone">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
                                         <div class="row">
-                                            <div class="col s4">
+                                            <div class="col s12 m4">
                                                 <label for="nid_passport">NID/Passport</label>
                                             </div>
-                                            <div class="col s8">
+                                            <div class="col s12 m8">
                                                 <input id="nid_passport" type="text" class="validate" value="{{old('nid_passport')}}" name="nid_passport">
                                             </div>
                                         </div>

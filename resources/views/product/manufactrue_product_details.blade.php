@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row ic-pg-container">
                 <div class="col s12 m3 l3 product_preview_wrap">
-                    @if($product->product_video->video)
+                    @if(isset($product->product_video->video))
                         <div class="simpleLens-gallery-container" id="ic-gallery">
                             <div class="video_content">
                                 <center>

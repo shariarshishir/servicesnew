@@ -8,7 +8,7 @@
         <th> Total Price</th>
         <th> Payment Within </th>
         <th> Proforma Type</th>
-        <th> Status</th>
+        <th class="center-align" > Status</th>
       </tr>
     </thead>
 
@@ -31,7 +31,7 @@
                 <td>{{ $po->proforma_type}}</td>
                 <td>
                     @if($po->status == 0)
-                        <div class="status-btn right-align">
+                        <div class="status-btn center-align">
                             <a href="{{route('open.proforma.single.html', $po->id)}}" class="btn_green btn-warning ">
                                 PI Pending<br />
                                 <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; View Invoice
@@ -39,7 +39,7 @@
                         </div>
                     @endif
                     @if($po->status == 1)
-                        <div class="status-btn right-align">
+                        <div class="status-btn center-align">
                             <a href="{{route('open.proforma.single', $po->id)}}" class="btn_green btn-success" target="_blank" >
                                 PO Generated<br />
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; View Pdf
@@ -47,7 +47,7 @@
                         </div>
                     @endif
                     @if($po->status == -1)
-                        <div class="status-btn right-align">
+                        <div class="status-btn center-align">
 
                             <a href="{{route('open.proforma.single', $po->id)}}" class="btn_green btn-danger" target="_blank">
                                 PI Rejected<br />
@@ -56,14 +56,14 @@
                             <!-- <div class="revice_order_btn" style="display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;cursor: pointer;background-color: transparent;border: 1px solid #dae0e5;border-radius: 4px;color: #212529;"></div> -->
                             <div class="revice_order_btn">
                                 @if(auth()->id() == $po->created_by)
-                                    <div class="update-po-btn right-align">
+                                    <div class="update-po-btn center-align">
                                         <a class="btn_green" href="{{route('po.edit',['toid' => $po->buyer->id, 'poid' => $po->id])}}" >
                                             Update PO
                                         </a>
                                     </div>
                                 @endif
                             </div>
-                            <div class="rejectdetails-po-btn right-align">
+                            <div class="rejectdetails-po-btn center-align">
                                 <a class="waves-effect waves-light btn_green modal-trigger" href="#rejectPoDetailsModal">
                                     PO rejection Causes
                                 </a>

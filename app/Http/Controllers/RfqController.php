@@ -111,7 +111,7 @@ class RfqController extends Controller
                 $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->onlyTrashed()->latest()->paginate(6);
             }
         }else{
-            $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->withTrashed()->latest()->paginate(6);
+            $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(6);
         }
         return view('rfq.my_rfq',compact('rfqLists'));
     }
@@ -172,7 +172,7 @@ class RfqController extends Controller
             400);
         }
 
-        $rfq=Rfq::where('id',$rfq_id)->first();
+        $rfq=Rfq::withTrashed()->where('id',$rfq_id)->first();
         if(!$rfq){
             return response()->json(array(
                 'success' => false,
@@ -180,6 +180,11 @@ class RfqController extends Controller
                 400);
         }
         $rfq->update($request->only(['category_id','title','quantity','unit','unit_price','payment_method','delivery_time','destination','short_description','full_specification']));
+        if($request->publish == true && $rfq->deleted_at){
+            $rfq->restore();
+        }else if($request->publish == false && !$rfq->deleted_at){
+            $rfq->delete();
+        }
         if ($request->hasFile('product_images')){
             foreach ($request->file('product_images') as $index=>$product_image){
 

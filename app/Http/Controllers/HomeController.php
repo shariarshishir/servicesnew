@@ -61,7 +61,7 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-        return view('product.all_products',compact('products'));   
+        return view('product.all_products',compact('products'));
     }
     //start products by category sub category and subsub category
     public function productsByCategory($slug)
@@ -335,7 +335,7 @@ class HomeController extends Controller
                 $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
                 $suppliers = BusinessProfile::with(['user'])->where('business_name', 'like', '%'.$request->searchInput.'%')->get();
                 //$results = $wholesaler_products->merge($manufacture_products);
-                
+
                 $allItems = new \Illuminate\Database\Eloquent\Collection;
                 $allItems = $allItems->merge($wholesaler_products);
                 $allItems = $allItems->merge($manufacture_products);
@@ -343,7 +343,7 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($suppliers);
 
                 //dd($allItems);
-                
+
                 //dd($results);
                 //$averageRatings=[];
                 //foreach($results as $result){
@@ -411,23 +411,46 @@ class HomeController extends Controller
     }
 
     public function searchByProductOrVendor(Request $request){
-        //dd($request->all());
+
         $searchInputValue=$request->search_input;
 
         if(!empty($request->search_input)) {
 
             if($request->search_type=="product")
             {
-                $products=Product::with('images')->where('name', 'like', '%'.$request->search_input.'%')->get();
-                $searchType="product";
-                return view('system_search_products',compact('products','searchType','searchInputValue'));
 
+                $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->search_input.'%')->where('business_profile_id', '!=', null)->get();
+
+                $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->search_input.'%')->where('business_profile_id', '!=', null)->get();
+
+                $merged = $wholesaler_products->merge($manufacture_products);
+
+                $page = Paginator::resolveCurrentPage() ?: 1;
+                $perPage = 12;
+                $low_moq_lists = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $merged->forPage($page, $perPage),
+                    $merged->count(),
+                    $perPage,
+                    $page,
+                    ['path' => Paginator::resolveCurrentPath()],
+                );
+                // dd($low_moq_lists);
+                return view('product.low_moq',compact('low_moq_lists'));
+                // $searchType="product";
+                // return view('system_search_products',compact('products','searchType','searchInputValue'));
+                // return view('product.ready_stock_product',compact('products'));
             }
             elseif($request->search_type=="vendor")
             {
-                $vendors=Vendor::where('vendor_name', 'like', '%'.$request->search_input.'%')->get();
-                $searchType="vendor";
-                return view('system_search_vendors',compact('vendors','searchType','searchInputValue'));
+                $suppliers=BusinessProfile::with(['businessCategory', 'user', 'companyOverview'])->where(function($query) use ($request){
+                    if(isset($request->search_input)){
+                        $query-> where('business_name', 'like', '%'.$request->search_input.'%')->get();
+                    }
+                })
+                ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
+                $business_name_from_home = $request->search_input;
+
+                return view('suppliers.index',compact('suppliers','business_name_from_home'));
 
             }
         }
@@ -568,6 +591,25 @@ class HomeController extends Controller
             }
             if(isset($request->location)){
                 $query-> where('location', 'like', '%'.$request->location.'%')->get();
+            }
+            if(isset($request->verified)){
+                $query-> whereIn('is_business_profile_verified', $request->verified)->get();
+            }
+            if(isset($request->standard)){
+                $target = array('compliance', 'non_compliance');
+                if(count(array_intersect($request->standard, $target)) == count($target)){
+                    $query->get();
+                }else{
+
+                    if(in_array('compliance', $request->standard)){
+                        $query->has('certifications')->get();
+                    }
+                    if(in_array('non_compliance', $request->standard)){
+                        $query->has('certifications', '<', 1)->get();
+                    }
+                }
+
+
             }
         })
         ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);

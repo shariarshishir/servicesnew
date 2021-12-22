@@ -140,6 +140,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div>
+                                <label for="">Publish</label>
+                                <p>
+                                    <label>
+                                      <input name="publish" type="radio" id="rfq-publish-yes" value="1"/>
+                                      <span>Yes</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                      <input name="publish" type="radio"  id="rfq-publish-no" value="0"/>
+                                      <span>No</span>
+                                    </label>
+                                </p>
+                            </div>
                         </div>
 
 

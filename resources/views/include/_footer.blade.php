@@ -1217,10 +1217,10 @@ $("#searchOption").change(function(){
     $("#system_search .search_type").val(selectedSearchOption);
 
     if($(this).val() == "product"){
-        $(".search_input").attr("placeholder", "Type products name");
+        $(".search_input").attr("placeholder", " Search for ...");
     }
     else if($(this).val() == "vendor"){
-        $(".search_input").attr("placeholder", "Type vendors name");
+        $(".search_input").attr("placeholder", " Search for ...");
     }
 
     var searchInput = $("#system_search .search_input").val();

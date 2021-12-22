@@ -20,8 +20,8 @@
                 <li class="rfq_filter_select">
                     <select class="btn_grBorder" name="filter" id="rfq_filter">
                         <option value="" disabled selected>Choose your option</option>
-                        <option value="all" {{$filter_type == 'all' || $filter_type == '' ? 'selected' : ''}}>All</option>
-                        <option value="active"  {{$filter_type == 'active' ? 'selected' : ''}}>Active</option>
+                        <option value="all" {{$filter_type == 'all' ? 'selected' : ''}}>All</option>
+                        <option value="active"  {{$filter_type == 'active' || $filter_type == ''  ? 'selected' : ''}}>Active</option>
                         <option value="inactive" {{$filter_type == 'inactive' ? 'selected' : ''}}>Inactive</option>
                     </select>
                 </li>
@@ -46,19 +46,7 @@
 			</div>
 		</div>
         <div>
-            @if(!$rfqSentList->deleted_at)
-                <form method="POST" action="{{ route('rfq.delete', $rfqSentList->id) }}">
-                    @csrf
-                    @method('delete')
-                    <a class="btn red show_confirm" href="javascritp:void();">Set Inactive </a>
-                </form>
-                <a href="javascript:void(0);" class="btn grey" onclick="editRfq({{$rfqSentList->id}});">Edit</a>
-            @else
-                <form method="GET" action="{{ route('rfq.active', $rfqSentList->id) }}">
-                    <a class="btn green show_confirm_active" href="javascritp:void();">Set active </a>
-                </form>
-            @endif
-
+            <a href="javascript:void(0);" class="btn grey" style="float: right;" onclick="editRfq({{$rfqSentList->id}});">Edit</a>
         </div>
 		<div class="col s12 m9 l10 rfq_profile_info">
 			<div class="row">
@@ -72,7 +60,7 @@
 			</div>
 
                     <div class="rfq_view_detail_wrap">
-                        <h5>{{$rfqSentList->title}}</h5>
+                        <h5>{{$rfqSentList->title}} <span class="{{$rfqSentList->deleted_at ? 'red' : 'green' }}">{{$rfqSentList->deleted_at ? 'Inactive' : 'Active' }}</span></h5>
                         <span class="short_description">{{$rfqSentList->short_description}}</span>
                         <button class="none_button btn_view_detail" id="rfqViewDetail">Show More</button>
                         <div class="rfq_view_detail_info" style="display: none;">
@@ -377,48 +365,7 @@
         @endif
 
 
-        //delete
-        $('.show_confirm').click(function(event) {
-            var form =  $(this).closest("form");
-            event.preventDefault();
-            swal({
-                title: "Are you sure you want to inactive this record?",
-                text: "Please ensure and then confirm!",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, inactive it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            })
-            .then((e) => {
-                if (e.value == true) {
-                    form.submit();
-                }else {
-                    return false;
-                }
-            });
-        });
-         //active
-         $('.show_confirm_active').click(function(event) {
-            var form =  $(this).closest("form");
-            event.preventDefault();
-            swal({
-                title: "Are you sure you want to active this record?",
-                text: "Please ensure and then confirm!",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, active it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            })
-            .then((e) => {
-                if (e.value == true) {
-                    form.submit();
-                }else {
-                    return false;
-                }
-            });
-        });
+
 
         //edit
         function editRfq(rfq_id){
@@ -456,6 +403,12 @@
                             $('#edit-rfq-form #payment_method').val(data.data.payment_method);
                             $('#edit-rfq-form #payment_method').trigger('change');
                             $('#edit-rfq-form .delivery_time').val(data.date);
+                            if(data.data.deleted_at == null){
+                                $('#edit-rfq-form #rfq-publish-yes').prop("checked", true);
+                            }else{
+                                $('#edit-rfq-form #rfq-publish-no').prop("checked", true);
+                            }
+
                             for(i=1 ; i < 5 ; i++){
 
                                 var id='#edit_img'+i;

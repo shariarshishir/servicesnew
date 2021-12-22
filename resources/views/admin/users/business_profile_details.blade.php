@@ -632,7 +632,7 @@
                         </div>
                         @endif
 
-                        @if($business_profile->is_business_profile_verified == 0 || $business_profile->is_business_profile_verified == NULL)
+                        @if($business_profile->is_business_profile_verified == 0)
                         <a href="javascript:void(0)" class="btn btn-primary verification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="1">Click to verify this profile</a>
                         @else
                         <a href="javascript:void(0)" class="btn btn-danger unverification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="0">Click to unverify this profile</a>

@@ -61,7 +61,7 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-        return view('product.all_products',compact('products'));   
+        return view('product.all_products',compact('products'));
     }
     //start products by category sub category and subsub category
     public function productsByCategory($slug)
@@ -335,7 +335,7 @@ class HomeController extends Controller
                 $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
                 $suppliers = BusinessProfile::where('business_name', 'like', '%'.$request->searchInput.'%')->get();
                 //$results = $wholesaler_products->merge($manufacture_products);
-                
+
                 $allItems = new \Illuminate\Database\Eloquent\Collection;
                 $allItems = $allItems->merge($wholesaler_products);
                 $allItems = $allItems->merge($manufacture_products);
@@ -343,7 +343,7 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($suppliers);
 
                 //dd($allItems);
-                
+
                 //dd($results);
                 //$averageRatings=[];
                 //foreach($results as $result){
@@ -568,6 +568,25 @@ class HomeController extends Controller
             }
             if(isset($request->location)){
                 $query-> where('location', 'like', '%'.$request->location.'%')->get();
+            }
+            if(isset($request->verified)){
+                $query-> whereIn('is_business_profile_verified', $request->verified)->get();
+            }
+            if(isset($request->standard)){
+                $target = array('compliance', 'non_compliance');
+                if(count(array_intersect($request->standard, $target)) == count($target)){
+                    $query->get();
+                }else{
+
+                    if(in_array('compliance', $request->standard)){
+                        $query->has('certifications')->get();
+                    }
+                    if(in_array('non_compliance', $request->standard)){
+                        $query->has('certifications', '<', 1)->get();
+                    }
+                }
+
+
             }
         })
         ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);

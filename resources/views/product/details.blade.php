@@ -701,8 +701,8 @@ $reviewsCount = count($productReviews);
                                                 <div class="prod-mod-req-content">
                                                     <div class="row">
                                                         <div class="input-field col s12">
-                                                            <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>
                                                             <label for="product-modification-message" class="">Type your modification request.</label>
+                                                            <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>                                                            
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <label for="product-modification-image" class="product-modification-image">Upload Image</label>

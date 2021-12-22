@@ -145,10 +145,14 @@
     </div>
 </div>
 
-
 @if (Session::has('business_profile_create_permission'))
     <script>
         swal("",'{!!session::get("business_profile_create_permission")!!}',"warning");
+    </script>
+@endif
+@if (Session::has('success'))
+    <script>
+        swal("Done!",'{!!session::get("success")!!}',"success");
     </script>
 @endif
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -447,29 +451,29 @@
     }
 </script>
 <script>
-    @if(Session::has('success'))
-        //toastr.success("{{Session::get('success')}}");
-        var toastHTML= "{{Session::get('success')}}";
-        M.toast({html: toastHTML, classes:'toast-success'});
-    @endif
+    // @if(Session::has('success'))
+    //     //toastr.success("{{Session::get('success')}}");
+    //     var toastHTML= "{{Session::get('success')}}";
+    //     M.toast({html: toastHTML, classes:'toast-success'});
+    // @endif
 
-    @if(Session::has('error'))
-        //toastr.error("{{Session::get('error')}}");
-        var toastHTML= "{{Session::get('error')}}";
-        M.toast({html: toastHTML, classes:'toast-error'});
-    @endif
+    // @if(Session::has('error'))
+    //     //toastr.error("{{Session::get('error')}}");
+    //     var toastHTML= "{{Session::get('error')}}";
+    //     M.toast({html: toastHTML, classes:'toast-error'});
+    // @endif
 
-    @if(Session::has('info'))
-        //toastr.info("{{ Session::get('info') }}");
-        var toastHTML= "{{Session::get('info')}}";
-        M.toast({html: toastHTML, classes:'toast-info'});
-    @endif
+    // @if(Session::has('info'))
+    //     //toastr.info("{{ Session::get('info') }}");
+    //     var toastHTML= "{{Session::get('info')}}";
+    //     M.toast({html: toastHTML, classes:'toast-info'});
+    // @endif
 
-    @if(Session::has('warning'))
-       // toastr.warning("{{ Session::get('warning') }}");
-       var toastHTML= "{{Session::get('warning')}}";
-        M.toast({html: toastHTML, classes:'toast-warning'});
-    @endif
+    // @if(Session::has('warning'))
+    //    // toastr.warning("{{ Session::get('warning') }}");
+    //    var toastHTML= "{{Session::get('warning')}}";
+    //     M.toast({html: toastHTML, classes:'toast-warning'});
+    // @endif
   </script>
   <script>
     function addProductColorSize()

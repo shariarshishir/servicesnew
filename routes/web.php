@@ -245,6 +245,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
+    Route::delete('rfq/delete/{rfq_id}',[RfqController::class, 'delete'])->name('rfq.delete');
+    Route::get('rfq/active/{rfq_id}',[RfqController::class, 'active'])->name('rfq.active');
+    Route::get('rfq/edit/{rfq_id}',[RfqController::class, 'edit'])->name('rfq.edit');
+    Route::post('rfq/update/{rfq_id}',[RfqController::class, 'update'])->name('rfq.update');
+    Route::get('rfq/single/image/delete/{rfq_image_id}',[RfqController::class, 'singleImageDelete'])->name('rfq.single.image.delete');
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');

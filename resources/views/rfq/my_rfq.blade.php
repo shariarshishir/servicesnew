@@ -21,6 +21,30 @@
 			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
 		</ul>
 	</div>
+    <div>
+        <form action="{{route('rfq.my')}}" method="get">
+
+            @php $filter_type = array_key_exists('filter', app('request')->input())?app('request')->input('filter'):'';@endphp
+            <p>
+                <label>
+                    <input class="with-gap" value="all" name="filter" type="radio" {{$filter_type == 'all' || $filter_type == '' ? 'checked' : ''}}  onclick="this.form.submit();"/>
+                    <span>all</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="with-gap" value="active" name="filter" type="radio" {{$filter_type == 'active' ? 'checked' : ''}}  onclick="this.form.submit();" />
+                    <span>active</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="with-gap" value="inactive" name="filter" type="radio"  {{$filter_type == 'inactive' ? 'checked' : ''}} onclick="this.form.submit();"/>
+                    <span>inactive</span>
+                </label>
+            </p>
+        </form>
+    </div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
     @if(count($rfqLists)>0)
 	@foreach ($rfqLists as $rfqSentList)
@@ -34,6 +58,21 @@
 				@endif
 			</div>
 		</div>
+        <div>
+            @if(!$rfqSentList->deleted_at)
+                <form method="POST" action="{{ route('rfq.delete', $rfqSentList->id) }}">
+                    @csrf
+                    @method('delete')
+                    <a class="btn red show_confirm" href="javascritp:void();">Set Inactive </a>
+                </form>
+                <a href="javascript:void(0);" class="btn grey" onclick="editRfq({{$rfqSentList->id}});">Edit</a>
+            @else
+                <form method="GET" action="{{ route('rfq.active', $rfqSentList->id) }}">
+                    <a class="btn green show_confirm_active" href="javascritp:void();">Set active </a>
+                </form>
+            @endif
+
+        </div>
 		<div class="col s12 m9 l10 rfq_profile_info">
 			<div class="row">
 				<div class="profile_info col s12 m8 l8">
@@ -251,7 +290,9 @@
     </div>
 </div>
 @include('rfq._create_rfq_bid_form_modal')
+@include('rfq._edit_rfq_modal')
 @endsection
+
 
 @include('rfq._scripts')
 @push('js')
@@ -347,6 +388,214 @@
         }, 1000);
         }
         @endif
+
+
+        //delete
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            event.preventDefault();
+            swal({
+                title: "Are you sure you want to inactive this record?",
+                text: "Please ensure and then confirm!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes, inactive it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            })
+            .then((e) => {
+                if (e.value == true) {
+                    form.submit();
+                }else {
+                    return false;
+                }
+            });
+        });
+         //active
+         $('.show_confirm_active').click(function(event) {
+            var form =  $(this).closest("form");
+            event.preventDefault();
+            swal({
+                title: "Are you sure you want to active this record?",
+                text: "Please ensure and then confirm!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes, active it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            })
+            .then((e) => {
+                if (e.value == true) {
+                    form.submit();
+                }else {
+                    return false;
+                }
+            });
+        });
+
+        //edit
+        function editRfq(rfq_id){
+            var url = '{{ route("rfq.edit", ":slug") }}';
+            url = url.replace(':slug', rfq_id);
+            $.ajax({
+                    method: 'get',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    url: url,
+                    beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                    },
+                    success:function(data)
+                        {
+
+                            // $('#seller_product_form_update')[0].reset();
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            $('#edit-rfq-form').modal('open');
+
+                            $('#edit-rfq-form  input[name=edit_rfq_id]').val(data.data.id);
+                            $('#edit-rfq-form #category_id').val(data.data.category_id);
+                            $('#edit-rfq-form #category_id').trigger('change');
+                            $('#edit-rfq-form input[name=title]').val(data.data.title);
+                            $('#edit-rfq-form .short_description').text(data.data.short_description);
+                            $('#edit-rfq-form .full_specification').text(data.data.full_specification);
+                            $('#edit-rfq-form input[name=quantity]').val(data.data.quantity);
+                            $('#edit-rfq-form #unit').val(data.data.unit);
+                            $('#edit-rfq-form #unit').trigger('change');
+                            $('#edit-rfq-form input[name=unit_price]').val(data.data.unit_price);
+                            $('#edit-rfq-form input[name=destination]').val(data.data.destination);
+                            $('#edit-rfq-form #payment_method').val(data.data.payment_method);
+                            $('#edit-rfq-form #payment_method').trigger('change');
+                            $('#edit-rfq-form .delivery_time').val(data.date);
+                            for(i=1 ; i < 5 ; i++){
+
+                                var id='#edit_img'+i;
+                                $('#edit-rfq-form '+id+'').attr('src', 'https://via.placeholder.com/380');
+                                var html='<button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>';
+                                $(id).parent().parent().find('.input-group-append').html(html);
+                            }
+                            if(data.data.images){
+                                $.each(data.data.images, function(key, item){
+                                    ++key;
+                                    var id='#edit_img'+key;
+                                    var asset="{{asset('storage')}}"+'/'+item.image
+                                    $('#edit-rfq-form '+id+'').attr('src', asset);
+                                    $(id).parent().parent().find('.input-group-append').html('');
+                                    var html='<a href="javascript:void(0);" dataid="'+item.id+'" onclick="removeImageItem(this);">remove</a>';
+                                    $(id).parent().parent().find('.input-group-append').html(html);
+                                });
+                            }
+
+
+
+                        },
+
+                    error: function(xhr, status, error)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+
+                            // $('#errors').empty();
+                            // $("#errors").append("<li class='alert alert-danger'>"+error+"</li>")
+                            $.each(xhr.responseJSON.error, function (key, item)
+                            {
+                                swal("Done!",item,"error");
+                                // $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
+                            });
+
+                        }
+                });
+
+        }
+
+        //update
+        $('#edit-rfq-submit-form').on('submit',function(e){
+            e.preventDefault();
+            var id=$('input[name=edit_rfq_id]').val();
+            var url = '{{ route("rfq.update", ":slug") }}';
+                url = url.replace(':slug', id);
+            var formData = new FormData(this);
+            formData.append('_token', "{{ csrf_token() }}");
+            $.ajax({
+                method: 'post',
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                enctype: 'multipart/form-data',
+                url: url,
+                beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                    {
+                        $('.loading-message').html("");
+		                $('#loadingProgressContainer').hide();
+                        $('#edit-rfq-form').modal('close');
+                        swal("Done!", data.msg,"success");
+                        location.reload();
+
+                    },
+                error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+		                $('#loadingProgressContainer').hide();
+                        $('#edit_rfq_errors').empty();
+                        $("#edit_rfq_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
+                        $.each(xhr.responseJSON.error, function (key, item)
+                        {
+                            $("#edit_rfq_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
+                        });
+
+                    }
+            });
+        });
+
+        //remove single rfq image
+        function removeImageItem(obj){
+            var single_image_id= $(obj).attr('dataid');
+            var url = '{{ route("rfq.single.image.delete", ":slug") }}';
+                url = url.replace(':slug', single_image_id);
+            var obj=obj;
+            $.ajax({
+                method: 'get',
+                processData: false,
+                contentType: false,
+                cache: false,
+                url: url,
+                beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                    {
+                        $('.loading-message').html("");
+		                $('#loadingProgressContainer').hide();
+
+                        $(obj).parent().parent().parent().parent().find('.img-thumbnail').attr('src', 'https://via.placeholder.com/380');
+                        var html='<button type="button" class="btn_upload" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>';
+                        $(obj).parent().parent().find('.input-group-append').html(html);
+                    },
+                error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+		                $('#loadingProgressContainer').hide();
+                        $('#edit_rfq_errors').empty();
+                        $("#edit_rfq_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
+                        $.each(xhr.responseJSON.error, function (key, item)
+                        {
+                            $("#edit_rfq_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
+                        });
+
+                    }
+            });
+        }
+
+
+
     </script>
 
 @endpush

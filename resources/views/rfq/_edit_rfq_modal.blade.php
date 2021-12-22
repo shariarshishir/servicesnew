@@ -1,4 +1,4 @@
-<div id="create-rfq-form" class="modal rfq_detail_from_wrap">
+<div id="edit-rfq-form" class="modal rfq_detail_from_wrap">
     <div class="modal-content">
         <section class="ic-buying-req">
             <div class="container">
@@ -15,9 +15,13 @@
                         <span style="font-size: 12px; color: rgb(255, 0, 0); padding-bottom: 15px; display:block;">* Indicates Mandatory field</span>
                     </div>
                 </div>
+                <div id="edit_rfq_errors">
+
+                </div>
                 <!--Add Product Form-->
-                <form action="{{route('rfq.store')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
-                @csrf
+                <form action="" class="createRfqForm " method="post" enctype="multipart/form-data" id="edit-rfq-submit-form">
+                 @csrf
+                    <input type="hidden" name="edit_rfq_id" value="">
                     <div class="rfq_detail_from">
                         <!--3-->
                         <div class="row input-field input-wrapper">
@@ -25,7 +29,7 @@
                                 <label>Select Product Category <span >*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <select class="select2" name="category_id" required>
+                                <select class="select2" name="category_id" id="category_id" required>
                                     <option>Select an option</option>
                                     @foreach($manufacture_product_categories as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
@@ -55,28 +59,28 @@
                                 <label>Full Description</label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
+                                <textarea class="ig-new-rgt prd-txta full_specification" style="height:88px;" name="full_specification"></textarea>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col s12 m12 l6">
+                            <div class="col s12 m6 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
+                                    <div class="col s12 m6 l6">
                                         <label>Quantity <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m8 l6">
+                                    <div class="col s12 m6 l6">
                                         <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m12 l6">
+                            <div class=" col s12 m6 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
+                                    <div class="col s12 m6 l6">
                                         <label>Select Unit <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m8 l6">
-                                        <select class="select2" name="unit">
+                                    <div class="col s12 m6 l6">
+                                        <select class="select2" name="unit" id="unit">
                                             <option value="">Select an option</option>
                                             @php $units = units(); @endphp
                                             @foreach($units as $unit=>$value)
@@ -88,35 +92,35 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m12 l6">
+                            <div class="col s12 m6 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
+                                    <div class="col s12 m6 l6">
                                         <label>Target Price <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m8 l6">
+                                    <div class="col s12 m6 l6">
                                         <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m12 l6">
+                            <div class=" col s12 m6 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
+                                    <div class="col s12 m6 l6">
                                         <label>Destination <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m8 l6">
+                                    <div class="col s12 m6 l6">
                                         <input type="text" class="form-control- ig-new-rgt" name="destination" required/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m12 l6">
+                            <div class="col s12 m6 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
+                                    <div class="col s12 m6 l6">
                                         <label>Select Payment Method <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m8 l6">
-                                        <select class="select2" name="payment_method" required>
+                                    <div class="col s12 m6 l6">
+                                        <select class="select2" name="payment_method" id="payment_method" required>
                                             <option>Select an option</option>
                                             <option value="cash">Cash</option>
                                             <option value="card">Card</option>
@@ -126,13 +130,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m12 l6">
+                            <div class=" col s12 m6 l6">
                                 <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
+                                    <div class="col s12 m6 l6">
                                         <label>Expected Delivery Time <span>*</span></label>
                                     </div>
-                                    <div class="col s12 m8 l6">
-                                        <input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/>
+                                    <div class="col s12 m6 l6">
+                                        <input type="date" class="form-control- ig-new-rgt delivery_time" name="delivery_time" required/>
                                     </div>
                                 </div>
                             </div>
@@ -142,13 +146,13 @@
 
 
                         <div class="row rfq_img_upload_wrap">
-                            <div class="col s4 m3 l2">
+                            <div class="col s5 m4 l2">
                                 <div class="thumbnail_img">
-                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img1">
+                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="edit_img1">
                                 </div>
                                 <div class="upload_img_box center-align">
                                     <div id="msg"></div>
-                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img1')">
+                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'edit_img1')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
@@ -160,13 +164,13 @@
                             <!--/1-->
 
                             <!--2-->
-                            <div class="col s4 m3 l2">
+                            <div class="col s5 m4 l2">
                                 <div class="thumbnail_img">
-                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img2">
+                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="edit_img2">
                                 </div>
                                 <div class="upload_img_box center-align">
                                     <div id="msg"></div>
-                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img2')">
+                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'edit_img2')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
@@ -178,13 +182,13 @@
                             <!--/2-->
 
                             <!--3-->
-                            <div class="col s4 m3 l2">
+                            <div class="col s5 m4 l2">
                                 <div class="thumbnail_img">
-                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img3">
+                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="edit_img3">
                                 </div>
                                 <div class="upload_img_box center-align">
                                     <div id="msg"></div>
-                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img3')">
+                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'edit_img3')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
@@ -196,13 +200,13 @@
                             <!--/3-->
 
                             <!--4-->
-                            <div class="col s4 m3 l2">
+                            <div class="col s5 m4 l2">
                                 <div class="thumbnail_img">
-                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img4">
+                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="edit_img4">
                                 </div>
                                 <div class="upload_img_box center-align">
                                     <div id="msg"></div>
-                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img4')">
+                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'edit_img4')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
@@ -214,13 +218,13 @@
                             <!--/4-->
 
                             <!--5-->
-                            <div class="col s4 m3 l2">
+                            <div class="col s5 m4 l2">
                                 <div class="thumbnail_img">
-                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img5">
+                                  <img src="https://via.placeholder.com/380" class="img-thumbnail" id="edit_img5">
                                 </div>
                                 <div class="upload_img_box center-align">
                                     <div id="msg"></div>
-                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img5')">
+                                    <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'edit_img5')">
                                     <div class="input-group my-3" style="display:block;">
                                       <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
                                       <div class="input-group-append">
@@ -260,7 +264,7 @@
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit()">
+                                        <button type="submit" class="btn_green btn_rfq_post btn-green right">
                                             Post
                                         </button>
                                     </div>
@@ -461,6 +465,10 @@
             }
 
         }
+
+
+
+
 
 </script>
 @endpush

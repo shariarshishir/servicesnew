@@ -6,7 +6,16 @@
     $industry_type = array_key_exists('industry_type', app('request')->input())?app('request')->input('industry_type'):[];
     $factory_type = array_key_exists('factory_type', app('request')->input())?app('request')->input('factory_type'):[];
     $location = array_key_exists('location', app('request')->input())?app('request')->input('location'): '';
-    $business_name = array_key_exists('business_name', app('request')->input())?app('request')->input('business_name'): '';
+    
+    if(isset($business_name)){
+        if(!$business_name){
+            $business_name = array_key_exists('business_name', app('request')->input())?app('request')->input('business_name'): '';
+        }
+    }
+    else{
+        $business_name = null;
+    }
+   
     $factory_type_array=[
         '2'=>'woven',
         '4'=>'knit',

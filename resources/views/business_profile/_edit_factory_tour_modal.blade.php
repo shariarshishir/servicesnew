@@ -25,7 +25,7 @@
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourImages)>0 )
                         @foreach($companyFactoryTour->companyFactoryTourImages as $image)
-                        <div class="col s6 m3 l2 uploaded-factory-image-block">
+                        <div class="uploaded-factory-image-block">
                             <a href="javascript:void(0)"  data-imageId="{{$image->id}}" class="delete-factory-image" ><i class="material-icons dp48">remove_circle_outline</i></a>
                             <img id="previous-uploaded-factory-image" src="{{asset('storage/'.$image->factory_image)}}" alt="preview image" style="max-height: 80px;min-height:80px">
                         </div>
@@ -41,7 +41,7 @@
 
                         <div class="factory-image-block row ">
                             <div class="upload_img_box_wrap col s6 m3 l2">
-                                <a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
+                                <a href="javascript:void(0);" class="btn_close" onclick="removeFactoryImage(this)"><i class="material-icons dp48">close</i></a>
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>
@@ -67,7 +67,7 @@
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourLargeImages)>0 )
                             @foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
-                                <div class="col s6 m3 l2 uploaded-factory-large-image-block">
+                                <div class="uploaded-factory-large-image-block">
                                     <a href="javascript:void(0)"  data-largeImageId="{{$image->id}}" class="delete-factory-large-image" ><i class="material-icons dp48">remove_circle_outline</i></a>
                                     <img id="previous-uploaded-factory-image" src="{{asset('storage/'.$image->factory_large_image)}}" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>
@@ -80,7 +80,7 @@
                         <label for="product-upload">Media</label>
                         <div class="factory-large-image-block row">
                             <div class="upload_img_box_wrap col s6 m3 l2">
-                                <a href="javascript:void(0);" class="btn_delete" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
+                                <a href="javascript:void(0);" class="btn_close" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">close</i></a>
                                 <div class="upload_imgage_box">
                                     <img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">
                                 </div>

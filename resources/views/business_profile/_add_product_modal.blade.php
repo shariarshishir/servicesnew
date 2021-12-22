@@ -113,17 +113,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-field">
-                        <div class="s12">
+                    <div class="input-field row">
+                        <div class="col s12 m3 l3">
                             <label for="product-desc">Product Details</label>
                         </div>
-                        <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" ></textarea>
+                        <div class="col s12 m9 l9 ">
+                            <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" ></textarea>
+                        </div>
+                        
                     </div>
                     <div class="input-field">
-                        <div class="s12">
+                        <div class="col s12 m3 l3 ">
                             <label for="product-spec">Full specification</label>
                         </div>
-                        <textarea name="product_specification" id="product-spec" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" ></textarea>
+                        <div class="col s12 m9 l9 ">
+                            <textarea name="product_specification" id="product-spec" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" ></textarea>
+                        </div>
                     </div>
                     <div class="input-field row">
                         <div class="col s12 m3 l3 ">

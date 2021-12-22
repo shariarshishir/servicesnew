@@ -59,87 +59,91 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col s12 m12 l6">
-                                <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
-                                        <label>Quantity <span>*</span></label>
+                        <div class="inpuboxt_group_wrap">
+                            <div class="row">
+                                <div class="col s12 m12 l6">
+                                    <div class="input-field row input-wrapper">
+                                        <div class="col s12 m4 l5">
+                                            <label>Quantity <span>*</span></label>
+                                        </div>
+                                        <div class="col s12 m8 l7">
+                                            <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
+                                        </div>
                                     </div>
-                                    <div class="col s12 m8 l6">
-                                        <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
+                                </div>
+                                <div class=" col s12 m12 l6">
+                                    <div class="input-field row input-wrapper">
+                                        <div class="col s12 m4 l5">
+                                            <label>Select Unit <span>*</span></label>
+                                        </div>
+                                        <div class="col s12 m8 l7">
+                                            <select class="select2" name="unit">
+                                                <option value="">Select an option</option>
+                                                @php $units = units(); @endphp
+                                                @foreach($units as $unit=>$value)
+                                                    <option value="{{$unit}}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class=" col s12 m12 l6">
-                                <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
-                                        <label>Select Unit <span>*</span></label>
+                            <div class="row">
+                                <div class="col s12 m12 l6">
+                                    <div class="input-field row input-wrapper">
+                                        <div class="col s12 m4 l5">
+                                            <label>Target Price <span>*</span></label>
+                                        </div>
+                                        <div class="col s12 m8 l7">
+                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
+                                        </div>
                                     </div>
-                                    <div class="col s12 m8 l6">
-                                        <select class="select2" name="unit">
-                                            <option value="">Select an option</option>
-                                            @php $units = units(); @endphp
-                                            @foreach($units as $unit=>$value)
-                                                <option value="{{$unit}}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
+                                </div>
+                                <div class=" col s12 m12 l6">
+                                    <div class="input-field row input-wrapper">
+                                        <div class="col s12 m4 l5">
+                                            <label>Destination <span>*</span></label>
+                                        </div>
+                                        <div class="col s12 m8 l7">
+                                            <input type="text" class="form-control- ig-new-rgt" name="destination" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l6">
+                                    <div class="input-field row input-wrapper">
+                                        <div class="col s12 m4 l5">
+                                            <label>Select Payment Method <span>*</span></label>
+                                        </div>
+                                        <div class="col s12 m8 l7">
+                                            <select class="select2" name="payment_method" required>
+                                                <option>Select an option</option>
+                                                <option value="cash">Cash</option>
+                                                <option value="card">Card</option>
+                                                <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
+                                                <option value="pay order">Pay Order</option>
+                                                <option value="cheque">Cheque</option>
+                                                <option value="tt">TT</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col s12 m12 l6">
+                                    <div class="input-field row input-wrapper">
+                                        <div class="col s12 m4 l5">
+                                            <label>Expected Delivery Time <span>*</span></label>
+                                        </div>
+                                        <div class="col s12 m8 l7">
+                                            <input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col s12 m12 l6">
-                                <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
-                                        <label>Target Price <span>*</span></label>
-                                    </div>
-                                    <div class="col s12 m8 l6">
-                                        <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" col s12 m12 l6">
-                                <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
-                                        <label>Destination <span>*</span></label>
-                                    </div>
-                                    <div class="col s12 m8 l6">
-                                        <input type="text" class="form-control- ig-new-rgt" name="destination" required/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l6">
-                                <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
-                                        <label>Select Payment Method <span>*</span></label>
-                                    </div>
-                                    <div class="col s12 m8 l6">
-                                        <select class="select2" name="payment_method" required>
-                                            <option>Select an option</option>
-                                            <option value="cash">Cash</option>
-                                            <option value="card">Card</option>
-                                            <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
-                                            <option value="pay order">Pay Order</option>
-                                            <option value="cheque">Cheque</option>
-                                            <option value="tt">TT</option>
-                                            <option value="Others">Others</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" col s12 m12 l6">
-                                <div class="input-field row input-wrapper">
-                                    <div class="col s12 m4 l6">
-                                        <label>Expected Delivery Time <span>*</span></label>
-                                    </div>
-                                    <div class="col s12 m8 l6">
-                                        <input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
 
 
 

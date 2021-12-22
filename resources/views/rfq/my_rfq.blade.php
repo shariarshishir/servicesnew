@@ -13,38 +13,25 @@
 <!-- RFQ html start -->
 
 <div class="box_shadow_radius rfq_content_box">
-	<div class="rfq_info_wrap right-align rfq_top_navbar">
-		<ul>
-            <li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
-			<li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
-			<li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
-			<li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
-		</ul>
-	</div>
-    <div>
-        <form action="{{route('rfq.my')}}" method="get">
-
-            @php $filter_type = array_key_exists('filter', app('request')->input())?app('request')->input('filter'):'';@endphp
-            <p>
-                <label>
-                    <input class="with-gap" value="all" name="filter" type="radio" {{$filter_type == 'all' || $filter_type == '' ? 'checked' : ''}}  onclick="this.form.submit();"/>
-                    <span>all</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input class="with-gap" value="active" name="filter" type="radio" {{$filter_type == 'active' ? 'checked' : ''}}  onclick="this.form.submit();" />
-                    <span>active</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input class="with-gap" value="inactive" name="filter" type="radio"  {{$filter_type == 'inactive' ? 'checked' : ''}} onclick="this.form.submit();"/>
-                    <span>inactive</span>
-                </label>
-            </p>
-        </form>
-    </div>
+    <form action="{{route('rfq.my')}}" method="get" id="rfq_filter_form">
+        @php $filter_type = array_key_exists('filter', app('request')->input())?app('request')->input('filter'):'';@endphp
+        <div class="rfq_info_wrap right-align rfq_top_navbar">
+            <ul>
+                <li>
+                    <select class="btn_grBorder" name="filter" id="rfq_filter">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="all" {{$filter_type == 'all' || $filter_type == '' ? 'selected' : ''}}>All</option>
+                        <option value="active"  {{$filter_type == 'active' ? 'selected' : ''}}>Active</option>
+                        <option value="inactive" {{$filter_type == 'inactive' ? 'selected' : ''}}>Inactive</option>
+                    </select>
+                </li>
+                <li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
+                <li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
+                <li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
+                <li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
+            </ul>
+        </div>
+    </form>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
     @if(count($rfqLists)>0)
 	@foreach ($rfqLists as $rfqSentList)
@@ -594,6 +581,12 @@
             });
         }
 
+        //select on change form submit
+        $(document).ready(function() {
+            $('#rfq_filter').on('change', function() {
+                $('#rfq_filter_form').submit();
+            });
+        });
 
 
     </script>

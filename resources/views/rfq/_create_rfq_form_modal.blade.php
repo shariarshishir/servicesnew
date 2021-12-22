@@ -121,6 +121,9 @@
                                             <option value="cash">Cash</option>
                                             <option value="card">Card</option>
                                             <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
+                                            <option value="pay order">Pay Order</option>
+                                            <option value="cheque">Cheque</option>
+                                            <option value="tt">TT</option>
                                             <option value="Others">Others</option>
                                         </select>
                                     </div>

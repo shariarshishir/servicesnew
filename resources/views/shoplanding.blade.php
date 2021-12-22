@@ -16,6 +16,7 @@
 
 				<div class="module-search">
 					<select id="searchOption" class="select2 browser-default select-search-type">
+                        <option value="all" name="search_key" {{ $searchType=="all" ? 'selected' : '' }}>All</option>
 						<option value="product" name="search_key" {{ $searchType=="product" ? 'selected' : '' }}>Products</option>
 						<option value="vendor"  name="search_key" {{ $searchType=="vendor" ? 'selected' : '' }}>Manufacturers</option>
 					</select>

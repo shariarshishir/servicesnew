@@ -443,7 +443,7 @@ class HomeController extends Controller
                 $business_name_from_home = $request->search_input;
 
                 return view('suppliers.index',compact('suppliers','business_name_from_home'));
-
+            }
             elseif($request->search_type=="all")
             {
                 $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->search_input.'%')->where('business_profile_id', '!=', null)->get();

@@ -121,6 +121,7 @@ class RFQController extends Controller
             }
         
             $rfqData = $request->except(['product_images','user','sso_reference_id']);
+            $rfqData['is_from_omd']=1;
             $rfqData['created_by']=$user->id;
             $rfqData['status']='approved';
             $rfq=Rfq::create($rfqData);

@@ -93,6 +93,11 @@
             </div>    
         </div>
     </div>
+    <!-- <div class="pagination-block-wrapper">
+        <div class="col s12 center">
+            {!! $low_moq_lists->appends(['getRequest'=>$request])->links() !!}
+        </div>
+    </div> -->
     
 @endsection
 @push('js')

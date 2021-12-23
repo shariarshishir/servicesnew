@@ -1054,6 +1054,7 @@ form input:read-only {
     color: #fff;
     margin-bottom: 25px;
     letter-spacing: 1px;
+    text-transform: capitalize;
 }
 .profile_bannerwrap h2 {
     font-size: 22px;
@@ -1282,7 +1283,7 @@ form input:read-only {
 }
 
 .profile_contentCol .add-new-product-button .green {
-    height: 45px;
+    height: 44px;
     line-height: 35px;
 }
 .profile_contentCol .add-new-product-button .green .material-icons {
@@ -1966,6 +1967,7 @@ form input:read-only {
 .product_data_table_wrap .product_title {
     margin-bottom: 10px;
     display: block;
+    text-transform: capitalize;
 }
 .product_data_table_wrap h6 {
     font-weight: 600;
@@ -4763,6 +4765,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .business_list_wrapper .btn_create_new {
     display: inline-block;
     margin: 0 0 20px;
+    padding-bottom: 5px;
 }
 .business_list_innar_wrapper {
     padding: 20px !important;
@@ -5167,6 +5170,7 @@ input.input-field[type=text]:not(.browser-default) {
 .profile_tabNav_wrap .certificate_img_wrap .certificate_title {
     margin-top: 15px;
     display: block;
+    line-height: 24px;
 }   
 .profile_tabNav_wrap .certification_pdf_down {
     background : url('../images/frontendimages/new_layout_images/pdf-bg.png') no-repeat center;

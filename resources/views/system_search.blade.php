@@ -5,63 +5,88 @@
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
-                <div class="product_boxwrap">
+                <div class="product_boxwrap search_results_wrap">
                     <h3>Search Results</h3>
             
                     @foreach($allItems as $key=>$item)
                     @if($item->flag=="shop")
-                    <div class="product-item">
+                    <div class="product-item card search_results_itembox">
                         <a href="{{ route('mix.product.details', [$item->flag, $item->id]) }}" class="overlay_hover">&nbsp;</a>
-                        <div class="product-img">
-                            <img src="{{asset('storage').'/'.$item->images[0]->image}}">
-                        </div>
-                        <div class="product-short-intro">
-                            <h4>{{$item->name}}</h4>
-                            <div class="details">
-                                <p>MOQ {{$item->moq}} {{$item->product_unit}}</p>
-                            </div>
+                        <div class="row">
+                            <div class="col s12 m12 l4">
+                                <div class="product-img center-align search_results_left">
+                                    <img src="{{asset('storage').'/'.$item->images[0]->image}}">
+                                </div>
+                            </div> 
+                            <div class="col s12 m12 l8">
+                                <div class="product-short-intro search_results_right">
+                                    <h4>{{$item->name}}</h4>
+                                    <div class="details">
+                                        <p>MOQ {{$item->moq}} {{$item->product_unit}}</p>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                     @elseif($item->flag=="mb")
-                    <div class="product-item">
+                    <div class="product-item card search_results_itembox">
                         <a href="{{ route('mix.product.details', [$item->flag, $item->id]) }}" class="overlay_hover">&nbsp;</a>
-                        <div class="product-img">
-                            <img src="{{asset('storage').'/'.$item->product_images[0]->product_image}}">
-                        </div>
-                        <div class="product-short-intro">
-                            <h4>{{$item->title}}</h4>
-                            <div class="details">
-                                <p>MOQ: {{$item->moq}} {{$item->qty_unit}}</p>
-                            </div>
+                        <div class="row">
+                            <div class="col s12 m12 l4">
+                                <div class="product-img center-align search_results_left">
+                                    <img src="{{asset('storage').'/'.$item->product_images[0]->product_image}}">
+                                </div> 
+                            </div> 
+                            <div class="col s12 m12 l8">
+                                <div class="product-short-intro search_results_right">
+                                    <h4>{{$item->title}}</h4>
+                                    <div class="details">
+                                        <p>MOQ: {{$item->moq}} {{$item->qty_unit}}</p>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                     @elseif( $item->title && $item->slug )
-                    <div class="blog-item">
+                    <div class="blog-item card search_results_itembox">
                         <a href="{{route('blogs.details',$item->slug)}}" class="overlay_hover">&nbsp;</a>
-                        <div class="blog-img">
-                            <img src="{{ asset('storage/'.$item->feature_image) }}">
-                        </div>                       
-                        <div class="blog-short-intro">
-                            <h4>{{$item->title}}</h4>
-                            <div class="details">
-                                <p>{!! \Illuminate\Support\Str::limit(strip_tags($item->details), 250, '(...)')  !!}</p>
-                            </div>
+                        <div class="row">
+                            <div class="col s12 m12 l4">
+                                <div class="blog-img center-align search_results_left">
+                                    <img src="{{ asset('storage/'.$item->feature_image) }}">
+                                </div>  
+                            </div> 
+                            <div class="col s12 m12 l8">
+                                <div class="blog-short-intro search_results_right">
+                                    <h4>{{$item->title}}</h4>
+                                    <div class="details">
+                                        <p>{!! \Illuminate\Support\Str::limit(strip_tags($item->details), 250, '(...)')  !!}</p>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                     @else
-                    
-                    <div class="business-profile-item">
+                    <div class="business-profile-item card search_results_itembox">
                         <a href="{{route('supplier.profile', $item->id)}}" class="overlay_hover">&nbsp;</a>
-                        <div class="business-profile-img">
-                            <img src="{{ asset('storage/'.$item->feature_image) }}">
+                        <div class="row">
+                            <div class="col s12 m12 l4">
+                                <div class="business-profile-img center-align search_results_left">
+                                    <img src="{{ asset('storage/'.$item->feature_image) }}">
+                                </div> 
+                            </div> 
+                            <div class="col s12 m12 l8">
+                                <div class="business-profile-short-intro search_results_right">
+                                    <h4>{{$item->business_name}}</h4>
+                                    <div class="details">
+                                        <p>{{$item->industry_type}}</p>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
-                        <div class="business-profile-short-intro">
-                            <h4>{{$item->business_name}}</h4>
-                            <div class="details">
-                                <p>{{$item->industry_type}}</p>
-                            </div>
-                        </div>
+
                     </div>
+
                     @endif
                     @endforeach
                 </div>    

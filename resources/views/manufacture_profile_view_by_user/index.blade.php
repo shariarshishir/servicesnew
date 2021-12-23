@@ -1160,13 +1160,15 @@
 								@endif
 								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->
 								<div class="row">
-									<div class="col s12">
-										<ul class="tabs">
-											<li class="tab col m3"><a class="active" href="#factory_images">Factory Images</a></li>
-											<li class="tab col m3"><a href="#factory_degree_images">360 Degree Images</a></li>
-										</ul>
+									<div class="row top_titleWrap">
+										<div class="col s12 gallery_navbar">
+											<ul class="tabs">
+												<li class="tab col m3"><a class="active" href="#factory_images">Factory Images</a></li>
+												<li class="tab col m3"><a href="#factory_degree_images">360 Degree Images</a></li>
+											</ul>
+										</div>
 									</div>
-									<div id="factory_images" class="col s12">
+									<div id="factory_images" class="col s12 factory_imgbox_wrap">
 										<div class="row factory_image_gallery">
 										@if(count($companyFactoryTour->companyFactoryTourImages)>0)
 											@foreach($companyFactoryTour->companyFactoryTourImages as $image)
@@ -1184,8 +1186,8 @@
 
 										</div>
 									</div>
-									<div id="factory_degree_images" class="col s12">
-										<div class="row 360_degree_video_gallery">
+									<div id="factory_degree_images" class="col s12 video_gallery_box">
+										<div class="row degree_360_video_gallery">
 										@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
 										@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
 											<div class="col s12 m6 l6">

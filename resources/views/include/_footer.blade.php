@@ -732,13 +732,15 @@
   <script>
 //live search by product name or vendor name
 $(document).on("keyup",".search_input",function(){
+    var is_env = "{{ env('APP_ENV') }}";
+    var url;
     var searchInput = $(this).val();
     var selectedSearchOption = $("#searchOption").children("option:selected").val();
     $("#system_search .search_type").val(selectedSearchOption);
-    var url = '{{ route("live.search") }}';
+    var post_url = '{{ route("live.search") }}';
     $.ajax({
         type:'GET',
-        url: url,
+        url: post_url,
         dataType:'json',
         data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
         beforeSend: function() {
@@ -752,7 +754,12 @@ $(document).on("keyup",".search_input",function(){
             //$('#loadingProgressContainer').hide();
             var html="";
             var nohtml = "";
-            var url  = window.location.origin;
+            if(is_env == 'production'){
+                url  = window.location.origin+'/global';
+            } else {
+                url  = window.location.origin;
+            }
+            
             if(response.resultCount > 0)
             {
                 console.log(response.data);
@@ -1212,6 +1219,8 @@ function askForPrice($sku)
 //on change input field set
 $("#searchOption").change(function(){
     var nohtml = "";
+    var is_env = "{{ env('APP_ENV') }}";
+    var url;
     $('#search-results').html(nohtml).hide();
     var selectedSearchOption = $("#searchOption").children("option:selected").val();
     $("#system_search .search_type").val(selectedSearchOption);
@@ -1225,66 +1234,161 @@ $("#searchOption").change(function(){
 
     var searchInput = $("#system_search .search_input").val();
     console.log(searchInput);
-    var url = '{{ route("live.search") }}';
+    var post_url = '{{ route("live.search") }}';
     $.ajax({
         type:'GET',
-        url: url,
+        url: post_url,
         dataType:'json',
         data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
         success: function(response)
         {
             var html="";
             var nohtml = "";
+            if(is_env == 'production'){
+                url  = window.location.origin+'/global';
+            } else {
+                url  = window.location.origin;
+            }
             if(response.resultCount > 0)
             {
-                if(response.searchType=='product' && response.data.length > 0)
+                console.log(response.data);
+                if(response.searchType=='all' && response.data.length > 0)
                 {
-                    $('.product-item').html(nohtml);
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
                     for(var i=0; i<response.data.length; i++)
                     {
-                        html+='<div class="product-item">';
-                        $.each(response.data[i].images,function(key,item){
-                            if(key==0){
-                                var url  = window.location.origin;
-                                var image=url+'/storage/'+item.image;
-                                html+='<div class="product-img"><img src="'+image+'"></div>';
+                        if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
+                        {
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].images,function(key,item){
+                                if(key==0){
+                                    var url = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image="{{asset('storage/')}}"+'/'+item.image;
+                                    html += '<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].name+'</h4>';
+                            html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        else if(response.data[i].title && response.data[i].business_profile_id) // product for manufacturer
+                        {
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].product_images,function(key,item){
+                                if(key==0){
+                                    var url  = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image = "{{asset('storage/')}}"+'/'+item.product_image;
+                                    html += '<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].title+'</h4>';
+                            html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        else if(response.data[i].title && response.data[i].slug) // list for blog
+                        {
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/press-room/details/'+response.data[i].slug+'" class="overlay_hover">&nbsp;</a>';
+                            var image = "{{asset('storage/')}}"+'/'+response.data[i].feature_image;
+                            html += '<div class="product-img"><img src="'+image+'"></div>';                            
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].title+'</h4>';
+                            html += '<div class="details"><p>'+response.data[i].details.substring(0, 100)+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        else // list for supplier
+                        {
+                            var image;
+                            html += '<div class="product-item">';
+                            html += '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            if(response.data[i].user.image)
+                            {
+                            image = "{{asset('storage/')}}"+'/'+response.data[i].user.image;
                             }
-                        })
-                        html+= '<div class="product-short-intro">';
-                        html+= '<h4>'+response.data[i].name+'</h4>';
-                        html+= '<div class="details"><p><i class="material-icons pink-text"> star </i>' +response.averageRatings[i]+'</p></div>';
-                        html+='<h5>Tk (';
-
-                        var last1=JSON.parse(response.data[i].attribute).length;
-                        $.each(JSON.parse(response.data[i].attribute),function(key,item){
-
-                                            if(key == (last1 -1)){
-                                                html+= item[2];
-                                            }
-                                        })
-
-                        html+='<span>/ lot '+response.data[i].moq+' pieces / lot)</span></h5>';
-
-                        var url  = window.location.origin;
-                        html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details">See details</a>';
-                        html+= '</div><br>';
-                        html+= '</div>';
+                            else
+                            {
+                            image = "{{asset('images/frontendimages/no-image.png')}}";    
+                            }
+                            html += '<div class="product-img"><img src="'+image+'"></div>';
+                            html += '<div class="product-short-intro">';
+                            html += '<h4>'+response.data[i].business_name+'</h4>';
+                            html += '<div class="details"><p>'+response.data[i].industry_type+'</p></div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }                       
                     }
-                    $('#search-results').append(html);
+                    $('#search-results').html(html);
+                    $('#search-results').show();
+                }
+                else if(response.searchType=='product' && response.data.length > 0)
+                {
+                    $('.product-item').html(nohtml);
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
+                    for(var i=0; i<response.data.length; i++)
+                    {
+                        //console.log(response.data[i]);
+                        if(response.data[i].name) // product for wholesaler
+                        {
+                            html+='<div class="product-item">';
+                            html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].images,function(key,item){
+                                if(key==0){
+                                    var url  = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image="{{asset('storage/')}}"+'/'+item.image;
+                                    html+='<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html+= '<div class="product-short-intro">';
+                            html+= '<h4>'+response.data[i].name+'</h4>';
+                            html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html+= '</div>';
+                            html+= '</div>';
+                        }
+                        else // product for manufacturer
+                        {
+                            html+='<div class="product-item">';
+                            html+= '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            $.each(response.data[i].product_images,function(key,item){
+                                if(key==0){
+                                    var url  = window.location.origin;
+                                    // var image=url+'/storage/'+item.image;
+                                    var image="{{asset('storage/')}}"+'/'+item.product_image;
+                                    html+='<div class="product-img"><img src="'+image+'"></div>';
+                                }
+                            })
+                            html+= '<div class="product-short-intro">';
+                            html+= '<h4>'+response.data[i].title+'</h4>';
+                            html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                            html+= '</div>';
+                            html+= '</div>';
+                        }
+                    }
+                    $('#search-results').html(html);
                     $('#search-results').show();
                 }
                 else if(response.searchType=='vendor' && response.data.length > 0)
                 {
+                    //console.log(response.data);
                     $('.vendor-info').html(nohtml);
                     for(var i=0;i<response.data.length;i++){
                         html+='<div class="vendor-info">';
-                        console.log('hi');
-                        html+= '<h4>'+response.data[i].vendor_name+'</h4>';
-                        html+= '<div class="details"><p>'+response.data[i].vendor_address+'</p></div>';
-                        html+= '<a href="#">'+response.data[i].vendor_name+'</a>';
+                        html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                        html+= '<h4>'+response.data[i].business_name+'</h4>';
+                        html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
                         html+= '</div>';
                         }
-                    $('#search-results').append(html);
+                    $('#search-results').html(html);
                     $('#search-results').show();
                 }
             }

@@ -8,9 +8,11 @@
 	<div class="banner_overlay">
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
+		@if($business_profile->is_business_profile_verified == 1)
 		<div class="erified">
 		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
 		</div>
+		@endif
 		<div class="edit_profile_option">
 			<a href="javascript:void(0);" class="edit_profile_trigger"><i class="material-icons">border_color</i></a>
 		</div>

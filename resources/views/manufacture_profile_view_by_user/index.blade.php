@@ -43,7 +43,7 @@
 								<a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
 							@endif
 						</div>
-				
+
 						<div class="addressBox">
 							<span>Head Office </span><br/>
 							@if($business_profile->companyOverview->address)
@@ -51,7 +51,7 @@
 							@else
 							<div class="card-alert card cyan lighten-5">
 								<div class="card-content cyan-text">
-									<p>INFO : No data found.</p>
+									<p>INFO : There is no head office address for <b>{{ucwords($business_profile->business_name)}}</b>.</p>
 								</div>
 							</div>
 							@endif
@@ -63,7 +63,7 @@
 							@else
 							<div class="card-alert card cyan lighten-5">
 								<div class="card-content cyan-text">
-									<p>INFO : No data found.</p>
+									<p>INFO :There is no factory address for <b>{{ucwords($business_profile->business_name)}}</b>.</p>
 								</div>
 							</div>
 							@endif
@@ -74,9 +74,17 @@
 					<div class="left_bottom">
 						<h3 class="center-align" >Main Products</h3>
 						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-							@if($company_overview->name=="main_products")
-								<p>	{{$company_overview->value}}</p>
-							@endif
+                            @if($company_overview->name=="main_products")
+                                @if($company_overview->value)
+                                    <p>{{$company_overview->value}}</p>
+                                @else
+                                    <div class="card-alert card cyan lighten-5 no-info-message">
+                                        <div class="card-content cyan-text">
+                                            <p>INFO :There is no main products for <b>{{ucwords($business_profile->business_name)}}</b>.</p>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
 						@endforeach
 					</div>
 				@endif
@@ -95,15 +103,15 @@
 						</ul>
 					</div>
 					@if($business_profile->is_business_profile_verified == 0)
-						
-						<div class="profile_not_updated"> 
+
+						<div class="profile_not_updated">
 							<span class="profile_not_updated_inner center-align">
 								<div class="annaouncement_icon">&nbsp;</div>
 								<p style="font-size: 25px;"> You do not have access to view this profile.</p>
 								<p>Become a verified buyer to get full access of Merchant Bay.</p>
 								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
 							</span>
-							
+
 							<!-- <span class="profile_not_updated_inner">
 								<div class="annaouncement_icon">&nbsp;</div>
 								<p>You do not have access to view this profile.</p>
@@ -115,241 +123,203 @@
 							<a href="javascript:void(0);" class="button talk-to-us btn_green" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk To Us</a>
 							</div>
 						</div>
-						
-						
+
+
 					@else
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<div class="company_stuff center-align row">
-						@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-							@if($company_overview->name=='floor_space')
-							<div class="col s6 m3 l2">
-								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" />
-								</div>
-								<div class="title">Floor Space</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-							</div>
-							@endif
-							@if($company_overview->name=='no_of_machines')
-							<div class="col s6 m3 l2">
-								<div class="company_stuff_img">
-									<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
-								</div>
-								<div class="title">No. of Machines</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
-							</div>
-							@endif
-							@if($company_overview->name=='production_capacity')
-							<div class="col s6 m3 l3">
-								<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" />
-								<div class="title">Production Capacity</div>
-								<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
-							</div>
-							@endif
-							@if($company_overview->name=='number_of_worker')
-								@if(isset($company_overview->value))
-								<div class="col s6 m3 l2">
-									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" />
-									</div>
-									<div class="title">No. of workers</div>
-									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-								</div>
-								@endif
-							@endif
-							@if($company_overview->name=='number_of_female_worker')
-								@if(isset($company_overview->value))
-								<div class="col s6 m3 l3">
-									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" />
-									</div>
-									<div class="title">No. of female workers</div>
-									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-								</div>
-								@endif
-							@endif
-						@endforeach
+                            @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+                                @if($company_overview->name=='floor_space')
+                                <div class="col s6 m3 l2">
+                                    <div class="company_stuff_img">
+                                        <img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" />
+                                    </div>
+                                    <div class="title">Floor Space</div>
+                                    <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+                                </div>
+                                @endif
+                                @if($company_overview->name=='no_of_machines')
+                                <div class="col s6 m3 l2">
+                                    <div class="company_stuff_img">
+                                        <img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
+                                    </div>
+                                    <div class="title">No. of Machines</div>
+                                    <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+                                </div>
+                                @endif
+                                @if($company_overview->name=='production_capacity')
+                                <div class="col s6 m3 l3">
+                                    <img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" />
+                                    <div class="title">Production Capacity</div>
+                                    <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+                                </div>
+                                @endif
+                                @if($company_overview->name=='number_of_worker')
+                                    @if(isset($company_overview->value))
+                                    <div class="col s6 m3 l2">
+                                        <div class="company_stuff_img">
+                                            <img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" />
+                                        </div>
+                                        <div class="title">No. of workers</div>
+                                        <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+                                    </div>
+                                    @endif
+                                @endif
+                                @if($company_overview->name=='number_of_female_worker')
+                                    @if(isset($company_overview->value))
+                                    <div class="col s6 m3 l3">
+                                        <div class="company_stuff_img">
+                                            <img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" />
+                                        </div>
+                                        <div class="title">No. of female workers</div>
+                                        <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+                                    </div>
+                                    @endif
+                                @endif
+                            @endforeach
 						</div>
+
+
 						<!-- company_stuff -->
 						<div class="contentBox">
                             @if($business_profile->companyOverview->about_company)
 							    {{$business_profile->companyOverview->about_company}}
-                            @else
-                                <div class="card-alert card cyan lighten-5">
-                                    <div class="card-content cyan-text">
-                                        <p>INFO : company details is not available.</p>
-                                    </div>
-                                </div>
                             @endif
 						</div>
 						<!-- contentBox -->
-						<div class="certifications">
-							<h3>Certifications</h3>
-							<div class="certifications-block">
-								@if(count($business_profile->certifications)>0)
-									@foreach($business_profile->certifications as $certification)
-									<div class="certificate_img_wrap">
-										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-										<div class="certificate_img">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
-										</div>
-										<span class="certificate_title">{{$certification->title}}</span>
-										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
-										
-										<div class="certificate_img">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
-										</div>
-										<span class="certificate_title" >{{$certification->title}}</span>
-										@else
-										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
-										<span class="certificate_title" >{{$certification->title}}</span>
-										@endif
-									</div>
-									@endforeach
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
+                        @if(count($business_profile->certifications)>0)
+                            <div class="certifications">
+                                <h3>Certifications</h3>
+                                <div class="certifications-block">
+                                        @foreach($business_profile->certifications as $certification)
+                                        <div class="certificate_img_wrap">
+                                            @if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
+                                            <div class="certificate_img">
+                                                <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+                                                <br> -->
+                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
+                                            </div>
+                                            <span class="certificate_title">{{$certification->title}}</span>
+                                            @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
-						</div>
+                                            <div class="certificate_img">
+                                                <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+                                                <br> -->
+                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
+                                            </div>
+                                            <span class="certificate_title" >{{$certification->title}}</span>
+                                            @else
+                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+                                            <span class="certificate_title" >{{$certification->title}}</span>
+                                            @endif
+                                        </div>
+                                        @endforeach
+                                </div>
 
+                            </div>
+                        @endif
 						<!-- certifications -->
-						<div class="profile_product_wrap product_wrapper">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Main Products</h3>
-								</div>
-								<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
-							</div>
-							<div class="product_boxwrap row">
-								@if(count($mainProducts)>0)
-									@foreach($mainProducts as $product)
-									<div class="col s12 m4 l3">
-										<div class="productBox">
-											<div class="imgBox">
-												@foreach($product->product_images as $image)
-													<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
-													@break
-												@endforeach
-												<div class="favorite">
-													<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
-														<i class="material-icons dp48">favorite</i>
-													</a>
-												</div>
-											</div>
-											<div class="priceBox row">
+                        @if(count($mainProducts)>0)
+                            <div class="profile_product_wrap product_wrapper">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Main Products</h3>
+                                    </div>
+                                    <!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
+                                </div>
+                                <div class="product_boxwrap row">
+                                        @foreach($mainProducts as $product)
+                                        <div class="col s12 m4 l3">
+                                            <div class="productBox">
+                                                <div class="imgBox">
+                                                    @foreach($product->product_images as $image)
+                                                        <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+                                                        @break
+                                                    @endforeach
+                                                    <div class="favorite">
+                                                        <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+                                                            <i class="material-icons dp48">favorite</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="priceBox row">
 
-											</div>
-											<h4>
-												<a href="{{route('mix.product.details', ['mb', $product->id])}}">
-													{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
-												</a>
-											</h4>
-											<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
-											<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
-										</div>
-									</div>
-								@endforeach
-								@else
-								    <div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No Main Products.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
+                                                </div>
+                                                <h4>
+                                                    <a href="{{route('mix.product.details', ['mb', $product->id])}}">
+                                                        {{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+                                                    </a>
+                                                </h4>
+                                                <div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+                                                <div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
 						<!-- profile_product_wrap -->
-						
-						<div class="factory_imgbox_wrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Factory Images</h3>
-								</div>
-								<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
-							</div>
-							@if(count($business_profile->companyFactoryTour)>0)
-							<div class="row">
-								@if(count($companyFactoryTour->companyFactoryTourImages)>0)
-									@foreach($companyFactoryTour->companyFactoryTourImages as $image)
-										<div class="col s6 m4">
-											<div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->factory_image)}}" alt="" /></a></div>
-										</div>										
-									@endforeach
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No Image found.</p>
-										</div>
-									</div>								
-								@endif
-							</div>
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No Image found.</p>
-									</div>
-								</div>
-							@endif
-						</div>
+                        @if(count($business_profile->companyFactoryTour)>0)
+                            <div class="factory_imgbox_wrap">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Factory Images</h3>
+                                    </div>
+                                    <!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
+                                </div>
+
+                                <div class="row">
+                                    @if(count($companyFactoryTour->companyFactoryTourImages)>0)
+                                        @foreach($companyFactoryTour->companyFactoryTourImages as $image)
+                                            <div class="col s6 m4">
+                                                <div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->factory_image)}}" alt="" /></a></div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="card-alert card cyan lighten-5">
+                                            <div class="card-content cyan-text">
+                                                <p>INFO : No Image found.</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
 						<!-- factory_images -->
-						<div class="main_buyers_wrap">
-							<h3>Main Buyers</h3>
-							<div class="buyers_logo_wrap row main-buyers-block">
-								@if(count($business_profile->mainBuyers)>0)
-								@foreach($business_profile->mainBuyers as $mainBuyers)
-									<div class="col s6 m4 l3 main_buyer_box">
-										<a href="javascript:void(0);"></a>
-										<div class="main_buyer_img">
-											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
-										</div>
-										<h5>{{$mainBuyers->title}}</h5>
-									</div>
-								@endforeach
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-
-						</div>
+                        @if(count($business_profile->mainBuyers)>0)
+                            <div class="main_buyers_wrap">
+                                <h3>Main Buyers</h3>
+                                <div class="buyers_logo_wrap row main-buyers-block">
+                                    @foreach($business_profile->mainBuyers as $mainBuyers)
+                                        <div class="col s6 m4 l3 main_buyer_box">
+                                            <a href="javascript:void(0);"></a>
+                                            <div class="main_buyer_img">
+                                                <img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+                                            </div>
+                                            <h5>{{$mainBuyers->title}}</h5>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
 						<!-- main_buyers logo -->
-						<div class="export_destination_wrap">
-							<h3>Export Destinations</h3>
-							<div class="row flag_wrap center-align export-destination-block">
-								@if(count($business_profile->exportDestinations)>0)
-									@foreach($business_profile->exportDestinations as $exportDestination)
-										<div class="col s6 m4 l2">
-											<div class="flag_img export-destination-img">
-												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
-											</div>
-											<h5>{{$exportDestination->title}}</h5>
-										</div>
-									@endforeach
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-
-							</div>
-
-
-						</div>
+                        @if(count($business_profile->exportDestinations)>0)
+                            <div class="export_destination_wrap">
+                                <h3>Export Destinations</h3>
+                                <div class="row flag_wrap center-align export-destination-block">
+                                        @foreach($business_profile->exportDestinations as $exportDestination)
+                                            <div class="col s6 m4 l2">
+                                                <div class="flag_img export-destination-img">
+                                                    <img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+                                                </div>
+                                                <h5>{{$exportDestination->title}}</h5>
+                                            </div>
+                                        @endforeach
+                                </div>
+                            </div>
+                        @endif
 						<!-- export_destination -->
 					</div>
 					<!-- Home tabcontent end -->
@@ -379,399 +349,344 @@
 								</table>
 							</div>
 						</div>
-						<div class="overview_table_wrap capacity_machineries">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Capacity and Machineries</h3>
-								</div>
-							</div>
-							<div class="row capacity_table">
+                        {{-- capacity and mechineries --}}
+                        @if(count($business_profile->categoriesProduceds)>0 || count($business_profile->machineriesDetails) >0 )
+                            <div>
+                                <div class="overview_table_wrap capacity_machineries">
+                                    <div class="row top_titleWrap">
+                                        <div class="col s6 m6">
+                                            <h3>Capacity and Machineries</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row capacity_table">
 
-								<!-- <div class="col s12 m6">
-									<h4>Production Capacity (Annual)</h4>
-									<div class="production-capacity-wrapper">
-										@if(count($business_profile->productionCapacities)>0)
-										<div class="overview_table box_shadow">
-											<table>
-												<thead>
-													<tr>
-														<th>Machine Type</th>
-														<th>Annual Capacity</th>
-														<th>&nbsp;</th>
-													</tr>
-												</thead>
-												<tbody class="production-capacity-table-body">
-													@foreach($business_profile->productionCapacities as $productionCapacity)
-														<tr>
-															<td>{{$productionCapacity->machine_type}}</td>
-															<td>{{$productionCapacity->annual_capacity}}</td>
-															@if($productionCapacity->status==1)
-															<td><i class="material-icons" style="color:green">check_circle</i></td>
-															@else
-															<td><i class="material-icons "style="color:gray">check_circle</i></td>
-															@endif
-														</tr>
-													@endforeach
-												</tbody>
-											</table>
-										</div>
-										@else
-											<div class="card-alert card cyan lighten-5">
-												<div class="card-content cyan-text">
-													<p>INFO : No data found.</p>
-												</div>
-											</div>
-										@endif
-									</div>
-								</div> -->
+                                        <!-- <div class="col s12 m6">
+                                            <h4>Production Capacity (Annual)</h4>
+                                            <div class="production-capacity-wrapper">
+                                                @if(count($business_profile->productionCapacities)>0)
+                                                <div class="overview_table box_shadow">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Machine Type</th>
+                                                                <th>Annual Capacity</th>
+                                                                <th>&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="production-capacity-table-body">
+                                                            @foreach($business_profile->productionCapacities as $productionCapacity)
+                                                                <tr>
+                                                                    <td>{{$productionCapacity->machine_type}}</td>
+                                                                    <td>{{$productionCapacity->annual_capacity}}</td>
+                                                                    @if($productionCapacity->status==1)
+                                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                                    @else
+                                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                                    @endif
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                @else
+                                                    <div class="card-alert card cyan lighten-5">
+                                                        <div class="card-content cyan-text">
+                                                            <p>INFO : No data found.</p>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div> -->
+                                        @if(count($business_profile->categoriesProduceds)>0)
+                                            <div class="col s12 m12">
+                                                <h4>Categories Produced</h4>
+                                                <div class="categories_produced_wrapper">
+                                                    <div class="overview_table box_shadow">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Type</th>
+                                                                    <th>Percentage</th>
+                                                                    <th>&nbsp;</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="categories-produced-table-body">
+                                                                @foreach($business_profile->categoriesProduceds as $categoriesProduced)
+                                                                <tr>
+                                                                    <td>{{$categoriesProduced->type}}</td>
+                                                                    <td>{{$categoriesProduced->percentage}}</td>
+                                                                    @if($categoriesProduced->status==1)
+                                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                                    @else
+                                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                                    @endif
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                @if(count($business_profile->machineriesDetails)>0)
+                                    <div class="overview_table_wrap machinery_table">
+                                        <h4>Machinery Details</h4>
+                                        <div class="machinery_table_inner_wrap">
+                                            <div class="overview_table box_shadow">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Machine Name</th>
+                                                            <th>Quantity</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="machinaries-details-table-body">
+                                                        @foreach($business_profile->machineriesDetails as $machineriesDetail)
+                                                        <tr>
+                                                            <td>{{$machineriesDetail->machine_name}}</td>
+                                                            <td>{{$machineriesDetail->quantity}}</td>
+                                                            @if($machineriesDetail->status==1)
+                                                            <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                            @else
+                                                            <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                            @endif
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
 
-								<div class="col s12 m12">
-									<h4>Categories Produced</h4>
-									<div class="categories_produced_wrapper">
-										@if(count($business_profile->categoriesProduceds)>0)
-										<div class="overview_table box_shadow">
-											<table>
-												<thead>
-													<tr>
-														<th>Type</th>
-														<th>Percentage</th>
-														<th>&nbsp;</th>
-													</tr>
-												</thead>
-												<tbody class="categories-produced-table-body">
-													@foreach($business_profile->categoriesProduceds as $categoriesProduced)
-													<tr>
-														<td>{{$categoriesProduced->type}}</td>
-														<td>{{$categoriesProduced->percentage}}</td>
-														@if($categoriesProduced->status==1)
-														<td><i class="material-icons" style="color:green">check_circle</i></td>
-														@else
-														<td><i class="material-icons "style="color:gray">check_circle</i></td>
-														@endif
-													</tr>
-													@endforeach
-												</tbody>
-											</table>
-										</div>
-										@else
-											<div class="card-alert card cyan lighten-5">
-												<div class="card-content cyan-text">
-													<p>INFO : No data found.</p>
-												</div>
-											</div>
-										@endif
-									</div>
-								</div>
-							</div>
-						</div>
+                        @if(count($business_profile->productionFlowAndManpowers)>0)
+                            <div class="overview_table_wrap">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Production Flow and Manpower</h3>
+                                    </div>
 
-						<div class="overview_table_wrap machinery_table">
-							<h4>Machinery Details</h4>
-							<div class="machinery_table_inner_wrap">
-								@if(count($business_profile->machineriesDetails)>0)
-								<div class="overview_table box_shadow">
-									<table>
-										<thead>
-											<tr>
-												<th>Machine Name</th>
-												<th>Quantity</th>
-												<th>&nbsp;</th>
-											</tr>
-										</thead>
-										<tbody class="machinaries-details-table-body">
-											@foreach($business_profile->machineriesDetails as $machineriesDetail)
-											<tr>
-												<td>{{$machineriesDetail->machine_name}}</td>
-												<td>{{$machineriesDetail->quantity}}</td>
-												@if($machineriesDetail->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
-
-						<div class="overview_table_wrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Production Flow and Manpower</h3>
-								</div>
-							
-							</div>
-							<div class="manpower_table_wrapper">
-								@if(count($business_profile->productionFlowAndManpowers)>0)
-								<div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">
-									<table class="production-flow-and-manpower-table" style="width:100%">
-										<tbody class="production-flow-and-manpower-table-body">
-											<!-- Html will comes from script -->
-											@foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
-											<tr>
-												<th>{{$productionFlowAndManpower->production_type}}</th>
-												<td>
-													<table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
-													@foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
-													<tr>
-														<td>{{$flowAndManpower->name}}</td>
-														<td>{{$flowAndManpower->value}}</td>
-														@if($flowAndManpower->status==1)
-														<td><i class="material-icons" style="color:green">check_circle</i></td>
-														@else
-														<td><i class="material-icons "style="color:gray">check_circle</i></td>
-														@endif
-													</tr>
-													@endforeach
-													</table>
-												</td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
-
-						<div class="certifications">
-							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
-									<h3>Certifications</h3>
-								</div>
-								
-							</div>
-							<div class="certifications-block">
-								@if(count($business_profile->certifications)>0)
-									@foreach($business_profile->certifications as $certification)
-									<div class="certificate_img_wrap">
-										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-										<div class="certificate_img">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
-										</div>
-										<span class="certificate_title">{{$certification->title}}</span>
-										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
-										
-										<div class="certificate_img">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
-										</div>
-										<span class="certificate_title" >{{$certification->title}}</span>
-										@else
-										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
-										<span class="certificate_title" >{{$certification->title}}</span>
-										@endif
-									</div>
-									@endforeach
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
-
-						<div class="main_buyers_wrap">
-							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
-									<h3>Main Buyers</h3>
-								</div>
-
-							</div>
-							<div class="buyers_logo_wrap row main-buyers-block">
-								@if(count($business_profile->mainBuyers)>0)
-									@foreach($business_profile->mainBuyers as $mainBuyers)
-									<div class="col s6 m4 l3 main_buyer_box">
-										<a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
-										<div class="main_buyer_img">
-											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
-										</div>
-										<h5>{{$mainBuyers->title}}</h5>
-									</div>
-									@endforeach
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-
-							</div>
-
-						</div>
-						<div class="export_destination_wrap">
-							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
-									<h3>Export Destinations</h3>
-								</div>
-								
-							</div>
-							<div class="row flag_wrap center-align">
-
-								<div class="flagBox export-destination-block">
-									@if(count($business_profile->exportDestinations)>0)
-										@foreach($business_profile->exportDestinations as $exportDestination)
-										<div class="col s6 m4 l2">
-											<div class="flag_img export-destination-img">
-												<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
-											</div>
-											<h5>{{$exportDestination->title}}</h5>
-										</div>
-										@endforeach
-									@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-									@endif
-								</div>
-
-							</div>
-
-							<!-- <div class="row flag_wrap center-align">
-								<div class="col s6 m4 l2 flagBox export-destination-block">
-								@foreach($business_profile->exportDestinations as $exportDestination)
-									<div class="flag_img export-destination-img">
-										<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-										<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
-									</div>
-									<h5>{{$exportDestination->title}}</h5>
-								@endforeach
-								</div>
-							</div> -->
-						</div>
-
-						<div class="overview_table_wrap overview_table_alignLeft">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Business Terms</h3>
-								</div>
-								
-							</div>
-							<div class="business_terms_table_wrap">
-								@if(count($business_profile->businessTerms)>0)
-								<div class="overview_table box_shadow">
-									<table>
-										<tbody class="business-term-table-body">
-											@foreach($business_profile->businessTerms as $businessTerm)
-											<tr>
-												<td>{{$businessTerm->title}}</td>
-												<td>{{$businessTerm->quantity}}</td>
-												@if($businessTerm->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
+                                </div>
+                                <div class="manpower_table_wrapper">
+                                    <div class="production-flow-and-manpower-table-wrapper box_shadow overview_table">
+                                        <table class="production-flow-and-manpower-table" style="width:100%">
+                                            <tbody class="production-flow-and-manpower-table-body">
+                                                <!-- Html will comes from script -->
+                                                @foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
+                                                <tr>
+                                                    <th>{{$productionFlowAndManpower->production_type}}</th>
+                                                    <td>
+                                                        <table style="width:100%; border: 0px;" border="0" cellpadding="0" cellspacing="0">
+                                                        @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
+                                                        <tr>
+                                                            <td>{{$flowAndManpower->name}}</td>
+                                                            <td>{{$flowAndManpower->value}}</td>
+                                                            @if($flowAndManpower->status==1)
+                                                            <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                            @else
+                                                            <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                            @endif
+                                                        </tr>
+                                                        @endforeach
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
 
-						<div class="overview_table_wrap overview_table_alignLeft">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Sampling and R&D</h3>
-								</div>
-								
-							</div>
-							<div class="sampling_table_wrapper">
-								@if(count($business_profile->samplings) > 0)
-								<div class="overview_table box_shadow">
-									<table>
-										<tbody class="sampling-table-body">
-											@foreach($business_profile->samplings as $sampling)
-											<tr>
-												<td>{{$sampling->title}}</td>
-												<td>{{$sampling->quantity}}</td>
-												@if($sampling->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
+                        @if(count($business_profile->certifications)>0)
+                            <div class="certifications">
+                                <div class="row top_titleWrap upload_delete_wrap">
+                                    <div class="col s6 m6">
+                                        <h3>Certifications</h3>
+                                    </div>
+
+                                </div>
+                                <div class="certifications-block">
+                                        @foreach($business_profile->certifications as $certification)
+                                        <div class="certificate_img_wrap">
+                                            @if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
+                                            <div class="certificate_img">
+                                                <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+                                                <br> -->
+                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
+                                            </div>
+                                            <span class="certificate_title">{{$certification->title}}</span>
+                                            @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+
+                                            <div class="certificate_img">
+                                                <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+                                                <br> -->
+                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
+                                            </div>
+                                            <span class="certificate_title" >{{$certification->title}}</span>
+                                            @else
+                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+                                            <span class="certificate_title" >{{$certification->title}}</span>
+                                            @endif
+                                        </div>
+                                        @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(count($business_profile->mainBuyers)>0)
+                            <div class="main_buyers_wrap">
+                                <div class="row top_titleWrap upload_delete_wrap">
+                                    <div class="col s6 m6">
+                                        <h3>Main Buyers</h3>
+                                    </div>
+
+                                </div>
+                                <div class="buyers_logo_wrap row main-buyers-block">
+                                        @foreach($business_profile->mainBuyers as $mainBuyers)
+                                        <div class="col s6 m4 l3 main_buyer_box">
+                                            <a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                            <div class="main_buyer_img">
+                                                <img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+                                            </div>
+                                            <h5>{{$mainBuyers->title}}</h5>
+                                        </div>
+                                        @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(count($business_profile->exportDestinations)>0)
+                            <div class="export_destination_wrap">
+                                <div class="row top_titleWrap upload_delete_wrap">
+                                    <div class="col s6 m6">
+                                        <h3>Export Destinations</h3>
+                                    </div>
+
+                                </div>
+                                <div class="row flag_wrap center-align">
+                                    <div class="flagBox export-destination-block">
+                                            @foreach($business_profile->exportDestinations as $exportDestination)
+                                            <div class="col s6 m4 l2">
+                                                <div class="flag_img export-destination-img">
+                                                    <a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                                    <img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+                                                </div>
+                                                <h5>{{$exportDestination->title}}</h5>
+                                            </div>
+                                            @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row flag_wrap center-align">
+                                    <div class="col s6 m4 l2 flagBox export-destination-block">
+                                    @foreach($business_profile->exportDestinations as $exportDestination)
+                                        <div class="flag_img export-destination-img">
+                                            <a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                            <img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+                                        </div>
+                                        <h5>{{$exportDestination->title}}</h5>
+                                    @endforeach
+                                    </div>
+                                </div> -->
+                            </div>
+                        @endif
+
+                        @if(count($business_profile->businessTerms)>0)
+                            <div class="overview_table_wrap overview_table_alignLeft">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Business Terms</h3>
+                                    </div>
+                                </div>
+                                <div class="business_terms_table_wrap">
+                                    <div class="overview_table box_shadow">
+                                        <table>
+                                            <tbody class="business-term-table-body">
+                                                @foreach($business_profile->businessTerms as $businessTerm)
+                                                <tr>
+                                                    <td>{{$businessTerm->title}}</td>
+                                                    <td>{{$businessTerm->quantity}}</td>
+                                                    @if($businessTerm->status==1)
+                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                    @else
+                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
 
-						<div class="overview_table_wrap blank_overview_table_wrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Special customization ability</h3>
-								</div>
-								
-							</div>
-							<div class="special_customization_table_wrap">
-								@if(count($business_profile->specialCustomizations) > 0)
-								<div class="overview_table box_shadow">
-									<table>
-									<tbody class="special-customization-table-body">
-										@foreach($business_profile->specialCustomizations as $specialCustomization)
-										<tr>
-											<td>{{$specialCustomization->title}}</td>
-											@if($specialCustomization->status==1)
-											<td><i class="material-icons" style="color:green">check_circle</i></td>
-											@else
-											<td><i class="material-icons "style="color:gray">check_circle</i></td>
-											@endif
-										</tr>
-										@endforeach
-										</tbody>
-									</table>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
+                        @if(count($business_profile->samplings) > 0)
+                            <div class="overview_table_wrap overview_table_alignLeft">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Sampling and R&D</h3>
+                                    </div>
+
+                                </div>
+                                <div class="sampling_table_wrapper">
+                                    <div class="overview_table box_shadow">
+                                        <table>
+                                            <tbody class="sampling-table-body">
+                                                @foreach($business_profile->samplings as $sampling)
+                                                <tr>
+                                                    <td>{{$sampling->title}}</td>
+                                                    <td>{{$sampling->quantity}}</td>
+                                                    @if($sampling->status==1)
+                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                    @else
+                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
+                        @if(count($business_profile->specialCustomizations) > 0)
+                            <div class="overview_table_wrap blank_overview_table_wrap">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Special customization ability</h3>
+                                    </div>
+                                </div>
+                                <div class="special_customization_table_wrap">
+                                    <div class="overview_table box_shadow">
+                                        <table>
+                                        <tbody class="special-customization-table-body">
+                                            @foreach($business_profile->specialCustomizations as $specialCustomization)
+                                            <tr>
+                                                <td>{{$specialCustomization->title}}</td>
+                                                @if($specialCustomization->status==1)
+                                                <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                @else
+                                                <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
 
 
@@ -1073,93 +988,77 @@
 							</div>
 						</div>
 
-						<div class="overview_table_wrap blank_overview_table_wrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Sustainability commitments</h3>
-								</div>
-								
-							</div>
-							<div class="sustainability_commitment_table_wrap">
-								@if(count($business_profile->sustainabilityCommitments) > 0)
-								<div class="overview_table box_shadow">
-									<table>
-										<tbody class="sustainability-commitment-table-body">
-											@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
-											<tr>
-												<td>{{$sustainabilityCommitment->title}}</td>
-												@if($sustainabilityCommitment->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
-										</div>
-									</div>
-								@endif
-							</div>
-						</div>
+                        @if(count($business_profile->sustainabilityCommitments) > 0)
+                            <div class="overview_table_wrap blank_overview_table_wrap">
+                                <div class="row top_titleWrap">
+                                    <div class="col s6 m6">
+                                        <h3>Sustainability commitments</h3>
+                                    </div>
 
-						<div class="membership_wrap">
-							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
-									<h3>Association memberships</h3>
-								</div>
+                                </div>
+                                <div class="sustainability_commitment_table_wrap">
+                                    <div class="overview_table box_shadow">
+                                        <table>
+                                            <tbody class="sustainability-commitment-table-body">
+                                                @foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
+                                                <tr>
+                                                    <td>{{$sustainabilityCommitment->title}}</td>
+                                                    @if($sustainabilityCommitment->status==1)
+                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
+                                                    @else
+                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
-							</div>
-							<div class="membership_textBox association-membership-block">
-								@if(count($business_profile->associationMemberships)>0)
-							    @foreach($business_profile->associationMemberships as $associationMembership)
-								<div class="center-align association-membership-img">
-									<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
-									<div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
-									<p>{{$associationMembership->title}}</p>
-								</div>
-								@endforeach
-								@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
-									</div>
-								</div>
-								@endif
-							</div>
-						</div>
-						<div class="pr_highlights_wrap">
-							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
-									<h3>PR Highlights</h3>
-								</div>
+                        @if(count($business_profile->associationMemberships)>0)
+                            <div class="membership_wrap">
+                                <div class="row top_titleWrap upload_delete_wrap">
+                                    <div class="col s6 m6">
+                                        <h3>Association memberships</h3>
+                                    </div>
 
-							</div>
-							<div class="row press-highlight-block">
-							@if(count($business_profile->pressHighlights)>0)
-							@foreach($business_profile->pressHighlights as $pressHighlight)
-								<div class="col s6 m4 l2 paper_img press-highlight-img">
-									<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
-									<div class="press_img">
-										<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
-									</div>
-								</div>
-							@endforeach
-							@else
-								<div class="card-alert card cyan lighten-5">
-									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
-									</div>
-								</div>
-							@endif
+                                </div>
+                                <div class="membership_textBox association-membership-block">
+                                    @foreach($business_profile->associationMemberships as $associationMembership)
+                                    <div class="center-align association-membership-img">
+                                        <a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                        <div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
+                                        <p>{{$associationMembership->title}}</p>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
 
-							</div>
-						</div>
+                        @if(count($business_profile->pressHighlights)>0)
+                            <div class="pr_highlights_wrap">
+                                <div class="row top_titleWrap upload_delete_wrap">
+                                    <div class="col s6 m6">
+                                        <h3>PR Highlights</h3>
+                                    </div>
+
+                                </div>
+                                <div class="row press-highlight-block">
+                                    @foreach($business_profile->pressHighlights as $pressHighlight)
+                                        <div class="col s6 m4 l2 paper_img press-highlight-img">
+                                            <a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                            <div class="press_img">
+                                                <img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+
 					</div>
 					<div id="products" class="tabcontent">
 
@@ -1241,8 +1140,8 @@
 						</div>
 					</div> -->
 					<div id="factorytour" class="tabcontent">
-						<div class="profile_factory_tourWrap">							
-							@if(count($business_profile->companyFactoryTour)>0)	
+						<div class="profile_factory_tourWrap">
+							@if(count($business_profile->companyFactoryTour)>0)
 								@if($companyFactoryTour->virtual_tour)
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
@@ -1257,7 +1156,7 @@
 								@endphp
 								<div class="factory_video_box">
 									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[3]}}" allowfullscreen></iframe>
-								</div>								
+								</div>
 								@endif
 								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->
 								<div class="row">
@@ -1283,7 +1182,7 @@
 										</div>
 										@endif
 
-										</div>										
+										</div>
 									</div>
 									<div id="factory_degree_images" class="col s12">
 										<div class="row 360_degree_video_gallery">
@@ -1300,14 +1199,14 @@
 											</div>
 										</div>
 										@endif
-										
-										</div>										
+
+										</div>
 									</div>
-								</div>							
+								</div>
 							@else
 								<div class="card-alert card cyan lighten-5">
 									<div class="card-content cyan-text">
-										<p>INFO : No data found.</p>
+										<p>INFO : There is no factory tour for <b>{{ucwords($business_profile->business_name)}}</b></p>
 									</div>
 								</div>
 							@endif

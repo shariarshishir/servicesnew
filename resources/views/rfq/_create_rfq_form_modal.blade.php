@@ -469,5 +469,14 @@
 
         }
 
+
+        // $(".short_description").keypress(function() {
+        //     if($(this).val().length > 1) {
+        //         alert('The character length not more than 512')
+        //     } else {
+        //         // Disable submit button
+        //     }
+        // });
+
 </script>
 @endpush

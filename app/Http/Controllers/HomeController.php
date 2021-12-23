@@ -447,7 +447,7 @@ class HomeController extends Controller
             elseif($request->search_type=="all")
             {
                 $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->search_input.'%')->where('business_profile_id', '!=', null)->get();
-                $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->msearch_input.'%')->where('business_profile_id', '!=', null)->get();
+                $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->search_input.'%')->where('business_profile_id', '!=', null)->get();
                 $blogs = Blog::where('title', 'like', '%'.$request->search_input.'%')->get();
                 $suppliers = BusinessProfile::with(['user'])->where('business_name', 'like', '%'.$request->search_input.'%')->get();
                 

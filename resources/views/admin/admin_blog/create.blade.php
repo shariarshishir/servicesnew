@@ -31,7 +31,7 @@
                 <!-- form start -->
                 <form action="{{ route('blogs.store') }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
-                    @include('admin.blog.form')
+                    @include('admin.admin_blog.form')
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>

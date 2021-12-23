@@ -135,6 +135,11 @@
     //update company overview
    $('#company-overview-update-form').on('submit',function(e){
             e.preventDefault();
+            var words = $('.about-company').val().split(' ');
+            if(words.length > 250) {
+                alert('The about company words length limit is not more than 250, your given words length is '+words.length);
+                return false;
+            }
             var id = $('input[name=company_overview_id]').val();
             var url = '{{ route("company.overview.update", ":slug") }}';
                 url = url.replace(':slug', id);
@@ -2274,7 +2279,7 @@
         html +='</div>';
         $('.factory-image-block.row').append(html);
     }
-    
+
     function removeFactoryImage(el)
     {
         $(el).parent().remove();
@@ -2297,7 +2302,7 @@
     {
         $(el).parent().remove();
     }
-   
+
     $(document).ready(function (e) {
 
         $('#factory-image').change(function(){
@@ -2411,7 +2416,7 @@
                 $('#factory-tour-edit-form-errors').empty();
                 $("#factory-tour-edit-form-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
-                {  
+                {
                     $("#factory-tour-edit-form-errors").append("<div class='danger'>"+item+"</div>");
                 });
             }
@@ -2440,5 +2445,12 @@
 
     }
 
+    //limit word about the company
+    $(".about-company").keypress(function() {
+            var words = $(this).val().split(' ');
+            if(words.length > 250) {
+                alert('The about company words length limit is not more than 250')
+            }
+        });
     </script>
 @endpush

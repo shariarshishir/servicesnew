@@ -267,7 +267,7 @@
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit()">
+                                        <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit();">
                                             Post
                                         </button>
                                     </div>
@@ -452,8 +452,14 @@
                 $('input[name="delivery_time"]').removeClass('invalid');
             }
 
+
             if(errCount==0)
             {
+               var short_description= $('.short_description').val().length;
+                if($('.short_description').val().length > 512){
+                    alert('The short description character length limit is not more than 512, your given character length is '+short_description);
+                    return false;
+                }
                 // if (grecaptcha.getResponse()==""){
                 //     jQuery('.messageContent').html('Captcha Required');
                 // } else {
@@ -467,16 +473,17 @@
                 return false;
             }
 
+
         }
 
 
-        // $(".short_description").keypress(function() {
-        //     if($(this).val().length > 1) {
-        //         alert('The character length not more than 512')
-        //     } else {
-        //         // Disable submit button
-        //     }
-        // });
+        $(".short_description").keypress(function() {
+            if($(this).val().length > 512) {
+                alert('The short description character length limit is not more than 512')
+            } else {
+                // Disable submit button
+            }
+        });
 
 </script>
 @endpush

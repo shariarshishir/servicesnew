@@ -453,6 +453,11 @@
         //update
         $('#edit-rfq-submit-form').on('submit',function(e){
             e.preventDefault();
+            var short_description= $('.edit-short-description').val().length;
+                if($('.edit-short-description').val().length > 512){
+                    alert('The short description character length limit is not more than 512, your given character length is '+short_description);
+                    return false;
+                }
             var id=$('input[name=edit_rfq_id]').val();
             var url = '{{ route("rfq.update", ":slug") }}';
                 url = url.replace(':slug', id);

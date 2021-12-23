@@ -191,7 +191,7 @@
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-										<div class="certificate_img">
+										<div class="certificate_files">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
 											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
@@ -561,7 +561,7 @@
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-										<div class="certificate_img">
+										<div class="certificate_files">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
 											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 

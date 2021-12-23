@@ -32,7 +32,7 @@
                 <form action="{{ route('blogs.update',$blog->id) }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @include('admin.blog.form')
+                    @include('admin.admin_blog.form')
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>

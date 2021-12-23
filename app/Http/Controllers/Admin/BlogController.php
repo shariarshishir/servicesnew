@@ -17,32 +17,35 @@ class BlogController extends Controller
 
     public function index(){
         $blogs=Blog::latest()->paginate(10);
-        return view('admin.blog.index',compact('blogs'));
+        return view('admin.admin_blog.index',compact('blogs'));
     }
     public function  create(){
         $blog = new Blog();
-        return view('admin.blog.create',compact('blog'));
+        return view('admin.admin_blog.create',compact('blog'));
     }
     public function store(Request $request){
         
         $allData=$request->all();
         if ($request->hasFile('feature_image')){
             $path=$request->file('feature_image')->store('images','public');
-            $image = Image::make(Storage::get('public/'.$path))->fit(750, 293);
-            $small_image = Image::make(Storage::get('public/'.$path))->fit(360, 360);
-            Storage::put($path, $image);
-            Storage::put('small/'.$path, $small_image);
-            $allData['feature_image']=$path;
+            $image = Image::make(public_path('storage/'.$path))->fit(750, 293);
+            $image->save(public_path('storage/'.$path));
 
+            $path_small=$request->file('feature_image')->store('images/small/','public');
+            $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+            $small_image->save(public_path('storage/'.$path_small));
+            $allData['feature_image']=$path;
            
         }
 
         if ($request->hasFile('author_img')){
             $path=$request->file('author_img')->store('images','public');
-            $image = Image::make(Storage::get('public/'.$path))->fit(100, 100)->encode();
-            $small_image = Image::make(Storage::get('public/'.$path))->fit(100, 100)->encode();
-            Storage::put($path, $image);
-            Storage::put('small/'.$path, $small_image);
+            $image = Image::make(public_path('storage/'.$path))->fit(100, 100)->encode();
+            $image->save(public_path('storage/'.$path));
+
+            $path_small=$request->file('author_img')->store('images/small','public');
+            $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
+            $small_image->save(public_path('storage/'.$path_small));
             $allData['author_img']=$path;
         }
 
@@ -56,7 +59,7 @@ class BlogController extends Controller
     }
     public function  edit($id){
         $blog = Blog::where('id',$id)->first();
-        return view('admin.blog.edit',compact('blog'));
+        return view('admin.admin_blog.edit',compact('blog'));
     }
 
     public function update(Request $request, $id)
@@ -71,15 +74,17 @@ class BlogController extends Controller
         $blog->slug = make_slug($request->title);
 
         if ($request->hasFile('feature_image')){
+
             Storage::delete($blog->feature_image);
             Storage::delete('small/' .$blog->feature_image);
+
             $path=$request->file('feature_image')->store('images','public');
+            $image = Image::make(public_path('storage/'.$path))->fit(750, 293);
+            $image->save(public_path('storage/'.$path));
 
-            $image = Image::make(Storage::get('public/'.$path))->fit(750, 293)->encode();
-            $small_image = Image::make(Storage::get('public/'.$path))->fit(360, 360)->encode();
-
-            Storage::put($path, $image);
-            Storage::put('small/'.$path, $small_image);
+            $path_small=$request->file('feature_image')->store('images/small/','public');
+            $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+            $small_image->save(public_path('storage/'.$path_small));
 
             $blog->feature_image = $path;
         }
@@ -87,14 +92,14 @@ class BlogController extends Controller
         if ($request->hasFile('author_img')){
             Storage::delete($blog->author_img);
             Storage::delete('small/'.$blog->author_img);
+
             $path=$request->file('author_img')->store('images','public');
+            $image = Image::make(public_path('storage/'.$path))->fit(100, 100)->encode();
+            $image->save(public_path('storage/'.$path));
 
-            $image = Image::make(Storage::get($path))->fit(100, 100)->encode();
-            $small_image = Image::make(Storage::get('small/'.$path))->fit(100, 100)->encode();
-
-            Storage::put($path, $image);
-            Storage::put('small/'.$path, $small_image);
-
+            $path_small=$request->file('author_img')->store('images/small','public');
+            $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
+            $small_image->save(public_path('storage/'.$path_small));
             $blog->author_img = $path;
         }
 
@@ -115,7 +120,6 @@ class BlogController extends Controller
         if(isset($blog->author_img)){
             Storage::delete($blog->author_img);
             Storage::delete('small/'.$blog->author_img);
-
         }
 
         Blog::destroy($id);

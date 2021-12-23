@@ -882,7 +882,7 @@
 
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
-                    html +='<div class="certificate_img">';
+                    html +='<div class="certificate_files">';
                     html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down"> &nbsp; </a>';
                     html +='</div>';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
@@ -984,7 +984,7 @@
 
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                            html +='<div class="certificate_img">';
+                                            html +='<div class="certificate_files">';
                                             html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down"> &nbsp; </a>';
                                             html +='</div>';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';

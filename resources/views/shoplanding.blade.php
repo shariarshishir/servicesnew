@@ -120,7 +120,7 @@
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Make Your Sourcing Easy</h4>
-                            <p class="mb-15">We offer a balance of technology and traditional offline support. <a href="#">Our order management dashboard</a> lets clients stay connected with multiple stakeholders in one place. But we also have boots on the ground in Bangladesh so we can provide real-time updates too.</p>
+                            <p class="mb-15">We offer a balance of technology and traditional offline support. <span>Our order management dashboard</span> lets clients stay connected with multiple stakeholders in one place. But we also have boots on the ground in Bangladesh so we can provide real-time updates too.</p>
                             <a href="{{route('front.tools')}}" class="button">Explore Order Management Dashboard</a>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
-                            <p class="mb-15">With our <a href="#">3D virtual sampling</a> support, we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
+                            <p class="mb-15">With our <span>3D virtual sampling</span> support, we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
                             <a href="{{route('front.3d-studio')}}" class="button">Shop Designs</a>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                         <div class="description p-50">
                             <h2 class="text-color-brand">On Time Or Freeeeee.</h2>
                             <p>Imagine having access to a digital marketplace of over 1000 independently verified apparel manufacturers in Bangladesh. And using an intelligent order management system to track your products’ progress. That’s Merchant Bay. And, we’re so confident in our manufacturers and system that</p>
-                            <a class="text-color-brand" href="#">“If your apparel isn’t ready on time, we work for free”</a>
+                            <span style="color: #217156; font-weight: 500; font-size: 14px; letter-spacing: inherit;">“If your apparel isn’t ready on time, we work for free”</span>
                             <p class="mb-15">If you’re a fashion buyer, our guarantee means you’ve got nothing to lose. Book a call now to find out how we can help you get your designs on the market faster.</p>
                             <a href="javascript:void(0);" class="button talk-to-us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">TALK TO US</a>
                         </div>

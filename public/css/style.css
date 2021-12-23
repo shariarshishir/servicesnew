@@ -3684,8 +3684,8 @@ form input:read-only {
     padding: 3px 2%;
 }
 .rfq_detail_from .inpuboxt_group_wrap input {
-    padding: 3px 2%;
-    width: 88% !important;
+    /* padding: 3px 2%;
+    width: 88% !important; */
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -4000,6 +4000,43 @@ form input:read-only {
     margin: 0 0 20px;
     padding: 0;
 }
+
+#edit-rfq-form .rfq_input_checkbox_right {
+    padding-left: 0 !important;
+}
+#edit-rfq-form .rfq_detail_from .input-field label {
+ margin-bottom: 0;
+}
+#edit-rfq-form .rfq_input_checkbox {
+    padding: 10px 15px 0;
+}
+#edit-rfq-form .rfq_input_checkbox span {
+    color: #444;
+    position: inherit;
+    padding-top: 1px;
+    font-size: 16px;
+    top: inherit;
+    right: inherit;
+}
+#edit-rfq-form .rfq_input_checkbox [type="radio"]+span:before, 
+#edit-rfq-form .rfq_input_checkbox [type="radio"]+span:after {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #448547;
+}
+#edit-rfq-form .rfq_input_checkbox [type="radio"]:checked+span:after, 
+#edit-rfq-form .rfq_input_checkbox [type="radio"].with-gap:checked+span:after {
+    background: #448547;
+    width: 18px;
+    height: 18px;
+}
+#edit-rfq-form .rfq_input_checkbox [type="radio"]:checked+span:after, 
+#edit-rfq-form .rfq_input_checkbox [type="radio"].with-gap:checked+span:before, 
+#edit-rfq-form .rfq_input_checkbox [type="radio"].with-gap:checked+span:after {
+    border: 2px solid #448547;
+}
+
+
 .rfq_detail_from .input-field label {
     font-size: 16px;
     font-weight: 500;
@@ -4210,6 +4247,27 @@ form input:read-only {
     padding: 15px 0;
     /* color: #448547; */
     font-weight: 500;
+}
+
+.rfq_content_box .rfq_view_detail_wrap .green_active {
+    color: #448547;
+    font-size: 14px;
+}
+.rfq_content_box .rfq_view_detail_wrap .btn_rfq_inactive {
+    color: gray;
+    opacity: .9;
+    font-size: 14px;
+}
+
+.rfq_profile_detail .btn_rfq_edit {
+    background: #448547;
+    color: #fff;
+    padding: 3px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+.rfq_profile_detail .btn_rfq_edit .material-icons {
+    font-size: 15px;
 }
 .rfq_content_box .rfq_view_detail_wrap .btn_view_detail {
     /* background: url('../images/frontendimages/new_layout_images/rfq_detaile_arrow_down.png') no-repeat center bottom !important;
@@ -4789,7 +4847,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
     -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20) !important;
     box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
-    padding: 0 10px !important;
+    padding: 0 2% !important;
     float: right;
     height: 50px;
     line-height: 52px;

@@ -92,11 +92,10 @@
         var obj= $(this);
         swal({
             title: "Want to delete this product from ?",
-            text: "Please ensure and then confirm!",
             type: "warning",
             showCancelButton: !0,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
             reverseButtons: !0
         }).then(function (e) {
             if (e.value === true) {

@@ -98,7 +98,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Connect you with 1000+ suppliers</h4>
                             <p class="mb-15">We have over 20 years’ worth of experience in the apparel industry in Bangladesh, with extensive industry knowledge. We have <span>1000+ suppliers</span> ready to create your products. Your designs + our manufacturing = a match made in apparel heaven.</p>
-                            <a href="/rfq" class="button">Submit RFQ</a>
+                            <a href="{{route('rfq.index')}}" class="button">Submit RFQ</a>
                         </div>
                     </div>
                 </div>
@@ -120,8 +120,8 @@
                         </div>
                         <div class="item-description">
                             <h4 class="text-color-brand">Make Your Sourcing Easy</h4>
-                            <p class="mb-15">We offer a balance of technology and traditional offline support. <span>Our order management dashboard</span> lets clients stay connected with multiple stakeholders in one place. But we also have boots on the ground in Bangladesh so we can provide real-time updates too.</p>
-                            <a href="{{route('front.tools')}}" class="button">Explore Order Management Dashboard</a>
+                            <p class="mb-15">We offer a balance of technology and traditional offline support. Our solutions let clients stay connected with multiple stakeholders in one place. We also have boots on the ground in Bangladesh, which enable us to provide you with real-time updates.</p>
+                            <a href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="button">Talk to Us</a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                         <div class="item-description">
                             <h4 class="text-color-brand">Shorten Your Lead Time</h4>
                             <p class="mb-15">With our <span>3D virtual sampling</span> support, we can save you thousands of dollars and more than 21 days. From design to shipping, we got you covered. Fashion brands: book a call now, we guarantee you won’t regret it.</p>
-                            <a href="{{route('front.3d-studio')}}" class="button">Shop Designs</a>
+                            <a href="{{route('buydesignsproducts')}}" class="button">Shop Designs</a>
                         </div>
                     </div>
                 </div>

@@ -16,9 +16,9 @@
                             <img src="{{asset('storage').'/'.$item->images[0]->image}}">
                         </div>
                         <div class="product-short-intro">
-                            <h4>name</h4>
+                            <h4>{{$item->name}}</h4>
                             <div class="details">
-                                <p>MO  quoted_printable_decode</p>
+                                <p>MOQ {{$item->moq}} {{$item->product_unit}}</p>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                         <div class="product-short-intro">
                             <h4>{{$item->title}}</h4>
                             <div class="details">
-                                <p>MOQ: {{$item->title}}</p>
+                                <p>MOQ: {{$item->moq}} {{$item->qty_unit}}</p>
                             </div>
                         </div>
                     </div>

@@ -47,7 +47,7 @@
                                 <label>Short Description</label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <textarea class="ig-new-rgt prd-txta short_description" style="height:88px;" name="short_description"></textarea>
+                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">
@@ -455,8 +455,8 @@
 
             if(errCount==0)
             {
-               var short_description= $('.short_description').val().length;
-                if($('.short_description').val().length > 512){
+               var short_description= $('#create-rfq-form .add_short_description').val().length;
+                if($('#create-rfq-form .add_short_description').val().length > 512){
                     alert('The short description character length limit is not more than 512, your given character length is '+short_description);
                     return false;
                 }
@@ -477,7 +477,7 @@
         }
 
 
-        $(".short_description").keypress(function() {
+        $("#create-rfq-form .add_short_description").keypress(function() {
             if($(this).val().length > 512) {
                 alert('The short description character length limit is not more than 512')
             } else {

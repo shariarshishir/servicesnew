@@ -26,18 +26,25 @@
 		<div class="row">
 			<div class="col s12 m5 l3 profile_leftCol leftCol_wrap">
 				<div class="left_top">
-					<div class="profile_pic center-align">
-						@if(auth()->user()->image)
-						<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
-						@else
-						<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
-						@endif						
+					<div class="row">
+						<div class="col s4 m6 l12 profile_left_pic_wrap">
+							<div class=" profile_pic center-align">
+								@if(auth()->user()->image)
+								<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+								@else
+								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+								@endif						
+							</div>
+						</div>
+						<div class="col s8 m6 l12 profile_left_address_wrap">
+							<div class="office_address center-align ">
+								<h3>{{$business_profile->business_name}}</h3>
+								<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
+								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
+							</div>
+						</div>
 					</div>
-					<div class="office_address center-align ">
-						<h3>{{$business_profile->business_name}}</h3>
-						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}} <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
-						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
-					</div>
+					
 					<div class="center-align" style="display: none;">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
@@ -107,7 +114,7 @@
 						<div class="company_stuff center-align row">
 							@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
 								@if($company_overview->name=='floor_space')
-								<div class="col s6 m3 l2">
+								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
 										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
 									</div>
@@ -116,7 +123,7 @@
 								</div>
 								@endif
 								@if($company_overview->name=='no_of_machines')
-								<div class="col s6 m3 l2">
+								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
 										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
 									</div>
@@ -125,14 +132,14 @@
 								</div>
 								@endif
 								@if($company_overview->name=='production_capacity')
-								<div class="col s6 m3 l3">
+								<div class="col s4 m3 l3">
 									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" /> 
 									<div class="title">Production Capacity</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 								</div>
 								@endif
 								@if($company_overview->name=='number_of_worker')
-									<div class="col s6 m3 l2">
+									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
 											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
 										</div>
@@ -141,7 +148,7 @@
 									</div>
 								@endif
 								@if($company_overview->name=='number_of_female_worker')
-									<div class="col s6 m3 l3">
+									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
 											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
 										</div>

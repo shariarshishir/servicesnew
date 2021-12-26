@@ -31,12 +31,11 @@
 
                     <div class="col m3 productBox">
                         <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
-                        <h4>{{$title}}</h4>
-                        <div class="moqBox">MOQ: {{$list->moq}}</div>
-                        <div class="moq_view_details">
-                            <a class="moq_buss_name moq_left left" href="{{ route("supplier.profile",$list->businessProfile->id) }}">{{$list->businessProfile->business_name}}</a>
-                            <a class="moq_view moq_right right" href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">View Details </a>
-                        </div>
+                        <div class="priceBox row">
+                            <div class="col m5 s5 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->id) }}">{{$list->businessProfile->business_name}}</a></div>
+                            <div class="price col m7 s7 right-align moq-value">MOQ: {{$list->moq}}</div>
+                        </div>                        
+                        <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">{{$title}}</a></h4>
                     </div>
 
                 @endforeach

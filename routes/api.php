@@ -119,6 +119,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
    
     Route::post('/factory-tour',[FactoryTourController::class,'createFactoryTour']);
     Route::post('/factory-tour-edit',[FactoryTourController::class,'updateFactoryTour']);
+    Route::get('/factory-tour/{id}',[FactoryTourController::class,'factoryTourDetails']);
     //wholeslaer api
     Route::put('/store/{vendorUId}',[VendorController::class,'update']);
     Route::post('/wholesaler-products', [ProductController::class, 'store']);

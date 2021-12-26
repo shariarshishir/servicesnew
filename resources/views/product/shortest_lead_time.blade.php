@@ -16,13 +16,11 @@
                                             <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}"><img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt=""></a>
                                         </div>
                                     @endif
-                                    
-                                    <h4>{{$product->title}}</h4>
-                                    <span class="load_time_box">lead time: <span class="load_time"> {{$product->lead_time}} </span></span>
-                                    <div class="moq_view_details">
-                                        <a class="moq_buss_name moq_left left" href="{{route('supplier.profile',$product->business_profile_id)}}">{{ $product->businessProfile->business_name }}</a>
-                                        <a class="moq_view moq_right right" href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">View details</a>
+                                    <div class="priceBox row">
+                                        <div class="col s6 m6 apperal"><a href="{{route('supplier.profile',$product->business_profile_id)}}">{{ $product->businessProfile->business_name }}</a></div>
+                                        <div class="price col s6 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
                                     </div>
+                                    <h4><a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">{{$product->title}}</a></h4>
                                 </div>
                             </div>
                         @endforeach

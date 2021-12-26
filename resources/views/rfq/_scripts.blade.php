@@ -149,6 +149,12 @@
             });
         });
 
+        $(document).ready(function(){
+            $(".btn_responses_trigger").click(function(){
+                $(this).next(".respones_detail_wrap").toggle();
+            });
+        });
+
 
 </script>
 @endpush

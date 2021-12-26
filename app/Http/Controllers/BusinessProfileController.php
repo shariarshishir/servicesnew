@@ -368,4 +368,26 @@ class BusinessProfileController extends Controller
 
     }
 
+    public function termsOfServiceCreateOrUpdate(Request $request){
+     
+        try{
+            $company_overview = CompanyOverview::where('business_profile_id',$request->business_profile_id)->first();
+            $company_overview->update(['terms_of_service'=>$request->terms_of_service??null]);
+            $company_overview = CompanyOverview::where('business_profile_id',$request->business_profile_id)->first();
+            return response()->json([
+                'success' => true,
+                'message' => 'Company Terms of service Updated',
+                'company_overview'=>$company_overview
+
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['message' => $e->getMessage()],
+            ],500);
+
+        }
+    }
+
 }

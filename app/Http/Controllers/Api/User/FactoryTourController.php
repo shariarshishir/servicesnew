@@ -15,6 +15,21 @@ use DB;
 
 class FactoryTourController extends Controller
 {
+    public function factoryTourDetails($factoryTourId){
+        $companyFactoryTour = CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('id',$factoryTourId)->first();
+        if($companyFactoryTour){
+            return response()->json([
+                'success' => true,
+                'companyFactoryTour'=>$companyFactoryTour,
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'companyFactoryTour'=>$companyFactoryTour,
+            ],200);
+        }
+    }
     public function createFactoryTour(Request $request){
        
         $validator = Validator::make($request->all(), [

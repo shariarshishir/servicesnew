@@ -122,7 +122,7 @@
                         </div>
                         
                     </div>
-                    <div class="input-field">
+                    <div class="input-field row">
                         <div class="col s12 m3 l3 ">
                             <label for="product-spec">Full specification</label>
                         </div>

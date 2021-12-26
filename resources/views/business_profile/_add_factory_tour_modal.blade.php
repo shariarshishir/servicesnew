@@ -67,7 +67,7 @@
             
             <div class="row">
                 <div class="form-group factory-tour-photo factory_large_images_box">
-                    <legend>Factory Large Images</legend>
+                    <legend>Factory 360 Degree Images</legend>
 
                     <div class="factory_file_uploader">
                         <label for="product-upload">Media</label>

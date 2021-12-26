@@ -3,6 +3,8 @@
 
     $(document).ready(function()
     {
+        selectRefresh();
+
         $(".next_to_business_profile_info, .last-step").click(function()
         {
             //alert("I am here");
@@ -831,16 +833,28 @@
       });
     });
     //add or remove certification details input row
+    function selectRefresh() {
+    $('.certificate-select2').select2({
+        tags: true,
+        placeholder: "Select an Option",
+        allowClear: true,
+        width: '100%'
+    });
+    }
     function addCertificationDetails()
     {
         $('#certification-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="certification-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td><select class="certificate-select2"  name="certification_id[]"><option value="" disabled selected>Choose your option</option>@foreach ($default_certification as $list)<option value="{{$list->id}}">{{$list->certification_programs}}</option>@endforeach</select></td>';
+        html +='<td><input type="date" name="issue_date[]"></td>';
+        html +='<td><input type="date" name="expiry_date[]"></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea></td>';
         html +='<td><input name="image[]" class="input-field file_upload"  id="certification-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.certification-details-table-block tbody').append(html);
+        selectRefresh();
+
     }
     function removeCertificationDetails(el)
     {
@@ -871,6 +885,9 @@
         $('.loading-message').html("");
 		$('#loadingProgressContainer').hide();
         $('#certification-upload-form')[0].reset();
+        $(".certification-details-table-block").find("tr:gt(1)").remove();
+        $('.certificate-select2').val('');
+        $('.certificate-select2').trigger('change');
         var certifications=response.certifications;
         var nohtml="";
         if(certifications.length >0){
@@ -2451,6 +2468,8 @@
             if(words.length > 250) {
                 alert('The about company words length limit is not more than 250')
             }
-        });
+    });
+
+
     </script>
 @endpush

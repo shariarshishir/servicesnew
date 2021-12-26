@@ -13,4 +13,5 @@ class Certification extends Model
     {
         return $this->belongsTo(BusinessProfile::class);
     }
+
 }

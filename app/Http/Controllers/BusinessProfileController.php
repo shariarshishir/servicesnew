@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Certification;
 use App\Models\BusinessProfile;
 use App\Models\CompanyOverview;
 use App\Models\CategoriesProduced;
@@ -182,8 +183,8 @@ class BusinessProfileController extends Controller
                 $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
                 ->limit(4)
                 ->get();
-
-                return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts'));
+            $default_certification=Certification::get();
+            return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification'));
             }
             if($business_profile->business_type == 2){
 
@@ -364,7 +365,6 @@ class BusinessProfileController extends Controller
             ],500);
 
         }
-
 
     }
 

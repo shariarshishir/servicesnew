@@ -22,6 +22,7 @@
 		</ul>
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
+	@php $i = 1; @endphp
 	@foreach ($rfqLists as $rfqSentList)
 	<div class="rfq_profile_detail row">
 		<div class="col s12 m3 l2">
@@ -61,7 +62,11 @@
 					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}}</div> 
 					<div class="full_details"> 
 						<span class="title">Qty:</span> {{$rfqSentList->quantity}} {{$rfqSentList->unit}}, 
+						@if($rfqSentList->unit_price==0.00)
+						<span class="title">Target Price:</span> N/A, 
+						@else
 						<span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}}, 
+						@endif
 						<span class="title">Deliver to:</span> {{$rfqSentList->destination}}, 
 						<span class="title">Within:</span> {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}, 
 						<span class="title">Payment method:</span> {{$rfqSentList->payment_method}} </p>
@@ -92,7 +97,9 @@
 							</div>							
 						@else						
 							<div class="rfq_thum_img">
-								<img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />
+								<a data-fancybox="gallery-{{$i}}" href="{{asset('storage/'.$rfqImage->image)}}">
+									<img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />
+								</a>
 							</div>
 						@endif
                     @endforeach
@@ -182,6 +189,7 @@
 			</div-->
 		</div>
 	</div>
+	@php $i++; @endphp
 	@endforeach
 </div>
 <!-- RFQ html end -->

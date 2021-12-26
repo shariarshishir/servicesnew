@@ -30,6 +30,7 @@
                                 <tr>
                                     <th>User Name</th>
                                     <th>Email</th>
+                                    <th>Created Date</th>
                                 </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,9 @@
                                     </td>
                                     <td class="center">
                                         <a href="{{route('user.show', $user->id)}}">{{$user->email}}</a>
+                                    </td>
+                                    <td>
+                                      {{ \Carbon\Carbon::parse($user->created_at)->isoFormat('MMMM Do YYYY')}}
                                     </td>
                                 </tr>
                             @endforeach

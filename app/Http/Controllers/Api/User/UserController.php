@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\UserVerify;
+use App\Models\OrderModificationRequest;
 use Illuminate\Support\Facades\Hash;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -29,15 +30,21 @@ class UserController extends Controller
 
     public function show($userId)
     {
-        $user = User::with('vendor')->where('id',$userId)->where('is_email_verified',1)->first();
+        $user = User::with('businessProfile')->where('id',$userId)->where('is_email_verified',1)->first();
         $totalWishlist=count($user->productWishlist);
+        $totalOrderPlacedByUser = count($user->vendorOrder);
+        $orderQueries = OrderModificationRequest::with('orderModification')->where(['user_id' => auth()->id(), 'type' => 1])->get();
+        $totalOrderQueries = count($orderQueries);
         if(isset($user))
         {
-            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'message'=>'user found','code'=>'True'],200);
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderPlacedByUser'=>$totalOrderPlacedByUser,'totalOrderQueries'=>$totalOrderQueries,'message'=>'user found','code'=>'True'],200);
         }
         else
         {
-            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'message'=>'user not found','code'=>"False"],200);
+            $totalWishlist = [];
+            $totalOrderQueries = [];
+
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderQueries'=>$totalOrderQueries,'message'=>'user not found','code'=>"False"],200);
         }
 
     }

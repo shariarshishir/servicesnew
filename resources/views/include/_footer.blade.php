@@ -228,29 +228,7 @@
             $(".main-header").removeClass("fixed");
         }
     });
-    $('#newsletter_signup_form').on('submit',function(event){
-        event.preventDefault();
-        let newsletter_email_address = $('#newsletter_email_address').val();
-        $.ajax({
-          url: "{{route('newsletter.subscribe')}}",
-          type:"POST",
-          data:{
-            "_token": "{{ csrf_token() }}",
-            newsletter_email_address:newsletter_email_address,
-          },
-            success:function(response) {
-                swal(response.success,'successs');
-                $('form :input').val('');
-
-
-            },
-            error:function (response) {
-                var error = response.responseJSON.errors.newsletter_email_address;
-                swal(error[0],"Please try again", "error");
-
-            }
-         });
-        });
+   
 
 </script>
 
@@ -1408,7 +1386,33 @@ $("#searchOption").change(function(){
             $(".header_wrap").addClass("fixed");
         } else {
             $(".header_wrap").removeClass("fixed");
-        }
+        }swal(error[0],"Please try again", "error");
     });
+
+    $('#newsletter_signup_form').on('submit',function(e){
+        e.preventDefault();
+        let newsletter_email_address = $('#newsletter_email_address').val();
+        var url = '{{ route("newsletter.subscribe") }}';
+        $.ajax({
+            method: 'post',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "newsletter_email_address":newsletter_email_address,
+            },
+            url: url,
+
+            success:function(response){
+                
+                $('#newsletter_signup_form')[0].reset();
+                swal("Done!", response.message,"success");
+            },
+            error:function (response) {
+                var error = response.responseJSON.errors.newsletter_email_address;
+                swal(error[0],"Please try again", "error");
+
+            }
+        });
+    });
+
 
   </script>

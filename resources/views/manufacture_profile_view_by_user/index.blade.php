@@ -1216,7 +1216,19 @@
 					</div>
 					<div id="termsservice" class="tabcontent">
 						<h3>Terms of Service</h3>
-						<p>Who we are and what we do.</p>
+						<div class="terms-of-service-information-block">
+							@if($business_profile->companyOverview->terms_of_service)
+								<div class="terms-of-service-with-information" >
+									<p>{{$business_profile->companyOverview->terms_of_service}}</p>
+								</div>	
+							@else
+								<div class="card-alert card cyan lighten-5 terms-of-service-without-information" >
+									<div class="card-content cyan-text">
+										<p>INFO : No terms of service added by {{$business_profile->business_name}}.</p>
+									</div>
+								</div>
+							@endif
+						</div>
 					</div>
 					@endif
 

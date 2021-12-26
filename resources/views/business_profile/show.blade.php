@@ -1585,8 +1585,30 @@
 						</div>
 					</div>
 					<div id="termsservice" class="tabcontent">
+						<div class="right-align">
+							<a href="javascript:void(0);" data-target="terms-of-service-modal" class="terms_of_service_modal_trigger modal-trigger btn_green">Edit Terms of service</a>
+						</div> 
 						<h3>Terms of Service</h3>
-						<p>Who we are and what we do.</p>
+						
+						
+						<div class="terms-of-service-information-block">
+
+							@if($business_profile->companyOverview->terms_of_service)
+								<div class="terms-of-service-with-information" >
+									<p>{{$business_profile->companyOverview->terms_of_service}}</p>
+								</div>	
+							@else
+								<div class="card-alert card cyan lighten-5 terms-of-service-without-information" >
+									<div class="card-content cyan-text">
+										<p>INFO : No data found.</p>
+									</div>
+								</div>
+							@endif
+						</div>
+						
+						
+					   
+
 					</div>
 				</div>
 			</div>
@@ -1613,6 +1635,7 @@
     @include('business_profile._edit_product_modal')
 	@include('business_profile._add_factory_tour_modal')
 	@include('business_profile._edit_factory_tour_modal')
+	@include('business_profile._create_or_update_terms_of_service_modal')
 @endsection
 
 @include('business_profile._scripts')

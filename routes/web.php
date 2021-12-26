@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -439,6 +440,10 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('/order/update/{id}', [OrderController::class, 'OrderUpdateByAdmin'])->name('order.updateby.admin');
         Route::get('/order/update/status/delivered/{id}', [OrderController::class, 'statusToDelivered'])->name('order.status.change.delivered');
         Route::get('/order/ask/payment/{order_no}', [OrderController::class, 'OrderAskPayment'])->name('order.ask.payment');
+        // Certification
+        Route::resource('certification',AdminCertificationController::class, [
+            'as' => 'admin'
+        ]);
 
 
 

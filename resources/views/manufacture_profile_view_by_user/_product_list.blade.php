@@ -34,9 +34,9 @@
     </div>
 </div> --}}
 @else
-<div class="card-alert card cyan">
-    <div class="card-content white-text">
-        <p>INFO : No products available.</p>
+<div class="card-alert card cyan lighten-5">
+    <div class="card-content cyan-text">
+        <p>INFO : There is no product for <b>{{ucwords($business_profile->business_name)}}</p>
     </div>
 </div>
 @endif

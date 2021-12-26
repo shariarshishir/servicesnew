@@ -219,6 +219,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     Route::get('/factory-tour-image-delete',[CompanyFactoryTourController::class,'factoryTourImageDelete'])->name('factory-image.delete');
     Route::get('/factory-tour-large-image-delete',[CompanyFactoryTourController::class,'factoryTourLargeImageDelete'])->name('factory-large-image.delete');
+    Route::post('/terms-of-service-create-or-update',[BusinessProfileController::class,'termsOfServiceCreateOrUpdate'])->name('terms_of_service.create_or_update');
+   
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
         //product

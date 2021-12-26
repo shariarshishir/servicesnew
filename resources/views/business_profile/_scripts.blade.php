@@ -2423,6 +2423,50 @@
       });
     });
 
+
+    $('#terms-of-service-create-or-update-form').on('submit',function(e){
+    e.preventDefault();
+    var url = '{{ route("terms_of_service.create_or_update") }}';
+    var formData = new FormData(this);
+
+    formData.append('_token', "{{ csrf_token() }}");
+    $.ajax({
+        method: 'post',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData,
+        url: url,
+        beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        },
+
+        success:function(response){
+            $('.loading-message').html("");
+            $('#loadingProgressContainer').hide();
+            // $('#terms-of-service-create-or-update-form')[0].reset();
+      
+            
+            $('#terms-of-service-modal').modal('close');
+            $('.terms-of-service-information-block').children().remove();
+            var html ='<div class="terms-of-service-with-information"><p>'+response.company_overview.terms_of_service+'</p></div>';
+            $('.terms-of-service-information-block').append(html);
+           
+            swal("Done!", response.message,"success");
+        },
+        error: function(xhr, status, error)
+                {
+                    $('#terms-of-service-create-or-update-form-errors').empty();
+                    $("#terms-of-service-create-or-update-form-errors").append("<div class=''>"+error+"</div>");
+                    $.each(xhr.responseJSON.error, function (key, item)
+                    {
+                        $("#terms-of-service-create-or-update-form-errors").append("<div class='danger'>"+item+"</div>");
+                    });
+                }
+        });
+    });
+
     $(document).ready(function(){
         $(".manufacturer_profile_info_details .btn_edit, .manufacturer_profile_info_details .btn_upload, .manufacturer_profile_info_details .btn_delete").hide();
         $(".edit_profile_trigger").click(function() {

@@ -2450,8 +2450,20 @@
             
             $('#terms-of-service-modal').modal('close');
             $('.terms-of-service-information-block').children().remove();
-            var html ='<div class="terms-of-service-with-information"><p>'+response.company_overview.terms_of_service+'</p></div>';
-            $('.terms-of-service-information-block').append(html);
+            if(response.company_overview.terms_of_service){
+                var html ='<div class="terms-of-service-with-information"><p>'+response.company_overview.terms_of_service+'</p></div>';
+                $('.terms-of-service-information-block').append(html);
+            }
+            else{
+                var html='<div class="terms-of-service-without-information">';
+                    html +='<div class="card-alert card cyan lighten-5">';
+                    html +='<div class="card-content cyan-text">';
+                    html +='<p>INFO : No data found.</p>';
+                    html +='</div>';
+                    html +='</div>';
+                    $('.terms-of-service-information-block').append(html);
+                }
+            
            
             swal("Done!", response.message,"success");
         },

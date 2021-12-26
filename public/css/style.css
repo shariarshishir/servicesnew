@@ -863,9 +863,10 @@ form input:read-only {
 }
 .productBox .priceBox .apperal {
     font-size: 15px;
-    padding-top: 8px;
+    padding-top: 5px;
     /*padding-left: 0;*/
     text-align: left;
+    text-transform: capitalize;
 }
 .productBox .priceBox {
     padding: 20px 0 10px;
@@ -876,6 +877,12 @@ form input:read-only {
     font-weight: 500;
     /*padding-right: 0;*/
     line-height: 30px;
+}
+.productBox .priceBox .moq-value,
+.productBox .priceBox .lead-time-value {
+    font-size: 18px;
+    height: 30px;
+    overflow: hidden;
 }
 .profile_contentCol .productBox .priceBox .price {
     /* font-size: 23px; */
@@ -911,7 +918,7 @@ form input:read-only {
 }
 
 .low_moq_products_wrap .productBox h4 {
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .low_moq_products_wrap .moqBox {
     font-size: 20px;
@@ -7371,7 +7378,7 @@ nav .pagination li.active .page-link {
         height: 400px;
     }
 
-    .product_wrapper .shortest_lead_product_wrap .col.s12 {
+    .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3 {
         width: 33%;
     }
 
@@ -8436,7 +8443,7 @@ nav .pagination li.active .page-link {
         padding-top: 20px;
     }
 
-    .product_wrapper .shortest_lead_product_wrap .col.s12,
+    .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3,
     .product_wrapper .active_grid .col.s12  {
         width: 50%;
     }
@@ -8709,7 +8716,7 @@ nav .pagination li.active .page-link {
         height: auto;
         width: 90%;
     }
-    .product_wrapper .shortest_lead_product_wrap .col.s12,
+    .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3,
     .product_wrapper .active_grid .col.s12 {
         width: 100%;
         text-align: center;

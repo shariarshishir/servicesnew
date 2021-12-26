@@ -17,8 +17,8 @@
                                         </div>
                                     @endif
                                     <div class="priceBox row">
-                                        <div class="col m5 s5 apperal"><a href="{{route('supplier.profile',$product->business_profile_id)}}">{{ $product->businessProfile->business_name }}</a></div>
-                                        <div class="price col m7 s7 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
+                                        <div class="col s6 m6 apperal"><a href="{{route('supplier.profile',$product->business_profile_id)}}">{{ $product->businessProfile->business_name }}</a></div>
+                                        <div class="price col s6 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
                                     </div>
                                     <h4><a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">{{$product->title}}</a></h4>
                                 </div>

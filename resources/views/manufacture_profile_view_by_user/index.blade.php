@@ -23,18 +23,25 @@
 		<div class="row">
 			<div class="col s12 m5 l3 profile_leftCol leftCol_wrap">
 				<div class="left_top">
-					<div class="profile_pic center-align">
-						@if($userObj[0]->image)
-						<img src="{{ asset('storage/'.$userObj[0]->image) }}" alt="avatar">
-						@else
-						<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
-						@endif
+					<div class="row">
+						<div class="col s4 m6 l12 profile_left_pic_wrap">
+							<div class="profile_pic center-align">
+								@if($userObj[0]->image)
+								<img src="{{ asset('storage/'.$userObj[0]->image) }}" alt="avatar">
+								@else
+								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+								@endif
+							</div>
+						</div>
+						<div class="col s8 m6 l12 profile_left_address_wrap">
+							<div class="office_address center-align ">
+								<h3>{{$business_profile->business_name}}</h3>
+								<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
+								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
+							</div>
+						</div>
 					</div>
-					<div class="office_address center-align ">
-						<h3>{{$business_profile->business_name}}</h3>
-						<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
-						<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
-					</div>
+
 					@if($business_profile->is_business_profile_verified == 1)
 						<div class="center-align">
 							@if(Auth::guard('web')->check())

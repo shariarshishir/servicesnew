@@ -135,6 +135,11 @@
     //update company overview
    $('#company-overview-update-form').on('submit',function(e){
             e.preventDefault();
+            var words = $('.about-company').val().split(' ');
+            if(words.length > 250) {
+                alert('The about company words length limit is not more than 250, your given words length is '+words.length);
+                return false;
+            }
             var id = $('input[name=company_overview_id]').val();
             var url = '{{ route("company.overview.update", ":slug") }}';
                 url = url.replace(':slug', id);
@@ -2274,7 +2279,7 @@
         html +='</div>';
         $('.factory-image-block.row').append(html);
     }
-    
+
     function removeFactoryImage(el)
     {
         $(el).parent().remove();
@@ -2297,7 +2302,7 @@
     {
         $(el).parent().remove();
     }
-   
+
     $(document).ready(function (e) {
 
         $('#factory-image').change(function(){
@@ -2411,11 +2416,67 @@
                 $('#factory-tour-edit-form-errors').empty();
                 $("#factory-tour-edit-form-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
-                {  
+                {
                     $("#factory-tour-edit-form-errors").append("<div class='danger'>"+item+"</div>");
                 });
             }
       });
+    });
+
+
+    $('#terms-of-service-create-or-update-form').on('submit',function(e){
+    e.preventDefault();
+    var url = '{{ route("terms_of_service.create_or_update") }}';
+    var formData = new FormData(this);
+
+    formData.append('_token', "{{ csrf_token() }}");
+    $.ajax({
+        method: 'post',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData,
+        url: url,
+        beforeSend: function() {
+        $('.loading-message').html("Please Wait.");
+        $('#loadingProgressContainer').show();
+        },
+
+        success:function(response){
+            $('.loading-message').html("");
+            $('#loadingProgressContainer').hide();
+            // $('#terms-of-service-create-or-update-form')[0].reset();
+      
+            
+            $('#terms-of-service-modal').modal('close');
+            $('.terms-of-service-information-block').children().remove();
+            if(response.company_overview.terms_of_service){
+                var html ='<div class="terms-of-service-with-information"><p>'+response.company_overview.terms_of_service+'</p></div>';
+                $('.terms-of-service-information-block').append(html);
+            }
+            else{
+                var html='<div class="terms-of-service-without-information">';
+                    html +='<div class="card-alert card cyan lighten-5">';
+                    html +='<div class="card-content cyan-text">';
+                    html +='<p>INFO : No data found.</p>';
+                    html +='</div>';
+                    html +='</div>';
+                    $('.terms-of-service-information-block').append(html);
+                }
+            
+           
+            swal("Done!", response.message,"success");
+        },
+        error: function(xhr, status, error)
+                {
+                    $('#terms-of-service-create-or-update-form-errors').empty();
+                    $("#terms-of-service-create-or-update-form-errors").append("<div class=''>"+error+"</div>");
+                    $.each(xhr.responseJSON.error, function (key, item)
+                    {
+                        $("#terms-of-service-create-or-update-form-errors").append("<div class='danger'>"+item+"</div>");
+                    });
+                }
+        });
     });
 
     $(document).ready(function(){
@@ -2440,5 +2501,12 @@
 
     }
 
+    //limit word about the company
+    $(".about-company").keypress(function() {
+            var words = $(this).val().split(' ');
+            if(words.length > 250) {
+                alert('The about company words length limit is not more than 250')
+            }
+        });
     </script>
 @endpush

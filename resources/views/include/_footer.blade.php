@@ -228,29 +228,7 @@
             $(".main-header").removeClass("fixed");
         }
     });
-    $('#newsletter_signup_form').on('submit',function(event){
-        event.preventDefault();
-        let newsletter_email_address = $('#newsletter_email_address').val();
-        $.ajax({
-          url: "{{route('newsletter.subscribe')}}",
-          type:"POST",
-          data:{
-            "_token": "{{ csrf_token() }}",
-            newsletter_email_address:newsletter_email_address,
-          },
-            success:function(response) {
-                swal(response.success,'successs');
-                $('form :input').val('');
-
-
-            },
-            error:function (response) {
-                var error = response.responseJSON.errors.newsletter_email_address;
-                swal(error[0],"Please try again", "error");
-
-            }
-         });
-        });
+   
 
 </script>
 
@@ -731,6 +709,18 @@
 
   <script>
 //live search by product name or vendor name
+$("#searchOption").change(function(){
+    $('#search-results').hide();
+    if($(this).val() == "product"){
+        $(".search_input").val("").attr("placeholder", "Search for ...");
+    }
+    else if($(this).val() == "vendor"){
+        $(".search_input").val("").attr("placeholder", "Search for ...");
+    }
+    else if($(this).val() == "all"){
+        $(".search_input").val("").attr("placeholder", "Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc.");
+    }
+});
 $(document).on("keyup",".search_input",function(){
     var is_env = "{{ env('APP_ENV') }}";
     var url;
@@ -744,8 +734,9 @@ $(document).on("keyup",".search_input",function(){
         dataType:'json',
         data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
         beforeSend: function() {
-            //$('.loading-message').html("Searching please Wait.");
-            //$('#loadingProgressContainer').show();
+            //$('.loading-search-message').html("Searching please Wait.");
+            $('#search-results').html("Searching please Wait.");
+            $('#search-results').show();
         },
         success: function(response)
         {
@@ -765,7 +756,7 @@ $(document).on("keyup",".search_input",function(){
                 console.log(response.data);
                 if(response.searchType=='all' && response.data.length > 0)
                 {
-                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                     for(var i=0; i<response.data.length; i++)
                     {
                         if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
@@ -844,7 +835,7 @@ $(document).on("keyup",".search_input",function(){
                 else if(response.searchType=='product' && response.data.length > 0)
                 {
                     $('.product-item').html(nohtml);
-                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                     for(var i=0; i<response.data.length; i++)
                     {
                         //console.log(response.data[i]);
@@ -892,6 +883,7 @@ $(document).on("keyup",".search_input",function(){
                 {
                     //console.log(response.data);
                     $('.vendor-info').html(nohtml);
+                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                     for(var i=0;i<response.data.length;i++){
                         html+='<div class="vendor-info">';
                         html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
@@ -907,15 +899,15 @@ $(document).on("keyup",".search_input",function(){
             {
                 if(response.searchType=='all')
                 {
-                    $('#search-results').html("No Data found").show();
+                    $('#search-results').html("No information found regarding your search keyword.").show();
                 }
                 else if(response.searchType=='product')
                 {
-                    $('#search-results').html("No Product found").show();
+                    $('#search-results').html("No product found regarding your search keyword.").show();
                 }
                 else if(response.searchType=='vendor')
                 {
-                    $('#search-results').html("No Store found").show();
+                    $('#search-results').html("No manufacturer found regarding your search keyword.").show();
                 }
                 //$('#search-results').html(nohtml).hide();
             }
@@ -1216,199 +1208,39 @@ function askForPrice($sku)
 //     $("#system_search .search_type").val(selectedSearchOption);
 // })
 
-//on change input field set
-$("#searchOption").change(function(){
-    var nohtml = "";
-    var is_env = "{{ env('APP_ENV') }}";
-    var url;
-    $('#search-results').html(nohtml).hide();
-    var selectedSearchOption = $("#searchOption").children("option:selected").val();
-    $("#system_search .search_type").val(selectedSearchOption);
-
-    if($(this).val() == "product"){
-        $(".search_input").attr("placeholder", " Search for ...");
-    }
-    else if($(this).val() == "vendor"){
-        $(".search_input").attr("placeholder", " Search for ...");
-    }
-
-    var searchInput = $("#system_search .search_input").val();
-    console.log(searchInput);
-    var post_url = '{{ route("live.search") }}';
-    $.ajax({
-        type:'GET',
-        url: post_url,
-        dataType:'json',
-        data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
-        success: function(response)
-        {
-            var html="";
-            var nohtml = "";
-            if(is_env == 'production'){
-                url  = window.location.origin+'/global';
-            } else {
-                url  = window.location.origin;
-            }
-            if(response.resultCount > 0)
-            {
-                console.log(response.data);
-                if(response.searchType=='all' && response.data.length > 0)
-                {
-                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
-                    for(var i=0; i<response.data.length; i++)
-                    {
-                        if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
-                        {
-                            html += '<div class="product-item">';
-                            html += '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
-                            $.each(response.data[i].images,function(key,item){
-                                if(key==0){
-                                    var url = window.location.origin;
-                                    // var image=url+'/storage/'+item.image;
-                                    var image="{{asset('storage/')}}"+'/'+item.image;
-                                    html += '<div class="product-img"><img src="'+image+'"></div>';
-                                }
-                            })
-                            html += '<div class="product-short-intro">';
-                            html += '<h4>'+response.data[i].name+'</h4>';
-                            html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        else if(response.data[i].title && response.data[i].business_profile_id) // product for manufacturer
-                        {
-                            html += '<div class="product-item">';
-                            html += '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
-                            $.each(response.data[i].product_images,function(key,item){
-                                if(key==0){
-                                    var url  = window.location.origin;
-                                    // var image=url+'/storage/'+item.image;
-                                    var image = "{{asset('storage/')}}"+'/'+item.product_image;
-                                    html += '<div class="product-img"><img src="'+image+'"></div>';
-                                }
-                            })
-                            html += '<div class="product-short-intro">';
-                            html += '<h4>'+response.data[i].title+'</h4>';
-                            html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        else if(response.data[i].title && response.data[i].slug) // list for blog
-                        {
-                            html += '<div class="product-item">';
-                            html += '<a href="'+url+'/press-room/details/'+response.data[i].slug+'" class="overlay_hover">&nbsp;</a>';
-                            var image = "{{asset('storage/')}}"+'/'+response.data[i].feature_image;
-                            html += '<div class="product-img"><img src="'+image+'"></div>';                            
-                            html += '<div class="product-short-intro">';
-                            html += '<h4>'+response.data[i].title+'</h4>';
-                            html += '<div class="details"><p>'+response.data[i].details.substring(0, 100)+'</p></div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        else // list for supplier
-                        {
-                            var image;
-                            html += '<div class="product-item">';
-                            html += '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
-                            if(response.data[i].user.image)
-                            {
-                            image = "{{asset('storage/')}}"+'/'+response.data[i].user.image;
-                            }
-                            else
-                            {
-                            image = "{{asset('images/frontendimages/no-image.png')}}";    
-                            }
-                            html += '<div class="product-img"><img src="'+image+'"></div>';
-                            html += '<div class="product-short-intro">';
-                            html += '<h4>'+response.data[i].business_name+'</h4>';
-                            html += '<div class="details"><p>'+response.data[i].industry_type+'</p></div>';
-                            html += '</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }                       
-                    }
-                    $('#search-results').html(html);
-                    $('#search-results').show();
-                }
-                else if(response.searchType=='product' && response.data.length > 0)
-                {
-                    $('.product-item').html(nohtml);
-                    html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">close</i></a>';
-                    for(var i=0; i<response.data.length; i++)
-                    {
-                        //console.log(response.data[i]);
-                        if(response.data[i].name) // product for wholesaler
-                        {
-                            html+='<div class="product-item">';
-                            html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
-                            $.each(response.data[i].images,function(key,item){
-                                if(key==0){
-                                    var url  = window.location.origin;
-                                    // var image=url+'/storage/'+item.image;
-                                    var image="{{asset('storage/')}}"+'/'+item.image;
-                                    html+='<div class="product-img"><img src="'+image+'"></div>';
-                                }
-                            })
-                            html+= '<div class="product-short-intro">';
-                            html+= '<h4>'+response.data[i].name+'</h4>';
-                            html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
-                            html+= '</div>';
-                            html+= '</div>';
-                        }
-                        else // product for manufacturer
-                        {
-                            html+='<div class="product-item">';
-                            html+= '<a href="'+url+'/product/details/mb/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
-                            $.each(response.data[i].product_images,function(key,item){
-                                if(key==0){
-                                    var url  = window.location.origin;
-                                    // var image=url+'/storage/'+item.image;
-                                    var image="{{asset('storage/')}}"+'/'+item.product_image;
-                                    html+='<div class="product-img"><img src="'+image+'"></div>';
-                                }
-                            })
-                            html+= '<div class="product-short-intro">';
-                            html+= '<h4>'+response.data[i].title+'</h4>';
-                            html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
-                            html+= '</div>';
-                            html+= '</div>';
-                        }
-                    }
-                    $('#search-results').html(html);
-                    $('#search-results').show();
-                }
-                else if(response.searchType=='vendor' && response.data.length > 0)
-                {
-                    //console.log(response.data);
-                    $('.vendor-info').html(nohtml);
-                    for(var i=0;i<response.data.length;i++){
-                        html+='<div class="vendor-info">';
-                        html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
-                        html+= '<h4>'+response.data[i].business_name+'</h4>';
-                        html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
-                        html+= '</div>';
-                        }
-                    $('#search-results').html(html);
-                    $('#search-results').show();
-                }
-            }
-            else
-            {
-                $('#search-results').html(nohtml).hide();
-            }
-        }
-
-    });
-});
-
-
     $(window).scroll(function() {
         var scroll = $(window).scrollTop();
         if (scroll >= 180) {
             $(".header_wrap").addClass("fixed");
         } else {
             $(".header_wrap").removeClass("fixed");
-        }
+        }swal(error[0],"Please try again", "error");
     });
+
+    $('#newsletter_signup_form').on('submit',function(e){
+        e.preventDefault();
+        let newsletter_email_address = $('#newsletter_email_address').val();
+        var url = '{{ route("newsletter.subscribe") }}';
+        $.ajax({
+            method: 'post',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "newsletter_email_address":newsletter_email_address,
+            },
+            url: url,
+
+            success:function(response){
+                
+                $('#newsletter_signup_form')[0].reset();
+                swal("Done!", response.message,"success");
+            },
+            error:function (response) {
+                var error = response.responseJSON.errors.newsletter_email_address;
+                swal(error[0],"Please try again", "error");
+
+            }
+        });
+    });
+
 
   </script>

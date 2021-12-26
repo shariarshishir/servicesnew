@@ -97,8 +97,13 @@ $(document).on('click', '.cropper-image-modal-close', function () {
 
 $(document).ready(function(){
     var businessProfileId = @php echo $business_profile->id @endphp;
+    var is_env = "{{ env('APP_ENV') }}";
     $(".edit_wholesaler_profile_trigger").click(function(){
-        window.location.href = '/wholesaler/profile-details/'+businessProfileId+'?editmode=enabled';
+        if(is_env == 'production'){
+            window.location.href = '/global/wholesaler/profile-details/'+businessProfileId+'?editmode=enabled';
+        } else {
+            window.location.href = '/wholesaler/profile-details/'+businessProfileId+'?editmode=enabled';
+        }
     })
 })
 

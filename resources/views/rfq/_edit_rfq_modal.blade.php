@@ -51,7 +51,7 @@
                                 <label>Short Description</label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <textarea class="ig-new-rgt prd-txta short_description" style="height:88px;" name="short_description"></textarea>
+                                <textarea class="ig-new-rgt prd-txta short_description edit-short-description" style="height:88px;" name="short_description"></textarea>
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">
@@ -332,159 +332,159 @@
         }
         }
 
-        function onSubmit()
-        {
-            var errCount = 0;
-            var errorClass = 'error';
+        // function onSubmit()
+        // {
+        //     var errCount = 0;
+        //     var errorClass = 'error';
 
-            // if ($('input[name="name"]').val()=="" || $('input[name="name"]').val()=="undefined")
-            // {
-            //     errCount++;
-            //     $('input[name="name"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="name"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('input[name="name"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="name"]').removeClass('invalid');
-            // }
+        //     // if ($('input[name="name"]').val()=="" || $('input[name="name"]').val()=="undefined")
+        //     // {
+        //     //     errCount++;
+        //     //     $('input[name="name"]').closest('.input-wrapper').addClass(errorClass);
+        //     //     $('input[name="name"]').addClass('invalid');
+        //     // }
+        //     // else
+        //     // {
+        //     //     $('input[name="name"]').closest('.input-wrapper').removeClass(errorClass);
+        //     //     $('input[name="name"]').removeClass('invalid');
+        //     // }
 
-            // if ($('input[name="email"]').val()=="" || $('input[name="email"]').val()=="undefined")
-            // {
-            //     errCount++;
-            //     $('input[name="email"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="email"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('input[name="email"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="email"]').removeClass('invalid');
-            // }
+        //     // if ($('input[name="email"]').val()=="" || $('input[name="email"]').val()=="undefined")
+        //     // {
+        //     //     errCount++;
+        //     //     $('input[name="email"]').closest('.input-wrapper').addClass(errorClass);
+        //     //     $('input[name="email"]').addClass('invalid');
+        //     // }
+        //     // else
+        //     // {
+        //     //     $('input[name="email"]').closest('.input-wrapper').removeClass(errorClass);
+        //     //     $('input[name="email"]').removeClass('invalid');
+        //     // }
 
-            // if ($('input[name="mobile"]').val()=="" || $('input[name="mobile"]').val()=="undefined")
-            // {
-            //     errCount++;
-            //     $('input[name="mobile"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="mobile"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('input[name="mobile"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="mobile"]').removeClass('invalid');
-            // }
+        //     // if ($('input[name="mobile"]').val()=="" || $('input[name="mobile"]').val()=="undefined")
+        //     // {
+        //     //     errCount++;
+        //     //     $('input[name="mobile"]').closest('.input-wrapper').addClass(errorClass);
+        //     //     $('input[name="mobile"]').addClass('invalid');
+        //     // }
+        //     // else
+        //     // {
+        //     //     $('input[name="mobile"]').closest('.input-wrapper').removeClass(errorClass);
+        //     //     $('input[name="mobile"]').removeClass('invalid');
+        //     // }
 
-            // if ($('select[name="industry"]').val()==null || $('select[name="industry"]').val()=="Select an option")
-            // {
-            //     errCount++;
-            //     $('select[name="industry"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('select[name="industry"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('select[name="industry"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('select[name="industry"]').removeClass('invalid');
-            // }
+        //     // if ($('select[name="industry"]').val()==null || $('select[name="industry"]').val()=="Select an option")
+        //     // {
+        //     //     errCount++;
+        //     //     $('select[name="industry"]').closest('.input-wrapper').addClass(errorClass);
+        //     //     $('select[name="industry"]').addClass('invalid');
+        //     // }
+        //     // else
+        //     // {
+        //     //     $('select[name="industry"]').closest('.input-wrapper').removeClass(errorClass);
+        //     //     $('select[name="industry"]').removeClass('invalid');
+        //     // }
 
-            if ($('select[name="category_id"]').val()==null || $('select[name="category_id"]').val()=="Select an option")
-            {
-                errCount++;
-                $('select[name="category_id"]').closest('.input-wrapper').addClass(errorClass);
-                $('select[name="category_id"]').addClass('invalid');
-            }
-            else
-            {
-                $('select[name="category_id"]').closest('.input-wrapper').removeClass(errorClass);
-                $('select[name="category_id"]').removeClass('invalid');
-            }
+        //     if ($('select[name="category_id"]').val()==null || $('select[name="category_id"]').val()=="Select an option")
+        //     {
+        //         errCount++;
+        //         $('select[name="category_id"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('select[name="category_id"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('select[name="category_id"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('select[name="category_id"]').removeClass('invalid');
+        //     }
 
-            if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="title"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="title"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="title"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="title"]').removeClass('invalid');
-            }
+        //     if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
+        //     {
+        //         errCount++;
+        //         $('input[name="title"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('input[name="title"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('input[name="title"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('input[name="title"]').removeClass('invalid');
+        //     }
 
-            if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="quantity"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="quantity"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="quantity"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="quantity"]').removeClass('invalid');
-            }
+        //     if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
+        //     {
+        //         errCount++;
+        //         $('input[name="quantity"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('input[name="quantity"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('input[name="quantity"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('input[name="quantity"]').removeClass('invalid');
+        //     }
 
-            if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="unit_price"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="unit_price"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="unit_price"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="unit_price"]').removeClass('invalid');
-            }
+        //     if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined")
+        //     {
+        //         errCount++;
+        //         $('input[name="unit_price"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('input[name="unit_price"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('input[name="unit_price"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('input[name="unit_price"]').removeClass('invalid');
+        //     }
 
-            if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="destination"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="destination"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="destination"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="destination"]').removeClass('invalid');
-            }
+        //     if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")
+        //     {
+        //         errCount++;
+        //         $('input[name="destination"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('input[name="destination"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('input[name="destination"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('input[name="destination"]').removeClass('invalid');
+        //     }
 
-            if ($('select[name="payment_method"]').val()==null || $('select[name="payment_method"]').val()=="Select an option")
-            {
-                errCount++;
-                $('select[name="payment_method"]').closest('.input-wrapper').addClass(errorClass);
-                $('select[name="payment_method"]').addClass('invalid');
-            }
-            else
-            {
-                $('select[name="payment_method"]').closest('.input-wrapper').removeClass(errorClass);
-                $('select[name="payment_method"]').removeClass('invalid');
-            }
+        //     if ($('select[name="payment_method"]').val()==null || $('select[name="payment_method"]').val()=="Select an option")
+        //     {
+        //         errCount++;
+        //         $('select[name="payment_method"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('select[name="payment_method"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('select[name="payment_method"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('select[name="payment_method"]').removeClass('invalid');
+        //     }
 
-            if ($('input[name="delivery_time"]').val()=="" || $('input[name="delivery_time"]').val()=="undefined" || $('input[name="delivery_time"]').val()=="mm/dd/yyyy")
-            {
-                errCount++;
-                $('input[name="delivery_time"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="delivery_time"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="delivery_time"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="delivery_time"]').removeClass('invalid');
-            }
+        //     if ($('input[name="delivery_time"]').val()=="" || $('input[name="delivery_time"]').val()=="undefined" || $('input[name="delivery_time"]').val()=="mm/dd/yyyy")
+        //     {
+        //         errCount++;
+        //         $('input[name="delivery_time"]').closest('.input-wrapper').addClass(errorClass);
+        //         $('input[name="delivery_time"]').addClass('invalid');
+        //     }
+        //     else
+        //     {
+        //         $('input[name="delivery_time"]').closest('.input-wrapper').removeClass(errorClass);
+        //         $('input[name="delivery_time"]').removeClass('invalid');
+        //     }
 
-            if(errCount==0)
-            {
-                // if (grecaptcha.getResponse()==""){
-                //     jQuery('.messageContent').html('Captcha Required');
-                // } else {
-                    $("#page_button").click();
-                // }
-            }
-            else
-            {
-                alert('Please fill all the required fields.');
-                //$("html, body").animate({ scrollTop: 0 }, "slow");
-                return false;
-            }
+        //     if(errCount==0)
+        //     {
+        //         // if (grecaptcha.getResponse()==""){
+        //         //     jQuery('.messageContent').html('Captcha Required');
+        //         // } else {
+        //             $("#page_button").click();
+        //         // }
+        //     }
+        //     else
+        //     {
+        //         alert('Please fill all the required fields.');
+        //         //$("html, body").animate({ scrollTop: 0 }, "slow");
+        //         return false;
+        //     }
 
-        }
+        // }
 
 
 

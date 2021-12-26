@@ -34,6 +34,8 @@
     </form>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
     @if(count($rfqLists)>0)
+    @php $i = 1; @endphp
+    @php $x = 1; @endphp
 	@foreach ($rfqLists as $rfqSentList)
 	<div class="rfq_profile_detail row">
 		<div class="col s12 m3 l2">
@@ -68,7 +70,11 @@
                             <div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}} </div>
                             <div class="full_details">
                                 <span class="title">Qty:</span> {{$rfqSentList->quantity}} {{$rfqSentList->unit}},
-                                <span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}},
+                                @if($rfqSentList->unit_price==0.00)
+                                <span class="title">Target Price:</span> N/A, 
+                                @else
+                                <span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}}, 
+                                @endif
                                 <span class="title">Deliver to:</span>  {{$rfqSentList->destination}},
                                 <span class="title">Within:</span> {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }},
                                 <span class="title">Payment method:</span> {{$rfqSentList->payment_method}} </p>
@@ -104,7 +110,9 @@
                                 </div>
                                 @else
                                     <div class="rfq_thum_img">
-                                        <img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />
+                                        <a data-fancybox="gallery-{{$i}}" href="{{asset('storage/'.$rfqImage->image)}}">
+                                            <img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />
+                                        </a>
                                     </div>
                                 @endif
                             @endforeach
@@ -149,11 +157,11 @@
                     <div class="responses_wrap right-align">
                         <!--span><i class="material-icons">favorite</i> Saved</span-->
                         {{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a> --}}
-                        <button class="none_button btn_responses" id="rfqResponse" >
+                        <button class="none_button btn_responses btn_responses_trigger" id="rfqResponse" >
                             Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
                         </button>
                         @if($rfqSentList->bids()->exists())
-                        <div class="respones_detail_wrap">
+                        <div class="respones_detail_wrap" style="display: none;">
                             <div class="responses_open">&nbsp;</div>
                                 @foreach ($rfqSentList->bids as $bid)
 
@@ -201,13 +209,16 @@
                                                 @if(isset($bid->media))
                                                     @foreach (json_decode($bid->media) as $image)
                                                         <div class="respones_img">
-                                                            <img src="{{asset('storage/'.$image)}}" alt="">
+                                                            <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
+                                                                <img src="{{asset('storage/'.$image)}}" alt="">
+                                                            </a>
                                                         </div>
                                                     @endforeach
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
+                                @php $x++; @endphp    
                                 @endforeach
                         </div>
                         @endif
@@ -248,6 +259,7 @@
 
                 </div>
             </div>
+        @php $i++; @endphp
         @endforeach
     @else
         <div class="card-alert card cyan">
@@ -453,6 +465,11 @@
         //update
         $('#edit-rfq-submit-form').on('submit',function(e){
             e.preventDefault();
+            var short_description= $('.edit-short-description').val().length;
+                if($('.edit-short-description').val().length > 512){
+                    alert('The short description character length limit is not more than 512, your given character length is '+short_description);
+                    return false;
+                }
             var id=$('input[name=edit_rfq_id]').val();
             var url = '{{ route("rfq.update", ":slug") }}';
                 url = url.replace(':slug', id);

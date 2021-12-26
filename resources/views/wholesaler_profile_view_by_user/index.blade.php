@@ -8,9 +8,11 @@
 	<div class="banner_overlay">
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
-		<div class="erified">
-		<span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
-		</div>
+        @if($business_profile->is_business_profile_verified == 1)
+            <div class="erified">
+                <span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
+            </div>
+        @endif
 	</div>
 </section>
 <!-- Profile section end -->
@@ -48,7 +50,7 @@
 								<a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
 							@endif
 						</div>
-				
+
 						<div class="addressBox">
 							<span>Head Office </span><br/>
 							@if($business_profile->companyOverview->address)
@@ -56,7 +58,7 @@
 							@else
 							<div class="card-alert card cyan lighten-5">
 								<div class="card-content cyan-text">
-									<p>INFO : No data found.</p>
+									<p>INFO :There is no head office address for <b>{{ucwords($business_profile->business_name)}}</b>.</p>
 								</div>
 							</div>
 							@endif
@@ -68,7 +70,7 @@
 							@else
 							<div class="card-alert card cyan lighten-5">
 								<div class="card-content cyan-text">
-									<p>INFO : No data found.</p>
+									<p>INFO :There is no factory address for <b>{{ucwords($business_profile->business_name)}}</b>.</p>
 								</div>
 							</div>
 							@endif
@@ -86,7 +88,7 @@
 								@else
 								<div class="card-alert card cyan lighten-5 no-info-message">
 									<div class="card-content cyan-text">
-										INFO : No data found.
+                                        <p>INFO :There is no main products for <b>{{ucwords($business_profile->business_name)}}</b>.</p>
 									</div>
 								</div>
 								@endif
@@ -111,14 +113,14 @@
 					</div>
 					@if($business_profile->is_business_profile_verified == 0)
 
-						<div class="profile_not_updated"> 
+						<div class="profile_not_updated">
 							<span class="profile_not_updated_inner center-align">
 								<div class="annaouncement_icon">&nbsp;</div>
 								<p style="font-size: 25px;"> You do not have access to view this profile.</p>
 								<p>Become a verified buyer to get full access of Merchant Bay.</p>
 								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
 							</span>
-							
+
 							<!-- <span class="profile_not_updated_inner">
 								<div class="annaouncement_icon">&nbsp;</div>
 								<p>You do not have access to view this profile.</p>
@@ -130,12 +132,12 @@
 							<a href="javascript:void(0);" class="button talk-to-us btn_green" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk To Us</a>
 							</div>
 						</div>
-						
+
 					@else
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<!-- company_stuff -->
-						
+
 						<!-- contentBox -->
 						<div class="contentBox">
 							<div class="company_stuff center-align row">
@@ -143,7 +145,7 @@
 								@if($company_overview->name=='floor_space')
 								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
+										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" />
 									</div>
 									<div class="title">Floor Space</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -152,7 +154,7 @@
 								@if($company_overview->name=='no_of_machines')
 								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
+										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
 									</div>
 									<div class="title">No. of Machines</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
@@ -169,7 +171,7 @@
 									@if(isset($company_overview->value))
 									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
-											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" />
 										</div>
 										<div class="title">No. of workers</div>
 										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -180,7 +182,7 @@
 									@if(isset($company_overview->value))
 									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
-											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" />
 										</div>
 										<div class="title">No. of female workers</div>
 										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -193,12 +195,6 @@
 						<div class="contentBox">
                             @if($business_profile->companyOverview->about_company)
 							    {{$business_profile->companyOverview->about_company}}
-                            @else
-                                <div class="card-alert card cyan lighten-5">
-                                    <div class="card-content cyan-text">
-                                        <p>INFO : company details is not available.</p>
-                                    </div>
-                                </div>
                             @endif
 						</div>
 
@@ -240,58 +236,47 @@
 									</table>
 								</div>
 							</div>
-							<div class="membership_wrap">
-								<div class="row top_titleWrap upload_delete_wrap">
-									<div class="col s6 m6">
-										<h3>Association memberships</h3>
-									</div>
 
-								</div>
-								<div class="row membership_textBox association-membership-block">
-									@if(count($business_profile->associationMemberships)>0)
-										@foreach($business_profile->associationMemberships as $associationMembership)
-										<div class="col s12 m6 l5 center-align association-membership-img">
-											<a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
-											<div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
-											<p>{{$associationMembership->title}}</p>
-										</div>
-										@endforeach
-									@else
-										<div class="card-alert card cyan lighten-5">
-											<div class="card-content cyan-text">
-												<p>INFO : No data found.</p>
-											</div>
-										</div>
-									@endif
-								</div>
-							</div>
-							<div class="pr_highlights_wrap">
-								<div class="row top_titleWrap upload_delete_wrap">
-									<div class="col s6 m6">
-										<h3>PR Highlights</h3>
-									</div>
+                            @if(count($business_profile->associationMemberships)>0)
+                                <div class="membership_wrap">
+                                    <div class="row top_titleWrap upload_delete_wrap">
+                                        <div class="col s6 m6">
+                                            <h3>Association memberships</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row membership_textBox association-membership-block">
+                                            @foreach($business_profile->associationMemberships as $associationMembership)
+                                            <div class="col s12 m6 l5 center-align association-membership-img">
+                                                <a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                                <div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
+                                                <p>{{$associationMembership->title}}</p>
+                                            </div>
+                                            @endforeach
+                                    </div>
+                                </div>
+                            @endif
 
-								</div>
-								<div class="row press-highlight-block">
-									@if(count($business_profile->pressHighlights)>0)
-										@foreach($business_profile->pressHighlights as $pressHighlight)
-											<div class="col s6 m4 l2 paper_img press-highlight-img">
-												<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
-												<div class="press_img">
-													<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
-												</div>
-											</div>
-										@endforeach
-									@else
-										<div class="card-alert card cyan lighten-5">
-											<div class="card-content cyan-text">
-												<p>INFO : No data found.</p>
-											</div>
-										</div>
-									@endif
+                            @if(count($business_profile->pressHighlights)>0)
+                                <div class="pr_highlights_wrap">
+                                    <div class="row top_titleWrap upload_delete_wrap">
+                                        <div class="col s6 m6">
+                                            <h3>PR Highlights</h3>
+                                        </div>
 
-								</div>
-							</div>
+                                    </div>
+                                    <div class="row press-highlight-block">
+                                            @foreach($business_profile->pressHighlights as $pressHighlight)
+                                                <div class="col s6 m4 l2 paper_img press-highlight-img">
+                                                    <a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
+                                                    <div class="press_img">
+                                                        <img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
 						</div>
 					</div>
 					<div id="products" class="tabcontent">

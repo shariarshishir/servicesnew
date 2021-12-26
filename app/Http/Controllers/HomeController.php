@@ -450,7 +450,7 @@ class HomeController extends Controller
                 $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->search_input.'%')->where('business_profile_id', '!=', null)->get();
                 $blogs = Blog::where('title', 'like', '%'.$request->search_input.'%')->get();
                 $suppliers = BusinessProfile::with(['user'])->where('business_name', 'like', '%'.$request->search_input.'%')->get();
-                
+
                 $allItems = new \Illuminate\Database\Eloquent\Collection;
                 $allItems = $allItems->merge($wholesaler_products);
                 $allItems = $allItems->merge($manufacture_products);

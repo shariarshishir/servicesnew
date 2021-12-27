@@ -121,6 +121,14 @@
             </a>
           </li>
           {{-- end users --}}
+        {{--certificate--}}
+        {{-- shipping --}}
+        <li class="nav-item">
+            <a href="{{ Route('admin.certification.index')}}" class="nav-link {{ Route::is('admin.certification.*')? 'active' : ''}}">
+                <i class="fa fa-certificate" aria-hidden="true"></i>
+                <p>Certification</p>
+            </a>
+        </li>
 
         </ul>
       </nav>

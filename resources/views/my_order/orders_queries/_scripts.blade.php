@@ -48,11 +48,11 @@
 
             swal({
                 title: "Want to add this product into cart?",
-                text: "Please ensure and then confirm!",
-                type: "warning",
+                text: "",
+                type: "info",
                 showCancelButton: !0,
-                confirmButtonText: "Yes, add it!",
-                cancelButtonText: "No, cancel!",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
                 reverseButtons: !0
             }).then(function (e) {
                 if (e.value === true) {

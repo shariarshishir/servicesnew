@@ -27,7 +27,7 @@
                 </div>
                <input type="hidden" name="order_modification_request_id" value="">
                <!-- <button type="submit" class="btn_green waves-effect waves-light" id="submit-order-query-message-form">Submit</button> -->
-            </form>
+
             <div class="submit_btn_wrap">
                 <div class="row">
                     <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-
+    </form>
     </div>
     <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">

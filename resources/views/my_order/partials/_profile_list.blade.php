@@ -23,7 +23,7 @@
         <li class="profile-item-tab  orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Modification</a></li>
         <li class="profile-item-tab  orders-tab"><a class="{{ Route::is('user.order.query.index') ? 'active' : ''}}" href="{{route('user.order.query.index')}}"><span class="orderQueryProcessedCount"></span> Orders Query</a></li>
         <li class="profile-item-tab  inquiries-tab"><a class="{{ Route::is('po.index') ? 'active' : ''}}" href="{{route('po.index')}}"> Inquiries</a></li>
-        <li class="profile-item-tab  quick-query-tab"><a class="" href="#"> Quick Query</a></li>
+        {{-- <li class="profile-item-tab  quick-query-tab"><a class="" href="#"> Quick Query</a></li> --}}
     </ul>
 </div>
 

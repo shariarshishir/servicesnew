@@ -168,9 +168,11 @@
 			</div>
 			<div class="row">
 				<div class="col s2 mainNav_mobile_wrap">
-					<nav class="mainNav_mobile">
-						<a href="javascript:void(0);" data-target='mainDropdownNav' class="dropdown-trigger sidenav-trigger btn-sidenav-left"><i class="material-icons">menu</i></a>
-						<ul id='mainDropdownNav' class='dropdown-content card'>
+					<!-- <nav class="mainNav_mobile">
+						<span onclick="openNav()" href="javascript:void(0);" class="btn-sidenav-left"><i class="material-icons">menu</i></span>
+						<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+						<ul id='mySidenav' class='mySidenav'>
+							<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 							<li>
 								<a class="" href="javascript:void(0);" >Products</a>
 								<ul class="subNav">
@@ -195,24 +197,41 @@
 								</ul>
 							</li>
 						</ul>
-					</nav>
-					<!-- <div id="slide-out" class="sidenav">
-						<a href="javascript:void(0)" class="sideNavCloseBtn" onclick="closeSideNavFromLeft()">×</a>
+					</nav> -->
+
+					
+					<a onclick="openNav()" href="javascript:void(0);" class="btn-sidenav-left"><i class="material-icons">menu</i></a>
+					<div id="mySidenav" class="mySidenav">
+						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
 						<ul>
-							<li><a href="javascript:void(0);">Products</a></li>
-							<li><a href="javascript:void(0);">Supliers</a></li>
-							<li><a href="javascript:void(0);">RFQ</a></li>
-							<li><a href="javascript:void(0);">Tools</a></li>
 							<li>
-								<ul class="subNav">
-									<li><a href="javascript:void(0);">Blogs</a></li>
-									<li><a href="javascript:void(0);">Insights</a></li>
-									<li><a href="javascript:void(0);">Helps</a></li>
-									<li><a href="javascript:void(0);">FAQs</a></li>
+								<a class="dropdown-trigger" href="javascript:void(0);" data-target="more-system-products-mobile">Products <span class="subnev_arrow"><span class="material-icons right">keyboard_arrow_down</span></span></a>
+								<!-- Dropdown Structure -->
+								<ul id="more-system-products-mobile" class="dropdown-content subNav">
+									<li><a href="{{route('products')}}">All</a></li>
+									<li><a href="{{route('readystockproducts')}}">Ready to Ship</a></li>
+									<li><a href="{{route('buydesignsproducts')}}">Designs</a></li>
+									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
+									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
+									<li><a href="{{route('customizable')}}">Customizable</a></li>
+								</ul>
+							</li>
+							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
+							<li><a href="{{route('front.tools')}}">Tools</a></li>
+							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
+							<li>
+								<a class="dropdown-trigger subnev_open" href="javascript:void(0);" data-target="more-system-links-mobile">More <span class="subnev_arrow"><span class="material-icons right">keyboard_arrow_down</span></span></a>
+								<!-- Dropdown Structure -->
+								<ul id="more-system-links-mobile" class="dropdown-content subNav">
+									<li><a href="{{route('industry.blogs')}}">Blogs</a></li>
+									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
+									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
 								</ul>
 							</li>
 						</ul>
-					</div> -->
+					</div>
+
 					
 				</div>
 

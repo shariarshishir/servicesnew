@@ -435,7 +435,7 @@ Route::group(['prefix'=>'/admin'],function (){
         // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
         // Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
         Route::get('business-profile/{business_profile_id}/order/{order_id}',[OrderController::class, 'show'])->name('business.profile.order.show');
-        // Route::get('/vendor/{vendor}/order/{order}/notification/{notification}',[OrderController::class, 'showFromNotifaction'])->name('vendor.order.show.notification');
+        Route::get('business-profile/{businessProfile}/order/{order}/notification/{notification}',[OrderController::class, 'showFromNotifaction'])->name('vendor.order.show.notification');
         // Route::get('/vendor/{vendor}/order/{order}/edit',[OrderController::class, 'edit'])->name('vendor.order.edit');
         // Route::post('/vendor/{vendor}/order/{order}', [OrderController::class,'update'])->name('vendor.order.update');
         // Route::delete('/vendor/{vendor}/order/{order}', [OrderController::class,'destroy'])->name('vendor.order.destroy');

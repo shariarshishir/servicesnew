@@ -398,7 +398,7 @@ class ProductCartController extends Controller
 
                     }
                 }
-               // event(new NewOrderHasPlacedEvent($order));
+               event(new NewOrderHasPlacedEvent($order));
             }
 
 

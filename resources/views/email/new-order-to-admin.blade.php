@@ -37,7 +37,7 @@
                     @endforeach
 
                 </table>
-                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('vendor.order.show',['vendor' => $order->vendor_id, 'order' => $order->id ]) }}">click here to review the order.</a></p>
+                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('business.profile.order.show',['business_profile_id' => $order->business_profile_id, 'order_id' => $order->id ]) }}">click here to review the order.</a></p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;line-height:normal;">Thank you</p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">Merchant Bay PTE Ltd.</p>
 

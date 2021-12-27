@@ -31,7 +31,7 @@
             <div class="dropdown-order"></div>
             @foreach($notifications as $notification)
             @if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
-            <a href="{{route('vendor.order.show.notification',['vendor'=>$notification->data['order']['vendor_id'],'order'=>$notification->data['order']['order_number'],'notification'=>$notification->id])}}" class="dropdown-item">
+            <a href="{{route('vendor.order.show.notification',['businessProfile'=>$notification->data['order']['business_profile_id'],'order'=>$notification->data['order']['order_number'],'notification'=>$notification->id])}}" class="dropdown-item">
                 <i class="fas fa-envelope mr-2"></i>
                 <div class="admin-notification-content">
                   <div class="admin-notification-title">{{$notification->data['title']}}</div>

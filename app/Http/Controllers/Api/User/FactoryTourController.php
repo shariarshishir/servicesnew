@@ -15,8 +15,8 @@ use DB;
 
 class FactoryTourController extends Controller
 {
-    public function factoryTourDetails($factoryTourId){
-        $companyFactoryTour = CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('id',$factoryTourId)->first();
+    public function factoryTourDetails($businessProfileID){
+        $companyFactoryTour = CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$businessProfileID)->first();
         if($companyFactoryTour){
             return response()->json([
                 'success' => true,

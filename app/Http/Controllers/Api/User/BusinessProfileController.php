@@ -23,7 +23,6 @@ use stdClass;
 class BusinessProfileController extends Controller
 {
         public function show($id){
-            
             $businessProfile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
             
             if( $businessProfile){

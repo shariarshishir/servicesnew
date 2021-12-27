@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="company_name" class="">Company Name</label>
-                                    <input type="text" placeholder="" id="billing_company_name" name="billing_company_name" value="{{auth()->user()->vendor->vendor_name}}"/>
+                                    <input type="text" placeholder="" id="billing_company_name" name="billing_company_name" value="{{auth()->user()->company_name}}"/>
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="b_country" class="">Select Your Country</label>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="billing_address" class="">Address</label>
-                                    <input type="text" placeholder="" id="billing_address" name="billing_address" value="{{auth()->user()->vendor->vendor_address}}"/>
+                                    <input type="text" placeholder="" id="billing_address" name="billing_address" value=""/>
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="billing_zip" class="">Zip</label>
@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="shipping_company_name" class="">Company Name</label>
-                                    <input type="text" id="shipping_company_name" placeholder="" name="shipping_company_name" value="{{auth()->user()->vendor->vendor_name}}"/>
+                                    <input type="text" id="shipping_company_name" placeholder="" name="shipping_company_name" value="{{auth()->user()->company_name}}"/>
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="s_country" class="">Select Your Country</label>
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="address" class="">Address</label>
-                                    <input type="text" placeholder="" id="shipping_address" name="shipping_address" value="{{auth()->user()->vendor->vendor_address}}"/>
+                                    <input type="text" placeholder="" id="shipping_address" name="shipping_address" value=""/>
                                 </div>
                                 <div class="input-field col s12">
                                     <label for="address" class="">Zip</label>

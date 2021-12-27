@@ -63,4 +63,14 @@ class WishlistController extends Controller
             return response()->json(['message'=>'Item not deleted from wishlist','code'=>false],200);
         }
     }
+
+    public function wishListedProductsId(){
+        $wishListProductsIds=ProductWishlist::where('user_id',auth()->user()->id)->pluck('product_id')->toArray();
+        if($wishListProductsIds){
+            return response()->json(['wishListProductsIds'=>$wishListProductsIds,'code'=>true],200);
+        }
+        else{
+            return response()->json(['wishListProductsIds'=>$wishListProductsIds,'code'=>false],200);
+        }
+    }
 }

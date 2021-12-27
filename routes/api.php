@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\User\RfqBidController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
 use App\Http\Controllers\Api\User\BlogController;
 use App\Http\Controllers\Api\User\FactoryTourController;
+use App\Http\Controllers\Api\User\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,12 +120,12 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
    
     Route::post('/factory-tour',[FactoryTourController::class,'createFactoryTour']);
     Route::post('/factory-tour-edit',[FactoryTourController::class,'updateFactoryTour']);
-    Route::get('/factory-tour/{id}',[FactoryTourController::class,'factoryTourDetails']);
+    Route::get('/factory-tour/business-profile/{id}',[FactoryTourController::class,'factoryTourDetails']);
     //wholeslaer api
     Route::put('/store/{vendorUId}',[VendorController::class,'update']);
     Route::post('/wholesaler-products', [ProductController::class, 'store']);
     Route::post('/wholesaler-products-edit/{productId}', [ProductController::class, 'update']);
-    Route::delete('/store/{storeId}/products/{productId}', [ProductController::class, 'destroy']);
+    Route::delete('/products/{productId}', [ProductController::class, 'publishOrUnpublishProduct']);
     Route::get('/store/{businessProfileId}/orders', [OrderController::class, 'orderByBusinessProfileId']);
     Route::get('/store/{businessProfileId}/orders/{orderId}', [OrderController::class, 'vendorOrderByOrderId']);
     Route::get('/business-profile/{businessProfileId}/related-products', [ProductController::class, 'relatedProducts']);
@@ -135,6 +136,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     //wishlist api
     Route::post('/add-to-wishlist',[WishlistController::class,'addToWishlist']);
     Route::get('/wishlist',[WishlistController::class,'index']);
+    Route::get('/wishlist-products-id',[WishlistController::class,'wishListedProductsId']);
+    
     Route::post('/delete-wishlist-item',[WishlistController::class,'wishListItemDelete']);
     
 
@@ -181,6 +184,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);
 });
 
+Route::post('/getchatdata',[MessageController::class,'getchatdata']);
 
 //country list api
 Route::get('/countries', [OrderController::class, 'countries']);

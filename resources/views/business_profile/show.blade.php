@@ -33,7 +33,7 @@
 								<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
 								@else
 								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
-								@endif						
+								@endif
 							</div>
 						</div>
 						<div class="col s8 m6 l12 profile_left_address_wrap">
@@ -44,7 +44,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="center-align" style="display: none;">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
@@ -116,7 +116,7 @@
 								@if($company_overview->name=='floor_space')
 								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
+										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" />
 									</div>
 									<div class="title">Floor Space</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -125,7 +125,7 @@
 								@if($company_overview->name=='no_of_machines')
 								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
+										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
 									</div>
 									<div class="title">No. of Machines</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
@@ -133,7 +133,7 @@
 								@endif
 								@if($company_overview->name=='production_capacity')
 								<div class="col s4 m3 l3">
-									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" /> 
+									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" />
 									<div class="title">Production Capacity</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 								</div>
@@ -141,7 +141,7 @@
 								@if($company_overview->name=='number_of_worker')
 									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
-											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
+											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" />
 										</div>
 										<div class="title">No. of workers</div>
 										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -150,7 +150,7 @@
 								@if($company_overview->name=='number_of_female_worker')
 									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
-											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
+											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" />
 										</div>
 										<div class="title">No. of female workers</div>
 										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -175,15 +175,15 @@
 										<div class="certificate_files">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
-										
+
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
@@ -202,7 +202,7 @@
 							</div>
 
 						</div>
-						
+
 						<!-- certifications -->
 						<div class="profile_product_wrap product_wrapper">
 							<div class="row top_titleWrap">
@@ -238,7 +238,7 @@
 											<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
 											<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
 										</div>
-										
+
 									</div>
 								@endforeach
 								@else
@@ -264,14 +264,14 @@
 									@foreach($companyFactoryTour->companyFactoryTourImages as $image)
 										<div class="col s6 m4">
 											<div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->factory_image)}}" alt="" /></a></div>
-										</div>										
+										</div>
 									@endforeach
 								@else
 									<div class="card-alert card cyan lighten-5">
 										<div class="card-content cyan-text">
 											<p>INFO : No Image found.</p>
 										</div>
-									</div>								
+									</div>
 								@endif
 							</div>
 							@else
@@ -291,7 +291,7 @@
 									<div class="col s6 m4 l3 main_buyer_box">
 										<a href="javascript:void(0);"></a>
 										<div class="main_buyer_img">
-											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt=""> 
+											<img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
 										</div>
 										<h5>{{$mainBuyers->title}}</h5>
 									</div>
@@ -304,7 +304,7 @@
 									</div>
 								@endif
 							</div>
-							
+
 						</div>
 						<!-- main_buyers logo -->
 						<div class="export_destination_wrap">
@@ -326,10 +326,10 @@
 										</div>
 									</div>
 								@endif
-								
+
 							</div>
 
-							
+
 						</div>
 						<!-- export_destination -->
 					</div>
@@ -344,7 +344,7 @@
 								<div class="col s6 m6 right-align editBox">
 									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
-										<span class="btn_edit_white"> Edit</span> 
+										<span class="btn_edit_white"> Edit</span>
 									</button>
 								</div>
 								@endif
@@ -375,8 +375,8 @@
 								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
-										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-										<span class="btn_edit_white"> Edit</span> 
+										<span class="btn_icon"><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white"> Edit</span>
 									</button>
 								</div>
 								@endif
@@ -405,7 +405,7 @@
 															<td><i class="material-icons" style="color:green">check_circle</i></td>
 															@else
 															<td><i class="material-icons "style="color:gray">check_circle</i></td>
-															@endif 
+															@endif
 														</tr>
 													@endforeach
 												</tbody>
@@ -485,7 +485,7 @@
 												<td><i class="material-icons "style="color:gray">check_circle</i></td>
 												@endif
 											</tr>
-											@endforeach									
+											@endforeach
 										</tbody>
 									</table>
 								</div>
@@ -494,7 +494,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
@@ -507,8 +507,8 @@
 								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger">
-										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-										<span class="btn_edit_white"> Edit</span> 
+										<span class="btn_icon"><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white"> Edit</span>
 									</button>
 								</div>
 								@endif
@@ -538,7 +538,7 @@
 													</table>
 												</td>
 											</tr>
-											@endforeach									
+											@endforeach
 										</tbody>
 									</table>
 								</div>
@@ -547,7 +547,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
@@ -559,11 +559,11 @@
 								</div>
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
-										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white">Upload</span>
 									</button>
 									<button type="button" class="btn_delete btn_green_White delete-certification-button" >
-										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_icon"><i class="material-icons">delete</i></span>
 										<span class="btn_edit_white">Delete</span>
 									</button>
 								</div>
@@ -577,15 +577,15 @@
 										<div class="certificate_files">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a> 
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
 										</div>
 										<span class="certificate_title">{{$certification->title}}</span>
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
-										
+
 										<div class="certificate_img">
 											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
 											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a> 
+											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
@@ -611,11 +611,11 @@
 								</div>
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
-										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white"> Upload</span>
 									</button>
 									<button type="button" class="btn_delete btn_green_White  delete-main-buyer-button" >
-										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_icon"><i class="material-icons">delete</i></span>
 										<span class="btn_edit_white"> Delete</span>
 									</button>
 								</div>
@@ -638,9 +638,9 @@
 										</div>
 									</div>
 								@endif
-								
+
 							</div>
-						
+
 						</div>
 						<div class="export_destination_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
@@ -649,17 +649,17 @@
 								</div>
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
-										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white"> Upload</span>
 									</button>
 									<button type="button" class="btn_delete btn_green_White delete-export-destination-button" >
-										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_icon"><i class="material-icons">delete</i></span>
 										<span class="btn_edit_white"> Delete</span>
 									</button>
 								</div>
 							</div>
 							<div class="row flag_wrap center-align">
-								
+
 								<div class="flagBox export-destination-block">
 									@if(count($business_profile->exportDestinations)>0)
 										@foreach($business_profile->exportDestinations as $exportDestination)
@@ -679,7 +679,7 @@
 									</div>
 									@endif
 								</div>
-								
+
 							</div>
 
 							<!-- <div class="row flag_wrap center-align">
@@ -703,8 +703,8 @@
 								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" >
-										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-										<span class="btn_edit_white"> Edit</span> 
+										<span class="btn_icon"><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white"> Edit</span>
 									</button>
 								</div>
 								@endif
@@ -745,9 +745,9 @@
 								</div>
 								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger"> 
-										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-										<span class="btn_edit_white"> Edit</span> 
+									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger">
+										<span class="btn_icon"><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white"> Edit</span>
 									</button>
 								</div>
 								@endif
@@ -776,7 +776,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
@@ -788,9 +788,9 @@
 								</div>
 								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
-									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger"> 
-										<span class="btn_icon" ><i class="material-icons">border_color</i></span> 
-										<span class="btn_edit_white" > Edit</span> 
+									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger">
+										<span class="btn_icon" ><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white" > Edit</span>
 									</button>
 								</div>
 								@endif
@@ -832,8 +832,8 @@
 									@if(Auth::check())
 									<div class="col s6 m6 right-align editBox">
 										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" >
-											<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-											<span class="btn_edit_white" > Edit</span> 
+											<span class="btn_icon"><i class="material-icons">border_color</i></span>
+											<span class="btn_edit_white" > Edit</span>
 										</button>
 									</div>
 									@endif
@@ -853,7 +853,7 @@
 											<input class="with-gap health-facility-unchecked" name="healthcare_facility_disable"   disabled  value="0" type="radio" {{  ($walfareAndCsr->checked == "0" ? ' checked' : '') }}>
 											<span>No</span>
 										</label>
-							
+
 									</div>
 									@endif
 									@if($walfareAndCsr->name == 'doctor')
@@ -904,7 +904,7 @@
 									<div class="welfare_box row">
 										<span class="title col s8 m6 l6">Maternity Leave</span>
 										<label class="radio_box col s2 m2 l2">
-										<input class="with-gap maternity-leave-checked" name="maternity_leave_disable"  type="radio" disabled  value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} > 
+										<input class="with-gap maternity-leave-checked" name="maternity_leave_disable"  type="radio" disabled  value="1" {{  ($walfareAndCsr->checked == "1" ? ' checked' : '') }} >
 										<span>Yes</span>
 										</label>
 										<label class="radio_box col s2 m2 l2">
@@ -1002,7 +1002,7 @@
 								@endif
                             </div>
 
-								
+
 							<div class="row worker_welfare_box">
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
@@ -1011,8 +1011,8 @@
 									@if(Auth::check())
 									<div class="col s6 m6 right-align editBox">
 										<button type="button" data-target="security-modal" class="btn_edit btn_green_White modal-trigger" >
-											<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-											<span class="btn_edit_white" > Edit</span> 
+											<span class="btn_icon"><i class="material-icons">border_color</i></span>
+											<span class="btn_edit_white" > Edit</span>
 										</button>
 									</div>
 									@endif
@@ -1032,7 +1032,7 @@
 										<input class="with-gap" name="fire_exit" class="fire-exit-unchecked"    value="0" type="radio" {{  ($securityAndOther->checked == "0" ? ' checked' : '') }} disabled>
 										<span>No</span>
 										</label>
-							
+
 									</div>
 									@endif
 									@if($securityAndOther->name == 'fire_hydrant')
@@ -1142,8 +1142,8 @@
 								@if(Auth::check())
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" >
-										<span class="btn_icon"><i class="material-icons">border_color</i></span> 
-										<span class="btn_edit_white" > Edit</span> 
+										<span class="btn_icon"><i class="material-icons">border_color</i></span>
+										<span class="btn_edit_white" > Edit</span>
 									</button>
 								</div>
 								@endif
@@ -1171,7 +1171,7 @@
 										<div class="card-content cyan-text">
 											<p>INFO : No data found.</p>
 										</div>
-									</div>	
+									</div>
 								@endif
 							</div>
 						</div>
@@ -1183,11 +1183,11 @@
 								</div>
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
-										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white" > Upload</span>
 									</button>
 									<button type="button" class="btn_delete btn_green_White delete-association-membership-button">
-										<span class="btn_icon"><i class="material-icons">delete</i></span> 
+										<span class="btn_icon"><i class="material-icons">delete</i></span>
 										<span class="btn_edit_white"> Delete</span>
 									</button>
 								</div>
@@ -1217,7 +1217,7 @@
 								</div>
 								<div class="col s6 m6 right-align editBox">
 									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
-										<span class="btn_icon"><i class="material-icons">file_upload</i></span> 
+										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white"> Upload</span>
 									</button>
 									<button type="button" class="btn_delete btn_green_White delete-press-highlight-button" >
@@ -1243,7 +1243,7 @@
 										</div>
 									</div>
 								@endif
-								
+
 							</div>
 						</div>
 					</div>
@@ -1258,7 +1258,7 @@
 						<div class="manufacture-product-table-data">
 							@include('business_profile._product_table_data')
 						</div>
-					
+
 						<!--div class="profile_products_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
@@ -1513,11 +1513,11 @@
 						</div>
 					</div-->
 					<div id="factorytour" class="tabcontent">
-						<div class="profile_factory_tourWrap">							
-							@if(count($business_profile->companyFactoryTour)>0)	
+						<div class="profile_factory_tourWrap">
+							@if(count($business_profile->companyFactoryTour)>0)
 								<div class="right-align">
 									<a href="javascript:void(0);" data-target="factory-tour-edit-modal-block" class="factory_tour_edit_modal_trigger modal-trigger btn_green">Edit Factory Tour</a>
-								</div> 					
+								</div>
 								@if($companyFactoryTour->virtual_tour)
 								<div class="row top_titleWrap">
 									<div class="col s6 m6">
@@ -1542,7 +1542,7 @@
 											<li class="tab col m3"><a href="#factory_degree_images">360 Degree Images</a></li>
 										</ul>
 									</div>
-								</div>	
+								</div>
 								<div id="factory_images" class="col s12 factory_imgbox_wrap">
 									<div class="row factory_image_gallery">
 									@if(count($companyFactoryTour->companyFactoryTourImages)>0)
@@ -1559,7 +1559,7 @@
 									</div>
 									@endif
 
-									</div>										
+									</div>
 								</div>
 								<div id="factory_degree_images" class="col s12 video_gallery_box">
 									<div class="row degree_360_video_gallery">
@@ -1576,9 +1576,9 @@
 										</div>
 									</div>
 									@endif
-									
-									</div>										
-								</div>						
+
+									</div>
+								</div>
 							@else
 								<div class="right-align" style="padding-bottom: 20px">
 									<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="btn_green factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
@@ -1594,16 +1594,16 @@
 					<div id="termsservice" class="tabcontent">
 						<div class="right-align">
 							<a href="javascript:void(0);" data-target="terms-of-service-modal" class="terms_of_service_modal_trigger modal-trigger btn_green">Edit Terms of service</a>
-						</div> 
+						</div>
 						<h3>Terms of Service</h3>
-						
-						
+
+
 						<div class="terms-of-service-information-block">
 
 							@if($business_profile->companyOverview->terms_of_service)
 								<div class="terms-of-service-with-information" >
 									<p>{{$business_profile->companyOverview->terms_of_service}}</p>
-								</div>	
+								</div>
 							@else
 								<div class="card-alert card cyan lighten-5 terms-of-service-without-information" >
 									<div class="card-content cyan-text">
@@ -1612,9 +1612,9 @@
 								</div>
 							@endif
 						</div>
-						
-						
-					   
+
+
+
 
 					</div>
 				</div>
@@ -1623,7 +1623,7 @@
 		</div>
 	</div>
 </section>
-    
+
     @include('business_profile._edit_company_overview_modal')
     @include('business_profile._edit_capacity_and_machineries_modal')
     @include('business_profile._edit_production_flow_and_manpower_modal')

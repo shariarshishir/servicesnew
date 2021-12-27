@@ -3,6 +3,8 @@
 
     $(document).ready(function()
     {
+        selectRefresh();
+
         $(".next_to_business_profile_info, .last-step").click(function()
         {
             //alert("I am here");
@@ -831,22 +833,14 @@
       });
     });
     //add or remove certification details input row
-    function addCertificationDetails()
-    {
-        $('#certification-details-table-no-data').hide();
-        var html = '<tr>';
-        html +='<td><input name="title[]" id="certification-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="certification-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-        html +='</tr>';
-        $('.certification-details-table-block tbody').append(html);
+    function selectRefresh() {
+    $('.certificate-select2').select2({
+        tags: true,
+        placeholder: "Select an Option",
+        allowClear: true,
+        width: '100%'
+    });
     }
-    function removeCertificationDetails(el)
-    {
-        $(el).parent().parent().remove();
-    }
-
 
     //submit form for certification details
     $('#certification-upload-form').on('submit',function(e){
@@ -870,7 +864,11 @@
       success:function(response){
         $('.loading-message').html("");
 		$('#loadingProgressContainer').hide();
+        $('#certification-upload-errors').empty();
         $('#certification-upload-form')[0].reset();
+        $(".certification-details-table-block").find("tr:gt(1)").remove();
+        $('.certificate-select2').val('');
+        $('.certificate-select2').trigger('change');
         var certifications=response.certifications;
         var nohtml="";
         if(certifications.length >0){
@@ -930,6 +928,8 @@
       },
       error: function(xhr, status, error)
             {
+                $('.loading-message').html("");
+		        $('#loadingProgressContainer').hide();
                 $('#certification-upload-errors').empty();
                 $("#certification-upload-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
@@ -2446,8 +2446,8 @@
             $('.loading-message').html("");
             $('#loadingProgressContainer').hide();
             // $('#terms-of-service-create-or-update-form')[0].reset();
-      
-            
+
+
             $('#terms-of-service-modal').modal('close');
             $('.terms-of-service-information-block').children().remove();
             if(response.company_overview.terms_of_service){
@@ -2463,8 +2463,8 @@
                     html +='</div>';
                     $('.terms-of-service-information-block').append(html);
                 }
-            
-           
+
+
             swal("Done!", response.message,"success");
         },
         error: function(xhr, status, error)
@@ -2507,6 +2507,8 @@
             if(words.length > 250) {
                 alert('The about company words length limit is not more than 250')
             }
-        });
+    });
+
+
     </script>
 @endpush

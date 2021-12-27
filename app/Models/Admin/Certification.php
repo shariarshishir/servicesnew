@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Certification extends Model
 {
     use HasFactory;
+    protected $table= 'admin_certification';
     protected $guarded=[];
-    public function businessProfile()
-    {
-        return $this->belongsTo(BusinessProfile::class);
-    }
-
 }

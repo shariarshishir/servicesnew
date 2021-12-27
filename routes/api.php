@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\User\RfqBidController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
 use App\Http\Controllers\Api\User\BlogController;
 use App\Http\Controllers\Api\User\FactoryTourController;
+use App\Http\Controllers\Api\User\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,6 +182,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);
 });
 
+Route::post('/getchatdata',[MessageController::class,'getchatdata']);
 
 //country list api
 Route::get('/countries', [OrderController::class, 'countries']);

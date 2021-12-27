@@ -34,6 +34,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Certification programs</th>
                                 <th>Provider</th>
                                 <th>Nation</th>
@@ -45,6 +46,7 @@
                         <tbody>
                             @foreach($collection as $list)
                                 <tr>
+                                    <td>{{$list->id}}</td>
                                     <td>{{$list->certification_programs}}</td>
                                     <td>{{$list->provider}}</td>
                                     <td>{{$list->nation}}</td>

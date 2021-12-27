@@ -1090,11 +1090,11 @@ $(document).on("keyup",".search_input",function(){
     var url = '{{ route("add.cart") }}';
     swal({
         title: "Want to add this product into cart?",
-        text: "Please ensure and then confirm!",
-        type: "warning",
+        text: "",
+        type: "info",
         showCancelButton: !0,
-        confirmButtonText: "Yes, add it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         reverseButtons: !0
     }).then(function (e) {
         if (e.value === true) {
@@ -1177,11 +1177,11 @@ function askForPrice($sku)
     var url = '{{ route("user.order.query.store") }}';
     swal({
         title: "Want to query about this product?",
-        text: "Please ensure and then confirm!",
-        type: "warning",
+        text: "",
+        type: "info",
         showCancelButton: !0,
-        confirmButtonText: "Yes, add it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         reverseButtons: !0
     }).then(function (e) {
         if (e.value === true) {
@@ -1214,7 +1214,8 @@ function askForPrice($sku)
             $(".header_wrap").addClass("fixed");
         } else {
             $(".header_wrap").removeClass("fixed");
-        }swal(error[0],"Please try again", "error");
+        }
+        //swal(error[0],"Please try again", "error");
     });
 
     $('#newsletter_signup_form').on('submit',function(e){

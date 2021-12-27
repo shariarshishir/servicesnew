@@ -73,23 +73,6 @@
                                                 <a href="{{ route('query.show', $list->id) }}">
                                                     <i class="fa fa-eye" aria-hidden="true"></i> view
                                                 </a>
-
-                                                &nbsp; | &nbsp;
-                                                <a href="{{ route('query.edit', $list->id) }}">
-                                                    <i class="fas fa-plus-circle"></i>
-                                                    Create/Update
-                                                </a>
-
-                                                {{-- <a href="{{ route('query.request.edit', $list->id) }}">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i> view
-                                                </a>
-                                                @if ($list->type == config('constants.order_query_type.order_query_with_modification'))
-                                                &nbsp; | &nbsp;
-                                                <a href="{{ route('query.modification.request.edit', $list->id) }}">
-                                                    <i class="fas fa-plus-circle"></i>
-                                                    Create/Update Order
-                                                </a>
-                                                @endif --}}
                                             </td>
                                         </tr>
                                     @endforeach

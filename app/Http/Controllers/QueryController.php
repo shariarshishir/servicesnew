@@ -108,7 +108,7 @@ class QueryController extends Controller
             'user_agent' => $request->header('User-Agent'),
         ]);
         //event(new OrderQueryEvent($orderModificationRequest));
-        return response()->json(array('success' => true, 'msg' => 'Request Created Successfully'),200);
+        return response()->json(array('success' => true, 'msg' => 'Request created successfully. Please check my oders from your profile to get more update about your query.'),200);
     }
     //show communication model
     public function showMessage($order_query_request_id)

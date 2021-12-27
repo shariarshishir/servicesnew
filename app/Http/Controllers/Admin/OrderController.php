@@ -66,15 +66,15 @@ class OrderController extends Controller
 
     }
 
-    public function showFromNotifaction($vendorId,$order_number,$notificationId)
+    public function showFromNotifaction($businessProfileId,$order_number,$notificationId)
     {
         auth()->guard('admin')->user()->unreadNotifications->where('id', $notificationId)->markAsRead();
-        $vendorOrder=VendorOrder::where('vendor_id',$vendorId)->where('order_number',$order_number)->with(['billingAddress','shippingAddress','orderItems','shippingCharge'])->first();
+        $vendorOrder=VendorOrder::where('business_profile_id',$businessProfileId)->where('order_number',$order_number)->with(['billingAddress','shippingAddress','orderItems','shippingCharge'])->first();
         $orderItems=VendorOrderItem::where('order_id',$vendorOrder->id)->get();
         $shippingMethod=ShippingMethod::pluck('name');
         $shipMentType=ShipmentType::pluck('name');
         $uom=UOM::pluck('name');
-        return view('admin.vendor.order.show',compact('vendorId','orderItems','vendorOrder','shippingMethod','shipMentType','uom'));
+        return view('admin.vendor.order.show',compact('businessProfileId','orderItems','vendorOrder','shippingMethod','shipMentType','uom'));
 
     }
 

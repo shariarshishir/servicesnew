@@ -18,7 +18,7 @@
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
             <td style="padding: 30px;">
-                <p style="font-family:verdana;font-size:13px;margin:0px;line-height:normal;">Dear {{ $order->vendor->user->name}},</p>
+                <p style="font-family:verdana;font-size:13px;margin:0px;line-height:normal;">Dear {{ $order->businessProfile->user->name}},</p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"> You have received an order from {{ $order->user->name }}</p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">Order Details:</p>
                 <table border="1px solid black" style="border-collapse: collapse;">

@@ -379,15 +379,15 @@ Route::group(['prefix'=>'/admin'],function (){
         //prduct API start
         Route::post('/upload', [ProductController::class,'uploadSubmit']);
         Route::get('/delete-single-image', [ProductController::class,'deleteSingleImage']);
-        Route::get('/vendor/{vendor}/products', [ProductController::class,'index'])->name('product.index');
-        Route::get('/vendor/{vendor}/product/create', [ProductController::class,'create'])->name('product.create');
-        Route::post('/vendor/{vendor}/product', [ProductController::class,'store'])->name('product.store');
-        Route::get('/vendor/{vendor}/product/{product}/edit', [ProductController::class,'edit'])->name('product.edit');
-        Route::post('/vendor/{vendor}/product/{product}', [ProductController::class,'update'])->name('product.update');
-        Route::delete('/vendor/{vendor}/product/{product}', [ProductController::class,'destroy'])->name('product.destroy');
+        Route::get('/businessProfile/{businessProfileId}/products', [ProductController::class,'index'])->name('product.index');
+        Route::get('/businessProfile/{businessProfileId}/product/create', [ProductController::class,'create'])->name('product.create');
+        Route::post('/businessProfile/{businessProfileId}/product', [ProductController::class,'store'])->name('product.store');
+        Route::get('/businessProfile/{businessProfileId}/product/{product}/edit', [ProductController::class,'edit'])->name('product.edit');
+        Route::post('/businessProfile/{businessProfileId}/product/{product}', [ProductController::class,'update'])->name('product.update');
+        Route::delete('/businessProfile/{businessProfileId}/product/{product}', [ProductController::class,'destroy'])->name('product.destroy');
         Route::get('/related/products', [ProductController::class, 'relatedProducts'])->name('admin.users.related.products');
         //vendor order
-        // Route::get('/vendor/{vendor}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
+         Route::get('/businessProfile/{businessProfileId}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
         // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
         // Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
         // Route::get('/vendor/{vendor}/order/{order}',[OrderController::class, 'show'])->name('vendor.order.show');

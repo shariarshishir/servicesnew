@@ -115,10 +115,10 @@
                     </div>
                     <div class="store-address-block col-md-4">
                         <h4><i class="fas fa-briefcase"></i> Store Address</h4>
-                        <p>{{$vendorOrder->vendor->vendor_name}}</p>
-                        <p>{{$vendorOrder->vendor->vendor_address}}</p>
-                        <p>{{$vendorOrder->vendor->user->email}}</p>
-                        <p>{{$vendorOrder->vendor->user->phone}}</p>
+                        <p>{{$vendorOrder->businessProfile->business_name}}</p>
+                
+                        <p>{{$vendorOrder->businessProfile->user->email}}</p>
+                        <p>{{$vendorOrder->businessProfile->user->phone}}</p>
                     </div>
                 </div>
 

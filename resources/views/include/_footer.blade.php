@@ -1245,3 +1245,24 @@ function askForPrice($sku)
 
 
   </script>
+
+
+
+
+<script>
+    function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+
+<script>
+    $('.subnev_arrow').on('click', function() {
+        $(this).toggleClass('active');
+    });
+</script>
+   
+   

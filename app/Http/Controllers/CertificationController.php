@@ -16,7 +16,9 @@ class CertificationController extends Controller
 
         $validator = Validator::make($request->all(), [
             // 'title.*' => 'string|min:1|max:255',
+            'certification_id' => 'required',
             'certification_id.*' => 'required',
+            'image'   => 'required',
             'image.*' => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF,doc,docx,DOC,DOCX|max:5120',
             'short_description.*' => 'string|max:500|nullable',
             'issue_date.*' => 'required',

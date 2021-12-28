@@ -9,28 +9,11 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Certification;
-
+use App\Http\Requests\CertificationRequest;
 class CertificationController extends Controller
 {
-    public function certificationDetailsUpload(Request $request ){
+    public function certificationDetailsUpload(CertificationRequest $request ){
 
-        $validator = Validator::make($request->all(), [
-            // 'title.*' => 'string|min:1|max:255',
-            'certification_id' => 'required',
-            'certification_id.*' => 'required',
-            'image'   => 'required',
-            'image.*' => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF,doc,docx,DOC,DOCX|max:5120',
-            'short_description.*' => 'string|max:500|nullable',
-            'issue_date.*' => 'required',
-            'expiry_date.*' => 'required',
-        ]);
-        if ($validator->fails())
-        {
-            return response()->json(array(
-            'success' => false,
-            'error' => $validator->getMessageBag()),
-            400);
-        }
         try{
 
             if(isset($request->certification_id)){

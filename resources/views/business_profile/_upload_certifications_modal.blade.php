@@ -47,7 +47,9 @@
                                     <td>
                                         <textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea>
                                     </td>
-                                    <td><input class="input-field file_upload" name="image[]" id="certification-image" type="file"></td>
+                                    <td><input class="input-field file_upload" name="image[]" type="file"></td>
+                                    <input type="hidden" name="img_req[]">
+                                    <input type="hidden" name="certification_id_req[]">
                                     <td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
                                 </tr>
 
@@ -88,7 +90,7 @@
         html +='<td><input type="date" name="issue_date[]"></td>';
         html +='<td><input type="date" name="expiry_date[]"></td>';
         html +='<td><textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="certification-image" type="file"></td>';
+        html +='<td><input name="image[]" class="input-field file_upload"  id="certification-image" type="file"></td><input type="hidden" name="img_req[]"><input type="hidden" name="certification_id_req[]">';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.certification-details-table-block tbody').append(html);

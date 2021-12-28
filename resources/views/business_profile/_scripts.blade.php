@@ -932,7 +932,7 @@
 		        $('#loadingProgressContainer').hide();
                 $('#certification-upload-errors').empty();
                 $("#certification-upload-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
+                $.each(xhr.responseJSON.errors, function (key, item)
                 {
                     $("#certification-upload-errors").append("<div class='danger'>"+item+"</div>");
                 });

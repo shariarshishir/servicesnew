@@ -2,7 +2,7 @@
 @extends('layouts.app_containerless')
 
 @section('content')
-<h1 style="display: none;">MerchantBay | Global B2B Marketplace | RMG Sourcing Solutions</h1>
+<h1 style="display: none;">Merchant Bay | Fashion Sourcing Solution | Tech Enabled B2B Platform</h1>
 <!-- Banner section start  -->
 <section class="bannerwrap">
 	<div class="banner_slider">

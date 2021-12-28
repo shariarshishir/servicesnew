@@ -377,3 +377,42 @@ $(document).on("click", ".order-query-notification" , function() {
 $("#resend-email-validtion").click(function(){
     $("#resend-email-verification-form").toggle('slow');
   });
+
+
+
+  // slick slider 
+  $('.related_products_slider').slick({
+    dots: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 1000,
+
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });

@@ -92,7 +92,8 @@
 
                     height += '';
 
-                    $('#messagedata').animate({scrollTop: (height + 10)});
+                    // $('#messagedata').animate({scrollTop: (height + 10)});
+                    $('.chat-area').animate({scrollTop: (height + 10)});
 
                     updateUserLastActivity( message_formid, message_toid );
 
@@ -139,8 +140,9 @@
                 });
 
                 height += '';
+                // $('#messagedata').animate({scrollTop: (height + 10)});
+                $('.chat-area').animate({scrollTop: (height + 10)});
 
-                $('#messagedata').animate({scrollTop: (height + 10)});
 
                 updateUserLastActivity( message_formid, message_toid );
             });
@@ -176,7 +178,9 @@
 
                     height += '';
 
-                    $('#messagedata').animate({scrollTop: (height + 10)});
+                    // $('#messagedata').animate({scrollTop: (height + 10)});
+                    $('.chat-area').animate({scrollTop: (height + 10)});
+
                 }
             });
             @if($user->user_type == "supplier")
@@ -226,7 +230,8 @@
                     $("#messagebox").removeAttr("disabled");
                     $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">'+name+'</p><p class="m-0 chat-text truncate"></p></div></div>');
                     // $("#chatheader").css('border-bottom', '2px solid #55A860');
-                    $("#messagedata").animate({ scrollTop: $('#messagedata').prop("scrollHeight")});
+                    // $("#messagedata").animate({ scrollTop: $('#messagedata').prop("scrollHeight")});
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
 
                 }
             });

@@ -18,19 +18,21 @@ class CertificationController extends Controller
 
             if(isset($request->certification_id)){
                 if(count($request->certification_id)>0){
+                    $filename =null;
                     for($i=0; $i<count($request->certification_id) ;$i++){
                         $certification=new Certification();
                         if ($request->hasFile('image'))
                         {
+                            if(isset($request->image[$i])){
+                                $extension = $request->image[$i]->getClientOriginalExtension();
+                                if($extension=='pdf' ||$extension=='PDF' || $extension=='doc'||$extension=='docx'||$extension=='DOC'||$extension=='DOCX'){
+                                    $filename = $request->image[$i]->store('images/certificates','public');
 
-                            $extension = $request->image[$i]->getClientOriginalExtension();
-                            if($extension=='pdf' ||$extension=='PDF' || $extension=='doc'||$extension=='docx'||$extension=='DOC'||$extension=='DOCX'){
-                                $filename = $request->image[$i]->store('images/certificates','public');
-
-                            }else{
-                                $filename = $request->image[$i]->store('images/certificates','public');
-                                $image_resize = Image::make(public_path('storage/'.$filename));
-                                $image_resize->save(public_path('storage/'.$filename));
+                                }else{
+                                    $filename = $request->image[$i]->store('images/certificates','public');
+                                    $image_resize = Image::make(public_path('storage/'.$filename));
+                                    $image_resize->save(public_path('storage/'.$filename));
+                                }
                             }
 
                         }
@@ -51,7 +53,7 @@ class CertificationController extends Controller
                 }
             }
 
-            $certifications = Certification::where('business_profile_id',$request->business_profile_id)->get();
+            $certifications = Certification::where('business_profile_id',$request->business_profile_id)->with('default_certification')->get();
             return response()->json([
                 'success' => true,
                 'message' => 'Certification Added',
@@ -70,7 +72,7 @@ class CertificationController extends Controller
         $businessId=$certification->business_profile_id;
         $result=$certification->delete();
         if($result){
-            $certifications = Certification::where('business_profile_id',$businessId)->get();
+            $certifications = Certification::where('business_profile_id',$businessId)->with('default_certification')->get();
             return response()->json([
                 'success' => true,
                 'message' => 'Certification deleted successfully',

@@ -187,7 +187,8 @@
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
-										<div class="certificate_img"><img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+										@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
+										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@endif
 									</div>
@@ -589,7 +590,8 @@
 										</div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@else
-										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+                                        @php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
+										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
 										<span class="certificate_title" >{{$certification->title}}</span>
 										@endif
 									</div>

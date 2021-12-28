@@ -26,18 +26,19 @@ class CertificationRequest extends FormRequest
 
         $rules = [
             'short_description.*' => 'string|max:500|nullable',
-            'issue_date.*' => 'required',
-            'expiry_date.*' => 'required',
+            // 'issue_date.*' => 'required',
+            // 'expiry_date.*' => 'required',
+            'image.*'   => 'mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF,doc,docx,DOC,DOCX|max:5120',
         ];
-        if($this->input('img_req')){
-            $nbr = count($this->input('img_req')) - 1;
-        }else{
-            $nbr =0;
-        }
+        // if($this->input('img_req')){
+        //     $nbr = count($this->input('img_req')) - 1;
+        // }else{
+        //     $nbr =0;
+        // }
 
-        foreach(range(0, $nbr) as $index) {
-            $rules['image.' . $index] = 'required|mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF,doc,docx,DOC,DOCX|max:5120';
-        }
+        // foreach(range(0, $nbr) as $index) {
+        //     $rules['image.' . $index] = 'required|mimes:jpg,jpeg,bmp,png,gif,svg,pdf,PDF,JPG,JPEG,PNG,GIF,doc,docx,DOC,DOCX|max:5120';
+        // }
 
         //cat_id
         if($this->input('certification_id_req')){

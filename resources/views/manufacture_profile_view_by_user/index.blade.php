@@ -217,7 +217,8 @@
                                             </div>
                                             <span class="certificate_title" >{{$certification->title}}</span>
                                             @else
-                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+                                            @php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
+                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
                                             <span class="certificate_title" >{{$certification->title}}</span>
                                             @endif
                                         </div>
@@ -539,7 +540,8 @@
                                             </div>
                                             <span class="certificate_title" >{{$certification->title}}</span>
                                             @else
-                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification->image) }}" alt=""></div>
+                                            @php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
+                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
                                             <span class="certificate_title" >{{$certification->title}}</span>
                                             @endif
                                         </div>
@@ -1227,7 +1229,7 @@
 							@if($business_profile->companyOverview->terms_of_service)
 								<div class="terms-of-service-with-information" >
 									<p>{{$business_profile->companyOverview->terms_of_service}}</p>
-								</div>	
+								</div>
 							@else
 								<div class="card-alert card cyan lighten-5 terms-of-service-without-information" >
 									<div class="card-content cyan-text">

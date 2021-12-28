@@ -902,10 +902,12 @@
                     html +='</div>';
                 }
                 else {
+                    var certification_image_src= certifications[i].image ? certifications[i].image : certifications[i].default_certification.logo;
+                    var image_src_with_storage="{{asset('storage')}}"+'/'+certification_image_src;
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)"  style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<div class="certificate_img">';
-                    html +='<img src="'+image+'" alt="">';
+                    html +='<img src="'+image_src_with_storage+'" alt="">';
                     html +='</div>';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                     html +='</div>';
@@ -932,7 +934,7 @@
 		        $('#loadingProgressContainer').hide();
                 $('#certification-upload-errors').empty();
                 $("#certification-upload-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
+                $.each(xhr.responseJSON.errors, function (key, item)
                 {
                     $("#certification-upload-errors").append("<div class='danger'>"+item+"</div>");
                 });
@@ -1006,10 +1008,12 @@
                                             html +='</div>';
                                         }
                                         else {
+                                            var certification_image_src= certifications[i].image ? certifications[i].image : certifications[i].default_certification.logo;
+                                            var image_src_with_storage="{{asset('storage')}}"+'/'+certification_image_src;
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';
-                                            html +='<img src="'+image+'" alt="">';
+                                            html +='<img src="'+image_src_with_storage+'" alt="">';
                                             html +='</div>';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';
                                             html +='</div>';

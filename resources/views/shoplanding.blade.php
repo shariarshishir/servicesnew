@@ -2,7 +2,7 @@
 @extends('layouts.app_containerless')
 
 @section('content')
-
+<h1 style="display: none;">MerchantBay | Global B2B Marketplace | RMG Sourcing Solutions</h1>
 <!-- Banner section start  -->
 <section class="bannerwrap">
 	<div class="banner_slider">
@@ -197,7 +197,7 @@
         <div class="container">
             <div class="clear30" style="height: 0px; margin-bottom: 48px;"></div>
             <div>
-                <h1 class="homebHd mb20">PERFORM AT YOUR BEST WITH EASE</h1>
+                <h2 class="homebHd mb20">PERFORM AT YOUR BEST WITH EASE</h2>
                 <p class="homepgp mb50" style="margin-bottom: 50px;" >Over 1000 suppliers and buyers can search, connect and manage their business with our 3-dimensional  sourcing platform</P>
             </div>
         </div>
@@ -261,7 +261,7 @@
                     <!--right-->
                     <div class="col s12 m12 l8 plr0" id="suppliercontent">
                         <div class="row">
-                            <h1 class="homebHd-sm mb20 mtop30">Adapt to the Smart and Credible way to present your business</h1>
+                            <h2 class="homebHd-sm mb20 mtop30">Adapt to the Smart and Credible way to present your business</h2>
                             <p class="homepgp-sm mb30">Open a Digital Profile on Merchant Bay to be on the niche Search Engine of Bangladesh manufacturing industry and get Verified to be noticed and win trust of buyers.</P>
                         </div>
                         <div class="clear"></div>
@@ -270,41 +270,13 @@
                     </div>
                     <div class="col s12 m12 l8 plr0" id="buyercontent" style="display: none;">
                         <div class="row">
-                            <h1 class="homebHd-sm mb20 mtop30">The most reliable way to find and manage a supplier in Bangladesh</h1>
+                            <h2 class="homebHd-sm mb20 mtop30">The most reliable way to find and manage a supplier in Bangladesh</h2>
                             <p class="homepgp-sm mb30">Send your inquiry through RFQ (Request For Quotation) and let our smart matching system find the best matched suppliers to quote you, along with instant quotation you will have the advantage of connecting to Verified Suppliers, Order Management Dashboard and Merchandising Assistance.</P>
                         </div>
                         <div class="clear"></div>
                         <img src="{{asset('images/homepage/profile_mockup.png')}}" alt="" class="img-responsive">
                         <div class="clear20"></div>
                     </div>
-                    <!-- <div class="col-md-8 plr0" id="normalcontent">
-                        <ul class="nav nav-tabs bs-tab">
-                            <li class="active"><a data-toggle="tab" href="#buyerstab">Suppliers</a></li>
-                            <li><a data-toggle="tab" href="#supplierstab">Buyers</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div id="buyerstab" class="tab-pane fade in active">
-                                <div class="row">
-                                    <h1 class="homebHd-sm mb20 mtop30">Adapt to the Smart and Credible way to present your business</h1>
-                                    <p class="homepgp-sm mb30">Open a Digital Profile on Merchant Bay to be on the niche Search Engine of Bangladesh manufacturing industry and get Verified to be noticed and win trust of buyers.</P>
-                                </div>
-                                <div class="clear"></div>
-                                <img src="images/buyers-tab-img.png" alt="" class="img-responsive">
-                                <div class="clear20"></div>
-                            </div>
-
-                            <div id="supplierstab" class="tab-pane fade">
-                                <div class="row">
-                                    <h1 class="homebHd-sm mb20 mtop30">The most reliable way to find and manage a supplier in Bangladesh</h1>
-                                    <p class="homepgp-sm mb30">Send your inquiry through RFQ (Request For Quotation) and let our smart matching system find the best matched suppliers to quote you, along with instant quotation you will have the advantage of connecting to Verified Suppliers, Order Management Dashboard and Merchandising Assistance.</P>
-                                </div>
-                                <div class="clear"></div>
-                                <img src="images/supplier-tab.png" alt="" class="img-responsive">
-                                <div class="clear20"></div>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="col s12 m12 l8 plr0" style="display: none;" id="thirdpartycontent">
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Third Party Verification<br></b></P>

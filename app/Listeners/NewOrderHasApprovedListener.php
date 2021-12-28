@@ -13,7 +13,7 @@ use App\Mail\NewOrderPlaceMailToBuyer;
 use App\Mail\NewOrderPlaceMailToSeller;
 
 
-class NewOrderHasApprovedListener 
+class NewOrderHasApprovedListener implements ShouldQueue
 {
 
     public function handle($event)
@@ -21,10 +21,10 @@ class NewOrderHasApprovedListener
       
         // Mail sending to wholesaler after approved the order from admin
         Mail::to($event->order->businessProfile->user->email)->send(new NewOrderPlaceMailToSeller($event->order));
-        // Notification::send($event->order->businessProfile->user,new NewOrderHasApprovedNotification($event->order));
+        Notification::send($event->order->businessProfile->user,new NewOrderHasApprovedNotification($event->order));
 
         // Mail sending to buyer after approved the order from admin
-        // Mail::to($event->order->user->email)->send(new NewOrderPlaceMailToBuyer($event->order));
-        // Notification::send($event->order->user,new NewOrderHasApprovedNotification($event->order));
+        Mail::to($event->order->user->email)->send(new NewOrderPlaceMailToBuyer($event->order));
+        Notification::send($event->order->user,new NewOrderHasApprovedNotification($event->order));
     }
 }

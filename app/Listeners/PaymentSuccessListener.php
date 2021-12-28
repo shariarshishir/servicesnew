@@ -33,7 +33,7 @@ class PaymentSuccessListener implements ShouldQueue
         //to admin
         $admin=Admin::find(1);
         Notification::send($admin,new PaymentSuccessNotification($event->order,'admin'));
-        Mail::to('success@merchantbay.com')->send(new PaymentSuccessMail($event->order, 'admin'));
+        Mail::to('no-reply@merchantbay.com')->send(new PaymentSuccessMail($event->order, 'admin'));
         //to user
         Notification::send($event->order->user,new PaymentSuccessNotification($event->order,'user'));
         Mail::to($event->order->user->email)->send(new PaymentSuccessMail($event->order, 'user'));

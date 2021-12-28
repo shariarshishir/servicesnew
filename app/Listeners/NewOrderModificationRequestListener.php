@@ -18,7 +18,7 @@ class NewOrderModificationRequestListener implements ShouldQueue
 
         $admin=Admin::find(1);
         Notification::send($admin,new NewOrderModificationRequestNotification($event->orderModificationRequest->id));
-        Mail::to('success@merchantbay.com')->send(new NewOrderModificationRequestMail($event->orderModificationRequest));
+        Mail::to('no-reply@merchantbay.com')->send(new NewOrderModificationRequestMail($event->orderModificationRequest));
 
     }
 }

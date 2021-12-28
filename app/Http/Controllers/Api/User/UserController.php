@@ -507,6 +507,7 @@ class UserController extends Controller
     // user registration from sso
     public function signUp(Request $request)
     {
+        
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -535,7 +536,7 @@ class UserController extends Controller
             'is_email_verified' => 1,
         ]);
 
-       if($request->user_flag == 'service'){
+       if($request->user_flag == 'global'){
 
             $token = Str::random(64);
             UserVerify::create([

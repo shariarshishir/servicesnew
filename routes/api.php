@@ -82,7 +82,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::delete('/user/{userId}', [UserController::class, 'destroy']);
     Route::post('/logout', [UserController::class, 'logout']);
     Route::post('/profile-image-upload', [UserController::class, 'updateImage']);
-  
+
     //business profile
     Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
@@ -97,19 +97,19 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     Route::post('/certifications', [CertificationController::class, 'certificationDetailsUpload']);
     Route::get('/certifications/{id}', [CertificationController::class, 'deleteCertificate']);
-    
+
     Route::post('/main-buyers', [MainBuyerController::class, 'mainBuyerDetailsUpload']);
     Route::get('/main-buyers/{id}', [MainBuyerController::class, 'deleteMainBuyer']);
 
     Route::post('/association-memberships', [AssociationMembershipController::class, 'associationMembershipDetailsUpload']);
     Route::get('/association-memberships/{id}', [AssociationMembershipController::class, 'deleteAssociationMembership']);
-    
+
     Route::post('/export-destinations', [ExportDestinationController::class, 'exportDestinationDetailsUpload']);
     Route::get('/export-destinations/{id}', [ExportDestinationController::class, 'deleteExportDestination']);
-    
+
     Route::post('/press-highlights', [PressHighlightController::class, 'pressHighlightDetailsUpload']);
     Route::get('/press-highlights/{id}', [PressHighlightController::class, 'deletePressHighlight']);
-    
+
 
     Route::post('/business-term-create-or-update', [BusinessTermController::class, 'businessTermsCreateOrUpdate']);
     Route::post('/sampling-create-or-update', [SamplingController::class, 'samplingCreateOrUpdate']);
@@ -117,7 +117,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/sustainability-commitment-create-or-update', [SustainabilityCommitmentController::class, 'sustainabilityCommitmentCreateOrUpdate']);
     Route::post('/worker-walfare-create-or-update', [WalfareController::class, 'walfareCreateOrUpdate']);
     Route::post('/securtiy-create-or-update', [SecurityController::class, 'securityCreateOrUpdate']);
-   
+
     Route::post('/factory-tour',[FactoryTourController::class,'createFactoryTour']);
     Route::post('/factory-tour-edit',[FactoryTourController::class,'updateFactoryTour']);
     Route::get('/factory-tour/business-profile/{id}',[FactoryTourController::class,'factoryTourDetails']);
@@ -132,14 +132,14 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/product/reviews',[ReviewController::class,'createProductReview']);
     Route::post('/store/reviews',[ReviewController::class,'createVendorReview']);
 
-    
+
     //wishlist api
     Route::post('/add-to-wishlist',[WishlistController::class,'addToWishlist']);
     Route::get('/wishlist',[WishlistController::class,'index']);
     Route::get('/wishlist-products-id',[WishlistController::class,'wishListedProductsId']);
-    
+
     Route::post('/delete-wishlist-item',[WishlistController::class,'wishListItemDelete']);
-    
+
 
     //rfq api
     Route::post('/rfqs', [RFQController::class, 'store']);
@@ -147,7 +147,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     Route::get('/rfqs', [RFQController::class, 'index']);
     Route::get('/my-rfq-list', [RFQController::class, 'myRfqList']);
-    
+
 
     //manufacture product api
     Route::post('/manufacture-products', [ManufactureProductController::class, 'store']);
@@ -182,9 +182,12 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //notification
     Route::post('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);
+    //message center
+    Route::post('/getchatdata',[MessageController::class,'getchatdata']);
+    Route::get('/message-center',[MessageController::class,'message_center']);
 });
 
-Route::post('/getchatdata',[MessageController::class,'getchatdata']);
+
 
 //country list api
 Route::get('/countries', [OrderController::class, 'countries']);

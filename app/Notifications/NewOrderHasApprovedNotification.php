@@ -20,6 +20,7 @@ class NewOrderHasApprovedNotification extends Notification
      */
     public function __construct($order)
     {
+       
         $this->order=$order;
     }
 

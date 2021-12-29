@@ -65,9 +65,9 @@
                     @endforeach
                 </table>
                 <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;padding-bottom:15px;">Paid Amount: $ {{$order->pay_amount}}</p>
-                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('vendor.order.show',['vendor' => $order->vendor_id, 'order' => $order->id]) }}">Click here to see the full details</a></p>
+                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('business.profile.order.show',['business_profile_id' => $order->business_profile_id, 'order_id' => $order->id]) }}">Click here to see the full details</a></p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;line-height:normal;">......</p>
-                <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Contact User: <a href="mailto:{{ $order->user->email }}">{{ $order->user->email }}</a>. Call:{{ $order->user->phone }}. Address: {{ $order->user->vendor->vendor_address }} </p>
+                <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Contact User: <a href="mailto:{{ $order->user->email }}">{{ $order->user->email }}</a>. Call:{{ $order->user->phone }}. </p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Thank you</p>
                 @endif
 

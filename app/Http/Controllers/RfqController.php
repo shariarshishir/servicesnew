@@ -73,8 +73,6 @@ class RfqController extends Controller
                 if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
                     $path=$product_image->store('images','public');
-
-
                 }
                 else{
                     $path=$product_image->store('images','public');
@@ -84,9 +82,9 @@ class RfqController extends Controller
                 RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
             }
         }
-
-        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
-        // event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail));
+        $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
+        $allSelectedUsersToSendMail = BusinessProfile::with('user')->take(5)->get();
+        event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail,$rfq));
         // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
         //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         // }

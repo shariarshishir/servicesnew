@@ -37,7 +37,7 @@ class PaymentSuccessNotification extends Notification
             'title' => "Payment Success",
             'notification_data'=> $this->order->id,
             'notification_type'=>"PaymentSuccess",
-            'url' => $this->user_type== 'admin' ? route('vendor.order.show',['vendor' => $this->order->vendor_id, 'order' => $this->order->id]) : route('order.index'),
+            'url' => $this->user_type== 'admin' ? route('business.profile.order.show',['business_profile_id' => $this->order->business_profile_id, 'order_id' => $this->order->id]) : route('order.index'),
         ];
     }
 }

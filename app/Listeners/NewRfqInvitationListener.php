@@ -8,6 +8,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Rfq;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqInvitationMail;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewRfqNotification;
 
 class NewRfqInvitationListener implements ShouldQueue
 {
@@ -30,28 +32,26 @@ class NewRfqInvitationListener implements ShouldQueue
     public function handle($event)
     {
         
-        $supplier=$event->selectedUserToSendMail;
+        $user=$event->selectedUserToSendMail;
         $rfq=$event->rfq;
-        if($supplier=="success@merchantbay.com"){
+        if($user=="success@merchantbay.com"){
             $data=[
-                'supplier'=>$supplier,
+                'supplier'=>$user,
                 'rfq'=>$rfq,
-                'url'=>"/manage-rfq"
+                'url'=>"/rfq"
             ];
-            Mail::to($supplier)->send(new NewRfqInvitationMail($data));
-            // Notification::send($supplier,new NewRfqNotification($data));
+            Mail::to($user)->send(new NewRfqInvitationMail($data));
         }
         else{
-
-            foreach($supplier as $userData){
-                $data=[
-                    'supplier'=>$userData->user->name,
-                    'rfq'=>$rfq,
-                    'url'=>"/manage-rfq"
-                ];
-                Mail::to($userData->user->email)->send(new NewRfqInvitationMail($data));
-            }
-            // Notification::send($supplier,new NewRfqNotification($data));
+            $data=[
+                'supplier'=>$user->name,
+                'rfq'=>$rfq,
+                'url'=>"/rfq"
+            ];
+            
+            Mail::to($user->email)->send(new NewRfqInvitationMail($data));
+            Notification::send($user,new NewRfqNotification($data));
+    
         }
 
     }

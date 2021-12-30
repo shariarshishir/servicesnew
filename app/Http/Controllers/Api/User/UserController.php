@@ -33,7 +33,7 @@ class UserController extends Controller
         $user = User::with('businessProfile')->where('id',$userId)->where('is_email_verified',1)->first();
         $totalWishlist=count($user->productWishlist);
         $totalOrderPlacedByUser = count($user->vendorOrder);
-        $orderQueries = OrderModificationRequest::with('orderModification')->where(['user_id' => auth()->id(), 'type' => 1])->get();
+        $orderQueries = OrderModificationRequest::where(['user_id' => $userId, 'type' => 1])->get();
         $totalOrderQueries = count($orderQueries);
         if(isset($user))
         {

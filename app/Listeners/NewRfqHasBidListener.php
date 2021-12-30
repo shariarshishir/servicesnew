@@ -5,10 +5,14 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Rfq;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqHasBidMail;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\RfqBidNotification;
 
-class NewRfqHasBidListener implements ShouldQueue
+
+class NewRfqHasBidListener  implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -32,15 +36,20 @@ class NewRfqHasBidListener implements ShouldQueue
         $data=[
             'supplier'=>$supplier,
             'bidData'=>$event->bidData,
+            'url'=>"/rfq"
         ];
         if($supplier=="success@merchantbay.com"){
+           
             Mail::to($supplier)->send(new NewRfqHasBidMail($data));
-            // Notification::send($supplier,new NewRfqNotification($data));
+           
+        }else{
+            
+            Mail::to($supplier->user->email)->send(new NewRfqHasBidMail($data));
+            Notification::send($supplier->user,new RfqBidNotification($data));
+
         }
-        else{
-            // Notification::send($supplier,new NewRfqNotification($data));
-            Mail::to($event->selectedUserToSendMail->user->email)->send(new NewRfqHasBidMail($data));
-        }
+        
+        
 
     }
 }

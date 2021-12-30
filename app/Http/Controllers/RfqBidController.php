@@ -95,11 +95,13 @@ class RfqBidController extends Controller
             $allData['media'] = json_encode($image_path);
             $bidData=SupplierBid::create($allData);
 
+            //send mail to the user who had created rfq
             $selectedUserToSendMail= $rfq;
             event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
 
-            //$selectedUserToSendMail="success@merchantbay.com";
-            //event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+            //send mail to merchantbay
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
 
             return response()->json([
                 'success' => true,

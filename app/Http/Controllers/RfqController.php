@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rfq;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -83,14 +84,15 @@ class RfqController extends Controller
             }
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
-        $allSelectedUsersToSendMail = BusinessProfile::with('user')->take(5)->get();
-        event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail,$rfq));
-        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        // }
+        $selectedUsersToSendMail = User::take(5)->get();
+       
+        foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        }
 
-        // $selectedUserToSendMail="success@merchantbay.com";
-        // event(new NewRfqHasAddedEvent($selectedUserToSendMail));
+        $selectedUserToSendMail="success@merchantbay.com";
+        event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 

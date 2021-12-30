@@ -171,6 +171,22 @@
 										<div class="text-muted text-sm">{{$notification->created_at}}</div>
 									</div>
 								</a>
+								@elseif ($notification->type =='App\Notifications\NewRfqNotification')
+								<a href="{{ $notification->data['url'] }}" >
+									<i class="fas fa-envelope mr-2"></i>
+									<div class="admin-notification-content">
+									<div class="admin-notification-title">{{$notification->data['title']}}</div>
+									<div class="text-muted text-sm">{{$notification->created_at}}</div>
+									</div>
+								</a>
+								@elseif ($notification->type =='App\Notifications\RfqBidNotification')
+								<a href="{{ $notification->data['url'] }}" >
+									<i class="fas fa-envelope mr-2"></i>
+									<div class="admin-notification-content">
+									<div class="admin-notification-title">{{$notification->data['title']}}</div>
+									<div class="text-muted text-sm">{{$notification->created_at}}</div>
+									</div>
+								</a>
 								@endif
 							@endforeach
 						</li>
@@ -415,6 +431,22 @@
 									</div>
 								</a>
 								@elseif ($notification->type == 'App\Notifications\PaymentSuccessNotification')
+								<a href="{{ $notification->data['url'] }}" >
+									<i class="fas fa-envelope mr-2"></i>
+									<div class="admin-notification-content">
+									<div class="admin-notification-title">{{$notification->data['title']}}</div>
+									<div class="text-muted text-sm">{{$notification->created_at}}</div>
+									</div>
+								</a>
+								@elseif ($notification->type =='App\Notifications\NewRfqNotification')
+								<a href="{{ $notification->data['url'] }}" >
+									<i class="fas fa-envelope mr-2"></i>
+									<div class="admin-notification-content">
+									<div class="admin-notification-title">{{$notification->data['title']}}</div>
+									<div class="text-muted text-sm">{{$notification->created_at}}</div>
+									</div>
+								</a>
+								@elseif ($notification->type =='App\Notifications\RfqBidNotification')
 								<a href="{{ $notification->data['url'] }}" >
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">

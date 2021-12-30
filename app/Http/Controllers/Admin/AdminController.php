@@ -9,6 +9,7 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
@@ -221,70 +222,155 @@ class AdminController extends Controller
         return response()->json(["error"=>0, "barCategories"=>array_values($barCategories), "barData"=>array_values($barData), "totalUsers"=>$totalUsers, "msg"=> "data collected successfully!"]);
     }
 
-    public function getUsersBasedOnSelectedParams(Request $request) {
+    public function getUsersBasedOnSelectedParams(Request $request) 
+    {
         
-        //dd($request->all());
-
         $selectedYear = $request->selectedYear;
         $selectedMonth = $request->selectedMonth;
-        return response()->json(["status"=>1, "message"=>"Users list coming soon..."]);
-        /*
-        if($request->verifyVal == 1)
+        $timezone ="Asia/Dhaka";
+
+        $d = new DateTime($selectedYear.$selectedMonth.'01', new DateTimeZone($timezone));
+        $rangeStart = $d->format('Y-m-d');
+        $rangeEnd = $d->format('Y-m-t');
+        $rows = User::whereBetween('created_at', [$rangeStart, $rangeEnd])->get();
+        $rowsCount = count($rows);
+        $html = "";
+
+        if(!empty($rows) && $rowsCount > 0)
         {
-            $company_overview = CompanyOverview::findOrFail($request->companyId);
-            $company_overview_data = json_decode($company_overview->data);
-            $data=[];
-            foreach($company_overview_data as $value)
+            $html .= '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">';
+            $html .=  '<thead>';
+            $html .= '<tr>';
+            $html .= '<th>Name</th>';
+            $html .= '<th>Email</th>';
+            $html .= '<th>Phone</th>';
+            $html .= '<th>Company Name</th>';
+            $html .= '</tr>';
+            $html .= '</thead>';
+            $html .= '<tbody>';            
+            foreach($rows as $row)
             {
-                array_push($data,['name' => $value->name, 'value' => $value->value, 'status' => "1"]);
+                $html .= '<tr>';
+                $html .= '<td>'.$row->name.'</td>';
+                $html .= '<td>'.$row->email.'</td>';
+                $html .= '<td>'.$row->phone.'</td>';
+                $html .= '<td>'.$row->company_name.'</td>';
+                $html .= '</tr>';
             }
-            $company_overview->update(['data' => $data]);  
-            
-            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
-            if( $businessProfileVerification )
-            {
-                $businessProfileVerification->company_overview = 1;
-                $businessProfileVerification->save();
-            }
-            else{
-                $businessProfileVerification =new BusinessProfileVerification();
-                $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
-                $businessProfileVerification->company_overview = 1;
-                $businessProfileVerification->save();
-            }            
+            $html .= '</tbody>';
+            $html .= '</table>';
         }
         else 
         {
-            $company_overview = CompanyOverview::findOrFail($request->companyId);
-            $company_overview_data = json_decode($company_overview->data);
-            $data=[];
-            foreach($company_overview_data as $value)
-            {
-                array_push($data,['name' => $value->name, 'value' => $value->value, 'status' => "0"]);
-            }
-            $company_overview->update(['data' => $data]); 
-
-            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
-            if( $businessProfileVerification )
-            {
-                $businessProfileVerification->company_overview = 0;
-                $businessProfileVerification->save();
-            }
-            else{
-                $businessProfileVerification =new BusinessProfileVerification();
-                $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
-                $businessProfileVerification->company_overview = 0;
-                $businessProfileVerification->save();
-            }            
+            $html .= "No data found!";
         }
 
-        $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
-        $businessProfile->is_business_profile_verified = $request->verifyVal;
-        $businessProfile->profile_verified_by_admin = Auth::guard('admin')->user()->id ;
-        $businessProfile->save();
+        return response()->json(["status"=>1, 'data'=>$html, 'datacount'=>$rowsCount, "message"=>"data collected successfully!"]);
+    
+    }
+    
+    public function lastTwoWeeksActivedUsers(Request $request)
+    {
+        //dd(Carbon::now()->subDays(14));
+        //dd(Carbon::now());
+        
+        //$rangeStart = "2021-12-01";
+        //$rangeEnd = "2021-12-14";
 
-        return response()->json(["status"=>1, "message"=>"verified successfully"]);
-        */
+        $rangeStart = Carbon::now()->subDays(30)->format('Y-m-d');
+        $rangeEnd = Carbon::now()->format('Y-m-d');
+        
+        $timezone ="Asia/Dhaka"; 
+        $totalUsers = 0;
+        $barCategories = $barData = array();       
+
+        $oStart = new DateTime($rangeStart, new DateTimeZone($timezone));
+        $oEnd = clone $oStart;
+        $oEnd->add(new DateInterval("P1M"));
+        
+        while ($oStart->getTimestamp() < $oEnd->getTimestamp()) {
+            $k = $oStart->format('Ymd');
+            $barData[$k] = 0;
+            $barCategories[] = $oStart->format('M d');
+            $oStart->add(new DateInterval("P1D"));
+        }
+
+        $rows = User::whereBetween('last_activity', [$rangeStart, $rangeEnd])->get();
+        //dd($rows);
+        //$rows = User::whereDate('last_activity','>=',Carbon::now()->subdays(30))->get();
+        $totalUsers = count($rows);
+
+        if(!empty($rows))
+        {
+            foreach($rows as $row)
+            {
+                $tmpDateObj = new DateTime($row->last_activity, new DateTimeZone($timezone));
+                foreach($barData as $k => $v)
+                {
+                    if($tmpDateObj->format('Ymd')==$k){
+                        $tmp = $v;
+                        $v = $tmp+1;
+                    }
+                    
+                    $barData[$k] = $v;
+                }
+                
+                //echo '<pre>';
+                //print_r($barCategories);
+                //print_r($barData);
+            }
+        }        
+
+        return response()->json(["error"=>0, "barCategories"=>array_values($barCategories), "barData"=>array_values($barData), "totalUsers"=>$totalUsers, "msg"=> "data collected successfully!"]);
+    }    
+
+    public function getUsersBasedOnActivityParams(Request $request) 
+    {
+        
+        $rangeStart = Carbon::now()->subDays(30)->format('Y-m-d');
+        $rangeEnd = Carbon::now()->format('Y-m-d');
+        $timezone ="Asia/Dhaka";
+
+        //$d = new DateTime($selectedYear.$selectedMonth.'01', new DateTimeZone($timezone));
+        //$rangeStart = $d->format('Y-m-d');
+        //$rangeEnd = $d->format('Y-m-t');
+        $rows = User::whereBetween('last_activity', [$rangeStart, $rangeEnd])->get();
+        $rowsCount = count($rows);
+        $html = "";
+
+        if(!empty($rows) && $rowsCount > 0)
+        {
+            $html .= '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">';
+            $html .=  '<thead>';
+            $html .= '<tr>';
+            $html .= '<th>Name</th>';
+            $html .= '<th>Email</th>';
+            $html .= '<th>Phone</th>';
+            $html .= '<th>Company Name</th>';
+            $html .= '<th>Last Activity</th>';
+            $html .= '</tr>';
+            $html .= '</thead>';
+            $html .= '<tbody>';            
+            foreach($rows as $row)
+            {
+                $html .= '<tr>';
+                $html .= '<td>'.$row->name.'</td>';
+                $html .= '<td>'.$row->email.'</td>';
+                $html .= '<td>'.$row->phone.'</td>';
+                $html .= '<td>'.$row->company_name.'</td>';
+                $html .= '<td>'.$row->last_activity.'</td>';
+                $html .= '</tr>';
+            }
+            $html .= '</tbody>';
+            $html .= '</table>';
+        }
+        else 
+        {
+            $html .= "No data found!";
+        }
+
+        return response()->json(["status"=>1, 'data'=>$html, 'datacount'=>$rowsCount, "message"=>"data collected successfully!"]);
+    
     }    
 
 }

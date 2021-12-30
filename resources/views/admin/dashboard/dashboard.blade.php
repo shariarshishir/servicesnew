@@ -1,9 +1,6 @@
 
 @extends('layouts.admin')
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 @section('content')
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -51,51 +48,67 @@
 
 				</div>
 				
-				<div class="row" style="display: none;">
-					<div class="col-md-12">
-						<select name="stats_year" id="stats_year" class="statistics-list">
-							<option value="2017">2017</option>
-							<option value="2018">2018</option>
-							<option value="2019">2019</option>
-							<option value="2020">2020</option>
-							<option value="2021" selected="selected">2021</option>
-						</select>
-						<select name="stats_month" id="stats_month" class="statistics-list">
-							<option value="">All</option>
-							<option value="01">Jan</option>
-							<option value="02">Feb</option>
-							<option value="03">Mar</option>
-							<option value="04">Apr</option>
-							<option value="05">May</option>
-							<option value="06">Jun</option>
-							<option value="07">Jul</option>
-							<option value="08">Aug</option>
-							<option value="09">Sep</option>
-							<option value="10">Oct</option>
-							<option value="11">Nov</option>
-							<option value="12" selected="selected">Dec</option>
-						</select>		
-						<a href="javascript:void(0);" class="show-users-list-trigger">Show list</a>
-						<div class="modal fade" id="user-list-modal">
-							<div class="modal-dialog modal-lg" role="document">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="data-filter-bar">
+							<select name="stats_year" id="stats_year" class="statistics-list">
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021" selected="selected">2021</option>
+							</select>
+							<select name="stats_month" id="stats_month" class="statistics-list">
+								<option value="">All</option>
+								<option value="01">Jan</option>
+								<option value="02">Feb</option>
+								<option value="03">Mar</option>
+								<option value="04">Apr</option>
+								<option value="05">May</option>
+								<option value="06">Jun</option>
+								<option value="07">Jul</option>
+								<option value="08">Aug</option>
+								<option value="09">Sep</option>
+								<option value="10">Oct</option>
+								<option value="11">Nov</option>
+								<option value="12" selected="selected">Dec</option>
+							</select>		
+							<a href="javascript:void(0);" class="show-users-list-trigger">Show registered users list</a>
+							<div class="modal fade" id="user-list-modal">
+								<div class="modal-dialog modal-xl" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="userListModalLabel">User List</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="selected-users-list-block"></div>
+										</div>
+									</div>
+								</div>
+							</div>							
+						</div>
+						<div id="registered-userschartbar-container" style="margin: 0 auto;"></div>
+					</div>
+					<div class="col-md-6">
+						<a href="javascript:void(0);" class="show-active-users-list-trigger">Show active users list</a>
+						<div class="modal fade" id="active-users-list-modal">
+							<div class="modal-dialog modal-xl" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="userListModalLabel">User List</h5>
+										<h5 class="modal-title" id="ActiveUsersListModalLabel">User List</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-body">
-										<div class="selected-users-list-block"></div>
+										<div class="active-users-list-block"></div>
 									</div>
 								</div>
 							</div>
 						</div>						
-
-
-						<div id="registered-userschartbar-container" style="margin: 0 auto;"></div>
-					</div>
-					<div class="col-md-12">
 						<div id="active-userschartbar-container" style="margin: 0 auto;"></div>
 					</div>
 				</div>
@@ -108,10 +121,10 @@
 
 @push('js')
 <script>
-var bar_chart, xhr;
+var area_chart, bar_chart, xhr, xhr2;
 $(document).ready(function () {
 
-    bar_chart = Highcharts.chart('registered-userschartbar-container', {
+    area_chart = Highcharts.chart('registered-userschartbar-container', {
 		chart: {
 			type: 'area',
 			//width: $(window).width() - 100,
@@ -165,7 +178,8 @@ $(document).ready(function () {
 		}]
     });
 
-    $.fn.getStatsData = function() {
+    $.fn.getStatsData = function() 
+	{
 		// if there is a previous ajax search, then we abort it and then set xhr to null
 			if( xhr != null ) {
 				xhr.abort();
@@ -207,37 +221,38 @@ $(document).ready(function () {
 			},
 			dataType: 'json',
 			beforeSend: function(){
-				bar_chart.showLoading();
+				area_chart.showLoading();
 			},
 			complete: function(){
 			},
 			success: function(response){
 				console.log(response);
-				bar_chart.hideLoading();
+				area_chart.hideLoading();
 				
 				if(response.error==0){
 
-					bar_chart.xAxis[0].setCategories(response.barCategories);
-					bar_chart.series[0].setData(response.barData);
+					area_chart.xAxis[0].setCategories(response.barCategories);
+					area_chart.series[0].setData(response.barData);
 					
 					if(all_month_val==1){
-						bar_chart.xAxis[0].setTitle({text: 'Months'});
+						area_chart.xAxis[0].setTitle({text: 'Months'});
 					}
 					else {
-						bar_chart.xAxis[0].setTitle({text: 'Days'});
+						area_chart.xAxis[0].setTitle({text: 'Days'});
 					}
 
 				}
 			}
 		})  
-    }
+    };
     
     $.fn.getStatsData();
 	$('#stats_year, #stats_month').change(function(){
 		$.fn.getStatsData();
     });
 
-	$(".show-users-list-trigger").click(function(){
+	$(".show-users-list-trigger").click(function()
+	{
 		var selectedYear = $("#stats_year").val();
 		var selectedMonth = $("#stats_month").val();
 		var url = '{{ route("get.userslist.basedonselectedparams") }}';
@@ -249,56 +264,60 @@ $(document).ready(function () {
 				//$('.loading-message').html("Please Wait.");
 				//$('#loadingProgressContainer').show();
 			},
-			success:function(data)
+			success:function(response)
 			{
 				$('#user-list-modal').modal('show');
-				$(".selected-users-list-block").html(data.message);
+				$(".selected-users-list-block").html(response.data);
 			}
 		});
-	})	
-	/*
-	Highcharts.chart('registered-userschartbar-container', {
+	});
+	$('#user-list-modal').on('hidden.bs.modal', function () {
+    	$(".selected-users-list-block").html();
+	});
+
+	// bar chart start
+
+    bar_chart = Highcharts.chart('active-userschartbar-container', {
 		chart: {
-			type: 'column'
+			type: 'line',
+			//width: $(window).width() - 100,
+			height: 400
 		},
 		title: {
-			text: 'Registered Users'
+			text: 'Monthly active users'
 		},
-		subtitle: {
-			text: 'Source: merchantbay.com'
+		credits: {
+			enabled: false
+		},
+		legend: {
+			enabled: false
 		},
 		xAxis: {
-			categories: [
-				'Jan',
-				'Feb',
-				'Mar',
-				'Apr',
-				'May',
-				'Jun',
-				'Jul',
-				'Aug',
-				'Sep',
-				'Oct',
-				'Nov',
-				'Dec'
-			],
+			categories: [],
 			crosshair: true
 		},
 		yAxis: {
+			allowDecimals: false,
 			min: 0,
 			title: {
-				text: 'Rainfall (mm)'
+				text: 'Number of Users'
+			}
+		},
+		loading: {
+			labelStyle: {
+				color: '#333333'
+			},
+			style: {
+				"position": "absolute", "backgroundColor": "#ffffff", "opacity": 0.9, "textAlign": "center"
 			}
 		},
 		tooltip: {
-			headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-			pointFormat: '<tr><td style="padding:0; line-height: normal;">{point.y:.1f} users</td></tr>',
+			headerFormat: '<span style="font-size:12px"><b>{point.key}</b></span><table>',
+			pointFormat: '<tr><td style="color:{series.color};padding:0">Users: </td>' +
+			'<td style="padding:0"><b>{point.y}</b></td></tr>',
 			footerFormat: '</table>',
 			shared: true,
-			useHTML: true,
-			style: {
-				pointerEvents: 'auto'
-			}
+			useHTML: true
 		},
 		plotOptions: {
 			column: {
@@ -307,67 +326,79 @@ $(document).ready(function () {
 			}
 		},
 		series: [{
-			name: 'Monthly registered users',
-			data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+			name: 'Weeks',
+			data: []
 		}]
-	});
-	*/
+    });
+
+    $.fn.getLastTwoWeeksActiveUserStatsData = function() 
+	{
+		// if there is a previous ajax search, then we abort it and then set xhr to null
+		if( xhr2 != null ) {
+			xhr2.abort();
+			xhr2 = null;
+		}
+		
+		var last_two_weeks = 2;
+		xhr2 = $.ajax({
+			type: 'get',
+			url: '{{ route("get.last.twoweeks.active.users") }}',
+			data: {
+				last_two_weeks: last_two_weeks
+			},
+			dataType: 'json',
+			beforeSend: function(){
+				bar_chart.showLoading();
+			},
+			complete: function(){
+			},
+			success: function(response){
+				console.log(response);
+				bar_chart.hideLoading();
+
+				if(response.error==0){
+
+					bar_chart.xAxis[0].setCategories(response.barCategories);
+					bar_chart.series[0].setData(response.barData);
+					bar_chart.xAxis[0].setTitle({text: 'Days'});
+
+				}
+				
+			}
+		})  
+    };
+    
+    $.fn.getLastTwoWeeksActiveUserStatsData();
 	/*
-	Highcharts.chart('active-userschartbar-container', {
-		chart: {
-			type: 'column'
-		},
-		title: {
-			text: 'Active Users'
-		},
-		subtitle: {
-			text: 'Source: merchantbay.com'
-		},
-		xAxis: {
-			categories: [
-				'Jan',
-				'Feb',
-				'Mar',
-				'Apr',
-				'May',
-				'Jun',
-				'Jul',
-				'Aug',
-				'Sep',
-				'Oct',
-				'Nov',
-				'Dec'
-			],
-			crosshair: true
-		},
-		yAxis: {
-			min: 0,
-			title: {
-				text: 'Rainfall (mm)'
-			}
-		},
-		tooltip: {
-			headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-			pointFormat: '<tr><td style="padding:0; line-height: normal;">{point.y:.1f} users</td></tr>',
-			footerFormat: '</table>',
-			shared: true,
-			useHTML: true,
-			style: {
-				pointerEvents: 'auto'
-			}
-		},
-		plotOptions: {
-			column: {
-				pointPadding: 0.2,
-				borderWidth: 0
-			}
-		},
-		series: [{
-			name: 'Last 2 weeks active users',
-			data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
-		}]
-	});
+	$('#stats_year, #stats_month').change(function(){
+		$.fn.getLastTwoWeeksActiveUserStatsData();
+    });
 	*/
+
+	$(".show-active-users-list-trigger").click(function()
+	{
+		var last_two_weeks = 2;
+		var url = '{{ route("get.userslist.basedonactivityparams") }}';
+		$.ajax({
+			method: 'get',
+			data: {last_two_weeks:last_two_weeks},
+			url: url,
+			beforeSend: function() {
+				//$('.loading-message').html("Please Wait.");
+				//$('#loadingProgressContainer').show();
+			},
+			success:function(response)
+			{
+				$('#active-users-list-modal').modal('show');
+				$(".active-users-list-block").html(response.data);
+			}
+		});
+	});
+	$('#active-users-list-modal').on('hidden.bs.modal', function () {
+    	$(".active-users-list-block").html();
+	});	
+		
+	
 });	
 </script>
 @endpush

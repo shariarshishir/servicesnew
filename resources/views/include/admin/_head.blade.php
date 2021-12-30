@@ -16,6 +16,11 @@
   {{-- datatable --}}
   <link rel="stylesheet" href="{{ asset('admin-assets/css/datatables.min.css') }}">
 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
   <style>
     .image-uploader .uploaded .uploaded-image .delete-image {
         position: absolute !important;

@@ -311,8 +311,9 @@ class UserController extends Controller
             $remember_me = $request->remember == 'true' ? true : false;
             if(Auth::attempt($credentials,$remember_me))
             {
-                $userId=auth()->user()->id;
-                $user=User::whereId($userId)->first();
+                $userId = auth()->user()->id;
+                $user = User::whereId($userId)->first();
+                $user->update(['last_activity' => Carbon::now()]);
                 return response()->json(['user_id'=>$user->user_id]);
             }
             return response()->json(['msg' => 'Wrong email or password']);

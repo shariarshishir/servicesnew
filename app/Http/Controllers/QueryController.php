@@ -123,8 +123,8 @@ class QueryController extends Controller
                         $html='<div class="col m12 reply-row">';
                         $html.='<div class="col m12 reply-row-inner">';
                         $html.='<div class="row order-info-top">';
-                        $html.='<div class="col m6"><i class="material-icons">person</i> '.$commenter_name.'</div>';
-                        $html.='<div class="col m6" style="text-align: right;"><i class="material-icons">date_range</i> '. \Carbon\Carbon::parse($comment->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a').'</div>';
+                        $html.='<div class="col m6"><span class="order_inquiry_icon"><i class="material-icons">person</i> '.$commenter_name.'</span></div>';
+                        $html.='<div class="col m6" style="text-align: right;"><span class="order_inquiry_icon"><i class="material-icons">date_range</i> '. \Carbon\Carbon::parse($comment->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a').'</span></div>';
                         $html.='</div>';
                         $html.='<div class="row order-info-bottom">';
                         $html.='<div class="col m12 order-info-details">'.$detail->details.'</div>';

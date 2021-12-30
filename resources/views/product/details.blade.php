@@ -258,7 +258,10 @@ $reviewsCount = count($productReviews);
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+                                                    <div class="add_more_box" style="padding-top: 20px">
+                                                        <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+                                                    </div>
+                                                    <!-- <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a> -->
                                                     <div class="total-price-block" style="display: none;">
                                                         <div class="input-wrapper">
                                                             <label>Total Qty:</label>
@@ -690,7 +693,7 @@ $reviewsCount = count($productReviews);
                                         </div>
                                     </div>
 
-                                    <div id="product-modification-modal" class="modal modal-fixed-footer product-modification-modal">
+                                    <div id="product-modification-modal" class="modal profile_form_modal product-modification-modal">
                                         <div class="modal-content">
                                             <legend>Write your requirement</legend>
                                             <form action="#" method="post" name="prodModReqForm" id="prodModReqForm" enctype="multipart/form-data">
@@ -699,27 +702,39 @@ $reviewsCount = count($productReviews);
                                                     <ul id="pmr-errors"></ul>
                                                 </div>
                                                 <div class="prod-mod-req-content">
-                                                    <div class="row">
-                                                        <div class="input-field col s12">
-                                                            <label for="product-modification-message" class="">Type your modification request.</label>
-                                                            <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>                                                            
-                                                        </div>
-                                                        <div class="input-field col s12">
-                                                            <label for="product-modification-image" class="product-modification-image">Upload Image</label>
-                                                            <input type="file" name="prod_mod_req[image][]" />
+                                                    <div class="modification_message_box row">
+                                                        <div class="col s10 m11">
+                                                            <div class="input-field">
+                                                                <label for="product-modification-message" class="">Type your modification request.</label>
+                                                                <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>                                                            
+                                                            </div>
+                                                            <div class="input-field">
+                                                                <label for="product-modification-image" class="product-modification-image">Upload Image</label>
+                                                                <input class="uplodad_video_box" type="file" name="prod_mod_req[image][]" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addProdModReqContent()"><i class="material-icons dp48">add</i> Add More</a>
+                                                <div class="add_more_box" style="padding-top: 20px">
+                                                    <a href="javascript:void(0);" class="add-more-block" onclick="addProdModReqContent()"><i class="material-icons dp48">add</i> Add More</a>
+                                                </div>
+                                                <!-- <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addProdModReqContent()"><i class="material-icons dp48">add</i> Add More</a> -->
                                                 {{-- <input type="hidden" value="{{$product->vendor->id}}" name="vendor_id" /> --}}
                                                 <input type="hidden" value="{{$product->id}}" name="product_id" />
-                                                <button type="submit" class="btn green waves-effect waves-light" id="submitProdModReq">Submit</button>
+                                                <!-- <button type="submit" class="btn green waves-effect waves-light" id="submitProdModReq">Submit</button> -->
+                                                <div class="submit_btn_wrap" style="padding-top: 30px;">
+                                                    <div class="row">
+                                                        <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-action modal-close btn_grBorder">Cancel</a></div>
+                                                        <div class="col s12 m6 l6 right-align">
+                                                            <button type="submit" class="btn green waves-effect waves-light" id="submitProdModReq">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
-                                        <div class="modal-footer">
+                                        <!-- <div class="modal-footer">
                                             <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons green-text text-darken-1">close</i></a>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <input type="hidden" name="quantity" value="">
@@ -1338,7 +1353,7 @@ $reviewsCount = count($productReviews);
         //product modification
         function addProdModReqContent()
         {
-            var html= '<div class="row"><div class="input-field col s12"><textarea class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea><label for="product-modification-message" class="">Type your modification request.</label></div><div class="input-field col s12"><label for="product-modification-image" class="product-modification-image">Upload Image</label><input type="file" name="prod_mod_req[image][]"></div><a href="javascript:void(0);" class="btn waves-effect waves-light red remove-prod-mod-req-content" onclick="removeProdModReqContent(this)"><i class="material-icons dp48">remove</i></a></div>';
+            var html= '<div class="modification_message_box row"><div class="col s10 m11"><div class="input-field"><label for="product-modification-message" class="">Type your modification request.</label><textarea class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea></div><div class="input-field"><label for="product-modification-image" class="product-modification-image">Upload Image</label><input class="uplodad_video_box" type="file" name="prod_mod_req[image][]"></div></div><div class="col s2 m1"><a href="javascript:void(0);" class="btn_delete" onclick="removeProdModReqContent(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></div></div>';
             $(".prod-mod-req-content").append(html);
         }
         function removeProdModReqContent(el)

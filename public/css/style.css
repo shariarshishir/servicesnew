@@ -1149,6 +1149,7 @@ form input:read-only {
     background: #fff;
     font-size: 16px;
     line-height: 25px;
+    text-transform: capitalize;
 }
 .profile_leftCol .profile_pic,
 .leftCol_wrap .profile_pic  {
@@ -1172,6 +1173,7 @@ form input:read-only {
     border-bottom: 1px solid #707070;
     padding-bottom: 10px;
     font-size: 16px;
+    text-transform: capitalize;
 }
 .profile_leftCol .office_address h3,
 .leftCol_wrap .office_address h3 {
@@ -1399,7 +1401,7 @@ form input:read-only {
     margin-bottom: 30px;
 }
 .profile_contentCol #products .productBox .imgBox {
-    height: 160px;
+    height: 210px;
 }
 .profile_contentCol #products .productBox .priceBox {
     padding: 10px 0;
@@ -1407,12 +1409,12 @@ form input:read-only {
     max-height: 40px; */
 }
 
-
+.profile_contentCol #products .productBox .imgBox img,
 .profile_tabNav_wrap .productBox .imgBox img,
 .profile_product_wrap .productBox .imgBox a img{
-    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
-    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
-    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -webkit-box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 45%);
+    -moz-box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 45);
+    box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 45%);
     height: 100%;
 }
 
@@ -1668,6 +1670,7 @@ form input:read-only {
 .overview_table_wrap table {
     font-size: 16px;
     font-weight: 500;
+    text-transform: capitalize;
 }
 .production-flow-and-manpower-table-body tr th {
     text-align: center;
@@ -1804,6 +1807,7 @@ form input:read-only {
 .association-membership-img {
     padding-bottom: 20px !important;
     width: 25%;
+    line-height: 22px;
 }
 .profile_tabNav_wrap .membership_wrap .membership_textBox .imgbox {
    height: 75px;
@@ -2023,6 +2027,7 @@ form input:read-only {
     border-radius: 5px;
     display: inline-block;
     margin: 2px;
+    line-height: 22px;
 }
 .product_data_table_wrap .btn_product_edit {
     color: #448547;
@@ -2108,10 +2113,6 @@ form input:read-only {
     margin-top: 40px;
     float: right;
 }
-
-
-
-
 
 .simpleLens-thumbnails-container a {
     padding: 0 5px;
@@ -3355,6 +3356,7 @@ form input:read-only {
     font-weight: 600;
     color: #2D2D2D;
     margin: 10px 0 20px;
+    text-transform: capitalize;
 }
 .suppliers_filter_content .short_info_box {
     clear: both;
@@ -4853,7 +4855,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .business_list_wrapper .list_box {
     border-radius: 10px;
     padding: 20px;
-    font-size: 18px;
+    font-size: 16px;
 }
 .business_list_wrapper .list_box span {
     font-weight: 600;
@@ -5113,6 +5115,10 @@ input.input-field[type=text]:not(.browser-default) {
     text-align: center;
     display: inline-block;
     float: right;
+}
+
+#product-modification-modal .btn_delete {
+    padding-top: 90px;
 }
 .profile_form_modal .btn_delete .material-icons {
     color:#DC143C;
@@ -5378,6 +5384,10 @@ input.input-field[type=text]:not(.browser-default) {
     margin-top: 10px;
 }
 
+#product-modification-modal textarea {
+    height: 130px !important;
+    max-height: inherit;
+}
 #company-overview-modal textarea {
     height: 130px;
     max-height: inherit;
@@ -6197,6 +6207,7 @@ nav .pagination li.active .page-link {
     height: 40px;
     padding: 5px 10px 8px;
     display: inline-block;
+    line-height: 28px;
 }
 .billing_and_shipping_address_block label {
     display: block;
@@ -7132,6 +7143,7 @@ nav .pagination li.active .page-link {
     margin: 1.5rem 1rem 0 !important;
 }
 
+#product-modification-modal .uplodad_video_box,
 #lineitems .uplodad_video_box {
     box-shadow: none !important;
     background: none;
@@ -7361,7 +7373,40 @@ nav .pagination li.active .page-link {
     transform: rotate(180deg);
 }
 
- 
+.order-query-message-show {
+    padding-bottom: 20px;
+}
+.order-query-message-show .reply-row {
+    padding: 10px !important;
+}
+.order-query-message-show .reply-row:nth-child(odd) {
+    background: rgba(242,242,242,0.8);
+}
+.order-info-top .order_inquiry_icon {
+    display: inline-block;
+    padding-bottom: 10px;
+}
+.order-info-top .order_inquiry_icon .material-icons {
+    float: left;
+    color: #448547;
+    margin-right: 5px;
+}
+.order-query-message-show .order-info-details {
+    text-transform: capitalize;
+}
+.order-query-message-show .order-info-image {
+    padding: 10px;
+}
+.order-query-message-show .order-info-image img {
+    max-height: 72px;
+    width: auto;
+}
+.order-modification-data {
+    padding-top: 20px;
+}
+#order-details-modal_17 .striped {
+    margin-top: 20px;
+}
 
 
 /* ************************* policy_content_wrap style end ******************************  */
@@ -7470,6 +7515,8 @@ nav .pagination li.active .page-link {
     .profile_contentCol .productBox {
         margin-bottom: 20px;
     }
+
+    
     
 }
 
@@ -7675,6 +7722,12 @@ nav .pagination li.active .page-link {
         left: 30px;
     } 
 
+    .product_details_content_wrap .product_preview_wrap video {
+        width: 260px;
+        height: 145px;
+    }
+
+
 }
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
@@ -7874,6 +7927,10 @@ nav .pagination li.active .page-link {
 
     .product_wrapper .active_grid .productBox {
         height: 315px;
+    }
+
+    .wholesaler_product_wrap .product_item_box {
+        width: 33% !important;
     }
 
 
@@ -8383,6 +8440,10 @@ nav .pagination li.active .page-link {
     }
 
 
+    .product_details_wrapper .waves-effect {
+        margin-bottom: 10px;
+    }
+
 
     
 }
@@ -8461,6 +8522,11 @@ nav .pagination li.active .page-link {
     .chat_messagedata .sms_product_img {
         text-align: left;
         margin: 10px 0;
+    }
+
+    .association-membership-img {
+        width: 33%;
+        padding: 0 10px 20px !important;
     }
 
 
@@ -8817,6 +8883,16 @@ nav .pagination li.active .page-link {
         height: auto !important;
     }
 
+    .wholesaler_product_wrap .product_item_box {
+        width: 50% !important;
+    }
+
+    .product_details_content_wrap .product_preview_wrap video {
+        width: 235px;
+        height: 130px;
+    }
+
+
 
 }
 
@@ -9138,6 +9214,11 @@ nav .pagination li.active .page-link {
         width: 100%;
     }
 
+    
+    .association-membership-img {
+        width: 50%;
+    }
+
 
 
 
@@ -9295,6 +9376,12 @@ nav .pagination li.active .page-link {
         padding: 50px 0;
     }
 
+    .wholesaler_product_wrap .product_item_box {
+        width: 100% !important;
+    }
+
+
+
 
 }
 
@@ -9391,6 +9478,11 @@ nav .pagination li.active .page-link {
     .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
         width: 245px !important;
     }
+
+    .association-membership-img {
+        width: 100%;
+    }
+
 
 
 }

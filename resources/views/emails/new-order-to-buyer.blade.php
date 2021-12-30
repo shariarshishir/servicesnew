@@ -19,7 +19,7 @@
         <tr>
             <td style="padding: 30px;">
                 <p style="font-family:verdana;font-size:13px;margin:0px;line-height:normal;">Dear {{ $order->user->name}},</p>
-                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">Your order {{ $order->order_number }},has been placed to the {{ $order->vendor->vendor_name }}.</p>
+                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">Your order {{ $order->order_number }},has been placed to the {{ $order->businessProfile->business_name }}.</p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:5px;line-height:normal;">Order Details:</p>
                 <table border="1px solid black" style="border-collapse: collapse;">
                     <th>Image</th>

@@ -32,7 +32,7 @@ class CartController extends Controller
                 $newFormatedCart->id=$cartItem->id;
                 $newFormatedCart->business_profile_id=$cartItem->business_profile_id;
                 $newFormatedCart->user_id= $cartItem->user_id;
-                $newFormatedCart->sku=$cartItem->sku;
+                $newFormatedCart->sku=$cartItem->product_sku;
                 $newFormatedCart->name= $cartItem->name;
                 $newFormatedCart->product_type=$cartItem->product_type;
                 $newFormatedCart->unit_price=$cartItem->unit_price;
@@ -179,7 +179,7 @@ class CartController extends Controller
                 $newFormatedCart->id=$cartItem->id;
                 $newFormatedCart->business_profile_id=$cartItem->business_profile_id;
                 $newFormatedCart->user_id= $cartItem->user_id;
-                $newFormatedCart->sku=$cartItem->sku;
+                $newFormatedCart->product_sku=$cartItem->sku;
                 $newFormatedCart->name= $cartItem->name;
                 $newFormatedCart->product_type=$cartItem->product_type;
                 $newFormatedCart->unit_price=$cartItem->unit_price;

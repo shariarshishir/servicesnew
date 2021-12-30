@@ -74,6 +74,7 @@ class OrderController extends Controller
         $shippingMethod=ShippingMethod::pluck('name');
         $shipMentType=ShipmentType::pluck('name');
         $uom=UOM::pluck('name');
+        $businessProfileId = $businessProfileId;
         return view('admin.vendor.order.show',compact('businessProfileId','orderItems','vendorOrder','shippingMethod','shipMentType','uom'));
 
     }
@@ -123,8 +124,8 @@ class OrderController extends Controller
                 return redirect()->back()->withSuccess('Order Already Approved');
             }
             $vendorOrder->update(['state' => 'approved','approved_by_admin'=> Auth::guard('admin')->user()->id]);
-            // $order=VendorOrder::find($id);
-           // event(new NewOrderHasApprovedEvent($vendorOrder));
+            $vendorOrder=VendorOrder::with('orderItems.product.images')->find($id);
+            event(new NewOrderHasApprovedEvent($vendorOrder));
             return redirect()->back()->withSuccess('Order Status Updated Successfully');
         }catch(\Exception $e)
         {

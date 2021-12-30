@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use App\Models\SustainabilityCommitment;
 use App\Models\BusinessProfileVerification;
 

@@ -192,7 +192,7 @@ class OrderModificationRequestController extends Controller
 
 
 
-                //event(new NewOrderModificationRequestEvent($orderModificationRequest));
+                event(new NewOrderModificationRequestEvent($orderModificationRequest));
                 return response()->json([
                     'success' => 'Request Created Successfully!',
                     'message' => 'Done!',

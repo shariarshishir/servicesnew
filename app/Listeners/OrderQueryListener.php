@@ -32,7 +32,7 @@ class OrderQueryListener implements ShouldQueue
     {
         $admin=Admin::find(1);
         Notification::send($admin,new OrderQueryNotification($event->query));
-        Mail::to('success@merchantbay.com')->send(new OrderQueryMail($event->query));
+        Mail::to('no-reply@merchantbay.com')->send(new OrderQueryMail($event->query));
 
 
     }

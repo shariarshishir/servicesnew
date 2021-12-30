@@ -32,13 +32,13 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="{{route('product.index',$vendorId)}}" class="nav-link {{ Route::is('product.index') ||Route::is('product.create')||Route::is('product.edit')? 'active' : ''}} ">
+                <a href="{{route('product.index',$businessProfileId)}}" class="nav-link {{ Route::is('product.index') ||Route::is('product.create')||Route::is('product.edit')? 'active' : ''}} ">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Products</p>
                 </a>
              </li>
              <li class="nav-item">
-                <a href="{{route('vendor.order.index',$vendorId)}}" class="nav-link {{ Route::is('vendor.order.index')||Route::is('vendor.order.create')||Route::is('vendor.order.edit')||Route::is('vendor.order.show')? 'active' : ''}} ">
+                <a href="{{route('vendor.order.index',$businessProfileId)}}" class="nav-link {{ Route::is('vendor.order.index')||Route::is('vendor.order.create')||Route::is('vendor.order.edit')||Route::is('vendor.order.show')? 'active' : ''}} ">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Orders</p>
                 </a>

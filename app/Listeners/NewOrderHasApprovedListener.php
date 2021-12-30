@@ -18,15 +18,12 @@ class NewOrderHasApprovedListener implements ShouldQueue
 
     public function handle($event)
     {
-        //dd($event->order);
-        //$order=VendorOrder::with('orderItems')->where('id',$event->order->id)->first();
+      
         // Mail sending to wholesaler after approved the order from admin
-       // $user=User::find($order->vendor->user_id);
-        Mail::to($event->order->vendor->user->email)->send(new NewOrderPlaceMailToSeller($event->order));
-        Notification::send($event->order->vendor->user,new NewOrderHasApprovedNotification($event->order));
+        Mail::to($event->order->businessProfile->user->email)->send(new NewOrderPlaceMailToSeller($event->order));
+        Notification::send($event->order->businessProfile->user,new NewOrderHasApprovedNotification($event->order));
 
         // Mail sending to buyer after approved the order from admin
-        //$buyer = User::find($order->user_id);
         Mail::to($event->order->user->email)->send(new NewOrderPlaceMailToBuyer($event->order));
         Notification::send($event->order->user,new NewOrderHasApprovedNotification($event->order));
     }

@@ -154,7 +154,6 @@ class OrderController extends Controller
             $shipping_address_id=$request->shipping_address_id;
         }
         else{
-
             $request->validate([
                 'shipping_name'=>'required',
                 'shipping_company_name'=>'required',
@@ -164,7 +163,7 @@ class OrderController extends Controller
                 'shipping_zip'=>'required',
                 'shipping_city'=>'required',
                 's_country'=>'required',
-             ]);
+            ]);
             $address_id=UserAddress::create([
                 'user_id' =>auth()->id(),
                 'address_type' => 2,
@@ -229,7 +228,7 @@ class OrderController extends Controller
                             'unit_price'    => $item['unit_price'],
                             'copyright_price' => $item['copyright_price'] ?? null,
                             'price'         => $item['quantity']*$item['unit_price'],
-                            'color_attr'  => json_encode($item['color_attr']),
+                            'colors_sizes'  => json_encode($item['color_attr']),
                             'order_modification_req_id' => $item['order_modification_req_id'] ?? null,
                         ]);
                     }
@@ -242,7 +241,7 @@ class OrderController extends Controller
             CartItem::where('user_id',auth()->user()->id)->delete();
 
 
-           DB::commit();
+            DB::commit();
             return response()->json(["message"=>"Order created successfully","order"=>$order,"code"=>true],200);
         }catch(Exception $e){
             DB::rollback();

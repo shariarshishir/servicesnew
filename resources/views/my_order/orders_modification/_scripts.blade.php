@@ -389,17 +389,17 @@
                                     $('#confirm-order-modification-modal .confirm-ord-mod-color-sizes').html('');
                                     $.each(JSON.parse(data.data.colors_sizes),function(key, value){
                                         var html='<tr>';
-                                            html+='<td><input type="hidden" name="color" value="'+value.color+'">'+value.color+'</td>';
-                                            html+='<td><input type="hidden" name="xxs" value="'+value.xxs+'">'+value.xxs+'</td>';
-                                            html+='<td><input type="hidden" name="xs" value="'+value.xs+'">'+value.xs+'</td>';
-                                            html+='<td><input type="hidden" name="small" value="'+value.small+'">'+value.small+'</td>';
-                                            html+='<td><input type="hidden" name="medium" value="'+value.medium+'">'+value.medium+'</td>';
-                                            html+='<td><input type="hidden" name="large" value="'+value.large+'">'+value.large+'</td>';
-                                            html+='<td><input type="hidden" name="extra_large" value="'+value.extra_large+'">'+value.extra_large+'</td>';
-                                            html+='<td><input type="hidden" name="xxl" value="'+value.xxl+'">'+value.xxl+'</td>';
-                                            html+='<td><input type="hidden" name="xxxl" value="'+value.xxxl+'">'+value.xxxl+'</td>';
-                                            html+='<td><input type="hidden" name="four_xxl" value="'+value.four_xxl+'">'+value.four_xxl+'</td>';
-                                            html+='<td><input type="hidden" name="one_size" value="'+value.one_size+'">'+value.one_size+'</td>';
+                                            html+='<td data-title="Color"><input type="hidden" name="color" value="'+value.color+'">'+value.color+'</td>';
+                                            html+='<td data-title="XXS"><input type="hidden" name="xxs" value="'+value.xxs+'">'+value.xxs+'</td>';
+                                            html+='<td data-title="XS"><input type="hidden" name="xs" value="'+value.xs+'">'+value.xs+'</td>';
+                                            html+='<td data-title="Small"><input type="hidden" name="small" value="'+value.small+'">'+value.small+'</td>';
+                                            html+='<td data-title="Medium"><input type="hidden" name="medium" value="'+value.medium+'">'+value.medium+'</td>';
+                                            html+='<td data-title="Large"><input type="hidden" name="large" value="'+value.large+'">'+value.large+'</td>';
+                                            html+='<td data-title="Extra Large"><input type="hidden" name="extra_large" value="'+value.extra_large+'">'+value.extra_large+'</td>';
+                                            html+='<td data-title="XXL"><input type="hidden" name="xxl" value="'+value.xxl+'">'+value.xxl+'</td>';
+                                            html+='<td data-title="XXXL"><input type="hidden" name="xxxl" value="'+value.xxxl+'">'+value.xxxl+'</td>';
+                                            html+='<td data-title="4XXL"><input type="hidden" name="four_xxl" value="'+value.four_xxl+'">'+value.four_xxl+'</td>';
+                                            html+='<td data-title="One Size"><input type="hidden" name="one_size" value="'+value.one_size+'">'+value.one_size+'</td>';
 
                                             html+='</tr>';
                                             $('#confirm-order-modification-modal .confirm-ord-mod-color-sizes').append(html);

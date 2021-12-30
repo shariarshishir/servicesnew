@@ -13,7 +13,7 @@
                                 <div class="col m12 order-info-details">{{ $d->details }}</div>
                                 <div class="col m12 order-info-images">
                                 @if(isset($d->image))
-                                    <img src="{{ asset('storage/'.$d->image) }}" alt="" height="250" width="250">
+                                    <img src="{{ asset('storage/'.$d->image) }}" alt="" >
                                 @endif
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     <div class="col m12 order-info-details">{{ $cd->details }}</div>
                                     <div class="mod-detail-image col m12 order-info-details">
                                     @if(isset($cd->image))
-                                        <img src="{{ asset('storage/'.$cd->image) }}" alt="" height="250" width="250">
+                                        <img src="{{ asset('storage/'.$cd->image) }}" alt="">
                                     @endif
                                     </div>
                                 </div>

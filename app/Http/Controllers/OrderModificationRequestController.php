@@ -84,7 +84,7 @@ class OrderModificationRequestController extends Controller
 
             $requestContainer=[];
             foreach(json_decode($orderModificationRequset->details) as $requestDetail){
-                $html='<div class="col m12">';
+                $html='<div class="col m12 order_reply_box">';
                 $html.='<div class="row order-info-top">';
                 $html.='<div class="col m12 create-date"><i class="material-icons">date_range</i>'.\Carbon\Carbon::parse($orderModificationRequset->created_at)->isoFormat("MMMM Do YYYY").'</div>';
                 $html.='</div>';
@@ -93,7 +93,7 @@ class OrderModificationRequestController extends Controller
                 if(isset($requestDetail->image)){
                 $html.='<div class="mod-detail-image col m12 order-info-image">';
                     $image= asset('storage/'.$requestDetail->image);
-                    $html.='<img src="'.$image.'" alt="" height="250" width="250">';
+                    $html.='<img src="'.$image.'" alt="" >';
                 $html.='</div>';
                 }
                 $html.='</div>';
@@ -104,9 +104,9 @@ class OrderModificationRequestController extends Controller
             foreach($orderModificationRequset->comments as $comment){
                      $commenter_name= $comment->user->name ?? 'Merchantbay';
                      foreach(json_decode($comment->details) as $detail){
-                         $html='<div class="col m12 reply-row">';
+                         $html='<div class="col m12 reply-row order_reply_box">';
                             $html.='<div class="row order-info-top">';
-                            $html.='<div class="col m12">';
+                            $html.='<div class="col m12 order_reply_box">';
                             $html.='<p><i class="material-icons">person</i> '.$commenter_name.'</p>';
                             $html.='<p><i class="material-icons">date_range</i> '. \Carbon\Carbon::parse($comment->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a').'</p>';
                             $html.='</div>';
@@ -116,7 +116,7 @@ class OrderModificationRequestController extends Controller
                             if(isset($detail->image)){
                                 $html.='<div class="mod-detail-image col m12 order-info-image">';
                                 $image= asset('storage/'.$detail->image);
-                                $html.='<img src="'.$image.'" alt="" height="250" width="250">';
+                                $html.='<img src="'.$image.'" alt="">';
                                 $html.='</div>';
                             }
                             $html.='</div>';

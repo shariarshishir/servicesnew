@@ -246,7 +246,7 @@
                                     </div>
                                     <div class="row membership_textBox association-membership-block">
                                             @foreach($business_profile->associationMemberships as $associationMembership)
-                                            <div class="col s12 m6 l5 center-align association-membership-img">
+                                            <div class="center-align association-membership-img">
                                                 <a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
                                                 <div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
                                                 <p>{{$associationMembership->title}}</p>

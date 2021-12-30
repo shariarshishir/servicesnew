@@ -1,7 +1,7 @@
 @if($business_profile->wholesalerProducts()->exists())
-<div class="active_grid">
+<div class="active_grid wholesaler_product_wrap">
     @foreach($business_profile->wholesalerProducts as $key=>$product)
-        <div class="col s12 m4 l3">
+        <div class="col s12 m4 l3 product_item_box">
             <div class="productBox">
                 <div class="imgBox">
                     @foreach($product->images as $key=>$image)

@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers\API\USER;
 
-use App\Http\Controllers\Controller;
 use App\Chat;
-use App\Events\MessageCenter;
-use App\Events\ProductOrder;
-use App\Http\Resources\MerchantMessageResource;
-use App\Http\Resources\MerchantMessagesResource;
-use App\Http\Resources\SupplierMessageResource;
-use App\Http\Resources\UserSessionResource;
-use App\MerchantAssistanceMessage;
-use App\MerchantSupplierMessage;
 use App\Message;
-use App\Notifications\BuyerWantToContact;
-use App\Notifications\BuyerWantToContactFromProduct;
-use App\Notifications\RfqBidNotification;
+use App\Userchat;
 use App\Models\User;
 use App\UserSession;
-use App\Userchat;
+use App\Events\ProductOrder;
 use Illuminate\Http\Request;
+use App\Events\MessageCenter;
+use App\MerchantSupplierMessage;
+use App\MerchantAssistanceMessage;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 use App\RfqMerchantAssistanceMessage;
-use App\Http\Resources\RfqMerchantMessagesResource;
+use Illuminate\Auth\Events\Validated;
+use App\Notifications\BuyerWantToContact;
+use App\Notifications\RfqBidNotification;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\UserSessionResource;
+use Illuminate\Support\Facades\Notification;
+use App\Http\Resources\MerchantMessageResource;
+use App\Http\Resources\SupplierMessageResource;
+use App\Http\Resources\MerchantMessagesResource;
 use App\Http\Resources\RfqMerchantMessageResource;
-
+use App\Http\Resources\RfqMerchantMessagesResource;
+use App\Notifications\BuyerWantToContactFromProduct;
 
 class MessageController extends Controller
 {
@@ -41,17 +42,7 @@ class MessageController extends Controller
     public function message_center(){
 
         $user=Auth::user();
-        $allusers=[];
-
-        /*
-        if($user->is_group == 1)
-        {
-            $allusers = User::with('profile','badges','tour_photos')->where(['group_id' => Auth::id(), 'is_active' => 1])->get();
-            $user=User::with('profile','badges','tour_photos')->where('id', $allusers[0]->id)->first();
-        }
-        */
-        $allusers = User::where('id', $user->id)->get();
-        //dd($allusers);
+        $user['image'] = asset(!empty($user->image)? 'storage/' .$user->image : "storage/images/supplier.png");
         $chatdatas = Userchat::all();
         $chatusers = [];
         $users = [];
@@ -69,45 +60,18 @@ class MessageController extends Controller
             }
         }
 
-        $userData = User::whereIn('id',$users)->get();
+        $chatusers = User::whereIn('id',$users)->get();
 
-        $chatusers = $userData;
-        $buyers = [];
-        $allbuyers = User::where('user_type','buyer');
-        if($allbuyers->exists())
-        {
-            foreach($allbuyers->get() as $buyer)
-            {
-                $data = [];
-                $data['id'] = $buyer->id;
-                $data['name'] = $buyer->name;
-                $data['image'] = asset(!empty($buyer->profile['profile_image'])? 'storage/' .$buyer->profile['profile_image'] : "images/supplier.png");
-                $buyers[] = $data;
-            }
+        foreach($chatusers as $chatuser){
+            $chatuser['image'] = asset(!empty($chatuser->image) ? 'storage/' .$chatuser->image : "storage/images/supplier.png");
         }
 
-        /*
-        $userSupplier = User::find($request->uid);
-        //dd($userSupplier);
+        return response()->json([
+            'user' => $user,
+            'chatusers' => $chatusers,
+            'status'   => true,
+        ],200);
 
-        $user_session = UserSession::create([
-            'user1_id'=>$user->id,
-            'user2_id'=>$userSupplier->id,
-        ]);
-
-        $message = Message::create([
-            'session_id'=>$user_session->id,
-            'content'=>'Hello '.$userSupplier->name
-        ]);
-
-        Chat::insert([['message_id'=>$message->id, 'user_id'=>$user->id,'type'=>0 ],
-        ['message_id'=>$message->id, 'user_id'=>$userSupplier->id,'type'=>1 ]]);
-
-        $notification_data=['url'=>'/message-center'];
-        Notification::send($userSupplier, new BuyerWantToContact($notification_data));
-        */
-
-        return view('message.message_center', compact('user','chatusers','buyers','allusers'));
     }
 
     public function message_center_selected($id)
@@ -199,32 +163,60 @@ class MessageController extends Controller
 
     public function getchatdata(Request $request)
     {
-        $user = $request->user;
-        $to_id = $request->to_id;
-        $from_user=User::find($user);
-        $to_user=User::find($to_id);
-        $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
-        $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
+        $validator = Validator::make($request->all(), [
+            'from_id' => 'required',
+            'to_id'   => 'required',
 
-        $chats = Userchat::whereIn('participates', [$user])->whereIn('participates', [$to_id]);
-        if($chats->exists())
-        {
-            $chat = $chats->first();
-            $chatdataAllData = $chat->chatdata;
-            $chatdata = $chatdataAllData;
-            foreach ($chatdataAllData as $key => $value) {
-                $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
-                $chatdata[$key]['message'] = $messageStr;
-                //echo "<pre>"; print_r($chatdataAllData[$key]); exit();
+         ]);
+         if ($validator->fails())
+         {
+             return response()->json(array(
+             'success' => false,
+             'error' => $validator->getMessageBag()),
+             400);
+         }
+        try{
+            $user = $request->from_id;
+            $to_id = $request->to_id;
+            $from_user=User::findOrFail($user);
+            $to_user=User::findOrFail($to_id);
+            $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
+            $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
+
+            $chats = Userchat::whereIn('participates', [$user])->whereIn('participates', [$to_id]);
+            if($chats->exists())
+            {
+                $chat = $chats->first();
+                $chatdataAllData = $chat->chatdata;
+                $chatdata = $chatdataAllData;
+                foreach ($chatdataAllData as $key => $value) {
+                    $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
+                    $chatdata[$key]['message'] = $messageStr;
+                    //echo "<pre>"; print_r($chatdataAllData[$key]); exit();
+                }
+                //return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
+                return response()->json(["chatdata"=>$chatdata, "from_user_image"=>$from_user_image, "to_user_image"=>$to_user_image, "success"=>true], 200);
             }
-            //return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
-            return response()->json(["chatdata"=>$chatdata, "from_user_image"=>$from_user_image, "to_user_image"=>$to_user_image, "success"=>true], 200);
+            else
+            {
+                $chatdata = [];
+                return response()->json(["chatdata"=>$chatdata, "success"=>false], 200);
+            }
+
+        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+            return response([
+                'status' => false,
+                'error' => 'user not found'
+            ], 404);
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['msg' => $e->getMessage()],
+            ],500);
+
         }
-        else
-        {
-            $chatdata = [];
-            return response()->json(["chatdata"=>$chatdata, "success"=>false], 200);
-        }
+
+
     }
 
     public function updateuserlastactivity(Request $response)

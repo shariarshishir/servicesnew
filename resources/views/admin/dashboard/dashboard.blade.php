@@ -22,31 +22,6 @@
 		<section class="content">
 			<div class="card">
 				<legend>Dashboard</legend>
-				<div class="alert alert-info alert-dismissible">
-                  <h5><i class="fas fa-bullhorn"></i> MERCHANTBAY SHOP</h5>
-                  Welcome to Merchatbay Shop.
-                </div>
-
-				<div id="dashborad-panel" class="clearfix">
-
-					<div style="text-align:center;margin:0;">
-						<div class="icon" title="Vendors">
-							<a href="{{route('vendor.index')}}">
-								<i class="fas fa-store"></i>
-								<span>Stores</span>
-							</a>
-						</div>
-					</div>
-					<div style="text-align:center;margin:0;">
-						<div class="icon" title="Categories">
-							<a href="{{ Route('product-categories.index')}}">
-								<i class="fas fa-network-wired"></i>
-								<span>Categories</span>
-							</a>
-						</div>
-					</div>
-
-				</div>
 				
 				<div class="row">
 					<div class="col-md-6">
@@ -261,11 +236,13 @@ $(document).ready(function () {
 			data: {selectedYear:selectedYear, selectedMonth:selectedMonth},
 			url: url,
 			beforeSend: function() {
-				//$('.loading-message').html("Please Wait.");
-				//$('#loadingProgressContainer').show();
+				$('.loading-message').html("Please Wait.");
+				$('#loadingProgressContainer').show();
 			},
 			success:function(response)
 			{
+				$('.loading-message').html();
+				$('#loadingProgressContainer').hide();				
 				$('#user-list-modal').modal('show');
 				$(".selected-users-list-block").html(response.data);
 			}
@@ -284,7 +261,7 @@ $(document).ready(function () {
 			height: 400
 		},
 		title: {
-			text: 'Monthly active users'
+			text: 'Recently active users'
 		},
 		credits: {
 			enabled: false
@@ -384,11 +361,13 @@ $(document).ready(function () {
 			data: {last_two_weeks:last_two_weeks},
 			url: url,
 			beforeSend: function() {
-				//$('.loading-message').html("Please Wait.");
-				//$('#loadingProgressContainer').show();
+				$('.loading-message').html("Please Wait.");
+				$('#loadingProgressContainer').show();
 			},
 			success:function(response)
 			{
+				$('.loading-message').html();
+				$('#loadingProgressContainer').hide();				
 				$('#active-users-list-modal').modal('show');
 				$(".active-users-list-block").html(response.data);
 			}

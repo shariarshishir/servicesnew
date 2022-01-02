@@ -124,7 +124,7 @@
 						<li class="">
 							@foreach($userNotifications as $notification)
 								@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
-								<a href="{{route('vendor.order.show.notification',['businessProfile'=>$notification->data['order']['business_profile_id'],'order'=>$notification->data['order']['order_number'],'notification'=>$notification->id])}}" >
+								<a href="{{route('vendor.order.show.notification',['businessProfile'=>$notification->data['order']['business_profile_id'],'order'=>$notification->data['order']['order_number'],'notification'=>$notification->id])}}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 										<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -132,7 +132,7 @@
 									</div>
 								</a>
 								@elseif($notification->type == 'App\Notifications\NewOrderHasApprovedNotification')
-								<a href="{{ $notification->data['url'] }} class="dropdown-item">
+								<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 									<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -140,7 +140,7 @@
 									</div>
 								</a>
 								@elseif ($notification->type == 'App\Notifications\OrderQueryNotification' )
-								<a href="{{ url($notification->data['url']) }}" >
+								<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 										<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -148,7 +148,7 @@
 									</div>
 								</a>
 								@elseif ($notification->type == 'App\Notifications\NewOrderModificationRequestNotification' )
-								<a href="{{ $notification->data['url'] }}" >
+								<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 										<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -156,7 +156,7 @@
 									</div>
 								</a>
 								@elseif ($notification->type == 'App\Notifications\QueryCommuncationNotification' )
-								<a href="{{ $notification->data['url'] }}" >
+								<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 										<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -164,7 +164,7 @@
 									</div>
 								</a>
 								@elseif ($notification->type == 'App\Notifications\PaymentSuccessNotification')
-								<a href="{{ $notification->data['url'] }}" >
+								<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 										<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -172,7 +172,7 @@
 									</div>
 								</a>
 								@elseif ($notification->type =='App\Notifications\NewRfqNotification')
-								<a href="{{ $notification->data['url'] }}" >
+								<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 									<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -180,7 +180,7 @@
 									</div>
 								</a>
 								@elseif ($notification->type =='App\Notifications\RfqBidNotification')
-								<a href="{{ $notification->data['url'] }}" >
+								<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
 									<div class="admin-notification-title">{{$notification->data['title']}}</div>

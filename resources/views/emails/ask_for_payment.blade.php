@@ -1,14 +1,4 @@
-<h1>Payment</h1>
-Please pay your order bellow link:
-
-<head>
-    <style>
-    .btn{text-align:center;}
-    .loginButton {padding: 7px 15px 8px 20px;}
-    * {box-sizing: border-box;}
-    </style>
-    </head>
-    @component('mail::message')
+   @component('mail::message')
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
                 <td style="background:#f7f7f7;width:10%;padding:20px;text-align:center;"><img src="{{ asset('storage/images/mb_mail_logo.png') }}" alt="Mail Template Logo" width="100px" /></td>

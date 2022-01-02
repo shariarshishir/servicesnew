@@ -1,11 +1,3 @@
-
-<head>
-    <style>
-    .btn{text-align:center;}
-    .loginButton {padding: 7px 15px 8px 20px;}
-    * {box-sizing: border-box;}
-    </style>
-</head>
     @component('mail::message')
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>

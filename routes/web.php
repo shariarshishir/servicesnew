@@ -366,6 +366,10 @@ Route::group(['prefix'=>'/admin'],function (){
     Route::post('/login', [AdminController::class,'login'])->name('admin.login');
     Route::post('/logout', [AdminController::class,'logout'])->name('admin.logout');
     Route::get('/dashboard', [AdminController::class,'dashboard'])->name('admin.dashboard');
+    Route::get('/monthly-registered-users', [AdminController::class,'monthlyRegisteredUsers'])->name('monthly.registered.users');
+    Route::get('/get-users',[AdminController::class, 'getUsersBasedOnSelectedParams'])->name('get.userslist.basedonselectedparams');
+    Route::get('/last-active-users', [AdminController::class,'lastTwoWeeksActivedUsers'])->name('get.last.twoweeks.active.users');
+    Route::get('/get-activeusers',[AdminController::class, 'getUsersBasedOnActivityParams'])->name('get.userslist.basedonactivityparams');
     //vendors API's endpoint start
     Route::group(['middleware'=> 'is.admin'],function () {
         Route::get('/vendors', [VendorController::class,'index'])->name('vendor.index');

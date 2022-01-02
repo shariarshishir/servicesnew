@@ -59,7 +59,7 @@ table {
     word-break: initial;
 }
 table tr th {
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 .btn_green {
@@ -1153,6 +1153,7 @@ form input:read-only {
     background: #fff;
     font-size: 16px;
     line-height: 25px;
+    text-transform: capitalize;
 }
 .profile_leftCol .profile_pic,
 .leftCol_wrap .profile_pic  {
@@ -1176,6 +1177,7 @@ form input:read-only {
     border-bottom: 1px solid #707070;
     padding-bottom: 10px;
     font-size: 16px;
+    text-transform: capitalize;
 }
 .profile_leftCol .office_address h3,
 .leftCol_wrap .office_address h3 {
@@ -1403,7 +1405,7 @@ form input:read-only {
     margin-bottom: 30px;
 }
 .profile_contentCol #products .productBox .imgBox {
-    height: 160px;
+    height: 210px;
 }
 .profile_contentCol #products .productBox .priceBox {
     padding: 10px 0;
@@ -1411,12 +1413,12 @@ form input:read-only {
     max-height: 40px; */
 }
 
-
+.profile_contentCol #products .productBox .imgBox img,
 .profile_tabNav_wrap .productBox .imgBox img,
 .profile_product_wrap .productBox .imgBox a img{
-    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
-    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
-    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -webkit-box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 45%);
+    -moz-box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 45);
+    box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 45%);
     height: 100%;
 }
 
@@ -1672,6 +1674,7 @@ form input:read-only {
 .overview_table_wrap table {
     font-size: 16px;
     font-weight: 500;
+    text-transform: capitalize;
 }
 .production-flow-and-manpower-table-body tr th {
     text-align: center;
@@ -1808,6 +1811,7 @@ form input:read-only {
 .association-membership-img {
     padding-bottom: 20px !important;
     width: 25%;
+    line-height: 22px;
 }
 .profile_tabNav_wrap .membership_wrap .membership_textBox .imgbox {
    height: 75px;
@@ -2027,6 +2031,7 @@ form input:read-only {
     border-radius: 5px;
     display: inline-block;
     margin: 2px;
+    line-height: 22px;
 }
 .product_data_table_wrap .btn_product_edit {
     color: #448547;
@@ -2112,10 +2117,6 @@ form input:read-only {
     margin-top: 40px;
     float: right;
 }
-
-
-
-
 
 .simpleLens-thumbnails-container a {
     padding: 0 5px;
@@ -3359,6 +3360,7 @@ form input:read-only {
     font-weight: 600;
     color: #2D2D2D;
     margin: 10px 0 20px;
+    text-transform: capitalize;
 }
 .suppliers_filter_content .short_info_box {
     clear: both;
@@ -4857,7 +4859,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .business_list_wrapper .list_box {
     border-radius: 10px;
     padding: 20px;
-    font-size: 18px;
+    font-size: 16px;
 }
 .business_list_wrapper .list_box span {
     font-weight: 600;
@@ -5117,6 +5119,10 @@ input.input-field[type=text]:not(.browser-default) {
     text-align: center;
     display: inline-block;
     float: right;
+}
+
+#product-modification-modal .btn_delete {
+    padding-top: 90px;
 }
 .profile_form_modal .btn_delete .material-icons {
     color:#DC143C;
@@ -5382,6 +5388,15 @@ input.input-field[type=text]:not(.browser-default) {
     margin-top: 10px;
 }
 
+#product-modification-modal .input-field {
+    display: block;
+    float: left;
+    width: 100%;
+}
+#product-modification-modal textarea {
+    height: 130px !important;
+    max-height: inherit;
+}
 #company-overview-modal textarea {
     height: 130px;
     max-height: inherit;
@@ -5391,6 +5406,9 @@ input.input-field[type=text]:not(.browser-default) {
 .profile_form_modal textarea.about-company {
     height: 180px;
     border-radius: 10px;
+}
+#product-modification-modal .red {
+    height: 43px;
 }
 
 .order-query-message-content input {
@@ -6133,9 +6151,7 @@ nav .pagination li.active .page-link {
 #orders table th {
     padding: 5px 20px;
 }
-#orders .order_inquiries_table {
-    overflow: auto;
-}
+
 #orders .order_inquiries_table table th {
     padding: 15px 20px;
 }
@@ -6201,6 +6217,7 @@ nav .pagination li.active .page-link {
     height: 40px;
     padding: 5px 10px 8px;
     display: inline-block;
+    line-height: 28px;
 }
 .billing_and_shipping_address_block label {
     display: block;
@@ -7136,6 +7153,7 @@ nav .pagination li.active .page-link {
     margin: 1.5rem 1rem 0 !important;
 }
 
+#product-modification-modal .uplodad_video_box,
 #lineitems .uplodad_video_box {
     box-shadow: none !important;
     background: none;
@@ -7365,8 +7383,84 @@ nav .pagination li.active .page-link {
     transform: rotate(180deg);
 }
 
- 
+.order-query-message-show {
+    padding-bottom: 20px;
+}
+.order-query-message-show .reply-row {
+    padding: 10px !important;
+}
+.order-query-message-show .reply-row:nth-child(odd) {
+    background: rgba(242,242,242,0.8);
+}
+.order-info-top .order_inquiry_icon {
+    display: inline-block;
+    padding-bottom: 10px;
+}
+.order-info-top .order_inquiry_icon .material-icons {
+    float: left;
+    color: #448547;
+    margin-right: 5px;
+}
+.order-query-message-show .order-info-details {
+    text-transform: capitalize;
+    width: 100%;
+}
+.order-query-message-show .order-info-image {
+    padding: 10px;
+}
+.order-query-message-show .order-info-image img {
+    max-height: 72px;
+    width: auto;
+}
+.order-modification-data {
+    padding-top: 20px;
+}
+#order-details-modal_17 .striped {
+    margin-top: 20px;
+}
 
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat {
+    overflow-y: scroll !important;
+}
+.chat-application .app-chat .chat-content .sidebar {
+    width: 380px !important;
+}
+.chatting_app_wrapper .ps__rail-y {
+    top: inherit !important;
+    height: auto !important;
+    right: 0px;
+}
+.chatting_app_wrapper .ps__thumb-y {
+    top: inherit !important;
+    height: auto !important;
+}
+.ord-mod-pre-image,
+.ord-mod-mod-image {
+    max-height: 100px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+}
+
+.order_reply_box {
+    padding-bottom: 20px !important;
+    display: block;
+}
+.order_reply_box img {
+    height: 100px;
+    width: auto;
+    border-radius: 5px;
+}
+.order_reply_box .material-icons {
+    float: left;
+    color: #448547;
+    margin-right: 5px;
+}
+.order_reply_box .order-info-details {
+    padding: 20px 40px;
+    text-transform: capitalize;
+}
 
 /* ************************* policy_content_wrap style end ******************************  */
 
@@ -7394,7 +7488,6 @@ nav .pagination li.active .page-link {
     .suppliers_filter_wrapper input[type=text]:not(.browser-default){
         padding-left: 10px;
     }
-
     
 }
 @media only screen and (max-width: 1499px) {
@@ -7429,6 +7522,19 @@ nav .pagination li.active .page-link {
     .chat-application .app-chat .chat-content .sidebar {
         width: 360px !important;
     }
+
+    
+    
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat {
+        height: 200px !important;
+    }
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area {
+        height: 200px !important;
+    }
+
+    
+
+
 
 
 
@@ -7474,6 +7580,8 @@ nav .pagination li.active .page-link {
     .profile_contentCol .productBox {
         margin-bottom: 20px;
     }
+
+    
     
 }
 
@@ -7679,6 +7787,12 @@ nav .pagination li.active .page-link {
         left: 30px;
     } 
 
+    .product_details_content_wrap .product_preview_wrap video {
+        width: 260px;
+        height: 145px;
+    }
+
+
 }
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
@@ -7878,6 +7992,10 @@ nav .pagination li.active .page-link {
 
     .product_wrapper .active_grid .productBox {
         height: 315px;
+    }
+
+    .wholesaler_product_wrap .product_item_box {
+        width: 33% !important;
     }
 
 
@@ -8386,15 +8504,30 @@ nav .pagination li.active .page-link {
         line-height: 30px;
     }
 
+    .product_details_wrapper .waves-effect {
+        margin-bottom: 10px;
+    }
 
+    #orders .order_inquiries_table table th,
+    #orders .order_inquiries_table table td  {
+        padding: 10px;
+        font-size: 14px;
+    }
+    #orders .order_inquiries_table table .btn_green {
+        width: auto;
+        font-size: 14px;
+        max-width: inherit;
+        min-width: auto;
+    }
 
-    
 }
 
 @media only screen and (max-width: 900px) {
     .chat-application .app-sidebar {
         width: 100% !important;
         transform: inherit !important;
+        height: 200px;
+        overflow: scroll;
 
     }
     .productBox .priceBox .moq-value, 
@@ -8467,8 +8600,76 @@ nav .pagination li.active .page-link {
         margin: 10px 0;
     }
 
-
+    .association-membership-img {
+        width: 33%;
+        padding: 0 10px 20px !important;
+    }
 }
+
+
+
+@media only screen and (max-width: 800px) {
+	
+	/* Force table to not be like tables anymore */
+	.no_more_tables table, 
+	.no_more_tables thead, 
+	.no_more_tables tbody, 
+	.no_more_tables th, 
+	.no_more_tables td, 
+	.no_more_tables tr { 
+		display: block; 
+	}
+
+    .no_more_tables tr {
+        margin-bottom: 10px;
+    }
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.no_more_tables thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+ 
+	.no_more_tables tr { border: 1px solid #ccc; }
+ 
+	.no_more_tables td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50% !important; 
+		white-space: normal;
+		text-align:left;
+        text-align: left !important;
+	}
+ 
+	.no_more_tables td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+ 
+	/*
+	Label the data
+	*/
+	.no_more_tables td:before { content: attr(data-title); }
+
+    .empty_td,
+    .grand_total_title {
+        display: none !important;
+    }
+}
+
+
+
 
 @media only screen and (max-width: 768px) {
     table {
@@ -8821,6 +9022,14 @@ nav .pagination li.active .page-link {
         height: auto !important;
     }
 
+    .wholesaler_product_wrap .product_item_box {
+        width: 50% !important;
+    }
+
+    .product_details_content_wrap .product_preview_wrap video {
+        width: 235px;
+        height: 130px;
+    }
 
 }
 
@@ -9142,6 +9351,11 @@ nav .pagination li.active .page-link {
         width: 100%;
     }
 
+    
+    .association-membership-img {
+        width: 50%;
+    }
+
 
 
 
@@ -9239,11 +9453,6 @@ nav .pagination li.active .page-link {
         height: inherit !important;
     }
 
-    .profile_leftCol .profile_left_address_wrap,
-    .profile_leftCol .profile_left_pic_wrap {
-        /* width: 100% !important; */
-    }
-
     .profile_bannerwrap h1 {
         font-size: 25px;
     }
@@ -9298,6 +9507,32 @@ nav .pagination li.active .page-link {
     .profile_not_updated {
         padding: 50px 0;
     }
+
+    .wholesaler_product_wrap .product_item_box {
+        width: 100% !important;
+    }
+
+    .single-product-related-products .product_img {
+        text-align: center;
+    }
+    .single-product-related-products .product_img img {
+        display: inline-block;
+    }
+
+
+    .no_more_tables {
+        font-size: 14px;
+    }
+    .no_more_tables td:before {
+        font-size: 12px
+    }
+    #orders .order_inquiries_table table .btn_green {
+        max-width: 120px;
+        min-width: 120px;
+        font-size: 12px;
+        padding: 5px;
+    }
+
 
 
 }
@@ -9396,8 +9631,16 @@ nav .pagination li.active .page-link {
         width: 245px !important;
     }
 
+    .association-membership-img {
+        width: 100%;
+    }
+
+
 
 }
+
+
+
 
 
 

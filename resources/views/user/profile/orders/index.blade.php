@@ -17,22 +17,25 @@
                 </div>
             @endif
 
-            <table class="table striped" id="ordertable">
-                <thead>
-                    <tr>
-                        <th width="28%" class="text-center">#Order No.</th>
-                        <th width="28%" class="text-center">Amount</th>
-                        <th width="29%" class="text-center">Date</th>
-                        <th width="28%" class="text-center">Order Status</th>
-                        @if(auth()->user()->user_type=='wholesaler')<th width="28%" class="text-center">Order Type</th> @endif
-                        <th width="28%" class="text-center">Payment Status</th>
-                        <th width="10%" class="text-center">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody class="order-data">
-                   @include('user.profile.orders._order_data')
-                </tbody>
-            </table>
+            <div class="no_more_tables">
+                <table class="table striped" id="ordertable">
+                    <thead class="cf">
+                        <tr>
+                            <th class="text-center">#Order No.</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Order Status</th>
+                            @if(auth()->user()->user_type=='wholesaler')<th class="text-center">Order Type</th> @endif
+                            <th class="text-center">Payment Status</th>
+                            <th class="text-center">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody class="order-data">
+                    @include('user.profile.orders._order_data')
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     </div>
     @foreach($orders as $item)

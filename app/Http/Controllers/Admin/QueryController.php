@@ -118,11 +118,17 @@ class QueryController extends Controller
         }
 
         if ($OrderModificationRequest->type ==1){
-            event(new OrderQueryFromAdminEvent($orderModification));
+            if(env('APP_ENV') == 'production')
+            {
+                event(new OrderQueryFromAdminEvent($orderModification));
+            }
             return redirect()->route('query.request.index',1)->with('success', 'Created Successfully');
         }else{
-            Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
-            Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
+            if(env('APP_ENV') == 'production')
+            {
+                Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
+                Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
+            }
             return redirect()->route('query.request.index',2)->with('success', 'Created Successfully');
         }
 

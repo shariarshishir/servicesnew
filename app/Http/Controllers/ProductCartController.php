@@ -398,7 +398,10 @@ class ProductCartController extends Controller
 
                     }
                 }
-               event(new NewOrderHasPlacedEvent($order));
+                if(env('APP_ENV') == 'production')
+                {
+                    event(new NewOrderHasPlacedEvent($order));
+                }
             }
 
 

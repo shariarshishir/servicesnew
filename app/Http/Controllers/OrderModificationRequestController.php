@@ -191,8 +191,10 @@ class OrderModificationRequestController extends Controller
                 ]);
 
 
-
-                event(new NewOrderModificationRequestEvent($orderModificationRequest));
+                if(env('APP_ENV') == 'production')
+                {
+                    event(new NewOrderModificationRequestEvent($orderModificationRequest));
+                }
                 return response()->json([
                     'success' => 'Request Created Successfully!',
                     'message' => 'Done!',

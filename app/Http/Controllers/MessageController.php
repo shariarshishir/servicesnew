@@ -343,6 +343,7 @@ class MessageController extends Controller
 
     public function contactSupplierFromProduct(Request $request)
     {
+        
         /*
         $user = User::where('user_type', 'supplier')
             ->orWhere('user_type', 'both')

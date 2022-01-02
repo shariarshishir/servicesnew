@@ -96,12 +96,15 @@ class RfqBidController extends Controller
             $bidData=SupplierBid::create($allData);
 
             //send mail to the user who had created rfq
-            $selectedUserToSendMail= $rfq;
-            event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+            if(env('APP_ENV') == 'production')
+            {
+                $selectedUserToSendMail= $rfq;
+                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
 
-            //send mail to merchantbay
-            $selectedUserToSendMail="success@merchantbay.com";
-            event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+                //send mail to merchantbay
+                $selectedUserToSendMail="success@merchantbay.com";
+                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+            }
 
             return response()->json([
                 'success' => true,

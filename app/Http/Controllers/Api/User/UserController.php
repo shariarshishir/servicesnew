@@ -543,7 +543,10 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'token' => $token
             ]);
-            event(new NewUserHasRegisteredEvent($user, $token));
+            if(env('APP_ENV') == 'production')
+            {
+                event(new NewUserHasRegisteredEvent($user, $token));
+            }
        }
 
 

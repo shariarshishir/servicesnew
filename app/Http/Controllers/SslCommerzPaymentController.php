@@ -193,7 +193,10 @@ class SslCommerzPaymentController extends Controller
                     Auth::login($user);
                     $order=VendorOrder::where(['user_id' => $user->id, 'transaction_id' => $tran_id])->first();
                     //dd($order);
-                    event(new PaymentSuccessEvent($order));
+                    if(env('APP_ENV') == 'production')
+                    {
+                        event(new PaymentSuccessEvent($order));
+                    }
                     // $order_number=VendorOrder::where(['user_id' => $user->id, 'state' => 'unpaid'])->pluck('order_number');
                     // return view('sslcommerce.success',compact('order_number'))->with('success', 'Transaction is successfully Completed');
                     return view('sslcommerce.success')->with('success', 'Transaction is successfully Completed');

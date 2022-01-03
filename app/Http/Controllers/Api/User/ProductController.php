@@ -383,6 +383,8 @@ class ProductController extends Controller
             $newFormatedProduct->productReview=$product->productReview;
             $newFormatedProduct->productTotalAverageRating=productRating($product->id);
             $newFormatedProduct->images=$product->images;
+            $newFormatedProduct->userName=$product->businessProfile->user->name;
+            $newFormatedProduct->userImage=$product->businessProfile->user->image;
 
 
         }
@@ -502,7 +504,7 @@ class ProductController extends Controller
                     array_push($productsArray,$newFormatedProduct);
                     $attribute_array=[];
 
-                }
+            }
 
         }
         if(count($productsArray)>0){

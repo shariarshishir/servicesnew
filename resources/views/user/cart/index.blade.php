@@ -10,134 +10,137 @@
                     <legend>Cart List</legend>
 
                     <div class="cart-wrapper">
-
-                        @foreach($addToCartItems as $key=>$itemByVendorId)
-                        <table class="shop_table shop_table_responsive cart_table striped">
-                            <thead>
-                                <tr>
-                                    <th class="product-thumbnail">Product Image</th>
-                                    <th class="product-name">Product Name</th>
-                                    <th class="product-name">Business Name</th>
-                                    <th class="product-price">Price</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-subtotal">Subtotal</th>
-                                    <th class="product-remove">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($itemByVendorId as $item)
-
-                                    @csrf
-                                    <tr class="cart_item" data-vendorId="{{$item->business_profile_id}}">
-
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$item->image)}}" class="" alt="" loading="lazy"/></a>
-                                        </td>
-
-                                        <td class="product-name" data-title="Product">
-                                            <div style="color: #4CAF50;">{{$item->name}}</div>
-                                            @if($item->full_stock==1)
-                                            <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span>
-                                            @elseif(isset($item->order_modification_req_id))
-                                            <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span>
-                                            @endif
-                                        </td>
-                                        <td class="product-name" data-title="Product">
-                                            @php  $business_profile= businessProfileInfo($item->business_profile_id); @endphp
-                                            <div style="color: #4CAF50;">{{ $business_profile->business_name }}</div>
-                                        </td>
-
-                                        <td class="product-price" data-title="Price">
-                                            <span class="price-currencySymbol">${{ number_format($item->unit_price, 2) }}</span>
-                                        </td>
-
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <label class="screen-reader-text" for="quantity_609789500c73f">This is my first product quantity</label>
-                                                <input type="number" id="quantity" class="input-text qty text" step="1" min="0" max="" name="cart_quantity" value="{{$item->quantity}}" title="Qty" size="4" placeholder="" inputmode="numeric" disabled="disabled" />
-                                                @if($item->full_stock==1 || isset($item->order_modification_req_id) )
-                                                {{-- <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span> --}}
-                                                {{-- @elseif(isset($item->order_modification_req_id)) --}}
-                                                {{-- <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span> --}}
-                                                @else
-                                                <a class="waves-effect waves-light cart_item_edit" href="javascript:void(0);" id="{{$item->id}}">Edit Item</a>
-                                                @endif
-                                                @if($item->product_type==1)
-                                                    {{-- <a href="javascript:void(0);" class="edit_fresh_order_item">Edit Item</a>
-                                                    <a href="javascript:void(0);" class="cancel_edit_fresh_order_item" style="display: none;">Cancel</a> --}}
-                                                    <div class="fresh_stock_block_wrapper">
-                                                        <button type="submit" id="updateCartItem_freshorder" class="btn waves-effect waves-light green" style="display: none;">Update</button>
-                                                            @if($item->copyright_price && !isset($item->order_modification_req_id) )
-                                                                @if(!in_array($item->product_sku,$orderedItem))
-                                                                    {{-- <label class="tooltipped copyright-checkbox" data-position="top" data-tooltip="Copyright price is {{ $item->copyright_price }}. Please check this box if you want to buy the copyright<br /> of this product. This price will add to your total price of this product."> --}}
-                                                                        {{-- <input name="copyright_price" type="checkbox" cartrowid="{{ $item->id }}" @if($item->copyright==true) checked @endif/> --}}
-                                                                        <div class="switch">
-                                                                            <label>
-                                                                                <span class="tooltipped" data-position="top"  data-tooltip="If you buy with copyright,no one will be able to buy it.Copyright price is {{ $item->copyright_price }}. <br> This price will add to your total price of this product."><i class="material-icons dp48">live_help</i></span>
-                                                                                <input type="checkbox" name="copyright_price" cartrowid="{{ $item->id }}"  @if($item->copyright==true) checked @endif/>
-                                                                                {{ __('Want to buy with copyright?') }}
-                                                                                <span class="lever"></span>
-                                                                            </label>
-                                                                        </div>
-                                                                        {{-- <span>{{ __('Want to buy with copyright?') }}</span> --}}
-                                                                        {{-- <span class="tooltipped" data-position="top"  data-tooltip="If you buy with copyright,no one will be able to buy it.Copyright price is {{ $item->copyright_price }}. <br> This price will add to your total price of this product."><i class="material-icons dp48">live_help</i></span> --}}
-                                                                    {{-- </label> --}}
-                                                                @endif
-
-                                                            @endif
-                                                    </div>
-                                                @endif
-
-
-                                            </div>
-                                        </td>
-
-                                        <td class="product-subtotal" data-title="Subtotal">
-                                            <span class="price-amount">
-                                                <bdi><span class="price-currencySymbol">${{ number_format($item->total_price, 2) }}</span>
-                                                    @if (isset($item->discount_amount))
-                                                        <span class="tooltipped" data-position="top" data-tooltip="Discount Amount {{ $item->discount_amount }}"><i class="material-icons dp48">live_help</i></span>
-                                                   @endif
-                                                </bdi>
-                                            </span>
-                                        </td>
-                                        <td class="product-remove">
-                                            <a href="{{route('cart.delete',$item->id)}}" class="btn_delete" aria-label="Remove this item" data-cartRowId="{{$item->id}}" data-product_sku="{{$item->product_sku}}"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
-                                        </td>
+                        <div class="no_more_tables">
+                            @foreach($addToCartItems as $key=>$itemByVendorId)
+                            <table class="shop_table shop_table_responsive cart_table striped">
+                                <thead class="cf">
+                                    <tr>
+                                        <th class="product-thumbnail">Product Image</th>
+                                        <th class="product-name">Product Name</th>
+                                        <th class="product-name">Business Name</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Subtotal</th>
+                                        <th class="product-remove">Action</th>
                                     </tr>
-                                    {{-- <input type="hidden" name="rowId" value="{{$item->cart_row_id}}" >
-                                    <input type="hidden" name="product_type" value="{{ $item->product_type }}" /> --}}
-                                </form>
+                                </thead>
+                                <tbody>
+                                @foreach($itemByVendorId as $item)
+                                        @csrf
+                                        <tr class="cart_item" data-vendorId="{{$item->business_profile_id}}">
+
+                                            <td data-title="Product Image" class="product-thumbnail">
+                                                <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$item->image)}}" class="" alt="" loading="lazy"/></a>
+                                            </td>
+
+                                            <td data-title="Product Name" class="product-name" data-title="Product">
+                                                <div style="color: #4CAF50;">{{$item->name}}</div>
+                                                @if($item->full_stock==1)
+                                                <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span>
+                                                @elseif(isset($item->order_modification_req_id))
+                                                <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span>
+                                                @endif
+                                            </td>
+                                            <td data-title="Business Name" class="product-name" data-title="Product">
+                                                @php  $business_profile= businessProfileInfo($item->business_profile_id); @endphp
+                                                <div style="color: #4CAF50;">{{ $business_profile->business_name }}</div>
+                                            </td>
+
+                                            <td data-title="Price" class="product-price" data-title="Price">
+                                                <span class="price-currencySymbol">${{ number_format($item->unit_price, 2) }}</span>
+                                            </td>
+
+                                            <td data-title="Quantity" class="product-quantity" data-title="Quantity">
+                                                <div class="quantity">
+                                                    <label class="screen-reader-text" for="quantity_609789500c73f">This is my first product quantity</label>
+                                                    <input type="number" id="quantity" class="input-text qty text" step="1" min="0" max="" name="cart_quantity" value="{{$item->quantity}}" title="Qty" size="4" placeholder="" inputmode="numeric" disabled="disabled" />
+                                                    @if($item->full_stock==1 || isset($item->order_modification_req_id) )
+                                                    {{-- <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span> --}}
+                                                    {{-- @elseif(isset($item->order_modification_req_id)) --}}
+                                                    {{-- <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span> --}}
+                                                    @else
+                                                    <a class="waves-effect waves-light cart_item_edit" href="javascript:void(0);" id="{{$item->id}}">Edit Item</a>
+                                                    @endif
+                                                    @if($item->product_type==1)
+                                                        {{-- <a href="javascript:void(0);" class="edit_fresh_order_item">Edit Item</a>
+                                                        <a href="javascript:void(0);" class="cancel_edit_fresh_order_item" style="display: none;">Cancel</a> --}}
+                                                        <div class="fresh_stock_block_wrapper">
+                                                            <button type="submit" id="updateCartItem_freshorder" class="btn waves-effect waves-light green" style="display: none;">Update</button>
+                                                                @if($item->copyright_price && !isset($item->order_modification_req_id) )
+                                                                    @if(!in_array($item->product_sku,$orderedItem))
+                                                                        {{-- <label class="tooltipped copyright-checkbox" data-position="top" data-tooltip="Copyright price is {{ $item->copyright_price }}. Please check this box if you want to buy the copyright<br /> of this product. This price will add to your total price of this product."> --}}
+                                                                            {{-- <input name="copyright_price" type="checkbox" cartrowid="{{ $item->id }}" @if($item->copyright==true) checked @endif/> --}}
+                                                                            <div class="switch">
+                                                                                <label>
+                                                                                    <span class="tooltipped" data-position="top"  data-tooltip="If you buy with copyright,no one will be able to buy it.Copyright price is {{ $item->copyright_price }}. <br> This price will add to your total price of this product."><i class="material-icons dp48">live_help</i></span>
+                                                                                    <input type="checkbox" name="copyright_price" cartrowid="{{ $item->id }}"  @if($item->copyright==true) checked @endif/>
+                                                                                    {{ __('Want to buy with copyright?') }}
+                                                                                    <span class="lever"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                            {{-- <span>{{ __('Want to buy with copyright?') }}</span> --}}
+                                                                            {{-- <span class="tooltipped" data-position="top"  data-tooltip="If you buy with copyright,no one will be able to buy it.Copyright price is {{ $item->copyright_price }}. <br> This price will add to your total price of this product."><i class="material-icons dp48">live_help</i></span> --}}
+                                                                        {{-- </label> --}}
+                                                                    @endif
+
+                                                                @endif
+                                                        </div>
+                                                    @endif
+
+
+                                                </div>
+                                            </td>
+
+                                            <td data-title="Subtotal" class="product-subtotal" data-title="Subtotal">
+                                                <span class="price-amount">
+                                                    <bdi><span class="price-currencySymbol">${{ number_format($item->total_price, 2) }}</span>
+                                                        @if (isset($item->discount_amount))
+                                                            <span class="tooltipped" data-position="top" data-tooltip="Discount Amount {{ $item->discount_amount }}"><i class="material-icons dp48">live_help</i></span>
+                                                    @endif
+                                                    </bdi>
+                                                </span>
+                                            </td>
+                                            <td data-title="Action" class="product-remove">
+                                                <a href="{{route('cart.delete',$item->id)}}" class="btn_delete" aria-label="Remove this item" data-cartRowId="{{$item->id}}" data-product_sku="{{$item->product_sku}}"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
+                                            </td>
+                                        </tr>
+                                        {{-- <input type="hidden" name="rowId" value="{{$item->cart_row_id}}" >
+                                        <input type="hidden" name="product_type" value="{{ $item->product_type }}" /> --}}
+                                    </form>
+                                @endforeach
+                                </tbody>
+                            </table>
                             @endforeach
-                            </tbody>
-                        </table>
-                        @endforeach
+                        </div>
 
                         <div class="cart-collaterals row">
                             <div class="cart_totals ">
                                 <legend>Cart totals</legend>
-                                <table cellspacing="0" class="shop_table shop_table_responsive">
-                                    <tbody>
-                                        <tr class="cart-subtotal">
-                                            <th>Subtotal</th>
-                                            <td data-title="Subtotal">
-                                                <span class="price-amount">
-                                                    <bdi><span class="price-currencySymbol">$</span>{{ number_format($cartData->sum('total_price'), 2) }}</bdi>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr class="order-total">
-                                            <th>Total</th>
-                                            <td data-title="Total">
-                                                <strong>
-                                                    <span class="price-amount amount">
+                                <div class="no_more_tables">
+                                    <table cellspacing="0" class="shop_table shop_table_responsive">
+                                        <tbody>
+                                            <tr class="cart-subtotal">
+                                                <th class="empty_td">Subtotal</th>
+                                                <td data-title="Subtotal">
+                                                    <span class="price-amount">
                                                         <bdi><span class="price-currencySymbol">$</span>{{ number_format($cartData->sum('total_price'), 2) }}</bdi>
                                                     </span>
-                                                </strong>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th class="empty_td">Total</th>
+                                                <td data-title="Total">
+                                                    <strong>
+                                                        <span class="price-amount amount">
+                                                            <bdi><span class="price-currencySymbol">$</span>{{ number_format($cartData->sum('total_price'), 2) }}</bdi>
+                                                        </span>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                                 <br>
                                 <div class="proceed-to-checkout">
                                     <a href="{{route('cart.checkout')}}" class="btn_green waves-effect waves-light green">Proceed to checkout</a>

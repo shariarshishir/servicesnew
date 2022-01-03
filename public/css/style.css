@@ -552,12 +552,6 @@ form input:read-only {
     position: relative;
 }
 
-#countdown-dropdown {
-    width: 300px !important;
-    padding: 20px;
-}
-
-
 /* Mobile header css end */
 
 /* ******* Nav css end ********** */
@@ -1676,7 +1670,7 @@ form input:read-only {
     font-weight: 500;
     text-transform: capitalize;
 }
-.production-flow-and-manpower-table-body tr th {
+.profile_tabNav_wrap .profile_table_design .manpower_table_wrapper .production-flow-and-manpower-table tr th {
     text-align: center;
     width: 40% !important;
 }
@@ -1751,7 +1745,7 @@ form input:read-only {
     border-top: none;
 }
 .profile_tabNav_wrap .profile_table_design .overview_table tr td tr td {
-    width: 50%;
+    width: 50% !important;
 }
 .profile_tabNav_wrap .overview_table tr td tr:first-child td {
     padding-top: 20px;
@@ -6307,12 +6301,12 @@ nav .pagination li.active .page-link {
     height: auto !important;
     top: 42px !important;
     padding-bottom: 0 !important;
-    ;
 }
 .cart-icon-outer-wrapper .card li {
     padding: 0px 0 20px;
     min-height: inherit;
 }
+.notifications_icon_wrap .card li:last-child,
 .cart-icon-outer-wrapper .card li:last-child {
     padding-bottom: 0;
 }
@@ -6395,6 +6389,38 @@ nav .pagination li.active .page-link {
 }
 .header_wrap .notifications_icon_wrap .noticication_counter {
     right: 6px;
+}
+
+.notifications_icon_wrap .card {
+    right: 0;
+    left: inherit !important;
+    height: auto !important;
+    top: 42px !important;
+    width: 210px !important;
+    padding: 5px 15px 15px !important;
+    min-width: 100px;
+}
+.notifications_icon_wrap .card li {
+    padding: 0px 0 10px;
+    min-height: inherit;
+}
+
+.notifications_icon_wrap .card li a:link,
+.notifications_icon_wrap .card li a:active,
+.notifications_icon_wrap .card li a:visited {
+    font-size: 16px;
+    color: #757575 !important;
+    display: block;
+    line-height: 22px;
+    padding: 0 !important;
+}
+.notifications_icon_wrap .card li:hover, 
+.notifications_icon_wrap .card li.active {
+    background: none;
+}
+.notifications_icon_wrap .card li a:hover, 
+.notifications_icon_wrap .card li.active a {
+    color: #448547 !important;
 }
 /* ******************** Cart style end*********************** */
 
@@ -8634,6 +8660,10 @@ nav .pagination li.active .page-link {
 
 
 @media only screen and (max-width: 800px) {
+
+    .no_more_tables {
+        padding: 10px 5px;
+    }
 	
 	/* Force table to not be like tables anymore */
 	.no_more_tables table, 
@@ -8738,6 +8768,10 @@ nav .pagination li.active .page-link {
 
     #product-add-modal-block .no_more_tables tr td input {
         width: 100% !important;
+    }
+
+    .cart-collaterals .cart_totals {
+        width: 100%;
     }
 
 

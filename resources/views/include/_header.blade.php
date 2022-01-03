@@ -120,7 +120,7 @@
 						</a>
 					</div>
 					
-					<ul id="countdown-dropdown" class="dropdown-content">
+					<ul id="countdown-dropdown" class="dropdown-content card">
 						<li class="">
 							@foreach($userNotifications as $notification)
 								@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
@@ -199,7 +199,6 @@
 								@endif
 							@endforeach
 						</li>
-
 					</ul>
 					<div class="header_message_box">
 						<a href="{{route('message.center')}}">
@@ -397,7 +396,7 @@
 						@endif
 					</div>
 
-					@if(auth()->user())
+					<!-- @if(auth()->user())
 						<div class="notifications_icon_wrap mobile_top_icon_box">
 							<a href="javascript:void(0);">
 								<i class="material-icons">notifications</i>
@@ -468,7 +467,7 @@
 							@endforeach
 
 							<div class="dropdown-divider"></div>
-							<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+								<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
 							</div>
 							
 						</ul>
@@ -478,7 +477,120 @@
 								<span class="sms_counter ">0</span>
 							</a>
 						</div>
-					@endif	
+					@endif -->
+
+
+
+					<div class="mobile_notification_wrap">
+						@if(auth()->user())
+							<div class="notifications_icon_wrap mobile_top_icon_box mobile_notifications_icon_wrap" >
+								<a href="javascript:void(0);" class="dropdown-trigger" data-target="countdown-dropdown-mobile" >
+									<i class="material-icons">notifications</i>
+									<span id="" class="noticication_counter">{{count($userNotifications)}}</span>
+								</a>
+							</div>
+
+							<ul id="countdown-dropdown-mobile" class="card dropdown-content">
+								<li class="">
+									@foreach($userNotifications as $notification)
+										@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
+										<a href="{{route('vendor.order.show.notification',['businessProfile'=>$notification->data['order']['business_profile_id'],'order'=>$notification->data['order']['order_number'],'notification'=>$notification->id])}}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif($notification->type == 'App\Notifications\NewOrderHasApprovedNotification')
+										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+											<div class="admin-notification-title">{{$notification->data['title']}}</div>
+											<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type == 'App\Notifications\OrderQueryNotification' )
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type == 'App\Notifications\OrderQueryFromAdminNotification' )
+										<a href="{{ url($notification->data['url']) }}" >
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										
+										@elseif ($notification->type == 'App\Notifications\NewOrderModificationRequestNotification' )
+										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type == 'App\Notifications\QueryCommuncationNotification' )
+										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type == 'App\Notifications\PaymentSuccessNotification')
+										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type =='App\Notifications\NewRfqNotification')
+										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+											<div class="admin-notification-title">{{$notification->data['title']}}</div>
+											<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type =='App\Notifications\RfqBidNotification')
+										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+											<div class="admin-notification-title">{{$notification->data['title']}}</div>
+											<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@endif
+									@endforeach
+								</li>
+							</ul>
+
+							<div class="header_message_box mobile_top_icon_box">
+								<a href="{{route('message.center')}}">
+									<i class="material-icons">message</i>
+									<span class="sms_counter ">0</span>
+								</a>
+							</div>
+
+						@endif
+					</div>
+					
+					
+
+
+
+
+
+
+
+
+
 
 
 					<div class="cart-icon-outer-wrapper mobile_top_icon_box">

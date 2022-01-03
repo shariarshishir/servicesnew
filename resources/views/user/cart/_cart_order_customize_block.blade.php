@@ -3,27 +3,29 @@
         <form action="{{route('cart.update')}}" method="POST">
             @csrf
 
-            <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Color</th>
-                        <th>XXS</th>
-                        <th>XS</th>
-                        <th>Small</th>
-                        <th>Medium</th>
-                        <th>Large</th>
-                        <th>Extra Large</th>
-                        <th>XXL</th>
-                        <th>XXXL</th>
-                        <th>4XXL</th>
-                        <th>One Size</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody class="colors-sizes edit-cart-color-size-block">
+            <div class="no_more_tables">
+                <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
+                    <thead class="cf">
+                        <tr>
+                            <th>Color</th>
+                            <th>XXS</th>
+                            <th>XS</th>
+                            <th>Small</th>
+                            <th>Medium</th>
+                            <th>Large</th>
+                            <th>Extra Large</th>
+                            <th>XXL</th>
+                            <th>XXXL</th>
+                            <th>4XXL</th>
+                            <th>One Size</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody class="colors-sizes edit-cart-color-size-block">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             <div class="add_more_colors_sizes">
 
             </div>

@@ -410,28 +410,30 @@
                                                 <h4>Categories Produced</h4>
                                                 <div class="categories_produced_wrapper">
                                                     <div class="overview_table box_shadow">
-                                                        <table>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Type</th>
-                                                                    <th>Percentage</th>
-                                                                    <th>&nbsp;</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="categories-produced-table-body">
-                                                                @foreach($business_profile->categoriesProduceds as $categoriesProduced)
-                                                                <tr>
-                                                                    <td>{{$categoriesProduced->type}}</td>
-                                                                    <td>{{$categoriesProduced->percentage}}</td>
-                                                                    @if($categoriesProduced->status==1)
-                                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
-                                                                    @else
-                                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
-                                                                    @endif
-                                                                </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
+														<div class="no_more_tables">
+															<table>
+																<thead class-"cf">
+																	<tr>
+																		<th>Type</th>
+																		<th>Percentage</th>
+																		<th>&nbsp;</th>
+																	</tr>
+																</thead>
+																<tbody class="categories-produced-table-body">
+																	@foreach($business_profile->categoriesProduceds as $categoriesProduced)
+																	<tr>
+																		<td data-title="Type">{{$categoriesProduced->type}}</td>
+																		<td data-title="Percentage">{{$categoriesProduced->percentage}}</td>
+																		@if($categoriesProduced->status==1)
+																		<td><i class="material-icons" style="color:green">check_circle</i></td>
+																		@else
+																		<td><i class="material-icons "style="color:gray">check_circle</i></td>
+																		@endif
+																	</tr>
+																	@endforeach
+																</tbody>
+															</table>
+														</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -443,28 +445,30 @@
                                         <h4>Machinery Details</h4>
                                         <div class="machinery_table_inner_wrap">
                                             <div class="overview_table box_shadow">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Machine Name</th>
-                                                            <th>Quantity</th>
-                                                            <th>&nbsp;</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="machinaries-details-table-body">
-                                                        @foreach($business_profile->machineriesDetails as $machineriesDetail)
-                                                        <tr>
-                                                            <td>{{$machineriesDetail->machine_name}}</td>
-                                                            <td>{{$machineriesDetail->quantity}}</td>
-                                                            @if($machineriesDetail->status==1)
-                                                            <td><i class="material-icons" style="color:green">check_circle</i></td>
-                                                            @else
-                                                            <td><i class="material-icons "style="color:gray">check_circle</i></td>
-                                                            @endif
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+												<div class="no_more_tables">
+													<table>
+														<thead class="cf">
+															<tr>
+																<th>Machine Name</th>
+																<th>Quantity</th>
+																<th>&nbsp;</th>
+															</tr>
+														</thead>
+														<tbody class="machinaries-details-table-body">
+															@foreach($business_profile->machineriesDetails as $machineriesDetail)
+															<tr>
+																<td data-title="Machine Name">{{$machineriesDetail->machine_name}}</td>
+																<td data-title="Quantity">{{$machineriesDetail->quantity}}</td>
+																@if($machineriesDetail->status==1)
+																<td><i class="material-icons" style="color:green">check_circle</i></td>
+																@else
+																<td><i class="material-icons "style="color:gray">check_circle</i></td>
+																@endif
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
                                             </div>
                                         </div>
                                     </div>

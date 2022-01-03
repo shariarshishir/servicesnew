@@ -10,32 +10,35 @@
 			<div class="form-group  sampling-details-block">
 				<legend>Create sampling</legend>
 				<div class="sampling-block">
-					<table class="sampling-table-block">
-						<thead>
-							<tr>
-								<th> Name</th>
-								<th>Quantity</th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							@if(count($business_profile->samplings)>0)
-							@foreach($business_profile->samplings as $sampling)
-							<tr>
-								<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="{{$sampling->title}}" ></td>
-								<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="{{$sampling->quantity}}" ></td>
-								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
-							</tr>
-							@endforeach
-							@else
-							<tr id="sampling-details-table-no-data">
-								<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>
-								<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>
-								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
-							</tr>
-							@endif
-						</tbody>
-					</table>
+					<div class="no_more_tables">
+						<table class="sampling-table-block">
+							<thead class="cf">
+								<tr>
+									<th> Name</th>
+									<th>Quantity</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								@if(count($business_profile->samplings)>0)
+								@foreach($business_profile->samplings as $sampling)
+								<tr>
+									<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="{{$sampling->title}}" ></td>
+									<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="{{$sampling->quantity}}" ></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
+								</tr>
+								@endforeach
+								@else
+								<tr id="sampling-details-table-no-data">
+									<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>
+									<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
+								</tr>
+								@endif
+							</tbody>
+						</table>
+					</div>
+					
 
 					<div class="add_more_box">
 						<a href="javascript:void(0);" class="add-more-block" onclick="addSamplingDetails()"><i class="material-icons dp48">add</i> Add More</a>

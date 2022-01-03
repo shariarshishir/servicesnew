@@ -496,8 +496,8 @@
 
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
-        html += '<td><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
-        html += '<td><input name="percentage[]" id="percentage" type="number" class="form-control  value="" ></td>';
+        html += '<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
+        html += '<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.categories-produced-table-block tbody').append(html);
@@ -514,8 +514,8 @@
 
     let totalChild = $('.machinaries-details-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
-    html += '<td><input name="quantity[]" id="quantity" type="number" class="form-control  value="" ></td>';
+    html += '<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
+    html += '<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control  value="" ></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('.machinaries-details-table-block tbody').append(html);
@@ -587,8 +587,8 @@
             //append in form
             $('.machinaries-details-table-block tbody').children().empty();
             var html='<tr id="production-capacity-table-no-data">';
-                html +='<td><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
-                html +='<td><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
+                html +='<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
+                html +='<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
                 html +='</tr>';
                 $('.machinaries-details-table-block tbody').append(html);
@@ -638,8 +638,8 @@
             //append in form
             $('.categories-produced-table-block tbody').children().empty();
             var html='  <tr id="categories-produced-table-no-data">';
-                html +='<td><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
-                html +='<td><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
+                html +='<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
+                html +='<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
                 html +='</tr>';
                 $('.categories-produced-table-block tbody').append(html);
@@ -726,10 +726,10 @@
 
         let totalChild = $('.production-flow-and-manpower-table-block tbody').children().length;
         var html = '<tr>';
-        html +='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
-        html +='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
-        html +='<td><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
-        html +='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
+        html +='<td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
+        html +='<td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
+        html +='<td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
+        html +='<td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.production-flow-and-manpower-table-block tbody').append(html);
@@ -807,10 +807,10 @@
             //append in form
             $('.production-flow-and-manpower-table-block  tbody').children().empty();
             var html='<tr id="production-flow-and-manpower-table-no-data">';
-                html+='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
-                html+='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>';
-                html+='<td><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>';
-                html+='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>';
+                html+='<td data=title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
+                html+='<td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>';
+                html+='<td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>';
+                html+='<td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>';
                 html+='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                 html+='</tr>';
                 $('.production-flow-and-manpower-table-block tbody').append(html);
@@ -1051,9 +1051,9 @@
     {
         $('#main-buyers-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="main-buyer-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="main-buyer-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="main-buyer-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="main-buyer-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.main-buyers-details-table-block tbody').append(html);
@@ -1234,9 +1234,9 @@
 
         $('#export-destination-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="export-destination-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="export-destination-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.export-destination-table-block tbody').append(html);
@@ -1292,9 +1292,9 @@
             //append in form
             $('.export-destination-table-block tbody').children().empty();
                 var html='<tr>';
-                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
-                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td data-title="Name"><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td data-title="Image"><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
                 html +='<tr>';
                 $('.export-destination-table-block  tbody').append(html);
@@ -1413,9 +1413,9 @@
 
         $('#association-membership-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="association-membership-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="association-membership-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.association-membership-details-table-block tbody').append(html);
@@ -1592,9 +1592,9 @@
 
         $('#press-highlight-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="press-highlight-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="press-highlight-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removePressHighlightDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.press-highlight-details-table-block tbody').append(html);
@@ -1649,9 +1649,9 @@
             }
             $('.press-highlight-details-table-block tbody').children().empty();
                 var html='<tr>';
-                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
-                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td data-title="Name">><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td data-title="Short Description">><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td data-title="Image">><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
                 html +='<tr>';
                 $('.press-highlight-details-table-block  tbody').append(html);
@@ -1767,8 +1767,8 @@
     {
 
         var html = '<tr>';
-        html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
+        html += '<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td data-title="quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.business-term-table-block tbody').append(html);
@@ -1833,8 +1833,8 @@
             //append in form
             $('.business-term-table-block tbody').children().html(nohtml);
             var html='<tr id="business-term-details-table-no-data">';
-            html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>';
-            html +='<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
+            html += '<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>';
+            html +='<td data-title="Quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
             html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
             html +='</tr>';
             $('.business-term-table-block tbody').append(html);
@@ -1862,8 +1862,8 @@
 
         //$('#sampling-details-table-no-data').hide();
         var html = '<tr>';
-        html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+        html += '<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.sampling-table-block  tbody').append(html);
@@ -1926,8 +1926,8 @@
             //append in form
             $('.sampling-table-block tbody').children().html(nohtml);
             var html='<tr id="sampling-details-table-no-data">';
-            html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
-            html +='<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+            html += '<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
+            html +='<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
             html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
             html +='</tr>';
             $('.sampling-table-block tbody').append(html);

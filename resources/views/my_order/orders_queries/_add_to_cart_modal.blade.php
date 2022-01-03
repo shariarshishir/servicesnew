@@ -17,14 +17,17 @@
 
                     <div class="form-group row">
                         <div class="color-and-size-block">
-                            <table class="color-size-table-block ">
-                                <thead>
+                            <div class="no_more_tables">
+                                <table class="color-size-table-block ">
+                                    <thead class="cf">
 
-                                </thead>
-                                <tbody class="order-query-processed-color-sizes">
+                                    </thead>
+                                    <tbody class="order-query-processed-color-sizes">
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="row order-query-processed-price-block order-modification-data" style="display: none">

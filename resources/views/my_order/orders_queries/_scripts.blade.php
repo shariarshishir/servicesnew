@@ -166,8 +166,8 @@
                                         $('#add-to-cart-order-query-modal .color-size-table-block thead').html(html);
                                         $.each(JSON.parse(data.data.details),function(key, value){
                                         var html='<tr>';
-                                            html+='<td><input type="hidden" name="color" value="'+value.color+'">'+value.color+'</td>';
-                                            html+='<td><input type="hidden" name="quantity" value="'+value.quantity+'">'+value.quantity+'</td>';
+                                            html+='<td data-title="Color"><input type="hidden" name="color" value="'+value.color+'">'+value.color+'</td>';
+                                            html+='<td data-title="Quantity"><input type="hidden" name="quantity" value="'+value.quantity+'">'+value.quantity+'</td>';
                                             html+='</tr>';
                                             $('#add-to-cart-order-query-modal .order-query-processed-color-sizes').append(html);
 

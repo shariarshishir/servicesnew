@@ -142,19 +142,21 @@
                                 </div>
                                 <div class="col s12">
                                     <div class="prices-breakdown-block">
-                                        <table class="fresh-order-attribute-table-block">
-                                            <thead>
-                                                <tr>
-                                                    <th>Qty Min</th>
-                                                    <th>Qty Max</th>
-                                                    <th>Price (usd)</th>
-                                                    <th>Lead Time (days)</th>
-                                                    <th>&nbsp;</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fresh-attr-tbody">
-                                            </tbody>
-                                        </table>
+                                        <div class="no_more_tables">
+                                            <table class="fresh-order-attribute-table-block">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Qty Min</th>
+                                                        <th>Qty Max</th>
+                                                        <th>Price (usd)</th>
+                                                        <th>Lead Time (days)</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="fresh-attr-tbody">
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <div class="add_more_box" style="padding-top: 20px">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
@@ -189,30 +191,32 @@
                                     </div>
                                     <div class="col s12">
                                         <div class="color-and-size-block">
-                                            <table class="color-size-table-block striped edit-color-sizes">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Color</th>
-                                                        <th>XXS</th>
-                                                        <th>XS</th>
-                                                        <th>Small</th>
-                                                        <th>Medium</th>
-                                                        <th>Large</th>
-                                                        <th>Extra Large</th>
-                                                        <th>XXL</th>
-                                                        <th>XXXL</th>
-                                                        <th>4XXL</th>
-                                                        <th>One Size</th>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="ready-attr-tbody-colors-sizes">
+                                            <div class="no_more_tables">
+                                                <table class="color-size-table-block striped edit-color-sizes">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Color</th>
+                                                            <th>XXS</th>
+                                                            <th>XS</th>
+                                                            <th>Small</th>
+                                                            <th>Medium</th>
+                                                            <th>Large</th>
+                                                            <th>Extra Large</th>
+                                                            <th>XXL</th>
+                                                            <th>XXXL</th>
+                                                            <th>4XXL</th>
+                                                            <th>One Size</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="ready-attr-tbody-colors-sizes">
 
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
                                             <div class="add_more_box" >
-                                            <a href="javascript:void(0);" class="add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
+                                                <a href="javascript:void(0);" class="add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                             </div>
 
                                         </div>
@@ -255,18 +259,21 @@
                                 </div>
                                 <div class="col s12">
                                     <div class="prices-breakdown-block">
-                                        <table class="ready-order-attribute-table-block striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Qty Min</th>
-                                                    <th>Qty Max</th>
-                                                    <th>Price (usd)</th>
-                                                    <th>&nbsp;</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class='ready-attr-tbody'>
-                                            </tbody>
-                                        </table>
+                                        <div class="no_more_tables">
+                                            <table class="ready-order-attribute-table-block striped">
+                                                <thead class="cf">
+                                                    <tr>
+                                                        <th>Qty Min</th>
+                                                        <th>Qty Max</th>
+                                                        <th>Price (usd)</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class='ready-attr-tbody'>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
 
                                         <div class="add_more_box" style="padding-top: 20px">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
@@ -294,18 +301,20 @@
                                     </div>
                                     <div class="col s12">
                                         <div class="color-and-size-block">
-                                            <table class="non-clothing-color-quantity-table-block edit-non-clothing-attr-counting striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Color</th>
-                                                        <th>Quantity</th>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="non-clothing-color-quantity-tbody">
+                                            <div class="no_more_tables">
+                                                <table class="non-clothing-color-quantity-table-block edit-non-clothing-attr-counting striped">
+                                                    <thead class="cf">
+                                                        <tr>
+                                                            <th>Color</th>
+                                                            <th>Quantity</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="non-clothing-color-quantity-tbody">
 
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
                                             <div class="add_more_box" style="padding-top: 20px">
                                                 <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
@@ -350,19 +359,22 @@
                                 </div>
                                 <div class="col s12">
                                     <div class="prices-breakdown-block">
-                                        <table class="non-clothing-prices-breakdown-block striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Qty Min</th>
-                                                    <th>Qty Max</th>
-                                                    <th>Price (usd)</th>
-                                                    <th>&nbsp;</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class='edit-non-clothing-prices-breakdown-tbody'>
+                                        <div class="no_more_tables">
+                                            <table class="non-clothing-prices-breakdown-block striped">
+                                                <thead class="cf">
+                                                    <tr>
+                                                        <th>Qty Min</th>
+                                                        <th>Qty Max</th>
+                                                        <th>Price (usd)</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class='edit-non-clothing-prices-breakdown-tbody'>
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
 
                                         <div class="add_more_box">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
@@ -382,12 +394,12 @@
                         </div>
 
 
-                        <div class="input-field row moq-unit-block">
-                            <div class="col m8">
+                        <div class="row moq-unit-block">
+                            <div class="col s12 m8 input-field ">
                                 <label for="moq" class="col-md-4 col-form-label text-md-right">Minimum Order Quantity</label>
                                 <input id="moq" type="number" class="form-control minimun-order-qty @error('moq') is-invalid @enderror" name="moq" value="{{ old('moq') }}"  autocomplete="moq" autofocus>
                             </div>
-                            <div class="col m4">
+                            <div class="col s12 m4 input-field ">
                                 <label for="product_unit" class="col-md-4 col-form-label text-md-right">Unit</label>
                                 <select class="select2 browser-default product_unit" name="product_unit">
                                     <option value="">Select</option>
@@ -401,14 +413,14 @@
                             </div>
                         </div>
 
-                        <div class="input-field row">
-                            <div class="col s12">
+                        <div class="row">
+                            <div class="col s12 input-field">
                                 <label>
                                     <input name="is_new_arrival" class="edit_is_new_arrival" type="checkbox" {{old('is_new_arrival')=='on'? 'checked' : " "}} />
                                     <span>{{ __('New Arrival') }}</span>
                                 </label>
                             </div>
-                            <div class="col s12">
+                            <div class="col s12 input-field ">
                                 <label>
                                     <input name="is_featured" class="edit_is_featured" type="checkbox" {{old('is_featured')=='on'? 'checked' : " "}}/>
                                     <span>{{ __('Featured') }}</span>
@@ -441,10 +453,10 @@
                             </div>
                         </div>
                         <div class="input-field row related-product" style="display: none;">
-                            <div class="col s12 m3 l3">
+                            <div class="col s12">
                                 <label for="">Select Related Products</label>
                             </div>
-                            <div class="col s12 m9 l9">
+                            <div class="col s12">
                                 <select class="js-example-basic-multiple" name="related_products[]" multiple="multiple"></select>
                             </div>
                         </div>

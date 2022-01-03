@@ -29,7 +29,16 @@
 						<input type="hidden" name="search_type" class="search_type" value="" />
 						<button class="btn waves-effect waves-light green darken-1 search-btn" type="submit" ><i class="material-icons dp48">search</i></button>
 					</form>
-					<div id="search-results" style="display: none;"></div>
+                    <div id="search-results-wrapper" style="display: none;">
+                        <div id="loadingSearchProgressContainer">
+                            <div id="loadingSearchProgressElement">
+                                <img src="{{asset('images/frontendimages/new_layout_images/loading-gray.gif')}}" width="128" height="15" alt="Loading">
+                                <div class="loading-message" style="display: none;">Loading...</div>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>                    
+					    <div id="search-results" style="display: none;"></div>
+                    </div>
 				</div>
 				
 			</div>

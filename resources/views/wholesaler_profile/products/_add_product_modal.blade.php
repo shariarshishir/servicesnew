@@ -122,26 +122,28 @@
                         </div>
                         <div class="col s12">
                             <div class="prices-breakdown-block">
-                                <table class="fresh-order-attribute-table-block">
-                                    <thead>
-                                        <tr>
-                                            <th>Qty Min</th>
-                                            <th>Qty Max</th>
-                                            <th>Price (usd)</th>
-                                            <th>Lead Time (days)</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                            <td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                            <td><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                            <td><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>
-                                            {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td> --}}
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="no_more_tables">
+                                    <table class="fresh-order-attribute-table-block">
+                                        <thead class="cf">
+                                            <tr>
+                                                <th>Qty Min</th>
+                                                <th>Qty Max</th>
+                                                <th>Price (usd)</th>
+                                                <th>Lead Time (days)</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
+                                                <td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
+                                                <td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                                <td data-title="Lead Time (days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>
+                                                {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td> --}}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                                 <div class="add_more_box" style="padding-top: 20px">
                                     <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
@@ -177,40 +179,42 @@
                             </div>
                             <div class="col s12">
                                 <div class="color-and-size-block">
-                                    <table class="color-size-table-block add-color-sizes">
-                                        <thead>
-                                            <tr>
-                                                <th>Color</th>
-                                                <th>XXS</th>
-                                                <th>XS</th>
-                                                <th>Small</th>
-                                                <th>Medium</th>
-                                                <th>Large</th>
-                                                <th>Extra Large</th>
-                                                <th>XXL</th>
-                                                <th>XXXL</th>
-                                                <th>4XXL</th>
-                                                <th>One Size</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxs][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xs][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[small][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[medium][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[large][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxl][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size" name="color_size[one_size][]" /></td>
-                                                {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td> --}}
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="no_more_tables">
+                                        <table class="color-size-table-block add-color-sizes">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Color</th>
+                                                    <th>XXS</th>
+                                                    <th>XS</th>
+                                                    <th>Small</th>
+                                                    <th>Medium</th>
+                                                    <th>Large</th>
+                                                    <th>Extra Large</th>
+                                                    <th>XXL</th>
+                                                    <th>XXXL</th>
+                                                    <th>4XXL</th>
+                                                    <th>One Size</th>
+                                                    <th>&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
+                                                    <td data-title="XXS"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxs][]" /></td>
+                                                    <td data-title="XS"><input type="text" value="0" class="form-control count-color-size" name="color_size[xs][]" /></td>
+                                                    <td data-title="Small"><input type="text" value="0" class="form-control count-color-size" name="color_size[small][]" /></td>
+                                                    <td data-title="Medium"><input type="text" value="0" class="form-control count-color-size" name="color_size[medium][]" /></td>
+                                                    <td data-title="Large"><input type="text" value="0" class="form-control count-color-size" name="color_size[large][]" /></td>
+                                                    <td data-title="Extra Large"><input type="text" value="0" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
+                                                    <td data-title="XXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxl][]" /></td>
+                                                    <td data-title="XXXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
+                                                    <td data-title="4XXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
+                                                    <td data-title="One Size"><input type="text" value="0" class="form-control count-color-size" name="color_size[one_size][]" /></td>
+                                                    {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td> --}}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <div class="add_more_box" style="padding-top: 20px">
                                         <a href="javascript:void(0);" class="add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
@@ -252,29 +256,31 @@
 
                     <div class="ready-stock-prices-breakdown">
                         <div class="row input-field ">
-                            <div class="col s12 m3 l3">
+                            <div class="col s12">
                                 <label>Prices Breakdown</label>
                             </div>
-                            <div class="col s12 m9 l9 prices-breakdown-block">
-                                <table class="ready-order-attribute-table-block">
-                                    <thead>
-                                        <tr>
-                                            <th>Qty Min</th>
-                                            <th>Qty Max</th>
-                                            <th>Price (usd)</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                            <td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                            <td><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                            {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td> --}}
-                                        </tr>
-                                    </tbody>
-                                </table>
-
+                            <div class="col s12 prices-breakdown-block">
+                                <div class="no_more_tables">
+                                    <table class="ready-order-attribute-table-block">
+                                        <thead class="cf">
+                                            <tr>
+                                                <th>Qty Min</th>
+                                                <th>Qty Max</th>
+                                                <th>Price (usd)</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
+                                                <td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
+                                                <td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                                {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td> --}}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                                 <div class="add_more_box" style="padding-top: 20px">
                                     <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>
@@ -296,26 +302,28 @@
                 <div class="non-clothing-block" style="display: none">
                     <div class="col-md-12" id="color-size-block">
                         <div class="row input-field">
-                            <div class="col s12 m3 l3">
+                            <div class="col s12">
                                 <label>Available Size & Colors</label>
                             </div>
-                            <div class="col s12 m9 l9">
+                            <div class="col s12">
                                 <div class="color-and-size-block">
-                                    <table class="non-clothing-color-quantity-table-block">
-                                        <thead>
-                                            <tr>
-                                                <th>Color</th>
-                                                <th>Quantity</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="text" value="" class="form-control" name="non_clothing_attr[color][]" /></td>
-                                                <td><input type="text" value="0" class="form-control count-color-size check-price-range-value" name="non_clothing_attr[quantity][]" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="no_more_tables">
+                                        <table class="non-clothing-color-quantity-table-block">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Color</th>
+                                                    <th>Quantity</th>
+                                                    <th>&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-title="Color"><input type="text" value="" class="form-control" name="non_clothing_attr[color][]" /></td>
+                                                    <td data-title="Quantity"><input type="text" value="0" class="form-control count-color-size check-price-range-value" name="non_clothing_attr[quantity][]" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                     <div class="add_more_box" style="padding-top: 20px">
                                         <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
@@ -360,24 +368,25 @@
                             <label>Prices Breakdown</label>
                         </div>
                         <div class="col s12 m9 l9 prices-breakdown-block">
-                            <table class="non-clothing-prices-breakdown-block">
-                                <thead>
-                                    <tr>
-                                        <th>Qty Min</th>
-                                        <th>Qty Max</th>
-                                        <th>Price (usd)</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                        <td><input name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                        <td><input name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+                            <div class="no_more_tables">
+                                <table class="non-clothing-prices-breakdown-block">
+                                    <thead class="cf">
+                                        <tr>
+                                            <th>Qty Min</th>
+                                            <th>Qty Max</th>
+                                            <th>Price (usd)</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-title="Qty Min"><input name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
+                                            <td data-title="Qty Max"><input name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
+                                            <td data-title="Price (usd)"><input name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="add_more_box" style="padding-top: 20px">
                                 <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
                             </div>
@@ -395,9 +404,9 @@
                 </div>
                 {{--end non clothing item block --}}
 
-                <div class="row input-field moq-unit-block">
+                <div class="row moq-unit-block">
                     <div class="row">
-                        <div class="col s12 m6 l6">
+                        <div class="col s12 m6 l6 input-field">
                             <div class="col 12">
                                 <label for="moq" class="col-md-4 col-form-label text-md-right">Minimum Order Quantity</label>
                             </div>
@@ -405,7 +414,7 @@
                                 <input id="moq" type="number" class="form-control @error('moq') is-invalid @enderror" name="moq" value="{{ old('moq') }}"  autocomplete="moq" autofocus>
                             </div>
                         </div>
-                        <div class="col s12 m6 l6">
+                        <div class="col s12 m6 l6 input-field">
                             <div class="col 12">
                                 <label for="product_unit" class="col-md-4 col-form-label text-md-right">Unit</label>
                             </div>

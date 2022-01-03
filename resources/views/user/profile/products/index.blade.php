@@ -86,20 +86,22 @@
                                     
                                 </div>
                                 <div class="table-content">
-                                    <table class="table striped" width="100%" id="seller-product-datatable">
-                                        <thead>
-                                          <tr>
-                                            <th>Image</th>
-                                            <th>Product Name</th>
-                                            <th>Status</th>
-                                            <th>Featured</th>
-                                            <th>New Arrival</th>
-                                            <th>Action</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                    <div clss="no_more_tables">
+                                        <table class="table striped" width="100%" id="seller-product-datatable">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Image</th>
+                                                    <th>Product Name</th>
+                                                    <th>Status</th>
+                                                    <th>Featured</th>
+                                                    <th>New Arrival</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 

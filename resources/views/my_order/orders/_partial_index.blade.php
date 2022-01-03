@@ -150,7 +150,7 @@
                                         <td class="empty_td">&nbsp;</td>
                                         <td class="empty_td">&nbsp;</td>
                                         <td class="empty_td">&nbsp;</td>
-                                        <td class="grand_total_title">Grand Total</td>
+                                        <td class="grand_total_title"><b> Grand Total</b></td>
                                         <td data-title="Grand Total" style="text-align: right;">${{$item->grand_total}}</td>
                                     </tr>
                                 </tbody>

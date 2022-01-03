@@ -225,39 +225,43 @@ $reviewsCount = count($productReviews);
                                             </div>
                                             <div id="fresh_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
-                                                    <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Color</th>
-                                                                <th>XXS</th>
-                                                                <th>XS</th>
-                                                                <th>Small</th>
-                                                                <th>Medium</th>
-                                                                <th>Large</th>
-                                                                <th>Extra Large</th>
-                                                                <th>XXL</th>
-                                                                <th>XXXL</th>
-                                                                <th>4XXL</th>
-                                                                <th>One Size</th>
-                                                                <th>&nbsp;</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="cusotmize-color-size-attr-tbody">
-                                                            <tr class="tr">
-                                                                <td><input class="combat" type="text" value="" name="color"/></td>
-                                                                <td><input class="combat" type="text" value="0" name="xxs" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="xs" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="small" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="medium" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="large" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="extra_large" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="xxl" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="xxxl" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="four_xxl" /></td>
-                                                                <td><input class="combat" type="text" value="0" name="one_size" /></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+
+                                                    <div class="no_more_tables">
+                                                        <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
+                                                            <thead class="cf">
+                                                                <tr>
+                                                                    <th>Color</th>
+                                                                    <th>XXS</th>
+                                                                    <th>XS</th>
+                                                                    <th>Small</th>
+                                                                    <th>Medium</th>
+                                                                    <th>Large</th>
+                                                                    <th>Extra Large</th>
+                                                                    <th>XXL</th>
+                                                                    <th>XXXL</th>
+                                                                    <th>4XXL</th>
+                                                                    <th>One Size</th>
+                                                                    <th>&nbsp;</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="cusotmize-color-size-attr-tbody">
+                                                                <tr class="tr">
+                                                                    <td data-title="Color"><input class="combat" type="text" value="" name="color"/></td>
+                                                                    <td data-title="XXS"><input class="combat" type="text" value="0" name="xxs" /></td>
+                                                                    <td data-title="XS"><input class="combat" type="text" value="0" name="xs" /></td>
+                                                                    <td data-title="Small"><input class="combat" type="text" value="0" name="small" /></td>
+                                                                    <td data-title="Medium"><input class="combat" type="text" value="0" name="medium" /></td>
+                                                                    <td data-title="Large"><input class="combat" type="text" value="0" name="large" /></td>
+                                                                    <td data-title="Extra Large"><input class="combat" type="text" value="0" name="extra_large" /></td>
+                                                                    <td data-title="XXL"><input class="combat" type="text" value="0" name="xxl" /></td>
+                                                                    <td data-title="XXXL"><input class="combat" type="text" value="0" name="xxxl" /></td>
+                                                                    <td data-title="4XXL"><input class="combat" type="text" value="0" name="four_xxl" /></td>
+                                                                    <td data-title="One Size"><input class="combat" type="text" value="0" name="one_size" /></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    
                                                     <div class="add_more_box" style="padding-top: 20px">
                                                         <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                                     </div>
@@ -309,226 +313,229 @@ $reviewsCount = count($productReviews);
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
-                                                    <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Color</th>
-                                                                <th>XXS</th>
-                                                                <th>XS</th>
-                                                                <th>Small</th>
-                                                                <th>Medium</th>
-                                                                <th>Large</th>
-                                                                <th>Extra Large</th>
-                                                                <th>XXL</th>
-                                                                <th>XXXL</th>
-                                                                <th>4XXL</th>
-                                                                <th>One Size</th>
-                                                                <th>&nbsp;</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="cusotmize-color-size-attr-tbody">
-                                                            @if($product->full_stock == 1)
-                                                                @foreach($colors_sizes as $color)
-                                                                    <tr class="tr">
-                                                                        <td>
-                                                                            <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
+                                                    <div class="no_more_tables">
+                                                        <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
+                                                            <thead class="cf">
+                                                                <tr>
+                                                                    <th>Color</th>
+                                                                    <th>XXS</th>
+                                                                    <th>XS</th>
+                                                                    <th>Small</th>
+                                                                    <th>Medium</th>
+                                                                    <th>Large</th>
+                                                                    <th>Extra Large</th>
+                                                                    <th>XXL</th>
+                                                                    <th>XXXL</th>
+                                                                    <th>4XXL</th>
+                                                                    <th>One Size</th>
+                                                                    <th>&nbsp;</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="cusotmize-color-size-attr-tbody">
+                                                                @if($product->full_stock == 1)
+                                                                    @foreach($colors_sizes as $color)
+                                                                        <tr class="tr">
+                                                                            <td data-title="Color">
+                                                                                <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
 
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xxs))
-                                                                                <input class="combat" type="text" value="{{ $color->xxs }}" name="xxs" readonly/>
+                                                                            </td>
+                                                                            <td data-title="XXS">
+                                                                                @if(!empty($color->xxs))
+                                                                                    <input class="combat" type="text" value="{{ $color->xxs }}" name="xxs" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xxs" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xxs" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xs))
-                                                                                <input class="combat" type="text" value="{{$color->xs}}" name="xs" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="XS">
+                                                                                @if(!empty($color->xs))
+                                                                                    <input class="combat" type="text" value="{{$color->xs}}" name="xs" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xs" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xs" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->small))
-                                                                                <input class="combat" type="text" value="{{$color->small}}" name="small" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Small">
+                                                                                @if(!empty($color->small))
+                                                                                    <input class="combat" type="text" value="{{$color->small}}" name="small" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="small" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="small" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->medium))
-                                                                                <input class="combat" type="text" value="{{$color->medium}}" name="medium" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Medium">
+                                                                                @if(!empty($color->medium))
+                                                                                    <input class="combat" type="text" value="{{$color->medium}}" name="medium" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="medium" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="medium" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->large))
-                                                                                <input class="combat" type="text" value="{{$color->large}}" name="large" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Large">
+                                                                                @if(!empty($color->large))
+                                                                                    <input class="combat" type="text" value="{{$color->large}}" name="large" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="large" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="large" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->extra_large))
-                                                                                <input class="combat" type="text" value="{{$color->extra_large}}" name="extra_large" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Extra Large">
+                                                                                @if(!empty($color->extra_large))
+                                                                                    <input class="combat" type="text" value="{{$color->extra_large}}" name="extra_large" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="extra_large" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="extra_large" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xxl))
-                                                                                <input class="combat" type="text" value="{{$color->xxl}}" name="xxl" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="XXL">
+                                                                                @if(!empty($color->xxl))
+                                                                                    <input class="combat" type="text" value="{{$color->xxl}}" name="xxl" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xxl" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xxl" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xxxl))
-                                                                                <input class="combat" type="text" value="{{$color->xxxl}}" name="xxxl" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="XXXL">
+                                                                                @if(!empty($color->xxxl))
+                                                                                    <input class="combat" type="text" value="{{$color->xxxl}}" name="xxxl" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xxxl" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xxxl" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->four_xxl))
-                                                                                <input class="combat" type="text" value="{{$color->four_xxl}}" name="four_xxl" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="4XXL">
+                                                                                @if(!empty($color->four_xxl))
+                                                                                    <input class="combat" type="text" value="{{$color->four_xxl}}" name="four_xxl" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="four_xxl" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="four_xxl" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->one_size))
-                                                                                <input class="combat" type="text" value="{{$color->one_size}}" name="one_size" readonly/>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="One Size">
+                                                                                @if(!empty($color->one_size))
+                                                                                    <input class="combat" type="text" value="{{$color->one_size}}" name="one_size" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="one_size" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="one_size" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
 
-                                                                @endforeach
-                                                            @else
-                                                                @foreach($colors_sizes as $color)
-                                                                    <tr class="tr">
-                                                                        <td>
-                                                                            <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
-                                                                            <span class="avl-wrap">&nbsp;</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xxs))
-                                                                                <input class="combat" type="text" value="0" name="xxs" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->xxs}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xxs" readonly />
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($colors_sizes as $color)
+                                                                        <tr class="tr">
+                                                                            <td data-title="Color">
+                                                                                <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
                                                                                 <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xs))
-                                                                                <input class="combat" type="text" value="0" name="xs" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->xs}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xs" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->small))
-                                                                                <input class="combat" type="text" value="0" name="small" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->small}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="small" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->medium))
-                                                                                <input class="combat" type="text" value="0" name="medium" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->medium}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="medium" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->large))
-                                                                                <input class="combat" type="text" value="0" name="large" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->large}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="large" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->extra_large))
-                                                                                <input class="combat" type="text" value="0" name="extra_large" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->extra_large}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="extra_large" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xxl))
-                                                                                <input class="combat" type="text" value="0" name="xxl" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->xxl}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xxl" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->xxxl))
-                                                                                <input class="combat" type="text" value="0" name="xxxl" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->xxxl}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="xxxl" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->four_xxl))
-                                                                                <input class="combat" type="text" value="0" name="four_xxl" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->four_xxl}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="four_xxl" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->one_size))
-                                                                                <input class="combat" type="text" value="0" name="one_size" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->one_size}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="one_size" readonly />
-                                                                                <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
-                                                        </tbody>
-                                                    </table>
+                                                                            </td>
+                                                                            <td data-title="XXS">
+                                                                                @if(!empty($color->xxs))
+                                                                                    <input class="combat" type="text" value="0" name="xxs" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->xxs}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xxs" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="XS">
+                                                                                @if(!empty($color->xs))
+                                                                                    <input class="combat" type="text" value="0" name="xs" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->xs}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xs" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Small">
+                                                                                @if(!empty($color->small))
+                                                                                    <input class="combat" type="text" value="0" name="small" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->small}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="small" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Medium">
+                                                                                @if(!empty($color->medium))
+                                                                                    <input class="combat" type="text" value="0" name="medium" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->medium}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="medium" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Large">
+                                                                                @if(!empty($color->large))
+                                                                                    <input class="combat" type="text" value="0" name="large" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->large}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="large" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="Extra Large">
+                                                                                @if(!empty($color->extra_large))
+                                                                                    <input class="combat" type="text" value="0" name="extra_large" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->extra_large}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="extra_large" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="XXL">
+                                                                                @if(!empty($color->xxl))
+                                                                                    <input class="combat" type="text" value="0" name="xxl" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->xxl}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xxl" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="XXXL">
+                                                                                @if(!empty($color->xxxl))
+                                                                                    <input class="combat" type="text" value="0" name="xxxl" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->xxxl}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="xxxl" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="4XXL">
+                                                                                @if(!empty($color->four_xxl))
+                                                                                    <input class="combat" type="text" value="0" name="four_xxl" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->four_xxl}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="four_xxl" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td data-title="One Size">
+                                                                                @if(!empty($color->one_size))
+                                                                                    <input class="combat" type="text" value="0" name="one_size" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->one_size}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="one_size" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    
                                                     <div class="total-price-block" style="display: none;">
                                                         <div class="input-wrapper">
                                                             <label>Total Qty:</label>
@@ -586,54 +593,57 @@ $reviewsCount = count($productReviews);
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
-                                                    <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Color</th>
-                                                                <th>Quantity</th>
-                                                                <th>&nbsp;</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="cusotmize-color-size-attr-tbody">
-                                                            @if($product->full_stock == 1)
-                                                                @foreach($colors_sizes as $color)
-                                                                    <tr class="tr">
-                                                                        <td>
-                                                                            <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
+                                                    <div class="no_more_tables">
+                                                        <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
+                                                            <thead class="cf">
+                                                                <tr>
+                                                                    <th>Color</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>&nbsp;</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="cusotmize-color-size-attr-tbody">
+                                                                @if($product->full_stock == 1)
+                                                                    @foreach($colors_sizes as $color)
+                                                                        <tr class="tr">
+                                                                            <td data-title="Color">
+                                                                                <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
 
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->quantity))
-                                                                                <input class="combat" type="text" value="{{ $color->quantity }}" name="non_clothing_quantity" readonly/>
+                                                                            </td>
+                                                                            <td data-title="Quantity">
+                                                                                @if(!empty($color->quantity))
+                                                                                    <input class="combat" type="text" value="{{ $color->quantity }}" name="non_clothing_quantity" readonly/>
 
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="non_clothing_quantity" readonly />
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="non_clothing_quantity" readonly />
 
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @else
-                                                                @foreach($colors_sizes as $color)
-                                                                    <tr class="tr">
-                                                                        <td>
-                                                                            <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
-                                                                            <span class="avl-wrap">&nbsp;</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            @if(!empty($color->quantity))
-                                                                                <input class="combat" type="text" value="0" name="non_clothing_quantity" />
-                                                                                <span class="avl-wrap">avl:<span class="avl">{{$color->quantity}}</span></span>
-                                                                            @else
-                                                                                <input type="text" class="readonly-item" value="0" name="non_clothing_quantity" readonly />
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($colors_sizes as $color)
+                                                                        <tr class="tr">
+                                                                            <td data-title="Color">
+                                                                                <input class="combat" type="text" value="{{$color->color}}" name="color" readonly />
                                                                                 <span class="avl-wrap">&nbsp;</span>
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
-                                                        </tbody>
-                                                    </table>
+                                                                            </td>
+                                                                            <td data-title="Quantity">
+                                                                                @if(!empty($color->quantity))
+                                                                                    <input class="combat" type="text" value="0" name="non_clothing_quantity" />
+                                                                                    <span class="avl-wrap">avl:<span class="avl">{{$color->quantity}}</span></span>
+                                                                                @else
+                                                                                    <input type="text" class="readonly-item" value="0" name="non_clothing_quantity" readonly />
+                                                                                    <span class="avl-wrap">&nbsp;</span>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    
                                                     <div class="total-price-block" style="display: none;">
                                                         <div class="input-wrapper">
                                                             <label>Total Qty:</label>

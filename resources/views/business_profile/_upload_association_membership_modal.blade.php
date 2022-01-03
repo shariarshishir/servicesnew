@@ -11,27 +11,30 @@
                 <div class="form-group  association-membership-details-block">
                     <legend>Association memberships Details</legend>
                     <div class="association-membership-details-block">
-                        <table class="association-membership-details-table-block">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Short description</th>
-                                    <th>Image</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="input-field" name="title[]" id="association-membership-title" type="text"  ></td>
-                                    <td>
-                                        <textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea>
-                                    </td>
-                                    <td><input class="input-field file_upload" name="image[]" id="association-membership-image" type="file"></td>
-                                    <td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
-                                </tr>
-                              
-                            </tbody>
-                        </table>
+                        <div class="no_more_tables">
+                            <table class="association-membership-details-table-block">
+                                <thead class="cf">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Short description</th>
+                                        <th>Image</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-title="Name"><input class="input-field" name="title[]" id="association-membership-title" type="text"  ></td>
+                                        <td data-title="Short Description">
+                                            <textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea>
+                                        </td>
+                                        <td data-title="Image"><input class="input-field file_upload" name="image[]" id="association-membership-image" type="file"></td>
+                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
                         <div class="add_more_box">
                             <a href="javascript:void(0);" class="add-more-block" onclick="addAssociationMembershipDetails()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>

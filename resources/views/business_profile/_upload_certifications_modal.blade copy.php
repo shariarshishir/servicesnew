@@ -11,28 +11,30 @@
                 <div class="form-group  certification-details-block">
                     <legend>Certification Details</legend>
                     <div class="certification-details-block">
-                        <table class="certification-details-table-block">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Short description</th>
-                                    <th>Image</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                                <tr>
-                                    <td><input class="input-field" name="title[]" id="certification-title" type="text"  ></td>
-                                    <td>
-                                        <textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea>
-                                    </td>
-                                    <td><input class="input-field file_upload" name="image[]" id="certification-image" type="file"></td>
-                                    <td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                        <div class="no_more_tables">
+                            <table class="certification-details-table-block">
+                                <thead class="cf">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Short description</th>
+                                        <th>Image</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-title="Title"><input class="input-field" name="title[]" id="certification-title" type="text"  ></td>
+                                        <td data-title="Short description">
+                                            <textarea class="input-field" name="short_description[]" id="certification-short-description" rows="4" cols="50"></textarea>
+                                        </td>
+                                        <td data-title="Image"><input class="input-field file_upload" name="image[]" id="certification-image" type="file"></td>
+                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removeCertificationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        
                         <div class="add_more_box">
                             <a href="javascript:void(0);" class="add-more-block" onclick="addCertificationDetails()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>

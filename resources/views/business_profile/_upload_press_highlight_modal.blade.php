@@ -11,26 +11,29 @@
                 <div class="form-group  press-highlight-details-block">
                     <legend>Press Highlight</legend>
                     <div class="press-highlight-details-block">
-                        <table class="press-highlight-details-table-block">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Short description</th>
-                                    <th>Image</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="input-field" name="title[]" id="press-highlight-title" type="text"  ></td>
-                                    <td>
-                                        <textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea>
-                                    </td>
-                                    <td><input class="input-field file_upload" name="image[]" id="press-highlight-image" type="file"></td>
-                                    <td><a href="javascript:void(0);" class="btn_delete" onclick="removePressHighlightDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="no_more_tables">
+                            <table class="press-highlight-details-table-block">
+                                <thead class=""cf>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Short description</th>
+                                        <th>Image</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-title="Name" ><input class="input-field" name="title[]" id="press-highlight-title" type="text"  ></td>
+                                        <td data-title="Short Description">
+                                            <textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea>
+                                        </td>
+                                        <td data-title="Image"><input class="input-field file_upload" name="image[]" id="press-highlight-image" type="file"></td>
+                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removePressHighlightDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
                         <div class="add_more_box">
                             <a href="javascript:void(0);" class="add-more-block" onclick="addPressHighlightDetails()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>

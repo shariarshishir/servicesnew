@@ -192,7 +192,7 @@ class SslCommerzPaymentController extends Controller
                     $user =  User::where('id' , $user_id)->first();
                     Auth::login($user);
                     $order=VendorOrder::where(['user_id' => $user->id, 'transaction_id' => $tran_id])->first();
-                    //dd($order);
+                  
                     if(env('APP_ENV') == 'production')
                     {
                         event(new PaymentSuccessEvent($order));

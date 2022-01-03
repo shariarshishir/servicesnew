@@ -332,7 +332,8 @@ class HomeController extends Controller
                 //$results=Product::with('images')->where('name', 'like', '%'.$request->searchInput.'%')->get();
                 $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
                 $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
-                $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
+                //$blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
+                $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->orWhere('details', 'like', '%'.$request->searchInput.'%')->get();
                 $suppliers = BusinessProfile::with(['user'])->where('business_name', 'like', '%'.$request->searchInput.'%')->get();
                 //$results = $wholesaler_products->merge($manufacture_products);
 

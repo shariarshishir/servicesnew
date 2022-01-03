@@ -3,21 +3,25 @@
         <form action="{{route('cart.update')}}" method="POST">
             @csrf
 
-            <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Color</th>
-                        <th>Qunatity</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody class=" edit-non-clothing-color-quantity-block">
+            <div class="no_more_tables">
+                <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
+                    <thead class="cf">
+                        <tr>
+                            <th>Color</th>
+                            <th>Qunatity</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody class=" edit-non-clothing-color-quantity-block">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+            
             <div class="add_more_colors_sizes">
 
             </div>
+
             <div class="total-price-block" style="display: none;">
                 <div class="input-wrapper">
                     <label>Total Qty:</label>

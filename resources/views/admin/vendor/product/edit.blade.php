@@ -141,24 +141,30 @@
                                     @if($product->product_type==1)
                                     <div class="form-group">
                                         <label>Prices Breakdown</label>
-                                        <table class="fresh-order-attribute-table-block">
-                                            <tr>
-                                                <th>Quantity Min</th>
-                                                <th>Quantity Max</th>
-                                                <th>Price(usd)</th>
-                                                <th>Lead Time(days)</th>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            @foreach($fresh_attr as $key=>$list)
-                                            <tr>
-                                                <td><input name="quantity_min[]" id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" value="{{$list[0]}}" placeholder="1-100"></td>
-                                                <td> <input name="quantity_max[]" id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" value="{{$list[1]}}" placeholder="1-100"></td>
-                                                <td><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$list[2]}}" ></td>
-                                                <td><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror" name="lead_time" value="{{$list[3]}}" ></td>
-                                                <td><a href="javascript:void(0);" class="btn btn-success" onclick="removeFreshOrderAttribute(this)"><i class="fa fa-minus fa-lg" aria-hidden="true" style="margin-top:6px;"></i></a></td>
-                                            </tr>
-                                            @endforeach
-                                        </table>
+                                        <div class="no_more_tables">
+                                            <table class="fresh-order-attribute-table-block">
+                                                <thead class="cf">
+                                                    <tr>
+                                                        <th>Quantity Min</th>
+                                                        <th>Quantity Max</th>
+                                                        <th>Price(usd)</th>
+                                                        <th>Lead Time(days)</th>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </thead>
+                                                
+                                                @foreach($fresh_attr as $key=>$list)
+                                                <tr>
+                                                    <td data-title="Quantity Min"><input name="quantity_min[]" id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" value="{{$list[0]}}" placeholder="1-100"></td>
+                                                    <td data-title="Quantity Max"> <input name="quantity_max[]" id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" value="{{$list[1]}}" placeholder="1-100"></td>
+                                                    <td data-title="Price(usd)"><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$list[2]}}" ></td>
+                                                    <td data-title="Lead Time(days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror" name="lead_time" value="{{$list[3]}}" ></td>
+                                                    <td><a href="javascript:void(0);" class="btn btn-success" onclick="removeFreshOrderAttribute(this)"><i class="fa fa-minus fa-lg" aria-hidden="true" style="margin-top:6px;"></i></a></td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                        
                                         <a href="javascript:void(0);" class="btn btn-success" onclick="addFreshOrderAttribute()"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
 
                                         <div class="form-group">
@@ -172,55 +178,60 @@
                                         <div class="col-md-12" id="color-size-block">
                                             <label>Available Size & Colors</label>
                                             <div class="row">
-                                                <table class="color-size-table-block" width="100%" border="1" cellpadding="0" cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <td>Color</td>
-                                                            <td>Small</td>
-                                                            <td>Medium</td>
-                                                            <td>Large</td>
-                                                            <td>Extra Large</td>
-                                                            <td>&nbsp;</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($colors_sizes as $color)
+                                                <div class="no_more_tables">
+                                                    <table class="color-size-table-block" width="100%" border="1" cellpadding="0" cellspacing="0">
+                                                        <thead class="cf">
                                                             <tr>
-                                                                <td><input type="text" value="{{$color->color}}" name="color_size[color][]" /></td>
-                                                                <td><input type="text" value="{{$color->small}}" name="color_size[small][]" /></td>
-                                                                <td><input type="text" value="{{$color->medium}}" name="color_size[medium][]" /></td>
-                                                                <td><input type="text" value="{{$color->large}}" name="color_size[large][]" /></td>
-                                                                <td><input type="text" value="{{$color->extra_large}}" name="color_size[extra_large][]" /></td>
-                                                                <td><a href="javascript:void(0);" class="btn btn-success" onclick="removeProductColorSize(this)"><i class="fa fa-minus fa-lg" aria-hidden="true" style="margin-top:6px;"></i></a></td>
+                                                                <td>Color</td>
+                                                                <td>Small</td>
+                                                                <td>Medium</td>
+                                                                <td>Large</td>
+                                                                <td>Extra Large</td>
+                                                                <td>&nbsp;</td>
                                                             </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($colors_sizes as $color)
+                                                                <tr>
+                                                                    <td data-title="Color"><input type="text" value="{{$color->color}}" name="color_size[color][]" /></td>
+                                                                    <td data-title="Small"><input type="text" value="{{$color->small}}" name="color_size[small][]" /></td>
+                                                                    <td data-title="Medium"><input type="text" value="{{$color->medium}}" name="color_size[medium][]" /></td>
+                                                                    <td data-title="Large"><input type="text" value="{{$color->large}}" name="color_size[large][]" /></td>
+                                                                    <td data-title="Extra Large"><input type="text" value="{{$color->extra_large}}" name="color_size[extra_large][]" /></td>
+                                                                    <td><a href="javascript:void(0);" class="btn btn-success" onclick="removeProductColorSize(this)"><i class="fa fa-minus fa-lg" aria-hidden="true" style="margin-top:6px;"></i></a></td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <a href="javascript:void(0);" class="btn btn-success" onclick="addProductColorSize()"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
                                         </div>
                                         <div class="form-group">
                                             <label>Prices Breakdown</label>
-                                            <table class="ready-order-attribute-table-block striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Qty Min</th>
-                                                        <th>Qty Max</th>
-                                                        <th>Price (usd)</th>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($fresh_attr as $key=>$list)
-                                                    <tr>
-                                                        <td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="{{$list[0]}}" placeholder="Min. Value"></td>
-                                                        <td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="{{$list[1]}}" placeholder="Max. Value"></td>
-                                                        <td><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="{{$list[2]}}" placeholder="$" ></td>
-                                                        <td><a href="javascript:void(0);" class="btn btn-success" onclick="removeReadyOrderAttribute(this)"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></a></td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                            <div class="no_more_tables">
+                                                <table class="ready-order-attribute-table-block striped">
+                                                    <thead class="cf">
+                                                        <tr>
+                                                            <th>Qty Min</th>
+                                                            <th>Qty Max</th>
+                                                            <th>Price (usd)</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($fresh_attr as $key=>$list)
+                                                        <tr>
+                                                            <td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="{{$list[0]}}" placeholder="Min. Value"></td>
+                                                            <td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="{{$list[1]}}" placeholder="Max. Value"></td>
+                                                            <td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="{{$list[2]}}" placeholder="$" ></td>
+                                                            <td><a href="javascript:void(0);" class="btn btn-success" onclick="removeReadyOrderAttribute(this)"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></a></td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
                                             <a href="javascript:void(0);" class="btn btn-success" onclick="addReadyOrderAttribute()"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
                                         </div>
                                         <div class="form-group">
@@ -334,11 +345,11 @@
     {
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control" name="color_size[small][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control" name="color_size[medium][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control" name="color_size[large][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control" name="color_size[extra_large][]" /></td>';
+    html += '<td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
+    html += '<td data-title="Small"><input type="text" value="0" class="form-control" name="color_size[small][]" /></td>';
+    html += '<td data-title="Medium"><input type="text" value="0" class="form-control" name="color_size[medium][]" /></td>';
+    html += '<td data-title="Large"><input type="text" value="0" class="form-control" name="color_size[large][]" /></td>';
+    html += '<td data-title="Extra Large"><input type="text" value="0" class="form-control" name="color_size[extra_large][]" /></td>';
     html += '<td><a href="javascript:void(0);" class="btn btn-success" onclick="removeProductColorSize(this)"><i class="fa fa-minus fa-lg" aria-hidden="true" style="margin-top:6px;"></i></a></td>';
     html += '</tr>';
     $('.color-size-table-block tbody').append(html);
@@ -352,10 +363,10 @@
     {
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>';
+    html += '<td data-title="Quantity Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
+    html += '<td data-title="Quantity Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
+    html += '<td data-title="Price(usd)"><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
+    html += '<td data-title="Lead Time(days)"><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>';
     html += '<td><a href="javascript:void(0);" class="btn btn-success" onclick="removeFreshOrderAttribute(this)"><i class="fa fa-minus fa-lg" aria-hidden="true" style="margin-top:6px;"></i></a></td>';
     html += '</tr>';
     $('.fresh-order-attribute-table-block tbody').append(html);
@@ -369,9 +380,9 @@
     {
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
+    html += '<td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
+    html += '<td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
+    html += '<td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
     html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">remove</i></a></td>';
     html += '</tr>';
     $('.ready-order-attribute-table-block tbody').append(html);

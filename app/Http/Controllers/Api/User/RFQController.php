@@ -28,7 +28,7 @@ class RFQController extends Controller
     }
     public function myRfqList()
     {
-        $rfqs=Rfq::withCount('bids')->with('images','user')->where('created_by',auth()->id())->latest()->paginate(5);
+        $rfqs=Rfq::withCount('bids')->with('images','user','bids')->where('created_by',auth()->id())->latest()->paginate(5);
         if($rfqs->total()>0){
 
             return response()->json(['rfqs'=>$rfqs,"success"=>true],200);

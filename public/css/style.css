@@ -1713,7 +1713,7 @@ form input:read-only {
 .profile_tabNav_wrap .profile_table_design .production-flow-and-manpower-table-wrapper table td,
 .profile_tabNav_wrap .profile_table_design .production-flow-and-manpower-table-wrapper table td, 
 .profile_tabNav_wrap .profile_table_design .production-flow-and-manpower-table-wrapper table th {
-    width: 100%;
+    width: 100% !important;
 }
 .profile_tabNav_wrap .overview_table .material-icons {
     float: right;
@@ -5334,6 +5334,11 @@ input.input-field[type=text]:not(.browser-default) {
     height: 150px !important;
 }
 
+#order-modification .btn_green {
+    padding: 5px 15px 4px;
+    font-size: 15px;
+}
+
 .profile_contentCol .contentBox,
 #about-company-information {
     padding-bottom: 50px;
@@ -7476,6 +7481,14 @@ nav .pagination li.active .page-link {
     font-size: 14px;
     font-weight: 600;
 }
+.no_more_tables_td_mob {
+    display: none;
+}
+.grand_total_title {
+    white-space: nowrap;
+}
+
+
 
 /* ************************* policy_content_wrap style end ******************************  */
 
@@ -7546,13 +7559,6 @@ nav .pagination li.active .page-link {
     .chat-application .app-chat .chat-content .chat-content-area .chat-area {
         height: 200px !important;
     }
-
-    
-
-
-
-
-
 
 }
 
@@ -7917,6 +7923,20 @@ nav .pagination li.active .page-link {
         margin-top: 3px;
     }
 
+    .profile_tabNav_wrap .editBox .btn_green_White {
+        min-width: 118px;
+    }
+    .profile_tabNav_wrap .editBox .btn_green_White .material-icons {
+        font-size: 16px;
+    }
+    .profile_tabNav_wrap .editBox .btn_green_White.btn_delete {
+        margin-left: 10px;
+    }
+
+    .profile_tabNav_wrap table td, .profile_tabNav_wrap table th {
+        padding: 8px;
+    }
+
 
 
 
@@ -8012,10 +8032,6 @@ nav .pagination li.active .page-link {
     .wholesaler_product_wrap .product_item_box {
         width: 33% !important;
     }
-
-
-    
-
 }
 
 
@@ -8249,8 +8265,12 @@ nav .pagination li.active .page-link {
     }
     .profile_tabNav_wrap .editBox .btn_green_White .btn_icon {
         border-radius: 8px;
-        width: 40px;
-        line-height: 40px;
+        width: 35px;
+        line-height: 38px;
+    }
+    .profile_tabNav_wrap .editBox .btn_green_White .material-icons {
+        font-size: 16px;
+        line-height: 38px;
     }
     .profile_contentCol .tabcontent .profile_product_wrap .product_boxwrap {
         margin: 0;
@@ -8270,13 +8290,12 @@ nav .pagination li.active .page-link {
     .manufacture-product-table-data .product_data_table_wrap table {
         width: 100%;
     }
-    .manufacture-product-table-data .product_data_table_wrap table td {
-        display: table-cell;
-    }
+
     .manufacture-product-table-data .product_data_table_wrap table thead{
         float: none;
         overflow: auto;
     }
+    .manufacture-product-table-data .product_data_table_wrap table td,
     .profile_tabNav_wrap .product_data_table_wrap table td, 
     .profile_tabNav_wrap .product_data_table_wrap table th {
         display: table-cell;
@@ -8535,6 +8554,11 @@ nav .pagination li.active .page-link {
         min-width: auto;
     }
 
+    .profile_tabNav_wrap .editBox .btn_green_White.btn_delete {
+        margin-left: 8px;
+    }
+
+
 }
 
 @media only screen and (max-width: 900px) {
@@ -8636,7 +8660,7 @@ nav .pagination li.active .page-link {
 	}
 
     .no_more_tables tr {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
  
 	/* Hide table headers (but not display: none;, for accessibility) */
@@ -8646,7 +8670,7 @@ nav .pagination li.active .page-link {
 		left: -9999px;
 	}
  
-	.no_more_tables tr { border: 1px solid #ccc; }
+	.no_more_tables tr { border: 1px solid #ccc !important; }
  
 	.no_more_tables td { 
 		/* Behave  like a "row" */
@@ -8667,11 +8691,20 @@ nav .pagination li.active .page-link {
 		left: 6px;
 		width: 45%; 
 		padding-right: 10px; 
-		white-space: nowrap;
+		white-space: inherit;
 		text-align:left;
 		font-weight: bold;
 	}
- 
+
+    .profile_form_modal tbody tr:first-child {
+        padding: inherit;
+    }
+
+
+    .no_more_tables input.input-field[type=text]:not(.browser-default) {
+        width: 96% !important;
+    }
+
 	/*
 	Label the data
 	*/
@@ -8680,7 +8713,48 @@ nav .pagination li.active .page-link {
     .empty_td,
     .grand_total_title {
         display: none !important;
+        white-space: nowrap;
     }
+
+    .profile_tabNav_wrap .no_more_tables tr {
+        display: inherit;
+    }
+    .profile_tabNav_wrap .profile_table_design .no_more_tables td, 
+    .profile_tabNav_wrap .profile_table_design .no_more_tables th {
+        width: inherit;
+    }
+    .overview_table_wrap .no_more_tables .material-icons {
+        float: inherit;
+    }
+
+    .no_more_tables_td_mob {
+        display: block;
+    }
+
+    .profile_form_modal .no_more_tables td {
+        display: inline-block;
+        width: 100%;
+        padding: 15px;
+    }
+    .profile_form_modal .no_more_tables td:before {
+        top: 18px;
+    }
+
+    .manufacture-product-table-data .product_data_table_wrap table td,
+    .profile_tabNav_wrap .product_data_table_wrap table td, 
+    .profile_tabNav_wrap .product_data_table_wrap table th {
+        display: inherit;
+    }
+
+    .no_more_tables #seller-product-datatable td {
+        padding-left: 20px !important;
+    }
+
+    #product-add-modal-block .no_more_tables tr td input {
+        width: 100% !important;
+    }
+
+
 }
 
 
@@ -9045,7 +9119,32 @@ nav .pagination li.active .page-link {
         width: 235px;
         height: 130px;
     }
+    
+    .profile_tabNav_wrap .overview_table {
+        padding: 10px 15px 20px;
+    }
+    .profile_tabNav_wrap table td, 
+    .profile_tabNav_wrap table th {
+        padding: 8px 5px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .profile_tabNav_wrap .top_titleWrap {
+        margin: 30px -10px;
+    }
 
+    .profile_tabNav_wrap .editBox .btn_green_White .material-icons {
+        font-size: 16px;
+        line-height: 36px;
+    }
+    .profile_tabNav_wrap .editBox .btn_upload span .material-icons {
+        font-size: 19px;
+        line-height: 38px;
+    }
+
+    .profile_tabNav_wrap .main_buyers_wrap .main_buyer_box.col.s6.m4 {
+        width: 33% !important;
+    }
 }
 
 
@@ -9279,10 +9378,10 @@ nav .pagination li.active .page-link {
     legend {
         text-align: center;
     }
-    .profile_form_modal table {
+    /* .profile_form_modal table {
         width: 500px;
         overflow: auto;
-    }
+    } */
     .profile_tabNav_wrap .color-size-table-block th,
     .profile_tabNav_wrap .fresh-order-attribute-table-block th {
         font-size: 14px;
@@ -9548,7 +9647,34 @@ nav .pagination li.active .page-link {
         padding: 5px;
     }
 
+    .profile_table_design .sustainability-commitment-table-body tr td, 
+    .profile_table_design .special-customization-table-body tr td {
+        width: 88%;
+    }
+    .profile_tabNav_wrap .profile_table_design table td:last-child, 
+    .profile_tabNav_wrap .profile_table_design table th:last-child {
+        width: 22%;
+    }
+    
+    .profile_tabNav_wrap .certificate_img_wrap .certificate_img img {
+        max-height: initial;
+        height: auto;
+        max-width: 135px;
+    }
 
+    #production-flow-and-manpower-modal .no_more_tables td:before {
+        width: 105px;
+        white-space: inherit;
+    }
+
+    .profile_form_modal .file_upload {
+        width: 110px !important;
+        min-width: inherit;
+    }
+
+    .profile_form_modal video {
+        width: 100% !important;
+    }
 
 }
 

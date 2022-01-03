@@ -10,32 +10,35 @@
 			<div class="form-group  business-term-details-block">
 				<legend>Create Business Terms</legend>
 				<div class="business-term-block">
-					<table class="business-term-table-block">
-						<thead>
-							<tr>
-								<th>Term Name</th>
-								<th>Quantity</th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							@if(count($business_profile->businessTerms)>0)
-							@foreach($business_profile->businessTerms as $businessTerm)
-							<tr>
-								<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->title}}" ></td>
-								<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="{{$businessTerm->quantity}}" ></td>
-								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
-							</tr>
-							@endforeach
-							@else
-							<tr id="business-term-details-table-no-data">
-							<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>
-								<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>
-								<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
-							</tr>
-							@endif
-						</tbody>
-					</table>
+					<div class="no_more_tables">
+						<table class="business-term-table-block">
+							<thead class="cf">
+								<tr>
+									<th>Term Name</th>
+									<th>Quantity</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								@if(count($business_profile->businessTerms)>0)
+								@foreach($business_profile->businessTerms as $businessTerm)
+								<tr>
+									<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->title}}" ></td>
+									<td data-title="Quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="{{$businessTerm->quantity}}" ></td>
+									<td data-title=""><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+								</tr>
+								@endforeach
+								@else
+								<tr id="business-term-details-table-no-data">
+									<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>
+									<td data-title="Quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>
+									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+								</tr>
+								@endif
+							</tbody>
+						</table>
+					</div>
+					
 					<div class="add_more_box">
 						<a href="javascript:void(0);" class="add-more-block" onclick="addBusinessTermDetails()"><i class="material-icons dp48">add</i> Add More</a>
 					</div>

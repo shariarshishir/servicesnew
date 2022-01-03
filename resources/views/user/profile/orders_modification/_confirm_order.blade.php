@@ -9,27 +9,30 @@
                     @csrf
                     <div class="form-group row">
                         <div class="color-and-size-block">
-                            <table class="color-size-table-block ">
-                                <thead>
-                                    <tr>
-                                        <th>Color</th>
-                                        <th>XXS</th>
-                                        <th>XS</th>
-                                        <th>Small</th>
-                                        <th>Medium</th>
-                                        <th>Large</th>
-                                        <th>Extra Large</th>
-                                        <th>XXL</th>
-                                        <th>XXXL</th>
-                                        <th>4XXL</th>
-                                        <th>One Size</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="confirm-ord-mod-color-sizes">
+                            <div class="no_more_tables">
+                                <table class="color-size-table-block ">
+                                    <thead class="cf">
+                                        <tr>
+                                            <th>Color</th>
+                                            <th>XXS</th>
+                                            <th>XS</th>
+                                            <th>Small</th>
+                                            <th>Medium</th>
+                                            <th>Large</th>
+                                            <th>Extra Large</th>
+                                            <th>XXL</th>
+                                            <th>XXXL</th>
+                                            <th>4XXL</th>
+                                            <th>One Size</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="confirm-ord-mod-color-sizes">
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="row">

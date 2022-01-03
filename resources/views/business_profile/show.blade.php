@@ -338,11 +338,11 @@
 					<div id="profile" class="tabcontent profile_table_design">
 						<div class="overview_table_wrap">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Company Overview</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button data-target="company-overview-modal" type="button" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
@@ -370,11 +370,11 @@
 						</div>
 						<div class="overview_table_wrap capacity_machineries">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Capacity and Machineries</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
@@ -427,28 +427,30 @@
 									<div class="categories_produced_wrapper">
 										@if(count($business_profile->categoriesProduceds)>0)
 										<div class="overview_table box_shadow">
-											<table>
-												<thead>
-													<tr>
-														<th>Type</th>
-														<th>Percentage</th>
-														<th>&nbsp;</th>
-													</tr>
-												</thead>
-												<tbody class="categories-produced-table-body">
-													@foreach($business_profile->categoriesProduceds as $categoriesProduced)
-													<tr>
-														<td>{{$categoriesProduced->type}}</td>
-														<td>{{$categoriesProduced->percentage}}</td>
-														@if($categoriesProduced->status==1)
-														<td><i class="material-icons" style="color:green">check_circle</i></td>
-														@else
-														<td><i class="material-icons "style="color:gray">check_circle</i></td>
-														@endif
-													</tr>
-													@endforeach
-												</tbody>
-											</table>
+											<div class="no_more_tables">
+												<table>
+													<thead class="cf" >
+														<tr>
+															<th>Type</th>
+															<th>Percentage</th>
+															<th>&nbsp;</th>
+														</tr>
+													</thead>
+													<tbody class="categories-produced-table-body">
+														@foreach($business_profile->categoriesProduceds as $categoriesProduced)
+														<tr>
+															<td data-title="Type">{{$categoriesProduced->type}}</td>
+															<td data-title="Percentage">{{$categoriesProduced->percentage}}</td>
+															@if($categoriesProduced->status==1)
+															<td><i class="material-icons" style="color:green">check_circle</i></td>
+															@else
+															<td><i class="material-icons "style="color:gray">check_circle</i></td>
+															@endif
+														</tr>
+														@endforeach
+													</tbody>
+												</table>
+											</div>
 										</div>
 										@else
 											<div class="card-alert card cyan lighten-5">
@@ -467,28 +469,30 @@
 							<div class="machinery_table_inner_wrap">
 								@if(count($business_profile->machineriesDetails)>0)
 								<div class="overview_table box_shadow">
-									<table>
-										<thead>
-											<tr>
-												<th>Machine Name</th>
-												<th>Quantity</th>
-												<th>&nbsp;</th>
-											</tr>
-										</thead>
-										<tbody class="machinaries-details-table-body">
-											@foreach($business_profile->machineriesDetails as $machineriesDetail)
-											<tr>
-												<td>{{$machineriesDetail->machine_name}}</td>
-												<td>{{$machineriesDetail->quantity}}</td>
-												@if($machineriesDetail->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
+									<div class="no_more_tables">
+										<table>
+											<thead class="cf">
+												<tr>
+													<th>Machine Name</th>
+													<th>Quantity</th>
+													<th>&nbsp;</th>
+												</tr>
+											</thead>
+											<tbody class="machinaries-details-table-body">
+												@foreach($business_profile->machineriesDetails as $machineriesDetail)
+												<tr>
+													<td data-title="Machine Name">{{$machineriesDetail->machine_name}}</td>
+													<td data-title="Quantity">{{$machineriesDetail->quantity}}</td>
+													@if($machineriesDetail->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">
@@ -502,11 +506,11 @@
 
 						<div class="overview_table_wrap">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Production Flow and Manpower</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button type="button" data-target="production-flow-and-manpower-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
@@ -555,10 +559,10 @@
 
 						<div class="certifications">
 							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
+								<div class="col s7">
 									<h3>Certifications</h3>
 								</div>
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s5 right-align editBox">
 									<button type="button" data-target="certification-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white">Upload</span>
@@ -608,10 +612,10 @@
 
 						<div class="main_buyers_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
+								<div class="col s7">
 									<h3>Main Buyers</h3>
 								</div>
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s5 right-align editBox">
 									<button type="button" data-target="main-buyers-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white"> Upload</span>
@@ -646,10 +650,10 @@
 						</div>
 						<div class="export_destination_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
+								<div class="col s7">
 									<h3>Export Destinations</h3>
 								</div>
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s5 right-align editBox">
 									<button type="button" data-target="export-destination-upload-form-modal" class="btn_upload btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white"> Upload</span>
@@ -699,11 +703,11 @@
 
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Business Terms</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button type="button" data-target="business-term-modal" class="btn_edit btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
@@ -714,21 +718,24 @@
 							<div class="business_terms_table_wrap">
 								@if(count($business_profile->businessTerms)>0)
 								<div class="overview_table box_shadow">
-									<table>
-										<tbody class="business-term-table-body">
-											@foreach($business_profile->businessTerms as $businessTerm)
-											<tr>
-												<td>{{$businessTerm->title}}</td>
-												<td>{{$businessTerm->quantity}}</td>
-												@if($businessTerm->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
+									<div class="no_more_tables">
+										<table>
+											<tbody class="business-term-table-body">
+												@foreach($business_profile->businessTerms as $businessTerm)
+												<tr>
+													<td data-title="Term Name">{{$businessTerm->title}}</td>
+													<td data-title="Quantity">{{$businessTerm->quantity}}</td>
+													@if($businessTerm->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+									
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">
@@ -742,11 +749,11 @@
 
 						<div class="overview_table_wrap overview_table_alignLeft">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Sampling and R&D</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button type="button" data-target="sampling-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
@@ -757,21 +764,23 @@
 							<div class="sampling_table_wrapper">
 								@if(count($business_profile->samplings) > 0)
 								<div class="overview_table box_shadow">
-									<table>
-										<tbody class="sampling-table-body">
-											@foreach($business_profile->samplings as $sampling)
-											<tr>
-												<td>{{$sampling->title}}</td>
-												<td>{{$sampling->quantity}}</td>
-												@if($sampling->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
+									<div class="no_more_tables">
+										<table>
+											<tbody class="sampling-table-body">
+												@foreach($business_profile->samplings as $sampling)
+												<tr>
+													<td data-title="Name">{{$sampling->title}}</td>
+													<td data-title="Quantity">{{$sampling->quantity}}</td>
+													@if($sampling->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">
@@ -785,11 +794,11 @@
 
 						<div class="overview_table_wrap blank_overview_table_wrap">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Special customization ability</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button type="button" data-target="special-customization-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon" ><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white" > Edit</span>
@@ -800,20 +809,22 @@
 							<div class="special_customization_table_wrap">
 								@if(count($business_profile->specialCustomizations) > 0)
 								<div class="overview_table box_shadow">
-									<table>
-									<tbody class="special-customization-table-body">
-										@foreach($business_profile->specialCustomizations as $specialCustomization)
-										<tr>
-											<td>{{$specialCustomization->title}}</td>
-											@if($specialCustomization->status==1)
-											<td><i class="material-icons" style="color:green">check_circle</i></td>
-											@else
-											<td><i class="material-icons "style="color:gray">check_circle</i></td>
-											@endif
-										</tr>
-										@endforeach
-										</tbody>
-									</table>
+									<div class="no_more_tables">
+										<table>
+											<tbody class="special-customization-table-body">
+												@foreach($business_profile->specialCustomizations as $specialCustomization)
+												<tr>
+													<td data-title="Name">{{$specialCustomization->title}}</td>
+													@if($specialCustomization->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">
@@ -828,11 +839,11 @@
 						<div class="worker_welfare_wrap" style="display: none;">
 							<div class="row worker_welfare_box">
 								<div class="row top_titleWrap">
-									<div class="col s6 m6">
+									<div class="col s9 m7">
 										<h3>Worker welfare and CSR</h3>
 									</div>
 									@if(Auth::check())
-									<div class="col s6 m6 right-align editBox">
+									<div class="col s3 m5 right-align editBox">
 										<button type="button" data-target="worker-walfare-modal" class="btn_edit btn_green_White modal-trigger" >
 											<span class="btn_icon"><i class="material-icons">border_color</i></span>
 											<span class="btn_edit_white" > Edit</span>
@@ -1138,11 +1149,11 @@
 
 						<div class="overview_table_wrap blank_overview_table_wrap">
 							<div class="row top_titleWrap">
-								<div class="col s6 m6">
+								<div class="col s9 m7">
 									<h3>Sustainability commitments</h3>
 								</div>
 								@if(Auth::check())
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s3 m5 right-align editBox">
 									<button type="button" data-target="sustainability-commitment-modal" class="btn_edit btn_green_White modal-trigger" >
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white" > Edit</span>
@@ -1153,20 +1164,22 @@
 							<div class="sustainability_commitment_table_wrap">
 								@if(count($business_profile->sustainabilityCommitments) > 0)
 								<div class="overview_table box_shadow">
-									<table>
-										<tbody class="sustainability-commitment-table-body">
-											@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
-											<tr>
-												<td>{{$sustainabilityCommitment->title}}</td>
-												@if($sustainabilityCommitment->status==1)
-												<td><i class="material-icons" style="color:green">check_circle</i></td>
-												@else
-												<td><i class="material-icons "style="color:gray">check_circle</i></td>
-												@endif
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
+									<div class="no_more_tables">
+										<table>
+											<tbody class="sustainability-commitment-table-body">
+												@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
+												<tr>
+													<td data-title="Name">{{$sustainabilityCommitment->title}}</td>
+													@if($sustainabilityCommitment->status==1)
+													<td><i class="material-icons" style="color:green">check_circle</i></td>
+													@else
+													<td><i class="material-icons "style="color:gray">check_circle</i></td>
+													@endif
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">
@@ -1180,10 +1193,10 @@
 
 						<div class="membership_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
+								<div class="col s7">
 									<h3>Association memberships</h3>
 								</div>
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s5 right-align editBox">
 									<button type="button" data-target="association-membership-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white" > Upload</span>
@@ -1214,10 +1227,10 @@
 						</div>
 						<div class="pr_highlights_wrap">
 							<div class="row top_titleWrap upload_delete_wrap">
-								<div class="col s6 m6">
+								<div class="col s7">
 									<h3>PR Highlights</h3>
 								</div>
-								<div class="col s6 m6 right-align editBox">
+								<div class="col s5 right-align editBox">
 									<button type="button" data-target="press-highlight-upload-form-modal" class="btn_upload btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">file_upload</i></span>
 										<span class="btn_edit_white"> Upload</span>

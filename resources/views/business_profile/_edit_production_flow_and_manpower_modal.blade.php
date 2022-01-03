@@ -11,46 +11,49 @@
                 <div class="form-group production-flow-and-manpower-block">
                     <legend>Production Capacity (Annual)</legend>
                     <div class="production-flow-and-manpower-block">
-                        <table class="production-flow-and-manpower-table-block">
-                            <thead>
-                                <tr>
-                                    <th>Production Type</th>
-                                    <th>Number of Machines</th>
-                                    <th>Manpower</th>
-                                    <th>Daily Capacity</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(count($business_profile->productionFlowAndManpowers)>0)
-                                    @foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
-                                    <tr id="production-flow-and-manpower-table-no-data">
-                                        <td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="{{$productionFlowAndManpower->production_type}}" ></td>
-                                        @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
-                                            @if($flowAndManpower->name=='No of Machines')
-                                            <td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
-                                            @endif
-                                            @if($flowAndManpower->name=='Manpower')
-                                            <td><input name="manpower[]" id="manpower" type="number" class="form-control " value="{{$flowAndManpower->value}}"></td>
-                                            @endif
-                                            @if($flowAndManpower->name=='Capacity Daily')
-                                            <td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
-                                            @endif
-                                        @endforeach
-                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+                        <div class="no_more_tables">
+                            <table class="production-flow-and-manpower-table-block">
+                                <thead class="cf">
+                                    <tr>
+                                        <th>Production Type</th>
+                                        <th>Number of Machines</th>
+                                        <th>Manpower</th>
+                                        <th>Daily Capacity</th>
+                                        <th>&nbsp;</th>
                                     </tr>
-                                    @endforeach
-                                @else
-                                <tr id="production-flow-and-manpower-table-no-data">
-                                    <td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>
-                                    <td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>
-                                    <td><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>
-                                    <td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>
-                                    <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
-                                </tr>
-                                @endif
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @if(count($business_profile->productionFlowAndManpowers)>0)
+                                        @foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
+                                        <tr id="production-flow-and-manpower-table-no-data">
+                                            <td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="{{$productionFlowAndManpower->production_type}}" ></td>
+                                            @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
+                                                @if($flowAndManpower->name=='No of Machines')
+                                                <td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
+                                                @endif
+                                                @if($flowAndManpower->name=='Manpower')
+                                                <td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control " value="{{$flowAndManpower->value}}"></td>
+                                                @endif
+                                                @if($flowAndManpower->name=='Capacity Daily')
+                                                <td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
+                                                @endif
+                                            @endforeach
+                                            <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                    <tr id="production-flow-and-manpower-table-no-data">
+                                        <td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>
+                                        <td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>
+                                        <td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>
+                                        <td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>
+                                        <td data-title=""><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
+                                    </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                        
 
                         <div class="add_more_box">
                             <a href="javascript:void(0);" class="add-more-block" onclick="addProductionFlowAndManpower()"><i class="material-icons dp48">add</i> Add More</a>

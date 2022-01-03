@@ -552,6 +552,10 @@ form input:read-only {
     position: relative;
 }
 
+#countdown-dropdown {
+    width: 300px !important;
+    padding: 20px;
+}
 
 
 /* Mobile header css end */

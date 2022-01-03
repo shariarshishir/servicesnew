@@ -118,19 +118,17 @@ class FactoryTourController extends Controller
                 $companyFactoryTour->virtual_tour = $request->virtual_tour;
                 $companyFactoryTour->save();
                 $factoryTourImages = CompanyFactoryTourImage::whereIn('id',$request->factory_image_ids)->get();
-                if(isset($factoryTourImages)){
+               
+                
+                if(count($factoryTourImages)>0){
                     foreach($factoryTourImages as $factoryTourImage){
-                        if(Storage::exists('public/'.$factoryTourImages->factory_image)){
-                            Storage::delete('public/'.$factoryTourImages->factory_image);
+                        if(Storage::exists('public/'.$factoryTourImage->factory_image)){
+                            Storage::delete('public/'.$factoryTourImage->factory_image);
                         }
                         $factoryTourImage->delete();
                     }
                 }
-                // if(isset($request->factory_image_ids)){
-                //     if(count($request->factory_image_ids)>0){
-                //             CompanyFactoryTourImage::whereIn('id', $request->factory_image_ids)->delete();
-                //     }
-                // }
+           
                 if ($request->hasFile('factory_images')){
                 
                     foreach($request->factory_images as $image){
@@ -144,19 +142,15 @@ class FactoryTourController extends Controller
                     }
                 }
                 $factoryTourLargeImages = CompanyFactoryTourLargeImage::whereIn('id',$request->factory_large_image_ids)->get();
-                if(isset($factoryTourLargeImages)){
+                if(count($factoryTourLargeImages)){
                     foreach($factoryTourLargeImages as $factoryTourLargeImage){
-                        if(Storage::exists('public/'.$factoryTourLargeImages->factory_large_image)){
-                            Storage::delete('public/'.$factoryTourLargeImages->factory_large_image);
+                        if(Storage::exists('public/'.$factoryTourLargeImage->factory_large_image)){
+                            Storage::delete('public/'.$factoryTourLargeImage->factory_large_image);
                         }
                         $factoryTourLargeImage->delete();
                     }
                 }
-                // if(isset($request->factory_large_image_ids)){
-                //     if( count($request->factory_large_image_ids)>0){
-                //         CompanyFactoryTourLargeImage::whereIn('id',$request->factory_large_image_ids)->delete();
-                //     }
-                // }
+           
                
                 if ($request->hasFile('factory_large_images')){
                    

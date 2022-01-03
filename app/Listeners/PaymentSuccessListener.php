@@ -30,6 +30,7 @@ class PaymentSuccessListener implements ShouldQueue
      */
     public function handle($event)
     {
+        
         //to admin
         $admin=Admin::find(1);
         Notification::send($admin,new PaymentSuccessNotification($event->order,'admin'));

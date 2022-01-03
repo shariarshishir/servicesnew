@@ -1,10 +1,3 @@
-<head>
-    <style>
-    .btn{text-align:center;}
-    .loginButton {padding: 7px 15px 8px 20px;}
-    * {box-sizing: border-box;}
-    </style>
-    </head>
     @component('mail::message')
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
@@ -19,7 +12,7 @@
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
                 <td style="padding: 30px;">
-                    <p style="font-family:verdana;font-size:13px;margin:0px;line-height:normal;">Dear {{ $product->vendor->user->name}},</p>
+                    <p style="font-family:verdana;font-size:13px;margin:0px;line-height:normal;">Dear {{ $product->businessProfile->user->name}},</p>
                     @if($alert_data == null)
                     <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:20px;line-height:normal;">Seems like your product {{ $product->name }} has been performing really well. However your product stock out , Please restock the product so that buyers can place orders.</p>
                     @else

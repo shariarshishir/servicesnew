@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rfq;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -73,8 +74,6 @@ class RfqController extends Controller
                 if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
                     $path=$product_image->store('images','public');
-
-
                 }
                 else{
                     $path=$product_image->store('images','public');
@@ -84,15 +83,19 @@ class RfqController extends Controller
                 RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
             }
         }
+        $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
+        
+        if(env('APP_ENV') == 'production')
+        {
+            $selectedUsersToSendMail = User::get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
 
-        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
-        // event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail));
-        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        // }
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        }
 
-        // $selectedUserToSendMail="success@merchantbay.com";
-        // event(new NewRfqHasAddedEvent($selectedUserToSendMail));
         $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
         return back()->with(['success'=> $msg]);
 

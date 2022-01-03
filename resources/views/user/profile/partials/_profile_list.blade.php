@@ -34,7 +34,7 @@
         </form>
     </div>
     <div class="shop-name">
-        <i class="material-icons dp48">store</i> {{ auth()->user()->vendor->vendor_name }}
+        <i class="material-icons dp48">store</i> {{ auth()->user()->name }}
     </div>
 </div>
 <div class="col s12 profile-menu-list">

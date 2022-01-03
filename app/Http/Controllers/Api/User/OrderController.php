@@ -266,6 +266,7 @@ class OrderController extends Controller
             $newFormatedItem=new stdClass;
             $newFormatedItem->id=$item->id;
             $newFormatedItem->product_sku=$item->product_sku;
+            $newFormatedItem->product_type=$item->product->product_type;
             $newFormatedItem->product_name=$item->product->name;
             $newFormatedItem->quantity=$item->quantity;
             $newFormatedItem->unit_price=$item->unit_price;

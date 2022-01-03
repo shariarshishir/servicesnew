@@ -1,27 +1,27 @@
 <?php
 
 namespace App\Notifications;
-use App\Models\Vendor;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewOrderHasApprovedNotification extends Notification
+class NewRfqNotification extends Notification
 {
     use Queueable;
-    public  $order;
 
+    public $data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($data)
     {
        
-        $this->order=$order;
+        $this->notification_data=$data;
     }
 
     /**
@@ -34,18 +34,18 @@ class NewOrderHasApprovedNotification extends Notification
     {
         return ['database'];
     }
-
-
-
+  
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "New Order has placed by merchant bay",
-            'notification_data' => $this->order->id,
-            'notification_type' => "OrderApproved",
-            'url' => '/order'
+            'title' => 'New RFQ posted',
+            'url' => $this->notification_data['url'],
         ];
     }
-
-
 }

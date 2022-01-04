@@ -205,11 +205,11 @@
                                     {
                                         var html= '<tr class="tr">';
 
-                                            html+='<td><input type="text" class="form-control" value="'+item2.color+'" id="predefind-colors" name="color_size[color][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                            html+='<td data-title="Color"><input type="text" class="form-control" value="'+item2.color+'" id="predefind-colors" name="color_size[color][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             if(item.quantity !=0 || item2.quantity !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.quantity+'"  name="color_size[quantity][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.quantity+'</span></span></td>';
+                                                html+='<td data-title="Cuantity"><input class="form-control combat" type="text" value="'+item2.quantity+'"  name="color_size[quantity][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.quantity+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[quantity][]" readonly/> <span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="Quantity"><input  type="text"  class="form-control readonly-item" name="color_size[quantity][]" readonly/> <span class="avl-wrap">&nbsp;</span></td>';
 
                                             }
 
@@ -241,61 +241,61 @@
 
                                         var html= '<tr class="tr">';
 
-                                            html+='<td><input type="text" class="form-control" value="'+item2.color+'" id="predefind-colors" name="color_size[color][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                            html+='<td data-title="Color"><input type="text" class="form-control" value="'+item2.color+'" id="predefind-colors" name="color_size[color][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             if(item.xxs !=0 || item2.xxs !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.xxs+'"  name="color_size[xxs][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.xxs+'</span></span></td>';
+                                                html+='<td data-title="XXS"><input class="form-control combat" type="text" value="'+item2.xxs+'"  name="color_size[xxs][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.xxs+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[xxs][]" readonly/> <span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="XXS"><input  type="text"  class="form-control readonly-item" name="color_size[xxs][]" readonly/> <span class="avl-wrap">&nbsp;</span></td>';
 
                                             }
                                             if(item.xs !=0 || item2.xs !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.xs+'"  name="color_size[xs][]" /><span class="avl-wrap">avl:<span class="avl">'+item.xs+'</span></span></td>';
+                                                html+='<td data-title="XS"><input class="form-control combat" type="text" value="'+item2.xs+'"  name="color_size[xs][]" /><span class="avl-wrap">avl:<span class="avl">'+item.xs+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[xs][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="XS"><input  type="text"  class="form-control readonly-item" name="color_size[xs][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             }
                                             if(item.small !=0 || item2.small !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.small+'"  name="color_size[small][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.small+'</span></span></td>';
+                                                html+='<td data-title="Small"><input class="form-control combat" type="text" value="'+item2.small+'"  name="color_size[small][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.small+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[small][]" readonly/><span class="avl-wrap">&nbsp;</span> </td>';
+                                                html+='<td data-title="Small"><input  type="text"  class="form-control readonly-item" name="color_size[small][]" readonly/><span class="avl-wrap">&nbsp;</span> </td>';
 
                                             }
                                             if(item.medium !=0 || item2.medium !=0) {
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.medium+'"  name="color_size[medium][]" /><span class="avl-wrap">avl:<span class="avl">'+item.medium+'</span></span></td>';
+                                                html+='<td data-title="Medium"><input class="form-control combat" type="text" value="'+item2.medium+'"  name="color_size[medium][]" /><span class="avl-wrap">avl:<span class="avl">'+item.medium+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[medium][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="Medium"><input  type="text"  class="form-control readonly-item" name="color_size[medium][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             }
                                             if(item.large !=0 || item2.large !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.large+'"  name="color_size[large][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.large+'</span></span></td>';
+                                                html+='<td data-title="Large"><input class="form-control combat" type="text" value="'+item2.large+'"  name="color_size[large][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.large+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[large][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="Large"><input  type="text"  class="form-control readonly-item" name="color_size[large][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
 
                                             }
                                             if(item.extra_large !=0 || item2.extra_large !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.extra_large+'"  name="color_size[extra_large][]" /><span class="avl-wrap">avl:<span class="avl">'+item.large+'</span></span></td>';
+                                                html+='<td data-title="Extra Large"><input class="form-control combat" type="text" value="'+item2.extra_large+'"  name="color_size[extra_large][]" /><span class="avl-wrap">avl:<span class="avl">'+item.large+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[extra_large][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="Extra Large"><input  type="text"  class="form-control readonly-item" name="color_size[extra_large][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             }
                                             if(item.xxl !=0 || item2.xxl !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.xxl+'"  name="color_size[xxl][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.xxl+'</span></span></td>';
+                                                html+='<td data-title="XXL"><input class="form-control combat" type="text" value="'+item2.xxl+'"  name="color_size[xxl][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.xxl+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[xxl][]" readonly/><span class="avl-wrap">&nbsp;</span> </td>';
+                                                html+='<td data-title="XXL"><input  type="text"  class="form-control readonly-item" name="color_size[xxl][]" readonly/><span class="avl-wrap">&nbsp;</span> </td>';
 
                                             }
                                             if(item.xxxl !=0 || item2.xxxl !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.xxxl+'"  name="color_size[xxxl][]" /><span class="avl-wrap">avl:<span class="avl">'+item.xxxl+'</span></span></td>';
+                                                html+='<td data-title="XXXL"><input class="form-control combat" type="text" value="'+item2.xxxl+'"  name="color_size[xxxl][]" /><span class="avl-wrap">avl:<span class="avl">'+item.xxxl+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[xxxl][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="XXXL"><input  type="text"  class="form-control readonly-item" name="color_size[xxxl][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             }
                                             if(item.four_xxl !=0 || item2.four_xxl !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.four_xxl+'"  name="color_size[four_xxl][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.four_xxl+'</span></span></td>';
+                                                html+='<td data-title="4XXL"><input class="form-control combat" type="text" value="'+item2.four_xxl+'"  name="color_size[four_xxl][]" /> <span class="avl-wrap">avl:<span class="avl">'+item.four_xxl+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[four_xxl][]" readonly/><span class="avl-wrap">&nbsp;</span> </td>';
+                                                html+='<td data-title="4XXL"><input  type="text"  class="form-control readonly-item" name="color_size[four_xxl][]" readonly/><span class="avl-wrap">&nbsp;</span> </td>';
 
                                             }
                                             if(item.one_size !=0 || item2.one_size !=0){
-                                                html+='<td><input class="form-control combat" type="text" value="'+item2.one_size+'"  name="color_size[one_size][]" /><span class="avl-wrap">avl:<span class="avl">'+item.one_size+'</span></span></td>';
+                                                html+='<td data-title="One Size"><input class="form-control combat" type="text" value="'+item2.one_size+'"  name="color_size[one_size][]" /><span class="avl-wrap">avl:<span class="avl">'+item.one_size+'</span></span></td>';
                                             }else{
-                                                html+='<td><input  type="text"  class="form-control readonly-item" name="color_size[one_size][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
+                                                html+='<td data-title="One Size"><input  type="text"  class="form-control readonly-item" name="color_size[one_size][]" readonly/><span class="avl-wrap">&nbsp;</span></td>';
                                             }
 
                                             html+='</tr>';
@@ -313,17 +313,17 @@
                             {
                                 var html= '<tr>';
 
-                                html+='<td><input type="text" value="'+item.color+'" id="predefind-colors" name="color_size[color][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.xxs+'" class="form-control " name="color_size[xxs][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.xs+'" class="form-control " name="color_size[xs][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.small+'" class="form-control " name="color_size[small][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.medium+'" class="form-control " name="color_size[medium][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.large+'" class="form-control " name="color_size[large][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.extra_large+'" class="form-control " name="color_size[extra_large][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.xxl+'" class="form-control " name="color_size[xxl][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.xxxl+'" class="form-control " name="color_size[xxxl][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.four_xxl+'" class="form-control " name="color_size[four_xxl][]" /></td>';
-                                html+='<td><input class="combat" type="text" value="'+item.one_size+'" class="form-control " name="color_size[one_size][]" /></td>';
+                                html+='<td data-title="Color"><input type="text" value="'+item.color+'" id="predefind-colors" name="color_size[color][]" /></td>';
+                                html+='<td data-title="XXS"><input class="combat" type="text" value="'+item.xxs+'" class="form-control " name="color_size[xxs][]" /></td>';
+                                html+='<td data-title="XS"><input class="combat" type="text" value="'+item.xs+'" class="form-control " name="color_size[xs][]" /></td>';
+                                html+='<td data-title="Small"><input class="combat" type="text" value="'+item.small+'" class="form-control " name="color_size[small][]" /></td>';
+                                html+='<td data-title="Medium"><input class="combat" type="text" value="'+item.medium+'" class="form-control " name="color_size[medium][]" /></td>';
+                                html+='<td data-title="Large"><input class="combat" type="text" value="'+item.large+'" class="form-control " name="color_size[large][]" /></td>';
+                                html+='<td data-title="Extra Large"><input class="combat" type="text" value="'+item.extra_large+'" class="form-control " name="color_size[extra_large][]" /></td>';
+                                html+='<td data-title="XXL"><input class="combat" type="text" value="'+item.xxl+'" class="form-control " name="color_size[xxl][]" /></td>';
+                                html+='<td data-title="XXXL"><input class="combat" type="text" value="'+item.xxxl+'" class="form-control " name="color_size[xxxl][]" /></td>';
+                                html+='<td data-title="4XXL"><input class="combat" type="text" value="'+item.four_xxl+'" class="form-control " name="color_size[four_xxl][]" /></td>';
+                                html+='<td data-title="One Color"><input class="combat" type="text" value="'+item.one_size+'" class="form-control " name="color_size[one_size][]" /></td>';
                                 html+='</tr>';
                                 $("#cart_item_customize_block .colors-sizes").append(html);
                             });
@@ -404,17 +404,17 @@ function addFreshOrderColorSizeInCart()
 
 {
     var html = '<tr class="tr">';
-        html+='<td><input type="text" id="predefind-colors" name="color_size[color][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[xxs][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[xs][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[small][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[medium][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[large][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[extra_large][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[xxl][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[xxxl][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[four_xxl][]" /></td>';
-        html+='<td><input class="combat" type="text"  class="form-control " name="color_size[one_size][]" /></td>';
+        html+='<td data-title="Color"><input type="text" id="predefind-colors" name="color_size[color][]" /></td>';
+        html+='<td data-title="XXS"><input class="combat" type="text"  class="form-control " name="color_size[xxs][]" /></td>';
+        html+='<td data-title="XS"><input class="combat" type="text"  class="form-control " name="color_size[xs][]" /></td>';
+        html+='<td data-title="Small"><input class="combat" type="text"  class="form-control " name="color_size[small][]" /></td>';
+        html+='<td data-title="Medium"><input class="combat" type="text"  class="form-control " name="color_size[medium][]" /></td>';
+        html+='<td data-title="Large"><input class="combat" type="text"  class="form-control " name="color_size[large][]" /></td>';
+        html+='<td data-title="Extra Large"><input class="combat" type="text"  class="form-control " name="color_size[extra_large][]" /></td>';
+        html+='<td data-title="XXL"><input class="combat" type="text"  class="form-control " name="color_size[xxl][]" /></td>';
+        html+='<td data-title="XXXL"><input class="combat" type="text"  class="form-control " name="color_size[xxxl][]" /></td>';
+        html+='<td data-title="4XXL"><input class="combat" type="text"  class="form-control " name="color_size[four_xxl][]" /></td>';
+        html+='<td data-title="One Size"><input class="combat" type="text"  class="form-control " name="color_size[one_size][]" /></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderColorSizeInCart(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
     $('#cart_item_customize_block tbody').append(html);

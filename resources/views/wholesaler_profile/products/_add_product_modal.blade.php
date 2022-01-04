@@ -364,10 +364,10 @@
                     {{-- end full stock --}}
 
                     <div class="row input-field non-clothing-prices-breakdown">
-                        <div class="col s12 m3 l3">
+                        <div class="col s12">
                             <label>Prices Breakdown</label>
                         </div>
-                        <div class="col s12 m9 l9 prices-breakdown-block">
+                        <div class="col s12 prices-breakdown-block">
                             <div class="no_more_tables">
                                 <table class="non-clothing-prices-breakdown-block">
                                     <thead class="cf">

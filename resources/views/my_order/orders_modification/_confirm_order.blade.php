@@ -34,7 +34,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="padding:30px 0;">
+                    <div class="row" style="padding:30px 15px;">
                        <p>Total Quantity: <span class="ord-mod-total-quantity"></span></p>
                        <p >Unit Price: <span class="ord-mod-unit-price"></span></p>
                        <p>Discount: <span class="ord-mod-discount"></span></p>

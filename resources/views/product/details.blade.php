@@ -118,7 +118,7 @@ $reviewsCount = count($productReviews);
 
                         <!-- <h4>{{ $product->name }}</h4> -->
                         <div class="row single-product-details-top">
-                            <div class="col m12">
+                            <div class="col s12">
 
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
                                     <span class="new badge red" data-badge-caption="Sold Out"></span>
@@ -158,20 +158,23 @@ $reviewsCount = count($productReviews);
                                             <div class="col-md-12" id="attr-block" style="display: none;"> -->
                                             <div class="col-md-12" id="attr-block">
                                                 <div class="ready_order_attr_block">
-                                                    <table style="border: 1px solid #ccc;" class="fresh-order-attributes">
-                                                        <tr>
-                                                            <td>Quantity({{$product->product_unit}})</td>
-                                                            <td>Price</td>
-                                                            @if($product->product_type==1) <td>Lead Time </td>@endif
-                                                        </tr>
-                                                        @foreach($attr as $key=>$list)
-                                                        <tr class="ready_attr_data">
-                                                            <td class="price-range-block"><span class="min-price">{{$list[0]}}</span> <span class="price-range-separator">-</span> <span class="max-price">{{$list[1]}}</span></td>
-                                                            <td>{{$list[2]}}</td>
-                                                            @if($product->product_type==1) <td>{{$list[3]}} </td>@endif
-                                                        </tr>
-                                                        @endforeach
-                                                    </table>
+                                                    <div class="no_more_tables">
+                                                        <table style="border: 1px solid #ccc;" class="fresh-order-attributes">
+                                                            <tr class="tr_none_mobile">
+                                                                <td>Quantity({{$product->product_unit}})</td>
+                                                                <td>Price</td>
+                                                                @if($product->product_type==1) <td>Lead Time </td>@endif
+                                                            </tr>
+                                                            @foreach($attr as $key=>$list)
+                                                            <tr class="ready_attr_data">
+                                                                <td data-title="Quantity" class="price-range-block"><span class="min-price">{{$list[0]}}</span> <span class="price-range-separator">-</span> <span class="max-price">{{$list[1]}}</span></td>
+                                                                <td data-title="Price">{{$list[2]}}</td>
+                                                                @if($product->product_type==1) <td data-title="Lead Time">{{$list[3]}} </td>@endif
+                                                            </tr>
+                                                            @endforeach
+                                                        </table>
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +230,7 @@ $reviewsCount = count($productReviews);
                                                 <div class="modal-content">
 
                                                     <div class="no_more_tables">
-                                                        <table class="color-size-table-block striped" width="100%" cellpadding="0" cellspacing="0">
+                                                        <table class="color-size-table-block striped">
                                                             <thead class="cf">
                                                                 <tr>
                                                                     <th>Color</th>
@@ -1368,7 +1371,7 @@ $reviewsCount = count($productReviews);
         }
         function removeProdModReqContent(el)
         {
-            $(el).parent().remove();
+            $(el).parent().parent().remove();
         }
         //submit request
         $('#prodModReqForm').on('submit',function(e){

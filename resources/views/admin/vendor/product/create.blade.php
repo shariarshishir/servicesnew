@@ -167,9 +167,9 @@
                                     <div class="stock-rtd-attr" style="display: none">
                                         <label>Available Size & Colors</label>
                                         <div class="col-md-12" id="color-size-block">
-                                            <div class="row">
+                                            <div class="no_more_tables">
                                                 <table class="color-size-table-block striped">
-                                                    <thead>
+                                                    <thead class="cf">
                                                         <tr>
                                                             <th>Color</th>
                                                             <th>Small</th>
@@ -181,11 +181,11 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[small][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[medium][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[large][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[extra_large][]" /></td>
+                                                            <td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
+                                                            <td data-title="Small"><input type="text" value="0" class="form-control" name="color_size[small][]" /></td>
+                                                            <td data-title="Medium"><input type="text" value="0" class="form-control" name="color_size[medium][]" /></td>
+                                                            <td data-title="Large"><input type="text" value="0" class="form-control" name="color_size[large][]" /></td>
+                                                            <td data-title="Extra Large"><input type="text" value="0" class="form-control" name="color_size[extra_large][]" /></td>
                                                             <td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeProductColorSize(this)"><i class="fas fa-minus"></i></a></td>
                                                         </tr>
                                                     </tbody>

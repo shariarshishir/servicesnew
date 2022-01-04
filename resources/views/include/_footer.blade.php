@@ -710,7 +710,7 @@
   <script>
 //live search by product name or vendor name
 $("#searchOption").change(function(){
-    $('#search-results').hide();
+    $('#search-results-wrapper').hide();
     if($(this).val() == "product"){
         $(".search_input").val("").attr("placeholder", "Search for ...");
     }
@@ -722,7 +722,7 @@ $("#searchOption").change(function(){
     }
 });
 $(document).on("keyup",".search_input",function(){
-    if($(this).val().length > 3)
+    if($(this).val().length > 2)
     {
         var is_env = "{{ env('APP_ENV') }}";
         var url;
@@ -737,14 +737,16 @@ $(document).on("keyup",".search_input",function(){
             data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
             beforeSend: function() {
                 //$('.loading-search-message').html("Searching please Wait.");
-                $('#search-results').html("Searching please Wait.");
-                $('#search-results').show();
+                //$('#search-results').html("Searching please Wait.");
+                //$('#search-results').show();
+                $("#search-results-wrapper").show();
             },
             success: function(response)
             {
                 //console.log(response.averageRatings);
                 //$('.loading-message').html("");
                 //$('#loadingProgressContainer').hide();
+                $("#loadingSearchProgressContainer").hide();
                 var html="";
                 var nohtml = "";
                 if(is_env == 'production'){
@@ -758,7 +760,7 @@ $(document).on("keyup",".search_input",function(){
                     console.log(response.data);
                     if(response.searchType=='all' && response.data.length > 0)
                     {
-                        html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
+                        //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0; i<response.data.length; i++)
                         {
                             if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
@@ -776,6 +778,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].name+'</h4>';
                                 html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html += '</div>';
                                 html += '</div>';
                             }
@@ -794,6 +797,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].title+'</h4>';
                                 html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html += '</div>';
                                 html += '</div>';
                             }
@@ -806,6 +810,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].title+'</h4>';
                                 html += '<div class="details"><p>'+response.data[i].details.substring(0, 100)+'</p></div>';
+                                html += '<div class="search-item-tag">Blog</div>';
                                 html += '</div>';
                                 html += '</div>';
                             }
@@ -826,6 +831,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].business_name+'</h4>';
                                 html += '<div class="details"><p>'+response.data[i].industry_type+'</p></div>';
+                                html += '<div class="search-item-tag">Supplier Profile</div>';
                                 html += '</div>';
                                 html += '</div>';
                                 html += '</div>';
@@ -837,7 +843,7 @@ $(document).on("keyup",".search_input",function(){
                     else if(response.searchType=='product' && response.data.length > 0)
                     {
                         $('.product-item').html(nohtml);
-                        html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
+                        //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0; i<response.data.length; i++)
                         {
                             //console.log(response.data[i]);
@@ -856,6 +862,7 @@ $(document).on("keyup",".search_input",function(){
                                 html+= '<div class="product-short-intro">';
                                 html+= '<h4>'+response.data[i].name+'</h4>';
                                 html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html+= '</div>';
                                 html+= '</div>';
                             }
@@ -874,6 +881,7 @@ $(document).on("keyup",".search_input",function(){
                                 html+= '<div class="product-short-intro">';
                                 html+= '<h4>'+response.data[i].title+'</h4>';
                                 html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html+= '</div>';
                                 html+= '</div>';
                             }
@@ -885,12 +893,13 @@ $(document).on("keyup",".search_input",function(){
                     {
                         //console.log(response.data);
                         $('.vendor-info').html(nohtml);
-                        html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
+                        //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0;i<response.data.length;i++){
                             html+='<div class="vendor-info">';
                             html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
                             html+= '<h4>'+response.data[i].business_name+'</h4>';
                             html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
+                            html += '<div class="search-item-tag">Supplier Profile</div>';
                             html+= '</div>';
                             }
                         $('#search-results').html(html);
@@ -901,14 +910,17 @@ $(document).on("keyup",".search_input",function(){
                 {
                     if(response.searchType=='all')
                     {
+                        $('#search-results').show();
                         $('#search-results').html("No information found regarding your search keyword.").show();
                     }
                     else if(response.searchType=='product')
                     {
+                        $('#search-results').show();
                         $('#search-results').html("No product found regarding your search keyword.").show();
                     }
                     else if(response.searchType=='vendor')
                     {
+                        $('#search-results').show();
                         $('#search-results').html("No manufacturer found regarding your search keyword.").show();
                     }
                     //$('#search-results').html(nohtml).hide();
@@ -1041,7 +1053,8 @@ $(document).on("keyup",".search_input",function(){
     });
 
     $(document).on("click",".close-search-modal-trigger",function(){
-        $(this).closest("#search-results").hide();
+        $(this).closest("#search-results-wrapper").hide();
+        $(".search_input").val("");
     });
 
     //switch to manufacturers

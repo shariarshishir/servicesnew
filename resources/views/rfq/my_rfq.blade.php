@@ -566,7 +566,7 @@
             let obj=$(this).find('.new-bid-reply-badge');
             $.ajax({
                 type:'GET',
-                url: '/rfq-bid-notification-mark-as-read',
+                url: "{{route('bid-notification-mark-as-read')}}",
                 data:{ rfqId: rfqId},
                 success: function (data) {
                     $('.noticication_counter').text(data['noOfnotification']);

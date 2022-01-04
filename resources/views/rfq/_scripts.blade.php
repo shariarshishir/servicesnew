@@ -165,8 +165,7 @@
            
             $.ajax({
                 type:'GET',
-               
-                url: '{{ route("notificationMarkAsRead") }}',
+                url: "{{route('notification-mark-as-read')}}",
                 data:{ rfqId: rfqId},
                 success: function (data) {
                     $('.noticication_counter').text(data['noOfnotification']);

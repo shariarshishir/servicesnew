@@ -146,7 +146,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/order/paynow',[ProductCartController::class,'order'])->name('cart.order');
     Route::get('/order-success',[ProductCartController::class,'orderSuccess'])->name('cart.order.success');
 
-    Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);
+    Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead'])->name('notification-mark-as-read');
     //store
     Route::get('store/{vendorId}', [UserController::class, 'myShop'])->name('users.myshop');
     Route::get('store/{vendorUid}/productgrouplist/{slug}', [UserController::class, 'myShopProductsByCategory'])->name('users.categories_products');
@@ -276,7 +276,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
-    Route::get('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'bidNotificationMarkAsRead']);
+    Route::get('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'notificationMarkAsRead'])->name('bid-notification-mark-as-read');
 
     //poforma
     Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');

@@ -125,10 +125,10 @@ class OrderController extends Controller
             }
             $vendorOrder->update(['state' => 'approved','approved_by_admin'=> Auth::guard('admin')->user()->id]);
             $vendorOrder=VendorOrder::with('orderItems.product.images')->find($id);
-            if(env('APP_ENV') == 'production')
-            {
+            // if(env('APP_ENV') == 'production')
+            // {
                 event(new NewOrderHasApprovedEvent($vendorOrder));
-            }
+            // }
             return redirect()->back()->withSuccess('Order Status Updated Successfully');
         }catch(\Exception $e)
         {

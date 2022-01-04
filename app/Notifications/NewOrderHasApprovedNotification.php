@@ -11,6 +11,7 @@ class NewOrderHasApprovedNotification extends Notification
 {
     use Queueable;
     public  $order;
+    public  $user_type;
 
 
     /**
@@ -18,10 +19,11 @@ class NewOrderHasApprovedNotification extends Notification
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($order,$user_type)
     {
-       
-        $this->order=$order;
+      
+        $this->order = $order;
+        $this->user_type =  $user_type;
     }
 
     /**
@@ -39,12 +41,25 @@ class NewOrderHasApprovedNotification extends Notification
 
     public function toDatabase($notifiable)
     {
-        return [
-            'title' => "New Order has placed by merchant bay",
-            'notification_data' => $this->order->id,
-            'notification_type' => "OrderApproved",
-            'url' => '/order'
-        ];
+        if($this->user_type=="wholesaler"){
+            return [
+                'title' => "New Order has placed by merchant bay",
+                'notification_data' => $this->order->id,
+                'notification_type' => "OrderApproved",
+                'url' => '/wholesaler/order/'.$this->order->businessProfile->id
+            ];
+
+        }
+        else{
+            return [
+                'title' => "New Order has placed by merchant bay",
+                'notification_data' => $this->order->id,
+                'notification_type' => "OrderApproved",
+                'url' => '/my-order'
+            ];
+
+        }
+       
     }
 
 

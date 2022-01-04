@@ -62,6 +62,12 @@ class User extends Authenticatable
         return $this->hasMany(BusinessProfile::class);
     }
 
+    public function businessProfileForRepresentative()
+    {
+        return $this->hasOne(BusinessProfile::class,'representative_user_id', 'id');
+    }
+
+
 
 
 

@@ -12,7 +12,11 @@ class ProfileInfoController extends Controller
     public function index($business_profile_id)
     {
         $business_profile=BusinessProfile::where('id', $business_profile_id)->first();
-        return view('wholesaler_profile.profile_info.index', compact('business_profile')); 
+        if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
+        {
+            return view('wholesaler_profile.profile_info.index', compact('business_profile'));
+        }
+        abort(401);
     }
     public function show($id)
     {

@@ -18,14 +18,14 @@
             <div class="back_to">
                 <a  href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
             </div>
-            
+
         </div>
     </section>
 
     <section class="ic-single-product-details manufactrue_product_details_wrap">
         <div class="container">
             <div class="row ic-pg-container">
-                
+
                 <div class="col s12 m12 l9 product_preview_info_wrap">
                     <div class="row">
                         <div class="col s12 m5 l4 product_preview_wrap">
@@ -343,7 +343,7 @@
 
                         @endif
                         @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{$product->category['name']}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}','{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{auth()->id()}}','{{$product->businessProfile->id}}');">Contact supplier</button>
                         @else
                             <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                         @endif
@@ -557,19 +557,17 @@
 @push('js')
     <script>
 
-        var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
-        var socket = io.connect(serverURL);
-        socket.on('connect', function(data) {
-        //alert('connect');
-        });
+        var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
+        var socket = io(serverURL, { transports : ['websocket'] });
+        socket.on('connect', function(data) {});
         @if(Auth::check())
-        function sendmessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
+        function sendmessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,user_id,business_id)
         {
-        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
+        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'user_id' : "{{Auth::user()->id}}", 'business_id' : business_id,'from_user_id': "{{Auth::user()->id}}", 'from_business_id' : null};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            var url = '{{ route("message.center") }}?uid='+createdBy;
+            var url = '{{ route("message.center") }}?bid='+business_id;
                 // url = url.replace(':slug', sku);
                 window.location.href = url;
             // window.location.href = "/message-center?uid="+createdBy;

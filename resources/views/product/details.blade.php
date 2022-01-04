@@ -24,9 +24,9 @@ $reviewsCount = count($productReviews);
         <a href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
     </div>
     <div class="single-product-details-block-wrapper">
-        
+
         <div class="row product_details_content_wrap">
-            
+
             <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m12 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
                     <div class="col s12 m5 l4 product_preview_wrap">
@@ -702,7 +702,7 @@ $reviewsCount = count($productReviews);
                                                     <div class="row">
                                                         <div class="input-field col s12">
                                                             <label for="product-modification-message" class="">Type your modification request.</label>
-                                                            <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>                                                            
+                                                            <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <label for="product-modification-image" class="product-modification-image">Upload Image</label>
@@ -902,7 +902,7 @@ $reviewsCount = count($productReviews);
                         </div>
                     </div>
                 </div>
-                
+
 
 
             </div>
@@ -912,7 +912,7 @@ $reviewsCount = count($productReviews);
                     <div class="right-align">
                         {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
                         @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{$product->category['name']}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')"">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{auth()->id()}}', '{{$product->businessProfile->id}}');">Contact supplier</button>
                         @else
                             <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                         @endif
@@ -989,7 +989,7 @@ $reviewsCount = count($productReviews);
         </div>
     </div>
 
-    
+
 
 
     <div class="row single-product-related-products">
@@ -1182,7 +1182,7 @@ $reviewsCount = count($productReviews);
         // });
 
         // $(document).ready(function() {
-        //     // slick slider 
+        //     // slick slider
         //     $('.related_products_slider').slick({
         //     dots: false,
         //     infinite: false,
@@ -1221,7 +1221,7 @@ $reviewsCount = count($productReviews);
         // });
 
 
-        
+
 
 
 
@@ -1381,19 +1381,24 @@ $reviewsCount = count($productReviews);
 
 
         //message center
-        var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
-        var socket = io.connect(serverURL);
-        socket.on('connect', function(data) {
-        //alert('connect');
-        });
+        //var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
+        // var serverURL = "localhost:4000";
+        // var socket = io.connect(serverURL);
+        // socket.on('connect', function(data) {
+        //   //alert('connect');
+        // });
+
+        var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
+        var socket = io(serverURL, { transports : ['websocket'] });
+        socket.on('connect', function(data) {});
         @if(Auth::check())
-        function sendmessage(productId,productTitle,productCategory,productImage,createdBy)
+        function sendmessage(productId,productTitle,productCategory,productImage,user_id,business_id)
         {
-        let message = {'message': 'We are Interested in Your Product ID:ms-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MS-"+productId,'name': productTitle,'category': productCategory,'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
+        let message = {'message': 'We are Interested in Your Product ID:ms-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MS-"+productId,'name': productTitle,'category': productCategory,'image': productImage}, 'user_id' : "{{Auth::user()->id}}", 'business_id' : business_id,'from_user_id': "{{Auth::user()->id}}", 'from_business_id' : null};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            var url = '{{ route("message.center") }}?uid='+createdBy;
+            var url = '{{ route("message.center") }}?bid='+business_id;
                 // url = url.replace(':slug', sku);
                 window.location.href = url;
             // window.location.href = "/message-center?uid="+createdBy;

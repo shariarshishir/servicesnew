@@ -1053,7 +1053,8 @@ $(document).on("keyup",".search_input",function(){
     });
 
     $(document).on("click",".close-search-modal-trigger",function(){
-        $(this).closest("#search-results").hide();
+        $(this).closest("#search-results-wrapper").hide();
+        $(".search_input").val("");
     });
 
     //switch to manufacturers

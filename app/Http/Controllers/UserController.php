@@ -533,6 +533,11 @@ class UserController extends Controller
                     $notification->markAsRead();
                     $message="Notification mark as read successfully";
                 }
+                elseif($notification->type == "App\Notifications\NewRfqNotification" && $notification->data['rfq_data']['id']==$request->rfqId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
 
         }
 
@@ -556,18 +561,20 @@ class UserController extends Controller
             if($notification->type=="App\Notifications\NewOrderHasApprovedNotification"){
                 array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
             }
-            else if($notification->type=="App\Notifications\QueryWithModificationToUserNotification"){
+            elseif($notification->type=="App\Notifications\QueryWithModificationToUserNotification"){
                 array_push($orderModificationRequestIds,$notification->data['notification_data']);
             }
-            else if($notification->type == "App\Notifications\OrderQueryFromAdminNotification"){
+            elseif($notification->type == "App\Notifications\OrderQueryFromAdminNotification"){
                 array_push($orderQueryProcessedIds,$notification->data['notification_data']['order_modification_request_id']);
             }
-            else if($notification->type=="App\Notifications\QueryCommuncationNotification"){
+            elseif($notification->type=="App\Notifications\QueryCommuncationNotification"){
                 array_push($orderModificationRequestIds,$notification->data['notification_data']);
             }
             elseif($notification->type=="App\Notifications\PaymentSuccessNotification"){
                 array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
             }
+           
+
 
         }
         $newModificationRequestNotificationCount=count($orderModificationRequestIds);

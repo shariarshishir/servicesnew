@@ -36,7 +36,7 @@ class NewRfqHasBidListener  implements ShouldQueue
         $data=[
             'supplier'=>$supplier,
             'bidData'=>$event->bidData,
-            'url'=>"/rfq"
+            'url'=>"/my-rfq"
         ];
         if($supplier=="success@merchantbay.com"){
            

@@ -13,6 +13,7 @@ use App\Models\BusinessProfile;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Validator;
+Use DB;
 
 
 class RfqController extends Controller
@@ -42,8 +43,14 @@ class RfqController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
+        $rfqIds=[];
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            if($notification->type=="App\Notifications\NewRfqNotification"){
+                array_push($rfqIds,$notification->data['rfq_data']['id']);
+            }
+        }
 
-        return view('rfq.index',compact('rfqLists'));
+        return view('rfq.index',compact('rfqLists','rfqIds'));
     }
 
 
@@ -87,7 +94,7 @@ class RfqController extends Controller
         
         if(env('APP_ENV') == 'production')
         {
-            $selectedUsersToSendMail = User::get();
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
             foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
                 event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             }
@@ -116,7 +123,27 @@ class RfqController extends Controller
         }else{
             $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(6);
         }
-        return view('rfq.my_rfq',compact('rfqLists'));
+
+        $newRfqBidIds=[];
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            
+            if($notification->type == "App\Notifications\RfqBidNotification"){
+                array_push($newRfqBidIds,$notification->data['notification_data']['id']);
+            }
+
+        }
+      
+        $newRfqBidsGroupByRfqId = DB::table('supplier_bids')
+                ->whereIn('id',$newRfqBidIds)
+                ->select('rfq_id', DB::raw('count(*) as total'))
+                ->groupBy('rfq_id')
+                ->get();
+        $rfqsWithNewBid=[];
+        foreach($newRfqBidsGroupByRfqId as $newRfqBidGroupByRfqId){
+            array_push($rfqsWithNewBid ,$newRfqBidGroupByRfqId->rfq_id);
+        }
+
+        return view('rfq.my_rfq',compact('rfqLists','rfqsWithNewBid'));
     }
 
     public function delete($rfq_id)

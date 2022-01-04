@@ -155,6 +155,26 @@
             });
         });
 
+        $('.btn_view_detail').on('click',function(event){
+            event.preventDefault();
+            console.log('hi');
+            let rfqId = $(this).attr("data-rfqId");
+           
+            let obj=$(this).closest('span');
+
+           
+            $.ajax({
+                type:'GET',
+               
+                url: '{{ route("notificationMarkAsRead") }}',
+                data:{ rfqId: rfqId},
+                success: function (data) {
+                    $('.noticication_counter').text(data['noOfnotification']);
+                    obj.remove();
+                }
+            });
+        });
+
 
 </script>
 @endpush

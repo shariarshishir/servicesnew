@@ -157,8 +157,10 @@
                     <div class="responses_wrap right-align">
                         <!--span><i class="material-icons">favorite</i> Saved</span-->
                         {{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a> --}}
-                        <button class="none_button btn_responses btn_responses_trigger" id="rfqResponse" >
+                        
+                        <button class="none_button btn_responses btn_responses_trigger" data-rfqId="{{$rfqSentList->id}}" id="rfqResponse">
                             Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
+                            @if(in_array($rfqSentList->id,$rfqsWithNewBid))<span class="new-bid-reply-badge" style="background:#17a2b8; color:#fff; padding:5px;font-size: 12px; border-radius: 5px; font-weight: 300;">New</span>@endif
                         </button>
                         @if($rfqSentList->bids()->exists())
                         <div class="respones_detail_wrap" style="display: none;">
@@ -557,6 +559,22 @@
                 $('#rfq_filter_form').submit();
             });
         });
+
+        $('.btn_responses_trigger').on('click',function(event){
+            event.preventDefault();
+            let rfqId = $(this).attr("data-rfqId");
+            let obj=$(this).find('.new-bid-reply-badge');
+            $.ajax({
+                type:'GET',
+                url: '/rfq-bid-notification-mark-as-read',
+                data:{ rfqId: rfqId},
+                success: function (data) {
+                    $('.noticication_counter').text(data['noOfnotification']);
+                    obj.remove();
+                }
+            });
+        });
+
 
 
     </script>

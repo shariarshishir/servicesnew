@@ -56,7 +56,8 @@
 			<div class="rfq_view_detail_wrap">
 				<h5>{{$rfqSentList->title}}</h5>
 				<span class="short_description">{{$rfqSentList->short_description}}</span>
-				<button class="none_button btn_view_detail" id="rfqViewDetail">Show More</button>
+				<button class="none_button btn_view_detail"  data-rfqId="{{$rfqSentList->id}}" id="rfqViewDetail">Show More @if(in_array($rfqSentList->id,$rfqIds))<span style="color:red">(New)</span>@endif</button>
+				
 				<div class="rfq_view_detail_info" style="display: none;">
 					<h6>Query for {{$rfqSentList->category->name}}</h6>
 					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}}</div> 

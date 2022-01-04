@@ -66,7 +66,7 @@
                                         <div class="col s12 m8">
                                             <select id="business_type" class="select2 browser-default select-business-type" name="business_type">
                                                 <option value="" disabled selected>Choose your business type</option>
-                                                <option value="1" {{old('business_type') == 1 ? 'selected' : ''}}>Manufacture</option>
+                                                <option value="1" {{old('business_type') == 1 ? 'selected' : ''}}>Manufacturer</option>
                                                 <option value="2" {{old('business_type') == 2 ? 'selected' : ''}}>Wholesaler</option>
                                                 <option value="3" {{old('business_type') == 3 ? 'selected' : ''}}>Design Studio</option>
                                             </select>

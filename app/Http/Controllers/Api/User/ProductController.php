@@ -383,6 +383,7 @@ class ProductController extends Controller
             $newFormatedProduct->productReview=$product->productReview;
             $newFormatedProduct->productTotalAverageRating=productRating($product->id);
             $newFormatedProduct->images=$product->images;
+            $newFormatedProduct->userId=$product->businessProfile->user->id;
             $newFormatedProduct->userName=$product->businessProfile->user->name;
             $newFormatedProduct->userImage=$product->businessProfile->user->image;
 

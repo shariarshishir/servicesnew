@@ -43,7 +43,7 @@
                                                                 @endif
                                                         @endforeach
                                                     @endif
-                                                @endforeach                                                    
+                                                @endforeach
                                             </div>
 
                                             <div class="product_info_short_details">
@@ -91,7 +91,7 @@
         var id = $(this).attr("data-wishListItemId");
         var obj= $(this);
         swal({
-            title: "Want to delete this product from ?",
+            title: "Do you want to delete this product from Wishlist?",
             type: "warning",
             showCancelButton: !0,
             confirmButtonText: "Yes",

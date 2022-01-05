@@ -57,19 +57,19 @@
 				<h5>{{$rfqSentList->title}}</h5>
 				<span class="short_description">{{$rfqSentList->short_description}}</span>
 				<button class="none_button btn_view_detail"  data-rfqId="{{$rfqSentList->id}}" id="rfqViewDetail">Show More @if(in_array($rfqSentList->id,$rfqIds))<span style="color:red">(New)</span>@endif</button>
-				
+
 				<div class="rfq_view_detail_info" style="display: none;">
 					<h6>Query for {{$rfqSentList->category->name}}</h6>
-					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}}</div> 
-					<div class="full_details"> 
-						<span class="title">Qty:</span> {{$rfqSentList->quantity}} {{$rfqSentList->unit}}, 
+					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}}</div>
+					<div class="full_details">
+						<span class="title">Qty:</span> {{$rfqSentList->quantity}} {{$rfqSentList->unit}},
 						@if($rfqSentList->unit_price==0.00)
-						<span class="title">Target Price:</span> N/A, 
+						<span class="title">Target Price:</span> N/A,
 						@else
-						<span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}}, 
+						<span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}},
 						@endif
-						<span class="title">Deliver to:</span> {{$rfqSentList->destination}}, 
-						<span class="title">Within:</span> {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }}, 
+						<span class="title">Deliver to:</span> {{$rfqSentList->destination}},
+						<span class="title">Within:</span> {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }},
 						<span class="title">Payment method:</span> {{$rfqSentList->payment_method}} </p>
 					</div>
 				</div>
@@ -82,21 +82,21 @@
                     @foreach ($rfqSentList->images as  $key => $rfqImage )
 						@if(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'PDF')
 							<div class="rfq_thum_img">
-								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" >&nbsp; PDF</a> 
+								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" target="_blank">&nbsp; PDF</a>
 							</div>
 						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'docx')
 							<div class="rfq_thum_img">
-								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="doc_icon" >&nbsp; DOC</a> 
+								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="doc_icon" >&nbsp; DOC</a>
 							</div>
 						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'xlsx')
 							<div class="rfq_thum_img">
-								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="xlsx_icon" >&nbsp; XLSX</a> 
+								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="xlsx_icon" >&nbsp; XLSX</a>
 							</div>
 						@elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'TAR'|| pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'tar'|| pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'rar'|| pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'RAR' ||pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'zip' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'ZIP')
 							<div class="rfq_thum_img">
 								<a href="{{ asset('storage/'.$rfqImage->image) }}" class="zip_icon" >&nbsp; DOC</a>
-							</div>							
-						@else						
+							</div>
+						@else
 							<div class="rfq_thum_img">
 								<a data-fancybox="gallery-{{$i}}" href="{{asset('storage/'.$rfqImage->image)}}">
 									<img src="{{asset('storage/'.$rfqImage->image)}}" alt="" />

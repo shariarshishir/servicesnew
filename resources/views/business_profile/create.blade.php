@@ -48,7 +48,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <div class="col s12 m4">
-                                            <label for="business_name">Business Name</label>
+                                            <label for="business_name">Organization Name</label>
                                         </div>
                                         <div class="col s12 m8">
                                             <input id="business_name" type="text" class="validate" name="business_name" value="{{old('business_name')}}">

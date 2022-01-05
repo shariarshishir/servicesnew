@@ -9,7 +9,7 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  main-buyers-details-block">
-                    <legend>Main buyers Details</legend>
+                    <legend>Main buyers Details <a class="tooltipped" data-position="top" data-tooltip="Mentioning your main buyers increases your credibility.<br />Please mention at least 5 buyers that you already served.<br />Give the buyer Name, Logo and any description you want to add."><i class="material-icons">info</i></a></legend>
                     <div class="main-buyers-details-block">
                         <div class="no_more_tables">
                             <table class="main-buyers-details-table-block">

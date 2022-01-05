@@ -8,7 +8,7 @@
         @if(Auth::check())
         function sendmessage(supplierId)
         {
-        let message = {'message': 'We are Interested your profile and would like to discuss More about the Product', 'product': null, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplierId};
+        let message = {'message': 'We are Interested in your profile and would like to discuss More about the Product', 'product': null, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplierId};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";

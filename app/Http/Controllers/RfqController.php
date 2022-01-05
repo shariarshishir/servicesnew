@@ -91,7 +91,7 @@ class RfqController extends Controller
             }
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
-        
+
         if(env('APP_ENV') == 'production')
         {
             $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
@@ -103,8 +103,8 @@ class RfqController extends Controller
             event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
         }
 
-        $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
-        return back()->with(['success'=> $msg]);
+        $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+        return back()->with(['rfq-success'=> $msg]);
 
     }
 
@@ -126,13 +126,13 @@ class RfqController extends Controller
 
         $newRfqBidIds=[];
         foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
-            
+
             if($notification->type == "App\Notifications\RfqBidNotification"){
                 array_push($newRfqBidIds,$notification->data['notification_data']['id']);
             }
 
         }
-      
+
         $newRfqBidsGroupByRfqId = DB::table('supplier_bids')
                 ->whereIn('id',$newRfqBidIds)
                 ->select('rfq_id', DB::raw('count(*) as total'))

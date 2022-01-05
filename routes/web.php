@@ -92,7 +92,7 @@ Route::get('/contactus', [HomeController::class, 'contactusLandingPage'])->name(
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
 Route::get('/supplier/location/data',[HomeController::class,'getSupplierLocationData'])->name('get.supplier.location.data');
-Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
+Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile')->middleware('auth');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
@@ -221,7 +221,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/factory-tour-image-delete',[CompanyFactoryTourController::class,'factoryTourImageDelete'])->name('factory-image.delete');
     Route::get('/factory-tour-large-image-delete',[CompanyFactoryTourController::class,'factoryTourLargeImageDelete'])->name('factory-large-image.delete');
     Route::post('/terms-of-service-create-or-update',[BusinessProfileController::class,'termsOfServiceCreateOrUpdate'])->name('terms_of_service.create_or_update');
-   
+
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
         //product

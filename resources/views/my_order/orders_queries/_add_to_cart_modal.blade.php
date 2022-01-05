@@ -1,5 +1,5 @@
 
-<div id="add-to-cart-order-query-modal" class="confirm-order-modification-details-modal modal modal-fixed-footer">
+<div id="add-to-cart-order-query-modal" class="confirm-order-modification-details-modal modal profile_form_modal">
     <div class="modal-content">
         <legend>Details</legend>
         <div class="row order-top-block">
@@ -44,7 +44,16 @@
                        <input type="hidden" name="ord_mod_discount" value="">
                        <input type="hidden" name="ord_req_product_type" value="">
 
-                       <button type="submit" class="btn green waves-effect waves-light" id="submitordModConfirmForm">Add To Cart</button>
+                       <div class="submit_btn_wrap">
+                            <div class="row">
+                                <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                                <div class="col s12 m6 l8 right-align">
+                                    <button type="submit" class="btn_green waves-effect waves-light" id="submitordModConfirmForm">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                       
                     </div>
 
 
@@ -55,9 +64,9 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
         <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
-    </div>
+    </div> -->
 </div>

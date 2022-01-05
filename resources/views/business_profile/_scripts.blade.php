@@ -16,27 +16,66 @@
             var numberOfOutlets = $("#number_of_outlets").val();
             var tradeLicense = $("#trade_license").val();
             var industryType = $('select[name="industry_type"]').val();
-            var businessCategoryId = $('select[name="business_category_id"]').val();
+            var businessCategoryId = $('select[name="business_category_id"] option:selected').text();
             var representiveName = $("#representive_name").val();
             var representiveEmail = $("#email").val();
             var representivePhone = $("#phone").val();
             var representiveNidPassport = $("#nid_passport").val();
 
             //setting values
-            $("#review_name").html("<b>Name:</b> "+name);
+            $("#review_name").html("<b>Organization Name:</b> "+name);
             $("#review_location").html("<b>Location:</b> "+location);
-            $("#review_business_type").html("<b>Business Type:</b> "+businessType);
-            $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
-            $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
+            if(businessType == 1){
+                $("#review_business_type").html("<b>Business Type:</b> Manufacturer");
+            } else if(businessType == 2) {
+                $("#review_business_type").html("<b>Business Type:</b> Wholesaler");
+            } else {
+                $("#review_business_type").html("<b>Business Type:</b> Design Studio");
+            }
+            
+            if(numberOfFactories){
+                $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
+            } else {
+                $("#review_number_of_factories").html("<b>Number of Factories:</b> N/A");
+            }
+            
+            if(numberOfOutlets) {
+                $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
+            } else {
+                $("#review_number_of_outlets").html("<b>Number of Outlets:</b> N/A");
+            }
+            
             $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
             $("#review_industry_type").html("<b>Industry Type:</b> "+industryType);
-            $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
+            if(businessCategoryId){
+                $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
+            } else {
+                $("#review_business_category_id").html("<b>Business Category:</b> N/A");
+            }
+            
+            if(representiveName){
+                $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
+            } else {
+                $("#review_representative_name").html("<b>Representative Name:</b> N/A");
+            }
 
-            $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
-            $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
-            $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
-            $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
+            if(representiveEmail){
+                $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);    
+            } else {
+                $("#review_representatives_email").html("<b>Representative Email:</b> N/A");
+            }
 
+            if(representivePhone){
+                $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
+            } else {
+                $("#review_representatives_contact").html("<b>Representative Phone:</b> N/A");
+            }
+
+            if(representiveNidPassport) {
+                $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
+            } else {
+                $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> N/A");
+            }
 
             if(!name){
                 var alertHtml = '<div class="card-alert card orange lighten-5">';
@@ -49,7 +88,7 @@
             } else {
                 var infoHtml = '<div class="card-alert card cyan lighten-5">';
                 infoHtml += '<div class="card-content cyan-text">';
-                infoHtml += '<p>INFO : Please verify your input data and hit submit button to create profile.</p>';
+                infoHtml += '<p>Please check your provided data and submit to create profile.</p>';
                 infoHtml += '</div>';
                 infoHtml += '</div>';
                 $("#information_message").html(infoHtml);

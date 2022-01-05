@@ -7,19 +7,20 @@ $productReviews = singleProductReviewInformation($product->id);
 $reviewsCount = count($productReviews);
 @endphp
 <input type="hidden" name="product_sku" value="{{$product->sku}}">
-@if ($orderModificationRequest->isNotEmpty())
-<div class="card-alert card cyan">
 
-    <div class="card-content white-text">
-        <p>INFO : You have already sent modification request for this product.</p>
-    </div>
-    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-    </button>
-</div>
-@endif
 
 <div class="product_details_wrapper">
+    @if ($orderModificationRequest->isNotEmpty())
+    <div class="card-alert card cyan">
+
+        <div class="card-content white-text">
+            <p>INFO : You have already sent modification request for this product.</p>
+        </div>
+        <button style="position: absolute; top: -13px; right: 0px; color: #000;" type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    @endif
     <div class="back_to">
         <a href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
     </div>
@@ -563,7 +564,7 @@ $reviewsCount = count($productReviews);
                                                     @if($product->full_stock==1)
                                                         <div class="price-calculation-notification" >
                                                             <div class="card-alert card cyan">
-                                                                <div class="card-content white-text" style="padding: 10px;">
+                                                                <div class="card-content white-text" style="font-size: 12px;">
                                                                     This is full stock feature Please click on calculate price button. To get updated price calculation.
                                                                 </div>
                                                             </div>
@@ -671,7 +672,7 @@ $reviewsCount = count($productReviews);
                                                     @if($product->full_stock==1)
                                                         <div class="price-calculation-notification" >
                                                             <div class="card-alert card cyan">
-                                                                <div class="card-content white-text" style="padding: 10px;">
+                                                                <div class="card-content white-text" style="font-size: 12px;">
                                                                     This is full stock feature Please click on calculate price button. To get updated price calculation.
                                                                 </div>
                                                             </div>

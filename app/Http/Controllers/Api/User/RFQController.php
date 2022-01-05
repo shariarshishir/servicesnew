@@ -58,6 +58,7 @@ class RFQController extends Controller
         //     400);
         // }
         try{
+           
             $rfqData = $request->except(['product_images']);
             $rfqData['created_by']=auth()->id();
             $rfqData['status']='approved';
@@ -69,15 +70,17 @@ class RFQController extends Controller
                         $path=$product_image->store('images','public');
                     }
                     else{
+                        
                         $path=$product_image->store('images','public');
                         $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
                         Storage::put($path, $image);
+                      
                     }
+                    RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
             }
             
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
-            
             if($rfq){
 
                 return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"message"=>$message,"success"=>true],200);

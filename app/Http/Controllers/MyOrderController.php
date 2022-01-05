@@ -12,5 +12,23 @@ class MyOrderController extends Controller
         $orders = VendorOrder::where('user_id',auth()->user()->id)->with(['billingAddress','shippingAddress'])->latest()->get();
         return view('my_order.orders.index',compact('orders'));
     }
+    public function  orderNotificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            if($notification->type == "App\Notifications\NewOrderHasApprovedNotification" && $notification->data['notification_data'] == $request->orderId)
+            {
+                $notification->markAsRead();
+                $message="Notification mark as read successfully";
+            }
+        }
+
+        if(!isset($message)){
+            $message="not found";
+        }
+        $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+        $noOfnotification=count($unreadNotifications);
+        return response()->json(['message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+    }
 
 }

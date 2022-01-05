@@ -18,14 +18,14 @@
             <div class="back_to">
                 <a  href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
             </div>
-            
+
         </div>
     </section>
 
     <section class="ic-single-product-details manufactrue_product_details_wrap">
         <div class="container">
             <div class="row ic-pg-container">
-                
+
                 <div class="col s12 m12 l9 product_preview_info_wrap">
                     <div class="row">
                         <div class="col s12 m5 l4 product_preview_wrap">
@@ -355,7 +355,7 @@
                         <div class="samplebox">
                             <h3>Company Detail</h3>
                             <div class="requestbox">
-                                <a class="modal-trigger" href="javascript:void(0);">Request Sample</a>
+                                {{-- <a class="modal-trigger" href="javascript:void(0);">Request Sample</a> --}}
                                 <p>contact for order customization or bulk volume rate-</p>
                             </div>
                             <form class="sampleformbox" id="requestSampleForm" action="" method="POST">

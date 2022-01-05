@@ -155,6 +155,11 @@
         swal("Done!",'{!!session::get("success")!!}',"success");
     </script>
 @endif
+@if (Session::has('rfq-success'))
+    <script>
+        swal("Congratulations!",'{!!session::get("rfq-success")!!}',"success");
+    </script>
+@endif
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
 <script
@@ -228,7 +233,7 @@
             $(".main-header").removeClass("fixed");
         }
     });
-   
+
 
 </script>
 
@@ -754,7 +759,7 @@ $(document).on("keyup",".search_input",function(){
                 } else {
                     url  = window.location.origin;
                 }
-                
+
                 if(response.resultCount > 0)
                 {
                     console.log(response.data);
@@ -806,7 +811,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-item">';
                                 html += '<a href="'+url+'/press-room/details/'+response.data[i].slug+'" class="overlay_hover">&nbsp;</a>';
                                 var image = "{{asset('storage/')}}"+'/'+response.data[i].feature_image;
-                                html += '<div class="product-img"><img src="'+image+'"></div>';                            
+                                html += '<div class="product-img"><img src="'+image+'"></div>';
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].title+'</h4>';
                                 html += '<div class="details"><p>'+response.data[i].details.substring(0, 100)+'</p></div>';
@@ -825,7 +830,7 @@ $(document).on("keyup",".search_input",function(){
                                 }
                                 else
                                 {
-                                image = "{{asset('images/frontendimages/no-image.png')}}";    
+                                image = "{{asset('images/frontendimages/no-image.png')}}";
                                 }
                                 html += '<div class="product-img"><img src="'+image+'"></div>';
                                 html += '<div class="product-short-intro">';
@@ -835,7 +840,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '</div>';
                                 html += '</div>';
                                 html += '</div>';
-                            }                       
+                            }
                         }
                         $('#search-results').html(html);
                         $('#search-results').show();
@@ -1247,7 +1252,7 @@ function askForPrice($sku)
             url: url,
 
             success:function(response){
-                
+
                 $('#newsletter_signup_form')[0].reset();
                 swal("Done!", response.message,"success");
             },
@@ -1341,5 +1346,5 @@ $(document).on("click", ".order-query-notification" , function() {
 });
 
 </script>
-   
-   
+
+

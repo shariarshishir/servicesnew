@@ -6,6 +6,7 @@
     <div class="mainContainer">
         <div class="container">
             <div class="product_wrapper">
+                <h3>All Products</h3>
                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
                 @foreach ($products  as $list )
                     @php

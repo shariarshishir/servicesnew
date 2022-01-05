@@ -71,9 +71,9 @@
                             <div class="full_details">
                                 <span class="title">Qty:</span> {{$rfqSentList->quantity}} {{$rfqSentList->unit}},
                                 @if($rfqSentList->unit_price==0.00)
-                                <span class="title">Target Price:</span> N/A, 
+                                <span class="title">Target Price:</span> N/A,
                                 @else
-                                <span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}}, 
+                                <span class="title">Target Price:</span> $ {{$rfqSentList->unit_price}},
                                 @endif
                                 <span class="title">Deliver to:</span>  {{$rfqSentList->destination}},
                                 <span class="title">Within:</span> {{ date('F j, Y',strtotime($rfqSentList->delivery_time)) }},
@@ -94,7 +94,7 @@
                             @foreach ($rfqSentList->images as  $key => $rfqImage )
                                 @if(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'PDF')
                                     <div class="rfq_thum_img">
-                                        <a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" >&nbsp; PDF</a>
+                                        <a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" target="_blank">&nbsp; PDF</a>
                                     </div>
                                 @elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'docx')
                                     <div class="rfq_thum_img">
@@ -157,7 +157,7 @@
                     <div class="responses_wrap right-align">
                         <!--span><i class="material-icons">favorite</i> Saved</span-->
                         {{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a> --}}
-                        
+
                         <button class="none_button btn_responses btn_responses_trigger" data-rfqId="{{$rfqSentList->id}}" id="rfqResponse">
                             Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
                             @if(in_array($rfqSentList->id,$rfqsWithNewBid))<span class="new-bid-reply-badge">New</span>@endif
@@ -220,7 +220,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @php $x++; @endphp    
+                                @php $x++; @endphp
                                 @endforeach
                         </div>
                         @endif

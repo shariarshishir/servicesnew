@@ -1280,5 +1280,66 @@ function askForPrice($sku)
         $(this).toggleClass('active');
     });
 </script>
+<script>
+    $(document).on("click", ".order-modification-request" , function() {
+    var notificationId =$(this).attr("data-order-modification-request-notification-id") ;
+    var obj=$(this).closest('tr').find('.newOrder');
+    $.ajax({
+        type:'GET',
+        url: "{{route('notification-mark-as-read')}}",
+        dataType:'json',
+        data:{ notificationId :notificationId},
+        success: function(data){
+            obj.remove();
+            $('.orderModificationCount').html(data.newModificationRequestNotificationCount);
+            // $('#noOfNotifications').html(data.noOfnotification);
+            $('.noticication_counter').text(data['noOfnotification']);
+        }
+    });
+
+});
+
+$(document).on("click", "#notification_identifier" , function() {
+    var notificationId =$(this).attr("data-notification-id") ;
+    var obj=$(this).closest('tr').find('.newOrder');
+    $.ajax({
+        type:'GET',
+        url: "{{route('notification-mark-as-read')}}",
+        dataType:'json',
+        data:{ notificationId :notificationId},
+        success: function(data){
+            $(obj).remove();
+                $('.orderApprovedCount').html(data.newOrderApprovedNotificationCount);
+                // $('#noOfNotifications').html(data.noOfnotification);
+                $('.noticication_counter').text(data['noOfnotification']);
+        }
+    });
+
+});
+
+
+
+
+
+//order query notification
+$(document).on("click", ".order-query-notification" , function() {
+    var notificationId =$(this).attr("data-notification-id") ;
+    var obj=$(this).closest('tr').find('.newOrder');
+    $.ajax({
+        type:'GET',
+        url: "{{route('notification-mark-as-read')}}",
+        dataType:'json',
+        data:{ notificationId :notificationId},
+        success: function(data){
+            obj.remove();
+            $('.orderQueryProcessedCount').html(data.newOrderQueryProcessedCount);
+           // $('#noOfNotifications').html(data.noOfnotification);
+            $('.noticication_counter').text(data['noOfnotification']);
+        }
+    });
+
+});
+
+</script>
    
    

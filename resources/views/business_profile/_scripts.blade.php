@@ -23,7 +23,7 @@
             var representiveNidPassport = $("#nid_passport").val();
 
             //setting values
-            $("#review_name").html("<b>Name:</b> "+name);
+            $("#review_name").html("<b>Organization Name:</b> "+name);
             $("#review_location").html("<b>Location:</b> "+location);
             if(businessType == 1){
                 $("#review_business_type").html("<b>Business Type:</b> Manufacturer");
@@ -88,7 +88,7 @@
             } else {
                 var infoHtml = '<div class="card-alert card cyan lighten-5">';
                 infoHtml += '<div class="card-content cyan-text">';
-                infoHtml += '<p>INFO : Please verify your input data and hit submit button to create profile.</p>';
+                infoHtml += '<p>Please check your provided data and submit to create profile.</p>';
                 infoHtml += '</div>';
                 infoHtml += '</div>';
                 $("#information_message").html(infoHtml);

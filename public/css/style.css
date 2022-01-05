@@ -477,9 +477,6 @@ form input:read-only {
     color: #ffffff;
     line-height: 37px;
 }
-.mobile_header .mobile_top_right #cart-dropdown-mobile {
-    padding-left: 10px !important;
-}
 .mobile_header .mobile_top_right #cart-dropdown-mobile .material-icons {
     background: none;
     color: #448547;
@@ -1125,12 +1122,19 @@ form input:read-only {
 }
 .profile_leftCol .office_address h4 span,
 .leftCol_wrap .office_address h4 span {
+    display: inline-block;
+}
+.profile_leftCol .office_address h4 .material-icons,
+.leftCol_wrap .office_address h4 .material-icons {
     color: #54A958;
     font-size: 26px;
     padding-right: 10px;
-    margin-top: -3px;
-    padding-right: 5px;
+    margin-top: 2px;
+    padding-right: 3px;
+    height: 22px;
+    line-height: 20px;
 }
+
 .profile_leftCol .office_address h4 img,
 .leftCol_wrap .office_address h4 img {
     margin-left: 10px;
@@ -1146,14 +1150,14 @@ form input:read-only {
 }
 .profile_leftCol .left_top .addressBox,
 .leftCol_wrap .left_top .addressBox {
-    padding: 10px 15px;
-    font-weight: 500;
+    padding: 10px 0;
 }
 .profile_leftCol .left_top .addressBox span,
 .leftCol_wrap .left_top .addressBox span {
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 5px;
     display: inline-block;
+    font-size: 16px;
 }
 .profile_leftCol .left_bottom,
 .leftCol_wrap .left_bottom {
@@ -1164,7 +1168,10 @@ form input:read-only {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 15px;
+    text-align: left;
 }
+
+
 /* profile_leftCol css end */
 
 /* profile_contentCol css start */
@@ -2690,7 +2697,7 @@ form input:read-only {
 .profile_factory_tourWrap .gallery_navbar ul li a:link,
 .profile_factory_tourWrap .gallery_navbar ul li a:active,
 .profile_factory_tourWrap .gallery_navbar ul li a:visited {
-    color: #257356;
+    color: #464545;
     font-size: 20px;
     font-weight: 600;
     text-transform: capitalize;
@@ -2699,10 +2706,11 @@ form input:read-only {
 }
 .profile_factory_tourWrap .gallery_navbar ul li a:focus, 
 .profile_factory_tourWrap .gallery_navbar ul li a:focus.active,
-.profile_factory_tourWrap .gallery_navbar ul li.active a,
+.profile_factory_tourWrap .gallery_navbar ul li a.active,
 .profile_factory_tourWrap .gallery_navbar ul li a:hover {
     text-decoration: underline;
     background: none;
+    color: #4E9C52;
 }
 .profile_tabNav_wrap #home .factory_imgbox_wrap {
     padding-bottom: 80px;
@@ -2715,7 +2723,7 @@ form input:read-only {
 .profile_factory_tourWrap .factory_image_gallery .imgBox {
     height: 200px;
     text-align: center;
-    margin: 0 10px 35px;
+    margin: 0 5px 30px;
 }
 .factory_imgbox_wrap .imgBox img {
     height: 100%;
@@ -5667,6 +5675,13 @@ legend {
     padding: 10px;
     border-radius: 10px;
 }
+.profile-menu-list ul.profile-tabs {
+    display: inline-block;
+    width: 100%;
+}
+.profile-menu-list ul.profile-tabs .profile-item-tab {
+    width: auto !important;
+}
 .profile-menu-list ul li {
     padding: 0 5px;
     display: inline-block;
@@ -5926,10 +5941,13 @@ nav .pagination li.active .page-link {
     margin-top: 22px;
     display: inline-block;
 }
+.add_new_shipping_adrs,
 .add_new_billing_adrs {
     margin-top: 10px;
     display: inline-block;
 }
+
+.add_new_shipping_adrs .material-icons,
 .add_new_billing_adrs .material-icons {
     float: left;
     font-size: 20px;
@@ -5954,22 +5972,33 @@ nav .pagination li.active .page-link {
     text-align: left;
     position: absolute;
     right: 0;
-    width: 235px;
+    width: 235px !important;
+    padding: 10px 0px 15px !important;
 }
 .cart-icon-wrapper-mobile .card {
     right: 0;
     left: inherit !important;
     height: auto !important;
     top: 42px !important;
-    padding-bottom: 0 !important;
+    padding: 10px 0px 5px !important;
 }
 .cart-icon-outer-wrapper .card li {
-    padding: 0px 0 20px;
+    padding: 0;
     min-height: inherit;
 }
 .notifications_icon_wrap .card li:last-child,
 .cart-icon-outer-wrapper .card li:last-child {
     padding-bottom: 0;
+}
+
+.cart-icon-outer-wrapper .card li a:link,
+.cart-icon-outer-wrapper .card li a:active,
+.cart-icon-outer-wrapper .card li a:visited {
+    padding: 8px 15px;
+    display: block;
+}
+.cart-icon-outer-wrapper .card li a:hover {
+    background: #eee;
 }
 .header_wrap .top_right .cart-icon-wrapper .card li .material-icons{
     font-size: 20px !important;
@@ -6051,8 +6080,8 @@ nav .pagination li.active .page-link {
     left: inherit !important;
     height: auto !important;
     top: 42px !important;
-    width: 210px !important;
-    padding: 5px 15px 15px !important;
+    width: 235px !important;
+    padding: 10px 0px 15px !important;
     min-width: 100px;
 }
 .notifications_icon_wrap .card li {
@@ -6066,7 +6095,7 @@ nav .pagination li.active .page-link {
     color: #757575 !important;
     display: block;
     line-height: 22px;
-    padding: 0 !important;
+    padding: 8px 15px !important;
 }
 .notifications_icon_wrap .card li:hover, 
 .notifications_icon_wrap .card li.active {
@@ -6074,8 +6103,20 @@ nav .pagination li.active .page-link {
 }
 .notifications_icon_wrap .card li a:hover, 
 .notifications_icon_wrap .card li.active a {
-    color: #448547 !important;
+    background: #eee;
 }
+.notifications_icon_wrap .card li a i {
+    color: #448547;
+    margin-right: 2px;
+    float: left;
+    margin-top: 4px;
+    line-height: 16px;
+}   
+.notifications_icon_wrap .card li a .text-muted  {
+    font-size: 13px;
+    margin-top: 5px;
+}
+
 /* ******************** Cart style end*********************** */
 
 /* ******************** business_profile_login style start*********************** */
@@ -6648,6 +6689,39 @@ nav .pagination li.active .page-link {
     height: 500px;
 }
 
+.shop-banner-wrapper {
+    position: relative;
+}
+.shop-banner-wrapper .change_banner_photo {
+    position: absolute;
+    right: 25px;
+    bottom: 45px;
+}
+.shop-banner-wrapper .change_banner_photo .profile-banner-upload-trigger{
+    border-radius: 5px;
+    line-height: 38px;
+    text-transform: capitalize;
+}
+.shop-banner-wrapper .change_banner_photo .material-icons {
+    margin-top: 8px;
+    line-height: 20px;
+    float: left;
+    margin-right: 5px;
+}
+.shop-banner-wrapper .shop-name {
+    font-size: 25px;
+    padding: 10px;
+    position: absolute;
+    left: 25px;
+    top: 32px;
+    color: #fff;
+}
+.shop-banner-wrapper .shop-name .material-icons {
+    float: left;
+    line-height: 20px;
+    margin-top: 8px;
+    margin-right: 6px;
+}
 
 /* ************************* chat message style start ******************************  */
 
@@ -8050,6 +8124,15 @@ nav .pagination li.active .page-link {
         font-size: 20px;
         line-height: 28px;
     }
+
+    .profile_leftCol .left_bottom, 
+    .leftCol_wrap .left_bottom,
+    .profile_leftCol .left_top .addressBox, 
+    .leftCol_wrap .left_top .addressBox,
+    .profile_leftCol .left_bottom h3, 
+    .leftCol_wrap .left_bottom h3 {
+        text-align: center;
+    }
     
 
 }
@@ -9116,6 +9199,14 @@ nav .pagination li.active .page-link {
     .profile_leftCol .left_top .addressBox, .leftCol_wrap .left_top .addressBox {
         font-size: 14px;
         line-height: 20px;
+    }
+
+    .cart-icon-wrapper-mobile .card {
+        right: -85px;
+        width: 230px !important;
+    }
+    .notifications_icon_wrap .card {
+        right: -30px;
     }
 
 }

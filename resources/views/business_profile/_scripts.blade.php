@@ -23,7 +23,7 @@
             var representiveNidPassport = $("#nid_passport").val();
 
             //setting values
-            $("#review_name").html("<b>Name:</b> "+name);
+            $("#review_name").html("<b>Business Name:</b> "+name);
             $("#review_location").html("<b>Location:</b> "+location);
             if(businessType == 1){
                 $("#review_business_type").html("<b>Business Type:</b> Manufacturer");

@@ -17,6 +17,9 @@
 		<div class="col s12 m12 l8 rightbar">
 			<div class="signRight-innter business_stepper_wrap">
 				<div class="sign-from-wrap">
+                    <div class="back_to" style="margin-bottom: 30px;">
+                        <a href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
+                    </div>
                     <h3>Creating Business Profile...</h3>
                     <div class="row">
                         <div class="col s12">
@@ -45,7 +48,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <div class="col s12 m4">
-                                            <label for="business_name">Name</label>
+                                            <label for="business_name">Business Name</label>
                                         </div>
                                         <div class="col s12 m8">
                                             <input id="business_name" type="text" class="validate" name="business_name" value="{{old('business_name')}}">

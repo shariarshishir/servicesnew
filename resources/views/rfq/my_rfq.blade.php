@@ -160,7 +160,7 @@
                         
                         <button class="none_button btn_responses btn_responses_trigger" data-rfqId="{{$rfqSentList->id}}" id="rfqResponse">
                             Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
-                            @if(in_array($rfqSentList->id,$rfqsWithNewBid))<span class="new-bid-reply-badge" style="background:#17a2b8; color:#fff; padding:5px;font-size: 12px; border-radius: 5px; font-weight: 300;">New</span>@endif
+                            @if(in_array($rfqSentList->id,$rfqsWithNewBid))<span class="new-bid-reply-badge">New</span>@endif
                         </button>
                         @if($rfqSentList->bids()->exists())
                         <div class="respones_detail_wrap" style="display: none;">

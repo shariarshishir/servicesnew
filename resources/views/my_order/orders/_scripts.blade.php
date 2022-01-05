@@ -43,4 +43,20 @@
             });
             });
     </script>
+    <script>
+        $(document).on("click", ".order-more-details" , function() {
+            var orderId =$(this).attr("data-orderId") ;
+            $.ajax({
+                type:'GET',
+                url: "{{route('order-notification-mark-as-read')}}",
+                dataType:'json',
+                data:{ orderId :orderId},
+                success: function(data){
+                   
+                    $('.noticication_counter').text(data['noOfnotification']);
+                }
+            });
+
+        });
+    </script>
 @endpush

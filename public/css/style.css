@@ -4215,6 +4215,20 @@ form input:read-only {
     position: relative;
     margin-top: 50px;
 }
+.rfq_content_box .rfq_view_detail_wrap .btn_view_detail span,
+.responses_wrap .btn_responses .new-bid-reply-badge {
+    color: #000;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 3px;
+    font-weight: 300;
+    border: 1px solid #000;
+}
+.rfq_content_box .rfq_view_detail_wrap .btn_view_detail span {
+    padding: 3px 4px 4px;
+    line-height: 14px;
+    display: inline-block;
+}
 .respones_detail_wrap .responses_open {
     background : url('../images/frontendimages/new_layout_images/respons_bg.png') no-repeat center top;
     padding-bottom: 50px;

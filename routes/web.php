@@ -147,6 +147,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/order-success',[ProductCartController::class,'orderSuccess'])->name('cart.order.success');
 
     Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead'])->name('notification-mark-as-read');
+    Route::get('/order-notification-mark-as-read',[MyOrderController::class,'orderNotificationMarkAsRead'])->name('order-notification-mark-as-read');
     //store
     Route::get('store/{vendorId}', [UserController::class, 'myShop'])->name('users.myshop');
     Route::get('store/{vendorUid}/productgrouplist/{slug}', [UserController::class, 'myShopProductsByCategory'])->name('users.categories_products');

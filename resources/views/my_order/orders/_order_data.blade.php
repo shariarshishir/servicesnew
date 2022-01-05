@@ -27,7 +27,7 @@
                 </td>
 
                 <td style="text-align: center">
-                    <a href="#order-details-modal_{{$orderItem->id}}" class="order-more-details btn green waves-effect waves-light modal-trigger"><i class="material-icons">remove_red_eye</i></a>
+                    <a href="#order-details-modal_{{$orderItem->id}}" data-orderId="{{$orderItem->id}}" class="order-more-details btn green waves-effect waves-light modal-trigger"><i class="material-icons">remove_red_eye</i></a>
                 </td>
             </tr>
 @endforeach

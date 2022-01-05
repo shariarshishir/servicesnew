@@ -53,7 +53,7 @@
 							<table class="categories-produced-table-block">
 								<thead class="cf">
 									<tr>
-										<th>Type</th>
+										<th>Type <!--a class="tooltipped" data-position="top" data-tooltip="I am a tooltip"><i class="material-icons">info</i></a--></th>
 										<th>Percentage</th>
 										<th>&nbsp;</th>
 									</tr>

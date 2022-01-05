@@ -736,7 +736,7 @@
     $(this).parent().remove();
     $.ajax({
         type:'GET',
-        url: '/notification-mark-as-read',
+        url: "{{route('notification-mark-as-read')}}",
         dataType:'json',
         data:{ notificationId :notificationId},
         success: function(data){

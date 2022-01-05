@@ -35,7 +35,7 @@
 					</nav>
 				</div>
 				<div class="col m2 logo"><a href="{{route('home')}}"><img src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
-				
+
 				<div class="col m5 top_right ">
 					<div class="user-block">
 						@if(env('APP_ENV') == 'production')
@@ -57,7 +57,7 @@
 										<a class="grey-text text-darken-1" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
 									</li>
 									<li tabindex="0">
-										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
+										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> Wishlist</a>
 									</li>
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{env('SSO_URL').'/profile'}}"><i class="material-icons">settings</i> Settings</a>
@@ -92,7 +92,7 @@
 										<a class="grey-text text-darken-1" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
 									</li>
 									<li tabindex="0">
-										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
+										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> Wishlist</a>
 									</li>
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{env('SSO_URL').'/profile'}}"><i class="material-icons">settings</i> Settings</a>
@@ -119,8 +119,9 @@
 							<span id="" class="noticication_counter">{{count($userNotifications)}}</span>
 						</a>
 					</div>
-					
+
 					<ul id="countdown-dropdown" class="dropdown-content card">
+						@if(count($userNotifications)>0)
 						<li class="">
 							@foreach($userNotifications as $notification)
 								@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
@@ -155,7 +156,7 @@
 										<div class="text-muted text-sm">{{$notification->created_at}}</div>
 									</div>
 								</a>
-								
+
 								@elseif ($notification->type == 'App\Notifications\NewOrderModificationRequestNotification' )
 								<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
@@ -165,6 +166,14 @@
 									</div>
 								</a>
 								@elseif ($notification->type == 'App\Notifications\QueryCommuncationNotification' )
+								<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
+									<i class="fas fa-envelope mr-2"></i>
+									<div class="admin-notification-content">
+										<div class="admin-notification-title">{{$notification->data['title']}}</div>
+										<div class="text-muted text-sm">{{$notification->created_at}}</div>
+									</div>
+								</a>
+								@elseif ($notification->type == 'App\Notifications\QueryWithModificationToUserNotification')
 								<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
 									<div class="admin-notification-content">
@@ -199,6 +208,11 @@
 								@endif
 							@endforeach
 						</li>
+						@else
+						<li class="no-notifications">
+							No notifications
+						</li>
+						@endif
 					</ul>
 					<div class="header_message_box">
 						<a href="{{route('message.center')}}">
@@ -206,7 +220,7 @@
 							<span class="sms_counter">0</span>
 						</a>
 					</div>
-					@endif					
+					@endif
 
                     <div class="cart-icon-outer-wrapper">
                         <div class="cart-icon-wrapper">
@@ -235,7 +249,7 @@
 					<a href="{{route('business.profile.create')}}" type="button" class="btn_profile btn_green">
 					    <span class="material-icons"> add </span> Business Profile
 					</a>
-					
+
 				</div>
 			</div>
 		</div>
@@ -279,7 +293,7 @@
 						</ul>
 					</nav> -->
 
-					
+
 					<a onclick="openNav()" href="javascript:void(0);" class="btn-sidenav-left"><i class="material-icons">menu</i></a>
 					<div id="mySidenav" class="mySidenav">
 						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
@@ -312,7 +326,7 @@
 						</ul>
 					</div>
 
-					
+
 				</div>
 
 
@@ -469,7 +483,7 @@
 							<div class="dropdown-divider"></div>
 								<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
 							</div>
-							
+
 						</ul>
 						<div class="header_message_box mobile_top_icon_box">
 							<a href="{{route('message.center')}}">
@@ -525,7 +539,7 @@
 												<div class="text-muted text-sm">{{$notification->created_at}}</div>
 											</div>
 										</a>
-										
+
 										@elseif ($notification->type == 'App\Notifications\NewOrderModificationRequestNotification' )
 										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
@@ -580,8 +594,8 @@
 
 						@endif
 					</div>
-					
-					
+
+
 
 
 

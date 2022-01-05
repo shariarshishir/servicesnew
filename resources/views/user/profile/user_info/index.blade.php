@@ -17,7 +17,7 @@
                 <img src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
                 @else
                 <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" width="300px">
-                @endif                
+                @endif
             </div>
             <div class="change_photo">
                 <form method="post" id="upload-image-form" enctype="multipart/form-data">
@@ -31,7 +31,7 @@
                     </div>
                     <input type="hidden" name="user_id" value="{{$user->id}}">
 
-                    <button type="submit" class="btn waves-effect waves-light green">Upload</button>
+                    <button type="submit" class="btn waves-effect waves-light green profile-image-upload-button" style="display: none">Upload</button>
                 </form>
             </div>
         </div>
@@ -69,7 +69,7 @@
                         <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
                         </div>
                     </div>
-                    
+
                     @endforeach
                 </div>
             </div>

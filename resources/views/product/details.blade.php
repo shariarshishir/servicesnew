@@ -25,9 +25,9 @@ $reviewsCount = count($productReviews);
         <a href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
     </div>
     <div class="single-product-details-block-wrapper">
-        
+
         <div class="row product_details_content_wrap">
-            
+
             <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m12 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
                     <div class="col s12 m5 l4 product_preview_wrap">
@@ -175,7 +175,7 @@ $reviewsCount = count($productReviews);
                                                             @endforeach
                                                         </table>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -265,7 +265,7 @@ $reviewsCount = count($productReviews);
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    
+
                                                     <div class="add_more_box" style="padding-top: 20px">
                                                         <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                                     </div>
@@ -539,7 +539,7 @@ $reviewsCount = count($productReviews);
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    
+
                                                     <div class="total-price-block" style="display: none;">
                                                         <div class="input-wrapper">
                                                             <label>Total Qty:</label>
@@ -647,7 +647,7 @@ $reviewsCount = count($productReviews);
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    
+
                                                     <div class="total-price-block" style="display: none;">
                                                         <div class="input-wrapper">
                                                             <label>Total Qty:</label>
@@ -720,7 +720,7 @@ $reviewsCount = count($productReviews);
                                                         <div class="col s10 m11">
                                                             <div class="input-field">
                                                                 <label for="product-modification-message" class="">Type your modification request.</label>
-                                                                <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>                                                            
+                                                                <textarea id="product-modification-message" class="materialize-textarea product-modification-message" name="prod_mod_req[details][]"></textarea>
                                                             </div>
                                                             <div class="input-field">
                                                                 <label for="product-modification-image" class="product-modification-image">Upload Image</label>
@@ -931,7 +931,7 @@ $reviewsCount = count($productReviews);
                         </div>
                     </div>
                 </div>
-                
+
 
 
             </div>
@@ -1018,7 +1018,7 @@ $reviewsCount = count($productReviews);
         </div>
     </div>
 
-    
+
 
 
     <div class="row single-product-related-products">
@@ -1211,7 +1211,7 @@ $reviewsCount = count($productReviews);
         // });
 
         // $(document).ready(function() {
-        //     // slick slider 
+        //     // slick slider
         //     $('.related_products_slider').slick({
         //     dots: false,
         //     infinite: false,
@@ -1250,7 +1250,7 @@ $reviewsCount = count($productReviews);
         // });
 
 
-        
+
 
 
 
@@ -1493,13 +1493,84 @@ $reviewsCount = count($productReviews);
 
         function sendsamplemessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
         {
-        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
-        socket.emit('new message', message);
-        setTimeout(function(){
-            window.location.href = "/message-center";
-        }, 1000);
+            let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
+            socket.emit('new message', message);
+            setTimeout(function(){
+                window.location.href = "/message-center";
+            }, 1000);
         }
+
         @endif
+
+
+        $(document).on("click", "#favorite" , function() {
+            //console.log('hi');
+            var id = $(this).attr("data-productSku");
+
+            swal({
+                title: "Want to add this product into wishlist ?",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes, add it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            }).then(function (e) {
+                if (e.value === true) {
+                        $.ajax({
+                            type:'GET',
+                            url: "{{route('add.wishlist')}}",
+                            dataType:'json',
+                            data:{id :id },
+                            success: function(data){
+                                swal(data.message);
+                            }
+                        });
+                    }
+                else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+
+
+        });
+
+        $(document).on("click", "#wishList" , function() {
+            console.log('hi');
+            var id = $(this).attr("data-productSku");
+            swal({
+                title: "Want to add this product into wishlist ?",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes, add it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            }).then(function (e) {
+                if (e.value === true) {
+                    $.ajax({
+                        type:'GET',
+                        url: "{{route('add.wishlist')}}",
+                        dataType:'json',
+                        data:{id :id },
+                        success: function(data){
+                            swal(data.message);
+                        }
+                    });
+                }
+                else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+
+
+        });
+
+
+
+
 
     </script>
 @endpush

@@ -51,7 +51,7 @@
                                             <label for="business_name">Organization Name</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <input id="business_name" type="text" class="validate" name="business_name" value="{{old('business_name')}}">
+                                            <input id="business_name" type="text" class="validate" placeholder="Your Company/Factory/Studio name" name="business_name" value="{{old('business_name')}}">
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
@@ -59,7 +59,7 @@
                                             <label for="location">Location</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <input id="location" type="text" class="validate" name="location" value="{{old('location')}}">
+                                            <input id="location" type="text" class="validate" placeholder="Address of your Company/Factory/Studio" name="location" value="{{old('location')}}">
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
@@ -110,7 +110,7 @@
                                             <label for="trade_license">Trade License</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <input id="trade_license" type="text" class="validate" value="{{old('trade_license')}}" name="trade_license">
+                                            <input id="trade_license" type="text" class="validate" placeholder="Your valid Trade License number" value="{{old('trade_license')}}" name="trade_license">
                                         </div>
                                     </div>
                                     <div class="input-field col s12">
@@ -162,7 +162,7 @@
                                                 <label for="representive_name">Representive Name</label>
                                             </div>
                                             <div class="col s12 m8">
-                                                <input id="representive_name" type="text" class="validate" value="{{old('representive_name')}}" name="representive_name">
+                                                <input id="representive_name" type="text" class="validate" placeholder="Mr. John Deo" value="{{old('representive_name')}}" name="representive_name">
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                                 <label for="email">Email Address</label>
                                             </div>
                                             <div class="col s12 m8">
-                                                <input id="email" type="text" class="validate" value="{{old('email')}}" name="email">
+                                                <input id="email" type="text" class="validate" placeholder="name@company.com" value="{{old('email')}}" name="email">
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@
                                                 <label for="phone">Contact Number</label>
                                             </div>
                                             <div class="col s12 m8">
-                                                <input id="phone" type="text" class="validate" value="{{old('phone')}}" name="phone">
+                                                <input id="phone" type="text" class="validate" placeholder="Contact Number" value="{{old('phone')}}" name="phone">
                                             </div>
                                         </div>
                                     </div>
@@ -205,19 +205,19 @@
                             </div>
                             <div id="business_profile_info" class="col s12">
                                 <div id="review-profile-data" class="business_steps_content">
-                                    <div id="information_message"></div>
-                                    <div id="review_name"></div>
-                                    <div id="review_location"></div>
-                                    <div id="review_business_type"></div>
-                                    <div id="review_number_of_factories"></div>
-                                    <div id="review_number_of_outlets"></div>
-                                    <div id="review_trade_license"></div>
-                                    <div id="review_industry_type"></div>
-                                    <div id="review_business_category_id"></div>
-                                    <div id="review_representative_name"></div>
-                                    <div id="review_representatives_email"></div>
-                                    <div id="review_representatives_contact"></div>
-                                    <div id="review_representative_nidPassport"></div>
+                                    <div id="information_message" class="review-profile-data-info" style="padding-bottom: 25px;"></div>
+                                    <div id="review_name" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_location" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_business_type" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_number_of_factories" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_number_of_outlets" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_trade_license" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_industry_type" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_business_category_id" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_representative_name" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_representatives_email" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_representatives_contact" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_representative_nidPassport" class="review-profile-data-info"></div>
                                 </div>   
 
                                 <div class="step-actions">

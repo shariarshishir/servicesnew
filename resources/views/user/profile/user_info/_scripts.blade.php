@@ -101,15 +101,16 @@
 
     $('.profile-image-upload-trigger').click(function(){
         $(this).next().children(".profile-image-upload-trigger-alias").click();
+        $('.profile-image-upload-button').show();
     })
 
     var previousImageSrc = "@php echo $user->image; @endphp";
 
    $('#upload-image-form').submit(function(e) {
        e.preventDefault();
-       console.log(previousImageSrc);
+      // console.log(previousImageSrc);
        let formData = new FormData(this);
-       console.log(formData);
+       //console.log(formData);
        $('#image-input-error').text('');
 
        swal({
@@ -131,10 +132,12 @@
                     success: (response) => {
                         if (response) {
                         swal(response.message);
+                        $('.change_photo .profile-image-upload-button').hide();
                         this.reset();
                         var image="{{asset('storage/')}}"+'/'+response.user.image;
                         $(".profile-image-block  #profile_image").attr('src', image);
                         $(".user-block .avatar-online img").attr('src', image);
+
                         }
                     },
                     error: function(response){

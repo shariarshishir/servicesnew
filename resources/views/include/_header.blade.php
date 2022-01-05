@@ -121,6 +121,7 @@
 					</div>
 					
 					<ul id="countdown-dropdown" class="dropdown-content card">
+						@if(count($userNotifications)>0)
 						<li class="">
 							@foreach($userNotifications as $notification)
 								@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
@@ -172,6 +173,14 @@
 										<div class="text-muted text-sm">{{$notification->created_at}}</div>
 									</div>
 								</a>
+								@elseif ($notification->type == 'App\Notifications\QueryWithModificationToUserNotification')
+								<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
+									<i class="fas fa-envelope mr-2"></i>
+									<div class="admin-notification-content">
+										<div class="admin-notification-title">{{$notification->data['title']}}</div>
+										<div class="text-muted text-sm">{{$notification->created_at}}</div>
+									</div>
+								</a>
 								@elseif ($notification->type == 'App\Notifications\PaymentSuccessNotification')
 								<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 									<i class="fas fa-envelope mr-2"></i>
@@ -199,6 +208,11 @@
 								@endif
 							@endforeach
 						</li>
+						@else
+						<li class="no-notifications">
+							No notifications
+						</li>
+						@endif
 					</ul>
 					<div class="header_message_box">
 						<a href="{{route('message.center')}}">

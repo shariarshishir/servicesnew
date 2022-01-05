@@ -17,7 +17,7 @@ class NewOrderHasPlacedListener implements ShouldQueue
     public function handle($event)
     {
         $admin=Admin::find(1);
-        Mail::to('no-reply@merchantbay.com')->send(new NewOrderPlaceMailToAdmin($event->order));
+        Mail::to('success@merchantbay.com')->send(new NewOrderPlaceMailToAdmin($event->order));
         Notification::send($admin,new NewOrderHasPlacedNotification($event->order));
     }
 }

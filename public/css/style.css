@@ -5041,6 +5041,21 @@ input.input-field[type=text]:not(.browser-default) {
     top: 5px;
     right: 27px;
 }
+.profile_form_modal .tooltipped_title {
+    float: left;
+}
+.profile_form_modal .tooltipped {
+    float: left;
+    margin-left: 10px;
+    margin-top: 6px;
+    line-height: 10px;
+    color: #000000;
+    cursor: pointer;
+}
+.profile_form_modal .tooltipped .material-icons {
+    font-size: 18px;
+}
+
 .profile_form_modal td {
     padding: 15px 5px 0;
 } 

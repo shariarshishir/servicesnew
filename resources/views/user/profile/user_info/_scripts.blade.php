@@ -101,7 +101,6 @@
 
     $('.profile-image-upload-trigger').click(function(){
         $(this).next().children(".profile-image-upload-trigger-alias").click();
-        $('.profile-image-upload-button').show();
     })
 
     var previousImageSrc = "@php echo $user->image; @endphp";
@@ -173,6 +172,7 @@
         }
 
         reader.readAsDataURL(this.files[0]);
+        $('.profile-image-upload-button').show();
 
        });
 

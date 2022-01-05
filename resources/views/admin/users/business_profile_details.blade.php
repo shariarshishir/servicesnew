@@ -39,34 +39,36 @@
                             <h4>Company Overview</h4>
                             <form action="{{route('company.overview.varifie', $business_profile->companyOverview->id)}}" method="post">
                                 @csrf
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Value</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
+                                <div class="no_more_tables">
+                                    <table class="table">
+                                        <thead class="cf">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Value</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
 
-                                    <tbody>
-                                        @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-                                            <tr>
-                                                <td>{{str_replace('_', ' ', ucfirst($company_overview->name))}}</td>
-                                                <td class="{{$company_overview->name}}_value">{{$company_overview->value}}
-                                                    <input type="hidden" name="name[{{$company_overview->name}}]" value="{{$company_overview->value}}">
-                                                </td>
-                                                <td class="{{$company_overview->name}}_status">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="status[{{$company_overview->name}}]" value="1" {{ $company_overview->status == true ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="status[{{$company_overview->name}}]" value="0" {{ $company_overview->status == false ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        <tbody>
+                                            @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+                                                <tr>
+                                                    <td data-title="Name">{{str_replace('_', ' ', ucfirst($company_overview->name))}}</td>
+                                                    <td data-title="Value" class="{{$company_overview->name}}_value">{{$company_overview->value}}
+                                                        <input type="hidden" name="name[{{$company_overview->name}}]" value="{{$company_overview->value}}">
+                                                    </td>
+                                                    <td data-title="Status" class="{{$company_overview->name}}_status">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="status[{{$company_overview->name}}]" value="1" {{ $company_overview->status == true ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="status[{{$company_overview->name}}]" value="0" {{ $company_overview->status == false ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
                         </div>
@@ -117,74 +119,80 @@
                                 <div class="row categories-produced">
                                     <label>Categories Produced</label>
                                     <br>
-                                    <table class="categories-produced-table-block table">
-                                        <thead>
-                                            <tr>
-                                                <th>Type</th>
-                                                <th>Percentage</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if(count($business_profile->categoriesProduceds)>0)
-                                            @foreach($business_profile->categoriesProduceds as $key2=>$categoriesProduced)
-                                            <tr>
-                                                <td><input readOnly name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
-                                                <td><input readOnly name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="categories_produced_status[{{$key2}}]" value="1" {{ $categoriesProduced->status == 1 ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="categories_produced_status[{{$key2}}]" value="0" {{ $categoriesProduced->status == 0 ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="categories-produced-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                    <div clas="no_more_tables">
+                                        <table class="categories-produced-table-block table">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <th>Percentage</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if(count($business_profile->categoriesProduceds)>0)
+                                                @foreach($business_profile->categoriesProduceds as $key2=>$categoriesProduced)
+                                                <tr>
+                                                    <td data-title="Type"><input readOnly name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
+                                                    <td data-title="Percentage"><input readOnly name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
+                                                    <td data-title="Status">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="categories_produced_status[{{$key2}}]" value="1" {{ $categoriesProduced->status == 1 ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="categories_produced_status[{{$key2}}]" value="0" {{ $categoriesProduced->status == 0 ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr id="categories-produced-table-no-data">
+                                                    <td>No data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 </div>
 
 
                                 <div class="row machinaries-details">
                                     <label>machinaries Details</label>
                                     <br>
-                                    <table class="machinaries-details-table-block table">
-                                        <thead>
-                                            <tr>
-                                                <th>Machine Name</th>
-                                                <th>Quantity</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if(count($business_profile->machineriesDetails)>0)
-                                            @foreach($business_profile->machineriesDetails as $key3=>$machineriesDetail)
-                                            <tr>
-                                                <td><input readOnly name="machine_name[]" id="machine_name" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
-                                                <td><input readOnly name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="machineries_detail_status[{{$key3}}]" value="1" {{ $machineriesDetail->status == 1 ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="machineries_detail_status[{{$key3}}]" value="0" {{ $machineriesDetail->status == 0 ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="machinaries-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                    <div class="no_more_tables">
+                                        <table class="machinaries-details-table-block table">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Machine Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if(count($business_profile->machineriesDetails)>0)
+                                                @foreach($business_profile->machineriesDetails as $key3=>$machineriesDetail)
+                                                <tr>
+                                                    <td data-title="Machine Name"><input readOnly name="machine_name[]" id="machine_name" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
+                                                    <td data-title=""><input readOnly name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
+                                                    <td data-title="Quantity">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="machineries_detail_status[{{$key3}}]" value="1" {{ $machineriesDetail->status == 1 ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="machineries_detail_status[{{$key3}}]" value="0" {{ $machineriesDetail->status == 0 ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr id="machinaries-details-table-no-data">
+                                                    <td>No data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
@@ -276,39 +284,42 @@
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                     <label>Bsuiness terms</label>
                                     <br>
-                                    <table class="business-terms-table-block table">
-                                        <thead>
-                                            <tr>
-                                                <th>Machine Name</th>
-                                                <th>Quantity</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div class="no_more_tables">
+                                        <table class="business-terms-table-block table">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Machine Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                            @if(count($business_profile->businessTerms)>0)
-                                            @foreach($business_profile->businessTerms as $key4 => $businessTerm)
-                                            <tr>
+                                                @if(count($business_profile->businessTerms)>0)
+                                                @foreach($business_profile->businessTerms as $key4 => $businessTerm)
+                                                <tr>
 
-                                                <td><input readOnly name="business_term_title[]" id="business-term-title" type="text" class="form-control "  value="{{$businessTerm->title}}" ></td>
-                                                <td><input readOnly name="business_term_quantity[]" id="business-term-quantity" type="number" class="form-control "  value="{{$businessTerm->quantity}}" ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="business_term_status[{{$key4}}]" value="1" {{ $businessTerm->status == 1 ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="business_term_status[{{$key4}}]" value="0" {{ $businessTerm->status == 0 ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="business-terms-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                                    <td data-title="Machine Name"><input readOnly name="business_term_title[]" id="business-term-title" type="text" class="form-control "  value="{{$businessTerm->title}}" ></td>
+                                                    <td data-title="Quantity"><input readOnly name="business_term_quantity[]" id="business-term-quantity" type="number" class="form-control "  value="{{$businessTerm->quantity}}" ></td>
+                                                    <td>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="business_term_status[{{$key4}}]" value="1" {{ $businessTerm->status == 1 ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="business_term_status[{{$key4}}]" value="0" {{ $businessTerm->status == 0 ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr id="business-terms-details-table-no-data">
+                                                    <td>No data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
                         <div>
@@ -319,39 +330,42 @@
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                     <label>Sampling and R&D</label>
                                     <br>
-                                    <table class="samplings-table-block table">
-                                        <thead>
-                                            <tr>
-                                                <th> Name</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div class="no_more_tables">
+                                        <table class="samplings-table-block table">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th> Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        @if(count($business_profile->samplings)>0)
-							            @foreach($business_profile->samplings as $key5=>$sampling)
-                                            <tr>
+                                            @if(count($business_profile->samplings)>0)
+                                            @foreach($business_profile->samplings as $key5=>$sampling)
+                                                <tr>
 
-                                                <td><input readOnly name="sampling_title[]" id="sampling-title" type="text" class="form-control "  value="{{$sampling->title}}" ></td>
-                                                <td><input readOnly name="sampling_quantity[]" id="sampling-quantity" type="number" class="form-control "  value="{{$sampling->quantity}}" ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sampling_status[{{$key5}}]" value="1" {{ $sampling->status == 1 ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sampling_status[{{$key5}}]" value="0" {{ $sampling->status == 0 ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="sampling-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                                    <td data-title="Name"><input readOnly name="sampling_title[]" id="sampling-title" type="text" class="form-control "  value="{{$sampling->title}}" ></td>
+                                                    <td data-title="Quantity"><input readOnly name="sampling_quantity[]" id="sampling-quantity" type="number" class="form-control "  value="{{$sampling->quantity}}" ></td>
+                                                    <td data-title="Status">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="sampling_status[{{$key5}}]" value="1" {{ $sampling->status == 1 ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="sampling_status[{{$key5}}]" value="0" {{ $sampling->status == 0 ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr id="sampling-details-table-no-data">
+                                                    <td>No data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
                         <div>
@@ -362,37 +376,40 @@
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                     <label>Special customization ability</label>
                                     <br>
-                                    <table class="special-customizations-table-block table">
-                                        <thead>
-                                            <tr>
-                                                <th> Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div class="no_more_tables">
+                                        <table class="special-customizations-table-block table">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th> Name</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        @if(count($business_profile->specialCustomizations)>0)
-							            @foreach($business_profile->specialCustomizations as $key=>$specialCustomization)
-                                            <tr>
+                                            @if(count($business_profile->specialCustomizations)>0)
+                                            @foreach($business_profile->specialCustomizations as $key=>$specialCustomization)
+                                                <tr>
 
-                                                <td><input readOnly name="special_customization_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$specialCustomization->title}}"  ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="special_customization_status[{{$key}}]" value="1" {{ $specialCustomization->status == 1 ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="special_customization_status[{{$key}}]" value="0" {{ $specialCustomization->status == 0 ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="special-customizations-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                                    <td data-title="Name"><input readOnly name="special_customization_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$specialCustomization->title}}"  ></td>
+                                                    <td data-title="Status">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="special_customization_status[{{$key}}]" value="1" {{ $specialCustomization->status == 1 ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="special_customization_status[{{$key}}]" value="0" {{ $specialCustomization->status == 0 ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr id="special-customizations-details-table-no-data">
+                                                    <td>No data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
                         <div>
@@ -403,37 +420,40 @@
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                     <label>Sustainability commitments</label>
                                     <br>
-                                    <table class="sustainability-commitments-table-block table">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div class="no_more_tables">
+                                        <table class="sustainability-commitments-table-block table">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        @if(count($business_profile->sustainabilityCommitments)>0)
-							            @foreach($business_profile->sustainabilityCommitments as $key=>$sustainabilityCommitment)
-                                            <tr>
+                                            @if(count($business_profile->sustainabilityCommitments)>0)
+                                            @foreach($business_profile->sustainabilityCommitments as $key=>$sustainabilityCommitment)
+                                                <tr>
 
-                                                <td><input readOnly name="sustainability_commitment_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$sustainabilityCommitment->title}}"  ></td>
-                                                <td>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sustainability_commitment_status[{{$key}}]" value="1" {{ $sustainabilityCommitment->status == 1 ? 'checked' : '' }}>verified
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="sustainability_commitment_status[{{$key}}]" value="0" {{ $sustainabilityCommitment->status == 0 ? 'checked' : '' }}>unverified
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            <tr id="sustainability-commitments-details-table-no-data">
-                                                <td>No data</td>
-                                            </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                                    <td data-title="Name"><input readOnly name="sustainability_commitment_title[]" id="special-customizations-title" type="text" class="form-control "  value="{{$sustainabilityCommitment->title}}"  ></td>
+                                                    <td data-title="Status">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="sustainability_commitment_status[{{$key}}]" value="1" {{ $sustainabilityCommitment->status == 1 ? 'checked' : '' }}>verified
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="sustainability_commitment_status[{{$key}}]" value="0" {{ $sustainabilityCommitment->status == 0 ? 'checked' : '' }}>unverified
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr id="sustainability-commitments-details-table-no-data">
+                                                    <td>No data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 <button type="submit" class="btn btn-success float-right">submit</button>
                             </form>
                         <div>

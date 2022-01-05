@@ -1,6 +1,6 @@
 <div class="product_data_table_wrap">
     <div class="no_more_tables">
-        <table class="table table-striped striped bordered responsive-table box_shadow_radius ">
+        <table class="table table-striped striped bordered box_shadow_radius ">
             <thead class="cf">
                 <tr>
                     <th>Category</th>

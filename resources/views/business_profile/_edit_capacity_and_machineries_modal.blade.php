@@ -47,13 +47,13 @@
 
 			<div class="col s12 capacity_block_box">
 				<div class="form-group categories-produced-block">
-					<legend>Categories Produced</legend>
+					<legend>Categories <a class="tooltipped" data-position="top" data-tooltip="Please input the percentage of Kids, <br />Man and Women products your factory manufactures.<br />For example: Men- 60%, Women 30% and kids 10%"><i class="material-icons">info</i></a></legend>
 					<div class="categories-produced-block">
 						<div class="no_more_tables">
 							<table class="categories-produced-table-block">
 								<thead class="cf">
 									<tr>
-										<th>Type <!--a class="tooltipped" data-position="top" data-tooltip="I am a tooltip"><i class="material-icons">info</i></a--></th>
+										<th>Category</th>
 										<th>Percentage</th>
 										<th>&nbsp;</th>
 									</tr>
@@ -62,15 +62,15 @@
 									@if(count($business_profile->categoriesProduceds)>0)
 									@foreach($business_profile->categoriesProduceds as $categoriesProduced)
 									<tr>
-										<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
-										<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
+										<td data-title="Type"><input name="type[]" placeholder="Man, Woman, Kids etc." id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
+										<td data-title="Percentage"><input name="percentage[]" placeholder="% on total annual production" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
 										<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 									</tr>
 									@endforeach
 									@else
 									<tr id="categories-produced-table-no-data">
-										<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>
-										<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>
+										<td data-title="Type"><input name="type[]" id="type" placeholder="Man, Woman, Kids etc." type="text" class="form-control "  value="" ></td>
+										<td data-title="Percentage"><input name="percentage[]" id="percentage" placeholder="% on total annual production" type="number" class="form-control "  value="" ></td>
 										<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 									</tr>
 									@endif
@@ -88,7 +88,7 @@
 		</div>
 		<div class="row capacity_block_box">
 			<div class="form-group machinaries-details-block">
-				<legend>machinaries Details</legend>
+				<legend>machinaries Details <a class="tooltipped" data-position="top" data-tooltip="Please input the machineries name and quantity<br />in this section. Be specific while mentioning the machine name."><i class="material-icons">info</i></a></legend>
 				<div class="machinaries-details-block">
 					<div class="no_more_tables">
 						<table class="machinaries-details-table-block">

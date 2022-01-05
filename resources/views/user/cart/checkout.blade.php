@@ -22,7 +22,7 @@
             <form action="{{route('cart.order')}}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col m12">
+                    <div class="col s12">
                         <div class="cart-wrapper">
                             <div class="no_more_tables">
                                 <table class="shop_table shop_table_responsive cart_table" cellspacing="0">
@@ -159,15 +159,18 @@
                                   </p>
                             </div>
                         <div class="shipping_address_block">
-                            <div class="shipping_adrs" style="@if(count($shipping_address)==0) display:none; @endif">
-                                <label for="shipping_adres_select" class="">Select Shipping Address</label>
-                                <select class="select2 browser-default" name="shipping_address_id" id="shipping_adres_select" >
-                                    <option value="" disabled selected>Select</option>
-                                    @foreach($shipping_address as $address)
-                                    <option value="{{$address->id}}">{{$address->name}}-{{$address->address}}</option>
-                                    @endforeach
-                                </select>
-                                <a href="javascript:void(0);" class="add_new_shipping_adrs">Add New</a>
+                            <div class="input-field">
+                                <div class="shipping_adrs" style="@if(count($shipping_address)==0) display:none; @endif">
+                                    <label for="shipping_adres_select" class="">Select Shipping Address</label>
+                                    <select class="select2 browser-default" name="shipping_address_id" id="shipping_adres_select" >
+                                        <option value="" disabled selected>Select</option>
+                                        @foreach($shipping_address as $address)
+                                        <option value="{{$address->id}}">{{$address->name}}-{{$address->address}}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <a href="javascript:void(0);" class="add_new_shipping_adrs">Add New</a> -->
+                                    <a href="javascript:void(0);" class="add_new_shipping_adrs"> <i class="material-icons dp48">add</i> Add New</a>
+                                </div>
                             </div>
 
                             <div class="row shipping_adrs_new"  style="@if(count($shipping_address)!=0) display:none; @endif" >

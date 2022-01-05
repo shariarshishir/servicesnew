@@ -1844,6 +1844,10 @@ form input:read-only {
     white-space: nowrap;
     padding: 15px;
 }
+div.dataTables_wrapper table.mdc-data-table__table {
+    overflow: hidden;
+}
+.dataTables_wrapper thead,
 .product_data_table_wrap thead {
     background: #54A958;
     color: #ffffff;
@@ -5122,6 +5126,7 @@ input.input-field[type=text]:not(.browser-default) {
     padding: 5px 10px;
     height: auto;
     margin-top: 10px;
+    background: #54A958 !important;
 }
 #product-modification-modal .input-field {
     display: block;
@@ -5174,6 +5179,10 @@ input.input-field[type=text]:not(.browser-default) {
 .certification-details-table-block .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 10px;
     right: 5px;
+}
+.product-details-table-block td .colorSizeModal {
+    display: block;
+    font-size: 15px;
 }
 
 
@@ -5846,8 +5855,11 @@ nav .pagination li.active .page-link {
 #orders {
     padding-bottom: 50px;
 }
+.order-details-modal .product-details-table-block {
+    padding-bottom: 30px;
+}
 #orders table th {
-    padding: 5px 20px;
+    padding: 15px 20px;
 }
 #orders .order_inquiries_table table th {
     padding: 15px 20px;
@@ -6000,6 +6012,10 @@ nav .pagination li.active .page-link {
 .cart-icon-outer-wrapper .card li {
     padding: 0;
     min-height: inherit;
+}
+.notifications_icon_wrap .card li.no-notifications {
+    padding: 5px 15px 0;
+    opacity: 0.6;
 }
 .notifications_icon_wrap .card li:last-child,
 .cart-icon-outer-wrapper .card li:last-child {

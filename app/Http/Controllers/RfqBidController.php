@@ -112,4 +112,25 @@ class RfqBidController extends Controller
             ]);
 
     }
+
+
+    public function  notificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            if($notification->type == "App\Notifications\RfqBidNotification" && $notification->data['notification_data']['rfq_id'] == $request->rfqId)
+            {
+                $notification->markAsRead();
+                $message="Notification mark as read successfully";
+            }
+        }
+
+        if(!isset($message)){
+            $message="not found";
+        }
+        $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+        $noOfnotification=count($unreadNotifications);
+        return response()->json(['message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+    }
+
 }

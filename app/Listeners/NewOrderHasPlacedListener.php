@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewOrderHasPlacedNotification;
 
-class NewOrderHasPlacedListener 
+class NewOrderHasPlacedListener implements ShouldQueue
 {
     public function handle($event)
     {

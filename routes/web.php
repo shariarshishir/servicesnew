@@ -146,7 +146,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/order/paynow',[ProductCartController::class,'order'])->name('cart.order');
     Route::get('/order-success',[ProductCartController::class,'orderSuccess'])->name('cart.order.success');
 
-    Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);
+    Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead'])->name('notification-mark-as-read');
     //store
     Route::get('store/{vendorId}', [UserController::class, 'myShop'])->name('users.myshop');
     Route::get('store/{vendorUid}/productgrouplist/{slug}', [UserController::class, 'myShopProductsByCategory'])->name('users.categories_products');
@@ -254,6 +254,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('rfq/edit/{rfq_id}',[RfqController::class, 'edit'])->name('rfq.edit');
     Route::post('rfq/update/{rfq_id}',[RfqController::class, 'update'])->name('rfq.update');
     Route::get('rfq/single/image/delete/{rfq_image_id}',[RfqController::class, 'singleImageDelete'])->name('rfq.single.image.delete');
+    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
@@ -272,10 +273,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
     Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct'])->name('message.center.contact.supplier.from.product');
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
-    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
+    Route::get('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'notificationMarkAsRead'])->name('bid-notification-mark-as-read');
+
     //poforma
     Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
     Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');

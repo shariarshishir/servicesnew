@@ -103,6 +103,7 @@ class RfqBidNotification extends Notification
         return [
 
             'title'=>"New bid has created",
+            'notification_data'=>$this->notification_data['bidData'],
             'url'=>$this->notification_data['url'],
 
         ];

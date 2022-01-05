@@ -147,6 +147,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     Route::get('/rfqs', [RFQController::class, 'index']);
     Route::get('/my-rfq-list', [RFQController::class, 'myRfqList']);
+    Route::get('/rfq/{id}/bids', [RfqBidController::class, 'rfqBidsByRfqId']);
 
 
     //manufacture product api

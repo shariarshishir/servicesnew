@@ -7,11 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewRfqNotification extends Notification
+class NewRfqNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $data;
+    public $notification_data;
 
     /**
      * Create a new notification instance.
@@ -22,6 +22,7 @@ class NewRfqNotification extends Notification
     {
        
         $this->notification_data=$data;
+        
     }
 
     /**
@@ -45,6 +46,7 @@ class NewRfqNotification extends Notification
     {
         return [
             'title' => 'New RFQ posted',
+            'rfq_data' => $this->notification_data['rfq'],
             'url' => $this->notification_data['url'],
         ];
     }

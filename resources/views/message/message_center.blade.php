@@ -16,6 +16,7 @@
             socket.on('connect', function(data) {
                 console.log('connect');
                 var selectedBusinessId = "{{ Request::get('bid') }}";
+                var selectedUserId = "{{ Request::get('uid') }}";
                 if(selectedBusinessId > 0)
                 {
                     $('#allchatter').children('div.all-chatter-div').each(function()
@@ -45,6 +46,46 @@
 
                         }
                     });
+                    $('#allchatter').children('div.all-chatter-div').click(function()
+                    {
+                        $('#allchatter').children('div.all-chatter-div').removeClass('active');
+                        $(this).addClass('active');
+                        $('.generate-po-btn').attr("href", "{{ env('APP_URL') }}/po/add/toid="+$(this).data('toid'));
+                        message_userid = $(this).data("userid");
+                        message_businessid = $(this).data("businessid");
+                    });
+                }
+
+                if(selectedUserId > 0)
+                {
+                    $('#allchatter').children('div.all-chatter-div').each(function()
+                    {
+                        if($(this).data('userid') == selectedUserId) {
+
+                            $(this).addClass('active');
+                            $(this).click();
+                            message_userid = $(this).data("userid");
+                            message_businessid = $(this).data("businessid");
+
+                            var s = new Array;
+                            var i = 0;
+                            var x = $("#allchatter .all-chatter-div").length;
+
+                            $("#allchatter .all-chatter-div").each( function() {
+                                s[i] = $(this).data("businessid");
+                                i++;
+                            });
+                            var g = s.sort(function(a,b){return a-b});
+                            for(var c = 0; c < x; c++) {
+                                var div = g[c];
+                                var d = $("#allchatter .all-chatter-div[data-businessid="+selectedUserId+"]").clone();
+                                var s = $("#allchatter .all-chatter-div[data-businessid="+selectedUserId+"]").remove();
+                                $("#allchatter").prepend(d);
+                            }
+
+                        }
+                    });
+
                     $('#allchatter').children('div.all-chatter-div').click(function()
                     {
                         $('#allchatter').children('div.all-chatter-div').removeClass('active');
@@ -355,22 +396,22 @@
                                                     <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-userid="{{$cuser['user_id']}}" data-businessid="{{$cuser['business_id']}}" onclick="getchatdata('{{$cuser['user_id']}}','{{$cuser['business_id']}}', '{{ $cuser['image'] }}', '{{ $cuser['name'] }}', '{{$type}}')" style="cursor: pointer;">
                                                 @endif
                                                 <div class="user-section">
-                                                <div class="row valign-wrapper">
-                                                    <div class="col s2 media-image online pr-0">
-                                                    <img src="{{ $cuser['image'] }}" alt="" class="circle z-depth-2 responsive-img">
+                                                    <div class="row valign-wrapper">
+                                                        <div class="col s2 media-image online pr-0">
+                                                        <img src="{{ $cuser['image'] }}" alt="" class="circle z-depth-2 responsive-img">
+                                                        </div>
+                                                        <div class="col s10">
+                                                        <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser['name'] }}</p>
+                                                        <p class="m-0 info-text"></p>
+                                                        </div>
                                                     </div>
-                                                    <div class="col s10">
-                                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser['name'] }}</p>
-                                                    <p class="m-0 info-text"></p>
-                                                    </div>
-                                                </div>
                                                 </div>
                                                 <div class="info-section">
-                                                <div class="star-timing">
-                                                    <div class="time">
-                                                    {{-- <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span> --}}
+                                                    <div class="star-timing">
+                                                        <div class="time">
+                                                        {{-- <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span> --}}
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 </div>
                                             </div>
                                         @endforeach

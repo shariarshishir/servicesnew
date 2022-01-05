@@ -342,13 +342,31 @@ class MessageController extends Controller
 
     public function contactSupplierFromProduct(Request $request)
     {
-        /*
-        $user = User::where('user_type', 'supplier')
-            ->orWhere('user_type', 'both')
-            ->where('id', $request->supplier_id)
-            ->first();
-        */
-        return 'notify';
+
+        $business_profile=BusinessProfile::find($request->business_id);
+        if(!$business_profile){
+            return response()->json([
+                'msg' => 'Profile Not Found',
+                'success' => false
+            ],404);
+        }
+       $users_id=[];
+       array_push($users_id, $business_profile->user->id);
+       if($business_profile->representativeUser()->exists()){
+        array_push($users_id,  $business_profile->representativeUser->id);
+       }
+       $users=User::whereIn('id', $users_id)->get();
+       $notification_data=[
+        'title'=>'Hello, I want to discuss more about your products',
+        'url'=>'/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id,
+        ];
+       foreach($users as $user){
+           Notification::send($user, new BuyerWantToContact($notification_data));
+       }
+       return response()->json([
+        'success' => true,
+        'msg' => 'success',
+         ],200);
         $user = User::find($request->supplier_id);
 
         if ($user && in_array(\auth()->user()->user_type, ['buyer', 'both']))

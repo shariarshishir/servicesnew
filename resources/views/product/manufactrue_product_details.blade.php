@@ -343,7 +343,7 @@
 
                         @endif
                         @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}','{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{auth()->id()}}','{{$product->businessProfile->id}}');">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->id}}); updateUserLastActivity('{{Auth::id()}}','{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{auth()->id()}}','{{$product->businessProfile->id}}');">Contact supplier</button>
                         @else
                             <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                         @endif
@@ -602,14 +602,14 @@
 
         }
 
-        function contactSupplierFromProduct(supplierId)
+        function contactSupplierFromProduct(business_id)
         {
 
-        var supplier_id = supplierId;
+        var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
         data_json = {
-            "supplier_id": supplier_id,
+            "business_id": business_id,
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
         }

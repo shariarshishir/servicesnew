@@ -912,7 +912,7 @@ $reviewsCount = count($productReviews);
                     <div class="right-align">
                         {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
                         @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{auth()->id()}}', '{{$product->businessProfile->id}}');">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{auth()->id()}}', '{{$product->businessProfile->id}}');">Contact supplier</button>
                         @else
                             <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
                         @endif
@@ -1433,14 +1433,14 @@ $reviewsCount = count($productReviews);
 
         }
 
-        function contactSupplierFromProduct(supplierId)
+        function contactSupplierFromProduct(business_id)
         {
 
-        var supplier_id = supplierId;
+        var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
         data_json = {
-            "supplier_id": supplier_id,
+            "business_id": business_id,
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
         }

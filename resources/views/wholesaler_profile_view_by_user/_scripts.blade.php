@@ -45,14 +45,14 @@
 
         }
 
-        function contactSupplierFromProduct(supplierId)
+        function contactSupplierFromProduct(business_id)
         {
 
-        var supplier_id = supplierId;
+        var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
         data_json = {
-            "supplier_id": supplier_id,
+            "business_id": business_id,
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
         }

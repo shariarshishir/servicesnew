@@ -1122,12 +1122,19 @@ form input:read-only {
 }
 .profile_leftCol .office_address h4 span,
 .leftCol_wrap .office_address h4 span {
+    display: inline-block;
+}
+.profile_leftCol .office_address h4 .material-icons,
+.leftCol_wrap .office_address h4 .material-icons {
     color: #54A958;
     font-size: 26px;
     padding-right: 10px;
-    margin-top: -3px;
-    padding-right: 5px;
+    margin-top: 2px;
+    padding-right: 3px;
+    height: 22px;
+    line-height: 20px;
 }
+
 .profile_leftCol .office_address h4 img,
 .leftCol_wrap .office_address h4 img {
     margin-left: 10px;
@@ -1143,14 +1150,14 @@ form input:read-only {
 }
 .profile_leftCol .left_top .addressBox,
 .leftCol_wrap .left_top .addressBox {
-    padding: 10px 15px;
-    font-weight: 500;
+    padding: 10px 0;
 }
 .profile_leftCol .left_top .addressBox span,
 .leftCol_wrap .left_top .addressBox span {
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 5px;
     display: inline-block;
+    font-size: 16px;
 }
 .profile_leftCol .left_bottom,
 .leftCol_wrap .left_bottom {
@@ -1161,7 +1168,10 @@ form input:read-only {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 15px;
+    text-align: left;
 }
+
+
 /* profile_leftCol css end */
 
 /* profile_contentCol css start */
@@ -8113,6 +8123,15 @@ nav .pagination li.active .page-link {
     .about_content_wrap h3, .policy_content_wrap h3 {
         font-size: 20px;
         line-height: 28px;
+    }
+
+    .profile_leftCol .left_bottom, 
+    .leftCol_wrap .left_bottom,
+    .profile_leftCol .left_top .addressBox, 
+    .leftCol_wrap .left_top .addressBox,
+    .profile_leftCol .left_bottom h3, 
+    .leftCol_wrap .left_bottom h3 {
+        text-align: center;
     }
     
 

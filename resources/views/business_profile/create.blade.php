@@ -142,7 +142,7 @@
                             </div>
                             <div id="representative_details_info" class="col s12">
                                 <div class="representative_box">
-                                    <label class="title" for="business_name">Am i the representive of the business?</label>
+                                    <label class="title" for="business_name">Am I the representive of the business?</label>
                                     <label class="radio_box">
                                         <input name="has_representative" type="radio" value="1"  />
                                         <span>Yes</span>

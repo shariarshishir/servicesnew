@@ -1062,18 +1062,6 @@ $reviewsCount = count($productReviews);
                                         <span class="new badge red sold-out" data-badge-caption="Sold Out"></span>
                                     @endif
                                 </div>
-                                @php  $averageRating = productRating($product->id);@endphp
-                                <div class="product_info_details">
-                                    <div class="shipping_label">Free Shipping</div>
-                                    <div class="rating_label">
-                                        <i class="material-icons pink-text"> star </i>
-                                        <span>{{$averageRating}}</span>
-                                    </div>
-                                </div>
-                                <div class="vendor_name">
-                                    {{-- <a href="#"> {{$product->businessProfile->business_name}}</a> --}}
-                                    {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}">{{$product->vendor->vendor_name}}</a> --}}
-                                </div>
                             </div>
                             <!-- Modal Structure -->
                             <div  id="product-details-modal_{{$product->sku}}" class="modal modal-fixed-footer product-details-modal" tabindex="0">

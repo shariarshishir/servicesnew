@@ -83,7 +83,7 @@ class RFQController extends Controller
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){
 
-                return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"message"=>$message,"success"=>true],200);
+                return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,'user'=>$rfq->user,"message"=>$message,"success"=>true],200);
             }
             else{
                 return response()->json(["success"=>false],200);

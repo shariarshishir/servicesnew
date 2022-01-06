@@ -36,13 +36,13 @@
             if(numberOfFactories){
                 $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
             } else {
-                $("#review_number_of_factories").html("<b>Number of Factories:</b> N/A");
+                $("#review_number_of_factories").hide();
             }
 
             if(numberOfOutlets) {
                 $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
             } else {
-                $("#review_number_of_outlets").html("<b>Number of Outlets:</b> N/A");
+                $("#review_number_of_outlets").hide();
             }
 
             $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
@@ -50,31 +50,31 @@
             if(businessCategoryId){
                 $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
             } else {
-                $("#review_business_category_id").html("<b>Business Category:</b> N/A");
+                $("#review_business_category_id").hide();
             }
 
             if(representiveName){
                 $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
             } else {
-                $("#review_representative_name").html("<b>Representative Name:</b> N/A");
+                $("#review_representative_name").hide();
             }
 
             if(representiveEmail){
                 $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
             } else {
-                $("#review_representatives_email").html("<b>Representative Email:</b> N/A");
+                $("#review_representatives_email").hide();
             }
 
             if(representivePhone){
                 $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
             } else {
-                $("#review_representatives_contact").html("<b>Representative Phone:</b> N/A");
+                $("#review_representatives_contact").hide();
             }
 
             if(representiveNidPassport) {
                 $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
             } else {
-                $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> N/A");
+                $("#review_representative_nidPassport").hide();
             }
 
             if(!name){

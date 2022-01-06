@@ -394,7 +394,8 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::delete('/businessProfile/{businessProfileId}/product/{product}', [ProductController::class,'destroy'])->name('product.destroy');
         Route::get('/related/products', [ProductController::class, 'relatedProducts'])->name('admin.users.related.products');
         //vendor order
-         Route::get('/businessProfile/{businessProfileId}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
+        Route::get('orders',[OrderController::class, 'orderList'])->name('admin.orders.index');
+        Route::get('/businessProfile/{businessProfileId}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
         // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
         // Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
         // Route::get('/vendor/{vendor}/order/{order}',[OrderController::class, 'show'])->name('vendor.order.show');

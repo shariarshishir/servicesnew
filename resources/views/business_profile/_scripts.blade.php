@@ -1688,9 +1688,9 @@
             }
             $('.press-highlight-details-table-block tbody').children().empty();
                 var html='<tr>';
-                html +='<td data-title="Name">><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
-                html +='<td data-title="Short Description">><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td data-title="Image">><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td data-title="Name"><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td data-title="Image"><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
                 html +='<tr>';
                 $('.press-highlight-details-table-block  tbody').append(html);

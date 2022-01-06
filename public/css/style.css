@@ -1557,6 +1557,7 @@ form input:read-only {
 }
 .profile_tabNav_wrap .editBox .btn_green_White.btn_delete {
     margin-left: 15px;
+    line-height: 37px;
 }
 .profile_tabNav_wrap .editBox .btn_green_White:focus {
     background: #fff;
@@ -5059,6 +5060,9 @@ input.input-field[type=text]:not(.browser-default) {
     display: block;
     position: absolute;
     top: 5px;
+    right: 0;
+}
+.profile_tabNav_wrap a.remove-certificate {
     right: 27px;
 }
 .profile_form_modal .tooltipped_title {
@@ -5365,7 +5369,7 @@ input.input-field[type=text]:not(.browser-default) {
     margin: 0;
 }
 .footer_right_bottom ul li {
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 .footer_right_bottom  ul li a:link,
 .footer_right_bottom ul li a:active,
@@ -6332,7 +6336,7 @@ nav .pagination li.active .page-link {
 }
 #homepage .banner .description h2 {
 	font-size: 50px;
-	font-weight: 800;
+	font-weight: 700;
 	text-transform: capitalize;
 	max-width: 365px;
 	line-height: 75px;
@@ -7047,18 +7051,20 @@ nav .pagination li.active .page-link {
     background-color: transparent;
 }
 .mainNav_mobile_wrap .mySidenav ul .subNav li a {
-    padding: 5px 10px;
+    padding: 8px 10px;
     color: #000000;
     font-size: 15px;
     background: none !important;
 }
+.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:active,
 .mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:hover,
 .mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:focus {
-    background-color: transparent;
+    background: #eee !important;
 }
+.mainNav_mobile_wrap .mySidenav ul .subNav li a:active,
 .mainNav_mobile_wrap .mySidenav ul .subNav li a:focus,
 .mainNav_mobile_wrap .mySidenav ul .subNav li a:hover {
-    background-color: transparent;
+    background: #eee !important;
 }
 .mainNav_mobile_wrap .mySidenav .closebtn {
     position: absolute;
@@ -7733,7 +7739,7 @@ nav .pagination li.active .page-link {
         box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
         /* margin: 0 20px 40px; */
         border-radius: 10px;
-        padding: 20px !important;
+        padding: 10px !important;
     }
     .product_wrapper .imgBox .favorite {
         top: 0;
@@ -7846,6 +7852,7 @@ nav .pagination li.active .page-link {
     }
     #homepage .homepgp {
         font-size: 18px;
+        line-height: 28px;
     }
     #homepage .tbm li a {
         font-size: 16px;
@@ -8458,7 +8465,7 @@ nav .pagination li.active .page-link {
     .product_wrapper .low_moq_products_wrap .productBox {
         min-height: auto;
         max-height: inherit !important;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
         text-align: center;
     }
     .low_moq_products_wrap .moq_view_details {
@@ -8621,7 +8628,7 @@ nav .pagination li.active .page-link {
      }
     .product_wrapper .low_moq_products_wrap .productBox {
         height: auto;
-        width: 44%;
+        width: 42%;
     }
     .product_wrapper .shortest_lead_product_wrap .productBox {
         width: 95%;
@@ -8774,6 +8781,10 @@ nav .pagination li.active .page-link {
         display: block;
         float: none;
     }
+    .productBox .sold-out h4 {
+        width: 90px;
+        height: 35px;
+    }
     
 }
 
@@ -8814,7 +8825,7 @@ nav .pagination li.active .page-link {
     .product_wrapper .active_grid .col.s12 ,
     .profile_tabNav_wrap .col.s6.m4,
     .profile_contentCol .productBox {
-        width: 100% !important;
+        /* width: 100% !important; */
     }
     .seller-product-list .mdc-layout-grid__inner {
         padding: 30px 0 0;
@@ -8890,10 +8901,12 @@ nav .pagination li.active .page-link {
     .product_wrapper .product_boxwrap .active_grid {
         margin: 0;
     }
+    #homepage .delivaryTime .guarantee h3,
     #homepage .perform-header h1,
     #homepage .delivaryTime .ontimeDescription .description h2,
-    #homepage .banner .description h2 {
-        font-size: 25px !important;
+    #homepage .banner .description h2,
+    #homepage .perform-header h2 {
+        font-size: 22px !important;
         line-height: 30px !important;
         margin-top: 20px;
         text-align: center;
@@ -8901,6 +8914,11 @@ nav .pagination li.active .page-link {
     #homepage .perform-header h1 {
         font-size: 20px !important;
         line-height: 25px !important;
+    }
+    #homepage .banner .description, 
+    #homepage .delivaryTime .ontimeDescription .description,
+    #homepage .about .about-item .item-body .item-description {
+        line-height: 25px;
     }
     #homepage .about .about-item .item-body .item-description h4 {
         font-size: 20px;
@@ -8947,16 +8965,16 @@ nav .pagination li.active .page-link {
         display: flex;
     }
     .product_wrapper .low_moq_products_wrap .productBox {
-        height: auto;
-        width: 90%;
+        /* height: auto;
+        width: 90%; */
     }
     .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3,
     .product_wrapper .active_grid .col.s12 {
-        width: 100%;
+        /* width: 100%; */
         text-align: center;
     }
     .product_wrapper .active_grid .productBox {
-        height: auto;
+        height: 265px;
     }
  
     .modal .modal-content .container {
@@ -9057,12 +9075,13 @@ nav .pagination li.active .page-link {
         text-align: center;
     }
 
+
 }
 
 @media only screen and (max-width: 480px) {
     .mobile_header .material-icons,
     .mobile_header .mobile_top_right .material-icons {
-        line-height: 31px;
+        /* line-height: 31px; */
     }
     .profile_wholesaler_tab_menu ul li, 
     .profile_contentCol .profile_tab_menu .tabs .tab {
@@ -9092,7 +9111,7 @@ nav .pagination li.active .page-link {
     }
     .product_wrapper .low_moq_products_wrap .productBox,
     .product_wrapper .active_grid .productBox {
-        height: auto;
+        /* height: auto; */
         padding-bottom: 15px !important;
     }
     .purchase_order_top td strong {
@@ -9281,6 +9300,10 @@ nav .pagination li.active .page-link {
         font-size: 14px;
         line-height: 20px;
     }
+    .product_wrapper .low_moq_products_wrap .productBox .imgBox, 
+    .product_wrapper .active_grid .productBox .imgBox {
+        height: 100px;
+    }
 
 }
 
@@ -9347,6 +9370,7 @@ nav .pagination li.active .page-link {
     #homepage .perform_tab_table {
         padding: 0;
     }
+
     .suppliers_filter_wrapper .suppliers_filter_content .filter_search_input {
         width: 75% !important;
     }
@@ -9385,6 +9409,11 @@ nav .pagination li.active .page-link {
     #order-modification .btn_green {
         min-width: 90px;
         font-size: 13px;
+    }
+
+
+    .product-search-block .col.m4, .product_wrapper .active_grid .col.s12, .profile_tabNav_wrap .col.s6.m4, .profile_contentCol .productBox {
+        width: 100% !important;
     }
 
 

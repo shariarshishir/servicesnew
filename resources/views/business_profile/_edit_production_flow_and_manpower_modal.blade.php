@@ -9,7 +9,12 @@
            <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group production-flow-and-manpower-block">
-                    <legend>Production Capacity (Annual) <a class="tooltipped" data-position="top" data-tooltip="Input your production flow and manpower data chronologically. <br />For example: if your manufacturing process starts with Knitting <br />then knitting will be the first."><i class="material-icons">info</i></a></legend>
+                    <legend>
+                        <div class="row">
+                            <span class="tooltipped_title">Production Capacity (Annual)</span> <a class="tooltipped" data-position="top" data-tooltip="Input your production flow and manpower data chronologically. <br />For example: if your manufacturing process starts with Knitting <br />then knitting will be the first."><i class="material-icons">info</i></a>
+                        </div>
+                    </legend>
+                    
                     <div class="production-flow-and-manpower-block">
                         <div class="no_more_tables">
                             <table class="production-flow-and-manpower-table-block">

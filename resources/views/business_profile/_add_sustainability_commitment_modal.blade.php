@@ -8,7 +8,11 @@
 		
 		<div class="row">
 			<div class="form-group  sustainability-commitment-details-block">
-				<legend>Sustainability commitments <a class="tooltipped" data-position="top" data-tooltip="Mention if you have any feature or facility which is dedicated to<br />your sustainability commitment. For example: Have rainwater harvesting plant,<br /> Water recovery system able to recover 90% of the used water etc."><i class="material-icons">info</i></a></legend>
+				<legend> 
+					<div class="row">
+						<span class="tooltipped_title">Sustainability commitments</span> <a class="tooltipped" data-position="top" data-tooltip="Mention if you have any feature or facility which is dedicated to<br />your sustainability commitment. For example: Have rainwater harvesting plant,<br /> Water recovery system able to recover 90% of the used water etc."><i class="material-icons">info</i></a>
+					</div>
+				</legend>
 				<div class="sustainability-commitment-block">
 					<table class="sustainability-commitment-table-block">
 						<thead>

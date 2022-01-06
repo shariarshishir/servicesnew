@@ -8,7 +8,11 @@
 		
 		<div class="row">
 			<div class="form-group  sampling-details-block">
-				<legend>Sampling and R&D <a class="tooltipped" data-position="top" data-tooltip="Mention the elements of your Sampling and R&D section.<br />Elements can be Sampling facility space, Manpower, Sample lead time (In weeks),<br />SMS Capacity/Lead Times (In weeks), Daily sample capacity,<br />Design studio facility (Yes/No), Design studio Manpower etc.<br /> Input the name of the Particular field and use the other<br /> field to input the quantity of that particular."><i class="material-icons">info</i></a></legend>
+				<legend> 
+					<div class="row">
+						<span class="tooltipped_title">Sampling and R&D</span> <a class="tooltipped" data-position="top" data-tooltip="Mention the elements of your Sampling and R&D section.<br />Elements can be Sampling facility space, Manpower, Sample lead time (In weeks),<br />SMS Capacity/Lead Times (In weeks), Daily sample capacity,<br />Design studio facility (Yes/No), Design studio Manpower etc.<br /> Input the name of the Particular field and use the other<br /> field to input the quantity of that particular."><i class="material-icons">info</i></a>
+					</div>
+				</legend>
 				<div class="sampling-block">
 					<div class="no_more_tables">
 						<table class="sampling-table-block">

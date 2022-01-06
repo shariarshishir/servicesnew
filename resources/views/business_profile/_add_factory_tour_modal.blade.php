@@ -10,12 +10,14 @@
 
             <div class="row">
                 <div class="form-group input-field factory-tour-photo">
-                    <legend>Virtual Tour Url</legend>
+                    <legend>Virtual Tour Url
+                        <span class="tooltipped" data-position="top"  data-tooltip="You need to upload your video to Youtube and provide an embedded link.<br> You can find the embedded link for the video in the share button below the Youtube video."><i class="material-icons dp48">live_help</i></span>
+                    </legend>
                     <input type="text" name="virtual_tour" value=""  >
                 </div>
             </div>
 
-        
+
             <div class="row">
                 <div class="form-group factory-tour-photo factory_images_box">
                     <legend>Factory Images</legend>
@@ -54,17 +56,17 @@
                                     <input type="file" name="factory_images[]" placeholder="Choose image"  id="factory-image">
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <a href="javascript:void(0);" class="add-more-factory-image-block" onclick="addFactoryImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                     </div>  -->
 
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="form-group factory-tour-photo factory_large_images_box">
                     <legend>Factory 360 Degree Images</legend>
@@ -103,7 +105,7 @@
                                     <input type="file" name="factory_large_images[]" placeholder="Choose image"  id="factory-large-image">
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <br>
@@ -111,13 +113,13 @@
                         <a href="javascript:void(0);" class="add-more-factory-large-image-block" onclick="addFactoryLargeImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                     </div> -->
 
-                    
-                        
+
+
                 </div>
             </div>
-          
 
-            
+
+
                 <!-- <div class="row">
                     <div class="col s12 m6 l6 right-align">
                         <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit</button>
@@ -132,9 +134,9 @@
                     </div>
                 </div>
             </div>
-            
+
         </form>
-    
+
         <!-- <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
         </div> -->
@@ -144,4 +146,4 @@
             <i class="material-icons green-text text-darken-1">close</i>
         </a>
     </div> -->
-</div>        
+</div>

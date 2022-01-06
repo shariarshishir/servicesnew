@@ -145,7 +145,7 @@
                             </div>
                             <div id="representative_details_info" class="col s12">
                                 <div class="representative_box">
-                                    <label class="title" for="business_name">Am I the representive of the business?</label>
+                                    <label class="title" for="business_name">Do You want to represent this business yourself?<span class="tooltipped" data-position="top"  data-tooltip="A representative will receive notifications about orders,<br> queries and other activities from Merchant Bay. A representative can only represent one business."><i class="material-icons dp48">live_help</i></span></label>
                                     <label class="radio_box">
                                         <input name="has_representative" type="radio" value="1"  />
                                         <span>Yes</span>
@@ -200,8 +200,8 @@
                                 <div class="step-actions">
                                     <a href="javascript:void(0)" class="previous previous_to_business_details_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "business_details_info" )'>Back</a>
                                     <a href="javascript:void(0)" class="next next_to_business_profile_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "business_profile_info" )'>Next</a>
-                                </div>   
-                               
+                                </div>
+
                             </div>
                             <div id="business_profile_info" class="col s12">
                                 <div id="review-profile-data" class="business_steps_content">
@@ -218,12 +218,12 @@
                                     <div id="review_representatives_email" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representatives_contact" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representative_nidPassport" class="review-profile-data-info"></div>
-                                </div>   
+                                </div>
 
                                 <div class="step-actions">
                                     <a href="javascript:void(0)" class="previous previous_to_representative_details_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "representative_details_info" )'>Back</a>
                                     <button type="submit" class="btn waves-effect waves-light green">Submit <i class="material-icons right">send</i></button>
-                                </div>   
+                                </div>
                             </div>
                         </form>
                     </div>

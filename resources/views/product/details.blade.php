@@ -1037,7 +1037,16 @@ $reviewsCount = count($productReviews);
                             <div class="product_img">
                                 {{-- <a href="javascript:void();" class="overlay_hover"></a> --}}
                                 @foreach($product->images as $key=>$image)
-                                    <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                    @if($product->businessProfile()->exists())
+                                        <a href="{{route('productdetails',$product->sku)}}">
+                                            <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                        </a>
+                                    @else
+                                        <a href="javascript:void(0);">
+                                            <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                        </a>
+                                    @endif
+                                    {{-- <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" /> --}}
                                     @break
                                 @endforeach
                                 <div class="product_quick_options">

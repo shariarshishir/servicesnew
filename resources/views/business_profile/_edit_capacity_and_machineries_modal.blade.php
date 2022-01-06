@@ -49,7 +49,7 @@
 				<div class="form-group categories-produced-block">
 					<legend> 
 						<div class="row" style="margin:0;">
-                            <span class="_title">Categories</span> <a class="tooltipped" data-position="top" data-tooltip="Please input the percentage of Kids, <br />Man and Women products your factory manufactures.<br />For example: Men- 60%, Women 30% and kids 10%"><i class="material-icons">info</i></a>
+                            <span class="tooltipped_title">Categories</span> <a class="tooltipped" data-position="top" data-tooltip="Please input the percentage of Kids, <br />Man and Women products your factory manufactures.<br />For example: Men- 60%, Women 30% and kids 10%"><i class="material-icons">info</i></a>
                         </div>
 					</legend>
 					<div class="categories-produced-block">

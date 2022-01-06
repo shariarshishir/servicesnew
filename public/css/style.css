@@ -1927,8 +1927,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .product_data_table_wrap h6 {
     font-weight: 600;
 }
-.product_data_table_wrap .prd-lt-con-list {
-    padding-bottom: 20px;
+.product_data_table_wrap .product_size {
+    padding-top: 12px;
 }
 .product_data_table_wrap .product_size span {
     border: 1px solid #3D3D3D;
@@ -4590,6 +4590,19 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .business_stepper_wrap .representative_box .title {
     font-size: 18px;
     color: #54A958;
+    position: relative;
+    padding-right: 35px;
+}
+.business_stepper_wrap .representative_box .title .tooltipped {
+    line-height: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.business_stepper_wrap .representative_box .title .tooltipped i {
+    color: #707070;
+
 }
 .business_stepper_wrap .representative_box .radio_box {
     margin-left: 50px;
@@ -5222,6 +5235,12 @@ input.input-field[type=text]:not(.browser-default) {
 .product-details-table-block td .colorSizeModal {
     display: block;
     font-size: 15px;
+}
+
+#manufacture-update-errors {
+    color: red;
+    font-size: 14px;
+    padding: 20px 40px 0;
 }
 
 
@@ -8048,6 +8067,7 @@ nav .pagination li.active .page-link {
         display: block;
         margin-bottom: 20px;
     }
+
     .business_stepper_wrap .representative_box .radio_box {
         margin-left: 0;
         margin-right: 20px;
@@ -8206,7 +8226,9 @@ nav .pagination li.active .page-link {
     .leftCol_wrap .left_bottom h3 {
         text-align: center;
     }
-    
+    .low_moq_products_wrap .moqBox {
+        font-size: 16px;
+    }
 
 }
 
@@ -8477,7 +8499,7 @@ nav .pagination li.active .page-link {
         display: block;
         border: none;
         width: 100%;
-        padding: 10px;
+        /* padding: 10px; */
     }
     .low_moq_products_wrap .moq_view {
         padding: 0;
@@ -8974,7 +8996,7 @@ nav .pagination li.active .page-link {
         text-align: center;
     }
     .product_wrapper .active_grid .productBox {
-        height: 265px;
+        height: 300px;
     }
  
     .modal .modal-content .container {
@@ -9113,6 +9135,9 @@ nav .pagination li.active .page-link {
     .product_wrapper .active_grid .productBox {
         /* height: auto; */
         padding-bottom: 15px !important;
+    }
+    .product_wrapper .active_grid .productBox {
+        height: 268px;
     }
     .purchase_order_top td strong {
         font-size: 20px !important;
@@ -9304,6 +9329,7 @@ nav .pagination li.active .page-link {
     .product_wrapper .active_grid .productBox .imgBox {
         height: 100px;
     }
+    
 
 }
 
@@ -9412,6 +9438,9 @@ nav .pagination li.active .page-link {
     }
 
 
+    .product_wrapper .low_moq_products_wrap .productBox {
+        width: 94%;
+    }
     .product-search-block .col.m4, .product_wrapper .active_grid .col.s12, .profile_tabNav_wrap .col.s6.m4, .profile_contentCol .productBox {
         width: 100% !important;
     }

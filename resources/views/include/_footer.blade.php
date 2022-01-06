@@ -727,6 +727,9 @@ $("#searchOption").change(function(){
     }
 });
 $(document).on("keyup",".search_input",function(){
+    if($(this).val().length == 0){
+        $("#search-results-wrapper").hide();
+    }
     if($(this).val().length > 2)
     {
         var is_env = "{{ env('APP_ENV') }}";

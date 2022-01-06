@@ -1846,6 +1846,7 @@ form input:read-only {
 }
 div.dataTables_wrapper table.mdc-data-table__table {
     overflow: hidden;
+    border-radius: 20px 20px 0 0;
 }
 .dataTables_wrapper thead,
 .product_data_table_wrap thead {
@@ -3412,6 +3413,11 @@ div.dataTables_wrapper table.mdc-data-table__table {
     color: #54A958;
     font-weight: 600;
     margin-bottom: 30px;
+}
+.blog_detail_info_wrap h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 30px 0 20px;
 }
 .blog_detail_info_wrap h6 {
     font-size: 35px;
@@ -5055,6 +5061,21 @@ input.input-field[type=text]:not(.browser-default) {
     top: 5px;
     right: 27px;
 }
+.profile_form_modal .tooltipped_title {
+    float: left;
+}
+.profile_form_modal .tooltipped {
+    float: left;
+    margin-left: 10px;
+    margin-top: 6px;
+    line-height: 10px;
+    color: #000000;
+    cursor: pointer;
+}
+.profile_form_modal .tooltipped .material-icons {
+    font-size: 18px;
+}
+
 .profile_form_modal td {
     padding: 15px 5px 0;
 } 
@@ -6124,7 +6145,7 @@ nav .pagination li.active .page-link {
     right: 0;
     left: inherit !important;
     height: auto !important;
-    top: 42px !important;
+    top: 52px !important;
     width: 235px !important;
     padding: 10px 0px 15px !important;
     min-width: 100px;
@@ -9228,7 +9249,8 @@ nav .pagination li.active .page-link {
 
     .no_more_tables td {
         padding-left: 40% !important;
-        font-size: 14px;
+        font-size: 13px;
+        line-height: 20px;
     }
     .no_more_tables td:before {
         width: 40%;
@@ -9254,6 +9276,10 @@ nav .pagination li.active .page-link {
     }
     .notifications_icon_wrap .card {
         right: -30px;
+    }
+    #homepage .tbm li a {
+        font-size: 14px;
+        line-height: 20px;
     }
 
 }
@@ -9358,6 +9384,7 @@ nav .pagination li.active .page-link {
 
     #order-modification .btn_green {
         min-width: 90px;
+        font-size: 13px;
     }
 
 

@@ -250,7 +250,7 @@ class HomeController extends Controller
         $colors_sizes = json_decode($product->colors_sizes);
         $attr = json_decode($product->attribute);
         //recommandiation products
-        $recommandProducts=Product::with('businessProfile')->where('state',1)
+        $recommandProducts=Product::with('businessProfile')->where('business_profile_id', '!=', null)->where('state',1)
         ->where('id','!=',$product->id)
         ->whereHas('category', function($q) use ($product){
              $q->where('id',$product->product_category_id);

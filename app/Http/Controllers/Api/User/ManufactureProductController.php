@@ -195,7 +195,7 @@ class ManufactureProductController extends Controller
     }
     public function show($productId){
        
-        $product=Product::with('product_images','category','businessProfile','user')->where('id',$productId)->first();
+        $product=Product::with('product_images','category','businessProfile.user')->where('id',$productId)->first();
         if($product){
             return response()->json([
                 'success' => true,

@@ -40,7 +40,7 @@
 						<div class="add_more_box">
 							<a href="javascript:void(0);" class="add-more-block" onclick="addProductionCapacity()"><i class="material-icons dp48">add</i> Add More</a>
 						</div>
-						
+
 					</div>
 				</div>
 			</div> -->
@@ -67,14 +67,14 @@
 									@foreach($business_profile->categoriesProduceds as $categoriesProduced)
 									<tr>
 										<td data-title="Type"><input name="type[]" placeholder="Man, Woman, Kids etc." id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
-										<td data-title="Percentage"><input name="percentage[]" placeholder="% on total annual production" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
+										<td data-title="Percentage"><input name="percentage[]" placeholder="% on total annual production" id="percentage" type="number" class="form-control valid-number-check"  value="{{$categoriesProduced->percentage}}" ></td>
 										<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 									</tr>
 									@endforeach
 									@else
 									<tr id="categories-produced-table-no-data">
 										<td data-title="Type"><input name="type[]" id="type" placeholder="Man, Woman, Kids etc." type="text" class="form-control "  value="" ></td>
-										<td data-title="Percentage"><input name="percentage[]" id="percentage" placeholder="% on total annual production" type="number" class="form-control "  value="" ></td>
+										<td data-title="Percentage"><input name="percentage[]" id="percentage" placeholder="% on total annual production" type="number" class="form-control valid-number-check"  value="" ></td>
 										<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 									</tr>
 									@endif
@@ -85,7 +85,7 @@
 						<div class="add_more_box">
 							<a href="javascript:void(0);" class="add-more-block" onclick="addCategoriesProduced()"><i class="material-icons dp48">add</i> Add More</a>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
@@ -112,14 +112,14 @@
 								@foreach($business_profile->machineriesDetails as $machineriesDetail)
 								<tr>
 									<td data-title="Machine Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
-									<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
+									<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control valid-number-check"  value="{{$machineriesDetail->quantity}}" ></td>
 									<td data-title=""><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 								</tr>
 								@endforeach
 								@else
 								<tr id="machinaries-details-table-no-data">
 									<td data-title="Machine Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>
-									<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>
+									<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control valid-number-check"  value="" ></td>
 									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 								</tr>
 								@endif
@@ -129,7 +129,7 @@
 					<div class="add_more_box">
 						<a href="javascript:void(0);" class="add-more-block" onclick="addMachinariesDetails()"><i class="material-icons dp48">add</i> Add More</a>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -148,6 +148,17 @@
 	<!-- <div class="modal-footer">
 		<a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
 	</div> -->
-	
+
 </div>
 </div>
+
+@push('js')
+<script>
+    $(document).on('change','.valid-number-check', function(){
+        var value=$(this).val();
+        if(value == 0 || value < 0){
+            alert('0 or negative not accepted.');
+        }
+    });
+</script>
+@endpush

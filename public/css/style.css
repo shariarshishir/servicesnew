@@ -1844,6 +1844,11 @@ form input:read-only {
     white-space: nowrap;
     padding: 15px;
 }
+div.dataTables_wrapper table.mdc-data-table__table {
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+.dataTables_wrapper thead,
 .product_data_table_wrap thead {
     background: #54A958;
     color: #ffffff;
@@ -3409,6 +3414,11 @@ form input:read-only {
     font-weight: 600;
     margin-bottom: 30px;
 }
+.blog_detail_info_wrap h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 30px 0 20px;
+}
 .blog_detail_info_wrap h6 {
     font-size: 35px;
     font-size: 20px;
@@ -4222,6 +4232,20 @@ form input:read-only {
     border-radius: 15px;
     position: relative;
     margin-top: 50px;
+}
+.rfq_content_box .rfq_view_detail_wrap .btn_view_detail span,
+.responses_wrap .btn_responses .new-bid-reply-badge {
+    color: #000;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 3px;
+    font-weight: 300;
+    border: 1px solid #000;
+}
+.rfq_content_box .rfq_view_detail_wrap .btn_view_detail span {
+    padding: 3px 4px 4px;
+    line-height: 14px;
+    display: inline-block;
 }
 .respones_detail_wrap .responses_open {
     background : url('../images/frontendimages/new_layout_images/respons_bg.png') no-repeat center top;
@@ -5037,6 +5061,21 @@ input.input-field[type=text]:not(.browser-default) {
     top: 5px;
     right: 27px;
 }
+.profile_form_modal .tooltipped_title {
+    float: left;
+}
+.profile_form_modal .tooltipped {
+    float: left;
+    margin-left: 10px;
+    margin-top: 6px;
+    line-height: 10px;
+    color: #000000;
+    cursor: pointer;
+}
+.profile_form_modal .tooltipped .material-icons {
+    font-size: 18px;
+}
+
 .profile_form_modal td {
     padding: 15px 5px 0;
 } 
@@ -5122,6 +5161,7 @@ input.input-field[type=text]:not(.browser-default) {
     padding: 5px 10px;
     height: auto;
     margin-top: 10px;
+    background: #54A958 !important;
 }
 #product-modification-modal .input-field {
     display: block;
@@ -5174,6 +5214,10 @@ input.input-field[type=text]:not(.browser-default) {
 .certification-details-table-block .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 10px;
     right: 5px;
+}
+.product-details-table-block td .colorSizeModal {
+    display: block;
+    font-size: 15px;
 }
 
 
@@ -5846,8 +5890,11 @@ nav .pagination li.active .page-link {
 #orders {
     padding-bottom: 50px;
 }
+.order-details-modal .product-details-table-block {
+    padding-bottom: 30px;
+}
 #orders table th {
-    padding: 5px 20px;
+    padding: 15px 20px;
 }
 #orders .order_inquiries_table table th {
     padding: 15px 20px;
@@ -6001,6 +6048,10 @@ nav .pagination li.active .page-link {
     padding: 0;
     min-height: inherit;
 }
+.notifications_icon_wrap .card li.no-notifications {
+    padding: 5px 15px 0;
+    opacity: 0.6;
+}
 .notifications_icon_wrap .card li:last-child,
 .cart-icon-outer-wrapper .card li:last-child {
     padding-bottom: 0;
@@ -6094,7 +6145,7 @@ nav .pagination li.active .page-link {
     right: 0;
     left: inherit !important;
     height: auto !important;
-    top: 42px !important;
+    top: 52px !important;
     width: 235px !important;
     padding: 10px 0px 15px !important;
     min-width: 100px;
@@ -9198,7 +9249,8 @@ nav .pagination li.active .page-link {
 
     .no_more_tables td {
         padding-left: 40% !important;
-        font-size: 14px;
+        font-size: 13px;
+        line-height: 20px;
     }
     .no_more_tables td:before {
         width: 40%;
@@ -9224,6 +9276,10 @@ nav .pagination li.active .page-link {
     }
     .notifications_icon_wrap .card {
         right: -30px;
+    }
+    #homepage .tbm li a {
+        font-size: 14px;
+        line-height: 20px;
     }
 
 }
@@ -9328,6 +9384,7 @@ nav .pagination li.active .page-link {
 
     #order-modification .btn_green {
         min-width: 90px;
+        font-size: 13px;
     }
 
 

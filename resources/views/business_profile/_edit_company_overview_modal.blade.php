@@ -1,6 +1,10 @@
 <div id="company-overview-modal" class="modal profile_form_modal">
     <div class="modal-content">
-        <legend>Company Overview</legend>
+        <legend>
+            <div class="row">
+                <span class="tooltipped_title"> Company Overview</span> <a class="tooltipped" data-position="top" data-tooltip="Please mention the general information about your business. <br />This information will represent your identity in the digital space. <br />Input your values carefully. <br />Any false information is strictly prohibited."><i class="material-icons">info</i></a>
+            </div>
+        </legend>
         <div class="row">
             <div id="errors"></div>
             <form class="col s12" method="post" action="#" id="company-overview-update-form">

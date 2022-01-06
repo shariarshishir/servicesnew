@@ -32,19 +32,19 @@
             } else {
                 $("#review_business_type").html("<b>Business Type:</b> Design Studio");
             }
-            
+
             if(numberOfFactories){
                 $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
             } else {
                 $("#review_number_of_factories").html("<b>Number of Factories:</b> N/A");
             }
-            
+
             if(numberOfOutlets) {
                 $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
             } else {
                 $("#review_number_of_outlets").html("<b>Number of Outlets:</b> N/A");
             }
-            
+
             $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
             $("#review_industry_type").html("<b>Industry Type:</b> "+industryType);
             if(businessCategoryId){
@@ -52,7 +52,7 @@
             } else {
                 $("#review_business_category_id").html("<b>Business Category:</b> N/A");
             }
-            
+
             if(representiveName){
                 $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
             } else {
@@ -60,7 +60,7 @@
             }
 
             if(representiveEmail){
-                $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);    
+                $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
             } else {
                 $("#review_representatives_email").html("<b>Representative Email:</b> N/A");
             }
@@ -535,8 +535,8 @@
 
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
-        html += '<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
-        html += '<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control  value="" ></td>';
+        html += '<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control"  value="" ></td>';
+        html += '<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control valid-number-check"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.categories-produced-table-block tbody').append(html);
@@ -553,8 +553,8 @@
 
     let totalChild = $('.machinaries-details-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
-    html += '<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control  value="" ></td>';
+    html += '<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control"  value="" ></td>';
+    html += '<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control valid-number-check"  value="" ></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('.machinaries-details-table-block tbody').append(html);
@@ -578,6 +578,7 @@
       success:function(response){
         $('.loading-message').html("");
         $('#loadingProgressContainer').hide();
+        $('#capacity-machineries-errors').empty();
         var machineriesDetails=response.machineriesDetails;
         var categoriesProduceds=response.categoriesProduceds;
         var productionCapacities=response.productionCapacities;

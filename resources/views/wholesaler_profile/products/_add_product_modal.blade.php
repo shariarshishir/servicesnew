@@ -129,7 +129,7 @@
                                                 <th>Qty Min</th>
                                                 <th>Qty Max</th>
                                                 <th>Price (usd)</th>
-                                                <th>Lead Time (days)</th>
+                                                <th>Lead Time</th>
                                                 <th>&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -280,7 +280,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                
+
                                 <div class="add_more_box" style="padding-top: 20px">
                                     <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>

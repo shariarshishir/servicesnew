@@ -10,17 +10,19 @@
             <input type="hidden" name="company_factory_tour_id"  value="{{$companyFactoryTour->id ?? ''}}">
             <input type="hidden" name="company_factory_tour_image_ids">
             <input type="hidden" name="company_factory_tour_large_image_ids">
-            
+
             <div class="row">
                 <div class="form-group input-field factory-tour-photo">
-                    <legend>Virtual Tour Url</legend>
+                    <legend>Virtual Tour Url
+                        <span class="tooltipped" data-position="top"  data-tooltip="You need to upload your video to Youtube and provide an embedded link.<br> You can find the embedded link for the video in the share button below the Youtube video."><i class="material-icons dp48">live_help</i></span>
+                    </legend>
                     <input type="text" name="virtual_tour" value="{{$companyFactoryTour->virtual_tour ?? ''}}">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group factory-tour-photo factory_images_box">
                     <legend>Factory Images</legend>
-                    
+
                     <div class="row factory_images_box_wrap">
                         @if(isset($companyFactoryTour->companyFactoryTourImages))
                         @if(count($companyFactoryTour->companyFactoryTourImages)>0 )
@@ -34,7 +36,7 @@
                         @endif
 
                     </div>
-                    
+
                     <div class="factory_file_uploader">
 
                         <label for="product-upload">Media</label>
@@ -55,10 +57,10 @@
                             <a href="javascript:void(0);" class="add-more-factory-image-block" onclick="addFactoryImageBlock()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="form-group factory-tour-photo factory_large_images_box">
                     <legend>Factory 360 Degree Images</legend>
@@ -96,7 +98,7 @@
 
                 </div>
             </div>
-           
+
             <div class="submit_btn_wrap" style="padding-top: 30px;">
                 <div class="row">
                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
@@ -105,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </form>
     </div>
-</div>        
+</div>

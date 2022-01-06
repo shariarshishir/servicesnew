@@ -120,7 +120,7 @@
                         <div class="col s12 m9 l9 ">
                             <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" ></textarea>
                         </div>
-                        
+
                     </div>
                     <div class="input-field row">
                         <div class="col s12 m3 l3 ">
@@ -132,10 +132,10 @@
                     </div>
                     <div class="input-field row">
                         <div class="col s12 m3 l3 ">
-                            <label for="lead_time">Lead time (days)</label>
+                            <label for="lead_time">Lead time</label>
                         </div>
                         <div class="col s12 m9 l9 ">
-                            <input type="text" name="lead_time" id="lead_time" class="form-control" placeholder="Lead Time" required>
+                            <input type="text" name="lead_time" id="lead_time" class="form-control" placeholder="days" required>
                         </div>
                     </div>
                     <div class="product_media_wrap">

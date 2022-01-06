@@ -9,7 +9,11 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  association-membership-details-block">
-                    <legend>Association memberships <a class="tooltipped" data-position="top" data-tooltip="Mention the association memberships you have.<br />This increases the credibility of your facility. <br />Mention the association name in the Name field,<br /> Upload the logo of the association in the logo<br /> field and mention the membership number in the<br /> membership number filed."><i class="material-icons">info</i></a></legend>
+                    <legend> 
+                        <div class="row">
+                            <span class="tooltipped_title">Association memberships</span> <a class="tooltipped" data-position="top" data-tooltip="Mention the association memberships you have.<br />This increases the credibility of your facility. <br />Mention the association name in the Name field,<br /> Upload the logo of the association in the logo<br /> field and mention the membership number in the<br /> membership number filed."><i class="material-icons">info</i></a>
+                        </div>
+                    </legend>
                     <div class="association-membership-details-block">
                         <div class="no_more_tables">
                             <table class="association-membership-details-table-block">

@@ -8,7 +8,11 @@
 		
 		<div class="row">
 			<div class="form-group  special-customization-details-block">
-				<legend>Special Customization ability <a class="tooltipped" data-position="top" data-tooltip="Mention(if any) special customization capability you have.<br />Please write the relevant text and user keywords so that<br />your profile get advantage in promotion algorithm."><i class="material-icons">info</i></a></legend>
+				<legend> 
+					<div class="row">
+						<span class="tooltipped_title">Special Customization ability</span> <a class="tooltipped" data-position="top" data-tooltip="Mention(if any) special customization capability you have.<br />Please write the relevant text and user keywords so that<br />your profile get advantage in promotion algorithm."><i class="material-icons">info</i></a>
+					</div>
+				</legend>
 				<div class="special-customization-block">
 					<table class="special-customization-table-block">
 						<thead>

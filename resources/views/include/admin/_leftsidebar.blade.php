@@ -53,6 +53,12 @@
                 <p>Shop Configuration</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ Route('admin.orders.index')}}" class="nav-link {{ Route::is('admin.orders.index')? 'active' : ''}}">
+              <i class="fas fa-palette nav-icon"></i>
+                <p>Orders</p>
+            </a>
+          </li>
           <li class="nav-item has-treeview {{ Route::is('query.request.index',1) || Route::is('query.request.index',2)? 'menu-open' : ''}}">
             <a href="javascript:void(0);" class="nav-link {{ Route::is('query.request.index',1) || Route::is('query.request.index',2)? 'active' : ''}}">
               <i class="nav-icon fas fa-question-circle"></i>

@@ -13,8 +13,10 @@
 
             <div class="row">
                 <div class="form-group input-field factory-tour-photo">
-                    <legend>Virtual Tour Url
-                        <span class="tooltipped" data-position="top"  data-tooltip="You need to upload your video to Youtube and provide an embedded link.<br> You can find the embedded link for the video in the share button below the Youtube video."><i class="material-icons dp48">live_help</i></span>
+                    <legend> 
+                        <div class="row">
+                            <span class="tooltipped_title">Virtual Tour Url</span> <span class="tooltipped" data-position="top"  data-tooltip="You need to upload your video to Youtube and provide an embedded link.<br> You can find the embedded link for the video in the share button below the Youtube video."><i class="material-icons dp48">info</i></span>
+                        </div>
                     </legend>
                     <input type="text" name="virtual_tour" value="{{$companyFactoryTour->virtual_tour ?? ''}}">
                 </div>

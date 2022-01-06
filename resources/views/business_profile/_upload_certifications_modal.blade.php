@@ -19,7 +19,11 @@
                 </div>
                 <div class="defaut-certification-block"></div> --}}
                 <div class="form-group  certification-details-block">
-                    <legend>Certification Details <a class="tooltipped" data-position="top" data-tooltip="Mention your certification information in this section."><i class="material-icons">info</i></a></legend>
+                    <legend> 
+                        <div class="row">
+                            <span class="tooltipped_title">Certification Details</span> <a class="tooltipped" data-position="top" data-tooltip="Mention your certification information in this section."><i class="material-icons">info</i></a>
+                        </div>
+                    </legend>
                     <div class="certification-details-block">
                         <div class="no_more_tables">
                             <table class="certification-details-table-block">

@@ -439,6 +439,45 @@ class UserController extends Controller
 
     }
 
+    //login without sso from app
+    // public function login(Request $request){
+
+    //     request()->validate([
+
+    //         'email'=> 'required',
+    //         'password'=> 'required',
+
+    //     ]);
+
+    //     $user = User::where('email',$request->email)->first();
+    //     $message = "Email verfication mail has resent successfully";
+    //     $token=$user->createToken('merchantbayshop')->plainTextToken;
+    //     if($user && $user->is_email_verified == 0 && Hash::check($request->password, $user->password)){
+
+    //         $verifyUser = UserVerify::where('user_id', $user->id)->first();
+    //         $email_verification_OTP = $email_verification_OTP = mt_rand(100000,999999);
+    //         $verifyUser = UserVerify::where('user_id',$verifyUser->user_id)->update([
+    //             'user_id' => $user->id,
+    //             'token' => $email_verification_OTP
+    //         ]);
+    //         $verifyUser = UserVerify::where('user_id', $user->id)->first();
+
+    //         Mail::send('emails.apiEmailVerificationEmail', ['token' => $verifyUser->token], function($message) use($request){
+    //             $message->to($request->email);
+    //             $message->subject('Email Verification Mail');
+    //         });
+    //         return response()->json(array('message' => $message,'auth_token'=> $token,'code'=>'True','user'=>$user),200);
+    //     }
+    //     elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
+    //         return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
+    //     }
+    //     else{
+    //         return response()->json(['message' => 'Wrong email or password','code'=>'False' ,'user'=>$user],401);
+    //     }
+
+    // }
+
+
 
 
 

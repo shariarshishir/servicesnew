@@ -213,6 +213,7 @@ class OrderController extends Controller
                         'payment_id'      => $request['payment_id']?? 1,
                         'payment_name'    => $request['payment_name']?? '10% with merchant assistance',
                         'state'           => 'pending',
+                        'payment_status'  => 'unpaid',
                         'ip_address'      => $request->ip(),
                         'user_agent'      => $request->header('User-Agent'),
                     ]);

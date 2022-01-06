@@ -8,7 +8,12 @@
 		
 		<div class="row">
 			<div class="form-group  business-term-details-block">
-				<legend>Business Terms <a class="tooltipped" data-position="top" data-tooltip="Mention your business terms in this section.<br />Input terms in the first field and condition in the second field.<br />For example: If you want to mention the average lead<br />time as business term then input Average lead time in the term box then<br />input xx days in the second input field."><i class="material-icons">info</i></a></legend>
+				<legend>
+					<div class="row">
+						<span class="tooltipped_title">Business Terms</span> <a class="tooltipped" data-position="top" data-tooltip="Mention your business terms in this section.<br />Input terms in the first field and condition in the second field.<br />For example: If you want to mention the average lead<br />time as business term then input Average lead time in the term box then<br />input xx days in the second input field."><i class="material-icons">info</i></a>
+					</div>
+				</legend>
+				
 				<div class="business-term-block">
 					<div class="no_more_tables">
 						<table class="business-term-table-block">

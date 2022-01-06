@@ -9,7 +9,11 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row">
                 <div class="form-group  export-destination-details-block">
-                    <legend>Export Destinations <a class="tooltipped" data-position="top" data-tooltip="Mention the countries you export most often.<br />This information will help to recommend your profile <br />to the buyers from those regions."><i class="material-icons">info</i></a></legend>
+                    <legend> 
+                        <div class="row">
+                            <span class="tooltipped_title">Export Destinations</span> <a class="tooltipped" data-position="top" data-tooltip="Mention the countries you export most often.<br />This information will help to recommend your profile <br />to the buyers from those regions."><i class="material-icons">info</i></a>
+                        </div>
+                    </legend>
                     <div class="export-destination-details-block">
                         <div class="no_more_tables">
                             <table class="export-destination-table-block">

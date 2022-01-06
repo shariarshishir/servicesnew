@@ -47,7 +47,11 @@
 
 			<div class="col s12 capacity_block_box">
 				<div class="form-group categories-produced-block">
-					<legend>Categories <a class="tooltipped" data-position="top" data-tooltip="Please input the percentage of Kids, <br />Man and Women products your factory manufactures.<br />For example: Men- 60%, Women 30% and kids 10%"><i class="material-icons">info</i></a></legend>
+					<legend> 
+						<div class="row" style="margin:0;">
+                            <span class="tooltipped_title">Categories</span> <a class="tooltipped" data-position="top" data-tooltip="Please input the percentage of Kids, <br />Man and Women products your factory manufactures.<br />For example: Men- 60%, Women 30% and kids 10%"><i class="material-icons">info</i></a>
+                        </div>
+					</legend>
 					<div class="categories-produced-block">
 						<div class="no_more_tables">
 							<table class="categories-produced-table-block">
@@ -88,7 +92,11 @@
 		</div>
 		<div class="row capacity_block_box">
 			<div class="form-group machinaries-details-block">
-				<legend>machinaries Details <a class="tooltipped" data-position="top" data-tooltip="Please input the machineries name and quantity<br />in this section. Be specific while mentioning the machine name."><i class="material-icons">info</i></a></legend>
+				<legend>
+					<div class="row">
+						<span class="tooltipped_title">Machinaries Details </span> <a class="tooltipped" data-position="top" data-tooltip="Please input the machineries name and quantity<br />in this section. Be specific while mentioning the machine name."><i class="material-icons">info</i></a>
+					</div>
+				</legend>
 				<div class="machinaries-details-block">
 					<div class="no_more_tables">
 						<table class="machinaries-details-table-block">

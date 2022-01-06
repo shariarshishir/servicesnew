@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductWishlist;
 use Illuminate\Support\Facades\Auth;
+use stdClass;
 
 class WishlistController extends Controller
 {
@@ -43,13 +44,25 @@ class WishlistController extends Controller
 
 
     public function  index(){
-        $wishListItems=ProductWishlist::with('product.images')->where('user_id',auth()->user()->id)->get();
-        if($wishListItems){
-            return response()->json(['message' => 'Wishlist products found','code'=>true,'productWishlist'=>$wishListItems],200);
+        $wishListItems = ProductWishlist::with('product.images')->where('user_id',auth()->user()->id)->get();
+        $productsArray = [];
+        foreach($wishListItems as $wishlistItem){
+           
+            $newFormatedProduct= new stdClass();
+            $newFormatedProduct->id = $wishlistItem->id;
+            $newFormatedProduct->attribute = json_decode($wishlistItem->product->attribute);
+            $newFormatedProduct->name = $wishlistItem->product->name;
+            $newFormatedProduct->moq = $wishlistItem->product->moq;
+            $newFormatedProduct->product_unit = $wishlistItem->product->product_unit;
+            $newFormatedProduct->images = $wishlistItem->product->images;
+            array_push($productsArray,$newFormatedProduct);
+        }
+        if(count($productsArray)>0){
+            return response()->json(['message' => 'Wishlist products found','code'=>true,'productWishlist'=>$productsArray],200);
 
         }
         else{
-            return response()->json(['message' => 'Wishlist products not found !!','code'=>false,'productWishlist'=>$wishListItems],204);
+            return response()->json(['message' => 'Wishlist products not found !!','code'=>false,'productWishlist'=>$productsArray],200);
         }
     }
 

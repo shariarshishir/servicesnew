@@ -41,7 +41,7 @@
                     <span class="chip lighten-5 {{$orderItem->payment_status== 'paid' ? 'green green-text' : 'yellow yellow-text' }}">{{ucfirst($orderItem->payment_status)}}</span>
                 </td>
 
-                <td style="text-align: center  test">
+                <td style="text-align: center;">
                     @if(isset($countOrderApproved))
                     <a id="notification_identifier" data-orderId="{{$orderItem->id}}"  href="#order-details-modal_{{$orderItem->id}}" class="order-more-details btn green waves-effect waves-light modal-trigger"><i class="material-icons">remove_red_eye</i></a>
                     @else

@@ -250,7 +250,7 @@ class HomeController extends Controller
         $colors_sizes = json_decode($product->colors_sizes);
         $attr = json_decode($product->attribute);
         //recommandiation products
-        $recommandProducts=Product::with('businessProfile')->where('business_profile_id', '!=', null)->where('state',1)
+        $recommandProducts=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->where('state',1)
         ->where('id','!=',$product->id)
         ->whereHas('category', function($q) use ($product){
              $q->where('id',$product->product_category_id);
@@ -258,10 +258,14 @@ class HomeController extends Controller
         })
         ->orWhere(function($query) use ($product){
             $query->where('product_type',$product->product_type)
-                  ->where('id', '!=', $product->id);
+                  ->where('id', '!=', $product->id)
+                  ->where('business_profile_id', '!=', null);
         })
-        ->with(['images'])
+        ->whereHas('businessProfile', function($b){
+            $b->where('deleted_at' , null);
+        })
         ->get();
+
         return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
     }
 
@@ -750,7 +754,6 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-
         return view('product.low_moq',compact('low_moq_lists'));
     }
     //low moq details

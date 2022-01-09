@@ -38,7 +38,7 @@
 				        <legend>Business Lists</legend>
                             @if($user->businessProfile()->exists())
                                 <div class="row">
-                                    @foreach ($user->businessProfile as $profile )
+                                    @foreach ($user->businessProfileWithTrashed as $profile )
                                         <div class="col-md-6">
                                             <p>Business Type :
                                                 @switch($profile->business_type)
@@ -63,6 +63,14 @@
                                                 <p>Number Of Outlets : {{$profile->number_of_outlets}}</p>
                                             @endif
                                             <a href="{{Route('business.profile.details', $profile->id)}}">View Details</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @if($profile->deleted_at)
+                                                <a href="{{route('business.profile.restore', $profile->id)}}" onclick="return confirm('Are you sure?');">Active</a>
+                                            @else
+                                                <a href="{{route('business.profile.delete', $profile->id)}}" onclick="return confirm('Are you sure?');">Inactive</a>
+                                            @endif
+
                                         </div>
                                     @endforeach
 

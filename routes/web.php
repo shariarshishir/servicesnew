@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
+use App\Http\Controllers\Admin\ManageBusinessProfileController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -454,7 +455,9 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('certification',AdminCertificationController::class, [
             'as' => 'admin'
         ]);
-
+        //active inactive business profile
+        Route::get('businessprofile/delete/{businessprofileid}', [ManageBusinessProfileController::class, 'delete'])->name('business.profile.delete');
+        Route::get('businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('business.profile.restore');
 
 
 

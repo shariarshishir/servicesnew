@@ -95,6 +95,8 @@ class RfqBidController extends Controller
                 $newFormatedBid = new stdClass();
                 $newFormatedBid->id = $bid->id;
                 $newFormatedBid->business_profile_id = $bid->business_profile_id;
+                $newFormatedBid->user_id = $bid->businessProfile->user->id;
+                $newFormatedBid->user_image = $bid->businessProfile->user->image;
                 $newFormatedBid->supplier_id = $bid->supplier_id;
                 $newFormatedBid->titile = $bid->titile;
                 $newFormatedBid->description = $bid->description;

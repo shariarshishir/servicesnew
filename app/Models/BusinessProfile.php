@@ -113,51 +113,5 @@ class BusinessProfile extends Model
         return $this->hasMany(RelatedProduct::class);
     }
 
-    //deleting and restoring business profile
-    protected static $relations_to_cascade_to_wholesaler = ['cartItems','wholesalerProducts','relatedProducts'];
-    protected static $relations_to_cascade_to_manufacture = ['cartItems','manufactureProducts','relatedProducts'];
-
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-
-    //     static::deleting(function($resource) {
-    //         return $resource->delete();
-    //         if($resource->business_type == 1) {
-    //             $relations_to_cascade =static::$relations_to_cascade_to_manufacture;
-    //         }else{
-    //             return 'test';
-    //             $relations_to_cascade =static::$relations_to_cascade_to_wholesaler;
-    //         }
-    //         foreach ($relations_to_cascade as $relation) {
-    //             foreach ($resource->{$relation}()->get() as $item) {
-    //                 if(isset($item)){
-    //                     $item->delete();
-    //                 }
-    //             }
-    //         }
-
-    //         $resource->delete();
-
-    //     });
-
-    //     static::restoring(function($resource) {
-    //         if($resource->business_type == 1) {
-    //             $relations_to_cascade =static::$relations_to_cascade_to_manufacture;
-    //         }else{
-    //             $relations_to_cascade =static::$relations_to_cascade_to_wholesaler;
-    //         }
-    //         foreach ($relations_to_cascade as $relation) {
-    //             foreach ($resource->{$relation}()->onlyTrashed()->get() as $item) {
-    //                 if(isset($item)){
-    //                     $item->restore();
-    //                 }
-    //             }
-    //         }
-
-    //         $resource->restore();
-    //     });
-    // }
 
 }

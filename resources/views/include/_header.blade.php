@@ -84,7 +84,7 @@
 										@endif
 									</span>
 								</a>
-								<ul id="profile-dropdown" class="dropdown-content">
+								<ul id="profile-dropdown" class="dropdown-content card">
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
@@ -214,12 +214,14 @@
 						</li>
 						@endif
 					</ul>
+
 					<div class="header_message_box">
 						<a href="{{route('message.center')}}">
 							<i class="material-icons">message</i>
 							<span class="sms_counter">0</span>
 						</a>
 					</div>
+
 					@endif
 
                     <div class="cart-icon-outer-wrapper">
@@ -344,7 +346,7 @@
 										@endif
 									</span>
 								</a>
-								<ul id="profile-dropdown-mobile" class="dropdown-content profile_dropdown_mobile">
+								<ul id="profile-dropdown-mobile" class="dropdown-content profile_dropdown_mobile card">
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
@@ -381,7 +383,7 @@
 										@endif
 									</span>
 								</a>
-								<ul id="profile-dropdown-mobile" class="dropdown-content">
+								<ul id="profile-dropdown-mobile" class="dropdown-content card">
 									<li tabindex="0">
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
@@ -505,6 +507,7 @@
 							</div>
 
 							<ul id="countdown-dropdown-mobile" class="card dropdown-content">
+								@if(count($userNotifications)>0)
 								<li class="">
 									@foreach($userNotifications as $notification)
 										@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
@@ -516,7 +519,7 @@
 											</div>
 										</a>
 										@elseif($notification->type == 'App\Notifications\NewOrderHasApprovedNotification')
-										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
 											<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -541,7 +544,7 @@
 										</a>
 
 										@elseif ($notification->type == 'App\Notifications\NewOrderModificationRequestNotification' )
-										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
 												<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -549,7 +552,15 @@
 											</div>
 										</a>
 										@elseif ($notification->type == 'App\Notifications\QueryCommuncationNotification' )
-										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title">{{$notification->data['title']}}</div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+										@elseif ($notification->type == 'App\Notifications\QueryWithModificationToUserNotification')
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
 												<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -557,7 +568,7 @@
 											</div>
 										</a>
 										@elseif ($notification->type == 'App\Notifications\PaymentSuccessNotification')
-										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
 												<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -565,7 +576,7 @@
 											</div>
 										</a>
 										@elseif ($notification->type =='App\Notifications\NewRfqNotification')
-										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
 											<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -573,7 +584,7 @@
 											</div>
 										</a>
 										@elseif ($notification->type =='App\Notifications\RfqBidNotification')
-										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
 											<div class="admin-notification-title">{{$notification->data['title']}}</div>
@@ -583,6 +594,11 @@
 										@endif
 									@endforeach
 								</li>
+								@else
+								<li class="no-notifications">
+									No notifications
+								</li>
+								@endif
 							</ul>
 
 							<div class="header_message_box mobile_top_icon_box">

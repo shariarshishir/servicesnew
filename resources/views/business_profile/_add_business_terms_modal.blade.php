@@ -28,15 +28,15 @@
 								@if(count($business_profile->businessTerms)>0)
 								@foreach($business_profile->businessTerms as $businessTerm)
 								<tr>
-									<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->title}}" ></td>
-									<td data-title="Quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="{{$businessTerm->quantity}}" ></td>
+									<td data-title="Particular"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="{{$businessTerm->title}}" ></td>
+									<td data-title="Term"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="{{$businessTerm->quantity}}" ></td>
 									<td data-title=""><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 								</tr>
 								@endforeach
 								@else
 								<tr id="business-term-details-table-no-data">
-									<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>
-									<td data-title="Quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>
+									<td data-title="Particular"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>
+									<td data-title="Term"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>
 									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>
 								</tr>
 								@endif

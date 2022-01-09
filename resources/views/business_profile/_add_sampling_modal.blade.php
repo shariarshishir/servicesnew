@@ -27,14 +27,14 @@
 								@if(count($business_profile->samplings)>0)
 								@foreach($business_profile->samplings as $sampling)
 								<tr>
-									<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="{{$sampling->title}}" ></td>
+									<td data-title="Particulars"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="{{$sampling->title}}" ></td>
 									<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="{{$sampling->quantity}}" ></td>
 									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 								</tr>
 								@endforeach
 								@else
 								<tr id="sampling-details-table-no-data">
-									<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>
+									<td data-title="Particulars"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>
 									<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>
 									<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 								</tr>

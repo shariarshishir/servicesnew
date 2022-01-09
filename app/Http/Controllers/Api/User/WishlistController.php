@@ -50,6 +50,8 @@ class WishlistController extends Controller
            
             $newFormatedProduct= new stdClass();
             $newFormatedProduct->id = $wishlistItem->id;
+            $newFormatedProduct->product_id = $wishlistItem->product->id;
+            $newFormatedProduct->product_type = $wishlistItem->product->product_type;
             $newFormatedProduct->attribute = json_decode($wishlistItem->product->attribute);
             $newFormatedProduct->name = $wishlistItem->product->name;
             $newFormatedProduct->moq = $wishlistItem->product->moq;

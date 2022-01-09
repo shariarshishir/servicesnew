@@ -234,9 +234,10 @@ class OrderController extends Controller
                             'order_modification_req_id' => $item['order_modification_req_id'] ?? null,
                         ]);
                     }
-                    if(isset($item->order_modification_req_id)){
-               
-                        OrderModificationRequest::where('id',$item->order_modification_req_id)->update(['state' => config('constants.order_query_status.ordered')]);
+                   
+                    if(isset($item['order_modification_req_id'])){
+                        
+                        OrderModificationRequest::where('id',$item['order_modification_req_id'])->update(['state' => 3]);
                     }
                 }
 

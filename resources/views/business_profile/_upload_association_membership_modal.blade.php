@@ -28,7 +28,7 @@
                                 <tbody>
                                     <tr>
                                         <td data-title="Name"><input class="input-field" name="title[]" id="association-membership-title" type="text"  ></td>
-                                        <td data-title="Short Description">
+                                        <td data-title="Membership number">
                                             <textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea>
                                         </td>
                                         <td data-title="Image"><input class="input-field file_upload" name="image[]" id="association-membership-image" type="file"></td>

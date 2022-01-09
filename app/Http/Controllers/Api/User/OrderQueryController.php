@@ -24,6 +24,7 @@ class OrderQueryController extends Controller
                    $newFormatedOrderQuery->id=$orderQuery->id;
                    $newFormatedOrderQuery->type=$orderQuery->type;
                    $newFormatedOrderQuery->user=$orderQuery->user->name;
+                   $newFormatedOrderQuery->email=$orderQuery->user->email;
                    $newFormatedOrderQuery->product_id=$orderQuery->product_id;
                    $newFormatedOrderQuery->product_type=$orderQuery->product->product_type;
                    $newFormatedOrderQuery->details=json_decode($orderQuery->details);

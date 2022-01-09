@@ -12,6 +12,7 @@ use App\Models\VendorOrderItem;
 use App\Models\UserAddress;
 use App\Models\CartItem;
 use App\Models\BusinessProfile;
+use App\Models\OrderModificationRequest;
 use DB;
 use Exception;
 use App\Models\Product;
@@ -213,6 +214,7 @@ class OrderController extends Controller
                         'payment_id'      => $request['payment_id']?? 1,
                         'payment_name'    => $request['payment_name']?? '10% with merchant assistance',
                         'state'           => 'pending',
+                        'payment_status'  => 'unpaid',
                         'ip_address'      => $request->ip(),
                         'user_agent'      => $request->header('User-Agent'),
                     ]);
@@ -232,10 +234,13 @@ class OrderController extends Controller
                             'order_modification_req_id' => $item['order_modification_req_id'] ?? null,
                         ]);
                     }
+                    if(isset($item->order_modification_req_id)){
+               
+                        OrderModificationRequest::where('id',$item->order_modification_req_id)->update(['state' => config('constants.order_query_status.ordered')]);
+                    }
                 }
 
             }
-
 
                
             CartItem::where('user_id',auth()->user()->id)->delete();

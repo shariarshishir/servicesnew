@@ -36,7 +36,7 @@
                 <div class="col-md-12">
                     <div class="card">
 				        <legend>Business Lists</legend>
-                            @if($user->businessProfile()->exists())
+                            @if($user->businessProfileWithTrashed()->exists())
                                 <div class="row">
                                     @foreach ($user->businessProfileWithTrashed as $profile )
                                         <div class="col-md-6">

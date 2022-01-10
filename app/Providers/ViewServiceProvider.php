@@ -31,7 +31,6 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function($view) {
-
             $categories = Cache::remember('categories', 60, function ()
             {
                 $source = ProductCategory::select('id', 'name', 'slug', 'status', 'parent_id')->where('status',1)->get()->toArray();

@@ -11,9 +11,6 @@ class Country extends Model
 
     protected $connection = 'mysql';
     protected $table="countries";
-    public function user()
-    {
-        return $this->belongsTo(User::class,'country','code');
-    }
+    
 
 }

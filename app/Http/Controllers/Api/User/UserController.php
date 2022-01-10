@@ -155,6 +155,7 @@ class UserController extends Controller
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
+            'country'=>'required'
         ]);
         $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
@@ -173,6 +174,7 @@ class UserController extends Controller
             'user_agent' => $request->header('User-Agent'),
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
+            'country' => $request->country,
         ]);
 
         $email_verification_OTP = mt_rand(100000,999999);
@@ -379,21 +381,20 @@ class UserController extends Controller
 
     public function login(Request $request){
 
-        dd($request->all());
         request()->validate([
 
             'email'=> 'required',
             'password'=> 'required',
 
         ]);
-        // if(env('APP_ENV') == 'production')
-        // {
+        if(env('APP_ENV') == 'production')
+        {
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
             
-        // }
+        }
 
         if($sso->successful()){
 

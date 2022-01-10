@@ -49,8 +49,9 @@ class WishlistController extends Controller
         foreach($wishListItems as $wishlistItem){
            
             $newFormatedProduct= new stdClass();
-            $newFormatedProduct->id = $wishlistItem->id;
-            $newFormatedProduct->product_id = $wishlistItem->product->id;
+            $newFormatedProduct->wishlist_id = $wishlistItem->id;
+            $newFormatedProduct->id = $wishlistItem->product->id;
+            $newFormatedProduct->business_profile_id = $wishlistItem->product->businessProfile->id;
             $newFormatedProduct->product_type = $wishlistItem->product->product_type;
             $newFormatedProduct->attribute = json_decode($wishlistItem->product->attribute);
             $newFormatedProduct->name = $wishlistItem->product->name;

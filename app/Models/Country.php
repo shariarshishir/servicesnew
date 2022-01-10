@@ -12,5 +12,4 @@ class Country extends Model
     protected $connection = 'mysql';
     protected $table="countries";
     
-
 }

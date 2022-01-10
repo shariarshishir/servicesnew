@@ -73,8 +73,8 @@ Route::get('/email/verify',[UserController::class, 'emailVerify']);
 Route::post('/omd-rfqs', [RFQController::class, 'storeRfqFromOMD']);
 
 //blogs
-Route::get('/blogs',[BlogController::class,'blogs'])->name('industry.blogs');
-Route::get('/blogs/{id}',[BlogController::class,'blogDetails'])->name('blogs.details');
+Route::get('/blogs',[BlogController::class,'blogs']);
+Route::get('/blogs/{id}',[BlogController::class,'blogDetails']);
 
 Route::group(['middleware'=>['auth:sanctum']],function () {
     //user api

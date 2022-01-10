@@ -1348,6 +1348,86 @@ $(document).on("click", ".order-query-notification" , function() {
 
 });
 
+
+//profile active inactive
+$(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
+            if($(this).is(":checked")) {
+                var obj = $(this);
+                var b_profile_id=$(this).attr('bpid');
+                var delete_url = '{{ route("business.profile.delete", ":slug") }}';
+                    delete_url = delete_url.replace(':slug', b_profile_id);
+                swal({
+                    title: "Want to disable this profile ?",
+                    text: "Please ensure and then confirm!",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: !0
+                })
+                .then((willDelete) => {
+                    if (willDelete.value === true) {
+                        $.ajax({
+                            url: delete_url,
+                            type: "GET",
+                            success:function(data)
+                                {
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    obj.prop('checked',false);
+                                    swal("Oops...!", xhr.responseJSON.msg,"warning");
+
+                                }
+                        });
+                    }
+                    else {
+                        $(this).prop('checked',false);
+                        willDelete.dismiss;
+                    }
+                });
+            }
+
+            else {
+                var obj = $(this);
+                var b_profile_id=$(this).attr('bpid');
+                var restore_url = '{{ route("business.profile.restore", ":slug") }}';
+                    restore_url = restore_url.replace(':slug', b_profile_id);
+                    swal({
+                    title: "Want to restore this profile ?",
+                    text: "Please ensure and then confirm!",
+                    type: "success",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: !0
+                })
+                .then((willRestore) => {
+                    if (willRestore.value === true) {
+                        $.ajax({
+                            url: restore_url,
+                            type: "GET",
+                            success:function(data)
+                                {
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    obj.prop('checked',true);
+                                    swal("Oops...!", xhr.responseJSON.msg,"warning");
+
+                                }
+                        });
+                    }
+                    else {
+                        $(this).prop('checked',true);
+                        willRestore.dismiss;
+                    }
+                });
+            }
+        });
+
 </script>
 
 

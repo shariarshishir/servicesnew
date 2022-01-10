@@ -60,19 +60,22 @@
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
                         <div class="my_businesses_box card user-business-profile-short-info">
-                        @if($businessprofile->business_type==1)
-                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
-                        @else
-                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
-                        @endif
-                        <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
-                        <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
-                        @if ($businessprofile->deleted_at)
-                            <span class="red">Inactive</span>
-                            <a href="{{route('business.profile.restore', $businessprofile->id)}}" onclick="return confirm('Are you sure?');">Active</a>
-                        @else
-                            <a href="{{route('business.profile.delete', $businessprofile->id)}}" onclick="return confirm('if you inactive your business,the business data will not show anywhere');">Inactive</a>
-                        @endif
+                            @if($businessprofile->business_type==1)
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                            @else
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                            @endif
+                            <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
+                            <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+
+                            <div class="switch profile_enable_disable_trigger">
+                                <label>
+                                    <span class="enable_disable_label">Disable This profile</span>
+                                    <input type="checkbox" bpid={{$businessprofile->id}} {{$businessprofile->deleted_at ? 'checked' : ''}}>
+                                    <span class="lever"></span>
+                                </label>
+                            </div>
+
                         </div>
                     </div>
 

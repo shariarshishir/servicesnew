@@ -9,9 +9,29 @@ class ManageBusinessProfileController extends Controller
 {
     public function delete($id)
     {
-        $business_profile=BusinessProfile::findOrFail($id);
+        $business_profile=BusinessProfile::where('id',$id)->first();
+        if(!$business_profile){
+            return response()->json([
+                'success' => false,
+                'msg'     => 'Record not found'
+            ],404);
+        }
+        $business_profile_rel_auth_id=[];
+        array_push($business_profile_rel_auth_id, $business_profile->user_id,$business_profile->representative_user_id);
+
+        if(!in_array(auth()->id(), $business_profile_rel_auth_id)){
+            return response()->json([
+                'success' => false,
+                'msg'     => 'You are not authorized'
+            ],401);
+        }
+
         $business_profile->delete();
-        return redirect()->back()->with('success', 'Business profile deactivated successfull.');
+        return response()->json([
+            'success' => true,
+            'msg'     => 'Business profile deactivated successfull.'
+        ],200);
+
     }
 
     public function restore($id)
@@ -20,8 +40,28 @@ class ManageBusinessProfileController extends Controller
         ->where('id', $id)
         ->first();
 
+        if(!$business_profile){
+            return response()->json([
+                'success' => false,
+                'msg'     => 'Record not found'
+            ],404);
+        }
+        $business_profile_rel_auth_id=[];
+        array_push($business_profile_rel_auth_id, $business_profile->user_id,$business_profile->representative_user_id);
+
+        if(!in_array(auth()->id(), $business_profile_rel_auth_id)){
+            return response()->json([
+                'success' => false,
+                'msg'     => 'You are not authorized'
+            ],401);
+        }
+
         $business_profile->restore();
-        return redirect()->back()->with('success', 'Business profile restored successfull.');
+        return response()->json([
+            'success' => true,
+            'msg'     => 'Business profile restored successfull.'
+        ],200);
+       // return redirect()->back()->with('success', 'Business profile restored successfull.');
     }
 
 }

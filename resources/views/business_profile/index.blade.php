@@ -29,12 +29,13 @@
                         @endswitch
                     </p>
                     <p><span>Location:</span> {{$profile->location}}</p>
-                    @if ($profile->deleted_at)
-                        <span class="red">Inactive</span>
-                        <a href="{{route('business.profile.restore', $profile->id)}}" onclick="return confirm('Are you sure?');">Active</a>
-                    @else
-                        <a href="{{route('business.profile.delete', $profile->id)}}" onclick="return confirm('if you inactive your business,the business data will not show anywhere');">Inactive</a>
-                    @endif
+                    <div class="switch profile_enable_disable_trigger">
+                        <label>
+                            <span class="enable_disable_label">Disable This profile</span>
+                            <input type="checkbox" bpid={{$profile->id}} {{$profile->deleted_at ? 'checked' : ''}}>
+                            <span class="lever"></span>
+                        </label>
+                    </div>
                     @if($profile->business_type==1)
                     <a class="business_view" href="{{route('business.profile.show',$profile->id)}}">View Details</a>
                     @else

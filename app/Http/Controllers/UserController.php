@@ -434,10 +434,10 @@ class UserController extends Controller
         // return view('user.profile.index',compact('user','category','productList','productNewArrival','productFeatured','countries','orders','flag','vendorReviews','orderModificationRequestIds','orderIds','orderModificationRequest','notifications'));
 
         $user=User::where('id',auth()->id())->first();
-        $businessProfiles=BusinessProfile::where('user_id',auth()->id())->get();
+        $businessProfiles=BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
         if($businessProfiles->isEmpty())
         {
-            $businessProfiles=BusinessProfile::where('representative_user_id',auth()->id())->get();
+            $businessProfiles=BusinessProfile::withTrashed()->where('representative_user_id',auth()->id())->get();
         }
 
 
@@ -573,7 +573,7 @@ class UserController extends Controller
             elseif($notification->type=="App\Notifications\PaymentSuccessNotification"){
                 array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
             }
-           
+
 
 
         }

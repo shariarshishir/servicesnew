@@ -25,11 +25,11 @@ class BusinessProfileController extends Controller
 
     public function index()
     {
-        $business_profile=BusinessProfile::where('user_id',auth()->id())->get();
+        $business_profile=BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
 
         if($business_profile->isEmpty())
         {
-            $business_profile=BusinessProfile::where('representative_user_id',auth()->id())->get();
+            $business_profile=BusinessProfile::withTrashed()->where('representative_user_id',auth()->id())->get();
         }
 
         return view('business_profile.index',['business_profile' => $business_profile]);
@@ -170,7 +170,7 @@ class BusinessProfileController extends Controller
 
     public function show($id)
     {
-        $business_profile = BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
+        $business_profile = BusinessProfile::withTrashed()->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
         $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
 
 
@@ -178,9 +178,9 @@ class BusinessProfileController extends Controller
         {
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
             $sizes=['S','M','L','XL','XXL','XXXL'];
-            $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
+            $products=Product::withTrashed()->latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
-                $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+                $mainProducts=Product::withTrashed()->with('product_images')->where('business_profile_id',$id)->inRandomOrder()
                 ->limit(4)
                 ->get();
             $default_certification=Certification::get();
@@ -369,7 +369,7 @@ class BusinessProfileController extends Controller
     }
 
     public function termsOfServiceCreateOrUpdate(Request $request){
-     
+
         try{
             $company_overview = CompanyOverview::where('business_profile_id',$request->business_profile_id)->first();
             $company_overview->update(['terms_of_service'=>$request->terms_of_service??null]);

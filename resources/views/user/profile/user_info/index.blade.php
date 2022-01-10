@@ -67,6 +67,12 @@
                         @endif
                         <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
                         <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+                        @if ($businessprofile->deleted_at)
+                            <span class="red">Inactive</span>
+                            <a href="{{route('business.profile.restore', $businessprofile->id)}}" onclick="return confirm('Are you sure?');">Active</a>
+                        @else
+                            <a href="{{route('business.profile.delete', $businessprofile->id)}}" onclick="return confirm('if you inactive your business,the business data will not show anywhere');">Inactive</a>
+                        @endif
                         </div>
                     </div>
 

@@ -66,9 +66,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             @if($profile->deleted_at)
-                                                <a href="{{route('business.profile.restore', $profile->id)}}" onclick="return confirm('Are you sure?');">Active</a>
+                                                <a href="{{route('admin.business.profile.restore', $profile->id)}}" onclick="return confirm('Are you sure?');">Active</a>
                                             @else
-                                                <a href="{{route('business.profile.delete', $profile->id)}}" onclick="return confirm('Are you sure?');">Inactive</a>
+                                                <a href="{{route('admin.business.profile.delete', $profile->id)}}" onclick="return confirm('Are you sure?');">Inactive</a>
                                             @endif
 
                                         </div>

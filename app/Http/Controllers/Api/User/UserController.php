@@ -379,6 +379,7 @@ class UserController extends Controller
 
     public function login(Request $request){
 
+        dd($request->all());
         request()->validate([
 
             'email'=> 'required',
@@ -546,6 +547,7 @@ class UserController extends Controller
     // user registration from sso
     public function signUp(Request $request)
     {
+        // dd($request->all());
         
         $request->validate([
             'name' => 'required',
@@ -555,6 +557,7 @@ class UserController extends Controller
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
+            'country'=>'required'
         ]);
         $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
@@ -572,6 +575,7 @@ class UserController extends Controller
             'user_agent' => $request->header('User-Agent'),
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
+            'country' => $request->country,
             'is_email_verified' => 1,
         ]);
 

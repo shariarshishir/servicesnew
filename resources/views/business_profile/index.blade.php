@@ -13,7 +13,14 @@
             @foreach ($business_profile  as $profile )
             <div class="business_list_itembox">
                 <div class="box_shadow list_box">
-                    <p><span>Business Name:</span> {{$profile->business_name}}</p>
+                    <p>
+                        <span>Business Name:</span> 
+                        @if($profile->business_type==1)
+                        <a href="{{route('business.profile.show',$profile->id)}}">{{$profile->business_name}}</a>
+                        @else
+                        <a href="{{route('wholesaler.profile.show',$profile->id)}}">{{$profile->business_name}}</a>
+                        @endif                        
+                    </p>
                     <p><span>Business Type:</span>
                         @switch($profile->business_type)
                             @case(1)
@@ -28,7 +35,7 @@
                             @default
                         @endswitch
                     </p>
-                    <p><span>Location:</span> {{$profile->location}}</p>
+                    <p><span>Location:</span> {{ \Illuminate\Support\Str::limit($profile->location, 15, $end='...') }}</p>
                     <div class="switch profile_enable_disable_trigger">
                         <label>
                             <input type="checkbox" bpid={{$profile->id}} {{$profile->deleted_at ? '' : 'checked'}}>

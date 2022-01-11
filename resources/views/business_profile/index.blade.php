@@ -31,9 +31,9 @@
                     <p><span>Location:</span> {{$profile->location}}</p>
                     <div class="switch profile_enable_disable_trigger">
                         <label>
-                            <span class="enable_disable_label">Disable This profile</span>
-                            <input type="checkbox" bpid={{$profile->id}} {{$profile->deleted_at ? 'checked' : ''}}>
+                            <input type="checkbox" bpid={{$profile->id}} {{$profile->deleted_at ? '' : 'checked'}}>
                             <span class="lever"></span>
+                            <span class="enable_disable_label {{$profile->deleted_at ? '' : 'teal white-text text-darken-2'}}">{{$profile->deleted_at ? 'Unpublish' : 'Publish'}}</span>
                         </label>
                     </div>
                     @if($profile->business_type==1)

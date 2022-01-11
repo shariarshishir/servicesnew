@@ -145,7 +145,7 @@
                             </div>
                             <div id="representative_details_info" class="col s12">
                                 <div class="representative_box">
-                                    <label class="title" for="business_name">Do You want to represent this business yourself?<span class="tooltipped" data-position="top"  data-tooltip="A representative will receive notifications about orders,<br />queries and other activities from Merchant Bay.<br />You can only represent one business."><i class="material-icons dp48">info</i></span></label>
+                                    <label class="title" for="business_name">Do you want to represent this business yourself?<span class="tooltipped" data-position="top"  data-tooltip="A representative will receive notifications about orders,<br />queries and other activities from Merchant Bay.<br />You can only represent one business."><i class="material-icons dp48">info</i></span></label>
                                     <span class="radio_box_wrap">
                                         <label class="radio_box">
                                             <input name="has_representative" type="radio" value="1"  />

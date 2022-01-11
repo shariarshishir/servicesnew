@@ -193,11 +193,12 @@
 
                                             <div class="full_specification"><span class="title">Description:</span> {!! $bid->description !!} </div>
                                             <div class="full_details">
-                                                <span class="title">Quantity:</span> {{$bid->quantity}},
+                                                <span class="title">Offer Price:</span> ${{$bid->unit_price}}/pc
+                                                <!--<span class="title">Quantity:</span> {{$bid->quantity}},
                                                 <span class="title">Unit Price:</span> {{$bid->unit_price}},
                                                 <span class="title">Total Price:</span>  {{$bid->total_price}},
                                                 <span class="title">Payment Method:</span> {{$bid->payment_method}},
-                                                <span class="title">Delivery Time:</span> {{$bid->delivery_time}}
+                                                <span class="title">Delivery Time:</span> {{$bid->delivery_time}}-->
                                             </div>
 
                                             <!-- <p>Description: {{$bid->description}}</p>
@@ -207,7 +208,7 @@
                                             <p>Payment Method: {{$bid->payment_method}}</p>
                                             <p>Delivery Time: {{$bid->delivery_time}}</p> -->
 
-                                            <div class="respones_img_wrap">
+                                             <!--<div class="respones_img_wrap">
                                                 @if(isset($bid->media))
                                                     @foreach (json_decode($bid->media) as $image)
                                                         <div class="respones_img">
@@ -240,7 +241,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 @php $x++; @endphp

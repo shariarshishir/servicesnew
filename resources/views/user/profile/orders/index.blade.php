@@ -3,9 +3,9 @@
         <div class="card card-with-padding order-list-block">
             <legend>Orders List</legend>
             @if (auth()->user()->user_type == 'wholesaler')
-                <div class="col m12 product-search-block">
+                <div class="col s12 m12 product-search-block">
                     <div class="row">
-                        <div class="col m4">
+                        <div class="col s12 m4">
                             <label for="new_arrival">Order Type</label>
                             <select class="select2 browser-default" name="filter_order_type" id="filter_order_type">
                                 <option value="" selected>Choose your option</option>
@@ -43,26 +43,26 @@
             <div class="modal-content">
                 <legend>Order Details</legend>
                 <div class="row order-top-block">
-                    <div class="order-info-top col m6">
+                    <div class="order-info-top col s12 m6">
                         <p>Order Number: #{{$item->order_number}}</p>
                         <p>Date: {{ \Carbon\Carbon::parse($item->created_at)->isoFormat('MMMM Do YYYY')}}</p>
                     </div>
 
-                    <div class="order-status-block col m6">
+                    <div class="order-status-block col s12 m6">
                         <p>Buyer Name: {{ ucfirst($item->user->name)}}</p>
                         {{-- <a href="javascript:void(0);" class="waves-effect waves-green btn green">Shipped</a> --}}
                     </div>
                 </div>
                 <div class="row order-address-block">
 
-                    {{-- <div class="billing-address-block col m6">
+                    {{-- <div class="billing-address-block col s12 m6">
                         <h4><i class="material-icons">description</i> Billing Address</h4>
                         <p>{{$item->billingAddress->company_name}}</p>
                         <p>{{$item->billingAddress->address}}</p>
                         <p>{{$item->billingAddress->email}}</p>
                         <p>{{$item->billingAddress->phone}}</p>
                     </div>
-                    <div class="shipping-address-block col m6">
+                    <div class="shipping-address-block col s12 m6">
                         <h4><i class="material-icons">card_travel</i> Shipping Address</h4>
                         <p>{{$item->shippingAddress->company_name}}</p>
                         <p>{{$item->shippingAddress->address}}</p>
@@ -177,16 +177,16 @@
                 @if(isset($item->shippingCharge) &&$item->shippingCharge->status == config('constants.shipping_charge_status.confirm'))
                     <div class="shipping-charge-div">
                         <legend>Shipping Information</legend>
-                        <div class="col m12">
+                        <div class="col s12 m12">
                             <div class="row">
                                 @if($item->shippingCharge->forwarder_name)
-                                <div class="col m12">
+                                <div class="col s12 m12">
                                     <label>Forwarder Name:</label>
                                     {{$item->shippingCharge->forwarder_name}}
                                 </div>
                                 @endif
                                 @if($item->shippingCharge->forwarder_address)
-                                <div class="col m12">
+                                <div class="col s12 m12">
                                     <label>Forwarder Address:</label>
                                     {{$item->shippingCharge->forwarder_address}}
                                 </div>

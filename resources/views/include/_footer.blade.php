@@ -1378,7 +1378,7 @@ $(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
                                 {
                                     $('.loading-message').html("");
 		                            $('#loadingProgressContainer').hide();
-                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Publish');
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Published');
                                     obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').addClass('teal white-text text-darken-2');
                                     swal("Done!", data.msg,"success");
                                 },
@@ -1406,8 +1406,8 @@ $(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
                 var delete_url = '{{ route("business.profile.delete", ":slug") }}';
                     delete_url = delete_url.replace(':slug', b_profile_id);
                 swal({
-                    title: "Want to disable this profile ?",
-                    text: "Please ensure and then confirm!",
+                    title: "Want to disable this profile?",
+                    text: "(All products of this profile will be unpublish!)",
                     type: "warning",
                     showCancelButton: !0,
                     confirmButtonText: "Yes",
@@ -1427,7 +1427,7 @@ $(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
                                 {
                                     $('.loading-message').html("");
 		                            $('#loadingProgressContainer').hide();
-                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Unpublish');
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Unpublished');
                                     obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').removeClass('teal white-text text-darken-2');
                                     swal("Done!", data.msg,"success");
                                 },

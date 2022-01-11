@@ -29,7 +29,7 @@ class ManageBusinessProfileController extends Controller
         $business_profile->delete();
         return response()->json([
             'success' => true,
-            'msg'     => 'Business profile deactivated successfull.'
+            'msg'     => 'Business profile deactivated successfully.'
         ],200);
 
     }
@@ -59,7 +59,7 @@ class ManageBusinessProfileController extends Controller
         $business_profile->restore();
         return response()->json([
             'success' => true,
-            'msg'     => 'Business profile restored successfull.'
+            'msg'     => 'Business profile restored successfully.'
         ],200);
        // return redirect()->back()->with('success', 'Business profile restored successfull.');
     }

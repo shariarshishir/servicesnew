@@ -168,7 +168,7 @@
                                 @foreach ($rfqSentList->bids as $bid)
 
                                     <div class="row respones_box">
-                                        <div class="col s12 m2 l2">
+                                        <div class="col s12 m3 l2">
                                             <div class="rfq_profile_img">
                                                 @if(auth()->user()->image)
                                                 <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
@@ -177,7 +177,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col s12 m10 l10 rfq_profile_info">
+                                        <div class="col s12 m7 l10 rfq_profile_info">
                                             <div class="row">
                                                 <div class="col m7 l7 profile_info">
                                                     <h4>{{$bid->businessProfile->business_name}} </h4>

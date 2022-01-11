@@ -4359,17 +4359,17 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_thum_imgs .rfq_thum_img img {
     height: 200px;
 }
-.rfq_thum_img .xlsx_icon {
-    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
-    background-size: 120px;
+.rfq_thum_img .doc_icon {
+    background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
+    background-size: 118px;
     width: auto;
     height: 132px;
     display: block;
     font-size: 0;
 }
-.rfq_thum_img .doc_icon {
-    background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
-    background-size: 120px;
+.rfq_thum_img .xlsx_icon {
+    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
+    background-size: 118px;
     width: auto;
     height: 132px;
     display: block;
@@ -4377,7 +4377,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_thum_img .pdf_icon {
     background: url(../images/frontendimages/new_layout_images/pdf-bg.png) no-repeat center;
-    background-size: 120px;
+    background-size: 118px;
     width: auto;
     height: 132px;
     display: block;
@@ -4385,7 +4385,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_thum_img .zip_icon {
     background: url(../images/frontendimages/new_layout_images/zip-bg.png) no-repeat center;
-    background-size: 120px;
+    background-size: 118px;
     width: auto;
     height: 132px;
     display: block;
@@ -4848,6 +4848,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     font-weight: 400;
     /* width: 96%; */
     width: -webkit-fill-available !important;
+    width: -moz-available !important;
     margin-bottom: 0;
     border: none !important;
 }
@@ -7621,6 +7622,14 @@ nav .pagination li.active .page-link {
         margin-right: 20px;
     }
 
+    .rfq_profile_info .btn_green {
+        padding: 5px 10px 3px;
+        font-size: 15px;
+    }
+    .rfq_content_box .respones_detail_wrap .respones_box {
+        padding: 0;
+    }
+
 
 }
 
@@ -7826,6 +7835,7 @@ nav .pagination li.active .page-link {
     .wholesaler_product_wrap .product_item_box {
         width: 33% !important;
     }
+
 }
 
 
@@ -8584,6 +8594,10 @@ nav .pagination li.active .page-link {
         padding: 20px 15px 0;
     }
 
+    .modal .color-and-size-block .color-size-table-block tr td input {
+        width: -webkit-fill-available !important;
+        width: -moz-available !important;
+    }
 
 }
 
@@ -8959,9 +8973,9 @@ nav .pagination li.active .page-link {
     .rfq_profile_info {
             text-align: center;
         }
-    .rfq_thum_imgs .rfq_thum_img {
+    /* .rfq_thum_imgs .rfq_thum_img {
         float: none;
-    }
+    } */
     .banner_search .material-icons {
         font-size: 1.5rem !important;
     }
@@ -9235,6 +9249,13 @@ nav .pagination li.active .page-link {
     .video_upload_block .edit-video-show-block {
         text-align: center;
     }
+    .rfq_content_box .respones_detail_wrap .respones_box {
+        padding: 0;
+    }
+    .rfq_profile_info .btn_green {
+        margin: 10px 0 20px !important;
+    }
+
 
 
 }
@@ -9325,8 +9346,14 @@ nav .pagination li.active .page-link {
     }
     .profile_leftCol .office_address h4 span, 
     .leftCol_wrap .office_address h4 span {
-        font-size: 20px;
+        font-size: 12px;
         padding-right: 0;
+        line-height: 18px;
+    }
+    .profile_leftCol .office_address h4 .material-icons, 
+    .leftCol_wrap .office_address h4 .material-icons {
+        font-size: 20px;
+        margin-top: -2px;
     }
     .profile_leftCol .profile_pic, .leftCol_wrap .profile_pic {
         width: 75px;
@@ -9575,11 +9602,27 @@ nav .pagination li.active .page-link {
         min-width: 90px;
         font-size: 13px;
     }
+    .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3, .product_wrapper .active_grid .col.s12 {
+        width: 100%;
+        margin: 0 0 10px 0;
+    }
     .product_wrapper .low_moq_products_wrap .productBox {
         width: 94%;
     }
     .product-search-block .col.m4, .product_wrapper .active_grid .col.s12, .profile_tabNav_wrap .col.s6.m4, .profile_contentCol .productBox {
         width: 100% !important;
+    }
+
+    .rfq_thum_imgs .rfq_thum_img {
+        width: 90px;
+        height: 100px;
+    }
+    .rfq_thum_img .xlsx_icon,
+    .rfq_thum_img .pdf_icon,
+    .rfq_thum_img .zip_icon,
+    .rfq_thum_img .doc_icon {
+        background-size: 88px;
+        height: 100px;
     }
 
 

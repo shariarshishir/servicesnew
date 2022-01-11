@@ -66,7 +66,7 @@ class RfqBidController extends Controller
              400);
          }
 
-            $allData=$request->only('rfq_id','business_profile_id','unit_price');
+            $allData=$request->only('rfq_id','business_profile_id','unit_price','description');
             $allData['supplier_id']=auth()->id();
             $rfq = Rfq::find($request->rfq_id);
             // $allData['title'] =$rfq->title;

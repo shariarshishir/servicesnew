@@ -26,6 +26,7 @@
                     </div>
                     <div class=" col s12 m8 l9">
                         <textarea name="description" id="product-bidding-desc" for="product-bidding-desc" class="editor product-bidding-desc" cols="30" rows="10"></textarea>
+                        <span class="validation-error-description red"></span>
                     </div>
                 </div>
                 <div class="row input-field input-wrapper">
@@ -33,7 +34,8 @@
                         <label for="product-unit">Offer Price <span >*</span></label>
                     </div>
                     <div class=" col s4 m4 ">
-                        <input type="text" id="product-unit" name="unit" class="form-control" placeholder="$ Price in USD/pc" value="" disabled="">
+                        <input type="text" id="product-unit" name="unit_price" class="form-control bid-price-range-value" placeholder="$ Price in USD/pc" value="" >
+                        <span class="validation-error-unit-price red"></span>
                     </div>
                 </div>
 

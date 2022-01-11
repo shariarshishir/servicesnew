@@ -26,6 +26,7 @@
                             $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", false);
                             $('#rfq-bid-modal input[name=rfq_id]').val(data.data.id);
                             $('#rfq_bid_store_errors').empty();
+                            $('#rfq-bid-modal .rfq-replay-submit').show();
 
                             $('#my_business_list').html('');
                             $.each(data.my_business, function (i, item) {
@@ -39,7 +40,8 @@
                                 $('#my_business_list').trigger('change');
                                 tinymce.get("product-bidding-desc").setContent(data.bid.description);
                                 $('#rfq-bid-modal input[name=unit_price]').val(data.bid.unit_price);
-                                $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
+                                // $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
+                                  $('#rfq-bid-modal .rfq-replay-submit').hide();
 
                             }
 
@@ -64,11 +66,74 @@
         }
 
         //store bid rfq
+
+        function validateWordsLength() {
+            var max = 1;
+            var theEditor = tinymce.activeEditor;
+            var wordCount = theEditor.plugins.wordcount.getCount();
+            if(wordCount == 0){
+                $('#rfq-bid-form .validation-error-description').text('Short description required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-description').text(' ');
+            }
+            if (wordCount > max) {
+                alert("Short description Maximum " + max + " words allowed.your given words length is "+wordCount + "")
+                return false;
+            }
+            return;
+        }
+
+        function validateUnitPrice(){
+            var unit_value= $('#rfq-bid-modal input[name=unit_price]').val().length;
+            if(unit_value == 0){
+                $('#rfq-bid-form .validation-error-unit-price').text('Unit price required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-unit-price').text('');
+            }
+            return;
+        }
+        // tinymce.init({
+        //     selector: 'textarea',
+        //     setup: function(editor) {
+        //         editor.on('init', function(e) {
+        //             var body = editor.get("product-bidding-desc").getBody();
+        //             var content = editor.trim(body.innerText || body.textContent).split(' ');
+        //             var max = 1;
+        //             var count = content.length;
+        //             if (count > max) {
+        //                 alert("Maximum " + max + " words allowed.your given words length is "+count + "")
+        //             }
+
+        //                 });
+        //     }
+        // });
+
         $('#rfq-bid-form').on('submit',function(e){
             e.preventDefault();
 
-            var unit_value= $('#rfq-bid-modal input[name=unit]').val();
-            if(unit_value)
+            var unit_value= $('#rfq-bid-modal input[name=unit_price]').val().length;
+            if(unit_value == 0){
+                $('#rfq-bid-form .validation-error-unit-price').text('Unit price required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-unit-price').text('');
+            }
+
+            var max = 50;
+            var theEditor = tinymce.activeEditor;
+            var wordCount = theEditor.plugins.wordcount.getCount();
+            if(wordCount == 0){
+                $('#rfq-bid-form .validation-error-description').text('Short description required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-description').text(' ');
+            }
+            if (wordCount > max) {
+                alert("Short description Maximum " + max + " words allowed.your given words length is "+wordCount + "")
+                return false;
+            }
 
             tinyMCE.triggerSave();
             var formData = new FormData(this);

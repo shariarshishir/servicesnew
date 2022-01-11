@@ -31,6 +31,6 @@ class Rfq extends Model
 
     public function businessProfile()
     {
-        return $this->belongsTo('App\Models\BusinessProfile', 'created_by');
+        return $this->belongsTo('App\Models\BusinessProfile', 'created_by')->withTrashed();
     }
 }

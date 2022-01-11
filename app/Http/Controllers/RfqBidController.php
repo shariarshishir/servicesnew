@@ -73,14 +73,19 @@ class RfqBidController extends Controller
             // $allData['unit'] = $rfq->unit;
             // $allData['destination'] =$rfq->destination;
 
-            // $image_path =[];
             // if ($request->hasFile('rfq_images')){
             //     foreach ($request->file('rfq_images') as $product_image){
-            //         $path=$product_image->store('images','public');
+            //         $extension = $product_image->getClientOriginalExtension();
 
-            //         $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-            //         Storage::put($path, $image);
+            //         if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
+            //             $path=$product_image->store('images','public');
+            //         }
+            //         else{
+            //             $path=$product_image->store('images','public');
+            //             $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+            //             Storage::put($path, $image);
+            //         }
             //         $image_path[] = $path;
             //     }
 
@@ -91,7 +96,7 @@ class RfqBidController extends Controller
             //         $image_path[] = $item->image;
             //     }
 
-            // }
+            //  }
             // $allData['media'] = json_encode($image_path);
 
             $bidData=SupplierBid::create($allData);

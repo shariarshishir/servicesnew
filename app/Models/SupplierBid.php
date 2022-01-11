@@ -13,7 +13,7 @@ class SupplierBid extends Model
     protected $guarded=[];
 
     public function businessProfile(){
-        return $this->belongsTo('App\Models\BusinessProfile', 'business_profile_id', 'id');
+        return $this->belongsTo('App\Models\BusinessProfile', 'business_profile_id', 'id')->withTrashed();
     }
 
     public function user(){

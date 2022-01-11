@@ -15,9 +15,9 @@
                         <legend>Products List</legend>
                         <div class="seller-product-list">
                             <div class="exists-seller-product-list">
-                                <div class="col m12 product-search-block">
+                                <div class="col s12 m12 product-search-block">
                                     <div class="row">
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <div class="input-field">
                                                 <div class="col s12">
                                                     <label for="status">Status</label>
@@ -29,7 +29,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <div class="input-field">
                                                 <div class="col s12">
                                                     <label for="new_arrival">Product Type</label>
@@ -42,7 +42,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <div class="input-field">
                                                 <div class="col s12">
                                                     <label>Search</label>

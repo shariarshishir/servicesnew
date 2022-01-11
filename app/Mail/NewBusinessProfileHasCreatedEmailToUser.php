@@ -11,14 +11,10 @@ class NewBusinessProfileHasCreatedEmailToUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $business_profile;
+    public function __construct($business_profile)
     {
-        //
+        $this->business_profile = $business_profile;
     }
 
     /**
@@ -28,6 +24,6 @@ class NewBusinessProfileHasCreatedEmailToUser extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.email_to_new_business_profile_creator');
+        return $this->markdown('emails.email_to_new_business_profile_creator')->subject('Business Profile Created Successfully')->with('business_profile',$this->business_profile);
     }
 }

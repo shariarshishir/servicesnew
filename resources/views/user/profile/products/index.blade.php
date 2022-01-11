@@ -29,7 +29,7 @@
                         <legend>Products List</legend>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col m12 add-new-product-button">
+                                <div class="col s12 m12 add-new-product-button">
                                     <a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green" data-position="top" data-tooltip="add new product">
                                         <i class="material-icons dp48">add</i> Add New product
                                     </a>
@@ -39,9 +39,9 @@
 
                         <div class="seller-product-list">
                             <div class="exists-seller-product-list">
-                                <div class="col m12 product-search-block">
+                                <div class="col s12 m12 product-search-block">
                                     <div class="row">
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <label for="status">Status</label>
                                             <select class="select2 browser-default" name="status_id" id="filter_state" >
                                                 <option value=""  selected>Choose your option</option>
@@ -49,7 +49,7 @@
                                                 <option value="0" >UnPublish</option>
                                             </select>
                                         </div>
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <label for="new_arrival">Product Type</label>
                                             <select class="select2 browser-default" name="filter_product_type" id="filter_product_type">
                                                 <option value="" selected>Choose your option</option>
@@ -58,7 +58,7 @@
                                                 <option value="3">Non Clothing Item</option>
                                             </select>
                                         </div>
-                                        {{-- <div class="col m4">
+                                        {{-- <div class="col s12 m4">
                                             <label for="product_category_id">Is Featured</label>
                                             <select class="select2 browser-default" name="featured_id" id="filter_featured">
                                                 <option value=""  selected>Choose your option</option>
@@ -66,7 +66,7 @@
                                                 <option value="0">InActive</option>
                                             </select>
                                         </div>
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <label for="new_arrival">New Arrival</label>
                                             <select class="select2 browser-default" name="new_arrival_id" id="filter_arrival">
                                                 <option value="" selected>Choose your option</option>

@@ -1534,20 +1534,26 @@
 									<a href="javascript:void(0);" data-target="factory-tour-edit-modal-block" class="factory_tour_edit_modal_trigger modal-trigger btn_green">Edit Factory Tour</a>
 								</div>
 								@if($companyFactoryTour->virtual_tour)
-								<div class="row top_titleWrap">
-									<div class="col s6 m6">
-										<h3>Virtual Tour</h3>
+									<div class="row top_titleWrap">
+										<div class="col s6 m6">
+											<h3>Virtual Tour</h3>
+										</div>
+										<!-- <div class="col s6 m6 right-align">
+											<a href="javascript:void(0);">Watch on YouTube</a>
+										</div> -->
 									</div>
-									<!-- <div class="col s6 m6 right-align">
-										<a href="javascript:void(0);">Watch on YouTube</a>
-									</div> -->
-								</div>
-								@php
-									$youTubeUrl = explode('/', $companyFactoryTour->virtual_tour);
-								@endphp
-								<div class="factory_video_box">
-									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[4]}}" allowfullscreen></iframe>
-								</div>
+									@php
+										$youTubeUrl = explode('/', $companyFactoryTour->virtual_tour);
+									@endphp
+									@if($youTubeUrl[3]=="embed")
+									<div class="factory_video_box">
+										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[4]}}" allowfullscreen></iframe>
+									</div>
+									@else
+									<div class="factory_video_box">
+										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[3]}}" allowfullscreen></iframe>
+									</div>
+									@endif
 								@endif
 								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->
 								<div class="row top_titleWrap">

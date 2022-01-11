@@ -2357,6 +2357,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box {
     height: 90%;
+    position: relative;
 }
 .product_details_info_wrap .ic-product-title {
     font-size: 22px;
@@ -4344,15 +4345,16 @@ div.dataTables_wrapper table.mdc-data-table__table {
     height: 100%;
     border-radius: 10px;
 }
+
 .rfq_profile_info .rfq_thum_imgs {
     padding: 20px 0;
 }
 .rfq_thum_imgs .rfq_thum_img {
-    display: inline-block;
     width: 120px;
     margin-right: 15px;
     margin-bottom: 15px;
     height: 120px;
+    float: left;
 }
 .rfq_thum_imgs .rfq_thum_img img {
     height: 200px;
@@ -4403,6 +4405,16 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 300;
     font-size: 15px;
 }
+.respones_img_wrap .rfq_thum_img .xlsx_icon,
+.respones_img_wrap .rfq_thum_img .doc_icon,
+.respones_img_wrap .rfq_thum_img .pdf_icon,
+.respones_img_wrap .rfq_thum_img .zip_icon {
+    background-size: 80px;
+    height: 80px;
+}
+
+
+
 /********************* RFQ page css End **************************/
 
 
@@ -4457,6 +4469,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .business_stepper_wrap {
     padding: 50px 80px;
     overflow: hidden;
+}
+.business_stepper_wrap .back_to img {
+    width: 45px;
 }
 .business_stepper_wrap h3 {
     font-size: 32px;
@@ -4709,8 +4724,50 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     left: 0;
     right: 0;
     bottom: 0px;
-
 }
+
+.user-profile-basic-info-block .my_businesses_wrap .my_businesses_box .switch,
+.business_list_inner_wrap .business_list_itembox .list_box .switch {
+    position: absolute;
+    right: 8px;
+    bottom: 10px;
+    width: auto;
+    text-align: right;
+}
+.business_list_inner_wrap .business_list_itembox .list_box .switch {
+    bottom: 50px;
+}
+.my_businesses_wrap .my_businesses_box .switch label input[type=checkbox]:checked+.lever,
+.business_list_itembox .list_box .switch label input[type=checkbox]:checked+.lever {
+    background: #73D578;
+    margin: 0 0 5px 0;
+}
+.my_businesses_wrap .my_businesses_box .switch .teal,
+.business_list_itembox .list_box .switch .teal {
+    background: none !important;
+    color: #54A958 !important;
+    border-radius: 10px;
+    font-weight: 400 !important;
+    font-size: 12px;
+}
+.my_businesses_wrap .my_businesses_box .switch label input[type=checkbox]:checked+.lever:after,
+.business_list_itembox .list_box .switch label input[type=checkbox]:checked+.lever:after {
+    background: #54A958;
+}
+.my_businesses_wrap .my_businesses_box .switch .enable_disable_label,
+.business_list_itembox .list_box .switch .enable_disable_label  {
+    color: #808080;
+    font-weight: 400 !important;
+    font-size: 12px;
+    display: block;
+    
+}
+.my_businesses_wrap .my_businesses_box .switch label .lever,
+.business_list_itembox .list_box .switch label .lever {
+    margin: 0 0px 5px 0;
+    
+}
+
 /* business_stepper_wrap css end  */
 
 
@@ -4732,6 +4789,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 .modal .modal-content {
     padding: 40px 40px 20px;
+    overflow: hidden;
 }
 .modal-content h4 {
     font-size: 20px;
@@ -4776,7 +4834,6 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .input-field select,
 .input-field .select2-container--default .select2-selection--single,
 .input-field input {
-    border: none;
     border-radius: 10px;
     -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
     -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20) !important;
@@ -4810,12 +4867,24 @@ input.input-field[type=text]:not(.browser-default) {
     height: 133px;
     padding-top: 10px !important;
 }
+
 .modal table tr td input {
     width: 82% !important;
     text-align: center;
     float: left;
     border-radius: 5px !important;
 }
+.modal .color-and-size-block .color-size-table-block tr td input {
+    width: 65% !important;
+}
+.modal .prices-breakdown-block .fresh-order-attribute-table-block tr td input {
+    width: 85% !important;
+}
+[type="checkbox"]:not(:checked), 
+[type="checkbox"]:checked {
+    width: auto !important;
+}
+
 .input-field .radio_box input {
     width: auto !important;
 }
@@ -5809,6 +5878,9 @@ legend {
     background-color: #54A958;
     color: #FFFFFF;
 }
+.order-list-block .table tr td.mdc-data-table__cell:last-child {
+    text-align: right;
+}
 .order-list-block .table .btn {
     padding: 0 10px;
     margin: 3px;
@@ -6043,6 +6115,7 @@ nav .pagination li.active .page-link {
     padding: 20px;
     background: #e3e3e3;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 .billing_adrs {
     padding: 20px 0;
@@ -8414,6 +8487,8 @@ nav .pagination li.active .page-link {
 		text-align:left;
 		font-weight: bold;
 	}
+    .order-details-modal .no_more_tables td:before,
+    .no_more_tables .dataTables_wrapper td:before,
     .product_data_table_wrap .no_more_tables td:before {
         top: 8px;
     }

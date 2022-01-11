@@ -6,7 +6,7 @@
             <table style="background: #fff; max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
-                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
+                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/global/" title="logo" target="_blank">
                             <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
                         </a>
                     </td>
@@ -29,10 +29,11 @@
                         <table style="max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td style="text-align: left; padding: 5px; margin: 0px; width: 50%;">
+                                    @if($business_profie->business_type==1)
+                                    <a target="_blank" href="{{route('business.profile.show',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
+                                    @else
                                     <a target="_blank" href="{{route('wholesaler.profile.info',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
-                                </td>
-                                <td style="text-align: right; padding: 5px; margin: 0px; width: 50%;">
-                                    <a target="_blank" href="javascript:void(0);" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Ask for verification</a>
+                                    @endif
                                 </td>
                             </tr>
                         </table>

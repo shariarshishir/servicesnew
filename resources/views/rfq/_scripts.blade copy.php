@@ -24,8 +24,13 @@
                             $('#rfq-bid-modal').modal('open');
                             $('#rfq-bid-form')[0].reset();
                             $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", false);
+                            $('#rfq-bid-modal .rfq_img_upload_wrap').show();
+                            $('#rfq-bid-modal .previous-image-show').hide();
+
                             $('#rfq-bid-modal input[name=rfq_id]').val(data.data.id);
-                            $('#rfq_bid_store_errors').empty();
+                            $('#rfq-bid-modal input[name=title]').val(data.data.title);
+                            $('#rfq-bid-modal input[name=unit]').val(data.data.unit);
+                            $('#rfq-bid-modal input[name=destination]').val(data.data.destination);
 
                             $('#my_business_list').html('');
                             $.each(data.my_business, function (i, item) {
@@ -37,9 +42,24 @@
                             if(data.hasOwnProperty('bid')){
                                 $('#my_business_list').val(data.bid.business_profile_id);
                                 $('#my_business_list').trigger('change');
+                                $('#rfq-bid-modal input[name=quantity]').val(data.bid.quantity);
                                 tinymce.get("product-bidding-desc").setContent(data.bid.description);
                                 $('#rfq-bid-modal input[name=unit_price]').val(data.bid.unit_price);
+                                $('#rfq-bid-modal input[name=total_price]').val(data.bid.total_price);
+                                $('#product-payment-method').val(data.bid.payment_method);
+                                $('#product-payment-method').trigger('change');
+                                $('#rfq-bid-modal input[name=delivery_time]').val(data.bid.delivery_time);
                                 $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
+                                $('#rfq-bid-modal .rfq_img_upload_wrap').hide();
+                                $('#rfq-bid-modal .previous-image-show').show();
+                                $('#rfq-bid-modal .previous-image-show').html('');
+                                $.each(JSON.parse(data.bid.media) ,function(key, item){
+                                    var image="{{asset('storage')}}"+"/"+item;
+                                    var html='<div class="replied_image">';
+                                        html+='<img src="'+image+'" width="100%" alt="media">';
+                                        html+= '</div>';
+                                    $('#rfq-bid-modal .previous-image-show').append(html);
+                                });
 
                             }
 
@@ -66,10 +86,6 @@
         //store bid rfq
         $('#rfq-bid-form').on('submit',function(e){
             e.preventDefault();
-
-            var unit_value= $('#rfq-bid-modal input[name=unit]').val();
-            if(unit_value)
-
             tinyMCE.triggerSave();
             var formData = new FormData(this);
             var url = '{{ route("rfq.bid.store") }}';
@@ -129,7 +145,7 @@
                 {
                     $(this).text('Show More');
                 }
-
+           
             });
         });
 
@@ -143,10 +159,10 @@
             event.preventDefault();
             console.log('hi');
             let rfqId = $(this).attr("data-rfqId");
-
+           
             let obj=$(this).closest('span');
 
-
+           
             $.ajax({
                 type:'GET',
                 url: "{{route('notification-mark-as-read')}}",

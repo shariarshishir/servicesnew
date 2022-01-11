@@ -1546,7 +1546,7 @@
 									$youTubeUrl = explode('/', $companyFactoryTour->virtual_tour);
 								@endphp
 								<div class="factory_video_box">
-									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[3]}}" allowfullscreen></iframe>
+									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[4]}}" allowfullscreen></iframe>
 								</div>
 								@endif
 								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->

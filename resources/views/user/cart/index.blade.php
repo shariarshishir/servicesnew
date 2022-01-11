@@ -40,6 +40,9 @@
                                                 @elseif(isset($item->order_modification_req_id))
                                                 <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span>
                                                 @endif
+                                                @if($item->deleted_at)
+                                                    <span class="badge badge pill red accent-2 mr-2 ready-to-ship-label">Product not available</span>
+                                                @endif
                                             </td>
                                             <td data-title="Business Name" class="product-name" data-title="Product">
                                                 @php  $business_profile= businessProfileInfo($item->business_profile_id); @endphp
@@ -59,7 +62,9 @@
                                                     {{-- @elseif(isset($item->order_modification_req_id)) --}}
                                                     {{-- <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span> --}}
                                                     @else
-                                                    <a class="waves-effect waves-light cart_item_edit" href="javascript:void(0);" id="{{$item->id}}">Edit Item</a>
+                                                        @if(!$item->deleted_at)
+                                                            <a class="waves-effect waves-light cart_item_edit" href="javascript:void(0);" id="{{$item->id}}">Edit Item</a>
+                                                        @endif
                                                     @endif
                                                     @if($item->product_type==1)
                                                         {{-- <a href="javascript:void(0);" class="edit_fresh_order_item">Edit Item</a>
@@ -140,7 +145,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                
+
                                 <br>
                                 <div class="proceed-to-checkout">
                                     <a href="{{route('cart.checkout')}}" class="btn_green waves-effect waves-light green">Proceed to checkout</a>

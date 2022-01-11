@@ -211,9 +211,32 @@
                                                 @if(isset($bid->media))
                                                     @foreach (json_decode($bid->media) as $image)
                                                         <div class="respones_img">
-                                                            <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
+                                                            {{-- <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
                                                                 <img src="{{asset('storage/'.$image)}}" alt="">
-                                                            </a>
+                                                            </a> --}}
+                                                            @if(pathinfo($image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($image, PATHINFO_EXTENSION) == 'PDF')
+                                                                <div class="rfq_thum_img">
+                                                                    <a href="{{ asset('storage/'.$image) }}" class="pdf_icon" target="_blank">&nbsp; PDF</a>
+                                                                </div>
+                                                            @elseif(pathinfo($image, PATHINFO_EXTENSION) == 'doc' || pathinfo($image, PATHINFO_EXTENSION) == 'docx')
+                                                                <div class="rfq_thum_img">
+                                                                    <a href="{{ asset('storage/'.$image) }}" class="doc_icon" >&nbsp; DOC</a>
+                                                                </div>
+                                                            @elseif(pathinfo($image, PATHINFO_EXTENSION) == 'xlsx')
+                                                                <div class="rfq_thum_img">
+                                                                    <a href="{{ asset('storage/'.$image) }}" class="xlsx_icon" >&nbsp; XLSX</a>
+                                                                </div>
+                                                            @elseif(pathinfo($image, PATHINFO_EXTENSION) == 'TAR'|| pathinfo($image, PATHINFO_EXTENSION) == 'tar'|| pathinfo($image, PATHINFO_EXTENSION) == 'rar'|| pathinfo($image, PATHINFO_EXTENSION) == 'RAR' ||pathinfo($image, PATHINFO_EXTENSION) == 'zip' || pathinfo($image, PATHINFO_EXTENSION) == 'ZIP')
+                                                            <div class="rfq_thum_img">
+                                                                <a href="{{ asset('storage/'.$image) }}" class="zip_icon" >&nbsp; DOC</a>
+                                                            </div>
+                                                            @else
+                                                                <div class="rfq_thum_img">
+                                                                    <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
+                                                                        <img src="{{asset('storage/'.$image)}}" alt="" />
+                                                                    </a>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     @endforeach
                                                 @endif

@@ -66,7 +66,7 @@
 									@if(count($business_profile->categoriesProduceds)>0)
 									@foreach($business_profile->categoriesProduceds as $categoriesProduced)
 									<tr>
-										<td data-title="Type"><input name="type[]" placeholder="Man, Woman, Kids etc." id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
+										<td data-title="Category"><input name="type[]" placeholder="Man, Woman, Kids etc." id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
 										<td data-title="Percentage"><input name="percentage[]" placeholder="% on total annual production" id="percentage" type="number" class="form-control valid-number-check"  value="{{$categoriesProduced->percentage}}" ></td>
 										<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>
 									</tr>

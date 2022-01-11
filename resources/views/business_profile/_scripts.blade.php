@@ -36,13 +36,13 @@
             if(numberOfFactories){
                 $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
             } else {
-                $("#review_number_of_factories").html("<b>Number of Factories:</b> N/A");
+                $("#review_number_of_factories").hide();
             }
 
             if(numberOfOutlets) {
                 $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
             } else {
-                $("#review_number_of_outlets").html("<b>Number of Outlets:</b> N/A");
+                $("#review_number_of_outlets").hide();
             }
 
             $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
@@ -50,31 +50,31 @@
             if(businessCategoryId){
                 $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
             } else {
-                $("#review_business_category_id").html("<b>Business Category:</b> N/A");
+                $("#review_business_category_id").hide();
             }
 
             if(representiveName){
                 $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
             } else {
-                $("#review_representative_name").html("<b>Representative Name:</b> N/A");
+                $("#review_representative_name").hide();
             }
 
             if(representiveEmail){
                 $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
             } else {
-                $("#review_representatives_email").html("<b>Representative Email:</b> N/A");
+                $("#review_representatives_email").hide();
             }
 
             if(representivePhone){
                 $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
             } else {
-                $("#review_representatives_contact").html("<b>Representative Phone:</b> N/A");
+                $("#review_representatives_contact").hide();
             }
 
             if(representiveNidPassport) {
                 $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
             } else {
-                $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> N/A");
+                $("#review_representative_nidPassport").hide();
             }
 
             if(!name){
@@ -535,8 +535,8 @@
 
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
-        html += '<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control"  value="" ></td>';
-        html += '<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control valid-number-check"  value="" ></td>';
+        html += '<td data-title="Category"><input name="type[]" placeholder="Man, Woman, Kids etc." id="type" type="text" class="form-control"  value="" ></td>';
+        html += '<td data-title="Percentage"><input name="percentage[]" id="percentage" placeholder="Man, Woman, Kids etc." type="number" class="form-control valid-number-check"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.categories-produced-table-block tbody').append(html);
@@ -1454,7 +1454,7 @@
         $('#association-membership-details-table-no-data').hide();
         var html = '<tr>';
         html +='<td data-title="Name"><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Membership number"><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
         html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="association-membership-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
@@ -1807,8 +1807,8 @@
     {
 
         var html = '<tr>';
-        html += '<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td data-title="quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
+        html += '<td data-title="Particular"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td data-title="Term"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.business-term-table-block tbody').append(html);
@@ -1902,7 +1902,7 @@
 
         //$('#sampling-details-table-no-data').hide();
         var html = '<tr>';
-        html += '<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td data-title="Particulars"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
         html += '<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';

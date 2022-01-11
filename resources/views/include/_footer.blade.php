@@ -210,7 +210,7 @@
 {{-- jasny-bootstrap --}}
 <script src="{{asset('js/jasny-bootstrap.js')}}"></script>
 {{-- typehead js --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 <!--script src="{{asset('js/bootstrap3-typeahead.min.js')}}"></script-->
 
 @stack('js')
@@ -1348,6 +1348,107 @@ $(document).on("click", ".order-query-notification" , function() {
 
 });
 
-</script>
 
+//profile active inactive
+$(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
+            if($(this).is(":checked")) {
+                var obj = $(this);
+                var b_profile_id=$(this).attr('bpid');
+                var restore_url = '{{ route("business.profile.restore", ":slug") }}';
+                    restore_url = restore_url.replace(':slug', b_profile_id);
+                    swal({
+                    title: "Want to restore this profile ?",
+                    text: "Please ensure and then confirm!",
+                    type: "success",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: !0
+                })
+                .then((willRestore) => {
+                    if (willRestore.value === true) {
+                        $.ajax({
+                            url: restore_url,
+                            type: "GET",
+                            beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Publish');
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').addClass('teal white-text text-darken-2');
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.prop('checked',false);
+                                    swal("Oops...!", xhr.responseJSON.msg,"warning");
+
+                                }
+                        });
+                    }
+                    else {
+                        $(this).prop('checked',false);
+                        willRestore.dismiss;
+                    }
+                });
+
+            }
+
+            else {
+                var obj = $(this);
+                var b_profile_id=$(this).attr('bpid');
+                var delete_url = '{{ route("business.profile.delete", ":slug") }}';
+                    delete_url = delete_url.replace(':slug', b_profile_id);
+                swal({
+                    title: "Want to disable this profile ?",
+                    text: "Please ensure and then confirm!",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: !0
+                })
+                .then((willDelete) => {
+                    if (willDelete.value === true) {
+                        $.ajax({
+                            url: delete_url,
+                            type: "GET",
+                            beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Unpublish');
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').removeClass('teal white-text text-darken-2');
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.prop('checked',true);
+                                    swal("Oops...!", xhr.responseJSON.msg,"warning");
+
+                                }
+                        });
+                    }
+                    else {
+                        $(this).prop('checked',true);
+                        willDelete.dismiss;
+                    }
+                });
+
+            }
+        });
+
+</script>
 

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
+use App\Http\Controllers\Admin\ManageBusinessProfileController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\SustainabilityCommitmentController;
 use App\Http\Controllers\WalfareController;
 use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\CompanyFactoryTourController;
+use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
 
 
@@ -291,6 +293,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/pro-forma-invoices',[PoController::class, 'proformaInvoices'])->name('proforma.invoice');
     Route::get('/open-proforma-single/{id}',[PoController::class, 'openProformaSingle'])->name('open.proforma.single');
 
+    //active inactive business profile by user
+    Route::get('businessprofile/delete/{businessprofileid}', [UsersManageBusinessProfileController::class, 'delete'])->name('business.profile.delete');
+    Route::get('businessprofile/restore/{businessprofileid}', [UsersManageBusinessProfileController::class, 'restore'])->name('business.profile.restore');
 
 
 
@@ -454,7 +459,9 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('certification',AdminCertificationController::class, [
             'as' => 'admin'
         ]);
-
+        //active inactive business profile
+        Route::get('admin/businessprofile/delete/{businessprofileid}', [ManageBusinessProfileController::class, 'delete'])->name('admin.business.profile.delete');
+        Route::get('admin/businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('admin.business.profile.restore');
 
 
 

@@ -75,10 +75,23 @@ class RfqBidController extends Controller
 
             if ($request->hasFile('rfq_images')){
                 foreach ($request->file('rfq_images') as $product_image){
-                    $path=$product_image->store('images','public');
+                    $extension = $product_image->getClientOriginalExtension();
 
-                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                    Storage::put($path, $image);
+                    if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
+
+                        $path=$product_image->store('images','public');
+                    }
+                    else{
+                        $path=$product_image->store('images','public');
+                        $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+                        Storage::put($path, $image);
+                    }
+
+
+                    // $path=$product_image->store('images','public');
+
+                    // $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+                    // Storage::put($path, $image);
 
                     $image_path[] = $path;
                 }

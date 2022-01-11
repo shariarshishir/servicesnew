@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->hasMany(BusinessProfile::class);
     }
 
+    public function businessProfileWithTrashed()
+    {
+        return $this->hasMany(BusinessProfile::class)->withTrashed();
+    }
+
 
 
 

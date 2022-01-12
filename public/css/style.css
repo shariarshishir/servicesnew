@@ -3141,7 +3141,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .suppliers_filter_wrapper input[type=text]:not(.browser-default){
     background: none !important;
-    padding-top: 3px;
+    padding-top: 2px;
     text-align: left;
 }
 .suppliers_filter_wrapper .filter_search_input:focus {
@@ -4173,7 +4173,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     border-radius: 10px;
     margin: 0;
-    height: auto;
+    height: 100%;
     vertical-align: middle;
     width: auto;
 }
@@ -9254,6 +9254,30 @@ nav .pagination li.active .page-link {
     }
     .rfq_profile_info .btn_green {
         margin: 10px 0 20px !important;
+    }
+    .rfq_thum_imgs .rfq_thum_img {
+        float: none;
+        display: inline-block;
+        overflow: hidden;
+        margin: 0;
+        padding: 10px;
+    }
+    .rfq_content_box .rfq_profile_info .rfq_thum_imgs img {
+        border: 1px solid #eee;
+        -webkit-box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 20%);
+        -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.20);
+        box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 20%);
+    }
+    .rfq_thum_img .xlsx_icon,  
+    .rfq_thum_img .pdf_icon, 
+    .rfq_thum_img .zip_icon,
+    .rfq_thum_img .doc_icon {
+        background-size: 98px;
+        height: 112px;
+    }
+
+    .pagination-block-wrapper .col.s12.center {
+        padding-bottom: 20px;
     }
 
 

@@ -41,10 +41,14 @@ legend {
 }
 .card {
     background: #fff;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 2px 1px -1px rgb(0 0 0 / 12%);
-    border-radius: 0px;
+    /* box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 2px 1px -1px rgb(0 0 0 / 12%); */
+    /* border-radius: 0px; */
     border: none;
     padding: 15px;
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    border-radius: 0px;
 }
 
 #dashborad-panel div {
@@ -199,4 +203,39 @@ legend {
 }
 .prod-mod-req-content .reply-message-block {
     margin-bottom: 15px;
+}
+
+.user_list_wrapper legend {
+    margin-bottom: 30px;
+}
+.user_list_itembox {
+    text-transform: capitalize;
+    margin-bottom: 40px;
+}
+.user_list_itembox .item_list_box {
+    margin: 0 15px 30px;
+    height: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 16px;
+    position: relative;
+    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+
+}
+.user_list_wrapper .enable_disable_label {
+    text-align: right;
+}
+.user_list_wrapper .view_details {
+    display: block;
+    background: #54A958;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px;
 }

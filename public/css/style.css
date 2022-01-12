@@ -405,6 +405,7 @@ form input:read-only {
 }
 .header_dasktop .mainNav ul li {
     padding: 0 20px;
+    position: relative;
 }
 .header_dasktop .mainNav ul li:first-child {
     padding: 0;
@@ -432,14 +433,15 @@ form input:read-only {
     margin-left: 0;
 }
 .header_dasktop .mainNav .subNav {
-    min-width: 215px;
+    min-width: 235px;
     background: #fff;
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid #54A958;
     padding: 15px;
+    top: 38px !important;
 }
 .header_dasktop .mainNav ul li li {
     padding: 0 0 5px !important;
@@ -4780,8 +4782,12 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 #certification-upload-form-modal {
     width: 72%;
 }
-#product-edit-modal-block,
+/* #product-edit-modal-block,
 #product-add-modal-block {
+    top: 15% !important;
+} */
+.fullscreen-modal.profile_form_modal,
+.wholesaler_add_product_modal {
     top: 15% !important;
 }
 .modal legend {
@@ -5442,6 +5448,10 @@ input.input-field[type=text]:not(.browser-default) {
     text-align: center;
 }
 
+.footer_right_bottom .footer_buttonWrap .industry_textbox::-moz-placeholder {
+    color: #73D578;
+    z-index: 1;
+}
 .footer_right_bottom .footer_buttonWrap .industry_textbox::-webkit-input-placeholder {
     color: #73D578;
 }
@@ -5974,6 +5984,10 @@ div.dataTables_wrapper div.dataTables_info {
 nav {
     background: none;
     box-shadow: none;
+}
+.pagination-block-wrapper nav {
+    height: inherit;
+    padding-bottom: 20px;
 }
 nav .pagination {
     width: 100%;
@@ -6584,6 +6598,7 @@ nav .pagination li.active .page-link {
 }
 #homepage .about .about-item .item-body .item-description p {
 	font-size: 16px;
+    line-height: 25px;
 }
 #homepage .about .about-item .item-body .item-description a,
 #homepage .about .about-item .item-body .item-description p span {
@@ -6671,7 +6686,8 @@ nav .pagination li.active .page-link {
 }
 #homepage .delivaryTime .ontimeDescription .description p {
 	margin-top: 16px;
-	margin-bottom: 20spx;
+	margin-bottom: 20px;
+    line-height: 25px;
 }
 #homepage .delivaryTime .ontimeDescription .description a {
 	font-weight: 500;
@@ -7324,6 +7340,11 @@ nav .pagination li.active .page-link {
     padding-top: 5px;
 }
 
+.page_content_wrap nav {
+    height: inherit;
+    line-height: initial;
+}
+
 
 /* ************************* policy_content_wrap style end ******************************  */
 
@@ -7759,6 +7780,10 @@ nav .pagination li.active .page-link {
         padding-top: 20px;
     }
 
+    .profile_contentCol .tabcontent {
+        padding: 21px 0 0px 20px;
+    }
+
 }
 
 
@@ -7836,10 +7861,11 @@ nav .pagination li.active .page-link {
         width: 33% !important;
     }
 
+
 }
 
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 993px) {
 
     .header_wrap {
         padding-top: 0;
@@ -7983,6 +8009,7 @@ nav .pagination li.active .page-link {
     #homepage .htbcont-lft {
         margin: 0 -20px;
         border-right: none;
+        line-height: 25px;
     }
     #homepage .htbcont {
         margin-bottom: 50px;
@@ -7992,6 +8019,7 @@ nav .pagination li.active .page-link {
     #homepage .tbm li a.active, 
     #homepage .tbm li a:first-child:hover {
         border-radius: 6px 6px 0 0;
+        font-size: 18px;
     }
     #homepage .delivaryTime .guarantee p,
     #homepage .homebHd-sm,
@@ -8016,6 +8044,10 @@ nav .pagination li.active .page-link {
     #homepage .tbm li a {
         font-size: 16px;
         padding: 15px 20px;
+    }
+    #homepage .demoButton .content p {
+        font-size: 22px;
+        line-height: 35px;
     }
     .profile_tab_menu ul,
     .profile-menu-list ul {
@@ -9103,10 +9135,7 @@ nav .pagination li.active .page-link {
     #homepage .about .about-item .item-body {
         padding: 35px 20px;
     }
-    #homepage .demoButton .content p {
-        font-size: 22px;
-        line-height: 28px;
-    }
+ 
     #homepage .tbm li a:hover, 
     #homepage .tbm li a.active, 
     #homepage .tbm li a:first-child:hover {
@@ -9275,9 +9304,8 @@ nav .pagination li.active .page-link {
         background-size: 98px;
         height: 112px;
     }
-
-    .pagination-block-wrapper .col.s12.center {
-        padding-bottom: 20px;
+    #products .manufacture-product-table-data .col.s12.m4.l3 {
+        width: 50% !important;
     }
 
 
@@ -9509,6 +9537,9 @@ nav .pagination li.active .page-link {
     .notifications_icon_wrap .card {
         right: -30px;
     }
+    #homepage .tbm li a:hover, 
+    #homepage .tbm li a.active, 
+    #homepage .tbm li a:first-child:hover,
     #homepage .tbm li a {
         font-size: 14px;
         line-height: 20px;
@@ -9647,6 +9678,9 @@ nav .pagination li.active .page-link {
     .rfq_thum_img .doc_icon {
         background-size: 88px;
         height: 100px;
+    }
+    #products .manufacture-product-table-data .col.s12.m4.l3 {
+        width: 100% !important;
     }
 
 

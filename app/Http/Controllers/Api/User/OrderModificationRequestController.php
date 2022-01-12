@@ -22,13 +22,14 @@ class OrderModificationRequestController extends Controller
             foreach($orderModificationRequests as $orderModificationRequest){
 
                    $newFormatedOrderModificationRequest= new stdClass();
-                   $newFormatedOrderModificationRequest->id=$orderModificationRequest->id;
-                   $newFormatedOrderModificationRequest->type=$orderModificationRequest->type;
-                   $newFormatedOrderModificationRequest->user=$orderModificationRequest->user->name;
-                   $newFormatedOrderModificationRequest->product_id=$orderModificationRequest->product_id;
-                   $newFormatedOrderModificationRequest->details=json_decode($orderModificationRequest->details);
-                   $newFormatedOrderModificationRequest->created_at=$orderModificationRequest->created_at;
-                   $newFormatedOrderModificationRequest->updated_at=$orderModificationRequest->updated_at;
+                   $newFormatedOrderModificationRequest->id = $orderModificationRequest->id;
+                   $newFormatedOrderModificationRequest->type = $orderModificationRequest->type;
+                   $newFormatedOrderModificationRequest->user = $orderModificationRequest->user->name;
+                   $newFormatedOrderModificationRequest->product_id = $orderModificationRequest->product_id;
+                   $newFormatedOrderModificationRequest->product_name = $orderModificationRequest->product->name;
+                   $newFormatedOrderModificationRequest->details = json_decode($orderModificationRequest->details);
+                   $newFormatedOrderModificationRequest->created_at = $orderModificationRequest->created_at;
+                   $newFormatedOrderModificationRequest->updated_at = $orderModificationRequest->updated_at;
                    array_push($orderModificationRequestsArray,$orderModificationRequest);
             }
             return response()->json(array(
@@ -65,6 +66,11 @@ class OrderModificationRequestController extends Controller
             $newFormatedOrderModificationRequest->user=$orderModificationRequest->user->name;
             $newFormatedOrderModificationRequest->product_id=$orderModificationRequest->product_id;
             $newFormatedOrderModificationRequest->details=json_decode($orderModificationRequest->details);
+            $newFormatedOrderModificationRequest->color_sizes = json_decode($orderModificationRequest->orderModification->colors_sizes);
+            $newFormatedOrderModificationRequest->unit_price = $orderModificationRequest->orderModification->unit_price;
+            $newFormatedOrderModificationRequest->quantity = $orderModificationRequest->orderModification->quantity;
+            $newFormatedOrderModificationRequest->total_price = $orderModificationRequest->orderModification->total_price;
+            $newFormatedOrderModificationRequest->state=$orderModificationRequest->state;
             $newFormatedOrderModificationRequest->created_at=$orderModificationRequest->created_at;
             $newFormatedOrderModificationRequest->updated_at=$orderModificationRequest->updated_at;
             $newFormatedOrderModificationRequest->comments=$commemntArray;

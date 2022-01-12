@@ -100,7 +100,7 @@ class BusinessProfileController extends Controller
                     $business_profile = BusinessProfile::create($business_profile_data);
                     //create company overview
                     $this->createCompanyOverview($request,$business_profile->id);
-                    // event(new NewBusinessProfileHasCreatedEvent($business_profile));
+                    event(new NewBusinessProfileHasCreatedEvent($business_profile));
                     return response()->json([
                         'success' => true,
                         'redirect_url' => route('business.profile'),

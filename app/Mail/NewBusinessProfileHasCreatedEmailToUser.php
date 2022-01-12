@@ -16,7 +16,7 @@ class NewBusinessProfileHasCreatedEmailToUser extends Mailable
     {
         $this->business_profile = $business_profile;
     }
-
+    
     /**
      * Build the message.
      *

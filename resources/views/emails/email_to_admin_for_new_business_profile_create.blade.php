@@ -6,7 +6,7 @@
             <table style="background: #fff; max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
-                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
+                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/global/" title="logo" target="_blank">
                             <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
                         </a>
                     </td>
@@ -21,13 +21,21 @@
                 </tr>
                 <tr>
                     <td style="text-align:center; padding:20px 0 0; margin: 0;">
-                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0; border-radius: 8px;" width="600px" height="auto" src="{{ asset('storage/images/profile-banner-update.png') }}" title="logo" alt="logo">
-                        </a>
+                        <div style="position: relative; display: flex; align-items: center; justify-content: center; height: 120px; padding: 0; margin: 0;">
+                            <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; height: 120px; width: 100%; padding: 0; margin: 0;">
+                                <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/global/" title="logo" target="_blank">
+                                    <img style="padding: 0; margin: 0; border-radius: 8px;" width="100%" height="100%" src="{{ asset('storage/images/cover_img.png') }}" title="" alt="">
+                                </a>
+                            </div>
+                            <div style="font-family: 'Poppins', sans-serif; color: #fff; font-size: 22px; line-height: 28px; font-weight: 600; padding: 0; margin: 0; z-index: 9;">
+                                {{$business_profile->business_name}}
+                            </div>
+                        </div>							
                         <span style="text-align: center; display: block;  padding: 30px 0 40px; margin: 0; line-height: 45px;">
                             <a target="_blank" href="{{route('business.profile.details',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Go to profile</a>
                         </span>
                     </td>
+                 
                 </tr>
                 <tr>
                     <td style="text-align: center; padding: 30px; margin: 0;">

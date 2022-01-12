@@ -1,4 +1,3 @@
-@component('mail::message')
 <table cellspacing="0" border="0" cellpadding="0" width="100%" style="font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A; padding: 0; margin: 0;"
 >
     <tr>
@@ -15,11 +14,11 @@
                     <td style="padding: 50px 0 0; margin: 0;">
                         <h1 style="font-family: 'Poppins', sans-serif; font-weight: 600; padding: 0px 0px 20px 0px; margin: 0px; font-size:32px; line-height: 40px; color: #0A0A0A;">Your profile is created</h1>
                         <p style="margin: 0px; padding: 8px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
-                            Dear {{$business_profie->user->name}},
+                            Dear {{$business_profile->user->name}},
                         </p>
                         
                         <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
-                            Thank you for opening your business profile in Merchant Bay. Your profile for {{$business_profie->business_name}} is successfully created. It is currently <strong>60%</strong> completed. A complete profile gets advantage in buyer search visibility. 
+                            Thank you for opening your business profile in Merchant Bay. Your profile for {{$business_profile->business_name}} is successfully created. It is currently <strong>60%</strong> completed. A complete profile gets advantage in buyer search visibility. 
                         </p>
                         <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"> Buyers get more confidence in suppliers information that are verified by Merchant bay. </p>
                     </td>
@@ -29,7 +28,7 @@
                         <table style="max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td style="text-align: left; padding: 5px; margin: 0px; width: 50%;">
-                                    @if($business_profie->business_type==1)
+                                    @if($business_profile->business_type==1)
                                     <a target="_blank" href="{{route('business.profile.show',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
                                     @else
                                     <a target="_blank" href="{{route('wholesaler.profile.info',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
@@ -42,7 +41,7 @@
                 <tr>
                     <td style="text-align: center; padding: 30px 0 50px; margin: 0px; width: 100%;">
                         <p style="margin: 0; padding: 0px; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">If the link is not working, please contact us. </p>
-                        <p style="margin: 0; padding: 0px; text-decoration: underline; color: #0A0A0A;">Email: <span style="font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">success@merchantbay.com</span>, Call: </p>
+                        <p style="margin: 0; padding: 0px; text-decoration: underline; color: #0A0A0A;">Email: <span style="font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">success@merchantbay.com</span> </p>
                     </td>
                 </tr>
                 <tr>
@@ -85,4 +84,4 @@
         </td>
     </tr>
 </table>
-@endcomponent
+

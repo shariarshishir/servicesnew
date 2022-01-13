@@ -16,9 +16,11 @@ use App\Notifications\QueryWithModificationToUserNotification;
 use App\Mail\QueryWithModificationTouserMail;
 use App\Notifications\QueryCommuncationNotification;
 use App\Mail\QueryCommuncationMail;
+use App\Http\Traits\PushNotificationTrait;
 
 class QueryController extends Controller
 {
+    use PushNotificationTrait;
    public function index($type)
    {
        $query_request_list=OrderModificationRequest::latest()->where('type',$type)->with(['user','businessProfile','product'])->get();
@@ -120,12 +122,19 @@ class QueryController extends Controller
         if ($OrderModificationRequest->type ==1){
             if(env('APP_ENV') == 'production')
             {
+                $fcmToken="c9sWZ1wZBSeU0f_y-1zUDm:APA91bHAvTWpXERe2BWn13brnY_OghUPlfoMTeyV-zrsZ94H2exyGadKwjjhk1sm7oV473LfP0Y6VmrEFp3Xs20kEVqVUTVMfLXw9UxDv0GK3P7n3D8wJsTyS-hjFGC6f_Cs5AYTTRdS";
+                $message="Order query Request has been Processed.Please check your order query list.";
+                $this->pushNotificationSend($fcmToken,$orderModification->orderModificationRequest->user->name,$message);
                 event(new OrderQueryFromAdminEvent($orderModification));
             }
             return redirect()->route('query.request.index',1)->with('success', 'Created Successfully');
         }else{
             if(env('APP_ENV') == 'production')
             {
+                $fcmToken="c9sWZ1wZBSeU0f_y-1zUDm:APA91bHAvTWpXERe2BWn13brnY_OghUPlfoMTeyV-zrsZ94H2exyGadKwjjhk1sm7oV473LfP0Y6VmrEFp3Xs20kEVqVUTVMfLXw9UxDv0GK3P7n3D8wJsTyS-hjFGC6f_Cs5AYTTRdS";
+                $message=".Please check your order modification request list.";
+                $this->pushNotificationSend($fcmToken,$orderModification->orderModificationRequest->user->name,$message);
+
                 Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
                 Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
             }

@@ -7,7 +7,7 @@
         @endif
     @endforeach
 @endif
-<form action="{{ route('query.request.store') }}" method="post" name="ordModCreateForm" id="ordModCreateForm" class="ordModCreateForm" enctype="multipart/form-data">
+<form action="{{ route('query.request.store') }}" method="post" name="ordModCreateForm" id="ordModCreateForm" class="ordModCreateForm admin_order_create_form" enctype="multipart/form-data">
     @csrf
     <div class="form-group row">
         <div class="color-and-size-block">
@@ -80,15 +80,15 @@
     </div>
     <div class="clearfix"></div>
     <div class="form-group row amount-block">
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-6">
             <label for="unit-price" class="col-form-label ">Unit Price</label>
             <input id="unit-price" type="text"  class="unit-price form-control @error('unit_price') is-invalid @enderror price-value" name="unit_price" value="{{ old('unit_price') }}"  autocomplete="unit_price" autofocus>
         </div>
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-6">
             <label for="total-quantity" class="col-form-label ">Total Quantity</label>
             <input id="total-quantity" type="number" class="form-control @error('total-quantity') is-invalid @enderror" name="total_quantity" value="{{  $total_quantity}}"  autocomplete="total-quantity" autofocus readonly>
         </div>
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-6">
             <label for="discount_type" class="col-form-label ">Discount type</label>
             <select class="form-select form-control" aria-label="Default select example" name="discount_type" id="discount-type">
                 <option value="">select</option>
@@ -96,15 +96,15 @@
                 <option value="2">Persentence</option>
               </select>
         </div>
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-6">
             <label for="discount" class="col-form-label ">Discount</label>
             <input id="discount" type="number" class="form-control @error('discount_amount') is-invalid @enderror" name="discount" value="{{ old('discount') }}"  autocomplete="discount_amount" autofocus>
         </div>
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-6">
             <label for="discount-amount" class="col-form-label ">Discount Amount</label>
             <input id="discount-amount" type="number" class="form-control @error('discount_amount') is-invalid @enderror" name="discount_amount" value="{{ old('discount_amount') }}"  autocomplete="discount_amount" autofocus readonly>
         </div>
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-6">
             <label for="total-price" class="col-form-label ">Total Price</label>
             <input id="total-price" type="number" class="form-control @error('total-price') is-invalid @enderror" name="total_price" value="{{ old('total-price') }}"  autocomplete="total-price" autofocus readonly>
         </div>

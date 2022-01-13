@@ -127,6 +127,9 @@ p {
 }
 .order-modification-comment-modal .btn.add-comment {
     margin-top: 20px;
+    line-height: 35px;
+    padding: 0 10px!important;
+    height: 38px;
 }
 .order-proceed-btn {
     text-align: right;
@@ -321,6 +324,7 @@ p {
 }
 .fa-plus {
     margin-right: 5px;
+    font-size: 14px;
 }
 .btn-primary {
     color: #fff;
@@ -350,17 +354,168 @@ p {
     color: #54A958;
     margin-right: 5px;
 }
-.btn-group{
+.admin_blog_form .btn-group {
     margin-top: 10px;
 }
-.btn-info,
-.btn-info:hover {
+.blog_list_table {
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.blog_list_table thead {
+    background: #54A958;
+    color: #ffffff;
+}
+.blog_list_table thead .fa {
+    color: #ffffff !important;
+}
+.admin_blog_form .btn-info,
+.admin_blog_form .btn-info:hover {
     color: #fff;
-    background-color: #54A958;
-    border-color: #54A958;
+    background-color: #54A958 !important;
+    border-color: #54A958 !important;
+    height: 35px;
+    line-height: 20px;
+    margin-right: 5px;
+    border-radius: 5px !important;
+    padding: 0 10px 1px;
+}
+.admin_blog_form .btn-danger {
+    border-radius: 5px !important;
+    height: 35px;
+    line-height: 20px;
+    padding: 0 10px 1px;
+}
+.admin_blog_form .form-control {
+    height: inherit; 
+}
+.admin_blog_form .btn-group .fas {
+    font-size: 12px;
+    float: left;
+    margin: 5px 5px 0 0;
 }
 
 .certification_edit_admin .thumbnail_img img {
     max-width: 200px;
     height: auto;
+}
+
+.blog_feature_image_wrap img {
+    height: 120px;
+    width: auto;
+    min-height: 100px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.order-details-block .amount-block,
+.admin_order_create_form .amount-block {
+    width: 100%;
+    padding-top: 30px;
+}
+.admin_order_query_table .ord-mod-color-sizes,
+.admin_order_create_form .ord-mod-color-sizes {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+.admin_order_query_table thead,
+.admin_order_create_form thead  {
+    background: #54A958;
+    color: #ffffff;
+}
+.admin_order_query_table thead th,
+.admin_order_create_form thead th {
+    padding: 10px;    
+}
+.admin_order_create_form .ord-mod-color-sizes td {
+    padding: 3px;
+}
+.admin_order_query_table .add-more-block {
+    background: #54A958;
+    display: inline-block;
+    color: #ffffff;
+    margin-top: 15px;
+    height: 35px;
+    line-height: 34px;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+.admin_order_query_table .add-more-block:hover {
+    color: #ffffff;
+}
+.remove-color-size-block,
+.remove-color-size-block:hover {
+    color: #DC143C;
+}
+
+.admin_order_query_table .fa-plus-circle {
+    margin-right: 5px;
+}
+.admin_order_query_table .fa-minus-circle:before {
+    margin-right: 5px;
+}
+
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .no_more_tables {
+        padding: 10px 5px;
+    }
+	
+	/* Force table to not be like tables anymore */
+	.no_more_tables table, 
+	.no_more_tables thead, 
+	.no_more_tables tbody, 
+	.no_more_tables th, 
+	.no_more_tables td, 
+	.no_more_tables tr { 
+		display: block; 
+	}
+    .no_more_tables tr {
+        margin-bottom: 15px;
+    }
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.no_more_tables thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	.no_more_tables tr { 
+        border: 1px solid #ccc !important; 
+    }
+	.no_more_tables td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50% !important; 
+		white-space: normal;
+		text-align:left;
+        text-align: left !important;
+	}
+	.no_more_tables td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 7px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: inherit;
+		text-align:left;
+		font-weight: bold;
+	}
+    .no_more_tables td:before { content: attr(data-title); }
+
+    .order-details-block .color-and-size-block {
+        width: 100%;
+    }
+    .order-details-block .billing-address-block {
+        padding-bottom: 20px;
+    }
+
+    
+
 }

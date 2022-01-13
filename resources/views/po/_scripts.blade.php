@@ -40,7 +40,7 @@
                 var html = '<h3>'+response.data[0].name+'</h3> <address> '+ response.data[0].email +'<br>'+ response.data[0].phone +' </address>';
                 $('#buyerdata').html(html);
             }
-        });        
+        });
     }
     if(selectedBuyerId){
         getbuyerdetails(selectedBuyerId);
@@ -145,9 +145,18 @@
     {
         selectedel = el;
         let product = encodeURIComponent(el.value);
-        $.get( "{{ env('APP_URL') }}/getsupplierbycat/"+product, function( data ) {
-              $( "#modal_body" ).html( data );
+        var url = '{{ route("getsupplierbycat", ":slug") }}';
+            url = url.replace(':slug', product);
+        $.ajax({
+            method: 'get',
+            url: url,
+            success:function(response){
+                $( "#modal_body" ).html( response );
+            }
         });
+        // $.get( "{{ env('APP_URL') }}/getsupplierbycat/"+product, function( data ) {
+        //       $( "#modal_body" ).html( data );
+        // });
         $('#selectcat').modal('open');
     }
 

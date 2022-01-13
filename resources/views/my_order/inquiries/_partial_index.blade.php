@@ -27,7 +27,8 @@
                             @endif
                         </td>
                         <td data-title="Date">{{ $po->proforma_date }}</td>
-                        <td data-title="Total Price"><a href="javascript:void(0)" data-toggle="modal" data-target="#detailsFormModal{{ $index }}">{{ number_format($total_price_wt,2) }}</a></td>
+                        {{-- <td data-title="Total Price"><a href="javascript:void(0)" data-toggle="modal" data-target="#detailsFormModal{{ $index }}">{{ number_format($total_price_wt,2) }}</a></td> --}}
+                        <td data-title="Total Price">USD ${{ number_format($total_price_wt,2) }}</td>
                         <td data-title="Payment Within">{{ $po->payment_within }}</td>
                         <td data-title="Proforma Type">{{ $po->proforma_type}}</td>
                         <td data-title="Status">
@@ -41,7 +42,7 @@
                             @endif
                             @if($po->status == 1)
                                 <div class="status-btn center-align">
-                                    <a href="{{route('open.proforma.single', $po->id)}}" class="btn_green btn-success" target="_blank" >
+                                    <a href="{{route('open.proforma.single.html', $po->id)}}" class="btn_green btn-success" target="_blank" >
                                         PO Generated<br />
                                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; View Pdf
                                     </a>
@@ -50,7 +51,7 @@
                             @if($po->status == -1)
                                 <div class="status-btn center-align">
 
-                                    <a href="{{route('open.proforma.single', $po->id)}}" class="btn_green btn-danger" target="_blank">
+                                    <a href="{{route('open.proforma.single.html', $po->id)}}" class="btn_green btn-danger" target="_blank">
                                         PI Rejected<br />
                                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; View Pdf
                                     </a>

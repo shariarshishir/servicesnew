@@ -421,7 +421,6 @@
                     },
                     success:function(data)
                         {
-
                             // $('#seller_product_form_update')[0].reset();
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();

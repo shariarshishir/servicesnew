@@ -68,7 +68,7 @@ class BusinessProfileController extends Controller
             }),
             'email' => 'required_if:has_representative,0|unique:users',
             'phone' => 'required_if:has_representative,0',
-            'nid_passport' => 'required_if:has_representative,0',
+            //'nid_passport' => 'required_if:has_representative,0',
             'representive_name' =>'required_if:has_representative,0',
             'business_category_id' => 'required_if:business_type,1',
 

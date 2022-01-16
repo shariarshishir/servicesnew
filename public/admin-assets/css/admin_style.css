@@ -455,6 +455,16 @@ p {
     margin-right: 5px;
 }
 
+table tr td form .btn-danger {
+    float: right;
+}
+.admin_product_Category input {
+    height: auto;
+}
+.admin_product_Category .admoin_category_img img {
+    max-width: 150px;
+}
+
 
 
 
@@ -494,6 +504,7 @@ p {
 		white-space: normal;
 		text-align:left;
         text-align: left !important;
+        min-height: 25px;
 	}
 	.no_more_tables td:before { 
 		/* Now like a table header */

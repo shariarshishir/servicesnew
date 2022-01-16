@@ -179,6 +179,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     //order modification request
     Route::post('/order-modification-request',[OrderModificationRequestController::class, 'store']);
     Route::post('/order-modification-comment',[OrderModificationCommentController::class, 'store']);
+    Route::get('/order-modification-request',[OrderModificationRequestController::class, 'index']);
+    Route::get('/order-modification-request/{orderModificationRequestId}',[OrderModificationRequestController::class, 'show']);
 
 
     //notification

@@ -11,8 +11,8 @@
                     </div>
                     
                     <div class="ic-press-caption">
-                        <h3>{{ $blog->title }}</h3>
-                        <div style="margin-bottom:10px">{!! $blog->details !!}</div>
+                        <h2>{{ $blog->title }}</h2>
+                        <div class="blog_details_textbox">{!! $blog->details !!}</div>
 
                         @if(count($blog->sourcedata) > 0)
                         <div>
@@ -32,7 +32,7 @@
                         @endif
                         
                         @if(!empty($blog->photo_credit))
-                            <p style="margin-bottom:5px"><b>Photo Courtesy:</b> <i>{{ $blog->photo_credit }}</i></p>
+                            <p style="margin:10px 0"><b>Photo Courtesy:</b> <i>{{ $blog->photo_credit }}</i></p>
                         @endif
                     </div>
                 </div>
@@ -43,14 +43,14 @@
                         <img class="mymedia-thum" src="@if(!empty($blog->author_img)){{ asset('storage/'.$blog->author_img) }} @else {{ 'https://via.placeholder.com/100' }} @endif" class="mr-3" alt="{{ $blog->author_name }}">
                         <div class="mymedia-body">
                             <h5 class="mt-0">by <strong>{{ $blog->author_name }}</strong></h5>
-                            <p>{{ $blog->author_note }}</p>
+                            <p>{!! $blog->author_note !!}</p>
                         </div>
                     </div>
                 </div>
                 @endif
 
 
-                <div class=" blog_details_social_wrap {{ !empty($blog->author_name) ? 'col-md-6' : '' }}" style="margin-bottom:30px">
+                <div class=" blog_details_social_wrap {{ !empty($blog->author_name) ? 'col-md-6' : '' }}">
                     <div class="ic-pagination" style="color:black;">
                         
                     </div>

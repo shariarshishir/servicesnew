@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Mail\NewOrderPlaceMail;
 use App\Mail\NewOrderPlaceMailToAdmin;
+use App\Mail\NewOrderPlaceMailToBuyer;
 use App\Models\VendorOrder;
 use App\Models\Admin;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,6 +19,7 @@ class NewOrderHasPlacedListener implements ShouldQueue
     {
         $admin=Admin::find(1);
         Mail::to('success@merchantbay.com')->send(new NewOrderPlaceMailToAdmin($event->order));
+        Mail::to($event->order->user->email)->send(new NewOrderPlaceMailToBuyer($event->order));
         Notification::send($admin,new NewOrderHasPlacedNotification($event->order));
     }
 }

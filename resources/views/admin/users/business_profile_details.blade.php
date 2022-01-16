@@ -28,8 +28,8 @@
     <section class="content">
         <div class="container-fluid">
            <div class="row">
-                <div>
-                    <a href="{{route('business.profile.orders.index', $business_profile->id)}}">Orders <span>({{count($business_profile->wholesalerOrders)}})</span></a>
+                <div class="orders_box">
+                    <a class="btn_green" href="{{route('business.profile.orders.index', $business_profile->id)}}">Orders <span>({{count($business_profile->wholesalerOrders)}})</span></a>
                 </div>
                 <div class="col-md-12">
                     <div class="card">

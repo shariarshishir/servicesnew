@@ -17,8 +17,10 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Events\NewBusinessProfileHasCreatedEvent;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use stdClass;
+
 
 class BusinessProfileController extends Controller
 {
@@ -95,9 +97,10 @@ class BusinessProfileController extends Controller
                 ];
 
                 if($request->has_representative == true){
-                    $business_profile=BusinessProfile::create($business_profile_data);
+                    $business_profile = BusinessProfile::create($business_profile_data);
                     //create company overview
                     $this->createCompanyOverview($request,$business_profile->id);
+                    event(new NewBusinessProfileHasCreatedEvent($business_profile));
                     return response()->json([
                         'success' => true,
                         'redirect_url' => route('business.profile'),
@@ -139,15 +142,18 @@ class BusinessProfileController extends Controller
                     }
 
                     //user registraion as represetative
-                    $representive_data['password'] =bcrypt($representive_data['password']);
+                    $representive_data['password'] = bcrypt($representive_data['password']);
                     $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
-                    $representive_data['user_id'] =$user_id;
+                    $representive_data['user_id'] = $user_id;
                     $user=User::create($representive_data);
                     //profile create
-                    $business_profile_data['representative_user_id']= $user->id;
-                    $business_profile=BusinessProfile::create($business_profile_data);
+                    $business_profile_data['representative_user_id'] = $user->id;
+                    $business_profile = BusinessProfile::create($business_profile_data);
                     //create company overview
                     $this->createCompanyOverview($request,$business_profile->id);
+
+                   event(new NewBusinessProfileHasCreatedEvent($business_profile));
+
                     return response()->json([
                         'success' => true,
                         'redirect_url' => route('business.profile'),

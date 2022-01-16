@@ -22,7 +22,7 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 certification_list_wrap">
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-12">
                         <a href="{{route('admin.certification.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New</a>
@@ -31,7 +31,7 @@
                 @include('include.admin._message')
                 <div class="card">
                     <legend>Certification List</legend>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered certification_table">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -51,7 +51,7 @@
                                     <td>{{$list->provider}}</td>
                                     <td>{{$list->nation}}</td>
                                     <td>{{$list->about}}</td>
-                                    <td><img src="{{asset('storage/'.$list->logo)}}" alt="logo" width="200" height="150"></td>
+                                    <td><img src="{{asset('storage/'.$list->logo)}}" alt="logo"></td>
                                     <td><a href="{{route('admin.certification.edit', $list->id)}}">Edit</a></td>
                                 </tr>
                             @endforeach

@@ -5156,24 +5156,24 @@ input.input-field[type=text]:not(.browser-default) {
 }   
 .profile_tabNav_wrap .certification_pdf_down {
     background : url('../images/frontendimages/new_layout_images/pdf-bg.png') no-repeat center;
-    background-size: 170px;
-    width: auto;
-    height: 185px;
+    background-size: 165px;
+    height: 100%;
     display: block;
+    width: 100%;
 }
 .certificate_img_wrap .certificate_img .xlsx_icon {
     background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
-    background-size: 210px;
-    width: auto;
-    height: 250px;
+    background-size: 165px;
+    height: 100%;
     display: block;
+    width: 100%;
 }
 .certificate_img_wrap .certificate_img .doc_icon {
     background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
-    background-size: 210px;
-    width: auto;
-    height: 250px;
+    background-size: 165px;
+    height: 100%;
     display: block;
+    width: 100%;
 }
 .association-membership-img,
 .press-highlight-img {
@@ -7345,21 +7345,42 @@ nav .pagination li.active .page-link {
 .grand_total_title {
     white-space: nowrap;
 }
-
 #terms-of-service-modal.profile_form_modal textarea {
     height: 150px;
     max-height: inherit;
-
 }
-
 #manufacture-product-upload-form {
     overflow: hidden;
     padding-top: 5px;
 }
-
 .page_content_wrap nav {
     height: inherit;
     line-height: initial;
+}
+#product-review .review-item {
+    font-size: 15px;
+    line-height: 25px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+#product-review .review-item:last-child {
+    border-bottom: none;
+}
+#product-review .review-item .user-name span {
+    font-size: 15px;
+    opacity: 0.6;
+}
+#product-review .star-rating img {
+    max-width: 18px;
+}
+#product-review .review-item .reviewed-by {
+    margin: 0;
+}
+#product-review .review-item .user-image {
+    padding-right: 15px;
+}
+#product-review .review-item .user-image img {
+    max-width: 50px;
 }
 
 
@@ -7431,6 +7452,8 @@ nav .pagination li.active .page-link {
     .chat-application .app-chat .chat-content .chat-content-area .chat-area {
         height: 200px !important;
     }
+    
+
 
     
 }
@@ -7671,6 +7694,12 @@ nav .pagination li.active .page-link {
     }
     .rfq_content_box .respones_detail_wrap .respones_box {
         padding: 0;
+    }
+    
+    .profile_tabNav_wrap .certification_pdf_down,
+    .certificate_img_wrap .certificate_img .xlsx_icon,
+    .certificate_img_wrap .certificate_img .doc_icon {
+        background-size: 145px;
     }
 
 

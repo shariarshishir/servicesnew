@@ -26,7 +26,7 @@ a {
 }
 legend {
     background-color: #ddd;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: #000;
     padding: 10px;
@@ -290,9 +290,9 @@ p {
     padding-bottom: 20px;
     width: 100%;
 }
-.orders_box .btn_green {
+.btn_green {
     background: #54A958;
-    border: 1px solid #54A958;
+    border: 1px solid #54A958 !important;
     color: #FFFFFF;
     border-radius: 10px;
     font-size: 16px;
@@ -303,10 +303,21 @@ p {
     -webkit-box-shadow: 0px 0px 14px -3px rgb(68 133 71);
     -moz-box-shadow: 0px 0px 14px -3px rgba(68,133,71,1);
     box-shadow: 0px 0px 14px -3px rgb(68 133 71);
-    min-width: 120px;
+    min-width: 100px;
     display: inline-block;
     text-align: center;
 }
+.btn_green:focus,
+.btn_green:hover,
+.orders_box .btn_green:hover {
+    color: #ffffff;
+    outline: none;
+    background: #54A958;
+    -webkit-box-shadow: 0px 0px 19px -3px rgba(68,133,71,1);
+    -moz-box-shadow: 0px 0px 19px -3px rgba(68,133,71,1);
+    box-shadow: 0px 0px 19px -3px rgba(68,133,71,1);
+}
+
 
 .certification_table img {
     max-width: 100px;
@@ -394,6 +405,9 @@ p {
     float: left;
     margin: 5px 5px 0 0;
 }
+.blog_list_table tr td form .btn-danger {
+    float: none;
+}
 
 .certification_edit_admin .thumbnail_img img {
     max-width: 200px;
@@ -439,6 +453,7 @@ p {
     line-height: 34px;
     padding: 0 10px;
     border-radius: 5px;
+    line-height: 32px;
 }
 .admin_order_query_table .add-more-block:hover {
     color: #ffffff;
@@ -456,13 +471,46 @@ p {
 }
 
 table tr td form .btn-danger {
-    float: right;
+    /* float: right; */
 }
+.admin_certification_add input,
 .admin_product_Category input {
     height: auto;
 }
+.admin_certification_add .thumbnail_img img,
 .admin_product_Category .admoin_category_img img {
     max-width: 150px;
+}
+
+.admin_business_profile_details legend {
+    margin-bottom: 20px;
+}
+.admin_business_profile_details .submitBox {
+    padding: 20px 0 40px;
+}
+
+.radio-inline {
+    padding-right: 10px;
+}
+.radio-inline input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin: 4px 5px 0 0;
+}
+
+.admin_categories_list table tr td img {
+    max-height: 30px;
+}
+.no_more_tables table {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+.no_more_tables table thead {
+    background: #54A958;
+    color: #ffffff;
 }
 
 
@@ -527,6 +575,31 @@ table tr td form .btn-danger {
         padding-bottom: 20px;
     }
 
-    
+    .admin_business_profile_details .order_value {
+        min-height: 40px;
+    }
+    .admin_business_profile_details .order_value input {
+        width: 100%;
+    }
+    .admin_business_profile_details .radio-inline {
+        display: block;
+    }
 
+    .no_more_tables .no_data_td {
+        padding-left: 10px !important;
+    }
+
+    table tr td form .btn-danger {
+        float: none;
+    }
+
+
+}
+
+@media only screen and (max-width: 420px) {
+    .no_more_tables td:before {
+        font-size: 14px;
+        top: 3px;
+        line-height: 16px;
+    }
 }

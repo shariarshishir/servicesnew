@@ -29,7 +29,7 @@
 					<a href="{{route('blogs.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New Blog</a>
 				</div>
 			</div>
-            <div class="card">
+            <div class="card admin_categories_list">
 				        <legend>Categories List</legend>
                 <div class="no_more_tables">
                   <table id="" class="table table-striped table-bordered table-hover blog_list_table" width="100%">
@@ -49,9 +49,9 @@
                               <td data-title="ID">{{ $index+1 }}</td>
                               <td data-title="Title">{{ \Illuminate\Support\Str::limit($blog->title, 20, '(...)') }}</td>
                               <td data-title="Details">{!! \Illuminate\Support\Str::limit($blog->details, 20, '(...)') !!}</td>
-                              <td data-title="Feature image"><img class="img-fluid" style="max-height: 30px" src="{{ asset('storage/'.$blog->feature_image) }}"></td>
+                              <td data-title="Feature image"><img class="img-fluid" src="{{ asset('storage/'.$blog->feature_image) }}"></td>
                               <td data-title="Created by">{{ $blog->created_user['name'] }}</td>
-                              <td data-title="Action">
+                              <td data-title="Action" class="text-center"> 
                               
                                   <a class="btn btn-success btn-xs" href="{{route('blogs.edit',$blog->id)}}">Edit</a>
                               

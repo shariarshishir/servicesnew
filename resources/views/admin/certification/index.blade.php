@@ -31,33 +31,36 @@
                 @include('include.admin._message')
                 <div class="card">
                     <legend>Certification List</legend>
-                    <table class="table table-bordered certification_table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Certification programs</th>
-                                <th>Provider</th>
-                                <th>Nation</th>
-                                <th>About</th>
-                                <th>Logo</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($collection as $list)
-                                <tr>
-                                    <td>{{$list->id}}</td>
-                                    <td>{{$list->certification_programs}}</td>
-                                    <td>{{$list->provider}}</td>
-                                    <td>{{$list->nation}}</td>
-                                    <td>{{$list->about}}</td>
-                                    <td><img src="{{asset('storage/'.$list->logo)}}" alt="logo"></td>
-                                    <td><a href="{{route('admin.certification.edit', $list->id)}}">Edit</a></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-            </div>
+                    <div class="no_more_tables">
+                      <table class="table table-bordered certification_table">
+                          <thead class="cf">
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Certification programs</th>
+                                  <th>Provider</th>
+                                  <th>Nation</th>
+                                  <th>About</th>
+                                  <th>Logo</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach($collection as $list)
+                                  <tr>
+                                      <td data-title="ID">{{$list->id}}</td>
+                                      <td data-title="Certification programs">{{$list->certification_programs}}</td>
+                                      <td data-title="Provider">{{$list->provider}}</td>
+                                      <td data-title="Nation">{{$list->nation}}</td>
+                                      <td data-title="About">{{$list->about}}</td>
+                                      <td data-title="Logo"><img src="{{asset('storage/'.$list->logo)}}" alt="logo"></td>
+                                      <td data-title="Action"><a href="{{route('admin.certification.edit', $list->id)}}">Edit</a></td>
+                                  </tr>
+                              @endforeach
+                          </tbody>
+                      </table>
+                    </div>
+                    
+                </div>
                 <div>
                     {{ $collection->links() }}
                 </div>

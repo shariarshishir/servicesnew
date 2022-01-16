@@ -31,38 +31,39 @@
                 @include('include.admin._message')
                 <div class="card">
                     <legend>Shipping Method List</legend>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($collection as $list)
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('shipping-method.edit', $list->id) }}">{{$list->name}}</a>
-                                    </td>
-                                    <td>
-                                        {{$list->description}}
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('shipping-method.destroy', $list->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure');">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-            </div>
+                    <div class="no_more_tables">
+                      <table class="table table-bordered">
+                          <thead class="cf">
+                              <tr>
+                                  <th>Name</th>
+                                  <th>Description</th>
+                                  <th class="text-center">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach($collection as $list)
+                                  <tr>
+                                      <td data-title="Name">
+                                          <a href="{{ route('shipping-method.edit', $list->id) }}">{{$list->name}}</a>
+                                      </td>
+                                      <td data-title="Description">
+                                          {{$list->description}}
+                                      </td>
+                                      <td data-title="Action" class="text-center">
+                                          <form action="{{ route('shipping-method.destroy', $list->id) }}" method="POST">
+                                              @csrf
+                                              @method('DELETE')
+                                              <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure');">
+                                                  <i class="fas fa-trash"></i>
+                                              </button>
+                                          </form>
+                                      </td>
+                                  </tr>
+                              @endforeach
+                          </tbody>
+                      </table>
+                    </div>
+              </div>
           </div>
         </div>
       </div>

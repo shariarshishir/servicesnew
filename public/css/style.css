@@ -1368,9 +1368,10 @@ form input:read-only {
     height: 220px;
     margin: 0 20px 40px 0 !important;
 }
+
 .profile_tabNav_wrap .degree_360_video_gallery .imgBox img {
     height: 100%;
-    width: 100%;
+    width:auto;
     border-radius: 12px;
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
@@ -2717,6 +2718,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: inline-block;
     margin-right: 40px;
 }
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:link,
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:active,
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:visited,
 .profile_factory_tourWrap .gallery_navbar ul li a:link,
 .profile_factory_tourWrap .gallery_navbar ul li a:active,
 .profile_factory_tourWrap .gallery_navbar ul li a:visited {
@@ -2727,6 +2731,10 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 0;
     text-align: left;
 }
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:focus,
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a.active:focus,
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a.active,
+.profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:hover,
 .profile_factory_tourWrap .gallery_navbar ul li a:focus, 
 .profile_factory_tourWrap .gallery_navbar ul li a:focus.active,
 .profile_factory_tourWrap .gallery_navbar ul li a.active,
@@ -2763,6 +2771,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .profile_factory_tourWrap .col.m6.l6 .imgBox {
     height: 230px;
     margin-bottom: 20px;
+    text-align: center;
 }
 .profile_factory_tourWrap .factory_imgbox_wrap .imgBox img {
     height: 100%;
@@ -7476,12 +7485,12 @@ nav .pagination li.active .page-link {
     .profile_factory_tourWrap .gallery_navbar ul li {
         margin-right: 10px;
     }
+    .profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:link, 
+    .profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:active, 
+    .profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:visited, 
     .profile_factory_tourWrap .gallery_navbar ul li a:link, 
     .profile_factory_tourWrap .gallery_navbar ul li a:active, 
-    .profile_factory_tourWrap .gallery_navbar ul li a:visited,
-    .profile_factory_tourWrap .top_titleWrap a:link, 
-    .profile_factory_tourWrap .top_titleWrap a:active, 
-    .profile_factory_tourWrap .top_titleWrap a:visited {
+    .profile_factory_tourWrap .gallery_navbar ul li a:visited {
         font-size: 15px;
     }
     .profile_tabNav_wrap #home .product_boxwrap .productBox .imgBox {
@@ -8808,6 +8817,9 @@ nav .pagination li.active .page-link {
     .profile_factory_tourWrap .top_titleWrap a:visited {
         font-size: 15px;
     }
+    .profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:link, 
+    .profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:active, 
+    .profile_tabNav_wrap #home .factory_imgbox_wrap ul li a:visited, 
     .profile_factory_tourWrap .gallery_navbar ul li a:link, 
     .profile_factory_tourWrap .gallery_navbar ul li a:active, 
     .profile_factory_tourWrap .gallery_navbar ul li a:visited {

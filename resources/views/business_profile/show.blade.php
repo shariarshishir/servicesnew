@@ -257,12 +257,12 @@
 								<div class="row top_titleWrap">
 									<div class="col s12 gallery_navbar">
 										<ul class="tabs">
-											<li class="tab col m3"><a class="active" href="#factory_images">Factory Images</a></li>
-											<li class="tab col m3"><a href="#factory_degree_images">360 Degree Images</a></li>
+											<li class="tab col m3"><a class="active" href="#factory_show_images">Factory Images</a></li>
+											<li class="tab col m3"><a href="#factory_degree_show_images">360 Degree Images</a></li>
 										</ul>
 									</div>
 								</div>
-								<div id="factory_images" class="col s12 factory_imgbox_wrap">
+								<div id="factory_show_images" class="col s12 factory_imgbox_wrap">
 									<div class="row factory_image_gallery">
 									@if(count($companyFactoryTour->companyFactoryTourImages)>0)
 										@foreach($companyFactoryTour->companyFactoryTourImages as $image)
@@ -284,7 +284,7 @@
 
 									</div>
 								</div>
-								<div id="factory_degree_images" class="col s12 video_gallery_box">
+								<div id="factory_degree_show_images" class="col s12 video_gallery_box">
 									<div class="row degree_360_video_gallery">
 									@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
 									@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
@@ -307,9 +307,6 @@
 									</div>
 								</div>
 							@else
-								<div class="right-align" style="padding-bottom: 20px">
-									<a href="javascript:void(0);" data-target="factory-tour-add-modal-block" class="btn_green factory_tour_modal_trigger modal-trigger">Add Factory Tours</a>
-								</div>
 								<div class="card-alert card cyan lighten-5">
 									<div class="card-content cyan-text">
 										<p>INFO : No data found.</p>

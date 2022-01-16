@@ -7383,6 +7383,9 @@ nav .pagination li.active .page-link {
     max-width: 50px;
 }
 
+.review_info_box label {
+    color: #707070;
+}
 
 /* ************************* policy_content_wrap style end ******************************  */
 

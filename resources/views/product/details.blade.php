@@ -867,58 +867,65 @@ $reviewsCount = count($productReviews);
                         </div>
                     </div>
                     <div id="product-review" class="col s12">
-                        <div class="card card-with-padding">
-
+                        <div class="card-with-padding">
                             @if($reviewsCount > 0)
                             @foreach($productReviews as $productReview)
-                            <div class="review-item">
-                                <div class="reviewed-by row">
-                                    <div class="user-image left">
-                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" />
+                            <div class="review-item card">
+                                <div class="row">
+                                    <div class="col s12 m9">
+                                        <div class="reviewed-by row">
+                                            <div class="user-image left">
+                                                <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" />
+                                            </div>
+                                            <div class="user-name left">
+                                                <span>Reviewd by</span> {{ $productReview->name }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <label>Experience : </label>
+                                                {{ $productReview->experience }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="user-name left">
-                                        <span>Reviewd by</span> {{ $productReview->name }}
+                                    <div class="col s12 m3">
+                                        <div class="review-info">
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Overall : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Communication : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row"> 
+                                                <div class="col s12 review_info_box">
+                                                    <label>On Time Delivery : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Sample Support : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Product Quality : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="review-info">
-                                    <div class="row">
-                                        <div class="col s12 review_info_box">
-                                            <label>Overall : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12 review_info_box">
-                                            <label>Communication : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row"> 
-                                        <div class="col s12 review_info_box">
-                                            <label>On Time Delivery : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12 review_info_box">
-                                            <label>Sample Support : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12 review_info_box">
-                                            <label>Product Quality : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Experience : </label>
-                                            {{ $productReview->experience }}
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
                             @endforeach
                             @else

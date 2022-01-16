@@ -28,7 +28,7 @@
                 <li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
                 <li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
                 <li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
-                <li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
+                <li><a class="btn_grBorder modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
             </ul>
         </div>
     </form>

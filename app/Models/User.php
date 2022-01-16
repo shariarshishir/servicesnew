@@ -39,6 +39,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Vendor::class);
     }
+    public function countryName()
+    {
+        return $this->belongsTo(Country::class,'country','code');
+    }
+   
     public function vendorOrder()
     {
         return $this->hasMany(VendorOrder::class);

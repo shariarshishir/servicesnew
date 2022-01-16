@@ -29,6 +29,29 @@
         'design_studio' => 3,
      ],
 
+     'Production Type' => [
+         'knitting' => 'Knitting',
+         'linking' => 'Linking',
+         'woven' => 'Woven',
+         'finishing' => 'Finishing',
+         'cutting' => 'Cutting',
+         'sewing' => 'Sewing',
+         'washing' => 'Washing',
+         'printing' => 'Printing',
+         'embroidery' => 'Embroidery',
+         'attachments' => 'Attachments',
+         'packaging' => 'Packaging',
+         'yarn-booking' => 'Yarn Booking',
+         'yarn-in-house' => 'Yrn In House',
+         'dying' => 'Dying',
+         'fabric-in-house' => 'Fabric In House',
+         'print-embroidery' => 'Print Embroidery',
+         'knit-items'      => 'Knit Items',
+         'polo-shirt-and-fancy-item' => 'Polo Shirt and Fancy item',
+         't-shirt' => 'T-shirt',
+
+     ],
+
 
 
 

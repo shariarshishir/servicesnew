@@ -761,18 +761,20 @@
 
 
     //Add and remove row for production-flow-and-manpower dynamically
+
     function addProductionFlowAndManpower()
     {
 
         let totalChild = $('.production-flow-and-manpower-table-block tbody').children().length;
         var html = '<tr>';
-        html +='<td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
+        html +='<td data-title="producttion type" class="input-field"><select name="production_type[]" class="certificate-select2"><option value="" disabled selected>Choose your option</option>@foreach (Config::get('constants.Production Type') as $key => $production_type)<option value="{{$key}}">{{$production_type}}</option>@endforeach</select></td>';
         html +='<td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
         html +='<td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
         html +='<td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.production-flow-and-manpower-table-block tbody').append(html);
+        selectRefresh();
     }
     function removeProductionFlowAndManpower(el)
     {
@@ -874,12 +876,12 @@
     });
     //add or remove certification details input row
     function selectRefresh() {
-    $('.certificate-select2').select2({
-        tags: true,
-        placeholder: "Select an Option",
-        allowClear: true,
-        width: '100%'
-    });
+        $('.certificate-select2').select2({
+            tags: true,
+            placeholder: "Select an Option",
+            allowClear: true,
+            width: '100%'
+        });
     }
 
     //submit form for certification details

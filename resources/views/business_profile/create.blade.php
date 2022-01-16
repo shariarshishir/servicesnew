@@ -85,7 +85,7 @@
                                                     <label for="number_of_outlets">Number Of Outlets</label>
                                                 </div>
                                                 <div class="col s12 m7">
-                                                    <input id="number_of_outlets" type="text" class="validate" name="number_of_outlets" value="{{old('number_of_outlets')}}">
+                                                    <input id="number_of_outlets" type="text" class="validate zero-not-allowed" name="number_of_outlets" value="{{old('number_of_outlets', 1)}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@
                                                     <label for="number_of_factories">Number Of Factories</label>
                                                 </div>
                                                 <div class="col s12 m7">
-                                                    <input id="number_of_factories" type="text" class="validate" name="number_of_factories"  value="{{old('number_of_factories')}}">
+                                                    <input id="number_of_factories" type="text" class="validate zero-not-allowed" name="number_of_factories"  value="{{old('number_of_factories',1)}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -245,3 +245,15 @@
     }
 </style>
 @endsection
+
+@push('js')
+    <script>
+        $(document).on('keyup', '.zero-not-allowed', function(){
+            var value= parseInt($(this).val());
+            if(value == 0 || value < 0){
+                swal('alert!', 'Zero or negative not allowed', 'warning');
+                $(this).val(1);
+            }
+        });
+    </script>
+@endpush

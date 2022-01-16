@@ -234,7 +234,7 @@ class BusinessProfileController extends Controller
                 $count++;
             }
 
-            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
+            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=> $request->same_as_office_adrs ? $request->address : $request->factory_address,'same_as_office_adrs' => $request->same_as_office_adrs ? true : false ,'about_company'=>$request->about_company]);
 
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
             if($businessProfileVerification){

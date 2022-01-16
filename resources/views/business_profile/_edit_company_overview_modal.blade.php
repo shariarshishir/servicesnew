@@ -20,15 +20,21 @@
                 </div>
                 <div class="row">
                     <div class="col s12 input-field">
-                        <label for="address">Address</label>
+                        <label for="address">Office Address</label>
                         <td>
                             <textarea class="address" name="address" value="{{$business_profile->companyOverview->address}}" type="text"  rows="20" cols="50">{{$business_profile->companyOverview->address ?? ''}}</textarea>
                         </td>
                     </div>
                 </div>
-                <div class="row ">
+                <div class="row">
                     <div class="col s12 input-field">
                         <label for="address">Factory Address</label>
+                        <p>
+                            <label>
+                              <input type="checkbox" name="same_as_office_adrs" {{$business_profile->companyOverview->same_as_office_adrs == true ? 'checked' : ''}}/>
+                              <span>Same as office address</span>
+                            </label>
+                        </p>
                         <td>
                             <textarea class="factory_address" name="factory_address" value="{{$business_profile->companyOverview->factory_address}}" type="text"  rows="20" cols="50">{{$business_profile->companyOverview->factory_address ?? ''}}</textarea>
                         </td>
@@ -42,7 +48,7 @@
                         </td>
                     </div>
                 </div>
-                
+
                 <div class="submit_btn_wrap">
                     <div class="row">
                         <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
@@ -59,3 +65,23 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">&nbsp;</a>
     </div> -->
 </div>
+
+@push('js')
+    <script>
+         if($('input[name=same_as_office_adrs]').prop("checked") == true){
+               $('.factory_address').hide();
+        }
+        else if($('input[name=same_as_office_adrs]').prop("checked") == false){
+            $('.factory_address').show();
+        }
+        $(document).on('change', 'input[name=same_as_office_adrs]', function(){
+            if($('input[name=same_as_office_adrs]').prop("checked") == true){
+               $('.factory_address').hide();
+            }
+            else if($('input[name=same_as_office_adrs]').prop("checked") == false){
+                $('.factory_address').show();
+            }
+        });
+</script>
+
+@endpush

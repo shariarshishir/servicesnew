@@ -56,7 +56,14 @@
                                         @endforeach
                                     @else
                                     <tr id="production-flow-and-manpower-table-no-data">
-                                        <td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>
+                                        <td data-title="producttion type" class="input-field">
+                                            <select name="production_type[]" id="" class="certificate-select2">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach (Config::get('constants.Production Type') as $key => $production_type)
+                                                    <option value="{{$key}}">{{$production_type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>                                    
                                         <td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>
                                         <td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>
                                         <td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>

@@ -131,106 +131,109 @@
                 </div> --}}
 
                 <div class="border-separator"></div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th data-field="Product Name">Product Name</th>
-                                <th data-field="SKU">SKU</th>
-                                <th data-field="Unit Price">Unit Price</th>
-                                <th data-field="Qty">Qty</th>
-                                <th data-field="Price" style="text-align: right;">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($vendorOrder->orderItems as $list )
+                    <div class="no_more_tables">
+                        <table class="table table-striped">
+                            <thead class="cf">
                                 <tr>
-                                    <td>{{$list->product->name ?? ""}}
-                                        @if($list->full_stock == 1)
-                                        <span class="badge badge-primary">Full Stock</span>
-                                        @elseif(isset($list->order_modification_req_id))
-                                        <span class="badge badge-primary">Modified</span>
-                                        @endif
-                                    </td>
-                                    <td>{{$list->product_sku}}</td>
-                                    <td>${{ number_format($list->unit_price, 2) }}</td>
-                                    <td>
-                                        {{$list->quantity}}
-                                        @if ($list->full_stock == 1)
-                                          <span  data-toggle="tooltip" title="Full Stock"><i class="fas fa-question-circle"></i></span>
-                                        @endif
+                                    <th data-field="Product Name">Product Name</th>
+                                    <th data-field="SKU">SKU</th>
+                                    <th data-field="Unit Price">Unit Price</th>
+                                    <th data-field="Qty">Qty</th>
+                                    <th data-field="Price" style="text-align: right;">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($vendorOrder->orderItems as $list )
+                                    <tr>
+                                        <td data-title="Product Name">{{$list->product->name ?? ""}}
+                                            @if($list->full_stock == 1)
+                                            <span class="badge badge-primary">Full Stock</span>
+                                            @elseif(isset($list->order_modification_req_id))
+                                            <span class="badge badge-primary">Modified</span>
+                                            @endif
+                                        </td>
+                                        <td data-title="SKU">{{$list->product_sku}}</td>
+                                        <td data-title="Unit Price">${{ number_format($list->unit_price, 2) }}</td>
+                                        <td data-title="Qty">
+                                            {{$list->quantity}}
+                                            @if ($list->full_stock == 1)
+                                            <span  data-toggle="tooltip" title="Full Stock"><i class="fas fa-question-circle"></i></span>
+                                            @endif
 
-                                        @if(isset($list->colors_sizes))
-                                            <a href="javascript:void(0);"  class="colorSizeModal">Show More</a>
-                                            <div class="modal fade" id="colorSizeModal" tabindex="-1" role="dialog" aria-labelledby="colorSizeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Colors and Sizes</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                            @if($list->product->product_type == 1 || $list->product->product_type == 2)
-                                                                @foreach(json_decode($list->colors_sizes) as $key => $item)
-                                                                    @php
-                                                                        $xxs = ($item->xxs) ? $item->xxs .' XXS, ':'';
-                                                                        $xs = ($item->xs) ? $item->xs .' XS, ':'';
-                                                                        $smallCount = ($item->small) ? $item->small .' Small, ':'';
-                                                                        $mediumCount = ($item->medium) ? $item->medium .' Medium, ':'';
-                                                                        $largeCount = ($item->large) ? $item->large .' Large, ':'';
-                                                                        $extra_largeCount = ($item->extra_large) ? $item->extra_large .' Extra Large, ':'';
-                                                                        $xxl = ($item->xxl) ? $item->xxl .' XXL, ':'';
-                                                                        $xxxl = ($item->xxxl) ? $item->xxxl .' XXXl, ':'';
-                                                                        $four_xxl = ($item->four_xxl) ? $item->four_xxl .' 4XXXl, ':'';
-                                                                        $one_size = ($item->one_size) ? $item->one_size .' One Size, ':'';
-                                                                        echo "<p>".$item->color.": " .$xxs . $xs . $smallCount . $mediumCount . $largeCount . $extra_largeCount. $xxl .  $xxxl . $four_xxl . $one_size."</p>";
-                                                                    @endphp
-                                                                @endforeach
-                                                            @endif
+                                            @if(isset($list->colors_sizes))
+                                                <a href="javascript:void(0);"  class="colorSizeModal">Show More</a>
+                                                <div class="modal fade" id="colorSizeModal" tabindex="-1" role="dialog" aria-labelledby="colorSizeModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Colors and Sizes</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                                @if($list->product->product_type == 1 || $list->product->product_type == 2)
+                                                                    @foreach(json_decode($list->colors_sizes) as $key => $item)
+                                                                        @php
+                                                                            $xxs = ($item->xxs) ? $item->xxs .' XXS, ':'';
+                                                                            $xs = ($item->xs) ? $item->xs .' XS, ':'';
+                                                                            $smallCount = ($item->small) ? $item->small .' Small, ':'';
+                                                                            $mediumCount = ($item->medium) ? $item->medium .' Medium, ':'';
+                                                                            $largeCount = ($item->large) ? $item->large .' Large, ':'';
+                                                                            $extra_largeCount = ($item->extra_large) ? $item->extra_large .' Extra Large, ':'';
+                                                                            $xxl = ($item->xxl) ? $item->xxl .' XXL, ':'';
+                                                                            $xxxl = ($item->xxxl) ? $item->xxxl .' XXXl, ':'';
+                                                                            $four_xxl = ($item->four_xxl) ? $item->four_xxl .' 4XXXl, ':'';
+                                                                            $one_size = ($item->one_size) ? $item->one_size .' One Size, ':'';
+                                                                            echo "<p>".$item->color.": " .$xxs . $xs . $smallCount . $mediumCount . $largeCount . $extra_largeCount. $xxl .  $xxxl . $four_xxl . $one_size."</p>";
+                                                                        @endphp
+                                                                    @endforeach
+                                                                @endif
 
-                                                            @if ($list->product->product_type == 3)
-                                                                @foreach(json_decode($list->colors_sizes) as $key => $item)
-                                                                    @php
-                                                                        $quantity = ($item->quantity) ? $item->quantity .'Quantity, ':'';
-                                                                        echo "<p>".$item->color.": " .$quantity."</p>";
-                                                                    @endphp
-                                                                @endforeach
-                                                            @endif
+                                                                @if ($list->product->product_type == 3)
+                                                                    @foreach(json_decode($list->colors_sizes) as $key => $item)
+                                                                        @php
+                                                                            $quantity = ($item->quantity) ? $item->quantity .'Quantity, ':'';
+                                                                            echo "<p>".$item->color.": " .$quantity."</p>";
+                                                                        @endphp
+                                                                    @endforeach
+                                                                @endif
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            </div>
+                                                </div>
 
-                                        @endif
-                                    </td>
-                                    <td style="text-align: right;">
-                                        @if(isset($list->copyright_price))
-                                        <span  data-toggle="tooltip" title=" Copyright price is {{ $list->copyright_price }}"><i class="fas fa-question-circle"></i></span>
-                                        @endif
-                                        @if(isset($list->discount))
-                                        <span  data-toggle="tooltip" title="Discount amount {{ $list->discount }}"><i class="fas fa-question-circle"></i></span>
-                                        @endif
-                                        ${{ number_format($list->price, 2) }}
-                                    </td>
+                                            @endif
+                                        </td>
+                                        <td data-title="Price" style="text-align: right;">
+                                            @if(isset($list->copyright_price))
+                                            <span  data-toggle="tooltip" title=" Copyright price is {{ $list->copyright_price }}"><i class="fas fa-question-circle"></i></span>
+                                            @endif
+                                            @if(isset($list->discount))
+                                            <span  data-toggle="tooltip" title="Discount amount {{ $list->discount }}"><i class="fas fa-question-circle"></i></span>
+                                            @endif
+                                            ${{ number_format($list->price, 2) }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                {{-- <tr class="sub-total">
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Sub Total</td>
+                                    <td style="text-align: right;">$ {{ number_format($vendorOrder->sub_total, 2) }}</td>
+                                </tr> --}}
+                                <tr class="grand-total">
+                                    <td class="empty_td">&nbsp;</td>
+                                    <td class="empty_td">&nbsp;</td>
+                                    <td class="empty_td">&nbsp;</td>
+                                    <td class="grand_total_title">Grand Total</td>
+                                    <td data-title="Grand Total" style="text-align: right;">${{ number_format($vendorOrder->grand_total, 2) }}</td>
                                 </tr>
-                            @endforeach
-                            {{-- <tr class="sub-total">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>Sub Total</td>
-                                <td style="text-align: right;">$ {{ number_format($vendorOrder->sub_total, 2) }}</td>
-                            </tr> --}}
-                            <tr class="grand-total">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>Grand Total</td>
-                                <td style="text-align: right;">${{ number_format($vendorOrder->grand_total, 2) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 <div class="shipping-charge-div">
                     @if($vendorOrder->shippingCharge)
                         @include('admin.users.orders._update_shipping_charge_form')

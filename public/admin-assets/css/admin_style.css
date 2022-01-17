@@ -294,7 +294,7 @@ p {
     background: #54A958;
     border: 1px solid #54A958 !important;
     color: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 6px;
     font-size: 16px;
     font-weight: 500;
     text-transform: capitalize;
@@ -462,16 +462,11 @@ p {
 .remove-color-size-block:hover {
     color: #DC143C;
 }
-
 .admin_order_query_table .fa-plus-circle {
     margin-right: 5px;
 }
 .admin_order_query_table .fa-minus-circle:before {
     margin-right: 5px;
-}
-
-table tr td form .btn-danger {
-    /* float: right; */
 }
 .admin_certification_add input,
 .admin_product_Category input {
@@ -481,14 +476,12 @@ table tr td form .btn-danger {
 .admin_product_Category .admoin_category_img img {
     max-width: 150px;
 }
-
 .admin_business_profile_details legend {
     margin-bottom: 20px;
 }
 .admin_business_profile_details .submitBox {
     padding: 20px 0 40px;
 }
-
 .radio-inline {
     padding-right: 10px;
 }
@@ -500,7 +493,6 @@ table tr td form .btn-danger {
     float: left;
     margin: 4px 5px 0 0;
 }
-
 .admin_categories_list table tr td img {
     max-height: 30px;
 }
@@ -512,8 +504,50 @@ table tr td form .btn-danger {
     background: #54A958;
     color: #ffffff;
 }
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length {
+    padding: 20px 0;
+}
+.data-filter-bar,
+.show-active-users-list-trigger {
+    display: block;
+    font-weight: 600;
+}
+#user-list-modal .modal-xl,
+#active-users-list-modal .modal-dialog {
+    max-width: 90%;
+}
+#user-list-modal .table tr th,
+#user-list-modal .table tr td {
+    white-space: inherit;
+    word-break: break-word;
+}
+.data-filter-bar {
+    padding: 20px 0;
+}
+.active_users_list {
+    text-align: right;
+    padding: 20px 0;
+}
+.active_users_list .btn_green {
+    display: inline-block;
+}
+.active_users_list .btn_green,
+.data-filter-bar .btn_green {
+    font-size: 14px;
+    margin-right: 0;
+} 
 
+.table.table-striped a.colorSizeModal {
+    display: block;
+}
 
+.admin_order_query_table table thead tr th,
+.admin_order_create_form table thead tr th,
+.shipping-charge-block table thead tr th {
+    white-space: nowrap;
+    font-size: 14px;
+}
 
 
 
@@ -568,6 +602,11 @@ table tr td form .btn-danger {
 	}
     .no_more_tables td:before { content: attr(data-title); }
 
+    .grand_total_title,
+    .empty_td {
+        display: none !important;
+    }
+
     .order-details-block .color-and-size-block {
         width: 100%;
     }
@@ -593,7 +632,29 @@ table tr td form .btn-danger {
         float: none;
     }
 
+    .shipping-address-block {
+        padding-bottom: 20px;
+    }
+    .order-details-block .no_more_tables td:before{
+        top: 15px;
+    }
 
+}
+
+@media only screen and (max-width: 767px) {
+    .active_users_list {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .dataTables_wrapper .dataTables_filter, 
+    .dataTables_wrapper .dataTables_length {
+        padding: 0;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        padding-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 420px) {
@@ -602,4 +663,6 @@ table tr td form .btn-danger {
         top: 3px;
         line-height: 16px;
     }
+
+
 }

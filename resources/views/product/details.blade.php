@@ -144,7 +144,9 @@ $reviewsCount = count($productReviews);
                                                     {{ 'Negotiable' }}
                                                     @endif
                                                     @if($loop->last && $v[2] != 'Negotiable')
+                                                    <span class="nego_price">
                                                         ${{ $v[2] }}
+                                                    </span>
                                                     @endif
                                                     @if($loop->last && $v[2] == 'Negotiable')
                                                         @foreach (json_decode($product->attribute) as $k => $v)
@@ -318,7 +320,7 @@ $reviewsCount = count($productReviews);
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
                                                     <div class="no_more_tables">
-                                                        <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
+                                                        <table class="color-size-table-block-prob striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
                                                             <thead class="cf">
                                                                 <tr>
                                                                     <th>Color</th>
@@ -873,14 +875,25 @@ $reviewsCount = count($productReviews);
                             <div class="review-item card">
                                 <div class="row">
                                     <div class="col s12 m9">
-                                        <div class="reviewed-by row">
-                                            <div class="user-image left">
-                                                <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" />
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                                <div class="reviewed-by row">
+                                                    <div class="user-image left">
+                                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" />
+                                                    </div>
+                                                    <div class="user-name left">
+                                                        <span>Reviewd by</span> {{ $productReview->name }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="user-name left">
-                                                <span>Reviewd by</span> {{ $productReview->name }}
+                                            <div class="col s12 m6">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Overall : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                                </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="row">
                                             <div class="col s12">
                                                 <label>Experience : </label>
@@ -890,12 +903,12 @@ $reviewsCount = count($productReviews);
                                     </div>
                                     <div class="col s12 m3">
                                         <div class="review-info">
-                                            <div class="row">
+                                            <!-- <div class="row">
                                                 <div class="col s12 review_info_box">
                                                     <label>Overall : </label>
                                                     <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row">
                                                 <div class="col s12 review_info_box">
                                                     <label>Communication : </label>

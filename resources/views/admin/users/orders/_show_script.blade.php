@@ -10,12 +10,12 @@
         function addMoreShippingCharge()
         {
             var html = '<tr>';
-            html += '<td> <select class="form-select form-control" aria-label="Default select example" name="shipping[shipping_method][]" required> <option value="" selected>select</option>  @foreach ($shippingMethod as $list ) <option value="{{$list}}">{{$list}}</option>@endforeach</select></td>';
-            html += '<td> <select class="form-select form-control" aria-label="Default select example" name="shipping[shipment_type][]" required> <option value="" selected>select</option>  @foreach ($shipMentType as $list ) <option value="{{$list}}">{{$list}}</option>@endforeach</select></td>';
-            html += '<td> <select class="form-select form-control" aria-label="Default select example" name="shipping[uom][]" required> <option value="" selected> select</option>  @foreach ($uom as $list ) <option value="{{$list}}">{{$list}}</option>@endforeach</select></td>';
-            html += '<td><input type="number" name="shipping[unit_price][]" class="shipping-unit-price form-control" required /></td>';
-            html += '<td><input type="number" name="shipping[qty][]" class="shipping-qty form-control" required /></td>';
-            html += '<td><input type="number" name="shipping[total][]" class="shipping-total form-control" readonly required /></td>';
+            html += '<td data-title="Shipping Method"> <select class="form-select form-control" aria-label="Default select example" name="shipping[shipping_method][]" required> <option value="" selected>select</option>  @foreach ($shippingMethod as $list ) <option value="{{$list}}">{{$list}}</option>@endforeach</select></td>';
+            html += '<td data-title="Shipment Type"> <select class="form-select form-control" aria-label="Default select example" name="shipping[shipment_type][]" required> <option value="" selected>select</option>  @foreach ($shipMentType as $list ) <option value="{{$list}}">{{$list}}</option>@endforeach</select></td>';
+            html += '<td data-title="UOM"> <select class="form-select form-control" aria-label="Default select example" name="shipping[uom][]" required> <option value="" selected> select</option>  @foreach ($uom as $list ) <option value="{{$list}}">{{$list}}</option>@endforeach</select></td>';
+            html += '<td data-title="Per UOM Price($)"><input type="number" name="shipping[unit_price][]" class="shipping-unit-price form-control" required /></td>';
+            html += '<td data-title="QTY"><input type="number" name="shipping[qty][]" class="shipping-qty form-control" required /></td>';
+            html += '<td data-title="Total($)"><input type="number" name="shipping[total][]" class="shipping-total form-control" readonly required /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger remove-shipping-charge-tr" onclick="removeShippingChargeTr(this)"><i class="fas fa-minus"></i></a></td>';
             html += '</tr>';
             $('.shipping-charge-table tbody').append(html);

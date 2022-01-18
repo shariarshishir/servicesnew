@@ -14,7 +14,7 @@
                             <span class="tooltipped_title">Production Capacity (Annual)</span> <a class="tooltipped" data-position="top" data-tooltip="Input your production flow and manpower data chronologically. <br />For example: if your manufacturing process starts with Knitting <br />then knitting will be the first."><i class="material-icons">info</i></a>
                         </div>
                     </legend>
-                    
+
                     <div class="production-flow-and-manpower-block">
                         <div class="no_more_tables">
                             <table class="production-flow-and-manpower-table-block">
@@ -31,7 +31,15 @@
                                     @if(count($business_profile->productionFlowAndManpowers)>0)
                                         @foreach($business_profile->productionFlowAndManpowers as $productionFlowAndManpower)
                                         <tr id="production-flow-and-manpower-table-no-data">
-                                            <td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="{{$productionFlowAndManpower->production_type}}" ></td>
+                                            {{-- <td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="{{$productionFlowAndManpower->production_type}}" ></td> --}}
+                                            <td data-title="producttion type" class="input-field">
+                                                <select name="production_type[]" id="" class="certificate-select2">
+                                                    <option value="" disabled selected>Choose your option</option>
+                                                    @foreach (Config::get('constants.Production Type') as $key => $production_type)
+                                                        <option value="{{$key}}" {{$productionFlowAndManpower->production_type == $key? 'selected' : ''}}>{{$production_type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
                                             @foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flowAndManpower)
                                                 @if($flowAndManpower->name=='No of Machines')
                                                 <td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="{{$flowAndManpower->value}}"></td>
@@ -48,7 +56,14 @@
                                         @endforeach
                                     @else
                                     <tr id="production-flow-and-manpower-table-no-data">
-                                        <td data-title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>
+                                        <td data-title="producttion type" class="input-field">
+                                            <select name="production_type[]" id="" class="certificate-select2">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach (Config::get('constants.Production Type') as $key => $production_type)
+                                                    <option value="{{$key}}">{{$production_type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>                                    
                                         <td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>
                                         <td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>
                                         <td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>
@@ -58,17 +73,17 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
 
                         <div class="add_more_box">
                             <a href="javascript:void(0);" class="add-more-block" onclick="addProductionFlowAndManpower()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
 
-            
+
 
             <div class="submit_btn_wrap">
                 <div class="row">
@@ -81,9 +96,11 @@
 
 
         </form>
-    
+
         <!-- <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
         </div> -->
     </div>
 </div>
+
+

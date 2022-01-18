@@ -28,7 +28,7 @@
                 <li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
                 <li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
                 <li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
-                <li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
+                <li><a class="btn_grBorder modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
             </ul>
         </div>
     </form>
@@ -193,11 +193,12 @@
 
                                             <div class="full_specification"><span class="title">Description:</span> {!! $bid->description !!} </div>
                                             <div class="full_details">
-                                                <span class="title">Quantity:</span> {{$bid->quantity}},
+                                                <span class="title">Offer Price:</span> ${{$bid->unit_price}}/pc
+                                                <!--<span class="title">Quantity:</span> {{$bid->quantity}},
                                                 <span class="title">Unit Price:</span> {{$bid->unit_price}},
                                                 <span class="title">Total Price:</span>  {{$bid->total_price}},
                                                 <span class="title">Payment Method:</span> {{$bid->payment_method}},
-                                                <span class="title">Delivery Time:</span> {{$bid->delivery_time}}
+                                                <span class="title">Delivery Time:</span> {{$bid->delivery_time}}-->
                                             </div>
 
                                             <!-- <p>Description: {{$bid->description}}</p>
@@ -207,7 +208,7 @@
                                             <p>Payment Method: {{$bid->payment_method}}</p>
                                             <p>Delivery Time: {{$bid->delivery_time}}</p> -->
 
-                                            <div class="respones_img_wrap">
+                                             <!--<div class="respones_img_wrap">
                                                 @if(isset($bid->media))
                                                     @foreach (json_decode($bid->media) as $image)
                                                         <div class="respones_img">
@@ -240,7 +241,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 @php $x++; @endphp
@@ -420,7 +421,6 @@
                     },
                     success:function(data)
                         {
-
                             // $('#seller_product_form_update')[0].reset();
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();

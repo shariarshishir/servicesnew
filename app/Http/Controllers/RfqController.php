@@ -170,7 +170,7 @@ class RfqController extends Controller
                 'error'  => 'id not exists',
             ],404);
         }
-        $date=Carbon::parse($rfq->delivery_date)->format('Y-m-d');
+        $date=Carbon::parse($rfq->delivery_time)->format('Y-m-d');
         return response()->json([
             'success' => true,
             'data' => $rfq,

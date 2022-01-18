@@ -48,7 +48,7 @@
 								<option value="11">Nov</option>
 								<option value="12" selected="selected">Dec</option>
 							</select>		
-							<a href="javascript:void(0);" class="show-users-list-trigger">Show registered users list</a>
+							<a href="javascript:void(0);" class="show-users-list-trigger btn_green">Show registered users list</a>
 							<div class="modal fade" id="user-list-modal">
 								<div class="modal-dialog modal-xl" role="document">
 									<div class="modal-content">
@@ -59,7 +59,9 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<div class="selected-users-list-block"></div>
+											<div class="no_more_tables">
+												<div class="selected-users-list-block"></div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -68,7 +70,10 @@
 						<div id="registered-userschartbar-container" style="margin: 0 auto;"></div>
 					</div>
 					<div class="col-md-6">
-						<a href="javascript:void(0);" class="show-active-users-list-trigger">Show active users list</a>
+						<div class="active_users_list">
+							<a href="javascript:void(0);" class="show-active-users-list-trigger btn_green">Show active users list</a>
+						</div>
+						
 						<div class="modal fade" id="active-users-list-modal">
 							<div class="modal-dialog modal-xl" role="document">
 								<div class="modal-content">
@@ -79,7 +84,9 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<div class="active-users-list-block"></div>
+										<div class="no_more_tables">
+											<div class="active-users-list-block"></div>
+										</div>
 									</div>
 								</div>
 							</div>

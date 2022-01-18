@@ -24,24 +24,26 @@
                     <div class="row">
                         <div class="col s12">
                             <ul class="tabs">
-                                <li class="tab col s4 m4 l4">
+                                <li class="tab col s4 m4 l4 business_details_tab">
                                     <a class="active" href="#business_details_info">
                                         <span class="step_count">1</span> Business Details
                                     </a>
                                 </li>
-                                <li class="tab col s4 m4 l4">
+                                <li class="tab col s4 m4 l4 disabled representive_details_tab">
                                     <a href="#representative_details_info">
                                         <span class="step_count">2</span> Representive Details
                                     </a>
                                 </li>
-                                <li class="tab col s4 m4 l4">
+                                <li class="tab col s4 m4 l4 disabled business_profile_details_tab">
                                     <a href="#business_profile_info" class="last-step">
                                         <span class="step_count">3</span> Business Profile
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div id="edit_errors"></div>
+                        <div class="col s12 edit_errors_wrapper" style="display: none;">
+                            <div class="col s12" id="edit_errors"></div>
+                        </div>
                         <form id="business_profile_form" method="POST"  enctype="multipart/form-data">
                             @csrf
                             <div id="business_details_info" class="col s12">
@@ -85,7 +87,7 @@
                                                     <label for="number_of_outlets">Number Of Outlets</label>
                                                 </div>
                                                 <div class="col s12 m7">
-                                                    <input id="number_of_outlets" type="text" class="validate" name="number_of_outlets" value="{{old('number_of_outlets')}}">
+                                                    <input id="number_of_outlets" type="text" class="validate zero-not-allowed" name="number_of_outlets" value="{{old('number_of_outlets')}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -100,7 +102,7 @@
                                                     <label for="number_of_factories">Number Of Factories</label>
                                                 </div>
                                                 <div class="col s12 m7">
-                                                    <input id="number_of_factories" type="text" class="validate" name="number_of_factories"  value="{{old('number_of_factories')}}">
+                                                    <input id="number_of_factories" type="text" class="validate zero-not-allowed" name="number_of_factories"  value="{{old('number_of_factories')}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +143,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="javascript:void(0)" class="next next_to_representative_details_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "representative_details_info" )'>Next</a>
+                                <a href="javascript:void(0)" class="next next_to_representative_details_info btn waves-effect waves-light green" onclick='$(".representive_details_tab").removeClass("disabled");$(".business_details_tab").addClass("disabled");$(".tabs").tabs( "select", "representative_details_info" )'>Next</a>
                             </div>
                             <div id="representative_details_info" class="col s12">
                                 <div class="representative_box">
@@ -200,8 +202,8 @@
                                     </div>
                                 </div>
                                 <div class="step-actions">
-                                    <a href="javascript:void(0)" class="previous previous_to_business_details_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "business_details_info" )'>Back</a>
-                                    <a href="javascript:void(0)" class="next next_to_business_profile_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "business_profile_info" )'>Next</a>
+                                    <a href="javascript:void(0)" class="previous previous_to_business_details_info btn waves-effect waves-light green" onclick='$(".edit_errors_wrapper").hide();$(".business_details_tab").removeClass("disabled");$(".representive_details_tab").addClass("disabled");$(".tabs").tabs( "select", "business_details_info" )'>Back</a>
+                                    <a href="javascript:void(0)" class="next next_to_business_profile_info btn waves-effect waves-light green" onclick='$(".business_profile_details_tab").removeClass("disabled");$(".representive_details_tab").addClass("disabled");$(".tabs").tabs( "select", "business_profile_info" )'>Next</a>
                                 </div>
 
                             </div>
@@ -223,7 +225,7 @@
                                 </div>
 
                                 <div class="step-actions">
-                                    <a href="javascript:void(0)" class="previous previous_to_representative_details_info btn waves-effect waves-light green" onclick='$(".tabs").tabs( "select", "representative_details_info" )'>Back</a>
+                                    <a href="javascript:void(0)" class="previous previous_to_representative_details_info btn waves-effect waves-light green" onclick='$(".edit_errors_wrapper").hide();$(".business_profile_details_tab").addClass("disabled");$(".representive_details_tab").removeClass("disabled");$(".tabs").tabs( "select", "representative_details_info" )'>Back</a>
                                     <button type="submit" class="btn waves-effect waves-light green">Submit <i class="material-icons right">send</i></button>
                                 </div>
                             </div>
@@ -245,3 +247,15 @@
     }
 </style>
 @endsection
+
+@push('js')
+    <script>
+        $(document).on('keyup', '.zero-not-allowed', function(){
+            var value= parseInt($(this).val());
+            if(value == 0 || value < 0){
+                swal('alert!', 'Zero or negative not allowed', 'warning');
+                //$(this).val(1);
+            }
+        });
+    </script>
+@endpush

@@ -170,14 +170,14 @@ ul, label {
 					</tr>
 					@php $total_price = 0; @endphp
                     @php $total_tax_price = 0; @endphp
-                    @php $price_unit = 'BDT'; @endphp;
+                    @php $price_unit = 'USD'; @endphp;
                     @if(Auth::user()->id == $po->buyer->id)
 	                    @foreach($po->performa_items as $ik => $item)
 							<tr>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">{{$ik + 1}}</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">{{ $item->product->title }}</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%; text-align:center;">
-									BDT {{ number_format($item->unit_price, 2) }}
+									USD {{ number_format($item->unit_price, 2) }}
 									<span style="display:block;font-size:10px;color:#999;">Vat included.</span>
 								</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%; text-align;center;">{{ $item->unit }}</td>

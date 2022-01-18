@@ -16,6 +16,6 @@ class ProformaProduct extends Model
     }
 
     public function product(){
-        return $this->belongsTo('App\Models\Manufacture\Product','product_id');
+        return $this->belongsTo('App\Models\Manufacture\Product','product_id')->withTrashed();
     }
 }

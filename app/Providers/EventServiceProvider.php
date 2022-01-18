@@ -10,6 +10,7 @@ use App\Events\OrderQueryEvent;
 use App\Events\OrderQueryFromAdminEvent;
 use App\Events\PaymentSuccessEvent;
 use App\Events\ProductAvailabilityEvent;
+use App\Events\NewBusinessProfileHasCreatedEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -59,6 +60,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewRfqHasBidEvent::class => [
             'App\Listeners\NewRfqHasBidListener',
+        ],
+        NewBusinessProfileHasCreatedEvent::class => [
+            'App\Listeners\NewBusinessProfileHasCreatedListener',
         ],
     ];
 

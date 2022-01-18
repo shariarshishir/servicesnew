@@ -122,10 +122,10 @@ $reviewsCount = count($productReviews);
                             <div class="col s12">
 
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
-                                    <span class="new badge red" data-badge-caption="Sold Out"></span>
+                                    <span class="new badge red" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
                                 @endif
                                 @if($product->full_stock== 1)
-                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock</span>
+                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder" style="display: none;">Full Stock only</span>
                                 @else
 
                                     <div class="single-product-moq">
@@ -144,7 +144,9 @@ $reviewsCount = count($productReviews);
                                                     {{ 'Negotiable' }}
                                                     @endif
                                                     @if($loop->last && $v[2] != 'Negotiable')
+                                                    <span class="nego_price">
                                                         ${{ $v[2] }}
+                                                    </span>
                                                     @endif
                                                     @if($loop->last && $v[2] == 'Negotiable')
                                                         @foreach (json_decode($product->attribute) as $k => $v)
@@ -251,16 +253,16 @@ $reviewsCount = count($productReviews);
                                                             <tbody class="cusotmize-color-size-attr-tbody">
                                                                 <tr class="tr">
                                                                     <td data-title="Color"><input class="combat" type="text" value="" name="color"/></td>
-                                                                    <td data-title="XXS"><input class="combat" type="text" value="0" name="xxs" /></td>
-                                                                    <td data-title="XS"><input class="combat" type="text" value="0" name="xs" /></td>
-                                                                    <td data-title="Small"><input class="combat" type="text" value="0" name="small" /></td>
-                                                                    <td data-title="Medium"><input class="combat" type="text" value="0" name="medium" /></td>
-                                                                    <td data-title="Large"><input class="combat" type="text" value="0" name="large" /></td>
-                                                                    <td data-title="Extra Large"><input class="combat" type="text" value="0" name="extra_large" /></td>
-                                                                    <td data-title="XXL"><input class="combat" type="text" value="0" name="xxl" /></td>
-                                                                    <td data-title="XXXL"><input class="combat" type="text" value="0" name="xxxl" /></td>
-                                                                    <td data-title="4XXL"><input class="combat" type="text" value="0" name="four_xxl" /></td>
-                                                                    <td data-title="One Size"><input class="combat" type="text" value="0" name="one_size" /></td>
+                                                                    <td data-title="XXS"><input class="combat" type="text" value="" name="xxs" /></td>
+                                                                    <td data-title="XS"><input class="combat" type="text" value="" name="xs" /></td>
+                                                                    <td data-title="Small"><input class="combat" type="text" value="" name="small" /></td>
+                                                                    <td data-title="Medium"><input class="combat" type="text" value="" name="medium" /></td>
+                                                                    <td data-title="Large"><input class="combat" type="text" value="" name="large" /></td>
+                                                                    <td data-title="Extra Large"><input class="combat" type="text" value="" name="extra_large" /></td>
+                                                                    <td data-title="XXL"><input class="combat" type="text" value="" name="xxl" /></td>
+                                                                    <td data-title="XXXL"><input class="combat" type="text" value="" name="xxxl" /></td>
+                                                                    <td data-title="4XXL"><input class="combat" type="text" value="" name="four_xxl" /></td>
+                                                                    <td data-title="One Size"><input class="combat" type="text" value="" name="one_size" /></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -308,7 +310,7 @@ $reviewsCount = count($productReviews);
                                                 <div class="col m12 ready_stock left-align">
                                                     <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -318,7 +320,7 @@ $reviewsCount = count($productReviews);
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
                                                     <div class="no_more_tables">
-                                                        <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
+                                                        <table class="color-size-table-block-prob striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
                                                             <thead class="cf">
                                                                 <tr>
                                                                     <th>Color</th>
@@ -348,7 +350,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{ $color->xxs }}" name="xxs" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xxs" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xxs" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -357,7 +359,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->xs}}" name="xs" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xs" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xs" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -366,7 +368,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->small}}" name="small" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="small" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="small" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -375,7 +377,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->medium}}" name="medium" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="medium" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="medium" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -384,7 +386,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->large}}" name="large" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="large" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="large" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -393,7 +395,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->extra_large}}" name="extra_large" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="extra_large" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="extra_large" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -402,7 +404,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->xxl}}" name="xxl" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xxl" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xxl" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -411,7 +413,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->xxxl}}" name="xxxl" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xxxl" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xxxl" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -420,7 +422,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->four_xxl}}" name="four_xxl" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="four_xxl" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="four_xxl" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -429,7 +431,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{$color->one_size}}" name="one_size" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="one_size" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="one_size" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -445,91 +447,91 @@ $reviewsCount = count($productReviews);
                                                                             </td>
                                                                             <td data-title="XXS">
                                                                                 @if(!empty($color->xxs))
-                                                                                    <input class="combat" type="text" value="0" name="xxs" />
+                                                                                    <input class="combat" type="text" value="" name="xxs" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->xxs}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xxs" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xxs" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="XS">
                                                                                 @if(!empty($color->xs))
-                                                                                    <input class="combat" type="text" value="0" name="xs" />
+                                                                                    <input class="combat" type="text" value="" name="xs" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->xs}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xs" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xs" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="Small">
                                                                                 @if(!empty($color->small))
-                                                                                    <input class="combat" type="text" value="0" name="small" />
+                                                                                    <input class="combat" type="text" value="" name="small" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->small}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="small" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="small" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="Medium">
                                                                                 @if(!empty($color->medium))
-                                                                                    <input class="combat" type="text" value="0" name="medium" />
+                                                                                    <input class="combat" type="text" value="" name="medium" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->medium}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="medium" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="medium" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="Large">
                                                                                 @if(!empty($color->large))
-                                                                                    <input class="combat" type="text" value="0" name="large" />
+                                                                                    <input class="combat" type="text" value="" name="large" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->large}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="large" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="large" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="Extra Large">
                                                                                 @if(!empty($color->extra_large))
-                                                                                    <input class="combat" type="text" value="0" name="extra_large" />
+                                                                                    <input class="combat" type="text" value="" name="extra_large" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->extra_large}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="extra_large" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="extra_large" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="XXL">
                                                                                 @if(!empty($color->xxl))
-                                                                                    <input class="combat" type="text" value="0" name="xxl" />
+                                                                                    <input class="combat" type="text" value="" name="xxl" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->xxl}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xxl" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xxl" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="XXXL">
                                                                                 @if(!empty($color->xxxl))
-                                                                                    <input class="combat" type="text" value="0" name="xxxl" />
+                                                                                    <input class="combat" type="text" value="" name="xxxl" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->xxxl}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="xxxl" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="xxxl" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="4XXL">
                                                                                 @if(!empty($color->four_xxl))
-                                                                                    <input class="combat" type="text" value="0" name="four_xxl" />
+                                                                                    <input class="combat" type="text" value="" name="four_xxl" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->four_xxl}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="four_xxl" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="four_xxl" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
                                                                             <td data-title="One Size">
                                                                                 @if(!empty($color->one_size))
-                                                                                    <input class="combat" type="text" value="0" name="one_size" />
+                                                                                    <input class="combat" type="text" value="" name="one_size" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->one_size}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="one_size" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="one_size" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
@@ -588,7 +590,7 @@ $reviewsCount = count($productReviews);
                                                 <div class="col m12">
                                                     <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -619,7 +621,7 @@ $reviewsCount = count($productReviews);
                                                                                     <input class="combat" type="text" value="{{ $color->quantity }}" name="non_clothing_quantity" readonly/>
 
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="non_clothing_quantity" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="non_clothing_quantity" readonly />
 
                                                                                 @endif
                                                                             </td>
@@ -634,10 +636,10 @@ $reviewsCount = count($productReviews);
                                                                             </td>
                                                                             <td data-title="Quantity">
                                                                                 @if(!empty($color->quantity))
-                                                                                    <input class="combat" type="text" value="0" name="non_clothing_quantity" />
+                                                                                    <input class="combat" type="text" value="" name="non_clothing_quantity" />
                                                                                     <span class="avl-wrap">avl:<span class="avl">{{$color->quantity}}</span></span>
                                                                                 @else
-                                                                                    <input type="text" class="readonly-item" value="0" name="non_clothing_quantity" readonly />
+                                                                                    <input type="text" class="readonly-item" value="" name="non_clothing_quantity" readonly />
                                                                                     <span class="avl-wrap">&nbsp;</span>
                                                                                 @endif
                                                                             </td>
@@ -867,58 +869,76 @@ $reviewsCount = count($productReviews);
                         </div>
                     </div>
                     <div id="product-review" class="col s12">
-                        <div class="card card-with-padding">
-
+                        <div class="card-with-padding">
                             @if($reviewsCount > 0)
                             @foreach($productReviews as $productReview)
-                            <div class="review-item">
-                                <div class="reviewed-by">
-                                    <div class="user-image">
-                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" width="50px" />
+                            <div class="review-item card">
+                                <div class="row">
+                                    <div class="col s12 m9">
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                                <div class="reviewed-by row">
+                                                    <div class="user-image left">
+                                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" />
+                                                    </div>
+                                                    <div class="user-name left">
+                                                        <span>Reviewd by</span> {{ $productReview->name }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col s12 m6">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Overall : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <label>Experience : </label>
+                                                {{ $productReview->experience }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="user-name">
-                                        <span>Reviewd By</span>{{ $productReview->name }}
+                                    <div class="col s12 m3">
+                                        <div class="review-info">
+                                            <!-- <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Overall : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                                </div>
+                                            </div> -->
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Communication : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row"> 
+                                                <div class="col s12 review_info_box">
+                                                    <label>On Time Delivery : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Sample Support : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Product Quality : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="review-info">
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Overall : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Communication : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>On Time Delivery : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Sample Support : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Product Quality : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Experience : </label>
-                                            {{ $productReview->experience }}
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
                             @endforeach
                             @else
@@ -1068,7 +1088,7 @@ $reviewsCount = count($productReviews);
                                     @include('product._product_price')
 
                                     @if($product->availability==0 && $product->product_type==2)
-                                        <span class="new badge red sold-out" data-badge-caption="Sold Out"></span>
+                                        <span class="new badge red sold-out" data-badge-caption="Sold Out" style="display: none;"></span>
                                     @endif
                                 </div>
                             </div>

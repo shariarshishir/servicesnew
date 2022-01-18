@@ -239,7 +239,7 @@ class AdminController extends Controller
         if(!empty($rows) && $rowsCount > 0)
         {
             $html .= '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">';
-            $html .=  '<thead>';
+            $html .=  '<thead class="cf">';
             $html .= '<tr>';
             $html .= '<th>Name</th>';
             $html .= '<th>Email</th>';
@@ -251,10 +251,10 @@ class AdminController extends Controller
             foreach($rows as $row)
             {
                 $html .= '<tr>';
-                $html .= '<td>'.$row->name.'</td>';
-                $html .= '<td>'.$row->email.'</td>';
-                $html .= '<td>'.$row->phone.'</td>';
-                $html .= '<td>'.$row->company_name.'</td>';
+                $html .= '<td data-title="Name">'.$row->name.'</td>';
+                $html .= '<td data-title="Email">'.$row->email.'</td>';
+                $html .= '<td data-title="Phone">'.$row->phone.'</td>';
+                $html .= '<td data-title="Company Name">'.$row->company_name.'</td>';
                 $html .= '</tr>';
             }
             $html .= '</tbody>';
@@ -341,7 +341,7 @@ class AdminController extends Controller
         if(!empty($rows) && $rowsCount > 0)
         {
             $html .= '<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">';
-            $html .=  '<thead>';
+            $html .=  '<thead class="cf">';
             $html .= '<tr>';
             $html .= '<th>Name</th>';
             $html .= '<th>Email</th>';
@@ -354,11 +354,11 @@ class AdminController extends Controller
             foreach($rows as $row)
             {
                 $html .= '<tr>';
-                $html .= '<td>'.$row->name.'</td>';
-                $html .= '<td>'.$row->email.'</td>';
-                $html .= '<td>'.$row->phone.'</td>';
-                $html .= '<td>'.$row->company_name.'</td>';
-                $html .= '<td>'.$row->last_activity.'</td>';
+                $html .= '<td data-title="Name">'.$row->name.'</td>';
+                $html .= '<td data-title="Email">'.$row->email.'</td>';
+                $html .= '<td data-title="Phone">'.$row->phone.'</td>';
+                $html .= '<td data-title="Company Name">'.$row->company_name.'</td>';
+                $html .= '<td data-title="Last Activity">'.$row->last_activity.'</td>';
                 $html .= '</tr>';
             }
             $html .= '</tbody>';

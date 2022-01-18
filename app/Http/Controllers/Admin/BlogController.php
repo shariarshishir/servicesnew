@@ -28,7 +28,7 @@ class BlogController extends Controller
         $allData=$request->all();
         if ($request->hasFile('feature_image')){
             $path=$request->file('feature_image')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path))->fit(750, 293);
+            $image = Image::make(public_path('storage/'.$path));
             $image->save(public_path('storage/'.$path));
 
             $path_small=$request->file('feature_image')->store('images/small/','public');
@@ -40,7 +40,7 @@ class BlogController extends Controller
 
         if ($request->hasFile('author_img')){
             $path=$request->file('author_img')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path))->fit(100, 100)->encode();
+            $image = Image::make(public_path('storage/'.$path))->encode();
             $image->save(public_path('storage/'.$path));
 
             $path_small=$request->file('author_img')->store('images/small','public');
@@ -79,7 +79,7 @@ class BlogController extends Controller
             Storage::delete('small/' .$blog->feature_image);
 
             $path=$request->file('feature_image')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path))->fit(750, 293);
+            $image = Image::make(public_path('storage/'.$path));
             $image->save(public_path('storage/'.$path));
 
             $path_small=$request->file('feature_image')->store('images/small/','public');
@@ -94,7 +94,7 @@ class BlogController extends Controller
             Storage::delete('small/'.$blog->author_img);
 
             $path=$request->file('author_img')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path))->fit(100, 100)->encode();
+            $image = Image::make(public_path('storage/'.$path))->encode();
             $image->save(public_path('storage/'.$path));
 
             $path_small=$request->file('author_img')->store('images/small','public');

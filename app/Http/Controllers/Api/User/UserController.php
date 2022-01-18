@@ -34,17 +34,20 @@ class UserController extends Controller
         $totalWishlist=count($user->productWishlist);
         $totalOrderPlacedByUser = count($user->vendorOrder);
         $orderQueries = OrderModificationRequest::where(['user_id' => $userId, 'type' => 1])->get();
+        $orderModifications = OrderModificationRequest::where(['user_id' => $userId, 'type' => 2])->get();
         $totalOrderQueries = count($orderQueries);
+        $totalOrderModifications = count($orderModifications);
         if(isset($user))
         {
-            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderPlacedByUser'=>$totalOrderPlacedByUser,'totalOrderQueries'=>$totalOrderQueries,'message'=>'user found','code'=>'True'],200);
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderPlacedByUser'=>$totalOrderPlacedByUser,'totalOrderQueries'=>$totalOrderQueries,'totalOrderModifications'=>$totalOrderModifications,'message'=>'user found','code'=>'True'],200);
         }
         else
         {
             $totalWishlist = [];
             $totalOrderQueries = [];
+            $totalOrderModifications = [];
 
-            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderQueries'=>$totalOrderQueries,'message'=>'user not found','code'=>"False"],200);
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderQueries'=>$totalOrderQueries,'totalOrderModifications'=>$totalOrderModifications,'message'=>'user not found','code'=>"False"],200);
         }
 
     }
@@ -580,19 +583,15 @@ class UserController extends Controller
             'is_email_verified' => 1,
         ]);
 
-       if($request->user_flag == 'global'){
-
-            $token = Str::random(64);
-            UserVerify::create([
-                'user_id' => $user->id,
-                'token' => $token
-            ]);
-            if(env('APP_ENV') == 'production')
-            {
-                event(new NewUserHasRegisteredEvent($user, $token));
-            }
-       }
-
+        $token = Str::random(64);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $token
+        ]);
+        if(env('APP_ENV') == 'production' && $request->user_flag == 'global')
+        {
+            event(new NewUserHasRegisteredEvent($user, $token));
+        }
 
         return response()->json(['msg' => 'user created successfully'], 200);
     }

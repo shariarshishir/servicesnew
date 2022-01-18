@@ -51,11 +51,12 @@ class RfqBidController extends Controller
         $validator = Validator::make($request->all(), [
             'rfq_id' => 'required',
             'business_profile_id'=>'required',
-            'payment_method'=>'required',
-            'quantity'=>'required',
             'unit_price'=>'required',
-            'total_price'=>'required',
-            'delivery_time'=>'required',
+            'description' => 'required',
+            //'total_price'=>'required',
+            // 'payment_method'=>'required',
+            // 'quantity'=>'required',
+            // 'delivery_time'=>'required',
            ]);
            if ($validator->fails())
          {
@@ -65,47 +66,39 @@ class RfqBidController extends Controller
              400);
          }
 
-            $allData=$request->all();
+            $allData=$request->only('rfq_id','business_profile_id','unit_price','description');
             $allData['supplier_id']=auth()->id();
             $rfq = Rfq::find($request->rfq_id);
-            $allData['title'] =$rfq->title;
-            $allData['unit'] = $rfq->unit;
-            $allData['destination'] =$rfq->destination;
-            $image_path =[];
+            // $allData['title'] =$rfq->title;
+            // $allData['unit'] = $rfq->unit;
+            // $allData['destination'] =$rfq->destination;
 
-            if ($request->hasFile('rfq_images')){
-                foreach ($request->file('rfq_images') as $product_image){
-                    $extension = $product_image->getClientOriginalExtension();
+            // if ($request->hasFile('rfq_images')){
+            //     foreach ($request->file('rfq_images') as $product_image){
+            //         $extension = $product_image->getClientOriginalExtension();
 
-                    if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
+            //         if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
-                        $path=$product_image->store('images','public');
-                    }
-                    else{
-                        $path=$product_image->store('images','public');
-                        $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                        Storage::put($path, $image);
-                    }
+            //             $path=$product_image->store('images','public');
+            //         }
+            //         else{
+            //             $path=$product_image->store('images','public');
+            //             $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+            //             Storage::put($path, $image);
+            //         }
+            //         $image_path[] = $path;
+            //     }
 
+            //     unset($allData['rfq_images']);
+            // }else{
 
-                    // $path=$product_image->store('images','public');
+            //     foreach($rfq->images as $item){
+            //         $image_path[] = $item->image;
+            //     }
 
-                    // $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                    // Storage::put($path, $image);
+            //  }
+            // $allData['media'] = json_encode($image_path);
 
-                    $image_path[] = $path;
-                }
-
-                unset($allData['rfq_images']);
-            }else{
-
-                foreach($rfq->images as $item){
-                    $image_path[] = $item->image;
-                }
-
-            }
-
-            $allData['media'] = json_encode($image_path);
             $bidData=SupplierBid::create($allData);
 
             //send mail to the user who had created rfq

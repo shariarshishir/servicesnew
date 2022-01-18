@@ -12,6 +12,7 @@ trait PushNotificationTrait {
             //write title, description and so on
             'title'		=> 'Hello '.$userName,
             'body' 	=> $message,
+            'icon' => "{{ asset('storage/images/mb_mail_logo.png') }}",
             'sound' =>'fcmsound.mp3'
             ];
 

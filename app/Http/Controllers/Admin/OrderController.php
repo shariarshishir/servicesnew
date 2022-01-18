@@ -134,8 +134,8 @@ class OrderController extends Controller
             $vendorOrder->update(['state' => 'approved','approved_by_admin'=> Auth::guard('admin')->user()->id]);
             $vendorOrder=VendorOrder::with('orderItems.product.images')->find($id);
             
-            $fcmToken="c9sWZ1wZBSeU0f_y-1zUDm:APA91bHAvTWpXERe2BWn13brnY_OghUPlfoMTeyV-zrsZ94H2exyGadKwjjhk1sm7oV473LfP0Y6VmrEFp3Xs20kEVqVUTVMfLXw9UxDv0GK3P7n3D8wJsTyS-hjFGC6f_Cs5AYTTRdS";
-            $message="Thank you for placing an order with Merchant Bay.Please check your order list.";
+            $fcmToken = $vendorOrder->user->fcm_token;
+            $message = "Thank you for placing an order with Merchant Bay.Please check your order list.";
             $this->pushNotificationSend($fcmToken,$vendorOrder->user->name,$message);
 
             if(env('APP_ENV') == 'production')

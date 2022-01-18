@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqInvitationMail;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewRfqNotification;
+use App\Http\Traits\PushNotificationTrait;
 
 class NewRfqInvitationListener implements ShouldQueue
 {
+    use PushNotificationTrait;
     /**
      * Create the event listener.
      *
@@ -43,6 +45,11 @@ class NewRfqInvitationListener implements ShouldQueue
             Mail::to($user)->send(new NewRfqInvitationMail($data));
         }
         else{
+
+            //send push notification to user for new rfq
+            $fcmToken = $user->fcm_token;
+            $message = "A new rfq has been posted";
+            $this->pushNotificationSend($fcmToken,$user->name,$message);
             $data=[
                 'supplier'=>$user->name,
                 'rfq'=>$rfq,

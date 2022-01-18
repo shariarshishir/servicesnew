@@ -22,6 +22,7 @@ use App\Models\OrderModificationRequest;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
+use App\Http\Traits\PushNotificationTrait;
 
 
 class ProductCartController extends Controller
@@ -400,10 +401,12 @@ class ProductCartController extends Controller
 
                     }
                 }
-                if(env('APP_ENV') == 'production')
-                {
+                
+
+                // if(env('APP_ENV') == 'production')
+                // {
                     event(new NewOrderHasPlacedEvent($order));
-                }
+                // }
             }
 
 

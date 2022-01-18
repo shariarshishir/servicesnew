@@ -35,13 +35,13 @@
                   <p>Categories</p>
               </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" style="display: none;">
             <a href="{{route('vendor.index')}}" class="nav-link {{ Route::is('vendor.show') ||Route::is('vendor.index')? 'active' : ''}} ">
                 <i class="fas fa-store nav-icon"></i>
                 <p>Stores</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" style="display: none;">
             <a href="{{ Route('vendor.inactive.index')}}" class="nav-link {{ Route::is('vendor.inactive.index')? 'active' : ''}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Inactive Stores</p>
@@ -55,7 +55,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ Route('admin.orders.index')}}" class="nav-link {{ Route::is('admin.orders.index')? 'active' : ''}}">
-              <i class="fas fa-palette nav-icon"></i>
+              <i class="fas fa-shopping-cart nav-icon"></i>
                 <p>Orders</p>
             </a>
           </li>
@@ -86,8 +86,8 @@
           {{-- shipping --}}
           <li class="nav-item has-treeview {{ Route::is('uom*') || Route::is('shipping-method*') || Route::is('shipment-type*') ? 'menu-open' : ''}}">
             <a href="javascript:void(0);" class="nav-link {{ Route::is('uom*') || Route::is('shipping-method*') || Route::is('shipment-type*') ? 'active' : ''}}">
-                <i class="fas fa-shipping-fast"></i>
-              <p>Shipping<i class="right fas fa-angle-left"></i></p>
+                <i class="fas fa-shipping-fast nav-icon"></i>
+                <p>Shipping</p>
             </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
@@ -114,7 +114,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ Route('blogs.index')}}" class="nav-link {{ Route::is('blogs.index')? 'active' : ''}}">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-newspaper nav-icon"></i>
                 <p>Blogs</p>
             </a>
           </li>
@@ -122,7 +122,7 @@
           {{-- users --}}
           <li class="nav-item">
             <a href="{{ Route('users.index')}}" class="nav-link {{ Route::is('users.*')? 'active' : ''}}">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user nav-icon"></i>
                 <p>Users</p>
             </a>
           </li>
@@ -131,7 +131,7 @@
         {{-- shipping --}}
         <li class="nav-item">
             <a href="{{ Route('admin.certification.index')}}" class="nav-link {{ Route::is('admin.certification.*')? 'active' : ''}}">
-                <i class="fa fa-certificate" aria-hidden="true"></i>
+                <i class="fa fa-certificate nav-icon"></i>
                 <p>Certification</p>
             </a>
         </li>

@@ -59,10 +59,20 @@
 						<td style="font-weight: 500; font-size: 22px">{{$po->buyer->name}}</td>
 					</tr>
 					<tr>
-						<td>{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
+						<td>
+							@if(@$po->buyer->company_name)
+							<p>Company Name: {{ @$po->buyer->company_name }}</p> 
+							@endif
+							@if(@$po->buyer->country)
+							<p>Country: {{ @$po->buyer->country }}</p>
+							@endif
+						</td>
 					</tr>
 					<tr>
-						<td>Ph: {{ @$po->buyer->phone}} Email: {{ @$po->buyer->email }}</td>
+						<td>
+							<p>Phone: {{ @$po->buyer->phone}}</p> 
+							<p>Email: {{ @$po->buyer->email }}</p>
+						</td>
 					</tr>
 				</table>
 			</td>

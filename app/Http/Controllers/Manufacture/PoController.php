@@ -69,6 +69,7 @@ class PoController extends Controller
     public function add()
 	{
 		$user=Auth::user();
+        $userAllBusinessProfiles = BusinessProfile::where('user_id', $user->id)->get();
         $business_profile=BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
         $business_profile_id=[];
         foreach($business_profile as $profile){
@@ -100,7 +101,7 @@ class PoController extends Controller
 		// }
 		// sort($products);
         $products=$allproducts;
-		return view('po.add',compact('buyers','products'));
+		return view('po.add',compact('buyers','products','userAllBusinessProfiles'));
 	}
 
     public function getsupplierbycat($id)
@@ -116,6 +117,7 @@ class PoController extends Controller
 
 		//echo '<pre>';print_r($request->input());exit;
 		$data = new Proforma;
+        $data->business_profile_id = $request->input('business_profile');
 		$data->buyer_id = $request->input('selected_buyer_id');
 		$data->proforma_id = $request->input('po_id');
 		$data->proforma_date = $request->input('po_date');

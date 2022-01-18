@@ -61,6 +61,14 @@
                                     </div>
                                     <div class="col s12 m6 l7 input-field">
                                         <div class="form-group has-feedback">
+                                            <label>Select Business <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                            <select name="business_profile" class="select2" required>
+                                                @foreach($userAllBusinessProfiles as $userBusinessProfile)
+                                                <option value="{{$userBusinessProfile->id}}">{{$userBusinessProfile->business_name}} - {{$userBusinessProfile->business_type==1 ? 'Manufacturer':'Wholesaler' }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>                                        
+                                        <div class="form-group has-feedback">
                                             <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
                                             <input type="text" class="form-control" required name="po_id"/>
                                         </div>

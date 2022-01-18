@@ -60,6 +60,41 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
 use App\Http\Controllers\RfqBidController;
 
+use Maatwebsite\Excel\Facades\Excel;
+
+Route::get('xlsDataExportForVerifiedBusinessProfile', function(){
+
+    //$allBusinessProfileList = App\Models\BusinessProfile::with(['user'])->get();
+    $verifiedBusinessProfileList = App\Models\BusinessProfile::with(['user'])->where(['is_business_profile_verified' => 1])->get();
+    
+    $data = array();
+
+    foreach($verifiedBusinessProfileList as $k => $businessProfile):
+
+        $data[] = [
+            'business_name' => $businessProfile->business_name ?? '',
+            'business_location' => $businessProfile->location ?? '',
+            'owner_name' => $businessProfile['user']->name ?? '',
+            'owner_email' => $businessProfile['user']->email ?? '',
+            'owner_phone' => $businessProfile['user']->phone ?? '',
+            'verification_status' => $businessProfile->is_business_profile_verified ?? ''
+        ];
+
+    endforeach;
+
+    echo "<pre>"; print_r($data); echo "</pre>";
+    die();
+    /*
+    return Excel::create('service_business_profiles_table', function($excel) use ($data) {
+        $excel->sheet('service_business_profiles_table', function($sheet) use ($data){
+            $sheet->fromArray($data);
+        });
+    })->download('xlsx');
+    */
+    //return Excel::download($verifiedBusinessProfileList, 'service_business_profiles_table.xlsx');
+
+    //return response()->json($data);
+});
 
 /*
 |--------------------------------------------------------------------------

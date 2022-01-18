@@ -180,6 +180,8 @@ return [
         //sweet alert package
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -234,6 +236,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
 

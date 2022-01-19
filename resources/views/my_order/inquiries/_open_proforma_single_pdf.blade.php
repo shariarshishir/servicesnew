@@ -143,10 +143,20 @@ ul, label {
 									<td style="color:#000; padding:0.1%; font-size:18px;">{{$po->buyer->name}}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
+									<td style="color:#000; padding:0.1%;">
+										@if(@$po->buyer->company_name)
+										<p>Company Name: {{ @$po->buyer->company_name }}</p> 
+										@endif
+										@if(@$po->buyer->country)
+										<p>Country: {{ @$po->buyer->country }}</p>
+										@endif
+									</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: {{ @$po->buyer->phone }} Email: {{ @$po->buyer->email }}</td>
+									<td style="color:#000; padding:0.1%;">
+										<p>Phone: {{ @$po->buyer->phone}}</p> 
+										<p>Email: {{ @$po->buyer->email }}</p>
+									</td>
 								</tr>
 							</table>
 						</td>

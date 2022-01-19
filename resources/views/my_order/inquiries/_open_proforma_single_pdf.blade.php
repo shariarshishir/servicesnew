@@ -121,16 +121,13 @@ ul, label {
 									<td style="color:#53AB57; font-size:14px; padding:0.1%; font-weight:bold;">Vendor</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%; font-size:18px;">Merchant Bay</td>
+									<td style="font-weight: 500; font-size: 22px">{{$supplierInfo->name}}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">House#27, Uttara Dhaka, 1230, Bangladesh</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: +880 9611-677345 Email: info@merchantbay.com</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">www.merchantbay.com</td>
+									<td>
+										<p>Phone: {{ $supplierInfo->phone}}</p> 
+										<p>Email: {{ $supplierInfo->email }}</p>								
+									</td>
 								</tr>
 							</table>
 						</td>

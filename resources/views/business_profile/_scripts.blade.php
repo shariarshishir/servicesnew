@@ -235,6 +235,7 @@
                         $('#about-company-information').text(data.about_company);
                         var nohtml="";
                         if(data.address == null) {
+                            $(".sidebar-headoffice-address").hide();
                             $('#head-office').empty();
                             var html ='<div class="card-alert card cyan lighten-5">';
                             html+='<div class="card-content cyan-text">';
@@ -244,6 +245,7 @@
                             $('#head-office').append(html);
 
                         } else {
+                            $(".sidebar-headoffice-address").show();
                             $('#head-office').empty();
                             var html ='<p>'+data.address+'</p>';
                             $('#head-office').append(html);
@@ -251,6 +253,7 @@
                         }
 
                         if(data.factory_address == null) {
+                            $(".sidebar-factory-address").hide();
                             $('#factory-address').empty();
                             var html ='<div class="card-alert card cyan lighten-5">';
                             html+='<div class="card-content cyan-text">';
@@ -260,6 +263,7 @@
                             $('#factory-address').append(html);
 
                         } else {
+                            $(".sidebar-factory-address").show();
                             $('#factory-address').empty();
                             var html ='<p>'+data.factory_address+'</p>';
                             $('#factory-address').append(html);
@@ -2533,6 +2537,7 @@
             $(".profile-tab a").addClass("active");
             $('.tabs').tabs().find('a[href="#profile-tab"]').trigger('click');
             $(".manufacturer_profile_info_details .btn_edit, .manufacturer_profile_info_details .btn_upload, .manufacturer_profile_info_details .btn_delete").toggle();
+            $(".data-profile-block").toggle();
         });
     });
     //video

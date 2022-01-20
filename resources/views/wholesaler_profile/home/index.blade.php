@@ -29,26 +29,27 @@
 				</div>
 				@endif
 				@if($company_overview->name=='number_of_worker')
-					@if(isset($company_overview->value))
 					<div class="col s4 m3 l2">
 						<div class="company_stuff_img">
 							<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
 						</div>
 						<div class="title">No. of workers</div>
-						<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+						@if(isset($company_overview->value))
+							<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+						@endif
 					</div>
-					@endif
 				@endif
 				@if($company_overview->name=='number_of_female_worker')
-					@if(isset($company_overview->value))
+					
 					<div class="col s4 m3 l2">
 						<div class="company_stuff_img">
 							<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" /> 
 						</div>
 						<div class="title">No. of female workers</div>
-						<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+						@if(isset($company_overview->value))
+							<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+						@endif
 					</div>
-					@endif
 				@endif
 			@endforeach
 		</div>
@@ -60,7 +61,7 @@
 		@if($business_profile->companyOverview->about_company)
 			{{$business_profile->companyOverview->about_company}}
 		@else
-			<div class="card-alert card cyan lighten-5">
+			<div class="card-alert card cyan lighten-5" style="display: none;">
 				<div class="card-content cyan-text">
 					<p>INFO : company details is not available.</p>
 				</div>

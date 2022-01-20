@@ -48,7 +48,7 @@
 					<div class="center-align" style="display: none;">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
-					<div class="addressBox">
+					<div class="addressBox sidebar-headoffice-address" @php echo ($business_profile->companyOverview->address) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 						<span>Head Office </span><br/>
 						<div id="head-office">
 							@if($business_profile->companyOverview->address)
@@ -62,7 +62,7 @@
 							@endif
 						</div>
 					</div>
-					<div class="addressBox">
+					<div class="addressBox sidebar-factory-address" @php echo ($business_profile->companyOverview->factory_address) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 						<span>Factory Address</span> <br/>
 						<div id="factory-address">
 							@if($business_profile->companyOverview->factory_address)
@@ -165,7 +165,7 @@
 							</p>
 						</div>
 						<!-- contentBox -->
-						<div class="certifications">
+						<div class="certifications data-profile-block" @php echo (count($business_profile->certifications) > 0) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 							<h3>Certifications</h3>
 							<div class="certifications-block">
 							@if(count($business_profile->certifications)>0)
@@ -221,7 +221,7 @@
 						</div>
 
 						<!-- certifications -->
-						<div class="profile_product_wrap product_wrapper">
+						<div class="profile_product_wrap product_wrapper data-profile-block" @php echo (count($mainProducts) > 0) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Main Products</h3>
@@ -268,7 +268,7 @@
 							</div>
 						</div>
 						<!-- profile_product_wrap -->
-						<div class="factory_imgbox_wrap">
+						<div class="factory_imgbox_wrap data-profile-block" @php echo (count($business_profile->companyFactoryTour) > 0) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 							<h3>Factory Images</h3>
 							
 							@if(count($business_profile->companyFactoryTour)>0)
@@ -334,7 +334,7 @@
 							
 						</div>
 						<!-- factory_images -->
-						<div class="main_buyers_wrap">
+						<div class="main_buyers_wrap data-profile-block" @php echo (count($business_profile->mainBuyers) > 0) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 							<h3>Main Buyers</h3>
 							<div class="buyers_logo_wrap row main-buyers-block">
 								@if(count($business_profile->mainBuyers)>0)
@@ -358,7 +358,7 @@
 
 						</div>
 						<!-- main_buyers logo -->
-						<div class="export_destination_wrap">
+						<div class="export_destination_wrap data-profile-block" @php echo (count($business_profile->exportDestinations) > 0) ? 'style="display: block;"' : 'style="display: none;"'; @endphp>
 							<h3>Export Destinations</h3>
 							<div class="row flag_wrap center-align export-destination-block">
 								@if(count($business_profile->exportDestinations)>0)
@@ -418,143 +418,146 @@
 								</table>
 							</div>
 						</div>
-						<div class="overview_table_wrap capacity_machineries">
-							<div class="row top_titleWrap">
-								<div class="col s9 m7">
-									<h3>Capacity and Machineries</h3>
-								</div>
-								@if(Auth::check())
-								<div class="col s3 m5 right-align editBox">
-									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
-										<span class="btn_icon"><i class="material-icons">border_color</i></span>
-										<span class="btn_edit_white"> Edit</span>
-									</button>
-								</div>
-								@endif
-							</div>
-							<div class="row capacity_table">
 
-								<!-- <div class="col s12 m6">
-									<h4>Production Capacity (Annual)</h4>
-									<div class="production-capacity-wrapper">
-										@if(count($business_profile->productionCapacities)>0)
-										<div class="overview_table box_shadow">
-											<table>
-												<thead>
-													<tr>
-														<th>Machine Type</th>
-														<th>Annual Capacity</th>
-														<th>&nbsp;</th>
-													</tr>
-												</thead>
-												<tbody class="production-capacity-table-body">
-													@foreach($business_profile->productionCapacities as $productionCapacity)
-														<tr>
-															<td>{{$productionCapacity->machine_type}}</td>
-															<td>{{$productionCapacity->annual_capacity}}</td>
-															@if($productionCapacity->status==1)
-															<td><i class="material-icons" style="color:green">check_circle</i></td>
-															@else
-															<td><i class="material-icons "style="color:gray">check_circle</i></td>
-															@endif
-														</tr>
-													@endforeach
-												</tbody>
-											</table>
-										</div>
-										@else
-										<div class="card-alert card cyan lighten-5">
-											<div class="card-content cyan-text">
-												<p>INFO : No data found.</p>
-											</div>
-										</div>
-										@endif
+						<div @php echo ( count($business_profile->categoriesProduceds) > 0 && count($business_profile->machineriesDetails > 0) ) ? 'class="capacity-and-machineries-outer-wrapper" style="display: block;"' : 'class="capacity-and-machineries-outer-wrapper data-profile-block" style="display: none;"'; @endphp>
+							<div class="overview_table_wrap capacity_machineries">
+								<div class="row top_titleWrap">
+									<div class="col s9 m7">
+										<h3>Capacity and Machineries</h3>
 									</div>
-								</div> -->
+									@if(Auth::check())
+									<div class="col s3 m5 right-align editBox">
+										<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
+											<span class="btn_icon"><i class="material-icons">border_color</i></span>
+											<span class="btn_edit_white"> Edit</span>
+										</button>
+									</div>
+									@endif
+								</div>
+								<div class="row capacity_table">
 
-								<div class="col s12 m12">
-									<h4>Categories Produced</h4>
-									<div class="categories_produced_wrapper">
-										@if(count($business_profile->categoriesProduceds)>0)
-										<div class="overview_table box_shadow">
-											<div class="no_more_tables">
+									<!-- <div class="col s12 m6">
+										<h4>Production Capacity (Annual)</h4>
+										<div class="production-capacity-wrapper">
+											@if(count($business_profile->productionCapacities)>0)
+											<div class="overview_table box_shadow">
 												<table>
-													<thead class="cf" >
+													<thead>
 														<tr>
-															<th>Type</th>
-															<th>Percentage</th>
+															<th>Machine Type</th>
+															<th>Annual Capacity</th>
 															<th>&nbsp;</th>
 														</tr>
 													</thead>
-													<tbody class="categories-produced-table-body">
-														@foreach($business_profile->categoriesProduceds as $categoriesProduced)
-														<tr>
-															<td data-title="Type">{{$categoriesProduced->type}}</td>
-															<td data-title="Percentage">{{$categoriesProduced->percentage}}</td>
-															@if($categoriesProduced->status==1)
-															<td><i class="material-icons" style="color:green">check_circle</i></td>
-															@else
-															<td><i class="material-icons "style="color:gray">check_circle</i></td>
-															@endif
-														</tr>
+													<tbody class="production-capacity-table-body">
+														@foreach($business_profile->productionCapacities as $productionCapacity)
+															<tr>
+																<td>{{$productionCapacity->machine_type}}</td>
+																<td>{{$productionCapacity->annual_capacity}}</td>
+																@if($productionCapacity->status==1)
+																<td><i class="material-icons" style="color:green">check_circle</i></td>
+																@else
+																<td><i class="material-icons "style="color:gray">check_circle</i></td>
+																@endif
+															</tr>
 														@endforeach
 													</tbody>
 												</table>
 											</div>
-										</div>
-										@else
+											@else
 											<div class="card-alert card cyan lighten-5">
 												<div class="card-content cyan-text">
 													<p>INFO : No data found.</p>
 												</div>
 											</div>
-										@endif
-									</div>
-								</div>
-							</div>
-						</div>
+											@endif
+										</div>
+									</div> -->
 
-						<div class="overview_table_wrap machinery_table">
-							<h4>Machinery Details</h4>
-							<div class="machinery_table_inner_wrap">
-								@if(count($business_profile->machineriesDetails)>0)
-								<div class="overview_table box_shadow">
-									<div class="no_more_tables">
-										<table>
-											<thead class="cf">
-												<tr>
-													<th>Machine Name</th>
-													<th>Quantity</th>
-													<th>&nbsp;</th>
-												</tr>
-											</thead>
-											<tbody class="machinaries-details-table-body">
-												@foreach($business_profile->machineriesDetails as $machineriesDetail)
-												<tr>
-													<td data-title="Machine Name">{{$machineriesDetail->machine_name}}</td>
-													<td data-title="Quantity">{{$machineriesDetail->quantity}}</td>
-													@if($machineriesDetail->status==1)
-													<td><i class="material-icons" style="color:green">check_circle</i></td>
-													@else
-													<td><i class="material-icons "style="color:gray">check_circle</i></td>
-													@endif
-												</tr>
-												@endforeach
-											</tbody>
-										</table>
-									</div>
-								</div>
-								@else
-									<div class="card-alert card cyan lighten-5">
-										<div class="card-content cyan-text">
-											<p>INFO : No data found.</p>
+									<div class="col s12 m12">
+										<h4>Categories Produced</h4>
+										<div class="categories_produced_wrapper">
+											@if(count($business_profile->categoriesProduceds)>0)
+											<div class="overview_table box_shadow">
+												<div class="no_more_tables">
+													<table>
+														<thead class="cf" >
+															<tr>
+																<th>Type</th>
+																<th>Percentage</th>
+																<th>&nbsp;</th>
+															</tr>
+														</thead>
+														<tbody class="categories-produced-table-body">
+															@foreach($business_profile->categoriesProduceds as $categoriesProduced)
+															<tr>
+																<td data-title="Type">{{$categoriesProduced->type}}</td>
+																<td data-title="Percentage">{{$categoriesProduced->percentage}}</td>
+																@if($categoriesProduced->status==1)
+																<td><i class="material-icons" style="color:green">check_circle</i></td>
+																@else
+																<td><i class="material-icons "style="color:gray">check_circle</i></td>
+																@endif
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
+											</div>
+											@else
+												<div class="card-alert card cyan lighten-5">
+													<div class="card-content cyan-text">
+														<p>INFO : No data found.</p>
+													</div>
+												</div>
+											@endif
 										</div>
 									</div>
-								@endif
+								</div>
+							</div>
+
+							<div class="overview_table_wrap machinery_table">
+								<h4>Machinery Details</h4>
+								<div class="machinery_table_inner_wrap">
+									@if(count($business_profile->machineriesDetails)>0)
+									<div class="overview_table box_shadow">
+										<div class="no_more_tables">
+											<table>
+												<thead class="cf">
+													<tr>
+														<th>Machine Name</th>
+														<th>Quantity</th>
+														<th>&nbsp;</th>
+													</tr>
+												</thead>
+												<tbody class="machinaries-details-table-body">
+													@foreach($business_profile->machineriesDetails as $machineriesDetail)
+													<tr>
+														<td data-title="Machine Name">{{$machineriesDetail->machine_name}}</td>
+														<td data-title="Quantity">{{$machineriesDetail->quantity}}</td>
+														@if($machineriesDetail->status==1)
+														<td><i class="material-icons" style="color:green">check_circle</i></td>
+														@else
+														<td><i class="material-icons "style="color:gray">check_circle</i></td>
+														@endif
+													</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+									@else
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>
+									@endif
+								</div>
 							</div>
 						</div>
 
-						<div class="overview_table_wrap">
+						<div @php echo (count($business_profile->productionFlowAndManpowers) > 0) ? 'class="overview_table_wrap" style="display: block;"' : 'class="overview_table_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap">
 								<div class="col s9 m7">
 									<h3>Production Flow and Manpower</h3>
@@ -607,7 +610,7 @@
 							</div>
 						</div>
 
-						<div class="certifications">
+						<div @php echo (count($business_profile->certifications) > 0) ? 'class="certifications" style="display: block;"' : 'class="certifications data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s7">
 									<h3>Certifications</h3>
@@ -678,7 +681,7 @@
 							</div>
 						</div>
 
-						<div class="main_buyers_wrap">
+						<div @php echo (count($business_profile->mainBuyers) > 0) ? 'class="main_buyers_wrap" style="display: block;"' : 'class="main_buyers_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s7">
 									<h3>Main Buyers</h3>
@@ -716,7 +719,7 @@
 							</div>
 
 						</div>
-						<div class="export_destination_wrap">
+						<div @php echo (count($business_profile->exportDestinations) > 0) ? 'class="export_destination_wrap" style="display: block;"' : 'class="export_destination_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s7">
 									<h3>Export Destinations</h3>
@@ -769,7 +772,7 @@
 							</div> -->
 						</div>
 
-						<div class="overview_table_wrap overview_table_alignLeft">
+						<div @php echo (count($business_profile->businessTerms) > 0) ? 'class="overview_table_wrap overview_table_alignLeft" style="display: block;"' : 'class="overview_table_wrap overview_table_alignLeft data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap">
 								<div class="col s9 m7">
 									<h3>Business Terms</h3>
@@ -815,7 +818,7 @@
 							</div>
 						</div>
 
-						<div class="overview_table_wrap overview_table_alignLeft">
+						<div @php echo (count($business_profile->samplings) > 0) ? 'class="overview_table_wrap overview_table_alignLeft" style="display: block;"' : 'class="overview_table_wrap overview_table_alignLeft data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap">
 								<div class="col s9 m7">
 									<h3>Sampling and R&D</h3>
@@ -860,7 +863,7 @@
 							</div>
 						</div>
 
-						<div class="overview_table_wrap blank_overview_table_wrap">
+						<div @php echo (count($business_profile->specialCustomizations) > 0) ? 'class="overview_table_wrap blank_overview_table_wrap" style="display: block;"' : 'class="overview_table_wrap blank_overview_table_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap">
 								<div class="col s9 m7">
 									<h3>Special customization ability</h3>
@@ -1215,7 +1218,7 @@
 							</div>
 						</div>
 
-						<div class="overview_table_wrap blank_overview_table_wrap">
+						<div @php echo (count($business_profile->sustainabilityCommitments) > 0) ? 'class="overview_table_wrap blank_overview_table_wrap" style="display: block;"' : 'class="overview_table_wrap blank_overview_table_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap">
 								<div class="col s9 m7">
 									<h3>Sustainability commitments</h3>
@@ -1259,7 +1262,7 @@
 							</div>
 						</div>
 
-						<div class="membership_wrap">
+						<div @php echo (count($business_profile->associationMemberships) > 0) ? 'class="membership_wrap" style="display: block;"' : 'class="membership_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s7">
 									<h3>Association memberships</h3>
@@ -1293,7 +1296,7 @@
 								@endif
 							</div>
 						</div>
-						<div class="pr_highlights_wrap">
+						<div @php echo (count($business_profile->pressHighlights) > 0) ? 'class="pr_highlights_wrap" style="display: block;"' : 'class="pr_highlights_wrap data-profile-block" style="display: none;"'; @endphp>
 							<div class="row top_titleWrap upload_delete_wrap">
 								<div class="col s7">
 									<h3>PR Highlights</h3>

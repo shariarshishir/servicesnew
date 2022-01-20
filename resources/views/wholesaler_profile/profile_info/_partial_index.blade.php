@@ -36,7 +36,7 @@ $profileEditMode = Request::get('editmode');
 			</table>
 		</div>
 	</div>
-	<div class="membership_wrap">
+	<div class="membership_wrap" @php echo ( count($business_profile->associationMemberships) > 0 || $profileEditMode == 'enabled' ) ? 'style="display:block;"' : 'style="display:none;"'; @endphp>
 		<div class="row top_titleWrap upload_delete_wrap">
 			<div class="col s6 m6">
 				<h3>Association memberships</h3>
@@ -74,7 +74,7 @@ $profileEditMode = Request::get('editmode');
 			@endif
 		</div>
 	</div>
-	<div class="pr_highlights_wrap">
+	<div class="pr_highlights_wrap" @php echo ( count($business_profile->pressHighlights) > 0 || $profileEditMode == 'enabled' ) ? 'style="display:block;"' : 'style="display:none;"'; @endphp>
 		<div class="row top_titleWrap upload_delete_wrap">
 			<div class="col s6 m6">
 				<h3>PR Highlights</h3>

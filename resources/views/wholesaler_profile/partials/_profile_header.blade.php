@@ -43,7 +43,8 @@
 					<div class="center-align" style="display: none;">
 						<a href="#" class="btn_green btn_supplier">Contact Supplier</a>
 					</div>
-					<div class="addressBox">
+
+					<div class="addressBox sidebar-headoffice-address" @php echo ($business_profile->companyOverview->address) ? 'style="display:block;"' : 'style="display:none;"'; @endphp>
 						<span>Head Office </span><br/>
 						<div id="head-office">
 							@if($business_profile->companyOverview->address)
@@ -57,7 +58,8 @@
 							@endif
 						</div>
 					</div>
-					<div class="addressBox">
+					
+					<div class="addressBox sidebar-factory-address" @php echo ($business_profile->companyOverview->factory_address) ? 'style="display:block;"' : 'style="display:none;"'; @endphp>
 						<span>Factory Address</span> <br/>
 						<div id="factory-address">
 							@if($business_profile->companyOverview->factory_address)

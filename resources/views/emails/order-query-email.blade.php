@@ -11,7 +11,7 @@
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
             <td style="padding: 30px;">
-                <p style="font-family:verdana;font-size:13px;margin:0px;color:#000;line-height:normal;">A new order query to Merchant Bay Shop.</p>
+                <p style="font-family:verdana;font-size:13px;margin:0px;color:#000;line-height:normal;">A new order query to Merchant Bay.</p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;">User name: {{ $query->user->name }}</p>
                 <p style="font-family:verdana;font-size:12px;margin:0px;color:#000;line-height:normal;">Product name: {{ $query->product->name }}</p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('query.edit', $query->id) }}">Click here to see the full details</a></p>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\OrderModificationRequest;
 use stdClass;
+use App\Events\NewOrderModificationRequestEvent;
 
 class OrderModificationRequestController extends Controller
 {
@@ -66,10 +67,10 @@ class OrderModificationRequestController extends Controller
             $newFormatedOrderModificationRequest->user=$orderModificationRequest->user->name;
             $newFormatedOrderModificationRequest->product_id=$orderModificationRequest->product_id;
             $newFormatedOrderModificationRequest->details=json_decode($orderModificationRequest->details);
-            $newFormatedOrderModificationRequest->color_sizes = json_decode($orderModificationRequest->orderModification->colors_sizes);
-            $newFormatedOrderModificationRequest->unit_price = $orderModificationRequest->orderModification->unit_price;
-            $newFormatedOrderModificationRequest->quantity = $orderModificationRequest->orderModification->quantity;
-            $newFormatedOrderModificationRequest->total_price = $orderModificationRequest->orderModification->total_price;
+            $newFormatedOrderModificationRequest->color_sizes = $orderModificationRequest->orderModification ? json_decode($orderModificationRequest->orderModification->colors_sizes):NULL;
+            $newFormatedOrderModificationRequest->unit_price = $orderModificationRequest->orderModification ? $orderModificationRequest->orderModification->unit_price:NULL;
+            $newFormatedOrderModificationRequest->quantity = $orderModificationRequest->orderModification ? $orderModificationRequest->orderModification->quantity:NULL;
+            $newFormatedOrderModificationRequest->total_price = $orderModificationRequest->orderModification ? $orderModificationRequest->orderModification->total_price:NULL;
             $newFormatedOrderModificationRequest->state=$orderModificationRequest->state;
             $newFormatedOrderModificationRequest->created_at=$orderModificationRequest->created_at;
             $newFormatedOrderModificationRequest->updated_at=$orderModificationRequest->updated_at;
@@ -142,7 +143,7 @@ class OrderModificationRequestController extends Controller
 
 
 
-               // event(new NewOrderModificationRequestEvent($orderModificationRequest));
+                event(new NewOrderModificationRequestEvent($orderModificationRequest));
                 return response()->json([
                     'success' => 'Request Created Successfully!',
                     'code' =>true,

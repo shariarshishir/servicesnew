@@ -23,9 +23,9 @@ class NewOrderHasPlacedListener implements ShouldQueue
 
         //send push notification to admin for new order
         $fcmToken = $admin->fcm_token;
-        $message = "A new order is placed.Please review and forward the order to the supplier";
-        $this->pushNotificationSend($fcmToken,$admin->name,$message);
-
+        $title = "New Order has placed";
+        $message = "A new order is placed by ".$event->order->user->name.".Please review and forward the order to the supplier";
+        $this->pushNotificationSend($fcmToken,$title,$message);
         //send  notification and email to admin  and buyer for new order
         Mail::to('success@merchantbay.com')->send(new NewOrderPlaceMailToAdmin($event->order));
         Mail::to($event->order->user->email)->send(new NewOrderPlaceMailToBuyer($event->order));

@@ -94,7 +94,7 @@ class RfqController extends Controller
 
         if(env('APP_ENV') == 'production')
         {
-            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
             foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
                 event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             }

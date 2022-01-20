@@ -400,13 +400,13 @@
     $('.signin').click(function (e) {
         e.preventDefault();
         var firebaseConfig = {
-            apiKey: "AIzaSyD7rRW59FfaNdzjOAdF93gEhnOzCynFKrc",
-            authDomain: "shopmerchantbay-5fe20.firebaseapp.com",
-            projectId: "shopmerchantbay-5fe20",
-            storageBucket: "shopmerchantbay-5fe20.appspot.com",
-            messagingSenderId: "455810425517",
-            appId: "1:455810425517:web:7617959ac0122da5badc24",
-            measurementId: "G-E1FD0F7EDG"
+            apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
+            authDomain: "merchant-bay-service.firebaseapp.com",
+            projectId: "merchant-bay-service",
+            storageBucket: "merchant-bay-service.appspot.com",
+            messagingSenderId: "789211877611",
+            appId: "1:789211877611:web:006bb3073632a306daeeae",
+            measurementId: "G-M5LLMK2G5S"
         };
        
         

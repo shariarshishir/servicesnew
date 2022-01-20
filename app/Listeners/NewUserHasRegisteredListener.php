@@ -12,22 +12,33 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUserRegistrationMailToUser;
 use App\Http\Traits\PushNotificationTrait;
 
-class NewUserHasRegisteredListener 
+class NewUserHasRegisteredListener implements ShouldQueue
 {
     use PushNotificationTrait;
     public function handle($event)
     {
         $admin=Admin::find(1);
 
-        //send push notification to admin for new order
+        //send push notification to admin for new user registration
         $fcmToken = $admin->fcm_token;
-        $message = "A new user is awating for review";
-        $this->pushNotificationSend($fcmToken,$admin->name,$message);
+        $title = "New user has registered";
+        $message = "A new user is awating for review. Please review the user request and give feedback as soon as possible";
+        $this->pushNotificationSend($fcmToken,$title,$message);
 
         //mail to admin
         Mail::to('success@merchantbay.com')->send(new NewUserRegistrationMail($event->user));
+
         //mail to user
-        Mail::to($event->user->email)->send(new NewUserRegistrationMailToUser($event->user, $event->token));
+        if($event->user->user_agent == "Dart"){
+            Mail::send('emails.apiEmailVerificationEmail', ['token' => $event->token], function($message) use($event){
+                $message->to($event->user->email);
+                $message->subject('Welcome to Merchantbay');
+            });
+        }
+        else{
+            Mail::to($event->user->email)->send(new NewUserRegistrationMailToUser($event->user, $event->token));
+        }
+            
 
     }
 }

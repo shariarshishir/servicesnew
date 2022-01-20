@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use stdClass;
+use App\Events\NewBusinessProfileHasCreatedEvent;
 
 class BusinessProfileController extends Controller
 {
@@ -204,6 +205,7 @@ class BusinessProfileController extends Controller
                         $business_profile=BusinessProfile::create($business_profile_data);
                         //create company overview
                         $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+                        event(new NewBusinessProfileHasCreatedEvent($business_profile));
                         return response()->json([
                             'success' => true,
                             'business_profile'=>$business_profile,
@@ -257,6 +259,7 @@ class BusinessProfileController extends Controller
                         
                         //create company overview
                         $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+                        event(new NewBusinessProfileHasCreatedEvent($business_profile));
                         $newCompanyOverview = new stdClass();
                         $newCompanyOverview->business_profile_id=$companyOverview->business_profile_id;
                         $newCompanyOverview->business_profile_id=json_decode($companyOverview->data);

@@ -18,15 +18,27 @@
                         <p style="margin: 0px; padding: 8px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
                             Thank you for registering to Merchant Bay, a B2B tech-enabled platforms created as a critical channel for sales, marketing and order management of apparel.
                         </p>
-                        
+                        @if((Request::wantsJson()))
+                        <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
+                            Your registration will be reviewed and verified within <strong> 48 hours</strong>. Meanwhile, verify your email using the following OTP
+                        </p>
+                        @else
                         <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
                             Your registration will be reviewed and verified within <strong> 48 hours</strong>. Meanwhile, verify your email by clicking this button
                         </p>
+                        @endif
+                        @if((Request::wantsJson()))
+                        <span style="text-align: center; display: block;  padding: 20px 0 50px; margin: 0px; line-height: 25px;">
+                            <p style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; border-radius: 8px; padding: 10px 20px; display: inline-block; color: #fff; text-decoration: none;">{{$token}}</p>
+                        </span>
+                        @else
                         <span style="text-align: center; display: block;  padding: 20px 0 50px; margin: 0px; line-height: 25px;">
                             <a href="{{ route('user.verify',$token) }}" target="_blank" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; border-radius: 8px; padding: 10px 20px; display: inline-block; color: #fff; text-decoration: none;">Confirm Email</a>
                         </span>
+                        @endif
                     </td>
                 </tr>
+                @if(!(Request::wantsJson()))
                 <tr>
                     <td style="text-align: left; padding: 0; margin: 0;">
                         <p style="margin: 0; padding: 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">If the button is not working, click the following link...</p>
@@ -39,6 +51,7 @@
                         <p style="margin: 0; padding: 0px; text-decoration: underline; color: #0A0A0A;">Email: <span style="font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">success@merchantbay.com</span>, Call: </p>
                     </td>
                 </tr>
+                @endif
                 <tr>
                     <td style="padding: 0; margin: 0;"> 
                         <ul style="margin: 0 0 0 30px; padding: 0;">

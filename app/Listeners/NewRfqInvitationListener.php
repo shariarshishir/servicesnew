@@ -48,8 +48,9 @@ class NewRfqInvitationListener implements ShouldQueue
 
             //send push notification to user for new rfq
             $fcmToken = $user->fcm_token;
-            $message = "A new rfq has been posted";
-            $this->pushNotificationSend($fcmToken,$user->name,$message);
+            $title = "A new rfq has been posted";
+            $message = "Dear, ".$user->name.", A request for quotation you may feel interested about.Please check RFQ list";
+            $this->pushNotificationSend($fcmToken,$title,$message);
             $data=[
                 'supplier'=>$user->name,
                 'rfq'=>$rfq,

@@ -4,31 +4,29 @@ namespace App\Http\Traits;
 
 trait PushNotificationTrait {
 
-        public  function pushNotificationSend($fcmToken,$userName,$message){
-            define('API_ACCESS_KEY','AAAAaiBrIq0:APA91bF4mv49Tnd3KHaHQ3Y77EwR1AfB2JloyI1AnQuPO5P7ToKXrm8xVT8UbjaTfJLKBKVZH4UjrPoFUuMs5shDMtLXZ7zkv6JYcwv9tQ_srjfs9xOhzUx-wd_4tBEzH-T_p7GFs99X');
+        public  function pushNotificationSend($fcmToken,$title,$message){
+           // define('API_ACCESS_KEY','AAAAt8CxkOs:APA91bFDPXCdGn-N7U1_u1XjtIi3WRz76RxAdjp7wE8CgXzhKQcKcOWiMKx2KBAwneCue_TuUuvD83ZqGWkqHVqbFp_Khgm3xiL2lsMuuBaIgK_PsPis9WAhrziLJC0TkQZVzxRaBD-2');
             $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-        
+            
             $notification = [
             //write title, description and so on
-            'title'		=> 'Hello '.$userName,
+            'title'		=> $title,
             'body' 	=> $message,
-            'icon' => "{{ asset('storage/images/mb_mail_logo.png') }}",
-            'sound' =>'fcmsound.mp3'
+            'sound' =>'fcmsound.mp3',
+            'icon'=>'launcher_icon',
+            'alert' => true,
+            'channelId'=>'merchantbay'
             ];
 
-            $extraNotificationData = [
-            'body' 	=> 'You have a new percel order.Please check in your dashboard.',
-            'message' 	=> 'here is a message. message',
-            ];
                 
             $fcmNotification = [
             //'registration_ids' => $tokenList, //multple token array
             'to'        =>$fcmToken, //single token
+            'priority' =>'high',
             'notification' => $notification,
-            'data' => $extraNotificationData
             ];
             $headers = [
-            'Authorization: key=' . API_ACCESS_KEY,
+            'Authorization: key=' . env('API_ACCESS_KEY'),
             'Content-Type: application/json'
             ];
             $ch = curl_init();

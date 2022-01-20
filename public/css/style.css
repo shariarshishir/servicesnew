@@ -5355,6 +5355,11 @@ input.input-field[type=text]:not(.browser-default) {
     font-size: 14px;
     padding: 20px 40px 0;
 }
+.validaiton-errors {
+    color: red;
+    font-size: 14px;
+    padding: 20px 40px 0;
+}
 
 
 /* *************** Footer Container css start ***************** */

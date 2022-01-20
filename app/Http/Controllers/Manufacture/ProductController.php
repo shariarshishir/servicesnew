@@ -34,8 +34,15 @@ class ProductController extends Controller
             'lead_time'=>'required',
             'industry' => 'required',
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
-
-
+            'price_unit' => 'required',
+            'qty_unit'   => 'required',
+            'colors'  => 'required',
+            'sizes'  => 'required',
+            'product_images' => 'required',
+            'price_per_unit'=> 'required',
+        ],[
+            'price_per_unit.required' => 'The price range field is required.',
+            'category_id.required' => 'The product category field is required',
         ]);
 
         if ($validator->fails())
@@ -148,12 +155,19 @@ public function update(Request $request, $product_id)
     $validator = Validator::make($request->all(), [
         'category_id' => 'required',
         'title'=>'required',
-        //'price_per_unit'=>'required|numeric',
+        'price_per_unit'=>'required',
+        'price_unit' => 'required',
         'moq'=>'required|numeric',
+        'qty_unit'   => 'required',
+        'colors'  => 'required',
+        'sizes'  => 'required',
         'product_details'=>'required',
         'product_specification'=>'required',
         'lead_time'=>'required',
         'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+    ],[
+        'price_per_unit.required' => 'The price range field is required.',
+        'category_id.required' => 'The product category field is required',
     ]);
 
     if ($validator->fails())

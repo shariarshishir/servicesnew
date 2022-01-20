@@ -541,9 +541,9 @@ class ProductController extends Controller
             }
             if($productImages->isNotEmpty()){
                 foreach($productImages as $productImage){
-                    if(Storage::exists('public/'.$productImage->image) && Storage::exists('public/'.$productImage->original)){
-                        Storage::delete('public/'.$productImage->image);
-                        Storage::delete('public/'.$productImage->original);
+                    if(Storage::exists($productImage->image) && Storage::exists($productImage->original)){
+                        Storage::delete($productImage->image);
+                        Storage::delete($productImage->original);
                     }
                     $productImage->delete();
                 }

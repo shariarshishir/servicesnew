@@ -156,7 +156,6 @@
         $('#edit_non_clothing_availability').val(tot);
     });
 
-    var validation_array=['images', 'category_id', 'description', 'product_unit', 'moq', 'name','ready_stock_availability','full_stock_price','non_clothing_availability','non_clothing_full_stock_price',];
     var price_breakdown_array=['quantity_min','quantity_max','price','lead','ready_quantity_min','ready_quantity_max','ready_price','non_clothing_min','non_clothing_max','non_clothing_price',];
     //store seller product
     $('#seller_product_form').on('submit',function(e){
@@ -212,9 +211,8 @@
                             $.each(price_breakdown_array, function(k,array_item){
                                 priceBreakDownValidation(key, array_item);
                             });
-                            if(validation_array.indexOf(key) != -1){
-                                $('.'+key+'_error').html('*required');
-                            }
+
+                            $('.'+key+'_error').html('*required');
 
                             $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
                         });
@@ -578,9 +576,7 @@
                             $.each(price_breakdown_array, function(k,array_item){
                                 priceBreakDownValidation(key, array_item);
                             });
-                            if(validation_array.indexOf(key) != -1){
-                                $('.'+key+'_error').html('*required');
-                            }
+                            $('.'+key+'_error').html('*required');
 
                             $("#edit_errors").append("<li class='alert alert-danger'>"+item+"</li>")
                         });

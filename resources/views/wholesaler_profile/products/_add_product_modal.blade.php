@@ -519,7 +519,7 @@
                 </div>
 
                 <div role="">
-                    <ul id="errors"></ul>
+                    <ul id="errors" class="validaiton-errors"></ul>
                 </div>
 
                 <div class="submit_btn_wrap" style="padding-top: 30px;">

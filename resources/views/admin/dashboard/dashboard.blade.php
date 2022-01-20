@@ -31,10 +31,11 @@
 								<option value="2018">2018</option>
 								<option value="2019">2019</option>
 								<option value="2020">2020</option>
-								<option value="2021" selected="selected">2021</option>
+								<option value="2021">2021</option>
+								<option value="2022" selected="selected">2022</option>
 							</select>
 							<select name="stats_month" id="stats_month" class="statistics-list">
-								<option value="">All</option>
+								<option value="" selected="selected">All</option>
 								<option value="01">Jan</option>
 								<option value="02">Feb</option>
 								<option value="03">Mar</option>
@@ -46,9 +47,9 @@
 								<option value="09">Sep</option>
 								<option value="10">Oct</option>
 								<option value="11">Nov</option>
-								<option value="12" selected="selected">Dec</option>
+								<option value="12">Dec</option>
 							</select>		
-							<a href="javascript:void(0);" class="show-users-list-trigger">Show registered users list</a>
+							<a href="javascript:void(0);" class="show-users-list-trigger btn_green">Show registered users list</a>
 							<div class="modal fade" id="user-list-modal">
 								<div class="modal-dialog modal-xl" role="document">
 									<div class="modal-content">
@@ -59,7 +60,9 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<div class="selected-users-list-block"></div>
+											<div class="no_more_tables">
+												<div class="selected-users-list-block"></div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -68,7 +71,10 @@
 						<div id="registered-userschartbar-container" style="margin: 0 auto;"></div>
 					</div>
 					<div class="col-md-6">
-						<a href="javascript:void(0);" class="show-active-users-list-trigger">Show active users list</a>
+						<div class="active_users_list">
+							<a href="javascript:void(0);" class="show-active-users-list-trigger btn_green">Show active users list</a>
+						</div>
+						
 						<div class="modal fade" id="active-users-list-modal">
 							<div class="modal-dialog modal-xl" role="document">
 								<div class="modal-content">
@@ -79,7 +85,9 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<div class="active-users-list-block"></div>
+										<div class="no_more_tables">
+											<div class="active-users-list-block"></div>
+										</div>
 									</div>
 								</div>
 							</div>

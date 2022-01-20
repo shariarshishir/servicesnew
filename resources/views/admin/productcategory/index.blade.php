@@ -28,97 +28,76 @@
 					<a href="{{route('product-categories.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New productCategory</a>
 				</div>
 			</div>
-            <div class="card">
+            <div class="card admin_categories_list">
 				<legend>Categories List</legend>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                     <th>Image</th>
-                      <th>Product Category Name</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
 
-					@foreach($outArray as $categoryitem)
+				<div class="no_more_tables">
+					<table class="table table-bordered">
+						<thead class="cf">
 						<tr>
-                            <td>
-								@if(isset($categoryitem->image))
-								<img id="preview-image" src="{{asset('storage/'.$categoryitem['image'])}}"
-									alt="preview image" style="width: 50px; height: 50px;">
-								@else
-								<img id="preview-image" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
-									alt="preview image" style="width: 50px; height: 50px;">
-								@endif									
-							</td>
-							<td>
-								<a href="{{ route('product-categories.edit', $categoryitem['id']) }}">{{$categoryitem['name']}}</a>
-							</td>
-							<td class="center">
-								@if($categoryitem['status']==1)
-									<span class="badge badge-success">Published </span>
-								@else
-									<span class="badge badge-danger">Unpublished</span>
-								@endif
-							</td>
-							<td>
-								<form action="{{ route('product-categories.destroy', $categoryitem['id']) }}" method="POST">
-									@csrf
-									@method('DELETE')
-									<button type="submit" class="btn btn-danger btn-sm">
-										<i class="fas fa-trash"></i>
-									</button>
-								</form>
-							</td>
+							<th>Image</th>
+							<th>Product Category Name</th>
+							<th>Status</th>
+							<th class="text-center">Action</th>
 						</tr>
-						@if(!empty($categoryitem['children'])) <!-- 1st sub level -->
-							@foreach($categoryitem['children'] as $childcategoryitem)
-							<tr>
-                                <td>
-								@if(isset($childcategoryitem->image))
-								<img id="preview-image" src="{{asset('storage/'.$childcategoryitem['image'])}}"
-									alt="preview image" style="width: 50px; height: 50px;">
-								@else
-								<img id="preview-image" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
-									alt="preview image" style="width: 50px; height: 50px;">
-								@endif									
-                                </td>
-								<td class="sub-cat-item">
-									<a href="{{ route('product-categories.edit', $childcategoryitem['id']) }}">- {{$childcategoryitem['name']}}</a>
-								</td>
-								<td class="center">
-									@if($childcategoryitem['status']==1)
-										<span class="badge badge-success">Published </span>
-									@else
-										<span class="badge badge-danger">Unpublished</span>
-									@endif
-								</td>
-								<td>
-									<form action="{{ route('product-categories.destroy', $childcategoryitem['id']) }}" method="POST">
-										@csrf
-										@method('DELETE')
-										<button type="submit" class="btn btn-danger btn-sm">
-											<i class="fas fa-trash"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-								@if(!empty($childcategoryitem['children'])) <!-- 2nd sub level -->
-									@foreach($childcategoryitem['children'] as $subchildcategoryitem)
+						</thead>
+						<tbody>
+
+							@foreach($outArray as $categoryitem)
+								<tr>
+									<td data-title="Image">
+										@if(isset($categoryitem->image))
+										<img id="preview-image" src="{{asset('storage/'.$categoryitem['image'])}}"
+											alt="preview image">
+										@else
+										<img id="preview-image" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+											alt="preview image">
+										@endif									
+									</td>
+									<td data-title="Product Category">
+										<a href="{{ route('product-categories.edit', $categoryitem['id']) }}">{{$categoryitem['name']}}</a>
+									</td>
+									<td data-title="Status" class="center">
+										@if($categoryitem['status']==1)
+											<span class="badge badge-success">Published </span>
+										@else
+											<span class="badge badge-danger">Unpublished</span>
+										@endif
+									</td>
+									<td data-title="Action" class="text-center">
+										<form action="{{ route('product-categories.destroy', $categoryitem['id']) }}" method="POST">
+											@csrf
+											@method('DELETE')
+											<button type="submit" class="btn btn-danger btn-sm">
+												<i class="fas fa-trash"></i>
+											</button>
+										</form>
+									</td>
+								</tr>
+								@if(!empty($categoryitem['children'])) <!-- 1st sub level -->
+									@foreach($categoryitem['children'] as $childcategoryitem)
 									<tr>
-										<td class="second-sub-cat-item">
-											<a href="{{ route('product-categories.edit', $subchildcategoryitem['id']) }}">-- {{$subchildcategoryitem['name']}}</a>
+										<td data-title="Image">
+										@if(isset($childcategoryitem->image))
+										<img id="preview-image" src="{{asset('storage/'.$childcategoryitem['image'])}}"
+											alt="preview image">
+										@else
+										<img id="preview-image" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+											alt="preview image" >
+										@endif									
 										</td>
-										<td class="center">
-											@if($subchildcategoryitem['status']==1)
+										<td data-title="Product Category" class="sub-cat-item">
+											<a href="{{ route('product-categories.edit', $childcategoryitem['id']) }}">- {{$childcategoryitem['name']}}</a>
+										</td>
+										<td class="center" data-title="Status">
+											@if($childcategoryitem['status']==1)
 												<span class="badge badge-success">Published </span>
 											@else
 												<span class="badge badge-danger">Unpublished</span>
 											@endif
 										</td>
-										<td>
-											<form action="{{ route('product-categories.destroy', $subchildcategoryitem['id']) }}" method="POST">
+										<td data-title="Action" class="text-center">
+											<form action="{{ route('product-categories.destroy', $childcategoryitem['id']) }}" method="POST">
 												@csrf
 												@method('DELETE')
 												<button type="submit" class="btn btn-danger btn-sm">
@@ -127,14 +106,39 @@
 											</form>
 										</td>
 									</tr>
+										@if(!empty($childcategoryitem['children'])) <!-- 2nd sub level -->
+											@foreach($childcategoryitem['children'] as $subchildcategoryitem)
+											<tr>
+												<td data-title="ID" class="second-sub-cat-item">
+													<a href="{{ route('product-categories.edit', $subchildcategoryitem['id']) }}">-- {{$subchildcategoryitem['name']}}</a>
+												</td>
+												<td data-title="Status" class="center">
+													@if($subchildcategoryitem['status']==1)
+														<span class="badge badge-success">Published </span>
+													@else
+														<span class="badge badge-danger">Unpublished</span>
+													@endif
+												</td>
+												<td data-title="Action" class="text-center">
+													<form action="{{ route('product-categories.destroy', $subchildcategoryitem['id']) }}" method="POST">
+														@csrf
+														@method('DELETE')
+														<button type="submit" class="btn btn-danger btn-sm">
+															<i class="fas fa-trash"></i>
+														</button>
+													</form>
+												</td>
+											</tr>
+											@endforeach
+										@endif
 									@endforeach
 								@endif
 							@endforeach
-						@endif
-					@endforeach
 
-                  </tbody>
-                </table>
+						</tbody>
+					</table>
+				</div>
+                
 
            </div>
           </div>

@@ -175,8 +175,8 @@ class PoController extends Controller
     {
         $users[] = auth()->id();
         $po = Proforma::where('id', $id)->with('performa_items')->first();
-
-        return view('my_order.inquiries._open_proforma_single_html',compact('po','users'));
+        $supplierInfo = User::where('id', $po->created_by)->first();
+        return view('my_order.inquiries._open_proforma_single_html',compact('po','users','supplierInfo'));
     }
 
     public function acceptProformaInvoice(Request $request)

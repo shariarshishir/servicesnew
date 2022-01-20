@@ -40,6 +40,10 @@
                 <p><i class="material-icons dp48 waves-effect waves-light">person</i> {{$user->name}}</p>
                 <p><i class="material-icons dp48 waves-effect waves-light">email</i> {{$user->email}}</p>
                 <p><i class="material-icons dp48 waves-effect waves-light">local_phone</i> {{$user->phone}}</p>
+                
+                <div class="user_my_order_btnwrap">
+                    <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
+                </div>
             </div>
             @if(count($businessProfiles) > 0)
             @php
@@ -85,9 +89,9 @@
             @endif
         </div>
     </div>
-    <div class="user_my_order_btnwrap">
+    <!-- <div class="user_my_order_btnwrap">
         <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
-    </div>
+    </div> -->
 
 
 

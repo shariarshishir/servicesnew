@@ -583,19 +583,15 @@ class UserController extends Controller
             'is_email_verified' => 1,
         ]);
 
-       if($request->user_flag == 'global'){
-
-            $token = Str::random(64);
-            UserVerify::create([
-                'user_id' => $user->id,
-                'token' => $token
-            ]);
-            if(env('APP_ENV') == 'production')
-            {
-                event(new NewUserHasRegisteredEvent($user, $token));
-            }
-       }
-
+        $token = Str::random(64);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $token
+        ]);
+        if(env('APP_ENV') == 'production' && $request->user_flag == 'global')
+        {
+            event(new NewUserHasRegisteredEvent($user, $token));
+        }
 
         return response()->json(['msg' => 'user created successfully'], 200);
     }

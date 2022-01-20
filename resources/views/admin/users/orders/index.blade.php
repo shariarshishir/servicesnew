@@ -33,39 +33,42 @@
                 <div class="card">
                 <legend>Orders List</legend>
                     @if(count($collection)>0)
-                    <table class="table table-bordered orders-table">
-                        <thead>
-                            <tr>
-                            <th>Order No.</th>
-                            <th>Order Status</th>
-                            <th>Payment Status</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach($collection as $list)
+                    <div class="no_more_tables">
+                        <table class="table table-bordered orders-table">
+                            <thead class="cf">
                                 <tr>
-                                    <td>
-                                        <a href="{{route('business.profile.order.show',['business_profile_id' => $list->business_profile_id,'order_id'=>$list->id])}}">{{$list->order_number}}</a>
-                                    </td>
-                                    <td class="@switch($list->state)
-                                        @case('pending')
-                                            text-danger
-                                            @break
-                                        @case('approved')
-                                            text-success
-                                            @break
-                                        @case('delivered')
-                                            text-info
-                                            @break
-                                        @default
-
-                                    @endswitch">{{ ucfirst($list->state)}}</td>
-                                    <td class="{{$list->payment_status == 'paid' ? 'text-success' : 'text-warning'}}">{{ ucfirst($list->payment_status) }}</td>
+                                    <th>Order No.</th>
+                                    <th>Order Status</th>
+                                    <th>Payment Status</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                @foreach($collection as $list)
+                                    <tr>
+                                        <td data-title="Order No.">
+                                            <a href="{{route('business.profile.order.show',['business_profile_id' => $list->business_profile_id,'order_id'=>$list->id])}}">{{$list->order_number}}</a>
+                                        </td>
+                                        <td data-title="Order Status" class="@switch($list->state)
+                                            @case('pending')
+                                                text-danger
+                                                @break
+                                            @case('approved')
+                                                text-success
+                                                @break
+                                            @case('delivered')
+                                                text-info
+                                                @break
+                                            @default
+
+                                        @endswitch">{{ ucfirst($list->state)}}</td>
+                                        <td data-title="Payment Status" class="{{$list->payment_status == 'paid' ? 'text-success' : 'text-warning'}}">{{ ucfirst($list->payment_status) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    
 
                     @else
                         <div class="alert alert-info alert-dismissible">

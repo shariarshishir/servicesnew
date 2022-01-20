@@ -172,24 +172,40 @@
 									@foreach($business_profile->certifications as $certification)
 									<div class="certificate_img_wrap">
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-										<div class="certificate_files">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
-										</div>
-										<span class="certificate_title" >{{$certification->title}}</span>
+											<div class="certificate_files">
+												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+												<br> -->
+												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_pdf_down tooltipped">&nbsp;</a>
+											</div>
+											<span class="certificate_title" >{{$certification->title}}</span>
+											@if($certification->issue_date)
+											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+											@endif
+											@if($certification->expiry_date)
+											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+											@endif											
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
-										<div class="certificate_img">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
-										</div>
-										<span class="certificate_title" >{{$certification->title}}</span>
+											<div class="certificate_img">
+												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="doc_icon tooltipped">&nbsp;</a>
+											</div>
+											<span class="certificate_title" >{{$certification->title}}</span>
+											@if($certification->issue_date)
+											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+											@endif
+											@if($certification->expiry_date)
+											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+											@endif											
 										@else
-										@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
-										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-										<span class="certificate_title" >{{$certification->title}}</span>
+											@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
+											<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ asset('storage/'.$certification_image_src) }}"><img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></a></div>
+											<span class="certificate_title" >{{$certification->title}}</span>
+											@if($certification->issue_date)
+											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+											@endif
+											@if($certification->expiry_date)
+											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+											@endif
 										@endif
 									</div>
 									@endforeach
@@ -253,35 +269,69 @@
 						</div>
 						<!-- profile_product_wrap -->
 						<div class="factory_imgbox_wrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Factory Images</h3>
-								</div>
-								<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
-							</div>
+							<h3>Factory Images</h3>
+							
 							@if(count($business_profile->companyFactoryTour)>0)
-							<div class="row">
-								@if(count($companyFactoryTour->companyFactoryTourImages)>0)
-									@foreach($companyFactoryTour->companyFactoryTourImages as $image)
-										<div class="col s6 m4">
-											<div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->factory_image)}}" alt="" /></a></div>
-										</div>
-									@endforeach
-								@else
+								<div class="row top_titleWrap">
+									<div class="col s12 gallery_navbar">
+										<ul class="tabs">
+											<li class="tab col m3"><a class="active" href="#factory_show_images">Factory Images</a></li>
+											<li class="tab col m3"><a href="#factory_degree_show_images">360 Degree Images</a></li>
+										</ul>
+									</div>
+								</div>
+								<div id="factory_show_images" class="col s12 factory_imgbox_wrap">
+									<div class="row factory_image_gallery">
+									@if(count($companyFactoryTour->companyFactoryTourImages)>0)
+										@foreach($companyFactoryTour->companyFactoryTourImages as $image)
+											<div class="col s6 m4 l4">
+												<div class="imgBox">
+													<a data-fancybox="factory-image-gallery" href="{{asset('storage/'.$image->factory_image)}}">
+														<img src="{{asset('storage/'.$image->factory_image)}}" alt="">
+													</a>
+												</div>
+											</div>
+										@endforeach
+									@else
 									<div class="card-alert card cyan lighten-5">
 										<div class="card-content cyan-text">
 											<p>INFO : No Image found.</p>
 										</div>
 									</div>
-								@endif
-							</div>
+									@endif
+
+									</div>
+								</div>
+								<div id="factory_degree_show_images" class="col s12 video_gallery_box">
+									<div class="row degree_360_video_gallery">
+									@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
+									@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
+										<div class="col s12 m6 l6">
+											<div class="imgBox">
+												<a data-fancybox="factory-360image-gallery" href="{{asset('storage/'.$image->factory_large_image)}}">
+													<img src="{{asset('storage/'.$image->factory_large_image)}}" alt="">
+												</a>
+											</div>
+										</div>
+									@endforeach
+									@else
+									<div class="card-alert card cyan lighten-5">
+										<div class="card-content cyan-text">
+											<p>INFO : No Image found.</p>
+										</div>
+									</div>
+									@endif
+
+									</div>
+								</div>
 							@else
 								<div class="card-alert card cyan lighten-5">
 									<div class="card-content cyan-text">
-										<p>INFO : No Image found.</p>
+										<p>INFO : No data found.</p>
 									</div>
 								</div>
-							@endif
+							@endif							
+							
 						</div>
 						<!-- factory_images -->
 						<div class="main_buyers_wrap">
@@ -579,24 +629,42 @@
 									<div class="certificate_img_wrap">
 										<a href="javascript:void(0)" style="display: none;" data-id="{{$certification->id}}" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-										<div class="certificate_files">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
-										</div>
-										<span class="certificate_title">{{$certification->title}}</span>
+											<div class="certificate_files">
+												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+												<br> -->
+												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
+											</div>
+											<span class="certificate_title">{{$certification->title}}</span>
+											@if($certification->issue_date)
+											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+											@endif
+											@if($certification->expiry_date)
+											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+											@endif
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
-										<div class="certificate_img">
-											<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-											<br> -->
-											<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
-										</div>
-										<span class="certificate_title" >{{$certification->title}}</span>
+											<div class="certificate_img">
+												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+												<br> -->
+												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
+											</div>
+											<span class="certificate_title" >{{$certification->title}}</span>
+											@if($certification->issue_date)
+											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+											@endif
+											@if($certification->expiry_date)
+											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+											@endif											
 										@else
                                         @php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
-										<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-										<span class="certificate_title" >{{$certification->title}}</span>
+											<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
+											<span class="certificate_title" >{{$certification->title}}</span>
+											@if($certification->issue_date)
+											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+											@endif
+											@if($certification->expiry_date)
+											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+											@endif											
 										@endif
 									</div>
 									@endforeach

@@ -121,16 +121,13 @@ ul, label {
 									<td style="color:#53AB57; font-size:14px; padding:0.1%; font-weight:bold;">Vendor</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%; font-size:18px;">Merchant Bay</td>
+									<td style="font-weight: 500; font-size: 22px">{{$supplierInfo->name}}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">House#27, Uttara Dhaka, 1230, Bangladesh</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: +880 9611-677345 Email: info@merchantbay.com</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">www.merchantbay.com</td>
+									<td>
+										<p>Phone: {{ $supplierInfo->phone}}</p> 
+										<p>Email: {{ $supplierInfo->email }}</p>								
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -143,10 +140,20 @@ ul, label {
 									<td style="color:#000; padding:0.1%; font-size:18px;">{{$po->buyer->name}}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
+									<td style="color:#000; padding:0.1%;">
+										@if(@$po->buyer->company_name)
+										<p>Company Name: {{ @$po->buyer->company_name }}</p> 
+										@endif
+										@if(@$po->buyer->country)
+										<p>Country: {{ @$po->buyer->country }}</p>
+										@endif
+									</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: {{ @$po->buyer->phone }} Email: {{ @$po->buyer->email }}</td>
+									<td style="color:#000; padding:0.1%;">
+										<p>Phone: {{ @$po->buyer->phone}}</p> 
+										<p>Email: {{ @$po->buyer->email }}</p>
+									</td>
 								</tr>
 							</table>
 						</td>

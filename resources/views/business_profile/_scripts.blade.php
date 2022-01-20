@@ -159,6 +159,7 @@
                     {
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
+                        $('.edit_errors_wrapper').show();
                         $('#edit_errors').empty();
                         //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                         $("#edit_errors").append("<div class=''>"+error+"</div>");

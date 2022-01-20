@@ -122,10 +122,10 @@ $reviewsCount = count($productReviews);
                             <div class="col s12">
 
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
-                                    <span class="new badge red" data-badge-caption="Sold Out"></span>
+                                    <span class="new badge red" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
                                 @endif
                                 @if($product->full_stock== 1)
-                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock</span>
+                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder" style="display: none;">Full Stock only</span>
                                 @else
 
                                     <div class="single-product-moq">
@@ -144,7 +144,9 @@ $reviewsCount = count($productReviews);
                                                     {{ 'Negotiable' }}
                                                     @endif
                                                     @if($loop->last && $v[2] != 'Negotiable')
+                                                    <span class="nego_price">
                                                         ${{ $v[2] }}
+                                                    </span>
                                                     @endif
                                                     @if($loop->last && $v[2] == 'Negotiable')
                                                         @foreach (json_decode($product->attribute) as $k => $v)
@@ -308,7 +310,7 @@ $reviewsCount = count($productReviews);
                                                 <div class="col m12 ready_stock left-align">
                                                     <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -318,7 +320,7 @@ $reviewsCount = count($productReviews);
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
                                                     <div class="no_more_tables">
-                                                        <table class="color-size-table-block striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
+                                                        <table class="color-size-table-block-prob striped ready-stock-table-block" width="100%" cellpadding="0" cellspacing="0">
                                                             <thead class="cf">
                                                                 <tr>
                                                                     <th>Color</th>
@@ -588,7 +590,7 @@ $reviewsCount = count($productReviews);
                                                 <div class="col m12">
                                                     <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -867,58 +869,76 @@ $reviewsCount = count($productReviews);
                         </div>
                     </div>
                     <div id="product-review" class="col s12">
-                        <div class="card card-with-padding">
-
+                        <div class="card-with-padding">
                             @if($reviewsCount > 0)
                             @foreach($productReviews as $productReview)
-                            <div class="review-item">
-                                <div class="reviewed-by">
-                                    <div class="user-image">
-                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" width="50px" />
+                            <div class="review-item card">
+                                <div class="row">
+                                    <div class="col s12 m9">
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                                <div class="reviewed-by row">
+                                                    <div class="user-image left">
+                                                        <img src="{{asset('storage/'.$productReview->image)}}" class="responsive-img" />
+                                                    </div>
+                                                    <div class="user-name left">
+                                                        <span>Reviewd by</span> {{ $productReview->name }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col s12 m6">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Overall : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <label>Experience : </label>
+                                                {{ $productReview->experience }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="user-name">
-                                        <span>Reviewd By</span>{{ $productReview->name }}
+                                    <div class="col s12 m3">
+                                        <div class="review-info">
+                                            <!-- <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Overall : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
+                                                </div>
+                                            </div> -->
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Communication : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row"> 
+                                                <div class="col s12 review_info_box">
+                                                    <label>On Time Delivery : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Sample Support : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s12 review_info_box">
+                                                    <label>Product Quality : </label>
+                                                    <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="review-info">
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Overall : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->overall_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Communication : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>On Time Delivery : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Sample Support : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->sample_support_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Product Quality : </label>
-                                            <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <label>Experience : </label>
-                                            {{ $productReview->experience }}
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
                             @endforeach
                             @else
@@ -1068,7 +1088,7 @@ $reviewsCount = count($productReviews);
                                     @include('product._product_price')
 
                                     @if($product->availability==0 && $product->product_type==2)
-                                        <span class="new badge red sold-out" data-badge-caption="Sold Out"></span>
+                                        <span class="new badge red sold-out" data-badge-caption="Sold Out" style="display: none;"></span>
                                     @endif
                                 </div>
                             </div>

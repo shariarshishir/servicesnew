@@ -73,7 +73,10 @@ class BusinessProfileController extends Controller
             //'nid_passport' => 'required_if:has_representative,0',
             'representive_name' =>'required_if:has_representative,0',
             'business_category_id' => 'required_if:business_type,1',
-
+         ],[
+             'email.required_if' => 'The representive email field is required.',
+             'phone.required_if' => 'The representive phone field is required.',
+             'representive_name.required_if' => 'The representive name field is required.',
          ]);
          if ($validator->fails())
          {

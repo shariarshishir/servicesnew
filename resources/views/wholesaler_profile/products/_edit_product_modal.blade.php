@@ -3,7 +3,11 @@
     <div class="modal-content">
 
             <legend>Edit Product</legend>
-
+            <div class="col-md-12">
+                <div class="row">
+                    <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+                </div>
+            </div>
             <form method="POST" action="javascript:void(0);" enctype="multipart/form-data" id="seller_product_form_update">
                 @method('PUT')
                 @csrf
@@ -16,10 +20,6 @@
                         </div>
                     </div>
                 @endif
-                <div role="">
-                    <ul id="edit_errors"></ul>
-                </div>
-
 
                 <div class="wholesaler_edit_product_form container">
 
@@ -39,11 +39,12 @@
 
                     <div class="row input-field product-upload-block edit-image-block">
                         <div class="col s12 m3 l3">
-                            <label class="active">Image:</label>
+                            <label class="active">Image <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 m9 l9">
                             <div class="input-images-2" style="padding-top: .5rem;"></div>
                             <div class="image-upload-message">Minimum image size 300 X 300</div>
+                            <span class="images_error text-danger error-rm"></span>
                         </div>
                     </div>
 
@@ -77,21 +78,22 @@
                     <div class="product-details-block">
                         <div class="row input-field">
                             <div class="col s12 m3 l3">
-                                <label for="p-edit-name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }}</label>
+                                <label for="p-edit-name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }} <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
-                                <input id="p-edit-name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus required>
+                                <input id="p-edit-name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus >
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <span class="name_error text-danger error-rm"></span>
                             </div>
                         </div>
 
                         <div class="row input-field">
                             <div class="col s12 m3 l3">
-                                <label for="product_type">{{ __('Product Type') }}</label>
+                                <label for="product_type">{{ __('Product Type') }} <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
                                 <div class="radio-block">
@@ -113,7 +115,7 @@
 
                         <div class="row input-field">
                             <div class="col s12 m3 l3">
-                                <label for="product_category_id">{{ __('Product Category') }}</label>
+                                <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
                                 <select name="category_id" class="select2 browser-default " id="edit_category_id">
@@ -133,12 +135,13 @@
                                     @endforeach
                                 </select>
                                 <span class="text-danger error-text category_id_err"></span>
+                                <span class="category_id_error text-danger error-rm"></span>
                             </div>
                         </div>
                         <div class="fresh-rtd-attr">
                             <div class="row input-field">
                                 <div class="col s12">
-                                    <label>Prices Breakdown</label>
+                                    <label>Prices Breakdown <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col s12">
                                     <div class="prices-breakdown-block">
@@ -156,10 +159,11 @@
                                                 <tbody class="fresh-attr-tbody">
                                                 </tbody>
                                             </table>
+                                            <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
-                                        <div class="add_more_box" style="padding-top: 20px">
+                                        {{-- <div class="add_more_box" style="padding-top: 20px">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </div>
@@ -169,7 +173,7 @@
                                     <label for="copyright-price" class="col-md-4 col-form-label text-md-right">Copyright Price</label>
                                 </div>
                                 <div class="col s12 m9 l9">
-                                    <input type="text" name="copyright_price" class="copyright_price_edit_val" onchange="allowTwoDecimal('.copyright_price_edit_val')" />
+                                    <input type="text" name="copyright_price" class="copyright_price_edit_val negitive-or-text-not-allowed" onchange="allowTwoDecimal('.copyright_price_edit_val')" />
                                 </div>
                             </div>
                             <div class="row input-field">
@@ -187,7 +191,7 @@
                             <div class="col-md-12" id="color-size-block">
                                 <div class="row input-field">
                                     <div class="col s12">
-                                        <label>Available Size & Colors</label>
+                                        <label>Available Size & Colors <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col s12">
                                         <div class="color-and-size-block">
@@ -236,10 +240,11 @@
                             <div class="full-stock-price" style="display: none">
                                 <div class="row input-field full-stock-price-block">
                                     <div class="col s12 m3 l3">
-                                        <label for="full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price</label>
+                                        <label for="full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col s12 m9 l9">
                                         <input id="full_stock_price" type="number" step=".01" class="form-control @error('full_stock_price') is-invalid @enderror" name="full_stock_price" value="{{ old('full_stock_price') }}"  autocomplete="full_stock_price" autofocus>
+                                        <span class="full_stock_price_error text-danger error-rm"></span>
                                     </div>
                                 </div>
                                 <div class="row input-field">
@@ -255,7 +260,7 @@
                             {{-- end full stock --}}
                             <div class="row input-field ready-stock-prices-breakdown">
                                 <div class="col s12">
-                                    <label>Prices Breakdown</label>
+                                    <label>Prices Breakdown <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col s12">
                                     <div class="prices-breakdown-block">
@@ -272,22 +277,25 @@
                                                 <tbody class='ready-attr-tbody'>
                                                 </tbody>
                                             </table>
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+
                                         </div>
 
 
-                                        <div class="add_more_box" style="padding-top: 20px">
+                                        {{-- <div class="add_more_box" style="padding-top: 20px">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </div>
                             </div>
                             <div class="row input-field">
                                 <div class="col s12 m3 l3">
-                                    <label for="edit_ready_stock_availability" class="col-md-4 col-form-label text-md-right">Availability</label>
+                                    <label for="edit_ready_stock_availability" class="col-md-4 col-form-label text-md-right">Availability <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col s12 m9 l9">
                                     <input id="edit_ready_stock_availability" type="number" class="form-control availability @error('ready_stock_availability') is-invalid @enderror" name="ready_stock_availability" value="{{ old('ready_stock_availability') }}"  autocomplete="ready_stock_availability" autofocus readonly>
+                                    <span class="ready_stock_availability_error text-danger error-rm"></span>
                                 </div>
                             </div>
                         </div>
@@ -297,7 +305,7 @@
                             <div class="col-md-12" id="color-size-block">
                                 <div class="row input-field">
                                     <div class="col s12">
-                                        <label>Available Size & Colors</label>
+                                        <label>Available Size & Colors <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col s12">
                                         <div class="color-and-size-block">
@@ -337,7 +345,7 @@
                             <div class="non-clothing-full-stock-price" style="display: none">
                                 <div class="input-field row non-clothing-full-stock-price-block" >
                                     <div class="col s12 m3 m3">
-                                        <label for="non_clothing_full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price</label>
+                                        <label for="non_clothing_full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col s12 m9 m9">
                                         <input id="non_clothing_full_stock_price" type="number" step=".01" class="form-control @error('non_clothing_full_stock_price') is-invalid @enderror" name="non_clothing_full_stock_price" value="{{ old('non_clothing_full_stock_price') }}"  autocomplete="non_clothing_full_stock_price" autofocus>
@@ -355,7 +363,7 @@
                             {{-- end full stock --}}
                             <div class="input-field row non-clothing-prices-breakdown">
                                 <div class="col s12">
-                                    <label>Prices Breakdown</label>
+                                    <label>Prices Breakdown <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col s12">
                                     <div class="prices-breakdown-block">
@@ -373,19 +381,20 @@
 
                                                 </tbody>
                                             </table>
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown(this)"><i class="material-icons dp48">add</i> Add More</a>
                                         </div>
 
 
-                                        <div class="add_more_box">
+                                        {{-- <div class="add_more_box">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </div>
                             </div>
                             <div class="input-field row">
                                 <div class="col s12 m3 l3">
-                                    <label for="edit_non_clothing_availability" class="col-md-4 col-form-label text-md-right">Availability</label>
+                                    <label for="edit_non_clothing_availability" class="col-md-4 col-form-label text-md-right">Availability <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col s12 m9 l9">
                                     <input id="edit_non_clothing_availability" type="number" class="form-control availability @error('non_clothing_availability') is-invalid @enderror" name="non_clothing_availability" value="{{ old('non_clothing_availability') }}"  autocomplete="non_clothing_availability" autofocus readonly>
@@ -396,11 +405,12 @@
 
                         <div class="row moq-unit-block">
                             <div class="col s12 m8 input-field ">
-                                <label for="moq" class="col-md-4 col-form-label text-md-right">Minimum Order Quantity</label>
+                                <label for="moq" class="col-md-4 col-form-label text-md-right">Minimum Order Quantity <span class="text-danger">*</span></label>
                                 <input id="moq" type="number" class="form-control minimun-order-qty @error('moq') is-invalid @enderror" name="moq" value="{{ old('moq') }}"  autocomplete="moq" autofocus>
+                                <span  class="moq_error text-danger error-rm"></span>
                             </div>
                             <div class="col s12 m4 input-field ">
-                                <label for="product_unit" class="col-md-4 col-form-label text-md-right">Unit</label>
+                                <label for="product_unit" class="col-md-4 col-form-label text-md-right">Unit <span class="text-danger">*</span></label>
                                 <select class="select2 browser-default product_unit" name="product_unit">
                                     <option value="">Select</option>
                                     <option value="LBS/Pound">LBS / Pound</option>
@@ -410,6 +420,7 @@
                                     <option value="Meter">Meter</option>
                                     <option value="Ton">Ton</option>
                                 </select>
+                                <span class="product_unit_error text-danger error-rm"></span>
                             </div>
                         </div>
 
@@ -430,10 +441,11 @@
 
                         <div class="input-field row">
                             <div class="col s12 m3 l3">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }} <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
                                 <textarea id="edit-description" class="editor edit-description" name="description" >{{old('description')}}</textarea>
+                                <span class="description_error text-danger error-rm"></span>
                             </div>
                         </div>
                         <div class="input-field row">
@@ -473,6 +485,10 @@
                             <input type="hidden" name="p_type">
 
 
+                        </div>
+
+                        <div role="">
+                            <ul id="edit_errors"></ul>
                         </div>
 
                         <div class="submit_btn_wrap">

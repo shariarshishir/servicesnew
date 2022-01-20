@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Validator;
 use App\Events\OrderQueryEvent;
 use Image;
 use Illuminate\Support\Facades\Storage;
-use App\Notifications\QueryCommuncationNotification;
-use App\Mail\QueryCommuncationMail;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\QueryCommuncationNotification;
+use App\Mail\QueryCommuncationMail;
 
 class QueryController extends Controller
 {

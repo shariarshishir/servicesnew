@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 use App\Models\RfqImage;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Events\NewRfqHasAddedEvent;
 
 
 class RFQController extends Controller
@@ -79,6 +80,16 @@ class RFQController extends Controller
                     RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
             }
+            if(env('APP_ENV') == 'production')
+        {
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        }
             
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){
@@ -137,6 +148,13 @@ class RFQController extends Controller
                     RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
             }
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
 
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){

@@ -16,9 +16,11 @@ use App\Notifications\QueryWithModificationToUserNotification;
 use App\Mail\QueryWithModificationTouserMail;
 use App\Notifications\QueryCommuncationNotification;
 use App\Mail\QueryCommuncationMail;
+use App\Http\Traits\PushNotificationTrait;
 
 class QueryController extends Controller
 {
+   use PushNotificationTrait;
    public function index($type)
    {
        $query_request_list=OrderModificationRequest::latest()->where('type',$type)->with(['user','businessProfile','product'])->get();
@@ -120,12 +122,25 @@ class QueryController extends Controller
         if ($OrderModificationRequest->type ==1){
             if(env('APP_ENV') == 'production')
             {
+                //send push notification
+                $fcmToken=$orderModification->orderModificationRequest->user->fcm_token;
+                $title = "Order query request processed";
+                $message = "Your order query request has been processed.Please check your order query list.";
+                $this->pushNotificationSend($fcmToken,$title,$message);
+
+                //send mail and database notification using this event to buyer
                 event(new OrderQueryFromAdminEvent($orderModification));
             }
             return redirect()->route('query.request.index',1)->with('success', 'Created Successfully');
         }else{
             if(env('APP_ENV') == 'production')
             {
+                //send push notification
+                $fcmToken=$orderModification->orderModificationRequest->user->fcm_token;
+                $title = "Order modification request processed";
+                $message = "Your order modification request has been processed.Please check your order modification request list.";
+                $this->pushNotificationSend($fcmToken, $title,$message);
+
                 Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
                 Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
             }
@@ -164,6 +179,13 @@ class QueryController extends Controller
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
         ]);
+
+        //send push notification to admin for new order modification request m
+        $fcmToken = $data->orderModificationRequest->user->fcm_token;
+        $title = "New message for your order modification request";
+        $details = json_decode($data->details);
+        $message = $details[0]->details;
+        $this->pushNotificationSend($fcmToken,$title,$message);
 
         Notification::send($data->orderModificationRequest->user,new QueryCommuncationNotification($data ,'admin'));
         Mail::to($data->orderModificationRequest->user->email)->send(new QueryCommuncationMail($data, 'admin'));

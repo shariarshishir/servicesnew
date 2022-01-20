@@ -6,13 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
+use App\Models\Admin;
 use Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\OrderModificationComment;
+use App\Http\Traits\PushNotificationTrait;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\QueryCommuncationNotification;
+use App\Mail\QueryCommuncationMail;
 
 class OrderModificationCommentController extends Controller
 {
+    use PushNotificationTrait;
     public function store( Request $request)
     {
        try{
@@ -46,9 +53,20 @@ class OrderModificationCommentController extends Controller
                         'ip_address'                    => $request->ip(),
                         'user_agent'                    => $request->header('User-Agent'),
                     ]);
-            // $admin= Admin::find(1);
-            // Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
-            // Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));
+
+
+            $admin= Admin::find(1);
+
+            //send push notification to admin for new order modification request reply
+            $fcmToken = $admin->fcm_token;
+            $title = "New reply message for order modification request from".$data->user->name;
+            $details = json_decode($data->details);
+            $message = $details[0]->details;
+            $this->pushNotificationSend($fcmToken,$title,$message);
+
+            Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
+            Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));
+
             return response()->json([
                 'message' => 'Comment Created Successfully!',
                 'code' => true,

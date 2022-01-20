@@ -246,7 +246,8 @@ class OrderController extends Controller
                
             CartItem::where('user_id',auth()->user()->id)->delete();
 
-
+            event(new NewOrderHasPlacedEvent($order));
+             
             DB::commit();
             return response()->json(["message"=>"Order created successfully","order"=>$order,"code"=>true],200);
         }catch(Exception $e){

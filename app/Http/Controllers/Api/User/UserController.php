@@ -174,7 +174,7 @@ class UserController extends Controller
             'user_type' => 'buyer',
             'sso_reference_id' =>$request->sso_reference_id,
             'ip_address' => $request->ip(),
-            'user_agent' => $request->header('User-Agent'),
+            'user_agent' => 'Dart',
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
             'country' => $request->country,
@@ -186,11 +186,8 @@ class UserController extends Controller
             'token' => $email_verification_OTP
           ]);
         $token=$user->createToken('merchantbayshop')->plainTextToken;
+        event(new NewUserHasRegisteredEvent($user, $email_verification_OTP));
 
-        Mail::send('emails.apiEmailVerificationEmail', ['token' => $email_verification_OTP], function($message) use($request){
-            $message->to($request->email);
-            $message->subject('Welcome to Merchantbay Shop');
-        });
 
         if($user){
             return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
@@ -423,7 +420,7 @@ class UserController extends Controller
             }
             elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
 
-
+                $user->update(['last_activity' => Carbon::now(),'fcm_token'=>$request->fcm_token]);
                 return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>"True"],201);
                 // return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
 

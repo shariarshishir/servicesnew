@@ -131,7 +131,11 @@ class ReviewController extends Controller
             $newFormatedProductReview->product_quality_rating = $productReview->product_quality_rating;
             $newFormatedProductReview->experience = $productReview->experience;
             $newFormatedProductReview->average_rating= $productReview->average_rating;
+            $newFormatedProductReview->user_id= $productReview->user->id;
             $newFormatedProductReview->created_by= $productReview->user->name;
+            $newFormatedProductReview->user_image= $productReview->user->image;
+            $newFormatedProductReview->created_at= $productReview->created_at;
+            $newFormatedProductReview->updated_at= $productReview->updated_at;
             array_push($productReviewsArray,$newFormatedProductReview);
         }
 

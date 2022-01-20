@@ -10,26 +10,12 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqHasBidMail;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\RfqBidNotification;
+use App\Http\Traits\PushNotificationTrait;
 
 
 class NewRfqHasBidListener  implements ShouldQueue
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
+   use PushNotificationTrait;
     public function handle($event)
     {
         $supplier=$event->selectedUserToSendMail;
@@ -43,6 +29,11 @@ class NewRfqHasBidListener  implements ShouldQueue
             Mail::to($supplier)->send(new NewRfqHasBidMail($data));
            
         }else{
+
+            $fcmToken = $supplier->user->fcm_token;
+            $title = "new response for your RFQ";
+            $message = "Dear, ".$supplier->user->name.", A supplier has reponded for your RFQ.If you are interested please let him know about your interest";
+            $this->pushNotificationSend($fcmToken,$title,$message);
             
             Mail::to($supplier->user->email)->send(new NewRfqHasBidMail($data));
             Notification::send($supplier->user,new RfqBidNotification($data));

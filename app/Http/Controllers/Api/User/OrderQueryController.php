@@ -101,6 +101,11 @@ class OrderQueryController extends Controller
             'state'=> config('constants.order_query_status.pending')
         ]);
 
+        if(env('APP_ENV') == 'production')
+        {
+            event(new OrderQueryEvent($orderModificationRequest));
+        }
+
         if($orderModificationRequest){
             return response()->json(array('code' => true, 'message' => 'Order query Created Successfully','orderMordificationRequest'=> $orderModificationRequest),200);
 

@@ -396,43 +396,81 @@
         });
     });
 </script>
-
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
 <script>
     $('.signin').click(function (e) {
         e.preventDefault();
-        var email = $('#email_login').val();
-        var password=$('#password_login').val();
-        var remember =$(this).closest('#login-register-modal').find('input[name="remember"]').prop('checked');
-        $.ajax({
-            url: "{{route('users.login')}}",
-            type: "POST",
-            data: {"email": email, "password": password , "remember": remember, "_token": "{{ csrf_token() }}"},
-            success: function (data) {
-                    if($.isEmptyObject(data.error)){
-                       if(data.msg){
-                        //$('.error-msg').show().text(data.msg);
-                        // alert(data.msg);
-                        $('#email_login').addClass('invalid');
-                        $('#password_login').addClass('invalid');
-                       }
-                       else{
-                          //console.log(data);
-                        var url = '{{ route("users.profile") }}';
-                        window.location.href=url;
-                       }
+        var firebaseConfig = {
+            apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
+            authDomain: "merchant-bay-service.firebaseapp.com",
+            projectId: "merchant-bay-service",
+            storageBucket: "merchant-bay-service.appspot.com",
+            messagingSenderId: "789211877611",
+            appId: "1:789211877611:web:006bb3073632a306daeeae",
+            measurementId: "G-M5LLMK2G5S"
+        };
+       
+        
 
+        if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+        }else {
+        firebase.app(); // if already initialized, use that one
+        }
+        
+        const messaging = firebase.messaging();
+        
+        messaging.requestPermission()
+            .then(function () {
+                return messaging.getToken()
+            })
+            .then(function (fcm_token) {
+                var fcm_token = fcm_token;
+                var email = $('#email_login').val();
+                var password=$('#password_login').val();
+                var remember =$(this).closest('#login-register-modal').find('input[name="remember"]').prop('checked');
+                $.ajax({
+                    url: "{{route('users.login')}}",
+                    type: "POST",
+                    data: {"email": email, "password": password ,"fcm_token":fcm_token, "remember": remember, "_token": "{{ csrf_token() }}"},
+                    success: function (data) {
+                            if($.isEmptyObject(data.error)){
+                            if(data.msg){
+                                //$('.error-msg').show().text(data.msg);
+                                // alert(data.msg);
+                                $('#email_login').addClass('invalid');
+                                $('#password_login').addClass('invalid');
+                            }
+                            else{
+                                //console.log(data);
+                                var url = '{{ route("users.profile") }}';
+                                window.location.href=url;
+                            }
+
+                            }
+                            else{
+                                printErrorMsg(data.error);
+                            }
                     }
-                    else{
-                        printErrorMsg(data.error);
-                    }
-            }
+                });
+            }).catch(function (error) {
+                alert(error);
+            });
+
         });
-    });
     function printErrorMsg (msg) {
         $.each( msg, function( key, value ) {
           $('.'+key+'_err').text(value);
         });
     }
+     messaging.onMessage(function(payload) {
+        const noteTitle = payload.notification.title;
+        const noteOptions = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(noteTitle, noteOptions);
+    });
 </script>
 <script>
     // @if(Session::has('success'))

@@ -44,7 +44,7 @@ class WishlistController extends Controller
 
 
     public function  index(){
-        $wishListItems = ProductWishlist::with('product.images')->where('user_id',auth()->user()->id)->get();
+        $wishListItems = ProductWishlist::with('product.images')->where('user_id',auth()->user()->id)->paginate(10);
         $productsArray = [];
         foreach($wishListItems as $wishlistItem){
            

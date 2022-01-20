@@ -313,7 +313,7 @@ class UserController extends Controller
             {
                 $userId = auth()->user()->id;
                 $user = User::whereId($userId)->first();
-                $user->update(['last_activity' => Carbon::now()]);
+                $user->update(['last_activity' => Carbon::now(),'fcm_token'=>$request->fcm_token]);
                 return response()->json(['user_id'=>$user->user_id]);
             }
             return response()->json(['msg' => 'Wrong email or password']);

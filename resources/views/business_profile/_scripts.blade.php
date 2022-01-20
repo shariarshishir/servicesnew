@@ -303,6 +303,7 @@
             $('.file').val('');
             $('.img-thumbnail').attr('src', 'https://via.placeholder.com/80');
             $('#manufacture-product-upload-errors').empty();
+            $('.rm-error').html('');
         });
     });
 
@@ -331,7 +332,7 @@
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#errors').empty();
-                            console.log(data);
+                            $('.rm-error').html('');
                             $('#product-add-modal-block').modal('close');
                             $('.manufacture-product-table-data').html('');
                             $('.manufacture-product-table-data').html(data.data);
@@ -446,6 +447,7 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#manufacture-update-errors').empty();
+                                $('.rm-error').html('');
                                 $('#product-edit-modal-block').modal('close');
                                 $('.manufacture-product-table-data').html('');
                                 $('.manufacture-product-table-data').html(data.data);

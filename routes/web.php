@@ -356,6 +356,7 @@ Route::group(['prefix'=>'/manufacture'],function (){
     Route::get('product/edit/{product_id}',[ManufactureProductController::class, 'edit'])->name('manufacture.product.edit');
     Route::post('product/update/{product_id}',[ManufactureProductController::class, 'update'])->name('manufacture.product.update');
     Route::get('product/delete/{product_id}/{business_profile_id}',[ManufactureProductController::class, 'delete'])->name('manufacture.product.delete');
+    Route::get('/product/publish-unpublish/{pid}/{bid}',[ManufactureProductController::class, 'publishUnpublish'])->name('manufacture.product.publish.unpublish');
 
 });
 

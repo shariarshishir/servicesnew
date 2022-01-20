@@ -261,6 +261,23 @@ public function delete($product_id, $business_profile_id)
 
 }
 
+public function publishUnpublish($pid, $bid)
+    {
+      $product=Product::withTrashed()->where('id',$pid)->first();
+      if($product->deleted_at){
+          $product->restore();
+          $products=Product::withTrashed()->where('business_profile_id',$bid)->latest()->with(['product_images','category'])->get();
+          $data=view('business_profile._product_table_data', compact('products'))->render();
+          return response()->json(array('success' => true, 'msg' => 'Product Published Successfully','data' => $data),200);
+        }
+      else{
+        $product->delete();
+        $products=Product::withTrashed()->where('business_profile_id',$bid)->latest()->with(['product_images','category'])->get();
+        $data=view('business_profile._product_table_data', compact('products'))->render();
+        return response()->json(array('success' => true, 'msg' => 'Product Unpublished Successfully', 'data' => $data),200);
+      }
+    }
+
 
 
 

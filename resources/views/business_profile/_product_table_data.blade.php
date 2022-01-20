@@ -76,7 +76,9 @@
                         <td data-title="MOQ" style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->moq }} {{ $product->qty_unit }}</td>
                         <td data-title="Lead Time" style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->lead_time }}</td>
                         <td data-title="" style="text-align:center;cursor: pointer;">
-                            <a class="btn_product_edit" href="javascript:void(0);" onclick="editproduct('{{ $product->id }}')">Edit</a> | <a href="javascript:void(0);" onclick="deleteProduct('{{ $product->id }}', '{{$product->business_profile_id}}')" style="color:#ff0000;">Delete</a>
+                            {{-- <a class="btn_product_edit" href="javascript:void(0);" onclick="editproduct('{{ $product->id }}')">Edit</a> | <a href="javascript:void(0);" onclick="deleteProduct('{{ $product->id }}', '{{$product->business_profile_id}}')" style="color:#ff0000;">Delete</a> --}}
+                            <a class="btn_product_edit" href="javascript:void(0);" onclick="editproduct('{{ $product->id }}')">Edit</a> | <a href="javascript:void(0);" onclick="publishUnpublishProduct('{{ $product->id }}', '{{$product->deleted_at ? 0 : 1 }}', '{{$product->business_profile_id}}')" style="{{$product->deleted_at ? '#00FF00' : 'color:#ff0000;' }}">{{$product->deleted_at ? 'Publish' : 'Unpublish' }}</a>
+
                         </td>
                     </tr>
                 @endforeach
@@ -87,4 +89,101 @@
         </table>
     </div>
 </div>
+
+@push('js')
+    <script>
+        //seller publish unpublish product
+       function publishUnpublishProduct(product_id, status, bid){
+            var pid=product_id
+            var status = status;
+            // if(!confirm('Are You Want to Delete?')){return false;}
+            var url = '{{ route("manufacture.product.publish.unpublish", [":pid", ":bid"] ) }}';
+                url = url.replace(':pid', pid);
+                url = url.replace(':bid', bid);
+            if(status == 1){
+                swal({
+                    title: "Want to unpublished this product ?",
+                    text: "Please ensure and then confirm!",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, unpublish it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: !0
+                }).then(function (e) {
+                    if (e.value === true) {
+                        $.ajax({
+                            url: url,
+                            type: "GET",
+                            beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    $('.manufacture-product-table-data').html('');
+                                    $('.manufacture-product-table-data').html(data.data);
+                                    swal("Done!", data.msg,"success");
+
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    toastr.success(error);
+                                }
+                            });
+                        }
+                    else {
+                        e.dismiss;
+                    }
+                }, function (dismiss) {
+                    return false;
+                })
+            } else {
+                swal({
+                    title: "Want to published this product ?",
+                    text: "Please ensure and then confirm!",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, publish it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: !0
+                }).then(function (e) {
+                    if (e.value === true) {
+                        $.ajax({
+                            url: url,
+                            type: "GET",
+                            beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    $('.manufacture-product-table-data').html('');
+                                    $('.manufacture-product-table-data').html(data.data);
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    toastr.success(error);
+                                }
+                            });
+                        }
+                    else {
+                        e.dismiss;
+                    }
+                }, function (dismiss) {
+                    return false;
+                })
+            }
+
+        };
+    </script>
+@endpush
 

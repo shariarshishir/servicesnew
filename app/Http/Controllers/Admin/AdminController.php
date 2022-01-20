@@ -126,7 +126,8 @@ class AdminController extends Controller
             }
         }
         
-        $rows = User::get();
+        //$rows = User::get();
+        $rows = User::where('created_at', '>=', $rangeStart)->where('created_at', '<=', $rangeEnd)->get();
         //dd($rows);
         $totalUsers = count($rows);
         
@@ -221,7 +222,7 @@ class AdminController extends Controller
         //$json_result['totalUsers'] = $totalUsers;
         //$json_result['msg'] = 'data collected successfully!';
         
-        return response()->json(["error"=>0, "barCategories"=>array_values($barCategories), "barData"=>array_values($barData), "totalUsers"=>$totalUsers, "msg"=> "data collected successfully!"]);
+        return response()->json(["error"=>0, "barCategories"=>array_values($barCategories), "barData"=>array_values($barData), "totalUsers"=>$totalUsers, "msg"=> "registered users data collected successfully!"]);
     }
 
     public function getUsersBasedOnSelectedParams(Request $request) 
@@ -234,7 +235,8 @@ class AdminController extends Controller
         $d = new DateTime($selectedYear.$selectedMonth.'01', new DateTimeZone($timezone));
         $rangeStart = $d->format('Y-m-d');
         $rangeEnd = $d->format('Y-m-t');
-        $rows = User::whereBetween('created_at', [$rangeStart, $rangeEnd])->get();
+        //$rows = User::whereBetween('created_at', [$rangeStart, $rangeEnd])->get();
+        $rows = User::where('created_at', '>=', $rangeStart)->where('created_at', '<=', $rangeEnd)->get();
         $rowsCount = count($rows);
         $html = "";
 
@@ -267,7 +269,7 @@ class AdminController extends Controller
             $html .= "No data found!";
         }
 
-        return response()->json(["status"=>1, 'data'=>$html, 'datacount'=>$rowsCount, "message"=>"data collected successfully!"]);
+        return response()->json(["status"=>1, 'data'=>$html, 'datacount'=>$rowsCount, "message"=>"data collected successfully for selected month and year!"]);
     
     }
     
@@ -297,7 +299,8 @@ class AdminController extends Controller
             $oStart->add(new DateInterval("P1D"));
         }
 
-        $rows = User::whereBetween('last_activity', [$rangeStart, $rangeEnd])->get();
+        //$rows = User::whereBetween('last_activity', [$rangeStart, $rangeEnd])->get();
+        $rows = User::where('last_activity', '>=', $rangeStart)->where('last_activity', '<=', $rangeEnd)->get();
         //dd($rows);
         //$rows = User::whereDate('last_activity','>=',Carbon::now()->subdays(30))->get();
         $totalUsers = count($rows);
@@ -336,7 +339,8 @@ class AdminController extends Controller
         //$d = new DateTime($selectedYear.$selectedMonth.'01', new DateTimeZone($timezone));
         //$rangeStart = $d->format('Y-m-d');
         //$rangeEnd = $d->format('Y-m-t');
-        $rows = User::whereBetween('last_activity', [$rangeStart, $rangeEnd])->get();
+        //$rows = User::whereBetween('last_activity', [$rangeStart, $rangeEnd])->get();
+        $rows = User::where('last_activity', '>=', $rangeStart)->where('last_activity', '<=', $rangeEnd)->get();
         $rowsCount = count($rows);
         $html = "";
 

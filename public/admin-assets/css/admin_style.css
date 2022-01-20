@@ -481,6 +481,7 @@ p {
 }
 .admin_business_profile_details .submitBox {
     padding: 20px 0 40px;
+    text-align: right;
 }
 .radio-inline {
     padding-right: 10px;

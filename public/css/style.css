@@ -7456,7 +7456,9 @@ nav .pagination li.active .page-link {
     color: #000 !important;
 }
 #manufacture-product-upload-form .text-danger,
-#manufacture-product-update-form .text-danger {
+#manufacture-product-update-form .text-danger,
+#product-add-modal-block .text-danger,
+#product-edit-modal-block .text-danger {
     font-size: 11px;
 }
 #manufacture-product-upload-form .select2-container,
@@ -7464,7 +7466,9 @@ nav .pagination li.active .page-link {
     margin-bottom: 0px;
 }
 #manufacture-product-upload-errors,
-#manufacture-update-errors {
+#manufacture-update-errors,
+#product-add-modal-block .validaiton-errors,
+#product-edit-modal-block .validaiton-errors {
     background-color: #ffebee !important;
     padding: 10px 20px;
     color: #f44336 !important;
@@ -7474,7 +7478,8 @@ nav .pagination li.active .page-link {
     margin-bottom: 10px;
 }
 #manufacture-product-upload-errors div:first-child,
-#manufacture-update-errors div:first-child {
+#manufacture-update-errors div:first-child,
+#product-add-modal-block .validaiton-errors li:first-child {
     color: #000 !important;
   }
 

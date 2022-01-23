@@ -488,7 +488,7 @@
                         </div>
 
                         <div role="">
-                            <ul id="edit_errors" class="validaiton-errors"></ul>
+                            <ul id="edit_errors" class="validaiton-errors" style="display: none;"></ul>
                         </div>
 
                         <div class="submit_btn_wrap">

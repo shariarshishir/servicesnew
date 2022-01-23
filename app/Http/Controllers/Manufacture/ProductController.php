@@ -34,8 +34,15 @@ class ProductController extends Controller
             'lead_time'=>'required',
             'industry' => 'required',
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
-
-
+            'price_unit' => 'required',
+            'qty_unit'   => 'required',
+            'colors'  => 'required',
+            'sizes'  => 'required',
+            'product_images' => 'required',
+            'price_per_unit'=> 'required',
+        ],[
+            'price_per_unit.required' => 'The price range field is required.',
+            'category_id.required' => 'The product category field is required',
         ]);
 
         if ($validator->fails())
@@ -148,12 +155,19 @@ public function update(Request $request, $product_id)
     $validator = Validator::make($request->all(), [
         'category_id' => 'required',
         'title'=>'required',
-        //'price_per_unit'=>'required|numeric',
+        'price_per_unit'=>'required',
+        'price_unit' => 'required',
         'moq'=>'required|numeric',
+        'qty_unit'   => 'required',
+        'colors'  => 'required',
+        'sizes'  => 'required',
         'product_details'=>'required',
         'product_specification'=>'required',
         'lead_time'=>'required',
         'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+    ],[
+        'price_per_unit.required' => 'The price range field is required.',
+        'category_id.required' => 'The product category field is required',
     ]);
 
     if ($validator->fails())
@@ -246,6 +260,23 @@ public function delete($product_id, $business_profile_id)
         ],200);
 
 }
+
+public function publishUnpublish($pid, $bid)
+    {
+      $product=Product::withTrashed()->where('id',$pid)->first();
+      if($product->deleted_at){
+          $product->restore();
+          $products=Product::withTrashed()->where('business_profile_id',$bid)->latest()->with(['product_images','category'])->get();
+          $data=view('business_profile._product_table_data', compact('products'))->render();
+          return response()->json(array('success' => true, 'msg' => 'Product Published Successfully','data' => $data),200);
+        }
+      else{
+        $product->delete();
+        $products=Product::withTrashed()->where('business_profile_id',$bid)->latest()->with(['product_images','category'])->get();
+        $data=view('business_profile._product_table_data', compact('products'))->render();
+        return response()->json(array('success' => true, 'msg' => 'Product Unpublished Successfully', 'data' => $data),200);
+      }
+    }
 
 
 

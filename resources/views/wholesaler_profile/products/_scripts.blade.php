@@ -20,6 +20,8 @@
             $('.ready-stock-prices-breakdown').show();
             $('#product-add-modal-block .product_unit').val('');
             $('#product-add-modal-block .product_unit').trigger('change');
+            $('.error-rm').html('');
+
         })
 
         $('.js-example-basic-multiple').select2();
@@ -153,6 +155,8 @@
         });
         $('#edit_non_clothing_availability').val(tot);
     });
+
+    var price_breakdown_array=['quantity_min','quantity_max','price','lead','ready_quantity_min','ready_quantity_max','ready_price','non_clothing_min','non_clothing_max','non_clothing_price',];
     //store seller product
     $('#seller_product_form').on('submit',function(e){
             e.preventDefault();
@@ -195,19 +199,41 @@
                     },
                 error: function(xhr, status, error)
                     {
+                       console.log(xhr.responseJSON.error);
+
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#errors').empty();
-                        $("#errors").append("<li class='alert alert-danger'>"+error+"</li>")
+                        $("#errors").append("<li class='alert alert-danger'>"+error+"</li>");
+                        $('.error-rm').html('');
                         $.each(xhr.responseJSON.error, function (key, item)
                         {
+                            $.each(price_breakdown_array, function(k,array_item){
+                                priceBreakDownValidation(key, array_item);
+                            });
+
+                            $('.'+key+'_error').html('*required');
+
                             $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
                         });
                     }
             });
         });
 
+      function priceBreakDownValidation(errorItem , compareItem ){
+            if(compareItem == 'lead'){
+                if(errorItem.split('_')[0] == compareItem){
+                    var key = errorItem.split('.')[1];
+                    $('.'+compareItem+'_'+key+'_error').html('*required');
+                }
+            }else{
+                if(errorItem.split('.')[0] == compareItem){
+                    var key = errorItem.split('.')[1];
+                    $('.'+compareItem+'_'+key+'_error').html('*required');
+                }
+            }
 
+      }
     //edit seller product
 
     $(document).on('click', '.seller-edit-product',function(){
@@ -231,6 +257,8 @@
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#product-edit-modal-block').modal('open');
+                        $('.error-rm').html('');
+                        $('#edit_errors').empty();
                         $('.edit-image-block .input-images-2').html('');
                         $('#edit_category_id').val(data.product.product_category_id);
                         $('#edit_category_id').trigger('change');
@@ -331,7 +359,7 @@
                             $('#product-edit-modal-block .moq-unit-block').show();
                             $.each(data.attr, function (key, item)
                             {
-                                var html='<tr><td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td><td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td> <td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ></td><td data-title="Lead Time (days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="'+item[3]+'" placeholder="Days"></td><td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td></tr>';
+                                var html='<tr><td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror" value="'+item[0]+'" placeholder="Min. Value"><span class="quantity_min_'+key+'_error text-danger error-rm"></span></td><td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"><span class="quantity_max_'+key+'_error text-danger error-rm"></span></td> <td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ><span  class="price_'+key+'_error text-danger error-rm"></span></td><td data-title="Lead Time (days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="'+item[3]+'" placeholder="Days"><span  class="lead_'+key+'_error text-danger error-rm"></span></td><td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td></tr>';
                                 $(".fresh-attr-tbody").append(html);
                             });
 
@@ -352,7 +380,7 @@
                             $(".ready-attr-tbody").html('');
                             $.each(data.attr, function (key, item)
                             {
-                                var html='<tr><td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td><td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td><td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ></td><td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td></tr>';
+                                var html='<tr><td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"><span class="ready_quantity_min_'+key+'_error text-danger error-rm"></span></td><td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"><span class="ready_quantity_max_'+key+'_error text-danger error-rm"></span></td><td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$" ><span  class="ready_price_'+key+'_error text-danger error-rm"></span></td><td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td></tr>';
                                 $(".ready-attr-tbody").append(html);
                             });
                             $(".ready-attr-tbody-colors-sizes").html('');
@@ -360,16 +388,16 @@
                             {
                                 var html= '<tr>';
                                     html+='<td data-title="Color"><div class="autocomplete"><input type="text" value="'+item.color+'" class="form-control" id="predefind-colors" name="color_size[color][]" /></div></td>';
-                                    html+='<td data-title="XXS"><input type="text" value="'+item.xxs+'" class="form-control " name="color_size[xxs][]" /></td>';
-                                    html+='<td data-title="XS"><input type="text" value="'+item.xs+'" class="form-control " name="color_size[xs][]" /></td>';
-                                    html+='<td data-title="Small"><input type="text" value="'+item.small+'" class="form-control " name="color_size[small][]" /></td>';
-                                    html+='<td data-title="Medium"><input type="text" value="'+item.medium+'" class="form-control " name="color_size[medium][]" /></td>';
-                                    html+='<td data-title="Large"><input type="text" value="'+item.large+'" class="form-control " name="color_size[large][]" /></td>';
-                                    html+='<td data-title="Extra Large"><input type="text" value="'+item.extra_large+'" class="form-control " name="color_size[extra_large][]" /></td>';
-                                    html+='<td data-title="XXL"><input type="text" value="'+item.xxl+'" class="form-control " name="color_size[xxl][]" /></td>';
-                                    html+='<td data-title="XXXL"><input type="text" value="'+item.xxxl+'" class="form-control " name="color_size[xxxl][]" /></td>';
-                                    html+='<td data-title="4XXL"><input type="text" value="'+item.four_xxl+'" class="form-control " name="color_size[four_xxl][]" /></td>';
-                                    html+='<td data-title="One Size"><input type="text" value="'+item.one_size+'" class="form-control " name="color_size[one_size][]" /></td>';
+                                    html+='<td data-title="XXS"><input type="text" value="'+item.xxs+'" class="form-control negitive-or-text-not-allowed" name="color_size[xxs][]" /></td>';
+                                    html+='<td data-title="XS"><input type="text" value="'+item.xs+'" class="form-control negitive-or-text-not-allowed" name="color_size[xs][]" /></td>';
+                                    html+='<td data-title="Small"><input type="text" value="'+item.small+'" class="form-control negitive-or-text-not-allowed" name="color_size[small][]" /></td>';
+                                    html+='<td data-title="Medium"><input type="text" value="'+item.medium+'" class="form-control negitive-or-text-not-allowed" name="color_size[medium][]" /></td>';
+                                    html+='<td data-title="Large"><input type="text" value="'+item.large+'" class="form-control negitive-or-text-not-allowed" name="color_size[large][]" /></td>';
+                                    html+='<td data-title="Extra Large"><input type="text" value="'+item.extra_large+'" class="form-control negitive-or-text-not-allowed" name="color_size[extra_large][]" /></td>';
+                                    html+='<td data-title="XXL"><input type="text" value="'+item.xxl+'" class="form-control negitive-or-text-not-allowed" name="color_size[xxl][]" /></td>';
+                                    html+='<td data-title="XXXL"><input type="text" value="'+item.xxxl+'" class="form-control negitive-or-text-not-allowed" name="color_size[xxxl][]" /></td>';
+                                    html+='<td data-title="4XXL"><input type="text" value="'+item.four_xxl+'" class="form-control negitive-or-text-not-allowed" name="color_size[four_xxl][]" /></td>';
+                                    html+='<td data-title="One Size"><input type="text" value="'+item.one_size+'" class="form-control negitive-or-text-not-allowed" name="color_size[one_size][]" /></td>';
                                     html+='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                                     html+='</tr>';
                                  $(".ready-attr-tbody-colors-sizes").append(html);
@@ -412,7 +440,7 @@
                             {
                                 var html = '<tr>';
                                     html += '<td data-title="Color"><input type="text" value="'+item.color+'" class="form-control" name="non_clothing_attr[color][]" /></td>';
-                                    html += '<td data-title="Quantity"><input type="text" value="'+item.quantity+'" class="form-control check-price-range-value" name="non_clothing_attr[quantity][]" /></td>';
+                                    html += '<td data-title="Quantity"><input type="text" value="'+item.quantity+'" class="form-control negitive-or-text-not-allowed" name="non_clothing_attr[quantity][]" /></td>';
                                     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingAttr(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                                     html += '</tr>';
 
@@ -424,9 +452,9 @@
                             $.each(data.attr, function (key, item)
                             {
                                 var html = '<tr>';
-                                    html += '<td data-title="Qty Min"><input  name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"></td>';
-                                    html += '<td data-title="Qty Max"><input  name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"></td>';
-                                    html += '<td data-title="Price (usd)"><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$"></td>';
+                                    html += '<td data-title="Qty Min"><input  name="non_clothing_min[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="'+item[0]+'" placeholder="Min. Value"><span class="non_clothing_min_'+key+'_error text-danger error-rm"></span></td>';
+                                    html += '<td data-title="Qty Max"><input  name="non_clothing_max[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="'+item[1]+'" placeholder="Max. Value"><span class="non_clothing_max_'+key+'_error text-danger error-rm"></span></td>';
+                                    html += '<td data-title="Price (usd)"><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="'+item[2]+'" placeholder="$"><span class="non_clothing_price_'+key+'_error text-danger error-rm"></span></td>';
                                     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                                     html += '</tr>';
                                 $(".edit-non-clothing-prices-breakdown-tbody").append(html);
@@ -534,10 +562,23 @@
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#edit_errors').empty();
-                        $("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
+                        $("#errors").append("<li class='alert alert-danger'>"+error+"</li>")
+                        // $("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
+                        // $.each(xhr.responseJSON.error, function (key, item)
+                        // {
+                        //     $("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
+                        // });
+
+
+                        $('.error-rm').html('');
                         $.each(xhr.responseJSON.error, function (key, item)
                         {
-                            $("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
+                            $.each(price_breakdown_array, function(k,array_item){
+                                priceBreakDownValidation(key, array_item);
+                            });
+                            $('.'+key+'_error').html('*required');
+
+                            $("#edit_errors").append("<li class='alert alert-danger'>"+item+"</li>")
                         });
 
                     }
@@ -860,6 +901,14 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
         $('#product-edit-modal-block .edit-video-show-div').hide();
 
     }
+
+//negetive or text not allowed
+$(document).on('keyup', '.negitive-or-text-not-allowed', function(){
+    //if(this.value<0 ){this.value= this.value * -1;}
+    if($.isNumeric(this.value ) == false || this.value<0){
+        this.value= '';
+    }
+});
 
 
 </script>

@@ -173,6 +173,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" integrity="sha512-igVQ7hyQVijOUlfg3OmcTZLwYJIBXU63xL9RC12xBHNpmGJAktDnzl9Iw0J4yrSaQtDxTTVlwhY730vphoVqJQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+{{-- <script src="{{asset('js/select2.full.min.js')}}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.material.min.js"></script>
@@ -516,16 +517,16 @@
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
     html += '<td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
-    html += '<td data-title="XXS"><input type="text" value="0" class="form-control " name="color_size[xxs][]" /></td>';
-    html += '<td data-title="XS"><input type="text" value="0" class="form-control " name="color_size[xs][]" /></td>';
-    html += '<td data-title="Small"><input type="text" value="0" class="form-control " name="color_size[small][]" /></td>';
-    html += '<td data-title="Medium"><input type="text" value="0" class="form-control " name="color_size[medium][]" /></td>';
-    html += '<td data-title="Large"><input type="text" value="0" class="form-control " name="color_size[large][]" /></td>';
-    html += '<td data-title="Extra Large"><input type="text" value="0" class="form-control " name="color_size[extra_large][]" /></td>';
-    html += '<td data-title="XXL"><input type="text" value="0" class="form-control " name="color_size[xxl][]" /></td>';
-    html += '<td data-title="XXXL"><input type="text" value="0" class="form-control " name="color_size[xxxl][]" /></td>';
-    html += '<td data-title="4XXL"><input type="text" value="0" class="form-control " name="color_size[four_xxl][]" /></td>';
-    html += '<td data-title="One Size"><input type="text" value="0" class="form-control " name="color_size[one_size][]" /></td>';
+    html += '<td data-title="XXS"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xxs][]" /></td>';
+    html += '<td data-title="XS"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xs][]" /></td>';
+    html += '<td data-title="Small"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[small][]" /></td>';
+    html += '<td data-title="Medium"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[medium][]" /></td>';
+    html += '<td data-title="Large"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[large][]" /></td>';
+    html += '<td data-title="Extra Large"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[extra_large][]" /></td>';
+    html += '<td data-title="XXL"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xxl][]" /></td>';
+    html += '<td data-title="XXXL"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xxxl][]" /></td>';
+    html += '<td data-title="4XXL"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[four_xxl][]" /></td>';
+    html += '<td data-title="One Size"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[one_size][]" /></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('.color-size-table-block tbody').append(html);
@@ -535,33 +536,36 @@
         $(el).parent().parent().remove();
     }
 
-    function addFreshOrderAttribute()
+
+    function addFreshOrderAttribute(el)
     {
-    let totalChild = $('.color-size-table-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td data-title="Lead Time (days)"><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>';
-    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-    html += '</tr>';
-    $('.fresh-order-attribute-table-block tbody').append(html);
+        var count=$(el).closest('.no_more_tables').find('.fresh-order-attribute-table-block tbody').children('tr').length;
+        //let totalChild = $('.color-size-table-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"><span class="quantity_min_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"><span class="quantity_max_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"><span  class="price_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Lead Time (days)"><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"><span  class="lead_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        html += '</tr>';
+        $('.fresh-order-attribute-table-block tbody').append(html);
     }
     function removeFreshOrderAttribute(el)
     {
         $(el).parent().parent().remove();
     }
 
-    function addReadyOrderAttribute()
+    function addReadyOrderAttribute(el)
     {
-    let totalChild = $('.color-size-table-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-    html += '</tr>';
-    $('.ready-order-attribute-table-block tbody').append(html);
+        var count=$(el).closest('.no_more_tables').find('.ready-order-attribute-table-block tbody').children('tr').length;
+        let totalChild = $('.color-size-table-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"><span class="ready_quantity_min_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"><span class="ready_quantity_max_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"><span  class="ready_price_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        html += '</tr>';
+        $('.ready-order-attribute-table-block tbody').append(html);
     }
     function removeReadyOrderAttribute(el)
     {
@@ -574,7 +578,7 @@
     let totalChild = $('.non-clothing-color-quantity-table-block tbody').children().length;
     var html = '<tr>';
     html += '<td data-title="Color"><input type="text" value="" class="form-control" name="non_clothing_attr[color][]" /></td>';
-    html += '<td data-title="Quantity"><input type="text" value="0" class="form-control check-price-range-value" name="non_clothing_attr[quantity][]" /></td>';
+    html += '<td data-title="Quantity"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="non_clothing_attr[quantity][]" /></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingAttr(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
     html += '</tr>';
     $('.non-clothing-color-quantity-table-block tbody').append(html);
@@ -585,16 +589,17 @@
     }
 
 
-    function addNonClothingPriceBreakDown()
+    function addNonClothingPriceBreakDown(el)
     {
-    let totalChild = $('.non-clothing-prices-breakdown-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td data-title="Qty Min"><input  name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td data-title="Qty Max"><input  name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td data-title="Price (usd)"><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-    html += '</tr>';
-    $('.non-clothing-prices-breakdown-block tbody').append(html);
+        var count=$(el).closest('.no_more_tables').find('.non-clothing-prices-breakdown-block tbody').children('tr').length;
+        let totalChild = $('.non-clothing-prices-breakdown-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td data-title="Qty Min"><input  name="non_clothing_min[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"><span class="non_clothing_min_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Qty Max"><input  name="non_clothing_max[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"><span class="non_clothing_max_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Price (usd)"><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"><span class="non_clothing_price_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        html += '</tr>';
+        $('.non-clothing-prices-breakdown-block tbody').append(html);
     }
     function removeNonClothingPriceBreakDown(el)
     {

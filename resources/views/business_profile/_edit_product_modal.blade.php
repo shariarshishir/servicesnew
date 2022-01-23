@@ -2,7 +2,6 @@
 
     <form action="" method="post" enctype="multipart/form-data" id="manufacture-product-update-form">
         @csrf
-        <div id="manufacture-update-errors"></div>
         <div class="modal-content">
 
         </div>
@@ -20,3 +19,4 @@
     </div> -->
 
 </div>
+

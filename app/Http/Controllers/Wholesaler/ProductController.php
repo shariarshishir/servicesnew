@@ -137,6 +137,13 @@ class ProductController extends Controller
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
 
+        ],[
+            'non_clothing_availability.required_if' => 'The  availability field is required when product type is Non Clothing.',
+            'ready_stock_availability.required_if' => 'The  availability field is required when product type is Ready Stock.',
+            'quantity_min.*.required_if' => 'the :attribute are required',
+            'quantity_max.*.required_if' => 'the :attribute are required',
+            'price.*.required_if' => 'the :attribute are required',
+            'lead_time.*.required_if' => 'the :attribute are required',
         ]);
 
         if ($validator->fails())
@@ -386,6 +393,13 @@ class ProductController extends Controller
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
+        ],[
+            'non_clothing_availability.required_if' => 'The  availability field is required when product type is Non Clothing.',
+            'ready_stock_availability.required_if' => 'The  availability field is required when product type is Ready Stock.',
+            'quantity_min.*.required_if' => 'the :attribute are required',
+            'quantity_max.*.required_if' => 'the :attribute are required',
+            'price.*.required_if' => 'the :attribute are required',
+            'lead_time.*.required_if' => 'the :attribute are required',
         ]);
 
         if ($validator->fails())
@@ -527,9 +541,9 @@ class ProductController extends Controller
             }
             if($productImages->isNotEmpty()){
                 foreach($productImages as $productImage){
-                    if(Storage::exists('public/'.$productImage->image) && Storage::exists('public/'.$productImage->original)){
-                        Storage::delete('public/'.$productImage->image);
-                        Storage::delete('public/'.$productImage->original);
+                    if(Storage::exists($productImage->image) && Storage::exists($productImage->original)){
+                        Storage::delete($productImage->image);
+                        Storage::delete($productImage->original);
                     }
                     $productImage->delete();
                 }

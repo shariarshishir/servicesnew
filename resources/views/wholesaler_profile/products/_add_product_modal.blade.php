@@ -1,7 +1,11 @@
 <div id="product-add-modal-block" class="modal fullscreen-modal wholesaler_add_product_modal profile_form_modal">
     <div class="modal-content">
         <legend>Upload Product</legend>
-
+        <div class="col-md-12">
+            <div class="row">
+                <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+            </div>
+        </div>
         <form method="POST" action="javascript:void(0);" enctype="multipart/form-data" id="seller_product_form">
             @csrf
             <div class="input-field ">
@@ -16,10 +20,6 @@
                     </ul>
                 </div>
             @endif
-            <div role="">
-                <ul id="errors"></ul>
-            </div>
-
             <div class="wholesaler_add_product_form container">
 
                 {{-- <div class="row input-field product-upload-block">
@@ -38,11 +38,12 @@
 
                 <div class="row input-field product-upload-block">
                     <div class="col s12 m3 l3">
-                        <label class="active">Image:</label>
+                        <label class="active">Image <span class="text-danger">*</span></label>
                     </div>
                     <div class="col s12 m9 l9">
                         <div class="input-images-1" style="padding-top: .5rem;"></div>
                         <div class="image-upload-message">Minimum image size 300 X 300</div>
+                        <span class="images_error text-danger error-rm"></span>
                     </div>
                 </div>
                 {{-- video --}}
@@ -56,21 +57,22 @@
                 </div>
                 <div class="row input-field product-details-block">
                     <div class="col s12 m3 l3">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }}</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }} <span class="text-danger">*</span></label>
                     </div>
                     <div class="col s12 m9 l9">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus required />
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus />
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        <span class="name_error text-danger error-rm"></span>
                     </div>
                 </div>
 
                 <div class="row input-field ">
                     <div class="col s12 m3 l3">
-                        <label for="product_type">{{ __('Product Type') }}</label>
+                        <label for="product_type">{{ __('Product Type') }} <span class="text-danger">*</span></label>
                     </div>
                     <div class="col s12 m9 l9">
                         <div class="radio-block">
@@ -92,7 +94,7 @@
 
                 <div class="row input-field ">
                     <div class="col s12 m3 l3">
-                        <label for="product_category_id">{{ __('Product Category') }}</label>
+                        <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
                     </div>
                     <div class="col s12 m9 l9">
                         <select name="category_id" class="select2 browser-default" id="category_id">
@@ -111,14 +113,14 @@
                                     @endif
                             @endforeach
                         </select>
-                        <span class="text-danger error-text category_id_err"></span>
+                        <span class="category_id_error text-danger error-rm"></span>
                     </div>
                 </div>
 
                 <div class="fresh-rtd-attr">
                     <div class="row input-field">
                         <div class="col s12">
-                            <label>Prices Breakdown</label>
+                            <label>Prices Breakdown <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12">
                             <div class="prices-breakdown-block">
@@ -135,19 +137,28 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                                <td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                                <td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                                <td data-title="Lead Time (days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>
+                                                <td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value">
+                                                    <span class="quantity_min_0_error text-danger error-rm"></span>
+                                                </td>
+                                                <td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value">
+                                                    <span class="quantity_max_0_error text-danger error-rm"></span>
+                                                </td>
+                                                <td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" >
+                                                    <span class="price_0_error text-danger error-rm"></span>
+                                                </td>
+                                                <td data-title="Lead Time (days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control negitive-or-text-not-allowed @error('lead_time') is-invalid @enderror"  value="" placeholder="Days">
+                                                    <span class="lead_0_error text-danger error-rm"></span>
+                                                </td>
                                                 {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td> --}}
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>
 
-                                <div class="add_more_box" style="padding-top: 20px">
-                                    <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
-                                </div>
+                                {{-- <div class="add_more_box" style="padding-top: 20px">
+                                     <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                </div> --}}
 
                             </div>
                         </div>
@@ -157,7 +168,7 @@
                             <label for="copyright-price" class="col-md-4 col-form-label text-md-right">Copyright Price</label>
                         </div>
                         <div class="col s12 m9 l9">
-                            <input type="text" name="copyright_price" class="copyright_price_val" onchange="allowTwoDecimal('.copyright_price_val')" />
+                            <input type="text" name="copyright_price" class="copyright_price_val negitive-or-text-not-allowed" onchange="allowTwoDecimal('.copyright_price_val')" />
                         </div>
                     </div>
                     <div class="row input-field">
@@ -175,7 +186,7 @@
                     <div class="col-md-12" id="color-size-block">
                         <div class="row input-field ">
                             <div class="col s12">
-                                <label>Available Size & Colors</label>
+                                <label>Available Size & Colors <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12">
                                 <div class="color-and-size-block">
@@ -200,16 +211,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
-                                                    <td data-title="XXS"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxs][]" /></td>
-                                                    <td data-title="XS"><input type="text" value="0" class="form-control count-color-size" name="color_size[xs][]" /></td>
-                                                    <td data-title="Small"><input type="text" value="0" class="form-control count-color-size" name="color_size[small][]" /></td>
-                                                    <td data-title="Medium"><input type="text" value="0" class="form-control count-color-size" name="color_size[medium][]" /></td>
-                                                    <td data-title="Large"><input type="text" value="0" class="form-control count-color-size" name="color_size[large][]" /></td>
-                                                    <td data-title="Extra Large"><input type="text" value="0" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
-                                                    <td data-title="XXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxl][]" /></td>
-                                                    <td data-title="XXXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
-                                                    <td data-title="4XXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
-                                                    <td data-title="One Size"><input type="text" value="0" class="form-control count-color-size" name="color_size[one_size][]" /></td>
+                                                    <td data-title="XXS"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[xxs][]"/></td>
+                                                    <td data-title="XS"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[xs][]" /></td>
+                                                    <td data-title="Small"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[small][]" /></td>
+                                                    <td data-title="Medium"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[medium][]" /></td>
+                                                    <td data-title="Large"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[large][]" /></td>
+                                                    <td data-title="Extra Large"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[extra_large][]" /></td>
+                                                    <td data-title="XXL"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[xxl][]" /></td>
+                                                    <td data-title="XXXL"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[xxxl][]" /></td>
+                                                    <td data-title="4XXL"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[four_xxl][]" /></td>
+                                                    <td data-title="One Size"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="color_size[one_size][]" /></td>
                                                     {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td> --}}
                                                 </tr>
                                             </tbody>
@@ -237,10 +248,11 @@
                     <div class="full-stock-price" style="display: none">
                         <div class="row input-field full-stock-price-block">
                             <div class="col s12 m3 l3">
-                                <label for="full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price</label>
+                                <label for="full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
                                 <input id="full_stock_price" type="number" step=".01" class="form-control @error('full_stock_price') is-invalid @enderror" name="full_stock_price" value="{{ old('full_stock_price') }}"  autocomplete="full_stock_price" autofocus>
+                                <span class="full_stock_price_error text-danger error-rm"></span>
                             </div>
                         </div>
                         <div class="row input-field ">
@@ -257,7 +269,7 @@
                     <div class="ready-stock-prices-breakdown">
                         <div class="row input-field ">
                             <div class="col s12">
-                                <label>Prices Breakdown</label>
+                                <label>Prices Breakdown <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 prices-breakdown-block">
                                 <div class="no_more_tables">
@@ -272,28 +284,37 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                                <td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                                <td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                                <td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value">
+                                                    <span class="ready_quantity_min_0_error text-danger error-rm"></span>
+                                                </td>
+                                                <td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value">
+                                                    <span class="ready_quantity_max_0_error text-danger error-rm"></span>
+                                                </td>
+                                                <td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" >
+                                                    <span class="ready_price_0_error text-danger error-rm"></span>
+                                                </td>
                                                 {{-- <td><a href="javascript:void(0);" class="btn_delete" onclick="removeReadyOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a> </td> --}}
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addReadyOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+
                                 </div>
 
-                                <div class="add_more_box" style="padding-top: 20px">
-                                    <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
-                                </div>
+                                {{-- <div class="add_more_box" style="padding-top: 20px">
+                                    <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                </div> --}}
 
                             </div>
                         </div>
                     </div>
                     <div class="row input-field">
                         <div class="col s12 m3 l3">
-                            <label for="ready_stock_availability" class="col-md-4 col-form-label text-md-right">Quantity Available</label>
+                            <label for="ready_stock_availability" class="col-md-4 col-form-label text-md-right">Quantity Available  <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 m9 l9">
                             <input id="ready_stock_availability" type="number" class="form-control  @error('ready_stock_availability') is-invalid @enderror" name="ready_stock_availability" value="{{ old('ready_stock_availability') }}"  autocomplete="ready_stock_availability" autofocus readonly>
+                            <span class="ready_stock_availability_error text-danger error-rm"></span>
                         </div>
                     </div>
                 </div> {{--stock-rtd-attr --}}
@@ -303,7 +324,7 @@
                     <div class="col-md-12" id="color-size-block">
                         <div class="row input-field">
                             <div class="col s12">
-                                <label>Available Size & Colors</label>
+                                <label>Available Size & Colors <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12">
                                 <div class="color-and-size-block">
@@ -319,7 +340,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td data-title="Color"><input type="text" value="" class="form-control" name="non_clothing_attr[color][]" /></td>
-                                                    <td data-title="Quantity"><input type="text" value="0" class="form-control count-color-size check-price-range-value" name="non_clothing_attr[quantity][]" /></td>
+                                                    <td data-title="Quantity"><input type="text" value="" class="form-control count-color-size negitive-or-text-not-allowed" name="non_clothing_attr[quantity][]" /></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -346,10 +367,11 @@
                     <div class="non-clothing-full-stock-price"  style="display: none">
                         <div class="row input-field non-clothing-full-stock-price-block">
                             <div class="col s12 m3 l3">
-                                <label for="non_clothing_full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price</label>
+                                <label for="non_clothing_full_stock_price" class="col-md-4 col-form-label text-md-right">Full Stock Price <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
                                 <input id="non_clothing_full_stock_price" type="number" step=".01" class="form-control @error('non_clothing_full_stock_price') is-invalid @enderror" name="non_clothing_full_stock_price" value="{{ old('non_clothing_full_stock_price') }}"  autocomplete="non_clothing_full_stock_price" autofocus>
+                                <span class="non_clothing_full_stock_price_error text-danger error-rm"></span>
                             </div>
                         </div>
                         <div class="row input-field">
@@ -365,7 +387,7 @@
 
                     <div class="row input-field non-clothing-prices-breakdown">
                         <div class="col s12">
-                            <label>Prices Breakdown</label>
+                            <label>Prices Breakdown <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 prices-breakdown-block">
                             <div class="no_more_tables">
@@ -380,25 +402,33 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td data-title="Qty Min"><input name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                            <td data-title="Qty Max"><input name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                            <td data-title="Price (usd)"><input name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                            <td data-title="Qty Min"><input name="non_clothing_min[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value">
+                                                <span class="non_clothing_min_0_error text-danger error-rm"></span>
+                                            </td>
+                                            <td data-title="Qty Max"><input name="non_clothing_max[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value">
+                                                <span class="non_clothing_max_0_error text-danger error-rm"></span>
+                                            </td>
+                                            <td data-title="Price (usd)"><input name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$" >
+                                                <span class="non_clothing_price_0_error text-danger error-rm"></span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addNonClothingPriceBreakDown(this)"><i class="material-icons dp48">add</i> Add More</a>
                             </div>
-                            <div class="add_more_box" style="padding-top: 20px">
+                            {{-- <div class="add_more_box" style="padding-top: 20px">
                                 <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
                     <div class="row input-field">
                         <div class="col s12 m3 l3">
-                            <label for="non_clothing_availability" class="col-md-4 col-form-label text-md-right">Quantity Available</label>
+                            <label for="non_clothing_availability" class="col-md-4 col-form-label text-md-right">Quantity Available <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 m9 l9">
                             <input id="non_clothing_availability" type="number" class="form-control  @error('non_clothing_availability') is-invalid @enderror" name="non_clothing_availability" value="{{ old('non_clothing_availability') }}"  autocomplete="non_clothing_availability" autofocus readonly>
+                            <span class="non_clothing_availability_error text-danger error-rm"></span>
                         </div>
                     </div>
                 </div>
@@ -408,15 +438,16 @@
                     <div class="row">
                         <div class="col s12 m6 l6 input-field">
                             <div class="col 12">
-                                <label for="moq" class="col-md-4 col-form-label text-md-right">Minimum Order Quantity</label>
+                                <label for="moq" class="col-md-4 col-form-label text-md-right">Minimum Order Quantity <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12">
                                 <input id="moq" type="number" class="form-control @error('moq') is-invalid @enderror" name="moq" value="{{ old('moq') }}"  autocomplete="moq" autofocus>
+                                <span  class="moq_error text-danger error-rm"></span>
                             </div>
                         </div>
                         <div class="col s12 m6 l6 input-field">
                             <div class="col 12">
-                                <label for="product_unit" class="col-md-4 col-form-label text-md-right">Unit</label>
+                                <label for="product_unit" class="col-md-4 col-form-label text-md-right">Unit <span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12">
                                 <select class="select2 browser-default product_unit" name="product_unit">
@@ -428,6 +459,7 @@
                                     <option value="Meter">Meter</option>
                                     <option value="Ton">Ton</option>
                                 </select>
+                                <span class="product_unit_error text-danger error-rm"></span>
                             </div>
                         </div>
                     </div>
@@ -448,10 +480,11 @@
                 </div>
                 <div class="row input-field">
                     <div class="col s12 m3 l3">
-                        <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                        <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }} <span class="text-danger">*</span></label>
                     </div>
                     <div class="col s12 m9 l9">
                         <textarea id="description" class="editor" name="description" >{{old('description')}}</textarea>
+                        <span class="description_error text-danger error-rm"></span>
                     </div>
                 </div>
                 <div class="row input-field">
@@ -483,6 +516,10 @@
                     <div class="col s12 m9 l9">
                         <select class="js-example-basic-multiple" name="related_products[]" multiple="multiple"></select>
                     </div>
+                </div>
+
+                <div role="">
+                    <ul id="errors" class="validaiton-errors"></ul>
                 </div>
 
                 <div class="submit_btn_wrap" style="padding-top: 30px;">

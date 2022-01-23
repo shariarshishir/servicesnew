@@ -303,6 +303,7 @@
             $('.file').val('');
             $('.img-thumbnail').attr('src', 'https://via.placeholder.com/80');
             $('#manufacture-product-upload-errors').empty();
+            $('.rm-error').html('');
         });
     });
 
@@ -331,7 +332,7 @@
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#errors').empty();
-                            console.log(data);
+                            $('.rm-error').html('');
                             $('#product-add-modal-block').modal('close');
                             $('.manufacture-product-table-data').html('');
                             $('.manufacture-product-table-data').html(data.data);
@@ -339,13 +340,16 @@
                         },
                     error: function(xhr, status, error)
                         {
+
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#manufacture-product-upload-errors').empty();
                             //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                             $("#manufacture-product-upload-errors").append("<div class=''>"+error+"</div>");
+                            $('.rm-error').html('');
                             $.each(xhr.responseJSON.error, function (key, item)
                             {
+                                $('.'+key+'_error').html('*required');
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                 $("#manufacture-product-upload-errors").append("<div class=''>"+item+"</div>");
 
@@ -443,6 +447,7 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#manufacture-update-errors').empty();
+                                $('.rm-error').html('');
                                 $('#product-edit-modal-block').modal('close');
                                 $('.manufacture-product-table-data').html('');
                                 $('.manufacture-product-table-data').html(data.data);
@@ -455,8 +460,10 @@
                                 $('#manufacture-update-errors').empty();
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                                 $("#manufacture-update-errors").append("<div class=''>"+error+"</div>");
+                                $('.rm-error').html('');
                                 $.each(xhr.responseJSON.error, function (key, item)
                                 {
+                                    $('.'+key+'_error').html('*required');
                                     //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                     $("#manufacture-update-errors").append("<div class=''>"+item+"</div>");
 

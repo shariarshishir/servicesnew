@@ -1284,12 +1284,12 @@
 
         $('#export-destination-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td data-title="Name"><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Name" class="input-field"><select name="country_id[]"class="certificate-select2"><option value="" disabled selected>Choose your option</option>@foreach ($country as $key => $name)<option value="{{$key}}">{{$name}}</option>@endforeach</select></td>';
         html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="export-destination-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.export-destination-table-block tbody').append(html);
+        selectRefresh();
     }
 
     function removeExportDestinationDetails(el)
@@ -1328,13 +1328,14 @@
 
             for(let i = 0;i < exportDestinations.length ;i++){
                 var html='';
-                var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
+                var image_name=exportDestinations[i].country.code+'.png';
+                var image="{{asset('images/frontendimages/flags/')}}"+'/'+image_name.toLowerCase();
                 html +='<div class="col s6 m4 l2">';
                 html +='<div class="flag_img export-destination-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<img src="'+image+'" alt="">';
                 html +='</div>';
-                html +='<h5>'+exportDestinations[i].title+'</h5>';
+                html +='<h5>'+exportDestinations[i].country.name+'</h5>';
                 html +='</div>';
                 $('.export-destination-block').append(html);
             }
@@ -1342,12 +1343,12 @@
             //append in form
             $('.export-destination-table-block tbody').children().empty();
                 var html='<tr>';
-                html +='<td data-title="Name"><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td data-title="Name" class="input-field"><select name="country_id[]"class="certificate-select2"><option value="" disabled selected>Choose your option</option>@foreach ($country as $key => $name)<option value="{{$key}}">{{$name}}</option>@endforeach</select></td>';
                 html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td data-title="Image"><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
                 html +='<tr>';
                 $('.export-destination-table-block  tbody').append(html);
+                selectRefresh();
         }
         else{
                 $('.export-destination-block').html(nohtml);
@@ -1417,13 +1418,14 @@
                                     $('.export-destination-block').html(nohtml);
                                     for(let i = 0;i < exportDestinations.length ;i++){
                                         var html='';
-                                        var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
+                                        var image_name=exportDestinations[i].country.code+'.png';
+                                        var image="{{asset('images/frontendimages/flags/')}}"+'/'+image_name.toLowerCase();
                                         html +='<div class="col s6 m4 l2">';
                                         html +='<div class="flag_img export-destination-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<img src="'+image+'" alt="">';
                                         html +='</div>';
-                                        html +='<h5>'+exportDestinations[i].title+'</h5>';
+                                        html +='<h5>'+exportDestinations[i].country.name+'</h5>';
                                         html +='</div>';
                                         $('.export-destination-block').append(html);
                                     }

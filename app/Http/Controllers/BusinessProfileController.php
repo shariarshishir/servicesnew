@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Events\NewBusinessProfileHasCreatedEvent;
+use App\Models\Country;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use stdClass;
 
@@ -193,7 +194,8 @@ class BusinessProfileController extends Controller
                 ->limit(4)
                 ->get();
             $default_certification=Certification::get();
-            return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification'));
+            $country=Country::pluck('name','id');
+            return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification','country'));
             }
             if($business_profile->business_type == 2){
 

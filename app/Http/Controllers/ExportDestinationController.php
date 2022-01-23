@@ -12,11 +12,12 @@ use App\Models\ExportDestination;
 class ExportDestinationController extends Controller
 {
     public function exportDestinationDetailsUpload(Request $request ){
-     
+
         $validator = Validator::make($request->all(), [
-            'title.*' => 'string|min:1|max:255',
-            'image.*' => 'image',
+            'country_id.*' => 'required',
             'short_description.*' => 'string|max:500',
+        ],[
+            'country_id.*.required' => 'The name field is required',
         ]);
         if ($validator->fails())
         {
@@ -26,32 +27,32 @@ class ExportDestinationController extends Controller
             400);
         }
         try{
-        
-            if(isset($request->title)){
-                if(count($request->title)>0){
-                    for($i=0; $i<count($request->title) ;$i++){
+
+            // if(isset($request->country_id)){
+                if(count($request->country_id)>0){
+                    for($i=0; $i<count($request->country_id) ;$i++){
                         $exportDestination=new ExportDestination();
-                        if ($request->hasFile('image'))
-                        {
-                            $filename = $request->image[$i]->store('images/export-destinations','public');
-                            $image_resize = Image::make(public_path('storage/'.$filename));
-                            $image_resize->save(public_path('storage/'.$filename));
-                        }
-                      
-                        $exportDestination->title=$request->title[$i];
-                        $exportDestination->image=$filename;
+                        // if ($request->hasFile('image'))
+                        // {
+                        //     $filename = $request->image[$i]->store('images/export-destinations','public');
+                        //     $image_resize = Image::make(public_path('storage/'.$filename));
+                        //     $image_resize->save(public_path('storage/'.$filename));
+                        // }
+
+                        $exportDestination->country_id=$request->country_id[$i];
+                        // $exportDestination->image=$filename;
                         $exportDestination->short_description=$request->short_description[$i];
                         $exportDestination->business_profile_id = $request->business_profile_id;
                         $exportDestination->created_by = Auth::user()->id;
                         $exportDestination->updated_by = NULL;
                         $exportDestination->save();
-                        
+
                     }
 
                 }
-            }
-            
-            $exportDestinations = ExportDestination::where('business_profile_id',$request->business_profile_id)->get();
+            // }
+
+            $exportDestinations = ExportDestination::with('country')->where('business_profile_id',$request->business_profile_id)->get();
             return response()->json([
                 'success' => true,
                 'message' => 'Export destination Added',
@@ -63,14 +64,14 @@ class ExportDestinationController extends Controller
                 'success' => false,
                 'error'   => ['error_line' => $e->getLine()],
             ],500);
-        }  
+        }
     }
     public function deleteExportDestination(Request $request){
         $exportDestination=ExportDestination::where('id',$request->id)->first();
         $businessId=$exportDestination->business_profile_id;
         $result=$exportDestination->delete();
         if($result){
-            $exportDestinations = ExportDestination::where('business_profile_id',$businessId)->get();
+            $exportDestinations = ExportDestination::with('country')->where('business_profile_id',$businessId)->get();
             return response()->json([
                 'success' => true,
                 'message' => 'Export destination deleted successfully',

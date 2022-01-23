@@ -183,7 +183,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
 											<div class="certificate_img">
@@ -195,7 +195,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@else
 											@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
 											<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ asset('storage/'.$certification_image_src) }}"><img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></a></div>
@@ -270,7 +270,7 @@
 						<!-- profile_product_wrap -->
 						<div class="factory_imgbox_wrap">
 							<h3>Factory Images</h3>
-							
+
 							@if(count($business_profile->companyFactoryTour)>0)
 								<div class="row top_titleWrap">
 									<div class="col s12 gallery_navbar">
@@ -330,8 +330,8 @@
 										<p>INFO : No data found.</p>
 									</div>
 								</div>
-							@endif							
-							
+							@endif
+
 						</div>
 						<!-- factory_images -->
 						<div class="main_buyers_wrap">
@@ -365,9 +365,9 @@
 									@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
 											<div class="flag_img export-destination-img">
-												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 											</div>
-											<h5>{{$exportDestination->title}}</h5>
+											<h5>{{$exportDestination->country->name}}</h5>
 										</div>
 									@endforeach
 								@else
@@ -654,7 +654,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@else
                                         @php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
 											<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
@@ -664,7 +664,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@endif
 									</div>
 									@endforeach
@@ -740,9 +740,9 @@
 										<div class="col s6 m4 l2">
 											<div class="flag_img export-destination-img">
 												<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 											</div>
-											<h5>{{$exportDestination->title}}</h5>
+											<h5>{{$exportDestination->country->name}}</h5>
 										</div>
 										@endforeach
 									@else
@@ -803,7 +803,7 @@
 											</tbody>
 										</table>
 									</div>
-									
+
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">

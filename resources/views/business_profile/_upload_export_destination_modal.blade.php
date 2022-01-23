@@ -159,6 +159,8 @@
       },
       error: function(xhr, status, error)
             {
+                $('.loading-message').html("");
+		        $('#loadingProgressContainer').hide();
                 $('#export-destination-upload-errors').empty();
                 $("#export-destination-upload-errors").append("<div class=''>"+error+"</div>");
                 $.each(xhr.responseJSON.error, function (key, item)
@@ -206,7 +208,7 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 var exportDestinations=response.exportDestinations;
-                                console.log(exportDestinations);
+                                //console.log(exportDestinations);
                                 var nohtml="";
                                 if(exportDestinations.length >0){
                                     $('.export-destination-block').html(nohtml);
@@ -238,6 +240,8 @@
                             },
                             error: function(xhr, status, error)
                             {
+                                $('.loading-message').html("");
+                                $('#loadingProgressContainer').hide();
                                 toastr.success(error);
                             }
                         });

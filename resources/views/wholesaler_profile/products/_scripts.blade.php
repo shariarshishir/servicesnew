@@ -204,6 +204,7 @@
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#errors').empty();
+                        $('#errors').show();
                         $("#errors").append("<li class='alert alert-danger'>"+error+"</li>");
                         $('.error-rm').html('');
                         $.each(xhr.responseJSON.error, function (key, item)
@@ -212,7 +213,7 @@
                                 priceBreakDownValidation(key, array_item);
                             });
 
-                            $('.'+key+'_error').html('*required');
+                            $('.'+key+'_error').html('required');
 
                             $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
                         });
@@ -224,12 +225,12 @@
             if(compareItem == 'lead'){
                 if(errorItem.split('_')[0] == compareItem){
                     var key = errorItem.split('.')[1];
-                    $('.'+compareItem+'_'+key+'_error').html('*required');
+                    $('.'+compareItem+'_'+key+'_error').html('required');
                 }
             }else{
                 if(errorItem.split('.')[0] == compareItem){
                     var key = errorItem.split('.')[1];
-                    $('.'+compareItem+'_'+key+'_error').html('*required');
+                    $('.'+compareItem+'_'+key+'_error').html('required');
                 }
             }
 
@@ -562,6 +563,7 @@
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#edit_errors').empty();
+                        $('#edit_errors').show();
                         $("#errors").append("<li class='alert alert-danger'>"+error+"</li>")
                         // $("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                         // $.each(xhr.responseJSON.error, function (key, item)
@@ -576,7 +578,7 @@
                             $.each(price_breakdown_array, function(k,array_item){
                                 priceBreakDownValidation(key, array_item);
                             });
-                            $('.'+key+'_error').html('*required');
+                            $('.'+key+'_error').html('required');
 
                             $("#edit_errors").append("<li class='alert alert-danger'>"+item+"</li>")
                         });

@@ -89,6 +89,7 @@
                 <span class="text-danger error-text error-msg login-error-msg" style="display: none;"></span>
                 <form method="POST" action="#">
                     @csrf
+                    <input type="hidden" name="fcm_token" id="fcm_token" value="">
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
@@ -398,8 +399,7 @@
 </script>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
 <script>
-    $('.signin').click(function (e) {
-        e.preventDefault();
+    $( document ).ready(function() {
         var firebaseConfig = {
             apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
             authDomain: "merchant-bay-service.firebaseapp.com",
@@ -420,39 +420,15 @@
         
         const messaging = firebase.messaging();
         
+        
         messaging.requestPermission()
             .then(function () {
                 return messaging.getToken()
             })
             .then(function (fcm_token) {
                 var fcm_token = fcm_token;
-                var email = $('#email_login').val();
-                var password=$('#password_login').val();
-                var remember =$(this).closest('#login-register-modal').find('input[name="remember"]').prop('checked');
-                $.ajax({
-                    url: "{{route('users.login')}}",
-                    type: "POST",
-                    data: {"email": email, "password": password ,"fcm_token":fcm_token, "remember": remember, "_token": "{{ csrf_token() }}"},
-                    success: function (data) {
-                            if($.isEmptyObject(data.error)){
-                            if(data.msg){
-                                //$('.error-msg').show().text(data.msg);
-                                // alert(data.msg);
-                                $('#email_login').addClass('invalid');
-                                $('#password_login').addClass('invalid');
-                            }
-                            else{
-                                //console.log(data);
-                                var url = '{{ route("users.profile") }}';
-                                window.location.href=url;
-                            }
-
-                            }
-                            else{
-                                printErrorMsg(data.error);
-                            }
-                    }
-                });
+                $("#fcm_token").val(fcm_token);
+               
             }).catch(function (error) {
                 alert(error);
             });
@@ -463,14 +439,52 @@
           $('.'+key+'_err').text(value);
         });
     }
-     messaging.onMessage(function(payload) {
-        const noteTitle = payload.notification.title;
-        const noteOptions = {
-            body: payload.notification.body,
-            icon: payload.notification.icon,
-        };
-        new Notification(noteTitle, noteOptions);
+    messaging.onMessage(function(payload) {
+    const noteTitle = payload.notification.title;
+    const noteOptions = {
+        body: payload.notification.body,
+        icon: payload.notification.icon,
+    };
+    new Notification(noteTitle, noteOptions);
+});
+</script>
+
+<script>
+    $('.signin').click(function (e) {
+        e.preventDefault();
+        var email = $('#email_login').val();
+        var password=$('#password_login').val();
+        var fcm_token=$('#fcm_token').val();
+        var remember =$(this).closest('#login-register-modal').find('input[name="remember"]').prop('checked');
+        $.ajax({
+            url: "{{route('users.login')}}",
+            type: "POST",
+            data: {"email": email, "password": password ,"fcm_token":fcm_token, "remember": remember, "_token": "{{ csrf_token() }}"},
+            success: function (data) {
+                    if($.isEmptyObject(data.error)){
+                       if(data.msg){
+                        //$('.error-msg').show().text(data.msg);
+                        // alert(data.msg);
+                        $('#email_login').addClass('invalid');
+                        $('#password_login').addClass('invalid');
+                       }
+                       else{
+                          //console.log(data);
+                        var url = '{{ route("users.profile") }}';
+                        window.location.href=url;
+                       }
+                    }
+                    else{
+                        printErrorMsg(data.error);
+                    }
+            }
+        });
     });
+    function printErrorMsg (msg) {
+        $.each( msg, function( key, value ) {
+          $('.'+key+'_err').text(value);
+        });
+    }
 </script>
 <script>
     // @if(Session::has('success'))

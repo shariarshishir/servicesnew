@@ -276,7 +276,7 @@ class BusinessProfileController extends Controller
 
     }
 
-    public function capacityAndMachineriesCreateOrUpdate(Request $request){
+   /* public function capacityAndMachineriesCreateOrUpdate(Request $request){
         $validator = Validator::make($request->all(), [
             'machine_type.*' => 'required_with:annual_capacity|string|min:1|max:255',
             'annual_capacity.*' => 'required_with:machine_type|integer',
@@ -377,8 +377,124 @@ class BusinessProfileController extends Controller
 
         }
 
+    }*/
+
+    public function categoriesProducedCreateOrUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'type.*' => 'required_with:percentage|string|min:1|max:255',
+            'percentage.*' => 'required_with:type|integer',
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        try{
+
+
+            $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->delete();
+            if(isset($request->type)){
+                $noOftype=count($request->type);
+                if($noOftype>0){
+                    for($i=0;$i<$noOftype; $i++){
+                        $categoriesProduced  =  new CategoriesProduced();
+                        $categoriesProduced->type = $request->type[$i];
+                        $categoriesProduced->percentage = $request->percentage[$i];
+                        $categoriesProduced->business_profile_id = $request->business_profile_id;
+                        $categoriesProduced->status = 0;
+                        $categoriesProduced->created_by = Auth::user()->id;
+                        $categoriesProduced->updated_by = NULL;
+                        $categoriesProduced->save();
+                    }
+                }
+
+            }
+
+            $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->categories_produced = 0 ;
+                $businessProfileVerification->save();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Categories Produceds information Updated',
+                'categoriesProduceds'=>$categoriesProduceds,
+
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['msg' => $e->getLine()],
+            ],500);
+
+        }
     }
 
+
+    public function machineryDetailsCreateOrUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'machine_name.*' =>'required_with:quantity|string|min:1|max:255',
+            'quantity.*' => 'required_with:machine_name|integer'
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        try{
+
+            $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->delete();
+
+            if(isset($request->machine_name)){
+                $noOfMachineName=count($request->machine_name);
+                if($noOfMachineName>0){
+                    for($i=0; $i<$noOfMachineName ;$i++){
+
+                        $machineriesDetail   =  new MachineriesDetail();
+                        $machineriesDetail->machine_name = $request->machine_name[$i];
+                        $machineriesDetail->quantity = $request->quantity[$i];
+                        $machineriesDetail->business_profile_id = $request->business_profile_id;
+                        $machineriesDetail->status = 0;
+                        $machineriesDetail->created_by = Auth::user()->id;
+                        $machineriesDetail->updated_by = NULL;
+                        $machineriesDetail->save();
+                    }
+
+                }
+            }
+
+            $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->machinery_details = 0 ;
+                $businessProfileVerification->save();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Machineries information Updated',
+                'machineriesDetails'=>$machineriesDetails,
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['msg' => $e->getLine()],
+            ],500);
+
+        }
+    }
     public function termsOfServiceCreateOrUpdate(Request $request){
 
         try{

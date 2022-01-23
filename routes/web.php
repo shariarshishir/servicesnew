@@ -188,7 +188,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
-    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
+    //Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
+    Route::post('/categories-produced-create-or-update', [BusinessProfileController::class, 'categoriesProducedCreateOrUpdate'])->name('categories.produced.create-or-update');
+    Route::post('/machinery-details-create-or-update', [BusinessProfileController::class, 'machineryDetailsCreateOrUpdate'])->name('machinery.details.create-or-update');
 
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
 
@@ -435,7 +437,11 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
         Route::get('user/business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
         Route::post('user/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
-        Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
+        // Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
+
+        Route::post('user/business/profile/ctegories-produced/verify',[AdminBusinessProfileController::class, 'ctegoriesProducedInformationVerify'])->name('ctegories.produced.verify');
+        Route::post('user/business/profile/machinaries-details/verify',[AdminBusinessProfileController::class, 'machinariesDetailsInformationVerify'])->name('machinaries.details.verify');
+
         Route::post('user/business/profile/capacity-terms/verify',[AdminBusinessProfileController::class, 'businessTermsInformationVerify'])->name('business.terms.verify');
         Route::post('user/business/profile/samplings/verify',[AdminBusinessProfileController::class, 'samplingsInformationVerify'])->name('samplings.verify');
         Route::post('user/business/profile/special-customization/verify',[AdminBusinessProfileController::class, 'specialCustomizationInformationVerify'])->name('special.customizations.verify');

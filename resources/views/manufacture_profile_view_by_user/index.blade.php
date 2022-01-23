@@ -358,14 +358,13 @@
 							</div>
 						</div>
                         {{-- capacity and mechineries --}}
-                        @if(count($business_profile->categoriesProduceds)>0 || count($business_profile->machineriesDetails) >0 )
-                            <div>
+
                                 <div class="overview_table_wrap capacity_machineries">
-                                    <div class="row top_titleWrap">
+                                    {{-- <div class="row top_titleWrap">
                                         <div class="col s6 m6">
                                             <h3>Capacity and Machineries</h3>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row capacity_table">
 
                                         <!-- <div class="col s12 m6">
@@ -407,7 +406,7 @@
                                         </div> -->
                                         @if(count($business_profile->categoriesProduceds)>0)
                                             <div class="col s12 m12">
-                                                <h4>Categories Produced</h4>
+                                                <h3>Categories Produced</h3>
                                                 <div class="categories_produced_wrapper">
                                                     <div class="overview_table box_shadow">
 														<div class="no_more_tables">
@@ -442,7 +441,7 @@
                                 </div>
                                 @if(count($business_profile->machineriesDetails)>0)
                                     <div class="overview_table_wrap machinery_table">
-                                        <h4>Machinery Details</h4>
+                                        <h3>Machinery Details</h3>
                                         <div class="machinery_table_inner_wrap">
                                             <div class="overview_table box_shadow">
 												<div class="no_more_tables">
@@ -473,8 +472,8 @@
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-                        @endif
+
+
 
                         @if(count($business_profile->productionFlowAndManpowers)>0)
                             <div class="overview_table_wrap">

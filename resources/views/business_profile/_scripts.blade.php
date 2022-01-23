@@ -572,203 +572,180 @@
         $(el).parent().parent().remove();
     }
 
-    //submit form  FOR CAPACITY AND MECHINERIES
-    $('#capacity-machinaries-form').on('submit',function(e){
-    e.preventDefault();
-    $.ajax({
-      url: '{{ route("capacity-and-machineries.create-or-update")}}' ,
-      type:"POST",
-      data: $('#capacity-machinaries-form').serialize(),
-      beforeSend: function() {
-        $('.loading-message').html("Please Wait.");
-        $('#loadingProgressContainer').show();
-      },
-      success:function(response){
-        $('.loading-message').html("");
-        $('#loadingProgressContainer').hide();
-        $('#capacity-machineries-errors').empty();
-        var machineriesDetails=response.machineriesDetails;
-        var categoriesProduceds=response.categoriesProduceds;
-        var productionCapacities=response.productionCapacities;
+    //Add and remove row for production-flow-and-manpower dynamically
 
-        var nohtml="";
-        if(machineriesDetails.length >0){
-            $('.machinery_table_inner_wrap').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<thead>';
-            html +='<tr>';
-            html +='<th>Machine Name</th>';
-            html +='<th>Quantity</th>';
-            html +='<th>&nbsp;</th>';
-            html +='</tr>';
-            html +='</thead>';
-            html +='<tbody class="machinaries-details-table-body">';
+    //categories produced submit form
+    $('#categorires-produced-form').on('submit',function(e){
+            e.preventDefault();
+            $.ajax({
+            url: '{{ route("categories.produced.create-or-update")}}' ,
+            type:"POST",
+            data: $('#categorires-produced-form').serialize(),
+            beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+            },
+            success:function(response){
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                $('#categorires-produced-errors').empty();
 
-            for(let i=0;i<machineriesDetails.length ;i++){
-                html += '<tr>';
-                html += '<td>'+machineriesDetails[i].machine_name+'</td>';
-                html += '<td>'+machineriesDetails[i].quantity+'</td>';
-                if(machineriesDetails[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                var categoriesProduceds=response.categoriesProduceds;
+                var nohtml="";
+                if(categoriesProduceds.length >0){
+                    $('.categories_produced_wrapper').html(nohtml);
+                    var  html ='<div class="overview_table box_shadow">';
+                    html +='<table>';
+                    html +='<thead>';
+                    html +='<tr>';
+                    html +='<th>Type</th>';
+                    html +='<th>Percentage</th>';
+                    html +='<th>&nbsp;</th>';
+                    html +='</tr>';
+                    html +='</thead>';
+                    html +='<tbody class="categories-produced-table-body">';
+
+                    for(let i=0;i<categoriesProduceds.length ;i++){
+                        html += '<tr>';
+                        html += '<td>'+categoriesProduceds[i].type+'</td>';
+                        html += '<td>'+categoriesProduceds[i].percentage+'</td>';
+                        if(categoriesProduceds[i].status==1)
+                        html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                        else{
+                        html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                        }
+                        html += '</tr>';
+                    }
+
+                    html+='</tbody>';
+                    html +='</table>';
+                    html +='</div>';
+                    $('.categories_produced_wrapper').append(html);
+
+                }else{
+
+                    $('.categories_produced_wrapper').html(nohtml);
+                    var html='';
+                    html +='<div class="card-alert card cyan lighten-5">';
+                    html +='<div class="card-content cyan-text">';
+                    html +='<p>INFO : No data found.</p>';
+                    html +='</div>';
+                    $('.categories_produced_wrapper').append(html);
+
+                    //append in form
+                    $('.categories-produced-table-block tbody').children().empty();
+                    var html='  <tr id="categories-produced-table-no-data">';
+                        html +='<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
+                        html +='<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
+                        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                        html +='</tr>';
+                        $('.categories-produced-table-block tbody').append(html);
                 }
-                html += '</tr>';
 
-            }
-            html+='</tbody>';
-            html +='</table>';
-            html +='</div>';
-            $('.machinery_table_inner_wrap').append(html);
-        }
-        else{
-            //append in table
-            $('.machinery_table_inner_wrap').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.machinery_table_inner_wrap').append(html);
+                $('#categorires-produced-modal').modal('close');
+                swal("Done!", response.message,"success");
+            },
+            error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $('#categorires-produced-errors').empty();
+                        $("#categorires-produced-errors").append("<div class=''>"+error+"</div>");
+                        $.each(xhr.responseJSON.error, function (key, item)
+                        {
+                            $("#categorires-produced-errors").append("<div class='danger'>"+item+"</div>");
+                        });
+                    }
+            });
+    });
 
-            //append in form
-            $('.machinaries-details-table-block tbody').children().empty();
-            var html='<tr id="production-capacity-table-no-data">';
-                html +='<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
-                html +='<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+    //machinery details submit form
+    $('#machinery-details-form').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+        url: '{{ route("machinery.details.create-or-update")}}' ,
+        type:"POST",
+        data: $('#machinery-details-form').serialize(),
+        beforeSend: function() {
+            $('.loading-message').html("Please Wait.");
+            $('#loadingProgressContainer').show();
+        },
+        success:function(response){
+            $('.loading-message').html("");
+            $('#loadingProgressContainer').hide();
+            $('#machinery-details-errors').empty();
+            var machineriesDetails=response.machineriesDetails;
+            var nohtml="";
+            if(machineriesDetails.length >0){
+                $('.machinery_table_inner_wrap').html(nohtml);
+                var  html ='<div class="overview_table box_shadow">';
+                html +='<table>';
+                html +='<thead>';
+                html +='<tr>';
+                html +='<th>Machine Name</th>';
+                html +='<th>Quantity</th>';
+                html +='<th>&nbsp;</th>';
                 html +='</tr>';
-                $('.machinaries-details-table-block tbody').append(html);
-        }
+                html +='</thead>';
+                html +='<tbody class="machinaries-details-table-body">';
 
-        var nohtml="";
-        if(categoriesProduceds.length >0){
-            $('.categories_produced_wrapper').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<thead>';
-            html +='<tr>';
-            html +='<th>Type</th>';
-            html +='<th>Percentage</th>';
-            html +='<th>&nbsp;</th>';
-            html +='</tr>';
-            html +='</thead>';
-            html +='<tbody class="categories-produced-table-body">';
+                for(let i=0;i<machineriesDetails.length ;i++){
+                    html += '<tr>';
+                    html += '<td>'+machineriesDetails[i].machine_name+'</td>';
+                    html += '<td>'+machineriesDetails[i].quantity+'</td>';
+                    if(machineriesDetails[i].status==1)
+                    html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                    else{
+                    html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                    }
+                    html += '</tr>';
 
-            for(let i=0;i<categoriesProduceds.length ;i++){
-                html += '<tr>';
-                html += '<td>'+categoriesProduceds[i].type+'</td>';
-                html += '<td>'+categoriesProduceds[i].percentage+'</td>';
-                if(categoriesProduceds[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
-                html += '</tr>';
+                html+='</tbody>';
+                html +='</table>';
+                html +='</div>';
+                $('.machinery_table_inner_wrap').append(html);
+            }
+            else{
+                //append in table
+                $('.machinery_table_inner_wrap').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.machinery_table_inner_wrap').append(html);
+
+                //append in form
+                $('.machinaries-details-table-block tbody').children().empty();
+                var html='<tr id="production-capacity-table-no-data">';
+                    html +='<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
+                    html +='<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
+                    html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                    html +='</tr>';
+                    $('.machinaries-details-table-block tbody').append(html);
             }
 
-            html+='</tbody>';
-            html +='</table>';
-            html +='</div>';
-            $('.categories_produced_wrapper').append(html);
-
-        }else{
-
-            $('.categories_produced_wrapper').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.categories_produced_wrapper').append(html);
-
-            //append in form
-            $('.categories-produced-table-block tbody').children().empty();
-            var html='  <tr id="categories-produced-table-no-data">';
-                html +='<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
-                html +='<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
-                html +='</tr>';
-                $('.categories-produced-table-block tbody').append(html);
-        }
 
 
-        // var nohtml="";
-        // if(productionCapacities.length >0){
-        //     $('.production-capacity-wrapper').html(nohtml);
-        //     var  html ='<div class="overview_table box_shadow">';
-        //     html +='<table>';
-        //     html +='<thead>';
-        //     html +='<tr>';
-        //     html +='<th>Machine Type</th>';
-        //     html +='<th>Annual Capacity</th>';
-        //     html +='<th>&nbsp;</th>';
-        //     html +='</tr>';
-        //     html +='</thead>';
-        //     html +='<tbody class="production-capacity-table-body">';
-
-        //     for(let i=0;i<productionCapacities.length ;i++){
-        //         html += '<tr>';
-        //         html += '<td>'+productionCapacities[i].machine_type+'</td>';
-        //         html += '<td>'+productionCapacities[i].annual_capacity+'</td>';
-        //         if(productionCapacities[i].status==1)
-        //         html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-        //         else{
-        //         html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
-        //         }
-        //         html += '</tr>';
-
-        //     }
-        //     html+='</tbody>';
-        //     html +='</table>';
-		// 	html +='</div>';
-        //     $('.production-capacity-wrapper').append(html);
-        // }else{
-        //     //append in table
-        //     // $('.production-capacity-table-body').children().empty();
-        //     // var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
-        //     // $('.production-capacity-table-body').append(html);
-
-        //     $('.production-capacity-wrapper').html(nohtml);
-        //     var html='';
-        //     html +='<div class="card-alert card cyan lighten-5">';
-        //     html +='<div class="card-content cyan-text">';
-        //     html +='<p>INFO : No data found.</p>';
-        //     html +='</div>';
-        //     $('.production-capacity-wrapper').append(html);
-
-        //     //append in form
-        //     $('.production-capacity-table-block tbody').children().empty();
-        //     var html='  <tr id="production-capacity-table-no-data">';
-        //         html +='<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>';
-        //         html +='<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>';
-        //         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-        //         html +='</tr>';
-        //         $('.production-capacity-table-block tbody').append(html);
-        // }
-
-
-
-        $('#capacity-and-machineries-modal').modal('close');
-        swal("Done!", response.message,"success");
-      },
-      error: function(xhr, status, error)
-            {
-                $('#capacity-machineries-errors').empty();
-                $("#capacity-machineries-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
+            $('#machinery-details-modal').modal('close');
+            swal("Done!", response.message,"success");
+        },
+        error: function(xhr, status, error)
                 {
-                    $("#capacity-machineries-errors").append("<div class='danger'>"+item+"</div>");
-                });
-            }
-      });
+                    $('.loading-message').html("");
+                    $('#loadingProgressContainer').hide();
+                    $('#machinery-details-errors').empty();
+                    $("#machinery-details-errors").append("<div class=''>"+error+"</div>");
+                    $.each(xhr.responseJSON.error, function (key, item)
+                    {
+                        $("#machinery-details-errors").append("<div class='danger'>"+item+"</div>");
+                    });
+                }
+        });
     });
 
 
-
-
-    //Add and remove row for production-flow-and-manpower dynamically
 
     function addProductionFlowAndManpower()
     {

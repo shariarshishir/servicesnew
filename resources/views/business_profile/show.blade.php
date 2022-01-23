@@ -419,13 +419,14 @@
 							</div>
 						</div>
 						<div class="overview_table_wrap capacity_machineries">
-							<div class="row top_titleWrap">
+
+                            <div class="row top_titleWrap">
 								<div class="col s9 m7">
-									<h3>Capacity and Machineries</h3>
+									<h3>Categories Produced</h3>
 								</div>
 								@if(Auth::check())
 								<div class="col s3 m5 right-align editBox">
-									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
+									<button type="button" data-target="categorires-produced-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
 									</button>
@@ -473,7 +474,6 @@
 								</div> -->
 
 								<div class="col s12 m12">
-									<h4>Categories Produced</h4>
 									<div class="categories_produced_wrapper">
 										@if(count($business_profile->categoriesProduceds)>0)
 										<div class="overview_table box_shadow">
@@ -514,8 +514,21 @@
 							</div>
 						</div>
 
+
+                        <div class="row top_titleWrap">
+                            <div class="col s9 m7">
+                                <h3>Machinery Details</h3>
+                            </div>
+                            @if(Auth::check())
+                            <div class="col s3 m5 right-align editBox">
+                                <button type="button" data-target="machinery-details-modal" class="btn_edit btn_green_White modal-trigger">
+                                    <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                                    <span class="btn_edit_white"> Edit</span>
+                                </button>
+                            </div>
+                            @endif
+						</div>
 						<div class="overview_table_wrap machinery_table">
-							<h4>Machinery Details</h4>
 							<div class="machinery_table_inner_wrap">
 								@if(count($business_profile->machineriesDetails)>0)
 								<div class="overview_table box_shadow">
@@ -1732,6 +1745,8 @@
 	@include('business_profile._add_factory_tour_modal')
 	@include('business_profile._edit_factory_tour_modal')
 	@include('business_profile._create_or_update_terms_of_service_modal')
+    @include('business_profile._edit_categories_produced')
+    @include('business_profile._edit_machinery_details')
 @endsection
 
 @include('business_profile._scripts')

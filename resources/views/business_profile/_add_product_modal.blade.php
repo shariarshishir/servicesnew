@@ -283,7 +283,7 @@
                         </div>
                     </div>
 
-                    <div id="manufacture-product-upload-errors" class="validaiton-errors"></div>
+                    <div id="manufacture-product-upload-errors" class="validaiton-errors" style="display: none;"></div>
 
                     <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>

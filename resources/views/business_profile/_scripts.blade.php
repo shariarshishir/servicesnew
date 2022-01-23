@@ -344,12 +344,13 @@
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#manufacture-product-upload-errors').empty();
+                            $('#manufacture-product-upload-errors').show();
                             //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                             $("#manufacture-product-upload-errors").append("<div class=''>"+error+"</div>");
                             $('.rm-error').html('');
                             $.each(xhr.responseJSON.error, function (key, item)
                             {
-                                $('.'+key+'_error').html('*required');
+                                $('.'+key+'_error').html('required');
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                 $("#manufacture-product-upload-errors").append("<div class=''>"+item+"</div>");
 
@@ -458,12 +459,13 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#manufacture-update-errors').empty();
+                                $('#manufacture-update-errors').show();
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                                 $("#manufacture-update-errors").append("<div class=''>"+error+"</div>");
                                 $('.rm-error').html('');
                                 $.each(xhr.responseJSON.error, function (key, item)
                                 {
-                                    $('.'+key+'_error').html('*required');
+                                    $('.'+key+'_error').html('required');
                                     //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                     $("#manufacture-update-errors").append("<div class=''>"+item+"</div>");
 

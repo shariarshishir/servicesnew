@@ -15,7 +15,7 @@ class ExportDestinationController extends Controller
 
         $validator = Validator::make($request->all(), [
             'country_id.*' => 'required',
-            'short_description.*' => 'string|max:500',
+            'short_description.*' => 'string|max:500|nullable',
         ],[
             'country_id.*.required' => 'The name field is required',
         ]);

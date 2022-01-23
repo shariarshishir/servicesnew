@@ -1765,6 +1765,7 @@ input[type=number]:not(.browser-default):disabled {
     /* width: 200px; */
     height: auto;
     vertical-align: middle;
+    text-align: center;
 }
 .profile_tabNav_wrap .pr_highlights_wrap .paper_img .press_img img {
     width: auto;
@@ -5224,13 +5225,18 @@ input.input-field[type=text]:not(.browser-default) {
     position: relative;
 }
 .profile_tabNav_wrap a.remove-association-membership,
-.profile_tabNav_wrap a.remove-press-highlight,
 .profile_tabNav_wrap a.remove-main-buyer,
 .profile_tabNav_wrap a.remove-certificate {
     display: block;
     position: absolute;
     top: 5px;
     right: 0;
+}
+.profile_tabNav_wrap a.remove-press-highlight {
+    display: block;
+    position: absolute;
+    top: -30px;
+    right: 0;    
 }
 .profile_tabNav_wrap a.remove-certificate {
     right: 27px;

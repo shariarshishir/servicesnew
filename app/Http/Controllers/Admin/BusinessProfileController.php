@@ -71,12 +71,12 @@ class BusinessProfileController extends Controller
                 $businessProfileVerification->save();
             }
         }
-        
+
         return redirect()->back()->with('success', 'company overview updated');
     }
-    public function capacityAndMachineriesInformationVerify(Request $request)
+    /*public function capacityAndMachineriesInformationVerify(Request $request)
     {
-        
+
         $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->delete();
         $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->delete();
         // $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->delete();
@@ -93,7 +93,7 @@ class BusinessProfileController extends Controller
         //         }
         //     }
         // }
-       
+
 
 
         if(isset($request->type)){
@@ -110,7 +110,7 @@ class BusinessProfileController extends Controller
             }
 
         }
-        
+
         if(isset($request->machine_name)){
             $noOfMachineName=count($request->machine_name);
             if($noOfMachineName>0){
@@ -126,12 +126,12 @@ class BusinessProfileController extends Controller
 
             }
         }
-        
+
         $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
         $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
         // $productionCapacities = ProductionCapacity::where('business_profile_id',$request->business_profile_id)->get();
         $machineriesDetailsVerified = 0;
-      
+
         foreach($machineriesDetails as $machineriesDetail){
             if($machineriesDetail->status == 1){
                 $machineriesDetailsVerified = 1;
@@ -142,8 +142,8 @@ class BusinessProfileController extends Controller
             }
 
         }
-        
-       
+
+
         $categoriesProducedsVerified = 0;
         foreach($categoriesProduceds as $categoriesProduceds){
             if($categoriesProduceds->status == 1){
@@ -155,7 +155,7 @@ class BusinessProfileController extends Controller
             }
 
         }
-       
+
         // $productionCapacitiesVerified = 0;
         // foreach($productionCapacities as $productionCapacity){
         //     if($productionCapacity->status == 1){
@@ -167,40 +167,116 @@ class BusinessProfileController extends Controller
         //     }
 
         // }
-        if( ($machineriesDetailsVerified == 1) && ( $categoriesProducedsVerified == 1)){
+        if($machineriesDetailsVerified == 1){
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
             if( $businessProfileVerification ){
-                $businessProfileVerification->capacity_and_machineries = 1;
+                $businessProfileVerification->machinery_details = 1;
                 $businessProfileVerification->save();
             }
             else{
                 $businessProfileVerification =new BusinessProfileVerification();
                 $businessProfileVerification->business_profile_id = $request->business_profile_id;
-                $businessProfileVerification->capacity_and_machineries = 1;
+                $businessProfileVerification->machinery_details = 1;
                 $businessProfileVerification->save();
             }
         }
-        else{
+        if( $categoriesProducedsVerified == 1){
                 $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
                 if( $businessProfileVerification ){
-                    $businessProfileVerification->capacity_and_machineries = 0;
+                    $businessProfileVerification->categories_produced = 1;
                     $businessProfileVerification->save();
                 }
                 else{
                     $businessProfileVerification =new BusinessProfileVerification();
                     $businessProfileVerification->business_profile_id = $request->business_profile_id;
-                    $businessProfileVerification->capacity_and_machineries = 0;
+                    $businessProfileVerification->categories_produced = 1;
                     $businessProfileVerification->save();
                 }
 
             }
         return redirect()->back()->with('success', 'capacity and machineries information  updated');
+    }*/
+
+    public function ctegoriesProducedInformationVerify(Request $request)
+    {
+
+        foreach($request->categories_produced_id as $id){
+            $categoriesProduceds = CategoriesProduced::where('id',$id)->update(['status' => $request->categories_produced_status[$id]]);
+        }
+
+        $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
+
+        $categoriesProducedsVerified = 0;
+        foreach($categoriesProduceds as $categoriesProduceds){
+            if($categoriesProduceds->status == 1){
+                $categoriesProducedsVerified = 1;
+            }
+            else{
+                $categoriesProducedsVerified = 0;
+                break;
+            }
+
+        }
+
+        if( $categoriesProducedsVerified == 1){
+                $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+                if( $businessProfileVerification ){
+                    $businessProfileVerification->categories_produced = 1;
+                    $businessProfileVerification->save();
+                }
+                else{
+                    $businessProfileVerification =new BusinessProfileVerification();
+                    $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                    $businessProfileVerification->categories_produced = 1;
+                    $businessProfileVerification->save();
+                }
+
+            }
+        return redirect()->back()->with('success', 'Categories Produceds information  updated');
+    }
+
+    public function machinariesDetailsInformationVerify(Request $request)
+    {
+        foreach($request->machineries_detail_id as $id){
+            $machineriesDetails = MachineriesDetail::where('id',$id)->update(['status' => $request->machineries_detail_status[$id]]);
+        }
+
+        $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
+        $machineriesDetailsVerified = 0;
+
+        foreach($machineriesDetails as $machineriesDetail){
+            if($machineriesDetail->status == 1){
+                $machineriesDetailsVerified = 1;
+            }
+            else{
+                $machineriesDetailsVerified = 0;
+                break;
+            }
+
+        }
+
+
+        if($machineriesDetailsVerified == 1){
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
+            if( $businessProfileVerification ){
+                $businessProfileVerification->machinery_details = 1;
+                $businessProfileVerification->save();
+            }
+            else{
+                $businessProfileVerification =new BusinessProfileVerification();
+                $businessProfileVerification->business_profile_id = $request->business_profile_id;
+                $businessProfileVerification->machinery_details = 1;
+                $businessProfileVerification->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Machineries details information  updated');
     }
 
 
     public function businessTermsInformationVerify(Request $request)
     {
-        
+
         $result = BusinessTerm::where('business_profile_id',$request->business_profile_id)->delete();
         if(isset($request->business_term_title)){
             $noOfBusinessTermTitle=count($request->business_term_title);
@@ -229,7 +305,7 @@ class BusinessProfileController extends Controller
                 break;
             }
         }
-       
+
         if($flag==1){
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
             if( $businessProfileVerification ){
@@ -261,7 +337,7 @@ class BusinessProfileController extends Controller
 
     public function samplingsInformationVerify(Request $request)
     {
-        
+
         $result = Sampling::where('business_profile_id',$request->business_profile_id)->delete();
         if(isset($request->sampling_title)){
             $noOfSamplingTitle=count($request->sampling_title);
@@ -323,7 +399,7 @@ class BusinessProfileController extends Controller
 
     public function specialCustomizationInformationVerify(Request $request)
     {
-        
+
         $result = SpecialCustomization::where('business_profile_id',$request->business_profile_id)->delete();
         if(isset($request->special_customization_title)){
             $noOfSpecialCustomizationTitle=count($request->special_customization_title);
@@ -397,7 +473,7 @@ class BusinessProfileController extends Controller
         }
 
         $sustainabilityCommitments = SustainabilityCommitment::where('business_profile_id',$request->business_profile_id)->get();
-       
+
         $flag = 0;
         foreach($sustainabilityCommitments as $sustainabilityCommitment){
             if($sustainabilityCommitment->status == 1){
@@ -409,7 +485,7 @@ class BusinessProfileController extends Controller
                 break;
             }
         }
-        
+
 
         if($flag == 1){
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
@@ -443,11 +519,11 @@ class BusinessProfileController extends Controller
 
 
     public function productionflowAndManpowerInformationVerify(Request $request){
-        
+
         $productionFlowAndManpowers = ProductionFlowAndManpower::where('business_profile_id',$request->business_profile_id)->delete();
         if(isset($request->production_type)){
             if(count($request->production_type)>0){
-               
+
                 for($i=0; $i < count($request->production_type); $i++){
 
 
@@ -464,8 +540,8 @@ class BusinessProfileController extends Controller
                         }
                     }
                     $jacquardMachines->value=$request->no_of_jacquard_machines[$i];
-           
-            
+
+
 
                     //manpower object
                     $manpowerStatusArray=[];
@@ -480,7 +556,7 @@ class BusinessProfileController extends Controller
                             $manpower->status=$status;
                         }
                     }
-          
+
                     //daily Capacity object
                     $dailyCapacityStatusArray=[];
                     foreach($request->daily_capacity_status as $key=>$status){
@@ -498,7 +574,7 @@ class BusinessProfileController extends Controller
                     //push all object into array
                     $flowAndManpowerArray=[];
                     array_push($flowAndManpowerArray,$jacquardMachines,$manpower,$dailyCapacity);
-        
+
                     $productionFlowAndManpower=new ProductionFlowAndManpower;
                     $productionFlowAndManpower->production_type=$request->production_type[$i];
                     $productionFlowAndManpower->flow_and_manpower=json_encode($flowAndManpowerArray);
@@ -510,9 +586,9 @@ class BusinessProfileController extends Controller
                 $productionFlowAndManpowers = ProductionFlowAndManpower::where('business_profile_id',$request->business_profile_id)->get();
                 $flag = 0 ;
                 foreach($productionFlowAndManpowers as $productionFlowAndManpower){
-                   
+
                     foreach(json_decode($productionFlowAndManpower->flow_and_manpower) as $flow_and_manpower){
-                      
+
                         if($flow_and_manpower->status == "1"){
                             $flag = 1;
                         }
@@ -522,7 +598,7 @@ class BusinessProfileController extends Controller
                         }
                     }
                 }
-               
+
                 if($flag==1){
                     $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id)->first();
                     if( $businessProfileVerification ){
@@ -552,20 +628,20 @@ class BusinessProfileController extends Controller
 
             }
         }
-        
+
         $productionFlowAndManpowers = ProductionFlowAndManpower::where('business_profile_id',$request->business_profile_id)->get();
         return redirect()->back()->with('success', 'ProductionFlow And Manpower information  updated');
     }
 
     public function walfareInformationVerify(Request $request){
         $walfare = Walfare::where('business_profile_id',$request->business_profile_id)->delete();
-            
+
             $walfareArray=[];
             $healthcareFacility = new stdClass();
             $healthcareFacility->name='healthcare_facility';
             $healthcareFacility->checked=$request->healthcare_facility;
             $healthcareFacility->status=$request->healthcare_facility_status;
-            
+
             $dayCare = new stdClass();
             $dayCare->name='day_care';
             $dayCare->checked=$request->day_care;
@@ -592,26 +668,26 @@ class BusinessProfileController extends Controller
             $socialWork->status=$request->social_work_status;
 
             array_push($walfareArray,$healthcareFacility,$dayCare,$doctor,$maternityLeave,$playground,$socialWork);
-            
+
             $walfare = new Walfare();
             $walfare->walfare_and_csr=json_encode($walfareArray);
             $walfare->business_profile_id = $request->business_profile_id;
             $walfare->save();
-            
+
             $walfare = Walfare::where('business_profile_id',$request->business_profile_id)->first();
             return redirect()->back()->with('success', 'Worker walfare information  updated');
-    } 
+    }
 
     public function securityInformationVerify(Request $request){
-            
+
         $security = Security::where('business_profile_id',$request->business_profile_id)->delete();
-            
+
         $securityArray=[];
         $fireExit = new stdClass();
         $fireExit->name='fire_exit';
         $fireExit->checked=$request->fire_exit;
         $fireExit->status=$request->fire_exit_status;
-        
+
         $fireHydrant = new stdClass();
         $fireHydrant->name='fire_hydrant';
         $fireHydrant->checked=$request->fire_hydrant;
@@ -628,19 +704,19 @@ class BusinessProfileController extends Controller
         $protocols->status=$request->water_source_status;
 
         array_push($securityArray,$fireExit,$fireHydrant,$waterSource,$protocols);
-        
+
         $security = new Security();
         $security->security_and_others=json_encode($securityArray);
         $security->business_profile_id = $request->business_profile_id;
         $security->save();
-                    
+
         $security = Security::where('business_profile_id',$request->business_profile_id)->first();
         return redirect()->back()->with('success', 'Worker walfare information  updated');
-    } 
+    }
 
     public function verifyBusinessProfile(Request $request) {
         //dd($request->verifyVal);
-        
+
         // start update company overview table data and company_overview column in business_profile_verifications table
         if($request->verifyVal == 1)
         {
@@ -651,8 +727,8 @@ class BusinessProfileController extends Controller
             {
                 array_push($data,['name' => $value->name, 'value' => $value->value, 'status' => "1"]);
             }
-            $company_overview->update(['data' => $data]);  
-            
+            $company_overview->update(['data' => $data]);
+
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
             if( $businessProfileVerification )
             {
@@ -664,9 +740,9 @@ class BusinessProfileController extends Controller
                 $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
                 $businessProfileVerification->company_overview = 1;
                 $businessProfileVerification->save();
-            }            
+            }
         }
-        else 
+        else
         {
             $company_overview = CompanyOverview::findOrFail($request->companyId);
             $company_overview_data = json_decode($company_overview->data);
@@ -675,7 +751,7 @@ class BusinessProfileController extends Controller
             {
                 array_push($data,['name' => $value->name, 'value' => $value->value, 'status' => "0"]);
             }
-            $company_overview->update(['data' => $data]); 
+            $company_overview->update(['data' => $data]);
 
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id)->first();
             if( $businessProfileVerification )
@@ -688,7 +764,7 @@ class BusinessProfileController extends Controller
                 $businessProfileVerification->business_profile_id = $company_overview->business_profile_id;
                 $businessProfileVerification->company_overview = 0;
                 $businessProfileVerification->save();
-            }            
+            }
         }
         // end update company overview table data and company_overview column in business_profile_verifications table
 

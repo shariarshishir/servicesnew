@@ -79,10 +79,10 @@
 
                         @if($business_profile->business_type == 1)
                         <div class="capacity-and-machineries">
-                            <legend>Capacity and machineries</legend>
-                            <form action="{{route('capacity.machineries.verify')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
+                            {{-- <legend>Capacity and machineries</legend> --}}
+                            {{-- <form action="{{route('capacity.machineries.verify')}}" method="post"> --}}
+                                {{-- @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}"> --}}
                                 <!-- <div clas="row production-capacity">
                                     <label>Production Capacity (Annual)</label>
                                     <br>
@@ -119,7 +119,9 @@
                                         </tbody>
                                     </table>
                                 </div> -->
-
+                            <form action="{{route('ctegories.produced.verify')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                 <div class="categories-produced">
                                     <label>Categories Produced</label>
                                     <div class="no_more_tables">
@@ -134,18 +136,19 @@
                                             <tbody>
                                                 @if(count($business_profile->categoriesProduceds)>0)
                                                     @foreach($business_profile->categoriesProduceds as $key2=>$categoriesProduced)
-                                                    <tr>
-                                                        <td data-title="Type"><input readOnly name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
-                                                        <td data-title="Percentage"><input readOnly name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
-                                                        <td data-title="Status">
-                                                            <label class="radio-inline">
-                                                                <input type="radio" name="categories_produced_status[{{$key2}}]" value="1" {{ $categoriesProduced->status == 1 ? 'checked' : '' }}>verified
-                                                            </label>
-                                                            <label class="radio-inline">
-                                                                <input type="radio" name="categories_produced_status[{{$key2}}]" value="0" {{ $categoriesProduced->status == 0 ? 'checked' : '' }}>unverified
-                                                            </label>
-                                                        </td>
-                                                    </tr>
+                                                        <tr>
+                                                            <input type="hidden" name="categories_produced_id[]" value="{{$categoriesProduced->id}}">
+                                                            <td data-title="Type"><input readOnly name="type[]" id="type" type="text" class="form-control "  value="{{$categoriesProduced->type}}" ></td>
+                                                            <td data-title="Percentage"><input readOnly name="percentage[]" id="percentage" type="number" class="form-control "  value="{{$categoriesProduced->percentage}}" ></td>
+                                                            <td data-title="Status">
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="categories_produced_status[{{$categoriesProduced->id}}]" value="1" {{ $categoriesProduced->status == 1 ? 'checked' : '' }}>verified
+                                                                </label>
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="categories_produced_status[{{$categoriesProduced->id}}]" value="0" {{ $categoriesProduced->status == 0 ? 'checked' : '' }}>unverified
+                                                                </label>
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
                                                 @else
                                                 <tr id="categories-produced-table-no-data">
@@ -157,13 +160,20 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    
+
                                 </div>
 
+                                <div class="submitBox">
+                                    <button type="submit" class="btn_green btn-success">Submit</button>
+                                </div>
+                            </form>
 
+                            <form action="{{route('machinaries.details.verify')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                 <div class="machinaries-details">
                                     <label>Machinaries Details</label>
-                                   
+
                                     <div class="no_more_tables">
                                         <table class="machinaries-details-table-block table">
                                             <thead class="cf">
@@ -177,14 +187,15 @@
                                                 @if(count($business_profile->machineriesDetails)>0)
                                                 @foreach($business_profile->machineriesDetails as $key3=>$machineriesDetail)
                                                 <tr>
+                                                    <input type="hidden" name="machineries_detail_id[]" value="{{$machineriesDetail->id}}">
                                                     <td data-title="Machine Name"><input readOnly name="machine_name[]" id="machine_name" type="text" class="form-control "  value="{{$machineriesDetail->machine_name}}" ></td>
                                                     <td data-title="Quantity"><input readOnly name="quantity[]" id="quantity" type="number" class="form-control "  value="{{$machineriesDetail->quantity}}" ></td>
                                                     <td data-title="Status">
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="machineries_detail_status[{{$key3}}]" value="1" {{ $machineriesDetail->status == 1 ? 'checked' : '' }}>verified
+                                                            <input type="radio" name="machineries_detail_status[{{$machineriesDetail->id}}]" value="1" {{ $machineriesDetail->status == 1 ? 'checked' : '' }}>verified
                                                         </label>
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="machineries_detail_status[{{$key3}}]" value="0" {{ $machineriesDetail->status == 0 ? 'checked' : '' }}>unverified
+                                                            <input type="radio" name="machineries_detail_status[{{$machineriesDetail->id}}]" value="0" {{ $machineriesDetail->status == 0 ? 'checked' : '' }}>unverified
                                                         </label>
                                                     </td>
                                                 </tr>
@@ -203,7 +214,7 @@
                                 <div class="submitBox">
                                     <button type="submit" class="btn_green btn-success">Submit</button>
                                 </div>
-                                
+
                             </form>
                         <div>
 
@@ -294,7 +305,7 @@
                                 @csrf
                                 <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                                 <legend>Bsuiness terms</legend>
-                                
+
                                 <div class="no_more_tables">
                                     <table class="business-terms-table-block table">
                                         <thead class="cf">
@@ -335,7 +346,7 @@
                                 <div class="submitBox">
                                     <button type="submit" class="btn_green btn-success">Submit</button>
                                 </div>
-                                
+
                             </form>
                         <div>
 
@@ -576,7 +587,7 @@
                                     </div>
                                     @endif
                                     @endforeach
-                                    
+
                                     <div class="submitBox">
                                         <button class="btn_green btn-success" type="submit">Submit</button>
                                     </div>

@@ -12,10 +12,11 @@ trait PushNotificationTrait {
             //write title, description and so on
             'title'		=> $title,
             'body' 	=> $message,
-            'sound' =>'fcmsound.mp3',
+            'sound' =>'default',
             'icon'=>'launcher_icon',
             'alert' => true,
-            'channelId'=>'merchantbay'
+            'channelId'=>'merchantbay',
+            'click_action'=>env('APP_NOTIFICATION_URL')
             ];
 
             $fcmNotification = [
@@ -23,8 +24,7 @@ trait PushNotificationTrait {
             'to'        =>$fcmToken, //single token
             'priority' =>'high',
             'sound'=>'default',
-            'notification' => $notification,
-            'click_action'=>env('APP_URL'),
+            'notification' => $notification
             ];
             $headers = [
             'Authorization: key=' . env('API_ACCESS_KEY'),

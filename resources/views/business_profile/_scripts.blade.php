@@ -2318,7 +2318,25 @@
       });
     });
 
+    $(document).on('change', '.factory-sm-image-trigger', function(e) {
+        //alert("I am here");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            //$(".factory-sm-image-preview").attr('src', e.target.result);
+            $(this).closest(".upload_img_box_wrap").find(".factory-sm-image-preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
 
+    $(document).on('change', '.factory-lg-image-trigger', function(e) {
+        //alert("I am here");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            //$(".factory-sm-image-preview").attr('src', e.target.result);
+            $(this).closest(".upload_img_box_wrap").find(".factory-lg-image-preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
 
 
     function addFactoryImageBlock()
@@ -2327,10 +2345,10 @@
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<a href="javascript:void(0);" class="btn_close" onclick="removeFactoryImage(this)"><i class="material-icons dp48">close</i></a>';
         html +='<div class="upload_imgage_box">';
-        html +='<img id="preview-large-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='<img id="preview-large-image-before-upload" class="factory-sm-image-preview" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='</div>';
         html +='<div class="form-group">';
-        html +='<input type="file" name="factory_images[]" placeholder="Choose image" id="factory-large-image">';
+        html +='<input type="file" name="factory_images[]" placeholder="Choose image" class="factory-sm-image-trigger" id="factory-large-image">';
         html +='</div>';
         html +='</div>';
         $('.factory-image-block.row').append(html);
@@ -2347,9 +2365,9 @@
 
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<a href="javascript:void(0);" class="btn_close" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">close</i></a>';
-        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" class="factory-lg-image-preview" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='<div class="form-group">';
-        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" id="factory-image">';
+        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" class="factory-lg-image-trigger" id="factory-image">';
         html +='</div>';
 
         $('.factory-large-image-block').append(html);
@@ -2358,18 +2376,6 @@
     {
         $(el).parent().remove();
     }
-
-    $(document).ready(function (e) {
-
-        $('#factory-image').change(function(){
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                $('#preview-image-before-upload').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-
-    });
 
 
     $('#factory-tour-form').on('submit',function(e){

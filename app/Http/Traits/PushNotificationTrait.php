@@ -18,12 +18,13 @@ trait PushNotificationTrait {
             'channelId'=>'merchantbay'
             ];
 
-                
             $fcmNotification = [
             //'registration_ids' => $tokenList, //multple token array
             'to'        =>$fcmToken, //single token
             'priority' =>'high',
+            'sound'=>'default',
             'notification' => $notification,
+            'click_action'=>env('APP_URL'),
             ];
             $headers = [
             'Authorization: key=' . env('API_ACCESS_KEY'),

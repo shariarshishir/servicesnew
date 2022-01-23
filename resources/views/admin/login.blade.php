@@ -40,8 +40,8 @@
 
       <form action="{{route('admin.login')}}" id="admin-login-form" method="POST">
         @csrf
+        <input type="hidden"  name="fcm_token" id="fcm_token" value="" />
         <div class="input-group mb-3">
-          <input type="hidden"  name="fcm_token" id="fcm_token" value="" />
           <input type="email" class="form-control" placeholder="Email" name="email">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -68,7 +68,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="button" class="btn btn-success btn-block admin-signin">Sign In</button>
+            <button type="submit" class="btn btn-success btn-block admin-signin">Sign In</button>
             <button type="submit" class="btn btn-success btn-block admin-signin-trigger" style="display: none;">Sign In</button>
           </div>
           <!-- /.col -->
@@ -86,59 +86,57 @@
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
-
 <script>
-$(document).ready(function(){
-    $('.admin-signin').click(function (e) 
-    {
-        //e.preventDefault();
-        
-        var messaging;
+    $( document ).ready(function() {
         var firebaseConfig = {
-              apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
-              authDomain: "merchant-bay-service.firebaseapp.com",
-              projectId: "merchant-bay-service",
-              storageBucket: "merchant-bay-service.appspot.com",
-              messagingSenderId: "789211877611",
-              appId: "1:789211877611:web:006bb3073632a306daeeae",
-              measurementId: "G-M5LLMK2G5S"
+            apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
+            authDomain: "merchant-bay-service.firebaseapp.com",
+            projectId: "merchant-bay-service",
+            storageBucket: "merchant-bay-service.appspot.com",
+            messagingSenderId: "789211877611",
+            appId: "1:789211877611:web:006bb3073632a306daeeae",
+            measurementId: "G-M5LLMK2G5S"
         };
+       
         
 
         if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
         }else {
-            firebase.app(); // if already initialized, use that one
+        firebase.app(); // if already initialized, use that one
         }
         
-        messaging = firebase.messaging();
-     
-        messaging
-            .requestPermission()
+        const messaging = firebase.messaging();
+        
+        
+        messaging.requestPermission()
             .then(function () {
                 return messaging.getToken()
             })
             .then(function (fcm_token) {
-                
+                var fcm_token = fcm_token;
                 $("#fcm_token").val(fcm_token);
-                $(".admin-signin-trigger").click();
-
+               
             }).catch(function (error) {
                 alert(error);
             });
-    })
 
-    messaging.onMessage(function (payload) {
-        const title = payload.notification.title;
-        const options = {
-            body: payload.notification.body,
-            icon: payload.notification.icon,
-        };
-        new Notification(title, options);
-    });
-
+        });
+    function printErrorMsg (msg) {
+        $.each( msg, function( key, value ) {
+          $('.'+key+'_err').text(value);
+        });
+    }
+    messaging.onMessage(function(payload) {
+    const noteTitle = payload.notification.title;
+    const noteOptions = {
+        body: payload.notification.body,
+        icon: payload.notification.icon,
+    };
+    new Notification(noteTitle, noteOptions);
 });
 </script>
+
 
 </body>
 </html>

@@ -411,15 +411,13 @@
         };
        
         
-
+        // Initialize Firebase
         if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
+            firebase.initializeApp(firebaseConfig);
         }else {
-        firebase.app(); // if already initialized, use that one
+            firebase.app(); // if already initialized, use that one
         }
-        
         const messaging = firebase.messaging();
-        
         
         messaging.requestPermission()
             .then(function () {
@@ -434,19 +432,24 @@
             });
 
         });
-    function printErrorMsg (msg) {
-        $.each( msg, function( key, value ) {
-          $('.'+key+'_err').text(value);
-        });
-    }
-    messaging.onMessage(function(payload) {
-    const noteTitle = payload.notification.title;
-    const noteOptions = {
-        body: payload.notification.body,
-        icon: payload.notification.icon,
-    };
-    new Notification(noteTitle, noteOptions);
-});
+        function printErrorMsg (msg) {
+            $.each( msg, function( key, value ) {
+            $('.'+key+'_err').text(value);
+            });
+        }
+        //This code recieve message from server /your app and print message to console if same tab is opened as of project in browser
+        messaging.onMessage(function(payload) {
+        const noteTitle = payload.notification.title;
+        const noteOptions = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+            data:{
+                time:  new Date(Date.now()).toString(),
+                click_action: payload.notification.click_action
+            }
+        };
+        new Notification(noteTitle, noteOptions);
+    });
 </script>
 
 <script>

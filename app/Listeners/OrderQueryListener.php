@@ -21,7 +21,8 @@ class OrderQueryListener implements ShouldQueue
         $fcmToken = $admin->fcm_token;
         $title = "New order query is requested";
         $message = "A new order query is requested by ".$event->query->user->name.".Please check the order query details";
-        $this->pushNotificationSend($fcmToken,$title,$message);
+        $action_url = route('query.edit', $event->query->id);
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
         //send database notification and mail to admin
         Notification::send($admin,new OrderQueryNotification($event->query));

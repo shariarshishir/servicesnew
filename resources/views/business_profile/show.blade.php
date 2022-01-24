@@ -183,7 +183,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
 											<div class="certificate_img">
@@ -195,7 +195,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@else
 											@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
 											<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ asset('storage/'.$certification_image_src) }}"><img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></a></div>
@@ -270,7 +270,7 @@
 						<!-- profile_product_wrap -->
 						<div class="factory_imgbox_wrap">
 							<h3>Factory Images</h3>
-							
+
 							@if(count($business_profile->companyFactoryTour)>0)
 								<div class="row top_titleWrap">
 									<div class="col s12 gallery_navbar">
@@ -330,8 +330,8 @@
 										<p>INFO : No data found.</p>
 									</div>
 								</div>
-							@endif							
-							
+							@endif
+
 						</div>
 						<!-- factory_images -->
 						<div class="main_buyers_wrap">
@@ -365,9 +365,9 @@
 									@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
 											<div class="flag_img export-destination-img">
-												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 											</div>
-											<h5>{{$exportDestination->title}}</h5>
+											<h5>{{$exportDestination->country->name}}</h5>
 										</div>
 									@endforeach
 								@else
@@ -419,13 +419,14 @@
 							</div>
 						</div>
 						<div class="overview_table_wrap capacity_machineries">
-							<div class="row top_titleWrap">
+
+                            <div class="row top_titleWrap">
 								<div class="col s9 m7">
-									<h3>Capacity and Machineries</h3>
+									<h3>Categories Produced</h3>
 								</div>
 								@if(Auth::check())
 								<div class="col s3 m5 right-align editBox">
-									<button type="button" data-target="capacity-and-machineries-modal" class="btn_edit btn_green_White modal-trigger">
+									<button type="button" data-target="categorires-produced-modal" class="btn_edit btn_green_White modal-trigger">
 										<span class="btn_icon"><i class="material-icons">border_color</i></span>
 										<span class="btn_edit_white"> Edit</span>
 									</button>
@@ -473,7 +474,6 @@
 								</div> -->
 
 								<div class="col s12 m12">
-									<h4>Categories Produced</h4>
 									<div class="categories_produced_wrapper">
 										@if(count($business_profile->categoriesProduceds)>0)
 										<div class="overview_table box_shadow">
@@ -514,8 +514,21 @@
 							</div>
 						</div>
 
+
+                        <div class="row top_titleWrap">
+                            <div class="col s9 m7">
+                                <h3>Machinery Details</h3>
+                            </div>
+                            @if(Auth::check())
+                            <div class="col s3 m5 right-align editBox">
+                                <button type="button" data-target="machinery-details-modal" class="btn_edit btn_green_White modal-trigger">
+                                    <span class="btn_icon"><i class="material-icons">border_color</i></span>
+                                    <span class="btn_edit_white"> Edit</span>
+                                </button>
+                            </div>
+                            @endif
+						</div>
 						<div class="overview_table_wrap machinery_table">
-							<h4>Machinery Details</h4>
 							<div class="machinery_table_inner_wrap">
 								@if(count($business_profile->machineriesDetails)>0)
 								<div class="overview_table box_shadow">
@@ -654,7 +667,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@else
                                         @php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
 											<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
@@ -664,7 +677,7 @@
 											@endif
 											@if($certification->expiry_date)
 											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif											
+											@endif
 										@endif
 									</div>
 									@endforeach
@@ -740,9 +753,9 @@
 										<div class="col s6 m4 l2">
 											<div class="flag_img export-destination-img">
 												<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-												<img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 											</div>
-											<h5>{{$exportDestination->title}}</h5>
+											<h5>{{$exportDestination->country->name}}</h5>
 										</div>
 										@endforeach
 									@else
@@ -803,7 +816,7 @@
 											</tbody>
 										</table>
 									</div>
-									
+
 								</div>
 								@else
 									<div class="card-alert card cyan lighten-5">
@@ -1315,7 +1328,8 @@
 									<div class="col s6 m4 l2 paper_img press-highlight-img">
 										<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
 										<div class="press_img">
-											<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+											<div class="press_img_box"><img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" /></div>
+											<div>{{$pressHighlight->title}}</div>
 										</div>
 									</div>
 								@endforeach
@@ -1732,6 +1746,8 @@
 	@include('business_profile._add_factory_tour_modal')
 	@include('business_profile._edit_factory_tour_modal')
 	@include('business_profile._create_or_update_terms_of_service_modal')
+    @include('business_profile._edit_categories_produced')
+    @include('business_profile._edit_machinery_details')
 @endsection
 
 @include('business_profile._scripts')

@@ -247,7 +247,7 @@
                 <button type="submit" class="btn waves-effect waves-light green seller_product_create btn_green">Update</button>
                 <button type="button" class="btn modal-close waves-effect waves-light green btn-back-to-product-list btn_green">Cancel</button>
             </div> -->
-            <div id="manufacture-update-errors"></div>
+            <div id="manufacture-update-errors" style="display: none;"></div>
             <div class="submit_btn_wrap">
                 <div class="row">
                     <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>

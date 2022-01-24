@@ -344,12 +344,13 @@
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#manufacture-product-upload-errors').empty();
+                            $('#manufacture-product-upload-errors').show();
                             //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                             $("#manufacture-product-upload-errors").append("<div class=''>"+error+"</div>");
                             $('.rm-error').html('');
                             $.each(xhr.responseJSON.error, function (key, item)
                             {
-                                $('.'+key+'_error').html('*required');
+                                $('.'+key+'_error').html('required');
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                 $("#manufacture-product-upload-errors").append("<div class=''>"+item+"</div>");
 
@@ -458,12 +459,13 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#manufacture-update-errors').empty();
+                                $('#manufacture-update-errors').show();
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                                 $("#manufacture-update-errors").append("<div class=''>"+error+"</div>");
                                 $('.rm-error').html('');
                                 $.each(xhr.responseJSON.error, function (key, item)
                                 {
-                                    $('.'+key+'_error').html('*required');
+                                    $('.'+key+'_error').html('required');
                                     //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                     $("#manufacture-update-errors").append("<div class=''>"+item+"</div>");
 
@@ -572,203 +574,180 @@
         $(el).parent().parent().remove();
     }
 
-    //submit form  FOR CAPACITY AND MECHINERIES
-    $('#capacity-machinaries-form').on('submit',function(e){
-    e.preventDefault();
-    $.ajax({
-      url: '{{ route("capacity-and-machineries.create-or-update")}}' ,
-      type:"POST",
-      data: $('#capacity-machinaries-form').serialize(),
-      beforeSend: function() {
-        $('.loading-message').html("Please Wait.");
-        $('#loadingProgressContainer').show();
-      },
-      success:function(response){
-        $('.loading-message').html("");
-        $('#loadingProgressContainer').hide();
-        $('#capacity-machineries-errors').empty();
-        var machineriesDetails=response.machineriesDetails;
-        var categoriesProduceds=response.categoriesProduceds;
-        var productionCapacities=response.productionCapacities;
+    //Add and remove row for production-flow-and-manpower dynamically
 
-        var nohtml="";
-        if(machineriesDetails.length >0){
-            $('.machinery_table_inner_wrap').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<thead>';
-            html +='<tr>';
-            html +='<th>Machine Name</th>';
-            html +='<th>Quantity</th>';
-            html +='<th>&nbsp;</th>';
-            html +='</tr>';
-            html +='</thead>';
-            html +='<tbody class="machinaries-details-table-body">';
+    //categories produced submit form
+    $('#categorires-produced-form').on('submit',function(e){
+            e.preventDefault();
+            $.ajax({
+            url: '{{ route("categories.produced.create-or-update")}}' ,
+            type:"POST",
+            data: $('#categorires-produced-form').serialize(),
+            beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+            },
+            success:function(response){
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                $('#categorires-produced-errors').empty();
 
-            for(let i=0;i<machineriesDetails.length ;i++){
-                html += '<tr>';
-                html += '<td>'+machineriesDetails[i].machine_name+'</td>';
-                html += '<td>'+machineriesDetails[i].quantity+'</td>';
-                if(machineriesDetails[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                var categoriesProduceds=response.categoriesProduceds;
+                var nohtml="";
+                if(categoriesProduceds.length >0){
+                    $('.categories_produced_wrapper').html(nohtml);
+                    var  html ='<div class="overview_table box_shadow">';
+                    html +='<table>';
+                    html +='<thead>';
+                    html +='<tr>';
+                    html +='<th>Type</th>';
+                    html +='<th>Percentage</th>';
+                    html +='<th>&nbsp;</th>';
+                    html +='</tr>';
+                    html +='</thead>';
+                    html +='<tbody class="categories-produced-table-body">';
+
+                    for(let i=0;i<categoriesProduceds.length ;i++){
+                        html += '<tr>';
+                        html += '<td>'+categoriesProduceds[i].type+'</td>';
+                        html += '<td>'+categoriesProduceds[i].percentage+'</td>';
+                        if(categoriesProduceds[i].status==1)
+                        html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                        else{
+                        html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                        }
+                        html += '</tr>';
+                    }
+
+                    html+='</tbody>';
+                    html +='</table>';
+                    html +='</div>';
+                    $('.categories_produced_wrapper').append(html);
+
+                }else{
+
+                    $('.categories_produced_wrapper').html(nohtml);
+                    var html='';
+                    html +='<div class="card-alert card cyan lighten-5">';
+                    html +='<div class="card-content cyan-text">';
+                    html +='<p>INFO : No data found.</p>';
+                    html +='</div>';
+                    $('.categories_produced_wrapper').append(html);
+
+                    //append in form
+                    $('.categories-produced-table-block tbody').children().empty();
+                    var html='  <tr id="categories-produced-table-no-data">';
+                        html +='<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
+                        html +='<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
+                        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                        html +='</tr>';
+                        $('.categories-produced-table-block tbody').append(html);
                 }
-                html += '</tr>';
 
-            }
-            html+='</tbody>';
-            html +='</table>';
-            html +='</div>';
-            $('.machinery_table_inner_wrap').append(html);
-        }
-        else{
-            //append in table
-            $('.machinery_table_inner_wrap').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.machinery_table_inner_wrap').append(html);
+                $('#categorires-produced-modal').modal('close');
+                swal("Done!", response.message,"success");
+            },
+            error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $('#categorires-produced-errors').empty();
+                        $("#categorires-produced-errors").append("<div class=''>"+error+"</div>");
+                        $.each(xhr.responseJSON.error, function (key, item)
+                        {
+                            $("#categorires-produced-errors").append("<div class='danger'>"+item+"</div>");
+                        });
+                    }
+            });
+    });
 
-            //append in form
-            $('.machinaries-details-table-block tbody').children().empty();
-            var html='<tr id="production-capacity-table-no-data">';
-                html +='<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
-                html +='<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+    //machinery details submit form
+    $('#machinery-details-form').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+        url: '{{ route("machinery.details.create-or-update")}}' ,
+        type:"POST",
+        data: $('#machinery-details-form').serialize(),
+        beforeSend: function() {
+            $('.loading-message').html("Please Wait.");
+            $('#loadingProgressContainer').show();
+        },
+        success:function(response){
+            $('.loading-message').html("");
+            $('#loadingProgressContainer').hide();
+            $('#machinery-details-errors').empty();
+            var machineriesDetails=response.machineriesDetails;
+            var nohtml="";
+            if(machineriesDetails.length >0){
+                $('.machinery_table_inner_wrap').html(nohtml);
+                var  html ='<div class="overview_table box_shadow">';
+                html +='<table>';
+                html +='<thead>';
+                html +='<tr>';
+                html +='<th>Machine Name</th>';
+                html +='<th>Quantity</th>';
+                html +='<th>&nbsp;</th>';
                 html +='</tr>';
-                $('.machinaries-details-table-block tbody').append(html);
-        }
+                html +='</thead>';
+                html +='<tbody class="machinaries-details-table-body">';
 
-        var nohtml="";
-        if(categoriesProduceds.length >0){
-            $('.categories_produced_wrapper').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<thead>';
-            html +='<tr>';
-            html +='<th>Type</th>';
-            html +='<th>Percentage</th>';
-            html +='<th>&nbsp;</th>';
-            html +='</tr>';
-            html +='</thead>';
-            html +='<tbody class="categories-produced-table-body">';
+                for(let i=0;i<machineriesDetails.length ;i++){
+                    html += '<tr>';
+                    html += '<td>'+machineriesDetails[i].machine_name+'</td>';
+                    html += '<td>'+machineriesDetails[i].quantity+'</td>';
+                    if(machineriesDetails[i].status==1)
+                    html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                    else{
+                    html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                    }
+                    html += '</tr>';
 
-            for(let i=0;i<categoriesProduceds.length ;i++){
-                html += '<tr>';
-                html += '<td>'+categoriesProduceds[i].type+'</td>';
-                html += '<td>'+categoriesProduceds[i].percentage+'</td>';
-                if(categoriesProduceds[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
-                html += '</tr>';
+                html+='</tbody>';
+                html +='</table>';
+                html +='</div>';
+                $('.machinery_table_inner_wrap').append(html);
+            }
+            else{
+                //append in table
+                $('.machinery_table_inner_wrap').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.machinery_table_inner_wrap').append(html);
+
+                //append in form
+                $('.machinaries-details-table-block tbody').children().empty();
+                var html='<tr id="production-capacity-table-no-data">';
+                    html +='<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
+                    html +='<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
+                    html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                    html +='</tr>';
+                    $('.machinaries-details-table-block tbody').append(html);
             }
 
-            html+='</tbody>';
-            html +='</table>';
-            html +='</div>';
-            $('.categories_produced_wrapper').append(html);
-
-        }else{
-
-            $('.categories_produced_wrapper').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.categories_produced_wrapper').append(html);
-
-            //append in form
-            $('.categories-produced-table-block tbody').children().empty();
-            var html='  <tr id="categories-produced-table-no-data">';
-                html +='<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
-                html +='<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
-                html +='</tr>';
-                $('.categories-produced-table-block tbody').append(html);
-        }
 
 
-        // var nohtml="";
-        // if(productionCapacities.length >0){
-        //     $('.production-capacity-wrapper').html(nohtml);
-        //     var  html ='<div class="overview_table box_shadow">';
-        //     html +='<table>';
-        //     html +='<thead>';
-        //     html +='<tr>';
-        //     html +='<th>Machine Type</th>';
-        //     html +='<th>Annual Capacity</th>';
-        //     html +='<th>&nbsp;</th>';
-        //     html +='</tr>';
-        //     html +='</thead>';
-        //     html +='<tbody class="production-capacity-table-body">';
-
-        //     for(let i=0;i<productionCapacities.length ;i++){
-        //         html += '<tr>';
-        //         html += '<td>'+productionCapacities[i].machine_type+'</td>';
-        //         html += '<td>'+productionCapacities[i].annual_capacity+'</td>';
-        //         if(productionCapacities[i].status==1)
-        //         html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-        //         else{
-        //         html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
-        //         }
-        //         html += '</tr>';
-
-        //     }
-        //     html+='</tbody>';
-        //     html +='</table>';
-		// 	html +='</div>';
-        //     $('.production-capacity-wrapper').append(html);
-        // }else{
-        //     //append in table
-        //     // $('.production-capacity-table-body').children().empty();
-        //     // var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
-        //     // $('.production-capacity-table-body').append(html);
-
-        //     $('.production-capacity-wrapper').html(nohtml);
-        //     var html='';
-        //     html +='<div class="card-alert card cyan lighten-5">';
-        //     html +='<div class="card-content cyan-text">';
-        //     html +='<p>INFO : No data found.</p>';
-        //     html +='</div>';
-        //     $('.production-capacity-wrapper').append(html);
-
-        //     //append in form
-        //     $('.production-capacity-table-block tbody').children().empty();
-        //     var html='  <tr id="production-capacity-table-no-data">';
-        //         html +='<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>';
-        //         html +='<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>';
-        //         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-        //         html +='</tr>';
-        //         $('.production-capacity-table-block tbody').append(html);
-        // }
-
-
-
-        $('#capacity-and-machineries-modal').modal('close');
-        swal("Done!", response.message,"success");
-      },
-      error: function(xhr, status, error)
-            {
-                $('#capacity-machineries-errors').empty();
-                $("#capacity-machineries-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
+            $('#machinery-details-modal').modal('close');
+            swal("Done!", response.message,"success");
+        },
+        error: function(xhr, status, error)
                 {
-                    $("#capacity-machineries-errors").append("<div class='danger'>"+item+"</div>");
-                });
-            }
-      });
+                    $('.loading-message').html("");
+                    $('#loadingProgressContainer').hide();
+                    $('#machinery-details-errors').empty();
+                    $("#machinery-details-errors").append("<div class=''>"+error+"</div>");
+                    $.each(xhr.responseJSON.error, function (key, item)
+                    {
+                        $("#machinery-details-errors").append("<div class='danger'>"+item+"</div>");
+                    });
+                }
+        });
     });
 
 
-
-
-    //Add and remove row for production-flow-and-manpower dynamically
 
     function addProductionFlowAndManpower()
     {
@@ -1278,181 +1257,6 @@
     });
 
 
-//export destination add remove
-    function addExportDestinationDetails()
-    {
-
-        $('#export-destination-details-table-no-data').hide();
-        var html = '<tr>';
-        html +='<td data-title="Name"><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="export-destination-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-        html +='</tr>';
-        $('.export-destination-table-block tbody').append(html);
-    }
-
-    function removeExportDestinationDetails(el)
-    {
-        $(el).parent().parent().remove();
-    }
-     //submit form for export destination
-
-     $('#export-destination-upload-form').on('submit',function(e){
-    e.preventDefault();
-    var url = '{{ route("exportdestinations.upload") }}';
-    var formData = new FormData(this);
-    formData.append('_token', "{{ csrf_token() }}");
-    $.ajax({
-        method: 'post',
-        processData: false,
-        contentType: false,
-        cache: false,
-        data: formData,
-        enctype: 'multipart/form-data',
-        url: url,
-        beforeSend: function() {
-        $('.loading-message').html("Please Wait.");
-        $('#loadingProgressContainer').show();
-        },
-
-      success:function(response){
-        $('.loading-message').html("");
-		$('#loadingProgressContainer').hide();
-        $('#export-destination-upload-form')[0].reset();
-        var exportDestinations=response.exportDestinations;
-        console.log(exportDestinations);
-        var nohtml="";
-        if(exportDestinations.length >0){
-            $('.export-destination-block').html(nohtml);
-
-            for(let i = 0;i < exportDestinations.length ;i++){
-                var html='';
-                var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
-                html +='<div class="col s6 m4 l2">';
-                html +='<div class="flag_img export-destination-img">';
-                html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                html +='<img src="'+image+'" alt="">';
-                html +='</div>';
-                html +='<h5>'+exportDestinations[i].title+'</h5>';
-                html +='</div>';
-                $('.export-destination-block').append(html);
-            }
-
-            //append in form
-            $('.export-destination-table-block tbody').children().empty();
-                var html='<tr>';
-                html +='<td data-title="Name"><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
-                html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td data-title="Image"><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
-                html +='<tr>';
-                $('.export-destination-table-block  tbody').append(html);
-        }
-        else{
-                $('.export-destination-block').html(nohtml);
-                var html='';
-                html +='<div class="card-alert card cyan lighten-5">';
-                html +='<div class="card-content cyan-text">';
-                html +='<p>INFO : No data found.</p>';
-                html +='</div>';
-                $('.export-destination-block').append(html);
-            }
-
-        $('#export-destination-upload-form-modal').modal('close');
-        swal("Done!", response.message,"success");
-      },
-      error: function(xhr, status, error)
-            {
-                $('#export-destination-upload-errors').empty();
-                $("#export-destination-upload-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
-                {
-                    $("#export-destination-upload-errors").append("<div class='danger'>"+item+"</div>");
-                });
-            }
-      });
-    });
-
-
-
-    $(document).on('click', '.delete-export-destination-button',function(e){
-        e.preventDefault();
-        $('.remove-export-destination').show();
-    });
-
-
-    $(document).on('click', '.remove-export-destination',function(e)
-    {
-        e.preventDefault();
-        var id=$(this).attr("data-id");
-        console.log(id);
-        swal({
-                title: "Want to delete this export destionation ?",
-                text: "Please ensure and then confirm!",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function (e) {
-                if (e.value === true)
-                {
-                    $.ajax({
-                        url: '{{ route("exportdestinations.delete") }}',
-                        type: "GET",
-                        data:{id:id},
-                        beforeSend: function() {
-                        $('.loading-message').html("Please Wait.");
-                        $('#loadingProgressContainer').show();
-                        },
-                        success:function(response)
-                            {
-                                $('.loading-message').html("");
-                                $('#loadingProgressContainer').hide();
-                                var exportDestinations=response.exportDestinations;
-                                console.log(exportDestinations);
-                                var nohtml="";
-                                if(exportDestinations.length >0){
-                                    $('.export-destination-block').html(nohtml);
-                                    for(let i = 0;i < exportDestinations.length ;i++){
-                                        var html='';
-                                        var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
-                                        html +='<div class="col s6 m4 l2">';
-                                        html +='<div class="flag_img export-destination-img">';
-                                        html +='<a style="display: none;" href="javascript:void(0)" data-id="'+exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                        html +='<img src="'+image+'" alt="">';
-                                        html +='</div>';
-                                        html +='<h5>'+exportDestinations[i].title+'</h5>';
-                                        html +='</div>';
-                                        $('.export-destination-block').append(html);
-                                    }
-                                }
-                                else{
-                                    $('.export-destination-block').html(nohtml);
-                                    var html='';
-                                    html +='<div class="card-alert card cyan lighten-5">';
-                                    html +='<div class="card-content cyan-text">';
-                                    html +='<p>INFO : No data found.</p>';
-                                    html +='</div>';
-                                    $('.export-destination-block').append(html);
-                                }
-                                $('#export-destination-upload-form-modal').modal('close');
-                                swal("Done!", response.message,"success");
-                            },
-                            error: function(xhr, status, error)
-                            {
-                                toastr.success(error);
-                            }
-                        });
-                }
-                else {
-                    e.dismiss;
-                }
-            }, function (dismiss) {
-                return false;
-            })
-    });
 
 
 
@@ -2316,7 +2120,25 @@
       });
     });
 
+    $(document).on('change', '.factory-sm-image-trigger', function(e) {
+        //alert("I am here");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            //$(".factory-sm-image-preview").attr('src', e.target.result);
+            $(this).closest(".upload_img_box_wrap").find(".factory-sm-image-preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
 
+    $(document).on('change', '.factory-lg-image-trigger', function(e) {
+        //alert("I am here");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            //$(".factory-sm-image-preview").attr('src', e.target.result);
+            $(this).closest(".upload_img_box_wrap").find(".factory-lg-image-preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
 
 
     function addFactoryImageBlock()
@@ -2325,10 +2147,10 @@
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<a href="javascript:void(0);" class="btn_close" onclick="removeFactoryImage(this)"><i class="material-icons dp48">close</i></a>';
         html +='<div class="upload_imgage_box">';
-        html +='<img id="preview-large-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='<img id="preview-large-image-before-upload" class="factory-sm-image-preview" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='</div>';
         html +='<div class="form-group">';
-        html +='<input type="file" name="factory_images[]" placeholder="Choose image" id="factory-large-image">';
+        html +='<input type="file" name="factory_images[]" placeholder="Choose image" class="factory-sm-image-trigger" id="factory-large-image">';
         html +='</div>';
         html +='</div>';
         $('.factory-image-block.row').append(html);
@@ -2345,9 +2167,9 @@
 
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<a href="javascript:void(0);" class="btn_close" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">close</i></a>';
-        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" class="factory-lg-image-preview" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='<div class="form-group">';
-        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" id="factory-image">';
+        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" class="factory-lg-image-trigger" id="factory-image">';
         html +='</div>';
 
         $('.factory-large-image-block').append(html);
@@ -2356,18 +2178,6 @@
     {
         $(el).parent().remove();
     }
-
-    $(document).ready(function (e) {
-
-        $('#factory-image').change(function(){
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                $('#preview-image-before-upload').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-
-    });
 
 
     $('#factory-tour-form').on('submit',function(e){

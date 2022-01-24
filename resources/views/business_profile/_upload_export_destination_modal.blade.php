@@ -28,7 +28,7 @@
                                     <tr>
                                         <td data-title="Name" class="input-field">
                                             <select name="country_id[]"  class="certificate-select2">
-                                                <option value="" disabled selected>Choose your option</option>
+                                                <option value=""  selected>Choose your option</option>
                                                 @foreach ($country as $key => $name)
                                                     <option value="{{$key}}">{{$name}}</option>
                                                 @endforeach
@@ -78,7 +78,7 @@
 
         $('#export-destination-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td data-title="Name" class="input-field"><select name="country_id[]"class="certificate-select2"><option value="" disabled selected>Choose your option</option>@foreach ($country as $key => $name)<option value="{{$key}}">{{$name}}</option>@endforeach</select></td>';
+        html +='<td data-title="Name" class="input-field"><select name="country_id[]"class="certificate-select2"><option value="" selected>Choose your option</option>@foreach ($country as $key => $name)<option value="{{$key}}">{{$name}}</option>@endforeach</select></td>';
         html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
@@ -114,8 +114,9 @@
         $('.loading-message').html("");
 		$('#loadingProgressContainer').hide();
         $('#export-destination-upload-form')[0].reset();
+        $('#export-destination-upload-errors').empty();
         var exportDestinations=response.exportDestinations;
-        console.log(exportDestinations);
+
         var nohtml="";
         if(exportDestinations.length >0){
             $('.export-destination-block').html(nohtml);
@@ -137,7 +138,7 @@
             //append in form
             $('.export-destination-table-block tbody').children().empty();
                 var html='<tr>';
-                html +='<td data-title="Name" class="input-field"><select name="country_id[]"class="certificate-select2"><option value="" disabled selected>Choose your option</option>@foreach ($country as $key => $name)<option value="{{$key}}">{{$name}}</option>@endforeach</select></td>';
+                html +='<td data-title="Name" class="input-field"><select name="country_id[]"class="certificate-select2"><option value=""  selected>Choose your option</option>@foreach ($country as $key => $name)<option value="{{$key}}">{{$name}}</option>@endforeach</select></td>';
                 html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
                 html +='<tr>';
@@ -183,7 +184,7 @@
     {
         e.preventDefault();
         var id=$(this).attr("data-id");
-        console.log(id);
+
         swal({
                 title: "Want to delete this export destionation ?",
                 text: "Please ensure and then confirm!",
@@ -208,7 +209,7 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 var exportDestinations=response.exportDestinations;
-                                //console.log(exportDestinations);
+
                                 var nohtml="";
                                 if(exportDestinations.length >0){
                                     $('.export-destination-block').html(nohtml);

@@ -105,7 +105,7 @@ class RfqBidController extends Controller
             if(env('APP_ENV') == 'production')
             {
                 $selectedUserToSendMail= $rfq;
-                event(new m($selectedUserToSendMail, $bidData));
+                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
 
                 //send mail to merchantbay
                 $selectedUserToSendMail="success@merchantbay.com";

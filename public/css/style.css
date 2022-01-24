@@ -321,13 +321,12 @@ input[type=number]:not(.browser-default):disabled {
 .header_wrap {
     padding: 10px 0 0;
     position: relative;
-    z-index: 1;
+    z-index: 3;
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     background: #fff;
     transition:all 0.5s;
-    z-index: 9;
 }
 .header_wrap.fixed {
     background-color: rgba(255,255,255,1);

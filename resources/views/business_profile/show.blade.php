@@ -109,6 +109,13 @@
 							<li class="tab tos-tab"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
+					@if($business_profile->is_business_profile_verified == 0)
+						<div class="card-alert card orange" style="display: none;">
+							<div class="card-content white-text">
+								<p>WARNING : Your profile is not verified. <a href="#send-verification-request-modal" class="send-verification-request-trigger modal-trigger">Send Request</a></p>
+							</div>
+						</div>											
+					@endif					
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<div class="company_stuff center-align row">

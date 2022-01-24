@@ -4,22 +4,19 @@ namespace App\Http\Traits;
 
 trait PushNotificationTrait {
 
-        public  function pushNotificationSend($fcmToken,$title,$message){
-           // define('API_ACCESS_KEY','AAAAt8CxkOs:APA91bFDPXCdGn-N7U1_u1XjtIi3WRz76RxAdjp7wE8CgXzhKQcKcOWiMKx2KBAwneCue_TuUuvD83ZqGWkqHVqbFp_Khgm3xiL2lsMuuBaIgK_PsPis9WAhrziLJC0TkQZVzxRaBD-2');
+        public  function pushNotificationSend($fcmToken,$title,$message,$action_url){
+        
             $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-            
             $notification = [
-            //write title, description and so on
-            'title'		=> $title,
+            'title'	=> $title,
             'body' 	=> $message,
             'sound' =>'default',
-            'icon'=>'launcher_icon',
+            'icon'=>'/logo.png',
             'alert' => true,
             'channelId'=>'merchantbay',
-            'click_action'=>env('APP_NOTIFICATION_URL')
+            'click_action'=>$action_url
             ];
-
-            $fcmNotification = [
+            $payload = [
             //'registration_ids' => $tokenList, //multple token array
             'to'        =>$fcmToken, //single token
             'priority' =>'high',
@@ -36,7 +33,7 @@ trait PushNotificationTrait {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
             $result = curl_exec($ch);
             curl_close($ch);
             $aa =  $result;

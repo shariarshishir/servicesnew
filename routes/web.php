@@ -299,6 +299,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('businessprofile/delete/{businessprofileid}', [UsersManageBusinessProfileController::class, 'delete'])->name('business.profile.delete');
     Route::get('businessprofile/restore/{businessprofileid}', [UsersManageBusinessProfileController::class, 'restore'])->name('business.profile.restore');
 
+    Route::post('/send-request-for-profile-verification', [BusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
 
 
 
@@ -470,7 +471,7 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('admin/businessprofile/delete/{businessprofileid}', [ManageBusinessProfileController::class, 'delete'])->name('admin.business.profile.delete');
         Route::get('admin/businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('admin.business.profile.restore');
 
-
+        Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
 
 
 

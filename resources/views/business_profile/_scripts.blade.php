@@ -2373,6 +2373,41 @@
             }
     });
 
+    $('.verification_request_trigger').click(function () {
+        
+        var verificationMsg = $("#verification_message").val();
+        var verificationRequestedBusinessProfileId = $("#requested_business_profile_id").val();
+        var verificationRequestedBusinessProfileName = $("#requested_business_profile_name").val();
+        //alert(verificationRequestedBusinessProfileId);
+        //e.preventDefault();
+    
+        $.ajax({
+            url: "{{route('business.profile.verification.request')}}",
+            type: "POST",
+            data: {"verificationMsg": verificationMsg, "verificationRequestedBusinessProfileId": verificationRequestedBusinessProfileId, "verificationRequestedBusinessProfileName": verificationRequestedBusinessProfileName},
+            success: function (data) {
+                console.log(data);
+                /*
+                if($.isEmptyObject(data.error))
+                {
+                    if(data.msg){
+                        $('#email_login').addClass('invalid');
+                        $('#password_login').addClass('invalid');
+                    }
+                    else{
+                        var url = '{{ route("users.profile") }}';
+                        window.location.href=url;
+                    }
+                }
+                else{
+                    printErrorMsg(data.error);
+                }
+                */
+            }
+        });
+    
+    });    
+
 
     </script>
 @endpush

@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 trait PushNotificationTrait {
 
-        public  function pushNotificationSend($fcmToken,$title,$message,$action_url){
+        public  function pushNotificationSend($fcmToken,$title,$message,$action_url=null){
         
             $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
             $notification = [

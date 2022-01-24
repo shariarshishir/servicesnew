@@ -33,7 +33,8 @@ class NewRfqHasBidListener  implements ShouldQueue
             $fcmToken = $supplier->user->fcm_token;
             $title = "new response for your RFQ";
             $message = "Dear, ".$supplier->user->name.", A supplier has reponded for your RFQ.If you are interested please let him know about your interest";
-            $this->pushNotificationSend($fcmToken,$title,$message);
+            $action_url = route('rfq.my');
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
             
             Mail::to($supplier->user->email)->send(new NewRfqHasBidMail($data));
             Notification::send($supplier->user,new RfqBidNotification($data));

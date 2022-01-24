@@ -2380,31 +2380,44 @@
         var verificationRequestedBusinessProfileName = $("#requested_business_profile_name").val();
         //alert(verificationRequestedBusinessProfileId);
         //e.preventDefault();
-    
-        $.ajax({
-            url: "{{route('business.profile.verification.request')}}",
-            type: "POST",
-            data: {"verificationMsg": verificationMsg, "verificationRequestedBusinessProfileId": verificationRequestedBusinessProfileId, "verificationRequestedBusinessProfileName": verificationRequestedBusinessProfileName},
-            success: function (data) {
-                console.log(data);
-                /*
-                if($.isEmptyObject(data.error))
-                {
-                    if(data.msg){
-                        $('#email_login').addClass('invalid');
-                        $('#password_login').addClass('invalid');
-                    }
-                    else{
-                        var url = '{{ route("users.profile") }}';
-                        window.location.href=url;
-                    }
-                }
-                else{
-                    printErrorMsg(data.error);
-                }
-                */
+        swal({
+            title: "Want to send request for review?",
+            text: "Please ensure you have added all the information.",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            reverseButtons: !0
+        }).then(function (e) {
+            if (e.value === true)
+            {
+                $.ajax({
+                    url: "{{route('business.profile.verification.request')}}",
+                    type: "POST",
+                    data: {"verificationMsg": verificationMsg, "verificationRequestedBusinessProfileId": verificationRequestedBusinessProfileId, "verificationRequestedBusinessProfileName": verificationRequestedBusinessProfileName},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
+                    success:function(response)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            $('#send-verification-request-modal').modal('close');
+                            swal("Done!", response.message,"success");
+                        },
+                        error: function(xhr, status, error)
+                        {
+                            toastr.success(error);
+                        }
+                    });
             }
-        });
+            else {
+                e.dismiss;
+            }
+        }, function (dismiss) {
+            return false;
+        })
     
     });    
 

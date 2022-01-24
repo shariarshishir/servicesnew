@@ -110,11 +110,13 @@
 						</ul>
 					</div>
 					@if($business_profile->is_business_profile_verified == 0)
+					<div class="profile_verification_request_block">
 						<div class="card-alert card orange">
 							<div class="card-content white-text">
 								<p>WARNING : Your profile is not verified. <a href="#send-verification-request-modal" class="send-verification-request-trigger modal-trigger">Send Request</a></p>
 							</div>
-						</div>											
+						</div>										
+					</div>	
 					@endif					
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>

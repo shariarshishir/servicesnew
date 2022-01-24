@@ -1,4 +1,7 @@
 <div class="tabcontent">
+	
+	@include('wholesaler_profile.verification_message')
+
 	<h3>About the Company</h3>
 	<div class="contentBox">
 		<div class="company_stuff center-align row">

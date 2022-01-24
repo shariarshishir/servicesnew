@@ -146,24 +146,6 @@
     </div>
 </div>
 
-<div id="send-verification-request-modal" class="modal">
-    <div class="modal-content">
-        <legend>Request for verification</legend>
-        <form id="profile_verification_request" method="POST">
-            <div class="row">
-                <div class="input-field col s12">
-                    <label for="verification_text">Message <i data-position="top" data-tooltip="Click Here" class="material-icons tooltipped">info</i></label>
-                    <textarea id="verification_text" name="verification_text"></textarea>
-                </div>
-            </div>
-            <button type="submit" class="btn">Submit</button>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
-</div>
-
 @if (Session::has('business_profile_create_permission'))
     <script>
         swal("",'{!!session::get("business_profile_create_permission")!!}',"warning");

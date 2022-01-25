@@ -428,7 +428,7 @@
                 $("#fcm_token").val(fcm_token);
                
             }).catch(function (error) {
-                alert(error);
+                //alert(error);
             });
 
         });

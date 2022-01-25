@@ -21,6 +21,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
+                            <input type="hidden"  name="fcm_token" id="fcm_token" value="" />
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="email" class="">{{ __('E-Mail Address') }}</label>
@@ -142,4 +143,62 @@
 
     </div>
 </div>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+<script>
+    $( document ).ready(function() {
+        var firebaseConfig = {
+            apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
+            authDomain: "merchant-bay-service.firebaseapp.com",
+            projectId: "merchant-bay-service",
+            storageBucket: "merchant-bay-service.appspot.com",
+            messagingSenderId: "789211877611",
+            appId: "1:789211877611:web:006bb3073632a306daeeae",
+            measurementId: "G-M5LLMK2G5S"
+        };
+       
+        
+
+        if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+        }else {
+        firebase.app(); // if already initialized, use that one
+        }
+        
+        const messaging = firebase.messaging();
+        
+        
+        messaging.requestPermission()
+            .then(function () {
+                return messaging.getToken()
+            })
+            .then(function (fcm_token) {
+                var fcm_token = fcm_token;
+                $("#fcm_token").val(fcm_token);
+               
+            }).catch(function (error) {
+                alert(error);
+            });
+
+        });
+    function printErrorMsg (msg) {
+        $.each( msg, function( key, value ) {
+          $('.'+key+'_err').text(value);
+        });
+    }
+    messaging.onMessage(function(payload) {
+    const noteTitle = payload.notification.title;
+    const noteOptions = {
+        body: payload.notification.body,
+        icon: payload.notification.icon,
+        data:{
+            time:  new Date(Date.now()).toString(),
+            click_action: payload.notification.click_action
+        }
+    };
+
+    
+    new Notification(noteTitle, noteOptions);
+});
+</script>
+
 @endsection

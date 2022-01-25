@@ -409,18 +409,18 @@
             appId: "1:789211877611:web:006bb3073632a306daeeae",
             measurementId: "G-M5LLMK2G5S"
         };
-       
-        
+
+
 
         if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
         }else {
         firebase.app(); // if already initialized, use that one
         }
-        
+
         const messaging = firebase.messaging();
-        
-        
+
+
         messaging.requestPermission()
             .then(function () {
                 return messaging.getToken()
@@ -428,7 +428,7 @@
             .then(function (fcm_token) {
                 var fcm_token = fcm_token;
                 $("#fcm_token").val(fcm_token);
-               
+
             }).catch(function (error) {
                 alert(error);
             });
@@ -784,6 +784,7 @@ $("#searchOption").change(function(){
     }
 });
 $(document).on("keyup",".search_input",function(){
+
     if($(this).val().length == 0){
         $("#search-results-wrapper").hide();
     }
@@ -882,8 +883,10 @@ $(document).on("keyup",".search_input",function(){
                             else // list for supplier
                             {
                                 var image;
+                                var profile_url="{{route('supplier.profile', ':slug')}}";
+                                    profile_url=profile_url.replace(':slug', response.data[i].alias);
                                 html += '<div class="product-item">';
-                                html += '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                                html += '<a href="'+profile_url+'" class="overlay_hover">&nbsp;</a>';
                                 if(response.data[i].user.image)
                                 {
                                 image = "{{asset('storage/')}}"+'/'+response.data[i].user.image;
@@ -960,8 +963,10 @@ $(document).on("keyup",".search_input",function(){
                         $('.vendor-info').html(nohtml);
                         //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0;i<response.data.length;i++){
+                            var profile_url="{{route('supplier.profile', ':slug')}}";
+                                profile_url=profile_url.replace(':slug', response.data[i].alias);
                             html+='<div class="vendor-info">';
-                            html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            html+= '<a href="'+profile_url+'" class="overlay_hover">&nbsp;</a>';
                             html+= '<h4>'+response.data[i].business_name+'</h4>';
                             html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
                             html += '<div class="search-item-tag">Supplier Profile</div>';

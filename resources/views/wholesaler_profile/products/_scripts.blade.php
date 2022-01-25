@@ -25,9 +25,9 @@
         })
 
         $('.js-example-basic-multiple').select2();
-        var business_profile_id= '{{$business_profile->id}}';
+        var business_profile_alias= '{{$business_profile->alias}}';
         var url = '{{ route("wholesaler.product.index", ":slug") }}';
-            url = url.replace(':slug', business_profile_id);
+            url = url.replace(':slug', business_profile_alias);
         var table = $('#seller-product-datatable').DataTable({
             searching: false,
             processing: true,

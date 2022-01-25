@@ -14,12 +14,12 @@
             <div class="business_list_itembox">
                 <div class="box_shadow list_box">
                     <p>
-                        <span>Business Name:</span> 
+                        <span>Business Name:</span>
                         @if($profile->business_type==1)
-                        <a href="{{route('business.profile.show',$profile->id)}}">{{$profile->business_name}}</a>
+                        <a href="{{route('manufacturer.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
                         @else
-                        <a href="{{route('wholesaler.profile.show',$profile->id)}}">{{$profile->business_name}}</a>
-                        @endif                        
+                        <a href="{{route('wholesaler.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
+                        @endif
                     </p>
                     <p><span>Business Type:</span>
                         @switch($profile->business_type)
@@ -44,9 +44,9 @@
                         </label>
                     </div>
                     @if($profile->business_type==1)
-                    <a class="business_view" href="{{route('business.profile.show',$profile->id)}}">View Details</a>
+                    <a class="business_view" href="{{route('manufacturer.profile.show',$profile->alias)}}">View Details</a>
                     @else
-                    <a class="business_view" href="{{route('wholesaler.profile.show',$profile->id)}}">View Details</a>
+                    <a class="business_view" href="{{route('wholesaler.profile.show',$profile->alias)}}">View Details</a>
                     @endif
                 </div>
             </div>

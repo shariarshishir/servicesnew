@@ -10,9 +10,9 @@ use App\Models\BusinessProfile;
 
 class OrderController extends Controller
 {
-    public function index($business_profile_id)
+    public function index($alias)
    {
-        $business_profile=BusinessProfile::withTrashed()->findOrFail($business_profile_id);
+        $business_profile=BusinessProfile::withTrashed()->where('alias', $alias)->firstOrFail();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             $orders = VendorOrder::where('business_profile_id',$business_profile->id)->whereNotIn('state', ['pending','cancel'])->with(['billingAddress','shippingAddress'])->latest()->get();

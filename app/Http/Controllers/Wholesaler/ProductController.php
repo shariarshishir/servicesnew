@@ -30,15 +30,15 @@ use App\Rules\ReadyStockFullStockRule;
 
 class ProductController extends Controller
 {
-    public function index(Request $request, $business_profile_id)
+    public function index(Request $request, $alias)
    {
 
-        $business_profile=BusinessProfile::withTrashed()->where('id', $business_profile_id)->first();
+        $business_profile=BusinessProfile::withTrashed()->where('alias', $alias)->first();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             if ($request->ajax())
             {
-                $data =Product::withTrashed()->latest()->where('business_profile_id',$business_profile_id)->with('images');
+                $data =Product::withTrashed()->latest()->where('business_profile_id',$business_profile->id)->with('images');
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('image',function($row){

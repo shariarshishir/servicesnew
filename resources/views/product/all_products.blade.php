@@ -34,7 +34,7 @@
                         <h4>{{$title}}</h4>
                         <div class="moqBox">MOQ: {{$list->moq}}</div>
                         <div class="moq_view_details">
-                            <a class="moq_buss_name moq_left left" href="{{ route("supplier.profile",$list->businessProfile->id) }}">{{$list->businessProfile->business_name}}</a>
+                            <a class="moq_buss_name moq_left left" href="{{ route("supplier.profile",$list->businessProfile->alias) }}">{{$list->businessProfile->business_name}}</a>
                             <a class="moq_view moq_right right" href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">View Details </a>
                         </div>
                     </div>

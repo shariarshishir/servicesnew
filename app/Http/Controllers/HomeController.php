@@ -346,7 +346,6 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($manufacture_products);
                 $allItems = $allItems->merge($blogs);
                 $allItems = $allItems->merge($suppliers);
-
                 //dd($allItems);
 
                 //dd($results);
@@ -631,9 +630,9 @@ class HomeController extends Controller
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile
-    public function supplerProfile($id)
+    public function supplierProfile($alias)
     {
-        $business_profile=BusinessProfile::findOrFail($id);
+        $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
         //manufacture
         // $flag=0;
         // if( $business_profile->companyOverview->about_company == null){
@@ -660,10 +659,10 @@ class HomeController extends Controller
         if($business_profile->business_type == 1 )
         {
 
-            $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations.country','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations.country','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
             $userObj = User::where('id',$business_profile->user_id)->get();
-            $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
-            $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+            $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$business_profile->id)->first();
+            $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
             ->limit(4)
             ->get();
             // $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
@@ -695,9 +694,9 @@ class HomeController extends Controller
         //wholesaler
         if($business_profile->business_type == 2 )
         {
-            $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
             $userObj = User::where('id',$business_profile->user_id)->get();
-            $mainProducts=Product::with('images')->where('business_profile_id',$id)->inRandomOrder()
+            $mainProducts=Product::with('images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
             ->limit(4)
             ->get();
             // $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();

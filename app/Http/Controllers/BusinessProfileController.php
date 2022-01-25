@@ -86,9 +86,11 @@ class BusinessProfileController extends Controller
              'error' => $validator->getMessageBag()),
              400);
          }
+
          try{
                 $business_profile_data=[
                     'business_name' => $request->business_name,
+                    'alias'   => $this->createAlias($request->business_name),
                     'user_id'       => auth()->id(),
                     'location'      => $request->location,
                     'business_type' => $request->business_type,
@@ -178,10 +180,39 @@ class BusinessProfileController extends Controller
 
     }
 
-    public function show($id)
+    public function createAlias($name)
     {
-        $business_profile = BusinessProfile::withTrashed()->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
-        $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
+        $lowercase=strtolower($name);
+        $space_replace=str_replace(' ', '-', $lowercase);
+        $alias=$space_replace;
+        return $this->checkExistsAlias($alias);
+    }
+
+    public function checkExistsAlias($alias)
+    {
+        $check_exists=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists){
+            $create_array= explode('-',$alias);
+            $last_key=array_slice($create_array,-1,1);
+            $last_key_string=implode(' ',$last_key);
+            if(is_numeric($last_key_string)){
+                $last_key_string++;
+                array_pop($create_array);
+                array_push($create_array,$last_key_string);
+            }else{
+                array_push($create_array,1);
+            }
+            $alias=implode("-",$create_array);
+            return $this->checkExistsAlias($alias);
+
+        }
+
+        return $alias;
+    }
+    public function show($alias)
+    {
+        $business_profile = BusinessProfile::withTrashed()->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->where('alias',$alias)->firstOrFail();
+        $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$business_profile->id)->first();
 
 
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
@@ -190,17 +221,18 @@ class BusinessProfileController extends Controller
             $sizes=['S','M','L','XL','XXL','XXXL'];
             $products=Product::withTrashed()->latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
-                $mainProducts=Product::withTrashed()->with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+                $mainProducts=Product::withTrashed()->with('product_images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
                 ->limit(4)
                 ->get();
-            $default_certification=Certification::get();
-            $country=Country::pluck('name','id');
-            return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification','country'));
+                $default_certification=Certification::get();
+                $country=Country::pluck('name','id');
+                return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification','country'));
             }
-            if($business_profile->business_type == 2){
+            abort(404);
+            // if($business_profile->business_type == 2){
 
-               return view('wholesaler_profile.index',compact('business_profile'));
-            }
+            //    return view('wholesaler_profile.index',compact('business_profile'));
+            // }
 
 
         }

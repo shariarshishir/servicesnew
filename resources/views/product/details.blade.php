@@ -86,7 +86,7 @@ $reviewsCount = count($productReviews);
                         <div class="row">
                             <div class="col s12 m6 l6">
                                 <div class="seller-store">
-                                    <a href="{{route('supplier.profile', $product->businessProfile->id)}}">{{$product->businessProfile->business_name}}</a>
+                                    <a href="{{route('supplier.profile', $product->businessProfile->alias)}}">{{$product->businessProfile->business_name}}</a>
                                 </div>
                             </div>
 
@@ -102,7 +102,7 @@ $reviewsCount = count($productReviews);
                         <!-- <div class="row">
                             <div class="col s12 m6 l6 left-align">
                                 <div class="seller-store">
-                                    <a href="{{route('supplier.profile', $product->businessProfile->id)}}">{{$product->businessProfile->business_name}}</a>
+                                    <a href="{{route('supplier.profile', $product->businessProfile->alias)}}">{{$product->businessProfile->business_name}}</a>
                                     {{-- <a href="{{ route('users.myshop',$product->vendor->vendor_uid) }}"><i class="material-icons dp48">store</i> {{ $product->vendor->vendor_name }}</a> --}}
                                 </div>
                             </div>
@@ -893,7 +893,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col s12">
                                                 <label>Experience : </label>
@@ -915,7 +915,7 @@ $reviewsCount = count($productReviews);
                                                     <div class="star-rating" data-score="{{ $productReview->communication_rating }}"></div>
                                                 </div>
                                             </div>
-                                            <div class="row"> 
+                                            <div class="row">
                                                 <div class="col s12 review_info_box">
                                                     <label>On Time Delivery : </label>
                                                     <div class="star-rating" data-score="{{ $productReview->ontime_delivery_rating }}"></div>
@@ -933,12 +933,12 @@ $reviewsCount = count($productReviews);
                                                     <div class="star-rating" data-score="{{ $productReview->product_quality_rating }}"></div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
                             @endforeach
                             @else

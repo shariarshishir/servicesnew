@@ -16,7 +16,7 @@
                         <p style="margin: 0px; padding: 8px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
                             Dear {{$business_profile->user->name}},
                         </p>
-                        
+
                         <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
                             Thank you for opening your business profile in Merchant Bay. Your profile for {{$business_profile->business_name}} is successfully created. It is currently <strong>60%</strong> completed. A complete profile gets advantage in buyer search visibility. 
                         </p>
@@ -29,9 +29,9 @@
                             <tr>
                                 <td style="text-align: left; padding: 5px; margin: 0px; width: 50%;">
                                     @if($business_profile->business_type==1)
-                                    <a target="_blank" href="{{route('business.profile.show',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
+                                    <a target="_blank" href="{{route('manufacturer.profile.show',$business_profile->alias)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
                                     @else
-                                    <a target="_blank" href="{{route('wholesaler.profile.info',$business_profile->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
+                                    <a target="_blank" href="{{route('wholesaler.profile.info',$business_profile->alias)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
                                     @endif
                                 </td>
                             </tr>

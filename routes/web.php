@@ -71,6 +71,8 @@ use App\Http\Controllers\RfqBidController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');
 Route::post('import',[ImportController::class, 'import'])->name('import');
@@ -94,7 +96,6 @@ Route::get('/contactus', [HomeController::class, 'contactusLandingPage'])->name(
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
 Route::get('/supplier/location/data',[HomeController::class,'getSupplierLocationData'])->name('get.supplier.location.data');
-Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile')->middleware('auth');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
@@ -185,7 +186,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile', [BusinessProfileController::class, 'index'])->name('business.profile');
     Route::get('/business/profile/create', [BusinessProfileController::class, 'create'])->name('business.profile.create');
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
-    Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
+    Route::get('/manufacturer/profile/{alias}', [BusinessProfileController::class, 'show'])->name('manufacturer.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
     //Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
@@ -230,18 +231,18 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
         //product
-        Route::get('/profile/show/{id}', [ProfileInfoController::class, 'show'])->name('wholesaler.profile.show');
-        Route::get('/product/{business_profile_id}', [WholesalerProductController::class, 'index'])->name('wholesaler.product.index');
+        Route::get('/profile/{alias}', [ProfileInfoController::class, 'show'])->name('wholesaler.profile.show');
+        Route::get('/profile/{alias}/products', [WholesalerProductController::class, 'index'])->name('wholesaler.product.index');
         Route::post('/product/store', [WholesalerProductController::class, 'store'])->name('wholesaler.product.store');
         Route::get('/product/edit/{sku}', [WholesalerProductController::class, 'edit'])->name('wholesaler.product.edit');
         Route::put('/product/update/{sku}', [WholesalerProductController::class, 'update'])->name('wholesaler.product.update');
         Route::get('/product/publish-unpublish/{sku}',[WholesalerProductController::class, 'publishUnpublish'])->name('wholesaler.product.publish.unpublish');
         //order
-        Route::get('order/{business_profile_id}',[WholesalerOrderController::class, 'index'])->name('wholesaler.order.index');
+        Route::get('profile/{alias}/received-orders',[WholesalerOrderController::class, 'index'])->name('wholesaler.order.index');
         Route::get('order-delivered/{orderNumber}',[WholesalerOrderController::class, 'orderDelivered']);
         Route::get('order-type-filter', [WholesalerOrderController::class, 'orderTypeFilter'])->name('wholesaler.order.type.filter');
         //profile info
-        Route::get('profile-details/{business_profile_id}',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
+        Route::get('profile/{alias}/info',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
 
     });
     //tinymc
@@ -362,6 +363,7 @@ Route::group(['prefix'=>'/manufacture'],function (){
 
 });
 
+Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
 
 
 

@@ -409,7 +409,7 @@
                             <br/><br/>
                             <span class="col-md-3"></span>
                             @if(!empty($product->business_profile_id))
-                                <a href="{{ route('supplier.profile', $product->business_profile_id) }}" class="text-center ic-primary">View Company Profile</a>
+                                <a href="{{ route('supplier.profile', $product->businessProfile->alias) }}" class="text-center ic-primary">View Company Profile</a>
                             @else
                                 <a href="javascript:void(0);" class="text-center ic-primary">View Company Profile</a>
                             @endif

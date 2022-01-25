@@ -40,7 +40,7 @@
                 <p><i class="material-icons dp48 waves-effect waves-light">person</i> {{$user->name}}</p>
                 <p><i class="material-icons dp48 waves-effect waves-light">email</i> {{$user->email}}</p>
                 <p><i class="material-icons dp48 waves-effect waves-light">local_phone</i> {{$user->phone}}</p>
-                
+
                 <div class="user_my_order_btnwrap">
                     <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
                 </div>
@@ -65,9 +65,9 @@
                     <div class="<?php echo $className; ?>">
                         <div class="my_businesses_box card user-business-profile-short-info">
                             @if($businessprofile->business_type==1)
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}">{{ $businessprofile->business_name }}</a></p>
                             @else
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}">{{ $businessprofile->business_name }}</a></p>
                             @endif
                             <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
                             <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>

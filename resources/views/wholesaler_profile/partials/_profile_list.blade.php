@@ -45,9 +45,9 @@
 
 <!--div class="col s12 profile-menu-list">
     <ul class=" z-depth-1 profile-tabs">
-        <li class="profile-item-tab col m2 profile-tab"><a class="{{ Route::is('business.profile.show') ? 'active' : ''}}" href="{{route('business.profile.show', $business_profile->id)}}">Profile</a></li>
-        <li class="profile-item-tab col m2 products-tab"><a class="{{ Route::is('wholesaler.product.index') ? 'active' : ''}}" href="{{route('wholesaler.product.index', $business_profile->id)}}">Products</a></li>
-        <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('wholesaler.order.index') ? 'active' : ''}}" href="{{route('wholesaler.order.index', $business_profile->id)}}">Orders</a></li>
+        <li class="profile-item-tab col m2 profile-tab"><a class="{{ Route::is('manufacturer.profile.show') ? 'active' : ''}}" href="{{route('manufacturer.profile.show', $business_profile->alias)}}">Profile</a></li>
+        <li class="profile-item-tab col m2 products-tab"><a class="{{ Route::is('wholesaler.product.index') ? 'active' : ''}}" href="{{route('wholesaler.product.index', $business_profile->alias)}}">Products</a></li>
+        <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('wholesaler.order.index') ? 'active' : ''}}" href="{{route('wholesaler.order.index', $business_profile->alias)}}">Orders</a></li>
         {{-- <li class="profile-item-tab col m2 orders-modification-tab"><a class="{{ Route::is('ord.mod.req.index') ? 'active' : ''}}" href="{{route('ord.mod.req.index')}}"><span class="orderModificationCount"></span>  Requested For Msodification</a></li>
         <li class="profile-item-tab col m2 orders-tab"><a class="{{ Route::is('user.order.query.index') ? 'active' : ''}}" href="{{route('user.order.query.index')}}"><span class="orderQueryProcessedCount"></span> Orders Query</a></li>
         <li class="profile-item-tab col m2 reviews-tab"><a class="{{ Route::is('vendor.review.index') ? 'active' : ''}}" href="{{route('vendor.review.index')}}">Reviews</a></li> --}}
@@ -56,10 +56,10 @@
 
 <div class="profile_tab_menu profile_wholesaler_tab_menu">
     <ul>
-        <li><a   class="{{ (request()->segment(2) == 'profile') ? 'active' : '' }}"  href="{{route('wholesaler.profile.show', $business_profile->id)}}" >Home</a></li>
-        <li><a   class="{{ (request()->segment(2) == 'profile-details') ? 'active' : '' }}"  href="{{route('wholesaler.profile.info', $business_profile->id)}}" >Profile</a></li>
-        <li><a   class="{{ (request()->segment(2) == 'product') ? 'active' : '' }}"   href="{{route('wholesaler.product.index', $business_profile->id)}}" >Products</a></li>
-        <li><a   class="{{ (request()->segment(2) == 'order') ? 'active' : '' }}"   href="{{route('wholesaler.order.index', $business_profile->id)}}">Received Orders</a></li>
+        <li><a   class="{{ empty(request()->segment(4)) ? 'active' : '' }}"  href="{{route('wholesaler.profile.show', $business_profile->alias)}}" >Home</a></li>
+        <li><a   class="{{ (request()->segment(4) == 'info') ? 'active' : '' }}"  href="{{route('wholesaler.profile.info', $business_profile->alias)}}" >Profile</a></li>
+        <li><a   class="{{ (request()->segment(4) == 'products') ? 'active' : '' }}"   href="{{route('wholesaler.product.index', $business_profile->alias)}}" >Products</a></li>
+        <li><a   class="{{ (request()->segment(4) == 'received-orders') ? 'active' : '' }}"   href="{{route('wholesaler.order.index', $business_profile->alias)}}">Received Orders</a></li>
 
     </ul>
 </div>

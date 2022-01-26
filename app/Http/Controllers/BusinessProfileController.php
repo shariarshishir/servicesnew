@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin\Certification;
+use stdClass;
+use App\Models\User;
+use App\Models\Country;
+use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
 use App\Models\CompanyOverview;
-use App\Models\CategoriesProduced;
+use Illuminate\Validation\Rule;
 use App\Models\MachineriesDetail;
+use App\Models\CategoriesProduced;
 use App\Models\CompanyFactoryTour;
 use App\Models\ProductionCapacity;
-use App\Models\BusinessProfileVerification;
+use App\Models\Admin\Certification;
 use App\Models\Manufacture\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Events\NewBusinessProfileHasCreatedEvent;
-use App\Models\Country;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+use App\Models\BusinessProfileVerification;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use stdClass;
+use App\Events\NewBusinessProfileHasCreatedEvent;
 
 
 class BusinessProfileController extends Controller
@@ -548,5 +549,49 @@ class BusinessProfileController extends Controller
 
         }
     }
+
+    public function aliasExistingCheck(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'alias' =>'required',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'error' => 'this field is required'),
+            400);
+        }
+        $alias=str_replace(' ','-',strtolower($request->alias));
+        $check_exists_alias=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists_alias){
+            return response()->json(['error' => 'The alias has already been taken'],409);
+        }
+        return response()->json(['msg' => 'this alias you can use', 'alias' => $alias],200);
+    }
+
+    public function updateAlias(Request $request)
+    {
+        $validator = Validator::make(['alias' =>str_replace(' ','-',strtolower($request->alias)), 'business_profile_id' => $request->business_profile_id ], [
+            'alias' =>'required|unique:business_profiles,alias',
+            'business_profile_id' => 'required'
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        $alias=str_replace(' ','-',strtolower($request->alias));
+        $business_profile=BusinessProfile::where('id', $request->business_profile_id)->update(['alias' => $alias]);
+        return response()->json([
+            'success' => true,
+            'msg'     => 'alias updated successfully.',
+            'url'     => route('business.profile'),
+        ],200);
+
+    }
+
 
 }

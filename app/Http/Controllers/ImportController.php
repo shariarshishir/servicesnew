@@ -49,11 +49,42 @@ class ImportController extends Controller
     {
         $profile=BusinessProfile::get();
         foreach($profile as $p){
-           $b_name= strtolower($p->business_name);
-           $alias=Str::replace(' ', '-', $b_name);
+           $alias= $this->createAlias($p->business_name);
+        //    $b_name= strtolower($p->business_name);
+        //    $alias=Str::replace(' ', '-', $b_name);
            $p->update(['alias' => $alias]);
         }
         return 'done!';
+    }
+
+    public function createAlias($name)
+    {
+        $lowercase=strtolower($name);
+        $space_replace=str_replace(' ', '-', $lowercase);
+        $alias=$space_replace;
+        return $this->checkExistsAlias($alias);
+    }
+
+    public function checkExistsAlias($alias)
+    {
+        $check_exists=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists){
+            $create_array= explode('-',$alias);
+            $last_key=array_slice($create_array,-1,1);
+            $last_key_string=implode(' ',$last_key);
+            if(is_numeric($last_key_string)){
+                $last_key_string++;
+                array_pop($create_array);
+                array_push($create_array,$last_key_string);
+            }else{
+                array_push($create_array,1);
+            }
+            $alias=implode("-",$create_array);
+            return $this->checkExistsAlias($alias);
+
+        }
+
+        return $alias;
     }
 
 

@@ -576,9 +576,9 @@ class BusinessProfileController extends Controller
         $alias=$this->removeSpecialCharacterFromAlais($request->alias);
         $check_exists_alias=BusinessProfile::where('alias', $alias)->first();
         if($check_exists_alias){
-            return response()->json(['error' => 'The alias has already been taken'],409);
+            return response()->json(['error' => 'The name has already been taken. Please try with another name.'],409);
         }
-        return response()->json(['msg' => 'this alias you can use', 'alias' => $alias],200);
+        return response()->json(['msg' => 'This name is available. Click arrow to use this name.', 'alias' => $alias],200);
     }
 
     public function updateAlias(Request $request)

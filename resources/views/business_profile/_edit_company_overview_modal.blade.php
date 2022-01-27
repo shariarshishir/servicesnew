@@ -25,7 +25,7 @@
                         <i class="material-icons send-icon" style="color: #565856; font-size: 25px;">send</i>
                     </button>
                 </div>
-                <div class="alias-loader">
+                <div class="alias-loader" style="display: none;">
                     <img src="{{asset('images/frontendimages/spinner.gif')}}" alt="" />
                 </div>
                 <span class="alias-msg"></span>

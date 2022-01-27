@@ -183,11 +183,20 @@ class BusinessProfileController extends Controller
 
     }
 
+    public function removeSpecialCharacterFromAlais($alias)
+    {
+        $lowercase=strtolower($alias);
+        $pattern= '/[^A-Za-z0-9\-]/';
+        $preg_replace= preg_replace($pattern, '-', $lowercase);
+        $single_hypen= preg_replace('/-+/', '-', $preg_replace);
+        $alias= $single_hypen;
+        return $alias;
+    }
+
+
     public function createAlias($name)
     {
-        $lowercase=strtolower($name);
-        $space_replace=str_replace(' ', '-', $lowercase);
-        $alias=$space_replace;
+        $alias=$this->removeSpecialCharacterFromAlais($name);
         return $this->checkExistsAlias($alias);
     }
 
@@ -563,17 +572,19 @@ class BusinessProfileController extends Controller
             'error' => 'this field is required'),
             400);
         }
-        $alias=str_replace(' ','-',strtolower($request->alias));
+
+        $alias=$this->removeSpecialCharacterFromAlais($request->alias);
         $check_exists_alias=BusinessProfile::where('alias', $alias)->first();
         if($check_exists_alias){
-            return response()->json(['error' => 'The alias has already been taken'],409);
+            return response()->json(['error' => 'The name has already been taken. Please try with another name.'],409);
         }
-        return response()->json(['msg' => 'this alias you can use', 'alias' => $alias],200);
+        return response()->json(['msg' => 'This name is available. Click arrow to use this name.', 'alias' => $alias],200);
     }
 
     public function updateAlias(Request $request)
     {
-        $validator = Validator::make(['alias' =>str_replace(' ','-',strtolower($request->alias)), 'business_profile_id' => $request->business_profile_id ], [
+        $alias=$this->removeSpecialCharacterFromAlais($request->alias);
+        $validator = Validator::make(['alias' => $alias, 'business_profile_id' => $request->business_profile_id ], [
             'alias' =>'required|unique:business_profiles,alias',
             'business_profile_id' => 'required'
 
@@ -585,7 +596,6 @@ class BusinessProfileController extends Controller
             'error' => $validator->getMessageBag()),
             400);
         }
-        $alias=str_replace(' ','-',strtolower($request->alias));
         $business_profile=BusinessProfile::where('id', $request->business_profile_id)->update(['alias' => $alias]);
         return response()->json([
             'success' => true,

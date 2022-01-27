@@ -48,10 +48,9 @@ class ImportController extends Controller
     public function generateAlias()
     {
         $profile=BusinessProfile::get();
+        //$profile=BusinessProfile::where('alias', NULL)->get();
         foreach($profile as $p){
            $alias= $this->createAlias($p->business_name);
-        //    $b_name= strtolower($p->business_name);
-        //    $alias=Str::replace(' ', '-', $b_name);
            $p->update(['alias' => $alias]);
         }
         return 'done!';
@@ -60,8 +59,10 @@ class ImportController extends Controller
     public function createAlias($name)
     {
         $lowercase=strtolower($name);
-        $space_replace=str_replace(' ', '-', $lowercase);
-        $alias=$space_replace;
+        $pattern= '/[^A-Za-z0-9\-]/';
+        $preg_replace= preg_replace($pattern, '-', $lowercase);
+        $single_hypen= preg_replace('/-+/', '-', $preg_replace);
+        $alias= $single_hypen;
         return $this->checkExistsAlias($alias);
     }
 

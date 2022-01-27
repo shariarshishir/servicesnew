@@ -25,7 +25,10 @@
                         <i class="material-icons send-icon" style="color: #565856; font-size: 25px;">send</i>
                     </button>
                 </div>
-                <span class="col s12 alias-msg"> </span>
+                <div class="alias-loader" style="display: none;">
+                    <img src="{{asset('images/frontendimages/spinner.gif')}}" alt="" />
+                </div>
+                <span class="alias-msg"></span>
             </div>
         </form>
 
@@ -118,27 +121,27 @@
                 data: {alias : alias},
                 url: url,
                 beforeSend: function() {
-                $('.loading-message').html("Please Wait.");
-                $('#loadingProgressContainer').show();
+                //$('.loading-message').html("Please Wait.");
+                $('.alias-loader').show();
                 },
                 success:function(data)
                     {
-                        $('.loading-message').html("");
-		                $('#loadingProgressContainer').hide();
+                        //$('.loading-message').html("");
+		                $('.alias-loader').hide();
                         //obj.val(data.alias);
                         $('.alias-msg').text(data.msg);
 
-                        $('.alias-msg').removeClass('text-danger');
+                        $('.alias-msg').removeClass('text-danger').addClass('green-text');
                         $('#alias-submit-btn').prop('disabled', false);
                         $('.send-icon').css('color','#54A958');
 
                     },
                 error: function(xhr, status, error)
                     {
-                        $('.loading-message').html("");
-		                $('#loadingProgressContainer').hide();
+                        //$('.loading-message').html("");
+		                $('.alias-loader').hide();
                         //obj.val(data.alias);
-                        $('.alias-msg').addClass('text-danger');
+                        $('.alias-msg').removeClass('green-text').addClass('text-danger');
                         $('.alias-msg').text(xhr.responseJSON.error);
                         $('#alias-submit-btn').prop('disabled', true);
                         $('.send-icon').css('color','#565856');
@@ -172,20 +175,20 @@
                         enctype: 'multipart/form-data',
                         url: url,
                         beforeSend: function() {
-                        $('.loading-message').html("Please Wait.");
-                        $('#loadingProgressContainer').show();
+                        //$('.loading-message').html("Please Wait.");
+                        $('.alias-loader').show();
                         },
                         success:function(response)
                             {
-                                $('.loading-message').html("");
-                                $('#loadingProgressContainer').hide();
+                                //$('.loading-message').html("");
+                                $('.alias-loader').hide();
                                 swal("Done!", response.msg,"success");
                                 window.location = response.url;
                             },
                             error: function(xhr, status, error)
                             {
-                                $('.loading-message').html("");
-                                $('#loadingProgressContainer').hide();
+                                //$('.loading-message').html("");
+                                $('.alias-loader').hide();
                                 $('#alias-submit-btn').prop('disabled', true);
                                 $('.send-icon').css('color','#565856');
                                 $('.alias-msg').addClass('text-danger');

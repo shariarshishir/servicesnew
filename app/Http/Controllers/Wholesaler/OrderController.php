@@ -16,7 +16,13 @@ class OrderController extends Controller
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             $orders = VendorOrder::where('business_profile_id',$business_profile->id)->whereNotIn('state', ['pending','cancel'])->with(['billingAddress','shippingAddress'])->latest()->get();
-            return view('wholesaler_profile.orders.index',compact('orders','business_profile'));
+            $orderApprovedNotificationIds = [];
+            foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewOrderHasApprovedNotification')->where('read_at',null) as $notification)
+            {
+                array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
+               
+            }
+            return view('wholesaler_profile.orders.index',compact('orders','business_profile','orderApprovedNotificationIds'));
         }
         abort(401);
 

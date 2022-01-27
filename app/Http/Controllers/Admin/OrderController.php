@@ -23,6 +23,8 @@ class OrderController extends Controller
     public function orderList()
     {
        $collection=VendorOrder::latest()->paginate(10);
+       auth()->guard('admin')->user()->unreadNotifications->where('id', $notificationId)->markAsRead();
+
        return view('admin.order.index',compact('collection'));
     }
 

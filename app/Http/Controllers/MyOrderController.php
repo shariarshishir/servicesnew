@@ -10,7 +10,13 @@ class MyOrderController extends Controller
     public function index(Request $request)
     {
         $orders = VendorOrder::where('user_id',auth()->user()->id)->with(['billingAddress','shippingAddress'])->latest()->get();
-        return view('my_order.orders.index',compact('orders'));
+        $orderApprovedNotificationIds = [];
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewOrderHasApprovedNotification')->where('read_at',null) as $notification)
+        {
+            array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
+           
+        }
+        return view('my_order.orders.index',compact('orders','orderApprovedNotificationIds'));
     }
     public function  orderNotificationMarkAsRead(Request $request){
 

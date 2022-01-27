@@ -11,6 +11,7 @@ use App\Events\OrderQueryFromAdminEvent;
 use App\Events\PaymentSuccessEvent;
 use App\Events\ProductAvailabilityEvent;
 use App\Events\NewBusinessProfileHasCreatedEvent;
+use App\Events\NewBusinessProfileVerificationRequestEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -63,6 +64,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewBusinessProfileHasCreatedEvent::class => [
             'App\Listeners\NewBusinessProfileHasCreatedListener',
+        ],
+        NewBusinessProfileVerificationRequestEvent::class => [
+            'App\Listeners\NewBusinessProfileVerificationRequestListener',
         ],
     ];
 

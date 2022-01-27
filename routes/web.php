@@ -367,7 +367,6 @@ Route::group(['prefix'=>'/manufacture'],function (){
 
 });
 
-Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
 
 
 
@@ -483,5 +482,8 @@ Route::group(['prefix'=>'/admin'],function (){
     });
 
 });
+
+Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
+
 
 

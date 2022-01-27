@@ -88,6 +88,9 @@ class BusinessProfile extends Model
     {
         return $this->hasOne(Walfare::class);
     }
+    public function businessProfileVerificationsRequest(){
+        return $this->hasOne(BusinessProfileVerificationsRequest::class);
+    }
     public function security()
     {
         return $this->hasOne(Security::class);

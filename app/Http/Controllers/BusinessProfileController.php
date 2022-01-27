@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewBusinessProfileHasCreatedEvent;
+use App\Events\NewBusinessProfileVerificationRequestEvent;
 
 
 class BusinessProfileController extends Controller
@@ -213,7 +214,7 @@ class BusinessProfileController extends Controller
     }
     public function show($alias)
     {
-        $business_profile = BusinessProfile::withTrashed()->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->where('alias',$alias)->firstOrFail();
+        $business_profile = BusinessProfile::withTrashed()->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour','businessProfileVerificationsRequest')->where('alias',$alias)->firstOrFail();
         $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$business_profile->id)->first();
 
 
@@ -597,14 +598,15 @@ class BusinessProfileController extends Controller
 
     public function businessProfileVerificationRequest(Request $request)
     {
-        //dd($request);
         try
         {
-            BusinessProfileVerificationsRequest::create([
+            BusinessProfileVerificationsRequest::where('business_profile_id',$request->verificationRequestedBusinessProfileId)->delete();
+            $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::create([
                 'business_profile_id' => $request->verificationRequestedBusinessProfileId,
                 'business_profile_name' => $request->verificationRequestedBusinessProfileName,
                 'verification_message'=> $request->verificationMsg,
             ]);
+            event(new NewBusinessProfileVerificationRequestEvent($businessProfileVerificationsRequest));
             return response()->json([
                 'success' => true,
                 'message' => 'Request sent successfully.'

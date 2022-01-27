@@ -21,7 +21,7 @@
                                         @if(isset($countOrderQueryMdf))
                                             @foreach ($countOrderQueryMdf as $key => $count)
                                                 @if($key == $item->id)
-                                                    <span class="new badge blue newOrder">{{$count}}</span>
+                                                    <span class="new_item_color newOrder">{{$count}} New</span>
                                                 @endif
                                             @endforeach
                                         @endif

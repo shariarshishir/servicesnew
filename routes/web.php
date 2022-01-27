@@ -299,14 +299,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //active inactive business profile by user
     Route::get('businessprofile/delete/{businessprofileid}', [UsersManageBusinessProfileController::class, 'delete'])->name('business.profile.delete');
     Route::get('businessprofile/restore/{businessprofileid}', [UsersManageBusinessProfileController::class, 'restore'])->name('business.profile.restore');
-<<<<<<< HEAD
    //alias
-   Route::get('alias-existing-check',[BusinessProfileController::class, 'aliasExistingCheck'])->name('alias.existing.check');
-   Route::post('alias-update',[BusinessProfileController::class, 'updateAlias'])->name('update.alias');
-=======
+    Route::get('alias-existing-check',[BusinessProfileController::class, 'aliasExistingCheck'])->name('alias.existing.check');
+    Route::post('alias-update',[BusinessProfileController::class, 'updateAlias'])->name('update.alias');
 
     Route::post('/send-request-for-profile-verification', [BusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
->>>>>>> dev
 
 
 

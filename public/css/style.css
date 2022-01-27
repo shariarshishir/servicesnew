@@ -7502,6 +7502,22 @@ nav .pagination li.active .page-link {
     font-weight: 400;
     color: #000;
 }
+.verification-info-icon {
+    vertical-align: middle;
+}
+#profile_verification_request i {
+    vertical-align: middle;
+}
+.alias-loader {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+}
+.alias-msg {
+    font-size: 12px;
+    padding-top: 6px;
+    display: inline-block;
+}
 
 /* ************************* policy_content_wrap style end ******************************  */
 

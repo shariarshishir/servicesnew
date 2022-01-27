@@ -75,7 +75,7 @@ class ViewServiceProvider extends ServiceProvider
 
         view()->composer('include.admin._header', function($view) {
             if(auth()->guard('admin')->check()){
-                $notifications =auth()->guard('admin')->user()->unreadNotifications;
+                $notifications =auth()->guard('admin')->user()->unreadNotifications->where('read_at',NULL);
                 $view->with(['notifications'=>$notifications]);
             }
 

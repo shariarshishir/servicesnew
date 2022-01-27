@@ -779,11 +779,10 @@ class BusinessProfileController extends Controller
 
     public function showBusinessProfileVerificationRequest()
     {
-        auth()->guard('admin')->user()->unreadNotifications->where('type','App\Notifications\NewBusinessProfileVerificationRequestNotification');
+        auth()->guard('admin')->user()->unreadNotifications->where('type','App\Notifications\NewBusinessProfileVerificationRequestNotification')->where('read_at',null)->markAsRead();
 
         $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::latest()->paginate(10);
-        $notifications = auth()->guard('admin')->user()->unreadNotifications;
-        dd($notifications);
-        return view('admin.business_profile_verification_request.index',compact('businessProfileVerificationsRequest','notifications'));
+       
+        return view('admin.business_profile_verification_request.index',compact('businessProfileVerificationsRequest'));
     }
 }

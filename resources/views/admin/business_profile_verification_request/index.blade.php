@@ -2,7 +2,6 @@
 @section('content')
 !-- Main content -->
 
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -32,6 +31,7 @@
                               <tr>
                                   <th>ID</th>
                                   <th>Business Profile Name</th>
+                                  <th>Created At</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -41,6 +41,7 @@
                                       <td data-title="Business Profile Name">
                                         <a href="{{Route('business.profile.details', $list->business_profile_id)}}">{{$list->business_profile_name}}</a>
                                       </td>
+                                      <td data-title="created_at">{{$list->created_at}}</td>
                                   </tr>
                               @endforeach
                           </tbody>

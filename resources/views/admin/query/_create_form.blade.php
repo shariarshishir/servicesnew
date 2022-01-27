@@ -1,12 +1,4 @@
-@if(auth()->guard('admin')->user()->unreadNotifications)
-    @foreach (auth()->guard('admin')->user()->unreadNotifications as $notification)
-        @if($notification->type == "App\Notifications\OrderQueryNotification")
-            @if($notification->data['notification_data']['id'] == $collection->id)
-               {{  $notification->markAsRead(); }}
-            @endif
-        @endif
-    @endforeach
-@endif
+
 <form action="{{ route('query.request.store') }}" method="post" name="ordModCreateForm" id="ordModCreateForm" class="ordModCreateForm admin_order_create_form" enctype="multipart/form-data">
     @csrf
     <div class="form-group row">

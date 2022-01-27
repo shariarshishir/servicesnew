@@ -22,7 +22,9 @@ class NewBusinessProfileHasCreatedListener implements ShouldQueue
         $fcmToken = $admin->fcm_token;
         $title = "New business profile has created";
         $message = "A new business profile has created .Please assign success manager to verify information";
-        $this->pushNotificationSend($fcmToken,$title,$message);
+        $action_url=route('business.profile.details',$event->business_profile->id);
+        
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
         // //mail to admin after new business profile create
         Mail::to('success@merchantbay.com')->send(new NewBusinessProfileHasCreatedEmailToAdmin($event->business_profile));

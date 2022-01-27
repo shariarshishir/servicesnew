@@ -550,6 +550,11 @@ p {
     font-size: 14px;
 }
 
+.sidebar-mini .nav-sidebar .nav-link {
+    white-space: normal;
+    display: flex;
+}
+
 
 
 @media only screen and (max-width: 800px) {

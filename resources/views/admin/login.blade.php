@@ -118,7 +118,7 @@
                 $("#fcm_token").val(fcm_token);
                
             }).catch(function (error) {
-                alert(error);
+                //alert(error);
             });
 
         });
@@ -132,7 +132,13 @@
     const noteOptions = {
         body: payload.notification.body,
         icon: payload.notification.icon,
+        data:{
+            time:  new Date(Date.now()).toString(),
+            click_action: payload.notification.click_action
+        }
     };
+
+    
     new Notification(noteTitle, noteOptions);
 });
 </script>

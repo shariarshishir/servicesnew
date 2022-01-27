@@ -62,7 +62,8 @@ class OrderModificationCommentController extends Controller
             $title = "New reply message for order modification request from".$data->user->name;
             $details = json_decode($data->details);
             $message = $details[0]->details;
-            $this->pushNotificationSend($fcmToken,$title,$message);
+            $action_url = route('query.show', $data->orderModificationRequest->id);
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
             Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
             Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));

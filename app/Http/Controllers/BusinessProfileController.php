@@ -14,12 +14,13 @@ use App\Models\CategoriesProduced;
 use App\Models\CompanyFactoryTour;
 use App\Models\ProductionCapacity;
 use App\Models\Admin\Certification;
+use App\Models\BusinessProfileVerification;
+use App\Models\BusinessProfileVerificationsRequest;
 use App\Models\Manufacture\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use App\Models\BusinessProfileVerification;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewBusinessProfileHasCreatedEvent;
 
@@ -593,5 +594,31 @@ class BusinessProfileController extends Controller
 
     }
 
+
+    public function businessProfileVerificationRequest(Request $request)
+    {
+        //dd($request);
+        try
+        {
+            BusinessProfileVerificationsRequest::create([
+                'business_profile_id' => $request->verificationRequestedBusinessProfileId,
+                'business_profile_name' => $request->verificationRequestedBusinessProfileName,
+                'verification_message'=> $request->verificationMsg,
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Request sent successfully.'
+            ],200);
+
+        }
+        catch(\Exception $e)
+        {
+            return response()->json([
+                'success' => false,
+                'error'   => ['message' => $e->getMessage()],
+            ],500);
+
+        }
+    }
 
 }

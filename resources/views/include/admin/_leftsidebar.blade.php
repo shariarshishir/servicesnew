@@ -135,6 +135,12 @@
                 <p>Certification</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ Route('verification.request.index')}}" class="nav-link">
+                <i class="fa fa-certificate nav-icon"></i>
+                <p>Business Profile Verification Request</p>
+            </a>
+        </li>
 
         </ul>
       </nav>

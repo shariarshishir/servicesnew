@@ -109,6 +109,15 @@
 							<li class="tab tos-tab"><a href="#termsservice">Terms of Service</a></li>
 						</ul>
 					</div>
+					@if($business_profile->is_business_profile_verified == 0)
+					<div class="profile_verification_request_block">
+						<div class="card-alert card orange">
+							<div class="card-content white-text">
+								<p>WARNING : Your profile is not verified. <a href="#send-verification-request-modal" class="send-verification-request-trigger modal-trigger">Send Request</a></p>
+							</div>
+						</div>										
+					</div>	
+					@endif					
 					<div id="home" class="tabcontent">
 						<h3>About the Company</h3>
 						<div class="company_stuff center-align row">
@@ -1328,7 +1337,8 @@
 									<div class="col s6 m4 l2 paper_img press-highlight-img">
 										<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
 										<div class="press_img">
-											<img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+											<div class="press_img_box"><img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" /></div>
+											<div>{{$pressHighlight->title}}</div>
 										</div>
 									</div>
 								@endforeach
@@ -1726,6 +1736,7 @@
 	</div>
 </section>
 
+
     @include('business_profile._edit_company_overview_modal')
     @include('business_profile._edit_capacity_and_machineries_modal')
     @include('business_profile._edit_production_flow_and_manpower_modal')
@@ -1747,6 +1758,7 @@
 	@include('business_profile._create_or_update_terms_of_service_modal')
     @include('business_profile._edit_categories_produced')
     @include('business_profile._edit_machinery_details')
+	@include('business_profile._create_or_update_business_profile_verification_request')
 @endsection
 
 @include('business_profile._scripts')

@@ -4,6 +4,9 @@ $profileEditMode = Request::get('editmode');
 <!-- profile tabcontent end -->
 <div id="profile" class="tabcontent profile_table_design ">
 <div class="overview_table_wrap">
+		
+		@include('wholesaler_profile.verification_message')
+		
 		<div class="row top_titleWrap">
 			<div class="col s6 m6">
 				<h3>Company Overview</h3>

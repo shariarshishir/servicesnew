@@ -23,7 +23,8 @@ class NewUserHasRegisteredListener implements ShouldQueue
         $fcmToken = $admin->fcm_token;
         $title = "New user has registered";
         $message = "A new user is awating for review. Please review the user request and give feedback as soon as possible";
-        $this->pushNotificationSend($fcmToken,$title,$message);
+        $action_url=route('user.show',$event->user->id);
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
         //mail to admin
         Mail::to('success@merchantbay.com')->send(new NewUserRegistrationMail($event->user));

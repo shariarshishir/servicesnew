@@ -1,3 +1,4 @@
+@include('wholesaler_profile.verification_message')
 @if(count($orders) > 0)
     <div class="col-md-12">
         <div class="card card-with-padding order-list-block">

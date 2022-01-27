@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\QueryCommuncationNotification;
 use App\Mail\QueryCommuncationMail;
+use App\Http\Traits\PushNotificationTrait;
 
 class QueryController extends Controller
 {
+    use PushNotificationTrait;
     public function index()
     {
        $orderQueries=OrderModificationRequest::where(['user_id' => auth()->id(), 'type' => 1])->latest()->get();
@@ -192,6 +194,15 @@ class QueryController extends Controller
             'user_agent'                    => $request->header('User-Agent'),
         ]);
         $admin= Admin::find(1);
+        //send push notification to admin for order query request message from user
+        $fcmToken =  $admin->fcm_token;
+        $title = "New message for your order modification request";
+        $details = json_decode($data->details);
+        $message = $details[0]->details;
+        $action_url = route('query.show', $data->orderModificationRequest->id);
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+        
+        //send db notification to admin
         Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
         Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));
         return response()->json([

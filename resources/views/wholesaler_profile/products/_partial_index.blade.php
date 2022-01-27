@@ -3,6 +3,7 @@
         <div class="product-list-block">
             <div class="col-md-12">
                     <div class="card-with-padding profile_wholesaler_inner">
+                        @include('wholesaler_profile.verification_message')
                         <div class="card-body">
                             <div class="row">
                                 <div class="col m12 add-new-product-button">

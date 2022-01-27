@@ -17,6 +17,7 @@ use App\Models\BusinessProfileVerification;
 use App\Models\Walfare;
 use App\Models\Security;
 use App\Models\BusinessProfile;
+use App\Models\BusinessProfileVerificationsRequest;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
 class BusinessProfileController extends Controller
@@ -774,5 +775,11 @@ class BusinessProfileController extends Controller
         $businessProfile->save();
 
         return response()->json(["status"=>1, "message"=>"verified successfully"]);
+    }
+
+    public function showBusinessProfileVerificationRequest()
+    {
+        $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::latest()->paginate(10);
+        return view('admin.business_profile_verification_request.index',compact('businessProfileVerificationsRequest'));
     }
 }

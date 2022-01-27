@@ -10,7 +10,7 @@
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row input-field" style="margin-bottom: 45px;">
                 <div class="col s12" style="position: relative;">
-                    <label style="margin: 0; padding:0;">Customized Your Profile Url</label>
+                    <label style="margin: 0; padding:0;">Customize Your Profile Url</label>
                     <input type="text" class="form-control"
                         style="box-shadow: none !important;
                         border-bottom: 1px solid #9e9e9e !important;
@@ -22,7 +22,7 @@
                         background: none;
                         border: none;
                         box-shadow: none;"  id="alias-submit-btn" disabled>
-                        <i class="material-icons" style="color: #54A958; font-size: 25px;">send</i>
+                        <i class="material-icons send-icon" style="color: #565856; font-size: 25px;">send</i>
                     </button>
                 </div>
                 <span class="col s12 alias-msg"> </span>
@@ -130,6 +130,7 @@
 
                         $('.alias-msg').removeClass('text-danger');
                         $('#alias-submit-btn').prop('disabled', false);
+                        $('.send-icon').css('color','#54A958');
 
                     },
                 error: function(xhr, status, error)
@@ -140,6 +141,7 @@
                         $('.alias-msg').addClass('text-danger');
                         $('.alias-msg').text(xhr.responseJSON.error);
                         $('#alias-submit-btn').prop('disabled', true);
+                        $('.send-icon').css('color','#565856');
 
                     }
             });
@@ -185,6 +187,7 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#alias-submit-btn').prop('disabled', true);
+                                $('.send-icon').css('color','#565856');
                                 $('.alias-msg').addClass('text-danger');
                                 $('.alias-msg').text(xhr.responseJSON.error.alias ?? xhr.responseJSON.error.business_profile_id);
 

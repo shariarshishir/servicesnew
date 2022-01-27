@@ -39,6 +39,15 @@
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 <!-- Calendly link widget end -->
 <link rel="shortcut icon" href="{{ asset('images/frontendimages/favicon/favicon.png') }}" type="image/x-icon">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141181864-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-141181864-1');
+</script>
+
 @yield('css')
 {{-- jquery ui --}}
 {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> --}}

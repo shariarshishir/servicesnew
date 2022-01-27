@@ -48,6 +48,7 @@ class ImportController extends Controller
     public function generateAlias()
     {
         $profile=BusinessProfile::get();
+        //$profile=BusinessProfile::where('alias', NULL)->get();
         foreach($profile as $p){
            $alias= $this->createAlias($p->business_name);
            $p->update(['alias' => $alias]);

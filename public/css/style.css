@@ -7488,6 +7488,21 @@ nav .pagination li.active .page-link {
     color: #000 !important;
   }
 
+.swal2-popup .swal2-content {
+    line-height: 25px;
+}  
+.new_item_color{
+    background: yellow;
+    padding: 2px 3px;
+    font-size: 12px;
+    margin-left: 5px;
+    display: inline-block;
+    line-height: 15px;
+    border-radius: 3px;
+    font-weight: 400;
+    color: #000;
+}
+
 /* ************************* policy_content_wrap style end ******************************  */
 
 /* ******************** Media css style start *********************** */

@@ -1,7 +1,7 @@
 @foreach($orders as $orderItem)
             <tr class="newOrderRow">
                 <td data-title="Order Number" class="order-number" >
-                    <a  href="#order-details-modal_{{$orderItem->id}}" class="order-more-details modal-trigger">{{$orderItem->order_number}}</a>
+                    <a  href="#order-details-modal_{{$orderItem->id}}" class="order-more-details modal-trigger">{{$orderItem->order_number}}@if(in_array($orderItem->id,$orderApprovedNotificationIds))<span class="order-new-bedge new_item_color"> New</span>@endif</a>
                 </td>
                 <td data-title="Amount">$ {{$orderItem->grand_total}}</td>
                 <td data-title="Date">{{ \Carbon\Carbon::parse($orderItem->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</td>

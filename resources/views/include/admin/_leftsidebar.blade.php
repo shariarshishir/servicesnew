@@ -142,6 +142,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="{{ Route('admin.rfq.index')}}" class="nav-link">
+                <i class="fas fa-quote-left nav-icon"></i>
+                <p>RFQ</p>
+            </a>
+        </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

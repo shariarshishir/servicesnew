@@ -35,6 +35,13 @@ class QueryController extends Controller
 
    public function show($id)
    {
+       $notifications = auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\OrderQueryNotification')->where('read_at',null);
+       foreach($notifications as $notification){
+           if($notification->data['notification_data']['id']==$id)
+           {
+               $notification->markAsRead();
+           }
+       }
        $query_request=OrderModificationRequest::where('id',$id)->with(['user','businessProfile','product','orderModification'])->first();
        return view('admin.query.show',['collection' => $query_request]);
    }

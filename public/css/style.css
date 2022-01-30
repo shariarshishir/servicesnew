@@ -1444,8 +1444,8 @@ input[type=number]:not(.browser-default):disabled {
     font-size: 16px;
     font-weight: 500;
     margin-top: 20px;
+    margin-bottom: 0px;
     line-height: 25px;
-    height: 52px;
     font-size: 16px;
     overflow: hidden;
 }

@@ -47,8 +47,11 @@
 				@endif
 			</div>
 		</div>
-        <div>
-            <a href="javascript:void(0);" class="btn_rfq_edit" style="float: right;" onclick="editRfq({{$rfqSentList->id}});"><i class="material-icons">border_color</i></a>
+        <div style="float: right;">
+            @if($rfqSentList->deleted_at == null)
+                <a href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})" ><span> <i class="material-icons"> share </i></span></a>
+            @endif
+                <a href="javascript:void(0);" class="btn_rfq_edit"  onclick="editRfq({{$rfqSentList->id}});"><i class="material-icons">border_color</i></a>
         </div>
 		<div class="col s12 m9 l10 rfq_profile_info">
 			<div class="row">
@@ -304,6 +307,7 @@
 </div>
 @include('rfq._create_rfq_bid_form_modal')
 @include('rfq._edit_rfq_modal')
+@include('rfq.share_modal')
 @endsection
 
 

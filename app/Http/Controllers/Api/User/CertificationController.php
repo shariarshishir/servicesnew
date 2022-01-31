@@ -9,9 +9,28 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Certification;
+use App\Models\Admin\Certification as CertificationType;
 
 class CertificationController extends Controller
 {
+
+    public function certificationTypesList(){
+        $certificationTypes = CertificationType::get();
+        if(count($certificationTypes)){
+            return response()->json([
+                'success' => true,
+                'certifications'=>$certificationTypes,
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'certifications'=>$certificationTypes,
+            ],200);
+        }
+
+
+    }
     public function certificationDetailsUpload(Request $request ){
        
         $validator = Validator::make($request->all(), [

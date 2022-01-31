@@ -113,7 +113,7 @@ class BusinessProfileController extends Controller
 
         //business profile list of auth user
         public function businessProfileList(){
-            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->get();
+            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->withTrashed()->get();
             if(count($businessProfiles)>0){
                 $companyOverviewArray=[];
                 foreach($businessProfiles as $businessProfile){
@@ -190,6 +190,7 @@ class BusinessProfileController extends Controller
             try{
                     $business_profile_data=[
                         'business_name' => $request->business_name,
+                        'alias'   => $this->createAlias($request->business_name),
                         'user_id'       => auth()->user()->id,
                         'location'      => $request->location,
                         'business_type' => $request->business_type,
@@ -277,6 +278,47 @@ class BusinessProfileController extends Controller
                     'error'   => ['msg' => $e->getMessage()],
                 ],500);
                 }
+        }
+
+
+
+        public function removeSpecialCharacterFromAlais($alias)
+        {
+            $lowercase=strtolower($alias);
+            $pattern= '/[^A-Za-z0-9\-]/';
+            $preg_replace= preg_replace($pattern, '-', $lowercase);
+            $single_hypen= preg_replace('/-+/', '-', $preg_replace);
+            $alias= $single_hypen;
+            return $alias;
+        }
+
+
+        public function createAlias($name)
+        {
+            $alias=$this->removeSpecialCharacterFromAlais($name);
+            return $this->checkExistsAlias($alias);
+        }
+
+        public function checkExistsAlias($alias)
+        {
+            $check_exists=BusinessProfile::where('alias', $alias)->first();
+            if($check_exists){
+                $create_array= explode('-',$alias);
+                $last_key=array_slice($create_array,-1,1);
+                $last_key_string=implode(' ',$last_key);
+                if(is_numeric($last_key_string)){
+                    $last_key_string++;
+                    array_pop($create_array);
+                    array_push($create_array,$last_key_string);
+                }else{
+                    array_push($create_array,1);
+                }
+                $alias=implode("-",$create_array);
+                return $this->checkExistsAlias($alias);
+
+            }
+
+            return $alias;
         }
 
         //company overview data
@@ -430,6 +472,126 @@ class BusinessProfileController extends Controller
             }
             
         }
+
+
+    public function profilePublishOrUnpublish(Request $request)
+    {
+        if($request->is_publish==false){
+            $business_profile = BusinessProfile::where('id',$request->business_profile_id)->first();
+          
+        }
+        else{
+            $business_profile=BusinessProfile::onlyTrashed()
+                ->where('id', $request->business_profile_id)
+                ->first();
+        }
+        
+        if(!$business_profile){
+            return response()->json([
+                'code' => false,
+                'message'     => 'Profile not found'
+            ],404);
+        }
+        $business_profile_rel_auth_id=[];
+        array_push($business_profile_rel_auth_id, $business_profile->user_id,$business_profile->representative_user_id);
+
+        if(!in_array(auth()->id(), $business_profile_rel_auth_id)){
+            return response()->json([
+                'code' => false,
+                'message'     => 'You are not authorized'
+            ],401);
+        }
+
+        if($request->is_publish==false){
+            $business_profile->delete();
+            return response()->json([
+                'code' => true,
+                'message'     => 'Business profile unpublished successfully.'
+            ],200);
+
+        }
+        else{
+            
+            $business_profile->restore();
+            return response()->json([
+                'code' => true,
+                'message'     => 'Business profile published successfully.'
+            ],200);
+
+        }
+    }
+       //Search suppliers by supplier name
+       //suppliers
+        public function searchSuppliersByBusinessName(Request $request)
+        {
+           if(!empty($request->search_input)) {
+                $businessProfiles=BusinessProfile::with('user')->where('business_name', 'like', '%'.$request->search_input.'%')->paginate(10);
+                if($businessProfiles->total()>0){
+                    return response()->json(['suppliers' => $businessProfiles, 'message' => 'Store found','code'=>false], 200);
+                }
+                else{
+                    return response()->json(['suppliers' => $businessProfiles, 'message' => 'Store not found','code'=>False], 200);
+                }
+
+            }
+            else
+            {
+                $businessProfiles = [];
+                return response()->json(['suppliers' =>$businessProfiles, 'message' => 'Search key is empty','code'=>False], 200);
+            }
+        }
+
+
+
+
+
+        //suppliers
+        public function filterSuppliers(Request $request)
+        {
+            $suppliers=BusinessProfile::with(['businessCategory', 'user', 'companyOverview'])->where(function($query) use ($request){
+
+                if($request->industry_type){
+                    $query->whereIn('industry_type',$request->industry_type)->get();
+                }
+                if($request->factory_type){
+                    $query->whereHas('businessCategory', function ($sub_query) use ($request) {
+                        $sub_query->where('id', $request->factory_type);
+                    })->get();
+                }
+                if(isset($request->business_name)){
+                    $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
+                }
+                if(isset($request->location)){
+                    $query-> where('location', 'like', '%'.$request->location.'%')->get();
+                }
+                if(isset($request->verified)){
+                    $query-> whereIn('is_business_profile_verified', $request->verified)->get();
+                }
+                if(isset($request->standard)){
+                    $target = array('compliance', 'non_compliance');
+                    if(count(array_intersect($request->standard, $target)) == count($target)){
+                        $query->get();
+                    }else{
+    
+                        if(in_array('compliance', $request->standard)){
+                            $query->has('certifications')->get();
+                        }
+                        if(in_array('non_compliance', $request->standard)){
+                            $query->has('certifications', '<', 1)->get();
+                        }
+                    }
+    
+    
+                }
+            })
+            ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
+            return view('suppliers.index',compact('suppliers'));
+        }
+
+
+
+
+    
 
        
 }

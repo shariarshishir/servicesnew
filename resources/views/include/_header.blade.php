@@ -122,7 +122,7 @@
 
 					<ul id="countdown-dropdown" class="dropdown-content card">
 						@if(count($userNotifications)>0)
-						<li class="">
+						<li class="notifications-list">
 							@foreach($userNotifications as $notification)
 								@if($notification->type == 'App\Notifications\NewOrderHasPlacedNotification')
 								<a href="{{route('vendor.order.show.notification',['businessProfile'=>$notification->data['order']['business_profile_id'],'order'=>$notification->data['order']['order_number'],'notification'=>$notification->id])}}" class="dropdown-item">

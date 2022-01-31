@@ -252,6 +252,10 @@
     <script>
         $(document).on('keyup', '.zero-not-allowed', function(){
             var value= parseInt($(this).val());
+            var regex = /[0-9]|\./;
+            if( !regex.test(value) ) {
+                swal('alert!', 'Text not allowed. You have to enter a valid number.', 'warning');
+            }            
             if(value == 0 || value < 0){
                 swal('alert!', 'Zero or negative not allowed', 'warning');
                 //$(this).val(1);

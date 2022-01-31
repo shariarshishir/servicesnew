@@ -1444,8 +1444,8 @@ input[type=number]:not(.browser-default):disabled {
     font-size: 16px;
     font-weight: 500;
     margin-top: 20px;
+    margin-bottom: 0px;
     line-height: 25px;
-    height: 52px;
     font-size: 16px;
     overflow: hidden;
 }
@@ -6361,7 +6361,7 @@ nav .pagination li.active .page-link {
     left: inherit !important;
     height: auto !important;
     top: 52px !important;
-    width: 235px !important;
+    width: 450px !important;
     padding: 10px 0px 15px !important;
     min-width: 100px;
 }
@@ -6372,6 +6372,11 @@ nav .pagination li.active .page-link {
 .notifications_icon_wrap .card li {
     padding: 0px 0 10px;
     min-height: inherit;
+}
+.notifications_icon_wrap .card li.notifications-list {
+    padding: 0px 0 10px;
+    height: 250px;
+    overflow-y: auto;
 }
 .notifications_icon_wrap .card li a:link,
 .notifications_icon_wrap .card li a:active,

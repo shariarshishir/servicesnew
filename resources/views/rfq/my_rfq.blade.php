@@ -49,7 +49,7 @@
 		</div>
         <div style="float: right;">
             @if($rfqSentList->deleted_at == null)
-                <a href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})" ><span> <i class="material-icons"> share </i></span></a>
+                <a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})" ><span> <i class="material-icons"> share </i> Share</span></a>
             @endif
                 <a href="javascript:void(0);" class="btn_rfq_edit"  onclick="editRfq({{$rfqSentList->id}});"><i class="material-icons">border_color</i></a>
         </div>

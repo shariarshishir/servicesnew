@@ -18,7 +18,7 @@
                             <th>XXXL</th>
                             <th>4XXL</th>
                             <th>One Size</th>
-                            <th>&nbsp;</th>
+                            <!-- <th>&nbsp;</th> -->
                         </tr>
                     </thead>
                     <tbody class="colors-sizes edit-cart-color-size-block">

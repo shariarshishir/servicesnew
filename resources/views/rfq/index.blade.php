@@ -45,9 +45,9 @@
 					</h4>
 					<p>Merchandiser, Fashion Tex Ltd.</p>
 				</div>
-				<!--div class="profile_view_time right-align col s12 m4 l4">
-					<span> <i class="material-icons"> watch_later </i> 35 mins</span>
-				</div-->
+				<div class="profile_view_time right-align col s12 m4 l4">
+					<a href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})"><span> <i class="material-icons"> share </i></span></a>
+				</div>
 			</div>
 
 			<!-- <h6>{{$rfqSentList->title}}</h6>
@@ -57,7 +57,7 @@
 				<h5>{{$rfqSentList->title}}</h5>
 				<span class="short_description">{{$rfqSentList->short_description}}</span>
 				<button class="none_button btn_view_detail"  data-rfqId="{{$rfqSentList->id}}" id="rfqViewDetail">Show More @if(in_array($rfqSentList->id,$rfqIds))<span class="new_item_color">New</span>@endif</button>
-				
+
 				<div class="rfq_view_detail_info" style="display: none;">
 					<h6>Query for {{$rfqSentList->category->name}}</h6>
 					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList->full_specification}}</div>
@@ -201,6 +201,7 @@
     </div>
 </div>
 @include('rfq._create_rfq_bid_form_modal')
+@include('rfq.share_modal');
 @endsection
 
 @include('rfq._scripts')

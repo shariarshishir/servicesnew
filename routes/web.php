@@ -72,7 +72,6 @@ use App\Http\Controllers\RfqBidController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');
@@ -254,6 +253,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //my order
     Route::get('my-order',[MyOrderController::class, 'index'])->name('myorder');
     //rfq
+
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     Route::delete('rfq/delete/{rfq_id}',[RfqController::class, 'delete'])->name('rfq.delete');
@@ -262,6 +262,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('rfq/update/{rfq_id}',[RfqController::class, 'update'])->name('rfq.update');
     Route::get('rfq/single/image/delete/{rfq_image_id}',[RfqController::class, 'singleImageDelete'])->name('rfq.single.image.delete');
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
+    Route::get('rfq/share/{rfq_id}',[RfqController::class, 'share'])->name('rfq.share');
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
@@ -310,6 +311,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
 });
 
+//rfq show with shareable link
+Route::get('rfq/{link}',[RfqController::class, 'showRfqUsingLink'])->name('show.rfq.using.link');
+
 //user API's endpoint start
 Route::group(['prefix'=>'/user'],function (){
     Route::get('/register/{type}', [UserController::class, 'showRegistrationForm'])->name('user.register');
@@ -327,7 +331,7 @@ Route::group(['prefix'=>'/user'],function (){
 
 
 });
-
+Route::post('login-rfq-share-link',[RfqController::class, 'loginFromRfqShareLink'])->name('login.from.rfq.share.link');
 //fresh order calcualte
 Route::post('/fresh-order/calculate',[SellerProductController::class, 'freshOrderCalculate'])->name('fresh.order.calculate');
 //product modification request

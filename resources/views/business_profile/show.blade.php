@@ -385,6 +385,7 @@
 												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 											</div>
 											<h5>{{$exportDestination->country->name}}</h5>
+											<span>{{$exportDestination->short_description}}</span>
 										</div>
 									@endforeach
 								@else
@@ -773,6 +774,7 @@
 												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 											</div>
 											<h5>{{$exportDestination->country->name}}</h5>
+											<span>{{$exportDestination->short_description}}</span>
 										</div>
 										@endforeach
 									@else

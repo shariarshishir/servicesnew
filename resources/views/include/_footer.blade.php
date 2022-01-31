@@ -467,7 +467,7 @@
                     if($.isEmptyObject(data.error)){
                        if(data.msg){
                         //$('.error-msg').show().text(data.msg);
-                        // alert(data.msg);
+                        alert(data.msg);
                         $('#email_login').addClass('invalid');
                         $('#password_login').addClass('invalid');
                        }

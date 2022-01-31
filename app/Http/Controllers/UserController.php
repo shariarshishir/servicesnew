@@ -299,7 +299,7 @@ class UserController extends Controller
 
                 }
                 else{
-                    return response()->json(['msg' => 'No active account found with the given credentials']);
+                    return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.']);
                 }
             }
 

@@ -88,13 +88,15 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
     Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
+    
+    //active inactive business profile by user
+    Route::post('/business-profile/publish-unpublish', [BusinessProfileController::class, 'profilePublishOrUnpublish']);
     Route::post('/business-profile',[BusinessProfileController::class,'store']);
     Route::put('/company-overview',[CompanyOverviewController::class,'companyOverviewUpdate']);
     Route::post('/capacity-and-machineries',[CapacityAndMachineriesController::class,'capacityAndMachineriesCreateOrUpdate']);
     Route::post('/production-flow-and-manpower', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate']);
 
-
-
+    Route::get('/certifications-type', [CertificationController::class, 'certificationTypesList']);
     Route::post('/certifications', [CertificationController::class, 'certificationDetailsUpload']);
     Route::get('/certifications/{id}', [CertificationController::class, 'deleteCertificate']);
 
@@ -224,10 +226,11 @@ Route::get('/business-profile/{businessProfileID}/manufacture-products', [Manufa
 
 //business profile
 Route::get('/all-business-profiles',[BusinessProfileController::class,'allBusinessProfile']);
+Route::post('/search-suppliers-by-business-name', [BusinessProfileController::class, 'searchSuppliersByBusinessName']);
+
 //store api
 Route::get('/stores',[VendorController::class,'index']);
 Route::get('/store/{vendorUId}',[VendorController::class,'show']);
-Route::post('/search-store-by-name', [VendorController::class, 'searchByVendorName']);
 
 //user details
 Route::get('/user/{userId}', [UserController::class, 'show']);

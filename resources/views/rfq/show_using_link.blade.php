@@ -77,6 +77,7 @@
                 <!--div class="tagS">
                     <a href="javascript:void(0);"> #Sweater</a> <a href="javascript:void(0);"> #Apparel</a>
                 </div-->
+                @php $i=1; @endphp
                 <div class="row rfq_thum_imgs left-align">
                     @if($rfq->images()->exists())
                         @foreach ($rfq->images as  $key => $rfqImage )

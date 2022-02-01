@@ -43,4 +43,21 @@
             });
             });
     </script>
+    <script>
+        $(document).on("click", ".order-more-details" , function() {
+            var orderId =$(this).attr("data-orderId") ;
+            var obj = $(this).parent().parent().find('.order-new-bedge');
+            $.ajax({
+                type:'GET',
+                url: "{{route('order-notification-mark-as-read')}}",
+                dataType:'json',
+                data:{ orderId :orderId},
+                success: function(data){
+                    obj.remove();
+                    $('.noticication_counter').text(data['noOfnotification']);
+                }
+            });
+
+        });
+    </script>
 @endpush

@@ -16,27 +16,66 @@
             var numberOfOutlets = $("#number_of_outlets").val();
             var tradeLicense = $("#trade_license").val();
             var industryType = $('select[name="industry_type"]').val();
-            var businessCategoryId = $('select[name="business_category_id"]').val();
+            var businessCategoryId = $('select[name="business_category_id"] option:selected').text();
             var representiveName = $("#representive_name").val();
             var representiveEmail = $("#email").val();
             var representivePhone = $("#phone").val();
             var representiveNidPassport = $("#nid_passport").val();
 
             //setting values
-            $("#review_name").html("<b>Name:</b> "+name);
+            $("#review_name").html("<b>Organization Name:</b> "+name);
             $("#review_location").html("<b>Location:</b> "+location);
-            $("#review_business_type").html("<b>Business Type:</b> "+businessType);
-            $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
-            $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
+            if(businessType == 1){
+                $("#review_business_type").html("<b>Business Type:</b> Manufacturer");
+            } else if(businessType == 2) {
+                $("#review_business_type").html("<b>Business Type:</b> Wholesaler");
+            } else {
+                $("#review_business_type").html("<b>Business Type:</b> Design Studio");
+            }
+
+            if(numberOfFactories){
+                $("#review_number_of_factories").html("<b>Number of Factories:</b> "+numberOfFactories);
+            } else {
+                $("#review_number_of_factories").hide();
+            }
+
+            if(numberOfOutlets) {
+                $("#review_number_of_outlets").html("<b>Number of Outlets:</b> "+numberOfOutlets);
+            } else {
+                $("#review_number_of_outlets").hide();
+            }
+
             $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
             $("#review_industry_type").html("<b>Industry Type:</b> "+industryType);
-            $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
+            if(businessCategoryId){
+                $("#review_business_category_id").html("<b>Business Category:</b> "+businessCategoryId);
+            } else {
+                $("#review_business_category_id").hide();
+            }
 
-            $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
-            $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
-            $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
-            $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
+            if(representiveName){
+                $("#review_representative_name").html("<b>Representative Name:</b> "+representiveName);
+            } else {
+                $("#review_representative_name").hide();
+            }
 
+            if(representiveEmail){
+                $("#review_representatives_email").html("<b>Representative Email:</b> "+representiveEmail);
+            } else {
+                $("#review_representatives_email").hide();
+            }
+
+            if(representivePhone){
+                $("#review_representatives_contact").html("<b>Representative Phone:</b> "+representivePhone);
+            } else {
+                $("#review_representatives_contact").hide();
+            }
+
+            if(representiveNidPassport) {
+                $("#review_representative_nidPassport").html("<b>Representative NID/Passport:</b> "+representiveNidPassport);
+            } else {
+                $("#review_representative_nidPassport").hide();
+            }
 
             if(!name){
                 var alertHtml = '<div class="card-alert card orange lighten-5">';
@@ -49,7 +88,7 @@
             } else {
                 var infoHtml = '<div class="card-alert card cyan lighten-5">';
                 infoHtml += '<div class="card-content cyan-text">';
-                infoHtml += '<p>INFO : Please verify your input data and hit submit button to create profile.</p>';
+                infoHtml += '<p>Please check your provided data and submit to create profile.</p>';
                 infoHtml += '</div>';
                 infoHtml += '</div>';
                 $("#information_message").html(infoHtml);
@@ -120,6 +159,7 @@
                     {
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
+                        $('.edit_errors_wrapper').show();
                         $('#edit_errors').empty();
                         //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                         $("#edit_errors").append("<div class=''>"+error+"</div>");
@@ -263,6 +303,7 @@
             $('.file').val('');
             $('.img-thumbnail').attr('src', 'https://via.placeholder.com/80');
             $('#manufacture-product-upload-errors').empty();
+            $('.rm-error').html('');
         });
     });
 
@@ -291,7 +332,7 @@
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#errors').empty();
-                            console.log(data);
+                            $('.rm-error').html('');
                             $('#product-add-modal-block').modal('close');
                             $('.manufacture-product-table-data').html('');
                             $('.manufacture-product-table-data').html(data.data);
@@ -299,13 +340,17 @@
                         },
                     error: function(xhr, status, error)
                         {
+
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
                             $('#manufacture-product-upload-errors').empty();
+                            $('#manufacture-product-upload-errors').show();
                             //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                             $("#manufacture-product-upload-errors").append("<div class=''>"+error+"</div>");
+                            $('.rm-error').html('');
                             $.each(xhr.responseJSON.error, function (key, item)
                             {
+                                $('.'+key+'_error').html('required');
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                 $("#manufacture-product-upload-errors").append("<div class=''>"+item+"</div>");
 
@@ -403,6 +448,7 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#manufacture-update-errors').empty();
+                                $('.rm-error').html('');
                                 $('#product-edit-modal-block').modal('close');
                                 $('.manufacture-product-table-data').html('');
                                 $('.manufacture-product-table-data').html(data.data);
@@ -413,10 +459,13 @@
                                 $('.loading-message').html("");
                                 $('#loadingProgressContainer').hide();
                                 $('#manufacture-update-errors').empty();
+                                $('#manufacture-update-errors').show();
                                 //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+error+"</div></div>");
                                 $("#manufacture-update-errors").append("<div class=''>"+error+"</div>");
+                                $('.rm-error').html('');
                                 $.each(xhr.responseJSON.error, function (key, item)
                                 {
+                                    $('.'+key+'_error').html('required');
                                     //$("#edit_errors").append("<div class='card-alert card red'><div class='card-content white-text card-with-no-padding'>"+item+"</div></div>");
                                     $("#manufacture-update-errors").append("<div class=''>"+item+"</div>");
 
@@ -496,8 +545,8 @@
 
         let totalChild = $('.categories-produced-table-block tbody').children().length;
         var html = '<tr>';
-        html += '<td><input name="type[]" id="type" type="text" class="form-control  value="" ></td>';
-        html += '<td><input name="percentage[]" id="percentage" type="number" class="form-control  value="" ></td>';
+        html += '<td data-title="Category"><input name="type[]" placeholder="Man, Woman, Kids etc." id="type" type="text" class="form-control"  value="" ></td>';
+        html += '<td data-title="Percentage"><input name="percentage[]" id="percentage" placeholder="Man, Woman, Kids etc." type="number" class="form-control valid-number-check"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.categories-produced-table-block tbody').append(html);
@@ -514,8 +563,8 @@
 
     let totalChild = $('.machinaries-details-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input name="machine_name[]" id="machine_name" type="text" class="form-control  value="" ></td>';
-    html += '<td><input name="quantity[]" id="quantity" type="number" class="form-control  value="" ></td>';
+    html += '<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control"  value="" ></td>';
+    html += '<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control valid-number-check"  value="" ></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('.machinaries-details-table-block tbody').append(html);
@@ -525,214 +574,194 @@
         $(el).parent().parent().remove();
     }
 
-    //submit form  FOR CAPACITY AND MECHINERIES
-    $('#capacity-machinaries-form').on('submit',function(e){
-    e.preventDefault();
-    $.ajax({
-      url: '{{ route("capacity-and-machineries.create-or-update")}}' ,
-      type:"POST",
-      data: $('#capacity-machinaries-form').serialize(),
-      beforeSend: function() {
-        $('.loading-message').html("Please Wait.");
-        $('#loadingProgressContainer').show();
-      },
-      success:function(response){
-        $('.loading-message').html("");
-        $('#loadingProgressContainer').hide();
-        var machineriesDetails=response.machineriesDetails;
-        var categoriesProduceds=response.categoriesProduceds;
-        var productionCapacities=response.productionCapacities;
+    //Add and remove row for production-flow-and-manpower dynamically
 
-        var nohtml="";
-        if(machineriesDetails.length >0){
-            $('.machinery_table_inner_wrap').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<thead>';
-            html +='<tr>';
-            html +='<th>Machine Name</th>';
-            html +='<th>Quantity</th>';
-            html +='<th>&nbsp;</th>';
-            html +='</tr>';
-            html +='</thead>';
-            html +='<tbody class="machinaries-details-table-body">';
+    //categories produced submit form
+    $('#categorires-produced-form').on('submit',function(e){
+            e.preventDefault();
+            $.ajax({
+            url: '{{ route("categories.produced.create-or-update")}}' ,
+            type:"POST",
+            data: $('#categorires-produced-form').serialize(),
+            beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+            },
+            success:function(response){
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                $('#categorires-produced-errors').empty();
 
-            for(let i=0;i<machineriesDetails.length ;i++){
-                html += '<tr>';
-                html += '<td>'+machineriesDetails[i].machine_name+'</td>';
-                html += '<td>'+machineriesDetails[i].quantity+'</td>';
-                if(machineriesDetails[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                var categoriesProduceds=response.categoriesProduceds;
+                var nohtml="";
+                if(categoriesProduceds.length >0){
+                    $('.categories_produced_wrapper').html(nohtml);
+                    var  html ='<div class="overview_table box_shadow">';
+                    html +='<table>';
+                    html +='<thead>';
+                    html +='<tr>';
+                    html +='<th>Type</th>';
+                    html +='<th>Percentage</th>';
+                    html +='<th>&nbsp;</th>';
+                    html +='</tr>';
+                    html +='</thead>';
+                    html +='<tbody class="categories-produced-table-body">';
+
+                    for(let i=0;i<categoriesProduceds.length ;i++){
+                        html += '<tr>';
+                        html += '<td>'+categoriesProduceds[i].type+'</td>';
+                        html += '<td>'+categoriesProduceds[i].percentage+'</td>';
+                        if(categoriesProduceds[i].status==1)
+                        html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                        else{
+                        html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                        }
+                        html += '</tr>';
+                    }
+
+                    html+='</tbody>';
+                    html +='</table>';
+                    html +='</div>';
+                    $('.categories_produced_wrapper').append(html);
+
+                }else{
+
+                    $('.categories_produced_wrapper').html(nohtml);
+                    var html='';
+                    html +='<div class="card-alert card cyan lighten-5">';
+                    html +='<div class="card-content cyan-text">';
+                    html +='<p>INFO : No data found.</p>';
+                    html +='</div>';
+                    $('.categories_produced_wrapper').append(html);
+
+                    //append in form
+                    $('.categories-produced-table-block tbody').children().empty();
+                    var html='  <tr id="categories-produced-table-no-data">';
+                        html +='<td data-title="Type"><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
+                        html +='<td data-title="Percentage"><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
+                        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                        html +='</tr>';
+                        $('.categories-produced-table-block tbody').append(html);
                 }
-                html += '</tr>';
 
-            }
-            html+='</tbody>';
-            html +='</table>';
-            html +='</div>';
-            $('.machinery_table_inner_wrap').append(html);
-        }
-        else{
-            //append in table
-            $('.machinery_table_inner_wrap').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.machinery_table_inner_wrap').append(html);
+                $('#categorires-produced-modal').modal('close');
+                swal("Done!", response.message,"success");
+            },
+            error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $('#categorires-produced-errors').empty();
+                        $("#categorires-produced-errors").append("<div class=''>"+error+"</div>");
+                        $.each(xhr.responseJSON.error, function (key, item)
+                        {
+                            $("#categorires-produced-errors").append("<div class='danger'>"+item+"</div>");
+                        });
+                    }
+            });
+    });
 
-            //append in form
-            $('.machinaries-details-table-block tbody').children().empty();
-            var html='<tr id="production-capacity-table-no-data">';
-                html +='<td><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
-                html +='<td><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+    //machinery details submit form
+    $('#machinery-details-form').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+        url: '{{ route("machinery.details.create-or-update")}}' ,
+        type:"POST",
+        data: $('#machinery-details-form').serialize(),
+        beforeSend: function() {
+            $('.loading-message').html("Please Wait.");
+            $('#loadingProgressContainer').show();
+        },
+        success:function(response){
+            $('.loading-message').html("");
+            $('#loadingProgressContainer').hide();
+            $('#machinery-details-errors').empty();
+            var machineriesDetails=response.machineriesDetails;
+            var nohtml="";
+            if(machineriesDetails.length >0){
+                $('.machinery_table_inner_wrap').html(nohtml);
+                var  html ='<div class="overview_table box_shadow">';
+                html +='<table>';
+                html +='<thead>';
+                html +='<tr>';
+                html +='<th>Machine Name</th>';
+                html +='<th>Quantity</th>';
+                html +='<th>&nbsp;</th>';
                 html +='</tr>';
-                $('.machinaries-details-table-block tbody').append(html);
-        }
+                html +='</thead>';
+                html +='<tbody class="machinaries-details-table-body">';
 
-        var nohtml="";
-        if(categoriesProduceds.length >0){
-            $('.categories_produced_wrapper').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<thead>';
-            html +='<tr>';
-            html +='<th>Type</th>';
-            html +='<th>Percentage</th>';
-            html +='<th>&nbsp;</th>';
-            html +='</tr>';
-            html +='</thead>';
-            html +='<tbody class="categories-produced-table-body">';
+                for(let i=0;i<machineriesDetails.length ;i++){
+                    html += '<tr>';
+                    html += '<td>'+machineriesDetails[i].machine_name+'</td>';
+                    html += '<td>'+machineriesDetails[i].quantity+'</td>';
+                    if(machineriesDetails[i].status==1)
+                    html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                    else{
+                    html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                    }
+                    html += '</tr>';
 
-            for(let i=0;i<categoriesProduceds.length ;i++){
-                html += '<tr>';
-                html += '<td>'+categoriesProduceds[i].type+'</td>';
-                html += '<td>'+categoriesProduceds[i].percentage+'</td>';
-                if(categoriesProduceds[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
                 }
-                html += '</tr>';
+                html+='</tbody>';
+                html +='</table>';
+                html +='</div>';
+                $('.machinery_table_inner_wrap').append(html);
+            }
+            else{
+                //append in table
+                $('.machinery_table_inner_wrap').html(nohtml);
+                var html='';
+                html +='<div class="card-alert card cyan lighten-5">';
+                html +='<div class="card-content cyan-text">';
+                html +='<p>INFO : No data found.</p>';
+                html +='</div>';
+                $('.machinery_table_inner_wrap').append(html);
+
+                //append in form
+                $('.machinaries-details-table-block tbody').children().empty();
+                var html='<tr id="production-capacity-table-no-data">';
+                    html +='<td data-title="Name"><input name="machine_name[]" id="machine_name" type="text" class="form-control "  value="" ></td>';
+                    html +='<td data-title="Quantity"><input name="quantity[]" id="quantity" type="number" class="form-control "  value="" ></td>';
+                    html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMachinariesDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                    html +='</tr>';
+                    $('.machinaries-details-table-block tbody').append(html);
             }
 
-            html+='</tbody>';
-            html +='</table>';
-            html +='</div>';
-            $('.categories_produced_wrapper').append(html);
-
-        }else{
-
-            $('.categories_produced_wrapper').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.categories_produced_wrapper').append(html);
-
-            //append in form
-            $('.categories-produced-table-block tbody').children().empty();
-            var html='  <tr id="categories-produced-table-no-data">';
-                html +='<td><input name="type[]" id="type" type="text" class="form-control "  value="" ></td>';
-                html +='<td><input name="percentage[]" id="percentage" type="number" class="form-control "  value="" ></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeCategoriesProduced(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
-                html +='</tr>';
-                $('.categories-produced-table-block tbody').append(html);
-        }
 
 
-        // var nohtml="";
-        // if(productionCapacities.length >0){
-        //     $('.production-capacity-wrapper').html(nohtml);
-        //     var  html ='<div class="overview_table box_shadow">';
-        //     html +='<table>';
-        //     html +='<thead>';
-        //     html +='<tr>';
-        //     html +='<th>Machine Type</th>';
-        //     html +='<th>Annual Capacity</th>';
-        //     html +='<th>&nbsp;</th>';
-        //     html +='</tr>';
-        //     html +='</thead>';
-        //     html +='<tbody class="production-capacity-table-body">';
-
-        //     for(let i=0;i<productionCapacities.length ;i++){
-        //         html += '<tr>';
-        //         html += '<td>'+productionCapacities[i].machine_type+'</td>';
-        //         html += '<td>'+productionCapacities[i].annual_capacity+'</td>';
-        //         if(productionCapacities[i].status==1)
-        //         html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-        //         else{
-        //         html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
-        //         }
-        //         html += '</tr>';
-
-        //     }
-        //     html+='</tbody>';
-        //     html +='</table>';
-		// 	html +='</div>';
-        //     $('.production-capacity-wrapper').append(html);
-        // }else{
-        //     //append in table
-        //     // $('.production-capacity-table-body').children().empty();
-        //     // var html = '<div class="card-alert card cyan lighten-5 no_data_box ">No Data</div>';
-        //     // $('.production-capacity-table-body').append(html);
-
-        //     $('.production-capacity-wrapper').html(nohtml);
-        //     var html='';
-        //     html +='<div class="card-alert card cyan lighten-5">';
-        //     html +='<div class="card-content cyan-text">';
-        //     html +='<p>INFO : No data found.</p>';
-        //     html +='</div>';
-        //     $('.production-capacity-wrapper').append(html);
-
-        //     //append in form
-        //     $('.production-capacity-table-block tbody').children().empty();
-        //     var html='  <tr id="production-capacity-table-no-data">';
-        //         html +='<td><input name="machine_type[]" id="machine_type" type="text" class="form-control "  value="" ></td>';
-        //         html +='<td><input name="annual_capacity[]" id="annual_capacity" type="number" class="form-control "  value="" ></td>';
-        //         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionCapacity(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-        //         html +='</tr>';
-        //         $('.production-capacity-table-block tbody').append(html);
-        // }
-
-
-
-        $('#capacity-and-machineries-modal').modal('close');
-        swal("Done!", response.message,"success");
-      },
-      error: function(xhr, status, error)
-            {
-                $('#capacity-machineries-errors').empty();
-                $("#capacity-machineries-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
+            $('#machinery-details-modal').modal('close');
+            swal("Done!", response.message,"success");
+        },
+        error: function(xhr, status, error)
                 {
-                    $("#capacity-machineries-errors").append("<div class='danger'>"+item+"</div>");
-                });
-            }
-      });
+                    $('.loading-message').html("");
+                    $('#loadingProgressContainer').hide();
+                    $('#machinery-details-errors').empty();
+                    $("#machinery-details-errors").append("<div class=''>"+error+"</div>");
+                    $.each(xhr.responseJSON.error, function (key, item)
+                    {
+                        $("#machinery-details-errors").append("<div class='danger'>"+item+"</div>");
+                    });
+                }
+        });
     });
 
 
 
-
-    //Add and remove row for production-flow-and-manpower dynamically
     function addProductionFlowAndManpower()
     {
 
         let totalChild = $('.production-flow-and-manpower-table-block tbody').children().length;
         var html = '<tr>';
-        html +='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
-        html +='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
-        html +='<td><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
-        html +='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
+        html +='<td data-title="producttion type" class="input-field"><select name="production_type[]" class="certificate-select2"><option value="" disabled selected>Choose your option</option>@foreach (Config::get('constants.Production Type') as $key => $production_type)<option value="{{$key}}">{{$production_type}}</option>@endforeach</select></td>';
+        html +='<td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value="" ></td>';
+        html +='<td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control "  value="" ></td>';
+        html +='<td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value="" ></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.production-flow-and-manpower-table-block tbody').append(html);
+        selectRefresh();
     }
     function removeProductionFlowAndManpower(el)
     {
@@ -807,10 +836,10 @@
             //append in form
             $('.production-flow-and-manpower-table-block  tbody').children().empty();
             var html='<tr id="production-flow-and-manpower-table-no-data">';
-                html+='<td><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
-                html+='<td><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>';
-                html+='<td><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>';
-                html+='<td><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>';
+                html+='<td data=title="Production Type"><input name="production_type[]" id="production_type" type="text" class="form-control "  value="" ></td>';
+                html+='<td data-title="Number of Machines"><input name="no_of_jacquard_machines[]" id="no_of_jacquard_machines" type="number" class="form-control "  value=""></td>';
+                html+='<td data-title="Manpower"><input name="manpower[]" id="manpower" type="number" class="form-control " value=""></td>';
+                html+='<td data-title="Daily Capacity"><input name="daily_capacity[]" id="daily_capacity" type="number" class="form-control "  value=""></td>';
                 html+='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductionFlowAndManpower(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
                 html+='</tr>';
                 $('.production-flow-and-manpower-table-block tbody').append(html);
@@ -834,12 +863,12 @@
     });
     //add or remove certification details input row
     function selectRefresh() {
-    $('.certificate-select2').select2({
-        tags: true,
-        placeholder: "Select an Option",
-        allowClear: true,
-        width: '100%'
-    });
+        $('.certificate-select2').select2({
+            tags: true,
+            placeholder: "Select an Option",
+            allowClear: true,
+            width: '100%'
+        });
     }
 
     //submit form for certification details
@@ -1051,9 +1080,9 @@
     {
         $('#main-buyers-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="main-buyer-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="main-buyer-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="main-buyer-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="main-buyer-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.main-buyers-details-table-block tbody').append(html);
@@ -1228,181 +1257,6 @@
     });
 
 
-//export destination add remove
-    function addExportDestinationDetails()
-    {
-
-        $('#export-destination-details-table-no-data').hide();
-        var html = '<tr>';
-        html +='<td><input name="title[]" id="export-destination-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="export-destination-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="export-destination-image" type="file"></td>';
-        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeExportDestinationDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-        html +='</tr>';
-        $('.export-destination-table-block tbody').append(html);
-    }
-
-    function removeExportDestinationDetails(el)
-    {
-        $(el).parent().parent().remove();
-    }
-     //submit form for export destination
-
-     $('#export-destination-upload-form').on('submit',function(e){
-    e.preventDefault();
-    var url = '{{ route("exportdestinations.upload") }}';
-    var formData = new FormData(this);
-    formData.append('_token', "{{ csrf_token() }}");
-    $.ajax({
-        method: 'post',
-        processData: false,
-        contentType: false,
-        cache: false,
-        data: formData,
-        enctype: 'multipart/form-data',
-        url: url,
-        beforeSend: function() {
-        $('.loading-message').html("Please Wait.");
-        $('#loadingProgressContainer').show();
-        },
-
-      success:function(response){
-        $('.loading-message').html("");
-		$('#loadingProgressContainer').hide();
-        $('#export-destination-upload-form')[0].reset();
-        var exportDestinations=response.exportDestinations;
-        console.log(exportDestinations);
-        var nohtml="";
-        if(exportDestinations.length >0){
-            $('.export-destination-block').html(nohtml);
-
-            for(let i = 0;i < exportDestinations.length ;i++){
-                var html='';
-                var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
-                html +='<div class="col s6 m4 l2">';
-                html +='<div class="flag_img export-destination-img">';
-                html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                html +='<img src="'+image+'" alt="">';
-                html +='</div>';
-                html +='<h5>'+exportDestinations[i].title+'</h5>';
-                html +='</div>';
-                $('.export-destination-block').append(html);
-            }
-
-            //append in form
-            $('.export-destination-table-block tbody').children().empty();
-                var html='<tr>';
-                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
-                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
-                html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
-                html +='<tr>';
-                $('.export-destination-table-block  tbody').append(html);
-        }
-        else{
-                $('.export-destination-block').html(nohtml);
-                var html='';
-                html +='<div class="card-alert card cyan lighten-5">';
-                html +='<div class="card-content cyan-text">';
-                html +='<p>INFO : No data found.</p>';
-                html +='</div>';
-                $('.export-destination-block').append(html);
-            }
-
-        $('#export-destination-upload-form-modal').modal('close');
-        swal("Done!", response.message,"success");
-      },
-      error: function(xhr, status, error)
-            {
-                $('#export-destination-upload-errors').empty();
-                $("#export-destination-upload-errors").append("<div class=''>"+error+"</div>");
-                $.each(xhr.responseJSON.error, function (key, item)
-                {
-                    $("#export-destination-upload-errors").append("<div class='danger'>"+item+"</div>");
-                });
-            }
-      });
-    });
-
-
-
-    $(document).on('click', '.delete-export-destination-button',function(e){
-        e.preventDefault();
-        $('.remove-export-destination').show();
-    });
-
-
-    $(document).on('click', '.remove-export-destination',function(e)
-    {
-        e.preventDefault();
-        var id=$(this).attr("data-id");
-        console.log(id);
-        swal({
-                title: "Want to delete this export destionation ?",
-                text: "Please ensure and then confirm!",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function (e) {
-                if (e.value === true)
-                {
-                    $.ajax({
-                        url: '{{ route("exportdestinations.delete") }}',
-                        type: "GET",
-                        data:{id:id},
-                        beforeSend: function() {
-                        $('.loading-message').html("Please Wait.");
-                        $('#loadingProgressContainer').show();
-                        },
-                        success:function(response)
-                            {
-                                $('.loading-message').html("");
-                                $('#loadingProgressContainer').hide();
-                                var exportDestinations=response.exportDestinations;
-                                console.log(exportDestinations);
-                                var nohtml="";
-                                if(exportDestinations.length >0){
-                                    $('.export-destination-block').html(nohtml);
-                                    for(let i = 0;i < exportDestinations.length ;i++){
-                                        var html='';
-                                        var image="{{asset('storage/')}}"+'/'+exportDestinations[i].image;
-                                        html +='<div class="col s6 m4 l2">';
-                                        html +='<div class="flag_img export-destination-img">';
-                                        html +='<a style="display: none;" href="javascript:void(0)" data-id="'+exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                        html +='<img src="'+image+'" alt="">';
-                                        html +='</div>';
-                                        html +='<h5>'+exportDestinations[i].title+'</h5>';
-                                        html +='</div>';
-                                        $('.export-destination-block').append(html);
-                                    }
-                                }
-                                else{
-                                    $('.export-destination-block').html(nohtml);
-                                    var html='';
-                                    html +='<div class="card-alert card cyan lighten-5">';
-                                    html +='<div class="card-content cyan-text">';
-                                    html +='<p>INFO : No data found.</p>';
-                                    html +='</div>';
-                                    $('.export-destination-block').append(html);
-                                }
-                                $('#export-destination-upload-form-modal').modal('close');
-                                swal("Done!", response.message,"success");
-                            },
-                            error: function(xhr, status, error)
-                            {
-                                toastr.success(error);
-                            }
-                        });
-                }
-                else {
-                    e.dismiss;
-                }
-            }, function (dismiss) {
-                return false;
-            })
-    });
 
 
 
@@ -1413,9 +1267,9 @@
 
         $('#association-membership-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="association-membership-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="association-membership-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Membership number"><textarea class="input-field" name="short_description[]" id="association-membership-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="association-membership-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeAssociationMembershipDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.association-membership-details-table-block tbody').append(html);
@@ -1592,9 +1446,9 @@
 
         $('#press-highlight-details-table-no-data').hide();
         var html = '<tr>';
-        html +='<td><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
-        html +='<td><textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea></td>';
-        html +='<td><input name="image[]" class="input-field file_upload"  id="press-highlight-image" type="file"></td>';
+        html +='<td data-title="Name"><input name="title[]" id="press-highlight-title" type="text" class="input-field"  value="" ></td>';
+        html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="press-highlight-short-description" rows="4" cols="50"></textarea></td>';
+        html +='<td data-title="Image"><input name="image[]" class="input-field file_upload"  id="press-highlight-image" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removePressHighlightDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html +='</tr>';
         $('.press-highlight-details-table-block tbody').append(html);
@@ -1649,9 +1503,9 @@
             }
             $('.press-highlight-details-table-block tbody').children().empty();
                 var html='<tr>';
-                html +='<td><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
-                html +='<td><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
-                html +='<td><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
+                html +='<td data-title="Name"><input class="input-field" name="title[]" id="main-buyer-title" type="text"  ></td>';
+                html +='<td data-title="Short Description"><textarea class="input-field" name="short_description[]" id="main-buyer-short-description" rows="4" cols="50"></textarea></td>';
+                html +='<td data-title="Image"><input class="input-field file_upload" name="image[]" id="main-buyer-image" type="file"></td>';
                 html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeMainBuyersDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
                 html +='<tr>';
                 $('.press-highlight-details-table-block  tbody').append(html);
@@ -1767,8 +1621,8 @@
     {
 
         var html = '<tr>';
-        html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
+        html += '<td data-title="Particular"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td data-title="Term"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.business-term-table-block tbody').append(html);
@@ -1833,8 +1687,8 @@
             //append in form
             $('.business-term-table-block tbody').children().html(nohtml);
             var html='<tr id="business-term-details-table-no-data">';
-            html += '<td><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>';
-            html +='<td><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
+            html += '<td data-title="Term Name"><input name="business_term_title[]" id="business-term-title" type="text" class="input-field" value="" ></td>';
+            html +='<td data-title="Quantity"><input name="business_term_quantity[]" id="business-term-quantity" type="number" class="input-field"  value="" ></td>';
             html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeBusinessTermDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
             html +='</tr>';
             $('.business-term-table-block tbody').append(html);
@@ -1862,8 +1716,8 @@
 
         //$('#sampling-details-table-no-data').hide();
         var html = '<tr>';
-        html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
-        html += '<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+        html += '<td data-title="Particulars"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field"  value="" ></td>';
+        html += '<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
         html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
         html += '</tr>';
         $('.sampling-table-block  tbody').append(html);
@@ -1926,8 +1780,8 @@
             //append in form
             $('.sampling-table-block tbody').children().html(nohtml);
             var html='<tr id="sampling-details-table-no-data">';
-            html += '<td><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
-            html +='<td><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+            html += '<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
+            html +='<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
             html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
             html +='</tr>';
             $('.sampling-table-block tbody').append(html);
@@ -2266,7 +2120,25 @@
       });
     });
 
+    $(document).on('change', '.factory-sm-image-trigger', function(e) {
+        //alert("I am here");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            //$(".factory-sm-image-preview").attr('src', e.target.result);
+            $(this).closest(".upload_img_box_wrap").find(".factory-sm-image-preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
 
+    $(document).on('change', '.factory-lg-image-trigger', function(e) {
+        //alert("I am here");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            //$(".factory-sm-image-preview").attr('src', e.target.result);
+            $(this).closest(".upload_img_box_wrap").find(".factory-lg-image-preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
 
 
     function addFactoryImageBlock()
@@ -2275,10 +2147,10 @@
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<a href="javascript:void(0);" class="btn_close" onclick="removeFactoryImage(this)"><i class="material-icons dp48">close</i></a>';
         html +='<div class="upload_imgage_box">';
-        html +='<img id="preview-large-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='<img id="preview-large-image-before-upload" class="factory-sm-image-preview" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='</div>';
         html +='<div class="form-group">';
-        html +='<input type="file" name="factory_images[]" placeholder="Choose image" id="factory-large-image">';
+        html +='<input type="file" name="factory_images[]" placeholder="Choose image" class="factory-sm-image-trigger" id="factory-large-image">';
         html +='</div>';
         html +='</div>';
         $('.factory-image-block.row').append(html);
@@ -2295,9 +2167,9 @@
 
         var html ='<div class="upload_img_box_wrap col s6 m3 l2">';
         html +='<a href="javascript:void(0);" class="btn_close" onclick="removeFactoryLargeImage(this)"><i class="material-icons dp48">close</i></a>';
-        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" alt="preview image" style="max-height: 80px;min-height:80px">';
+        html +='<img id="preview-image-before-upload" src="https://via.placeholder.com/80" class="factory-lg-image-preview" alt="preview image" style="max-height: 80px;min-height:80px">';
         html +='<div class="form-group">';
-        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" id="factory-image">';
+        html +='<input type="file" name="factory_large_images[]" placeholder="Choose image" class="factory-lg-image-trigger" id="factory-image">';
         html +='</div>';
 
         $('.factory-large-image-block').append(html);
@@ -2306,18 +2178,6 @@
     {
         $(el).parent().remove();
     }
-
-    $(document).ready(function (e) {
-
-        $('#factory-image').change(function(){
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                $('#preview-image-before-upload').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-
-    });
 
 
     $('#factory-tour-form').on('submit',function(e){
@@ -2512,6 +2372,54 @@
                 alert('The about company words length limit is not more than 250')
             }
     });
+
+    $('.verification_request_trigger').click(function () {
+        
+        var verificationMsg = $("#verification_message").val();
+        var verificationRequestedBusinessProfileId = $("#requested_business_profile_id").val();
+        var verificationRequestedBusinessProfileName = $("#requested_business_profile_name").val();
+        //alert(verificationRequestedBusinessProfileId);
+        //e.preventDefault();
+        swal({
+            title: "Want to send request for review?",
+            text: "Please ensure you have added all the information.",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            reverseButtons: !0
+        }).then(function (e) {
+            if (e.value === true)
+            {
+                $.ajax({
+                    url: "{{route('business.profile.verification.request')}}",
+                    type: "POST",
+                    data: {"verificationMsg": verificationMsg, "verificationRequestedBusinessProfileId": verificationRequestedBusinessProfileId, "verificationRequestedBusinessProfileName": verificationRequestedBusinessProfileName},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
+                    success:function(response)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            $('#send-verification-request-modal').modal('close');
+                            swal("Done!", response.message,"success");
+                        },
+                        error: function(xhr, status, error)
+                        {
+                            toastr.success(error);
+                        }
+                    });
+            }
+            else {
+                e.dismiss;
+            }
+        }, function (dismiss) {
+            return false;
+        })
+    
+    });    
 
 
     </script>

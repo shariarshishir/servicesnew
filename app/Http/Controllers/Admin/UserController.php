@@ -16,7 +16,8 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user=User::where('id', $id)->with('businessProfile')->first();
+        $user=User::where('id', $id)->with('businessProfileWithTrashed')->first();
+
         if(!$user)
         {
             abort(404);
@@ -26,7 +27,7 @@ class UserController extends Controller
 
     public function businessProfileDetails($profile_id)
     {
-        $business_profile=BusinessProfile::where('id', $profile_id)->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->first();
+        $business_profile=BusinessProfile::withTrashed()->where('id', $profile_id)->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->first();
         if(!$business_profile)
         {
             abort(404);

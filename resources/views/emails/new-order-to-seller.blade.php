@@ -1,10 +1,4 @@
-<head>
-    <style>
-    .btn{text-align:center;}
-    .loginButton {padding: 7px 15px 8px 20px;}
-    * {box-sizing: border-box;}
-    </style>
-    </head>
+
     @component('mail::message')
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
@@ -37,7 +31,7 @@
                         </tr>
                     @endforeach
                 </table>
-                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('order.index') }}">Click here to see the order details</a></p>
+                <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('wholesaler.order.index',[ 'alias'=> $order->businessProfile->alias ]) }}">Click here to see the order details</a></p>
                 <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;line-height:normal;">Having any issue?</p>
                 <p style="font-family:verdana;font-size:13px;margin:0px;line-height:normal;">Contact us: email: <a href="mailto:success@merchantbay.com">success@merchantbay.com</a>. Call: </p>
                 <p style="font-family:verdana;font-size:13px;margin:0px;padding-bottom:15px;line-height:normal;">Keep your profile updated to receive more orders.</p>

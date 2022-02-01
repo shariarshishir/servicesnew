@@ -299,17 +299,17 @@ $(document).ready(function() {
 function addFreshOrderColorSize()
 {
     var html = '<tr class="tr">';
-    html += '<td><input class="combat" type="text" value="" name="color"/></td>';
-    html += '<td><input class="combat" type="text" value="0" name="xxs" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="xs" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="small" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="medium" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="large" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="extra_large" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="xxl" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="xxxl" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="four_xxl" /></td>';
-    html += '<td><input class="combat" type="text" value="0" name="one_size" /></td>';
+    html += '<td data-title="Color"><input class="combat" type="text" value="" name="color"/></td>';
+    html += '<td data-title="XXS"><input class="combat" type="text" value="" name="xxs" /></td>';
+    html += '<td data-title="XS"><input class="combat" type="text" value="" name="xs" /></td>';
+    html += '<td data-title="Small"><input class="combat" type="text" value="" name="small" /></td>';
+    html += '<td data-title="Medium"><input class="combat" type="text" value="" name="medium" /></td>';
+    html += '<td data-title="Large"><input class="combat" type="text" value="" name="large" /></td>';
+    html += '<td data-title="Extra Large"><input class="combat" type="text" value="" name="extra_large" /></td>';
+    html += '<td data-title="XXL"><input class="combat" type="text" value="" name="xxl" /></td>';
+    html += '<td data-title="XXXL"><input class="combat" type="text" value="" name="xxxl" /></td>';
+    html += '<td data-title="4XXL"><input class="combat" type="text" value="" name="four_xxl" /></td>';
+    html += '<td data-title="One Color"><input class="combat" type="text" value="" name="one_size" /></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderColorSize(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('#fresh_order_customize_block tbody').append(html);
@@ -320,67 +320,13 @@ $(el).parent().parent().remove();
 }
 
 
-$(document).on("click", "#notification_identifier" , function() {
-    var notificationId =$(this).attr("data-notification-id") ;
-    var obj=$(this).closest('tr').find('.newOrder');
-    $.ajax({
-        type:'GET',
-        url: '/notification-mark-as-read',
-        dataType:'json',
-        data:{ notificationId :notificationId},
-        success: function(data){
-            $(obj).remove();
-                $('.orderApprovedCount').html(data.newOrderApprovedNotificationCount);
-                $('#noOfNotifications').html(data.noOfnotification);
-        }
-    });
-
-});
-
-
-
-$(document).on("click", ".order-modification-request" , function() {
-    var notificationId =$(this).attr("data-order-modification-request-notification-id") ;
-    var obj=$(this).closest('tr').find('.newOrder');
-    $.ajax({
-        type:'GET',
-        url: '/notification-mark-as-read',
-        dataType:'json',
-        data:{ notificationId :notificationId},
-        success: function(data){
-            obj.remove();
-            $('.orderModificationCount').html(data.newModificationRequestNotificationCount);
-            $('#noOfNotifications').html(data.noOfnotification);
-        }
-    });
-
-});
-
-//order query notification
-$(document).on("click", ".order-query-notification" , function() {
-    var notificationId =$(this).attr("data-notification-id") ;
-    var obj=$(this).closest('tr').find('.newOrder');
-    $.ajax({
-        type:'GET',
-        url: '/notification-mark-as-read',
-        dataType:'json',
-        data:{ notificationId :notificationId},
-        success: function(data){
-            obj.remove();
-            $('.orderQueryProcessedCount').html(data.newOrderQueryProcessedCount);
-            $('#noOfNotifications').html(data.noOfnotification);
-        }
-    });
-
-});
-
 $("#resend-email-validtion").click(function(){
     $("#resend-email-verification-form").toggle('slow');
   });
 
 
 
-  // slick slider 
+  // slick slider
   $('.related_products_slider').slick({
     dots: false,
     infinite: false,

@@ -16,9 +16,11 @@ use App\Notifications\QueryWithModificationToUserNotification;
 use App\Mail\QueryWithModificationTouserMail;
 use App\Notifications\QueryCommuncationNotification;
 use App\Mail\QueryCommuncationMail;
+use App\Http\Traits\PushNotificationTrait;
 
 class QueryController extends Controller
 {
+   use PushNotificationTrait;
    public function index($type)
    {
        $query_request_list=OrderModificationRequest::latest()->where('type',$type)->with(['user','businessProfile','product'])->get();
@@ -33,6 +35,13 @@ class QueryController extends Controller
 
    public function show($id)
    {
+       $notifications = auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\OrderQueryNotification')->where('read_at',null);
+       foreach($notifications as $notification){
+           if($notification->data['notification_data']['id']==$id)
+           {
+               $notification->markAsRead();
+           }
+       }
        $query_request=OrderModificationRequest::where('id',$id)->with(['user','businessProfile','product','orderModification'])->first();
        return view('admin.query.show',['collection' => $query_request]);
    }
@@ -118,11 +127,28 @@ class QueryController extends Controller
         }
 
         if ($OrderModificationRequest->type ==1){
-            event(new OrderQueryFromAdminEvent($orderModification));
+            if(env('APP_ENV') == 'production')
+            {
+                
+               
+
+                //send mail and database notification using this event to buyer
+                event(new OrderQueryFromAdminEvent($orderModification));
+            }
             return redirect()->route('query.request.index',1)->with('success', 'Created Successfully');
         }else{
-            Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
-            Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
+            if(env('APP_ENV') == 'production')
+            {
+                //send push notification
+                $fcmToken=$orderModification->orderModificationRequest->user->fcm_token;
+                $title = "Order modification request processed";
+                $message = "Your order modification request has been processed.Please check your order modification request list.";
+                $action_url = route('ord.mod.req.index');
+                $this->pushNotificationSend($fcmToken, $title,$message,$action_url);
+
+                Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
+                Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
+            }
             return redirect()->route('query.request.index',2)->with('success', 'Created Successfully');
         }
 
@@ -158,6 +184,14 @@ class QueryController extends Controller
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
         ]);
+
+        //send push notification to user for comment
+        $fcmToken = $data->orderModificationRequest->user->fcm_token;
+        $title = "New message for your order modification request";
+        $details = json_decode($data->details);
+        $message = $details[0]->details;
+        $action_url = $data->orderModificationRequest->type == 2 ? route('ord.mod.req.index') : route('user.order.query.index') ;
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
         Notification::send($data->orderModificationRequest->user,new QueryCommuncationNotification($data ,'admin'));
         Mail::to($data->orderModificationRequest->user->email)->send(new QueryCommuncationMail($data, 'admin'));

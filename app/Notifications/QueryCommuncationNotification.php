@@ -39,7 +39,7 @@ class QueryCommuncationNotification extends Notification implements ShouldQueue
             $url = route('ord.mod.req.index');
         }
         return [
-            'title' => "Order Query Message",
+            'title' => "Order Modification Request Reply",
             'notification_data'=> $this->data->order_modification_request_id,
             'notification_type'=>"QueryWithModification",
             'order_qurey_type' => $this->data->orderModificationRequest->type,

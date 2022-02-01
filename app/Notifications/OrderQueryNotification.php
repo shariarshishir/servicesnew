@@ -51,7 +51,7 @@ class OrderQueryNotification extends Notification
             'title' => "Order Query Request",
             'notification_data'=> $this->query,
             'notification_type'=>"OrderQuery",
-            'url' =>'admin/query/edit/'.$this->query->id.'',
+            'url' =>route('query.show',$this->query->id)
         ];
     }
 }

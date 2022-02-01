@@ -136,7 +136,7 @@
                                         @endif
 
                                         @if(Auth::guard('web')->check())
-                                            <a href="{{route('supplier.profile', $supplier->id)}}">Visit Profile</a>
+                                            <a href="{{route('supplier.profile', $supplier->alias)}}">Visit Profile</a>
                                         @else
                                             <a href="#supplier-view-auth-check-modal" class="modal-trigger">Visit Profile</a>
                                         @endif

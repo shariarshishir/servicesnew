@@ -117,7 +117,7 @@ class HomeController extends Controller
     //start readystock products
     public function readyStockProducts()
     {
-        $products = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.ready_stock_product',compact('products'));
     }
 
@@ -163,14 +163,14 @@ class HomeController extends Controller
     //customizable products
     public function customizable()
     {
-        $products = Product::with('images')->where('customize', true)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.customizable',compact('products'));
     }
 
    //start buy design products
     public function buyDesignsProducts()
     {
-        $products = Product::with('images')->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::with('images')->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
         return view('product.buy_design_product',compact('products'));
     }
 
@@ -250,7 +250,7 @@ class HomeController extends Controller
         $colors_sizes = json_decode($product->colors_sizes);
         $attr = json_decode($product->attribute);
         //recommandiation products
-        $recommandProducts=Product::with('businessProfile')->where('state',1)
+        $recommandProducts=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->where('state',1)
         ->where('id','!=',$product->id)
         ->whereHas('category', function($q) use ($product){
              $q->where('id',$product->product_category_id);
@@ -258,10 +258,14 @@ class HomeController extends Controller
         })
         ->orWhere(function($query) use ($product){
             $query->where('product_type',$product->product_type)
-                  ->where('id', '!=', $product->id);
+                  ->where('id', '!=', $product->id)
+                  ->where('business_profile_id', '!=', null);
         })
-        ->with(['images'])
+        ->whereHas('businessProfile', function($b){
+            $b->where('deleted_at' , null);
+        })
         ->get();
+
         return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
     }
 
@@ -332,7 +336,8 @@ class HomeController extends Controller
                 //$results=Product::with('images')->where('name', 'like', '%'.$request->searchInput.'%')->get();
                 $wholesaler_products = Product::with(['images','businessProfile'])->where('name', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
                 $manufacture_products = ManufactureProduct::with(['product_images','businessProfile'])->where('title', 'like', '%'.$request->searchInput.'%')->where('business_profile_id', '!=', null)->get();
-                $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
+                //$blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->get();
+                $blogs = Blog::where('title', 'like', '%'.$request->searchInput.'%')->orWhere('details', 'like', '%'.$request->searchInput.'%')->get();
                 $suppliers = BusinessProfile::with(['user'])->where('business_name', 'like', '%'.$request->searchInput.'%')->get();
                 //$results = $wholesaler_products->merge($manufacture_products);
 
@@ -341,7 +346,6 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($manufacture_products);
                 $allItems = $allItems->merge($blogs);
                 $allItems = $allItems->merge($suppliers);
-
                 //dd($allItems);
 
                 //dd($results);
@@ -626,9 +630,9 @@ class HomeController extends Controller
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile
-    public function supplerProfile($id)
+    public function supplierProfile($alias)
     {
-        $business_profile=BusinessProfile::findOrFail($id);
+        $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
         //manufacture
         // $flag=0;
         // if( $business_profile->companyOverview->about_company == null){
@@ -655,10 +659,10 @@ class HomeController extends Controller
         if($business_profile->business_type == 1 )
         {
 
-            $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations.country','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
             $userObj = User::where('id',$business_profile->user_id)->get();
-            $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
-            $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+            $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$business_profile->id)->first();
+            $mainProducts=ManufactureProduct::with('product_images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
             ->limit(4)
             ->get();
             // $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
@@ -690,9 +694,9 @@ class HomeController extends Controller
         //wholesaler
         if($business_profile->business_type == 2 )
         {
-            $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->findOrFail($id);
+            $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
             $userObj = User::where('id',$business_profile->user_id)->get();
-            $mainProducts=Product::with('images')->where('business_profile_id',$id)->inRandomOrder()
+            $mainProducts=Product::with('images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
             ->limit(4)
             ->get();
             // $businessVerification = BusinessProfileVerification::where('business_profile_id',$id)->first();
@@ -749,7 +753,6 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-
         return view('product.low_moq',compact('low_moq_lists'));
     }
     //low moq details

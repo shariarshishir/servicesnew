@@ -30,43 +30,46 @@
                 </div>
                 <div class="form-group row">
                     <div class="color-and-size-block">
-                        <table class="color-size-table-block ord-mod-color-sizes">
-                            <thead>
-                                <tr>
-                                    <th>Color</th>
-                                    <th>XXS</th>
-                                    <th>XS</th>
-                                    <th>Small</th>
-                                    <th>Medium</th>
-                                    <th>Large</th>
-                                    <th>Extra Large</th>
-                                    <th>XXL</th>
-                                    <th>XXXL</th>
-                                    <th>4XXL</th>
-                                    <th>One Size</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody class="ord-mod-color-tbody">
-                                @php $total_quantity= [] @endphp
-                                @foreach (json_decode($item->details) as $detail)
-                                     @php array_push($total_quantity, $detail->xxs+$detail->xs+$detail->small+$detail->medium+$detail->large+$detail->extra_large+$detail->xxl+$detail->four_xxl+$detail->one_size); @endphp
+                        <div class="no_more_tables">
+                            <table class="color-size-table-block ord-mod-color-sizes">
+                                <thead class="cf">
                                     <tr>
-                                        <td><input type="text" value="{{ $detail->color }}" class="form-control" name="color_size[color][]" /></td>
-                                        <td><input type="text" value="{{ $detail->xxs }}" class="form-control count-color-size" name="color_size[xxs][]" /></td>
-                                        <td><input type="text" value="{{ $detail->xs }}" class="form-control count-color-size" name="color_size[xs][]" /></td>
-                                        <td><input type="text" value="{{ $detail->small }}" class="form-control count-color-size" name="color_size[small][]" /></td>
-                                        <td><input type="text" value="{{ $detail->medium }}" class="form-control count-color-size" name="color_size[medium][]" /></td>
-                                        <td><input type="text" value="{{ $detail->large }}" class="form-control count-color-size" name="color_size[large][]" /></td>
-                                        <td><input type="text" value="{{ $detail->extra_large }}" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
-                                        <td><input type="text" value="{{ $detail->xxl }}" class="form-control count-color-size" name="color_size[xxl][]" /></td>
-                                        <td><input type="text" value="{{ $detail->xxxl }}" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
-                                        <td><input type="text" value="{{ $detail->four_xxl }}" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
-                                        <td><input type="text" value="{{ $detail->one_size }}" class="form-control count-color-size" name="color_size[one_size][]" /></td>
+                                        <th>Color</th>
+                                        <th>XXS</th>
+                                        <th>XS</th>
+                                        <th>Small</th>
+                                        <th>Medium</th>
+                                        <th>Large</th>
+                                        <th>Extra Large</th>
+                                        <th>XXL</th>
+                                        <th>XXXL</th>
+                                        <th>4XXL</th>
+                                        <th>One Size</th>
+                                        <th>&nbsp;</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody class="ord-mod-color-tbody">
+                                    @php $total_quantity= [] @endphp
+                                    @foreach (json_decode($item->details) as $detail)
+                                        @php array_push($total_quantity, $detail->xxs+$detail->xs+$detail->small+$detail->medium+$detail->large+$detail->extra_large+$detail->xxl+$detail->four_xxl+$detail->one_size); @endphp
+                                        <tr>
+                                            <td data-title="color"><input type="text" value="{{ $detail->color }}" class="form-control" name="color_size[color][]" /></td>
+                                            <td data-title="XXS"><input type="text" value="{{ $detail->xxs }}" class="form-control count-color-size" name="color_size[xxs][]" /></td>
+                                            <td data-title="XS"><input type="text" value="{{ $detail->xs }}" class="form-control count-color-size" name="color_size[xs][]" /></td>
+                                            <td data-title="Small"><input type="text" value="{{ $detail->small }}" class="form-control count-color-size" name="color_size[small][]" /></td>
+                                            <td data-title="Medium"><input type="text" value="{{ $detail->medium }}" class="form-control count-color-size" name="color_size[medium][]" /></td>
+                                            <td data-title="Large"><input type="text" value="{{ $detail->large }}" class="form-control count-color-size" name="color_size[large][]" /></td>
+                                            <td data-title="Extra Large"><input type="text" value="{{ $detail->extra_large }}" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
+                                            <td data-title="XXL"><input type="text" value="{{ $detail->xxl }}" class="form-control count-color-size" name="color_size[xxl][]" /></td>
+                                            <td data-title="XXXL"><input type="text" value="{{ $detail->xxxl }}" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
+                                            <td data-title="4XXL"><input type="text" value="{{ $detail->four_xxl }}" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
+                                            <td data-title="One Size"><input type="text" value="{{ $detail->one_size }}" class="form-control count-color-size" name="color_size[one_size][]" /></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                       
                         @php  $total_quantity=array_sum($total_quantity); @endphp
                         <div class="col-md-2">
                             <label for="total-quantity" class="col-form-label ">Total Quantity</label>

@@ -13,3 +13,4 @@
 @include('business_profile._scripts')
 @include('business_profile._upload_press_highlight_modal')
 @include('business_profile._upload_association_membership_modal')
+@include('business_profile._create_or_update_business_profile_verification_request')

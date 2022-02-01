@@ -30,15 +30,15 @@ use App\Rules\ReadyStockFullStockRule;
 
 class ProductController extends Controller
 {
-    public function index(Request $request, $business_profile_id)
+    public function index(Request $request, $alias)
    {
 
-        $business_profile=BusinessProfile::where('id', $business_profile_id)->first();
+        $business_profile=BusinessProfile::withTrashed()->where('alias', $alias)->first();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             if ($request->ajax())
             {
-                $data =Product::latest()->where('business_profile_id',$business_profile_id)->with('images');
+                $data =Product::withTrashed()->latest()->where('business_profile_id',$business_profile->id)->with('images');
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('image',function($row){
@@ -137,6 +137,13 @@ class ProductController extends Controller
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
 
+        ],[
+            'non_clothing_availability.required_if' => 'The  availability field is required when product type is Non Clothing.',
+            'ready_stock_availability.required_if' => 'The  availability field is required when product type is Ready Stock.',
+            'quantity_min.*.required_if' => 'the :attribute are required',
+            'quantity_max.*.required_if' => 'the :attribute are required',
+            'price.*.required_if' => 'the :attribute are required',
+            'lead_time.*.required_if' => 'the :attribute are required',
         ]);
 
         if ($validator->fails())
@@ -230,7 +237,7 @@ class ProductController extends Controller
                 $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
             }
 
-            $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+            $business_profile=BusinessProfile::withTrashed()->where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
             //tiny mc text editor file upload
             $temporary_folder= public_path('storage/temp').'/'. $business_profile_name.'/'.'pdf/';
@@ -332,7 +339,7 @@ class ProductController extends Controller
     public function edit($sku)
     {
        try{
-            $product=Product::with('video')->where('sku',$sku)->first();
+            $product=Product::withTrashed()->with('video')->where('sku',$sku)->first();
             $colors_sizes=json_decode($product->colors_sizes);
             $attr=json_decode($product->attribute);
             $preloaded=array();
@@ -342,7 +349,7 @@ class ProductController extends Controller
                 $obj[$key]->src = asset('storage/'.$image->image);
                 $preloaded[]=$obj[$key];
             }
-            $related_products=RelatedProduct::where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->pluck('related_product_id');
+            $related_products=RelatedProduct::withTrashed()->where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->pluck('related_product_id');
             return response()->json(array(
                 'success' => true,
                 'product' => $product,
@@ -386,6 +393,13 @@ class ProductController extends Controller
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
 
+        ],[
+            'non_clothing_availability.required_if' => 'The  availability field is required when product type is Non Clothing.',
+            'ready_stock_availability.required_if' => 'The  availability field is required when product type is Ready Stock.',
+            'quantity_min.*.required_if' => 'the :attribute are required',
+            'quantity_max.*.required_if' => 'the :attribute are required',
+            'price.*.required_if' => 'the :attribute are required',
+            'lead_time.*.required_if' => 'the :attribute are required',
         ]);
 
         if ($validator->fails())
@@ -471,7 +485,7 @@ class ProductController extends Controller
 
 
 
-                Product::where('sku',$sku)->update([
+                Product::withTrashed()->where('sku',$sku)->update([
                     'name'      => $request->name,
                     'product_category_id' => $request->category_id,
                     'is_featured' => $request->is_featured=='on'? 1:0,
@@ -493,11 +507,11 @@ class ProductController extends Controller
                     'customize'      => isset($request->customize) ? true : false,
                     'updated_by'  => auth()->id(),
             ]);
-            $product=Product::where('sku',$sku)->first();
+            $product=Product::withTrashed()->where('sku',$sku)->first();
             // $user=User::where('id',auth()->id())->first();
             // $vendorName=Str::slug($user->vendor->vendor_name,'-');
 
-            $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
+            $business_profile=BusinessProfile::withTrashed()->where('id', $product->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
              //tiny mc text editor file upload
              $temporary_folder= public_path('storage/temp').'/'. $business_profile_name.'/'.'pdf/';
@@ -527,9 +541,9 @@ class ProductController extends Controller
             }
             if($productImages->isNotEmpty()){
                 foreach($productImages as $productImage){
-                    if(Storage::exists('public/'.$productImage->image) && Storage::exists('public/'.$productImage->original)){
-                        Storage::delete('public/'.$productImage->image);
-                        Storage::delete('public/'.$productImage->original);
+                    if(Storage::exists($productImage->image) && Storage::exists($productImage->original)){
+                        Storage::delete($productImage->image);
+                        Storage::delete($productImage->original);
                     }
                     $productImage->delete();
                 }
@@ -575,7 +589,7 @@ class ProductController extends Controller
             //related products
             if(!isset($request->related_products))
             {
-                $relatedProduct=RelatedProduct::where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->get();
+                $relatedProduct=RelatedProduct::withTrashed()->where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->get();
                 if($relatedProduct){
                     foreach($relatedProduct as $rel_product)
                     {
@@ -585,7 +599,7 @@ class ProductController extends Controller
             }
             if($request->related_products)
             {
-                $relatedProduct=RelatedProduct::where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->get();
+                $relatedProduct=RelatedProduct::withTrashed()->where('business_profile_id',$product->business_profile_id)->where('product_id',$product->id)->get();
                 if($relatedProduct){
                     foreach($relatedProduct as $rel_product)
                         {
@@ -616,7 +630,7 @@ class ProductController extends Controller
 
     public function publishUnpublish($sku)
     {
-      $product=Product::where('sku',$sku)->first();
+      $product=Product::withTrashed()->where('sku',$sku)->first();
       if($product->state==1){
           $product->update(['state' => 0]);
           return response()->json(array('success' => true, 'msg' => 'Product Unpublished Successfully'),200);

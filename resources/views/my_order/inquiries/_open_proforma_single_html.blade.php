@@ -4,17 +4,18 @@
 
 @include('my_order.partials._profile_list')
 
-<div class="col s12 purchase_order_wrap">
+<div class="col s12 purchase_order_wrap" id="purchase_order_wrap">
 	<table style="width: 100%;">
 		<tr class="purchase_order_top">
 			<td ><strong style="font-size: 25px;"> Purchase Order</strong></td>
-			<td style="text-align: right;">
+			<td style="text-align: right;" class="rm-for-print">
 				@if(auth()->id() == $po->buyer_id && $po->status != 1)
 				<button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
 				{{-- <a href="javascript:void(0);" class="btn btn_red rejectPiBtn" data-toggle="modal" data-target="#rejectOrderDetailsModal">Reject</a> &nbsp; --}}
-				<a class="waves-effect waves-light btn_green modal-trigger" href="#rejectOrderDetailsModal">Reject</a>
+				<a class="waves-effect waves-light btn_green modal-trigger" id="rejectOrderTrigger" href="#rejectOrderDetailsModal">Reject</a>
 				@endif
-				<button onclick="window.print()" class="btn_green printPageButton">Print</button>				
+				{{-- <button onclick="window.print()" class="btn_green printPageButton">Print</button> --}}
+                <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
 			</td>
 		</tr>
 		<tr>
@@ -36,16 +37,13 @@
 						<td><span style="color: #448547; font-weight: 600; font-size: 18px"> Vendor</span></td>
 					</tr>
 					<tr>
-						<td style="font-weight: 500; font-size: 22px">Merchant Bay</td>
+						<td style="font-weight: 500; font-size: 22px">{{$supplierInfo->name}}</td>
 					</tr>
 					<tr>
-						<td>House#27, Uttara Dhaka, 1230, Bangladesh</td>
-					</tr>
-					<tr>
-						<td>Ph: +880 9611-677345 Email: info@merchantbay.com</td>
-					</tr>
-					<tr>
-						<td>www.merchantbay.com</td>
+						<td>
+							<p>Phone: {{ $supplierInfo->phone}}</p> 
+							<p>Email: {{ $supplierInfo->email }}</p>								
+						</td>
 					</tr>
 				</table>
 			</td>
@@ -58,13 +56,23 @@
 						<td style="font-weight: 500; font-size: 22px">{{$po->buyer->name}}</td>
 					</tr>
 					<tr>
-						<td>{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
+						<td>
+							@if(@$po->buyer->company_name)
+							<p>Company Name: {{ @$po->buyer->company_name }}</p> 
+							@endif
+							@if(@$po->buyer->country)
+							<p>Country: {{ @$po->buyer->country }}</p>
+							@endif							
+						</td>
 					</tr>
 					<tr>
-						<td>Ph: {{ @$po->buyer->phone}} Email: {{ @$po->buyer->email }}</td>
+						<td>
+							<p>Phone: {{ @$po->buyer->phone}}</p> 
+							<p>Email: {{ @$po->buyer->email }}</p>							
+						</td>
 					</tr>
 				</table>
-			</td>			
+			</td>
 		</tr>
 
 		<tr style="border-bottom: none;">
@@ -82,14 +90,14 @@
 					@php $supplier_id = 0; @endphp
 					@php $total_price = 0; @endphp
                     @php $total_tax_price = 0; @endphp
-                    @php $price_unit = 'BDT'; @endphp
+                    @php $price_unit = 'USD'; @endphp
                     @if(Auth::user()->id == $po->buyer->id)
 	                    @foreach($po->performa_items as $ik => $item)
 							<tr>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">{{$ik + 1}}</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">{{ $item->product->title }}</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">
-									BDT {{ number_format($item->unit_price, 2) }}
+									USD {{ number_format($item->unit_price, 2) }}
 									<span style="display:block;font-size:10px;color:#999;">Vat & Tax included.</span>
 								</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%; text-align;center;">{{ $item->unit }}</td>
@@ -346,6 +354,16 @@
                 window.location.href = "/message-center?uid={{ $supplier_id }}";
             }, 1000);
             */
+        }
+
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+            document.body.innerHTML = originalContents;
         }
     </script>
 

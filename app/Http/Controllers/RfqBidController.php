@@ -51,11 +51,12 @@ class RfqBidController extends Controller
         $validator = Validator::make($request->all(), [
             'rfq_id' => 'required',
             'business_profile_id'=>'required',
-            'payment_method'=>'required',
-            'quantity'=>'required',
             'unit_price'=>'required',
-            'total_price'=>'required',
-            'delivery_time'=>'required',
+            'description' => 'required',
+            //'total_price'=>'required',
+            // 'payment_method'=>'required',
+            // 'quantity'=>'required',
+            // 'delivery_time'=>'required',
            ]);
            if ($validator->fails())
          {
@@ -65,41 +66,51 @@ class RfqBidController extends Controller
              400);
          }
 
-            $allData=$request->all();
+            $allData=$request->only('rfq_id','business_profile_id','unit_price','description');
             $allData['supplier_id']=auth()->id();
             $rfq = Rfq::find($request->rfq_id);
-            $allData['title'] =$rfq->title;
-            $allData['unit'] = $rfq->unit;
-            $allData['destination'] =$rfq->destination;
-            $image_path =[];
+            // $allData['title'] =$rfq->title;
+            // $allData['unit'] = $rfq->unit;
+            // $allData['destination'] =$rfq->destination;
 
-            if ($request->hasFile('rfq_images')){
-                foreach ($request->file('rfq_images') as $product_image){
-                    $path=$product_image->store('images','public');
+            // if ($request->hasFile('rfq_images')){
+            //     foreach ($request->file('rfq_images') as $product_image){
+            //         $extension = $product_image->getClientOriginalExtension();
 
-                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                    Storage::put($path, $image);
+            //         if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
-                    $image_path[] = $path;
-                }
+            //             $path=$product_image->store('images','public');
+            //         }
+            //         else{
+            //             $path=$product_image->store('images','public');
+            //             $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+            //             Storage::put($path, $image);
+            //         }
+            //         $image_path[] = $path;
+            //     }
 
-                unset($allData['rfq_images']);
-            }else{
+            //     unset($allData['rfq_images']);
+            // }else{
 
-                foreach($rfq->images as $item){
-                    $image_path[] = $item->image;
-                }
+            //     foreach($rfq->images as $item){
+            //         $image_path[] = $item->image;
+            //     }
 
-            }
+            //  }
+            // $allData['media'] = json_encode($image_path);
 
-            $allData['media'] = json_encode($image_path);
             $bidData=SupplierBid::create($allData);
 
-            //$selectedUserToSendMail= $rfq;
-            //event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+            //send mail to the user who had created rfq
+            if(env('APP_ENV') == 'production')
+            {
+                $selectedUserToSendMail= $rfq;
+                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
 
-            //$selectedUserToSendMail="success@merchantbay.com";
-            //event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+                //send mail to merchantbay
+                $selectedUserToSendMail="success@merchantbay.com";
+                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
+            }
 
             return response()->json([
                 'success' => true,
@@ -107,4 +118,25 @@ class RfqBidController extends Controller
             ]);
 
     }
+
+
+    public function  notificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            if($notification->type == "App\Notifications\RfqBidNotification" && $notification->data['notification_data']['rfq_id'] == $request->rfqId)
+            {
+                $notification->markAsRead();
+                $message="Notification mark as read successfully";
+            }
+        }
+
+        if(!isset($message)){
+            $message="not found";
+        }
+        $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+        $noOfnotification=count($unreadNotifications);
+        return response()->json(['message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+    }
+
 }

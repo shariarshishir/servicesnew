@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
+use App\Http\Controllers\Admin\ManageBusinessProfileController;
+use App\Http\Controllers\Admin\RfqController as AdminRfqController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -34,6 +36,7 @@ use App\Http\Controllers\SustainabilityCommitmentController;
 use App\Http\Controllers\WalfareController;
 use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\CompanyFactoryTourController;
+use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
 
 
@@ -69,6 +72,7 @@ use App\Http\Controllers\RfqBidController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');
 Route::post('import',[ImportController::class, 'import'])->name('import');
@@ -92,7 +96,6 @@ Route::get('/contactus', [HomeController::class, 'contactusLandingPage'])->name(
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');
 Route::get('/supplier/location/data',[HomeController::class,'getSupplierLocationData'])->name('get.supplier.location.data');
-Route::get('/supplier/profile/{id}',[HomeController::class, 'supplerProfile'])->name('supplier.profile');
 // Route::get('/suppliers', [HomeController::class, 'vendorList'])->name('vendors');
 Route::get('product/{value}/details',[HomeController::class, 'productDetails'])->name('productdetails');
 
@@ -146,7 +149,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/order/paynow',[ProductCartController::class,'order'])->name('cart.order');
     Route::get('/order-success',[ProductCartController::class,'orderSuccess'])->name('cart.order.success');
 
-    Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);
+    Route::get('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead'])->name('notification-mark-as-read');
+    Route::get('/order-notification-mark-as-read',[MyOrderController::class,'orderNotificationMarkAsRead'])->name('order-notification-mark-as-read');
     //store
     Route::get('store/{vendorId}', [UserController::class, 'myShop'])->name('users.myshop');
     Route::get('store/{vendorUid}/productgrouplist/{slug}', [UserController::class, 'myShopProductsByCategory'])->name('users.categories_products');
@@ -182,10 +186,12 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/business/profile', [BusinessProfileController::class, 'index'])->name('business.profile');
     Route::get('/business/profile/create', [BusinessProfileController::class, 'create'])->name('business.profile.create');
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
-    Route::get('/business/profile/show/{id}', [BusinessProfileController::class, 'show'])->name('business.profile.show');
+    Route::get('/manufacturer/profile/{alias}', [BusinessProfileController::class, 'show'])->name('manufacturer.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
 
-    Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
+    //Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
+    Route::post('/categories-produced-create-or-update', [BusinessProfileController::class, 'categoriesProducedCreateOrUpdate'])->name('categories.produced.create-or-update');
+    Route::post('/machinery-details-create-or-update', [BusinessProfileController::class, 'machineryDetailsCreateOrUpdate'])->name('machinery.details.create-or-update');
 
     Route::post('/production-flow-and-manpower-create-or-update', [ProductionFlowAndManpowerController::class, 'productionFlowAndManpowerCreateOrUpdate'])->name('production-flow-and-manpower.create-or-update');
 
@@ -221,22 +227,22 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/factory-tour-image-delete',[CompanyFactoryTourController::class,'factoryTourImageDelete'])->name('factory-image.delete');
     Route::get('/factory-tour-large-image-delete',[CompanyFactoryTourController::class,'factoryTourLargeImageDelete'])->name('factory-large-image.delete');
     Route::post('/terms-of-service-create-or-update',[BusinessProfileController::class,'termsOfServiceCreateOrUpdate'])->name('terms_of_service.create_or_update');
-   
+
     //wholesaler  profile
     Route::group(['prefix'=>'/wholesaler'],function (){
         //product
-        Route::get('/profile/show/{id}', [ProfileInfoController::class, 'show'])->name('wholesaler.profile.show');
-        Route::get('/product/{business_profile_id}', [WholesalerProductController::class, 'index'])->name('wholesaler.product.index');
+        Route::get('/profile/{alias}', [ProfileInfoController::class, 'show'])->name('wholesaler.profile.show');
+        Route::get('/profile/{alias}/products', [WholesalerProductController::class, 'index'])->name('wholesaler.product.index');
         Route::post('/product/store', [WholesalerProductController::class, 'store'])->name('wholesaler.product.store');
         Route::get('/product/edit/{sku}', [WholesalerProductController::class, 'edit'])->name('wholesaler.product.edit');
         Route::put('/product/update/{sku}', [WholesalerProductController::class, 'update'])->name('wholesaler.product.update');
         Route::get('/product/publish-unpublish/{sku}',[WholesalerProductController::class, 'publishUnpublish'])->name('wholesaler.product.publish.unpublish');
         //order
-        Route::get('order/{business_profile_id}',[WholesalerOrderController::class, 'index'])->name('wholesaler.order.index');
+        Route::get('profile/{alias}/received-orders',[WholesalerOrderController::class, 'index'])->name('wholesaler.order.index');
         Route::get('order-delivered/{orderNumber}',[WholesalerOrderController::class, 'orderDelivered']);
         Route::get('order-type-filter', [WholesalerOrderController::class, 'orderTypeFilter'])->name('wholesaler.order.type.filter');
         //profile info
-        Route::get('profile-details/{business_profile_id}',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
+        Route::get('profile/{alias}/info',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
 
     });
     //tinymc
@@ -247,6 +253,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //my order
     Route::get('my-order',[MyOrderController::class, 'index'])->name('myorder');
     //rfq
+
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     Route::delete('rfq/delete/{rfq_id}',[RfqController::class, 'delete'])->name('rfq.delete');
@@ -254,6 +261,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('rfq/edit/{rfq_id}',[RfqController::class, 'edit'])->name('rfq.edit');
     Route::post('rfq/update/{rfq_id}',[RfqController::class, 'update'])->name('rfq.update');
     Route::get('rfq/single/image/delete/{rfq_image_id}',[RfqController::class, 'singleImageDelete'])->name('rfq.single.image.delete');
+    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
+    Route::get('rfq/share/{rfq_id}',[RfqController::class, 'share'])->name('rfq.share');
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
@@ -272,27 +281,38 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
     Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct'])->name('message.center.contact.supplier.from.product');
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
-    Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
+    Route::get('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'notificationMarkAsRead'])->name('bid-notification-mark-as-read');
+
     //poforma
     Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
     Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');
     Route::post('/po/store', [PoController::class,'store'])->name('po.store');
     Route::get('/po',[PoController::class,'index'])->name('po.index');
-    Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat']);
+    Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat'])->name('getsupplierbycat');
     Route::get('/open-proforma-single-html/{id}', [PoController::class, 'openProformaSingleHtml'])->name('open.proforma.single.html');
     Route::post('/pro-forma-invoice-accept', [PoController::class, 'acceptProformaInvoice'])->name('accept.proforma.invoice');
     Route::post('/pro-forma-invoice-reject',[PoController::class, 'rejectProformaInvoice'])->name('reject.proforma.invoice');
     Route::get('/pro-forma-invoices',[PoController::class, 'proformaInvoices'])->name('proforma.invoice');
     Route::get('/open-proforma-single/{id}',[PoController::class, 'openProformaSingle'])->name('open.proforma.single');
 
+    //active inactive business profile by user
+    Route::get('businessprofile/delete/{businessprofileid}', [UsersManageBusinessProfileController::class, 'delete'])->name('business.profile.delete');
+    Route::get('businessprofile/restore/{businessprofileid}', [UsersManageBusinessProfileController::class, 'restore'])->name('business.profile.restore');
+   //alias
+    Route::get('alias-existing-check',[BusinessProfileController::class, 'aliasExistingCheck'])->name('alias.existing.check');
+    Route::post('alias-update',[BusinessProfileController::class, 'updateAlias'])->name('update.alias');
 
+    Route::post('/send-request-for-profile-verification', [BusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
 
 
 
 });
+
+//rfq show with shareable link
+Route::get('rfq/{link}',[RfqController::class, 'showRfqUsingLink'])->name('show.rfq.using.link');
 
 //user API's endpoint start
 Route::group(['prefix'=>'/user'],function (){
@@ -311,7 +331,7 @@ Route::group(['prefix'=>'/user'],function (){
 
 
 });
-
+Route::post('login-rfq-share-link',[RfqController::class, 'loginFromRfqShareLink'])->name('login.from.rfq.share.link');
 //fresh order calcualte
 Route::post('/fresh-order/calculate',[SellerProductController::class, 'freshOrderCalculate'])->name('fresh.order.calculate');
 //product modification request
@@ -348,6 +368,7 @@ Route::group(['prefix'=>'/manufacture'],function (){
     Route::get('product/edit/{product_id}',[ManufactureProductController::class, 'edit'])->name('manufacture.product.edit');
     Route::post('product/update/{product_id}',[ManufactureProductController::class, 'update'])->name('manufacture.product.update');
     Route::get('product/delete/{product_id}/{business_profile_id}',[ManufactureProductController::class, 'delete'])->name('manufacture.product.delete');
+    Route::get('/product/publish-unpublish/{pid}/{bid}',[ManufactureProductController::class, 'publishUnpublish'])->name('manufacture.product.publish.unpublish');
 
 });
 
@@ -366,6 +387,10 @@ Route::group(['prefix'=>'/admin'],function (){
     Route::post('/login', [AdminController::class,'login'])->name('admin.login');
     Route::post('/logout', [AdminController::class,'logout'])->name('admin.logout');
     Route::get('/dashboard', [AdminController::class,'dashboard'])->name('admin.dashboard');
+    Route::get('/monthly-registered-users', [AdminController::class,'monthlyRegisteredUsers'])->name('monthly.registered.users');
+    Route::get('/get-users',[AdminController::class, 'getUsersBasedOnSelectedParams'])->name('get.userslist.basedonselectedparams');
+    Route::get('/last-active-users', [AdminController::class,'lastTwoWeeksActivedUsers'])->name('get.last.twoweeks.active.users');
+    Route::get('/get-activeusers',[AdminController::class, 'getUsersBasedOnActivityParams'])->name('get.userslist.basedonactivityparams');
     //vendors API's endpoint start
     Route::group(['middleware'=> 'is.admin'],function () {
         Route::get('/vendors', [VendorController::class,'index'])->name('vendor.index');
@@ -387,7 +412,8 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::delete('/businessProfile/{businessProfileId}/product/{product}', [ProductController::class,'destroy'])->name('product.destroy');
         Route::get('/related/products', [ProductController::class, 'relatedProducts'])->name('admin.users.related.products');
         //vendor order
-         Route::get('/businessProfile/{businessProfileId}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
+        Route::get('orders',[OrderController::class, 'orderList'])->name('admin.orders.index');
+        Route::get('/businessProfile/{businessProfileId}/orders',[OrderController::class, 'index'])->name('vendor.order.index');
         // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');
         // Route::post('/vendor/{vendor}/order',[OrderController::class, 'store'])->name('vendor.order.store');
         // Route::get('/vendor/{vendor}/order/{order}',[OrderController::class, 'show'])->name('vendor.order.show');
@@ -421,7 +447,11 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
         Route::get('user/business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
         Route::post('user/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
-        Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
+        // Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
+
+        Route::post('user/business/profile/ctegories-produced/verify',[AdminBusinessProfileController::class, 'ctegoriesProducedInformationVerify'])->name('ctegories.produced.verify');
+        Route::post('user/business/profile/machinaries-details/verify',[AdminBusinessProfileController::class, 'machinariesDetailsInformationVerify'])->name('machinaries.details.verify');
+
         Route::post('user/business/profile/capacity-terms/verify',[AdminBusinessProfileController::class, 'businessTermsInformationVerify'])->name('business.terms.verify');
         Route::post('user/business/profile/samplings/verify',[AdminBusinessProfileController::class, 'samplingsInformationVerify'])->name('samplings.verify');
         Route::post('user/business/profile/special-customization/verify',[AdminBusinessProfileController::class, 'specialCustomizationInformationVerify'])->name('special.customizations.verify');
@@ -446,14 +476,20 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('certification',AdminCertificationController::class, [
             'as' => 'admin'
         ]);
+        //active inactive business profile
+        Route::get('admin/businessprofile/delete/{businessprofileid}', [ManageBusinessProfileController::class, 'delete'])->name('admin.business.profile.delete');
+        Route::get('admin/businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('admin.business.profile.restore');
 
-
-
-
+        Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
+        //rfq
+        Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
 
 
     });
 
 });
+
+Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
+
 
 

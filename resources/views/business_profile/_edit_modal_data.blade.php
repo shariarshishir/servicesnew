@@ -4,16 +4,20 @@
             <div class="col-xs-12 title">
                 <legend>Upload Product</legend>
                 <!-- <p>Upload your new product</p> -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="manufacture-product-upload-errors"></div>
         <input type="hidden" name="edit_product_id" value="{{$product->id}}" >
 
         {{-- <div class="row"> --}}
         <div class="form-group row input-field">
             <div class="col s12 m3 l3">
-                <label for="product_category_id">{{ __('Product Category') }}</label>
+                <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
                 <select name="category_id" class="select2 browser-default" id="category_id">
@@ -22,8 +26,8 @@
                         <option value="{{ $product_category->id }}" @if($product_category->id == $product->product_category){{ 'selected' }} @endif>{{ $product_category->name }}</option>
                     @endforeach
                 </select>
+                <span class="text-danger error-text category_id_error rm-error"></span>
             </div>
-            <span class="text-danger error-text category_id_err"></span>
         </div>
         {{-- <div class="row input-field">
             <div class="col s12 m3 l3">
@@ -37,45 +41,49 @@
 
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="producut-title">Title</label>
+                <label for="producut-title">Title <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
-                <input type="text" id="producut-title" name="title" value="{{$product->title}}" class="form-control" placeholder="Product Title ..." required>
+                <input type="text" id="producut-title" name="title" value="{{$product->title}}" class="form-control" placeholder="Product Title ..." >
+                <span class="text-danger error-text title_error rm-error"></span>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m6 l6 input-field">
                 <div class="col s12">
-                    <label for="producut-quality">Price Range</label>
+                    <label for="producut-quality">Price Range <span class="text-danger">*</span></label>
                 </div>
                 <div class="col s12">
-                    <input type="text" name="price_per_unit" value="{{$product->price_per_unit}}" id="producut-quality" class="form-control" placeholder="ex. 5.00 - 6.00" required>
+                    <input type="text" name="price_per_unit" value="{{$product->price_per_unit}}" id="producut-quality" class="form-control" placeholder="ex. 5.00 - 6.00">
+                    <span class="text-danger error-text price_per_unit_error rm-error"></span>
                 </div>
             </div>
             <div class="col s12 m6 l6 input-field">
                 <div class="col s12">
-                    <label for="price_unit">Price Unit</label>
+                    <label for="price_unit">Price Unit <span class="text-danger">*</span></label>
                 </div>
                 <div class="col s12">
                     <select class="select2 browser-default price_unit" name="price_unit">
                         <option value="BDT" {{($product->price_unit == 'BDT') ? 'selected' : ''}}>BDT</option>
                         <option value="USD" {{($product->price_unit == 'USD') ? 'selected' : ''}}>USD</option>
                     </select>
+                    <span class="text-danger error-text price_unit_error rm-error"></span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m6 l6 input-field">
                 <div class="col s12">
-                    <label for="product-moq">MOQ</label>
+                    <label for="product-moq">MOQ <span class="text-danger">*</span></label>
                 </div>
                 <div class="col s12">
-                    <input type="number" name="moq" value="{{ $product->moq }}" id="product-moq" class="form-control" placeholder="Minimum Order Quantity" required>
+                    <input type="number" name="moq" value="{{ $product->moq }}" id="product-moq" class="form-control" placeholder="Minimum Order Quantity">
+                    <span class="text-danger error-text moq_error rm-error"></span>
                 </div>
             </div>
             <div class="col s12 m6 l6 input-field">
                 <div class="col s12">
-                    <label for="qty_unit">Qty Unit</label>
+                    <label for="qty_unit">Qty Unit <span class="text-danger">*</span></label>
                 </div>
                 <div class="col s12">
                     <select class="select2 browser-default qty_unit" name="qty_unit">
@@ -86,13 +94,14 @@
                         <option value="Meter" {{($product->qty_unit == 'Meter') ? 'selected' : ''}}>Meter</option>
                         <option value="Dozens" {{($product->qty_unit == 'Dozens') ? 'selected' : ''}}>Dozens</option>
                     </select>
+                    <span class="text-danger error-text qty_unit_error rm-error"></span>
                 </div>
             </div>
         </div>
 
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="product-colors">Colors <small>EXP: Red,Blue,...</small></label>
+                <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
                 <select class="select2 browser-default product-colors" name="colors[]" multiple>
@@ -106,11 +115,12 @@
                         @endforeach
                     @endif
                 </select>
+                <span class="text-danger error-text colors_error rm-error"></span>
             </div>
         </div>
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small></label>
+                <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
                 <select class="select2 browser-default product-sizes" name="sizes[]"  multiple="multiple">
@@ -124,36 +134,40 @@
                         @endforeach
                     @endif
                 </select>
+                <span class="text-danger error-text sizes_error rm-error"></span>
             </div>
         </div>
         <div class="row input-field">
             <div class="col s12 m3 m3">
-                <label for="product-desc">Product Details</label>
+                <label for="product-desc">Product Details <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
                 <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" >{!! $product->product_details !!}</textarea>
+                <span class="text-danger error-text product_details_error rm-error"></span>
             </div>
         </div>
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="product-spec">Full specification</label>
+                <label for="product-spec">Full specification <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
                 <textarea name="product_specification" id="product-spec" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" >{!! $product->product_specification !!}</textarea>
+                <span class="text-danger error-text product_specification_error rm-error"></span>
             </div>
         </div>
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="lead_time">Lead time</label>
+                <label for="lead_time">Lead time <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
-                <input type="text" name="lead_time" value="{{ $product->lead_time }}" id="lead_time" class="form-control" placeholder="Lead Time" required>
+                <input type="text" name="lead_time" value="{{ $product->lead_time }}" id="lead_time" class="form-control" placeholder="days">
+                <span class="text-danger error-text lead_time_error rm-error"></span>
             </div>
         </div>
         <div class="product_media_wrap row">
             <div class="col s12 input-field">
                 <label for="product-upload">
-                    <span>Media</span>
+                    <span>Media</span><span class="text-danger">*</span>
                 </label>
             </div>
             <div class="center-align row profile_edit_img">
@@ -229,12 +243,11 @@
                     <input class="uplodad_video_box" type="file" name="video">
                 </div>
             </div>
-
-
             <!-- <div class="col s12 submit_wrap right-align">
                 <button type="submit" class="btn waves-effect waves-light green seller_product_create btn_green">Update</button>
                 <button type="button" class="btn modal-close waves-effect waves-light green btn-back-to-product-list btn_green">Cancel</button>
             </div> -->
+            <div id="manufacture-update-errors" style="display: none;"></div>
             <div class="submit_btn_wrap">
                 <div class="row">
                     <div class="col s12 m6 l4 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
@@ -247,5 +260,6 @@
         </div>
     </div>
 </section>
+
 
 

@@ -32,9 +32,9 @@
                     <div class="col m3 productBox">
                         <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
                         <div class="priceBox row">
-                            <div class="col s6 m6 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->id) }}">{{$list->businessProfile->business_name}}</a></div>
+                            <div class="col s6 m6 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">{{$list->businessProfile->business_name}}</a></div>
                             <div class="price col s6 m6 right-align moq-value">MOQ: {{$list->moq}}</div>
-                        </div>                        
+                        </div>
                         <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">{{$title}}</a></h4>
                     </div>
 

@@ -33,18 +33,21 @@ class UserController extends Controller
         $user = User::with('businessProfile')->where('id',$userId)->where('is_email_verified',1)->first();
         $totalWishlist=count($user->productWishlist);
         $totalOrderPlacedByUser = count($user->vendorOrder);
-        $orderQueries = OrderModificationRequest::with('orderModification')->where(['user_id' => auth()->id(), 'type' => 1])->get();
+        $orderQueries = OrderModificationRequest::where(['user_id' => $userId, 'type' => 1])->get();
+        $orderModifications = OrderModificationRequest::where(['user_id' => $userId, 'type' => 2])->get();
         $totalOrderQueries = count($orderQueries);
+        $totalOrderModifications = count($orderModifications);
         if(isset($user))
         {
-            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderPlacedByUser'=>$totalOrderPlacedByUser,'totalOrderQueries'=>$totalOrderQueries,'message'=>'user found','code'=>'True'],200);
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderPlacedByUser'=>$totalOrderPlacedByUser,'totalOrderQueries'=>$totalOrderQueries,'totalOrderModifications'=>$totalOrderModifications,'message'=>'user found','code'=>'True'],200);
         }
         else
         {
             $totalWishlist = [];
             $totalOrderQueries = [];
+            $totalOrderModifications = [];
 
-            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderQueries'=>$totalOrderQueries,'message'=>'user not found','code'=>"False"],200);
+            return response()->json(['user'=>$user,'totalWishlist'=>$totalWishlist,'totalOrderQueries'=>$totalOrderQueries,'totalOrderModifications'=>$totalOrderModifications,'message'=>'user not found','code'=>"False"],200);
         }
 
     }
@@ -155,6 +158,7 @@ class UserController extends Controller
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
+            'country'=>'required'
         ]);
         $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
@@ -170,9 +174,10 @@ class UserController extends Controller
             'user_type' => 'buyer',
             'sso_reference_id' =>$request->sso_reference_id,
             'ip_address' => $request->ip(),
-            'user_agent' => $request->header('User-Agent'),
+            'user_agent' => 'Dart',
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
+            'country' => $request->country,
         ]);
 
         $email_verification_OTP = mt_rand(100000,999999);
@@ -181,11 +186,8 @@ class UserController extends Controller
             'token' => $email_verification_OTP
           ]);
         $token=$user->createToken('merchantbayshop')->plainTextToken;
+        event(new NewUserHasRegisteredEvent($user, $email_verification_OTP));
 
-        Mail::send('emails.apiEmailVerificationEmail', ['token' => $email_verification_OTP], function($message) use($request){
-            $message->to($request->email);
-            $message->subject('Welcome to Merchantbay Shop');
-        });
 
         if($user){
             return response()->json(array('user'=>$user,'token'=>$email_verification_OTP,'auth_token'=>$token,'message' => 'User Created Successfully','code'=>'True'),200);
@@ -385,14 +387,14 @@ class UserController extends Controller
             'password'=> 'required',
 
         ]);
-        // if(env('APP_ENV') == 'production')
-        // {
+        if(env('APP_ENV') == 'production')
+        {
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
             
-        // }
+        }
 
         if($sso->successful()){
 
@@ -418,7 +420,7 @@ class UserController extends Controller
             }
             elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
 
-
+                $user->update(['last_activity' => Carbon::now(),'fcm_token'=>$request->fcm_token]);
                 return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'sso_token'=>$sso['access'],'code'=>"True"],201);
                 // return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
 
@@ -438,6 +440,45 @@ class UserController extends Controller
 
 
     }
+
+    //login without sso from app
+    // public function login(Request $request){
+
+    //     request()->validate([
+
+    //         'email'=> 'required',
+    //         'password'=> 'required',
+
+    //     ]);
+
+    //     $user = User::where('email',$request->email)->first();
+    //     $message = "Email verfication mail has resent successfully";
+    //     $token=$user->createToken('merchantbayshop')->plainTextToken;
+    //     if($user && $user->is_email_verified == 0 && Hash::check($request->password, $user->password)){
+
+    //         $verifyUser = UserVerify::where('user_id', $user->id)->first();
+    //         $email_verification_OTP = $email_verification_OTP = mt_rand(100000,999999);
+    //         $verifyUser = UserVerify::where('user_id',$verifyUser->user_id)->update([
+    //             'user_id' => $user->id,
+    //             'token' => $email_verification_OTP
+    //         ]);
+    //         $verifyUser = UserVerify::where('user_id', $user->id)->first();
+
+    //         Mail::send('emails.apiEmailVerificationEmail', ['token' => $verifyUser->token], function($message) use($request){
+    //             $message->to($request->email);
+    //             $message->subject('Email Verification Mail');
+    //         });
+    //         return response()->json(array('message' => $message,'auth_token'=> $token,'code'=>'True','user'=>$user),200);
+    //     }
+    //     elseif($user && $user->is_email_verified == 1 && Hash::check($request->password, $user->password)){
+    //         return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
+    //     }
+    //     else{
+    //         return response()->json(['message' => 'Wrong email or password','code'=>'False' ,'user'=>$user],401);
+    //     }
+
+    // }
+
 
 
 
@@ -507,6 +548,7 @@ class UserController extends Controller
     // user registration from sso
     public function signUp(Request $request)
     {
+        // dd($request->all());
         
         $request->validate([
             'name' => 'required',
@@ -516,6 +558,7 @@ class UserController extends Controller
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
+            'country'=>'required'
         ]);
         $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
@@ -533,19 +576,19 @@ class UserController extends Controller
             'user_agent' => $request->header('User-Agent'),
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
+            'country' => $request->country,
             'is_email_verified' => 1,
         ]);
 
-       if($request->user_flag == 'global'){
-
-            $token = Str::random(64);
-            UserVerify::create([
-                'user_id' => $user->id,
-                'token' => $token
-            ]);
+        $token = Str::random(64);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $token
+        ]);
+        if(env('APP_ENV') == 'production' && $request->user_flag == 'global')
+        {
             event(new NewUserHasRegisteredEvent($user, $token));
-       }
-
+        }
 
         return response()->json(['msg' => 'user created successfully'], 200);
     }

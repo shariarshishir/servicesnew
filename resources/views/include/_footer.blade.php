@@ -89,6 +89,7 @@
                 <span class="text-danger error-text error-msg login-error-msg" style="display: none;"></span>
                 <form method="POST" action="#">
                     @csrf
+                    <input type="hidden" name="fcm_token" id="fcm_token" value="">
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
@@ -155,6 +156,11 @@
         swal("Done!",'{!!session::get("success")!!}',"success");
     </script>
 @endif
+@if (Session::has('rfq-success'))
+    <script>
+        swal("Congratulations!",'{!!session::get("rfq-success")!!}',"success");
+    </script>
+@endif
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
 <script
@@ -167,6 +173,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" integrity="sha512-igVQ7hyQVijOUlfg3OmcTZLwYJIBXU63xL9RC12xBHNpmGJAktDnzl9Iw0J4yrSaQtDxTTVlwhY730vphoVqJQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+{{-- <script src="{{asset('js/select2.full.min.js')}}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.material.min.js"></script>
@@ -205,7 +212,7 @@
 {{-- jasny-bootstrap --}}
 <script src="{{asset('js/jasny-bootstrap.js')}}"></script>
 {{-- typehead js --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 <!--script src="{{asset('js/bootstrap3-typeahead.min.js')}}"></script-->
 
 @stack('js')
@@ -228,7 +235,7 @@
             $(".main-header").removeClass("fixed");
         }
     });
-   
+
 
 </script>
 
@@ -390,22 +397,77 @@
         });
     });
 </script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+<script>
+    $( document ).ready(function() {
+        var firebaseConfig = {
+            apiKey: "AIzaSyAnarX9u8kFVklreePU_UUeHE2BmCVVRs4",
+            authDomain: "merchant-bay-service.firebaseapp.com",
+            projectId: "merchant-bay-service",
+            storageBucket: "merchant-bay-service.appspot.com",
+            messagingSenderId: "789211877611",
+            appId: "1:789211877611:web:006bb3073632a306daeeae",
+            measurementId: "G-M5LLMK2G5S"
+        };
+
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }else {
+            firebase.app(); // if already initialized, use that one
+        }
+        const messaging = firebase.messaging();
+
+        messaging.requestPermission()
+            .then(function () {
+                return messaging.getToken()
+            })
+            .then(function (fcm_token) {
+                var fcm_token = fcm_token;
+                $("#fcm_token").val(fcm_token);
+
+            }).catch(function (error) {
+                //alert(error);
+            });
+
+        });
+        function printErrorMsg (msg) {
+            $.each( msg, function( key, value ) {
+            $('.'+key+'_err').text(value);
+            });
+        }
+        //This code recieve message from server /your app and print message to console if same tab is opened as of project in browser
+        messaging.onMessage(function(payload) {
+        const noteTitle = payload.notification.title;
+        const noteOptions = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+            data:{
+                time:  new Date(Date.now()).toString(),
+                click_action: payload.notification.click_action
+            }
+        };
+        new Notification(noteTitle, noteOptions);
+    });
+</script>
 
 <script>
     $('.signin').click(function (e) {
         e.preventDefault();
         var email = $('#email_login').val();
         var password=$('#password_login').val();
+        var fcm_token=$('#fcm_token').val();
         var remember =$(this).closest('#login-register-modal').find('input[name="remember"]').prop('checked');
         $.ajax({
             url: "{{route('users.login')}}",
             type: "POST",
-            data: {"email": email, "password": password , "remember": remember, "_token": "{{ csrf_token() }}"},
+            data: {"email": email, "password": password ,"fcm_token":fcm_token, "remember": remember, "_token": "{{ csrf_token() }}"},
             success: function (data) {
                     if($.isEmptyObject(data.error)){
                        if(data.msg){
                         //$('.error-msg').show().text(data.msg);
-                        // alert(data.msg);
+                        alert(data.msg);
                         $('#email_login').addClass('invalid');
                         $('#password_login').addClass('invalid');
                        }
@@ -414,7 +476,6 @@
                         var url = '{{ route("users.profile") }}';
                         window.location.href=url;
                        }
-
                     }
                     else{
                         printErrorMsg(data.error);
@@ -458,17 +519,17 @@
     {
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[xxs][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[xs][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[small][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[medium][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[large][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[extra_large][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[xxl][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[xxxl][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[four_xxl][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control " name="color_size[one_size][]" /></td>';
+    html += '<td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
+    html += '<td data-title="XXS"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xxs][]" /></td>';
+    html += '<td data-title="XS"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xs][]" /></td>';
+    html += '<td data-title="Small"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[small][]" /></td>';
+    html += '<td data-title="Medium"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[medium][]" /></td>';
+    html += '<td data-title="Large"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[large][]" /></td>';
+    html += '<td data-title="Extra Large"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[extra_large][]" /></td>';
+    html += '<td data-title="XXL"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xxl][]" /></td>';
+    html += '<td data-title="XXXL"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[xxxl][]" /></td>';
+    html += '<td data-title="4XXL"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[four_xxl][]" /></td>';
+    html += '<td data-title="One Size"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="color_size[one_size][]" /></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeProductColorSize(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
     html += '</tr>';
     $('.color-size-table-block tbody').append(html);
@@ -478,33 +539,36 @@
         $(el).parent().parent().remove();
     }
 
-    function addFreshOrderAttribute()
+
+    function addFreshOrderAttribute(el)
     {
-    let totalChild = $('.color-size-table-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>';
-    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-    html += '</tr>';
-    $('.fresh-order-attribute-table-block tbody').append(html);
+        var count=$(el).closest('.no_more_tables').find('.fresh-order-attribute-table-block tbody').children('tr').length;
+        //let totalChild = $('.color-size-table-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"><span class="quantity_min_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"><span class="quantity_max_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"><span  class="price_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Lead Time (days)"><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"><span  class="lead_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        html += '</tr>';
+        $('.fresh-order-attribute-table-block tbody').append(html);
     }
     function removeFreshOrderAttribute(el)
     {
         $(el).parent().parent().remove();
     }
 
-    function addReadyOrderAttribute()
+    function addReadyOrderAttribute(el)
     {
-    let totalChild = $('.color-size-table-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-    html += '</tr>';
-    $('.ready-order-attribute-table-block tbody').append(html);
+        var count=$(el).closest('.no_more_tables').find('.ready-order-attribute-table-block tbody').children('tr').length;
+        let totalChild = $('.color-size-table-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"><span class="ready_quantity_min_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"><span class="ready_quantity_max_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"><span  class="ready_price_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeFreshOrderAttribute(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        html += '</tr>';
+        $('.ready-order-attribute-table-block tbody').append(html);
     }
     function removeReadyOrderAttribute(el)
     {
@@ -516,8 +580,8 @@
     {
     let totalChild = $('.non-clothing-color-quantity-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input type="text" value="" class="form-control" name="non_clothing_attr[color][]" /></td>';
-    html += '<td><input type="text" value="0" class="form-control check-price-range-value" name="non_clothing_attr[quantity][]" /></td>';
+    html += '<td data-title="Color"><input type="text" value="" class="form-control" name="non_clothing_attr[color][]" /></td>';
+    html += '<td data-title="Quantity"><input type="text" value="" class="form-control negitive-or-text-not-allowed" name="non_clothing_attr[quantity][]" /></td>';
     html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingAttr(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
     html += '</tr>';
     $('.non-clothing-color-quantity-table-block tbody').append(html);
@@ -528,16 +592,17 @@
     }
 
 
-    function addNonClothingPriceBreakDown()
+    function addNonClothingPriceBreakDown(el)
     {
-    let totalChild = $('.non-clothing-prices-breakdown-block tbody').children().length;
-    var html = '<tr>';
-    html += '<td><input  name="non_clothing_min[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input  name="non_clothing_max[]"  type="text" class="form-control check-price-range-value @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
-    html += '</tr>';
-    $('.non-clothing-prices-breakdown-block tbody').append(html);
+        var count=$(el).closest('.no_more_tables').find('.non-clothing-prices-breakdown-block tbody').children('tr').length;
+        let totalChild = $('.non-clothing-prices-breakdown-block tbody').children().length;
+        var html = '<tr>';
+        html += '<td data-title="Qty Min"><input  name="non_clothing_min[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"><span class="non_clothing_min_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Qty Max"><input  name="non_clothing_max[]"  type="text" class="form-control negitive-or-text-not-allowed @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"><span class="non_clothing_max_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td data-title="Price (usd)"><input  name="non_clothing_price[]" type="text" class="form-control price-range-value @error('price') is-invalid @enderror"  value="" placeholder="$"><span class="non_clothing_price_'+count+'_error text-danger error-rm"></span></td>';
+        html += '<td><a href="javascript:void(0);" class="btn_delete" onclick="removeNonClothingPriceBreakDown(this)"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a></td>';
+        html += '</tr>';
+        $('.non-clothing-prices-breakdown-block tbody').append(html);
     }
     function removeNonClothingPriceBreakDown(el)
     {
@@ -710,7 +775,7 @@
   <script>
 //live search by product name or vendor name
 $("#searchOption").change(function(){
-    $('#search-results').hide();
+    $('#search-results-wrapper').hide();
     if($(this).val() == "product"){
         $(".search_input").val("").attr("placeholder", "Search for ...");
     }
@@ -722,7 +787,11 @@ $("#searchOption").change(function(){
     }
 });
 $(document).on("keyup",".search_input",function(){
-    if($(this).val().length > 3)
+
+    if($(this).val().length == 0){
+        $("#search-results-wrapper").hide();
+    }
+    if($(this).val().length > 2)
     {
         var is_env = "{{ env('APP_ENV') }}";
         var url;
@@ -737,14 +806,16 @@ $(document).on("keyup",".search_input",function(){
             data:{ searchInput:searchInput,selectedSearchOption:selectedSearchOption},
             beforeSend: function() {
                 //$('.loading-search-message').html("Searching please Wait.");
-                $('#search-results').html("Searching please Wait.");
-                $('#search-results').show();
+                //$('#search-results').html("Searching please Wait.");
+                //$('#search-results').show();
+                $("#search-results-wrapper").show();
             },
             success: function(response)
             {
                 //console.log(response.averageRatings);
                 //$('.loading-message').html("");
                 //$('#loadingProgressContainer').hide();
+                $("#loadingSearchProgressContainer").hide();
                 var html="";
                 var nohtml = "";
                 if(is_env == 'production'){
@@ -752,13 +823,13 @@ $(document).on("keyup",".search_input",function(){
                 } else {
                     url  = window.location.origin;
                 }
-                
+
                 if(response.resultCount > 0)
                 {
                     console.log(response.data);
                     if(response.searchType=='all' && response.data.length > 0)
                     {
-                        html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
+                        //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0; i<response.data.length; i++)
                         {
                             if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
@@ -776,6 +847,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].name+'</h4>';
                                 html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html += '</div>';
                                 html += '</div>';
                             }
@@ -794,6 +866,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].title+'</h4>';
                                 html += '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html += '</div>';
                                 html += '</div>';
                             }
@@ -802,34 +875,38 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<div class="product-item">';
                                 html += '<a href="'+url+'/press-room/details/'+response.data[i].slug+'" class="overlay_hover">&nbsp;</a>';
                                 var image = "{{asset('storage/')}}"+'/'+response.data[i].feature_image;
-                                html += '<div class="product-img"><img src="'+image+'"></div>';                            
+                                html += '<div class="product-img"><img src="'+image+'"></div>';
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].title+'</h4>';
                                 html += '<div class="details"><p>'+response.data[i].details.substring(0, 100)+'</p></div>';
+                                html += '<div class="search-item-tag">Blog</div>';
                                 html += '</div>';
                                 html += '</div>';
                             }
                             else // list for supplier
                             {
                                 var image;
+                                var profile_url="{{route('supplier.profile', ':slug')}}";
+                                    profile_url=profile_url.replace(':slug', response.data[i].alias);
                                 html += '<div class="product-item">';
-                                html += '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                                html += '<a href="'+profile_url+'" class="overlay_hover">&nbsp;</a>';
                                 if(response.data[i].user.image)
                                 {
                                 image = "{{asset('storage/')}}"+'/'+response.data[i].user.image;
                                 }
                                 else
                                 {
-                                image = "{{asset('images/frontendimages/no-image.png')}}";    
+                                image = "{{asset('images/frontendimages/no-image.png')}}";
                                 }
                                 html += '<div class="product-img"><img src="'+image+'"></div>';
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].business_name+'</h4>';
                                 html += '<div class="details"><p>'+response.data[i].industry_type+'</p></div>';
+                                html += '<div class="search-item-tag">Supplier Profile</div>';
                                 html += '</div>';
                                 html += '</div>';
                                 html += '</div>';
-                            }                       
+                            }
                         }
                         $('#search-results').html(html);
                         $('#search-results').show();
@@ -837,7 +914,7 @@ $(document).on("keyup",".search_input",function(){
                     else if(response.searchType=='product' && response.data.length > 0)
                     {
                         $('.product-item').html(nohtml);
-                        html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
+                        //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0; i<response.data.length; i++)
                         {
                             //console.log(response.data[i]);
@@ -856,6 +933,7 @@ $(document).on("keyup",".search_input",function(){
                                 html+= '<div class="product-short-intro">';
                                 html+= '<h4>'+response.data[i].name+'</h4>';
                                 html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html+= '</div>';
                                 html+= '</div>';
                             }
@@ -874,6 +952,7 @@ $(document).on("keyup",".search_input",function(){
                                 html+= '<div class="product-short-intro">';
                                 html+= '<h4>'+response.data[i].title+'</h4>';
                                 html+= '<div class="details"><p>MOQ: '+response.data[i].moq+'</p></div>';
+                                html += '<div class="search-item-tag">Single Product</div>';
                                 html+= '</div>';
                                 html+= '</div>';
                             }
@@ -885,12 +964,15 @@ $(document).on("keyup",".search_input",function(){
                     {
                         //console.log(response.data);
                         $('.vendor-info').html(nohtml);
-                        html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
+                        //html+='<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>';
                         for(var i=0;i<response.data.length;i++){
+                            var profile_url="{{route('supplier.profile', ':slug')}}";
+                                profile_url=profile_url.replace(':slug', response.data[i].alias);
                             html+='<div class="vendor-info">';
-                            html+= '<a href="'+url+'/supplier/profile/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
+                            html+= '<a href="'+profile_url+'" class="overlay_hover">&nbsp;</a>';
                             html+= '<h4>'+response.data[i].business_name+'</h4>';
                             html+= '<div class="details"><p>'+response.data[i].location+'</p></div>';
+                            html += '<div class="search-item-tag">Supplier Profile</div>';
                             html+= '</div>';
                             }
                         $('#search-results').html(html);
@@ -901,14 +983,17 @@ $(document).on("keyup",".search_input",function(){
                 {
                     if(response.searchType=='all')
                     {
+                        $('#search-results').show();
                         $('#search-results').html("No information found regarding your search keyword.").show();
                     }
                     else if(response.searchType=='product')
                     {
+                        $('#search-results').show();
                         $('#search-results').html("No product found regarding your search keyword.").show();
                     }
                     else if(response.searchType=='vendor')
                     {
+                        $('#search-results').show();
                         $('#search-results').html("No manufacturer found regarding your search keyword.").show();
                     }
                     //$('#search-results').html(nohtml).hide();
@@ -1041,7 +1126,8 @@ $(document).on("keyup",".search_input",function(){
     });
 
     $(document).on("click",".close-search-modal-trigger",function(){
-        $(this).closest("#search-results").hide();
+        $(this).closest("#search-results-wrapper").hide();
+        $(".search_input").val("");
     });
 
     //switch to manufacturers
@@ -1234,7 +1320,7 @@ function askForPrice($sku)
             url: url,
 
             success:function(response){
-                
+
                 $('#newsletter_signup_form')[0].reset();
                 swal("Done!", response.message,"success");
             },
@@ -1267,5 +1353,167 @@ function askForPrice($sku)
         $(this).toggleClass('active');
     });
 </script>
-   
-   
+<script>
+    $(document).on("click", ".order-modification-request" , function() {
+    var notificationId =$(this).attr("data-order-modification-request-notification-id") ;
+    var obj=$(this).closest('tr').find('.newOrder');
+    $.ajax({
+        type:'GET',
+        url: "{{route('notification-mark-as-read')}}",
+        dataType:'json',
+        data:{ notificationId :notificationId},
+        success: function(data){
+            obj.remove();
+            $('.orderModificationCount').html(data.newModificationRequestNotificationCount);
+            // $('#noOfNotifications').html(data.noOfnotification);
+            $('.noticication_counter').text(data['noOfnotification']);
+        }
+    });
+
+});
+
+$(document).on("click", "#notification_identifier" , function() {
+    var notificationId =$(this).attr("data-notification-id") ;
+    var obj=$(this).closest('tr').find('.newOrder');
+    $.ajax({
+        type:'GET',
+        url: "{{route('notification-mark-as-read')}}",
+        dataType:'json',
+        data:{ notificationId :notificationId},
+        success: function(data){
+            $(obj).remove();
+                $('.orderApprovedCount').html(data.newOrderApprovedNotificationCount);
+                // $('#noOfNotifications').html(data.noOfnotification);
+                $('.noticication_counter').text(data['noOfnotification']);
+        }
+    });
+
+});
+
+
+
+
+
+//order query notification
+$(document).on("click", ".order-query-notification" , function() {
+    var notificationId =$(this).attr("data-notification-id") ;
+    var obj=$(this).closest('tr').find('.newOrder');
+    $.ajax({
+        type:'GET',
+        url: "{{route('notification-mark-as-read')}}",
+        dataType:'json',
+        data:{ notificationId :notificationId},
+        success: function(data){
+            obj.remove();
+            $('.orderQueryProcessedCount').html(data.newOrderQueryProcessedCount);
+           // $('#noOfNotifications').html(data.noOfnotification);
+            $('.noticication_counter').text(data['noOfnotification']);
+        }
+    });
+
+});
+
+
+//profile active inactive
+$(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
+            if($(this).is(":checked")) {
+                var obj = $(this);
+                var b_profile_id=$(this).attr('bpid');
+                var restore_url = '{{ route("business.profile.restore", ":slug") }}';
+                    restore_url = restore_url.replace(':slug', b_profile_id);
+                    swal({
+                    title: "Want to restore this profile ?",
+                    text: "Please ensure and then confirm!",
+                    type: "success",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: !0
+                })
+                .then((willRestore) => {
+                    if (willRestore.value === true) {
+                        $.ajax({
+                            url: restore_url,
+                            type: "GET",
+                            beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Published');
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').addClass('teal white-text text-darken-2');
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.prop('checked',false);
+                                    swal("Oops...!", xhr.responseJSON.msg,"warning");
+
+                                }
+                        });
+                    }
+                    else {
+                        $(this).prop('checked',false);
+                        willRestore.dismiss;
+                    }
+                });
+
+            }
+
+            else {
+                var obj = $(this);
+                var b_profile_id=$(this).attr('bpid');
+                var delete_url = '{{ route("business.profile.delete", ":slug") }}';
+                    delete_url = delete_url.replace(':slug', b_profile_id);
+                swal({
+                    title: "Want to disable this profile?",
+                    text: "(All products of this profile will be unpublish!)",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: !0
+                })
+                .then((willDelete) => {
+                    if (willDelete.value === true) {
+                        $.ajax({
+                            url: delete_url,
+                            type: "GET",
+                            beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').text('Unpublished');
+                                    obj.closest('.profile_enable_disable_trigger').find('.enable_disable_label').removeClass('teal white-text text-darken-2');
+                                    swal("Done!", data.msg,"success");
+                                },
+                                error: function(xhr, status, error)
+                                {
+                                    $('.loading-message').html("");
+		                            $('#loadingProgressContainer').hide();
+                                    obj.prop('checked',true);
+                                    swal("Oops...!", xhr.responseJSON.msg,"warning");
+
+                                }
+                        });
+                    }
+                    else {
+                        $(this).prop('checked',true);
+                        willDelete.dismiss;
+                    }
+                });
+
+            }
+        });
+
+</script>
+

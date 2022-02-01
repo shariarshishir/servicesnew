@@ -89,7 +89,7 @@ if (!function_exists('businessProfileInfo')) {
 
     function businessProfileInfo($business_profile_id)
     {
-        $business_profile=BusinessProfile::where('id',$business_profile_id)->first();
+        $business_profile=BusinessProfile::withTrashed()->where('id',$business_profile_id)->first();
         return $business_profile;
     }
 }

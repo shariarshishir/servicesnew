@@ -39,6 +39,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Vendor::class);
     }
+    public function countryName()
+    {
+        return $this->belongsTo(Country::class,'country','code');
+    }
+
     public function vendorOrder()
     {
         return $this->hasMany(VendorOrder::class);
@@ -67,6 +72,11 @@ class User extends Authenticatable
         return $this->hasOne(BusinessProfile::class,'representative_user_id', 'id');
     }
 
+
+    public function businessProfileWithTrashed()
+    {
+        return $this->hasMany(BusinessProfile::class)->withTrashed();
+    }
 
 
 

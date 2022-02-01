@@ -36,8 +36,8 @@
 						<div class="col s8 m6 l12 profile_left_address_wrap">
 							<div class="office_address center-align ">
 								<h3>{{$business_profile->business_name}}</h3>
-								<h4><span class="material-icons">pin_drop</span>{{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" style="display: none;" /> </h4>
 								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
+								<h4><span class="material-icons">pin_drop</span> <span class="pro_location"> {{$business_profile->location}}</span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" style="display: none;" /> </h4>
 							</div>
 						</div>
 					</div>
@@ -246,7 +246,7 @@
                                     </div>
                                     <div class="row membership_textBox association-membership-block">
                                             @foreach($business_profile->associationMemberships as $associationMembership)
-                                            <div class="col s12 m6 l5 center-align association-membership-img">
+                                            <div class="center-align association-membership-img">
                                                 <a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
                                                 <div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
                                                 <p>{{$associationMembership->title}}</p>

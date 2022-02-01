@@ -31,7 +31,6 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function($view) {
-
             $categories = Cache::remember('categories', 60, function ()
             {
                 $source = ProductCategory::select('id', 'name', 'slug', 'status', 'parent_id')->where('status',1)->get()->toArray();
@@ -76,7 +75,7 @@ class ViewServiceProvider extends ServiceProvider
 
         view()->composer('include.admin._header', function($view) {
             if(auth()->guard('admin')->check()){
-                $notifications =auth()->guard('admin')->user()->unreadNotifications;
+                $notifications =auth()->guard('admin')->user()->unreadNotifications->where('read_at',NULL);
                 $view->with(['notifications'=>$notifications]);
             }
 

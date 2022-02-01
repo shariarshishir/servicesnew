@@ -92,19 +92,22 @@
                     <div class="form-group row fresh-rtd-attr">
                         <label>Prices Breakdown</label>
                         <div class="prices-breakdown-block">
-                            <table class="fresh-order-attribute-table-block">
-                                <thead>
-                                    <tr>
-                                        <th>Qty Min</th>
-                                        <th>Qty Max</th>
-                                        <th>Price (usd)</th>
-                                        <th>Lead Time (days)</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fresh-attr-tbody">
-                                </tbody>
-                            </table>
+                            <div class="no_more_tables">
+                                <table class="fresh-order-attribute-table-block">
+                                    <thead class="cf">
+                                        <tr>
+                                            <th>Qty Min</th>
+                                            <th>Qty Max</th>
+                                            <th>Price (usd)</th>
+                                            <th>Lead Time (days)</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fresh-attr-tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                             <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
 
@@ -126,27 +129,30 @@
                         <div class="row">
                             <label>Available Size & Colors</label>
                             <div class="color-and-size-block">
-                                <table class="color-size-table-block striped edit-color-sizes">
-                                    <thead>
-                                        <tr>
-                                            <th>Color</th>
-                                            <th>XXS</th>
-                                            <th>XS</th>
-                                            <th>Small</th>
-                                            <th>Medium</th>
-                                            <th>Large</th>
-                                            <th>Extra Large</th>
-                                            <th>XXL</th>
-                                            <th>XXXL</th>
-                                            <th>4XXL</th>
-                                            <th>One Size</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="ready-attr-tbody-colors-sizes">
+                                <div class="no_more_tables">
+                                    <table class="color-size-table-block striped edit-color-sizes">
+                                        <thead>
+                                            <tr>
+                                                <th>Color</th>
+                                                <th>XXS</th>
+                                                <th>XS</th>
+                                                <th>Small</th>
+                                                <th>Medium</th>
+                                                <th>Large</th>
+                                                <th>Extra Large</th>
+                                                <th>XXL</th>
+                                                <th>XXXL</th>
+                                                <th>4XXL</th>
+                                                <th>One Size</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="ready-attr-tbody-colors-sizes">
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                                 <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                             </div>
                         </div>
@@ -175,19 +181,23 @@
                     <div class="form-group row ready-stock-prices-breakdown">
                         <label>Prices Breakdown</label>
                         <div class="prices-breakdown-block">
-                            <table class="ready-order-attribute-table-block striped">
-                                <thead>
-                                    <tr>
-                                        <th>Qty Min</th>
-                                        <th>Qty Max</th>
-                                        <th>Price (usd)</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody class='ready-attr-tbody'>
+                            <div class="no_more_tables">
+                                <table class="ready-order-attribute-table-block striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Qty Min</th>
+                                            <th>Qty Max</th>
+                                            <th>Price (usd)</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class='ready-attr-tbody'>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            
                             <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addReadyOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>
@@ -204,18 +214,20 @@
                         <div class="row">
                             <label>Available Size & Colors</label>
                             <div class="color-and-size-block">
-                                <table class="non-clothing-color-quantity-table-block edit-non-clothing-attr-counting striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Color</th>
-                                            <th>Quantity</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="non-clothing-color-quantity-tbody">
+                                <div class="no_more_tables">
+                                    <table class="non-clothing-color-quantity-table-block edit-non-clothing-attr-counting striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Color</th>
+                                                <th>Quantity</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="non-clothing-color-quantity-tbody">
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addNonClothingAttr()"><i class="material-icons dp48">add</i> Add More</a>
                             </div>
                         </div>
@@ -244,19 +256,22 @@
                     <div class="form-group row non-clothing-prices-breakdown">
                         <label>Prices Breakdown</label>
                         <div class="prices-breakdown-block">
-                            <table class="non-clothing-prices-breakdown-block striped">
-                                <thead>
-                                    <tr>
-                                        <th>Qty Min</th>
-                                        <th>Qty Max</th>
-                                        <th>Price (usd)</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody class='edit-non-clothing-prices-breakdown-tbody'>
+                            <div class="no_more_tables">
+                                <table class="non-clothing-prices-breakdown-block striped">
+                                    <thead class="cf">
+                                        <tr>
+                                            <th>Qty Min</th>
+                                            <th>Qty Max</th>
+                                            <th>Price (usd)</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class='edit-non-clothing-prices-breakdown-tbody'>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                             <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>

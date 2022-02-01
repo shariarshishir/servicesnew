@@ -181,17 +181,17 @@
     {
         let totalChild = $('.color-size-table-block tbody').children().length;
         var html = '<tr>';
-        html += '<td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[xxs][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[xs][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[small][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[medium][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[large][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[extra_large][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[xxl][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[xxxl][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[four_xxl][]" /></td>';
-        html += '<td><input type="text" value="0" class="form-control " name="color_size[one_size][]" /></td>';
+        html += '<td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>';
+        html += '<td data-title="XXS"><input type="text" value="0" class="form-control " name="color_size[xxs][]" /></td>';
+        html += '<td data-title="XS"><input type="text" value="0" class="form-control " name="color_size[xs][]" /></td>';
+        html += '<td data-title="Small"><input type="text" value="0" class="form-control " name="color_size[small][]" /></td>';
+        html += '<td data-title="Medium"><input type="text" value="0" class="form-control " name="color_size[medium][]" /></td>';
+        html += '<td data-title="Large"><input type="text" value="0" class="form-control " name="color_size[large][]" /></td>';
+        html += '<td data-title="Extra Large"><input type="text" value="0" class="form-control " name="color_size[extra_large][]" /></td>';
+        html += '<td data-title="XXL"><input type="text" value="0" class="form-control " name="color_size[xxl][]" /></td>';
+        html += '<td data-title="XXXL"><input type="text" value="0" class="form-control " name="color_size[xxxl][]" /></td>';
+        html += '<td data-title="4XXL"><input type="text" value="0" class="form-control " name="color_size[four_xxl][]" /></td>';
+        html += '<td data-title="One Size"><input type="text" value="0" class="form-control " name="color_size[one_size][]" /></td>';
         html += '<td><a href="javascript:void(0);" class="btn waves-effect waves-light red" onclick="removeProductColorSize(this)"><i class="fas fa-minus-circle">Remove</i></a></td>';
         html += '</tr>';
         $('.color-size-table-block tbody').append(html);

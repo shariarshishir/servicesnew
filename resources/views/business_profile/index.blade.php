@@ -13,7 +13,14 @@
             @foreach ($business_profile  as $profile )
             <div class="business_list_itembox">
                 <div class="box_shadow list_box">
-                    <p><span>Business Name:</span> {{$profile->business_name}}</p>
+                    <p>
+                        <span>Business Name:</span>
+                        @if($profile->business_type==1)
+                        <a href="{{route('manufacturer.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
+                        @else
+                        <a href="{{route('wholesaler.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
+                        @endif
+                    </p>
                     <p><span>Business Type:</span>
                         @switch($profile->business_type)
                             @case(1)
@@ -28,18 +35,25 @@
                             @default
                         @endswitch
                     </p>
-                    <p><span>Location:</span> {{$profile->location}}</p>
+                    <p><span>Location:</span> {{ \Illuminate\Support\Str::limit($profile->location, 15, $end='...') }}</p>
+                    <div class="switch profile_enable_disable_trigger">
+                        <label>
+                            <input type="checkbox" bpid={{$profile->id}} {{$profile->deleted_at ? '' : 'checked'}}>
+                            <span class="lever"></span>
+                            <span class="enable_disable_label {{$profile->deleted_at ? '' : 'teal white-text text-darken-2'}}">{{$profile->deleted_at ? 'Unpublished' : 'Published'}}</span>
+                        </label>
+                    </div>
                     @if($profile->business_type==1)
-                    <a class="business_view" href="{{route('business.profile.show',$profile->id)}}">View Details</a>
+                    <a class="business_view" href="{{route('manufacturer.profile.show',$profile->alias)}}">View Details</a>
                     @else
-                    <a class="business_view" href="{{route('wholesaler.profile.show',$profile->id)}}">View Details</a>
+                    <a class="business_view" href="{{route('wholesaler.profile.show',$profile->alias)}}">View Details</a>
                     @endif
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-    
+
 
 
 </div>

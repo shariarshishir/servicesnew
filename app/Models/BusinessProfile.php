@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BusinessProfile extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $connection = 'mysql';
     protected $guarded=[];
 
@@ -91,6 +92,9 @@ class BusinessProfile extends Model
     {
         return $this->hasOne(Walfare::class);
     }
+    public function businessProfileVerificationsRequest(){
+        return $this->hasOne(BusinessProfileVerificationsRequest::class);
+    }
     public function security()
     {
         return $this->hasOne(Security::class);
@@ -111,5 +115,10 @@ class BusinessProfile extends Model
     {
         return $this->hasMany(VendorOrder::class);
     }
+
+    public function relatedProducts(){
+        return $this->hasMany(RelatedProduct::class);
+    }
+
 
 }

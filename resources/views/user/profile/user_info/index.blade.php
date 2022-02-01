@@ -17,7 +17,7 @@
                 <img src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
                 @else
                 <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" width="300px">
-                @endif                
+                @endif
             </div>
             <div class="change_photo">
                 <form method="post" id="upload-image-form" enctype="multipart/form-data">
@@ -31,7 +31,7 @@
                     </div>
                     <input type="hidden" name="user_id" value="{{$user->id}}">
 
-                    <button type="submit" class="btn waves-effect waves-light green">Upload</button>
+                    <button type="submit" class="btn waves-effect waves-light green profile-image-upload-button" style="display: none">Upload</button>
                 </form>
             </div>
         </div>
@@ -40,6 +40,10 @@
                 <p><i class="material-icons dp48 waves-effect waves-light">person</i> {{$user->name}}</p>
                 <p><i class="material-icons dp48 waves-effect waves-light">email</i> {{$user->email}}</p>
                 <p><i class="material-icons dp48 waves-effect waves-light">local_phone</i> {{$user->phone}}</p>
+
+                <div class="user_my_order_btnwrap">
+                    <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
+                </div>
             </div>
             @if(count($businessProfiles) > 0)
             @php
@@ -60,25 +64,34 @@
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
                         <div class="my_businesses_box card user-business-profile-short-info">
-                        @if($businessprofile->business_type==1)
-                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('business.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
-                        @else
-                        <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->id)}}">{{ $businessprofile->business_name }}</a></p>
-                        @endif
-                        <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
-                        <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+                            @if($businessprofile->business_type==1)
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}">{{ $businessprofile->business_name }}</a></p>
+                            @else
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}">{{ $businessprofile->business_name }}</a></p>
+                            @endif
+                            <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
+                            <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+
+                            <div class="switch profile_enable_disable_trigger">
+                                <label>
+                                    <input type="checkbox" bpid={{$businessprofile->id}} {{$businessprofile->deleted_at ? '' : 'checked'}}>
+                                    <span class="lever"></span>
+                                    <span class="enable_disable_label {{$businessprofile->deleted_at ? '' : 'teal white-text text-darken-2'}}">{{$businessprofile->deleted_at ? 'Unpublish' : 'Publish'}}</span>
+                                </label>
+                            </div>
+
                         </div>
                     </div>
-                    
+
                     @endforeach
                 </div>
             </div>
             @endif
         </div>
     </div>
-    <div class="user_my_order_btnwrap">
+    <!-- <div class="user_my_order_btnwrap">
         <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
-    </div>
+    </div> -->
 
 
 

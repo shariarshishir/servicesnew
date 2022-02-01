@@ -299,7 +299,7 @@ class UserController extends Controller
 
                 }
                 else{
-                    return response()->json(['msg' => 'No active account found with the given credentials']);
+                    return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.']);
                 }
             }
 
@@ -311,8 +311,9 @@ class UserController extends Controller
             $remember_me = $request->remember == 'true' ? true : false;
             if(Auth::attempt($credentials,$remember_me))
             {
-                $userId=auth()->user()->id;
-                $user=User::whereId($userId)->first();
+                $userId = auth()->user()->id;
+                $user = User::whereId($userId)->first();
+                $user->update(['last_activity' => Carbon::now(),'fcm_token'=>$request->fcm_token]);
                 return response()->json(['user_id'=>$user->user_id]);
             }
             return response()->json(['msg' => 'Wrong email or password']);
@@ -433,10 +434,10 @@ class UserController extends Controller
         // return view('user.profile.index',compact('user','category','productList','productNewArrival','productFeatured','countries','orders','flag','vendorReviews','orderModificationRequestIds','orderIds','orderModificationRequest','notifications'));
 
         $user=User::where('id',auth()->id())->first();
-        $businessProfiles=BusinessProfile::where('user_id',auth()->id())->get();
+        $businessProfiles=BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
         if($businessProfiles->isEmpty())
         {
-            $businessProfiles=BusinessProfile::where('representative_user_id',auth()->id())->get();
+            $businessProfiles=BusinessProfile::withTrashed()->where('representative_user_id',auth()->id())->get();
         }
 
 
@@ -532,6 +533,11 @@ class UserController extends Controller
                     $notification->markAsRead();
                     $message="Notification mark as read successfully";
                 }
+                elseif($notification->type == "App\Notifications\NewRfqNotification" && $notification->data['rfq_data']['id']==$request->rfqId)
+                {
+                    $notification->markAsRead();
+                    $message="Notification mark as read successfully";
+                }
 
         }
 
@@ -555,18 +561,20 @@ class UserController extends Controller
             if($notification->type=="App\Notifications\NewOrderHasApprovedNotification"){
                 array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
             }
-            else if($notification->type=="App\Notifications\QueryWithModificationToUserNotification"){
+            elseif($notification->type=="App\Notifications\QueryWithModificationToUserNotification"){
                 array_push($orderModificationRequestIds,$notification->data['notification_data']);
             }
-            else if($notification->type == "App\Notifications\OrderQueryFromAdminNotification"){
+            elseif($notification->type == "App\Notifications\OrderQueryFromAdminNotification"){
                 array_push($orderQueryProcessedIds,$notification->data['notification_data']['order_modification_request_id']);
             }
-            else if($notification->type=="App\Notifications\QueryCommuncationNotification"){
+            elseif($notification->type=="App\Notifications\QueryCommuncationNotification"){
                 array_push($orderModificationRequestIds,$notification->data['notification_data']);
             }
             elseif($notification->type=="App\Notifications\PaymentSuccessNotification"){
                 array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
             }
+
+
 
         }
         $newModificationRequestNotificationCount=count($orderModificationRequestIds);

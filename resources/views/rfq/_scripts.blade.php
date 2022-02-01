@@ -24,13 +24,9 @@
                             $('#rfq-bid-modal').modal('open');
                             $('#rfq-bid-form')[0].reset();
                             $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", false);
-                            $('#rfq-bid-modal .rfq_img_upload_wrap').show();
-                            $('#rfq-bid-modal .previous-image-show').hide();
-
                             $('#rfq-bid-modal input[name=rfq_id]').val(data.data.id);
-                            $('#rfq-bid-modal input[name=title]').val(data.data.title);
-                            $('#rfq-bid-modal input[name=unit]').val(data.data.unit);
-                            $('#rfq-bid-modal input[name=destination]').val(data.data.destination);
+                            $('#rfq_bid_store_errors').empty();
+                            $('#rfq-bid-modal .rfq-replay-submit').show();
 
                             $('#my_business_list').html('');
                             $.each(data.my_business, function (i, item) {
@@ -42,24 +38,10 @@
                             if(data.hasOwnProperty('bid')){
                                 $('#my_business_list').val(data.bid.business_profile_id);
                                 $('#my_business_list').trigger('change');
-                                $('#rfq-bid-modal input[name=quantity]').val(data.bid.quantity);
                                 tinymce.get("product-bidding-desc").setContent(data.bid.description);
                                 $('#rfq-bid-modal input[name=unit_price]').val(data.bid.unit_price);
-                                $('#rfq-bid-modal input[name=total_price]').val(data.bid.total_price);
-                                $('#product-payment-method').val(data.bid.payment_method);
-                                $('#product-payment-method').trigger('change');
-                                $('#rfq-bid-modal input[name=delivery_time]').val(data.bid.delivery_time);
-                                $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
-                                $('#rfq-bid-modal .rfq_img_upload_wrap').hide();
-                                $('#rfq-bid-modal .previous-image-show').show();
-                                $('#rfq-bid-modal .previous-image-show').html('');
-                                $.each(JSON.parse(data.bid.media) ,function(key, item){
-                                    var image="{{asset('storage')}}"+"/"+item;
-                                    var html='<div class="replied_image">';
-                                        html+='<img src="'+image+'" width="100%" alt="media">';
-                                        html+= '</div>';
-                                    $('#rfq-bid-modal .previous-image-show').append(html);
-                                });
+                                // $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
+                                  $('#rfq-bid-modal .rfq-replay-submit').hide();
 
                             }
 
@@ -84,8 +66,75 @@
         }
 
         //store bid rfq
+
+        function validateWordsLength() {
+            var max = 1;
+            var theEditor = tinymce.activeEditor;
+            var wordCount = theEditor.plugins.wordcount.getCount();
+            if(wordCount == 0){
+                $('#rfq-bid-form .validation-error-description').text('Short description required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-description').text(' ');
+            }
+            if (wordCount > max) {
+                alert("Short description Maximum " + max + " words allowed.your given words length is "+wordCount + "")
+                return false;
+            }
+            return;
+        }
+
+        function validateUnitPrice(){
+            var unit_value= $('#rfq-bid-modal input[name=unit_price]').val().length;
+            if(unit_value == 0){
+                $('#rfq-bid-form .validation-error-unit-price').text('Unit price required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-unit-price').text('');
+            }
+            return;
+        }
+        // tinymce.init({
+        //     selector: 'textarea',
+        //     setup: function(editor) {
+        //         editor.on('init', function(e) {
+        //             var body = editor.get("product-bidding-desc").getBody();
+        //             var content = editor.trim(body.innerText || body.textContent).split(' ');
+        //             var max = 1;
+        //             var count = content.length;
+        //             if (count > max) {
+        //                 alert("Maximum " + max + " words allowed.your given words length is "+count + "")
+        //             }
+
+        //                 });
+        //     }
+        // });
+
         $('#rfq-bid-form').on('submit',function(e){
             e.preventDefault();
+
+            var unit_value= $('#rfq-bid-modal input[name=unit_price]').val().length;
+            if(unit_value == 0){
+                $('#rfq-bid-form .validation-error-unit-price').text('Unit price required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-unit-price').text('');
+            }
+
+            var max = 50;
+            var theEditor = tinymce.activeEditor;
+            var wordCount = theEditor.plugins.wordcount.getCount();
+            if(wordCount == 0){
+                $('#rfq-bid-form .validation-error-description').text('Short description required');
+                return false;
+            }else{
+                $('#rfq-bid-form .validation-error-description').text(' ');
+            }
+            if (wordCount > max) {
+                alert("Short description Maximum " + max + " words allowed.your given words length is "+wordCount + "")
+                return false;
+            }
+
             tinyMCE.triggerSave();
             var formData = new FormData(this);
             var url = '{{ route("rfq.bid.store") }}';
@@ -145,7 +194,7 @@
                 {
                     $(this).text('Show More');
                 }
-           
+
             });
         });
 
@@ -155,6 +204,53 @@
             });
         });
 
+        $('.btn_view_detail').on('click',function(event){
+            event.preventDefault();
+            console.log('hi');
+            let rfqId = $(this).attr("data-rfqId");
 
+            let obj=$(this).closest('span');
+
+
+            $.ajax({
+                type:'GET',
+                url: "{{route('notification-mark-as-read')}}",
+                data:{ rfqId: rfqId},
+                success: function (data) {
+                    $('.noticication_counter').text(data['noOfnotification']);
+                    obj.remove();
+                }
+            });
+        });
+
+        //open share model
+        function openShareModel(id){
+            var rfq_id=id;
+            var url = '{{ route("rfq.share", ":slug") }}';
+            url = url.replace(':slug', rfq_id);
+            $.ajax({
+                    method: 'get',
+                    url: url,
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
+                    success:function(data)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            $('#share-modal').modal('open');
+                            $('#share-modal input[name=share_text]').val();
+                            $('#share-modal input[name=share_text]').val(data.link);
+                        },
+
+                    error: function(xhr, status, error)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            swal("Done!",xhr.responseJSON.error,"error");
+                        }
+            });
+        }
 </script>
 @endpush

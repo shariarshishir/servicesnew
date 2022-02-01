@@ -13,4 +13,8 @@ class ExportDestination extends Model
     {
         return $this->belongsTo(BusinessProfile::class);
     }
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

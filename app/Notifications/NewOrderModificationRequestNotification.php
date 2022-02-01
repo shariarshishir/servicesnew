@@ -34,7 +34,7 @@ class NewOrderModificationRequestNotification extends Notification
             'title' => "New order modification request",
             'notification_data'=> $this->data,
             'notification_type'=>"OrderModification",
-            'url' => route('query.edit',$this->data)
+            'url' => route('query.show',$this->data)
         ];
     }
 }

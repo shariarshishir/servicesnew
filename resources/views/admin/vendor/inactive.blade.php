@@ -23,62 +23,66 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-				<legend>Vendor List</legend>
+				      <legend>Vendor List</legend>
+              <div class="no_more_tables">
                 @if(count($users)>0)
-                <table class="table table-bordered">
-                    <thead>
-                            <tr>
-                              <th>Business Name </th>
-                              <th>Wholesaler Name</th>
-                              <th>Wholesaler email</th>
-                              <th>Vendor address</th>
-                              <th>Action</th>
-                            </tr>
-                    </thead>
-                    <tbody>
+                  <table class="table table-bordered">
+                      <thead class="cf">
+                              <tr>
+                                <th>Business Name </th>
+                                <th>Wholesaler Name</th>
+                                <th>Wholesaler Email</th>
+                                <th>Vendor Address</th>
+                                <th>Action</th>
+                              </tr>
+                      </thead>
+                      <tbody>
 
-                        @foreach($users as $user)
-                        <tr>
+                          @foreach($users as $user)
+                          <tr>
 
-                            <td class="center">
-                                <a href="{{route('vendor.show',$user->inactiveVendor->id)}}">{{$user->inactiveVendor->vendor_name}}</a>
-                            </td>
-                            <td>
-                                {{$user->name}}
-                            </td>
+                              <td data-title="Business Name" class="center">
+                                  <a href="{{route('vendor.show',$user->inactiveVendor->id)}}">{{$user->inactiveVendor->vendor_name}}</a>
+                              </td>
+                              <td data-title="Wholesaler Name">
+                                  {{$user->name}}
+                              </td>
 
-                            <td class="center">
-                                {{$user->email}}
-                            </td>
+                              <td data-title="Wholesaler Email" class="center">
+                                  {{$user->email}}
+                              </td>
 
-                            <td>
-                                {{$user->inactiveVendor->vendor_address}}
-                            </td>
+                              <td data-title="Vendor Address">
+                                  {{$user->inactiveVendor->vendor_address}}
+                              </td>
 
-                            <td>
-								{{-- <form action= method="GET">
-									<button type="submit" class="btn btn-danger btn-sm">
-										<i class="fas fa-trash-restore"></i>
-									</button>
-								</form> --}}
-                                <a href="{{ route('vendor.restore', $user->inactiveVendor->id) }}"> <i class="fas fa-trash-restore"></i></a>
-							</td>
+                              <td data-title="Action">
+                                {{-- <form action= method="GET">
+                                  <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-restore"></i>
+                                  </button>
+                                </form> --}}
+                                  <a href="{{ route('vendor.restore', $user->inactiveVendor->id) }}"> <i class="fas fa-trash-restore"></i></a>
+                              </td>
 
-                        </tr>
-                        @endforeach
+                          </tr>
+                          @endforeach
 
-                    </tbody>
-                </table>
+                      </tbody>
+                  </table>
                 @else
-                <div class="alert alert-info" role="alert">INFO : No vendors available.</div>
+                  <div class="alert alert-info" role="alert">INFO : No vendors available.</div>
                 @endif
-
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
     </section>
+
+
+
 </div>
 
 

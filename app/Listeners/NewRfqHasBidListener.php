@@ -5,42 +5,43 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Rfq;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqHasBidMail;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\RfqBidNotification;
+use App\Http\Traits\PushNotificationTrait;
 
-class NewRfqHasBidListener implements ShouldQueue
+
+class NewRfqHasBidListener  implements ShouldQueue
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
+   use PushNotificationTrait;
     public function handle($event)
     {
         $supplier=$event->selectedUserToSendMail;
         $data=[
             'supplier'=>$supplier,
             'bidData'=>$event->bidData,
+            'url'=>"/my-rfq"
         ];
         if($supplier=="success@merchantbay.com"){
+           
             Mail::to($supplier)->send(new NewRfqHasBidMail($data));
-            // Notification::send($supplier,new NewRfqNotification($data));
+           
+        }else{
+
+            $fcmToken = $supplier->user->fcm_token;
+            $title = "new response for your RFQ";
+            $message = "Dear, ".$supplier->user->name.", A supplier has reponded for your RFQ.If you are interested please let him know about your interest";
+            $action_url = route('rfq.my');
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+            
+            Mail::to($supplier->user->email)->send(new NewRfqHasBidMail($data));
+            Notification::send($supplier->user,new RfqBidNotification($data));
+
         }
-        else{
-            // Notification::send($supplier,new NewRfqNotification($data));
-            Mail::to($event->selectedUserToSendMail->user->email)->send(new NewRfqHasBidMail($data));
-        }
+        
+        
 
     }
 }

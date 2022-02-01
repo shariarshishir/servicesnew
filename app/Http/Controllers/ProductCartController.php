@@ -22,6 +22,7 @@ use App\Models\OrderModificationRequest;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
+use App\Http\Traits\PushNotificationTrait;
 
 
 class ProductCartController extends Controller
@@ -39,8 +40,9 @@ class ProductCartController extends Controller
         {
             //$addToCartItems[$cat->vendor_id] = DB::table('cart_items')->where('vendor_id', $cat->vendor_id)->where('cookie_identifier',$getCookieIdentifier)->get()->toArray();
             $addToCartItems[] = DB::table('cart_items')->where('business_profile_id', $cat->business_profile_id)->where('user_id',auth()->user()->id)->get()->toArray();
+
         }
-        $cartData = DB::table('cart_items')->where('user_id',auth()->user()->id)->get();
+        $cartData = DB::table('cart_items')->where('deleted_at', null)->where('user_id',auth()->user()->id)->get();
         $orderedItem=VendorOrderItem::pluck('product_sku')->toArray();
         return view('user.cart.index',compact('addToCartItems','cartData','orderedItem'));
     }
@@ -206,13 +208,14 @@ class ProductCartController extends Controller
         $countries=Country::all();
         $billing_address=UserAddress::where('user_id',auth()->id())->where('address_type',1)->get();
         $shipping_address=UserAddress::where('user_id',auth()->id())->where('address_type',2)->get();
-        $cartData = DB::table('cart_items')->where('user_id',auth()->id())->get();
+        $cartData = DB::table('cart_items')->where('deleted_at', null)->where('user_id',auth()->id())->get();
         $cartItems=count($cartData);
+        if($cartItems == 0){ alert()->error('Please, re-check the cart page', 'Error')->persistent("Close this"); return redirect()->back();}
         return view('user.cart.checkout',compact('countries','cartItems','billing_address','shipping_address','cartData'));
     }
 
     public function cartItemDelete($id){
-        CartItem::where('id',$id)->delete();
+        CartItem::where('id',$id)->forceDelete();
         alert()->success('success','Cart item deleted successfully!!!!')->autoclose(3500);
         // Session::flash('success','Cart item deleted successfully!!!!');
         return redirect()->route('cart.index');
@@ -272,7 +275,7 @@ class ProductCartController extends Controller
     }
     public function cartAllItemDelete(){
 
-        CartItem::where('user_id',auth()->user()->id)->delete();
+        CartItem::where('user_id',auth()->user()->id)->forceDelete();
         alert()->success('success','Cart items deleted successfully!!!!')->autoclose(3500);
         return redirect()->back();
     }
@@ -398,11 +401,12 @@ class ProductCartController extends Controller
 
                     }
                 }
-               event(new NewOrderHasPlacedEvent($order));
+              
+                    event(new NewOrderHasPlacedEvent($order));
             }
 
 
-            CartItem::where('user_id',auth()->user()->id)->delete();
+            CartItem::where('user_id',auth()->user()->id)->forceDelete();
             DB::commit();
             alert()->success('Your Order has been successfully done')->autoclose(3500);
             //alert()->success('Your Order has been successfully done')->autoclose(3500);

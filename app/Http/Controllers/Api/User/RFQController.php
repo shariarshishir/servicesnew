@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 use App\Models\RfqImage;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Events\NewRfqHasAddedEvent;
 
 
 class RFQController extends Controller
@@ -28,7 +29,7 @@ class RFQController extends Controller
     }
     public function myRfqList()
     {
-        $rfqs=Rfq::withCount('bids')->with('images','user')->where('created_by',auth()->id())->latest()->paginate(5);
+        $rfqs=Rfq::withCount('bids')->with('images','user','bids')->where('created_by',auth()->id())->latest()->paginate(5);
         if($rfqs->total()>0){
 
             return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
@@ -58,6 +59,7 @@ class RFQController extends Controller
         //     400);
         // }
         try{
+           
             $rfqData = $request->except(['product_images']);
             $rfqData['created_by']=auth()->id();
             $rfqData['status']='approved';
@@ -69,18 +71,30 @@ class RFQController extends Controller
                         $path=$product_image->store('images','public');
                     }
                     else{
+                        
                         $path=$product_image->store('images','public');
                         $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
                         Storage::put($path, $image);
+                      
                     }
+                    RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
             }
+            if(env('APP_ENV') == 'production')
+        {
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        }
             
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
-            
             if($rfq){
 
-                return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"message"=>$message,"success"=>true],200);
+                return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,'user'=>$rfq->user,"message"=>$message,"success"=>true],200);
             }
             else{
                 return response()->json(["success"=>false],200);
@@ -134,6 +148,13 @@ class RFQController extends Controller
                     RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
             }
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
 
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){

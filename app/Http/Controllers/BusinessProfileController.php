@@ -2,34 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin\Certification;
+use stdClass;
+use App\Models\User;
+use App\Models\Country;
+use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
 use App\Models\CompanyOverview;
-use App\Models\CategoriesProduced;
+use Illuminate\Validation\Rule;
 use App\Models\MachineriesDetail;
+use App\Models\CategoriesProduced;
 use App\Models\CompanyFactoryTour;
 use App\Models\ProductionCapacity;
+use App\Models\Admin\Certification;
 use App\Models\BusinessProfileVerification;
+use App\Models\BusinessProfileVerificationsRequest;
 use App\Models\Manufacture\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use stdClass;
+use App\Events\NewBusinessProfileHasCreatedEvent;
+use App\Events\NewBusinessProfileVerificationRequestEvent;
+
 
 class BusinessProfileController extends Controller
 {
 
     public function index()
     {
-        $business_profile=BusinessProfile::where('user_id',auth()->id())->get();
+        $business_profile=BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
 
         if($business_profile->isEmpty())
         {
-            $business_profile=BusinessProfile::where('representative_user_id',auth()->id())->get();
+            $business_profile=BusinessProfile::withTrashed()->where('representative_user_id',auth()->id())->get();
         }
 
         return view('business_profile.index',['business_profile' => $business_profile]);
@@ -68,10 +74,13 @@ class BusinessProfileController extends Controller
             }),
             'email' => 'required_if:has_representative,0|unique:users',
             'phone' => 'required_if:has_representative,0',
-            'nid_passport' => 'required_if:has_representative,0',
+            //'nid_passport' => 'required_if:has_representative,0',
             'representive_name' =>'required_if:has_representative,0',
             'business_category_id' => 'required_if:business_type,1',
-
+         ],[
+             'email.required_if' => 'The representive email field is required.',
+             'phone.required_if' => 'The representive phone field is required.',
+             'representive_name.required_if' => 'The representive name field is required.',
          ]);
          if ($validator->fails())
          {
@@ -80,9 +89,11 @@ class BusinessProfileController extends Controller
              'error' => $validator->getMessageBag()),
              400);
          }
+
          try{
                 $business_profile_data=[
                     'business_name' => $request->business_name,
+                    'alias'   => $this->createAlias($request->business_name),
                     'user_id'       => auth()->id(),
                     'location'      => $request->location,
                     'business_type' => $request->business_type,
@@ -95,9 +106,10 @@ class BusinessProfileController extends Controller
                 ];
 
                 if($request->has_representative == true){
-                    $business_profile=BusinessProfile::create($business_profile_data);
+                    $business_profile = BusinessProfile::create($business_profile_data);
                     //create company overview
                     $this->createCompanyOverview($request,$business_profile->id);
+                    event(new NewBusinessProfileHasCreatedEvent($business_profile));
                     return response()->json([
                         'success' => true,
                         'redirect_url' => route('business.profile'),
@@ -139,15 +151,18 @@ class BusinessProfileController extends Controller
                     }
 
                     //user registraion as represetative
-                    $representive_data['password'] =bcrypt($representive_data['password']);
+                    $representive_data['password'] = bcrypt($representive_data['password']);
                     $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
-                    $representive_data['user_id'] =$user_id;
+                    $representive_data['user_id'] = $user_id;
                     $user=User::create($representive_data);
                     //profile create
-                    $business_profile_data['representative_user_id']= $user->id;
-                    $business_profile=BusinessProfile::create($business_profile_data);
+                    $business_profile_data['representative_user_id'] = $user->id;
+                    $business_profile = BusinessProfile::create($business_profile_data);
                     //create company overview
                     $this->createCompanyOverview($request,$business_profile->id);
+
+                   event(new NewBusinessProfileHasCreatedEvent($business_profile));
+
                     return response()->json([
                         'success' => true,
                         'redirect_url' => route('business.profile'),
@@ -168,28 +183,68 @@ class BusinessProfileController extends Controller
 
     }
 
-    public function show($id)
+    public function removeSpecialCharacterFromAlais($alias)
     {
-        $business_profile = BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour')->findOrFail($id);
-        $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$id)->first();
+        $lowercase=strtolower($alias);
+        $pattern= '/[^A-Za-z0-9\-]/';
+        $preg_replace= preg_replace($pattern, '-', $lowercase);
+        $single_hypen= preg_replace('/-+/', '-', $preg_replace);
+        $alias= $single_hypen;
+        return $alias;
+    }
+
+
+    public function createAlias($name)
+    {
+        $alias=$this->removeSpecialCharacterFromAlais($name);
+        return $this->checkExistsAlias($alias);
+    }
+
+    public function checkExistsAlias($alias)
+    {
+        $check_exists=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists){
+            $create_array= explode('-',$alias);
+            $last_key=array_slice($create_array,-1,1);
+            $last_key_string=implode(' ',$last_key);
+            if(is_numeric($last_key_string)){
+                $last_key_string++;
+                array_pop($create_array);
+                array_push($create_array,$last_key_string);
+            }else{
+                array_push($create_array,1);
+            }
+            $alias=implode("-",$create_array);
+            return $this->checkExistsAlias($alias);
+
+        }
+
+        return $alias;
+    }
+    public function show($alias)
+    {
+        $business_profile = BusinessProfile::withTrashed()->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security','companyFactoryTour','businessProfileVerificationsRequest')->where('alias',$alias)->firstOrFail();
+        $companyFactoryTour=CompanyFactoryTour::with('companyFactoryTourImages','companyFactoryTourLargeImages')->where('business_profile_id',$business_profile->id)->first();
 
 
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
             $sizes=['S','M','L','XL','XXL','XXXL'];
-            $products=Product::latest()->where('business_profile_id', $business_profile->id)->get();
+            $products=Product::withTrashed()->latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
-                $mainProducts=Product::with('product_images')->where('business_profile_id',$id)->inRandomOrder()
+                $mainProducts=Product::withTrashed()->with('product_images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
                 ->limit(4)
                 ->get();
-            $default_certification=Certification::get();
-            return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification'));
+                $default_certification=Certification::get();
+                $country=Country::pluck('name','id');
+                return view('business_profile.show',compact('business_profile','companyFactoryTour', 'colors', 'sizes','products','mainProducts','default_certification','country'));
             }
-            if($business_profile->business_type == 2){
+            abort(404);
+            // if($business_profile->business_type == 2){
 
-               return view('wholesaler_profile.index',compact('business_profile'));
-            }
+            //    return view('wholesaler_profile.index',compact('business_profile'));
+            // }
 
 
         }
@@ -234,7 +289,7 @@ class BusinessProfileController extends Controller
                 $count++;
             }
 
-            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=>$request->factory_address,'about_company'=>$request->about_company]);
+            $company_overview->update(['data' => json_encode($data),'address'=>$request->address,'factory_address'=> $request->same_as_office_adrs ? $request->address : $request->factory_address,'same_as_office_adrs' => $request->same_as_office_adrs ? true : false ,'about_company'=>$request->about_company]);
 
             $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$company_overview->business_profile_id )->first();
             if($businessProfileVerification){
@@ -265,7 +320,7 @@ class BusinessProfileController extends Controller
 
     }
 
-    public function capacityAndMachineriesCreateOrUpdate(Request $request){
+   /* public function capacityAndMachineriesCreateOrUpdate(Request $request){
         $validator = Validator::make($request->all(), [
             'machine_type.*' => 'required_with:annual_capacity|string|min:1|max:255',
             'annual_capacity.*' => 'required_with:machine_type|integer',
@@ -366,10 +421,126 @@ class BusinessProfileController extends Controller
 
         }
 
+    }*/
+
+    public function categoriesProducedCreateOrUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'type.*' => 'required_with:percentage|string|min:1|max:255',
+            'percentage.*' => 'required_with:type|integer',
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        try{
+
+
+            $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->delete();
+            if(isset($request->type)){
+                $noOftype=count($request->type);
+                if($noOftype>0){
+                    for($i=0;$i<$noOftype; $i++){
+                        $categoriesProduced  =  new CategoriesProduced();
+                        $categoriesProduced->type = $request->type[$i];
+                        $categoriesProduced->percentage = $request->percentage[$i];
+                        $categoriesProduced->business_profile_id = $request->business_profile_id;
+                        $categoriesProduced->status = 0;
+                        $categoriesProduced->created_by = Auth::user()->id;
+                        $categoriesProduced->updated_by = NULL;
+                        $categoriesProduced->save();
+                    }
+                }
+
+            }
+
+            $categoriesProduceds = CategoriesProduced::where('business_profile_id',$request->business_profile_id)->get();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->categories_produced = 0 ;
+                $businessProfileVerification->save();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Categories Produceds information Updated',
+                'categoriesProduceds'=>$categoriesProduceds,
+
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['msg' => $e->getLine()],
+            ],500);
+
+        }
     }
 
+
+    public function machineryDetailsCreateOrUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'machine_name.*' =>'required_with:quantity|string|min:1|max:255',
+            'quantity.*' => 'required_with:machine_name|integer'
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        try{
+
+            $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->delete();
+
+            if(isset($request->machine_name)){
+                $noOfMachineName=count($request->machine_name);
+                if($noOfMachineName>0){
+                    for($i=0; $i<$noOfMachineName ;$i++){
+
+                        $machineriesDetail   =  new MachineriesDetail();
+                        $machineriesDetail->machine_name = $request->machine_name[$i];
+                        $machineriesDetail->quantity = $request->quantity[$i];
+                        $machineriesDetail->business_profile_id = $request->business_profile_id;
+                        $machineriesDetail->status = 0;
+                        $machineriesDetail->created_by = Auth::user()->id;
+                        $machineriesDetail->updated_by = NULL;
+                        $machineriesDetail->save();
+                    }
+
+                }
+            }
+
+            $machineriesDetails = MachineriesDetail::where('business_profile_id',$request->business_profile_id)->get();
+            $businessProfileVerification = BusinessProfileVerification::where('business_profile_id',$request->business_profile_id )->first();
+            if($businessProfileVerification){
+                $businessProfileVerification->machinery_details = 0 ;
+                $businessProfileVerification->save();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Machineries information Updated',
+                'machineriesDetails'=>$machineriesDetails,
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['msg' => $e->getLine()],
+            ],500);
+
+        }
+    }
     public function termsOfServiceCreateOrUpdate(Request $request){
-     
+
         try{
             $company_overview = CompanyOverview::where('business_profile_id',$request->business_profile_id)->first();
             $company_overview->update(['terms_of_service'=>$request->terms_of_service??null]);
@@ -382,6 +553,78 @@ class BusinessProfileController extends Controller
             ],200);
 
         }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'error'   => ['message' => $e->getMessage()],
+            ],500);
+
+        }
+    }
+
+    public function aliasExistingCheck(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'alias' =>'required',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'error' => 'this field is required'),
+            400);
+        }
+
+        $alias=$this->removeSpecialCharacterFromAlais($request->alias);
+        $check_exists_alias=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists_alias){
+            return response()->json(['error' => 'The name has already been taken. Please try with another name.'],409);
+        }
+        return response()->json(['msg' => 'This name is available. Click arrow to use this name.', 'alias' => $alias],200);
+    }
+
+    public function updateAlias(Request $request)
+    {
+        $alias=$this->removeSpecialCharacterFromAlais($request->alias);
+        $validator = Validator::make(['alias' => $alias, 'business_profile_id' => $request->business_profile_id ], [
+            'alias' =>'required|unique:business_profiles,alias',
+            'business_profile_id' => 'required'
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+        $business_profile=BusinessProfile::where('id', $request->business_profile_id)->update(['alias' => $alias]);
+        return response()->json([
+            'success' => true,
+            'msg'     => 'alias updated successfully.',
+            'url'     => route('business.profile'),
+        ],200);
+
+    }
+
+
+    public function businessProfileVerificationRequest(Request $request)
+    {
+        try
+        {
+            BusinessProfileVerificationsRequest::where('business_profile_id',$request->verificationRequestedBusinessProfileId)->delete();
+            $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::create([
+                'business_profile_id' => $request->verificationRequestedBusinessProfileId,
+                'business_profile_name' => $request->verificationRequestedBusinessProfileName,
+                'verification_message'=> $request->verificationMsg,
+            ]);
+            event(new NewBusinessProfileVerificationRequestEvent($businessProfileVerificationsRequest));
+            return response()->json([
+                'success' => true,
+                'message' => 'Request sent successfully.'
+            ],200);
+
+        }
+        catch(\Exception $e)
+        {
             return response()->json([
                 'success' => false,
                 'error'   => ['message' => $e->getMessage()],

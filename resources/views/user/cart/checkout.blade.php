@@ -22,65 +22,66 @@
             <form action="{{route('cart.order')}}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col m12">
+                    <div class="col s12">
                         <div class="cart-wrapper">
-                            <table class="shop_table shop_table_responsive cart_table" cellspacing="0">
-                                <thead>
-                                <tr>
-
-                                    <th class="product-thumbnail">Product Image</th>
-                                    <th class="product-name">Product Name</th>
-                                    <th class="product-price">Price</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-subtotal">Subtotal</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-
-
-                                @foreach($cartData as $cartItem)
-
-                                    <tr class="cart_item" data-vendorId="{{$cartItem->business_profile_id}}">
-
-                                        <td class="product-thumbnail">
-                                            <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$cartItem->image)}}" class="" alt="" loading="lazy"/></a>
-                                        </td>
-                                        <td class="product-name" data-title="Product">
-                                            <div style="color: #4CAF50;">{{$cartItem->name}}</div>
-                                            @if($cartItem->full_stock==1)
-                                                <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span>
-                                                @elseif(isset($cartItem->order_modification_req_id))
-                                                <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span>
-                                            @endif
-                                        </td>
-                                        <td class="product-price" data-title="Price">
-                                            <span class="price-currencySymbol">${{ number_format($cartItem->unit_price, 2) }}</span>
-                                        </td>
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <span class="price-currencySymbol">{{$cartItem->quantity}}</span>
-                                            @if ($cartItem->full_stock == 1)
-                                             <span class="tooltipped" data-position="top" data-tooltip="Full Stock"><i class="material-icons dp48">live_help</i></span>
-                                            @endif
-                                        </td>
-                                        <td class="product-subtotal" data-title="Subtotal">
-                                            <span class="price-amount">
-                                                <bdi><span class="price-currencySymbol">${{ number_format($cartItem->total_price, 2) }}</span></bdi>
-                                                @if($cartItem->copyright==true)
-                                                    <span class="tooltipped" data-position="top" data-tooltip="Copyright price is {{ number_format($cartItem->copyright_price, 2) }}"><i class="material-icons dp48">live_help</i></span>
-                                                @endif
-                                                @if (isset($cartItem->discount_amount))
-                                                    <span class="tooltipped" data-position="top" data-tooltip="Discount Amount {{ $cartItem->discount_amount }}"><i class="material-icons dp48">live_help</i></span>
-                                                @endif
-                                            </span>
-                                        </td>
-
+                            <div class="no_more_tables">
+                                <table class="shop_table shop_table_responsive cart_table" cellspacing="0">
+                                    <thead class="cf">
+                                    <tr>
+                                        <th class="product-thumbnail">Product Image</th>
+                                        <th class="product-name">Product Name</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Subtotal</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
 
-                                @endforeach
 
-                                </tbody>
-                            </table>
+                                    @foreach($cartData as $cartItem)
+
+                                        <tr class="cart_item" data-vendorId="{{$cartItem->business_profile_id}}">
+
+                                            <td data-title="Product Image" class="product-thumbnail">
+                                                <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$cartItem->image)}}" class="" alt="" loading="lazy"/></a>
+                                            </td>
+                                            <td data-title="Product Name" class="product-name" data-title="Product">
+                                                <div style="color: #4CAF50;">{{$cartItem->name}}</div>
+                                                @if($cartItem->full_stock==1)
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span>
+                                                    @elseif(isset($cartItem->order_modification_req_id))
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Modified</span>
+                                                @endif
+                                            </td>
+                                            <td data-title="Price" class="product-price" data-title="Price">
+                                                <span class="price-currencySymbol">${{ number_format($cartItem->unit_price, 2) }}</span>
+                                            </td>
+                                            <td data-title="Quantity" class="product-quantity" data-title="Quantity">
+                                                <span class="price-currencySymbol">{{$cartItem->quantity}}</span>
+                                                @if ($cartItem->full_stock == 1)
+                                                <span class="tooltipped" data-position="top" data-tooltip="Full Stock"><i class="material-icons dp48">live_help</i></span>
+                                                @endif
+                                            </td>
+                                            <td data-title="Subtotal" class="product-subtotal" data-title="Subtotal">
+                                                <span class="price-amount">
+                                                    <bdi><span class="price-currencySymbol">${{ number_format($cartItem->total_price, 2) }}</span></bdi>
+                                                    @if($cartItem->copyright==true)
+                                                        <span class="tooltipped" data-position="top" data-tooltip="Copyright price is {{ number_format($cartItem->copyright_price, 2) }}"><i class="material-icons dp48">live_help</i></span>
+                                                    @endif
+                                                    @if (isset($cartItem->discount_amount))
+                                                        <span class="tooltipped" data-position="top" data-tooltip="Discount Amount {{ $cartItem->discount_amount }}"><i class="material-icons dp48">live_help</i></span>
+                                                    @endif
+                                                </span>
+                                            </td>
+
+                                        </tr>
+
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -158,15 +159,18 @@
                                   </p>
                             </div>
                         <div class="shipping_address_block">
-                            <div class="shipping_adrs" style="@if(count($shipping_address)==0) display:none; @endif">
-                                <label for="shipping_adres_select" class="">Select Shipping Address</label>
-                                <select class="select2 browser-default" name="shipping_address_id" id="shipping_adres_select" >
-                                    <option value="" disabled selected>Select</option>
-                                    @foreach($shipping_address as $address)
-                                    <option value="{{$address->id}}">{{$address->name}}-{{$address->address}}</option>
-                                    @endforeach
-                                </select>
-                                <a href="javascript:void(0);" class="add_new_shipping_adrs">Add New</a>
+                            <div class="input-field">
+                                <div class="shipping_adrs" style="@if(count($shipping_address)==0) display:none; @endif">
+                                    <label for="shipping_adres_select" class="">Select Shipping Address</label>
+                                    <select class="select2 browser-default" name="shipping_address_id" id="shipping_adres_select" >
+                                        <option value="" disabled selected>Select</option>
+                                        @foreach($shipping_address as $address)
+                                        <option value="{{$address->id}}">{{$address->name}}-{{$address->address}}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <a href="javascript:void(0);" class="add_new_shipping_adrs">Add New</a> -->
+                                    <a href="javascript:void(0);" class="add_new_shipping_adrs"> <i class="material-icons dp48">add</i> Add New</a>
+                                </div>
                             </div>
 
                             <div class="row shipping_adrs_new"  style="@if(count($shipping_address)!=0) display:none; @endif" >

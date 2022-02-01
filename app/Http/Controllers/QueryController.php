@@ -9,14 +9,16 @@ use Illuminate\Support\Facades\Validator;
 use App\Events\OrderQueryEvent;
 use Image;
 use Illuminate\Support\Facades\Storage;
-use App\Notifications\QueryCommuncationNotification;
-use App\Mail\QueryCommuncationMail;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\QueryCommuncationNotification;
+use App\Mail\QueryCommuncationMail;
+use App\Http\Traits\PushNotificationTrait;
 
 class QueryController extends Controller
 {
+    use PushNotificationTrait;
     public function index()
     {
        $orderQueries=OrderModificationRequest::where(['user_id' => auth()->id(), 'type' => 1])->latest()->get();
@@ -107,8 +109,10 @@ class QueryController extends Controller
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
         ]);
+       
         event(new OrderQueryEvent($orderModificationRequest));
-        return response()->json(array('success' => true, 'msg' => 'Request created successfully. Please check my oders from your profile to get more update about your query.'),200);
+
+        return response()->json(array('success' => true, 'msg' => 'Request created successfully. Please check "My Orders" from your profile to get more update about your query.'),200);
     }
     //show communication model
     public function showMessage($order_query_request_id)
@@ -123,8 +127,8 @@ class QueryController extends Controller
                         $html='<div class="col m12 reply-row">';
                         $html.='<div class="col m12 reply-row-inner">';
                         $html.='<div class="row order-info-top">';
-                        $html.='<div class="col m6"><i class="material-icons">person</i> '.$commenter_name.'</div>';
-                        $html.='<div class="col m6" style="text-align: right;"><i class="material-icons">date_range</i> '. \Carbon\Carbon::parse($comment->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a').'</div>';
+                        $html.='<div class="col m6"><span class="order_inquiry_icon"><i class="material-icons">person</i> '.$commenter_name.'</span></div>';
+                        $html.='<div class="col m6" style="text-align: right;"><span class="order_inquiry_icon"><i class="material-icons">date_range</i> '. \Carbon\Carbon::parse($comment->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a').'</span></div>';
                         $html.='</div>';
                         $html.='<div class="row order-info-bottom">';
                         $html.='<div class="col m12 order-info-details">'.$detail->details.'</div>';
@@ -189,6 +193,15 @@ class QueryController extends Controller
             'user_agent'                    => $request->header('User-Agent'),
         ]);
         $admin= Admin::find(1);
+        //send push notification to admin for order query request message from user
+        $fcmToken =  $admin->fcm_token;
+        $title = "New message for your order modification request";
+        $details = json_decode($data->details);
+        $message = $details[0]->details;
+        $action_url = route('query.show', $data->orderModificationRequest->id);
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+        
+        //send db notification to admin
         Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
         Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));
         return response()->json([

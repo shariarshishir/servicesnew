@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rfq;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
-use App\Models\RfqImage;
-use App\Events\NewRfqHasAddedEvent;
-use App\Models\BusinessProfile;
 use Carbon\Carbon;
+use App\Models\Rfq;
+use App\Models\User;
+use App\Models\RfqImage;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\BusinessProfile;
+use App\Events\NewRfqHasAddedEvent;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+Use DB;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -41,8 +47,14 @@ class RfqController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
+        $rfqIds=[];
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            if($notification->type=="App\Notifications\NewRfqNotification"){
+                array_push($rfqIds,$notification->data['rfq_data']['id']);
+            }
+        }
 
-        return view('rfq.index',compact('rfqLists'));
+        return view('rfq.index',compact('rfqLists','rfqIds'));
     }
 
 
@@ -63,6 +75,7 @@ class RfqController extends Controller
         $rfqData = $request->except(['_token','captcha_token','product_images']);
         $rfqData['created_by']=auth()->id();
         $rfqData['status']='approved';
+        $rfqData['link'] = $this->generateUniqueLink();
 
         $rfq=Rfq::create($rfqData);
 
@@ -73,8 +86,6 @@ class RfqController extends Controller
                 if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
 
                     $path=$product_image->store('images','public');
-
-
                 }
                 else{
                     $path=$product_image->store('images','public');
@@ -84,17 +95,21 @@ class RfqController extends Controller
                 RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
             }
         }
+        $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
 
-        // $allSelectedUsersToSendMail = BusinessProfile::with('user')->get();
-        // event(new NewRfqHasAddedEvent($allSelectedUsersToSendMail));
-        // foreach($allSelectedUsersToSendMail as $selectedUserToSendMail) {
-        //     event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        // }
+        if(env('APP_ENV') == 'production')
+        {
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
 
-        // $selectedUserToSendMail="success@merchantbay.com";
-        // event(new NewRfqHasAddedEvent($selectedUserToSendMail));
-        $msg = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
-        return back()->with(['success'=> $msg]);
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        }
+
+        $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+        return back()->with(['rfq-success'=> $msg]);
 
     }
 
@@ -113,7 +128,27 @@ class RfqController extends Controller
         }else{
             $rfqLists=Rfq::where('created_by', auth()->id())->withCount('bids')->with('images','user')->latest()->paginate(6);
         }
-        return view('rfq.my_rfq',compact('rfqLists'));
+
+        $newRfqBidIds=[];
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+
+            if($notification->type == "App\Notifications\RfqBidNotification"){
+                array_push($newRfqBidIds,$notification->data['notification_data']['id']);
+            }
+
+        }
+
+        $newRfqBidsGroupByRfqId = DB::table('supplier_bids')
+                ->whereIn('id',$newRfqBidIds)
+                ->select('rfq_id', DB::raw('count(*) as total'))
+                ->groupBy('rfq_id')
+                ->get();
+        $rfqsWithNewBid=[];
+        foreach($newRfqBidsGroupByRfqId as $newRfqBidGroupByRfqId){
+            array_push($rfqsWithNewBid ,$newRfqBidGroupByRfqId->rfq_id);
+        }
+
+        return view('rfq.my_rfq',compact('rfqLists','rfqsWithNewBid'));
     }
 
     public function delete($rfq_id)
@@ -140,7 +175,7 @@ class RfqController extends Controller
                 'error'  => 'id not exists',
             ],404);
         }
-        $date=Carbon::parse($rfq->delivery_date)->format('Y-m-d');
+        $date=Carbon::parse($rfq->delivery_time)->format('Y-m-d');
         return response()->json([
             'success' => true,
             'data' => $rfq,
@@ -222,5 +257,120 @@ class RfqController extends Controller
                 'success' => true,
                 'msg'   => 'image delete successfully',
             ],200);
+    }
+
+    public function generateUniqueLink()
+    {
+        do {
+            $link = Str::random(20);
+        } while (Rfq::where('link', $link)->first());
+
+        return $link;
+    }
+
+    public function showRfqUsingLink($link)
+    {
+        $rfq=Rfq::withCount('bids')->with('user','businessProfile','category','images')->where('link',$link)->firstOrFail();
+
+        if($rfq->bids()->exists()){
+            $bid_user_id=[];
+            foreach($rfq->bids as $user){
+                array_push($bid_user_id,$user->supplier_id);
+            }
+            $rfq['bid_user_id'] = array_unique($bid_user_id);
+
+        }
+
+        return view('rfq.show_using_link',compact('rfq'));
+    }
+
+    public function share($rfq_id)
+    {
+        $rfq=Rfq::where('id',$rfq_id)->first();
+        if(!$rfq){
+            return response()->json(['error' => 'Record not found'],404);
+        }
+
+        if($rfq->link){
+            $link=route('show.rfq.using.link',$rfq->link);
+            return response()->json(['link'=> $link],200);
+        }
+
+        $link=$this->generateUniqueLink();
+        $rfq->update(['link'=> $link]);
+        $link=route('show.rfq.using.link',$rfq->link);
+        return response()->json(['link'=> $link],200);
+    }
+
+    public function loginFromRfqShareLink(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'rfqpassword' => 'required',
+            'rfqemail' => 'required|email',
+        ]);
+
+        if ($validator->passes()) {
+            // sso checking authentication
+            if(env('APP_ENV') == 'production')
+            {
+                $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
+                    'email' => $request->rfqemail,
+                    'password' => $request->rfqpassword,
+                ]);
+                if($sso->successful()){
+                    $access_token=$sso['access'];
+                    $explode=explode(".",$access_token);
+                    $time= base64_decode($explode[1]);
+                    $decode_time=json_decode($time);
+                    $get_time=$decode_time->exp;
+                    $current=strtotime(date('d.m.Y H:i:s'));
+                    $totalSecondsDiff = abs($get_time-$current);
+                    $totalMinutesDiff = $totalSecondsDiff/60;
+                    // $totalHoursDiff   = $totalSecondsDiff/60/60;
+                    // $totalDaysDiff    = $totalSecondsDiff/60/60/24;
+                    // $totalMonthsDiff  = $totalSecondsDiff/60/60/24/30;
+                    // $totalYearsDiff   = $totalSecondsDiff/60/60/24/365;
+
+                    // if($request->hasCookie('sso_token') !== null){
+                    //     Cookie::forget('sso_token');
+                    // }
+                    if(Cookie::has('sso_token')){
+                        Cookie::queue(Cookie::forget('sso_token'));
+                    }
+                   // $set_cookie=Cookie::make('sso_token', $access_token, $totalMinutesDiff);
+                    Cookie::queue(Cookie::make('sso_token', $access_token, $totalMinutesDiff));
+
+                    if($request->session()->has('sso_password')){
+                        $request->session()->forget('sso_password');
+                    }
+                    $request->session()->put('sso_password', $request->password);
+
+
+                }
+                else{
+                    return response()->json(['msg' => 'No active account found with the given credentials']);
+                }
+            }
+
+
+            $credentials = [
+                'email' => $request->rfqemail,
+                'password' => $request->rfqpassword,
+            ];
+            $remember_me = $request->remember == 'true' ? true : false;
+            if(Auth::attempt($credentials,$remember_me))
+            {
+                $userId = auth()->user()->id;
+                $user = User::whereId($userId)->first();
+                $user->update(['last_activity' => Carbon::now(),'fcm_token'=>$request->fcm_token]);
+
+                return response()->json(['user_id'=>$user->user_id, 'url' => url()->previous() ]);
+            }
+            return response()->json(['msg' => 'Wrong email or password']);
+
+        }
+
+        return response()->json(['error'=>$validator->errors()]);
+
     }
 }

@@ -28,7 +28,7 @@
                 <li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
                 <li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
                 <li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
-                <li><a class="btn_green modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
+                <li><a class="btn_grBorder modal-trigger" href="#create-rfq-form">Create Rfq</a></li>
             </ul>
         </div>
     </form>
@@ -47,8 +47,11 @@
 				@endif
 			</div>
 		</div>
-        <div>
-            <a href="javascript:void(0);" class="btn_rfq_edit" style="float: right;" onclick="editRfq({{$rfqSentList->id}});"><i class="material-icons">border_color</i></a>
+        <div style="float: right;">
+            @if($rfqSentList->deleted_at == null)
+                <a href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})" ><span> <i class="material-icons"> share </i></span></a>
+            @endif
+                <a href="javascript:void(0);" class="btn_rfq_edit"  onclick="editRfq({{$rfqSentList->id}});"><i class="material-icons">border_color</i></a>
         </div>
 		<div class="col s12 m9 l10 rfq_profile_info">
 			<div class="row">
@@ -94,7 +97,7 @@
                             @foreach ($rfqSentList->images as  $key => $rfqImage )
                                 @if(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'PDF')
                                     <div class="rfq_thum_img">
-                                        <a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" >&nbsp; PDF</a>
+                                        <a href="{{ asset('storage/'.$rfqImage->image) }}" class="pdf_icon" target="_blank">&nbsp; PDF</a>
                                     </div>
                                 @elseif(pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage->image, PATHINFO_EXTENSION) == 'docx')
                                     <div class="rfq_thum_img">
@@ -157,8 +160,10 @@
                     <div class="responses_wrap right-align">
                         <!--span><i class="material-icons">favorite</i> Saved</span-->
                         {{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal({{$rfqSentList->id}})">Reply on this RFQ</a> --}}
-                        <button class="none_button btn_responses btn_responses_trigger" id="rfqResponse" >
+
+                        <button class="none_button btn_responses btn_responses_trigger" data-rfqId="{{$rfqSentList->id}}" id="rfqResponse">
                             Responses <span class="respons_count">{{$rfqSentList->bids_count}}</span>
+                            @if(in_array($rfqSentList->id,$rfqsWithNewBid))<span class="new-bid-reply-badge">New</span>@endif
                         </button>
                         @if($rfqSentList->bids()->exists())
                         <div class="respones_detail_wrap" style="display: none;">
@@ -166,7 +171,7 @@
                                 @foreach ($rfqSentList->bids as $bid)
 
                                     <div class="row respones_box">
-                                        <div class="col s12 m2 l2">
+                                        <div class="col s12 m3 l2">
                                             <div class="rfq_profile_img">
                                                 @if(auth()->user()->image)
                                                 <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
@@ -175,7 +180,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col s12 m10 l10 rfq_profile_info">
+                                        <div class="col s12 m7 l10 rfq_profile_info">
                                             <div class="row">
                                                 <div class="col m7 l7 profile_info">
                                                     <h4>{{$bid->businessProfile->business_name}} </h4>
@@ -191,11 +196,12 @@
 
                                             <div class="full_specification"><span class="title">Description:</span> {!! $bid->description !!} </div>
                                             <div class="full_details">
-                                                <span class="title">Quantity:</span> {{$bid->quantity}},
+                                                <span class="title">Offer Price:</span> ${{$bid->unit_price}}/pc
+                                                <!--<span class="title">Quantity:</span> {{$bid->quantity}},
                                                 <span class="title">Unit Price:</span> {{$bid->unit_price}},
                                                 <span class="title">Total Price:</span>  {{$bid->total_price}},
                                                 <span class="title">Payment Method:</span> {{$bid->payment_method}},
-                                                <span class="title">Delivery Time:</span> {{$bid->delivery_time}}
+                                                <span class="title">Delivery Time:</span> {{$bid->delivery_time}}-->
                                             </div>
 
                                             <!-- <p>Description: {{$bid->description}}</p>
@@ -205,17 +211,40 @@
                                             <p>Payment Method: {{$bid->payment_method}}</p>
                                             <p>Delivery Time: {{$bid->delivery_time}}</p> -->
 
-                                            <div class="respones_img_wrap">
+                                             <!--<div class="respones_img_wrap">
                                                 @if(isset($bid->media))
                                                     @foreach (json_decode($bid->media) as $image)
                                                         <div class="respones_img">
-                                                            <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
+                                                            {{-- <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
                                                                 <img src="{{asset('storage/'.$image)}}" alt="">
-                                                            </a>
+                                                            </a> --}}
+                                                            @if(pathinfo($image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($image, PATHINFO_EXTENSION) == 'PDF')
+                                                                <div class="rfq_thum_img">
+                                                                    <a href="{{ asset('storage/'.$image) }}" class="pdf_icon" target="_blank">&nbsp; PDF</a>
+                                                                </div>
+                                                            @elseif(pathinfo($image, PATHINFO_EXTENSION) == 'doc' || pathinfo($image, PATHINFO_EXTENSION) == 'docx')
+                                                                <div class="rfq_thum_img">
+                                                                    <a href="{{ asset('storage/'.$image) }}" class="doc_icon" >&nbsp; DOC</a>
+                                                                </div>
+                                                            @elseif(pathinfo($image, PATHINFO_EXTENSION) == 'xlsx')
+                                                                <div class="rfq_thum_img">
+                                                                    <a href="{{ asset('storage/'.$image) }}" class="xlsx_icon" >&nbsp; XLSX</a>
+                                                                </div>
+                                                            @elseif(pathinfo($image, PATHINFO_EXTENSION) == 'TAR'|| pathinfo($image, PATHINFO_EXTENSION) == 'tar'|| pathinfo($image, PATHINFO_EXTENSION) == 'rar'|| pathinfo($image, PATHINFO_EXTENSION) == 'RAR' ||pathinfo($image, PATHINFO_EXTENSION) == 'zip' || pathinfo($image, PATHINFO_EXTENSION) == 'ZIP')
+                                                            <div class="rfq_thum_img">
+                                                                <a href="{{ asset('storage/'.$image) }}" class="zip_icon" >&nbsp; DOC</a>
+                                                            </div>
+                                                            @else
+                                                                <div class="rfq_thum_img">
+                                                                    <a data-fancybox="bidgallery-{{$x}}" href="{{asset('storage/'.$image)}}">
+                                                                        <img src="{{asset('storage/'.$image)}}" alt="" />
+                                                                    </a>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 @php $x++; @endphp
@@ -278,6 +307,7 @@
 </div>
 @include('rfq._create_rfq_bid_form_modal')
 @include('rfq._edit_rfq_modal')
+@include('rfq.share_modal')
 @endsection
 
 
@@ -393,7 +423,6 @@
                     },
                     success:function(data)
                         {
-
                             // $('#seller_product_form_update')[0].reset();
                             $('.loading-message').html("");
                             $('#loadingProgressContainer').hide();
@@ -555,6 +584,22 @@
                 $('#rfq_filter_form').submit();
             });
         });
+
+        $('.btn_responses_trigger').on('click',function(event){
+            event.preventDefault();
+            let rfqId = $(this).attr("data-rfqId");
+            let obj=$(this).find('.new-bid-reply-badge');
+            $.ajax({
+                type:'GET',
+                url: "{{route('bid-notification-mark-as-read')}}",
+                data:{ rfqId: rfqId},
+                success: function (data) {
+                    $('.noticication_counter').text(data['noOfnotification']);
+                    obj.remove();
+                }
+            });
+        });
+
 
 
     </script>

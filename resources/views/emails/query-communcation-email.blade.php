@@ -28,7 +28,7 @@
             <p style="font-family:verdana;font-size:12px;color:#000;margin:0px;padding-bottom:15px;line-height:normal;"><a href="{{ route('query.show', $data->orderModificationRequest->id) }}">Click here to see the full details</a></p>
 
             <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;line-height:normal;">......</p>
-            <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Contact: <a href="mailto:{{ $data->orderModificationRequest->user->email }}">{{ $data->orderModificationRequest->user->email }}</a>. Call:{{ $data->orderModificationRequest->user->phone }}. Address: {{ $data->orderModificationRequest->user->vendor->vendor_address }} </p>
+            <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Contact: <a href="mailto:{{ $data->orderModificationRequest->user->email }}">{{ $data->orderModificationRequest->user->email }}</a>. Call:{{ $data->orderModificationRequest->user->phone }}. </p>
             <p style="font-family:verdana;font-size:12px;margin:0px;padding-bottom:15px;color:#000;line-height:normal;">Thank you</p>
             @endif
 

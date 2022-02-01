@@ -24,6 +24,7 @@ class OrderQueryController extends Controller
                    $newFormatedOrderQuery->id=$orderQuery->id;
                    $newFormatedOrderQuery->type=$orderQuery->type;
                    $newFormatedOrderQuery->user=$orderQuery->user->name;
+                   $newFormatedOrderQuery->email=$orderQuery->user->email;
                    $newFormatedOrderQuery->product_id=$orderQuery->product_id;
                    $newFormatedOrderQuery->product_type=$orderQuery->product->product_type;
                    $newFormatedOrderQuery->details=json_decode($orderQuery->details);
@@ -99,6 +100,11 @@ class OrderQueryController extends Controller
             'details'   => json_encode($request->color_attr),
             'state'=> config('constants.order_query_status.pending')
         ]);
+
+        if(env('APP_ENV') == 'production')
+        {
+            event(new OrderQueryEvent($orderModificationRequest));
+        }
 
         if($orderModificationRequest){
             return response()->json(array('code' => true, 'message' => 'Order query Created Successfully','orderMordificationRequest'=> $orderModificationRequest),200);

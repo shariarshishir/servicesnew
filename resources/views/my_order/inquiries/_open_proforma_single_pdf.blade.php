@@ -121,16 +121,13 @@ ul, label {
 									<td style="color:#53AB57; font-size:14px; padding:0.1%; font-weight:bold;">Vendor</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%; font-size:18px;">Merchant Bay</td>
+									<td style="font-weight: 500; font-size: 22px">{{$supplierInfo->name}}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">House#27, Uttara Dhaka, 1230, Bangladesh</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: +880 9611-677345 Email: info@merchantbay.com</td>
-								</tr>
-								<tr>
-									<td style="color:#000; padding:0.1%;">www.merchantbay.com</td>
+									<td>
+										<p>Phone: {{ $supplierInfo->phone}}</p> 
+										<p>Email: {{ $supplierInfo->email }}</p>								
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -143,10 +140,20 @@ ul, label {
 									<td style="color:#000; padding:0.1%; font-size:18px;">{{$po->buyer->name}}</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">{{ @$po->buyer->profile->contact_info['street'] }}, {{ @$po->buyer->profile->contact_info['city'] }}, {{ @$po->buyer->profile->contact_info['state'] }}, {{ @$po->buyer->profile->contact_info['region'] }}, {{ @$po->buyer->profile->contact_info['zipCode'] }}</td>
+									<td style="color:#000; padding:0.1%;">
+										@if(@$po->buyer->company_name)
+										<p>Company Name: {{ @$po->buyer->company_name }}</p> 
+										@endif
+										@if(@$po->buyer->country)
+										<p>Country: {{ @$po->buyer->country }}</p>
+										@endif
+									</td>
 								</tr>
 								<tr>
-									<td style="color:#000; padding:0.1%;">Ph: {{ @$po->buyer->phone }} Email: {{ @$po->buyer->email }}</td>
+									<td style="color:#000; padding:0.1%;">
+										<p>Phone: {{ @$po->buyer->phone}}</p> 
+										<p>Email: {{ @$po->buyer->email }}</p>
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -170,14 +177,14 @@ ul, label {
 					</tr>
 					@php $total_price = 0; @endphp
                     @php $total_tax_price = 0; @endphp
-                    @php $price_unit = 'BDT'; @endphp;
+                    @php $price_unit = 'USD'; @endphp;
                     @if(Auth::user()->id == $po->buyer->id)
 	                    @foreach($po->performa_items as $ik => $item)
 							<tr>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">{{$ik + 1}}</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%;">{{ $item->product->title }}</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%; text-align:center;">
-									BDT {{ number_format($item->unit_price, 2) }}
+									USD {{ number_format($item->unit_price, 2) }}
 									<span style="display:block;font-size:10px;color:#999;">Vat included.</span>
 								</td>
 								<td style="border-bottom:1px solid #ddd; padding:1%; text-align;center;">{{ $item->unit }}</td>

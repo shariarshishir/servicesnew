@@ -135,26 +135,28 @@
 
                                     <div class="form-group fresh-rtd-attr">
                                         <label>Prices Breakdown</label>
-                                        <table class="fresh-order-attribute-table-block striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Qty Min</th>
-                                                    <th>Qty Max</th>
-                                                    <th>Price (usd)</th>
-                                                    <th>Lead Time (days)</th>
-                                                    <th><a href="javascript:void(0);" class="btn btn-success" onclick="addFreshOrderAttribute()"><i class="fas fa-plus"></i></a></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                                    <td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                                    <td><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                                    <td><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>
-                                                    <td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeFreshOrderAttribute(this)"><i class="fas fa-minus"></i></a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="no_more_tables">
+                                            <table class="fresh-order-attribute-table-block striped">
+                                                <thead class="cf">
+                                                    <tr>
+                                                        <th>Qty Min</th>
+                                                        <th>Qty Max</th>
+                                                        <th>Price (usd)</th>
+                                                        <th>Lead Time (days)</th>
+                                                        <th><a href="javascript:void(0);" class="btn btn-success" onclick="addFreshOrderAttribute()"><i class="fas fa-plus"></i></a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
+                                                        <td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
+                                                        <td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                                        <td data-title="Lead Time (days)"><input name="lead_time[]"  id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>
+                                                        <td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeFreshOrderAttribute(this)"><i class="fas fa-minus"></i></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="copyright-price" class="col-form-label text-md-right">Copyright Price</label>
@@ -165,9 +167,9 @@
                                     <div class="stock-rtd-attr" style="display: none">
                                         <label>Available Size & Colors</label>
                                         <div class="col-md-12" id="color-size-block">
-                                            <div class="row">
+                                            <div class="no_more_tables">
                                                 <table class="color-size-table-block striped">
-                                                    <thead>
+                                                    <thead class="cf">
                                                         <tr>
                                                             <th>Color</th>
                                                             <th>Small</th>
@@ -179,11 +181,11 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[small][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[medium][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[large][]" /></td>
-                                                            <td><input type="text" value="0" class="form-control" name="color_size[extra_large][]" /></td>
+                                                            <td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
+                                                            <td data-title="Small"><input type="text" value="0" class="form-control" name="color_size[small][]" /></td>
+                                                            <td data-title="Medium"><input type="text" value="0" class="form-control" name="color_size[medium][]" /></td>
+                                                            <td data-title="Large"><input type="text" value="0" class="form-control" name="color_size[large][]" /></td>
+                                                            <td data-title="Extra Large"><input type="text" value="0" class="form-control" name="color_size[extra_large][]" /></td>
                                                             <td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeProductColorSize(this)"><i class="fas fa-minus"></i></a></td>
                                                         </tr>
                                                     </tbody>
@@ -192,24 +194,27 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Prices Breakdown</label>
-                                            <table class="ready-order-attribute-table-block striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Qty Min</th>
-                                                        <th>Qty Max</th>
-                                                        <th>Price (usd)</th>
-                                                        <th><a href="javascript:void(0);" class="btn btn-success" onclick="addReadyOrderAttribute()"><i class="fas fa-plus"></i></a></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
-                                                        <td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
-                                                        <td><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
-                                                        <td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeReadyOrderAttribute(this)"><i class="fas fa-minus"></i></a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <div class="no_more_tables">
+                                                <table class="ready-order-attribute-table-block striped">
+                                                    <thead class="cf">
+                                                        <tr>
+                                                            <th>Qty Min</th>
+                                                            <th>Qty Max</th>
+                                                            <th>Price (usd)</th>
+                                                            <th><a href="javascript:void(0);" class="btn btn-success" onclick="addReadyOrderAttribute()"><i class="fas fa-plus"></i></a></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>
+                                                            <td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>
+                                                            <td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$" ></td>
+                                                            <td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeReadyOrderAttribute(this)"><i class="fas fa-minus"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
                                         </div>
 
                                         <div class="form-group">
@@ -335,10 +340,10 @@
     {
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input name="quantity_min[]" id="quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input name="quantity_max[]" id="quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
-    html += '<td><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>';
+    html += '<td data-title="Qty Min"><input name="quantity_min[]" id="quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
+    html += '<td data-title="Qty Max"><input name="quantity_max[]" id="quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
+    html += '<td data-title="Price (usd)"><input name="price[]" id="price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
+    html += '<td data-title="Lead Time (days)"><input name="lead_time[]" id="lead_time" type="text" class="form-control @error('lead_time') is-invalid @enderror"  value="" placeholder="Days"></td>';
     html += '<td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeFreshOrderAttribute(this)"><i class="fas fa-minus"></i></a></td>';
     html += '</tr>';
     $('.fresh-order-attribute-table-block tbody').append(html);
@@ -352,9 +357,9 @@
     {
     let totalChild = $('.color-size-table-block tbody').children().length;
     var html = '<tr>';
-    html += '<td><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
-    html += '<td><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
-    html += '<td><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
+    html += '<td data-title="Qty Min"><input name="ready_quantity_min[]" id="ready_quantity_min" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Min. Value"></td>';
+    html += '<td data-title="Qty Max"><input name="ready_quantity_max[]" id="ready_quantity_max" type="text" class="form-control @error('quantity') is-invalid @enderror"  value="" placeholder="Max. Value"></td>';
+    html += '<td data-title="Price (usd)"><input name="ready_price[]" id="ready_price" type="text" class="form-control @error('price') is-invalid @enderror"  value="" placeholder="$"></td>';
     html += '<td><a href="javascript:void(0);" class="btn btn-danger" onclick="removeFreshOrderAttribute(this)"><i class="fas fa-minus"></i></a></td>';
     html += '</tr>';
     $('.ready-order-attribute-table-block tbody').append(html);

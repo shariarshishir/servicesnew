@@ -8,9 +8,13 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Rfq;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewRfqInvitationMail;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewRfqNotification;
+use App\Http\Traits\PushNotificationTrait;
 
 class NewRfqInvitationListener implements ShouldQueue
 {
+    use PushNotificationTrait;
     /**
      * Create the event listener.
      *
@@ -29,31 +33,34 @@ class NewRfqInvitationListener implements ShouldQueue
      */
     public function handle($event)
     {
-
-        $supplier=$event->selectedUserToSendMail;
-        $latestRfq=Rfq::with('category','images')->latest()->first();
-        //$rfq=Rfq::with('category','images')->findOrFail($latestRfq->id);
-
-        if($supplier=="success@merchantbay.com"){
+        
+        $user=$event->selectedUserToSendMail;
+        $rfq=$event->rfq;
+        if($user=="success@merchantbay.com"){
             $data=[
-                'supplier'=>$supplier,
-                'rfq'=>$latestRfq,
-                'url'=>"/manage-rfq"
+                'supplier'=>$user,
+                'rfq'=>$rfq,
+                'url'=>"/rfq"
             ];
-            Mail::to($supplier)->send(new NewRfqInvitationMail($data));
-            // Notification::send($supplier,new NewRfqNotification($data));
+            Mail::to($user)->send(new NewRfqInvitationMail($data));
         }
         else{
 
-            foreach($supplier as $userData){
-                $data=[
-                    'supplier'=>$userData->user->name,
-                    'rfq'=>$latestRfq,
-                    'url'=>"/manage-rfq"
-                ];
-                Mail::to($userData->user->email)->send(new NewRfqInvitationMail($data));
-            }
-            // Notification::send($supplier,new NewRfqNotification($data));
+            //send push notification to user for new rfq
+            $fcmToken = $user->fcm_token;
+            $title = "A new rfq has been posted";
+            $message = "Dear, ".$user->name.", A request for quotation you may feel interested about.Please check RFQ list";
+            $action_url = route('rfq.index');
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+            $data=[
+                'supplier'=>$user->name,
+                'rfq'=>$rfq,
+                'url'=>"/rfq"
+            ];
+            
+            Mail::to($user->email)->send(new NewRfqInvitationMail($data));
+            Notification::send($user,new NewRfqNotification($data));
+    
         }
 
     }

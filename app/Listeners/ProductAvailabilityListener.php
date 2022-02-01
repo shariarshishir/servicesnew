@@ -25,7 +25,7 @@ class ProductAvailabilityListener implements ShouldQueue
     public function handle($event)
     {
         //$user=User::find($event->product->vendor->user_id);
-        Notification::send($event->product->vendor->user,new ProductAvailabilityNotification($event->product, $event->alert_data));
-        Mail::to($event->product->vendor->user->email)->send(new ProductAvailabilityMail($event->product, $event->alert_data));
+        Notification::send($event->product->businessProfile->user,new ProductAvailabilityNotification($event->product, $event->alert_data));
+        Mail::to($event->product->businessProfile->user->email)->send(new ProductAvailabilityMail($event->product, $event->alert_data));
     }
 }

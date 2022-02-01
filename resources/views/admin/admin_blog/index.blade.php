@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-!-- Main content -->
+
+<!-- Main content -->
 
 
 <div class="content-wrapper">
@@ -28,43 +29,40 @@
 					<a href="{{route('blogs.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New Blog</a>
 				</div>
 			</div>
-            <div class="card">
-				<legend>Categories List</legend>
-                <table id="" class="table table-striped table-bordered table-hover" width="100%">
-                    <thead>
-                        <tr>
-                            <th data-hide="phone" class="text-center">ID</th>
-                            <th data-class="expand" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Title</th>
-                            <th data-class="expand" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Details</th>
-                            <th data-hide="phone, tablet" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Feature image</th>
-                            <th data-hide="phone, tablet" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Created by</th>
-                            <th class="text-center"><i class="fa fa-fw fa-calendar text-blue hidden-md hidden-sm hidden-xs"></i> Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($blogs as $index=>$blog)
-                        <tr class="text-center">
-                            <td>{{ $index+1 }}</td>
-                            <td>{{ \Illuminate\Support\Str::limit($blog->title, 20, '(...)') }}</td>
-                            <td>{!! \Illuminate\Support\Str::limit($blog->details, 20, '(...)') !!}</td>
-                            <td><img class="img-fluid" style="max-height: 30px" src="{{ asset('storage/'.$blog->feature_image) }}"></td>
-                            <td>{{ $blog->created_user['name'] }}</td>
-                            <td>
-                            
-                                <a class="btn btn-success btn-xs" href="{{route('blogs.edit',$blog->id)}}">Edit</a>
-                            
-                            
-                                <form action="{{route('blogs.destroy',$blog->id)}}" method="post" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-xs" name="remove_item" type="submit">Delete</button>
-                                </form>
-                                
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="card admin_categories_list">
+				        <legend>Categories List</legend>
+                <div class="no_more_tables">
+                  <table id="" class="table table-striped table-bordered table-hover blog_list_table" width="100%">
+                      <thead class="cf">
+                          <tr>
+                              <th data-hide="phone" class="text-center">ID</th>
+                              <th data-class="expand" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Title</th>
+                              <th data-hide="phone, tablet" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Feature image</th>
+                              <th data-hide="phone, tablet" class="text-center"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Created by</th>
+                              <th class="text-center"><i class="fa fa-fw fa-calendar text-blue hidden-md hidden-sm hidden-xs"></i> Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach($blogs as $index=>$blog)
+                          <tr class="text-center">
+                              <td data-title="ID">{{ $index+1 }}</td>
+                              <td data-title="Title">{{ $blog->title }}</td>
+                              <td data-title="Feature image"><img class="img-fluid" src="{{ asset('storage/'.$blog->feature_image) }}"></td>
+                              <td data-title="Created by">{{ $blog->created_user['name'] }}</td>
+                              <td data-title="Action" class="text-center"> 
+                                  <a class="btn btn-success btn-xs" href="{{route('blogs.edit',$blog->id)}}">Edit</a>
+                                  <form action="{{route('blogs.destroy',$blog->id)}}" method="post" style="display: inline">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button class="btn btn-danger btn-xs" name="remove_item" type="submit">Delete</button>
+                                  </form>
+                              </td>
+                          </tr>
+                          @endforeach
+                      </tbody>
+                  </table>
+                </div>
+                
                 <div class="pagination">
                     {{ $blogs->links() }}
                 </div>

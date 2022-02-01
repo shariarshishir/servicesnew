@@ -10,12 +10,16 @@ use App\Events\OrderQueryEvent;
 use App\Events\OrderQueryFromAdminEvent;
 use App\Events\PaymentSuccessEvent;
 use App\Events\ProductAvailabilityEvent;
+use App\Events\NewBusinessProfileHasCreatedEvent;
+use App\Events\NewBusinessProfileVerificationRequestEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\NewRfqHasAddedEvent;
 use App\Events\NewRfqHasBidEvent;
+use App\Models\BusinessProfile;
+use App\Observers\ManageBusinessProfileObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -58,6 +62,12 @@ class EventServiceProvider extends ServiceProvider
         NewRfqHasBidEvent::class => [
             'App\Listeners\NewRfqHasBidListener',
         ],
+        NewBusinessProfileHasCreatedEvent::class => [
+            'App\Listeners\NewBusinessProfileHasCreatedListener',
+        ],
+        NewBusinessProfileVerificationRequestEvent::class => [
+            'App\Listeners\NewBusinessProfileVerificationRequestListener',
+        ],
     ];
 
     /**
@@ -67,6 +77,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        BusinessProfile::observe(ManageBusinessProfileObserver::class);
     }
 }

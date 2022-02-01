@@ -12,6 +12,7 @@ use App\Models\VendorOrderItem;
 use App\Models\UserAddress;
 use App\Models\CartItem;
 use App\Models\BusinessProfile;
+use App\Models\OrderModificationRequest;
 use DB;
 use Exception;
 use App\Models\Product;
@@ -213,6 +214,7 @@ class OrderController extends Controller
                         'payment_id'      => $request['payment_id']?? 1,
                         'payment_name'    => $request['payment_name']?? '10% with merchant assistance',
                         'state'           => 'pending',
+                        'payment_status'  => 'unpaid',
                         'ip_address'      => $request->ip(),
                         'user_agent'      => $request->header('User-Agent'),
                     ]);
@@ -232,15 +234,20 @@ class OrderController extends Controller
                             'order_modification_req_id' => $item['order_modification_req_id'] ?? null,
                         ]);
                     }
+                   
+                    if(isset($item['order_modification_req_id'])){
+                        
+                        OrderModificationRequest::where('id',$item['order_modification_req_id'])->update(['state' => 3]);
+                    }
                 }
 
             }
 
-
                
             CartItem::where('user_id',auth()->user()->id)->delete();
 
-
+            event(new NewOrderHasPlacedEvent($order));
+             
             DB::commit();
             return response()->json(["message"=>"Order created successfully","order"=>$order,"code"=>true],200);
         }catch(Exception $e){
@@ -266,6 +273,7 @@ class OrderController extends Controller
             $newFormatedItem=new stdClass;
             $newFormatedItem->id=$item->id;
             $newFormatedItem->product_sku=$item->product_sku;
+            $newFormatedItem->product_type=$item->product->product_type;
             $newFormatedItem->product_name=$item->product->name;
             $newFormatedItem->quantity=$item->quantity;
             $newFormatedItem->unit_price=$item->unit_price;

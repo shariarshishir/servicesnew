@@ -36,8 +36,8 @@
 						<div class="col s8 m6 l12 profile_left_address_wrap">
 							<div class="office_address center-align ">
 								<h3>{{$business_profile->business_name}}</h3>
-								<h4><span class="material-icons">pin_drop</span> {{$business_profile->location}}, <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
+								<h4><span class="material-icons">pin_drop</span> <span class="pro_location"> {{$business_profile->location}} </span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 							</div>
 						</div>
 					</div>
@@ -320,9 +320,9 @@
                                         @foreach($business_profile->exportDestinations as $exportDestination)
                                             <div class="col s6 m4 l2">
                                                 <div class="flag_img export-destination-img">
-                                                    <img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
+                                                    <img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
                                                 </div>
-                                                <h5>{{$exportDestination->title}}</h5>
+                                                <h5>{{$exportDestination->country->name}}</h5>
                                             </div>
                                         @endforeach
                                 </div>
@@ -358,14 +358,13 @@
 							</div>
 						</div>
                         {{-- capacity and mechineries --}}
-                        @if(count($business_profile->categoriesProduceds)>0 || count($business_profile->machineriesDetails) >0 )
-                            <div>
+
                                 <div class="overview_table_wrap capacity_machineries">
-                                    <div class="row top_titleWrap">
+                                    {{-- <div class="row top_titleWrap">
                                         <div class="col s6 m6">
                                             <h3>Capacity and Machineries</h3>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row capacity_table">
 
                                         <!-- <div class="col s12 m6">
@@ -407,31 +406,33 @@
                                         </div> -->
                                         @if(count($business_profile->categoriesProduceds)>0)
                                             <div class="col s12 m12">
-                                                <h4>Categories Produced</h4>
+                                                <h3>Categories Produced</h3>
                                                 <div class="categories_produced_wrapper">
                                                     <div class="overview_table box_shadow">
-                                                        <table>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Type</th>
-                                                                    <th>Percentage</th>
-                                                                    <th>&nbsp;</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="categories-produced-table-body">
-                                                                @foreach($business_profile->categoriesProduceds as $categoriesProduced)
-                                                                <tr>
-                                                                    <td>{{$categoriesProduced->type}}</td>
-                                                                    <td>{{$categoriesProduced->percentage}}</td>
-                                                                    @if($categoriesProduced->status==1)
-                                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
-                                                                    @else
-                                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
-                                                                    @endif
-                                                                </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
+														<div class="no_more_tables">
+															<table>
+																<thead class-"cf">
+																	<tr>
+																		<th>Type</th>
+																		<th>Percentage</th>
+																		<th>&nbsp;</th>
+																	</tr>
+																</thead>
+																<tbody class="categories-produced-table-body">
+																	@foreach($business_profile->categoriesProduceds as $categoriesProduced)
+																	<tr>
+																		<td data-title="Type">{{$categoriesProduced->type}}</td>
+																		<td data-title="Percentage">{{$categoriesProduced->percentage}}</td>
+																		@if($categoriesProduced->status==1)
+																		<td><i class="material-icons" style="color:green">check_circle</i></td>
+																		@else
+																		<td><i class="material-icons "style="color:gray">check_circle</i></td>
+																		@endif
+																	</tr>
+																	@endforeach
+																</tbody>
+															</table>
+														</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -440,37 +441,39 @@
                                 </div>
                                 @if(count($business_profile->machineriesDetails)>0)
                                     <div class="overview_table_wrap machinery_table">
-                                        <h4>Machinery Details</h4>
+                                        <h3>Machinery Details</h3>
                                         <div class="machinery_table_inner_wrap">
                                             <div class="overview_table box_shadow">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Machine Name</th>
-                                                            <th>Quantity</th>
-                                                            <th>&nbsp;</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="machinaries-details-table-body">
-                                                        @foreach($business_profile->machineriesDetails as $machineriesDetail)
-                                                        <tr>
-                                                            <td>{{$machineriesDetail->machine_name}}</td>
-                                                            <td>{{$machineriesDetail->quantity}}</td>
-                                                            @if($machineriesDetail->status==1)
-                                                            <td><i class="material-icons" style="color:green">check_circle</i></td>
-                                                            @else
-                                                            <td><i class="material-icons "style="color:gray">check_circle</i></td>
-                                                            @endif
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+												<div class="no_more_tables">
+													<table>
+														<thead class="cf">
+															<tr>
+																<th>Machine Name</th>
+																<th>Quantity</th>
+																<th>&nbsp;</th>
+															</tr>
+														</thead>
+														<tbody class="machinaries-details-table-body">
+															@foreach($business_profile->machineriesDetails as $machineriesDetail)
+															<tr>
+																<td data-title="Machine Name">{{$machineriesDetail->machine_name}}</td>
+																<td data-title="Quantity">{{$machineriesDetail->quantity}}</td>
+																@if($machineriesDetail->status==1)
+																<td><i class="material-icons" style="color:green">check_circle</i></td>
+																@else
+																<td><i class="material-icons "style="color:gray">check_circle</i></td>
+																@endif
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
                                             </div>
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-                        @endif
+
+
 
                         @if(count($business_profile->productionFlowAndManpowers)>0)
                             <div class="overview_table_wrap">
@@ -586,9 +589,9 @@
                                             <div class="col s6 m4 l2">
                                                 <div class="flag_img export-destination-img">
                                                     <a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-                                                    <img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
-                                                </div>
-                                                <h5>{{$exportDestination->title}}</h5>
+                                                    <img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+											</div>
+											<h5>{{$exportDestination->country->name}}</h5>
                                             </div>
                                             @endforeach
                                     </div>

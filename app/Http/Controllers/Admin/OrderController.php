@@ -15,9 +15,17 @@ use App\Mail\AskForPaymentMail;
 use App\Models\ShipmentType;
 use App\Models\ShippingMethod;
 use App\Models\UOM;
+use App\Http\Traits\PushNotificationTrait;
 
 class OrderController extends Controller
-{
+{ 
+    use PushNotificationTrait;
+    public function orderList()
+    {
+       $collection=VendorOrder::latest()->paginate(10);
+       return view('admin.order.index',compact('collection'));
+    }
+
 
     public function index($business_profile_id)
     {
@@ -125,7 +133,13 @@ class OrderController extends Controller
             }
             $vendorOrder->update(['state' => 'approved','approved_by_admin'=> Auth::guard('admin')->user()->id]);
             $vendorOrder=VendorOrder::with('orderItems.product.images')->find($id);
-            event(new NewOrderHasApprovedEvent($vendorOrder));
+            
+           
+
+            if(env('APP_ENV') == 'production')
+            {
+                event(new NewOrderHasApprovedEvent($vendorOrder));
+            }
             return redirect()->back()->withSuccess('Order Status Updated Successfully');
         }catch(\Exception $e)
         {

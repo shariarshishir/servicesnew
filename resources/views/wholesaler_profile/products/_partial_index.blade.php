@@ -3,6 +3,7 @@
         <div class="product-list-block">
             <div class="col-md-12">
                     <div class="card-with-padding profile_wholesaler_inner">
+                        @include('wholesaler_profile.verification_message')
                         <div class="card-body">
                             <div class="row">
                                 <div class="col m12 add-new-product-button">
@@ -15,9 +16,9 @@
                         <legend>Products List</legend>
                         <div class="seller-product-list">
                             <div class="exists-seller-product-list">
-                                <div class="col m12 product-search-block">
+                                <div class="col s12 m12 product-search-block">
                                     <div class="row">
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <div class="input-field">
                                                 <div class="col s12">
                                                     <label for="status">Status</label>
@@ -29,7 +30,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <div class="input-field">
                                                 <div class="col s12">
                                                     <label for="new_arrival">Product Type</label>
@@ -42,7 +43,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col m4">
+                                        <div class="col s12 m4">
                                             <div class="input-field">
                                                 <div class="col s12">
                                                     <label>Search</label>
@@ -55,20 +56,23 @@
                                     </div>
                                 </div>
                                 <div class="table-content product_data_table_wrap">
-                                    <table class="table striped box_shadow_radius" width="100%" id="seller-product-datatable">
-                                        <thead>
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Product Name</th>
-                                            <th>Status</th>
-                                            <th>Featured</th>
-                                            <th>New Arrival</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                    <div class="no_more_tables">
+                                        <table class="table striped box_shadow_radius" width="100%" id="seller-product-datatable">
+                                            <thead class="cf">
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Product Name</th>
+                                                <th>Status</th>
+                                                <th>Featured</th>
+                                                <th>New Arrival</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                             </div>
 

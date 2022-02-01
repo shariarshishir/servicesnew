@@ -17,39 +17,42 @@
                     </div>
                     <div class="form-group row">
                         <div class="color-and-size-block">
-                            <table class="color-size-table-block ord-mod-color-sizes">
-                                <thead>
-                                    <tr>
-                                        <th>Color</th>
-                                        <th>XXS</th>
-                                        <th>XS</th>
-                                        <th>Small</th>
-                                        <th>Medium</th>
-                                        <th>Large</th>
-                                        <th>Extra Large</th>
-                                        <th>XXL</th>
-                                        <th>XXXL</th>
-                                        <th>4XXL</th>
-                                        <th>One Size</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="ord-mod-color-tbody">
-                                    <tr>
-                                        <td><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxs][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xs][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[small][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[medium][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[large][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxl][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
-                                        <td><input type="text" value="0" class="form-control count-color-size" name="color_size[one_size][]" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="no_more_tables">
+                                <table class="color-size-table-block ord-mod-color-sizes">
+                                    <thead class="cf">
+                                        <tr>
+                                            <th>Color</th>
+                                            <th>XXS</th>
+                                            <th>XS</th>
+                                            <th>Small</th>
+                                            <th>Medium</th>
+                                            <th>Large</th>
+                                            <th>Extra Large</th>
+                                            <th>XXL</th>
+                                            <th>XXXL</th>
+                                            <th>4XXL</th>
+                                            <th>One Size</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ord-mod-color-tbody">
+                                        <tr>
+                                            <td data-title="Color"><input type="text" value="" class="form-control" name="color_size[color][]" /></td>
+                                            <td data-title="XXS"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxs][]" /></td>
+                                            <td data-title="XS"><input type="text" value="0" class="form-control count-color-size" name="color_size[xs][]" /></td>
+                                            <td data-title="Small"><input type="text" value="0" class="form-control count-color-size" name="color_size[small][]" /></td>
+                                            <td data-title="Medium"><input type="text" value="0" class="form-control count-color-size" name="color_size[medium][]" /></td>
+                                            <td data-title="Large"><input type="text" value="0" class="form-control count-color-size" name="color_size[large][]" /></td>
+                                            <td data-title="Extra Large "><input type="text" value="0" class="form-control count-color-size" name="color_size[extra_large][]" /></td>
+                                            <td data-title="XXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxl][]" /></td>
+                                            <td data-title="XXXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[xxxl][]" /></td>
+                                            <td data-title="4XXL"><input type="text" value="0" class="form-control count-color-size" name="color_size[four_xxl][]" /></td>
+                                            <td data-title="One Size"><input type="text" value="0" class="form-control count-color-size" name="color_size[one_size][]" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                             <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addProductColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                         </div>
                     </div>

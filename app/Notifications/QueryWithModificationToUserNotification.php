@@ -31,7 +31,7 @@ class QueryWithModificationToUserNotification extends Notification implements Sh
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "Order Query Request Processed",
+            'title' => "Order Modification Request Processed",
             'notification_data'=> $this->data,
             'notification_type'=>"QueryWithModification",
             'url' => route('ord.mod.req.index'),

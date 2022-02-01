@@ -33,7 +33,7 @@
                     <div class="col s12 m4 l3">
                         <label for="product-unit">Offer Price <span >*</span></label>
                     </div>
-                    <div class=" col s4 m4 ">
+                    <div class="col s12 m8 l9">
                         <input type="text" id="product-unit" name="unit_price" class="form-control bid-price-range-value" placeholder="$ Price in USD/pc" value="" >
                         <span class="validation-error-unit-price red"></span>
                     </div>

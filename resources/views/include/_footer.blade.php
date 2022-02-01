@@ -1515,5 +1515,38 @@ $(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
             }
         });
 
+
+//add to wishlist function
+function addToWishList(flag, id){
+
+    var id = id;
+    var flag= flag;
+    swal({
+        title: "Want to add this product into wishlist ?",
+        type: "warning",
+        showCancelButton: !0,
+        confirmButtonText: "Yes, add it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: !0
+    }).then(function (e) {
+        if (e.value === true) {
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('add.wishlist')}}",
+                    dataType:'json',
+                    data:{id : id, flag : flag },
+                    success: function(data){
+                        swal(data.message);
+                    }
+                });
+            }
+        else {
+            e.dismiss;
+        }
+    }, function (dismiss) {
+        return false;
+    })
+}
+
 </script>
 

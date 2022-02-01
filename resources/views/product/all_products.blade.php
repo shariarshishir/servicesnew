@@ -9,6 +9,19 @@
                 <h3>All Products</h3>
                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
                 @foreach ($products  as $list )
+
+                    <div class="favorite">
+                        {{-- @if(in_array($list->id,$wishListProductsIds))
+                        <a href="javascript:void(0);" onclick="addWishList('{{$list->flag}}', '{{$list->id}}');"  class="product-add-wishlist active">
+                            <i class="material-icons dp48">favorite</i>
+                        </a>
+                        @else --}}
+                        <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}');" class="product-add-wishlist">
+                            <i class="material-icons dp48">favorite</i>
+                        </a>
+                        {{-- @endif --}}
+                    </div>
+
                     @php
                         if($list->flag == 'shop'){
                             $title=$list->name;
@@ -28,6 +41,7 @@
 
                         }
                     @endphp
+
 
                     <div class="col m3 productBox">
                         <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
@@ -62,6 +76,8 @@
 
 @push('js')
     <script>
+
+
         /*$(document).ready(function(){
             var $pagination = $('#pagination'),
                 totalRecords = 0,

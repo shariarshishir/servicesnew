@@ -25,7 +25,7 @@
                                         <th>Medium</th>
                                         <th>Large</th>
                                         <th>Extra Large</th>
-                                        <th>&nbsp;</th>
+                                        <!-- <th>&nbsp;</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>

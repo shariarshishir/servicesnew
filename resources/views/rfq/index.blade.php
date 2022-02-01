@@ -46,7 +46,7 @@
 					<p>Merchandiser, Fashion Tex Ltd.</p>
 				</div>
 				<div class="profile_view_time right-align col s12 m4 l4">
-					<a href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})"><span> <i class="material-icons"> share </i></span></a>
+					<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList->id}})"><span> <i class="material-icons"> share </i> Share</span></a>
 				</div>
 			</div>
 

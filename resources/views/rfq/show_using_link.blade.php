@@ -12,8 +12,8 @@
 
 <!-- RFQ html start -->
 
-<div class="box_shadow_radius rfq_content_box ">
-	<div class="rfq_info_wrap right-align rfq_top_navbar">
+<div class="box_shadow_radius rfq_content_box rfg_share_boxwrap">
+	<div class="rfq_info_wrap right-align rfq_top_navbar rfg_share_top_navbar">
 		{{-- <ul>
 			<li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
 			<li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
@@ -29,8 +29,8 @@
 		</ul> --}}
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
-        <div class="rfq_profile_detail row">
-            <div class="col s12 m3 l2">
+        <div class="rfq_profile_detail rfg_share_box row">
+            <div class="col s12 m3 l2 rfg_share_left">
                 <div class="rfq_profile_img">
                     @if($rfq->user->image)
                     <img src="{{ asset('storage/'.$rfq->user->image) }}" alt="" />
@@ -77,6 +77,7 @@
                 <!--div class="tagS">
                     <a href="javascript:void(0);"> #Sweater</a> <a href="javascript:void(0);"> #Apparel</a>
                 </div-->
+                @php $i=1; @endphp
                 <div class="row rfq_thum_imgs left-align">
                     @if($rfq->images()->exists())
                         @foreach ($rfq->images as  $key => $rfqImage )
@@ -192,7 +193,7 @@
                         </div>
                     </div>
 
-                    <button class="btn green waves-effect waves-light right signin-from-rfq-share-link" type="submit" name="log-in">
+                    <button class="btn green waves-effect waves-light right signin-from-rfq-share-link signin" type="submit" name="log-in">
                         {{ __('Sign In') }} <i class="material-icons right">send</i>
                     </button>
                     {{-- @if (Route::has('password.request'))

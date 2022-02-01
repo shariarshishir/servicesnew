@@ -1,7 +1,10 @@
 <div id="share-modal" class="modal">
     <div class="modal-content">
-        <input type="text" name="share_text" id="share_text" readonly >
-        <a href="javascript:void(0)" onclick="copyToClipboard();">copy</a>
+        <h3>Please, copy the link to share the RFQ</h3>
+        <div class="share_url_box">
+            <input class="share_text_box" type="text" name="share_text" id="share_text" readonly >
+            <a class="share_copy" href="javascript:void(0)" onclick="copyToClipboard();">Copy</a>
+        </div>
     </div>
 </div>
 

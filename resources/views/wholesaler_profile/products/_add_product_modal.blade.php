@@ -205,7 +205,7 @@
                                                     <th>XXXL</th>
                                                     <th>4XXL</th>
                                                     <th>One Size</th>
-                                                    <th>&nbsp;</th>
+                                                    <!-- <th>&nbsp;</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -334,7 +334,7 @@
                                                 <tr>
                                                     <th>Color</th>
                                                     <th>Quantity</th>
-                                                    <th>&nbsp;</th>
+                                                    <!-- <th>&nbsp;</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>

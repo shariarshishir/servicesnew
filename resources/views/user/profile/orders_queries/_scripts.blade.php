@@ -135,7 +135,7 @@
                                             html+='<th>XXXL</th>';
                                             html+='<th>4XXL</th>';
                                             html+='<th>One Size</th>';
-                                            html+='<th>&nbsp;</th>';
+                                            // html+='<th>&nbsp;</th>';
                                             html+='<tr>';
                                         $('#add-to-cart-order-query-modal .color-size-table-block thead').html(html);
                                         $.each(JSON.parse(data.data.details),function(key, value){
@@ -161,7 +161,7 @@
                                         var html='<tr>';
                                             html+='<th>Color</th>';
                                             html+='<th>Quantity</th>';
-                                            html+='<th>&nbsp;</th>';
+                                            // html+='<th>&nbsp;</th>';
                                             html+='</tr>';
                                         $('#add-to-cart-order-query-modal .color-size-table-block thead').html(html);
                                         $.each(JSON.parse(data.data.details),function(key, value){

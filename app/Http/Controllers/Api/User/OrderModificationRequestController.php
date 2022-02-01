@@ -19,6 +19,11 @@ class OrderModificationRequestController extends Controller
     {
         $orderModificationRequests=OrderModificationRequest::latest()->where(['user_id' => auth()->user()->id, 'type' => 2])->with(['comments.replies', 'orderModification'])->get();
         $orderModificationRequestsArray=[];
+        $queryWithModificationRequestNotificationIds=[];
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\QueryWithModificationToUserNotification')->where('read_at',null) as $notification){
+            array_push($queryWithModificationRequestNotificationIds,$notification->data['notification_data']);
+        }
+
         if(count($orderModificationRequests)>0){
             foreach($orderModificationRequests as $orderModificationRequest){
 
@@ -31,11 +36,13 @@ class OrderModificationRequestController extends Controller
                    $newFormatedOrderModificationRequest->details = json_decode($orderModificationRequest->details);
                    $newFormatedOrderModificationRequest->created_at = $orderModificationRequest->created_at;
                    $newFormatedOrderModificationRequest->updated_at = $orderModificationRequest->updated_at;
+                   $newFormatedOrderModificationRequest->queryWithModificationRequestNotificationIds = $orderModificationRequest->queryWithModificationRequestNotificationIds;
                    array_push($orderModificationRequestsArray,$orderModificationRequest);
             }
+          
             return response()->json(array(
                 'code' => true,
-                'orderModificationRequests' => $orderModificationRequestsArray
+                'orderModificationRequests' => $orderModificationRequestsArray,
             ), 200);
  
         }
@@ -155,6 +162,32 @@ class OrderModificationRequestController extends Controller
                 'error' => $e->getMessage(),),
                 500);
         }
+    }
+    
+    public function  orderModificationRequestdNotificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\QueryWithModificationToUserNotification')->where('read_at',null) as $notification){
+            if( $notification->data['notification_data'] == $request->order_modification_request_id)
+            {
+                $notification->markAsRead();
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification mark as read successfully";
+                return response()->json(['code'=>true,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+                        
+            }
+            else{
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification not found";
+                return response()->json(['code'=>false,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+            }
+        }
+
+        
+       
+
     }
 
 

@@ -210,7 +210,7 @@
                                                             <th>XXXL</th>
                                                             <th>4XXL</th>
                                                             <th>One Size</th>
-                                                            <th>&nbsp;</th>
+                                                            <!-- <th>&nbsp;</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody class="ready-attr-tbody-colors-sizes">
@@ -315,7 +315,7 @@
                                                         <tr>
                                                             <th>Color</th>
                                                             <th>Quantity</th>
-                                                            <th>&nbsp;</th>
+                                                            <!-- <th>&nbsp;</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody class="non-clothing-color-quantity-tbody">

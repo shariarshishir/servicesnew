@@ -150,6 +150,9 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('/rfqs', [RFQController::class, 'index']);
     Route::get('/my-rfq-list', [RFQController::class, 'myRfqList']);
     Route::get('/rfq/{id}/bids', [RfqBidController::class, 'rfqBidsByRfqId']);
+    Route::post('/rfq-notification-mark-as-read',[RFQController::class,'newRfqNotificationMarkAsRead']);
+    Route::post('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'newRfqBidNotificationMarkAsRead']);
+    
 
 
     //manufacture product api
@@ -171,19 +174,23 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/orders',[OrderController::class,'orderCreate']);
     Route::get('/orders/{orderId}',[OrderController::class,'orderDetails']);
     Route::get('/orders-by-authenticated-user',[OrderController::class,'orderByAuthenticatedUser']);
+    Route::post('/order-approved-notification-mark-as-read',[OrderController::class,'orderApprovedNotificationMarkAsRead']);
+    
+    
 
     //order query
     Route::post('/order-queries', [OrderQueryController::class, 'store']);
     Route::get('/order-queries',[OrderQueryController::class, 'index']);
     Route::get('/order-queries/{orderModificationRequestId}',[OrderQueryController::class, 'show']);
-    Route::get('/order-queries-modification/{orderModificationId}',[OrderQueryController::class, 'showOrderQueryWithModification']);
+    Route::post('/order-queries-modification/{orderModificationId}',[OrderQueryController::class, 'showOrderQueryWithModification']);
+    Route::post('/order-query-from-admin-notification-mark-as-read',[OrderQueryController::class,'orderQueryFromAdminNotificationMarkAsRead']);
 
     //order modification request
     Route::post('/order-modification-request',[OrderModificationRequestController::class, 'store']);
     Route::post('/order-modification-comment',[OrderModificationCommentController::class, 'store']);
     Route::get('/order-modification-request',[OrderModificationRequestController::class, 'index']);
     Route::get('/order-modification-request/{orderModificationRequestId}',[OrderModificationRequestController::class, 'show']);
-
+    Route::post('/order-modification-request-notification-mark-as-read',[OrderModificationRequestController::class,'orderModificationRequestdNotificationMarkAsRead']);
 
     //notification
     Route::post('/notification-mark-as-read',[UserController::class,'notificationMarkAsRead']);

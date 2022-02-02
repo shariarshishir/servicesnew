@@ -4107,9 +4107,13 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_detail_from .short_description {
     min-height: 100px;
 }
+.rfq_create_wrap .rfq_detail_from .short_description {
+    min-height: 150px;
+}
 .rfq_detail_from_wrap .submit_btn_wrap {
     padding: 50px 0 0;
 }
+
 #product-edit-modal-block .submit_btn_wrap {
     padding-top: 30px;
 }
@@ -7732,8 +7736,17 @@ nav .pagination li.active .page-link {
     height: 36px;
     line-height: 26px;
     margin: 10px 0 !important;
-    
 }
+
+.rfq_create_wrap {
+    padding: 50px;
+}
+.rfq_create_wrap .thumbnail_img_box {
+    width: 100px;
+    float: left;
+    margin: 3px;
+}
+
 
 /* ************************* policy_content_wrap style end ******************************  */
 
@@ -9533,6 +9546,24 @@ nav .pagination li.active .page-link {
         margin: 0;
     } 
 
+    .rfq_create_wrap .rfq_img_upload_wrap {
+        text-align: center;
+    }
+    .rfq_create_wrap .thumbnail_img_box {
+        width: 85px;
+        float: none;
+        display: inline-block;
+    }
+
+    
+    .rfq_create_wrap .submit_btn_wrap .right-align .right {
+        float: none !important;
+    }
+    .rfq_create_wrap .submit_btn_wrap .left-align,
+    .rfq_create_wrap .submit_btn_wrap .right-align {
+        text-align: center !important;
+    }
+
 
 }
 
@@ -9869,6 +9900,16 @@ nav .pagination li.active .page-link {
     .blog_content_box .blog_imgbox img {
         max-height: inherit;
     }
+
+    .rfq_create_wrap {
+        padding: 50px 0;
+    }
+
+    .rfq_create_wrap .rfq_detail_from .category_title {
+        margin-top: 20px;
+    }
+
+ 
 
 
 }
@@ -10251,6 +10292,8 @@ nav .pagination li.active .page-link {
     #products .manufacture-product-table-data .col.s12.m4.l3 {
         width: 100% !important;
     }
+
+
 
 }
 

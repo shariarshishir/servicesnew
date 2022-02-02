@@ -52,7 +52,7 @@ class NewOrderHasApprovedNotification extends Notification
         }
         else{
             return [
-                'title' => "New Order has placed by merchant bay",
+                'title' => "New Order has approved by merchant bay",
                 'notification_data' => $this->order->id,
                 'notification_type' => "OrderApproved",
                 'url' => '/my-order'

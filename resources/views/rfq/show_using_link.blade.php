@@ -56,21 +56,20 @@
                 <div class="rfq_view_detail_wrap">
                     <h5>{{$rfq->title}}</h5>
                     <span class="short_description">{{$rfq->short_description}}</span>
-                    <button class="none_button btn_view_detail"  data-rfqId="{{$rfq->id}}" id="rfqViewDetail">Show More</button>
 
-                    <div class="rfq_view_detail_info" style="display: none;">
+                    <div class="rfq_view_detail_info">
                         <h6>Query for {{$rfq->category->name}}</h6>
                         <div class="full_specification"><span class="title">Details:</span> {{$rfq->full_specification}}</div>
                         <div class="full_details">
-                            <span class="title">Qty:</span> {{$rfq->quantity}} {{$rfq->unit}},
+                            <p><span class="title">Qty:</span> {{$rfq->quantity}} {{$rfq->unit}},</p>
                             @if($rfq->unit_price==0.00)
-                            <span class="title">Target Price:</span> N/A,
+                            <p><span class="title">Target Price:</span> N/A,</p>
                             @else
-                            <span class="title">Target Price:</span> $ {{$rfq->unit_price}},
+                            <p><span class="title">Target Price:</span> $ {{$rfq->unit_price}},</p>
                             @endif
-                            <span class="title">Deliver to:</span> {{$rfq->destination}},
-                            <span class="title">Within:</span> {{ date('F j, Y',strtotime($rfq->delivery_time)) }},
-                            <span class="title">Payment method:</span> {{$rfq->payment_method}} </p>
+                            <p><span class="title">Deliver to:</span> {{$rfq->destination}},</p>
+                            <p><span class="title">Within:</span> {{ date('F j, Y',strtotime($rfq->delivery_time)) }},</p>
+                            <p><span class="title">Payment method:</span> {{$rfq->payment_method}}</p>
                         </div>
                     </div>
                 </div>

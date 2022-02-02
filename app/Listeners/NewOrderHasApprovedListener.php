@@ -24,7 +24,7 @@ class NewOrderHasApprovedListener implements ShouldQueue
         $fcmToken = $event->order->businessProfile->user->fcm_token;
         $title = "You have a new order";
         $message = $event->order->user->name." has placed a new order for your product. Please check your received order list.";
-        $action_url= route('wholesaler.order.index',[ 'business_profile_id'=> $event->order->businessProfile->id ]) ;
+        $action_url= route('wholesaler.order.index',[ 'business_profile_id'=> $event->order->businessProfile->id ,'alias'=> $event->order->businessProfile->alias ]) ;
         $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
         // Mail sending to wholesaler after approved the order from admin

@@ -34,9 +34,16 @@ class OrderQueryController extends Controller
                    $newFormatedOrderQuery->updated_at=$orderQuery->updated_at;
                    array_push($orderQueriesArray,$newFormatedOrderQuery);
             }
+            $orderQueryProcessedIds=[];
+            foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\OrderQueryFromAdminNotification')->where('read_at',null) as $notification){
+                array_push($orderQueryProcessedIds,$notification->data['notification_data']['order_modification_request_id']);
+            }
+
+          
             return response()->json(array(
                 'code' => true,
-                'orderQueries' => $orderQueriesArray
+                'orderQueries' => $orderQueriesArray,
+                'orderQueryProcessedIds'=>array_unique($orderQueryProcessedIds)
             ), 200);
  
         }
@@ -143,6 +150,29 @@ class OrderQueryController extends Controller
                 'code' => false,
                 'orderModification'=> $newFormatedOrderModification
             ),200 );
+        }
+    }
+
+    public function  orderQueryFromAdminNotificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\OrderQueryFromAdminNotification')->where('read_at',null) as $notification){
+            if( $notification->data['notification_data']['order_modification_request_id'] == $request->order_modification_request_id)
+            {
+                $notification->markAsRead();
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification mark as read successfully";
+                return response()->json(['code'=>true,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+                        
+            }
+            else{
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification not found";
+                return response()->json(['code'=>false,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+            }
         }
     }
 }

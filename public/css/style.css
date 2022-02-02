@@ -4284,6 +4284,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     color: #54A958;
     font-weight: 500;
     margin-left: 50px;
+    cursor: default;
 }
 .rfq_content_box .rfq_profile_detail .responses_wrap .respons_count {
     background: #54A958;

@@ -742,6 +742,7 @@ class BusinessProfileController extends Controller
                 $businessProfileVerification->company_overview = 1;
                 $businessProfileVerification->save();
             }
+            $deleteVerificationRequest = BusinessProfileVerificationsRequest::where('business_profile_id', $company_overview->business_profile_id)->delete();
         }
         else
         {

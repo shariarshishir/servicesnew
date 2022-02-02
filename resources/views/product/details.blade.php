@@ -1072,9 +1072,15 @@ $reviewsCount = count($productReviews);
                                 <div class="product_quick_options">
                                     <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
                                     <div class="poduct_quick_options_inside">
-                                        <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}"class="btn waves-effect waves-light green lighten-1 product-add-wishlist">
-                                            <i class="material-icons dp48">favorite</i>
-                                        </a>
+                                        @if(in_array($product->id,$wishListShopProductsIds))
+                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist active">
+                                                <i class="material-icons dp48">favorite</i>
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                                                <i class="material-icons dp48">favorite</i>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1520,70 +1526,7 @@ $reviewsCount = count($productReviews);
         @endif
 
 
-        $(document).on("click", "#favorite" , function() {
-            //console.log('hi');
-            var id = $(this).attr("data-productSku");
 
-            swal({
-                title: "Want to add this product into wishlist ?",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, add it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function (e) {
-                if (e.value === true) {
-                        $.ajax({
-                            type:'GET',
-                            url: "{{route('add.wishlist')}}",
-                            dataType:'json',
-                            data:{id :id },
-                            success: function(data){
-                                swal(data.message);
-                            }
-                        });
-                    }
-                else {
-                    e.dismiss;
-                }
-            }, function (dismiss) {
-                return false;
-            })
-
-
-        });
-
-        $(document).on("click", "#wishList" , function() {
-            console.log('hi');
-            var id = $(this).attr("data-productSku");
-            swal({
-                title: "Want to add this product into wishlist ?",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, add it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function (e) {
-                if (e.value === true) {
-                    $.ajax({
-                        type:'GET',
-                        url: "{{route('add.wishlist')}}",
-                        dataType:'json',
-                        data:{id :id },
-                        success: function(data){
-                            swal(data.message);
-                        }
-                    });
-                }
-                else {
-                    e.dismiss;
-                }
-            }, function (dismiss) {
-                return false;
-            })
-
-
-        });
 
 
 

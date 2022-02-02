@@ -263,6 +263,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('rfq/single/image/delete/{rfq_image_id}',[RfqController::class, 'singleImageDelete'])->name('rfq.single.image.delete');
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     Route::get('rfq/share/{rfq_id}',[RfqController::class, 'share'])->name('rfq.share');
+    Route::get('rfq/create',[RfqController::class, 'create'])->name('rfq.crate');
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');

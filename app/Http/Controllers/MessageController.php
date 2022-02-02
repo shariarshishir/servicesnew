@@ -27,9 +27,11 @@ use App\Http\Resources\RfqMerchantMessageResource;
 use App\Models\BusinessProfile;
 use Illuminate\Support\Facades\Bus;
 use stdClass;
+use App\Http\Traits\PushNotificationTrait;
 
 class MessageController extends Controller
 {
+    use PushNotificationTrait;
     public function single_message(){
         return view('message.single');
     }
@@ -41,8 +43,8 @@ class MessageController extends Controller
 
     public function message_center(){
 
+        $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL)->markAsRead();
         $user=Auth::user();
-
         $chatdatas = Userchat::all();
         $chatusers = [];
         if(request()->business_id){
@@ -350,23 +352,54 @@ class MessageController extends Controller
                 'success' => false
             ],404);
         }
-       $users_id=[];
-       array_push($users_id, $business_profile->user->id);
-       if($business_profile->representativeUser()->exists()){
-        array_push($users_id,  $business_profile->representativeUser->id);
-       }
-       $users=User::whereIn('id', $users_id)->get();
-       $notification_data=[
-        'title'=>'Hello, I want to discuss more about your products',
-        'url'=>'/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id,
-        ];
-       foreach($users as $user){
-           Notification::send($user, new BuyerWantToContact($notification_data));
-       }
-       return response()->json([
-        'success' => true,
-        'msg' => 'success',
-         ],200);
+        $users_id=[];
+        array_push($users_id, $business_profile->user->id);
+        if($business_profile->representativeUser()->exists()){
+            array_push($users_id,  $business_profile->representativeUser->id);
+        }
+        $users=User::whereIn('id', $users_id)->get();
+
+        $notification_data=[
+            'title'=>'Hello, I want to discuss more about your products',
+            'url'=>'/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id,
+            ];
+
+        //send push notification to user for new rfq
+        if( $request->trigger_from == "from_profile" ){
+
+            $fcmToken = $business_profile->user->fcm_token;
+            $title = "A new message for you ";
+            $message = "Dear, ".$business_profile->user->name.", We are interested your profile and would like to discuss more about the product";
+            $action_url = '/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id;
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+            
+        }
+        elseif( $request->trigger_from == "from_product"  ){
+
+            $fcmToken = $business_profile->user->fcm_token;
+            $title = "Buyer want to contact with you";
+            $message = "We are interested your profile and would like to discuss more about the product";
+            $action_url = '/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id;
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+
+        }
+        elseif( $request->trigger_from == "from_rfq"  ){
+        
+            $fcmToken = $business_profile->user->fcm_token;
+            $title = "Buyer want to contact with you";
+            $message = "We are interested in your rfq bid  and would like to discuss more about the RFQ";
+            $action_url = '/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id;
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+
+        }
+
+        foreach($users as $user){
+            Notification::send($user, new BuyerWantToContact($notification_data));
+        }
+        return response()->json([
+            'success' => true,
+            'msg' => 'success',
+            ],200);
         $user = User::find($request->supplier_id);
 
         if ($user && in_array(\auth()->user()->user_type, ['buyer', 'both']))
@@ -439,6 +472,14 @@ class MessageController extends Controller
             ];
         Notification::send($user, new RfqBidNotification($notification_data));
 
+        
+        //send push notification to user for rfq bid
+        $fcmToken = $user->fcm_token;
+        $title = "A new responses for you";
+        $message = "Dear, ".$user->name.", A supplier has reponded for your RFQ.If you are interested please let him know about your interest";
+        $action_url = '/message-center?uid='.$supplier_id;
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+
 
         return redirect()
             ->route('sentBidReply', $supplier_id);
@@ -505,5 +546,20 @@ class MessageController extends Controller
 
         }
         return $suppliers;
+    }
+
+
+    public function sendMessageByPushNotifcation(Request $request){
+        $businessProfile = BusinessProfile::findOrFail($request->business_id);
+        $user = User::findOrFail($request->user_id);
+        $fcmToken = $businessProfile->user->fcm_token;
+        $title = "A new message for you from ".$user->name;
+        $message = $request->message;
+        $action_url = '/message-center?business_id='.$businessProfile->id.'&uid='.$businessProfile->user->id;
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+        return response()->json([
+            'success' => true
+        ]);
+
     }
 }

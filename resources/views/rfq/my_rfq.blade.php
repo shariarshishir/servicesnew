@@ -187,7 +187,7 @@
                                                     <p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
                                                 </div>
                                                 @if(Auth::guard('web')->check())
-                                                    <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->businessProfile->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{Auth::id()}}','{{$bid->businessProfile->id}}')">Contact Supplier</a></div>
+                                                    <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->businessProfile->id }},'from_rfq'); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{Auth::id()}}','{{$bid->businessProfile->id}}')">Contact Supplier</a></div>
                                                 @else
                                                     <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green">Contact Supplier</a></div>
                                                 @endif
@@ -360,17 +360,21 @@
 
         }
 
-        function contactSupplierFromProduct(business_id)
+        function contactSupplierFromProduct(business_id,trigger_from)
         {
 
         var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
+        var trigger_from = trigger_from;
+        
         data_json = {
             "business_id": business_id,
             "buyer_id": buyer_id,
+            "trigger_from": trigger_from,
             "csrftoken": csrftoken
         }
+        
         var url='{{route("message.center.contact.supplier.from.product")}}';
         jQuery.ajax({
             method: "POST",

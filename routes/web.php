@@ -281,6 +281,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/message-center/contactwithsupplierfromprofile',[MessageController::class,'contactWithSupplierFromProfile']);
     Route::post('/message-center/contactsupplierfromproduct',[MessageController::class,'contactSupplierFromProduct'])->name('message.center.contact.supplier.from.product');
     Route::get('/message-center/get-rfq-merchants',[MessageController::class,'getRFQMerchants']);
+    Route::post('/message-center/send-push-notification',[MessageController::class,'sendMessageByPushNotifcation'])->name('message.center.send.push.notification');
+
     //bid rfq
     Route::get('rfq/bid/create/{rfq_id}',[RfqBidController::class, 'create'])->name('rfq.bid.create');
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');

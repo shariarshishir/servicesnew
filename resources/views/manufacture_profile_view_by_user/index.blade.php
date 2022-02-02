@@ -45,7 +45,7 @@
 					@if($business_profile->is_business_profile_verified == 1)
 						<div class="center-align">
 							@if(Auth::guard('web')->check())
-								<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->id}}')">Contact supplier</a>
+								<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->id }},'from_profile'); ">Contact supplier</a>
 							@else
 								<a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
 							@endif

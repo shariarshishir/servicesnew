@@ -182,12 +182,13 @@
                 if(type == 'buyer'){
                     var from_user_id=user_id;
                     var from_business_id=null;
-                     var check_exists_image= "{{$user->image}}";
+                    var check_exists_image= "{{$user->image}}";
                     if(check_exists_image){
                         var image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
                     }else{
                         var image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                     }
+
                 }else{
                     var from_user_id=null;
                     var from_business_id=business_id;
@@ -213,6 +214,28 @@
 
                 height += '';
                 $('.chat-area').animate({scrollTop: (height + 10)});
+
+                var csrftoken = $("[name=_token]").val();
+                data_json = {
+                    "user_id": user_id,
+                    "business_id":business_id,
+                    "message":message.message,
+                    "csrftoken": csrftoken
+                }
+                var url='{{route("message.center.send.push.notification")}}';
+                jQuery.ajax({
+                    method: "POST",
+                    url: url,
+                    headers:{
+                        "X-CSRF-TOKEN": csrftoken
+                    },
+                    data: data_json,
+                    dataType:"json",
+
+                    success: function(response){
+                        
+                    }
+                });
 
 
                // updateUserLastActivity( message_formid, message_toid );
@@ -266,7 +289,6 @@
 
         function getchatdata(user_id, business_id, image, name, type)
         {
-
             var param = 'user_id='+user_id+'&business_id='+business_id;
             var url='{{route("message.center.getchatdata")}}';
             jQuery.ajax({

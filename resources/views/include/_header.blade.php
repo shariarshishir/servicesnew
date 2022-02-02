@@ -218,7 +218,7 @@
 					<div class="header_message_box">
 						<a href="{{route('message.center')}}">
 							<i class="material-icons">message</i>
-							<span class="sms_counter">0</span>
+							<span class="sms_counter">{{count($messageCenterNotifications)}}</span>
 						</a>
 					</div>
 

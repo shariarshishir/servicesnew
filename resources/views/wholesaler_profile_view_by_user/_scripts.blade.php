@@ -22,7 +22,6 @@
         var form_id = form_id;
         var to_id = to_id;
         var csrftoken = $("[name=_token]").val();
-
         data_json = {
             "form_id": form_id,
             "to_id": to_id,
@@ -45,15 +44,17 @@
 
         }
 
-        function contactSupplierFromProduct(business_id)
+        function contactSupplierFromProduct(business_id,trigger_from)
         {
 
         var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
+        var trigger_from = trigger_from;
         data_json = {
             "business_id": business_id,
             "buyer_id": buyer_id,
+            "trigger_from": trigger_from,
             "csrftoken": csrftoken
         }
         var url='{{route("message.center.contact.supplier.from.product")}}';

@@ -16,6 +16,10 @@ class OrderQueryController extends Controller
     public function index()
     {
         $orderQueries=OrderModificationRequest::with('orderModification')->where(['user_id' => auth()->id(), 'type' => 1])->get();
+        $orderQueryProcessedIds=[];
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\OrderQueryFromAdminNotification')->where('read_at',null) as $notification){
+            array_push($orderQueryProcessedIds,$notification->data['notification_data']['order_modification_request_id']);
+        }
         $orderQueriesArray=[];
         if(count($orderQueries)>0){
             foreach($orderQueries as $orderQuery){
@@ -32,18 +36,16 @@ class OrderQueryController extends Controller
                    $newFormatedOrderQuery->state=$orderQuery->state;
                    $newFormatedOrderQuery->created_at=$orderQuery->created_at;
                    $newFormatedOrderQuery->updated_at=$orderQuery->updated_at;
+                   $newFormatedOrderQuery->orderQueryProcessedIds=array_unique($orderQueryProcessedIds);
                    array_push($orderQueriesArray,$newFormatedOrderQuery);
             }
-            $orderQueryProcessedIds=[];
-            foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\OrderQueryFromAdminNotification')->where('read_at',null) as $notification){
-                array_push($orderQueryProcessedIds,$notification->data['notification_data']['order_modification_request_id']);
-            }
+  
 
           
             return response()->json(array(
                 'code' => true,
                 'orderQueries' => $orderQueriesArray,
-                'orderQueryProcessedIds'=>array_unique($orderQueryProcessedIds)
+               
             ), 200);
  
         }

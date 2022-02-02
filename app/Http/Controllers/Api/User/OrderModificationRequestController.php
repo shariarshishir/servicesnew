@@ -36,7 +36,7 @@ class OrderModificationRequestController extends Controller
                    $newFormatedOrderModificationRequest->details = json_decode($orderModificationRequest->details);
                    $newFormatedOrderModificationRequest->created_at = $orderModificationRequest->created_at;
                    $newFormatedOrderModificationRequest->updated_at = $orderModificationRequest->updated_at;
-                   $newFormatedOrderModificationRequest->queryWithModificationRequestNotificationIds = $orderModificationRequest->queryWithModificationRequestNotificationIds;
+                   $newFormatedOrderModificationRequest->queryWithModificationRequestNotificationIds = $queryWithModificationRequestNotificationIds;
                    array_push($orderModificationRequestsArray,$orderModificationRequest);
             }
           

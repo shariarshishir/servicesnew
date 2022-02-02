@@ -20,11 +20,16 @@ class RFQController extends Controller
     public function index()
     {
         $rfqs=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+        $newRfqWithNotificationIds = [];
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewRfqNotification')->where('read_at',null) as $notification){
+            array_push($newRfqWithNotificationIds,$notification->data['rfq_data']['id']);
+        }
+
         if(($rfqs->total())>0){
-            return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
+            return response()->json(['rfqs'=>$rfqs,'newRfqWithNotificationIds'=>$newRfqWithNotificationIds,"success"=>true],200);
         }
         else{
-            return response()->json(['rfqs'=>$rfqs,"success"=>false],200);
+            return response()->json(['rfqs'=>$rfqs,'newRfqWithNotificationIds'=>$newRfqWithNotificationIds,"success"=>false],200);
         }
     }
     public function myRfqList()
@@ -168,4 +173,32 @@ class RFQController extends Controller
             ],500);
         }
     }
+
+
+    public function  newRfqNotificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewRfqNotification')->where('read_at',null) as $notification){
+            if( $notification->data['notification_data']['id'] == $request->rfq_id)
+            {
+                $notification->markAsRead();
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification mark as read successfully";
+                return response()->json(['code'=>true,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+                        
+            }
+            else{
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification not found";
+                return response()->json(['code'=>false,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+            }
+        }
+    }
+
+    
+
+
 }

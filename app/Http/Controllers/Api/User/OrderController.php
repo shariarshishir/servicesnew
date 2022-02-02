@@ -70,6 +70,12 @@ class OrderController extends Controller
         $orders=VendorOrder::where('user_id',auth()->user()->id)->get();
 
         $orderArray=[];
+        $orderApprovedNotificationIds = []; 
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewOrderHasApprovedNotification')->where('read_at',null) as $notification)
+        {
+            array_push($orderApprovedNotificationIds,$notification->data['notification_data']);
+           
+        }
 
         foreach($orders as $order){
             $newFormatedOrder=new stdClass;
@@ -81,8 +87,11 @@ class OrderController extends Controller
             $newFormatedOrder->grand_total=$order->grand_total;
             $newFormatedOrder->created_at=$order->created_at;
             $newFormatedOrder->state=$order->state;
+            $newFormatedOrder->orderApprovedNotificationIds=$orderApprovedNotificationIds;
             array_push($orderArray,$newFormatedOrder);
         }
+
+      
 
         if(count($orders)>0){
             return response()->json(array('success' => true, 'orders' => $orderArray),200);
@@ -300,6 +309,30 @@ class OrderController extends Controller
         }
         else{
             return response()->json(array('code' => false, 'order' =>$order),200);
+        }
+
+    }
+
+    public function  orderApprovedNotificationMarkAsRead(Request $request){
+
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewOrderHasApprovedNotification')->where('read_at',null) as $notification){
+            if( $notification->data['notification_data'] == $request->order_id)
+            {
+                $notification->markAsRead();
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification mark as read successfully";
+                return response()->json(['code'=>true,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+                        
+            }
+            else{
+                $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
+                $noOfnotification=count($unreadNotifications);
+                $message="Notification not found";
+                return response()->json(['code'=>false,'message'=>$message,'noOfnotification'=>$noOfnotification]);
+
+            }
         }
 
     }

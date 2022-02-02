@@ -9,7 +9,7 @@
                         <tr>
                             <th>Color</th>
                             <th>Qunatity</th>
-                            <th>&nbsp;</th>
+                            <!-- <th>&nbsp;</th> -->
                         </tr>
                     </thead>
                     <tbody class=" edit-non-clothing-color-quantity-block">

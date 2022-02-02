@@ -224,8 +224,8 @@
 						<ul id="message-countdown-dropdown" class="dropdown-content card">
 							@if(count($userNotifications)>0)
 								@foreach($userNotifications as $notification)
+									@if($notification->type == 'App\Notifications\BuyerWantToContact')
 									<li class="notifications-list">
-										@if($notification->type == 'App\Notifications\BuyerWantToContact')
 										<a href="{{ $notification->data['url'] }}" class="dropdown-item">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content">
@@ -233,8 +233,8 @@
 												<div class="text-muted text-sm">{{$notification->created_at}}</div>
 											</div>
 										</a>
-										@endif
-									</li>	
+									</li>
+									@endif	
 								@endforeach
 							@else
 							<li class="no-notifications">

@@ -127,18 +127,12 @@ class QueryController extends Controller
         }
 
         if ($OrderModificationRequest->type ==1){
-            if(env('APP_ENV') == 'production')
-            {
-                
-               
-
+            
                 //send mail and database notification using this event to buyer
                 event(new OrderQueryFromAdminEvent($orderModification));
-            }
-            return redirect()->route('query.request.index',1)->with('success', 'Created Successfully');
+                return redirect()->route('query.request.index',1)->with('success', 'Created Successfully');
         }else{
-            if(env('APP_ENV') == 'production')
-            {
+            
                 //send push notification
                 $fcmToken=$orderModification->orderModificationRequest->user->fcm_token;
                 $title = "Order modification request processed";
@@ -148,8 +142,7 @@ class QueryController extends Controller
 
                 Notification::send($OrderModificationRequest->user,new QueryWithModificationToUserNotification($OrderModificationRequest->id));
                 Mail::to($OrderModificationRequest->user->email)->send(new QueryWithModificationTouserMail($OrderModificationRequest));
-            }
-            return redirect()->route('query.request.index',2)->with('success', 'Created Successfully');
+                return redirect()->route('query.request.index',2)->with('success', 'Created Successfully');
         }
 
 

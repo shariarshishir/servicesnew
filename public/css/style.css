@@ -785,6 +785,22 @@ input[type=number]:not(.browser-default):disabled {
 .product_wrapper .low_moq_products_wrap .productBox {
     margin-bottom: 30px;
 }
+.product_wrapper .productBox {
+    position: relative;
+}
+.product_wrapper .productBox .favorite {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    z-index: 1;
+}
+.product_wrapper .productBox .favorite .product-add-wishlist .material-icons {
+    color: #b0b0b2;
+    font-size: 30px;
+}
+.product_wrapper .productBox .favorite .product-add-wishlist.active .material-icons {
+color: #54A958;
+}
 .product_wrapper .product_slider .productBox {
     margin-bottom: 0px;
     min-height: inherit;

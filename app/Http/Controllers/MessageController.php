@@ -43,7 +43,7 @@ class MessageController extends Controller
 
     public function message_center(){
 
-        $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL)->markAsRead();
+        //$messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL)->markAsRead();
         $user=Auth::user();
         $chatdatas = Userchat::all();
         $chatusers = [];

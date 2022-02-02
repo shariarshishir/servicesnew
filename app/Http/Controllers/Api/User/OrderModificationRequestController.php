@@ -17,13 +17,13 @@ class OrderModificationRequestController extends Controller
 {
     public function index()
     {
+        
         $orderModificationRequests=OrderModificationRequest::latest()->where(['user_id' => auth()->user()->id, 'type' => 2])->with(['comments.replies', 'orderModification'])->get();
         $orderModificationRequestsArray=[];
         $queryWithModificationRequestNotificationIds=[];
-        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\QueryWithModificationToUserNotification')->where('read_at',null) as $notification){
+        foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\QueryWithModificationToUserNotification')->where('read_at',NULL) as $notification){
             array_push($queryWithModificationRequestNotificationIds,$notification->data['notification_data']);
         }
-
         if(count($orderModificationRequests)>0){
             foreach($orderModificationRequests as $orderModificationRequest){
 
@@ -37,7 +37,7 @@ class OrderModificationRequestController extends Controller
                    $newFormatedOrderModificationRequest->created_at = $orderModificationRequest->created_at;
                    $newFormatedOrderModificationRequest->updated_at = $orderModificationRequest->updated_at;
                    $newFormatedOrderModificationRequest->queryWithModificationRequestNotificationIds = $queryWithModificationRequestNotificationIds;
-                   array_push($orderModificationRequestsArray,$orderModificationRequest);
+                   array_push($orderModificationRequestsArray,$newFormatedOrderModificationRequest);
             }
           
             return response()->json(array(

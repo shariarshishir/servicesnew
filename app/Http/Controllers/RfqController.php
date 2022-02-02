@@ -58,6 +58,7 @@ class RfqController extends Controller
     }
 
 
+
     public function store(Request $request)
     {
 
@@ -372,5 +373,10 @@ class RfqController extends Controller
 
         return response()->json(['error'=>$validator->errors()]);
 
+    }
+
+    public function create()
+    {
+        return view('rfq.create');
     }
 }

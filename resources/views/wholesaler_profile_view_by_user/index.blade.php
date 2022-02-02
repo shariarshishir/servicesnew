@@ -30,7 +30,7 @@
 								<img src="{{ asset('storage/'.$userObj[0]->image) }}" alt="avatar">
 								@else
 								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
-								@endif						
+								@endif
 							</div>
 						</div>
 						<div class="col s8 m6 l12 profile_left_address_wrap">
@@ -41,11 +41,11 @@
 							</div>
 						</div>
 					</div>
-					
+
 					@if($business_profile->is_business_profile_verified == 1)
 						<div class="center-align">
 							@if(Auth::guard('web')->check())
-							<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->user->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->user->id}}')">Contact supplier</a>
+							<a href="javascript:void(0);" class="btn_green btn_supplier" onClick="contactSupplierFromProduct({{ $business_profile->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$business_profile->user->id}}'); sendmessage('{{$business_profile->id}}')">Contact supplier</a>
 							@else
 								<a href="javascript:void(0);" class="btn_green btn_supplier">Contact Supplier</a>
 							@endif
@@ -162,7 +162,7 @@
 								@endif
 								@if($company_overview->name=='production_capacity')
 								<div class="col s4 m3 l3">
-									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" /> 
+									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" />
 									<div class="title">Production Capacity</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 								</div>

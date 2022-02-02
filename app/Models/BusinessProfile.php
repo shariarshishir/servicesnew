@@ -17,6 +17,10 @@ class BusinessProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function representativeUser()
+    {
+        return $this->belongsTo(User::class,'representative_user_id', 'id');
+    }
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);

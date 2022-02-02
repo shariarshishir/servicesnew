@@ -1,18 +1,16 @@
 @push('js')
     <script>
-        var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
-        var socket = io.connect(serverURL);
-        socket.on('connect', function(data) {
-        //alert('connect');
-        });
+        var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
+        var socket = io(serverURL, { transports : ['websocket'] });
+        socket.on('connect', function(data) {});
         @if(Auth::check())
-        function sendmessage(supplierId)
+        function sendmessage(business_id)
         {
-        let message = {'message': 'We are Interested in your profile and would like to discuss More about the Product', 'product': null, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplierId};
+        let message = {'message': 'We are Interested your profile and would like to discuss More about the Product', 'product': null, 'user_id' : "{{Auth::user()->id}}", 'business_id' : business_id,'from_user_id': "{{Auth::user()->id}}", 'from_business_id' : null};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            var url = '{{ route("message.center") }}?uid='+supplierId;
+            var url = '{{ route("message.center") }}?bid='+business_id;
                 // url = url.replace(':slug', sku);
                 window.location.href = url;
             // window.location.href = "/message-center?uid="+supplierId;
@@ -47,14 +45,14 @@
 
         }
 
-        function contactSupplierFromProduct(supplierId)
+        function contactSupplierFromProduct(business_id)
         {
 
-        var supplier_id = supplierId;
+        var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
         data_json = {
-            "supplier_id": supplier_id,
+            "business_id": business_id,
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
         }

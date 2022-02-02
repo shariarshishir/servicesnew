@@ -115,7 +115,7 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer(['product.*','manufacture_profile_view_by_user.index','wholesaler_profile_view_by_user.index'], function($view) {
             if(Auth()->check()){
                 $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
-                $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('product_id')->toArray();
+                $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
             }
             else{
                 $wishListShopProductsIds=[];

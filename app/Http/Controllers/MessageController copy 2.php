@@ -24,9 +24,7 @@ use Illuminate\Support\Facades\Notification;
 use App\RfqMerchantAssistanceMessage;
 use App\Http\Resources\RfqMerchantMessagesResource;
 use App\Http\Resources\RfqMerchantMessageResource;
-use App\Models\BusinessProfile;
-use Illuminate\Support\Facades\Bus;
-use stdClass;
+
 
 class MessageController extends Controller
 {
@@ -42,97 +40,74 @@ class MessageController extends Controller
     public function message_center(){
 
         $user=Auth::user();
+        $allusers=[];
 
+        /*
+        if($user->is_group == 1)
+        {
+            $allusers = User::with('profile','badges','tour_photos')->where(['group_id' => Auth::id(), 'is_active' => 1])->get();
+            $user=User::with('profile','badges','tour_photos')->where('id', $allusers[0]->id)->first();
+        }
+        */
+        $allusers = User::where('id', $user->id)->get();
+        //dd($allusers);
         $chatdatas = Userchat::all();
+
         $chatusers = [];
-        if(request()->business_id){
-            $selectBusinessId=request()->business_id;
-            $type='business';
-            $chat_user_id = [];
-            foreach($chatdatas as $chat)
+        $users = [];
+        foreach($chatdatas as $chat)
+        {
+            if(in_array($user->id, $chat->participates))
             {
-                if($selectBusinessId == $chat->participates['business_id'])
+                foreach($chat->participates as $participate)
                 {
-                    $chat_user_id[] = $chat->participates['user_id'];
+                    if($participate != $user->id)
+                    {
+                        $users[] = $participate;
+                    }
                 }
             }
-            $chat_user_list=User::whereIn('id', $chat_user_id)->get();
-            foreach( $chat_user_list as $list){
-                array_push( $chatusers, ['business_id' => $selectBusinessId,'user_id'=>$list->id,'name' => $list->name, 'image' => $list->image? asset('storage/'.$list->image) : asset('storage/images/supplier.png')]);
+        }
 
-            }
-        }else{
-            $type='buyer';
-            $business_id = [];
-            foreach($chatdatas as $chat)
+        $userData = User::whereIn('id',$users)->get();
+
+        $chatusers = $userData;
+        $buyers = [];
+        $allbuyers = User::where('user_type','buyer');
+        if($allbuyers->exists())
+        {
+            foreach($allbuyers->get() as $buyer)
             {
-                if($user->id == $chat->participates['user_id'])
-                {
-                    $business_id[] = $chat->participates['business_id'];
-                }
-            }
-            $business_profile=BusinessProfile::whereIn('id', $business_id)->get();
-            foreach($business_profile as $list){
-                array_push( $chatusers, ['business_id'=>$list->id,'name' => $list->business_name, 'image' => $list->user->image? asset('storage/'.$list->user->image) : asset('storage/images/supplier.png')]);
-
+                $data = [];
+                $data['id'] = $buyer->id;
+                $data['name'] = $buyer->name;
+                $data['image'] = asset(!empty($buyer->profile['profile_image'])? 'storage/' .$buyer->profile['profile_image'] : "images/supplier.png");
+                $buyers[] = $data;
             }
         }
 
+        /*
+        $userSupplier = User::find($request->uid);
+        //dd($userSupplier);
 
-        $user_business_id=[];
-        if($user->businessProfile()->exists()){
-            foreach($user->businessProfile as $profile){
-                array_push($user_business_id, $profile->id);
-            }
-        }
-        if($user->businessProfileForRepresentative()->exists()){
-            array_push($user_business_id, $user->businessProfileForRepresentative->id);
-        }
-        $user_business_profile=BusinessProfile::whereIn('id', $user_business_id)->get();
+        $user_session = UserSession::create([
+            'user1_id'=>$user->id,
+            'user2_id'=>$userSupplier->id,
+        ]);
 
-        return view('message.message_center', compact('user','chatusers', 'user_business_profile', 'type'));
-    }
+        $message = Message::create([
+            'session_id'=>$user_session->id,
+            'content'=>'Hello '.$userSupplier->name
+        ]);
 
-    public function getchatdata(Request $request)
-    {
-        $user_id = $request->user_id;
-        $business_id = $request->business_id;
-        $user=User::find($user_id);
-        $business=BusinessProfile::find($business_id);
+        Chat::insert([['message_id'=>$message->id, 'user_id'=>$user->id,'type'=>0 ],
+        ['message_id'=>$message->id, 'user_id'=>$userSupplier->id,'type'=>1 ]]);
 
-        $user_business_id=[];
-        if(auth()->user()->businessProfile()->exists()){
-            foreach(auth()->user()->businessProfile as $profile){
-                array_push($user_business_id, $profile->id);
-            }
-        }
-        if(auth()->user()->businessProfileForRepresentative()->exists()){
-            array_push($user_business_id, auth()->user()->businessProfileForRepresentative->id);
-        }
+        $notification_data=['url'=>'/message-center'];
+        Notification::send($userSupplier, new BuyerWantToContact($notification_data));
+        */
 
-        $user_image= isset($user->image) ? asset('storage').'/'.$user->image : asset('storage/images/supplier.png');
-        $business_image= isset($business->user->image) ? asset('storage').'/'.$business->user->image : asset('storage/images/supplier.png');
-        $chats = Userchat::whereIn('participates.user_id', [$user_id])->whereIn('participates.business_id', [$business_id]);
-        if($chats->exists())
-        {
-            $chat = $chats->first();
-            $chatdataAllData = $chat->chatdata;
-            $chatdata = $chatdataAllData;
-            foreach ($chatdataAllData as $key => $value) {
-                $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
-                $chatdata[$key]['message'] = $messageStr;
-                //echo "<pre>"; print_r($chatdataAllData[$key]); exit();
-            }
-
-             return view('message.chatdata', compact('user','chatdata', 'user_image' , 'business_image', 'user_business_id'));
-
-        }
-        else
-        {
-            $chatdata = [];
-            return $chatdata;
-            //return view('message.chatdata', compact('user','chatdata', 'user_image' , 'business_image', 'user_business_id'));
-        }
+        return view('message.message_center', compact('user','chatusers','buyers','allusers'));
     }
 
     public function message_center_selected($id)
@@ -222,7 +197,34 @@ class MessageController extends Controller
         return view('message.message_center', compact('user','chatusers','buyers','allusers'));
     }
 
+    public function getchatdata(Request $request)
+    {
+        $user = $request->user;
+        $to_id = $request->to_id;
+        $from_user=User::find($user);
+        $to_user=User::find($to_id);
+        $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
+        $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
 
+        $chats = Userchat::whereIn('participates', [$user])->whereIn('participates', [$to_id]);
+        if($chats->exists())
+        {
+            $chat = $chats->first();
+            $chatdataAllData = $chat->chatdata;
+            $chatdata = $chatdataAllData;
+            foreach ($chatdataAllData as $key => $value) {
+                $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
+                $chatdata[$key]['message'] = $messageStr;
+                //echo "<pre>"; print_r($chatdataAllData[$key]); exit();
+            }
+            return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
+        }
+        else
+        {
+            $chatdata = [];
+            return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
+        }
+    }
 
     public function updateuserlastactivity(Request $response)
     {
@@ -342,31 +344,13 @@ class MessageController extends Controller
 
     public function contactSupplierFromProduct(Request $request)
     {
-
-        $business_profile=BusinessProfile::find($request->business_id);
-        if(!$business_profile){
-            return response()->json([
-                'msg' => 'Profile Not Found',
-                'success' => false
-            ],404);
-        }
-       $users_id=[];
-       array_push($users_id, $business_profile->user->id);
-       if($business_profile->representativeUser()->exists()){
-        array_push($users_id,  $business_profile->representativeUser->id);
-       }
-       $users=User::whereIn('id', $users_id)->get();
-       $notification_data=[
-        'title'=>'Hello, I want to discuss more about your products',
-        'url'=>'/message-center?business_id='.$request->business_id.'&uid='.$request->buyer_id,
-        ];
-       foreach($users as $user){
-           Notification::send($user, new BuyerWantToContact($notification_data));
-       }
-       return response()->json([
-        'success' => true,
-        'msg' => 'success',
-         ],200);
+        /*
+        $user = User::where('user_type', 'supplier')
+            ->orWhere('user_type', 'both')
+            ->where('id', $request->supplier_id)
+            ->first();
+        */
+        return 'notify';
         $user = User::find($request->supplier_id);
 
         if ($user && in_array(\auth()->user()->user_type, ['buyer', 'both']))

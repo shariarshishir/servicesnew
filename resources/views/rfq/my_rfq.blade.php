@@ -187,7 +187,7 @@
                                                     <p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
                                                 </div>
                                                 @if(Auth::guard('web')->check())
-                                                    <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{$bid->supplier_id}}')">Contact Supplier</a></div>
+                                                    <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->businessProfile->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{Auth::id()}}','{{$bid->businessProfile->id}}')">Contact Supplier</a></div>
                                                 @else
                                                     <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green">Contact Supplier</a></div>
                                                 @endif
@@ -315,19 +315,17 @@
 @push('js')
     <script>
 
-        var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
-        var socket = io.connect(serverURL);
-        socket.on('connect', function(data) {
-        //alert('connect');
-        });
+        var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
+        var socket = io(serverURL, { transports : ['websocket'] });
+        socket.on('connect', function(data) {});
         @if(Auth::check())
-        function sendmessage(bid_id,title,quantity,unit,unit_price,total_price,payment_method,delivery_time,description,supplier_id)
+        function sendmessage(bid_id,title,quantity,unit,unit_price,total_price,payment_method,delivery_time,description,user_id,business_id)
         {
-        let message = {'message': 'We are Interested in Your rfq bid title: '+title+' and would like to discuss More about that', 'product': {'rfq_bid_id': "rb-"+bid_id,'title': title,'quantity': quantity,'unit_price': unit_price+" "+unit, 'total_price': total_price, 'payment_method': payment_method, 'delivery_time': delivery_time, 'description': description}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplier_id};
+        let message = {'message': 'We are Interested in Your rfq bid title: '+title+' and would like to discuss More about that', 'product': {'rfq_bid_id': "rb-"+bid_id,'title': title,'quantity': quantity,'unit_price': unit_price+" "+unit, 'total_price': total_price, 'payment_method': payment_method, 'delivery_time': delivery_time, 'description': description}, 'user_id' : "{{Auth::user()->id}}", 'business_id' : business_id,'from_user_id': "{{Auth::user()->id}}", 'from_business_id' : null};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            var url = '{{ route("message.center") }}?uid='+supplier_id;
+            var url = '{{ route("message.center") }}?bid='+business_id;
                 // url = url.replace(':slug', sku);
                 window.location.href = url;
             // window.location.href = "/message-center?uid="+supplier_id;
@@ -362,14 +360,14 @@
 
         }
 
-        function contactSupplierFromProduct(supplierId)
+        function contactSupplierFromProduct(business_id)
         {
 
-        var supplier_id = supplierId;
+        var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
         data_json = {
-            "supplier_id": supplier_id,
+            "business_id": business_id,
             "buyer_id": buyer_id,
             "csrftoken": csrftoken
         }

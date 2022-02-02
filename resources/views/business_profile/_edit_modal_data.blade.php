@@ -196,7 +196,7 @@
                         @php $rand = rand();@endphp
                         <div class="col s6 m2 l2 center-align">
                             <div class="media_img">
-                                <img src="https://placehold.it/80x80" id="img{{ $rand }}" class="img-thumbnail">
+                                <img src="https://via.placeholder.com/80" id="img{{ $rand }}" class="img-thumbnail">
                             </div>
                             <div class="clear10"></div>
                             <div class="col s12">

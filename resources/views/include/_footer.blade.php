@@ -1517,10 +1517,11 @@ $(".profile_enable_disable_trigger input[type=checkbox]").change(function() {
 
 
 //add to wishlist function
-function addToWishList(flag, id){
+function addToWishList(flag, id, obj){
 
     var id = id;
     var flag= flag;
+    var obj = obj;
     swal({
         title: "Want to add this product into wishlist ?",
         type: "warning",
@@ -1535,8 +1536,20 @@ function addToWishList(flag, id){
                     url: "{{route('add.wishlist')}}",
                     dataType:'json',
                     data:{id : id, flag : flag },
+                    beforeSend: function() {
+                                $('.loading-message').html("Please Wait.");
+                                $('#loadingProgressContainer').show();
+                            },
                     success: function(data){
+                        $('.loading-message').html("");
+		                $('#loadingProgressContainer').hide();
+                        obj.addClass('active');
                         swal(data.message);
+                    },
+                    error: function(xhr, status, error){
+                        $('.loading-message').html("");
+		                $('#loadingProgressContainer').hide();
+                        swal(xhr.responseJSON.message);
                     }
                 });
             }

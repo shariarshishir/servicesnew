@@ -11,15 +11,15 @@
                 @foreach ($products  as $list )
 
                     <div class="favorite">
-                        {{-- @if(in_array($list->id,$wishListProductsIds))
-                        <a href="javascript:void(0);" onclick="addWishList('{{$list->flag}}', '{{$list->id}}');"  class="product-add-wishlist active">
-                            <i class="material-icons dp48">favorite</i>
-                        </a>
-                        @else --}}
-                        <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}');" class="product-add-wishlist">
-                            <i class="material-icons dp48">favorite</i>
-                        </a>
-                        {{-- @endif --}}
+                        @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))
+                            <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));"  class="product-add-wishlist active">
+                                <i class="material-icons dp48">favorite</i>
+                            </a>
+                        @else
+                            <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));" class="product-add-wishlist">
+                                <i class="material-icons dp48">favorite</i>
+                            </a>
+                        @endif
                     </div>
 
                     @php

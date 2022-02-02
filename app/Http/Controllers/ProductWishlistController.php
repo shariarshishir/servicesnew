@@ -36,22 +36,22 @@ class ProductWishlistController extends Controller
                 $productWishlist->save();
                 if($productWishlist){
                     return response()->json(
-                        ['message' => 'Added to Wishlist ..']
-                    );
+                        ['message' => 'Added to Wishlist ..'],
+                    200);
                 }
 
             }
             else{
                 return response()->json(
-                    ['message' => 'Product already added in wishlist !!']
-                );
+                    ['message' => 'Product already added in wishlist !!'],
+                409);
             }
 
         }
         else{
             return response()->json(
-                ['message' => 'Please login first !!']
-            );
+                ['message' => 'Please login first !!'],
+            401);
         }
     }
 

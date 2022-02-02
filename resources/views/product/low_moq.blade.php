@@ -28,6 +28,17 @@
 
                         }
                     @endphp
+                     <div class="favorite">
+                        @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))
+                            <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));"  class="product-add-wishlist active">
+                                <i class="material-icons dp48">favorite</i>
+                            </a>
+                        @else
+                            <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));" class="product-add-wishlist">
+                                <i class="material-icons dp48">favorite</i>
+                            </a>
+                        @endif
+                    </div>
 
                     <div class="col m3 productBox">
                         <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>

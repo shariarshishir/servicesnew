@@ -16,6 +16,17 @@
                                             <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}"><img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt=""></a>
                                         </div>
                                     @endif
+                                    <div class="favorite">
+                                        @if(in_array($product->id,$wishListShopProductsIds) || in_array($product->id,$wishListMfProductsIds))
+                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));"  class="product-add-wishlist active">
+                                                <i class="material-icons dp48">favorite</i>
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                                                <i class="material-icons dp48">favorite</i>
+                                            </a>
+                                        @endif
+                                    </div>
                                     <div class="priceBox row">
                                         <div class="col s6 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div>
                                         <div class="price col s6 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>

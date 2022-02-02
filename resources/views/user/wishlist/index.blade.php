@@ -13,46 +13,56 @@
                                 <div class="col s12 m12">
                                     <div class="content row">
                                         <div class="product_img col s12 m5 l3">
-                                            @foreach($item->product->images as $key=>$image)
-                                                @if($key==0)
-                                                    <img src="{{URL::asset('storage/'.$image->image)}}" class="responsive-img" alt="" />
+                                            @if($item->flag == 'shop')
+                                                @if($item->product->images()->exists())
+                                                    <a href="{{route('mix.product.details',['flag' => $item->product->flag, 'id' => $item->product->id])}}"><img src="{{URL::asset('storage/'.$item->product->images[0]->image)}}" class="responsive-img" alt="" /></a>
                                                 @endif
-                                            @endforeach
+
+                                            @else
+                                                @if($item->manufacture_product->product_images()->exists())
+                                                        <a href="{{route('mix.product.details',['flag' => $item->manufacture_product->flag, 'id' => $item->manufacture_product->id])}}"><img src="{{asset('storage/'.$item->manufacture_product->product_images[0]['product_image'])}}" alt=""></a>
+                                                @endif
+                                            @endif
                                         </div>
 
                                         <div class="product_short_details col s12 m7 l9">
 
-                                            <div class="product-title">{{$item->product->name}}</div>
+                                            <div class="product-title">{{$item->product->name ?? $item->manufacture_product->title}}</div>
+                                            @if($item->flag == 'shop')
+                                                <div class="product_price">
+                                                    @php
+                                                        $count= count(json_decode($item->product->attribute));
+                                                        $count = $count-2;
+                                                    @endphp
+                                                    @foreach (json_decode($item->product->attribute) as $k => $v)
+                                                        @if($k == 0 && $v[2] == 'Negotiable')
+                                                        <span class="price_negotiable">{{ 'Negotiable' }}</span>
+                                                        @endif
+                                                        @if($loop->last && $v[2] != 'Negotiable')
+                                                            ${{ $v[2] }} {{-- $ is the value for price unite --}}
+                                                        @endif
+                                                        @if($loop->last && $v[2] == 'Negotiable')
+                                                            @foreach (json_decode($item->product->attribute) as $k => $v)
+                                                                    @if($k == $count)
+                                                                        ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
+                                                                    @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </div>
 
-                                            <div class="product_price">
-                                                @php
-                                                    $count= count(json_decode($item->product->attribute));
-                                                    $count = $count-2;
-                                                @endphp
-                                                @foreach (json_decode($item->product->attribute) as $k => $v)
-                                                    @if($k == 0 && $v[2] == 'Negotiable')
-                                                    <span class="price_negotiable">{{ 'Negotiable' }}</span>
-                                                    @endif
-                                                    @if($loop->last && $v[2] != 'Negotiable')
-                                                        ${{ $v[2] }} {{-- $ is the value for price unite --}}
-                                                    @endif
-                                                    @if($loop->last && $v[2] == 'Negotiable')
-                                                        @foreach (json_decode($item->product->attribute) as $k => $v)
-                                                                @if($k == $count)
-                                                                    ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
-                                                                @endif
-                                                        @endforeach
-                                                    @endif
-                                                @endforeach
-                                            </div>
-
-                                            <div class="product_info_short_details">
-                                                {!! $item->product->description !!}
-                                            </div>
-
+                                                <div class="product_info_short_details">
+                                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->product->description), 30, $end='...')}}
+                                                </div>
+                                            @endif
+                                            @if($item->flag == 'mb')
+                                                <div class="product_info_short_details">
+                                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->manufacture_product->product_details), 30, $end='...')}}
+                                                </div>
+                                            @endif
                                             <div class="wishlist_more_details">
                                                 <span class="btn_view_wishlist">
-                                                    <a href="{{route('productdetails',$item->product->sku)}}" class="product-more-details">View Details</a>
+                                                    <a href="{{route('mix.product.details',['flag' => $item->manufacture_product->flag ?? $item->product->flag , 'id' => $item->manufacture_product->id ?? $item->product->id])}}" class="product-more-details"class="product-more-details">View Details</a>
                                                 </span>
                                                 <span class="btn_remove">
                                                     <a href="javascript:void(0);" data-wishListItemId="{{$item->id}}" class="deleteWishListItem "> <i class="material-icons dp48">delete_outline</i> <span>Remove </span></a>
@@ -67,6 +77,11 @@
                         </div>
                         @endforeach
                     </div>
+                </div>
+            </div>
+            <div class="pagination-block-wrapper">
+                <div class="col s12 center">
+                    {!! $wishListItems->links() !!}
                 </div>
             </div>
         @else
@@ -106,8 +121,8 @@
                     data:{id :id },
                     success: function(data){
                         swal(data.message);
-                        obj.parent().parent().remove();
-                        window.location.reload();
+                        obj.parent().parent().parent().parent().remove();
+                        //window.location.reload();
                     }
                 });
             }
@@ -118,6 +133,8 @@
             return false;
         })
     });
+
+
 </script>
 
 @endpush

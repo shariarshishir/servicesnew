@@ -216,7 +216,7 @@
 					</ul>
 
 					<div class="header_message_box"> 
-						<a href="javascript:void(0);" class="dropdown-trigger" data-target="message-countdown-dropdown">
+						<a href="{{route('message.center')}}" class="message-center-dropdown-trigger" data-target="message-countdown-dropdown">
 							<i class="material-icons">message</i>
 							<span class="sms_counter">{{count($messageCenterNotifications)}}</span>
 						</a>

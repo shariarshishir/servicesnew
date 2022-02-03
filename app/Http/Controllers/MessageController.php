@@ -562,7 +562,7 @@ class MessageController extends Controller
         $fcmToken = $businessProfile->user->fcm_token;
         $title = "A new message for you from ".$user->name;
         $message = $request->message;
-        $action_url = '/message-center?business_id='.$businessProfile->id.'&uid='.$businessProfile->user->id;
+        $action_url = '/message-center?business_id='.$businessProfile->id.'&uid='.$user->id;
         $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
         return response()->json([
             'success' => true

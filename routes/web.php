@@ -72,6 +72,7 @@ use App\Http\Controllers\RfqBidController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//test
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');

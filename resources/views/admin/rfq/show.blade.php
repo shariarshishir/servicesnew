@@ -68,7 +68,7 @@
                           <div class="col-md-8">
                               <h6>Replay Details</h6>
                               <p>Offer Price: <b>{{$bid->unit_price}}</b></p>
-                              <p>Description : {{$bid->description}}</p>
+                              <p>Description : {!! $bid->description !!}</p>
                           </div>
                       </div>
                   </div>

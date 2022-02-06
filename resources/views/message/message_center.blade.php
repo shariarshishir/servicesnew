@@ -3,86 +3,46 @@
 
 @push('js')
     <!--script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script-->
- <script>
-      function extractEmails (text) {
+    <script>
+
+        function extractEmails (text) {
             return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
         }
-
-         $( document ).ready(function() {
+        var message_formid;
+        var message_toid;
+        $( document ).ready(function() {
             $('#messageCenterLoaderOuter').show();
             $('#allchatter').children().eq(0).click();
-            var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
-            var socket = io(serverURL, { transports : ['websocket'] });
+            var allbuyers = @json($buyers);
+            var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
+            var socket = io.connect(serverURL);
             socket.on('connect', function(data) {
-                console.log('connect');
-                var selectedBusinessId = "{{ Request::get('bid') }}";
-                var selectedUserId = "{{ Request::get('uid') }}";
-                if(selectedBusinessId > 0)
+                var selectedSupplierId = "{{ Request::get('uid') }}";
+                if(selectedSupplierId > 0)
                 {
                     $('#allchatter').children('div.all-chatter-div').each(function()
                     {
-                        if($(this).data('businessid') == selectedBusinessId) {
-
+                        if($(this).data('toid') == selectedSupplierId) {
                             $(this).addClass('active');
                             $(this).click();
-                            message_userid = $(this).data("userid");
-                            message_businessid = $(this).data("businessid");
+                            message_formid = $(this).data("formid");
+                            message_toid = $(this).data("toid");
 
                             var s = new Array;
                             var i = 0;
                             var x = $("#allchatter .all-chatter-div").length;
 
                             $("#allchatter .all-chatter-div").each( function() {
-                                s[i] = $(this).data("businessid");
+                                s[i] = $(this).data("toid");
                                 i++;
                             });
                             var g = s.sort(function(a,b){return a-b});
                             for(var c = 0; c < x; c++) {
                                 var div = g[c];
-                                var d = $("#allchatter .all-chatter-div[data-businessid="+selectedBusinessId+"]").clone();
-                                var s = $("#allchatter .all-chatter-div[data-businessid="+selectedBusinessId+"]").remove();
+                                var d = $("#allchatter .all-chatter-div[data-toid="+selectedSupplierId+"]").clone();
+                                var s = $("#allchatter .all-chatter-div[data-toid="+selectedSupplierId+"]").remove();
                                 $("#allchatter").prepend(d);
                             }
-
-                        }
-                    });
-                    $('#allchatter').children('div.all-chatter-div').click(function()
-                    {
-                        $('#allchatter').children('div.all-chatter-div').removeClass('active');
-                        $(this).addClass('active');
-                        $('.generate-po-btn').attr("href", "{{ env('APP_URL') }}/po/add/toid="+$(this).data('toid'));
-                        message_userid = $(this).data("userid");
-                        message_businessid = $(this).data("businessid");
-                    });
-                }
-
-                if(selectedUserId > 0)
-                {
-                    $('#allchatter').children('div.all-chatter-div').each(function()
-                    {
-                        if($(this).data('userid') == selectedUserId) {
-
-                            $(this).addClass('active');
-                            $(this).click();
-                            message_userid = $(this).data("userid");
-                            message_businessid = $(this).data("businessid");
-
-                            var s = new Array;
-                            var i = 0;
-                            var x = $("#allchatter .all-chatter-div").length;
-
-                            $("#allchatter .all-chatter-div").each( function() {
-                                s[i] = $(this).data("businessid");
-                                i++;
-                            });
-                            var g = s.sort(function(a,b){return a-b});
-                            for(var c = 0; c < x; c++) {
-                                var div = g[c];
-                                var d = $("#allchatter .all-chatter-div[data-businessid="+selectedUserId+"]").clone();
-                                var s = $("#allchatter .all-chatter-div[data-businessid="+selectedUserId+"]").remove();
-                                $("#allchatter").prepend(d);
-                            }
-
                         }
                     });
 
@@ -91,41 +51,27 @@
                         $('#allchatter').children('div.all-chatter-div').removeClass('active');
                         $(this).addClass('active');
                         $('.generate-po-btn').attr("href", "{{ env('APP_URL') }}/po/add/toid="+$(this).data('toid'));
-                        message_userid = $(this).data("userid");
-                        message_businessid = $(this).data("businessid");
+                        message_formid = $(this).data("formid");
+                        message_toid = $(this).data("toid");
                     });
                 }
-
                 $('#allchatter').children('div.all-chatter-div').click(function()
                 {
                     $('#allchatter').children('div.all-chatter-div').removeClass('active');
                     $(this).addClass('active');
-                    message_userid = $(this).data("userid");
-                    message_businessid = $(this).data("businessid");
+                    message_formid = $(this).data("formid");
+                    message_toid = $(this).data("toid");
                 })
 
             });
-            //keypress
             $('#messagebox').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
-                var type= $('#type').val();
-                var user_id=$('#user_id').val();
-                var business_id=$('#business_id').val();
-                if(type == 'buyer'){
-                    var from_user_id=user_id;
-                    var from_business_id=null;
-                     var check_exists_image= "{{$user->image}}";
-                    if(check_exists_image){
-                        var image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
-                    }else{
-                        var image= "{{asset('storage')}}"+'/'+"images/supplier.png";
-                    }
+                var check_exists_image= "{{$user->image}}";
+                if(check_exists_image){
+                    var user_image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
                 }else{
-                    var from_user_id=null;
-                    var from_business_id=business_id;
-                    var image = $('#b_image').val();
+                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                 }
-
                 if(keycode == '13'){
                     var intRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
                     if( intRegex.test($('#messagebox').val()) || extractEmails($('#messagebox').val()) )
@@ -134,10 +80,11 @@
                         return false;
                     }
                     event.preventDefault();
-                    let message = {'message' : $('#messagebox').val(), 'image': "", 'user_id' : user_id, 'business_id' : business_id,'from_user_id' : from_user_id, 'from_business_id' : from_business_id , 'product' : null};
+                    let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                     socket.emit('new message', message);
                     $('#messagebox').val('');
-                        $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
+                    // $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
+                        $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+user_image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
                     var height = 0;
                     $('#messagedata div').each(function(i, value){
                         height += parseInt($(this).height());
@@ -145,55 +92,37 @@
 
                     height += '';
 
+                    // $('#messagedata').animate({scrollTop: (height + 10)});
                     $('.chat-area').animate({scrollTop: (height + 10)});
 
-                    // updateUserLastActivity( message_formid, message_toid );
+                    updateUserLastActivity( message_formid, message_toid );
 
-                    // var message_notification_form_id = "{{Auth::user()->id}}";
-                    // var message_notification_to_id = "{{Request::get('uid')}}";
-                    // var csrftoken = $("[name=_token]").val();
+                    var message_notification_form_id = "{{Auth::user()->id}}";
+                    var message_notification_to_id = "{{Request::get('uid')}}";
+                    var csrftoken = $("[name=_token]").val();
 
-                    // data_json = {
-                    //     "message_notification_form_id": message_notification_form_id,
-                    //     "message_notification_to_id": message_notification_to_id,
-                    //     "csrftoken": csrftoken
-                    // }
-                    // var url = '{{route("message.center.notification.user")}}';
-                    // jQuery.ajax({
-                    //     method: "POST",
-                    //     url: url,
-                    //     headers:{
-                    //         "X-CSRF-TOKEN": csrftoken
-                    //     },
-                    //     data: data_json,
-                    //     dataType:"json",
+                    data_json = {
+                        "message_notification_form_id": message_notification_form_id,
+                        "message_notification_to_id": message_notification_to_id,
+                        "csrftoken": csrftoken
+                    }
+                    var url = '{{route("message.center.notification.user")}}';
+                    jQuery.ajax({
+                        method: "POST",
+                        url: url,
+                        headers:{
+                            "X-CSRF-TOKEN": csrftoken
+                        },
+                        data: data_json,
+                        dataType:"json",
 
-                    //     success: function(data){
-                    //         console.log(data);
-                    //     }
-                    // });
+                        success: function(data){
+                            console.log(data);
+                        }
+                    });
                 }
             });
-            //sendbutton click
             $('.messageSendButton').click(function(){
-                var type= $('#type').val();
-                var user_id=$('#user_id').val();
-                var business_id=$('#business_id').val();
-                if(type == 'buyer'){
-                    var from_user_id=user_id;
-                    var from_business_id=null;
-                     var check_exists_image= "{{$user->image}}";
-                    if(check_exists_image){
-                        var image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
-                    }else{
-                        var image= "{{asset('storage')}}"+'/'+"images/supplier.png";
-                    }
-                }else{
-                    var from_user_id=null;
-                    var from_business_id=business_id;
-                    var image = $('#b_image').val();
-                }
-
                 var intRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
                 if( intRegex.test($('#messagebox').val()) || extractEmails($('#messagebox').val()) )
                 {
@@ -201,47 +130,45 @@
                     return false;
                 }
                 event.preventDefault();
-
-                let message = {'message' : $('#messagebox').val(), 'image': "", 'user_id' : user_id, 'business_id' : business_id, 'from_user_id': from_user_id , 'from_business_id': from_business_id, 'product' : null};
+                let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                 socket.emit('new message', message);
                 $('#messagebox').val('');
-                $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
+                $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
                 var height = 0;
                 $('#messagedata div').each(function(i, value){
                     height += parseInt($(this).height());
                 });
 
                 height += '';
+                // $('#messagedata').animate({scrollTop: (height + 10)});
                 $('.chat-area').animate({scrollTop: (height + 10)});
 
 
-               // updateUserLastActivity( message_formid, message_toid );
+                updateUserLastActivity( message_formid, message_toid );
             });
-
-            //socket on
             socket.on('new message', function(data) {
-                //console.log(data);
-                if(data.from_user_id != null){
-                    var check_exists_image= "{{$user->image}}";
-                    if(check_exists_image){
-                        var image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
-                    }else{
-                        var image= "{{asset('storage')}}"+'/'+"images/supplier.png";
-                    }
+                console.log(data);
+                var check_exists_image= "{{$user->image}}";
+                if(check_exists_image){
+                    var user_image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
                 }else{
-                    var image = $('#b_image').val();
+                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                 }
-
-                if(data.user_id == $('#user_id').val() && data.business_id == $('#business_id').val())
+                if(data.to_id == "{{$user->id}}" && data.from_id == $('#to_id').val())
                 {
                     let msg = "";
                     if(data.product != null)
                     {
-                        msg = '<div class="col-md-8 rgt-cb"><div class="clear10"></div><div class="col-md-4"><div class="row- prd-lt-con-gr"> <img src="'+data.product.imageurl+'" class="prd-lt-con-gr-img-bdr"></div><div class="row cer-ctxt2">Product ID: '+data.product.id+'</div></div><div class="col-md-8" style="border-left:1px solid #ddd;"><div class="col-md-12 plr0 prdd-bbg"><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Product Name</div><div class="col-md-6 pr0">: '+data.product.name+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Category</div><div class="col-md-6 pr0">: '+data.product.category+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Min Quantity</div><div class="col-md-6 pr0">: '+data.product.moq+' Pcs</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list bbdis"><div class="col-md-6 plr0">Unit Price</div><div class="col-md-6 pr0">: USD $'+data.product.price+'</div></div></div></div><div class="col-md-12 plr0 prd-gr" style="background: #55a860;font-size: 14px;color: #fff;padding: 10px;border-radius: 4px;margin-top: 10px;"> Greetings,<div class="clear10"></div><p>'+data.message+'</P></div></div><div class="col-md-12"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        // if(data.product.hasOwnProperty("rfq_bid_id")){
+                        //     msg = '<div class="col-md-8 rgt-cb"><div class="clear10"></div><div class="col-md-4"><div class="row- prd-lt-con-gr"></div><div class="row cer-ctxt2">Rfq title: '+data.rfq_bid.title+'</div></div><div class="col-md-8" style="border-left:1px solid #ddd;"><div class="col-md-12 plr0 prdd-bbg"><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Quantity</div><div class="col-md-6 pr0">: '+data.rfq_bid.quantity+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">price</div><div class="col-md-6 pr0">: '+data.rfq_bid.unit_price+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Total Price</div><div class="col-md-6 pr0">: '+data.rfq_bid.total_price+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list bbdis"><div class="col-md-6 plr0">Payment Method</div><div class="col-md-6 pr0">:'+data.rfq_bid.payment_method+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Delivery Time</div><div class="col-md-6 pr0">: '+data.rfq_bid.delivery_time+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Description</div><div class="col-md-6 pr0">: '+data.rfq_bid.description+'</div></div></div></div><div class="col-md-12 plr0 prd-gr" style="background: #55a860;font-size: 14px;color: #fff;padding: 10px;border-radius: 4px;margin-top: 10px;"> Greetings,<div class="clear10"></div><p>'+data.message+'</P></div></div><div class="col-md-12"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        // }else{
+                            msg = '<div class="col-md-8 rgt-cb"><div class="clear10"></div><div class="col-md-4"><div class="row- prd-lt-con-gr"> <img src="'+data.product.imageurl+'" class="prd-lt-con-gr-img-bdr"></div><div class="row cer-ctxt2">Product ID: '+data.product.id+'</div></div><div class="col-md-8" style="border-left:1px solid #ddd;"><div class="col-md-12 plr0 prdd-bbg"><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Product Name</div><div class="col-md-6 pr0">: '+data.product.name+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Category</div><div class="col-md-6 pr0">: '+data.product.category+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Min Quantity</div><div class="col-md-6 pr0">: '+data.product.moq+' Pcs</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list bbdis"><div class="col-md-6 plr0">Unit Price</div><div class="col-md-6 pr0">: USD $'+data.product.price+'</div></div></div></div><div class="col-md-12 plr0 prd-gr" style="background: #55a860;font-size: 14px;color: #fff;padding: 10px;border-radius: 4px;margin-top: 10px;"> Greetings,<div class="clear10"></div><p>'+data.message+'</P></div></div><div class="col-md-12"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        // }
                     }
                     else
                     {
-                        msg= '<div class="chat"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+data.message+'</p> </div></div><p>Just Now</p></div>';
+                        // msg = '<div class="col-md-8 rgt-cb"><p class="prd-gr2">'+data.message+'</p><div class="col-md-12" style="color: rgb(85, 168, 96);"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        msg= '<div class="chat"><div class="chat-avatar"><a class="avatar"><img src="'+user_image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+data.message+'</p> </div></div><p>Just Now</p></div>';
                     }
                     $('#messagedata').append(msg);
                     var height = 0;
@@ -251,23 +178,43 @@
 
                     height += '';
 
+                    // $('#messagedata').animate({scrollTop: (height + 10)});
                     $('.chat-area').animate({scrollTop: (height + 10)});
 
                 }
             });
+            @if($user->user_type == "supplier")
+                setTimeout(function(){
+                    socket.emit('onlinecheck', {'test':'test'});
+                }, 2000);
+                socket.on('onlineinitiate', function(data) {
+                    alert(data);
+                });
+                socket.on('online', function(data) {
+                    var buyers = [];
+                    data.forEach(function(item){
+                        buyers.push(item.buyer);
+                    });
+                    var html = '';
+                    allbuyers.forEach(function(buyer){
+                    });
+                    $('#nowonline').html(html);
+                });
+            @endif
+        });
 
-         });
-
-         window.onload = () => {
-            setTimeout(() => {
-                $('#messageCenterLoaderOuter').hide();
-            }, 2500)
+        function changecompany(value)
+        {
+            var url = '{{ route("message.center") }}'+value;
+                // url = url.replace(':slug', sku);
+                window.location.href = url;
+            // location.href = "{{ url('message-center')}}/"+value;
+            location.href =url;
         }
 
-        function getchatdata(user_id, business_id, image, name, type)
+        function getchatdata(user, to_id, image, name, company_name, position, lastchated)
         {
-
-            var param = 'user_id='+user_id+'&business_id='+business_id;
+            var param = 'user='+user+'&to_id='+to_id;
             var url='{{route("message.center.getchatdata")}}';
             jQuery.ajax({
                 type : "POST",
@@ -279,10 +226,6 @@
                 complete: function(){
                 },
                 success : function(msg){
-                    $('#user_id').val(user_id);
-                    $('#business_id').val(business_id);
-                    $('#type').val(type);
-                    $('#b_image').val(image);
                     $("#messagedata").html(msg);
                     $("#messagebox").removeAttr("disabled");
                     $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">'+name+'</p><p class="m-0 chat-text truncate"></p></div></div>');
@@ -357,7 +300,7 @@
                             <div class="sidebar-list-padding app-sidebar" id="chat-sidenav">
                               <!-- Sidebar Header -->
                               <div class="sidebar-header">
-                                {{-- <div class="row valign-wrapper">
+                                <div class="row valign-wrapper">
                                   <div class="col s2 media-image pr-0">
                                     <img src="../images/img.jpg" alt="" class="circle z-depth-2 responsive-img">
                                   </div>
@@ -365,22 +308,7 @@
                                     <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Users </p>
                                     <p class="m-0 info-text left-align">Currently online</p>
                                   </div>
-                                </div> --}}
-                                 <!-- Dropdown Trigger -->
-                                @if($user_business_profile->isNotEmpty())
-                                    <form action="{{route('message.center')}}" method="get">
-                                        <div class="input-field">
-                                            <label>Business</label>
-                                            <select class="select2 select-business" name="business_id">
-                                              <option value="" disabled selected>Choose your option</option>
-                                              @foreach ($user_business_profile as $profile)
-                                                <option value="{{$profile->id}}" {{ Request::get('business_id') == $profile->id ? 'selected' : '' }}>{{$profile->business_name}}</option>
-                                              @endforeach
-                                            </select>
-                                        </div>
-                                    </form>
-                                @endif
-                                <a href="{{route('message.center')}}">buyer</a>
+                                </div>
                               </div>
                               <!--/ Sidebar Header -->
 
@@ -389,29 +317,28 @@
                                 @if(count($chatusers) > 0)
                                     <div class="chat-list" id="allchatter">
                                         @foreach($chatusers as $cuser)
-                                            {{-- <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;"> --}}
-                                                @if($type== 'buyer')
-                                                    <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-userid="{{$user->id}}" data-businessid="{{$cuser['business_id']}}" onclick="getchatdata('{{$user->id}}','{{$cuser['business_id']}}', '{{ $cuser['image'] }}', '{{ $cuser['name'] }}','{{$type}}')" style="cursor: pointer;">
-                                                @elseif($type== 'business')
-                                                    <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-userid="{{$cuser['user_id']}}" data-businessid="{{$cuser['business_id']}}" onclick="getchatdata('{{$cuser['user_id']}}','{{$cuser['business_id']}}', '{{ $cuser['image'] }}', '{{ $cuser['name'] }}', '{{$type}}')" style="cursor: pointer;">
-                                                @endif
+                                            @php
+                                            $src = !empty($cuser->image) ? 'storage/' .$cuser->image : "storage/images/supplier.png";
+                                            $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
+                                            @endphp
+                                            <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
                                                 <div class="user-section">
-                                                    <div class="row valign-wrapper">
-                                                        <div class="col s2 media-image online pr-0">
-                                                        <img src="{{ $cuser['image'] }}" alt="" class="circle z-depth-2 responsive-img">
-                                                        </div>
-                                                        <div class="col s10">
-                                                        <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser['name'] }}</p>
-                                                        <p class="m-0 info-text"></p>
-                                                        </div>
+                                                <div class="row valign-wrapper">
+                                                    <div class="col s2 media-image online pr-0">
+                                                    <img src="{{ asset($src) }}" alt="" class="circle z-depth-2 responsive-img">
+                                                    </div>
+                                                    <div class="col s10">
+                                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser->name }}</p>
+                                                    <p class="m-0 info-text"></p>
                                                     </div>
                                                 </div>
+                                                </div>
                                                 <div class="info-section">
-                                                    <div class="star-timing">
-                                                        <div class="time">
-                                                        {{-- <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span> --}}
-                                                        </div>
+                                                <div class="star-timing">
+                                                    <div class="time">
+                                                    <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span>
                                                     </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -468,10 +395,7 @@
                           <i class="material-icons mr-2">face</i>
                           <i class="material-icons mr-2">attachment</i>
                           <input type="text" placeholder="Type message here.." class="message mb-0" id="messagebox">
-                          <input type="hidden" id="user_id" value="">
-                          <input type="hidden" id="business_id" value="">
-                          <input type="hidden" id="type" value="">
-                          <input type="hidden" id="b_image" value="">
+                          <input type="hidden" id="to_id" value="">
                           <a class="btn_green send messageSendButton" >Send</a>
                         </form>
                       </div>
@@ -500,11 +424,6 @@
             $(".scrollabled").each(function(){
                 $(this).tinyscrollbar();
             });
-        });
-
-        $('.select-business').change(function ()
-        {
-            $(this).closest('form').submit();
         });
     </script>
 @endpush

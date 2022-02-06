@@ -21,54 +21,25 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-
-            {{-- <div class="row" style="padding-bottom: 20px;">
-                <div class="col-lg-12">
-                    <a href="{{route('vendor.order.create',$vendorId)}}" class="btn btn-success" style="display: none;"><i class="fas fa-plus"></i> Add New order</a>
-                </div>
-            </div> --}}
-
             <div class="row admin_order_list_table_wrap">
                 <div class="col-md-12">
                     <div class="card">
                         <legend>Rfqs List</legend>
                         <div class="no_more_tables">
-                            @if(count($collection)>0)
-                            <table class="table table-bordered orders-table">
+                            <table class="table table-bordered orders-table data-table">
                                 <thead class="cf">
                                     <tr>
-                                    <th>Sl No.</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
-                                    <th>Delivery Time</th>
-                                    <th>User Name</th>
-                                    <th>Created_at</th>
-                                    <th>Action</th>
+                                        <th>Sl No.</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Delivery Time</th>
+                                        <th>User Name</th>
+                                        <th>Created_at</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-
-                                <tbody>
-                                    @foreach($collection as $key=>$list)
-                                        <tr>
-                                            <td >{{$key+1}}</td>
-                                            <td>{{ucwords($list->title)}}</td>
-                                            <td>{{$list->category->name}}</td>
-                                            <td>{{$list->quantity}}</td>
-                                            <td>{{\Carbon\Carbon::parse($list->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</td>
-                                            <td>{{$list->user->name}}</td>
-                                            <td>{{\Carbon\Carbon::parse($list->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</td>
-                                            <td><a href="{{route('admin.rfq.show', $list->id)}}">Details</a></td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
-
-                            @else
-                                <div class="alert alert-info alert-dismissible">
-                                    INFO : No rfq available.
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -81,7 +52,24 @@
 @endsection
 @push('js')
   <script>
-      $('.orders-table').DataTable();
+       $(function () {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            order: [['6', 'desc']],
+            ajax: "{{ route('admin.rfq.index') }}",
+            columns: [
+                {data:'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                {data: 'title', name: 'title'},
+                {data: 'category_id', name: 'category_id'},
+                {data: 'quantity', name: 'quantity'},
+                {data: 'delivery_time', name: 'delivery_time'},
+                {data: 'created_by', name: 'created_by'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'details', name: 'details',  orderable: false, searchable: false},
+            ]
+        });
+    });
   </script>
 @endpush
 

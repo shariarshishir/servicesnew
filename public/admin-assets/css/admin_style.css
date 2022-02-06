@@ -665,6 +665,14 @@ p {
     .active_users_list {
         text-align: left;
     }
+
+    .admin_rfq_left {
+        padding-bottom: 30px;
+    }
+    .rfq_replay_box .col-md-4 {
+        padding-bottom: 20px;
+    }
+
 }
 
 @media only screen and (max-width: 640px) {

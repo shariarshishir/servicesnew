@@ -268,7 +268,7 @@ $reviewsCount = count($productReviews);
                                                         </table>
                                                     </div>
 
-                                                    <div class="add_more_box" style="padding-top: 20px">
+                                                    <div class="add_more_box" style="padding: 20px 0">
                                                         <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                                     </div>
                                                     <!-- <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a> -->

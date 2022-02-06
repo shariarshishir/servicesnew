@@ -50,7 +50,16 @@ class BlogController extends Controller
         }
 
         $allData['created_by']=Auth::guard('admin')->user()->id;
-        $allData['slug'] = Str::slug($allData['title'],'-');
+        
+        $lowercase = strtolower($allData['title']);
+        $pattern = '/[^A-Za-z0-9\-]/';
+        $preg_replace = preg_replace($pattern, '-', $lowercase);
+        $single_hypen = preg_replace('/-+/', '-', $preg_replace);
+        $alias = $single_hypen;
+
+        //$allData['slug'] = Str::slug($allData['title'],'-');
+        $allData['slug'] = $alias;
+
         $blog=Blog::create($allData);
         Session::flash('success','Blog post created successfully!!!!');
 
@@ -71,7 +80,15 @@ class BlogController extends Controller
         $blog->author_note = $request->author_note;
         $blog->photo_credit = $request->photo_credit;
         $blog->details = $request->details;
-        $blog->slug = make_slug($request->title);
+
+        $lowercase = strtolower($request->title);
+        $pattern = '/[^A-Za-z0-9\-]/';
+        $preg_replace = preg_replace($pattern, '-', $lowercase);
+        $single_hypen = preg_replace('/-+/', '-', $preg_replace);
+        $alias = $single_hypen;        
+
+        //$blog->slug = make_slug($request->title);
+        $blog->slug = $alias;
 
         if ($request->hasFile('feature_image')){
 

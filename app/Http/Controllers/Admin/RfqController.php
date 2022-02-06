@@ -19,7 +19,7 @@ class RfqController extends Controller
                     ->editColumn('title', function($row) {
                        return ucwords($row->title);
                     })
-                    ->editColumn('category', function($row){
+                    ->editColumn('category_id', function($row){
                         return $row->category->name;
                     })
                     ->editColumn('delivery_time', function ($row) {

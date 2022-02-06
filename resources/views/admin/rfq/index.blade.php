@@ -61,7 +61,7 @@
             columns: [
                 {data:'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 {data: 'title', name: 'title'},
-                {data: 'category', name: 'category', orderable: false},
+                {data: 'category_id', name: 'category_id'},
                 {data: 'quantity', name: 'quantity'},
                 {data: 'delivery_time', name: 'delivery_time'},
                 {data: 'created_by', name: 'created_by'},

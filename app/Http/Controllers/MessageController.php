@@ -558,11 +558,20 @@ class MessageController extends Controller
 
     public function sendMessageByPushNotifcation(Request $request){
         $businessProfile = BusinessProfile::findOrFail($request->business_id);
-        $user = User::findOrFail($request->user_id);
-        $fcmToken = $businessProfile->user->fcm_token;
-        $title = "A new message for you from ".$user->name;
-        $message = $request->message;
-        $action_url = '/message-center?business_id='.$businessProfile->id.'&uid='.$user->id;
+        if($request->type == 'buyer'){
+            $user = User::findOrFail($request->user_id);
+            $fcmToken = $businessProfile->user->fcm_token;
+            $title = "A new message for you from ".$user->name;
+            $message = $request->message;
+            $action_url = '/message-center?business_id='.$businessProfile->id.'&uid='.$user->id;
+        }
+        else{
+            $user = User::findOrFail($request->user_id);
+            $fcmToken = $user->fcm_token;
+            $title = "A new message for you from ".$businessProfile->user->name;
+            $message = $request->message;
+            $action_url = '/message-center?bid='.$businessProfile->id;
+        }
         $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
         return response()->json([
             'success' => true

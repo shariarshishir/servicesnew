@@ -215,27 +215,44 @@
                 height += '';
                 $('.chat-area').animate({scrollTop: (height + 10)});
 
-                var csrftoken = $("[name=_token]").val();
-                data_json = {
-                    "user_id": user_id,
-                    "business_id":business_id,
-                    "message":message.message,
-                    "csrftoken": csrftoken
-                }
-                var url='{{route("message.center.send.push.notification")}}';
-                jQuery.ajax({
-                    method: "POST",
-                    url: url,
-                    headers:{
-                        "X-CSRF-TOKEN": csrftoken
-                    },
-                    data: data_json,
-                    dataType:"json",
+                //send push notification after sending message
+                if(type == "buyer"){
+                    data_json = {
+                            "user_id": user_id,
+                            "business_id":business_id,
+                            "message":message.message,
+                            "type":"buyer",
+                            "csrftoken": csrftoken
+                        }
 
-                    success: function(response){
-                        console.log(response);
+                }
+                else{
+                     //push notification json data 
+                     data_json = {
+                        "user_id": user_id,
+                        "business_id":business_id,
+                        "message":message.message,
+                        "type":"supplier",
+                        "csrftoken": csrftoken
                     }
-                });
+
+                }
+               
+                var csrftoken = $("[name=_token]").val();
+                var url='{{route("message.center.send.push.notification")}}';
+                    jQuery.ajax({
+                        method: "POST",
+                        url: url,
+                        headers:{
+                            "X-CSRF-TOKEN": csrftoken
+                        },
+                        data: data_json,
+                        dataType:"json",
+
+                        success: function(response){
+                            console.log(response);
+                        }
+                    });
 
 
                // updateUserLastActivity( message_formid, message_toid );

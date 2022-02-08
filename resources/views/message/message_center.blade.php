@@ -147,7 +147,8 @@
 
                     $('.chat-area').animate({scrollTop: (height + 10)});
 
-                    // updateUserLastActivity( message_formid, message_toid );
+                    updateUserLastActivityByReceiverBusinessId( user_id, business_id );
+
 
                     // var message_notification_form_id = "{{Auth::user()->id}}";
                     // var message_notification_to_id = "{{Request::get('uid')}}";
@@ -260,7 +261,48 @@
 
             //socket on
             socket.on('new message', function(data) {
-                //console.log(data);
+            
+                console.log(data);
+                var selectedBusinessIdFromUrl = "{{ Request::get('bid') }}";
+                var selectedUserIdFromUrl = "{{ Request::get('uid') }}";
+                if(data.from_business_id !=null){
+                    var sender_buisness_id = data.from_business_id;
+                    $('.chat-user').each(function() {
+                        if($(this).data('businessid') == sender_buisness_id){
+                            $(this).css("background-color", "red");
+                             
+                        }
+                    })
+
+                    var s = new Array;
+                    var i = 0;
+                    var x = $("#allchatter .chat-user").length;
+                    
+                    $("#allchatter .chat-user").each( function() {
+                        s[i] = $(this).data("businessid");
+                        i++;
+                    });
+                    var g = s.sort(function(a,b){return a-b});
+                    for(var c = 0; c < x; c++) {
+                        var div = g[c];
+                        var d = $("#allchatter .chat-user[data-businessid="+sender_buisness_id+"]").clone();
+                        var s = $("#allchatter .chat-user[data-businessid="+sender_buisness_id+"]").remove();
+                        $("#allchatter").prepend(d);
+                    } 
+                    
+
+                }
+                else{
+                    var sender_user_id = data.from_user_id;
+                    $('.chat-user').each(function() {
+                        if($(this).data('userid') == sender_user_id){
+                            $(this).css("background-color", "red");
+                        }
+                    })
+                }
+                
+               
+
                 if(data.from_user_id != null){
                     var check_exists_image= "{{$user->image}}";
                     if(check_exists_image){
@@ -351,6 +393,33 @@
                 "csrftoken": csrftoken
             }
             var url='{{route("message.center.update.user.last.activity")}}';
+            jQuery.ajax({
+                method: "POST",
+                url: url,
+                headers:{
+                    "X-CSRF-TOKEN": csrftoken
+                },
+                data: data_json,
+                dataType:"json",
+
+                success: function(data){
+                    console.log(data);
+                }
+            });
+
+        }
+        function updateUserLastActivityByReceiverBusinessId(form_id, to_business_id)
+        {
+            var form_id = form_id;
+            var to_business_id = to_business_id;
+            var csrftoken = $("[name=_token]").val();
+
+            data_json = {
+                "form_id": form_id,
+                "to_business_id": to_business_id,
+                "csrftoken": csrftoken
+            }
+            var url='{{route("message.center.update.user.last.activity.by.business.id")}}';
             jQuery.ajax({
                 method: "POST",
                 url: url,

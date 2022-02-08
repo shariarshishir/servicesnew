@@ -269,6 +269,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/message-center?uid={id}',[MessageController::class,'message_center_selected_supplier'])->name('sentBidReply');
     Route::post('/message-center/getchatdata',[MessageController::class,'getchatdata'])->name('message.center.getchatdata');
     Route::post('/message-center/updateuserlastactivity',[MessageController::class,'updateuserlastactivity'])->name('message.center.update.user.last.activity');
+    Route::post('/message-center/updateuserlastactivity-by-business-id',[MessageController::class,'updateUserlastactivityByBusinessId'])->name('message.center.update.user.last.activity.by.business.id');
+    
     Route::post('/message-center/notificationforuser',[MessageController::class,'notificationforuser'])->name('message.center.notification.user');
     Route::get('/merchant-message',[MessageController::class,'merchant_message']);
     Route::get('rfq-merchant-message',[MessageController::class,'rfq_merchant_message']);

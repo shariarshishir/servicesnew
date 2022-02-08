@@ -98,7 +98,6 @@ class MessageController extends Controller
             array_push($user_business_id, $user->businessProfileForRepresentative->id);
         }
         $user_business_profile=BusinessProfile::whereIn('id', $user_business_id)->get();
-
         return view('message.message_center', compact('user','chatusers', 'user_business_profile', 'type'));
     }
 
@@ -239,6 +238,14 @@ class MessageController extends Controller
         User::where('id', $response->to_id)->update(['last_activity' => date("Y-m-d H:i:s")]);
         return response()->json([
             'success' => $response
+        ]);
+    }
+    public function updateUserlastactivityByBusinessId(Request $response){
+        User::where('id', $response->form_id)->update(['last_activity' => date("Y-m-d H:i:s")]);
+        $businessProfile = BusinessProfile::where('id',$response->to_business_id)->first();
+        User::where('id', $businessProfile->user_id)->update(['last_activity' => date("Y-m-d H:i:s")]);
+        return response()->json([
+            'success' => "activity updated"
         ]);
     }
 

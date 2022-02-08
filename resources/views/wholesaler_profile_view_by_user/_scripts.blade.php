@@ -4,13 +4,13 @@
         var socket = io(serverURL, { transports : ['websocket'] });
         socket.on('connect', function(data) {});
         @if(Auth::check())
-        function sendmessage(businessid)
+        function sendmessage(business_id)
         {
         let message = {'message': 'We are Interested your profile and would like to discuss More about the Product', 'product': null, 'user_id' : "{{Auth::user()->id}}", 'business_id' : business_id,'from_user_id': "{{Auth::user()->id}}", 'from_business_id' : null};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            var url = '{{ route("message.center") }}?bid='+businessid;
+            var url = '{{ route("message.center") }}?bid='+business_id;
                 // url = url.replace(':slug', sku);
                 window.location.href = url;
             // window.location.href = "/message-center?uid="+supplierId;

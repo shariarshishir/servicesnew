@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
 use App\Events\NewRfqHasAddedEvent;
+use App\Jobs\NewRfqHasAddedJob;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -98,16 +99,18 @@ class RfqController extends Controller
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
 
+
         if(env('APP_ENV') == 'production')
         {
-            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->get();
             foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
-                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+                NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
             }
 
             $selectedUserToSendMail="success@merchantbay.com";
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
         }
+
 
         $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
         return back()->with(['rfq-success'=> $msg]);

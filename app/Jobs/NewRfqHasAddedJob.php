@@ -21,7 +21,7 @@ class NewRfqHasAddedJob implements ShouldQueue
 
     protected $selectedUserToSendMail;
     protected $rfq;
-    public $tries = 10;
+    public $tries = 3;
     /**
      * Create a new job instance.
      *

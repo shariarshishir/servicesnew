@@ -28,21 +28,6 @@
                             message_userid = $(this).data("userid");
                             message_businessid = $(this).data("businessid");
 
-                            var s = new Array;
-                            var i = 0;
-                            var x = $("#allchatter .all-chatter-div").length;
-
-                            $("#allchatter .all-chatter-div").each( function() {
-                                s[i] = $(this).data("businessid");
-                                i++;
-                            });
-                            var g = s.sort(function(a,b){return a-b});
-                            for(var c = 0; c < x; c++) {
-                                var div = g[c];
-                                var d = $("#allchatter .all-chatter-div[data-businessid="+selectedBusinessId+"]").clone();
-                                var s = $("#allchatter .all-chatter-div[data-businessid="+selectedBusinessId+"]").remove();
-                                $("#allchatter").prepend(d);
-                            }
 
                         }
                     });
@@ -67,22 +52,6 @@
                             message_userid = $(this).data("userid");
                             message_businessid = $(this).data("businessid");
 
-                            var s = new Array;
-                            var i = 0;
-                            var x = $("#allchatter .all-chatter-div").length;
-
-                            $("#allchatter .all-chatter-div").each( function() {
-                                s[i] = $(this).data("businessid");
-                                i++;
-                            });
-                            var g = s.sort(function(a,b){return a-b});
-                            for(var c = 0; c < x; c++) {
-                                var div = g[c];
-                                var d = $("#allchatter .all-chatter-div[data-businessid="+selectedUserId+"]").clone();
-                                var s = $("#allchatter .all-chatter-div[data-businessid="+selectedUserId+"]").remove();
-                                $("#allchatter").prepend(d);
-                            }
-
                         }
                     });
 
@@ -95,17 +64,21 @@
                         message_businessid = $(this).data("businessid");
                     });
                 }
-
-                $('#allchatter').children('div.all-chatter-div').click(function()
-                {
-                    $('#allchatter').children('div.all-chatter-div').removeClass('active');
-                    $(this).addClass('active');
-                    message_userid = $(this).data("userid");
-                    message_businessid = $(this).data("businessid");
-                })
-
             });
-            //keypress
+
+           
+            $(document).on("click", "div.all-chatter-div", function()
+            {
+                $('#allchatter').children('div.all-chatter-div').css('background-color','');
+                $('#allchatter').children('div.all-chatter-div').removeClass('active');
+                $(this).addClass('active');
+                message_userid = $(this).data("userid");
+                message_businessid = $(this).data("businessid");
+            });
+
+
+            
+            //will perform when keypress.
             $('#messagebox').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
                 var type= $('#type').val();
@@ -114,7 +87,7 @@
                 if(type == 'buyer'){
                     var from_user_id=user_id;
                     var from_business_id=null;
-                     var check_exists_image= "{{$user->image}}";
+                    var check_exists_image= "{{$user->image}}";
                     if(check_exists_image){
                         var image= "{{asset('storage')}}"+'/'+"{{$user->image}}";
                     }else{
@@ -127,6 +100,7 @@
                 }
 
                 if(keycode == '13'){
+                    
                     var intRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
                     if( intRegex.test($('#messagebox').val()) || extractEmails($('#messagebox').val()) )
                     {
@@ -147,7 +121,44 @@
 
                     $('.chat-area').animate({scrollTop: (height + 10)});
 
-                    updateUserLastActivityByReceiverBusinessId( user_id, business_id );
+                    //send push notification after sending message
+                    if(type == "buyer"){
+                        data_json = {
+                                "user_id": user_id,
+                                "business_id":business_id,
+                                "message":message.message,
+                                "type":"buyer",
+                                "csrftoken": csrftoken
+                            }
+
+                    }
+                    else{
+                        //push notification json data 
+                        data_json = {
+                            "user_id": user_id,
+                            "business_id":business_id,
+                            "message":message.message,
+                            "type":"supplier",
+                            "csrftoken": csrftoken
+                        }
+
+                    }
+                
+                    var csrftoken = $("[name=_token]").val();
+                    var url='{{route("message.center.send.push.notification")}}';
+                        jQuery.ajax({
+                            method: "POST",
+                            url: url,
+                            headers:{
+                                "X-CSRF-TOKEN": csrftoken
+                            },
+                            data: data_json,
+                            dataType:"json",
+
+                            success: function(response){
+                                console.log(response);
+                            }
+                        });
 
 
                     // var message_notification_form_id = "{{Auth::user()->id}}";
@@ -175,7 +186,7 @@
                     // });
                 }
             });
-            //sendbutton click
+            //will perform when click on send 
             $('.messageSendButton').click(function(){
                 var type= $('#type').val();
                 var user_id=$('#user_id').val();
@@ -256,7 +267,7 @@
                     });
 
 
-               // updateUserLastActivity( message_formid, message_toid );
+                    // updateUserLastActivityByReceiverBusinessId( user_id, business_id );
             });
 
             //socket on
@@ -267,9 +278,10 @@
                 var selectedUserIdFromUrl = "{{ Request::get('uid') }}";
                 if(data.from_business_id !=null){
                     var sender_buisness_id = data.from_business_id;
+                    var receiver_user_id = data.user_id;
                     $('.chat-user').each(function() {
-                        if($(this).data('businessid') == sender_buisness_id){
-                            $(this).css("background-color", "red");
+                        if( $(this).data('businessid') == sender_buisness_id  && $(this).data('userid')== receiver_user_id){
+                            $(this).css("background-color", "#d2fcd4");
                              
                         }
                     })
@@ -293,12 +305,31 @@
 
                 }
                 else{
-                    var sender_user_id = data.from_user_id;
+                    var sender_business_id = data.business_id;
+                    var receiver_user_id = data.user_id;
                     $('.chat-user').each(function() {
-                        if($(this).data('userid') == sender_user_id){
-                            $(this).css("background-color", "red");
+                        if( $(this).data('userid') == receiver_user_id && $(this).data('businessid') == sender_business_id ){
+                            $(this).css("background-color", "#d2fcd4");
                         }
                     })
+
+                    var s = new Array;
+                    var i = 0;
+                    var x = $("#allchatter .chat-user").length;
+                    
+                    
+                    $("#allchatter .chat-user").each( function() {
+                        s[i] = $(this).data("userid");
+                        i++;
+                    });
+                    
+                    var g = s.sort(function(a,b){return a-b});
+                    for(var c = 0; c < x; c++) {
+                        var div = g[c];
+                        var d = $("#allchatter .chat-user[data-userid="+receiver_user_id+"]").clone();
+                        var s = $("#allchatter .chat-user[data-userid="+receiver_user_id+"]").remove();
+                        $("#allchatter").prepend(d);
+                    }
                 }
                 
                
@@ -319,11 +350,11 @@
                     let msg = "";
                     if(data.product != null)
                     {
-                        msg = '<div class="col-md-8 rgt-cb"><div class="clear10"></div><div class="col-md-4"><div class="row- prd-lt-con-gr"> <img src="'+data.product.imageurl+'" class="prd-lt-con-gr-img-bdr"></div><div class="row cer-ctxt2">Product ID: '+data.product.id+'</div></div><div class="col-md-8" style="border-left:1px solid #ddd;"><div class="col-md-12 plr0 prdd-bbg"><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Product Name</div><div class="col-md-6 pr0">: '+data.product.name+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Category</div><div class="col-md-6 pr0">: '+data.product.category+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Min Quantity</div><div class="col-md-6 pr0">: '+data.product.moq+' Pcs</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list bbdis"><div class="col-md-6 plr0">Unit Price</div><div class="col-md-6 pr0">: USD $'+data.product.price+'</div></div></div></div><div class="col-md-12 plr0 prd-gr" style="background: #55a860;font-size: 14px;color: #fff;padding: 10px;border-radius: 4px;margin-top: 10px;"> Greetings,<div class="clear10"></div><p>'+data.message+'</P></div></div><div class="col-md-12"><div class="byr-pb-ld text-right">Just Now</div></div></div>';
+                        msg = '<div class="col-md-8 rgt-cb"><div class="clear10"></div><div class="col-md-4"><div class="row- prd-lt-con-gr"> <img src="'+data.product.imageurl+'" class="prd-lt-con-gr-img-bdr"></div><div class="row cer-ctxt2">Product ID: '+data.product.id+'</div></div><div class="col-md-8" style="border-left:1px solid #ddd;"><div class="col-md-12 plr0 prdd-bbg"><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Product Name</div><div class="col-md-6 pr0">: '+data.product.name+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Category</div><div class="col-md-6 pr0">: '+data.product.category+'</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list"><div class="col-md-6 plr0">Min Quantity</div><div class="col-md-6 pr0">: '+data.product.moq+' Pcs</div></div></div><div class="col-md-12"><div class="row prd-lt-con-list bbdis"><div class="col-md-6 plr0">Unit Price</div><div class="col-md-6 pr0">: USD $'+data.product.price+'</div></div></div></div><div class="col-md-12 plr0 prd-gr" style="background: #55a860;font-size: 14px;color: #fff;padding: 10px;border-radius: 4px;margin-top: 10px;"> Greetings,<div class="clear10"></div><p>'+data.message+'</P></div></div><div class="col-md-12"><div class="byr-pb-ld text-right just_now">Just Now</div></div></div>';
                     }
                     else
                     {
-                        msg= '<div class="chat"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+data.message+'</p> </div></div><p>Just Now</p></div>';
+                        msg= '<div class="chat"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+data.message+'</p> </div></div><p class="just_now">Just Now</p></div>';
                     }
                     $('#messagedata').append(msg);
                     var height = 0;
@@ -338,7 +369,7 @@
                 }
             });
 
-         });
+        });
 
          window.onload = () => {
             setTimeout(() => {
@@ -346,8 +377,10 @@
             }, 2500)
         }
 
+
         function getchatdata(user_id, business_id, image, name, type)
         {
+            
             var param = 'user_id='+user_id+'&business_id='+business_id;
             var url='{{route("message.center.getchatdata")}}';
             jQuery.ajax({
@@ -474,21 +507,23 @@
                                     <p class="m-0 info-text left-align">Currently online</p>
                                   </div>
                                 </div> --}}
-                                 <!-- Dropdown Trigger -->
-                                @if($user_business_profile->isNotEmpty())
-                                    <form action="{{route('message.center')}}" method="get">
-                                        <div class="input-field">
-                                            <label>Business</label>
-                                            <select class="select2 select-business" name="business_id">
-                                              <option value="" disabled selected>Choose your option</option>
-                                              @foreach ($user_business_profile as $profile)
-                                                <option value="{{$profile->id}}" {{ Request::get('business_id') == $profile->id ? 'selected' : '' }}>{{$profile->business_name}}</option>
-                                              @endforeach
-                                            </select>
-                                        </div>
-                                    </form>
-                                @endif
-                                <a href="{{route('message.center')}}">buyer</a>
+                                 <div class="messageCenter_leftTop">
+                                     <!-- Dropdown Trigger -->
+                                    @if($user_business_profile->isNotEmpty())
+                                        <form action="{{route('message.center')}}" method="get" style="text-align: left" class="messageCenter_leftForm">
+                                            <div class="input-field">
+                                                <label>Business Profiles</label>
+                                                <select class="select2 select-business" name="business_id">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach ($user_business_profile as $profile)
+                                                    <option value="{{$profile->id}}" {{ Request::get('business_id') == $profile->id ? 'selected' : '' }}>{{$profile->business_name}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        </form>
+                                        <a class="tooltipped switch_profile" data-position="top" data-tooltip="Switch to profile as a buyer" href="{{route('message.center')}}"><i class="material-icons">autorenew</i></a>
+                                    @endif
+                                </div>
                               </div>
                               <!--/ Sidebar Header -->
 

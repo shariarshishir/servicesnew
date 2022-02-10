@@ -824,6 +824,10 @@ input[type=number]:not(.browser-default):disabled {
     text-transform: capitalize;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 .productBox .priceBox {
     padding: 20px 0 10px;
@@ -1347,7 +1351,7 @@ input[type=number]:not(.browser-default):disabled {
     margin-bottom: 30px;
 }
 .profile_contentCol #products .productBox .imgBox {
-    height: 210px;
+    height: 165px;
 }
 .profile_contentCol #products .productBox .priceBox {
     padding: 10px 0;
@@ -6331,6 +6335,7 @@ nav .pagination li.active .page-link {
     padding: 0;
     min-height: inherit;
 }
+.header_message_box ul li.no-notifications,
 .notifications_icon_wrap .card li.no-notifications {
     padding: 5px 15px 0;
     opacity: 0.6;
@@ -6396,6 +6401,12 @@ nav .pagination li.active .page-link {
     display: inline-block;
     padding: 0 ;
 }
+.header_wrap .top_right .cart-icon-wrapper a:hover,
+.header_wrap .top_right .notifications_icon_wrap a:hover,
+.header_wrap .top_right .header_message_box a:hover {
+    border: none;
+    outline: none;
+}
 .header_wrap .top_right .cart-icon-wrapper .material-icons,
 .header_wrap .top_right .notifications_icon_wrap .material-icons,
 .header_wrap .top_right .header_message_box .material-icons {
@@ -6429,7 +6440,7 @@ nav .pagination li.active .page-link {
     left: inherit !important;
     height: auto !important;
     top: 52px !important;
-    width: 450px !important;
+    width: 400px !important;
     padding: 10px 0px 15px !important;
     min-width: 100px;
 }
@@ -6443,9 +6454,12 @@ nav .pagination li.active .page-link {
 }
 .notifications_icon_wrap .card li.notifications-list {
     padding: 0px 0 10px;
-    height: 250px;
+    /* height: 250px; */
     overflow-y: auto;
 }
+.header_message_box .card li a:link,
+.header_message_box .card li a:active,
+.header_message_box .card li a:visited,
 .notifications_icon_wrap .card li a:link,
 .notifications_icon_wrap .card li a:active,
 .notifications_icon_wrap .card li a:visited {
@@ -6455,14 +6469,19 @@ nav .pagination li.active .page-link {
     line-height: 22px;
     padding: 8px 15px !important;
 }
+.header_message_box .card li:active,
+.header_message_box .card li:hover,
 .notifications_icon_wrap .card li:hover,
 .notifications_icon_wrap .card li.active {
     background: none;
 }
+.header_message_box .card li a:hover,
+.header_message_box .card li.active a,
 .notifications_icon_wrap .card li a:hover,
 .notifications_icon_wrap .card li.active a {
     background: #eee;
 }
+.header_message_box .card li a i,
 .notifications_icon_wrap .card li a i {
     color: #54A958;
     margin-right: 2px;
@@ -6470,6 +6489,7 @@ nav .pagination li.active .page-link {
     margin-top: 4px;
     line-height: 16px;
 }
+.header_message_box .card li a .text-muted,
 .notifications_icon_wrap .card li a .text-muted  {
     font-size: 13px;
     margin-top: 5px;
@@ -7633,6 +7653,59 @@ nav .pagination li.active .page-link {
     text-align: center;
 }
 
+.messageCenter_leftTop {
+    position: relative;
+    width: 100%;
+}
+.messageCenter_leftTop .switch_profile {
+    position: absolute;
+    right: 15px;
+    top: 70px;
+}
+.messageCenter_leftTop .input-field label {
+    display: block;
+}
+.messageCenter_leftTop .select2-container {
+    width: 280px !important;
+}
+.messageCenter_leftTop .select2-selection {
+    margin-top: 10px;
+}
+.messageCenter_leftTop .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 22px;
+}
+
+.header_message_box #message-countdown-dropdown {
+    width: 400px !important;
+    right: 0;
+    left: inherit !important;
+}
+.header_message_box #message-countdown-dropdown li {
+    min-height: inherit;
+}
+.header_message_box #message-countdown-dropdown li:hover {
+    background: none;
+}
+.chat-sidebar .user-section .media-image img {
+    margin-top: 10px;
+}
+
+.messageCenter_leftForm {
+    width: 100%;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
+    position: relative;
+}
+.chat_messagedata .just_now {
+    margin-top: 9px !important;
+    font-size: 13px;
+    color: #54A958;
+    font-weight: 500;
+    position: absolute;
+    left: 73px;
+    bottom: -10px;
+}
+
 /* ************************* policy_content_wrap style end ******************************  */
 
 /* ******************** Media css style start *********************** */
@@ -8181,7 +8254,7 @@ nav .pagination li.active .page-link {
     .profile_container .profile_leftCol,
     body {
         font-size: 14px;
-        line-height: 18px;
+        line-height: 22px;
     }
     .profile_contentCol .tabcontent .quantity {
         font-size: 16px;
@@ -9186,6 +9259,7 @@ nav .pagination li.active .page-link {
         display: block;
         padding-top: 20px;
     }
+ 
     .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3,
     .product_wrapper .active_grid .col.s12  {
         width: 50%;
@@ -9253,6 +9327,7 @@ nav .pagination li.active .page-link {
         width: auto;
         height: auto !important;
     }
+    .profile_product_wrap .col.s12.m4.l3,
     .wholesaler_product_wrap .product_item_box {
         width: 50% !important;
     }
@@ -9374,11 +9449,11 @@ nav .pagination li.active .page-link {
         -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
         box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
         border-radius: 10px;
-        padding: 20px !important;
+        padding: 10px !important;
         margin-bottom: 30px;
     }
     .profile_tabNav_wrap #home .product_boxwrap .productBox .imgBox {
-        height: 140px;
+        height: 90px;
     }
     .profile_tabNav_wrap .factory_imgbox_wrap .imgBox {
         margin: 0 0 30px 0;
@@ -9515,6 +9590,7 @@ nav .pagination li.active .page-link {
     }
     legend {
         text-align: center;
+        line-height: 25px;
     }
     .profile_tabNav_wrap .color-size-table-block th,
     .profile_tabNav_wrap .fresh-order-attribute-table-block th {
@@ -9750,9 +9826,11 @@ nav .pagination li.active .page-link {
         width: 100%;
         text-align: center;
         white-space: inherit;
+ 
     }
     .productBox .priceBox .apperal {
         margin-bottom: 10px;
+        height: 26px;
     }
     .chatting_app_wrapper .content-area .card {
         padding-top: 45px !important;
@@ -9884,10 +9962,19 @@ nav .pagination li.active .page-link {
         font-size: 20px;
         line-height: 28px;
     }
+    .messageCenter_leftTop .select2-container {
+        width: 100% !important;
+        margin-top: 10px;
+    }
+    .messageCenter_leftTop .switch_profile {
+        right: 0;
+        top: 26px;
+    }
 
 }
 
 @media only screen and (max-width: 320px) {
+    .profile_product_wrap .col.s12.m4.l3,
     .profile_contentCol .manufacture-product-table-data .productBox,
     .profile_tabNav_wrap .export-destination-block .col.s6.m4.l2,
     .profile_tabNav_wrap .pr_highlights_wrap .paper_img.col.s6.m4.l2,
@@ -9905,6 +9992,7 @@ nav .pagination li.active .page-link {
     .banner_search .module-search #system_search {
         padding-left: 100px !important;
     }
+    
     .module-search .select2-container {
         width: 100px !important;
     }

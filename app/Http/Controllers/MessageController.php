@@ -65,12 +65,15 @@ class MessageController extends Controller
                     $chat_user_id[] = $chat->participates['user_id'];
                 }
             }
-            $chat_user_list=User::whereIn('id', $chat_user_id)->get();
+            //$chat_user_list = User::whereIn('id', $chat_user_id)->get();
+            $chat_user_list = User::whereIn('id', $chat_user_id)->orderBy('last_activity', 'DESC')->get();
             foreach( $chat_user_list as $list){
                 array_push( $chatusers, ['business_id' => $selectBusinessId,'user_id'=>$list->id,'name' => $list->name, 'image' => $list->image? asset('storage/'.$list->image) : asset('storage/images/supplier.png')]);
 
             }
-        }else{
+        } 
+        else{
+
             $type='buyer';
             $business_id = [];
             foreach($chatdatas as $chat)
@@ -80,10 +83,15 @@ class MessageController extends Controller
                     $business_id[] = $chat->participates['business_id'];
                 }
             }
-            $business_profile=BusinessProfile::whereIn('id', $business_id)->get();
+            //$business_profile=BusinessProfile::whereIn('id', $business_id)->get();
+
+            $business_profile = BusinessProfile::whereIn('id', $business_id)->get()->sortByDesc(function($query){
+                return $query->user->last_activity;
+             })
+             ->all();
+            
             foreach($business_profile as $list){
                 array_push( $chatusers, ['business_id'=>$list->id,'name' => $list->business_name, 'image' => $list->user->image? asset('storage/'.$list->user->image) : asset('storage/images/supplier.png')]);
-
             }
         }
 

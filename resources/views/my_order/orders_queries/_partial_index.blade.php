@@ -7,6 +7,7 @@
                 <table class="table striped" id="orderQueryTable">
                     <thead class="cf">
                         <tr>
+                            <th class="text-center">Id</th>
                             <th class="text-center">Product Name</th>
                             <th class="text-center">Date</th>
                             <th class="text-center">Status</th>
@@ -17,6 +18,7 @@
                     <tbody>
                         @foreach($orderQueries as $item)
                                 <tr>
+                                <td>{{$item->id}}</td>
                                 <td data-title="Product Name" class="order-number">
                                     <a href="javascript:void(0);" class="order-more-details ">
                                         {{$item->product->name}}
@@ -75,7 +77,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
 
         </div>
     </div>

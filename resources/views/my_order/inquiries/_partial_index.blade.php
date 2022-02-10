@@ -1,9 +1,8 @@
 <div class="order_inquiries_table card">
     <div class="no_more_tables">
-        <table>
+        <table id="po-table">
             <thead class="cf">
                 <tr >
-                    <th> ID</th>
                     <th> Invoice Id</th>
                     <th> Date</th>
                     <th> Total Price</th>
@@ -20,7 +19,6 @@
                         @php $total_price_wt += $item->tax_total_price; @endphp
                     @endforeach
                     <tr>
-                        <td data-title="ID">{{$index+1}}</td>
                         <td data-title="Invoice Id">{{ $po->proforma_id }}<br>
                             @if($po->status == 1)
                                 PO ID: {{$po->po_no}}
@@ -99,5 +97,5 @@
     </div>
 </div>
 
-
+@include('my_order.inquiries._scripts')
 

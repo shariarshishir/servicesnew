@@ -8,7 +8,12 @@
         //     $(this).siblings('.mod-comment-replay').toggle();
         //  });
         $('#orderQueryModificationTable').DataTable({
-            "order": [[ 1, "desc" ]]
+            "order": [[ 0, "desc" ]],
+            "columnDefs": [ {
+                "targets": 0,
+                "searchable": false,
+                "visible" :false,
+            } ]
         });
          $('#ordModCommentForm').on('submit',function(e){
             e.preventDefault();

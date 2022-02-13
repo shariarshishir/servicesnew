@@ -231,7 +231,7 @@ class BusinessProfileController extends Controller
         {
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
             $sizes=['S','M','L','XL','XXL','XXXL'];
-            $products=Product::withTrashed()->latest()->where('business_profile_id', $business_profile->id)->get();
+            $products=Product::withTrashed()->with('product_images')->latest()->where('business_profile_id', $business_profile->id)->get();
             if($business_profile->business_type == 1){
                 $mainProducts=Product::withTrashed()->with('product_images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
                 ->limit(4)

@@ -8,11 +8,17 @@
                         <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
                         @break
                     @endforeach
-                    {{-- <div class="favorite">
-                        <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+                </div>
+                <div class="favorite">
+                    @if(in_array($product->id,$wishListMfProductsIds))
+                        <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));"  class="product-add-wishlist active">
                             <i class="material-icons dp48">favorite</i>
                         </a>
-                    </div> --}}
+                    @else
+                        <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                            <i class="material-icons dp48">favorite</i>
+                        </a>
+                    @endif
                 </div>
                 <div class="priceBox row">
 

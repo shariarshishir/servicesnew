@@ -18,18 +18,18 @@
                             @break
                         @endforeach
                         <div class="favorite">
-                            @if(in_array($product->id,$wishListProductsIds))
-                            <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist active">
-                                <i class="material-icons dp48">favorite</i>
-                            </a>
+                            @if(in_array($product->id,$wishListShopProductsIds))
+                                <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist active">
+                                    <i class="material-icons dp48">favorite</i>
+                                </a>
                             @else
-                            <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist ">
-                                <i class="material-icons dp48">favorite</i>
-                            </a>
+                                <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                                    <i class="material-icons dp48">favorite</i>
+                                </a>
                             @endif
                         </div>
                         @if($product->availability==0 && ($product->product_type==2 || $product->product_type==3))
-                        <div class="sold-out"><h4>Sold Out</h4></div>
+                            <div class="sold-out"><h4>Sold Out</h4></div>
                         @endif
                     </div>
                     <div class="priceBox row">

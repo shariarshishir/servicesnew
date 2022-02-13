@@ -557,17 +557,19 @@
 @push('js')
     <script>
 
-        var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
-        var socket = io(serverURL, { transports : ['websocket'] });
-        socket.on('connect', function(data) {});
+var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
+        var socket = io.connect(serverURL);
+        socket.on('connect', function(data) {
+        //alert('connect');
+        });
         @if(Auth::check())
-        function sendmessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,user_id,business_id)
+        function sendmessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
         {
-        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'user_id' : "{{Auth::user()->id}}", 'business_id' : business_id,'from_user_id': "{{Auth::user()->id}}", 'from_business_id' : null};
+        let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More...', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
         socket.emit('new message', message);
         setTimeout(function(){
             //window.location.href = "/message-center";
-            var url = '{{ route("message.center") }}?bid='+business_id;
+            var url = '{{ route("message.center") }}?uid='+createdBy;
                 // url = url.replace(':slug', sku);
                 window.location.href = url;
             // window.location.href = "/message-center?uid="+createdBy;
@@ -605,12 +607,12 @@
         function contactSupplierFromProduct(business_id,trigger_from)
         {
 
-        var business_id = business_id;
+        var supplier_id = supplierId;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
         var trigger_from = trigger_from;
         data_json = {
-            "business_id": business_id,
+            "supplier_id": supplier_id,
             "buyer_id": buyer_id,
             "trigger_from": trigger_from,
             "csrftoken": csrftoken

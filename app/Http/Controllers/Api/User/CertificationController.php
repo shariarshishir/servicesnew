@@ -55,7 +55,7 @@ class CertificationController extends Controller
                             }
 
                         }
-                        $admin_certification=AdminCertification::where('id', $request->certification_id[$i])->first();
+                        $admin_certification=CertificationType::where('id', $request->certification_id[$i])->first();
                         $certification->title=$admin_certification->certification_programs;
                         $certification->admin_certification_id=$request->certification_id[$i];
                         $certification->issue_date= $request->issue_date[$i];

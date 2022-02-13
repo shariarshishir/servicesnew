@@ -17,7 +17,7 @@ class Rfq extends Model
     }
 
     public function user(){
-        return $this->belongsTo('App\Models\user', 'created_by', 'id');
+        return $this->belongsTo('App\Models\User', 'created_by', 'id');
     }
 
     public function bids()

@@ -29,11 +29,11 @@
                                         @csrf
                                         <tr class="cart_item" data-vendorId="{{$item->business_profile_id}}">
 
-                                            <td data-title="Product Image" class="product-thumbnail">
+                                            <td data-title="Product Image" class="product-thumbnail" style="width: 140px;">
                                                 <a href="#"><img height="80px"  width="80px" src="{{URL::asset('storage/'.$item->image)}}" class="" alt="" loading="lazy"/></a>
                                             </td>
 
-                                            <td data-title="Product Name" class="product-name" data-title="Product">
+                                            <td data-title="Product Name" class="product-name" data-title="Product" style="width: 250px;">
                                                 <div style="color: #4CAF50;">{{$item->name}}</div>
                                                 @if($item->full_stock==1)
                                                 <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span>
@@ -44,18 +44,18 @@
                                                     <span class="badge badge pill red accent-2 mr-2 ready-to-ship-label">Product not available</span>
                                                 @endif
                                             </td>
-                                            <td data-title="Business Name" class="product-name" data-title="Product">
+                                            <td data-title="Business Name" class="product-name" data-title="Product" style="width: 160px;">
                                                 @php  $business_profile= businessProfileInfo($item->business_profile_id); @endphp
                                                 <div style="color: #4CAF50;">{{ $business_profile->business_name }}</div>
                                             </td>
 
-                                            <td data-title="Price" class="product-price" data-title="Price">
+                                            <td data-title="Price" class="product-price" data-title="Price" style="width: 100px; ">
                                                 <span class="price-currencySymbol">${{ number_format($item->unit_price, 2) }}</span>
                                             </td>
 
-                                            <td data-title="Quantity" class="product-quantity" data-title="Quantity">
+                                            <td data-title="Quantity" class="product-quantity" data-title="Quantity" style="width:450px;">
                                                 <div class="quantity">
-                                                    <label class="screen-reader-text" for="quantity_609789500c73f">This is my first product quantity</label>
+                                                    <label class="screen-reader-text" for="quantity_609789500c73f">&nbsp;</label>
                                                     <input type="number" id="quantity" class="input-text qty text" step="1" min="0" max="" name="cart_quantity" value="{{$item->quantity}}" title="Qty" size="4" placeholder="" inputmode="numeric" disabled="disabled" />
                                                     @if($item->full_stock==1 || isset($item->order_modification_req_id) )
                                                     {{-- <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label">Full Stock</span> --}}
@@ -96,7 +96,7 @@
                                                 </div>
                                             </td>
 
-                                            <td data-title="Subtotal" class="product-subtotal" data-title="Subtotal">
+                                            <td data-title="Subtotal" class="product-subtotal" data-title="Subtotal" style="width: 100px;">
                                                 <span class="price-amount">
                                                     <bdi><span class="price-currencySymbol">${{ number_format($item->total_price, 2) }}</span>
                                                         @if (isset($item->discount_amount))
@@ -105,7 +105,7 @@
                                                     </bdi>
                                                 </span>
                                             </td>
-                                            <td data-title="Action" class="product-remove">
+                                            <td data-title="Action" class="product-remove" style="width: 100px;">
                                                 <a href="{{route('cart.delete',$item->id)}}" class="btn_delete" aria-label="Remove this item" data-cartRowId="{{$item->id}}" data-product_sku="{{$item->product_sku}}"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                             </td>
                                         </tr>

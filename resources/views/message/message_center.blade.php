@@ -3,30 +3,30 @@
 
 @push('js')
     <!--script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script-->
- <script>
-      function extractEmails (text) {
+    <script>
+
+        function extractEmails (text) {
             return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
         }
-
-         $( document ).ready(function() {
+        var message_formid;
+        var message_toid;
+        $( document ).ready(function() {
             $('#messageCenterLoaderOuter').show();
             $('#allchatter').children().eq(0).click();
-            var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
-            var socket = io(serverURL, { transports : ['websocket'] });
+            var allbuyers = @json($buyers);
+            var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
+            var socket = io.connect(serverURL);
             socket.on('connect', function(data) {
-                console.log('connect');
-                var selectedBusinessId = "{{ Request::get('bid') }}";
-                var selectedUserId = "{{ Request::get('uid') }}";
-                if(selectedBusinessId > 0)
+                var selectedSupplierId = "{{ Request::get('uid') }}";
+                if(selectedSupplierId > 0)
                 {
                     $('#allchatter').children('div.all-chatter-div').each(function()
                     {
-                        if($(this).data('businessid') == selectedBusinessId) {
-
+                        if($(this).data('toid') == selectedSupplierId) {
                             $(this).addClass('active');
                             $(this).click();
-                            message_userid = $(this).data("userid");
-                            message_businessid = $(this).data("businessid");
+                            message_formid = $(this).data("formid");
+                            message_toid = $(this).data("toid");
 
 
                         }
@@ -60,8 +60,8 @@
                         $('#allchatter').children('div.all-chatter-div').removeClass('active');
                         $(this).addClass('active');
                         $('.generate-po-btn').attr("href", "{{ env('APP_URL') }}/po/add/toid="+$(this).data('toid'));
-                        message_userid = $(this).data("userid");
-                        message_businessid = $(this).data("businessid");
+                        message_formid = $(this).data("formid");
+                        message_toid = $(this).data("toid");
                     });
                 }
             });
@@ -94,11 +94,8 @@
                         var image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                     }
                 }else{
-                    var from_user_id=null;
-                    var from_business_id=business_id;
-                    var image = $('#b_image').val();
+                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                 }
-
                 if(keycode == '13'){
                     
                     var intRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
@@ -108,10 +105,11 @@
                         return false;
                     }
                     event.preventDefault();
-                    let message = {'message' : $('#messagebox').val(), 'image': "", 'user_id' : user_id, 'business_id' : business_id,'from_user_id' : from_user_id, 'from_business_id' : from_business_id , 'product' : null};
+                    let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                     socket.emit('new message', message);
                     $('#messagebox').val('');
-                        $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
+                    // $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
+                        $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+user_image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
                     var height = 0;
                     $('#messagedata div').each(function(i, value){
                         height += parseInt($(this).height());
@@ -119,6 +117,7 @@
 
                     height += '';
 
+                    // $('#messagedata').animate({scrollTop: (height + 10)});
                     $('.chat-area').animate({scrollTop: (height + 10)});
 
                     //send push notification after sending message
@@ -214,17 +213,17 @@
                     return false;
                 }
                 event.preventDefault();
-
-                let message = {'message' : $('#messagebox').val(), 'image': "", 'user_id' : user_id, 'business_id' : business_id, 'from_user_id': from_user_id , 'from_business_id': from_business_id, 'product' : null};
+                let message = {'message' : $('#messagebox').val(), 'image': "", 'from_id' : "{{$user->id}}", 'to_id' : $('#to_id').val(), 'product' : null};
                 socket.emit('new message', message);
                 $('#messagebox').val('');
-                $('#messagedata').append('<div class="chat chat-right"><div class="chat-avatar"><a class="avatar"><img src="'+image+'" class="circle" alt="avatar"></a></div><div class="chat-body left-align"><div class="chat-text"><p>'+message.message+'</p></div></div></div>');
+                $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
                 var height = 0;
                 $('#messagedata div').each(function(i, value){
                     height += parseInt($(this).height());
                 });
 
                 height += '';
+                // $('#messagedata').animate({scrollTop: (height + 10)});
                 $('.chat-area').animate({scrollTop: (height + 10)});
 
                 //send push notification after sending message
@@ -269,8 +268,6 @@
 
                     // updateUserLastActivityByReceiverBusinessId( user_id, business_id );
             });
-
-            //socket on
             socket.on('new message', function(data) {
             
                 console.log(data);
@@ -342,10 +339,9 @@
                         var image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                     }
                 }else{
-                    var image = $('#b_image').val();
+                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
                 }
-
-                if(data.user_id == $('#user_id').val() && data.business_id == $('#business_id').val())
+                if(data.to_id == "{{$user->id}}" && data.from_id == $('#to_id').val())
                 {
                     let msg = "";
                     if(data.product != null)
@@ -364,10 +360,30 @@
 
                     height += '';
 
+                    // $('#messagedata').animate({scrollTop: (height + 10)});
                     $('.chat-area').animate({scrollTop: (height + 10)});
 
                 }
             });
+            @if($user->user_type == "supplier")
+                setTimeout(function(){
+                    socket.emit('onlinecheck', {'test':'test'});
+                }, 2000);
+                socket.on('onlineinitiate', function(data) {
+                    alert(data);
+                });
+                socket.on('online', function(data) {
+                    var buyers = [];
+                    data.forEach(function(item){
+                        buyers.push(item.buyer);
+                    });
+                    var html = '';
+                    allbuyers.forEach(function(buyer){
+                    });
+                    $('#nowonline').html(html);
+                });
+            @endif
+        });
 
         });
 
@@ -393,10 +409,6 @@
                 complete: function(){
                 },
                 success : function(msg){
-                    $('#user_id').val(user_id);
-                    $('#business_id').val(business_id);
-                    $('#type').val(type);
-                    $('#b_image').val(image);
                     $("#messagedata").html(msg);
                     $("#messagebox").removeAttr("disabled");
                     $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">'+name+'</p><p class="m-0 chat-text truncate"></p></div></div>');
@@ -498,7 +510,7 @@
                             <div class="sidebar-list-padding app-sidebar" id="chat-sidenav">
                               <!-- Sidebar Header -->
                               <div class="sidebar-header">
-                                {{-- <div class="row valign-wrapper">
+                                <div class="row valign-wrapper">
                                   <div class="col s2 media-image pr-0">
                                     <img src="../images/img.jpg" alt="" class="circle z-depth-2 responsive-img">
                                   </div>
@@ -532,29 +544,28 @@
                                 @if(count($chatusers) > 0)
                                     <div class="chat-list" id="allchatter">
                                         @foreach($chatusers as $cuser)
-                                            {{-- <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;"> --}}
-                                                @if($type== 'buyer')
-                                                    <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-userid="{{$user->id}}" data-businessid="{{$cuser['business_id']}}" onclick="getchatdata('{{$user->id}}','{{$cuser['business_id']}}', '{{ $cuser['image'] }}', '{{ $cuser['name'] }}','{{$type}}')" style="cursor: pointer;">
-                                                @elseif($type== 'business')
-                                                    <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-userid="{{$cuser['user_id']}}" data-businessid="{{$cuser['business_id']}}" onclick="getchatdata('{{$cuser['user_id']}}','{{$cuser['business_id']}}', '{{ $cuser['image'] }}', '{{ $cuser['name'] }}', '{{$type}}')" style="cursor: pointer;">
-                                                @endif
+                                            @php
+                                            $src = !empty($cuser->image) ? 'storage/' .$cuser->image : "storage/images/supplier.png";
+                                            $userRole = !empty($cuser->profile['personal_info']['job_title'])? $cuser->profile['personal_info']['job_title'] : "";
+                                            @endphp
+                                            <div class="chat-user animate fadeUp delay-1 all-chatter-div" data-formid="{{$user->id}}" data-toid="{{$cuser->id}}" onclick="$('#to_id').val('{{$cuser->id}}');getchatdata('{{$user->id}}','{{$cuser->id}}', '{{ asset($src) }}', '{{ $cuser->name }}', '08 September 2020')" style="cursor: pointer;">
                                                 <div class="user-section">
-                                                    <div class="row valign-wrapper">
-                                                        <div class="col s2 media-image online pr-0">
-                                                        <img src="{{ $cuser['image'] }}" alt="" class="circle z-depth-2 responsive-img">
-                                                        </div>
-                                                        <div class="col s10">
-                                                        <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser['name'] }}</p>
-                                                        <p class="m-0 info-text"></p>
-                                                        </div>
+                                                <div class="row valign-wrapper">
+                                                    <div class="col s2 media-image online pr-0">
+                                                    <img src="{{ asset($src) }}" alt="" class="circle z-depth-2 responsive-img">
+                                                    </div>
+                                                    <div class="col s10">
+                                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $cuser->name }}</p>
+                                                    <p class="m-0 info-text"></p>
                                                     </div>
                                                 </div>
+                                                </div>
                                                 <div class="info-section">
-                                                    <div class="star-timing">
-                                                        <div class="time">
-                                                        {{-- <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span> --}}
-                                                        </div>
+                                                <div class="star-timing">
+                                                    <div class="time">
+                                                    <span>{{ date('F j, Y, g:i a', strtotime($cuser->last_activity)) }}</span>
                                                     </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -611,10 +622,7 @@
                           <i class="material-icons mr-2">face</i>
                           <i class="material-icons mr-2">attachment</i>
                           <input type="text" placeholder="Type message here.." class="message mb-0" id="messagebox">
-                          <input type="hidden" id="user_id" value="">
-                          <input type="hidden" id="business_id" value="">
-                          <input type="hidden" id="type" value="">
-                          <input type="hidden" id="b_image" value="">
+                          <input type="hidden" id="to_id" value="">
                           <a class="btn_green send messageSendButton" >Send</a>
                         </form>
                       </div>
@@ -643,11 +651,6 @@
             $(".scrollabled").each(function(){
                 $(this).tinyscrollbar();
             });
-        });
-
-        $('.select-business').change(function ()
-        {
-            $(this).closest('form').submit();
         });
     </script>
 @endpush

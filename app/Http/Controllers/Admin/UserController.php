@@ -6,12 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Models\BusinessProfile;
 use Illuminate\Http\Request;
 use App\Models\User;
+use DataTables;
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users= User::where('is_representative', false)->latest()->get();
-        return view('admin.users.index',compact('users'));
+        if ($request->ajax()) {
+            $data = User::where('is_representative', false);
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->editColumn('email', function($row) {
+                       $route= route('user.show', $row->id);
+                       $action='<a href="'.$route.'">'.$row->email.'</a>';
+                       return $action;
+                    })
+                    ->editColumn('created_at', function ($user) {
+                        return \Carbon\Carbon::parse($user->created_at)->isoFormat('MMMM Do YYYY');
+                    })
+                    ->orderColumn('name', function ($query) {
+                        $query->orderBy('created_at', 'desc');
+                    })
+                    ->rawColumns(['email'])
+                    ->make(true);
+        }
+
+        return view('admin.users.index');
     }
 
     public function show($id)

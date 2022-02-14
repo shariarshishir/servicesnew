@@ -555,6 +555,20 @@ p {
     display: flex;
 }
 
+.admin_rfq_wrapper p {
+    margin-bottom: 5px;
+}
+.admin_rfq_wrapper .rfq_replay_box {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+}
+.rfq_replay_box h6 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.rfq_replay_box p {
+    margin-bottom: 0;
+}
 
 
 @media only screen and (max-width: 800px) {
@@ -651,6 +665,14 @@ p {
     .active_users_list {
         text-align: left;
     }
+
+    .admin_rfq_left {
+        padding-bottom: 30px;
+    }
+    .rfq_replay_box .col-md-4 {
+        padding-bottom: 20px;
+    }
+
 }
 
 @media only screen and (max-width: 640px) {

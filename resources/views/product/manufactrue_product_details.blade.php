@@ -555,8 +555,7 @@
 
 
 @push('js')
-    <script>
-
+<script>
         var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
         var socket = io(serverURL, { transports : ['websocket'] });
         socket.on('connect', function(data) {});
@@ -573,13 +572,11 @@
             // window.location.href = "/message-center?uid="+createdBy;
         }, 1000);
         }
-
         function updateUserLastActivity(form_id, to_id)
         {
         var form_id = form_id;
         var to_id = to_id;
         var csrftoken = $("[name=_token]").val();
-
         data_json = {
             "form_id": form_id,
             "to_id": to_id,
@@ -594,17 +591,13 @@
             },
             data: data_json,
             dataType:"json",
-
             success: function(data){
                 console.log(data);
             }
         });
-
         }
-
         function contactSupplierFromProduct(business_id,trigger_from)
         {
-
         var business_id = business_id;
         var csrftoken = $("[name=_token]").val();
         var buyer_id = "{{Auth::id()}}";
@@ -628,7 +621,6 @@
                 console.log(data);
             }
         });
-
         /*
         let message = {'message': 'Hi I would like to discuss More about your Product', 'product': null, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplierId};
         socket.emit('new message', message);
@@ -637,7 +629,6 @@
         }, 1000);
         */
         }
-
         function sendsamplemessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
         {
         let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
@@ -648,5 +639,4 @@
         }
         @endif
     </script>
-
 @endpush

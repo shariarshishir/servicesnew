@@ -268,7 +268,7 @@ $reviewsCount = count($productReviews);
                                                         </table>
                                                     </div>
 
-                                                    <div class="add_more_box" style="padding-top: 20px">
+                                                    <div class="add_more_box" style="padding: 20px 0">
                                                         <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a>
                                                     </div>
                                                     <!-- <a href="javascript:void(0);" class="btn waves-effect waves-light green add-more-block" onclick="addFreshOrderColorSize()"><i class="material-icons dp48">add</i> Add More</a> -->
@@ -1072,9 +1072,15 @@ $reviewsCount = count($productReviews);
                                 <div class="product_quick_options">
                                     <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
                                     <div class="poduct_quick_options_inside">
-                                        <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}"class="btn waves-effect waves-light green lighten-1 product-add-wishlist">
-                                            <i class="material-icons dp48">favorite</i>
-                                        </a>
+                                        @if(in_array($product->id,$wishListShopProductsIds))
+                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist active">
+                                                <i class="material-icons dp48">favorite</i>
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                                                <i class="material-icons dp48">favorite</i>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1427,13 +1433,6 @@ $reviewsCount = count($productReviews);
 
 
         //message center
-        //var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
-        // var serverURL = "localhost:4000";
-        // var socket = io.connect(serverURL);
-        // socket.on('connect', function(data) {
-        //   //alert('connect');
-        // });
-
         var serverURL ="{{ env('CHAT_URL'), 'localhost' }}:4000";
         var socket = io(serverURL, { transports : ['websocket'] });
         socket.on('connect', function(data) {});
@@ -1450,13 +1449,11 @@ $reviewsCount = count($productReviews);
             // window.location.href = "/message-center?uid="+createdBy;
         }, 1000);
         }
-
         function updateUserLastActivity(form_id, to_id)
         {
         var form_id = form_id;
         var to_id = to_id;
         var csrftoken = $("[name=_token]").val();
-
         data_json = {
             "form_id": form_id,
             "to_id": to_id,
@@ -1471,14 +1468,11 @@ $reviewsCount = count($productReviews);
             },
             data: data_json,
             dataType:"json",
-
             success: function(data){
                 console.log(data);
             }
         });
-
         }
-
         function contactSupplierFromProduct(business_id,trigger_from)
         {
         var business_id = business_id;
@@ -1504,7 +1498,6 @@ $reviewsCount = count($productReviews);
                 console.log(data);
             }
         });
-
         /*
         let message = {'message': 'Hi I would like to discuss More about your Product', 'product': null, 'from_id' : "{{Auth::user()->id}}", 'to_id' : supplierId};
         socket.emit('new message', message);
@@ -1513,7 +1506,6 @@ $reviewsCount = count($productReviews);
         }, 1000);
         */
         }
-
         function sendsamplemessage(productId,productTitle,productCategory,moq,qtyUnit,pricePerUnit,priceUnit,productImage,createdBy)
         {
             let message = {'message': 'We are Interested in Your Product ID:mb-'+productId+' and would like to discuss More about the Product', 'product': {'id': "MB-"+productId,'name': productTitle,'category': productCategory,'moq': moq,'price': priceUnit+" "+pricePerUnit, 'image': productImage}, 'from_id' : "{{Auth::user()->id}}", 'to_id' : createdBy};
@@ -1526,70 +1518,7 @@ $reviewsCount = count($productReviews);
         @endif
 
 
-        $(document).on("click", "#favorite" , function() {
-            //console.log('hi');
-            var id = $(this).attr("data-productSku");
 
-            swal({
-                title: "Want to add this product into wishlist ?",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, add it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function (e) {
-                if (e.value === true) {
-                        $.ajax({
-                            type:'GET',
-                            url: "{{route('add.wishlist')}}",
-                            dataType:'json',
-                            data:{id :id },
-                            success: function(data){
-                                swal(data.message);
-                            }
-                        });
-                    }
-                else {
-                    e.dismiss;
-                }
-            }, function (dismiss) {
-                return false;
-            })
-
-
-        });
-
-        $(document).on("click", "#wishList" , function() {
-            console.log('hi');
-            var id = $(this).attr("data-productSku");
-            swal({
-                title: "Want to add this product into wishlist ?",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, add it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function (e) {
-                if (e.value === true) {
-                    $.ajax({
-                        type:'GET',
-                        url: "{{route('add.wishlist')}}",
-                        dataType:'json',
-                        data:{id :id },
-                        success: function(data){
-                            swal(data.message);
-                        }
-                    });
-                }
-                else {
-                    e.dismiss;
-                }
-            }, function (dismiss) {
-                return false;
-            })
-
-
-        });
 
 
 

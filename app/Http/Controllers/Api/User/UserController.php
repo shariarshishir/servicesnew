@@ -164,7 +164,7 @@ class UserController extends Controller
         if($checkExistingUser){
             return response()->json('user already exists', 403);
         }
-    
+
         $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
         $user = User::create([
             'user_id'=>$user_id,
@@ -393,7 +393,16 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-            
+
+        }
+        $user = User::where('email',$request->email)->first();
+        if(Hash::check($request->password, $user->password)){
+            $message = "Email verfication mail has resent successfully";
+            $token=$user->createToken('merchantbayshop')->plainTextToken;
+            return response()->json(['message'=>"Login successful",'user'=>$user,'auth_token'=> $token,'code'=>"True"],201);
+        }
+        else{
+            return response()->json(['message' => 'failed'], 401);
         }
 
         if($sso->successful()){
@@ -549,7 +558,7 @@ class UserController extends Controller
     public function signUp(Request $request)
     {
         // dd($request->all());
-        
+
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -633,21 +642,21 @@ class UserController extends Controller
         return response()->json(["message"=>"notification marked as read successfully ","code"=>true],200);
     }
 
-       //profile update from sso 
+       //profile update from sso
         public function profileUpdate(Request $request)
         {
-           
+
             $validator = Validator::make($request->all(), [
                 'email'   => 'required',
             ]);
-            
+
             if($validator->fails()){
                 return response()->json(array(
                 'success' => false,
                 'error' => $validator->getMessageBag()->toArray()),
                 400);
             }
-            
+
             $user=User::where('email', $request->email)->first();
             if($user){
                 if(isset($request->password)){
@@ -673,7 +682,7 @@ class UserController extends Controller
                         500]);
 
                 }
-               
+
             }
             else{
                 return response()->json([
@@ -682,10 +691,10 @@ class UserController extends Controller
                     404]);
             }
         }
-           
-    
-            
-           
+
+
+
+
 
 
 

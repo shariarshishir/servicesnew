@@ -16,4 +16,9 @@ class Blog extends Model
         return $this->belongsTo('App\Models\Admin','created_by');
 
     }
+    public function metaInformation(){
+
+        return $this->hasOne('App\Models\MetaInformation','blog_id');
+
+    }
 }

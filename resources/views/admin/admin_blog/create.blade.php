@@ -69,6 +69,19 @@
     });
 
 </script>
+
+<script>
+      $(document).ready(function (e) {
+        $('#meta_image').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#preview-image-for-meta').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
+
+</script>
 <script type="text/javascript">
     
     $(document).ready(function() {

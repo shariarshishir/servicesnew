@@ -128,14 +128,14 @@
             <div class="col-sm-12 col-md-6" style="padding-right: 10px;">
                 <div class="form-group">
                     <label for="title">Meta Title* :</label>
-                    <input type="text" name="meta_title" class="form-control" id="meta_title" value="{{old('meta_title', $blog->metaInformation->meta_title)}}" placeholder="Meta Title">
+                    <input type="text" name="meta_title" class="form-control" id="meta_title" value="{{old('meta_title', $blog->metaInformation->meta_title??'')}}" placeholder="Meta Title">
                     @if($errors->has('meta_title'))
                     <div class="text-danger">{{ $errors->first('meta_title') }}</div>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="meta_description" class="col-form-label text-md-right">{{ __('Meta Description') }}</label>
-                    <textarea id="meta_description" class="editor" name="meta_description">{{old('meta_description',$blog->metaInformation->meta_description)}}</textarea>
+                    <textarea id="meta_description" class="editor" name="meta_description">{{old('meta_description',$blog->metaInformation->meta_description??'')}}</textarea>
                     @if($errors->has('meta_description'))
                         <div class="text-danger">{{ $errors->first('meta_description') }}</div>
                     @endif
@@ -144,7 +144,7 @@
                 <div class="blog_meta_image_wrap">
                     <label >Meta image :</label>
                     <div class="meta_image">
-                        @if($blog->metaInformation->meta_image)
+                        @if(isset($blog->metaInformation->meta_image))
                         <img id="preview-image-for-meta" src="{{ asset('storage/'.$blog->metaInformation->meta_image) }}"
                             alt="preview image">
                         @else

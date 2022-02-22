@@ -1,4 +1,10 @@
 @extends('layouts.app_containerless')
+@section('title', $blog->metaInformation->meta_title)
+@section('description', $blog->metaInformation->meta_description)
+@section('image', $blog->metaInformation->meta_image)
+@section('keywords', 'Industry Blogs')
+@section('robots', 'index, follow')
+@section('revisit-after', 'content="3 days')
 
 @section('content')
 <section class="ic-press-room blog_container">

@@ -80,7 +80,7 @@ class BlogController extends Controller
         $metaInformation->meta_title = $request->meta_title;
         $metaInformation->meta_description = $request->meta_description;
         $metaInformation->meta_type = $request->meta_type;
-        $metaInformation->meta_image = $meta_image_path;
+        $metaInformation->meta_image = $meta_image_path??NULL;
         $metaInformation->save();
 
 

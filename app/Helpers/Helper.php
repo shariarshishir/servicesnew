@@ -5,6 +5,7 @@ use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\RelatedProduct;
+use App\Models\MetaInformation;
 
 if (!function_exists('vendorInformation')) {
 
@@ -113,6 +114,14 @@ if (!function_exists('units')){
         ];
     }
 
+}
+
+if (!function_exists('getMetaInformationByType'))
+{
+    function getMetaInformationByType($type) {
+        $metaInfo = MetaInformation::where('meta_type',$type)->get();
+        return $metaInfo;
+    }
 }
 
 

@@ -143,33 +143,59 @@ class BlogController extends Controller
             $small_image->save(public_path('storage/'.$path_small));
             $blog->author_img = $path;
         }
-        if ($request->hasFile('meta_image')){
-            Storage::delete($blog->metaInformation->meta_image);
-            Storage::delete('small/'.$blog->metaInformation->meta_image);
-
-            $path = $request->file('meta_image')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path))->encode();
-            $image->save(public_path('storage/'.$path));
-
-            $path_small = $request->file('meta_image')->store('images/small','public');
-            $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
-            $small_image->save(public_path('storage/'.$path_small));
-            $meta_image_path = $path;
-        }
-        
-
-        
 
         $blog->updated_by = Auth::guard('admin')->user()->id;
         $blog->save();
         
         $metaInformation = MetaInformation::where('blog_id',$id)->first();
-        $metaInformation->blog_id = $blog->id;
-        $metaInformation->meta_title = $request->meta_title;
-        $metaInformation->meta_description = $request->meta_description;
-        $metaInformation->meta_type = $request->meta_type;
-        $metaInformation->meta_image = $meta_image_path ?? $metaInformation->meta_image;
-        $metaInformation->save();
+
+        if(!$metaInformation) 
+        {
+
+            if ($request->hasFile('meta_image')){
+                $path=$request->file('meta_image')->store('images','public');
+                $image = Image::make(public_path('storage/'.$path));
+                $image->save(public_path('storage/'.$path));
+    
+                $path_small=$request->file('meta_image')->store('images/small/','public');
+                $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+                $small_image->save(public_path('storage/'.$path_small));
+                $meta_image_path=$path;
+               
+            }
+
+            $metaInformation = new MetaInformation();
+            $metaInformation->blog_id = $blog->id;
+            $metaInformation->meta_title = $request->meta_title;
+            $metaInformation->meta_description = $request->meta_description;
+            $metaInformation->meta_type = $request->meta_type;
+            $metaInformation->meta_image = $meta_image_path ?? NULL;
+            $metaInformation->save();
+        } 
+        else
+        {
+
+            if ($request->hasFile('meta_image')){
+                Storage::delete($blog->metaInformation->meta_image);
+                Storage::delete('small/'.$blog->metaInformation->meta_image);
+    
+                $path = $request->file('meta_image')->store('images','public');
+                $image = Image::make(public_path('storage/'.$path))->encode();
+                $image->save(public_path('storage/'.$path));
+    
+                $path_small = $request->file('meta_image')->store('images/small','public');
+                $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
+                $small_image->save(public_path('storage/'.$path_small));
+                $meta_image_path = $path;
+            }
+
+            $metaInformation->blog_id = $blog->id;
+            $metaInformation->meta_title = $request->meta_title;
+            $metaInformation->meta_description = $request->meta_description;
+            $metaInformation->meta_type = $request->meta_type;
+            $metaInformation->meta_image = $meta_image_path ?? $metaInformation->meta_image;
+            $metaInformation->save();
+        }
 
         Session::flash('success','Blog post updated successfully!!!!');
         return redirect()->route('blogs.index');

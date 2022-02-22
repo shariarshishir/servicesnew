@@ -5,6 +5,21 @@
 {{-- csrf token --}}
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- Material CSS -->
+@php
+$getPostMetas = getMetaInformationByType('post');
+if($getPostMetas)
+{
+    foreach($getPostMetas as $postmeta) 
+    { 
+@endphp
+<meta property="og:title" content="{{$postmeta->meta_title}}" />
+<meta property="og:description" content="{{$postmeta->meta_description}}" />
+<meta property="og:image" content="{{$postmeta->meta_image}}" />
+<meta property="og:type" content="article" />
+@php
+    }
+}
+@endphp
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A==" crossorigin="anonymous" />

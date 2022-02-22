@@ -10,7 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\QueryController;
+use App\Http\Controllers\Admin\PaymentTermController;
 use App\Http\Controllers\Admin\ShipmentTypeController;
+use App\Http\Controllers\Admin\ShipmentTermController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\UomContorller;
@@ -437,8 +439,10 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('query/show/{id}',[QueryController::class, 'show'])->name('query.show');
         // uom, shipping-method, shipment-type, shipping-charge controller
         Route::resource('uom', UomContorller::class);
+        Route::resource('payment-term', PaymentTermController::class);
         Route::resource('shipping-method', ShippingMethodController::class);
         Route::resource('shipment-type', ShipmentTypeController::class);
+        Route::resource('shipment-term', ShipmentTermController::class);
         Route::get('shipping-charge/change/status/{order_id}', [ShippingChargeController::class, 'changeStatus'])->name('shipping.charge.change.status');
         Route::resource('shipping-charge', ShippingChargeController::class);
 

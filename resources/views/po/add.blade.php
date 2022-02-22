@@ -44,7 +44,7 @@
                                 <!-- <div style="padding-top: 30px;"></div> -->
                                 <div class="row">
                                     <!-- <div class="col s12 m6 l6"> -->
-                                    <div class="col s12 m6 l5 input-field">
+                                    <div class="col s12 input-field">
                                         <div class="col-md-12" style="display: none;">
                                             <div class="form-group has-feedback">
                                                 <label>Select Buyer</label>
@@ -59,27 +59,73 @@
                                         <div class="col-md-12" id="buyerdata"></div>
                                         <input type="hidden" name="selected_buyer_id" value="{{ request()->route()->parameters['id'] }}" />
                                     </div>
-                                    <div class="col s12 m6 l7 input-field">
-                                        <div class="form-group has-feedback">
-                                            <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
-                                            <input type="text" class="form-control" required name="po_id"/>
+                                    <div class="col s12 input-field">
+                                        <div class="row">
+                                            <div class="col s6 m3 l2">
+                                                <div class="form-group has-feedback">
+                                                    <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
+                                                    <input type="text" class="form-control" required name="po_id"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m3 l2">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Pro-forma Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="date" class="form-control" required name="po_date"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m3 l2">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Payment Within <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <select class="select2" required name="payment_within">
+                                                        <option value="On Delivery">On Delivery</option>
+                                                        <option value="Immediate">Immediate</option>
+                                                        <option value="Within 7 Days">Within 7 Days</option>
+                                                        <option value="Within 15 Days">Within 15 Days</option>
+                                                        <option value="Within 30 Days">Within 30 Days</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m3 l2">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Payment payment term <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <select class="select2" required name="payment_within">
+                                                        <option value="On Delivery">On Delivery</option>
+                                                        <option value="Immediate">Immediate</option>
+                                                        <option value="Within 7 Days">Within 7 Days</option>
+                                                        <option value="Within 15 Days">Within 15 Days</option>
+                                                        <option value="Within 30 Days">Within 30 Days</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col s6 m3 l2">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Shipment Term* <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <select class="select2" required name="payment_within">
+                                                        <option value="On Delivery">On Delivery</option>
+                                                        <option value="Immediate">Immediate</option>
+                                                        <option value="Within 7 Days">Within 7 Days</option>
+                                                        <option value="Within 15 Days">Within 15 Days</option>
+                                                        <option value="Within 30 Days">Within 30 Days</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col s6 m3 l2">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Shipping Address* <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="date" class="form-control" required name="po_date"/>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group has-feedback">
-                                            <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
-                                            <label>Pro-forma Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                            <input type="date" class="form-control" required name="po_date"/>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
-                                            <label>Payment Within <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                            <select class="select2" required name="payment_within">
-                                                <option value="On Delivery">On Delivery</option>
-                                                <option value="Immediate">Immediate</option>
-                                                <option value="Within 7 Days">Within 7 Days</option>
-                                                <option value="Within 15 Days">Within 15 Days</option>
-                                                <option value="Within 30 Days">Within 30 Days</option>
-                                            </select>
-                                        </div>
+                                       
+                                       
+                                       
                                     </div>
                                     <!-- </div> -->
                                 </div>

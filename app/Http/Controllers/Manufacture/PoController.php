@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Manufacture\Product;
 use App\Models\Proforma;
+use App\Models\PaymentTerm;
+use App\Models\ShipmentTerm;
+use App\Models\ShippingMethod;
+use App\Models\ShipmentType;
+
 use App\Models\ProformaProduct;
 use Carbon\Carbon;
 
@@ -99,8 +104,13 @@ class PoController extends Controller
         //     $products['id'] = $prod->id;
 		// }
 		// sort($products);
-        $products=$allproducts;
-		return view('po.add',compact('buyers','products'));
+        $products = $allproducts;
+        $paymentTerms = PaymentTerm::latest()->get();
+        $shipmentTerms = ShipmentTerm::latest()->get();
+        $shippingMethods = ShippingMethod::latest()->get();
+        $shipmentTypes = ShipmentType::latest()->get();
+
+		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes'));
 	}
 
     public function getsupplierbycat($id)

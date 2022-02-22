@@ -96,6 +96,18 @@
                             <p>UOM</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('payment-term.index')}}" class="nav-link {{ Route::is('payment-term*') ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Payment Term</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('shipment-term.index')}}" class="nav-link {{ Route::is('shipping-term*') ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Shipping Term</p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{route('shipping-method.index')}}" class="nav-link {{ Route::is('shipping-method*') ? 'active' : ''}} ">

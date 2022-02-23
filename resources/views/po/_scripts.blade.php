@@ -11,7 +11,7 @@
     var allbuyer = @json($buyers);
     var unit = '';
     // var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td style="position:relative;"><div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td style="position:relative;"><div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/></td><td><select class="form-control taxprice" onchange="changetaxprice(this)" name="tax[]"><option value="0">No Tax (0%)</option><option value="10">VAT (10%)</option></select></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
-    var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td style="position:relative;"><span class="required_star" style="position: absolute; top:10; right:11px;">*</span><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td style="position:relative;"><span class="required_star" style="position: absolute; top:10; right:11px;">*</span><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+    var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
     function getbuyerdetails(id)
     {
         //alert(id);
@@ -45,7 +45,6 @@
     if(selectedBuyerId){
         getbuyerdetails(selectedBuyerId);
     }
-
     function addlineitem()
     {
         $('#lineitems').append(lineitemcontent);
@@ -54,6 +53,54 @@
         {
             $('#lineitems').children().eq(i).children().eq(0).html((i + 1));
         }
+    }
+    function addShippingDetails()
+    {
+        var shippingDetailsInputField = '<tr>';
+        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<select name="shipping_details_method[]" class="select-shipping-method" style="width: 100%" onchange="changecat(this)">';
+        shippingDetailsInputField += '<option value="">Select</option>';
+        shippingDetailsInputField += '@foreach($shippingMethods as $shippingMethod)';
+        shippingDetailsInputField += '<option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>';
+        shippingDetailsInputField += '@endforeach';
+        shippingDetailsInputField += '</select>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<select name="shipping_details_type[]" class="select-shipping-type" style="width: 100%" onchange="changecat(this)">';
+        shippingDetailsInputField += '<option value="">Select</option>';
+        shippingDetailsInputField += '@foreach($shipmentTypes as $shipmentType)';
+        shippingDetailsInputField += '<option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>';
+        shippingDetailsInputField += '@endforeach';
+        shippingDetailsInputField += '</select>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<select name="shipping_details_uom[]" class="select-uom" style="width: 100%" onchange="changecat(this)">';
+        shippingDetailsInputField += '<option value="">Select</option>';
+        shippingDetailsInputField += '@foreach($uoms as $uom)';
+        shippingDetailsInputField += '<option value="{{ $uom->id }}">{{ $uom->name }}</option>';
+        shippingDetailsInputField += '@endforeach';
+        shippingDetailsInputField += '</select>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td > ';
+        shippingDetailsInputField += '<input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  required/>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td >';
+        shippingDetailsInputField += '<input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_qty[]" required/>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_total[]" readonly/>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td><a href="javascript:void(0);" class="ic-btn4" onclick="removeShippingDetails(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td>';
+        shippingDetailsInputField += '</tr>';
+        $('#shipping-details-table-body').append(shippingDetailsInputField);
+        $('.select-shipping-type').select2();
+        $('.select-shipping-method').select2();
+        $('.select-uom').select2();
+    }
+
+    function removeShippingDetails(el)
+    {
+        $(el).parent().parent().remove();
     }
 
     function removelineitem(el)

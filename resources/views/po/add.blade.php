@@ -90,13 +90,11 @@
                                             <div class="col s6 m3 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
-                                                    <label>Payment payment term <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <select class="select2" required name="payment_within">
-                                                        <option value="On Delivery">On Delivery</option>
-                                                        <option value="Immediate">Immediate</option>
-                                                        <option value="Within 7 Days">Within 7 Days</option>
-                                                        <option value="Within 15 Days">Within 15 Days</option>
-                                                        <option value="Within 30 Days">Within 30 Days</option>
+                                                    <label>Payment term* <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <select class="select2" required name="payment_term">
+                                                        @foreach($paymentTerms as $paymentTerm)
+                                                            <option value="{{$paymentTerm->id}}">{{$paymentTerm->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -105,12 +103,10 @@
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipment Term* <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <select class="select2" required name="payment_within">
-                                                        <option value="On Delivery">On Delivery</option>
-                                                        <option value="Immediate">Immediate</option>
-                                                        <option value="Within 7 Days">Within 7 Days</option>
-                                                        <option value="Within 15 Days">Within 15 Days</option>
-                                                        <option value="Within 30 Days">Within 30 Days</option>
+                                                    <select class="select2" required name="shipment_term">
+                                                        @foreach($shipmentTerms as $shipmentTerm)
+                                                            <option value="{{$shipmentTerm->id}}">{{$shipmentTerm->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -118,8 +114,8 @@
                                             <div class="col s6 m3 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
-                                                    <label>Shipping Address* <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="date" class="form-control" required name="po_date"/>
+                                                    <label>Shipping Address <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="shipping_address"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,6 +126,88 @@
                                     <!-- </div> -->
                                 </div>
                                 <div class="line_item_wrap">
+                                    <legend>Shipping Details</legend>
+                                    <div class="col s12 input-field">
+                                        <div class="row">
+                                            <div class="col s6 m4">
+                                                <div class="form-group has-feedback">
+                                                    <label>Forwarder name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="forwarder_name"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m4">
+                                                <div class="form-group has-feedback">
+                                                    <label>Forwarder Address <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m4">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Payable party <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <select class="select2" required name="payable_party">
+                                                        <option value="Buyer">Buyer</option>
+                                                        <option value="Buyer">Supplier</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:5%;">Shipping Method</th>
+                                                <th style="width:15%;">Shipment Type</th>
+                                                <th style="width:15%;">UOM</th>
+                                                <th style="width:15%;">Per UOM Price ($) <span class="required_star" style="color:red;">*</span></th>
+                                                <th style="width:15%;" >QTY <span class="required_star" style="color:red;">*</span></th>
+                                                <!-- <th style="width:15%;">Tax</th> -->
+                                                <th style="width:15%;">Total ($)</th>
+                                                <th style="width:5%; text-align:center;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="shipping-details-table-body" class="input-field">
+                                            <tr>
+                                                <td>
+                                                    <select name="shipping_details_method[]" class="select2" >
+                                                        <option value="">Select</option>
+                                                        @foreach($shippingMethods as $shippingMethod)
+                                                            <option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select  name="shipping_details_type[]" class="select2">
+                                                        <option value="">Select</option>
+                                                        @foreach($shipmentTypes as $shipmentType)
+                                                            <option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="shipping_details_uom[]" class="select2">
+                                                        <option value="">Select</option>
+                                                        @foreach($uoms as $uom)
+                                                            <option value="{{ $uom->id }}">{{ $uom->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
+                                                </td>
+                                                <td> 
+                                                    <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
+                                                </td>
+                                                <td>
+                                                    <input type="text"  name="shipping_details_total[]" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
+                                                </td>
+                                                <td><a href="javascript:void(0);" class="ic-btn4" onclick="addShippingDetails()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                       
+                                    </table>
+                                </div>
+                                <div class="line_item_wrap">
                                     <legend>Line Items</legend>
                                     <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
                                         <thead>
@@ -137,8 +215,8 @@
                                                 <th style="width:5%;">Sl. No.</th>
                                                 <th style="width:15%;">Item / Description</th>
                                                 <th style="width:15%;">Quantity</th>
-                                                <th style="width:15%;">Unit Price</th>
-                                                <th style="width:15%;">Sub Total</th>
+                                                <th style="width:15%;">Unit Price <span class="required_star" style="color: red;">*</span></th>
+                                                <th style="width:15%;">Sub Total <span class="required_star" style="color: red;">*</span></th>
                                                 <!-- <th style="width:15%;">Tax</th> -->
                                                 <th style="width:15%;">Total Price</th>
                                                 <th style="width:5%; text-align:center;"></th>
@@ -159,11 +237,11 @@
                                                     <input type="hidden" name="price_unit[]" required/>
                                                     <span class="supplier_details" style="color: #50AA5B;"></span>
                                                 </td>
-                                                <td style="position: relative;"> <span class="required_star" style="position: absolute; top:10; right:11px;">*</span>
+                                                <td>
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
                                                     <input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/>
                                                 </td>
-                                                <td style="position: relative;"> <span class="required_star" style="position: absolute; top:10; right:11px;">*</span>
+                                                <td>
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
                                                     <input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/>
                                                 </td>
@@ -198,6 +276,7 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <label>
+                                                            
                                                                 <input type="checkbox" aria-label="Checkbox for following text input" onclick="$(this).parent().parent().parent().prev().prop('readonly', function(i, v) { return !v; });">
                                                                 <span>Check to Edit</span>
                                                             </label>
@@ -260,6 +339,79 @@
                                         </ul>
                                     </div>
                                 </div>
+
+                                <div class="invoice_terms_conditions">
+                                    <div class="col s12 input-field">
+                                    <legend>Advising Bank</legend>
+                                        <div class="row">
+                                            <div class="col s6 m3">
+                                                <div class="form-group has-feedback">
+                                                    <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="forwarder_name"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m3">
+                                                <div class="form-group has-feedback">
+                                                    <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m3">
+                                                <div class="form-group has-feedback">
+                                                    <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                </div>
+                                            </div>
+                                            <div class="col s6 m3">
+                                                <div class="form-group has-feedback">
+                                                    <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="line_item_wrap">
+                                    <div class="col s12 input-field">
+                                        <legend>Signature</legend>
+                                        <div class="col s6 input-field">
+                                            <h6>Buyer</h6>
+                                            <div class="row">
+                                                <div class="col s12">
+                                                    <div class="form-group has-feedback">
+                                                        <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                        <input type="text" class="form-control" required name="forwarder_name"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12">
+                                                    <div class="form-group has-feedback">
+                                                        <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                        <input type="text" class="form-control" required name="forwarder_address"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s6 input-field">
+                                            <h6>Beneficiary Side</h6>
+                                            <div class="row">
+                                                <div class="col s12">
+                                                    <div class="form-group has-feedback">
+                                                        <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                        <input type="text" class="form-control" required name="forwarder_name"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12">
+                                                    <div class="form-group has-feedback">
+                                                        <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                        <input type="text" class="form-control" required name="forwarder_address"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="right">
                                     <button type="submit" class="btn_green btn-success">
                                         <i class="fa fa-send"></i> Submit
@@ -318,7 +470,6 @@
     </div>
 </div>
 </div>
-
 
 @endsection
 

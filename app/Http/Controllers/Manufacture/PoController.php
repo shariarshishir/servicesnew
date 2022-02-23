@@ -15,7 +15,7 @@ use App\Models\PaymentTerm;
 use App\Models\ShipmentTerm;
 use App\Models\ShippingMethod;
 use App\Models\ShipmentType;
-
+use App\Models\UOM;
 use App\Models\ProformaProduct;
 use Carbon\Carbon;
 
@@ -79,10 +79,8 @@ class PoController extends Controller
         foreach($business_profile as $profile){
             array_push($business_profile_id, $profile->id);
         }
-		//$allbuyers = MerchantAssistanceRequest::with('product','buyer')->where('status','request')->groupBy('buyer_id')->get();
-		// $allbuyers = User::where([['user_type','buyer'],['is_verified',1]])->with('profile.membership')->get();
+
         $allbuyers = User::where([['user_type','buyer'],['is_email_verified',1]])->with('businessProfile')->get();
-		//$allproducts = Product::with('product_images')->get()->unique('title');
 		$allproducts = Product::whereIn('business_profile_id', $business_profile_id)->with('user')->latest()->get(['id','title']);
 		$buyers = [];
 		$products = [];
@@ -98,26 +96,20 @@ class PoController extends Controller
 							'zipcode' => 'zip_code'
 						];
 		}
-		// foreach($allproducts as $prod)
-		// {
-		// 	$products['title'] = $prod->title;
-        //     $products['id'] = $prod->id;
-		// }
-		// sort($products);
+		
         $products = $allproducts;
         $paymentTerms = PaymentTerm::latest()->get();
         $shipmentTerms = ShipmentTerm::latest()->get();
         $shippingMethods = ShippingMethod::latest()->get();
         $shipmentTypes = ShipmentType::latest()->get();
+        $uoms = UOM::latest()->get();
 
-		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes'));
+		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms'));
 	}
 
     public function getsupplierbycat($id)
 	{
 		$products = Product::where('id',$id)->get();
-		//echo '<pre>';print_r($products);exit;
-		// $allsuppliers = User::where([['product_category',$id],['is_verified',1]])->with('profile.membership')->get();
 		return view('po.allsuppliers',compact('products'));
 	}
 

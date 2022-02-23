@@ -1,7 +1,7 @@
 @extends('layouts.app_containerless')
-@section('title', $blog->metaInformation->meta_title)
-@section('description', $blog->metaInformation->meta_description)
-@section('image', $blog->metaInformation->meta_image)
+@section('title', $blog->metaInformation->meta_title ?? '')
+@section('description', $blog->metaInformation->meta_description ?? '')
+@section('image', $blog->metaInformation->meta_image ?? '')
 @section('keywords', 'Industry Blogs')
 @section('robots', 'index, follow')
 @section('revisit-after', 'content="3 days')
@@ -9,15 +9,16 @@
 @section('content')
 <section class="ic-press-room blog_container">
         <div class="container">
-            <div class="page_content_wrap blog_detail_info_wrap">
+            <div itemscope itemtype="http://schema.org/BlogPosting" class="page_content_wrap blog_detail_info_wrap">
 
                 <div class="ic-press-left">
                     <div class="feature_img center-align">
-                        <img src="{{ asset('storage/'.$blog->feature_image) }}" class="img-responsive box_shadow_radius" alt="Missing" >
+                        <img src="{{ asset('storage/'.$blog->feature_image) }}" class="img-responsive box_shadow_radius" alt="Missing" itemprop="image" />
                     </div>
                     
                     <div class="ic-press-caption">
-                        <h2>{{ $blog->title }}</h2>
+                        <h2 itemprop="name">{{ $blog->title }}</h2>
+                        <meta itemprop="description" content="{!! $blog->metaInformation->meta_description ?? '' !!}">
                         <div class="blog_details_textbox">{!! $blog->details !!}</div>
 
                         @if(count($blog->sourcedata) > 0)
@@ -48,7 +49,7 @@
                     <div class="mymedia">
                         <img class="mymedia-thum" src="@if(!empty($blog->author_img)){{ asset('storage/'.$blog->author_img) }} @else {{ 'https://via.placeholder.com/100' }} @endif" class="mr-3" alt="{{ $blog->author_name }}">
                         <div class="mymedia-body">
-                            <h5 class="mt-0">by <strong>{{ $blog->author_name }}</strong></h5>
+                            <h5 class="mt-0" itemprop="author">by <strong>{{ $blog->author_name }}</strong></h5>
                             <p>{!! $blog->author_note !!}</p>
                         </div>
                     </div>
@@ -86,7 +87,6 @@
                         {{-- {{ $blog_posts->links('pagination.blog') }} --}}
                     </div>
                 </div>
-
 
             </div>
             

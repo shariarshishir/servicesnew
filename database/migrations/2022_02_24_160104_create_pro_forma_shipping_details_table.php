@@ -16,7 +16,6 @@ class CreateProFormaShippingDetailsTable extends Migration
         Schema::create('pro_forma_shipping_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proforma_id');
-            $table->unsignedBigInteger('supplier_id');
             $table->integer('shipping_details_method');
             $table->integer('shipping_details_type');
             $table->integer('shipping_details_uom');

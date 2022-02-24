@@ -178,6 +178,11 @@ class UserController extends Controller
             'phone'     => $request->phone,
             'company_name' => $request->company_name,
             'country' => $request->country,
+            'designation'       => $request->designation,
+            'business_type'     => $request->business_type,
+            'company_website'   => $request->company_website,
+            'linkedin_profile'  => $request->linkedin_profile,
+            'is_supplier'  => $request->business_type == 'supplier' ? 1 : 0,
         ]);
 
         $email_verification_OTP = mt_rand(100000,999999);
@@ -558,7 +563,8 @@ class UserController extends Controller
             'company_name' => 'required',
             'sso_reference_id' =>'required',
             'phone'           => 'required',
-            'country'=>'required'
+            'country'=>'required',
+
         ]);
         $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
@@ -578,6 +584,12 @@ class UserController extends Controller
             'company_name' => $request->company_name,
             'country' => $request->country,
             'is_email_verified' => 1,
+            'designation'       => $request->designation,
+            'business_type'     => $request->business_type,
+            'company_website'   => $request->company_website,
+            'linkedin_profile'  => $request->linkedin_profile,
+            'is_supplier'  => $request->business_type == 'supplier' ? 1 : 0,
+
         ]);
 
         $token = Str::random(64);

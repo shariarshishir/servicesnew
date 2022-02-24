@@ -45,18 +45,18 @@
                                 <div class="row">
                                     <!-- <div class="col s12 m6 l6"> -->
                                     <div class="col s12 input-field">
-                                        <div class="col-md-12" style="display: none;">
+                                        <div class="col-md-6" id="buyerdata"></div>
+                                        <div class="col-md-6">
                                             <div class="form-group has-feedback">
-                                                <label>Select Buyer</label>
-                                                <select name="buyer" id="buyerOptionsList" class="form-control" onChange="getbuyerdetails(this.value)">
-                                                    <option value="">--Select Buyer--</option>
-                                                    @foreach($buyers as $buyer)
-                                                        <option value="{{$buyer['id']}}">{{ucfirst($buyer['name'])}}</option>
+                                                <label>Beneficiary</label>
+                                                <select name="beneficiary_id" id="buyerOptionsList" class="form-control select2" onChange="getbuyerdetails(this.value)">
+                                                    <option value="">--Select a Beneficiary--</option>
+                                                    @foreach($businessProfileList as $businessProfile)
+                                                        <option value="{{$businessProfile->id}}">{{$businessProfile->business_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12" id="buyerdata"></div>
                                         <input type="hidden" name="selected_buyer_id" value="{{ request()->route()->parameters['id'] }}" />
                                     </div>
                                     <div class="col s12 input-field">
@@ -207,6 +207,43 @@
                                        
                                     </table>
                                 </div>
+                                <a href="#modal1" class="waves-effect waves-light btn modal-trigger btn shipment-file-upload-trigger">Upload Files</a>
+                                <!-- Modal Structure -->
+                                <div id="modal1" class="modal">
+                                    <div class="modal-content">
+                                        <div class="shipment-file-upload--block">
+                                            <div class="no_more_tables">
+                                                <table class="shipment-file-upload-table-block">
+                                                    <thead class="cf">
+                                                        <tr>
+                                                            <th>Title</th>
+                                                            <th>Image</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td><input class="input-field" name="shipping_details_title[]" id="shipping-details-title" type="text"  ></td>
+                                                        <td><input class="input-field file_upload" name="shipping_details_flies[]" id="shipping-details-file" type="file"></td>
+                                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>
+                                                    </tr>
+                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                            <div class="add_more_box">
+                                                <a href="javascript:void(0);" class="add-more-block" onclick="addShippingDetailsFile()"><i class="material-icons dp48">add</i> Add More</a>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+                                    </div>
+                                </div>
+
+
                                 <div class="line_item_wrap">
                                     <legend>Line Items</legend>
                                     <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
@@ -272,32 +309,62 @@
                                         <ul class="list-group terms-lists">
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms1"> Terms1
-                                                    <i class="material-icons">border_color</i>
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-1" name="terms_conditions[]" value="Terms and condition 1">
+                                                        <span>Terms and condition 1</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 1" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms2"> Terms2
-                                                    
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-2" name="terms_conditions[]" value="Terms and condition 2">
+                                                        <span>Terms and condition 2</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 2" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms3"> Terms3
-                                                    
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="input-group input-field">
-                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms4"> Terms4
-                                                    
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="input-group input-field">
-                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms5"> Terms5
-                                                    
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-3" name="terms_conditions[]" value="Terms and condition 3">
+                                                        <span>Terms and condition 3</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 3" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -311,25 +378,25 @@
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
                                                     <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" class="form-control" required name="forwarder_name"/>
+                                                    <input type="text" name="bank_name" class="form-control" required/>
                                                 </div>
                                             </div>
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
                                                     <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                    <input type="text" name="branch_name" class="form-control" required />
                                                 </div>
                                             </div>
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
                                                     <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                    <input type="text" name="bank_address" class="form-control" required />
                                                 </div>
                                             </div>
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
                                                     <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                    <input type="text" name="swift_code" class="form-control" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -345,13 +412,13 @@
                                                 <div class="col s12">
                                                     <div class="form-group has-feedback">
                                                         <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                        <input type="text" class="form-control" required name="forwarder_name"/>
+                                                        <input type="text" class="form-control" required name="buyer_singature_name"/>
                                                     </div>
                                                 </div>
                                                 <div class="col s12">
                                                     <div class="form-group has-feedback">
                                                         <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                        <input type="text" class="form-control" required name="forwarder_address"/>
+                                                        <input type="text" class="form-control" required name="buyer_singature_designation"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -362,13 +429,13 @@
                                                 <div class="col s12">
                                                     <div class="form-group has-feedback">
                                                         <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                        <input type="text" class="form-control" required name="forwarder_name"/>
+                                                        <input type="text" class="form-control"  name="beneficiar_singature_name" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col s12">
                                                     <div class="form-group has-feedback">
                                                         <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                        <input type="text" class="form-control" required name="forwarder_address"/>
+                                                        <input type="text" class="form-control"  name="beneficiar_singature_designation" required/>
                                                     </div>
                                                 </div>
                                             </div>

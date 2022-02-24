@@ -58,7 +58,7 @@
     {
         var shippingDetailsInputField = '<tr>';
         shippingDetailsInputField += '<td>';
-        shippingDetailsInputField += '<select name="shipping_details_method[]" class="select-shipping-method" style="width: 100%" onchange="changecat(this)">';
+        shippingDetailsInputField += '<select name="shipping_details_method[]" class="select-shipping-method" style="width: 100%"  >';
         shippingDetailsInputField += '<option value="">Select</option>';
         shippingDetailsInputField += '@foreach($shippingMethods as $shippingMethod)';
         shippingDetailsInputField += '<option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>';
@@ -66,7 +66,7 @@
         shippingDetailsInputField += '</select>';
         shippingDetailsInputField += '</td>';
         shippingDetailsInputField += '<td>';
-        shippingDetailsInputField += '<select name="shipping_details_type[]" class="select-shipping-type" style="width: 100%" onchange="changecat(this)">';
+        shippingDetailsInputField += '<select name="shipping_details_type[]" class="select-shipping-type" style="width: 100%"  >';
         shippingDetailsInputField += '<option value="">Select</option>';
         shippingDetailsInputField += '@foreach($shipmentTypes as $shipmentType)';
         shippingDetailsInputField += '<option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>';
@@ -74,7 +74,7 @@
         shippingDetailsInputField += '</select>';
         shippingDetailsInputField += '</td>';
         shippingDetailsInputField += '<td>';
-        shippingDetailsInputField += '<select name="shipping_details_uom[]" class="select-uom" style="width: 100%" onchange="changecat(this)">';
+        shippingDetailsInputField += '<select name="shipping_details_uom[]" class="select-uom" style="width: 100%" >';
         shippingDetailsInputField += '<option value="">Select</option>';
         shippingDetailsInputField += '@foreach($uoms as $uom)';
         shippingDetailsInputField += '<option value="{{ $uom->id }}">{{ $uom->name }}</option>';
@@ -82,10 +82,10 @@
         shippingDetailsInputField += '</select>';
         shippingDetailsInputField += '</td>';
         shippingDetailsInputField += '<td > ';
-        shippingDetailsInputField += '<input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  required/>';
+        shippingDetailsInputField += '<input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  onkeyup="changeunit(this)" required/>';
         shippingDetailsInputField += '</td>';
         shippingDetailsInputField += '<td >';
-        shippingDetailsInputField += '<input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_qty[]" required/>';
+        shippingDetailsInputField += '<input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_qty[]" onkeyup="changeunitprice(this)" required/>';
         shippingDetailsInputField += '</td>';
         shippingDetailsInputField += '<td>';
         shippingDetailsInputField += '<input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_total[]" readonly/>';
@@ -276,6 +276,52 @@
     //         window.location.href = "/message-center?uid="+selectedBuyerId;
     //     }, 1000);
     // }
+
+    function addShippingDetailsFile()
+    {
+        var html = '<tr>';
+        html +='<td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>';
+        html +='<td><input class="input-field file_upload" name="shipping_details_flies[]" id="shipping-details-file" type="file"></td>';
+        html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+        html +='</tr>';
+        $('.shipment-file-upload-table-block tbody').append(html);
+    }
+
+    function removeShippingDetailsFile(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+    $(document).ready(function(){
+        $(".terms-edit-trigger").click(function(){
+            $(this).hide();
+            $(this).closest(".input-group").find(".terms-label").hide();
+            $(this).closest(".input-group").find(".terms-edit-field").show();
+            $(this).closest(".input-group").find(".terms-save-trigger").show();
+            $(this).closest(".input-group").find(".terms-cancel-trigger").show();
+        });
+
+        $(".terms-cancel-trigger").click(function(){
+            $(this).hide();
+            $(this).closest(".input-group").find(".terms-save-trigger").hide();
+            $(this).closest(".input-group").find(".terms-edit-trigger").show();
+            $(this).closest(".input-group").find(".terms-edit-field").hide();
+            $(this).closest(".input-group").find(".terms-label").show();
+        });
+
+        $(".terms-save-trigger").click(function(){
+            $(this).hide();
+            $(this).closest(".input-group").find(".terms-cancel-trigger").hide();
+            $(this).closest(".input-group").find(".terms-edit-trigger").show();
+            $(this).closest(".input-group").find(".terms-edit-field").hide();
+            $(this).closest(".input-group").find(".terms-label").show();
+
+            inputVal = $(this).closest(".input-group").find(".terms-edit-value-field").val();
+            $(this).closest(".input-group").find(".terms-label span").text(inputVal);
+            
+        });
+
+    });
 </script>
 
 @endpush

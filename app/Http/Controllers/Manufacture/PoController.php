@@ -73,8 +73,9 @@ class PoController extends Controller
     }
     public function add()
 	{
+
 		$user=Auth::user();
-        $business_profile=BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
+        $business_profile = BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
         $business_profile_id=[];
         foreach($business_profile as $profile){
             array_push($business_profile_id, $profile->id);
@@ -103,8 +104,9 @@ class PoController extends Controller
         $shippingMethods = ShippingMethod::latest()->get();
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();
+        $businessProfileList = BusinessProfile::select('id','business_name')->where('user_id', $user->id)->where('business_type',1)->get();
 
-		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms'));
+		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms','businessProfileList'));
 	}
 
     public function getsupplierbycat($id)
@@ -116,7 +118,6 @@ class PoController extends Controller
     public function store(Request $request)
 	{
 
-		//echo '<pre>';print_r($request->input());exit;
 		$data = new Proforma;
 		$data->buyer_id = $request->input('selected_buyer_id');
 		$data->proforma_id = $request->input('po_id');

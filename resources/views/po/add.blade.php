@@ -272,68 +272,32 @@
                                         <ul class="list-group terms-lists">
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input type="text" class="form-control" Placeholder="Terms and Condition 1" name="conditions[]" readonly>
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <label>
-                                                            
-                                                                <input type="checkbox" aria-label="Checkbox for following text input" onclick="$(this).parent().parent().parent().prev().prop('readonly', function(i, v) { return !v; });">
-                                                                <span>Check to Edit</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms1"> Terms1
+                                                    <i class="material-icons">border_color</i>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input type="text" class="form-control" Placeholder="Terms and Condition 2" name="conditions[]" readonly>
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <label>
-                                                                <input type="checkbox" aria-label="Checkbox for following text input" onclick="$(this).parent().parent().parent().prev().prop('readonly', function(i, v) { return !v; });">
-                                                                <span>Check to Edit</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms2"> Terms2
+                                                    
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input type="text" class="form-control" Placeholder="Terms and Condition 3" name="conditions[]" readonly>
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <label>
-                                                                <input type="checkbox" aria-label="Checkbox for following text input" onclick="$(this).parent().parent().parent().prev().prop('readonly', function(i, v) { return !v; });">
-                                                                <span>Check to Edit</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms3"> Terms3
+                                                    
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input type="text" class="form-control" Placeholder="Terms and Condition 4" name="conditions[]" readonly>
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <label>
-                                                                <input type="checkbox" aria-label="Checkbox for following text input" onclick="$(this).parent().parent().parent().prev().prop('readonly', function(i, v) { return !v; });">
-                                                                <span>Check to Edit</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms4"> Terms4
+                                                    
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
-                                                    <input type="text" class="form-control" Placeholder="Terms and Condition 5" name="conditions[]" readonly>
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <label>
-                                                                <input type="checkbox" aria-label="Checkbox for following text input" onclick="$(this).parent().parent().parent().prev().prop('readonly', function(i, v) { return !v; });">
-                                                                <span>Check to Edit</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                    <input class="terms-checkbox" type="checkbox" id="vehicle1" name="conditions[]" value="terms5"> Terms5
+                                                    
                                                 </div>
                                             </li>
                                         </ul>

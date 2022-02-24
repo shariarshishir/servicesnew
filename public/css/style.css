@@ -7681,6 +7681,18 @@ nav .pagination li.active .page-link {
     display: block;
 }
 
+
+/* ************************************* */
+.terms_conditions_list .terms-lists .terms-checkbox {
+    opacity: inherit;
+    float: inherit;
+    position: inherit;
+    box-shadow: none;
+    height: auto;
+}
+
+
+
 /* ************************* policy_content_wrap style end ******************************  */
 /* ******************** Media css style start *********************** */
 

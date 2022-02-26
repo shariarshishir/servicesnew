@@ -48,7 +48,7 @@ class HomeController extends Controller
 
         $wholesaler_products=Product::with(['images','businessProfile'])->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
         $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('business_profile_id', '!=', null)->get();
-        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('id');
+        $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
         // $sorted=$merged->sortBy('moq');
         // $low_moq= $sorted->values()->all();
         // $object = (object) $low_moq;
@@ -117,7 +117,7 @@ class HomeController extends Controller
     //start readystock products
     public function readyStockProducts()
     {
-        $products = Product::with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::latest()->with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
         return view('product.ready_stock_product',compact('products'));
     }
 
@@ -163,14 +163,14 @@ class HomeController extends Controller
     //customizable products
     public function customizable()
     {
-        $products = Product::with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
         return view('product.customizable',compact('products'));
     }
 
    //start buy design products
     public function buyDesignsProducts()
     {
-        $products = Product::with('images')->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->inRandomOrder()->paginate(12);
+        $products = Product::latest()->with('images')->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
         return view('product.buy_design_product',compact('products'));
     }
 
@@ -740,7 +740,7 @@ class HomeController extends Controller
     {
         $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
         $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
-        $merged = $wholesaler_products->merge($manufacture_products)->sortBy('moq');
+        $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
         // $sorted=$merged->sortBy('moq');
         // $low_moq= $sorted->values()->all();
         // $object = (object) $low_moq;
@@ -814,7 +814,7 @@ class HomeController extends Controller
     //shortest lead time
     public function shortestLeadTime()
     {
-        $products=ManufactureProduct::with(['product_images','businessProfile'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->orderBy('lead_time')->paginate(12);
+        $products=ManufactureProduct::latest()->with(['product_images','businessProfile'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->paginate(12);
         return view('product.shortest_lead_time',compact('products'));
     }
 

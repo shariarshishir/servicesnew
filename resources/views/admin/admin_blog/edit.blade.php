@@ -25,7 +25,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Create New Blog</h3>
+                    <h3 class="card-title">Edit Blog</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -64,6 +64,18 @@
             let reader = new FileReader();
             reader.onload = (e) => {
                 $('#preview-image-for-blog').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
+
+</script>
+<script>
+      $(document).ready(function (e) {
+        $('#meta_image').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#preview-image-for-meta').attr('src', e.target.result);
             }
             reader.readAsDataURL(this.files[0]);
         });

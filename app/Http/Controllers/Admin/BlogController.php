@@ -10,13 +10,14 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Models\Blog;
+use App\Models\MetaInformation;
 
 
 class BlogController extends Controller
 {
 
     public function index(){
-        $blogs=Blog::latest()->paginate(10);
+        $blogs = Blog::with('metaInformation')->latest()->paginate(10);
         return view('admin.admin_blog.index',compact('blogs'));
     }
     public function  create(){
@@ -24,8 +25,8 @@ class BlogController extends Controller
         return view('admin.admin_blog.create',compact('blog'));
     }
     public function store(Request $request){
-        
-        $allData=$request->all();
+        // dd($request->all());
+        $allData = $request->except('_token', 'meta_title', 'meta_description','meta_image','meta_type');
         if ($request->hasFile('feature_image')){
             $path=$request->file('feature_image')->store('images','public');
             $image = Image::make(public_path('storage/'.$path));
@@ -49,6 +50,18 @@ class BlogController extends Controller
             $allData['author_img']=$path;
         }
 
+        if ($request->hasFile('meta_image')){
+            $path=$request->file('meta_image')->store('images','public');
+            $image = Image::make(public_path('storage/'.$path));
+            $image->save(public_path('storage/'.$path));
+
+            $path_small=$request->file('meta_image')->store('images/small/','public');
+            $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+            $small_image->save(public_path('storage/'.$path_small));
+            $meta_image_path=$path;
+           
+        }
+
         $allData['created_by']=Auth::guard('admin')->user()->id;
         
         $lowercase = strtolower($allData['title']);
@@ -60,20 +73,30 @@ class BlogController extends Controller
         //$allData['slug'] = Str::slug($allData['title'],'-');
         $allData['slug'] = $alias;
 
-        $blog=Blog::create($allData);
+        $blog = Blog::create($allData);
+
+        $metaInformation = new MetaInformation();
+        $metaInformation->blog_id = $blog->id;
+        $metaInformation->meta_title = $request->meta_title;
+        $metaInformation->meta_description = $request->meta_description;
+        $metaInformation->meta_type = $request->meta_type;
+        $metaInformation->meta_image = $meta_image_path??NULL;
+        $metaInformation->save();
+
+
         Session::flash('success','Blog post created successfully!!!!');
 
         return redirect()->route('blogs.index');
       
     }
     public function  edit($id){
-        $blog = Blog::where('id',$id)->first();
+        $blog = Blog::with('metaInformation')->where('id',$id)->first();
         return view('admin.admin_blog.edit',compact('blog'));
     }
 
     public function update(Request $request, $id)
     {
-        $blog = Blog::find($id);
+        $blog = Blog::with('metaInformation')->find($id);
         $blog->title = $request->title;
         $blog->source = $request->source;
         $blog->author_name = $request->author_name;
@@ -106,6 +129,7 @@ class BlogController extends Controller
             $blog->feature_image = $path;
         }
 
+
         if ($request->hasFile('author_img')){
             Storage::delete($blog->author_img);
             Storage::delete('small/'.$blog->author_img);
@@ -120,9 +144,59 @@ class BlogController extends Controller
             $blog->author_img = $path;
         }
 
-
         $blog->updated_by = Auth::guard('admin')->user()->id;
         $blog->save();
+        
+        $metaInformation = MetaInformation::where('blog_id',$id)->first();
+
+        if(!$metaInformation) 
+        {
+
+            if ($request->hasFile('meta_image')){
+                $path=$request->file('meta_image')->store('images','public');
+                $image = Image::make(public_path('storage/'.$path));
+                $image->save(public_path('storage/'.$path));
+    
+                $path_small=$request->file('meta_image')->store('images/small/','public');
+                $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+                $small_image->save(public_path('storage/'.$path_small));
+                $meta_image_path=$path;
+               
+            }
+
+            $metaInformation = new MetaInformation();
+            $metaInformation->blog_id = $blog->id;
+            $metaInformation->meta_title = $request->meta_title;
+            $metaInformation->meta_description = $request->meta_description;
+            $metaInformation->meta_type = $request->meta_type;
+            $metaInformation->meta_image = $meta_image_path ?? NULL;
+            $metaInformation->save();
+        } 
+        else
+        {
+
+            if ($request->hasFile('meta_image')){
+                Storage::delete($blog->metaInformation->meta_image);
+                Storage::delete('small/'.$blog->metaInformation->meta_image);
+    
+                $path = $request->file('meta_image')->store('images','public');
+                $image = Image::make(public_path('storage/'.$path))->encode();
+                $image->save(public_path('storage/'.$path));
+    
+                $path_small = $request->file('meta_image')->store('images/small','public');
+                $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
+                $small_image->save(public_path('storage/'.$path_small));
+                $meta_image_path = $path;
+            }
+
+            $metaInformation->blog_id = $blog->id;
+            $metaInformation->meta_title = $request->meta_title;
+            $metaInformation->meta_description = $request->meta_description;
+            $metaInformation->meta_type = $request->meta_type;
+            $metaInformation->meta_image = $meta_image_path ?? $metaInformation->meta_image;
+            $metaInformation->save();
+        }
+
         Session::flash('success','Blog post updated successfully!!!!');
         return redirect()->route('blogs.index');
     }

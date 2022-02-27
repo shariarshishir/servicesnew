@@ -1,5 +1,6 @@
 <!-- Footer section start -->
 <footer class="footer_wrap">
+    @if(request()->route()->getName() == 'home')
     <div class="footer_topWrap">
         <div class="container center">
             <div class="footer_topWrap_inner">
@@ -9,6 +10,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="footer_bottomWrap">
         <div class="container">
         <div class="row">

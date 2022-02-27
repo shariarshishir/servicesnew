@@ -1,4 +1,3 @@
-
 @extends('layouts.app_containerless')
 
 @section('content')
@@ -13,7 +12,6 @@
 				@php
 					$searchType= request()->get('search_type');
 				@endphp
-
 				<div class="module-search">
 					<select id="searchOption" class="select2 browser-default select-search-type">
                         <option value="all" name="search_key" {{ $searchType=="all" ? 'selected' : '' }}>All</option>
@@ -48,11 +46,6 @@
 </section>
 <!-- Banner section end  -->
 
-
-
-
-
-
 <main id="homepage">
     <section class="banner pt-50">
         <div class="container">
@@ -82,8 +75,8 @@
                 </div>
             </div>
         </div>
-
     </section>
+
     <section class="about pt-75">
         <div class="section-heading mb-100">
             <h3>What Can Merchant Bay Do For You?</h3>
@@ -160,6 +153,7 @@
             </div>
         </div>
     </section>
+    
     <section class="demoButton py-40">
         <div class="container">
             <div class="content flex-wrap">
@@ -171,6 +165,7 @@
             </div>
         </div>
     </section>
+
     <section class="delivaryTime pt-60">
         <div class="container">
             <div class="guarantee">
@@ -201,6 +196,7 @@
             </div>
         </div>
     </section>
+
     <!--Perform at Your Best-->
     <section class="perform-header">
         <div class="container">
@@ -216,7 +212,6 @@
         <div class="container">
             <div class="row">
                 <div class="col m12 plr0 htbcont">
-
                     <!--left-->
                     <div class="col s12 m12 l4 plr0">
                         <div class="htbcont-lft">
@@ -239,14 +234,12 @@
                                         <span>Know how we verify our suppliers</span>
                                     </a>
                                 </li>
-
                                 <li>
                                     <a href="javascript:void(0);" id="merchandising" onclick="makeactive('merchandisingcontent',this)">
                                         Merchandising Assistance&nbsp;<sup><i class="fa fa-plus" aria-hidden="true"></i></sup><br>
                                         <span>With our expert Merchandising Assistance learn how we solve your problem</span>
                                     </a>
                                 </li>
-
                                 <li>
                                     <a href="javascript:void(0);" id="order" onclick="makeactive('ordercontent',this)">
                                         Order Management Dashboard<br>
@@ -263,7 +256,6 @@
                             <div class="clear50 d-none d-md-block"></div>
                             <div class="clear20 d-none d-md-block"></div>
                         </div>
-                        
                     </div>
                     <!--/left-->
 
@@ -355,8 +347,6 @@
                                 </tbody>
                             </table>
                         </div>
-
-
                         <div class="clear30"></div>
                         <div class="com m12">
                             <p class="homepgp-sm mb30">
@@ -365,6 +355,7 @@
                             </P>
                         </div>
                     </div>
+
                     <div class="col s12 m12 l8 plr0" style="display: none;" id="merchandisingcontent">
                         <div class="clear30"></div>
                         <p class="homepgp-sm"><b style="color:#217156; font-size:20px;">Merchandising Assistance<br></b></P>
@@ -447,15 +438,11 @@
                         </div>
                         <div class="clear30"></div>
                         <div class="col s12 m12 text-center mtop40">
-
-                            
-                                <!--<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/abrarsayem'});return false;">Book a Call</a>-->
-                                <div class="center-align book_call"> <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="jb"> <span class="material-icons">phone</span> &nbsp;Book a Call </a></div>
-                                
-
-
-                            </div>
-
+                            <!--<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/abrarsayem'});return false;">Book a Call</a>-->
+                            <div class="center-align book_call"> 
+                                <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;" class="jb"> <span class="material-icons">phone</span> &nbsp;Book a Call </a>
+                            </div>                        
+                        </div>
                     </div>
                     <!--right-->
                 </div>

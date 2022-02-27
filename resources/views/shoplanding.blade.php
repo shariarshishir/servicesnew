@@ -164,8 +164,8 @@
                 <div class="sourcing_apps_box">
                     <h3>Download the App</h3>
                     <div class="apps_wrap">
-                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /> </a>
-                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /> </a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=da"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /> </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /> </a>
                     </div>
                 </div>
               </div>
@@ -209,7 +209,7 @@
                         <img src="{{asset('images/frontendimages/new-home/landing-rfq.png')}}" alt="" />
                     </div>
                     <div class="request_button_box center-align">
-                        <a href="javascript:void(0);" class="btn_border_black">Submit RFQ</a>
+                        <a href="{{route('rfq.index')}}" class="btn_border_black">Submit RFQ</a>
                         <a href="javascript:void(0);" class="btn_green btn_talk" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
                     </div>
                 </div>

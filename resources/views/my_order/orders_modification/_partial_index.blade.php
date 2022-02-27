@@ -6,6 +6,7 @@
                 <table class="table striped" id="orderQueryModificationTable">
                     <thead class="cf">
                         <tr>
+                            <th class="text-center">Id</th>
                             <th class="text-center">Product Name</th>
                             <th class="text-center">Request User</th>
                             <th class="text-center">Date</th>
@@ -16,6 +17,7 @@
                     <tbody>
                         @foreach($orderModificationRequest as $item)
                             <tr>
+                                <td>{{$item->id}}</td>
                                 <td data-title="Product Name" class="order-number">
                                     <a href="{{ route('productdetails',$item->product->sku) }}" class="order-more-details modal-trigger">{{$item->product->name}}
                                         @if(isset($countOrderQueryMdf))
@@ -76,7 +78,7 @@
 
                             </tr>
 
-                        
+
                         @endforeach
                     </tbody>
                 </table>

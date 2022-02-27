@@ -67,7 +67,7 @@ class OrderModificationRequestController extends Controller
         $countOrderQueryMdf=array_count_values($orderModificationRequestIds);
 
         //  if(auth()->user()->user_type=='buyer'){
-            $orderModificationRequest=OrderModificationRequest::where(['user_id' => auth()->user()->id, 'type' => 2])->with(['comments.replies', 'orderModification'])->latest()->get();
+            $orderModificationRequest=OrderModificationRequest::where(['user_id' => auth()->user()->id, 'type' => 2])->with(['comments.replies', 'orderModification'])->get();
         // }
         // else{
         //     $orderModificationRequest=OrderModificationRequest::latest()->where('vendor_id',auth()->user()->vendor->id)->with(['comments.replies', 'orderModification'])->get();
@@ -194,7 +194,7 @@ class OrderModificationRequestController extends Controller
 
 
                 event(new NewOrderModificationRequestEvent($orderModificationRequest));
-                
+
                 return response()->json([
                     'success' => 'Request Created Successfully!',
                     'message' => 'Done!',
@@ -244,7 +244,7 @@ class OrderModificationRequestController extends Controller
                 'user_agent'                    => $request->header('User-Agent'),
             ]);
             $admin= Admin::find(1);
-            
+
             //send push notification to admin for new order modification request
             $fcmToken = $admin->fcm_token;
             $title = "New reply message for order modification request from".$data->user->name;
@@ -252,7 +252,7 @@ class OrderModificationRequestController extends Controller
             $message = $details[0]->details;
             $action_url = route('query.show', $data->orderModificationRequest->id);
             $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
-            
+
             Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
             Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));
             return response()->json([

@@ -1,7 +1,12 @@
 @push('js')
 <script>
       $('#orderQueryTable').DataTable({
-    //     "order": [[ 1, "desc" ]]
+         "order": [[ 0, "desc" ]],
+         "columnDefs": [ {
+            "targets": 0,
+            "searchable": false,
+            "visible" :false,
+        } ]
      });
     $(document).ready(function() {
         $('.discount-type').select2();

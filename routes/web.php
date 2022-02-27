@@ -462,6 +462,7 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::post('user/business/profile/walfare/verify',[AdminBusinessProfileController::class, 'walfareInformationVerify'])->name('worker.walfare.verify');
         Route::post('user/business/profile/security/verify',[AdminBusinessProfileController::class, 'securityInformationVerify'])->name('worker.security.verify');
         Route::get('/user/business/profile/verify',[AdminBusinessProfileController::class, 'verifyBusinessProfile'])->name('business.profile.verify');
+        Route::get('/user/business/profile/spotlight',[AdminBusinessProfileController::class, 'spotlightBusinessProfile'])->name('business.profile.spotlight');
         //order through business profile
         Route::get('business-profile/{business_profile_id}/orders',[OrderController::class, 'index'])->name('business.profile.orders.index');
         // Route::get('/vendor/{vendor}/order/create',[OrderController::class, 'create'])->name('vendor.order.create');

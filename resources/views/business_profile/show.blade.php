@@ -381,11 +381,13 @@
 								@if(count($business_profile->exportDestinations)>0)
 									@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
-											<div class="flag_img export-destination-img">
-												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+											<div class="flag_innerBox">
+												<div class="flag_img export-destination-img">
+													<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+												</div>
+												<h5>{{$exportDestination->country->name}}</h5>
+												<span>{{$exportDestination->short_description}}</span>
 											</div>
-											<h5>{{$exportDestination->country->name}}</h5>
-											<span>{{$exportDestination->short_description}}</span>
 										</div>
 									@endforeach
 								@else
@@ -769,12 +771,14 @@
 									@if(count($business_profile->exportDestinations)>0)
 										@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
-											<div class="flag_img export-destination-img">
-												<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-												<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+											<div class="flag_innerBox">
+												<div class="flag_img export-destination-img">
+													<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+													<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+												</div>
+												<h5>{{$exportDestination->country->name}}</h5>
+												<span>{{$exportDestination->short_description}}</span>
 											</div>
-											<h5>{{$exportDestination->country->name}}</h5>
-											<span>{{$exportDestination->short_description}}</span>
 										</div>
 										@endforeach
 									@else

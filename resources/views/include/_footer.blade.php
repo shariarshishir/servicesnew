@@ -1,65 +1,77 @@
 <!-- Footer section start -->
 <footer class="footer_wrap">
+    @if(request()->route()->getName() == 'home')
     <div class="footer_topWrap">
         <div class="container center">
             <div class="footer_topWrap_inner">
                 <h2>Sign up and Get connected</h2>
                 <h4>With thousands of Suppliers and Products that meet your needs.</h4>
-                <button class="btn_green footer_signUp">Sign up</button>
+                <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green footer_signUp">Sign up</a>
             </div>
         </div>
     </div>
+    @endif
     <div class="footer_bottomWrap">
         <div class="container">
-            <div class="row">
-                <div class="col m6 l6 footer_left_bottom">
-                    <div class="addressWrap">
-                        <div class="addressBox">
-                        <h4>Office Address:</h4>
-                        <p>Meem Tower, <br />
-                        Floor: 8, House: 18, <br />
-                        Road: 12, Sector: 6, <br />
-                        Uttara, Dhaka. </p>
-                        </div>
-                        <a href="javascript:void(0);" class="btn_direct btn_grBorder">Get Direction</a>
-                        <a href="javascript:void(0);" class="btn_tour btn_lightgr">Virtual Tour</a>
-                    </div>
-                </div>
-                <div class="col m6 l6 footer_right_bottom">
+        <div class="row">
+                <div class="col s12 l6"></div>
+                <div class="col s12 l6 footer_newsletter_bar">
                     <h6>Subscribe to our weekly newsletter on industry and product updates</h6>
                     <div class="footer_buttonWrap right-align">
-                        <input type="text" class="industry_textbox" placeholder="Get the latest Industry Insights" />
-                        <button type="submit" class="btn_lightgr btn_email"> <img src="images/email.png" alt="" />Email</button>
+                        <form method="post" id="newsletter_signup_form">
+                            @csrf
+                            <input type="text" id="newsletter_email_address" class="industry_textbox" placeholder="Get the latest Industry Insights" required/>
+                            <button type="submit" id="newsletter_signup" class="btn_lightgr btn_email"> <img src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
+                        </form>
+					</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m4 l6 footer_left_bottom">
+                    <div class="addressWrap">
+                        <div class="addressBox">
+                            <h4>Office Address:</h4>
+                            <p>Meem Tower, <br />
+                            Floor: 8, House: 18, <br />
+                            Road: 12, Sector: 6, <br />
+                            Uttara, Dhaka. </p>
+                        </div>
+                        <a href="https://www.google.com/maps/place/Merchant+Bay+Office/@23.8710895,90.3987335,17z/data=!3m1!4b1!4m5!3m4!1s0x3755c59804b59f57:0xa5156d3fe206198c!8m2!3d23.8710846!4d90.4009222" target="_blank" class="btn_direct btn_grBorder">Get Direction</a>
+                        
+                        <!-- <a href="javascript:void(0);" class="btn_tour btn_lightgr">Virtual Tour</a> -->
                     </div>
+                </div>
+                <div class="col s12 m8 l6 footer_right_bottom">
                     <div class="row">
-                        <div class="col s12 m6 l4 help_menu">
+                        <div class="col s4 l4 help_menu">
                             <ul>
-                                <li><a href="javascript:void(0);">Tools</a></li>
-                                <li><a href="javascript:void(0);">Suppliers</a></li>
-                                <li><a href="javascript:void(0);">Quick Query</a></li>
-                                <li><a href="javascript:void(0);">Blogs/Insights</a></li>
-                                <li><a href="javascript:void(0);">Policies</a></li>
-                                <li><a href="javascript:void(0);">Helps</a></li>
+                                <li><a href="{{route('front.tools')}}">Tools</a></li>
+                                <li><a href="{{route('suppliers')}}">Suppliers</a></li>
+                                <li><a href="{{route('rfq.index')}}">RFQ</a></li>
+                                <li><a href="{{route('industry.blogs')}}">Blogs/Insights</a></li>
+                                <li><a href="{{route('front.policy')}}">Policies</a></li>
+                                <li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
                             </ul>
                             </div>
-                            <div class="col s12 m6 l4 product_menu">
+                            <div class="col s4 l5 product_menu">
                                 <h4>Products</h4>
                                 <ul>
-                                    <li><a href="javascript:void(0);">New Designs</a></li>
-                                    <li><a href="javascript:void(0);">New Arrivals</a></li>
-                                    <li><a href="javascript:void(0);">Ready Stock</a></li>
-                                    <li><a href="javascript:void(0);">Low MOQ</a></li>
-                                    <li><a href="javascript:void(0);">Customizable</a></li>
-                                    <li><a href="javascript:void(0);">Shortest Lead Time</a></li>
+                                    <li><a href="{{route('buydesignsproducts')}}">Designs</a></li>
+                                    <li style="display: none;"><a href="javascript:void(0);">New Arrivals</a></li>
+                                    <li><a href="{{route('readystockproducts')}}">Ready to Ship</a></li>
+                                    <li><a href="{{route('low.moq')}}">Low MOQ</a></li>
+                                    <li><a href="{{route('customizable')}}">Customizablee</a></li>
+                                    <li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
                                 </ul>
                             </div>
-                            <div class="col s12 m6 l4 info_menu">
-                            <ul>
-                                <li><a href="javascript:void(0);">About us</a></li>
-                                <li><a href="javascript:void(0);">Contact us</a></li>
-                                <li><a href="javascript:void(0);">Tutorials</a></li>
-                                <li><a href="javascript:void(0);">Submit a dispute</a></li>
-                            </ul>
+                            <div class="col s4 l3 info_menu">
+                                <ul>
+                                    <li><a href="{{route('front.aboutus')}}">About us</a></li>
+                                    <li><a href="mailto:success@merchantbay.com">Contact us</a></li>
+                                    <li style="display: none;"><a href="javascript:void(0);">Tutorials</a></li>
+                                    <li style="display: none;"><a href="javascript:void(0);">Submit a dispute</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,31 +80,31 @@
     </div>
     <div class="footer_bottom_part">
         <div class="container">
-        <div class="row">
-            <div class="col s12 m6 l2">
-            <div class="footer_copyright">
-                &copy;2022 Merchant Bay
+            <div class="row">
+                <div class="col s12 m6 l2">
+                    <div class="footer_copyright">
+                        &copy;2022 Merchant Bay
+                    </div>
+                </div>
+                <div class="col s12 m6 l2">
+                    <div class="footer_privacy"><a href="">Terms & Privacy</a></div>
+                </div>
+                <div class="col s12 m6 l4">
+                    <div class="socialWrap">
+                        <span>Follow us on</span>
+                        <a target="_blank" href="https://www.facebook.com/merchantbaybd"> <img src="{{asset('images/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
+                        <a target="_blank" href="https://twitter.com/merchantbay_com"><img src="{{asset('images/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/merchantbay"><img src="{{asset('images/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
+                        <a target="_blank" href="https://www.instagram.com/merchant.bay/"><img src="{{asset('images/frontendimages/new-home/insta.png')}}" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col s12 m6 l4">
+                    <div class="footer_apps_box">
+                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /></a>
+                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /></a>
+                    </div>
+                </div>
             </div>
-            </div>
-            <div class="col s12 m6 l2">
-            <div class="footer_privacy"><a href="">Terms & Privacy</a></div>
-            </div>
-            <div class="col s12 m6 l4">
-            <div class="socialWrap">
-                <span>Follow us on</span>
-                <a href="javascript:void(0);"> <img src="images/facebook.png" alt="" /></a>
-                <a href="javascript:void(0);"><img src="images/twitter.png" alt="" /></a>
-                <a href="javascript:void(0);"><img src="images/linkedin.png" alt="" /></a>
-                <a href="javascript:void(0);"><img src="images/insta.png" alt="" /></a>
-            </div>
-            </div>
-            <div class="col s12 m6 l4">
-            <div class="footer_apps_box">
-                <a href="javascript:void(0);"><img src="images/app-store.png" alt="" /></a>
-                <a href="javascript:void(0);"><img src="images/google-play.png" alt="" /></a>
-            </div>
-            </div>
-        </div>
         </div>
     </div>
 </footer>

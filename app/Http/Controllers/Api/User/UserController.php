@@ -182,7 +182,7 @@ class UserController extends Controller
             'business_type'     => $request->business_type,
             'company_website'   => $request->company_website,
             'linkedin_profile'  => $request->linkedin_profile,
-            'is_supplier'  => $request->business_type == 'supplier' ? 1 : 0,
+            'is_supplier'  => $request->user_type == 'supplier' ? 1 : 0,
         ]);
 
         $email_verification_OTP = mt_rand(100000,999999);
@@ -553,8 +553,7 @@ class UserController extends Controller
     // user registration from sso
     public function signUp(Request $request)
     {
-        // dd($request->all());
-        
+         
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -588,7 +587,7 @@ class UserController extends Controller
             'business_type'     => $request->business_type,
             'company_website'   => $request->company_website,
             'linkedin_profile'  => $request->linkedin_profile,
-            'is_supplier'  => $request->business_type == 'supplier' ? 1 : 0,
+            'is_supplier'  => $request->user_type == 'supplier' ? 1 : 0,
 
         ]);
 

@@ -45,6 +45,11 @@ $(document).ready(function() {
     //$("#modal3").modal("close");
 
     $('.tabs').tabs();
+    
+    $('.spotlight_tabs').tabs({
+        "swipeable": true
+    });
+    
 
     // var slider = document.getElementById('price-slider');
     // noUiSlider.create(slider, {

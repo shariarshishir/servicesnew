@@ -180,16 +180,16 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col s12 m7 l10 rfq_profile_info">
+                                        <div class="col s12 m9 l10 rfq_profile_info">
                                             <div class="row">
-                                                <div class="col m7 l7 profile_info">
+                                                <div class="col s12 l7 profile_info">
                                                     <h4>{{$bid->businessProfile->business_name}} </h4>
                                                     <p>{{$bid->businessProfile->business_type == 1 ? 'Manufacture' : 'Wholesalser'}}</p>
                                                 </div>
                                                 @if(Auth::guard('web')->check())
-                                                    <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{$bid->supplier_id}}')">Contact Supplier</a></div>
+                                                    <div class="col s12 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $bid->id }}); updateUserLastActivity('{{Auth::id()}}', '{{$bid->supplier_id}}'); sendmessage('{{$bid->id}}','{{$bid->title}}','{{$bid->quantity}}','{{$bid->unit}}','{{$bid->unit_price}}','{{$bid->total_price}}','{{$bid->payment_method}}','{{$bid->delivery_time}}','{{strip_tags($bid->description)}}','{{$bid->supplier_id}}')">Contact Supplier</a></div>
                                                 @else
-                                                    <div class="col m5 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green">Contact Supplier</a></div>
+                                                    <div class="col s12 l5 right-align"><a href="javascript:void(0);" class="ic-btn btn_green">Contact Supplier</a></div>
                                                 @endif
 
                                             </div>

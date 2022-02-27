@@ -319,10 +319,12 @@
                                 <div class="row flag_wrap center-align export-destination-block">
                                         @foreach($business_profile->exportDestinations as $exportDestination)
                                             <div class="col s6 m4 l2">
-                                                <div class="flag_img export-destination-img">
-                                                    <img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
-                                                </div>
-                                                <h5>{{$exportDestination->country->name}}</h5>
+												<ddiv class="flag_innerBox">
+													<div class="flag_img export-destination-img">
+														<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+													</div>
+													<h5>{{$exportDestination->country->name}}</h5>
+												</ddiv>
                                             </div>
                                         @endforeach
                                 </div>
@@ -587,11 +589,13 @@
                                     <div class="flagBox export-destination-block">
                                             @foreach($business_profile->exportDestinations as $exportDestination)
                                             <div class="col s6 m4 l2">
-                                                <div class="flag_img export-destination-img">
-                                                    <a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-                                                    <img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
-											</div>
-											<h5>{{$exportDestination->country->name}}</h5>
+												<div class="flag_innerBox">
+													<div class="flag_img export-destination-img">
+														<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+														<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+													</div>
+													<h5>{{$exportDestination->country->name}}</h5>
+												</div>
                                             </div>
                                             @endforeach
                                     </div>

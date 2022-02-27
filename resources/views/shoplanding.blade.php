@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="landing_intro_button_box">
-                                <a class="btn_howWrok btn_border_black" target="_blank" href="https://youtu.be/8z7uqq_Zqzg"><i class="material-icons"> play_circle_outline </i> How we work</a>
+                                <a class="btn_howWrok btn_border_black" data-fancybox href="https://youtu.be/8z7uqq_Zqzg"><i class="material-icons"> play_circle_outline </i> How we work</a>
                                 <a href="javascript:void(0);" class="btn_green btn_talk" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
               <div class="col s12 m6">
                 <div class="sourcing_info_box">
                     <h1><span> Bring the <span style="font-weight: 600;">Sourcing</span> <br/>
-                    in your <span style="font-weight: 600;">Pocket</span></h1>
+                    to your <span style="font-weight: 600;">Pocket</span></h1>
                     <p>Everything you need for your Apparel Business.</p>
                     <p><span style="font-weight: 600;">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
                 </div>
@@ -164,8 +164,8 @@
                 <div class="sourcing_apps_box">
                     <h3>Download the App</h3>
                     <div class="apps_wrap">
-                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /> </a>
-                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /> </a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=da"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /> </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /> </a>
                     </div>
                 </div>
               </div>
@@ -191,7 +191,7 @@
                             <h1>Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h1>
                             <p>Subscribe to the Smart Order Management Dashboard and different tools offered by Merchant Bay to make your operation data driven and transparent.</p>
                             <div class="tools_button_box">
-                                <a href="javascript:void(0);" class="btn_border_black">Explore MB Smart Tools</a>
+                                <a href="https://omd.merchantbay.com/" class="btn_border_black">Explore MB Smart Tools</a>
                                 <!-- <button class="btn_green request_demo">Request a Demo</button> -->
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                         <img src="{{asset('images/frontendimages/new-home/landing-rfq.png')}}" alt="" />
                     </div>
                     <div class="request_button_box center-align">
-                        <a href="javascript:void(0);" class="btn_border_black">Submit RFQ</a>
+                        <a href="{{route('rfq.index')}}" class="btn_border_black">Submit RFQ</a>
                         <a href="javascript:void(0);" class="btn_green btn_talk" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
                     </div>
                 </div>

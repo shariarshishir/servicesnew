@@ -17,6 +17,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
 use App\Models\BusinessProfileVerification;
+use App\Models\Category;
 use Helper;
 use DB;
 use Illuminate\Support\Facades\Http;
@@ -41,17 +42,105 @@ class HomeController extends Controller
         return view('shoplanding', compact('readyStockProducts', 'buyDesignsProducts'));
     }
 
-    public function productList()
+    public function productList(Request $request)
     {
+        //return $request->all();
         //$products = Product::with('images')->where('is_featured', 1)->where('state',1)->where('sold',0)->paginate(12);
         //return view('products',compact('products'));
 
         $wholesaler_products=Product::with(['images','businessProfile'])->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
         $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('business_profile_id', '!=', null)->get();
         $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
-        // $sorted=$merged->sortBy('moq');
-        // $low_moq= $sorted->values()->all();
-        // $object = (object) $low_moq;
+
+        if(isset($request->product_name)){
+            $search=$request->product_name;
+            $merged = $merged->filter(function($item) use ($search) {
+                if($item->flag == 'mb'){
+                    return stripos($item['title'],$search) !== false;
+                }
+                return stripos($item['name'],$search) !== false;
+            });
+        }
+        if(isset($request->product_type)){
+            $merged = $merged->whereIn('product_type', $request->product_type);
+            $merged->all();
+        }
+
+        if(isset($request->location)){
+            $search=$request->location;
+            $merged = $merged->filter(function($item) use ($search) {
+                    return stripos($item->businessProfile->location,$search) !== false;
+            });
+        }
+
+        if(isset($request->product_category)){
+            $merged = $merged->where('flag', 'shop')->where('product_category_id', $request->product_category);
+            $merged->all();
+        }
+
+        if(isset($request->factory_category)){
+            $merged = $merged->where('flag', 'mb')->where('product_category', $request->factory_category);
+            $merged->all();
+        }
+
+        if(isset($request->lead_minimum_range) &&  isset($request->lead_maximum_range)){
+
+            $merged = $merged->where('flag', 'mb')->whereBetween('lead_time', [$request->lead_minimum_range, $request->lead_maximum_range]);
+            $merged->all();
+
+            // $merged = $merged->filter(function($item) use ($request) {
+            //     if($item->flag == 'mb'){
+            //       return  $item->whereBetween('lead_time', [$request->lead_minimum_range, $request->lead_maximum_range]);
+            //     }
+            //     // elseif($item->flag == 'shop'){
+
+            //     // }
+
+            // });
+        }
+
+        if(isset($request->price_minimum_range) &&  isset($request->price_maximum_range)){
+            $search_id=[];
+            foreach($merged as $product){
+                if($product->flag == 'shop' && isset($product->attribute)){
+                    foreach(json_decode($product->attribute) as $price)
+                    {
+                    if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
+                        array_push($search_id,$product->id);
+                    }
+                    }
+                }
+
+
+            }
+
+            // $multiplied = $merged->map(function ($item, $key) {
+
+            //     if($item->flag == 'shop'){
+            //         if(isset($item['attribute'])){
+            //             foreach(json_decode($item['attribute']) as $price){
+            //                 $item->put('minimum_range', $price[0]);
+            //             }
+            //         }
+            //     }
+
+                // if($item->flag == 'mb'){
+                //     return substr($item->price_per_unit, 0, 3);
+                // }
+            //});
+            // $merged = $merged->where('flag', 'shop')->whereBetween('attribute', [$request->price_minimum_range, $request->price_maximum_range]);
+            // $merged->all();
+
+            // $merged = $merged->filter(function($item) use ($request) {
+            //     if($item->flag == 'mb'){
+            //       return  $item->whereBetween('lead_time', [$request->lead_minimum_range, $request->lead_maximum_range]);
+            //     }
+            // });
+        }
+
+
+        //return $search_id;
+
         $page = Paginator::resolveCurrentPage() ?: 1;
         $perPage = 12;
         $products = new \Illuminate\Pagination\LengthAwarePaginator(
@@ -61,8 +150,11 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-        return view('product.all_products',compact('products'));
+
+        $product_category= ProductCategory::all();
+        return view('product.all_products',compact('products', 'product_category'));
     }
+
     //start products by category sub category and subsub category
     public function productsByCategory($slug)
     {

@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="landing_intro_button_box">
-                                <a class="btn_howWrok btn_border_black" target="_blank" href="https://youtu.be/8z7uqq_Zqzg"><i class="material-icons"> play_circle_outline </i> How we work</a>
+                                <a class="btn_howWrok btn_border_black" data-fancybox href="https://youtu.be/8z7uqq_Zqzg"><i class="material-icons"> play_circle_outline </i> How we work</a>
                                 <a href="javascript:void(0);" class="btn_green btn_talk" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                             <h1>Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h1>
                             <p>Subscribe to the Smart Order Management Dashboard and different tools offered by Merchant Bay to make your operation data driven and transparent.</p>
                             <div class="tools_button_box">
-                                <a href="javascript:void(0);" class="btn_border_black">Explore MB Smart Tools</a>
+                                <a href="https://omd.merchantbay.com/" class="btn_border_black">Explore MB Smart Tools</a>
                                 <!-- <button class="btn_green request_demo">Request a Demo</button> -->
                             </div>
                         </div>

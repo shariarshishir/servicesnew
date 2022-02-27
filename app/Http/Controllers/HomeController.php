@@ -37,7 +37,8 @@ class HomeController extends Controller
         //$products = Product::with('images')->where('is_featured', 1)->paginate(9);
         //$readyStockProducts = Product::with('images')->whereIn('product_type', [2,3])->where('state',1)->where('sold',0)->inRandomOrder()->get();
         //$buyDesignsProducts = Product::with('images')->where('product_type', 1)->where('state',1)->where('sold',0)->inRandomOrder()->get();
-        $spotlightBusinessProfile = BusinessProfile::where("is_spotlight", 1)->get();
+        //$spotlightBusinessProfile = BusinessProfile::where("is_spotlight", 1)->get();
+        $spotlightBusinessProfile = BusinessProfile::with('companyOverview', 'user')->where("is_spotlight", 1)->get();
         //dd($buyDesignsProducts);
         //return view('shoplanding', compact('readyStockProducts', 'buyDesignsProducts', 'spotlightBusinessProfile'));
         return view('shoplanding', compact('spotlightBusinessProfile'));

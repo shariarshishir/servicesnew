@@ -110,88 +110,24 @@
             </div>
             <div class="landing_spotlight_infoWrap">
                 <div class="container">
-                    <div id="alphaTextile">
-                        <div class="right-align sayel_group_logo_box">
-                            <a href="javascript:void(0);" ><img src="{{asset('images/frontendimages/new-home/sayem-group.png')}}" alt="" /> </a>
-                        </div>
-                        <div class="spotlight_inner_info">
-                            <h3>Alpha Textile</h3>
-                            <h5>In Speed We believe</h5>
-                            <div class="spotlight_info">
-                                <p><span style="font-weight: 600;">Sayem Fashions LTD. & Radiant Sweater Ind. Ltd</span> are two units of manufacturing within <span style="font-weight: 600;">Sayem Group</span>, <br/>
-                                aspiring for complete customer satisfaction owing to the high quality Sweater at competitive <br/>
-                                prices with an on-schedule delivery and perfection in service. It firmly believes that <br/>
-                                the satisfaction of the valued customers is the focal point of its business.</p>
+                    @php 
+                        $spotlightCount = 0;
+                    @endphp
+                    @foreach($spotlightBusinessProfile as $businessProfile)
+                        <div id="spotlight-{{$spotlightCount}}">
+                            <div class="right-align sayel_group_logo_box">
+                                <img src="{{ asset('storage/'.$businessProfile->user->image) }}" alt="" />
+                            </div>
+                            <div class="spotlight_inner_info">
+                                <h3>{{ $businessProfile->business_name }}</h3>
+                                <div class="spotlight_info">{{ \Illuminate\Support\Str::limit($businessProfile->companyOverview->about_company, 550, $end='[...]') }}</div>
+                            </div>
+                            <div class="right-align">
+                                <a href="{{route('supplier.profile', $businessProfile->alias)}}" class="btn_green landing_view_profile" >View Profile</a>
                             </div>
                         </div>
-                        <div class="right-align">
-                            <a href="javascript:void(0);" class="btn_green landing_view_profile" >View Profile</a>
-                        </div>
-                    </div>
-                    <div id="carolinaGarments">
-                        <div class="right-align sayel_group_logo_box">
-                            <a href="javascript:void(0);" ><img src="{{asset('images/frontendimages/new-home/sayem-group.png')}}" alt="" /> </a>
-                        </div>
-                        <div class="spotlight_inner_info">
-                            <h3>Carolina Garments</h3>
-                            <h5>In Speed We believe</h5>
-                            <p><span style="font-weight: 600;">Sayem Fashions LTD. & Radiant Sweater Ind. Ltd</span> are two units of manufacturing within <span style="font-weight: 600;">Sayem Group</span>, <br/>
-                            aspiring for complete customer satisfaction owing to the high quality Sweater at competitive <br/>
-                            prices with an on-schedule delivery and perfection in service. It firmly believes that <br/>
-                            the satisfaction of the valued customers is the focal point of its business.</p>
-                        </div>
-                        <div class="right-align">
-                            <a href="javascript:void(0);" class="btn_green landing_view_profile" >View Profile</a>
-                        </div>
-                    </div>
-                    <div id="sayemFashions">
-                        <div class="right-align sayel_group_logo_box">
-                            <a href="javascript:void(0);" ><img src="{{asset('images/frontendimages/new-home/sayem-group.png')}}" alt="" /> </a>
-                        </div>
-                        <div class="spotlight_inner_info">
-                            <h3>Sayem Group</h3>
-                            <h5>In Speed We believe</h5>
-                            <p><span style="font-weight: 600;">Sayem Fashions LTD. & Radiant Sweater Ind. Ltd</span> are two units of manufacturing within <span style="font-weight: 600;">Sayem Group</span>, <br/>
-                            aspiring for complete customer satisfaction owing to the high quality Sweater at competitive <br/>
-                            prices with an on-schedule delivery and perfection in service. It firmly believes that <br/>
-                            the satisfaction of the valued customers is the focal point of its business.</p>
-                        </div>
-                        <div class="right-align">
-                            <a href="javascript:void(0);" class="btn_green landing_view_profile" >View Profile</a>
-                        </div>
-                    </div>
-                    <div id="radiantSweaters">
-                        <div class="right-align sayel_group_logo_box">
-                            <a href="javascript:void(0);" ><img src="{{asset('images/frontendimages/new-home/sayem-group.png')}}" alt="" /> </a>
-                        </div>
-                        <div class="spotlight_inner_info">
-                            <h3>Radiant Sweaters</h3>
-                            <h5>In Speed We believe</h5>
-                            <p><span style="font-weight: 600;">Sayem Fashions LTD. & Radiant Sweater Ind. Ltd</span> are two units of manufacturing within <span style="font-weight: 600;">Sayem Group</span>, <br/>
-                            aspiring for complete customer satisfaction owing to the high quality Sweater at competitive <br/>
-                            prices with an on-schedule delivery and perfection in service. It firmly believes that <br/>
-                            the satisfaction of the valued customers is the focal point of its business.</p>
-                        </div>
-                        <div class="right-align">
-                            <a href="javascript:void(0);" class="btn_green landing_view_profile" >View Profile</a>
-                        </div>
-                    </div>
-                    <div id="fatahFabrics">
-                        <div class="right-align sayel_group_logo_box">
-                            <a href="javascript:void(0);" ><img src="{{asset('images/frontendimages/new-home/sayem-group.png')}}" alt="" /> </a>
-                        </div>
-                        <div class="spotlight_inner_info">
-                            <h3>Fatah Fabrics</h3>
-                            <h5>In Speed We believe</h5>
-                            <p><span style="font-weight: 600;">Sayem Fashions LTD. & Radiant Sweater Ind. Ltd</span> are two units of manufacturing within <span style="font-weight: 600;">Sayem Group</span>, <br/>
-                            aspiring for complete customer satisfaction owing to the high quality Sweater at competitive <br/>
-                            prices with an on-schedule delivery and perfection in service. It firmly believes that <br/>
-                            the satisfaction of the valued customers is the focal point of its business.</p>
-                        </div>
-                        <div class="right-align">
-                            <a href="javascript:void(0);" class="btn_green landing_view_profile" >View Profile</a>
-                        </div>
-                    </div>
+                        @php $spotlightCount++; @endphp 
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -200,11 +136,13 @@
           <div class="container">
             <div class="landing_tab_menu">
                 <ul class="spotlight_tabs">
-                    <li class="tab"><a href="#alphaTextile">Alpha Textile</a></li>
-                    <li class="tab"><a href="#carolinaGarments">Carolina Garments Corp.</a></li>
-                    <li class="tab"><a href="#sayemFashions">Sayem Fashions Ltd.</a></li>
-                    <li class="tab"><a href="#radiantSweaters">Radiant Sweaters</a></li>
-                    <li class="tab"><a href="#fatahFabrics">Fatah Fabrics</a></li>
+                    @php 
+                        $spotlightCount = 0;
+                    @endphp
+                    @foreach($spotlightBusinessProfile as $businessProfile)
+                        <li class="tab"><a href="#spotlight-{{$spotlightCount}}">{{ $businessProfile->business_name }}</a></li>
+                        @php $spotlightCount++; @endphp 
+                    @endforeach
                 </ul>
             </div>
           </div>

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProFormaSignature extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
+    protected $guarded=[];
+    public function proforma()
+    {
+        return $this->belongsTo(Proforma::class);
+    }
 }

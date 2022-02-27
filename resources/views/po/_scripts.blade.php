@@ -11,7 +11,10 @@
     var allbuyer = @json($buyers);
     var unit = '';
     // var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td style="position:relative;"><div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td style="position:relative;"><div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/></td><td><select class="form-control taxprice" onchange="changetaxprice(this)" name="tax[]"><option value="0">No Tax (0%)</option><option value="10">VAT (10%)</option></select></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
-    var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+    var lineitemcontent = '<tr><td></td><td><select class="select-product product-dropdown" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+    
+    
+
     function getbuyerdetails(id)
     {
         //alert(id);
@@ -42,17 +45,52 @@
             }
         });
     }
+
+    function getProductListBybusinessProfileId(id)
+    {
+        $.ajax({
+            method: 'get',
+            data: {id:id},
+            url: '{{ route("product_list.by_profile_id") }}',
+            success:function(response){
+                console.log(response.products);
+                $('.product-dropdown').empty();
+                $('.product-dropdown').append('<option value="">Select Products</option>');
+                $.each(response.products,function(index,product){
+                    $('.product-dropdown').append('<option value="'+product.id+'">'+product.title+'</option>');
+                });
+            }
+        });
+    }
     if(selectedBuyerId){
         getbuyerdetails(selectedBuyerId);
     }
     function addlineitem()
     {
-        $('#lineitems').append(lineitemcontent);
-        $('.select-product').select2();
-        for(var i = 0; i < $('#lineitems').children().length; i++)
-        {
-            $('#lineitems').children().eq(i).children().eq(0).html((i + 1));
-        }
+        var businessProfileId= $( "#buyerOptionsList option:selected" ).val();
+        $.ajax({
+            method: 'get',
+            data: {id:businessProfileId},
+            url: '{{ route("product_list.by_profile_id") }}',
+            success:function(response){
+                var lineitemcontent = '<tr><td></td><td>';
+                lineitemcontent  += '<select class="select-product product-dropdown" style="width: 100%" onchange="changecat(this)">';
+                lineitemcontent  +='<option value="">Select Products</option>';
+                $.each(response.products,function(index,product){
+                    lineitemcontent  += '<option value="'+product.id+'">'+product.title+'</option>';
+                });
+                lineitemcontent  +='</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+                $('#lineitems').append(lineitemcontent);
+                $('.select-product').select2();
+                for(var i = 0; i < $('#lineitems').children().length; i++)
+                {
+                    $('#lineitems').children().eq(i).children().eq(0).html((i + 1));
+                }
+            }
+        });
+        
+
+        
     }
     function addShippingDetails()
     {
@@ -281,7 +319,7 @@
     {
         var html = '<tr>';
         html +='<td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>';
-        html +='<td><input class="input-field file_upload" name="shipping_details_flies[]" id="shipping-details-file" type="file"></td>';
+        html +='<td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>';
         html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
         html +='</tr>';
         $('.shipment-file-upload-table-block tbody').append(html);
@@ -318,9 +356,24 @@
 
             inputVal = $(this).closest(".input-group").find(".terms-edit-value-field").val();
             $(this).closest(".input-group").find(".terms-label span").text(inputVal);
+            $(this).closest(".input-group").find(".terms-label .checkbox").val(inputVal);
             
         });
 
+        // $(".buyerOptionsList").click(function(){
+        //     $.ajax({
+        //     method: 'get',
+        //     data: {id:id},
+        //     url: '{{ route("product_list.by_profile_id") }}',
+        //     success:function(response){
+        //         $('.product-dropdown').empty();
+        //         $('.product-dropdown').append('<option value="">Select Products</option>');
+        //         $.each(response.products,function(index,product){
+        //             $('.product-dropdown').append('<option value="'+product.id+'">'+product.title+'</option>');
+        //         });
+        //     }
+        // });
+        
     });
 </script>
 

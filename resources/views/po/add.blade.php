@@ -39,7 +39,7 @@
 
                         <!-- widget content -->
                         <div class="widget-body p-0">
-                            <form action="{{route('po.store')}}" method="post" >
+                            <form action="{{route('po.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                                 <!-- <div style="padding-top: 30px;"></div> -->
                                 <div class="row">
@@ -49,7 +49,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group has-feedback">
                                                 <label>Beneficiary</label>
-                                                <select name="beneficiary_id" id="buyerOptionsList" class="form-control select2" onChange="getbuyerdetails(this.value)">
+                                                <select name="business_profile_id" id="buyerOptionsList" class="form-control select2" onChange = "getProductListBybusinessProfileId(this.value)">
                                                     <option value="">--Select a Beneficiary--</option>
                                                     @foreach($businessProfileList as $businessProfile)
                                                         <option value="{{$businessProfile->id}}">{{$businessProfile->business_name}}</option>
@@ -224,7 +224,7 @@
                                                     <tbody>
                                                     <tr>
                                                         <td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
-                                                        <td><input class="input-field file_upload" name="shipping_details_flies[]" id="shipping-details-file" type="file"></td>
+                                                        <td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
                                                         <td><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>
                                                     </tr>
                                                     
@@ -263,7 +263,7 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>
-                                                    <select class="select2" onchange="changecat(this)">
+                                                    <select class="select2 product-dropdown" onchange="changecat(this)">
                                                         <option value="">Select Products</option>
                                                         @foreach($products as $product)
                                                             <option value="{{ $product->id }}">{{ $product->title }}</option>
@@ -367,6 +367,187 @@
                                                     </a>
                                                 </div>
                                             </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-4" name="terms_conditions[]" value="Terms and condition 4">
+                                                        <span>Terms and condition 4</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 4" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-5" name="terms_conditions[]" value="Terms and condition 5">
+                                                        <span>Terms and condition 5</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 5" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-6" name="terms_conditions[]" value="Terms and condition 6">
+                                                        <span>Terms and condition 6</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 6" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-7" name="terms_conditions[]" value="Terms and condition 7">
+                                                        <span>Terms and condition 7</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 7" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-8" name="terms_conditions[]" value="Terms and condition 8">
+                                                        <span>Terms and condition 8</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 8" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-9" name="terms_conditions[]" value="Terms and condition 9">
+                                                        <span>Terms and condition 9</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 9" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-10" name="terms_conditions[]" value="Terms and condition 10">
+                                                        <span>Terms and condition 10</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 10" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-11" name="terms_conditions[]" value="Terms and condition 11">
+                                                        <span>Terms and condition 11</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 11" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="input-group input-field">
+                                                    <label class="terms-label">
+                                                        <input class="checkbox" type="checkbox" id="terms-condition-12" name="terms_conditions[]" value="Terms and condition 12">
+                                                        <span>Terms and condition 12</span>
+                                                    </label>
+                                                    <div class="terms-edit-field" style="display: none;">
+                                                        <input type="text" class="terms-edit-value-field" value="Terms and condition 12" />
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="terms-edit-trigger">
+                                                        <i class="material-icons">border_color</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-save-trigger" style="display: none;">
+                                                        <i class="material-icons">done</i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="terms-cancel-trigger" style="display: none;">
+                                                        <i class="material-icons">cancel</i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

@@ -18,4 +18,26 @@ class Proforma extends Model
     public function performa_items(){
         return $this->hasMany('App\Models\ProformaProduct','performa_id');
     }
+    public function proFormaShippingDetails(){
+        return $this->hasMany('App\Models\ProFormaShippingDetails');
+    }
+    public function proFormaAdvisingBank(){
+        return $this->hasOne('App\Models\ProFormaAdvisingBank');
+    }
+    public function proFormaShippingFiles(){
+        return $this->hasMany('App\Models\ProFormaShippingFile');
+    }
+    public function proFormaSignature(){
+        return $this->hasOne('App\Models\ProFormaSignature');
+    }
+    public function businessProfile(){
+        return $this->belongsTo('App\Models\BusinessProfile');
+    }
+    public function paymentTerm(){
+        return $this->belongsTo('App\Models\PaymentTerm');
+    }
+    public function shipmentTerm(){
+        return $this->belongsTo('App\Models\ShipmentTerm');
+    }
+    
 }

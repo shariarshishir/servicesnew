@@ -295,6 +295,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');
     Route::post('/po/store', [PoController::class,'store'])->name('po.store');
     Route::get('/po',[PoController::class,'index'])->name('po.index');
+    Route::get('/product-list-by-business-profile-id', [PoController::class, 'getProductListByBuisnessProfileId'])->name('product_list.by_profile_id');
     Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat'])->name('getsupplierbycat');
     Route::get('/open-proforma-single-html/{id}', [PoController::class, 'openProformaSingleHtml'])->name('open.proforma.single.html');
     Route::post('/pro-forma-invoice-accept', [PoController::class, 'acceptProformaInvoice'])->name('accept.proforma.invoice');

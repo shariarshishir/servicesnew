@@ -34,6 +34,14 @@
                 <div class="col-md-12 admin_business_profile_details">
                     <div class="card">
                         <legend>Business Profile Details</legend>
+                        <div class="show_on_spot_light">
+                            @if($business_profile->is_spotlight == 1)
+                            <input type="checkbox" name="is_spotlight" value="{{ $business_profile->is_spotlight ? 1 : 0 }}" class="checkbox-spotlight" data-businessprofileid="{{$business_profile->id}}" checked="checked" />
+                            @else
+                            <input type="checkbox" name="is_spotlight" value="{{ $business_profile->is_spotlight ? 1 : 0 }}" class="checkbox-spotlight" data-businessprofileid="{{$business_profile->id}}" />
+                            @endif
+                            Show on spotlight
+                        </div>
 
                         <div id="company_overview">
                             <label>Company Overview</label>
@@ -685,7 +693,7 @@
                         @endif
 
                         @if($business_profile->is_business_profile_verified == 0)
-                        <a href="javascript:void(0)" class="btn_green verification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="1">Click to verify this profile</a>
+                        <a href="javascript:void(0)" class="btn_green verification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="1" data-spotlight="0">Click to verify this profile</a>
                         @else
                         <a href="javascript:void(0)" class="btn btn-danger unverification_trigger_from_backend" data-businessprofileid="{{$business_profile->id}}" data-companyid="{{$business_profile->companyOverview->id}}" data-verified="0">Click to unverify this profile</a>
                         @endif
@@ -704,6 +712,55 @@
 @push('js')
 <script>
     $(document).ready(function(){
+
+        $('.checkbox-spotlight').on('change', function() {
+            var url = '{{ route("business.profile.spotlight") }}';
+            var spotlightVal = $(this).val();
+            var profileId = $(this).attr("data-businessprofileid");
+            if(spotlightVal == 0) {
+                if (confirm('Are you sure? You want to show this profile in spotlight section?'))
+                {
+                    $.ajax({
+                        method: 'get',
+                        data: {spotlightVal:spotlightVal, profileId:profileId},
+                        url: url,
+                        beforeSend: function() {
+                            $('.loading-message').html("Please Wait.");
+                            $('#loadingProgressContainer').show();
+                        },
+                        success:function(data)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            //window.location.reload();
+                            //alert("Successfull.");
+                        }
+                    });
+                }
+            } else {
+                if (confirm('Are you sure? You want to remove this profile from spotlight section?'))
+                {
+                    $.ajax({
+                        method: 'get',
+                        data: {spotlightVal:spotlightVal, profileId:profileId},
+                        url: url,
+                        beforeSend: function() {
+                            $('.loading-message').html("Please Wait.");
+                            $('#loadingProgressContainer').show();
+                        },
+                        success:function(data)
+                        {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            //window.location.reload();
+                            //alert("Successfull.");
+                        }
+                    });
+                }                
+            }
+            
+        });
+
         $('.verification_trigger_from_backend').on('click',function(){
             //e.preventDefault();
             var url = '{{ route("business.profile.verify") }}';

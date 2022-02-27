@@ -716,7 +716,7 @@ class BusinessProfileController extends Controller
     }
 
     public function verifyBusinessProfile(Request $request) {
-        //dd($request->verifyVal);
+        //dd($request->all());
 
         // start update company overview table data and company_overview column in business_profile_verifications table
         if($request->verifyVal == 1)
@@ -785,5 +785,24 @@ class BusinessProfileController extends Controller
         $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::latest()->paginate(10);
        
         return view('admin.business_profile_verification_request.index',compact('businessProfileVerificationsRequest'));
+    }
+
+    public function spotlightBusinessProfile(Request $request) {
+        //dd($request->all());
+        
+        if($request->spotlightVal == 1) 
+        {
+            $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
+            $businessProfile->is_spotlight = 0;
+            $businessProfile->save();
+        } 
+        else 
+        {
+            $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
+            $businessProfile->is_spotlight = 1;
+            $businessProfile->save();
+        }
+        
+        return response()->json(["status"=>1, "message"=>"successful"]);
     }
 }

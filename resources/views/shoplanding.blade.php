@@ -154,7 +154,7 @@
               <div class="col s12 m6">
                 <div class="sourcing_info_box">
                     <h1><span> Bring the <span style="font-weight: 600;">Sourcing</span> <br/>
-                    in your <span style="font-weight: 600;">Pocket</span></h1>
+                    to your <span style="font-weight: 600;">Pocket</span></h1>
                     <p>Everything you need for your Apparel Business.</p>
                     <p><span style="font-weight: 600;">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
                 </div>

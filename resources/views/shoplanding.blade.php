@@ -171,7 +171,7 @@
               </div>
               <div class="col s12 m6">
                     <div class="sourcing_img_box">
-                        <img alt="" src="{{asset('images/frontendimages/new-home/sourcing-img.jpg')}}" />
+                        <img alt="" src="{{asset('images/frontendimages/new-home/sourcing-img.png')}}" />
                     </div>
               </div>
             </div>

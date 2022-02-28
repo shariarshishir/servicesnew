@@ -1,50 +1,53 @@
 @if(count($products)>0)
-    <div class="mainContainer">
-        <div class="container">
-            <div class="product_wrapper">
-                <h3>All Products</h3>
-                <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
-                    @foreach ($products  as $list )
+    <!-- <div class="mainContainer">
+        <div class="container"></div>
+    </div> -->
 
-                        <div class="col m4 productBox">
-                            <div class="favorite">
-                                @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))
-                                    <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));"  class="product-add-wishlist active">
-                                        <i class="material-icons dp48">favorite</i>
-                                    </a>
-                                @else
-                                    <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));" class="product-add-wishlist">
-                                        <i class="material-icons dp48">favorite</i>
-                                    </a>
-                                @endif
-                            </div>
+    <div class="product_wrapper">
+        <h3>All Products</h3>
+        <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
+            @foreach ($products  as $list )
 
-                            @php
-                                if($list->flag == 'shop'){
-                                    $title=$list->name;
-                                    if($list->images()->exists()){
-                                        $img= asset('storage').'/'.$list->images[0]->image;
-                                    }else{
-                                        $img= asset('storage').'/'.'images/supplier.png';
-                                    }
-
+                <div class="col s6 m4">
+                    <div class="productBox">
+                        <div class="favorite">
+                            @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))
+                                <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));"  class="product-add-wishlist active">
+                                    <i class="material-icons dp48">favorite</i>
+                                </a>
+                            @else
+                                <a href="javascript:void(0);" onclick="addToWishList('{{$list->flag}}', '{{$list->id}}', $(this));" class="product-add-wishlist">
+                                    <i class="material-icons dp48">favorite</i>
+                                </a>
+                            @endif
+                        </div>
+                        @php
+                            if($list->flag == 'shop'){
+                                $title=$list->name;
+                                if($list->images()->exists()){
+                                    $img= asset('storage').'/'.$list->images[0]->image;
                                 }else{
-                                    $title=$list->title;
-                                    if($list->product_images()->exists()){
-                                        $img= asset('storage').'/'.$list->product_images[0]->product_image;
-                                    }else{
-                                        $img= asset('storage').'/'.'images/supplier.png';
-                                    }
-
+                                    $img= asset('storage').'/'.'images/supplier.png';
                                 }
-                            @endphp
 
-                            <div class="inner_productBox">
-                                <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
-                                <div class="products_inner_textbox">
+                            }else{
+                                $title=$list->title;
+                                if($list->product_images()->exists()){
+                                    $img= asset('storage').'/'.$list->product_images[0]->product_image;
+                                }else{
+                                    $img= asset('storage').'/'.'images/supplier.png';
+                                }
+
+                            }
+                        @endphp
+
+                        <div class="inner_productBox">
+                            <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
+                            <div class="products_inner_textbox">
+                                <a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >
                                     <div class="priceBox row">
-                                        <div class="col s5 m5 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">Apparel</a></div>
-                                        <div class="price col s7 m7 right-align moq-value">
+                                        <div class="col s12 m4 apperal">Apparel</div>
+                                        <div class="price col s12 m8 right-align moq-value">
                                             @if($list->flag == 'mb') $ {{$list->price_per_unit}} / {{$list->qty_unit}} @endif
                                             @if($list->flag == 'shop')
                                                 @php
@@ -69,35 +72,44 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">{{$title}}</a></h4>
+
+                                    <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4> -->
+                                    <h4>{{$title}}</h4>
+
                                     @if(isset($list->moq))
                                         <div class="product_moq">MOQ: {{$list->moq}}</div>
                                     @endif
                                     @if(isset($list->lead_time))
                                         <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
                                     @endif
-                                </div>
-                                
+                                </a> 
                             </div>
-
-                            <!-- <div class="inner_productBox">
-                                <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
-                                <h4>{{$title}}</h4>
-                                <div class="moqBox">MOQ: {{$list->moq}}</div>
-                                <div class="moq_view_details">
-                                    <a class="moq_buss_name moq_left left" href="{{ route("supplier.profile",$list->businessProfile->alias) }}">{{$list->businessProfile->business_name}}</a>
-                                    <a class="moq_view moq_right right" href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">View Details </a>
-                                </div>
-                            </div> -->
-
+                            
                         </div>
 
-                    @endforeach
+
+                    </div>
+                    
+
+                    
+
+                    <!-- <div class="inner_productBox">
+                        <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
+                        <h4>{{$title}}</h4>
+                        <div class="moqBox">MOQ: {{$list->moq}}</div>
+                        <div class="moq_view_details">
+                            <a class="moq_buss_name moq_left left" href="{{ route("supplier.profile",$list->businessProfile->alias) }}">{{$list->businessProfile->business_name}}</a>
+                            <a class="moq_view moq_right right" href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">View Details </a>
+                        </div>
+                    </div> -->
 
                 </div>
-            </div>
+
+            @endforeach
+
         </div>
     </div>
+
     <div class="pagination-block-wrapper">
         <div class="col s12 center">
             {!! $products->appends(request()->query())->links() !!}

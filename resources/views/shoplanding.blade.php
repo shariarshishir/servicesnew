@@ -74,11 +74,11 @@
                         <div class="provide_items_box provide_left">
                             <h3><span>For Buyers</span></h3>
                             <ul>
-                                <li><a href="javascript:void(0);">Find vetted manufacturers</a></li>
-                                <li><a href="javascript:void(0);">Find manufacturers for low MOQ</a></li>
-                                <li><a href="javascript:void(0);">Source textiles and accessories</a></li>
-                                <li><a href="javascript:void(0);">Source with shortest lead time</a></li>
-                                <li><a href="javascript:void(0);">Manage orders with transparency</a></li>
+                                <li>Find Vetted Manufacturers</li>
+                                <li>Find Manufacturers for Low MOQ</li>
+                                <li>Source Textiles and Accessories</li>
+                                <li>Source with Shortest Lead Time</li>
+                                <li>Manage Orders with Transparency</li>
                             </ul>
                         </div>
                     </div>
@@ -86,11 +86,11 @@
                         <div class="provide_items_box">
                             <h3><span>For Suppliers</span></h3>
                             <ul>
-                                <li><a href="javascript:void(0);">Create and promote your Digital Presence</a></li>
-                                <li><a href="javascript:void(0);">Create your Digital Product Library</a></li>
-                                <li><a href="javascript:void(0);">Source raw materials at best deal</a></li>
-                                <li><a href="javascript:void(0);">Be data driven with Smart BI Tools</a></li>
-                                <li><a href="javascript:void(0);">Manage orders with efficiency</a></li>
+                                <li>Create And Promote Your Digital Presence</li>
+                                <li>Create Your Digital Product Library</li>
+                                <li>Source Raw Materials at Best Deal</li>
+                                <li>Be Data Driven with Smart Bi Tools</li>
+                                <li>Manage Orders with Efficiency</li>
                             </ul>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                 <div class="sourcing_apps_box">
                     <h3>Download the App</h3>
                     <div class="apps_wrap">
-                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=da"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /> </a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /> </a>
                         <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /> </a>
                     </div>
                 </div>

@@ -100,8 +100,8 @@
                 </div>
                 <div class="col s12 m6 l4">
                     <div class="footer_apps_box">
-                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /></a>
-                        <a href="javascript:void(0);"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /></a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,8 @@
     $factory_category = array_key_exists('factory_category', app('request')->input())?app('request')->input('factory_category'): '';
     $price_minimum_range = array_key_exists('price_minimum_range', app('request')->input())?app('request')->input('price_minimum_range'): '';
     $price_maximum_range = array_key_exists('price_maximum_range', app('request')->input())?app('request')->input('price_maximum_range'): '';
+    $gender = array_key_exists('gender', app('request')->input())?app('request')->input('gender'): [];
+    $sample_availability = array_key_exists('sample_availability', app('request')->input())?app('request')->input('sample_availability'): [];
 
 
 
@@ -115,19 +117,19 @@
                                         <h4>Gender</h4>
                                         <p>
                                             <label>
-                                                <input class="btn_radio" type="checkbox" value="male"  name="gender[]"  onclick="this.form.submit();"/>
+                                                <input class="btn_radio" type="checkbox" value="1"  name="gender[]" {{in_array(1, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
                                                 <span>Male</span>
                                             </label>
                                         </p>
                                         <p>
                                             <label>
-                                                <input class="btn_radio" type="checkbox" value="female"  name="gender[]"  onclick="this.form.submit();"/>
+                                                <input class="btn_radio" type="checkbox" value="2"  name="gender[]" {{in_array(2, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
                                                 <span>Female</span>
                                             </label>
                                         </p>
                                         <p>
                                             <label>
-                                                <input class="btn_radio" type="checkbox" value="unisex"  name="gender[]"  onclick="this.form.submit();"/>
+                                                <input class="btn_radio" type="checkbox" value="3"  name="gender[]" {{in_array(3, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
                                                 <span>Unisex</span>
                                             </label>
                                         </p>
@@ -138,13 +140,13 @@
                                         <h4>Sample availability</h4>
                                         <p>
                                             <label>
-                                                <input class="btn_radio" type="checkbox" value="yes"  name="sample_availability[]"  onclick="this.form.submit();"/>
+                                                <input class="btn_radio" type="checkbox" value="1"  name="sample_availability[]"  {{in_array(1, $sample_availability) ? 'checked' : ''}} onclick="this.form.submit();"/>
                                                 <span>Yes</span>
                                             </label>
                                         </p>
                                         <p>
                                             <label>
-                                                <input class="btn_radio" type="checkbox" value="no"  name="sample_availability[]"  onclick="this.form.submit();"/>
+                                                <input class="btn_radio" type="checkbox" value="0"  name="sample_availability[]" {{in_array(0, $sample_availability) ? 'checked' : ''}}  onclick="this.form.submit();"/>
                                                 <span>No</span>
                                             </label>
                                         </p>
@@ -170,7 +172,7 @@
                                         Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}} of  {{$products->total()}} results
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="prodcuts-list">
                                 @include('product._all_product_data')

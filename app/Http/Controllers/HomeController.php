@@ -110,6 +110,18 @@ class HomeController extends Controller
 
         }
 
+        if(isset($request->gender)){
+
+            $merged = $merged->whereIn('gender', $request->gender);
+            $merged->all();
+        }
+
+        if(isset($request->sample_availability)){
+
+            $merged = $merged->whereIn('sample_availability', $request->sample_availability);
+            $merged->all();
+        }
+
 
 
         $page = Paginator::resolveCurrentPage() ?: 1;

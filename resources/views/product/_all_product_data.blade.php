@@ -43,7 +43,14 @@
                                 <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
                                 <div class="products_inner_textbox">
                                     <div class="priceBox row">
-                                        <div class="col s5 m5 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">Apparel</a></div>
+                                        <div class="col s5 m5 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
+                                            @if($list->flag == 'mb')
+                                                {{ucfirst($list->category->name)}}
+                                            @else
+                                                {{$list->product_type == 3 ? 'Non-Clothing' : 'Apparel'}}
+                                            @endif
+
+                                        </a></div>
                                         <div class="price col s7 m7 right-align moq-value">
                                             @if($list->flag == 'mb') $ {{$list->price_per_unit}} / {{$list->qty_unit}} @endif
                                             @if($list->flag == 'shop')
@@ -77,7 +84,7 @@
                                         <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
                                     @endif
                                 </div>
-                                
+
                             </div>
 
                             <!-- <div class="inner_productBox">

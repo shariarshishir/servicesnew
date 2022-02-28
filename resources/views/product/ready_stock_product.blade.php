@@ -10,6 +10,7 @@
                     <div class="col s12 m3 left-column">
                         <div class="products_filter_list">
                             <h3>Filter by</h3>
+                            
                             <a class='btn_green btn_clear' href=""> Reset </a>
                         </div>
                     </div>

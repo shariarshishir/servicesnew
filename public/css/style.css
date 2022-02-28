@@ -8182,8 +8182,8 @@ nav .pagination li.active .page-link {
 .products_filter_list h4 {
     font-size: 16px;
     color: #464545;
-    font-weight: 400;
-    margin-bottom: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
 }
 .products_filter_list .filter_box {
     padding-bottom: 30px;
@@ -8273,6 +8273,11 @@ nav .pagination li.active .page-link {
     display: inline-block;
     width: 100%;
 }
+.products_filter_search_wrap .filter_search {
+    display: block;
+    width: 100%;
+    float: left;
+}
 .products_filter_search_wrap .filter_search_inputbox {
     width: 600px;
     float: right;
@@ -8336,11 +8341,16 @@ nav .pagination li.active .page-link {
     height: 50px;
     line-height: 68px;
 }
+
 .products_filter_wrapper .productBox .imgBox img {
     max-height: 150px;
 }
 .products_filter_wrapper .show-total-results {
-    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: right;
+    float: left;
+    width: 100%;
+    font-size: 14px;
 }
 
 .filter_search_inputbox .typeahead {
@@ -8378,8 +8388,7 @@ nav .pagination li.active .page-link {
 }
 
 .productBox .priceBox {
-    padding: 20px 10px 0px;
-    width: 100%;
+
 }
 .productBox h4{
     padding-left: 10px;
@@ -8390,13 +8399,49 @@ nav .pagination li.active .page-link {
     box-shadow: none;
 }
 
-
-
 /* products_filter_boxwrap css style end */
 /* ******************** products_filter css style end ******************** */
 
 
-
+/* live_market css style start */
+.live_market {
+    position: fixed;
+    left: 0;
+    bottom: 150px;
+    z-index: 9;
+    text-align: center;
+}
+.live_market a {
+    display: inline-block;
+    background: #54A958;
+    padding: 3px 10px 3px 4px;
+    border-radius: 0 5px 5px 0;
+    position: relative;
+}
+.live_market a {
+    color: #ffffff;
+}
+.live_market a .material-icons {
+    font-size: 16px;
+    line-height: 18px;
+}
+.live_market a span{
+    display: block;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 12px;
+    margin-top: -5px;
+}
+.live_market a .live-img {
+    width: 10px;
+    position: absolute;
+    right: 3px;
+    top: 7px;
+}
+.live_market a .live-img img {
+    border-radius: 10px;
+}
+/* live_market css style end */
 
 
 

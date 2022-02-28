@@ -156,20 +156,21 @@
                         </div>
                         <div class="col s12 m9 content-column">
                             <div class="show-product-results-wrapper products_filter_search_wrap">
+                                <div class="filter_search">
+                                    <form action="{{route('products')}}" method="get">
+                                        <div class="filter_search_inputbox">
+                                            <i class="material-icons">search</i>
+                                            <input class="filter_search_input " type="text" name="product_name" placeholder="Type product name" value="{{$product_name}}">
+                                            <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
+                                        </div>
+                                    </form>
+                                </div>
                                 <div class="show-product-results-inside-wrapper">
-                                    <div class="show-total-results right-align">
+                                    <div class="show-total-results">
                                         Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}} of  {{$products->total()}} results
                                     </div>
                                 </div>
-                                <div class="filter_search">
-                                        <form action="{{route('products')}}" method="get">
-                                            <div class="filter_search_inputbox">
-                                                <i class="material-icons">search</i>
-                                                <input class="filter_search_input " type="text" name="product_name" placeholder="Type product name" value="{{$product_name}}">
-                                                <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
-                                            </div>
-                                        </form>
-                                </div>
+                                
                             </div>
                             <div class="prodcuts-list">
                                 @include('product._all_product_data')

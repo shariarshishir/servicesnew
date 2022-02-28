@@ -1,3 +1,12 @@
+<!-- live_market section start -->
+<div class="live_market">
+    <a href="https://live.merchantbay.com/" target="_blank">
+        <i class="material-icons">live_tv</i>
+        <span>Live Market</span>
+        <span class="live-img"> <img src="{{asset('images/frontendimages/new-home/live-img.gif')}}" /></images> </span>
+    </a>
+</div>
+<!-- live_market section end -->
 <!-- Footer section start -->
 <footer class="footer_wrap">
     @if(request()->route()->getName() == 'home')

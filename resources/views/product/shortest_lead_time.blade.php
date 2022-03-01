@@ -177,10 +177,16 @@
                                                             <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
 
                                                             @if(isset($product->moq))
-                                                                <div class="product_moq">MOQ: {{$product->moq}}</div>
+                                                                <div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
                                                             @endif
                                                             @if(isset($product->lead_time))
-                                                                <div class="product_lead_time">Lead time: {{$product->lead_time}}</div>
+                                                                <div class="product_lead_time">Lead time:
+                                                                    @php
+                                                                        $pattern= '/[^0-9\-]/';
+                                                                        $preg_replace= preg_replace($pattern, '', $product->lead_time);
+                                                                    @endphp
+                                                                    {{$preg_replace}} days
+                                                                </div>
                                                             @endif
                                                             {{-- <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
                                                                 <div class="priceBox row">

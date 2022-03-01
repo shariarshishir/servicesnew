@@ -49,11 +49,12 @@
                                 <h4><a href="{{route('productdetails',$product->sku)}}" > {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}</a></h4>
 
                                 @if(isset($product->moq))
-                                    <div class="product_moq">MOQ: {{$product->moq}}</div>
+                                    <div class="product_moq">MOQ: {{$product->moq}} {{$product->product_unit}}</div>
                                 @endif
                                 @if($product->product_type == 1)
                                     <div class="product_lead_time">Lead time:
-                                        @php
+                                        {{getLeadTime($product)}}
+                                        {{-- @php
                                             $count= count(json_decode($product->attribute));
                                             $count = $count-2;
                                         @endphp
@@ -71,7 +72,7 @@
                                                         @endif
                                                 @endforeach
                                             @endif
-                                        @endforeach
+                                        @endforeach --}}
                                     </div>
                                 @endif
                             </a>

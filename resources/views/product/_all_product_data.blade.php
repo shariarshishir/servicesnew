@@ -44,16 +44,16 @@
                         <div class="inner_productBox">
                             <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
                             <div class="products_inner_textbox">
-                                <a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >
                                     <div class="priceBox row">
-                                        <div class="col s12 m4 apperal"><a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
-                                            @if($list->flag == 'mb')
-                                                {{ucfirst($list->category->name)}}
-                                            @else
-                                                {{$list->product_type == 3 ? 'Non-Clothing' : 'Apparel'}}
-                                            @endif
-
-                                        </a></div>
+                                        <div class="col s12 m4 apperal">
+                                            <a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
+                                                @if($list->flag == 'mb')
+                                                    {{ucfirst($list->category->name)}}
+                                                @else
+                                                    {{$list->product_type == 3 ? 'Non-Clothing' : 'Apparel'}}
+                                                @endif
+                                            </a>
+                                        </div>
                                         <div class="price col s12 m8 right-align moq-value">
                                             @if($list->flag == 'mb') $ {{$list->price_per_unit}} / {{$list->qty_unit}} @endif
                                             @if($list->flag == 'shop')
@@ -80,16 +80,37 @@
                                         </div>
                                     </div>
 
-                                    <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4> -->
-                                    <h4>{{$title}}</h4>
-
+                                    <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4>
                                     @if(isset($list->moq))
                                         <div class="product_moq">MOQ: {{$list->moq}}</div>
                                     @endif
-                                    @if(isset($list->lead_time))
+                                    @if($list->flag == 'mb')
                                         <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
+                                    @else
+                                        @if($list->product_type == 1)
+                                            <div class="product_lead_time">Lead time:
+                                                @php
+                                                $count= count(json_decode($list->attribute));
+                                                $count = $count-2;
+                                                @endphp
+                                                @foreach (json_decode($list->attribute) as $k => $v)
+                                                    @if($k == 0 && $v[2] == 'Negotiable')
+                                                    {{$v[3]}}
+                                                    @endif
+                                                    @if($loop->last && $v[2] != 'Negotiable')
+                                                        {{ $v[3] }}
+                                                    @endif
+                                                    @if($loop->last && $v[2] == 'Negotiable')
+                                                        @foreach (json_decode($list->attribute) as $k => $v)
+                                                                @if($k == $count)
+                                                                    {{ $v[3]  }}
+                                                                @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     @endif
-                                </a>
                             </div>
 
                         </div>

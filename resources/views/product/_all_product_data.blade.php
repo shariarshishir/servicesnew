@@ -55,7 +55,7 @@
                                             </a>
                                         </div>
                                         <div class="price col s12 m8 right-align moq-value">
-                                            @if($list->flag == 'mb') $ {{$list->price_per_unit}} / {{$list->qty_unit}} @endif
+                                            @if($list->flag == 'mb') $ {{$list->price_per_unit}}/<span class="unit"> {{$list->qty_unit}} @endif </span>
                                             @if($list->flag == 'shop')
                                                 @php
                                                     $count= count(json_decode($list->attribute));

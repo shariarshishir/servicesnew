@@ -18,7 +18,7 @@
 
             <div class="products_filter_wrapper">
                 <div class="row">
-                    <div class="col s12 m3 left-column">
+                    <div class="col s12 m12 l3 left-column">
                         <div class="products_filter_list">
                             <h3>Filter by</h3>
                             <form action="{{route('shortest.lead.time')}}" method="get" id="product_filter_form">
@@ -120,7 +120,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col s12 m9 content-column">
+                    <div class="col s12 m12 l9 content-column">
                         <div class="show-product-results-wrapper products_filter_search_wrap">
                             <div class="filter_search">
                                 <form action="" method="get">
@@ -170,7 +170,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="price col s12 m8 right-align moq-value">
-                                                                $ {{$product->price_per_unit}} / {{$product->qty_unit}}
+                                                                    $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
                                                                 </div>
                                                             </div>
 

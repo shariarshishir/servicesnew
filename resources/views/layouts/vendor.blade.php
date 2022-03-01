@@ -4,7 +4,7 @@
   @include('include.admin._head')
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" itemscope="" itemtype="https://schema.org/WebPage">
 <div class="wrapper">
 
   <!-- Navbar -->

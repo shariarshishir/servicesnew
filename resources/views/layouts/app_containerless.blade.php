@@ -3,7 +3,7 @@
 <head>
 @include('include._head')
 </head>
-<body>
+<body itemscope="" itemtype="https://schema.org/WebPage">
 {{-- For loader --}}
 <div class="overlay"></div>
 <div id="loadingProgressContainer" style="display: none;">
@@ -18,7 +18,7 @@
 <!-- /.Header -->
 
 <!-- Content Wrapper. Contains page content -->
-<div id="main">
+<div id="main" itemprop="mainEntity">
   <div class="row">
       @yield('content')
   </div>

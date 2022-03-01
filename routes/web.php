@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ShipmentTypeController;
 use App\Http\Controllers\Admin\ShipmentTermController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
+use App\Http\Controllers\Admin\ProFormaTermAndConditionController;
 use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
@@ -449,6 +450,9 @@ Route::group(['prefix'=>'/admin'],function (){
 
         // Blogs api start
         Route::resource('blogs', BlogController::class);
+
+        //profroma terms and conditions
+        Route::resource('proforma-terms-and-conditions', ProFormaTermAndConditionController::class);
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');

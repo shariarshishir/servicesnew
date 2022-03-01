@@ -122,6 +122,12 @@
                             <p>Shipping Type</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('proforma-terms-and-conditions.index')}}" class="nav-link {{ Route::is('profroma-terms-and-conditions*') ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Proforma terms and conditions</p>
+                        </a>
+                    </li>
                 </ul>
           </li>
           <li class="nav-item">

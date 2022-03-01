@@ -6,7 +6,7 @@
     // socket.on('connect', function(data) {
     //     //alert('connect');
     // });
-    var selectedBuyerId = "{{ request()->route()->parameters['id'] }}";
+    var selectedBuyerId = "{{ request()->route()->parameters['id'] ??$po->buyer_id }}";
     //alert(selectedBuyerId);
     var allbuyer = @json($buyers);
     var unit = '';
@@ -330,35 +330,53 @@
         $(el).parent().parent().remove();
     }
 
+    function addMoreTermAndCondition()
+    {
+        
+                                                    
+        var html  = '<li class="list-group-item ">';
+            html += '<div class="input-group input-field">';
+            html += '<input class="form-control" type="text"  name="terms_conditions[]" placeholder="Terms and condition" value="">';
+            html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeTermAndCondition(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+            html += '</li>';
+            $('.more-term-and-condition-unorder-list').append(html);
+    }
+    function removeTermAndCondition(el)
+    {
+        $(el).parent().remove();
+    }
+
+
+    
     $(document).ready(function(){
-        $(".terms-edit-trigger").click(function(){
-            $(this).hide();
-            $(this).closest(".input-group").find(".terms-label").hide();
-            $(this).closest(".input-group").find(".terms-edit-field").show();
-            $(this).closest(".input-group").find(".terms-save-trigger").show();
-            $(this).closest(".input-group").find(".terms-cancel-trigger").show();
-        });
+            $(document).on('click', '.terms-edit-trigger' , function(){ 
+                $(this).hide();
+                $(this).closest(".input-group").find(".terms-label").hide();
+                $(this).closest(".input-group").find(".terms-edit-field").show();
+                $(this).closest(".input-group").find(".terms-save-trigger").show();
+                $(this).closest(".input-group").find(".terms-cancel-trigger").show();
+            });
 
-        $(".terms-cancel-trigger").click(function(){
-            $(this).hide();
-            $(this).closest(".input-group").find(".terms-save-trigger").hide();
-            $(this).closest(".input-group").find(".terms-edit-trigger").show();
-            $(this).closest(".input-group").find(".terms-edit-field").hide();
-            $(this).closest(".input-group").find(".terms-label").show();
-        });
+            $(document).on('click', '.terms-cancel-trigger' , function(){
+                $(this).hide();
+                $(this).closest(".input-group").find(".terms-save-trigger").hide();
+                $(this).closest(".input-group").find(".terms-edit-trigger").show();
+                $(this).closest(".input-group").find(".terms-edit-field").hide();
+                $(this).closest(".input-group").find(".terms-label").show();
+            });
 
-        $(".terms-save-trigger").click(function(){
-            $(this).hide();
-            $(this).closest(".input-group").find(".terms-cancel-trigger").hide();
-            $(this).closest(".input-group").find(".terms-edit-trigger").show();
-            $(this).closest(".input-group").find(".terms-edit-field").hide();
-            $(this).closest(".input-group").find(".terms-label").show();
+            $(document).on('click', '.terms-save-trigger' , function(){
+                $(this).hide();
+                $(this).closest(".input-group").find(".terms-cancel-trigger").hide();
+                $(this).closest(".input-group").find(".terms-edit-trigger").show();
+                $(this).closest(".input-group").find(".terms-edit-field").hide();
+                $(this).closest(".input-group").find(".terms-label").show();
 
-            inputVal = $(this).closest(".input-group").find(".terms-edit-value-field").val();
-            $(this).closest(".input-group").find(".terms-label span").text(inputVal);
-            $(this).closest(".input-group").find(".terms-label .checkbox").val(inputVal);
-            
-        });
+                inputVal = $(this).closest(".input-group").find(".terms-edit-value-field").val();
+                $(this).closest(".input-group").find(".terms-label span").text(inputVal);
+                $(this).closest(".input-group").find(".terms-label .checkbox").val(inputVal);
+                
+            });
 
         // $(".buyerOptionsList").click(function(){
         //     $.ajax({

@@ -22,7 +22,10 @@ use App\Models\ProFormaSignature;
 use App\Models\ShipmentType;
 use App\Models\UOM;
 use App\Models\ProformaProduct;
+use App\Models\ProFormaTermAndCondition;
+use App\Models\SupplierCheckedProFormaTermAndCondition;
 use Carbon\Carbon;
+use App\Events\NewProfromaInvoiceHasCreatedEvent;
 
 use PDF;
 
@@ -109,9 +112,10 @@ class PoController extends Controller
         $shippingMethods = ShippingMethod::latest()->get();
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();
+        $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
         $businessProfileList = BusinessProfile::select('id','business_name')->where('user_id', $user->id)->where('business_type',1)->get();
 
-		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms','businessProfileList'));
+		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms','businessProfileList','proFormaTermAndConditions'));
 	}
 
     public function getsupplierbycat($id)
@@ -182,6 +186,14 @@ class PoController extends Controller
                 $proFormaShippingDetails->save();
             }
 
+            foreach($request->input('fixed_terms_conditions') as $key => $value)
+            {
+                $supplierCheckedProFormaTermAndCondition = new SupplierCheckedProFormaTermAndCondition;
+                $supplierCheckedProFormaTermAndCondition->proforma_id = $data->id;
+                $supplierCheckedProFormaTermAndCondition->pro_forma_term_and_condition_id = $request->input('fixed_terms_conditions')[$key];
+                $supplierCheckedProFormaTermAndCondition->save();
+            }
+
             if($request->hasFile('shipping_details_files')){
 
                 foreach( $request->file('shipping_details_files')  as $key => $file)
@@ -221,6 +233,8 @@ class PoController extends Controller
             $proFormaAdvisingBank->bank_address = $request->input('bank_address');
             $proFormaAdvisingBank->swift_code = $request->input('swift_code');
             $proFormaAdvisingBank->save();
+
+            event(new NewProfromaInvoiceHasCreatedEvent($data));
             
 
         // } catch (\Exception $e) {
@@ -260,7 +274,8 @@ class PoController extends Controller
     public function openProformaSingleHtml($id)
     {
         $users[] = auth()->id();
-        $po = Proforma::with('performa_items','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile')->where('id', $id)->first();
+        $po = Proforma::with('performa_items','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
+        $conditionArray = [];
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
         $supplierInfo = User::where('id', $po->created_by)->first();
         return view('my_order.inquiries._open_proforma_single_html',compact('po','users','supplierInfo','totalInvoice'));
@@ -268,10 +283,12 @@ class PoController extends Controller
 
     public function acceptProformaInvoice(Request $request)
     {
-        //Performa::where('id', $request->input('proforma_id'))->update(['po_no' => $request->input('po_id'), 'status' => 1]);
 
         Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'status' => 1]);
-
+        return response()->json([
+            'success' => $request
+        ]);
+        //Performa::where('id', $request->input('proforma_id'))->update(['po_no' => $request->input('po_id'), 'status' => 1]);
         //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');
         //return redirect()->action('RFQController@proformainvoices');
         //$test = $request->proforma_id;
@@ -295,14 +312,13 @@ class PoController extends Controller
         } else {
             abort(404);
         }*/
-        return response()->json([
-            'success' => $request
-        ]);
+        
     }
 
     public function rejectProformaInvoice(Request $request)
     {
          Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'reject_message' => $request->reject_message, 'status' => -1]);
+         return redirect()->route("po.index");
 
          //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');
          //return redirect()->action('RFQController@proformainvoices');
@@ -328,9 +344,9 @@ class PoController extends Controller
         //      abort(404);
         //  }
 
-         return response()->json([
-             'success' => $request
-         ]);
+        //  return response()->json([
+        //      'success' => $request
+        //  ]);
     }
 
     public function proformaInvoices()
@@ -392,48 +408,16 @@ class PoController extends Controller
 
     public function edit(Request $request)
     {
-        // $user=Auth::user();
-
-		// $allbuyers = User::where([['user_type','buyer'],['is_verified',1]])->with('profile.membership')->get();
-		// $allproducts = Product::where([['created_by', $user->id]])->with('user')->get();
-		// $selectedproduct = Performa::where('id', $request->poid)->with('performa_items')->get();
-		// //$selectedproduct2 = Performa::where('id', $poid)->with('performa_items')->get()[0];
-		// //echo "<pre>"; print_r($allbuyers); exit();
-		// $buyers = [];
-		// $products = [];
-		// foreach($allbuyers as $buy)
-		// {
-		// 	$buyers[] = [
-		// 					'name' => $buy->name,
-		// 					'id' => $buy->id,
-		// 					'street' => @$buy->profile['contact_info']['street'],
-		// 					'city' => @$buy->profile['contact_info']['city'],
-		// 					'state' => @$buy->profile['contact_info']['state'],
-		// 					'country' => @$buy->profile['contact_info']['region'],
-		// 					'zipcode' => @$buy->profile['contact_info']['zipCode']
-		// 				];
-		// }
-		// foreach($allproducts as $prod)
-		// {
-		// 	$products[] = $prod->id .'_'. $prod->title;
-		// }
-		// //sort($products);
-
-		// return view('po.edit',compact('buyers','products','selectedproduct'));
-
-
+        
         $user=Auth::user();
-        $business_profile=BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
+        $business_profile = BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
         $business_profile_id=[];
         foreach($business_profile as $profile){
             array_push($business_profile_id, $profile->id);
         }
-		//$allbuyers = MerchantAssistanceRequest::with('product','buyer')->where('status','request')->groupBy('buyer_id')->get();
-		// $allbuyers = User::where([['user_type','buyer'],['is_verified',1]])->with('profile.membership')->get();
+
         $allbuyers = User::where([['user_type','buyer'],['is_email_verified',1]])->with('businessProfile')->get();
-		//$allproducts = Product::with('product_images')->get()->unique('title');
 		$allproducts = Product::whereIn('business_profile_id', $business_profile_id)->with('user')->latest()->get(['id','title']);
-        $selectedproduct = Proforma::where('id', $request->poid)->with('performa_items')->get();
 		$buyers = [];
 		$products = [];
 		foreach($allbuyers as $buy)
@@ -448,17 +432,18 @@ class PoController extends Controller
 							'zipcode' => 'zip_code'
 						];
 		}
-		// foreach($allproducts as $prod)
-		// {
-		// 	$products['title'] = $prod->title;
-        //     $products['id'] = $prod->id;
-		// }
-		// sort($products);
-        foreach($allproducts as $prod)
-		{
-			$products[] = $prod->id .'_'. $prod->title;
-		}
-
-		return view('po.edit',compact('buyers','products','selectedproduct'));
+		
+        $products = $allproducts;
+        $paymentTerms = PaymentTerm::latest()->get();
+        $shipmentTerms = ShipmentTerm::latest()->get();
+        $shippingMethods = ShippingMethod::latest()->get();
+        $shipmentTypes = ShipmentType::latest()->get();
+        $uoms = UOM::latest()->get();
+        $businessProfileList = BusinessProfile::select('id','business_name')->where('user_id', $user->id)->where('business_type',1)->get();
+        $po = Proforma::with('performa_items','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $request->poid)->first();
+        $supplierCheckedProFormaTermAndConditions = SupplierCheckedProFormaTermAndCondition::where('proforma_id',$request->poid)->pluck('pro_forma_term_and_condition_id')->toArray();
+        $totalInvoice = ProformaProduct::where('performa_id',$request->poid)->sum('tax_total_price');
+        $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
+		return view('po.edit',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms','businessProfileList','po','totalInvoice','proFormaTermAndConditions','supplierCheckedProFormaTermAndConditions'));
     }
 }

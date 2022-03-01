@@ -27,6 +27,9 @@ class Proforma extends Model
     public function proFormaShippingFiles(){
         return $this->hasMany('App\Models\ProFormaShippingFile');
     }
+    public function supplierCheckedProFormaTermAndConditions(){
+        return $this->hasMany('App\Models\SupplierCheckedProFormaTermAndCondition');
+    }
     public function proFormaSignature(){
         return $this->hasOne('App\Models\ProFormaSignature');
     }

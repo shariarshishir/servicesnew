@@ -924,12 +924,7 @@ legend {
     overflow: hidden;
     margin: 0;
 }
-.product_moq,
-.product_lead_time {
-    font-size: 14px;
-    font-weight: 500;
-    color: #484848;
-}
+
 .product_slider .productBox h4,
 .product_slider .productBox h4 a {
     margin-bottom: 0;
@@ -1014,8 +1009,8 @@ legend {
 
 .product_wrapper .productBox .favorite {
     position: absolute;
-    right: 8px;
-    top: 8px;
+    right: 6px;
+    top: 5px;
     z-index: 1;
     height: 25px;
 }
@@ -8398,10 +8393,37 @@ nav .pagination li.active .page-link {
 }
 
 .products_filter_wrapper .price_negotiable {
-    font-size: 15px;
-    color: #54A958;
+    font-size: 16px;
+    color: #0A0A0A;
     font-weight: 500;
 }
+
+.products_filter_wrapper .priceBox .moq-value, 
+.products_filter_wrapper .priceBox .lead-time-value {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+}
+.products_filter_wrapper .priceBox .price {
+    font-size: 20px;
+}
+.products_filter_wrapper .priceBox .moq-value .unit {
+    font-size: 11px;
+    font-weight: 300;
+    margin-left: -3px;
+}
+
+.products_filter_wrapper .product_moq,
+.products_filter_wrapper .product_lead_time {
+    font-size: 14px;
+    font-weight: 500;
+    color: #484848;
+}
+.products_filter_wrapper .product_moq {
+    padding-top: 10px;
+}
+
+
 /* products_filter_boxwrap css style end */
 /* ******************** products_filter css style end ******************** */
 
@@ -9854,6 +9876,14 @@ nav .pagination li.active .page-link {
     .products_filter_wrapper .productBox .priceBox .price {
         text-align: left;
         padding-top: 10px;
+    }
+
+    .products_filter_list {
+        margin-bottom: 65px;
+    }
+
+    .products_filter_search_wrap .filter_search_inputbox {
+        width: 100%;
     }
     
 

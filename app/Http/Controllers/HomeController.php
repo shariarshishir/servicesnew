@@ -22,6 +22,7 @@ use Helper;
 use DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\Paginator;
+use App\Models\Manufacture\ProductCategory as ManufatureProductCategeory;
 
 
 class HomeController extends Controller
@@ -110,6 +111,18 @@ class HomeController extends Controller
 
         }
 
+        if(isset($request->gender)){
+
+            $merged = $merged->whereIn('gender', $request->gender);
+            $merged->all();
+        }
+
+        if(isset($request->sample_availability)){
+
+            $merged = $merged->whereIn('sample_availability', $request->sample_availability);
+            $merged->all();
+        }
+
 
 
         $page = Paginator::resolveCurrentPage() ?: 1;
@@ -178,10 +191,52 @@ class HomeController extends Controller
     }
     //end products category
     //start readystock products
-    public function readyStockProducts()
+    public function readyStockProducts(Request $request)
     {
-        $products = Product::latest()->with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
-        return view('product.ready_stock_product',compact('products'));
+        $product_category= ProductCategory::all();
+        $price_id=[];
+        if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+            $products = Product::latest()->with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            foreach($products as $q){
+                foreach(json_decode($q->attribute) as $price){
+                    if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
+                        array_push($price_id, $q->id);
+                    }
+                }
+            }
+
+        }
+
+        $products=Product::latest()->with(['images','businessProfile','category'])->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request, $price_id){
+
+            if(isset($request->product_name)){
+                $query->where('name', 'like', '%'.$request->product_name.'%')->get();
+            }
+            if(isset($request->location)){
+                $query->whereHas('businessProfile', function ($sub_query) use ($request) {
+                    $sub_query->where('location', $request->location);
+                })->get();
+            }
+            if(isset($request->product_category)){
+                $query->whereHas('category', function ($sub_query) use ($request) {
+                    $sub_query->where('id', $request->product_category);
+                })->get();
+            }
+            if(isset($request->gender)){
+                $query->whereIn('gender', $request->gender)->get();
+            }
+            if(isset($request->sample_availability)){
+                $query->whereIn('sample_availability', $request->sample_availability)->get();
+            }
+            if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+
+                $query->whereIn('id', $price_id)->get();
+            }
+
+
+        })->paginate(12);
+
+        return view('product.ready_stock_product',compact('products', 'product_category'));
     }
 
     public function readyStockProductsByCategory($slug)
@@ -224,17 +279,129 @@ class HomeController extends Controller
     //end readystock products
 
     //customizable products
-    public function customizable()
+    public function customizable(Request $request)
     {
-        $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
-        return view('product.customizable',compact('products'));
+       // $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+        $product_category= ProductCategory::all();
+        $price_id=[];
+        $lead_time=[];
+        if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+            $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            foreach($products as $q){
+                foreach(json_decode($q->attribute) as $price){
+                    if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
+                        array_push($price_id, $q->id);
+                    }
+                }
+            }
+
+        }
+
+        if(isset($request->lead_minimum_range) && isset($request->lead_maximum_range)){
+            $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            foreach($products as $q){
+                foreach(json_decode($q->attribute) as $price){
+                    if (  $price[3] >= $request->lead_minimum_range && $price[3] <= $request->lead_maximum_range){
+                        array_push($lead_time, $q->id);
+                    }
+                }
+            }
+
+        }
+        $products=Product::latest()->with(['images','businessProfile','category'])->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request,$price_id,$lead_time){
+
+             if(isset($request->product_name)){
+                 $query->where('name', 'like', '%'.$request->product_name.'%')->get();
+             }
+             if(isset($request->location)){
+                 $query->whereHas('businessProfile', function ($sub_query) use ($request) {
+                     $sub_query->where('location', $request->location);
+                 })->get();
+             }
+             if(isset($request->product_category)){
+                 $query->whereHas('category', function ($sub_query) use ($request) {
+                     $sub_query->where('id', $request->product_category);
+                 })->get();
+             }
+             if(isset($request->gender)){
+                 $query->whereIn('gender', $request->gender)->get();
+             }
+             if(isset($request->sample_availability)){
+                $query->whereIn('sample_availability', $request->sample_availability)->get();
+            }
+             if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+                $query->whereIn('id', $price_id)->get();
+            }
+            if(isset($request->lead_minimum_range) && isset($request->lead_maximum_range)){
+                $query->whereIn('id', $lead_time)->get();
+            }
+
+         })->paginate(12);
+        return view('product.customizable',compact('products','product_category'));
     }
 
    //start buy design products
-    public function buyDesignsProducts()
+    public function buyDesignsProducts(Request $request)
     {
-        $products = Product::latest()->with('images')->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
-        return view('product.buy_design_product',compact('products'));
+        $product_category= ProductCategory::all();
+        $price_id=[];
+        $lead_time=[];
+        if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+            $products = Product::latest()->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            foreach($products as $q){
+                foreach(json_decode($q->attribute) as $price){
+                    if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
+                        array_push($price_id, $q->id);
+                    }
+                }
+            }
+
+        }
+
+        if(isset($request->lead_minimum_range) && isset($request->lead_maximum_range)){
+            $products = Product::latest()->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            foreach($products as $q){
+                foreach(json_decode($q->attribute) as $price){
+                    if (  $price[3] >= $request->lead_minimum_range && $price[3] <= $request->lead_maximum_range){
+                        array_push($lead_time, $q->id);
+                    }
+                }
+            }
+
+        }
+        $products=Product::latest()->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request,$price_id, $lead_time){
+
+             if(isset($request->product_name)){
+                 $query->where('name', 'like', '%'.$request->product_name.'%')->get();
+             }
+             if(isset($request->location)){
+                 $query->whereHas('businessProfile', function ($sub_query) use ($request) {
+                     $sub_query->where('location', $request->location);
+                 })->get();
+             }
+             if(isset($request->product_category)){
+                 $query->whereHas('category', function ($sub_query) use ($request) {
+                     $sub_query->where('id', $request->product_category);
+                 })->get();
+             }
+             if(isset($request->gender)){
+                 $query->whereIn('gender', $request->gender)->get();
+             }
+             if(isset($request->sample_availability)){
+                $query->whereIn('sample_availability', $request->sample_availability)->get();
+            }
+            if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+
+                $query->whereIn('id', $price_id)->get();
+            }
+            if(isset($request->lead_minimum_range) && isset($request->lead_maximum_range)){
+
+                $query->whereIn('id', $lead_time)->get();
+            }
+
+
+         })->paginate(12);
+        return view('product.buy_design_product',compact('products', 'product_category'));
     }
 
     public function buyDesignProductsByCategory($slug)
@@ -799,14 +966,82 @@ class HomeController extends Controller
         // return $collection;
     }
 
-    public function lowMoq()
+    public function lowMoq(Request $request)
     {
         $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
         $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
         $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
-        // $sorted=$merged->sortBy('moq');
-        // $low_moq= $sorted->values()->all();
-        // $object = (object) $low_moq;
+
+        if(isset($request->product_name)){
+            $search=$request->product_name;
+            $merged = $merged->filter(function($item) use ($search) {
+                if($item->flag == 'mb'){
+                    return stripos($item['title'],$search) !== false;
+                }
+                return stripos($item['name'],$search) !== false;
+            });
+        }
+        if(isset($request->product_type)){
+            $array=$request->product_type;
+            if(in_array(2, $request->product_type)){
+                array_push($array, '3');
+            }
+            $merged = $merged->whereIn('product_type', $array);
+            $merged->all();
+        }
+
+        if(isset($request->location)){
+            $search=$request->location;
+            $merged = $merged->filter(function($item) use ($search) {
+                    return stripos($item->businessProfile->location,$search) !== false;
+            });
+        }
+
+        if(isset($request->product_category)){
+            $merged = $merged->where('flag', 'shop')->where('product_category_id', $request->product_category);
+            $merged->all();
+        }
+
+        if(isset($request->factory_category)){
+            $merged = $merged->where('flag', 'mb')->where('product_category', $request->factory_category);
+            $merged->all();
+        }
+
+        if(isset($request->lead_minimum_range) &&  isset($request->lead_maximum_range)){
+
+            $merged = $merged->where('flag', 'mb')->whereBetween('lead_time', [$request->lead_minimum_range, $request->lead_maximum_range]);
+            $merged->all();
+        }
+
+        if(isset($request->price_minimum_range) &&  isset($request->price_maximum_range)){
+            $price_id=[];
+            foreach($merged as $product){
+                if($product->flag == 'shop' && isset($product->attribute)){
+                    foreach(json_decode($product->attribute) as $price)
+                    {
+                        if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
+                            array_push($price_id,$product->id);
+                        }
+                    }
+                }
+            }
+            $merged = $merged->where('flag', 'shop')->whereIn('id', $price_id);
+            $merged->all();
+
+        }
+
+        if(isset($request->gender)){
+
+            $merged = $merged->whereIn('gender', $request->gender);
+            $merged->all();
+        }
+
+        if(isset($request->sample_availability)){
+
+            $merged = $merged->whereIn('sample_availability', $request->sample_availability);
+            $merged->all();
+        }
+
         $page = Paginator::resolveCurrentPage() ?: 1;
         $perPage = 12;
         $low_moq_lists = new \Illuminate\Pagination\LengthAwarePaginator(
@@ -816,7 +1051,8 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-        return view('product.low_moq',compact('low_moq_lists'));
+        $product_category= ProductCategory::all();
+        return view('product.low_moq',compact('low_moq_lists','product_category'));
     }
     //low moq details
     public function mixProductDetails($flag, $id)
@@ -875,10 +1111,49 @@ class HomeController extends Controller
         }
     }
     //shortest lead time
-    public function shortestLeadTime()
+    public function shortestLeadTime(Request $request)
     {
-        $products=ManufactureProduct::latest()->with(['product_images','businessProfile'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->paginate(12);
-        return view('product.shortest_lead_time',compact('products'));
+        $product_category= ManufatureProductCategeory::all();
+        $location_id=[];
+        if(isset($request->location)){
+            $products=ManufactureProduct::latest()->with(['product_images','businessProfile','category'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->get();
+            foreach($products as $p){
+                if($p->businessProfile->location == $request->location){
+                    array_push($location_id,$p->id);
+                }
+            }
+         }
+        $products=ManufactureProduct::latest()->with(['product_images','businessProfile','category'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->where(function($query) use ($request, $location_id){
+
+             if(isset($request->product_name)){
+                 $query->where('title', 'like', '%'.$request->product_name.'%')->get();
+             }
+             if(isset($request->location)){
+                $query->whereIn('id',$location_id)->get();
+             }
+             if(isset($request->product_category)){
+                 $query->whereHas('category', function ($sub_query) use ($request) {
+                     $sub_query->where('id', $request->product_category);
+                 })->get();
+             }
+             if(isset($request->gender)){
+                 $query->whereIn('gender', $request->gender)->get();
+             }
+             if(isset($request->sample_availability)){
+                $query->whereIn('sample_availability', $request->sample_availability)->get();
+            }
+            if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
+                $query->whereBetween('price_per_unit', [$request->price_minimum_range,$request->price_maximum_range])->get();
+
+            }
+            if(isset($request->lead_minimum_range) && isset($request->lead_maximum_range)){
+                $query->whereBetween('lead_time', [$request->lead_minimum_range,$request->lead_maximum_range])->get();
+            }
+
+
+         })->paginate(12);
+         //return $products;
+        return view('product.shortest_lead_time',compact('products', 'product_category'));
     }
 
     public function studio3dPage(){

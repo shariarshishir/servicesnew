@@ -135,6 +135,8 @@ class ProductController extends Controller
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
 
 
         ],[
@@ -282,6 +284,8 @@ class ProductController extends Controller
                 'full_stock_price' =>  $full_stock_price,
                 'full_stock_negotiable' => $full_stock_negotiable,
                 'customize'      => isset($request->customize) ? true : false,
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
                 'created_by'  => auth()->id(),
 
            ]);
@@ -392,6 +396,8 @@ class ProductController extends Controller
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->p_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
 
         ],[
             'non_clothing_availability.required_if' => 'The  availability field is required when product type is Non Clothing.',
@@ -506,6 +512,8 @@ class ProductController extends Controller
                     'full_stock_negotiable' => $full_stock_negotiable,
                     'customize'      => isset($request->customize) ? true : false,
                     'updated_by'  => auth()->id(),
+                    'gender'     => $request->gender,
+                    'sample_availability' =>$request->sample_availability,
             ]);
             $product=Product::withTrashed()->where('sku',$sku)->first();
             // $user=User::where('id',auth()->id())->first();

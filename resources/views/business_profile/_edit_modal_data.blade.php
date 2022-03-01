@@ -164,6 +164,49 @@
                 <span class="text-danger error-text lead_time_error rm-error"></span>
             </div>
         </div>
+
+        {{-- gender --}}
+        <div class="row input-field ">
+            <div class="col s12 m3 l3">
+                <label for="gender">Gender<span class="text-danger">*</span></label>
+                <span class="text-danger error-text gender_error rm-error"></span>
+            </div>
+            <div class="col s12 m9 l9">
+                <div class="radio-block">
+                    <label class="radio_box">
+                        <input class="with-gap" name="gender" type="radio" value="1" {{$product->gender == 1 ? 'checked' : ''}} />
+                        <span>Male</span>
+                    </label>
+                    <label class="radio_box">
+                        <input class="with-gap" name="gender" type="radio" value="2"  {{$product->gender == 2 ? 'checked' : ''}}/>
+                        <span>Female</span>
+                    </label>
+                    <label class="radio_box">
+                        <input class="with-gap" name="gender" type="radio" value="3" {{$product->gender == 3 ? 'checked' : ''}}/>
+                        <span>Unisex</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        {{-- sample availability --}}
+        <div class="row input-field ">
+            <div class="col s12 m3 l3">
+                <label for="sample_availability">Sample Availability <span class="text-danger">*</span></label>
+                <span class="text-danger error-text sample_availability_error rm-error"></span>
+            </div>
+            <div class="col s12 m9 l9">
+                <div class="radio-block">
+                    <label class="radio_box">
+                        <input class="with-gap" name="sample_availability" type="radio" value="1" {{$product->sample_availability == 1 ? 'checked' : ''}}/>
+                        <span>Yes</span>
+                    </label>
+                    <label class="radio_box">
+                        <input class="with-gap" name="sample_availability" type="radio" value="0" {{$product->sample_availability == 0 ? 'checked' : ''}}/>
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="product_media_wrap row">
             <div class="col s12 input-field">
                 <label for="product-upload">

@@ -99,9 +99,10 @@ class RfqController extends Controller
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
 
-
         if(env('APP_ENV') == 'production')
         {
+            /* code using redis-cli
+
             $selectedUsersToSendMail = User::where('id','<>',auth()->id())->get();
             foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
                 NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
@@ -109,7 +110,16 @@ class RfqController extends Controller
 
             $selectedUserToSendMail="success@merchantbay.com";
             NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
-        }
+
+            */
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        }        
 
 
         $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";

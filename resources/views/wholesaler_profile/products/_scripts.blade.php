@@ -255,6 +255,7 @@
                 success:function(data)
                     {
                         //console.log(data);
+
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#product-edit-modal-block').modal('open');
@@ -289,6 +290,26 @@
                         $('#p-edit-name').val(data.product.name);
                         $('input[name=seller_p_edit_sku]').val(data.product.sku);
                         $('input[name=p_type]').val(data.product.product_type);
+                        //gender
+                        if(data.product.gender ){
+                            if(data.product.gender == 1){
+                                $("#gender_male").prop('checked', true);
+                            }else if(data.product.gender == 2){
+                                $("#gender_female").prop('checked', true);
+                            }else if(data.product.gender == 3){
+                                $("#gender_unisex").prop('checked', true);
+                            }
+
+                        }else{
+                            $('#product-edit-modal-block input[name=gender]').prop('checked', false);
+                        }
+
+                        //sample_availability
+                        if(data.product.sample_availability == 1){
+                            $('#product-edit-modal-block #sample_availability_yes').prop('checked', true);
+                        }else{
+                            $('#product-edit-modal-block #sample_availability_no').prop('checked', true);
+                        }
 
                         if(data.product.is_new_arrival==1){
                             $('#product-edit-modal-block .edit_is_new_arrival').prop('checked', true);

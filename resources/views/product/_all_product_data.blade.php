@@ -45,7 +45,7 @@
                             <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
                             <div class="products_inner_textbox">
                                     <div class="priceBox row">
-                                        <div class="col s12 m4 apperal">
+                                        <div class="col s12 m12 l4 apperal">
                                             <a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
                                                 @if($list->flag == 'mb')
                                                     {{ucfirst($list->category->name)}}
@@ -54,8 +54,8 @@
                                                 @endif
                                             </a>
                                         </div>
-                                        <div class="price col s12 m8 right-align moq-value">
-                                            @if($list->flag == 'mb') $ {{$list->price_per_unit}}/<span class="unit"> {{$list->qty_unit}} @endif </span>
+                                        <div class="col s12 m12 l8 price">
+                                            @if($list->flag == 'mb') ${{$list->price_per_unit}}/<span class="unit"> {{$list->qty_unit}} @endif </span>
                                             @if($list->flag == 'shop')
                                                 @php
                                                     $count= count(json_decode($list->attribute));
@@ -66,12 +66,12 @@
                                                         <span class="price_negotiable">{{ 'Negotiable' }}</span>
                                                     @endif
                                                     @if($loop->last && $v[2] != 'Negotiable')
-                                                    $ {{ $v[2] }} / {{$list->product_unit}}{{-- $ is the value for price unite --}}
+                                                    ${{ $v[2] }} / {{$list->product_unit}}{{-- $ is the value for price unite --}}
                                                     @endif
                                                     @if($loop->last && $v[2] == 'Negotiable')
                                                         @foreach (json_decode($list->attribute) as $k => $v)
                                                                 @if($k == $count)
-                                                                $ {{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
+                                                                ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
                                                                 @endif
                                                         @endforeach
                                                     @endif

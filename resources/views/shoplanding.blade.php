@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="home_intro_left">
-                            <h1>Find your next Apparel Manufacturing Partner</h1>
+                            <h1>Find Your Next Apparel Manufacturing Partner</h1>
                             <p>Join the tech enabled fashion sourcing platform to connect <br/>
                                 directly with fashion manufacturers and <br/>
                                 wholesalers in BANGLADESH</p>
@@ -189,9 +189,9 @@
                     <div class="col s12 m6 landing_tools_right">
                         <div class="landing_tools_infobox">
                             <h1>Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h1>
-                            <p>Subscribe to the Smart Order Management Dashboard and different tools offered by Merchant Bay to make your operation data driven and transparent.</p>
+                            <p>Subscribe to the Smart Order Management Dashboard and a suit of BI tools offered by Merchant Bay to make your operation data driven and transparent.</p>
                             <div class="tools_button_box">
-                                <a href="https://omd.merchantbay.com/" class="btn_border_black">Explore MB Smart Tools</a>
+                                <a href="https://tools.merchantbay.com/" class="btn_border_black" target="_blank" >Explore MB Smart Tools</a>
                                 <!-- <button class="btn_green request_demo">Request a Demo</button> -->
                             </div>
                         </div>
@@ -203,7 +203,7 @@
         <div class="landing_request_wrap">
             <div class="container">
                 <div class="request_innter_box center-align">
-                    <h1>Want to get started real quick?</h1>
+                    <h1>Want to start real quick?</h1>
                     <h5>Submit a request for quotation enjoy sourcing <br/> from Bangladesh like never before</h5>
                     <div class="landing_request_img">
                         <img src="{{asset('images/frontendimages/new-home/landing-rfq.png')}}" alt="" />

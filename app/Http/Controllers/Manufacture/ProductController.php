@@ -40,6 +40,8 @@ class ProductController extends Controller
             'sizes'  => 'required',
             'product_images' => 'required',
             'price_per_unit'=> 'required',
+            'gender' => 'required',
+            'sample_availability' => 'required',
         ],[
             'price_per_unit.required' => 'The price range field is required.',
             'category_id.required' => 'The product category field is required',
@@ -72,6 +74,8 @@ class ProductController extends Controller
                 'price_unit'   => $request->price_unit,
                 'qty_unit'    =>$request->qty_unit,
                 'created_by' => auth()->id(),
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
 
             ];
             $product=Product::create($Data);
@@ -165,6 +169,8 @@ public function update(Request $request, $product_id)
         'product_specification'=>'required',
         'lead_time'=>'required',
         'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+        'gender' => 'required',
+        'sample_availability' => 'required',
     ],[
         'price_per_unit.required' => 'The price range field is required.',
         'category_id.required' => 'The product category field is required',
@@ -191,6 +197,8 @@ public function update(Request $request, $product_id)
         $product->colors=$request->colors ?? [];
         $product->sizes=$request->sizes ?? [];
         $product->lead_time=$request->lead_time;
+        $product->gender=$request->gender;
+        $product->sample_availability=$request->sample_availability;
         $product->save();
 
         if ($request->hasFile('product_images')){

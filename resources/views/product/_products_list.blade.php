@@ -19,7 +19,7 @@
                     @if($product->availability==0 && ($product->product_type==2 || $product->product_type==3))
                         <div class="sold-out">Sold Out</div>
                     @endif
-                    
+
                     <div class="inner_productBox">
                         <div class="imgBox">
                             @foreach($product->images as $key=>$image)
@@ -39,23 +39,40 @@
                         <div class="products_inner_textbox">
                             <a href="{{route('productdetails',$product->sku)}}">
                                 <div class="priceBox row">
-                                    <div class="col m5 s5 apperal">Apparel</div>
-                                    <!--div class="price col m7 s7 right-align">$26.50 <span>/pc</span></div-->
-                                    <div class="price col m7 s7 right-align">@include('product._product_price')</div>
+                                    <div class="col s12 m4 apperal">
+                                        <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
+                                            {{$product->product_type == 3 ? 'Non-Clothing' : 'Apparel'}}
+                                        </a>
+                                    </div>
+                                    <div class="price col s12 m8 right-align moq-value">@include('product._product_price')</div>
                                 </div>
-                                <h4>
-                                    @if($product->businessProfile()->exists())
-                                        {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
-                                    @else
-                                        {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
-                                    @endif
-                                </h4>
+                                <h4><a href="{{route('productdetails',$product->sku)}}" > {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}</a></h4>
 
-                                @if(isset($list->moq))
-                                    <div class="product_moq">MOQ: {{$list->moq}}</div>
+                                @if(isset($product->moq))
+                                    <div class="product_moq">MOQ: {{$product->moq}}</div>
                                 @endif
-                                @if(isset($list->lead_time))
-                                    <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
+                                @if($product->product_type == 1)
+                                    <div class="product_lead_time">Lead time:
+                                        @php
+                                            $count= count(json_decode($product->attribute));
+                                            $count = $count-2;
+                                        @endphp
+                                        @foreach (json_decode($product->attribute) as $k => $v)
+                                            @if($k == 0 && $v[2] == 'Negotiable')
+                                               {{$v[3]}} days
+                                            @endif
+                                            @if($loop->last && $v[2] != 'Negotiable')
+                                                {{ $v[3] }} days
+                                            @endif
+                                            @if($loop->last && $v[2] == 'Negotiable')
+                                                @foreach (json_decode($product->attribute) as $k => $v)
+                                                        @if($k == $count)
+                                                            {{ $v[3]  }} days
+                                                        @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 @endif
                             </a>
                         </div>
@@ -67,7 +84,7 @@
     </div>
     <div class="pagination-block-wrapper">
         <div class="col s12 center">
-            {!! $products->links() !!}
+            {!! $products->appends(request()->query())->links() !!}
         </div>
     </div>
 @else

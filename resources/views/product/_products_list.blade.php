@@ -2,7 +2,7 @@
 @if(count($products)>0)
     <div class="active_grid row ">
         @foreach($products as $key=>$product)
-            <div class="col s12 m4">
+            <div class="col s6 m4">
                 <div class="productBox">
                     <div class="favorite">
                         @if(in_array($product->id,$wishListShopProductsIds))
@@ -39,12 +39,12 @@
                         <div class="products_inner_textbox">
                             <a href="{{route('productdetails',$product->sku)}}">
                                 <div class="priceBox row">
-                                    <div class="col s12 m4 apperal">
+                                    <div class="col s12 m12 l4 apperal">
                                         <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
                                             {{$product->product_type == 3 ? 'Non-Clothing' : 'Apparel'}}
                                         </a>
                                     </div>
-                                    <div class="price col s12 m8 right-align moq-value">@include('product._product_price')</div>
+                                    <div class="col s12 m12 l8 price">@include('product._product_price')</div>
                                 </div>
                                 <h4><a href="{{route('productdetails',$product->sku)}}" > {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}</a></h4>
 

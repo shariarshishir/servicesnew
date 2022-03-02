@@ -164,12 +164,12 @@
                                                         </div>
                                                         <div class="products_inner_textbox">
                                                             <div class="priceBox row">
-                                                                <div class="col s12 m4 apperal">
+                                                                <div class="col s12 m12 l4 apperal">
                                                                     <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
                                                                             {{ucfirst($product->category->name)}}
                                                                     </a>
                                                                 </div>
-                                                                <div class="price col s12 m8 right-align moq-value">
+                                                                <div class="col s12 m12 l8 right-align price">
                                                                     $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
                                                                 </div>
                                                             </div>

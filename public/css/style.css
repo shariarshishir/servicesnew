@@ -932,9 +932,7 @@ legend {
 .productBox h4 a:hover {
     color: #54A958;
 }
-.low_moq_products_wrap .productBox h4 {
-    margin-bottom: 10px;
-}
+
 .low_moq_products_wrap .moqBox {
     font-size: 20px;
     font-weight: 500;
@@ -7994,10 +7992,11 @@ nav .pagination li.active .page-link {
 .landing_spotlight_top .spotlight_box {
     position: absolute;
     bottom: -35px;
+    z-index: 1;
 }
 
 .landing_spotlight_infoWrap {
-    background: url(../images/frontendimages/new-home/landing-spotlight-bg.jpg) no-repeat right center;
+    background: url(../images/frontendimages/new-home/spot-li.jpg) no-repeat right center;
     padding: 50px 0;
     background-size: cover;
     color: #ffffff;
@@ -8005,6 +8004,7 @@ nav .pagination li.active .page-link {
     line-height: 35px;
     font-weight: 300;
     min-height: 200px;
+    position: relative;
 }
 
 .landing_spotlight_wrap .spotlight_box img {
@@ -8132,6 +8132,15 @@ nav .pagination li.active .page-link {
 
 .landing_page_wrapper .carousel.carousel-slider {
     min-height: 490px !important;
+}
+
+.landing_spotlight_infoWrap .spotlight_overlay {
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 /* ************New Landing page design style end**************** */
 
@@ -8382,7 +8391,7 @@ nav .pagination li.active .page-link {
     border-radius: 10px;
     position: relative;
     background: #eee;
-    height: 345px;
+    height: 335px;
 }
 
 .products_filter_wrapper .productBox .imgBox {
@@ -8405,12 +8414,14 @@ nav .pagination li.active .page-link {
     text-align: right;
 }
 .products_filter_wrapper .priceBox .price {
-    font-size: 20px;
+    font-size: 16px;
+    text-align: right;
+    line-height: 22px;
 }
-.products_filter_wrapper .priceBox .moq-value .unit {
+.products_filter_wrapper .products_inner_textbox .unit {
     font-size: 11px;
     font-weight: 300;
-    margin-left: -3px;
+    margin-left: -2px;
 }
 
 .products_filter_wrapper .product_moq,
@@ -8711,7 +8722,7 @@ nav .pagination li.active .page-link {
     .productBox h4, .productBox h4 a {
         font-size: 14px;
         line-height: 20px;
-        margin-bottom: 5px;
+        height: auto;
     }
     .suppliers_container .suppliers_filter_wrap {
         text-align: center;
@@ -9165,6 +9176,9 @@ nav .pagination li.active .page-link {
     .products_filter_list .filter_min_max input {
         height: 37px;
     }
+    .products_filter_wrapper .priceBox .price {
+        font-size: 14px;
+    }
 
 }
 
@@ -9236,7 +9250,7 @@ nav .pagination li.active .page-link {
         line-height: 29px;
     }
     .product_wrapper .active_grid .productBox {
-        height: 315px;
+        /* height: 315px; */
     }
     .wholesaler_product_wrap .product_item_box {
         width: 33% !important;
@@ -9872,18 +9886,16 @@ nav .pagination li.active .page-link {
     .products_filter_wrapper .productBox .priceBox {
         padding-top: 10px;
     }
-
-    .products_filter_wrapper .productBox .priceBox .price {
-        text-align: left;
-        padding-top: 10px;
-    }
-
     .products_filter_list {
         margin-bottom: 65px;
     }
 
     .products_filter_search_wrap .filter_search_inputbox {
         width: 100%;
+    }
+    .products_filter_wrapper .priceBox .price {
+        text-align: left;
+        padding-top: 10px;
     }
     
 
@@ -10829,10 +10841,10 @@ nav .pagination li.active .page-link {
     }
     .product_wrapper .shortest_lead_product_wrap .col.s12.m4.l3,
     .product_wrapper .active_grid .col.s12 {
-        text-align: center;
+        /* text-align: center; */
     }
     .product_wrapper .active_grid .productBox {
-        height: 300px;
+        /* height: 300px; */
     }
     .modal .modal-content .container {
         padding: 0 !important;
@@ -11012,6 +11024,12 @@ nav .pagination li.active .page-link {
         max-width: 230px;
     }
 
+    
+    .products_filter_wrapper .productBox {
+        height: 335px;
+    }
+
+
 
 }
 
@@ -11047,7 +11065,7 @@ nav .pagination li.active .page-link {
         /* padding-bottom: 15px !important; */
     }
     .product_wrapper .active_grid .productBox {
-        height: 268px;
+        /* height: 268px; */
     }
     .purchase_order_top td strong {
         font-size: 20px !important;
@@ -11429,7 +11447,11 @@ nav .pagination li.active .page-link {
     #products .manufacture-product-table-data .col.s12.m4.l3 {
         width: 100% !important;
     }
-    
+
+    .product_wrapper .active_grid .productBox {
+        height: auto;
+    }
+
 
 }
 

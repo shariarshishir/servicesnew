@@ -109,6 +109,7 @@
                 </div>
             </div>
             <div class="landing_spotlight_infoWrap">
+                <div class="spotlight_overlay"></div>
                 <div class="container">
                     @php 
                         $spotlightCount = 0;

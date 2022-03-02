@@ -1,8 +1,8 @@
 
 @if(count($products)>0)
-    <div class="active_grid row ">
+    <div class="active_grid product_boxwrap row ">
         @foreach($products as $key=>$product)
-            <div class="col s6 m4">
+            <div class="col s6 m4 filter_product_item">
                 <div class="productBox">
                     <div class="favorite">
                         @if(in_array($product->id,$wishListShopProductsIds))

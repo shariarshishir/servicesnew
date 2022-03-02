@@ -143,7 +143,7 @@
                                     <h3>Shortest Lead Time Products</h3>
                                     <div class="low_moq_products_wrap shortest_lead_product_wrap row">
                                         @foreach ($products as $product)
-                                            <div class="col s6 m4">
+                                            <div class="col s6 m4 filter_product_item">
                                                 <div class="productBox">
                                                     <div class="favorite">
                                                         @if(in_array($product->id,$wishListShopProductsIds) || in_array($product->id,$wishListMfProductsIds))

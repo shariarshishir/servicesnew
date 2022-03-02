@@ -158,11 +158,6 @@
                                         </tbody>
                                        
                                     </table>
-                                    <div class="shipping-files">
-                                        @foreach($po->proFormaShippingFiles as $image)
-                                            <div ><a href="" style="display:block"><img src="{{ asset('storage/'.$image->shipping_details_files) }}" class="img-responsive" alt=""></a></div>
-                                        @endforeach
-                                    </div>
                                 </div>
                                 
 
@@ -222,7 +217,7 @@
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
                                                     <label class="terms-label">
-                                                        <span>{{$supplierCheckedProFormaTermAndCondition->proFormaTermAndCondition->term_and_condition}}</span>
+                                                        <span class="material-icons"> check </span> <span>{{$supplierCheckedProFormaTermAndCondition->proFormaTermAndCondition->term_and_condition}}</span>
                                                     </label>
                                                 </div>
                                             </li>
@@ -234,7 +229,7 @@
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
                                                     <label class="terms-label">
-                                                        <span>{{$condition}}</span>
+                                                        <span class="material-icons"> check </span> <span>{{$condition}}</span>
                                                     </label>
                                                 </div>
                                             </li>
@@ -316,6 +311,15 @@
                 </article>
                 <!-- WIDGET END -->
             </div>
+
+            <div class="shipping-files">
+                <legend><span class="material-icons">attach_file</span> Attachment</legend>
+                <ul>
+                @foreach($po->proFormaShippingFiles as $image)
+                    <li><span class="material-icons"> insert_drive_file </span> {{ asset('storage/'.$image->shipping_details_files) }}</li>
+                @endforeach
+                </ul>
+            </div>            
 
             <!-- end row -->
 

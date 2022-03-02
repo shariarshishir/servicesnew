@@ -157,10 +157,10 @@
         </div>
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="lead_time">Lead time <span class="text-danger">*</span></label>
+                <label for="lead_time">Lead time (days) <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
-                <input type="text" name="lead_time" value="{{ $product->lead_time }}" id="lead_time" class="form-control" placeholder="days">
+                <input type="text" name="lead_time" value="{{ $product->lead_time }}" id="lead_time" class="form-control negitive-or-text-not-allowed" placeholder="days">
                 <span class="text-danger error-text lead_time_error rm-error"></span>
             </div>
         </div>

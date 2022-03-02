@@ -46,7 +46,7 @@
                             Uttara, Dhaka. </p>
                         </div>
                         <a href="https://www.google.com/maps/place/Merchant+Bay+Office/@23.8710895,90.3987335,17z/data=!3m1!4b1!4m5!3m4!1s0x3755c59804b59f57:0xa5156d3fe206198c!8m2!3d23.8710846!4d90.4009222" target="_blank" class="btn_direct btn_grBorder">Get Direction</a>
-                        
+
                         <!-- <a href="javascript:void(0);" class="btn_tour btn_lightgr">Virtual Tour</a> -->
                     </div>
                 </div>
@@ -1607,6 +1607,14 @@ function addToWishList(flag, id, obj){
         return false;
     })
 }
+
+//negetive or text not allowed
+$(document).on('keyup', '.negitive-or-text-not-allowed', function(){
+    //if(this.value<0 ){this.value= this.value * -1;}
+    if($.isNumeric(this.value ) == false || this.value<0){
+        this.value= '';
+    }
+});
 
 </script>
 

@@ -1,8 +1,8 @@
 
 @if(count($products)>0)
-    <div class="active_grid row ">
+    <div class="active_grid product_boxwrap row ">
         @foreach($products as $key=>$product)
-            <div class="col s6 m4">
+            <div class="col s6 m4 filter_product_item">
                 <div class="productBox">
                     <div class="favorite">
                         @if(in_array($product->id,$wishListShopProductsIds))
@@ -49,11 +49,12 @@
                                 <h4><a href="{{route('productdetails',$product->sku)}}" > {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}</a></h4>
 
                                 @if(isset($product->moq))
-                                    <div class="product_moq">MOQ: {{$product->moq}}</div>
+                                    <div class="product_moq">MOQ: {{$product->moq}} {{$product->product_unit}}</div>
                                 @endif
                                 @if($product->product_type == 1)
                                     <div class="product_lead_time">Lead time:
-                                        @php
+                                        {{getLeadTime($product)}}
+                                        {{-- @php
                                             $count= count(json_decode($product->attribute));
                                             $count = $count-2;
                                         @endphp
@@ -71,7 +72,7 @@
                                                         @endif
                                                 @endforeach
                                             @endif
-                                        @endforeach
+                                        @endforeach --}}
                                     </div>
                                 @endif
                             </a>

@@ -197,7 +197,7 @@
                                                         <th>Qty Min</th>
                                                         <th>Qty Max</th>
                                                         <th>Price (usd)</th>
-                                                        <th>Lead Time</th>
+                                                        <th>Lead Time (days)</th>
                                                         <th>&nbsp;</th>
                                                     </tr>
                                                 </thead>

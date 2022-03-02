@@ -925,13 +925,7 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
 
     }
 
-//negetive or text not allowed
-$(document).on('keyup', '.negitive-or-text-not-allowed', function(){
-    //if(this.value<0 ){this.value= this.value * -1;}
-    if($.isNumeric(this.value ) == false || this.value<0){
-        this.value= '';
-    }
-});
+
 
 
 </script>

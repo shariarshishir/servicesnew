@@ -143,7 +143,7 @@
                                     <h3>Shortest Lead Time Products</h3>
                                     <div class="low_moq_products_wrap shortest_lead_product_wrap row">
                                         @foreach ($products as $product)
-                                            <div class="col s6 m4">
+                                            <div class="col s6 m4 filter_product_item">
                                                 <div class="productBox">
                                                     <div class="favorite">
                                                         @if(in_array($product->id,$wishListShopProductsIds) || in_array($product->id,$wishListMfProductsIds))
@@ -177,10 +177,16 @@
                                                             <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
 
                                                             @if(isset($product->moq))
-                                                                <div class="product_moq">MOQ: {{$product->moq}}</div>
+                                                                <div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
                                                             @endif
                                                             @if(isset($product->lead_time))
-                                                                <div class="product_lead_time">Lead time: {{$product->lead_time}}</div>
+                                                                <div class="product_lead_time">Lead time:
+                                                                    @php
+                                                                        $pattern= '/[^0-9\-]/';
+                                                                        $preg_replace= preg_replace($pattern, '', $product->lead_time);
+                                                                    @endphp
+                                                                    {{$preg_replace}} days
+                                                                </div>
                                                             @endif
                                                             {{-- <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
                                                                 <div class="priceBox row">

@@ -107,8 +107,8 @@ class PoController extends Controller
 		}
 		
         $products = $allproducts;
-        $paymentTerms = PaymentTerm::latest()->get();
-        $shipmentTerms = ShipmentTerm::latest()->get();
+        $paymentTerms = PaymentTerm::get();
+        $shipmentTerms = ShipmentTerm::get();
         $shippingMethods = ShippingMethod::latest()->get();
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();
@@ -434,8 +434,8 @@ class PoController extends Controller
 		}
 		
         $products = $allproducts;
-        $paymentTerms = PaymentTerm::latest()->get();
-        $shipmentTerms = ShipmentTerm::latest()->get();
+        $paymentTerms = PaymentTerm::get();
+        $shipmentTerms = ShipmentTerm::get();
         $shippingMethods = ShippingMethod::latest()->get();
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();

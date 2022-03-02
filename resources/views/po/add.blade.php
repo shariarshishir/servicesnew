@@ -45,8 +45,8 @@
                                 <div class="row">
                                     <!-- <div class="col s12 m6 l6"> -->
                                     <div class="col s12 input-field">
-                                        <div class="col-md-6" id="buyerdata"></div>
-                                        <div class="col-md-6">
+                                        <div class="col m6" id="buyerdata"></div>
+                                        <div class="col m6">
                                             <div class="form-group has-feedback">
                                                 <label>Beneficiary</label>
                                                 <select name="business_profile_id" id="buyerOptionsList" class="form-control select2" onChange = "getProductListBybusinessProfileId(this.value)" required>
@@ -156,14 +156,14 @@
                                     <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%;">Shipping Method <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">Shipment Type <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">UOM <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;" >QTY <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
+                                                <th>UOM <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
+                                                <th>QTY <span class="required_star" style="color: red;">*</span></th>
                                                 <!-- <th style="width:15%;">Tax</th> -->
-                                                <th style="width:15%;">Total ($)</th>
-                                                <th style="width:5%; text-align:center;"></th>
+                                                <th>Total ($)</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody id="shipping-details-table-body" class="input-field">
@@ -249,14 +249,14 @@
                                     <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%;">Sl. No.</th>
-                                                <th style="width:15%;">Item / Description <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">Quantity <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">Unit Price <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">Sub Total <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Sl. No.</th>
+                                                <th>Item / Description <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Quantity <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Unit Price <span class="required_star" style="color: red;">*</span></th>
+                                                <th>Sub Total <span class="required_star" style="color: red;">*</span></th>
                                                 <!-- <th style="width:15%;">Tax</th> -->
-                                                <th style="width:15%;">Total Price </th>
-                                                <th style="width:5%; text-align:center;"></th>
+                                                <th>Total Price </th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody id="lineitems" class="input-field">
@@ -319,13 +319,13 @@
                                             @endforeach
                                         </ul>
                                         <h6>More terms & conditions</h6>
+                                        <a href="javascript:void(0);" class="ic-btn4" onclick="addMoreTermAndCondition()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a>
                                         <ul class="list-group terms-lists more-term-and-condition-unorder-list">
-                                            <li class="list-group-item ">
+                                            <!--li class="list-group-item ">
                                                 <div class="input-group input-field">
                                                     <input class="form-control" type="text"  name="terms_conditions[]" placeholder="Terms and condition" value="">
-                                                    <a href="javascript:void(0);" class="ic-btn4" onclick="addMoreTermAndCondition()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a>
                                                 </div>
-                                            </li>
+                                            </li-->
                                         </ul>
                                     </div>
                                 </div>

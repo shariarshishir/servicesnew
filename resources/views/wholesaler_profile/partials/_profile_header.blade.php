@@ -1,7 +1,8 @@
+<div itemscope itemtype="https://schema.org/Organization">
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
 	<div class="banner_overlay">
-		<h1>{{$business_profile->business_name}}</h1>
+		<h1 itemprop="legalName">{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		@if($business_profile->is_business_profile_verified == 1)
 		<div class="erified">
@@ -25,17 +26,17 @@
 						<div class="col s4 m6 l12 profile_left_pic_wrap">
 							<div class="profile_pic center-align">
 								@if(auth()->user()->image)
-								<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
+								<img itemprop="image" src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar">
 								@else
-								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+								<img itemprop="image" src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
 								@endif
 							</div>
 						</div>
 						<div class="col s8 m6 l12 profile_left_address_wrap">
 							<div class="office_address center-align ">
-								<h3>{{$business_profile->business_name}}</h3>
+								<h3 itemprop="legalName">{{$business_profile->business_name}}</h3>
 								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
-								<h4><span class="material-icons">pin_drop</span><span class="pro_location"> {{$business_profile->location}} </span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
+								<h4><span class="material-icons">pin_drop</span><span class="pro_location" itemprop="location" itemscope itemtype="https://schema.org/Place"> {{$business_profile->location}} </span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 							</div>
 						</div>
 					</div>
@@ -47,7 +48,7 @@
 						<span>Head Office </span><br/>
 						<div id="head-office">
 							@if($business_profile->companyOverview->address)
-								<p>{{$business_profile->companyOverview->address}}</p>
+								<p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">{{$business_profile->companyOverview->address}}</p>
 							@else
 							<div class="card-alert card cyan lighten-5">
 								<div class="card-content cyan-text">
@@ -61,7 +62,7 @@
 						<span>Factory Address</span> <br/>
 						<div id="factory-address">
 							@if($business_profile->companyOverview->factory_address)
-								<p>{{$business_profile->companyOverview->factory_address}}</p>
+								<p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">{{$business_profile->companyOverview->factory_address}}</p>
 							@else
 							<div class="card-alert card cyan lighten-5">
 								<div class="card-content cyan-text">

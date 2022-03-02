@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
 use App\Http\Controllers\Admin\ManageBusinessProfileController;
+use App\Http\Controllers\Admin\NewUserRequestController;
 use App\Http\Controllers\Admin\RfqController as AdminRfqController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
@@ -486,7 +487,9 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
         //rfq
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
-
+        //new users requests
+        Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
+        Route::get('new/user/request/edit/{id}', [NewUserRequestController::class, 'edit'])->name('new.user.request.edit');
 
     });
 

@@ -6536,10 +6536,17 @@ nav .pagination li.active .page-link {
 }
 #buyerdata h3 {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
+    color: #54A958;
+}
+
+#buyerdata address {
+    font-size: 16px;
 }
 .line_item_wrap {
-    padding: 50px 0;
+    padding: 50px 0 0;
+    display: inline-block;
+    width: 100%;
 }
 .required_star {
     color: rgb(255, 0, 0);
@@ -6547,10 +6554,24 @@ nav .pagination li.active .page-link {
 }
 .pro_porma_invoice .btn_green {
     height: 40px;
-    margin: 50px 0 0;
+    line-height: 28px;
+    padding-left: 10px;
 }
 .pro_porma_invoice .btn_green i {
-    margin-right: 10px;
+    margin-right: 5px;
+    float: left;
+    font-size: 20px;
+    margin-top: 4px;
+}
+
+.invoice_submit .btn_green .fa {
+    font-size: 16px !important;
+}
+.shipping_details_wrap .input-field {
+    margin-bottom: 40px;
+}
+.beneficiary_info_wrap .input-field:first-child {
+    margin-bottom: 40px;
 }
 .terms_conditions_list .form-control {
     float: left !important;
@@ -6573,6 +6594,81 @@ nav .pagination li.active .page-link {
 }
 .terms_conditions_list .input-group-prepend input {
     width: auto;
+}
+
+.invoice_container_wrap table thead tr th,
+.invoice_container_wrap .input-field label {
+    font-size: 14px;
+    padding-top: 0;
+}
+.invoice_container_wrap table thead tr th,
+.invoice_container_wrap table tr td {
+    width: 20%;
+
+}
+.invoice_container_wrap table #shipping-details-table-body input {
+    width: auto !important;
+}
+
+.invoice_container_wrap .invoice_terms_conditions {
+    padding: 50px 0;
+}
+.invoice_container_wrap .invoice_terms_conditions .list-group-item {
+    margin-bottom: 5px;
+}
+.invoice_container_wrap .invoice_terms_conditions .list-group-item .input-field {
+    margin-bottom: 0;
+}
+.more-term-and-condition-unorder-list .list-group-item {
+    display: inline-block;
+    width: 100%;
+}
+.more-term-and-condition-unorder-list .list-group-item input.form-control {
+    float: left;
+    width: 90% !important;
+}
+.more-term-and-condition-unorder-list .list-group-item .btn_delete {
+    float: right;
+}
+.more-term-and-condition-unorder-list .list-group-item .input-field {
+    margin-bottom: 0;
+}
+.invoice_terms_conditions .add_more_condi {
+    padding: 20px 0 0;
+}
+.invoice_terms_conditions .add_more_condi a {
+    font-weight: 600;
+}
+.invoice_terms_conditions .add_more_condi .fa {
+    font-size: 16px;
+    margin-right: 10px;
+}
+.more-term-and-condition-unorder-list {
+    padding-top: 20px;
+}
+
+.invoice_signature_wrap h6 {
+    font-size: 20px;
+    margin: 20px 0 50px;
+}
+.supplier_select_modal .btn_green  {
+    min-width: inherit;
+    padding: 8px 18px;
+    margin: 3px;
+}
+.shipment_file_upload_modal .file_upload {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 60px;
+}
+.shipment_file_upload_modal .add_more_box {
+    padding-top: 15px;
+}
+
+.pro_porma_invoice #lineitems a .fa {
+    font-size: 18px;
+    float: right;
 }
 
 /* ****************************** */

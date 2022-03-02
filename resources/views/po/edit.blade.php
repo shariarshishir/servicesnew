@@ -216,7 +216,7 @@
                                 </div>
                                 <a href="#modal1" class="waves-effect waves-light btn modal-trigger btn shipment-file-upload-trigger">Upload Files</a>
                                 <!-- Modal Structure -->
-                                <div id="modal1" class="modal">
+                                <div id="modal1" class="modal shipment_file_upload_modal">
                                     <div class="modal-content">
                                         <div class="shipment-file-upload--block">
                                             <div class="no_more_tables">
@@ -242,12 +242,15 @@
                                             <div class="add_more_box">
                                                 <a href="javascript:void(0);" class="add-more-block" onclick="addShippingDetailsFile()"><i class="material-icons dp48">add</i> Add More</a>
                                             </div>
-                                            
+                                            <div class="right-align">
+                                                <a href="javascript:void(0);" class="btn_green modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
-                                    </div>
+                                    <!-- <div class="modal-footer">
+                                        <a href="javascript:void(0);" class="btn_green modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+                                    </div> -->
                                 </div>
 
 
@@ -454,7 +457,7 @@
 
 </div>
 
-<div class="modal" id="selectcat">
+<div class="modal supplier_select_modal" id="selectcat">
 <div class="modal-dialog modal-xl" style="width:900px;">
     <div class="modal-content">
 

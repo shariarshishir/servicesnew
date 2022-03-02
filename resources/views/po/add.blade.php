@@ -42,7 +42,7 @@
                             <form action="{{route('po.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                                 <!-- <div style="padding-top: 30px;"></div> -->
-                                <div class="row">
+                                <div class="row beneficiary_info_wrap">
                                     <!-- <div class="col s12 m6 l6"> -->
                                     <div class="col s12 input-field">
                                         <div class="col m6" id="buyerdata"></div>
@@ -119,13 +119,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
-                                       
-                                       
                                     </div>
                                     <!-- </div> -->
                                 </div>
-                                <div class="line_item_wrap">
+                                <div class="line_item_wrap shipping_details_wrap">
                                     <legend>Shipping Details</legend>
                                     <div class="col s12 input-field">
                                         <div class="row">
@@ -207,9 +204,9 @@
                                        
                                     </table>
                                 </div>
-                                <a href="#modal1" class="waves-effect waves-light btn modal-trigger btn shipment-file-upload-trigger">Upload Files</a>
+                                <a href="#modal1" class="waves-effect waves-light modal-trigger btn_green shipment-file-upload-trigger"> <i class="material-icons"> attach_file </i> Attach file</a>
                                 <!-- Modal Structure -->
-                                <div id="modal1" class="modal">
+                                <div id="modal1" class="modal shipment_file_upload_modal" >
                                     <div class="modal-content">
                                         <div class="shipment-file-upload--block">
                                             <div class="no_more_tables">
@@ -225,7 +222,7 @@
                                                     <tr>
                                                         <td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
                                                         <td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
-                                                        <td><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>
+                                                        <td class="right-align"><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>
                                                     </tr>
                                                     
                                                     </tbody>
@@ -235,12 +232,16 @@
                                             <div class="add_more_box">
                                                 <a href="javascript:void(0);" class="add-more-block" onclick="addShippingDetailsFile()"><i class="material-icons dp48">add</i> Add More</a>
                                             </div>
+                                            <div class="right-align">
+                                                <a href="javascript:void(0);" class="btn_green modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+                                            </div>
+                                            
                                             
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
-                                    </div>
+                                    <!-- <div class="modal-footer">
+                                        <a href="javascript:void(0);" class="btn_green modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+                                    </div> -->
                                 </div>
 
 
@@ -318,8 +319,8 @@
                                             </li>
                                             @endforeach
                                         </ul>
-                                        <h6>More terms & conditions</h6>
-                                        <a href="javascript:void(0);" class="ic-btn4" onclick="addMoreTermAndCondition()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a>
+                                        <div class="add_more_condi"><span><a href="javascript:void(0);" class="ic-btn4" onclick="addMoreTermAndCondition()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i>More terms & conditions</a></span></div>
+                                        
                                         <ul class="list-group terms-lists more-term-and-condition-unorder-list">
                                             <!--li class="list-group-item ">
                                                 <div class="input-group input-field">
@@ -330,53 +331,49 @@
                                     </div>
                                 </div>
 
-                              
-
-                                <div class="invoice_terms_conditions">
-                                    <div class="col s12 input-field">
+                                <div class="invoice_advising_bank">
                                     <legend>Advising Bank</legend>
-                                        <div class="row">
-                                            <div class="col s6 m3">
-                                                <div class="form-group has-feedback">
-                                                    <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" name="bank_name" class="form-control" required/>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col s6 m3 input-field">
+                                            <div class="has-feedback">
+                                                <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <input type="text" name="bank_name" class="form-control" required/>
                                             </div>
-                                            <div class="col s6 m3">
-                                                <div class="form-group has-feedback">
-                                                    <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" name="branch_name" class="form-control" required />
-                                                </div>
+                                        </div>
+                                        <div class="col s6 m3 input-field">
+                                            <div class="has-feedback">
+                                                <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <input type="text" name="branch_name" class="form-control" required />
                                             </div>
-                                            <div class="col s6 m3">
-                                                <div class="form-group has-feedback">
-                                                    <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" name="bank_address" class="form-control" required />
-                                                </div>
+                                        </div>
+                                        <div class="col s6 m3 input-field">
+                                            <div class="has-feedback">
+                                                <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <input type="text" name="bank_address" class="form-control" required />
                                             </div>
-                                            <div class="col s6 m3">
-                                                <div class="form-group has-feedback">
-                                                    <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="text" name="swift_code" class="form-control" required />
-                                                </div>
+                                        </div>
+                                        <div class="col s6 m3 input-field">
+                                            <div class="has-feedback">
+                                                <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <input type="text" name="swift_code" class="form-control" required />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="line_item_wrap">
+                                <div class="line_item_wrap invoice_signature_wrap">
                                     <div class="col s12 input-field">
                                         <legend>Signature</legend>
-                                        <div class="col s6 input-field">
+                                        <div class="col s6">
                                             <h6>Buyer Side</h6>
                                             <div class="row">
-                                                <div class="col s12">
+                                                <div class="col s12 input-field">
                                                     <div class="form-group has-feedback">
                                                         <label>Name<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                         <input type="text" class="form-control" required name="buyer_singature_name"/>
                                                     </div>
                                                 </div>
-                                                <div class="col s12">
+                                                <div class="col s12 input-field">
                                                     <div class="form-group has-feedback">
                                                         <label>Designation <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                         <input type="text" class="form-control" required name="buyer_singature_designation"/>
@@ -384,16 +381,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col s6 input-field">
+                                        <div class="col s6">
                                             <h6>Beneficiary Side</h6>
                                             <div class="row">
-                                                <div class="col s12">
+                                                <div class="col s12 input-field">
                                                     <div class="form-group has-feedback">
                                                         <label>Name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                         <input type="text" class="form-control"  name="beneficiar_singature_name" required/>
                                                     </div>
                                                 </div>
-                                                <div class="col s12">
+                                                <div class="col s12 input-field">
                                                     <div class="form-group has-feedback">
                                                         <label>Designation <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                         <input type="text" class="form-control"  name="beneficiar_singature_designation" required/>
@@ -404,7 +401,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="right">
+                                <div class="right invoice_submit">
                                     <button type="submit" class="btn_green btn-success">
                                         <i class="fa fa-send"></i> Submit
                                     </button>
@@ -434,7 +431,7 @@
 
 </div>
 
-<div class="modal" id="selectcat">
+<div class="modal supplier_select_modal" id="selectcat">
 <div class="modal-dialog modal-xl" style="width:900px;">
     <div class="modal-content">
 
@@ -456,8 +453,8 @@
         <!-- Modal body -->
         <div class="clear"></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary modal-close" >No</button>
-            <button type="button" class="btn btn-danger" onclick="addsupplier()">Ok</button>
+            <button type="button" class="btn_green btn-secondary modal-close" >No</button>
+            <button type="button" class="btn_green btn-danger" onclick="addsupplier()">Ok</button>
         </div>
     </div>
 </div>

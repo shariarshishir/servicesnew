@@ -176,7 +176,7 @@
                                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
                                 @foreach ($low_moq_lists  as $list )
 
-                                    <div class="col s6 m4">
+                                    <div class="col s6 m4 filter_product_item">
                                         <div class="productBox">
                                             @php
                                                 if($list->flag == 'shop'){
@@ -221,7 +221,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col s12 m12 l8 right-align price">
-                                                                @if($list->flag == 'mb') $ {{$list->price_per_unit}}/<span class="unit" >{{$list->qty_unit}} @endif</span>
+                                                                @if($list->flag == 'mb') $ {{$list->price_per_unit}} /<span class="unit" >{{$list->qty_unit}} @endif</span>
                                                                 @if($list->flag == 'shop')
                                                                     @php
                                                                         $count= count(json_decode($list->attribute));

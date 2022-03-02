@@ -194,35 +194,42 @@
 												<br> -->
 												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_pdf_down tooltipped">&nbsp;</a>
 											</div>
-											<span class="certificate_title" >{{$certification->title}}</span>
-											@if($certification->issue_date)
-											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
-											@endif
-											@if($certification->expiry_date)
-											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@if($certification->issue_date)
+												<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+												@endif
+												@if($certification->expiry_date)
+												<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+												@endif
+											</div>
+											
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
 											<div class="certificate_img">
 												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="doc_icon tooltipped">&nbsp;</a>
 											</div>
-											<span class="certificate_title" >{{$certification->title}}</span>
-											@if($certification->issue_date)
-											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
-											@endif
-											@if($certification->expiry_date)
-											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@if($certification->issue_date)
+												<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+												@endif
+												@if($certification->expiry_date)
+												<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+												@endif
+											</div>
 										@else
 											@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
 											<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ asset('storage/'.$certification_image_src) }}"><img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></a></div>
-											<span class="certificate_title" >{{$certification->title}}</span>
-											@if($certification->issue_date)
-											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
-											@endif
-											@if($certification->expiry_date)
-											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@if($certification->issue_date)
+												<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+												@endif
+												@if($certification->expiry_date)
+												<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+												@endif
+											</div>
 										@endif
 									</div>
 									@endforeach
@@ -385,8 +392,10 @@
 												<div class="flag_img export-destination-img">
 													<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 												</div>
-												<h5>{{$exportDestination->country->name}}</h5>
-												<span>{{$exportDestination->short_description}}</span>
+												<div class="flag_infoBox">
+													<h5>{{$exportDestination->country->name}}</h5>
+													<span>{{$exportDestination->short_description}}</span>
+												</div>
 											</div>
 										</div>
 									@endforeach
@@ -667,13 +676,15 @@
 												<br> -->
 												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
 											</div>
-											<span class="certificate_title">{{$certification->title}}</span>
-											@if($certification->issue_date)
-											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
-											@endif
-											@if($certification->expiry_date)
-											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title">{{$certification->title}}</span>
+												@if($certification->issue_date)
+												<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+												@endif
+												@if($certification->expiry_date)
+												<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+												@endif
+											</div>
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
 											<div class="certificate_img">
@@ -681,23 +692,27 @@
 												<br> -->
 												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
 											</div>
-											<span class="certificate_title" >{{$certification->title}}</span>
-											@if($certification->issue_date)
-											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
-											@endif
-											@if($certification->expiry_date)
-											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@if($certification->issue_date)
+												<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+												@endif
+												@if($certification->expiry_date)
+												<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+												@endif
+											</div>
 										@else
                                         @php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
 											<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-											<span class="certificate_title" >{{$certification->title}}</span>
-											@if($certification->issue_date)
-											<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
-											@endif
-											@if($certification->expiry_date)
-											<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
-											@endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@if($certification->issue_date)
+												<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+												@endif
+												@if($certification->expiry_date)
+												<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+												@endif
+											</div>
 										@endif
 									</div>
 									@endforeach
@@ -776,8 +791,10 @@
 													<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
 													<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 												</div>
-												<h5>{{$exportDestination->country->name}}</h5>
-												<span>{{$exportDestination->short_description}}</span>
+												<div class="flag_infoBox">
+													<h5>{{$exportDestination->country->name}}</h5>
+													<span>{{$exportDestination->short_description}}</span>
+												</div>
 											</div>
 										</div>
 										@endforeach

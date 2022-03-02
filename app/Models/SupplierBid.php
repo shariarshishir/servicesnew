@@ -19,4 +19,7 @@ class SupplierBid extends Model
     public function user(){
         return $this->belongsTo('App\Models\user', 'supplier_id', 'id');
     }
+    public function rfq(){
+        return $this->belongsTo('App\Models\Rfq');
+    }
 }

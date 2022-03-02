@@ -53,6 +53,7 @@ class RfqBidController extends Controller
             'business_profile_id'=>'required',
             'unit_price'=>'required',
             'description' => 'required',
+            'delivery_time'=>'required',
             //'total_price'=>'required',
             // 'payment_method'=>'required',
             // 'quantity'=>'required',
@@ -66,7 +67,7 @@ class RfqBidController extends Controller
              400);
          }
 
-            $allData=$request->only('rfq_id','business_profile_id','unit_price','description');
+            $allData=$request->only('rfq_id','business_profile_id','unit_price','description','delivery_time');
             $allData['supplier_id']=auth()->id();
             $rfq = Rfq::find($request->rfq_id);
             // $allData['title'] =$rfq->title;

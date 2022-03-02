@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="main_content_wrapper invoice_container_wrap  purchase_order_wrap" id="purchase_order_wrap">
+<div class="main_content_wrapper invoice_container_wrap purchase_order_wrap" id="purchase_order_wrap">
     
     <div class="card">
-        @if(auth()->id() == $po->buyer_id && $po->status != 1)
-        <button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button> &nbsp;
-        <a class="waves-effect waves-light btn_green modal-trigger"  href="#rejectOrderDetailsModal">Reject</a>
-        @endif
-        <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
+
+        <div class="invoice_top_button_wrap">
+            @if(auth()->id() == $po->buyer_id && $po->status != 1)
+            <button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button>
+            <a class="waves-effect waves-light btn_green modal-trigger"  href="#rejectOrderDetailsModal">Reject</a>
+            @endif
+            <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
+        </div>
 
         <div class="invoice_page_header">
             <legend class="">
@@ -35,23 +38,25 @@
                                 <div class="row">
                                     <!-- <div class="col s12 m6 l6"> -->
                                     <div class="col s12 input-field">
-                                        <div class="col m6" id="buyerdata">
-                                            <p> <b>Name:</b> {{$po->buyer->name}}</p>
-                                            <p> <b>Email:</b>{{$po->buyer->email}}</p>
-                                        </div>
-                                        <div class="col m6">
-                                            <div class="form-group has-feedback">
-                                                <label>Beneficiary</label>
-                                                <span style="display: block">{{ $po->businessProfile->business_name }}</span>
+                                        <div class="row">
+                                            <div class="col m6" id="buyerdata">
+                                                <p><b> {{$po->buyer->name}} </b></h5>
+                                                <p><b>{{$po->buyer->email}}</b></p>
+                                            </div>
+                                            <div class="col m6">
+                                                <div class="form-group has-feedback">
+                                                    <label><b>Beneficiary</b></label>
+                                                    <span style="display: block">{{ $po->businessProfile->business_name }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col s12 input-field">
+                                    <div class="col s12 input-field has_feedback_wrap">
                                         <div class="row">
                                             <div class="col s6 m3 l2">
                                                 <div class="form-group has-feedback">
                                                     <label>Pro-forma ID</label>
-                                                    <span>{{ $po->proforma_id }}</span>
+                                                    <p><span>{{ $po->proforma_id }}</span></p>
                                                 </div>
                                             </div>
                                             <div class="col s6 m3 l2">
@@ -90,128 +95,121 @@
                                             </div>
                                         </div>
                                        
-                                       
-                                       
                                     </div>
                                     <!-- </div> -->
                                 </div>
-                                <div class="line_item_wrap">
+                                <div class="line_item_wrap buyer_shipping_details">
                                     <legend>Shipping Details</legend>
                                     <div class="col s12 input-field">
-                                        <div class="row">
-                                            <div class="col s6 m4">
-                                                <div class="form-group has-feedback">
-                                                    <label>Forwarder name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <span> {{ $po->forwarder_name }} </span>
-                                                </div>
-                                            </div>
-                                            <div class="col s6 m4">
-                                                <div class="form-group has-feedback">
-                                                    <label>Forwarder Address <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <span> {{ $po->forwarder_address }} </span>
-                                                </div>
-                                            </div>
-                                            <div class="col s6 m4">
-                                                <div class="form-group has-feedback">
-                                                    <label>Payable party <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <span> {{ $po->payable_party}} </span>
-                                                </div>
-                                            </div>
+                                        <div class="form-group has-feedback">
+                                            <label><b>Forwarder name </b></label>
+                                            <span> {{ $po->forwarder_name }} </span>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label><b>Forwarder Address </b></label>
+                                            <span> {{ $po->forwarder_address }} </span>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label><b>Payable party </b></label>
+                                            <span> {{ $po->payable_party}} </span>
                                         </div>
                                     </div>
-                                    <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
-                                        <thead>
-                                            <tr>
-                                                <th style="width:5%;">Shipping Method</th>
-                                                <th style="width:15%;">Shipment Type</th>
-                                                <th style="width:15%;">UOM</th>
-                                                <th style="width:15%;">Per UOM Price ($) <span class="required_star" style="color:red;">*</span></th>
-                                                <th style="width:15%;" >QTY <span class="required_star" style="color:red;">*</span></th>
-                                                <!-- <th style="width:15%;">Tax</th> -->
-                                                <th style="width:15%;">Total ($)</th>
-                                                <th style="width:5%; text-align:center;"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="shipping-details-table-body" class="input-field">
-										@foreach($po->proFormaShippingDetails as $shippingDetails)
-                                            <tr>
-                                                <td>
-                                                    <span>{{ $shippingDetails->shippingMethod->name }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $shippingDetails->shipmentType->name }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $shippingDetails->uom->name }} </span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $shippingDetails->shipping_details_uom }}</span>
-                                                </td>
-                                                <td> 
-                                                    <span>{{ $shippingDetails->shipping_details_qty }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $shippingDetails->shipping_details_total }}</span>
-                                                </td>
-                                            </tr>
-										@endforeach
-                                        </tbody>
-                                       
-                                    </table>
+                                    <div class="col">
+                                        <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:5%;">Shipping Method</th>
+                                                    <th style="width:15%;">Shipment Type</th>
+                                                    <th style="width:15%;">UOM</th>
+                                                    <th style="width:15%;">Per UOM Price ($) <span class="required_star" style="color:red;">*</span></th>
+                                                    <th style="width:15%;" >QTY <span class="required_star" style="color:red;">*</span></th>
+                                                    <!-- <th style="width:15%;">Tax</th> -->
+                                                    <th style="width:15%;">Total ($)</th>
+                                                    <th style="width:5%; text-align:center;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="shipping-details-table-body" class="input-field">
+                                            @foreach($po->proFormaShippingDetails as $shippingDetails)
+                                                <tr>
+                                                    <td>
+                                                        <span>{{ $shippingDetails->shippingMethod->name }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $shippingDetails->shipmentType->name }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $shippingDetails->uom->name }} </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $shippingDetails->shipping_details_uom }}</span>
+                                                    </td>
+                                                    <td> 
+                                                        <span>{{ $shippingDetails->shipping_details_qty }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $shippingDetails->shipping_details_total }}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        
+                                        </table>
+                                    </div>
                                 </div>
                                 
 
-
                                 <div class="line_item_wrap">
                                     <legend>Line Items</legend>
-                                    <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
-                                        <thead>
-                                            <tr>
-                                                <th style="width:5%;">Sl. No.</th>
-                                                <th style="width:15%;">Item / Description</th>
-                                                <th style="width:15%;">Quantity</th>
-                                                <th style="width:15%;">Unit Price <span class="required_star" style="color: red;">*</span></th>
-                                                <th style="width:15%;">Sub Total <span class="required_star" style="color: red;">*</span></th>
-                                                <!-- <th style="width:15%;">Tax</th> -->
-                                                <th style="width:15%;">Total Price</th>
-                                                <th style="width:5%; text-align:center;"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="lineitems" class="input-field">
-										@foreach($po->performa_items as  $key => $proFormaItem)
-                                            <tr>
-                                                <td>{{$key+1 }}</td>
-                                                <td>
-                                                    <span>{{ $proFormaItem->product->title }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $proFormaItem->unit }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $proFormaItem->unit_price }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $proFormaItem->total_price }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>{{ $proFormaItem->tax_total_price }}</span>
-                                                </td>
-                                            </tr>
-										@endforeach
-                                        </tbody>
-                                        <tfoot>
-                                           
-                                            <tr>
-                                                <td colspan="5"class="right-align"><b>Total Invoice Amount</b></td>
-                                                <td colspan="2" align="left" id="total_price_amount">{{$totalInvoice}}</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                    <div class="col">
+                                        <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:5%;">Sl. No.</th>
+                                                    <th style="width:15%;">Item / Description</th>
+                                                    <th style="width:15%;">Quantity</th>
+                                                    <th style="width:15%;">Unit Price <span class="required_star" style="color: red;">*</span></th>
+                                                    <th style="width:15%;">Sub Total <span class="required_star" style="color: red;">*</span></th>
+                                                    <!-- <th style="width:15%;">Tax</th> -->
+                                                    <th style="width:15%;">Total Price</th>
+                                                    <th style="width:5%; text-align:center;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="lineitems" class="input-field">
+                                            @foreach($po->performa_items as  $key => $proFormaItem)
+                                                <tr>
+                                                    <td>{{$key+1 }}</td>
+                                                    <td>
+                                                        <span>{{ $proFormaItem->product->title }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $proFormaItem->unit }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $proFormaItem->unit_price }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $proFormaItem->total_price }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $proFormaItem->tax_total_price }}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                            
+                                                <tr>
+                                                    <td colspan="5"class="right-align"><b>Total Invoice Amount</b></td>
+                                                    <td colspan="2" align="left" id="total_price_amount">{{$totalInvoice}}</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
 
                                 <div class="invoice_terms_conditions">
                                     <legend>Terms & Conditions</legend>
-                                    <div class="terms_conditions_list">
+                                    <div class="terms_conditions_list" >
                                         <ul class="list-group terms-lists">
                                             @foreach($po->supplierCheckedProFormaTermAndConditions as $supplierCheckedProFormaTermAndCondition)
                                             <li class="list-group-item">
@@ -222,7 +220,6 @@
                                                 </div>
                                             </li>
                                             @endforeach
-                                            
                                         </ul>
                                         <ul class="list-group terms-lists">
                                             @foreach(json_decode($po->condition) as $key=>$condition)
@@ -240,27 +237,31 @@
                                 </div>
                                 
                                 <div class="invoice_terms_conditions">
-                                    <div class="col s12 input-field">
                                     <legend>Advising Bank</legend>
+                                    <div class="col s12 input-field">
                                         <div class="row">
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
-                                                    <label>Name of the bank <span> {{$po->proFormaAdvisingBank->bank_name}} </span></label>
+                                                    <label>Name of the bank</label> <br>
+                                                    <span> {{$po->proFormaAdvisingBank->bank_name}} </span>
                                                 </div>
                                             </div>
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
-                                                    <label>Branch name <span>{{ $po->proFormaAdvisingBank->branch_name }}</span></label>
+                                                    <label>Branch name</label><br>
+                                                    <span>{{ $po->proFormaAdvisingBank->branch_name }}</span>
                                                 </div>
                                             </div>
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
-                                                    <label>Address of the bank<span> {{ $po->proFormaAdvisingBank->bank_address }} </span></label>
+                                                    <label>Address of the bank </label><br>
+                                                    <span> {{ $po->proFormaAdvisingBank->bank_address }} </span>
                                                 </div>
                                             </div>
                                             <div class="col s6 m3">
                                                 <div class="form-group has-feedback">
-                                                    <label>Swift code <span>{{ $po->proFormaAdvisingBank->swift_code }}</span></label>
+                                                    <label>Swift code</label><br>
+                                                    <span>{{ $po->proFormaAdvisingBank->swift_code }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -268,36 +269,24 @@
                                 </div>
 
                                 <div class="line_item_wrap">
-                                    <div class="col s12 input-field">
+                                    <div class="row2 input-field">
                                         <legend>Signature</legend>
                                         <div class="col s6 input-field">
-                                            <h6>Buyer Side</h6>
-                                            <div class="row">
-                                                <div class="col s12">
-                                                    <div class="form-group has-feedback">
-                                                        <label>Name <span> {{ $po->proFormaSignature->buyer_singature_name }} </span></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12">
-                                                    <div class="form-group has-feedback">
-                                                        <label>Designation <span>{{$po->proFormaSignature->buyer_singature_designation}}</span></label>
-                                                    </div>
-                                                </div>
+                                            <h6><b>Buyer Side</b></h6>
+                                            <div class="form-group has-feedback">
+                                                <span> {{ $po->proFormaSignature->buyer_singature_name }} </span>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <span>{{$po->proFormaSignature->buyer_singature_designation}}</span>
                                             </div>
                                         </div>
                                         <div class="col s6 input-field">
-                                            <h6>Beneficiary Side</h6>
-                                            <div class="row">
-                                                <div class="col s12">
-                                                    <div class="form-group has-feedback">
-                                                        <label>Name <span> {{$po->proFormaSignature->beneficiar_singature_name}} </span></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12">
-                                                    <div class="form-group has-feedback">
-                                                        <label> Designation <span> {{ $po->proFormaSignature->beneficiar_singature_designation }} </span></label>
-                                                    </div>
-                                                </div>
+                                            <h6><b>Beneficiary Side</b></h6>
+                                            <div class="form-group has-feedback">
+                                                <span> {{$po->proFormaSignature->beneficiar_singature_name}} </span>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <span> {{ $po->proFormaSignature->beneficiar_singature_designation }} </span>
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +300,6 @@
                 </article>
                 <!-- WIDGET END -->
             </div>
-
             <div class="shipping-files">
                 <legend><span class="material-icons">attach_file</span> Attachment</legend>
                 <ul>
@@ -319,8 +307,7 @@
                     <li><span class="material-icons"> insert_drive_file </span> {{ asset('storage/'.$image->shipping_details_files) }}</li>
                 @endforeach
                 </ul>
-            </div>            
-
+            </div>
             <!-- end row -->
 
             <!-- end row -->

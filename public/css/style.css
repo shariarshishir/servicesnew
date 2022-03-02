@@ -6076,6 +6076,10 @@ legend {
     line-height: 26px;
     float: right;
 }
+
+.purchase_order_wrap .invoice_top_button_wrap .btn_green {
+    float: right;
+}
 .purchase_questions_table tr,
 .purchase_sub_table tr {
     border: none;
@@ -6093,6 +6097,40 @@ legend {
     font-size: 20px;
     font-weight: 600;
     color: #ffffff;
+}
+
+.invoice_top_button_wrap {
+    padding-bottom: 20px;
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+}
+.invoice_top_button_wrap .btn_green {
+    margin: 3px 5px;
+}
+
+.invoice_container_wrap .shipping-files {
+    vertical-align: middle;
+    align-items: center;
+}
+.invoice_container_wrap .shipping_img_files {
+    width: 100px;
+    float: left;
+    margin-right: 10px;
+}
+.invoice_container_wrap .shipping_img_files img {
+    height: auto;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+
+.has_feedback_wrap .has-feedback label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.has_feedback_wrap .has-feedback span {
+    font-size: 14px;
 }
 
 /* *******************************************8888 */
@@ -6544,7 +6582,7 @@ nav .pagination li.active .page-link {
     font-size: 16px;
 }
 .line_item_wrap {
-    padding: 50px 0 0;
+    padding: 25px 0 0;
     display: inline-block;
     width: 100%;
 }
@@ -6572,6 +6610,9 @@ nav .pagination li.active .page-link {
 }
 .beneficiary_info_wrap .input-field:first-child {
     margin-bottom: 40px;
+}
+.terms_conditions_list {
+    padding: 0 10px;
 }
 .terms_conditions_list .form-control {
     float: left !important;
@@ -6611,7 +6652,7 @@ nav .pagination li.active .page-link {
 }
 
 .invoice_container_wrap .invoice_terms_conditions {
-    padding: 50px 0;
+    padding: 25px 0;
 }
 .invoice_container_wrap .invoice_terms_conditions .list-group-item {
     margin-bottom: 5px;
@@ -6649,7 +6690,7 @@ nav .pagination li.active .page-link {
 
 .invoice_signature_wrap h6 {
     font-size: 20px;
-    margin: 20px 0 50px;
+    margin: 20px 0 25px;
 }
 .supplier_select_modal .btn_green  {
     min-width: inherit;
@@ -6669,6 +6710,22 @@ nav .pagination li.active .page-link {
 .pro_porma_invoice #lineitems a .fa {
     font-size: 18px;
     float: right;
+}
+
+.buyer_shipping_details label {
+    margin-bottom: 0;
+}
+.pro_porma_invoice .invoice_terms_conditions label {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.line_item_wrap h6 {
+    margin-bottom: 15px;
+}
+
+.invoice_container_wrap table thead th {
+    font-weight: 600;
 }
 
 /* ****************************** */

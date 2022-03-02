@@ -38,6 +38,14 @@
                         <span class="validation-error-unit-price red"></span>
                     </div>
                 </div>
+                <div class="input-field row input-wrapper">
+                    <div class="col s12 m4 l5">
+                        <label for="delivery_time">Expected Delivery Time <span>*</span></label>
+                    </div>
+                    <div class="col s12 m8 l7">
+                        <input type="date" id="delivery_time" class="form-control- ig-new-rgt" name="delivery_time" required/>
+                    </div>
+                </div>
 
 
 

@@ -85,6 +85,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //business profile
     Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
+    Route::get('/manufacture-product-categories-with-icon', [BusinessProfileController::class, 'manufactureProductCategoriesWithIcon']);
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
     Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
@@ -148,8 +149,15 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/rfq-bids', [RfqBidController::class, 'store']);
 
     Route::get('/rfqs', [RFQController::class, 'index']);
+    Route::get('/rfq-list-for-migration', [RFQController::class, 'rfqListforMigration']);
     Route::get('/my-rfq-list', [RFQController::class, 'myRfqList']);
+    Route::get('/rfq-by-category/{category}', [RFQController::class, 'rfqListByCategoryId']);
+    Route::get('/search-rfq-by-title', [RFQController::class, 'searchRfqByTitle']);
     Route::get('/rfq/{id}/bids', [RfqBidController::class, 'rfqBidsByRfqId']);
+    Route::get('/rfq-bids-created-by-auth-user', [RfqBidController::class, 'rfqBidCreatedByAuthUser']);
+
+    
+    
     Route::post('/rfq-notification-mark-as-read',[RFQController::class,'newRfqNotificationMarkAsRead']);
     Route::post('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'newRfqBidNotificationMarkAsRead']);
     

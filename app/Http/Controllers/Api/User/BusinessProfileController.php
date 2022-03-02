@@ -100,6 +100,25 @@ class BusinessProfileController extends Controller
             }
 
         }
+
+        public function manufactureProductCategoriesWithIcon(){
+            $manufactureProductCategories = ProductCategory::with('subcategories')->get();
+            $manufactureProductCategoriesArray = [];
+            foreach($manufactureProductCategories as $key=>$manufactureProductCategory){
+                $manufactureProductCategoryObject = new stdClass();
+                $manufactureProductCategoryObject->id = $manufactureProductCategory->id;
+                $manufactureProductCategoryObject->name = $manufactureProductCategory->name;
+                $manufactureProductCategoryObject->icon = asset('images/manufacture_category_icon/'.$key.'.svg');
+                array_push($manufactureProductCategoriesArray,$manufactureProductCategoryObject);
+            }
+            if( count($manufactureProductCategoriesArray)>0){
+                return response()->json(["productCategories"=>$manufactureProductCategoriesArray,"success"=>true],200);
+            }
+            else{
+                return response()->json(["productCategories"=>$manufactureProductCategoriesArray,"success"=>false],204);
+            }
+
+        }
         
         public function manufactureProductCategoriesByIndustryType(Request $request){
             $manufactureProductCategoriesByInduestryType=ProductCategory::with('subcategories')->where('industry',$request->industry)->get();

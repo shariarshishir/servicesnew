@@ -117,6 +117,31 @@ if (!function_exists('units')){
 
 
 
+if (!function_exists('getLeadTime')){
+    function getLeadTime($collection)
+    {
+
+        $count= count(json_decode($collection->attribute));
+        $count_previous_last = $count-2;
+        foreach (json_decode($collection->attribute) as $k => $v){
+            if($k == 0 && $v[2] == 'Negotiable'){
+                return $v[3]. ' days';
+            }
+            if($k == $count-1 && $v[2] != 'Negotiable'){
+                return $v[3]. ' days';
+            }
+            if($k == $count-1 && $v[2] == 'Negotiable'){
+                foreach (json_decode($collection->attribute) as $k => $v){
+                        if($k == $count_previous_last){
+                            return $v[3]. ' days';
+                        }
+
+                }
+            }
+        }
+    }
+}
+
 
 
 

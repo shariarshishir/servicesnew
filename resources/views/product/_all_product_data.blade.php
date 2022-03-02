@@ -82,14 +82,21 @@
 
                                     <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4>
                                     @if(isset($list->moq))
-                                        <div class="product_moq">MOQ: {{$list->moq}}</div>
+                                        <div class="product_moq">MOQ: {{$list->moq}} {{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</div>
                                     @endif
-                                    @if($list->flag == 'mb')
-                                        <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
+                                    @if($list->flag == 'mb' && isset($list->lead_time))
+                                        <div class="product_lead_time">Lead time:
+                                            @php
+                                                $pattern= '/[^0-9\-]/';
+                                                $preg_replace= preg_replace($pattern, '', $list->lead_time);
+                                            @endphp
+                                        {{$preg_replace}} days</div>
                                     @else
                                         @if($list->product_type == 1)
                                             <div class="product_lead_time">Lead time:
-                                                @php
+
+                                                {{getLeadTime($list)}}
+                                                {{-- @php
                                                 $count= count(json_decode($list->attribute));
                                                 $count = $count-2;
                                                 @endphp
@@ -107,7 +114,7 @@
                                                                 @endif
                                                         @endforeach
                                                     @endif
-                                                @endforeach
+                                                @endforeach --}}
                                             </div>
                                         @endif
                                     @endif

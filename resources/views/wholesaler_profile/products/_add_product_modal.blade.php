@@ -127,7 +127,7 @@
                                 <span>Yes</span>
                             </label>
                             <label class="radio_box">
-                                <input class="with-gap" name="sample_availability" type="radio" value="0" />
+                                <input class="with-gap" name="sample_availability" type="radio" value="0"  checked/>
                                 <span>No</span>
                             </label>
                         </div>
@@ -175,7 +175,7 @@
                                                 <th>Qty Min</th>
                                                 <th>Qty Max</th>
                                                 <th>Price (usd)</th>
-                                                <th>Lead Time</th>
+                                                <th>Lead Time (days)</th>
                                                 <th>&nbsp;</th>
                                             </tr>
                                         </thead>

@@ -35,7 +35,7 @@ $profileEditMode = Request::get('editmode');
 							</div>
 						</div>
                         @if(@$profileEditMode == 'enabled')
-                            <a class="waves-effect waves-light btn modal-trigger" href="#business_profile_logo_banner">edit</a>
+                            <a class="waves-effect waves-light btn_green modal-trigger edit_left_profile" href="#business_profile_logo_banner"><i class="material-icons">border_color</i></a>
                         @endif
 
 						<div class="col s8 m6 l12 profile_left_address_wrap">

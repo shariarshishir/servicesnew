@@ -109,23 +109,40 @@
                 </div>
             </div>
             <div class="landing_spotlight_infoWrap">
-                <div class="spotlight_overlay"></div>
-                <div class="container">
+                <div class="container-full-width">
                     @php 
                         $spotlightCount = 0;
                     @endphp
                     @foreach($spotlightBusinessProfile as $businessProfile)
                         <div id="spotlight-{{$spotlightCount}}">
-                            <div class="right-align sayel_group_logo_box">
-                                <img src="{{ asset('storage/'.$businessProfile->user->image) }}" alt="" />
+                            <div class="spotlight_overlay"></div>
+                            <div class="spotlight-inside-image">
+                                @if($businessProfile->business_profile_banner)
+                                <img src="{{ asset('storage/'.$businessProfile->business_profile_banner) }}" alt="" />
+                                @else
+                                <img src="{{ asset('images/frontendimages/new-home/spot-li.jpg') }}" alt="" />
+                                @endif
                             </div>
-                            <div class="spotlight_inner_info">
-                                <h3>{{ $businessProfile->business_name }}</h3>
-                                <div class="spotlight_info">{{ \Illuminate\Support\Str::limit($businessProfile->companyOverview->about_company, 550, $end='[...]') }}</div>
+                            <div class="container">
+                                <div class="spotlight-inside">
+                                    <div class="right-align sayel_group_logo_box">
+                                        <!--img src="{{ asset('storage/'.$businessProfile->user->image) }}" alt="" /-->
+                                        @if($businessProfile->business_profile_logo)
+                                        <img src="{{ asset('storage/'.$businessProfile->business_profile_logo) }}" alt="" />
+                                        @else
+                                        <img src="{{ asset('images/frontendimages/no-image.png') }}" alt="" />
+                                        @endif
+                                    </div>
+                                    <div class="spotlight_inner_info">
+                                        <h3>{{ $businessProfile->business_name }}</h3>
+                                        <div class="spotlight_info">{{ \Illuminate\Support\Str::limit($businessProfile->companyOverview->about_company, 550, $end='[...]') }}</div>
+                                    </div>
+                                    <div class="right-align">
+                                        <a href="{{route('supplier.profile', $businessProfile->alias)}}" class="btn_green landing_view_profile" >View Profile</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="right-align">
-                                <a href="{{route('supplier.profile', $businessProfile->alias)}}" class="btn_green landing_view_profile" >View Profile</a>
-                            </div>
+                            
                         </div>
                         @php $spotlightCount++; @endphp 
                     @endforeach

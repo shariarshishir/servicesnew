@@ -30,7 +30,7 @@ $('#business-profile-logo-banner-upload-form').submit(function(e) {
                             $('#business_profile_logo_banner').modal('close');
                             var logo="{{asset('storage/')}}"+'/'+response.business_profile.business_profile_logo;
                             var banner="{{asset('storage/')}}"+'/'+response.business_profile.business_profile_banner;
-                            $('.banner_overlay').css({"background": "url('"+banner+"')"});
+                            $('.banner_overlay').css({"background": "url('"+banner+"')", "background-size" : "cover"});
                             $(".business_profile_logo img").attr('src', logo);
                             $('#business-profile-logo-banner-upload-form')[0].reset();
                         }

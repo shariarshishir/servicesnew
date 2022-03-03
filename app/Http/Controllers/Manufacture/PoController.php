@@ -39,13 +39,11 @@ class PoController extends Controller
         $giving =  Proforma::with('performa_items')->whereHas('performa_items', function($q){
                     $q->where('supplier_id', Auth::id());
                 })
-                //->where('status', 1)
-                ->orderBy('id', 'desc')
-                ->paginate(10);
+                ->get();
         foreach($giving as $g){
             $g['proforma_type'] = 'giving';
         }
-        $received=Proforma::with('performa_items')->where('buyer_id', auth()->id())->latest()->paginate(10);
+        $received=Proforma::with('performa_items')->where('buyer_id', auth()->id())->get();
         foreach($received as $r){
             $r['proforma_type'] = 'received';
         }

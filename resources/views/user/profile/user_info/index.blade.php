@@ -12,11 +12,11 @@
             <legend style="margin-bottom: 20px;">Profile Information</legend>
         </div>
         <div class="col m3 profile-image-block">
-            <div class="profile_image">
+            <div class="profile_image" itemscope itemtype="https://schema.org/Person">
                 @if($user->image)
-                <img src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
+                <img itemprop="image" src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
                 @else
-                <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" width="300px">
+                <img itemprop="image" src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" width="300px">
                 @endif
             </div>
             <div class="change_photo">
@@ -36,10 +36,10 @@
             </div>
         </div>
         <div class="col m9 profile-info-block">
-            <div class="user-profile-info-block">
-                <p><i class="material-icons dp48 waves-effect waves-light">person</i> {{$user->name}}</p>
-                <p><i class="material-icons dp48 waves-effect waves-light">email</i> {{$user->email}}</p>
-                <p><i class="material-icons dp48 waves-effect waves-light">local_phone</i> {{$user->phone}}</p>
+            <div class="user-profile-info-block" itemscope itemtype="https://schema.org/Person">
+                <p itemprop="name"><i class="material-icons dp48 waves-effect waves-light">person</i> {{$user->name}}</p>
+                <p itemprop="email"><i class="material-icons dp48 waves-effect waves-light">email</i> {{$user->email}}</p>
+                <p itemprop="telephone"><i class="material-icons dp48 waves-effect waves-light">local_phone</i> {{$user->phone}}</p>
 
                 <div class="user_my_order_btnwrap">
                     <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
@@ -63,13 +63,13 @@
                 <div class="col m12 my_businesses_wrap">
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
-                        <div class="my_businesses_box card user-business-profile-short-info">
+                        <div class="my_businesses_box card user-business-profile-short-info" itemscope itemtype="https://schema.org/Organization">
                             @if($businessprofile->business_type==1)
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}">{{ $businessprofile->business_name }}</a></p>
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             @else
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}">{{ $businessprofile->business_name }}</a></p>
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             @endif
-                            <p><span style="font-weight: 500;">Business Location:</span> {{ $businessprofile->location }}</p>
+                            <p><span style="font-weight: 500;">Business Location:</span> <span itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $businessprofile->location }}</span></p>
                             <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
 
                             <div class="switch profile_enable_disable_trigger">

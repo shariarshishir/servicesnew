@@ -147,13 +147,57 @@
                     </div>
                     <div class="input-field row">
                         <div class="col s12 m3 l3 ">
-                            <label for="lead_time">Lead time <span class="text-danger">*</span></label>
+                            <label for="lead_time">Lead time (days) <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 m9 l9 ">
-                            <input type="text" name="lead_time" id="lead_time" class="form-control" placeholder="days" >
+                            <input type="text" name="lead_time" id="lead_time" class="form-control negitive-or-text-not-allowed" placeholder="days" >
                             <span class="text-danger error-text lead_time_error rm-error"></span>
                         </div>
                     </div>
+                     {{-- gender --}}
+                    <div class="row input-field ">
+                        <div class="col s12 m3 l3">
+                            <label for="gender">Gender<span class="text-danger">*</span></label>
+                            <span class="text-danger error-text gender_error rm-error"></span>
+                        </div>
+                        <div class="col s12 m9 l9">
+                            <div class="radio-block">
+                                <label class="radio_box">
+                                    <input class="with-gap" name="gender" type="radio" value="1" />
+                                    <span>Male</span>
+                                </label>
+                                <label class="radio_box">
+                                    <input class="with-gap" name="gender" type="radio" value="2" />
+                                    <span>Female</span>
+                                </label>
+                                <label class="radio_box">
+                                    <input class="with-gap" name="gender" type="radio" value="3" />
+                                    <span>Unisex</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- sample availability --}}
+                    <div class="row input-field ">
+                        <div class="col s12 m3 l3">
+                            <label for="sample_availability">Sample Availability <span class="text-danger">*</span></label>
+                            <span class="text-danger error-text sample_availability_error rm-error"></span>
+                        </div>
+                        <div class="col s12 m9 l9">
+                            <div class="radio-block">
+                                <label class="radio_box">
+                                    <input class="with-gap" name="sample_availability" type="radio" value="1" />
+                                    <span>Yes</span>
+                                </label>
+                                <label class="radio_box">
+                                    <input class="with-gap" name="sample_availability" type="radio" value="0" checked/>
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="product_media_wrap">
                         <div class="input-field">
                             <div class="s12">

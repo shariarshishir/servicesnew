@@ -21,7 +21,7 @@ class QueryController extends Controller
     use PushNotificationTrait;
     public function index()
     {
-       $orderQueries=OrderModificationRequest::where(['user_id' => auth()->id(), 'type' => 1])->latest()->get();
+       $orderQueries=OrderModificationRequest::where(['user_id' => auth()->id(), 'type' => 1])->get();
        $notifications = auth()->user()->unreadNotifications;
        $orderIds=[];
        $orderModificationRequestIds=[];
@@ -85,7 +85,7 @@ class QueryController extends Controller
     }
 
     public function store(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'type' => 'required',
             'product_id' => 'required',
@@ -109,7 +109,7 @@ class QueryController extends Controller
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
         ]);
-       
+
         event(new OrderQueryEvent($orderModificationRequest));
 
         return response()->json(array('success' => true, 'msg' => 'Request created successfully. Please check "My Orders" from your profile to get more update about your query.'),200);
@@ -200,7 +200,7 @@ class QueryController extends Controller
         $message = $details[0]->details;
         $action_url = route('query.show', $data->orderModificationRequest->id);
         $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
-        
+
         //send db notification to admin
         Notification::send($admin,new QueryCommuncationNotification($data ,'user'));
         Mail::to('success@merchantbay.com')->send(new QueryCommuncationMail($data, 'user'));

@@ -123,7 +123,7 @@
             </div>
 
         </div>
-        <div><h6>Meta Information</h6></div>
+        <div><legend>Meta Information</legend></div>
         <div class="row">
             <div class="col-sm-12 col-md-6" style="padding-right: 10px;">
                 <div class="form-group">

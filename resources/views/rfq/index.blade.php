@@ -204,7 +204,7 @@
     </div>
 </div>
 @include('rfq._create_rfq_bid_form_modal')
-@include('rfq.share_modal');
+@include('rfq.share_modal')
 @endsection
 
 @include('rfq._scripts')

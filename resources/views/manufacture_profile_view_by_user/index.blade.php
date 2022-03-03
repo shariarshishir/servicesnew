@@ -207,7 +207,10 @@
                                                 <br> -->
                                                 <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
                                             </div>
-                                            <span class="certificate_title">{{$certification->title}}</span>
+											<div class="certificate_infoBox">
+												<span class="certificate_title">{{$certification->title}}</span>
+											</div>
+                                            
                                             @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
                                             <div class="certificate_img">
@@ -215,11 +218,16 @@
                                                 <br> -->
                                                 <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
                                             </div>
-                                            <span class="certificate_title" >{{$certification->title}}</span>
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+											</div>
+                                            
                                             @else
                                             @php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
                                             <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-                                            <span class="certificate_title" >{{$certification->title}}</span>
+                                            <div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+											</div>
                                             @endif
                                         </div>
                                         @endforeach
@@ -319,10 +327,14 @@
                                 <div class="row flag_wrap center-align export-destination-block">
                                         @foreach($business_profile->exportDestinations as $exportDestination)
                                             <div class="col s6 m4 l2">
-                                                <div class="flag_img export-destination-img">
-                                                    <img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
-                                                </div>
-                                                <h5>{{$exportDestination->country->name}}</h5>
+												<ddiv class="flag_innerBox">
+													<div class="flag_img export-destination-img">
+														<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+													</div>
+													<div class="flag_infoBox">
+														<h5>{{$exportDestination->country->name}}</h5>
+													</div>
+												</ddiv>
                                             </div>
                                         @endforeach
                                 </div>
@@ -533,7 +545,10 @@
                                                 <br> -->
                                                 <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
                                             </div>
-                                            <span class="certificate_title">{{$certification->title}}</span>
+											<div class="certificate_infoBox">
+												<span class="certificate_title">{{$certification->title}}</span>
+											</div>
+                                            
                                             @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
                                             <div class="certificate_img">
@@ -541,12 +556,15 @@
                                                 <br> -->
                                                 <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
                                             </div>
-                                            <span class="certificate_title" >{{$certification->title}}</span>
-                                            @else
-                                            @php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
-                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-                                            <span class="certificate_title" >{{$certification->title}}</span>
-                                            @endif
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@else
+												@php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
+												<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
+												<span class="certificate_title" >{{$certification->title}}</span>
+												@endif
+											</div>
+                                            
                                         </div>
                                         @endforeach
                                 </div>
@@ -587,11 +605,15 @@
                                     <div class="flagBox export-destination-block">
                                             @foreach($business_profile->exportDestinations as $exportDestination)
                                             <div class="col s6 m4 l2">
-                                                <div class="flag_img export-destination-img">
-                                                    <a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-                                                    <img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
-											</div>
-											<h5>{{$exportDestination->country->name}}</h5>
+												<div class="flag_innerBox">
+													<div class="flag_img export-destination-img">
+														<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+														<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+													</div>
+													<div class="flag_infoBox">
+														<h5>{{$exportDestination->country->name}}</h5>
+													</div>
+												</div>
                                             </div>
                                             @endforeach
                                     </div>

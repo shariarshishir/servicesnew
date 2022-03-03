@@ -113,6 +113,51 @@
                             </div>
                         </div>
 
+                         {{-- gender --}}
+                        <div class="row input-field ">
+                            <div class="col s12 m3 l3">
+                                <label for="gender">Gender<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col s12 m9 l9">
+                                <div class="radio-block">
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="gender" id="gender_male" type="radio" value="1" />
+                                        <span>Male</span>
+                                    </label>
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="gender" id="gender_female" type="radio" value="2" />
+                                        <span>Female</span>
+                                    </label>
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="gender" id="gender_unisex" type="radio" value="3" />
+                                        <span>Unisex</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <span class="gender_error text-danger error-rm"></span>
+                        </div>
+                        {{-- sample availability --}}
+                        <div class="row input-field ">
+                            <div class="col s12 m3 l3">
+                                <label for="sample_availability">Sample Availability <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col s12 m9 l9">
+                                <div class="radio-block">
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="sample_availability" id="sample_availability_yes" type="radio" value="1" />
+                                        <span>Yes</span>
+                                    </label>
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="sample_availability" id="sample_availability_no" type="radio" value="0" />
+                                        <span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <span class="sample_availability_error text-danger error-rm"></span>
+                        </div>
+
+
+
                         <div class="row input-field">
                             <div class="col s12 m3 l3">
                                 <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
@@ -152,7 +197,7 @@
                                                         <th>Qty Min</th>
                                                         <th>Qty Max</th>
                                                         <th>Price (usd)</th>
-                                                        <th>Lead Time</th>
+                                                        <th>Lead Time (days)</th>
                                                         <th>&nbsp;</th>
                                                     </tr>
                                                 </thead>

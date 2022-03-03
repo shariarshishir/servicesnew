@@ -29,6 +29,32 @@
               <p>Dashboard</p>
             </a>
           </li>
+          {{-- new users registered list --}}
+          <li class="nav-item has-treeview {{ Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'menu-open' : ''}}">
+            <a href="javascript:void(0);" class="nav-link  {{Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'active' : ''}}">
+              <i class="nav-icon fa fa-users"></i>
+              <p>New User Requests<i class="right fas fa-angle-left"></i></p>
+            </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        @php
+                            $getTypeBySegment=  Request::segment(5);
+                        @endphp
+                        <a href="{{route('new.user.request', ['type' => 'buyer'])}}" class="nav-link {{ Route::is('new.user.request','buyer') && $getTypeBySegment == 'buyer' ? 'active' : ''}} ">
+                            <i class="fa fa-user nav-icon"></i>
+                            <p>Buyer</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('new.user.request', ['type' => 'supplier'])}}" class="nav-link {{ Route::is('new.user.request','supplier') && $getTypeBySegment == 'supplier' ? 'active' : ''}} ">
+                            <i class="fa fa-user nav-icon"></i>
+                            <p>Supplier</p>
+                        </a>
+                    </li>
+                </ul>
+          </li>
+            {{--end new users registered list --}}
           <li class="nav-item">
               <a href="{{ Route('product-categories.index')}}" class="nav-link {{ Route::is('product-categories.index')||Route::is('product-categories.create')||Route::is('product-categories.edit')? 'active' : ''}}">
                   <i class="fas fa-network-wired nav-icon"></i>

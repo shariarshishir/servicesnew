@@ -154,6 +154,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('/rfq-by-category/{category}', [RFQController::class, 'rfqListByCategoryId']);
     Route::get('/search-rfq-by-title', [RFQController::class, 'searchRfqByTitle']);
     Route::get('/rfq/{id}/bids', [RfqBidController::class, 'rfqBidsByRfqId']);
+    Route::get('/bids/{bid}', [RfqBidController::class, 'bidDetails']);
     Route::get('/rfq-bids-created-by-auth-user', [RfqBidController::class, 'rfqBidCreatedByAuthUser']);
 
     

@@ -44,9 +44,9 @@
                                 <!-- <div style="padding-top: 30px;"></div> -->
                                 <div class="row beneficiary_info_wrap">
                                     <!-- <div class="col s12 m6 l6"> -->
-                                    <div class="col s12 input-field">
-                                        <div class="col m6" id="buyerdata"></div>
-                                        <div class="col m6">
+                                    <div class="row input-field">
+                                        <div class="col s12 m6" id="buyerdata"></div>
+                                        <div class="col s12 m6">
                                             <div class="form-group has-feedback">
                                                 <label>Beneficiary</label>
                                                 <select name="business_profile_id" id="buyerOptionsList" class="form-control select2" onChange = "getProductListBybusinessProfileId(this.value)" required>
@@ -61,20 +61,20 @@
                                     </div>
                                     <div class="col s12 input-field">
                                         <div class="row">
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m6 l2">
                                                 <div class="form-group has-feedback">
                                                     <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
                                                     <input type="text" class="form-control" required name="po_id"/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m6 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Pro-forma Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="date" class="form-control" required name="po_date"/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m6 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payment Within <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -87,7 +87,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m6 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payment term<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -99,7 +99,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m6 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipment Term <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -111,7 +111,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m6 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipping Address <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -126,19 +126,19 @@
                                     <legend>Shipping Details</legend>
                                     <div class="col s12 input-field">
                                         <div class="row">
-                                            <div class="col s6 m4">
+                                            <div class="col s12 m6 l4">
                                                 <div class="form-group has-feedback">
                                                     <label>Forwarder name  </label>
                                                     <input type="text" class="form-control" required name="forwarder_name"/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m4">
+                                            <div class="col s12 m6 l4">
                                                 <div class="form-group has-feedback">
                                                     <label>Forwarder Address</label>
                                                     <input type="text" class="form-control" required name="forwarder_address"/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m4">
+                                            <div class="col s12 m6 l4">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payable party </label>
@@ -150,61 +150,65 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
-                                        <thead>
-                                            <tr>
-                                                <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
-                                                <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
-                                                <th>UOM <span class="required_star" style="color: red;">*</span></th>
-                                                <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
-                                                <th>QTY <span class="required_star" style="color: red;">*</span></th>
-                                                <!-- <th style="width:15%;">Tax</th> -->
-                                                <th>Total ($)</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="shipping-details-table-body" class="input-field">
-                                            <tr>
-                                                <td>
-                                                    <select name="shipping_details_method[]" class="select2" >
-                                                        <option value="">Select</option>
-                                                        @foreach($shippingMethods as $shippingMethod)
-                                                            <option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select  name="shipping_details_type[]" class="select2">
-                                                        <option value="">Select</option>
-                                                        @foreach($shipmentTypes as $shipmentType)
-                                                            <option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select name="shipping_details_uom[]" class="select2">
-                                                        <option value="">Select</option>
-                                                        @foreach($uoms as $uom)
-                                                            <option value="{{ $uom->id }}">{{ $uom->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
-                                                </td>
-                                                <td> 
-                                                    <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
-                                                </td>
-                                                <td>
-                                                    <input type="text"  name="shipping_details_total[]" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
-                                                </td>
-                                                <td><a href="javascript:void(0);" class="ic-btn4" onclick="addShippingDetails()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
-                                            </tr>
-                                        </tbody>
-                                       
-                                    </table>
+                                    <div class="no_more_tables">
+                                        <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>UOM <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>QTY <span class="required_star" style="color: red;">*</span></th>
+                                                    <!-- <th style="width:15%;">Tax</th> -->
+                                                    <th>Total ($)</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="shipping-details-table-body" class="input-field">
+                                                <tr>
+                                                    <td data-title="Shipping Method">
+                                                        <select name="shipping_details_method[]" class="select2" >
+                                                            <option value="">Select</option>
+                                                            @foreach($shippingMethods as $shippingMethod)
+                                                                <option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td data-title="Shipment Type">
+                                                        <select  name="shipping_details_type[]" class="select2">
+                                                            <option value="">Select</option>
+                                                            @foreach($shipmentTypes as $shipmentType)
+                                                                <option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td data-title="UOM">
+                                                        <select name="shipping_details_uom[]" class="select2">
+                                                            <option value="">Select</option>
+                                                            @foreach($uoms as $uom)
+                                                                <option value="{{ $uom->id }}">{{ $uom->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td data-title="Per UOM Price ($)">
+                                                        <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
+                                                    </td>
+                                                    <td data-title="QTY"> 
+                                                        <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
+                                                    </td>
+                                                    <td data-title="Total ($)">
+                                                        <input type="text"  name="shipping_details_total[]" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
+                                                    </td>
+                                                    <td data-title=""><a href="javascript:void(0);" class="ic-btn4" onclick="addShippingDetails()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                            <a href="#modal1" class="waves-effect waves-light modal-trigger btn_green shipment-file-upload-trigger"> <i class="material-icons"> attach_file </i> Attach file</a>
+                                        </table>
+                                        
+                                    </div>
+                                    
                                 </div>
-                                <a href="#modal1" class="waves-effect waves-light modal-trigger btn_green shipment-file-upload-trigger"> <i class="material-icons"> attach_file </i> Attach file</a>
+                                
                                 <!-- Modal Structure -->
                                 <div id="modal1" class="modal shipment_file_upload_modal" >
                                     <div class="modal-content">
@@ -247,61 +251,66 @@
 
                                 <div class="line_item_wrap">
                                     <legend>Line Items</legend>
-                                    <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
-                                        <thead>
+                                    <div class="no_more_tables">
+                                        <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th>Sl. No.</th>
+                                                    <th>Item / Description <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>Quantity <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>Unit Price <span class="required_star" style="color: red;">*</span></th>
+                                                    <th>Sub Total <span class="required_star" style="color: red;">*</span></th>
+                                                    <!-- <th style="width:15%;">Tax</th> -->
+                                                    <th>Total Price </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="lineitems" class="input-field">
+                                                <tr>
+                                                    <td data-title="Sl. No.">1</td>
+                                                    <td data-title="Item / Description">
+                                                        <select class="select2 product-dropdown" onchange="changecat(this)">
+                                                            <option value="">Select Products</option>
+                                                            @foreach($products as $product)
+                                                                <option value="{{ $product->id }}">{{ $product->title }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input type="hidden" name="supplier[]" required/>
+                                                        <input type="hidden" name="product[]" required/>
+                                                        <input type="hidden" name="price_unit[]" required/>
+                                                        <span class="supplier_details" style="color: #50AA5B;"></span>
+                                                    </td>
+                                                    <td data-title="Quantity">
+                                                        <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
+                                                        <input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/>
+                                                    </td>
+                                                    <td data-title="Unit Price">
+                                                        <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
+                                                        <input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/>
+                                                    </td>
+                                                    <td data-title="Sub Total">
+                                                        <input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/>
+                                                        <input type="hidden" class="taxprice" name="tax[]" value="0" />
+                                                    </td>
+                                                    <td data-title="Total Price"><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td>
+                                                    <td><a href="javascript:void(0);" class="ic-btn4" onclick="addlineitem()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
+                                                </tr>
+                                            </tbody>
+
                                             <tr>
-                                                <th>Sl. No.</th>
-                                                <th>Item / Description <span class="required_star" style="color: red;">*</span></th>
-                                                <th>Quantity <span class="required_star" style="color: red;">*</span></th>
-                                                <th>Unit Price <span class="required_star" style="color: red;">*</span></th>
-                                                <th>Sub Total <span class="required_star" style="color: red;">*</span></th>
-                                                <!-- <th style="width:15%;">Tax</th> -->
-                                                <th>Total Price </th>
-                                                <th></th>
+                                                <td colspan="5"class="right-align grand_total_title" style="padding-right: 20px"><b>Total Invoice Amount</b></td>
+                                                <td data-title="Total Invoice Amount" colspan="2" align="left" id="total_price_amount">0.00</td>
                                             </tr>
-                                        </thead>
-                                        <tbody id="lineitems" class="input-field">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <select class="select2 product-dropdown" onchange="changecat(this)">
-                                                        <option value="">Select Products</option>
-                                                        @foreach($products as $product)
-                                                            <option value="{{ $product->id }}">{{ $product->title }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <input type="hidden" name="supplier[]" required/>
-                                                    <input type="hidden" name="product[]" required/>
-                                                    <input type="hidden" name="price_unit[]" required/>
-                                                    <span class="supplier_details" style="color: #50AA5B;"></span>
-                                                </td>
-                                                <td>
-                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
-                                                    <input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/>
-                                                </td>
-                                                <td>
-                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
-                                                    <input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/>
-                                                    <input type="hidden" class="taxprice" name="tax[]" value="0" />
-                                                </td>
-                                                <td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td>
-                                                <td><a href="javascript:void(0);" class="ic-btn4" onclick="addlineitem()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <!--tr>
-                                                <td colspan="6" align="right"><b>Total Tax</b></td>
-                                                <td colspan="2" align="left" id="total_tax_price_amount">0.00</td>
-                                            </tr-->
-                                            <tr>
-                                                <td colspan="5"class="right-align"><b>Total Invoice Amount</b></td>
-                                                <td colspan="2" align="left" id="total_price_amount">0.00</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                            
+                                            <tfoot>
+                                                <!--tr>
+                                                    <td colspan="6" align="right"><b>Total Tax</b></td>
+                                                    <td colspan="2" align="left" id="total_tax_price_amount">0.00</td>
+                                                </tr-->
+                                                
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
 
                                 <div class="invoice_terms_conditions">
@@ -334,25 +343,25 @@
                                 <div class="invoice_advising_bank">
                                     <legend>Advising Bank</legend>
                                     <div class="row">
-                                        <div class="col s6 m3 input-field">
+                                        <div class="col s12 m6 l3 input-field">
                                             <div class="has-feedback">
                                                 <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                 <input type="text" name="bank_name" class="form-control" required/>
                                             </div>
                                         </div>
-                                        <div class="col s6 m3 input-field">
+                                        <div class="col s12 m6 l3 input-field">
                                             <div class="has-feedback">
                                                 <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                 <input type="text" name="branch_name" class="form-control" required />
                                             </div>
                                         </div>
-                                        <div class="col s6 m3 input-field">
+                                        <div class="col s12 m6 l3 input-field">
                                             <div class="has-feedback">
                                                 <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                 <input type="text" name="bank_address" class="form-control" required />
                                             </div>
                                         </div>
-                                        <div class="col s6 m3 input-field">
+                                        <div class="col s12 m6 l3 input-field">
                                             <div class="has-feedback">
                                                 <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                 <input type="text" name="swift_code" class="form-control" required />
@@ -364,7 +373,7 @@
                                 <div class="line_item_wrap invoice_signature_wrap">
                                     <div class="row input-field">
                                         <legend>Signature</legend>
-                                        <div class="col s6">
+                                        <div class="col s12 m6">
                                             <h6>Buyer Side</h6>
                                             <div class="row">
                                                 <div class="col s12 input-field">
@@ -381,7 +390,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col s6">
+                                        <div class="col s12 m6">
                                             <h6>Beneficiary Side</h6>
                                             <div class="row">
                                                 <div class="col s12 input-field">

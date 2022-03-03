@@ -95,7 +95,7 @@
     function addShippingDetails()
     {
         var shippingDetailsInputField = '<tr>';
-        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<td data-title="Shipping Method">';
         shippingDetailsInputField += '<select name="shipping_details_method[]" class="select-shipping-method" style="width: 100%"  >';
         shippingDetailsInputField += '<option value="">Select</option>';
         shippingDetailsInputField += '@foreach($shippingMethods as $shippingMethod)';
@@ -103,7 +103,7 @@
         shippingDetailsInputField += '@endforeach';
         shippingDetailsInputField += '</select>';
         shippingDetailsInputField += '</td>';
-        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<td data-title="Shipment Type">';
         shippingDetailsInputField += '<select name="shipping_details_type[]" class="select-shipping-type" style="width: 100%"  >';
         shippingDetailsInputField += '<option value="">Select</option>';
         shippingDetailsInputField += '@foreach($shipmentTypes as $shipmentType)';
@@ -111,7 +111,7 @@
         shippingDetailsInputField += '@endforeach';
         shippingDetailsInputField += '</select>';
         shippingDetailsInputField += '</td>';
-        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<td data-title="UOM">';
         shippingDetailsInputField += '<select name="shipping_details_uom[]" class="select-uom" style="width: 100%" >';
         shippingDetailsInputField += '<option value="">Select</option>';
         shippingDetailsInputField += '@foreach($uoms as $uom)';
@@ -119,13 +119,13 @@
         shippingDetailsInputField += '@endforeach';
         shippingDetailsInputField += '</select>';
         shippingDetailsInputField += '</td>';
-        shippingDetailsInputField += '<td > ';
+        shippingDetailsInputField += '<td data-title="Per UOM Price ($)"> ';
         shippingDetailsInputField += '<input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  onkeyup="changeunit(this)" required/>';
         shippingDetailsInputField += '</td>';
-        shippingDetailsInputField += '<td >';
+        shippingDetailsInputField += '<td data-title="QTY">';
         shippingDetailsInputField += '<input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_qty[]" onkeyup="changeunitprice(this)" required/>';
         shippingDetailsInputField += '</td>';
-        shippingDetailsInputField += '<td>';
+        shippingDetailsInputField += '<td data-title="Total ($)">';
         shippingDetailsInputField += '<input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_total[]" readonly/>';
         shippingDetailsInputField += '</td>';
         shippingDetailsInputField += '<td><a href="javascript:void(0);" class="ic-btn4" onclick="removeShippingDetails(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td>';

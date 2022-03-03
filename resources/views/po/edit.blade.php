@@ -62,20 +62,20 @@
                                     </div>
                                     <div class="col s12 input-field">
                                         <div class="row">
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m4 l2">
                                                 <div class="form-group has-feedback">
                                                     <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
                                                     <input type="text" class="form-control"  name="po_id" value="{{$po->proforma_id}}" readonly/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m4 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Pro-forma Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="date" class="form-control" readonly name="po_date" value="{{ $po->proforma_date }}"/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m4 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payment Within <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -88,7 +88,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m4 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payment term<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -100,7 +100,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m4 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipment Term<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -112,7 +112,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s6 m3 l2">
+                                            <div class="col s12 m4 l2">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipping Address <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -120,9 +120,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
-                                       
-                                       
                                     </div>
                                     <!-- </div> -->
                                 </div>
@@ -170,7 +167,7 @@
                                         <tbody id="shipping-details-table-body" class="input-field">
                                             @foreach($po->proFormaShippingDetails as $key=>$shippingDetails)
                                             <tr>
-                                                <td>
+                                                <td data-title="Shipping Method">
                                                     <select name="shipping_details_method[]" class="select2" >
                                                         <option value="">Select</option>
                                                         @foreach($shippingMethods as $shippingMethod)
@@ -178,7 +175,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td data-title="Shipment Type">
                                                     <select  name="shipping_details_type[]" class="select2">
                                                         <option value="">Select</option>
                                                         @foreach($shipmentTypes as $shipmentType)
@@ -186,7 +183,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td data-title="UOM">
                                                     <select name="shipping_details_uom[]" class="select2">
                                                         <option value="">Select</option>
                                                         @foreach($uoms as $uom)
@@ -194,13 +191,13 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td data-title="Per UOM Price ($)">
                                                     <input type="number" name="shipping_details_per_uom_price[]" value="{{$shippingDetails->shipping_details_per_uom_price}}" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
                                                 </td>
-                                                <td> 
+                                                <td data-title="QTY"> 
                                                     <input type="text" name="shipping_details_qty[]" value="{{$shippingDetails->shipping_details_qty}}" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
                                                 </td>
-                                                <td>
+                                                <td data-title="Total ($)">
                                                     <input type="text"  name="shipping_details_total[]" value="{{$shippingDetails->shipping_details_total}}" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
                                                 </td>
                                                 @if(count($po->proFormaShippingDetails)== $key+1 )
@@ -359,25 +356,25 @@
                                     <div class="col s12 input-field">
                                     <legend>Advising Bank</legend>
                                         <div class="row">
-                                            <div class="col s6 m3">
+                                            <div class="col s12 m3 l3">
                                                 <div class="form-group has-feedback">
                                                     <label>Name of the bank <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="text" name="bank_name" value="{{$po->proFormaAdvisingBank->bank_name}}" class="form-control" required/>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3">
+                                            <div class="col s12 m3 l3">
                                                 <div class="form-group has-feedback">
                                                     <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="text" name="branch_name" value="{{$po->proFormaAdvisingBank->branch_name}}" class="form-control" required />
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3">
+                                            <div class="col s12 m3 l3">
                                                 <div class="form-group has-feedback">
                                                     <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="text" name="bank_address"  value="{{$po->proFormaAdvisingBank->bank_address}}" class="form-control" required />
                                                 </div>
                                             </div>
-                                            <div class="col s6 m3">
+                                            <div class="col s12 m3 l3">
                                                 <div class="form-group has-feedback">
                                                     <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="text" name="swift_code" value="{{$po->proFormaAdvisingBank->swift_code}}"  class="form-control" required />

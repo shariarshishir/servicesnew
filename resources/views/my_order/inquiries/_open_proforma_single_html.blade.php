@@ -40,12 +40,12 @@
                                     <div class="col s12 input-field">
                                         <div class="row">
                                             <div class="col m6" id="buyerdata">
-                                                <p><b> {{$po->buyer->name}} </b></h5>
-                                                <p><b>{{$po->buyer->email}}</b></p>
+                                                <span><b>{{$po->buyer->name}} </b></span><br/>
+                                                <span>{{$po->buyer->email}}</span>
                                             </div>
                                             <div class="col m6">
                                                 <div class="form-group has-feedback">
-                                                    <label><b>Beneficiary</b></label>
+                                                    <label style="margin-bottom: 0;"><b>Beneficiary</b></label>
                                                     <span style="display: block">{{ $po->businessProfile->business_name }}</span>
                                                 </div>
                                             </div>
@@ -121,8 +121,8 @@
                                                     <th style="width:5%;">Shipping Method</th>
                                                     <th style="width:15%;">Shipment Type</th>
                                                     <th style="width:15%;">UOM</th>
-                                                    <th style="width:15%;">Per UOM Price ($) <span class="required_star" style="color:red;">*</span></th>
-                                                    <th style="width:15%;" >QTY <span class="required_star" style="color:red;">*</span></th>
+                                                    <th style="width:15%;">Per UOM Price ($)</th>
+                                                    <th style="width:15%;" >QTY</th>
                                                     <!-- <th style="width:15%;">Tax</th> -->
                                                     <th style="width:15%;">Total ($)</th>
                                                     <th style="width:5%; text-align:center;"></th>
@@ -167,8 +167,8 @@
                                                     <th style="width:5%;">Sl. No.</th>
                                                     <th style="width:15%;">Item / Description</th>
                                                     <th style="width:15%;">Quantity</th>
-                                                    <th style="width:15%;">Unit Price <span class="required_star" style="color: red;">*</span></th>
-                                                    <th style="width:15%;">Sub Total <span class="required_star" style="color: red;">*</span></th>
+                                                    <th style="width:15%;">Unit Price</th>
+                                                    <th style="width:15%;">Sub Total</th>
                                                     <!-- <th style="width:15%;">Tax</th> -->
                                                     <th style="width:15%;">Total Price</th>
                                                     <th style="width:5%; text-align:center;"></th>
@@ -207,7 +207,7 @@
                                     </div>
                                 </div>
 
-                                <div class="invoice_terms_conditions">
+                                <div class="invoice_terms_conditions invoice_buyer_conditions">
                                     <legend>Terms & Conditions</legend>
                                     <div class="terms_conditions_list" >
                                         <ul class="list-group terms-lists">
@@ -215,7 +215,7 @@
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
                                                     <label class="terms-label">
-                                                        <span class="material-icons"> check </span> <span>{{$supplierCheckedProFormaTermAndCondition->proFormaTermAndCondition->term_and_condition}}</span>
+                                                        <i class="material-icons"> check </i> <span>{{$supplierCheckedProFormaTermAndCondition->proFormaTermAndCondition->term_and_condition}}</span>
                                                     </label>
                                                 </div>
                                             </li>
@@ -226,7 +226,7 @@
                                             <li class="list-group-item">
                                                 <div class="input-group input-field">
                                                     <label class="terms-label">
-                                                        <span class="material-icons"> check </span> <span>{{$condition}}</span>
+                                                        <i class="material-icons"> check </i> <span>{{$condition}}</span>
                                                     </label>
                                                 </div>
                                             </li>
@@ -236,7 +236,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="invoice_terms_conditions">
+                                <div class="invoice_advising_bank">
                                     <legend>Advising Bank</legend>
                                     <div class="col s12 input-field">
                                         <div class="row">
@@ -269,10 +269,10 @@
                                 </div>
 
                                 <div class="line_item_wrap">
-                                    <div class="row2 input-field">
+                                    <div class="row input-field">
                                         <legend>Signature</legend>
                                         <div class="col s6 input-field">
-                                            <h6><b>Buyer Side</b></h6>
+                                            <h6>Buyer Side</h6>
                                             <div class="form-group has-feedback">
                                                 <span> {{ $po->proFormaSignature->buyer_singature_name }} </span>
                                             </div>
@@ -281,7 +281,7 @@
                                             </div>
                                         </div>
                                         <div class="col s6 input-field">
-                                            <h6><b>Beneficiary Side</b></h6>
+                                            <h6>Beneficiary Side</h6>
                                             <div class="form-group has-feedback">
                                                 <span> {{$po->proFormaSignature->beneficiar_singature_name}} </span>
                                             </div>
@@ -300,11 +300,11 @@
                 </article>
                 <!-- WIDGET END -->
             </div>
-            <div class="shipping-files">
-                <legend><span class="material-icons">attach_file</span> Attachment</legend>
+            <div class="shipping-files shipping_attachment_wrap">
+                <legend><i class="material-icons">attach_file</i> Attachment</legend>
                 <ul>
                 @foreach($po->proFormaShippingFiles as $image)
-                    <li><span class="material-icons"> insert_drive_file </span> {{ asset('storage/'.$image->shipping_details_files) }}</li>
+                    <li><i class="material-icons"> insert_drive_file </i> {{ asset('storage/'.$image->shipping_details_files) }}</li>
                 @endforeach
                 </ul>
             </div>
@@ -317,10 +317,10 @@
     </div>
 </div>
 
-<div class="modal" id="rejectOrderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="rejectOrderDetailsModal"  aria-hidden="true">
+<div class="modal reject_order_details_modal" id="rejectOrderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="rejectOrderDetailsModal"  aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
        <div class="modal-content">
-            <div class="modal-header modal-hdr-custum" style="background: rgb(85, 168, 96) none repeat scroll 0% 0%; border-radius: 4px 4px 0px 0px;">
+            <div class="modal-header modal-hdr-custum" style="background: rgb(85, 168, 96) none repeat scroll 0% 0%;">
             	<h4 class="modal-title" style="color: #fff; font-size: 14px;">
             		PO: {{ $po->proforma_id }} <br />
             		Date: {{$po->proforma_date}}
@@ -338,7 +338,10 @@
 						    <input type="hidden" id="po_id" name="po_id" value="{{ $po->id }}" />
 						    <input type="hidden" id="supplier_id" name="supplier_id" value="{{ $supplierInfo->id }}" />
 						    <input type="hidden" id="po_rejected_status" name="po_rejected_status" value="Rejected" />
-	                        <button type="submit" onclick="work_trigger()" class="btn btn-success" id="rejectRfqForm">Submit</button>
+	                        <div class="right-align">
+                                <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Submit</button>
+                            </div>
+                            
                     	</form>
                     </div>
                 </div>

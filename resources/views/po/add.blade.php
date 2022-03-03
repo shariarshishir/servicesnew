@@ -362,7 +362,7 @@
                                 </div>
 
                                 <div class="line_item_wrap invoice_signature_wrap">
-                                    <div class="col s12 input-field">
+                                    <div class="row input-field">
                                         <legend>Signature</legend>
                                         <div class="col s6">
                                             <h6>Buyer Side</h6>

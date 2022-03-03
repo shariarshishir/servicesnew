@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\RfqImage;
 use App\Models\User;
+use App\Models\SupplierBid;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewRfqHasAddedEvent;
 
@@ -19,19 +20,31 @@ class RFQController extends Controller
 {
     public function index()
     {
-        $rfqs=Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+        $rfqs = Rfq::withCount('bids')->with('images','user')->latest()->paginate(10);
+        $rfqIdsWithBid = SupplierBid::where('supplier_id',auth()->user()->id)->pluck('rfq_id')->toArray();
         $newRfqWithNotificationIds = [];
         foreach(auth()->user()->unreadNotifications->where('type','App\Notifications\NewRfqNotification')->where('read_at',null) as $notification){
             array_push($newRfqWithNotificationIds,$notification->data['rfq_data']['id']);
         }
 
         if(($rfqs->total())>0){
-            return response()->json(['rfqs'=>$rfqs,'newRfqWithNotificationIds'=>$newRfqWithNotificationIds,"success"=>true],200);
+            return response()->json(['rfqIdsWithBid'=>$rfqIdsWithBid,'rfqs'=>$rfqs,'newRfqWithNotificationIds'=>$newRfqWithNotificationIds,"success"=>true],200);
         }
         else{
-            return response()->json(['rfqs'=>$rfqs,'newRfqWithNotificationIds'=>$newRfqWithNotificationIds,"success"=>false],200);
+            return response()->json(['rfqIdsWithBid'=>$rfqIdsWithBid,'rfqs'=>$rfqs,'newRfqWithNotificationIds'=>$newRfqWithNotificationIds,"success"=>false],200);
         }
     }
+    public function rfqListforMigration()
+    {
+        $rfqs = Rfq::with('images','bids.businessProfile','category')->get();
+        if(count($rfqs)>0){
+            return response()->json(['rfqs'=>$rfqs,'success'=>true],200);
+        }
+        else{
+            return response()->json(['rfqs'=>$rfqs,"success"=>false],200);
+        }
+    }
+
     public function myRfqList()
     {
         $rfqs=Rfq::withCount('bids')->with('images','user','bids')->where('created_by',auth()->id())->latest()->paginate(5);
@@ -44,6 +57,33 @@ class RFQController extends Controller
             return response()->json(['rfqs'=> $rfqs,"success"=>false],200);
         }
     }
+    public function rfqListByCategoryId($id)
+    {
+        $rfqs=Rfq::withCount('bids')->with('images','user','bids')->where('category_id',$id)->latest()->paginate(5);
+        if($rfqs->total()>0){
+
+            return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
+        }
+        else{
+            
+            return response()->json(['rfqs'=> $rfqs,"success"=>false],200);
+        }
+    }
+
+    public function searchRfqByTitle(Request $request){
+         
+        if(!empty($request->search_input)){
+            $rfqs = Rfq::with('images','user','bids')->where('title', 'like', '%'.$request->search_input.'%')->paginate(10);
+            if($rfqs->total()>0){
+                return response()->json(['rfqs' => $rfqs, 'message' => 'RFQ found','code'=>false], 200);
+            }
+            else{
+                return response()->json(['rfqs' => $rfqs, 'message' => 'RFQ not found','code'=>False], 200);
+            }
+        }
+    }
+
+   
     public function store(Request $request){
         
         // $validator = Validator::make($request->all(), [
@@ -86,15 +126,15 @@ class RFQController extends Controller
                 }
             }
             if(env('APP_ENV') == 'production')
-        {
-            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
-            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+            {
+                $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+                foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                    event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+                }
+
+                $selectedUserToSendMail="success@merchantbay.com";
                 event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             }
-
-            $selectedUserToSendMail="success@merchantbay.com";
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-        }
             
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){

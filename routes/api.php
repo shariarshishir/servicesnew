@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\User\WalfareController;
 use App\Http\Controllers\Api\User\SecurityController;
 use App\Http\Controllers\Api\User\RFQController;
 use App\Http\Controllers\Api\User\RfqBidController;
+use App\Http\Controllers\Api\User\ProformaInvoiceController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
 use App\Http\Controllers\Api\User\BlogController;
 use App\Http\Controllers\Api\User\FactoryTourController;
@@ -85,6 +86,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //business profile
     Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
+    Route::get('/manufacture-product-categories-with-icon', [BusinessProfileController::class, 'manufactureProductCategoriesWithIcon']);
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
     Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
@@ -148,11 +150,31 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/rfq-bids', [RfqBidController::class, 'store']);
 
     Route::get('/rfqs', [RFQController::class, 'index']);
+    Route::get('/rfq-list-for-migration', [RFQController::class, 'rfqListforMigration']);
     Route::get('/my-rfq-list', [RFQController::class, 'myRfqList']);
+    Route::get('/rfq-by-category/{category}', [RFQController::class, 'rfqListByCategoryId']);
+    Route::get('/search-rfq-by-title', [RFQController::class, 'searchRfqByTitle']);
     Route::get('/rfq/{id}/bids', [RfqBidController::class, 'rfqBidsByRfqId']);
+    Route::get('/bids/{bid}', [RfqBidController::class, 'bidDetails']);
+    Route::get('/rfq-bids-created-by-auth-user', [RfqBidController::class, 'rfqBidCreatedByAuthUser']);
+
+    
+    
     Route::post('/rfq-notification-mark-as-read',[RFQController::class,'newRfqNotificationMarkAsRead']);
     Route::post('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'newRfqBidNotificationMarkAsRead']);
     
+
+
+    //poforma
+    Route::post('/proforma-invoices/store', [ProformaInvoiceController::class,'store']);
+    Route::post('/proforma-invoice-form', [ProformaInvoiceController::class,'allInformationNeededToCreateProFormaInvoice']);
+    
+    Route::get('/created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'createdProformaByAuthUser']);
+    Route::get('/received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'receivedProformaByAuthUser']);
+    Route::get('/product-list-by-business-profile-id', [ProformaInvoiceController::class, 'getProductListByBuisnessProfileId']);
+    Route::get('/proforma-invoices/{id}', [ProformaInvoiceController::class, 'proformaInvoiceDetails']);
+    Route::post('/proforma-invoice-accept', [ProformaInvoiceController::class, 'acceptProformaInvoice']);
+    Route::post('/proforma-invoice-reject',[ProformaInvoiceController::class, 'rejectProformaInvoice']);
 
 
     //manufacture product api

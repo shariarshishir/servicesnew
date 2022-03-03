@@ -61,7 +61,9 @@
 	<!-- company_stuff -->
 	<div class="contentBox">
 		@if($business_profile->companyOverview->about_company)
+		<p itemprop="description">
 			{{$business_profile->companyOverview->about_company}}
+		</p>
 		@else
 			<div class="card-alert card cyan lighten-5">
 				<div class="card-content cyan-text">

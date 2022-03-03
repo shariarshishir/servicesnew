@@ -113,13 +113,25 @@
           <li class="nav-item has-treeview {{ Route::is('uom*') || Route::is('shipping-method*') || Route::is('shipment-type*') ? 'menu-open' : ''}}">
             <a href="javascript:void(0);" class="nav-link {{ Route::is('uom*') || Route::is('shipping-method*') || Route::is('shipment-type*') ? 'active' : ''}}">
                 <i class="fas fa-shipping-fast nav-icon"></i>
-                <p>Shipping</p>
+                <p>Shipping<i class="right fas fa-angle-left"></i></p>
             </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('uom.index')}}" class="nav-link {{ Route::is('uom*')? 'active' : ''}} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>UOM</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('payment-term.index')}}" class="nav-link {{ Route::is('payment-term*') ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Payment Term</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('shipment-term.index')}}" class="nav-link {{ Route::is('shipping-term*') ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Shipping Term</p>
                         </a>
                     </li>
 
@@ -138,6 +150,12 @@
                     </li>
                 </ul>
           </li>
+          <li class="nav-item">
+            <a href="{{route('proforma-terms-and-conditions.index')}}" class="nav-link {{ Route::is('profroma-terms-and-conditions*') ? 'active' : ''}} ">
+                <i class="far fa-file nav-icon"></i>
+                <p>Proforma terms and conditions</p>
+            </a>
+          </li>          
           <li class="nav-item">
             <a href="{{ Route('blogs.index')}}" class="nav-link {{ Route::is('blogs.index')? 'active' : ''}}">
                 <i class="far fa-newspaper nav-icon"></i>

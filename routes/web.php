@@ -10,9 +10,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\QueryController;
+use App\Http\Controllers\Admin\PaymentTermController;
 use App\Http\Controllers\Admin\ShipmentTypeController;
+use App\Http\Controllers\Admin\ShipmentTermController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
+use App\Http\Controllers\Admin\ProFormaTermAndConditionController;
 use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
@@ -296,6 +299,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');
     Route::post('/po/store', [PoController::class,'store'])->name('po.store');
     Route::get('/po',[PoController::class,'index'])->name('po.index');
+    Route::get('/product-list-by-business-profile-id', [PoController::class, 'getProductListByBuisnessProfileId'])->name('product_list.by_profile_id');
     Route::get('/getsupplierbycat/{id}', [PoController::class, 'getsupplierbycat'])->name('getsupplierbycat');
     Route::get('/open-proforma-single-html/{id}', [PoController::class, 'openProformaSingleHtml'])->name('open.proforma.single.html');
     Route::post('/pro-forma-invoice-accept', [PoController::class, 'acceptProformaInvoice'])->name('accept.proforma.invoice');
@@ -440,13 +444,18 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('query/show/{id}',[QueryController::class, 'show'])->name('query.show');
         // uom, shipping-method, shipment-type, shipping-charge controller
         Route::resource('uom', UomContorller::class);
+        Route::resource('payment-term', PaymentTermController::class);
         Route::resource('shipping-method', ShippingMethodController::class);
         Route::resource('shipment-type', ShipmentTypeController::class);
+        Route::resource('shipment-term', ShipmentTermController::class);
         Route::get('shipping-charge/change/status/{order_id}', [ShippingChargeController::class, 'changeStatus'])->name('shipping.charge.change.status');
         Route::resource('shipping-charge', ShippingChargeController::class);
 
         // Blogs api start
         Route::resource('blogs', BlogController::class);
+
+        //profroma terms and conditions
+        Route::resource('proforma-terms-and-conditions', ProFormaTermAndConditionController::class);
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');

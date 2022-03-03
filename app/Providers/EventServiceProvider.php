@@ -12,6 +12,7 @@ use App\Events\PaymentSuccessEvent;
 use App\Events\ProductAvailabilityEvent;
 use App\Events\NewBusinessProfileHasCreatedEvent;
 use App\Events\NewBusinessProfileVerificationRequestEvent;
+use App\Events\NewProfromaInvoiceHasCreatedEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -67,6 +68,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewBusinessProfileVerificationRequestEvent::class => [
             'App\Listeners\NewBusinessProfileVerificationRequestListener',
+        ],
+        NewProfromaInvoiceHasCreatedEvent::class => [
+            'App\Listeners\NewProfromaInvoiceHasCreatedListener',
         ],
     ];
 

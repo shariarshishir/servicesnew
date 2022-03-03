@@ -27,6 +27,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 <link href="{{asset('css/style.css')}}" rel="stylesheet">
 <link href="{{asset('css/media.css')}}" rel="stylesheet">
+<link href="{{asset('css/pdf-style.css')}}" rel="stylesheet" media="print">
 <link href="{{asset('css/app-chat.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/icon.css')}}" rel="stylesheet">
 <link href="{{asset('css/image-uploader.min.css')}}" rel="stylesheet">

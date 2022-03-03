@@ -23,6 +23,7 @@ class RfqBidController extends Controller
             'business_profile_id'=>'required',
             'unit_price'=>'required',
             'description' => 'required',
+            'delivery_time'  => 'required',
            ]);
             if ($validator->fails())
             {
@@ -32,7 +33,7 @@ class RfqBidController extends Controller
              400);
             }
 
-            $allData=$request->only('rfq_id','business_profile_id','unit_price','description');
+            $allData=$request->only('rfq_id','business_profile_id','unit_price','description','delivery_time');
             $allData['supplier_id']=auth()->id();
             $rfq = Rfq::find($request->rfq_id);
             $bidData=SupplierBid::create($allData);
@@ -71,24 +72,29 @@ class RfqBidController extends Controller
         foreach($bids as $bid){
                 $newFormatedBid = new stdClass();
                 $newFormatedBid->id = $bid->id;
-                $newFormatedBid->business_profile_id = $bid->business_profile_id;
+                $newFormatedBid->rfq_id   = $bid->rfq_id;
                 $newFormatedBid->user_id = $bid->businessProfile->user->id;
-                $newFormatedBid->user_image = $bid->businessProfile->user->image;
-                $newFormatedBid->supplier_id = $bid->supplier_id;
-                $newFormatedBid->titile = $bid->titile;
-                $newFormatedBid->description = $bid->description;
-                $newFormatedBid->media = json_decode($bid->media);
-                $newFormatedBid->quantity =$bid->quantity;
-                $newFormatedBid->unit   = $bid->unit;
+                $newFormatedBid->business_profile_id = $bid->business_profile_id;
+                //$newFormatedBid->user_image = $bid->businessProfile->user->image;
+                //$newFormatedBid->supplier_id = $bid->supplier_id;
+                $newFormatedBid->title = $bid->rfq->title;
+                //$newFormatedBid->description = $bid->description;
+                //$newFormatedBid->rfq_short_description = $bid->rfq->short_description;
+                //$newFormatedBid->media = json_decode($bid->media);
+                //$newFormatedBid->quantity =$bid->quantity;
+                //$newFormatedBid->unit   = $bid->unit;
+                
+                $newFormatedBid->rfq_unit_price   = $bid->rfq->unit_price??NULL;
                 $newFormatedBid->unit_price   = $bid->unit_price;
-                $newFormatedBid->total_price   = $bid->total_price;
-                $newFormatedBid->destination   = $bid->destination;
-                $newFormatedBid->payment_method   = $bid->payment_method;
-                $newFormatedBid->delivery_time   = $bid->delivery_time;
-                $newFormatedBid->destination   = $bid->destination;
-                $newFormatedBid->user_id   = $bid->user->id;
+                //$newFormatedBid->total_price   = $bid->total_price;
+                //$newFormatedBid->destination   = $bid->destination;
+                //$newFormatedBid->payment_method   = $bid->payment_method;
+                // $newFormatedBid->destination   = $bid->destination;
                 $newFormatedBid->user_name   = $bid->user->name;
                 $newFormatedBid->company_name   = $bid->user->company_name;
+                $newFormatedBid->created_at   = $bid->created_at;
+                //$newFormatedBid->delivery_time   = $bid->delivery_time;
+
                 array_push($bidsArray,$newFormatedBid);
         }
         if(count($bidsArray)){
@@ -104,6 +110,72 @@ class RfqBidController extends Controller
             ],200);
 
         }
+
+    }
+
+    public function rfqBidCreatedByAuthUser(){
+        
+        $bids = SupplierBid::with('rfq')->where('supplier_id',auth()->user()->id)->paginate(10);
+        $bidsArray=[];
+        foreach($bids as $bid){
+            $newFormatedBid = new stdClass();
+            $newFormatedBid->id = $bid->id;
+            $newFormatedBid->rfq_id   = $bid->rfq_id;
+            $newFormatedBid->business_profile_id = $bid->business_profile_id;
+            //$newFormatedBid->user_image = $bid->businessProfile->user->image;
+            //$newFormatedBid->supplier_id = $bid->supplier_id;
+            $newFormatedBid->title = $bid->rfq->title??NULL;
+            //$newFormatedBid->description = $bid->description;
+            //$newFormatedBid->rfq_short_description = $bid->rfq->short_description;
+            //$newFormatedBid->media = json_decode($bid->media);
+            //$newFormatedBid->quantity =$bid->quantity;
+            //$newFormatedBid->unit   = $bid->unit;
+            
+            $newFormatedBid->rfq_unit_price   = $bid->rfq->unit_price??NULL;
+            $newFormatedBid->unit_price   = $bid->unit_price;
+            //$newFormatedBid->total_price   = $bid->total_price;
+            //$newFormatedBid->destination   = $bid->destination;
+            //$newFormatedBid->payment_method   = $bid->payment_method;
+            // $newFormatedBid->destination   = $bid->destination;
+            $newFormatedBid->user_name   = $bid->user->name;
+            $newFormatedBid->company_name_of_buyer   = $bid->rfq->user->company_name;
+            $newFormatedBid->created_at   = $bid->created_at;
+            //$newFormatedBid->delivery_time   = $bid->delivery_time;
+
+                array_push($bidsArray,$newFormatedBid);
+        }
+        if(count($bidsArray)){
+            return response()->json([
+                'success' => true,
+                'rfqBids' => $bidsArray,
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'rfqBids' => $bidsArray,
+            ],200);
+
+        }
+    }
+
+    public function bidDetails($id){
+        $bid = SupplierBid::with('rfq.images','rfq.user')->find($id);
+        if($id){
+            return response()->json([
+                'success' => true,
+                'bid' => $bid,
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'bid' => $bid,
+            ],200);
+
+        }
+        
+
 
     }
 

@@ -6,12 +6,15 @@
     // socket.on('connect', function(data) {
     //     //alert('connect');
     // });
-    var selectedBuyerId = "{{ request()->route()->parameters['id'] }}";
+    var selectedBuyerId = "{{ request()->route()->parameters['id'] ??$po->buyer_id }}";
     //alert(selectedBuyerId);
     var allbuyer = @json($buyers);
     var unit = '';
     // var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td style="position:relative;"><div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td style="position:relative;"><div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/></td><td><select class="form-control taxprice" onchange="changetaxprice(this)" name="tax[]"><option value="0">No Tax (0%)</option><option value="10">VAT (10%)</option></select></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
-    var lineitemcontent = '<tr><td></td><td><select class="select-product" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td style="position:relative;"><span class="required_star" style="position: absolute; top:10; right:11px;">*</span><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td style="position:relative;"><span class="required_star" style="position: absolute; top:10; right:11px;">*</span><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+    var lineitemcontent = '<tr><td></td><td><select class="select-product product-dropdown" style="width: 100%" onchange="changecat(this)"><option value="">Select Products</option>@foreach($products as $product) <option value="{{$product->id}}">{{$product->title}}</option> @endforeach</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+    
+    
+
     function getbuyerdetails(id)
     {
         //alert(id);
@@ -42,18 +45,100 @@
             }
         });
     }
+
+    function getProductListBybusinessProfileId(id)
+    {
+        $.ajax({
+            method: 'get',
+            data: {id:id},
+            url: '{{ route("product_list.by_profile_id") }}',
+            success:function(response){
+                console.log(response.products);
+                $('.product-dropdown').empty();
+                $('.product-dropdown').append('<option value="">Select Products</option>');
+                $.each(response.products,function(index,product){
+                    $('.product-dropdown').append('<option value="'+product.id+'">'+product.title+'</option>');
+                });
+            }
+        });
+    }
     if(selectedBuyerId){
         getbuyerdetails(selectedBuyerId);
     }
-
     function addlineitem()
     {
-        $('#lineitems').append(lineitemcontent);
-        $('.select-product').select2();
-        for(var i = 0; i < $('#lineitems').children().length; i++)
-        {
-            $('#lineitems').children().eq(i).children().eq(0).html((i + 1));
-        }
+        var businessProfileId= $( "#buyerOptionsList option:selected" ).val();
+        $.ajax({
+            method: 'get',
+            data: {id:businessProfileId},
+            url: '{{ route("product_list.by_profile_id") }}',
+            success:function(response){
+                var lineitemcontent = '<tr><td></td><td>';
+                lineitemcontent  += '<select class="select-product product-dropdown" style="width: 100%" onchange="changecat(this)">';
+                lineitemcontent  +='<option value="">Select Products</option>';
+                $.each(response.products,function(index,product){
+                    lineitemcontent  += '<option value="'+product.id+'">'+product.title+'</option>';
+                });
+                lineitemcontent  +='</select><input type="hidden" name="supplier[]" required/><input type="hidden" name="product[]" required/><input type="hidden" name="price_unit[]" required/><span class="supplier_details" style="color: #50AA5B;"></span></td><td><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
+                $('#lineitems').append(lineitemcontent);
+                $('.select-product').select2();
+                for(var i = 0; i < $('#lineitems').children().length; i++)
+                {
+                    $('#lineitems').children().eq(i).children().eq(0).html((i + 1));
+                }
+            }
+        });
+        
+
+        
+    }
+    function addShippingDetails()
+    {
+        var shippingDetailsInputField = '<tr>';
+        shippingDetailsInputField += '<td data-title="Shipping Method">';
+        shippingDetailsInputField += '<select name="shipping_details_method[]" class="select-shipping-method" style="width: 100%"  >';
+        shippingDetailsInputField += '<option value="">Select</option>';
+        shippingDetailsInputField += '@foreach($shippingMethods as $shippingMethod)';
+        shippingDetailsInputField += '<option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>';
+        shippingDetailsInputField += '@endforeach';
+        shippingDetailsInputField += '</select>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td data-title="Shipment Type">';
+        shippingDetailsInputField += '<select name="shipping_details_type[]" class="select-shipping-type" style="width: 100%"  >';
+        shippingDetailsInputField += '<option value="">Select</option>';
+        shippingDetailsInputField += '@foreach($shipmentTypes as $shipmentType)';
+        shippingDetailsInputField += '<option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>';
+        shippingDetailsInputField += '@endforeach';
+        shippingDetailsInputField += '</select>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td data-title="UOM">';
+        shippingDetailsInputField += '<select name="shipping_details_uom[]" class="select-uom" style="width: 100%" >';
+        shippingDetailsInputField += '<option value="">Select</option>';
+        shippingDetailsInputField += '@foreach($uoms as $uom)';
+        shippingDetailsInputField += '<option value="{{ $uom->id }}">{{ $uom->name }}</option>';
+        shippingDetailsInputField += '@endforeach';
+        shippingDetailsInputField += '</select>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td data-title="Per UOM Price ($)"> ';
+        shippingDetailsInputField += '<input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  onkeyup="changeunit(this)" required/>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td data-title="QTY">';
+        shippingDetailsInputField += '<input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_qty[]" onkeyup="changeunitprice(this)" required/>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td data-title="Total ($)">';
+        shippingDetailsInputField += '<input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_total[]" readonly/>';
+        shippingDetailsInputField += '</td>';
+        shippingDetailsInputField += '<td><a href="javascript:void(0);" class="ic-btn4" onclick="removeShippingDetails(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td>';
+        shippingDetailsInputField += '</tr>';
+        $('#shipping-details-table-body').append(shippingDetailsInputField);
+        $('.select-shipping-type').select2();
+        $('.select-shipping-method').select2();
+        $('.select-uom').select2();
+    }
+
+    function removeShippingDetails(el)
+    {
+        $(el).parent().parent().remove();
     }
 
     function removelineitem(el)
@@ -229,6 +314,85 @@
     //         window.location.href = "/message-center?uid="+selectedBuyerId;
     //     }, 1000);
     // }
+
+    function addShippingDetailsFile()
+    {
+        var html = '<tr>';
+        html +='<td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>';
+        html +='<td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>';
+        html +='<td class="right-align"><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+        html +='</tr>';
+        $('.shipment-file-upload-table-block tbody').append(html);
+    }
+
+    function removeShippingDetailsFile(el)
+    {
+        $(el).parent().parent().remove();
+    }
+
+    function addMoreTermAndCondition()
+    {
+        
+                                                    
+        var html  = '<li class="list-group-item ">';
+            html += '<div class="input-group input-field">';
+            html += '<input class="form-control" type="text"  name="terms_conditions[]" placeholder="Terms and condition" value="">';
+            html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeTermAndCondition(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>';
+            html += '</li>';
+            $('.more-term-and-condition-unorder-list').append(html);
+    }
+    function removeTermAndCondition(el)
+    {
+        $(el).parent().remove();
+    }
+
+
+    
+    $(document).ready(function(){
+            $(document).on('click', '.terms-edit-trigger' , function(){ 
+                $(this).hide();
+                $(this).closest(".input-group").find(".terms-label").hide();
+                $(this).closest(".input-group").find(".terms-edit-field").show();
+                $(this).closest(".input-group").find(".terms-save-trigger").show();
+                $(this).closest(".input-group").find(".terms-cancel-trigger").show();
+            });
+
+            $(document).on('click', '.terms-cancel-trigger' , function(){
+                $(this).hide();
+                $(this).closest(".input-group").find(".terms-save-trigger").hide();
+                $(this).closest(".input-group").find(".terms-edit-trigger").show();
+                $(this).closest(".input-group").find(".terms-edit-field").hide();
+                $(this).closest(".input-group").find(".terms-label").show();
+            });
+
+            $(document).on('click', '.terms-save-trigger' , function(){
+                $(this).hide();
+                $(this).closest(".input-group").find(".terms-cancel-trigger").hide();
+                $(this).closest(".input-group").find(".terms-edit-trigger").show();
+                $(this).closest(".input-group").find(".terms-edit-field").hide();
+                $(this).closest(".input-group").find(".terms-label").show();
+
+                inputVal = $(this).closest(".input-group").find(".terms-edit-value-field").val();
+                $(this).closest(".input-group").find(".terms-label span").text(inputVal);
+                $(this).closest(".input-group").find(".terms-label .checkbox").val(inputVal);
+                
+            });
+
+        // $(".buyerOptionsList").click(function(){
+        //     $.ajax({
+        //     method: 'get',
+        //     data: {id:id},
+        //     url: '{{ route("product_list.by_profile_id") }}',
+        //     success:function(response){
+        //         $('.product-dropdown').empty();
+        //         $('.product-dropdown').append('<option value="">Select Products</option>');
+        //         $.each(response.products,function(index,product){
+        //             $('.product-dropdown').append('<option value="'+product.id+'">'+product.title+'</option>');
+        //         });
+        //     }
+        // });
+        
+    });
 </script>
 
 @endpush

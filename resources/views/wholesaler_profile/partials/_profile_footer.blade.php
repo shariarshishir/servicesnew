@@ -4,6 +4,7 @@
 		</div>
 	</div>
 </section>
+</div>
 
 
 {{-- company overview edit Capacity and machineries  modal --}}

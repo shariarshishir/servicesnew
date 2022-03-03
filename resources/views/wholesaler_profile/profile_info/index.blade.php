@@ -9,3 +9,4 @@
 @endsection
 
 @include('wholesaler_profile.partials._scripts')
+@include('business_profile._business_profile_logo_banner_script')

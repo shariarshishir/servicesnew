@@ -129,10 +129,10 @@
                             <div class="industry_info_inner_box">
                                 <div class="row">
                                     <div class="supplier_profile_image_block col s12 m12 l3">
-                                        @if($supplier->user->image)
-                                        <img src="{{ asset('storage/'.$supplier->user->image) }}" alt="">
+                                        @if($supplier->business_profile_logo)
+                                        <img src="{{ asset('storage/'.$supplier->business_profile_logo) }}" alt="avatar" >
                                         @else
-                                        <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+                                        <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
                                         @endif
 
                                         @if(Auth::guard('web')->check())

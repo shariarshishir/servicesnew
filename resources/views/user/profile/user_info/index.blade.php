@@ -98,3 +98,4 @@
 </div>
 
 @include('user.profile.user_info._scripts')
+

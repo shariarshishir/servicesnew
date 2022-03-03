@@ -2344,12 +2344,14 @@
     });
 
     $(document).ready(function(){
+        $('.edit_busniess_profile_logo, .edit_busniess_profile_banner').hide();
         $(".manufacturer_profile_info_details .btn_edit, .manufacturer_profile_info_details .btn_upload, .manufacturer_profile_info_details .btn_delete").hide();
         $(".edit_profile_trigger").click(function() {
             $(".tabs li a").removeClass("active");
             $(".profile-tab a").addClass("active");
             $('.tabs').tabs().find('a[href="#profile-tab"]').trigger('click');
             $(".manufacturer_profile_info_details .btn_edit, .manufacturer_profile_info_details .btn_upload, .manufacturer_profile_info_details .btn_delete").toggle();
+            $('.edit_busniess_profile_logo, .edit_busniess_profile_banner ').toggle();
         });
     });
     //video
@@ -2374,7 +2376,7 @@
     });
 
     $('.verification_request_trigger').click(function () {
-        
+
         var verificationMsg = $("#verification_message").val();
         var verificationRequestedBusinessProfileId = $("#requested_business_profile_id").val();
         var verificationRequestedBusinessProfileName = $("#requested_business_profile_name").val();
@@ -2418,9 +2420,10 @@
         }, function (dismiss) {
             return false;
         })
-    
-    });    
+
+    });
 
 
     </script>
+
 @endpush

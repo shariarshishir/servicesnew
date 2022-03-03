@@ -61,7 +61,7 @@ use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
 use App\Http\Controllers\RfqBidController;
-
+use App\Models\BusinessProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -247,6 +247,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
         Route::get('profile/{alias}/info',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
 
     });
+    //business profile logo banner
+    Route::post('businessprofile/logo/create-or-update', [BusinessProfileController::class,'businessProfileLogoCreateUpdate' ])->name('business.profile.logo.create.update');
+    Route::post('businessprofile/banner/create-or-update', [BusinessProfileController::class,'businessProfileBannerCreateUpdate' ])->name('business.profile.banner.create.update');
     //tinymc
     Route::post('tiny-mc-file-uplaod', [TinyMcController::class, 'tinyMcFileUpload'])->name('tinymc.file.upload');
     Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');

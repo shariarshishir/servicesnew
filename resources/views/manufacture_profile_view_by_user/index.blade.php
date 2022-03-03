@@ -5,7 +5,7 @@
 
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
-	<div class="banner_overlay">
+	<div class="banner_overlay"  @if($business_profile->business_profile_banner) style="background:url('{{asset('storage').'/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		@if($business_profile->is_business_profile_verified == 1)
@@ -26,10 +26,10 @@
 					<div class="row">
 						<div class="col s4 m6 l12 profile_left_pic_wrap">
 							<div class="profile_pic center-align">
-								@if($userObj[0]->image)
-								<img src="{{ asset('storage/'.$userObj[0]->image) }}" alt="avatar">
+								@if($business_profile->business_profile_logo)
+								<img src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
-								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
+								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
 								@endif
 							</div>
 						</div>
@@ -210,7 +210,7 @@
 											<div class="certificate_infoBox">
 												<span class="certificate_title">{{$certification->title}}</span>
 											</div>
-                                            
+
                                             @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
                                             <div class="certificate_img">
@@ -221,7 +221,7 @@
 											<div class="certificate_infoBox">
 												<span class="certificate_title" >{{$certification->title}}</span>
 											</div>
-                                            
+
                                             @else
                                             @php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
                                             <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
@@ -548,7 +548,7 @@
 											<div class="certificate_infoBox">
 												<span class="certificate_title">{{$certification->title}}</span>
 											</div>
-                                            
+
                                             @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
                                             <div class="certificate_img">
@@ -564,7 +564,7 @@
 												<span class="certificate_title" >{{$certification->title}}</span>
 												@endif
 											</div>
-                                            
+
                                         </div>
                                         @endforeach
                                 </div>

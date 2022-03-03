@@ -101,12 +101,14 @@ $(document).ready(function(){
     // var is_env = "{{ env('APP_ENV') }}";
     $(".edit_wholesaler_profile_trigger").click(function(){
         window.location.href= url+'?editmode=enabled';
+
         // if(is_env == 'production'){
         //     window.location.href = '/global/wholesaler/profile-details/'+businessProfileId+'?editmode=enabled';
         // } else {
         //     window.location.href = '/wholesaler/profile-details/'+businessProfileId+'?editmode=enabled';
         // }
     })
+
 })
 
 

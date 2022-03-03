@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\User\WalfareController;
 use App\Http\Controllers\Api\User\SecurityController;
 use App\Http\Controllers\Api\User\RFQController;
 use App\Http\Controllers\Api\User\RfqBidController;
+use App\Http\Controllers\Api\User\ProformaInvoiceController;
 use App\Http\Controllers\Api\User\ManufactureProductController;
 use App\Http\Controllers\Api\User\BlogController;
 use App\Http\Controllers\Api\User\FactoryTourController;
@@ -162,6 +163,18 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/rfq-notification-mark-as-read',[RFQController::class,'newRfqNotificationMarkAsRead']);
     Route::post('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'newRfqBidNotificationMarkAsRead']);
     
+
+
+    //poforma
+    Route::post('/proforma-invoices/store', [ProformaInvoiceController::class,'store']);
+    Route::post('/proforma-invoice-form', [ProformaInvoiceController::class,'allInformationNeededToCreateProFormaInvoice']);
+    
+    Route::get('/created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'createdProformaByAuthUser']);
+    Route::get('/received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'receivedProformaByAuthUser']);
+    Route::get('/product-list-by-business-profile-id', [ProformaInvoiceController::class, 'getProductListByBuisnessProfileId']);
+    Route::get('/proforma-invoices/{id}', [ProformaInvoiceController::class, 'proformaInvoiceDetails']);
+    Route::post('/proforma-invoice-accept', [ProformaInvoiceController::class, 'acceptProformaInvoice']);
+    Route::post('/proforma-invoice-reject',[ProformaInvoiceController::class, 'rejectProformaInvoice']);
 
 
     //manufacture product api

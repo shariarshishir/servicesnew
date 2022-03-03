@@ -108,7 +108,7 @@ class BusinessProfileController extends Controller
                 $manufactureProductCategoryObject = new stdClass();
                 $manufactureProductCategoryObject->id = $manufactureProductCategory->id;
                 $manufactureProductCategoryObject->name = $manufactureProductCategory->name;
-                $manufactureProductCategoryObject->icon = asset('images/manufacture_category_icon/'.$key.'.svg');
+                $manufactureProductCategoryObject->icon = asset('images/frontendimages/manufacture_category_icon/'.$key.'.svg');
                 array_push($manufactureProductCategoriesArray,$manufactureProductCategoryObject);
             }
             if( count($manufactureProductCategoriesArray)>0){

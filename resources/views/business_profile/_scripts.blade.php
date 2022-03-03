@@ -2344,14 +2344,14 @@
     });
 
     $(document).ready(function(){
-        $('.edit_busniess_profile_logo, .edit_busniess_profile_banner').hide();
+        $('.edit_busniess_profile_logo_banner').hide();
         $(".manufacturer_profile_info_details .btn_edit, .manufacturer_profile_info_details .btn_upload, .manufacturer_profile_info_details .btn_delete").hide();
         $(".edit_profile_trigger").click(function() {
             $(".tabs li a").removeClass("active");
             $(".profile-tab a").addClass("active");
             $('.tabs').tabs().find('a[href="#profile-tab"]').trigger('click');
             $(".manufacturer_profile_info_details .btn_edit, .manufacturer_profile_info_details .btn_upload, .manufacturer_profile_info_details .btn_delete").toggle();
-            $('.edit_busniess_profile_logo, .edit_busniess_profile_banner ').toggle();
+            $('.edit_busniess_profile_logo_banner').toggle();
         });
     });
     //video

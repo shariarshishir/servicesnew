@@ -5,6 +5,7 @@
 @include('wholesaler_profile.partials._profile_list')
 @include('wholesaler_profile.profile_info._partial_index')
 @include('wholesaler_profile.partials._profile_footer')
+@include('business_profile._upload_business_profile_logo_banner')
 
 @endsection
 

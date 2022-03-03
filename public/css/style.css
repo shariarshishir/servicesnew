@@ -1040,7 +1040,7 @@ legend {
     padding-bottom: 60px;
 }
 .profile_bannerwrap .banner_overlay {
-    background : url('../images/frontendimages/new_layout_images/profile-banner-update.png') no-repeat center;
+    /*background : url('../images/frontendimages/new_layout_images/profile-banner-update.png') no-repeat center;*/
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.2);
     left: 0;
@@ -7495,7 +7495,7 @@ nav .pagination li.active .page-link {
     margin: 0 auto;
     width: auto;
     padding: 0;
-} 
+}
 
 #send-verification-request-modal #profile_verification_request label {
     left: inherit;
@@ -8367,7 +8367,7 @@ nav .pagination li.active .page-link {
     font-weight: 500;
 }
 
-.products_filter_wrapper .priceBox .moq-value, 
+.products_filter_wrapper .priceBox .moq-value,
 .products_filter_wrapper .priceBox .lead-time-value {
     font-size: 18px;
     line-height: 22px;
@@ -9734,7 +9734,7 @@ nav .pagination li.active .page-link {
         text-align: left;
         padding-top: 10px;
     }
-    
+
 
 }
 
@@ -11234,7 +11234,7 @@ nav .pagination li.active .page-link {
         height: auto;
     }
 
-    .profile_left_address_wrap, 
+    .profile_left_address_wrap,
     .profile_left_pic_wrap {
         width: 100% !important;
     }

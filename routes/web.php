@@ -248,8 +248,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     });
     //business profile logo banner
-    Route::post('businessprofile/logo/create-or-update', [BusinessProfileController::class,'businessProfileLogoCreateUpdate' ])->name('business.profile.logo.create.update');
-    Route::post('businessprofile/banner/create-or-update', [BusinessProfileController::class,'businessProfileBannerCreateUpdate' ])->name('business.profile.banner.create.update');
+    Route::post('businessprofile/logo-banner/create-or-update', [BusinessProfileController::class,'businessProfileLogoBannerCreateUpdate' ])->name('business.profile.logo.banner.create.update');
     //tinymc
     Route::post('tiny-mc-file-uplaod', [TinyMcController::class, 'tinyMcFileUpload'])->name('tinymc.file.upload');
     Route::get('tinymc-untracked-file-delete/{business_profile_id}',[TinyMcController::class, 'tinyMcUntrackedFileDelete'])->name('tinymc.untracked.file.delete');

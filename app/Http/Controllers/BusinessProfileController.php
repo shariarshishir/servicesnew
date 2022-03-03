@@ -636,59 +636,53 @@ class BusinessProfileController extends Controller
     }
 
 
-    public function businessProfileLogoCreateUpdate(Request $request)
+
+    public function businessProfileLogoBannerCreateUpdate(Request $request)
     {
         $request->validate([
             'business_profile_id' => 'required',
-            'business_profile_logo' => 'required|image|max:5000',
+            'banner' => 'required_without:logo|image|max:5000',
+            'logo' => 'required_without:banner|image|max:5000',
         ]);
 
         $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
         if(!$business_profile){
             return response()->json(['message'=> 'Collection not found'], 404);
         }
-        if($business_profile->business_profile_logo){
-            if(Storage::exists($business_profile->business_profile_logo) )
-            {
-                Storage::delete($business_profile->business_profile_logo);
+
+        if($request->hasFile('logo')){
+            if($business_profile->business_profile_logo){
+                if(Storage::exists($business_profile->business_profile_logo) )
+                {
+                    Storage::delete($business_profile->business_profile_logo);
+                }
             }
+
+            $filename = $request->logo->store('images/'.$business_profile->business_name.'/logo','public');
+            $image_resize = Image::make(public_path('storage/'.$filename));
+            $image_resize->fit(250, 250);
+            $image_resize->save(public_path('storage/'.$filename));
+            $business_profile->business_profile_logo= $filename;
+
         }
 
-        $filename = $request->business_profile_logo->store('images/'.$business_profile->business_name.'/logo','public');
-        // $image_resize = Image::make(public_path('storage/'.$filename));
-        // $image_resize->fit(250, 250);
-        // $image_resize->save(public_path('storage/'.$filename));
-        $business_profile->business_profile_logo= $filename;
-        $business_profile->save();
-        $message="Business profile logo uploaded successfully";
-        return response()->json(['business_profile'=>$business_profile,'message'=>$message],200);
-    }
-
-    public function businessProfileBannerCreateUpdate(Request $request)
-    {
-        $request->validate([
-            'business_profile_id' => 'required',
-            'business_profile_banner' => 'required|image|max:5000',
-        ]);
-
-        $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
-        if(!$business_profile){
-            return response()->json(['message'=> 'Collection not found'], 404);
-        }
-        if($business_profile->business_profile_banner){
-            if(Storage::exists($business_profile->business_profile_banner) )
-            {
-                Storage::delete($business_profile->business_profile_banner);
+        if($request->hasFile('banner')){
+            if($business_profile->business_profile_banner){
+                if(Storage::exists($business_profile->business_profile_banner) )
+                {
+                    Storage::delete($business_profile->business_profile_banner);
+                }
             }
+
+            $filename = $request->banner->store('images/'.$business_profile->business_name.'/banner','public');
+            $image_resize = Image::make(public_path('storage/'.$filename));
+            $image_resize->fit(600, 200);
+            $image_resize->save(public_path('storage/'.$filename));
+            $business_profile->business_profile_banner= $filename;
         }
 
-        $filename = $request->business_profile_banner->store('images/'.$business_profile->business_name.'/banner','public');
-        // $image_resize = Image::make(public_path('storage/'.$filename));
-        // $image_resize->fit(700, 250);
-        // $image_resize->save(public_path('storage/'.$filename));
-        $business_profile->business_profile_banner= $filename;
         $business_profile->save();
-        $message="Business profile banner uploaded successfully";
+        $message="Business profile update successfully";
         return response()->json(['business_profile'=>$business_profile,'message'=>$message],200);
     }
 

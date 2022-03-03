@@ -16,22 +16,6 @@
 		<div class="edit_profile_option">
 			<a href="javascript:void(0);" class="edit_profile_trigger"><i class="material-icons">border_color</i></a>
 		</div>
-
-        <div class="change_photo edit_busniess_profile_banner">
-            <form method="post" id="business-profile-banner-upload-form" enctype="multipart/form-data">
-                @csrf
-                <a href="javascript:void(0)" class="btn business-profile-banner-upload-trigger waves-effect waves-light btn_white">
-                    <i class="material-icons">create</i> Change banner
-                </a>
-                <div class="form-group" style="display: none;">
-                    <input type="file" name="business_profile_banner" class="form-control business-profile-banner-upload-trigger-alias" id="business-profile-banner-input">
-                    <span class="text-danger" id="business-profile-banner-upload-error"></span>
-                </div>
-                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-
-                <button type="submit" class="btn waves-effect waves-light green business-profile-banner-upload-button" style="display: none">Upload</button>
-            </form>
-        </div>
 	</div>
 
 </section>
@@ -52,20 +36,8 @@
 								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
 								@endif
 							</div>
-                            <div class="change_photo edit_busniess_profile_logo">
-                                <form method="post" id="business-profile-logo-upload-form" enctype="multipart/form-data">
-                                    @csrf
-                                    <a href="javascript:void(0)" class="btn business-profile-logo-upload-trigger waves-effect waves-light btn_white">
-                                        <i class="material-icons">create</i> Change Logo
-                                    </a>
-                                    <div class="form-group" style="display: none;">
-                                        <input type="file" name="business_profile_logo" class="form-control business-profile-upload-trigger-alias" id="business-profile-logo-input">
-                                        <span class="text-danger" id="business-profile-logo-upload-error"></span>
-                                    </div>
-                                    <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-
-                                    <button type="submit" class="btn waves-effect waves-light green business-profile-logo-upload-button" style="display: none">Upload</button>
-                                </form>
+                            <div class="change_photo edit_busniess_profile_logo_banner">
+                                <a class="waves-effect waves-light btn modal-trigger" href="#business_profile_logo_banner">edit</a>
                             </div>
 						</div>
 						<div class="col s8 m6 l12 profile_left_address_wrap">
@@ -1822,6 +1794,7 @@
     @include('business_profile._edit_categories_produced')
     @include('business_profile._edit_machinery_details')
 	@include('business_profile._create_or_update_business_profile_verification_request')
+    @include('business_profile._upload_business_profile_logo_banner')
 @endsection
 
 @include('business_profile._scripts')

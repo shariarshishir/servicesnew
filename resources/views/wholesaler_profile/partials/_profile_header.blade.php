@@ -3,7 +3,7 @@
 $profileEditMode = Request::get('editmode');
 @endphp
 <section class="profile_bannerwrap">
-	<div class="banner_overlay" @if($business_profile->business_profile_banner) style="background:url('{{asset('storage').'/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
+	<div class="banner_overlay testbanner" @if($business_profile->business_profile_banner) style="background:url('{{asset('storage').'/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		@if($business_profile->is_business_profile_verified == 1)
@@ -14,23 +14,6 @@ $profileEditMode = Request::get('editmode');
 		<div class="edit_profile_option">
 			<a href="javascript:void(0);" class="edit_wholesaler_profile_trigger"><i class="material-icons">border_color</i></a>
 		</div>
-        @if(@$profileEditMode == 'enabled')
-        <div class="change_photo edit_wholersaler_busniess_profile_banner">
-            <form method="post" id="business-profile-banner-upload-form" enctype="multipart/form-data">
-                @csrf
-                <a href="javascript:void(0)" class="btn business-profile-banner-upload-trigger waves-effect waves-light btn_white">
-                    <i class="material-icons">create</i> Change banner
-                </a>
-                <div class="form-group" style="display: none;">
-                    <input type="file" name="business_profile_banner" class="form-control business-profile-banner-upload-trigger-alias" id="business-profile-banner-input">
-                    <span class="text-danger" id="business-profile-banner-upload-error"></span>
-                </div>
-                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-
-                <button type="submit" class="btn waves-effect waves-light green business-profile-banner-upload-button" style="display: none">Upload</button>
-            </form>
-        </div>
-       @endif
 	</div>
 </section>
 <!-- Profile section end -->
@@ -52,21 +35,7 @@ $profileEditMode = Request::get('editmode');
 							</div>
 						</div>
                         @if(@$profileEditMode == 'enabled')
-                        <div class="change_photo ">
-                            <form method="post" id="business-profile-logo-upload-form" enctype="multipart/form-data">
-                                @csrf
-                                <a href="javascript:void(0)" class="btn business-profile-logo-upload-trigger waves-effect waves-light btn_white">
-                                    <i class="material-icons">create</i> Change Logo
-                                </a>
-                                <div class="form-group" style="display: none;">
-                                    <input type="file" name="business_profile_logo" class="form-control business-profile-upload-trigger-alias" id="business-profile-logo-input">
-                                    <span class="text-danger" id="business-profile-logo-upload-error"></span>
-                                </div>
-                                <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-
-                                <button type="submit" class="btn waves-effect waves-light green business-profile-logo-upload-button" style="display: none">Upload</button>
-                            </form>
-                        </div>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#business_profile_logo_banner">edit</a>
                         @endif
 
 						<div class="col s8 m6 l12 profile_left_address_wrap">

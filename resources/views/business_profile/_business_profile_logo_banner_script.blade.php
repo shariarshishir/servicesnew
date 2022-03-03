@@ -30,20 +30,14 @@ $('#business-profile-logo-banner-upload-form').submit(function(e) {
                             $('#business_profile_logo_banner').modal('close');
                             var logo="{{asset('storage/')}}"+'/'+response.business_profile.business_profile_logo;
                             var banner="{{asset('storage/')}}"+'/'+response.business_profile.business_profile_banner;
-                            //$(".banner_overlay").css({"background" : "url(" + banner + ")", "background-size": "cover"});
-                            //$('.banner_overlay').css('background-image', 'url(' + banner + ')');
-                            //$('.banner_overlay').css({"background-image": "url('../images/frontendimages/new_layout_images/profile-banner-update.png')"});
-                           // $('.banner_overlay').css({"background": "url("+banner+")"});
-                           $(".banner_overlay").css("background", "url(" + banner + ")");
-
+                            $('.banner_overlay').css({"background": "url('"+banner+"')"});
                             $(".business_profile_logo img").attr('src', logo);
-
                             $('#business-profile-logo-banner-upload-form')[0].reset();
                         }
                     },
                     error: function(response){
-                       // swal(response.responseJSON.message);
-                        $('#business-profile-logo-banner-upload-errors').text(response.responseJSON.message);
+                       swal(response.responseJSON.message);
+                        //$('#business-profile-logo-banner-upload-errors').text(response.responseJSON.message);
                     }
                 });
             }

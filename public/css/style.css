@@ -5997,19 +5997,19 @@ input.input-field[type=text]:not(.browser-default) {
     border: 1px solid #eee;
     border-radius: 3px;
 }
-.has_feedback_wrap {
-    padding-top: 10px !important;
-}
 .has_feedback_wrap .has-feedback label {
     display: block;
     font-weight: 600;
-    margin-bottom: 5px;
 }
 .has_feedback_wrap .has-feedback span {
     font-size: 14px;
 }
 
-/* *******************************************8888 */
+.buyerdata_info_top .input-field {
+    margin-bottom: 0px;
+}
+
+/* ******************************************* */
 .dataTables_length label {
     font-size: 16px;
     color: #000000;
@@ -6465,6 +6465,7 @@ nav .pagination li.active .page-link {
 
 .invoice_container_wrap .card {
     padding: 50px !important;
+    margin: 0 10px;
 }
 #buyerdata h3 {
     font-size: 20px;
@@ -6476,7 +6477,7 @@ nav .pagination li.active .page-link {
     font-size: 16px;
 }
 .line_item_wrap {
-    padding: 25px 0 0;
+    padding: 10px 0 0;
     display: inline-block;
     width: 100%;
 }
@@ -6530,8 +6531,6 @@ nav .pagination li.active .page-link {
 .terms_conditions_list .input-group-prepend input {
     width: auto;
 }
-
-
 .invoice_container_wrap table thead tr th,
 .invoice_container_wrap .input-field label {
     font-size: 14px;
@@ -6541,7 +6540,7 @@ nav .pagination li.active .page-link {
 .invoice_container_wrap table #shipping-details-table-body input{
     float: inherit;
     width: auto !important;
-    /* width: 80% !important; */
+    width: 205px !important;
 }
 .invoice_container_wrap .line_item_wrap #lineitems input {
     width: 80% !important;
@@ -6639,6 +6638,9 @@ nav .pagination li.active .page-link {
 .invoice_advising_bank {
     padding-top: 20px;
 }
+.shipping_attachment_wrap ul {
+    padding: 0 5px;
+}
 .shipping_attachment_wrap .material-icons {
     float: left;
     margin-right: 5px;
@@ -6658,6 +6660,15 @@ nav .pagination li.active .page-link {
 }
 .reject_order_details_modal .btn_green {
     height: 40px;
+}
+
+.shipping_details_table {
+    padding: 0 5px;
+}
+
+
+.shipping_details_wrap .btn_green {
+    margin-bottom: 30px;
 }
 
 /* ****************************** */
@@ -8415,6 +8426,9 @@ nav .pagination li.active .page-link {
     width: 18px;
     height: 18px;
 }
+.products_filter_list .price-value {
+    margin: 0;
+}
 .products_filter_list .filter_min_max input {
     width: 30%;
     height: 38px;
@@ -8678,6 +8692,7 @@ nav .pagination li.active .page-link {
         width: 20%;
     }
 
+
     /* ***************************************** */
 
     .landing_intro_wrapper h1 {
@@ -8844,6 +8859,9 @@ nav .pagination li.active .page-link {
     #certification-upload-form-modal .select2-container, #certification-upload-form-modal tr td input {
         width: 100px !important;
     }
+
+
+
 
 }
 
@@ -9104,6 +9122,10 @@ nav .pagination li.active .page-link {
     }
     .footer_apps_box {
         margin-top: 20px;
+    }
+
+    .invoice_container_wrap table #shipping-details-table-body input {
+        width: 80% !important;
     }
 
 
@@ -9943,7 +9965,12 @@ nav .pagination li.active .page-link {
         text-align: left;
         padding-top: 10px;
     }
-    
+
+    .buyerdata_info_top {
+        padding-bottom: 30px;
+    }
+
+
 
 }
 
@@ -10027,6 +10054,11 @@ nav .pagination li.active .page-link {
     .landing_provide_wrap h2,
     .landing_intro_wrapper h1 {
         font-size: 26px;
+    }
+
+    
+    .buyerdata_info_top .has-feedback {
+        padding-top: 20px;
     }
 
 
@@ -10163,6 +10195,8 @@ nav .pagination li.active .page-link {
     .order-modification-data {
         padding: 20px 15px 0;
     }
+    .invoice_container_wrap .line_item_wrap #lineitems input,
+    .invoice_container_wrap table #shipping-details-table-body input,
     .modal .color-and-size-block .color-size-table-block tr td input {
         width: -webkit-fill-available !important;
         width: -moz-available !important;
@@ -10172,6 +10206,17 @@ nav .pagination li.active .page-link {
         width: -webkit-fill-available !important;
         width: -moz-available !important;
         float: none;
+    }
+
+    .invoice_container_wrap .no_more_tables td {
+        padding-right: 15px;
+    }
+
+    .pro_porma_invoice #lineitems a .fa {
+        float: inherit;
+    }
+    .invoice_container_wrap .no_more_tables td:before {
+        top: 25px;
     }
 
 }

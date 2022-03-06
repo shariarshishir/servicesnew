@@ -44,7 +44,7 @@
                                 <!-- <div style="padding-top: 30px;"></div> -->
                                 <div class="row beneficiary_info_wrap">
                                     <!-- <div class="col s12 m6 l6"> -->
-                                    <div class="row input-field">
+                                    <div class="row input-field beneficiary_address_bar">
                                         <div class="col s12 m6" id="buyerdata"></div>
                                         <div class="col s12 m6">
                                             <div class="form-group has-feedback">
@@ -59,22 +59,22 @@
                                         </div>
                                         <input type="hidden" name="selected_buyer_id" value="{{ request()->route()->parameters['id'] }}" />
                                     </div>
-                                    <div class="col s12 input-field">
+                                    <div class="col s12">
                                         <div class="row">
-                                            <div class="col s12 m6 l2">
+                                            <div class="col s12 m6 l2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
                                                     <input type="text" class="form-control" required name="po_id"/>
                                                 </div>
                                             </div>
-                                            <div class="col s12 m6 l2">
+                                            <div class="col s12 m6 l2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Pro-forma Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
                                                     <input type="date" class="form-control" required name="po_date"/>
                                                 </div>
                                             </div>
-                                            <div class="col s12 m6 l2">
+                                            <div class="col s12 m6 l2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payment Within <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -87,7 +87,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col s12 m6 l2">
+                                            <div class="col s12 m6 l2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payment term<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -99,7 +99,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s12 m6 l2">
+                                            <div class="col s12 m6 l2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipment Term <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -111,7 +111,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s12 m6 l2">
+                                            <div class="col s12 m6 l2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Shipping Address <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
@@ -124,21 +124,21 @@
                                 </div>
                                 <div class="line_item_wrap shipping_details_wrap">
                                     <legend>Shipping Details</legend>
-                                    <div class="col s12 input-field">
+                                    <div class="col s12">
                                         <div class="row">
-                                            <div class="col s12 m6 l4">
+                                            <div class="col s12 m6 l4 input-field">
                                                 <div class="form-group has-feedback">
                                                     <label>Forwarder name  </label>
                                                     <input type="text" class="form-control" required name="forwarder_name"/>
                                                 </div>
                                             </div>
-                                            <div class="col s12 m6 l4">
+                                            <div class="col s12 m6 l4 input-field">
                                                 <div class="form-group has-feedback">
                                                     <label>Forwarder Address</label>
                                                     <input type="text" class="form-control" required name="forwarder_address"/>
                                                 </div>
                                             </div>
-                                            <div class="col s12 m6 l4">
+                                            <div class="col s12 m6 l4 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payable party </label>
@@ -149,63 +149,66 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <a href="#modal1" class="waves-effect waves-light modal-trigger btn_green shipment-file-upload-trigger"> <i class="material-icons"> attach_file </i> Attach file</a>
                                     </div>
-                                    <div class="no_more_tables">
-                                        <table class="table" style="border-bottom:1px solid #ccc; margin-bottom:15px;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
-                                                    <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
-                                                    <th>UOM <span class="required_star" style="color: red;">*</span></th>
-                                                    <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
-                                                    <th>QTY <span class="required_star" style="color: red;">*</span></th>
-                                                    <!-- <th style="width:15%;">Tax</th> -->
-                                                    <th>Total ($)</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="shipping-details-table-body" class="input-field">
-                                                <tr>
-                                                    <td data-title="Shipping Method">
-                                                        <select name="shipping_details_method[]" class="select2" >
-                                                            <option value="">Select</option>
-                                                            @foreach($shippingMethods as $shippingMethod)
-                                                                <option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td data-title="Shipment Type">
-                                                        <select  name="shipping_details_type[]" class="select2">
-                                                            <option value="">Select</option>
-                                                            @foreach($shipmentTypes as $shipmentType)
-                                                                <option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td data-title="UOM">
-                                                        <select name="shipping_details_uom[]" class="select2">
-                                                            <option value="">Select</option>
-                                                            @foreach($uoms as $uom)
-                                                                <option value="{{ $uom->id }}">{{ $uom->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td data-title="Per UOM Price ($)">
-                                                        <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
-                                                    </td>
-                                                    <td data-title="QTY"> 
-                                                        <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
-                                                    </td>
-                                                    <td data-title="Total ($)">
-                                                        <input type="text"  name="shipping_details_total[]" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
-                                                    </td>
-                                                    <td data-title=""><a href="javascript:void(0);" class="ic-btn4" onclick="addShippingDetails()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
-                                                </tr>
-                                            </tbody>
-                                            <a href="#modal1" class="waves-effect waves-light modal-trigger btn_green shipment-file-upload-trigger"> <i class="material-icons"> attach_file </i> Attach file</a>
-                                        </table>
-                                        
+                                    <div class="col s12">
+                                        <div class="no_more_tables">
+                                            <table class="table shipping_details_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
+                                                        <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
+                                                        <th>UOM <span class="required_star" style="color: red;">*</span></th>
+                                                        <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
+                                                        <th>QTY <span class="required_star" style="color: red;">*</span></th>
+                                                        <!-- <th style="width:15%;">Tax</th> -->
+                                                        <th>Total ($)</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="shipping-details-table-body" class="input-field">
+                                                    <tr>
+                                                        <td data-title="Shipping Method">
+                                                            <select name="shipping_details_method[]" class="select2" >
+                                                                <option value="">Select</option>
+                                                                @foreach($shippingMethods as $shippingMethod)
+                                                                    <option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td data-title="Shipment Type">
+                                                            <select  name="shipping_details_type[]" class="select2">
+                                                                <option value="">Select</option>
+                                                                @foreach($shipmentTypes as $shipmentType)
+                                                                    <option value="{{ $shipmentType->id }}">{{ $shipmentType->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td data-title="UOM">
+                                                            <select name="shipping_details_uom[]" class="select2">
+                                                                <option value="">Select</option>
+                                                                @foreach($uoms as $uom)
+                                                                    <option value="{{ $uom->id }}">{{ $uom->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td data-title="Per UOM Price ($)">
+                                                            <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
+                                                        </td>
+                                                        <td data-title="QTY"> 
+                                                            <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
+                                                        </td>
+                                                        <td data-title="Total ($)">
+                                                            <input type="text"  name="shipping_details_total[]" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
+                                                        </td>
+                                                        <td data-title=""><a href="javascript:void(0);" class="ic-btn4" onclick="addShippingDetails()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
                                     </div>
+                                    
                                     
                                 </div>
                                 

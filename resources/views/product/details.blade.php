@@ -1054,6 +1054,21 @@ $reviewsCount = count($productReviews);
 
                     <div class="card">
                         <div class="card-content">
+                            <div class="product_quick_options">
+                                <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
+                                <div class="poduct_quick_options_inside">
+                                    @if(in_array($product->id,$wishListShopProductsIds))
+                                        <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist active">
+                                            <i class="material-icons dp48">favorite</i>
+                                        </a>
+                                    @else
+                                        <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                                            <i class="material-icons dp48">favorite</i>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="product_img">
                                 {{-- <a href="javascript:void();" class="overlay_hover"></a> --}}
                                 @foreach($product->images as $key=>$image)
@@ -1069,20 +1084,7 @@ $reviewsCount = count($productReviews);
                                     {{-- <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" /> --}}
                                     @break
                                 @endforeach
-                                <div class="product_quick_options">
-                                    <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
-                                    <div class="poduct_quick_options_inside">
-                                        @if(in_array($product->id,$wishListShopProductsIds))
-                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist active">
-                                                <i class="material-icons dp48">favorite</i>
-                                            </a>
-                                        @else
-                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
-                                                <i class="material-icons dp48">favorite</i>
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
+                                
                             </div>
                             <div class="product_short_details">
                                 <div class="product-title">

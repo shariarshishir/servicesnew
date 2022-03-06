@@ -202,13 +202,13 @@
                             <div class="certifications">
                                 <h3>Certifications</h3>
                                 <div class="certifications-block">
-                                        @foreach($business_profile->certifications as $certification)
+                                    @foreach($business_profile->certifications as $certification)
                                         <div class="certificate_img_wrap">
                                             @if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
                                             <div class="certificate_img">
                                                 <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
                                                 <br> -->
-                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
+                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_file_down" >&nbsp;</a>
                                             </div>
 											<div class="certificate_infoBox">
 												<span class="certificate_title">{{$certification->title}}</span>
@@ -219,7 +219,7 @@
                                             <div class="certificate_img">
                                                 <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
                                                 <br> -->
-                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
+                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_doc certification_file_down" >&nbsp;</a>
                                             </div>
 											<div class="certificate_infoBox">
 												<span class="certificate_title" >{{$certification->title}}</span>
@@ -233,50 +233,100 @@
 											</div>
                                             @endif
                                         </div>
-                                        @endforeach
+                                    @endforeach
                                 </div>
 
                             </div>
                         @endif
 						<!-- certifications -->
                         @if(count($mainProducts)>0)
-                            <div class="profile_product_wrap product_wrapper">
-                                <div class="row top_titleWrap">
-                                    <div class="col s6 m6">
-                                        <h3>Main Products</h3>
-                                    </div>
-                                    <!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
-                                </div>
-                                <div class="product_boxwrap row">
-                                        @foreach($mainProducts as $product)
-                                        <div class="col s12 m4 l3">
-                                            <div class="productBox">
-                                                <div class="imgBox">
-                                                    @foreach($product->product_images as $image)
-                                                        <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
-                                                        @break
-                                                    @endforeach
-                                                    <div class="favorite">
-                                                        <a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
-                                                            <i class="material-icons dp48">favorite</i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="priceBox row">
+							<div class="product_design_wrapper">
+								<div class="profile_product_wrap product_wrapper">
+									<div class="row top_titleWrap">
+										<div class="col s6 m6">
+											<h3>Main Products</h3>
+										</div>
+										<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
+									</div>
+									<div class="product_boxwrap row">
+											@foreach($mainProducts as $product)
+											<div class="col s6 m4 product_item_box">
+												<div class="productBox">
+													<div class="favorite">
+														<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
+															<i class="material-icons dp48">favorite</i>
+														</a>
+													</div>
 
-                                                </div>
-                                                <h4>
-                                                    <a href="{{route('mix.product.details', ['mb', $product->id])}}">
-                                                        {{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
-                                                    </a>
-                                                </h4>
-                                                <div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
-                                                <div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
+													<div class="inner_productBox">
+														<div class="imgBox">
+															@foreach($product->product_images as $image)
+																<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+																@break
+															@endforeach
+														</div>
+
+														<div class="products_inner_textbox">
+															<div class="priceBox row">
+																<div class="col s12 m12 l4 apperal">
+																	<a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
+																			{{ucfirst($product->category->name)}}
+																	</a>
+																</div>
+																<div class="col s12 m12 l8 right-align price">
+																	$ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
+																</div>
+															</div>
+
+															<h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
+
+															@if(isset($product->moq))
+																<div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
+															@endif
+															@if(isset($product->lead_time))
+																<div class="product_lead_time">Lead time:
+																	@php
+																		$pattern= '/[^0-9\-]/';
+																		$preg_replace= preg_replace($pattern, '', $product->lead_time);
+																	@endphp
+																	{{$preg_replace}} days
+																</div>
+															@endif
+															{{-- <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
+																<div class="priceBox row">
+																	<!-- <div class="col s12 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div> -->
+																	<div class="col s12 m6 apperal">{{ $product->businessProfile->business_name }}</div>
+																	<div class="price col s12 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
+																</div>
+																<h4>{{$product->title}}</h4>
+																@if(isset($list->moq))
+																	<div class="product_moq">MOQ: {{$list->moq}}</div>
+																@endif
+																@if(isset($list->lead_time))
+																	<div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
+																@endif
+															</a> --}}
+														</div>
+
+													</div>
+
+
+													
+													<!-- <div class="priceBox row"></div>
+													<h4>
+														<a href="{{route('mix.product.details', ['mb', $product->id])}}">
+															{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+														</a>
+													</h4>
+													<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
+													<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div> -->
+												
+												</div>
+											</div>
+										@endforeach
+									</div>
+								</div>
+							</div>
                         @endif
 
 						<!-- profile_product_wrap -->
@@ -535,12 +585,73 @@
                             <div class="certifications">
                                 <div class="row top_titleWrap upload_delete_wrap">
                                     <div class="col s6 m6">
-                                        <h3>Certifications</h3>
+                                        <h3>Certifications </h3>
                                     </div>
-
                                 </div>
-                                <div class="certifications-block">
-                                        @foreach($business_profile->certifications as $certification)
+
+								<div class="certifications-block">
+									@if(count($business_profile->certifications)>0)
+										@foreach($business_profile->certifications as $certification)
+										<div class="certificate_img_wrap">
+											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
+												<div class="certificate_img">
+													<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+													<br> -->
+													<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_file_down tooltipped">&nbsp;</a>
+												</div>
+												<div class="certificate_infoBox">
+													<span class="certificate_title" >{{$certification->title}}</span>
+													@if($certification->issue_date)
+													<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+													@endif
+													@if($certification->expiry_date)
+													<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+													@endif
+												</div>
+
+											@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+
+												<div class="certificate_img">
+													<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_doc tooltipped certification_file_down">&nbsp;</a>
+												</div>
+												<div class="certificate_infoBox">
+													<span class="certificate_title" >{{$certification->title}}</span>
+													@if($certification->issue_date)
+													<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+													@endif
+													@if($certification->expiry_date)
+													<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+													@endif
+												</div>
+											@else
+												@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
+												<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ asset('storage/'.$certification_image_src) }}"><img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></a></div>
+												<div class="certificate_infoBox">
+													<span class="certificate_title" >{{$certification->title}}</span>
+													@if($certification->issue_date)
+													<span class="issue-date">Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}</span>
+													@endif
+													@if($certification->expiry_date)
+													<span class="expiry-date">Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}</span>
+													@endif
+												</div>
+											@endif
+										</div>
+										@endforeach
+									@else
+										<div class="card-alert card cyan lighten-5">
+											<div class="card-content cyan-text">
+												<p>INFO : No data found.</p>
+											</div>
+										</div>
+									@endif
+								</div>
+
+
+
+
+                                <!-- <div class="certifications-block">
+                                    @foreach($business_profile->certifications as $certification)
                                         <div class="certificate_img_wrap">
 
 											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
@@ -573,8 +684,10 @@
 											@endif
 
                                         </div>
-                                        @endforeach
-                                </div>
+                                    @endforeach
+                                </div> -->
+
+								
                             </div>
                         @endif
 

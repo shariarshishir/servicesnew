@@ -135,7 +135,7 @@ foreach($selectedproduct as $item)
                                         <tbody id="lineitems" class="input-field">
                                             @foreach($editProductArray['productitem'] as $key =>  $selectedProInfo)
                                                 <tr>
-                                                    <td data-title="test">1</td>
+                                                    <td data-title="">1</td>
                                                     <td>
                                                         <select class="select2" onchange="changecat(this)">
                                                             <option value="">Select Products</option>

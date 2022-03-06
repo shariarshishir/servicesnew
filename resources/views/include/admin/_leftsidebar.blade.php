@@ -26,8 +26,38 @@
           <li class="nav-item">
             <a href="{{ Route('admin.dashboard') }}" class="nav-link {{ Route::is('admin.dashboard')? 'active' : ''}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Dashboard</p>
+              <p>Profile</p>
             </a>
+          </li>
+          {{-- business profile --}}
+          <li class="nav-item has-treeview {{ Route::is('admin.business.profile.list.type*')  ? 'menu-open' : ''}}">
+            <a href="javascript:void(0);" class="nav-link {{  Route::is('admin.business.profile.list.type*') ? 'active' : ''}}">
+                <i class="fa fa-user nav-icon"></i>
+                <p>Profile<i class="right fas fa-angle-left"></i></p>
+            </a>
+                <ul class="nav nav-treeview">
+                    @php
+                        $getTypeBySegment=  Request::segment(3);
+                    @endphp
+                    <li class="nav-item">
+                        <a href="{{route('admin.business.profile.list.type', 'manufacturer')}}" class="nav-link {{ Route::is('admin.business.profile.list.type', 'manufacturer') && $getTypeBySegment == 'manufacturer' ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Manufacturer</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.business.profile.list.type', 'wholesaler')}}" class="nav-link {{ Route::is('admin.business.profile.list.type', 'wholesaler') && $getTypeBySegment == 'wholesaler' ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Wholesaler</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.business.profile.list.type', 'design_studio')}}" class="nav-link {{ Route::is('admin.business.profile.list.type', 'design_studio') && $getTypeBySegment == 'design_studio'? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Design Studio</p>
+                        </a>
+                    </li>
+                </ul>
           </li>
           {{-- new users registered list --}}
           <li class="nav-item has-treeview {{ Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'menu-open' : ''}}">
@@ -155,7 +185,7 @@
                 <i class="far fa-file nav-icon"></i>
                 <p>Proforma terms and conditions</p>
             </a>
-          </li>          
+          </li>
           <li class="nav-item">
             <a href="{{ Route('blogs.index')}}" class="nav-link {{ Route::is('blogs.index')? 'active' : ''}}">
                 <i class="far fa-newspaper nav-icon"></i>

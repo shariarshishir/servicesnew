@@ -1,16 +1,22 @@
 
 @extends('layouts.app_containerless')
 
+@section('title', 'Merchant Bay, Fashion Sourcing Solution, Tech Enabled B2B Platform')
+@section('description', 'Merchant Bay, B2B platform, Communication channel for buyer and supplier, Digital Platform, Manage Orders, Post RFQ, Best Suppliers in Bangladesh, Bangladesh RMG Sourching')
+@section('image', asset('images/frontendimages/merchantbay_logoX200.png'))
+@section('keywords', 'Supply Chain, B2B Fashion, Transparency, BI Tool, Fashion Marketplace, B2B Marketplace, Bangladesh RMG, RMG Sourcing, RMG, Smart Tool, T&A, Suppliers, Buyers, QC, Global, Live Fashion Market, Wholesaler, Sourcing, Platform, Export, RFQ, Quotation, Tool, MB, Merchant, Digitisation, Digitization, Digital Fashion, 3D Fashion, Bulk Fabric, Bulk Design, Bangladesh Fashion, Connect Fashion, Spotlight, Ready Stock, 1000 Suppliers, Yarn, Fabric, Garments, SaaS, Apparel sourcing, Best Suppliers in Bangladesh')
+@section('robots', 'index, nofollow')
+
 @section('content')
-    <section class="landing_page_wrapper">
+    <section class="landing_page_wrapper" itemprop="mainContentOfPage">
         <!-- New Landing design start -->
         <div class="landing_intro_wrapper">
             <div class="container">
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="home_intro_left">
-                            <h1>Find Your Next Apparel Manufacturing Partner</h1>
-                            <p>Join the tech enabled fashion sourcing platform to connect <br/>
+                            <h1 itemprop="headline">Find Your Next Apparel Manufacturing Partner</h1>
+                            <p itemprop="text">Join the tech enabled fashion sourcing platform to connect <br/>
                                 directly with fashion manufacturers and <br/>
                                 wholesalers in BANGLADESH</p>
                             
@@ -47,7 +53,7 @@
                             </div>
 
                             <div class="home_intro_right mobile_home_intro_img" style="display: none;">
-                                <img alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
+                                <img itemprop="image" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
                             </div>
 
                             <div class="landing_intro_button_box">
@@ -58,7 +64,7 @@
                     </div>
                     <div class="col s12 m6 ">
                         <div class="home_intro_right">
-                            <img alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
+                            <img itemprop="image" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
                         </div>
                     </div>
                 </div>
@@ -73,24 +79,24 @@
                     <div class="col s12 m6 l4">
                         <div class="provide_items_box provide_left">
                             <h3><span>For Buyers</span></h3>
-                            <ul>
-                                <li>Find Vetted Manufacturers</li>
-                                <li>Find Manufacturers for Low MOQ</li>
-                                <li>Source Textiles and Accessories</li>
-                                <li>Source with Shortest Lead Time</li>
-                                <li>Manage Orders with Transparency</li>
+                            <ul itemscope itemtype="https://schema.org/ListItem">
+                                <li itemprop="itemListElement">Find Vetted Manufacturers</li>
+                                <li itemprop="itemListElement">Find Manufacturers for Low MOQ</li>
+                                <li itemprop="itemListElement">Source Textiles and Accessories</li>
+                                <li itemprop="itemListElement">Source with Shortest Lead Time</li>
+                                <li itemprop="itemListElement">Manage Orders with Transparency</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col s12 m6 l4">
                         <div class="provide_items_box">
                             <h3><span>For Suppliers</span></h3>
-                            <ul>
-                                <li>Create and Promote Your Digital Presence</li>
-                                <li>Create Your Digital Product Library</li>
-                                <li>Source Raw Materials at Best Deal</li>
-                                <li>Be Data Driven with Smart Bi Tools</li>
-                                <li>Manage Orders with Efficiency</li>
+                            <ul itemscope itemtype="https://schema.org/ListItem">
+                                <li itemprop="itemListElement">Create and Promote Your Digital Presence</li>
+                                <li itemprop="itemListElement">Create Your Digital Product Library</li>
+                                <li itemprop="itemListElement">Source Raw Materials at Best Deal</li>
+                                <li itemprop="itemListElement">Be Data Driven with Smart Bi Tools</li>
+                                <li itemprop="itemListElement">Manage Orders with Efficiency</li>
                             </ul>
                         </div>
                     </div>
@@ -105,7 +111,7 @@
         <div class="landing_spotlight_wrap">
             <div class="landing_spotlight_top">
                 <div class="container">
-                    <div class="spotlight_box"><img src="{{asset('images/frontendimages/new-home/Spotlight.png')}}" alt="" /></div>
+                    <div class="spotlight_box"><img itemprop="image" src="{{asset('images/frontendimages/new-home/Spotlight.png')}}" alt="" /></div>
                 </div>
             </div>
             <div class="landing_spotlight_infoWrap">
@@ -118,9 +124,9 @@
                             <div class="spotlight_overlay"></div>
                             <div class="spotlight-inside-image">
                                 @if($businessProfile->business_profile_banner)
-                                <img src="{{ asset('storage/'.$businessProfile->business_profile_banner) }}" alt="" />
+                                <img itemprop="image" src="{{ asset('storage/'.$businessProfile->business_profile_banner) }}" alt="" />
                                 @else
-                                <img src="{{ asset('images/frontendimages/new-home/spot-li.jpg') }}" alt="" />
+                                <img itemprop="image" src="{{ asset('images/frontendimages/new-home/spot-li.jpg') }}" alt="" />
                                 @endif
                             </div>
                             <div class="container">
@@ -128,12 +134,12 @@
                                     <div class="right-align sayel_group_logo_box">
                                         <!--img src="{{ asset('storage/'.$businessProfile->user->image) }}" alt="" /-->
                                         @if($businessProfile->business_profile_logo)
-                                        <img src="{{ asset('storage/'.$businessProfile->business_profile_logo) }}" alt="" />
+                                        <img itemprop="image" src="{{ asset('storage/'.$businessProfile->business_profile_logo) }}" alt="" />
                                         @else
                                             @php
                                                 $img = $businessProfile->user->image ?'storage/'.$businessProfile->user->image : 'images/frontendimages/no-image.png';
                                             @endphp                                        
-                                            <img itemprop="image" src="{{asset($img)}}" alt="avatar" />
+                                            <img itemprop="image" itemprop="image" src="{{asset($img)}}" alt="avatar" />
                                         @endif
                                     </div>
                                     <div class="spotlight_inner_info">

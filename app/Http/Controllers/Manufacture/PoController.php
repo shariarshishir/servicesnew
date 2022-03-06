@@ -132,6 +132,7 @@ class PoController extends Controller
 
     public function store(Request $request)
 	{ 
+        //dd($request->all());
         //DB::beginTransaction();
 
         // try {
@@ -149,7 +150,9 @@ class PoController extends Controller
             $data->payable_party = $request->input('payable_party');
             
             $data->po_no = '';
-            $data->condition = json_encode($request->input('terms_conditions'));
+            
+            $data->condition = $request->input('terms_conditions') ? json_encode($request->input('terms_conditions')) : json_encode(array());
+            
             $data->status = 0;
             $data->created_by= auth()->id();
             $data->save();

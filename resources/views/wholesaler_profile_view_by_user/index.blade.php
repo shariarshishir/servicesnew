@@ -27,9 +27,12 @@
 						<div class="col s4 m6 l12 profile_left_pic_wrap">
 							<div class="profile_pic center-align">
 								@if($business_profile->business_profile_logo)
-								<img src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
+								    <img src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
-								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
+                                    @php
+                                    $img=$business_profile->user->image ?'storage/'.$business_profile->user->image : 'images/frontendimages/no-image.png';
+                                    @endphp
+                                    <img src="{{asset($img)}}" alt="avatar" >
 								@endif
 							</div>
 						</div>

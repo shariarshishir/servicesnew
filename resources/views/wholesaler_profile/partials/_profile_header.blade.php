@@ -29,9 +29,12 @@ $profileEditMode = Request::get('editmode');
 						<div class="col s4 m6 l12 profile_left_pic_wrap business_profile_logo">
 							<div class="profile_pic center-align">
 								@if($business_profile->business_profile_logo)
-								<img itemprop="image" src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
+								    <img itemprop="image" src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
-								<img itemprop="image" src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
+                                    @php
+                                    $img=$business_profile->user->image ?'storage/'.$business_profile->user->image : 'images/frontendimages/no-image.png';
+                                    @endphp
+								    <img itemprop="image" src="{{asset($img)}}" alt="avatar" >
 								@endif
 							</div>
 						</div>

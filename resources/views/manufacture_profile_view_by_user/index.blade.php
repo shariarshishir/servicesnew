@@ -29,7 +29,10 @@
 								@if($business_profile->business_profile_logo)
 								<img src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
-								<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
+                                    @php
+                                    $img=$business_profile->user->image ?'storage/'.$business_profile->user->image : 'images/frontendimages/no-image.png';
+                                    @endphp
+                                    <img src="{{asset($img)}}" alt="avatar" >
 								@endif
 							</div>
 						</div>
@@ -650,31 +653,35 @@
                                 <!-- <div class="certifications-block">
                                     @foreach($business_profile->certifications as $certification)
                                         <div class="certificate_img_wrap">
-                                            @if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-                                            <div class="certificate_img">
-                                                 <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-                                                <br> -->
-                                                <!-- <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_file_down" >&nbsp;</a>
-                                            </div>
+
+											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
+											<div class="certificate_img">
+												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+												<br> -->
+												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
+											</div>
 											<div class="certificate_infoBox">
 												<span class="certificate_title">{{$certification->title}}</span>
 											</div>
 
-                                            @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
+											@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
-                                            <div class="certificate_img">
-                                                 <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-                                                <br> -->
-                                                <!-- <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_doc certification_file_down" >&nbsp;</a>
-                                            </div>
+											<div class="certificate_img">
+												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
+												<br> -->
+												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
+											</div>
 											<div class="certificate_infoBox">
 												<span class="certificate_title" >{{$certification->title}}</span>
-												@else
-												@php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
-												<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-												<span class="certificate_title" >{{$certification->title}}</span>
-												@endif
 											</div>
+
+											@else
+											@php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
+											<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
+											<div class="certificate_infoBox">
+												<span class="certificate_title" >{{$certification->title}}</span>
+											</div>
+											@endif
 
                                         </div>
                                     @endforeach

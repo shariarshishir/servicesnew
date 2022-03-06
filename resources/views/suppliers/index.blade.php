@@ -132,7 +132,10 @@
                                         @if($supplier->business_profile_logo)
                                         <img src="{{ asset('storage/'.$supplier->business_profile_logo) }}" alt="avatar" >
                                         @else
-                                        <img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" >
+                                        @php
+                                            $img=$supplier->user->image ?'storage/'.$supplier->user->image : 'images/frontendimages/no-image.png';
+                                        @endphp
+                                        <img src="{{asset($img)}}" alt="avatar" >
                                         @endif
 
                                         @if(Auth::guard('web')->check())

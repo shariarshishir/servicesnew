@@ -270,8 +270,8 @@
               
                                         @foreach($po->performa_items as  $key => $proFormaItem)
                                             <tr>
-                                                <td>{{$key+1 }}</td>
-                                                <td>
+                                                <td data-title="Sl. No.">{{$key+1 }}</td>
+                                                <td data-title="Item / Description">
                                                     <select class="select2 product-dropdown" onchange="changecat(this)">
                                                         <option value="">Select Products</option>
                                                         @foreach($products as $product)
@@ -283,19 +283,19 @@
                                                     <input type="hidden" name="price_unit[]" value="{{ $proFormaItem->price_unit }}" required/>
                                                     <span class="supplier_details" style="color: #50AA5B;"></span>
                                                 </td>
-                                                <td>
+                                                <td data-title="Quantity">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
                                                     <input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" value="{{ $proFormaItem->unit }}" onkeyup="changeunit(this)" required/>
                                                 </td>
-                                                <td>
+                                                <td data-title="Unit Price">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:8px;"></div> -->
                                                     <input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" value="{{ $proFormaItem->unit_price }}" onkeyup="changeunitprice(this)" required/>
                                                 </td>
-                                                <td>
+                                                <td data-title="Sub Total">
                                                     <input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" value="{{ $proFormaItem->total_price }}" readonly/>
                                                     <input type="hidden" class="taxprice" name="tax[]" value="0" />
                                                 </td>
-                                                <td><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" value="{{ $proFormaItem->tax_total_price }}" readonly/></td>
+                                                <td data-title="Total Price"><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" value="{{ $proFormaItem->tax_total_price }}" readonly/></td>
                                                 @if(count($po->performa_items) == $key+1)
                                                     <td><a href="javascript:void(0);" class="ic-btn4" onclick="addlineitem()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i></a></td>
                                                 @endif

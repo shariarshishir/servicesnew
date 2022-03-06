@@ -914,10 +914,12 @@
 
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
-                    html +='<div class="certificate_files">';
-                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down"> &nbsp; </a>';
+                    html +='<div class="certificate_img">';
+                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_file_down"> &nbsp; </a>';
                     html +='</div>';
+                    html +='<div class="certificate_infoBox">';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                    html +='</div>';
                     html +='</div>';
                 }
                 else if(file_extension == 'DOC' || file_extension == 'DOCX' || file_extension == 'docx' || file_extension == 'doc'){
@@ -925,9 +927,11 @@
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<div class="certificate_img">';
-                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="doc_icon"> &nbsp; </a>';
+                    html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_doc certification_file_down"> &nbsp; </a>';
                     html +='</div>';
+                    html +='<div class="certificate_infoBox">';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                    html +='</div>';
                     html +='</div>';
                 }
                 else {
@@ -938,7 +942,9 @@
                     html +='<div class="certificate_img">';
                     html +='<img src="'+image_src_with_storage+'" alt="">';
                     html +='</div>';
+                    html +='<div class="certificate_infoBox">';
                     html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                    html +='</div>';
                     html +='</div>';
                 }
                 $('.certifications-block').append(html);
@@ -1020,10 +1026,12 @@
 
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
-                                            html +='<div class="certificate_files">';
-                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_pdf_down"> &nbsp; </a>';
+                                            html +='<div class="certificate_img">';
+                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_file_down"> &nbsp; </a>';
                                             html +='</div>';
+                                            html +='<div class="certificate_infoBox">';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                                            html +='</div>';
                                             html +='</div>';
                                         }
                                         else if(file_extension == 'DOC' || file_extension == 'DOCX' || file_extension == 'docx' || file_extension == 'doc'){
@@ -1031,9 +1039,11 @@
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';
-                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="doc_icon"> &nbsp; </a>';
+                                            html +='<a href="'+image+'" data-id="'+certifications[i].id+'" class="certification_doc certification_file_down"> &nbsp; </a>';
                                             html +='</div>';
+                                            html +='<div class="certificate_infoBox">';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                                            html +='</div>';
                                             html +='</div>';
                                         }
                                         else {
@@ -1044,7 +1054,9 @@
                                             html +='<div class="certificate_img">';
                                             html +='<img src="'+image_src_with_storage+'" alt="">';
                                             html +='</div>';
+                                            html +='<div class="certificate_infoBox">';
                                             html +='<span class="certificate_title">'+certifications[i].title+'</span>';
+                                            html +='</div>';
                                             html +='</div>';
                                         }
                                         $('.certifications-block').append(html);

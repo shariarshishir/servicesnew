@@ -170,13 +170,13 @@
                             </div>
                         </div>
                         @if(count($low_moq_lists)>0)
-                        <div class="prodcuts-list">
+                        <div class="product_design_wrapper">
                             <div class="product_wrapper">
                                 <h3>Low MOQ Products</h3>
                                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
                                 @foreach ($low_moq_lists  as $list )
 
-                                    <div class="col s6 m4 filter_product_item">
+                                    <div class="col s6 m4 product_item_box">
                                         <div class="productBox">
                                             @php
                                                 if($list->flag == 'shop'){

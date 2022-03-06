@@ -86,7 +86,7 @@
                         <div class="provide_items_box">
                             <h3><span>For Suppliers</span></h3>
                             <ul>
-                                <li>Create And Promote Your Digital Presence</li>
+                                <li>Create and Promote Your Digital Presence</li>
                                 <li>Create Your Digital Product Library</li>
                                 <li>Source Raw Materials at Best Deal</li>
                                 <li>Be Data Driven with Smart Bi Tools</li>
@@ -130,7 +130,10 @@
                                         @if($businessProfile->business_profile_logo)
                                         <img src="{{ asset('storage/'.$businessProfile->business_profile_logo) }}" alt="" />
                                         @else
-                                        <img src="{{ asset('images/frontendimages/no-image.png') }}" alt="" />
+                                            @php
+                                                $img = $businessProfile->user->image ?'storage/'.$businessProfile->user->image : 'images/frontendimages/no-image.png';
+                                            @endphp                                        
+                                            <img itemprop="image" src="{{asset($img)}}" alt="avatar" />
                                         @endif
                                     </div>
                                     <div class="spotlight_inner_info">

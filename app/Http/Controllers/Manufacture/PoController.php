@@ -35,11 +35,21 @@ class PoController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        $user_business_id=[];
+        if($user->businessProfile()->exists()){
+            foreach($user->businessProfile as $profile){
+                array_push($user_business_id, $profile->id);
+            }
+        }
+        if($user->businessProfileForRepresentative()->exists()){
+            array_push($user_business_id, $user->businessProfileForRepresentative->id);
+        }
 
-        $giving =  Proforma::with('performa_items')->whereHas('performa_items', function($q){
-                    $q->where('supplier_id', Auth::id());
-                })
-                ->get();
+        // $giving =  Proforma::with('performa_items')->whereHas('performa_items', function($q){
+        //             $q->where('supplier_id', Auth::id());
+        //         })
+        //         ->get();
+        $giving=Proforma::with('performa_items')->whereIn('business_profile_id', $user_business_id)->get();
         foreach($giving as $g){
             $g['proforma_type'] = 'giving';
         }
@@ -49,6 +59,11 @@ class PoController extends Controller
         }
 
         $proforma=$giving->merge($received);
+
+        if(isset($request->business_id)){
+            $proforma = $proforma->where('business_profile_id' , $request->business_id)->where('proforma_type', 'giving');
+            $proforma->all();
+        }
 
         return view('my_order.inquiries.index',compact('proforma'));
 
@@ -81,14 +96,24 @@ class PoController extends Controller
 	{
 
 		$user=Auth::user();
-        $business_profile = BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
-        $business_profile_id=[];
-        foreach($business_profile as $profile){
-            array_push($business_profile_id, $profile->id);
+        $user_business_id=[];
+        if($user->businessProfile()->exists()){
+            foreach($user->businessProfile as $profile){
+                array_push($user_business_id, $profile->id);
+            }
+        }
+        if($user->businessProfileForRepresentative()->exists()){
+            array_push($user_business_id, $user->businessProfileForRepresentative->id);
         }
 
+        // $business_profile = BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
+        // $business_profile_id=[];
+        // foreach($business_profile as $profile){
+        //     array_push($business_profile_id, $profile->id);
+        // }
+
         $allbuyers = User::where([['user_type','buyer'],['is_email_verified',1]])->with('businessProfile')->get();
-		$allproducts = Product::whereIn('business_profile_id', $business_profile_id)->with('user')->latest()->get(['id','title']);
+		$allproducts = Product::whereIn('business_profile_id', $user_business_id)->with('user')->latest()->get(['id','title']);
 		$buyers = [];
 		$products = [];
 		foreach($allbuyers as $buy)
@@ -103,7 +128,7 @@ class PoController extends Controller
 							'zipcode' => 'zip_code'
 						];
 		}
-		
+
         $products = $allproducts;
         $paymentTerms = PaymentTerm::get();
         $shipmentTerms = ShipmentTerm::get();
@@ -111,7 +136,7 @@ class PoController extends Controller
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();
         $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
-        $businessProfileList = BusinessProfile::select('id','business_name')->where('user_id', $user->id)->where('business_type',1)->get();
+        $businessProfileList = BusinessProfile::select('id','business_name')->whereIn('id', $user_business_id)->where('business_type',1)->get();
 
 		return view('po.add',compact('buyers','products','paymentTerms','shipmentTerms','shippingMethods','shipmentTypes','uoms','businessProfileList','proFormaTermAndConditions'));
 	}
@@ -131,8 +156,7 @@ class PoController extends Controller
     }
 
     public function store(Request $request)
-	{ 
-        //dd($request->all());
+	{
         //DB::beginTransaction();
 
         // try {
@@ -148,11 +172,11 @@ class PoController extends Controller
             $data->forwarder_name = $request->input('forwarder_name');
             $data->forwarder_address = $request->input('forwarder_address');
             $data->payable_party = $request->input('payable_party');
-            
+
             $data->po_no = '';
-            
+
             $data->condition = $request->input('terms_conditions') ? json_encode($request->input('terms_conditions')) : json_encode(array());
-            
+
             $data->status = 0;
             $data->created_by= auth()->id();
             $data->save();
@@ -171,7 +195,7 @@ class PoController extends Controller
                 $dataitem->tax_total_price = $request->input('tax_total_price')[$i];
                 $dataitem->price_unit = $request->input('price_unit')[$i];
                 $dataitem->save();
-                
+
             }
 
             foreach($request->input('shipping_details_method') as $i => $sup)
@@ -216,9 +240,9 @@ class PoController extends Controller
                 }
 
             }
-            
 
-            
+
+
             $proFormaSignature = new ProFormaSignature;
             $proFormaSignature->proforma_id = $data->id;
             $proFormaSignature->buyer_singature_name = $request->input('buyer_singature_name');
@@ -236,7 +260,7 @@ class PoController extends Controller
             $proFormaAdvisingBank->save();
 
             event(new NewProfromaInvoiceHasCreatedEvent($data));
-            
+
 
         // } catch (\Exception $e) {
         //     DB::rollback();
@@ -313,7 +337,7 @@ class PoController extends Controller
         } else {
             abort(404);
         }*/
-        
+
     }
 
     public function rejectProformaInvoice(Request $request)
@@ -409,16 +433,25 @@ class PoController extends Controller
 
     public function edit(Request $request)
     {
-        
+
         $user=Auth::user();
-        $business_profile = BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
-        $business_profile_id=[];
-        foreach($business_profile as $profile){
-            array_push($business_profile_id, $profile->id);
+        $user_business_id=[];
+        if($user->businessProfile()->exists()){
+            foreach($user->businessProfile as $profile){
+                array_push($user_business_id, $profile->id);
+            }
         }
+        if($user->businessProfileForRepresentative()->exists()){
+            array_push($user_business_id, $user->businessProfileForRepresentative->id);
+        }
+        // $business_profile = BusinessProfile::where('user_id', $user->id)->where('business_type',1)->get('id');
+        // $business_profile_id=[];
+        // foreach($business_profile as $profile){
+        //     array_push($business_profile_id, $profile->id);
+        // }
 
         $allbuyers = User::where([['user_type','buyer'],['is_email_verified',1]])->with('businessProfile')->get();
-		$allproducts = Product::whereIn('business_profile_id', $business_profile_id)->with('user')->latest()->get(['id','title']);
+		$allproducts = Product::whereIn('business_profile_id', $user_business_id)->with('user')->latest()->get(['id','title']);
 		$buyers = [];
 		$products = [];
 		foreach($allbuyers as $buy)
@@ -433,14 +466,14 @@ class PoController extends Controller
 							'zipcode' => 'zip_code'
 						];
 		}
-		
+
         $products = $allproducts;
         $paymentTerms = PaymentTerm::get();
         $shipmentTerms = ShipmentTerm::get();
         $shippingMethods = ShippingMethod::latest()->get();
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();
-        $businessProfileList = BusinessProfile::select('id','business_name')->where('user_id', $user->id)->where('business_type',1)->get();
+        $businessProfileList = BusinessProfile::select('id','business_name')->whereIn('id', $user_business_id)->where('business_type',1)->get();
         $po = Proforma::with('performa_items','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $request->poid)->first();
         $supplierCheckedProFormaTermAndConditions = SupplierCheckedProFormaTermAndCondition::where('proforma_id',$request->poid)->pluck('pro_forma_term_and_condition_id')->toArray();
         $totalInvoice = ProformaProduct::where('performa_id',$request->poid)->sum('tax_total_price');

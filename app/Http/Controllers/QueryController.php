@@ -15,13 +15,41 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\QueryCommuncationNotification;
 use App\Mail\QueryCommuncationMail;
 use App\Http\Traits\PushNotificationTrait;
+use Illuminate\Support\Facades\Auth;
 
 class QueryController extends Controller
 {
     use PushNotificationTrait;
-    public function index()
+    public function index(Request $request)
     {
-       $orderQueries=OrderModificationRequest::where(['user_id' => auth()->id(), 'type' => 1])->get();
+        $user = Auth::user();
+        $user_business_id=[];
+        if($user->businessProfile()->exists()){
+            foreach($user->businessProfile as $profile){
+                array_push($user_business_id, $profile->id);
+            }
+        }
+        if($user->businessProfileForRepresentative()->exists()){
+            array_push($user_business_id, $user->businessProfileForRepresentative->id);
+        }
+
+       $giving=OrderModificationRequest::where(['user_id' => auth()->id(), 'type' => 1])->get();
+       foreach($giving as $g){
+        $g['queries_type'] = 'giving';
+       }
+       //return $giving;
+       $received=OrderModificationRequest::whereIn('business_profile_id', $user_business_id)->where('type', 1)->get();
+
+       foreach($received as $r){
+        $r['queries_type'] = 'received';
+       }
+       $orderQueries = $giving->merge($received);
+
+       if(isset($request->business_id)){
+            $orderQueries = $orderQueries->where('business_profile_id' , $request->business_id)->where('queries_type', 'received');
+            $orderQueries->all();
+        }
+
        $notifications = auth()->user()->unreadNotifications;
        $orderIds=[];
        $orderModificationRequestIds=[];

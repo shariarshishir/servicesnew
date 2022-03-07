@@ -126,7 +126,7 @@
                                 @if($businessProfile->business_profile_banner)
                                 <img itemprop="image" src="{{ asset('storage/'.$businessProfile->business_profile_banner) }}" alt="" />
                                 @else
-                                <img itemprop="image" src="{{ asset('images/frontendimages/new-home/spot-li.jpg') }}" alt="" />
+                                <img itemprop="image" src="{{ asset('images/frontendimages/new-home/spot-li.png') }}" alt="" />
                                 @endif
                             </div>
                             <div class="container">
@@ -185,12 +185,12 @@
                 </div>
                 <div class="col s12 m6 product_video_infobox">
                     <div class="product_3d_info_box">
-                        <h1><span> Produce any design <br/> from our <span style="font-weight: 600;">AW 22/23</span> <br/>  and <span style="font-weight: 600;">SS 23</span> collection </h1>
-                        <p>Reduce your lead time and source trending products.</p>
+                        <h1><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h1>
+                        <p>Our 3D design service helps you to reduce lead time<br />significantly. We have a huge library of 1000+ designs<br />ranging from outerwear to underwear. Our product<br />development team brings the design to life as best<br />valued products with our technical expertise and<br />wide sourcing network.</p>
                     </div>
 
                     <div class="visit_studio">
-                        <a href="https://www.merchantbay.com/global/buy-designs" class="btn_green btn_visit_studio" >Visit Studio</a>
+                        <a href="{{route('buydesignsproducts')}}" class="btn_green btn_visit_studio" >Visit Studio</a>
                     </div>
                 </div>
               

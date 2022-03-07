@@ -180,11 +180,7 @@
             <div class="row"> 
                 <div class="col s12 m6 product_video_wrap">
                     <div class="product_video_box">
-                    
-                        <video width="320" height="240" autoplay>
-                            <source src="{{asset('images/frontendimages/new-home/product-3d.mp4')}}" type="video/mp4">
-                        </video>
-                        
+                        <img itemprop="image" src="{{asset('images/frontendimages/new-home/360-white.GIF')}}" alt="Animated Image" />
                     </div>
                 </div>
                 <div class="col s12 m6 product_video_infobox">

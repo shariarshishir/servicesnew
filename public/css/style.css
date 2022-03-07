@@ -5845,6 +5845,10 @@ input.input-field[type=text]:not(.browser-default) {
     margin-bottom: 0px;
 }
 
+.buyerdata_info_top {
+    padding-bottom: 20px;
+}
+
 /* ******************************************* */
 .dataTables_length label {
     font-size: 16px;
@@ -8616,6 +8620,39 @@ nav .pagination li.active .page-link {
     padding: 5px 10px;
     background: none;
 }
+.mvc_produce_design_wrap {
+    padding: 50px 0 0;
+}
+
+.mvc_produce_design_wrap h1 {
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 60px;
+    border-bottom: 1px solid #262626;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+.mvc_produce_design_wrap .visit_studio {
+    padding-top: 30px;
+}
+.mvc_produce_design_wrap .visit_studio .btn_visit_studio {
+    padding: 10px 24px;
+}
+
+.mvc_produce_design_wrap video#bgvid { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
 
 /* ******************** Media css style start *********************** */
 
@@ -8646,6 +8683,22 @@ nav .pagination li.active .page-link {
         font-size: 55px;
         line-height: 75px;
     }
+
+    .product_video_box {
+        padding-right: 100px;
+    }
+    .product_3d_info_box {
+        padding-top: 30px;
+    }
+
+    .mvc_produce_design_wrap h1 {
+        margin-bottom: 50px;
+    }
+
+    .mvc_produce_design_wrap .visit_studio {
+        padding-top: 50px;
+    }
+    
     .landing_tools_infobox {
         padding-left: 85px;
     }
@@ -9015,6 +9068,7 @@ nav .pagination li.active .page-link {
         font-size: 16px;
         line-height: 28px;
     }
+    .mvc_produce_design_wrap h1,
     .footer_topWrap_inner h2,
     .landing_request_wrap h1,
     .landing_tools_infobox h1,
@@ -9043,6 +9097,7 @@ nav .pagination li.active .page-link {
         width: 115px !important;
     }
 
+    .mvc_produce_design_wrap h1,
     .sourcing_info_box h1,
     .landing_intro_wrapper h1 {
         margin-bottom: 20px;
@@ -9984,6 +10039,7 @@ nav .pagination li.active .page-link {
     }
 
     /* ******************************************** */
+    .mvc_produce_design_wrap h1,
     .footer_topWrap_inner h2,
     .landing_request_wrap h1,
     .landing_tools_infobox h1,
@@ -10161,6 +10217,16 @@ nav .pagination li.active .page-link {
     .invoice_container_wrap .no_more_tables tr td:first-child:before {
         top: 12px;
     }
+
+    .purchase_order_wrap .no_more_tables td:before {
+        top: 10px;
+    }
+
+    .line_item_wrap .no_more_tables table,
+    .shipping_details_table.no_more_tables table {
+        border-bottom: none !important;
+    }
+
 
 }
 
@@ -10530,6 +10596,7 @@ nav .pagination li.active .page-link {
     .landing_tools_infobox .tools_button_box {
         padding-top: 10px;
     }
+    .mvc_produce_design_wrap h1,
     .footer_topWrap_inner h2,
     .landing_request_wrap h1,
     .landing_tools_infobox h1,
@@ -10960,12 +11027,18 @@ nav .pagination li.active .page-link {
     .home_intro_right img {
         max-width: 85%;
     }
+    .mvc_produce_design_wrap .row,
     .landing_tools_wrap .row {
         display: flex;
         flex-direction: column;
     }
+    .mvc_produce_design_wrap .product_video_wrap,
     .landing_tools_wrap .landing_tools_left {
         order: 2;
+    }
+
+    .mvc_produce_design_wrap .visit_studio {
+        padding-bottom: 30px;
     }
     .landing_tools_wrap .landing_tools_img {
         padding-top: 30px;
@@ -10980,6 +11053,7 @@ nav .pagination li.active .page-link {
         padding: 0 0 30px;
     }
 
+    .mvc_produce_design_wrap,
     .landing_provide_wrap h3,
     .sourcing_apps_box,
     .landing_sourcing_wrap .sourcing_info_box,

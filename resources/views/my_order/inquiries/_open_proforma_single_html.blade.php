@@ -32,7 +32,7 @@
                             </div>
                             <div class="col m6 input-field">
                                 <div class="form-group has-feedback">
-                                    <label style="margin-bottom: 0;"><b>Beneficiary</b></label>
+                                    <label style="margin-bottom: 0; left: 0;"><b>Beneficiary</b></label>
                                     <span style="display: block">{{ $po->businessProfile->business_name }}</span>
                                 </div>
                             </div>

@@ -175,6 +175,33 @@
           </div>
         </div>
 
+        <div class="mvc_produce_design_wrap">
+          <div class="container">
+            <div class="row"> 
+                <div class="col s12 m6 product_video_wrap">
+                    <div class="product_video_box">
+                    
+                        <video width="320" height="240" autoplay>
+                            <source src="{{asset('images/frontendimages/new-home/product-3d.mp4')}}" type="video/mp4">
+                        </video>
+                        
+                    </div>
+                </div>
+                <div class="col s12 m6 product_video_infobox">
+                    <div class="product_3d_info_box">
+                        <h1><span> Produce any design <br/> from our <span style="font-weight: 600;">AW 22/23</span> <br/>  and <span style="font-weight: 600;">SS 23</span> collection </h1>
+                        <p>Reduce your lead time and source trending products.</p>
+                    </div>
+
+                    <div class="visit_studio">
+                        <a href="https://www.merchantbay.com/global/buy-designs" class="btn_green btn_visit_studio" >Visit Studio</a>
+                    </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+
         <div class="landing_sourcing_wrap">
           <div class="container">
             <div class="row">
@@ -186,7 +213,7 @@
                     <p><span style="font-weight: 600;">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
                 </div>
                 <div class="sourcing_img_box mobile_sourcing_img_box" style="display: none;">
-                        <img alt="" src="{{asset('images/frontendimages/new-home/sourcing-img.jpg')}}" />
+                    <img alt="" src="{{asset('images/frontendimages/new-home/sourcing-img.jpg')}}" />
                 </div>
                 <div class="sourcing_apps_box">
                     <h3>Download the App</h3>

@@ -120,5 +120,21 @@ class BusinessProfile extends Model
         return $this->hasMany(RelatedProduct::class);
     }
 
+    public function profileBasedOrders()
+    {
+        return $this->hasMany(VendorOrder::class)->whereNotIn('state', ['pending','cancel']);
+    }
+
+    public function profileBasedPo()
+    {
+        return $this->hasMany(Proforma::class);
+    }
+
+    public function profileBasedQueries()
+    {
+        return $this->hasMany(OrderModificationRequest::class)->where('type', 1);
+    }
+
+
 
 }

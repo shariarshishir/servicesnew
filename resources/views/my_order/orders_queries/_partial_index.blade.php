@@ -11,7 +11,8 @@
                             <th class="text-center">Product Name</th>
                             <th class="text-center">Date</th>
                             <th class="text-center">Status</th>
-                            <th  class="text-center">&nbsp;</th>
+                            <th class="text-center">Queries Type</th>
+                            <th class="text-center">&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -68,9 +69,12 @@
                                         @endswitch
                                     </span>
                                 </td>
+                                <td>{{$item->queries_type}}</td>
                                 <td>
-                                    <a href="javascript:void(0);" id="{{$item->id}}" class="open-communication-channel btn green waves-effect waves-light modal-trigger order-query-notification tooltipped" data-notification-id="{{$item->id}}" data-position="top" data-tooltip="Click here to send any message."><i class="material-icons">chat_bubble_outline</i></a>
-                                    <a href="javascript:void(0);" id="{{$item->id}}" class="add-to-cart-order-query-modal btn green waves-effect waves-light order-query-notification tooltipped" data-notification-id="{{$item->id}}" data-position="top" data-tooltip="Click here to see order details."><i class="material-icons">description</i></a>
+                                    @if($item->queries_type == 'giving')
+                                        <a href="javascript:void(0);" id="{{$item->id}}" class="open-communication-channel btn green waves-effect waves-light modal-trigger order-query-notification tooltipped" data-notification-id="{{$item->id}}" data-position="top" data-tooltip="Click here to send any message."><i class="material-icons">chat_bubble_outline</i></a>
+                                        <a href="javascript:void(0);" id="{{$item->id}}" class="add-to-cart-order-query-modal btn green waves-effect waves-light order-query-notification tooltipped" data-notification-id="{{$item->id}}" data-position="top" data-tooltip="Click here to see order details."><i class="material-icons">description</i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -2,15 +2,16 @@
 
 namespace App\Listeners;
 
-use App\Providers\NewRfqHasAddedEvent;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Rfq;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Admin;
 use App\Mail\NewRfqInvitationMail;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
+use App\Providers\NewRfqHasAddedEvent;
+use Illuminate\Queue\InteractsWithQueue;
 use App\Notifications\NewRfqNotification;
 use App\Http\Traits\PushNotificationTrait;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Notification;
 
 class NewRfqInvitationListener implements ShouldQueue
 {
@@ -33,16 +34,23 @@ class NewRfqInvitationListener implements ShouldQueue
      */
     public function handle($event)
     {
-        
+
         $user=$event->selectedUserToSendMail;
         $rfq=$event->rfq;
         if($user=="success@merchantbay.com"){
             $data=[
                 'supplier'=>$user,
                 'rfq'=>$rfq,
-                'url'=>"/rfq"
+                'url'=>route('admin.rfq.index')
             ];
             Mail::to($user)->send(new NewRfqInvitationMail($data));
+            $data_for_notifaction=[
+                'supplier'=>$user,
+                'rfq'=>$rfq,
+                'url'=>route('admin.rfq.show', $rfq->id)
+            ];
+            $admin=Admin::find(1);
+            Notification::send($admin,new NewRfqNotification($data_for_notifaction));
         }
         else{
 
@@ -57,10 +65,10 @@ class NewRfqInvitationListener implements ShouldQueue
                 'rfq'=>$rfq,
                 'url'=>"/rfq"
             ];
-            
+
             Mail::to($user->email)->send(new NewRfqInvitationMail($data));
             Notification::send($user,new NewRfqNotification($data));
-    
+
         }
 
     }

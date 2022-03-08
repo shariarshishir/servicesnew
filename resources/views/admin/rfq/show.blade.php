@@ -1,7 +1,15 @@
 @extends('layouts.admin')
 @section('content')
 
-
+@if(auth()->guard('admin')->user()->unreadNotifications)
+    @foreach (auth()->guard('admin')->user()->unreadNotifications as $notification)
+        @if($notification->type == "App\Notifications\NewRfqNotification")
+            @if($notification->data['rfq_data']['id']== $rfq->id)
+               {{  $notification->markAsRead(); }}
+            @endif
+        @endif
+    @endforeach
+@endif
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -22,7 +30,7 @@
 
 
     <!-- Main content -->
-    <section class="content admin_rfq_wrapper">
+    <section class="content admin_rfq_wrapper" style="margin-top: 30px;">
       <div class="container-fluid">
         <div class="card">
           <div class="row">

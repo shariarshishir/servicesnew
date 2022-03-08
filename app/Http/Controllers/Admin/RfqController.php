@@ -68,7 +68,7 @@ class RfqController extends Controller
             $rfq->update(['status' => 'approved']);
             if(env('APP_ENV') == 'production')
             {
-                $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+                $selectedUsersToSendMail = User::where('id','<>', $rfq->created_by)->take(10)->get();
                 foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
                     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
                 }

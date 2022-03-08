@@ -36,6 +36,7 @@
                                         <th>Delivery Time</th>
                                         <th>User Name</th>
                                         <th>Created_at</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -66,6 +67,7 @@
                 {data: 'delivery_time', name: 'delivery_time'},
                 {data: 'created_by', name: 'created_by'},
                 {data: 'created_at', name: 'created_at'},
+                {data: 'status', name: 'status'},
                 {data: 'details', name: 'details',  orderable: false, searchable: false},
             ]
         });

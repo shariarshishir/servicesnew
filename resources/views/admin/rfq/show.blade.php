@@ -14,8 +14,12 @@
             </ol>
           </div>
         </div>
+        <div class="row  float-sm-right">
+            <a href="{{route('admin.rfq.status', $rfq->id)}}" class="btn btn-info" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+        </div>
       </div><!-- /.container-fluid -->
     </section>
+
 
     <!-- Main content -->
     <section class="content admin_rfq_wrapper">
@@ -79,7 +83,7 @@
         </div>
 
 
-        
+
       </div>
     </section>
 </div>

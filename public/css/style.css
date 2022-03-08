@@ -4740,8 +4740,8 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box .switch,
 .business_list_inner_wrap .business_list_itembox .list_box .switch {
     position: absolute;
-    right: 8px;
-    bottom: 10px;
+    right: 25px;
+    top: 10px;
     width: auto;
     text-align: right;
 }
@@ -8652,6 +8652,36 @@ nav .pagination li.active .page-link {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+}
+
+.business-shortcut-bar {
+    background: #ccc;
+    border-radius: 5px;
+    padding: 0px 20px;
+}
+.business-shortcut-bar ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.business-shortcut-bar ul li a:link,
+.business-shortcut-bar ul li a:visited,
+.business-shortcut-bar ul li a:active {
+    color: #000;
+}
+.business-shortcut-bar ul li a span {
+    background: red;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 11px;
+    line-height: 20px;
 }
 
 /* ******************** Media css style start *********************** */

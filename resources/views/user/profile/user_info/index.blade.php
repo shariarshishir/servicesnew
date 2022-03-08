@@ -49,9 +49,11 @@
             @php
                 $className = '';
                 if(count($businessProfiles)==3) {
-                    $className = "col m4";
+                    //$className = "col m4";
+                    $className = "col m12";
                 } elseif(count($businessProfiles)==2) {
-                    $className = "col m6";
+                    //$className = "col m6";
+                    $className = "col m12";
                 } else {
                     $className = "col m12";
                 }

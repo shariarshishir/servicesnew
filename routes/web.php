@@ -497,6 +497,7 @@ Route::group(['prefix'=>'/admin'],function (){
 
         Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
         //rfq
+        Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');

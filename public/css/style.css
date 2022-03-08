@@ -10257,6 +10257,13 @@ nav .pagination li.active .page-link {
         border-bottom: none !important;
     }
 
+    .business-shortcut-bar ul {
+        display: block;
+    }
+    .business-shortcut-bar ul li {
+        padding-bottom: 10px;
+    }
+
 
 }
 

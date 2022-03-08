@@ -6,7 +6,8 @@
     <div class="card">
         <div class="invoice_top_button_wrap">
             @if(auth()->id() == $po->buyer_id && $po->status != 1)
-            <button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm">Accept</button>
+            <!-- <button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm" >Accept</button> -->
+            <a class="waves-effect waves-light btn_green modal-trigger"  href="#acceptOrderDetailsModal">Accept</a>
             <a class="waves-effect waves-light btn_green modal-trigger"  href="#rejectOrderDetailsModal">Reject</a>
             @endif
             <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
@@ -181,6 +182,17 @@
                                             <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>Total Invoice Amount: </b></td>
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount"><b>{{$totalInvoice}}<b></td>
                                         </tr>
+                                        @foreach($po->checkedMerchantAssistances as $assistance)
+                                        <tr>
+                                            <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>{{$assistance->merchantAssistance->name}}: </b></td>
+                                            <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{ $assistance->merchantAssistance->amount }}<b> {{ $assistance->merchantAssistance->type=='Percentage' ? '%' :'USD'}} <b></td>
+                                        </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>Your total order amount with merchant assistant : </b></td>
+                                            <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{$po->total_invoice_amount_with_merchant_assistant}} <b> USD <b></td>
+                                        </tr>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -221,25 +233,25 @@
                                 <div class="col s6 m4 l3">
                                     <div class="form-group has-feedback">
                                         <label>Name of the bank</label> <br>
-                                        <span> {{$po->proFormaAdvisingBank->bank_name}} </span>
+                                        <span> {{$po->proFormaAdvisingBank->bank_name??''}} </span>
                                     </div>
                                 </div>
                                 <div class="col s6 m4 l3">
                                     <div class="form-group has-feedback">
                                         <label>Branch name</label><br>
-                                        <span>{{ $po->proFormaAdvisingBank->branch_name }}</span>
+                                        <span>{{ $po->proFormaAdvisingBank->branch_name??'' }}</span>
                                     </div>
                                 </div>
                                 <div class="col s6 m4 l3">
                                     <div class="form-group has-feedback">
                                         <label>Address of the bank </label><br>
-                                        <span> {{ $po->proFormaAdvisingBank->bank_address }} </span>
+                                        <span> {{ $po->proFormaAdvisingBank->bank_address??'' }} </span>
                                     </div>
                                 </div>
                                 <div class="col s6 m4 l3">
                                     <div class="form-group has-feedback">
                                         <label>Swift code</label><br>
-                                        <span>{{ $po->proFormaAdvisingBank->swift_code }}</span>
+                                        <span>{{ $po->proFormaAdvisingBank->swift_code??'' }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -251,19 +263,19 @@
                                 <div class="col s6 input-field">
                                     <h6>Buyer Side</h6>
                                     <div class="form-group has-feedback">
-                                        <span> {{ $po->proFormaSignature->buyer_singature_name }} </span>
+                                        <span> {{ $po->proFormaSignature->buyer_singature_name ??''}} </span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <span>{{$po->proFormaSignature->buyer_singature_designation}}</span>
+                                        <span>{{$po->proFormaSignature->buyer_singature_designation??''}}</span>
                                     </div>
                                 </div>
                                 <div class="col s6 input-field">
                                     <h6>Beneficiary Side</h6>
                                     <div class="form-group has-feedback">
-                                        <span> {{$po->proFormaSignature->beneficiar_singature_name}} </span>
+                                        <span> {{$po->proFormaSignature->beneficiar_singature_name??''}} </span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <span> {{ $po->proFormaSignature->beneficiar_singature_designation }} </span>
+                                        <span> {{ $po->proFormaSignature->beneficiar_singature_designation??'' }} </span>
                                     </div>
                                 </div>
                             </div>
@@ -336,6 +348,56 @@
     <input type="hidden" id="supplier_id" name="supplier_id" value="{{ $supplierInfo->id }}" />
     <input type="hidden" id="po_accepted_status" name="po_accepted_status" value="Accepted" />
 </form>
+
+<div class="modal accept_order_details_modal" id="acceptOrderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="acceptOrderDetailsModal"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-content">
+            <div class="modal-header modal-hdr-custum" style="background: rgb(85, 168, 96) none repeat scroll 0% 0%;">
+            	<h4 class="modal-title" style="color: #fff; font-size: 14px;">
+            		PO: {{ $po->proforma_id }} <br />
+            		Date: {{$po->proforma_date}}
+            	</h4>
+            </div>
+            <div class="modal-body modal-bdy-bdr">
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: 35px;">
+                    	<form action="{{route('accept.proforma.invoice')}}" class="rejectRfqForm" method="post" enctype="multipart/form-data">
+                    		@csrf
+						    <input type="hidden" id="proforma_id" name="proforma_id" value="{{ $po->proforma_id }}">
+                            <input type="hidden" id="total_invoice_amount" name="total_invoice_amount" value="{{$totalInvoice}}">
+                            <input type="hidden" id="total_invoice_amount_with_merchant_assistant" name="total_invoice_amount_with_merchant_assistant" value="">
+						    <input type="hidden" id="po_id" name="po_id" value="{{ $po->id }}" />
+                                @foreach($merchantAssistances as $key=>$merchantAssistance)
+                                <label>
+                                    <input type="checkbox"  class="merchant-assiatance-checkbox" data-merchant_assistance_name ="{{$merchantAssistance->name}}" data-merchant_assistance_id ="{{$merchantAssistance->id}}"  data-merchant_assistance_type ="{{$merchantAssistance->type}}" data-merchant_assistance_amount = "{{$merchantAssistance->amount}}" name="merchant_assistances[{{$key}}]" value="{{$merchantAssistance->id}}" >
+                                    <span> {{$merchantAssistance->name}} @if($merchantAssistance->type  == "Percentage") ( {{$merchantAssistance->amount}} % )@elseif($merchantAssistance->type  == "USD") ( {{$merchantAssistance->amount}} USD )@endif</span> 
+                                </label>
+                                <br>
+                                @endforeach
+                                <br>
+                            <div>Your total order amount : <b>{{$totalInvoice}}</b></div>
+                            <div class="merchant-assitance-calculation">
+
+                            </div>
+                            <div class="total-amount-with-merchant-assitance">
+    
+                            </div>
+	                        <div class="right-align">
+                                <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Submit</button>
+                            </div>
+                            
+                    	</form>
+                    </div>
+                </div>
+            </div>
+       </div>
+       <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+</div>
+
+
 
 
 
@@ -423,6 +485,70 @@
                     }
 
                 });
+            });
+
+
+
+            $(".merchant-assiatance-checkbox").on('click', function(e)
+            {
+                var type = $(this).attr("data-merchant_assistance_type");
+                var amount = $(this).attr("data-merchant_assistance_amount");
+                var merchantAssistanceId = $(this).attr("data-merchant_assistance_id");
+                var merchantAssistanceName = $(this).attr('data-merchant_assistance_name');
+                var noOfCheckedAssistance = $('.merchant-assitance-calculation').children().length;
+                if(noOfCheckedAssistance == 0){
+                    var totalInvoiceAmount = $('#total_invoice_amount').val();
+                }
+                else if(noOfCheckedAssistance > 0){
+                    var totalInvoiceAmount = $('#total_invoice_amount_with_merchant_assistant').val();
+                }
+
+
+                if($(this).is(':checked')){
+                    if(type == 'Percentage'){
+                        let totalInvoiceAmount = $('#total_invoice_amount').val();
+                        let latestTotalInvoiceAmountWithMerchantAssistant = $('#total_invoice_amount_with_merchant_assistant').val();
+                        var totalInvoiceAmountWithMerchantAssistant = parseFloat(latestTotalInvoiceAmountWithMerchantAssistant) + (parseFloat(totalInvoiceAmount)/100)*parseFloat(amount);
+                        html = '<div class="percent_amount" data-merchantAssistanceId='+merchantAssistanceId+'>'+merchantAssistanceName+'Added = '+amount+'%';
+                    }
+                    else{
+                        var totalInvoiceAmountWithMerchantAssistant = parseFloat(totalInvoiceAmount) + parseInt(amount);
+                        html = '<div class="usd_amount" data-merchantAssistanceId='+merchantAssistanceId+'>'+merchantAssistanceName+'Added = '+amount+' USD';
+                    }
+                    $('.merchant-assitance-calculation').append(html);
+                    $('#total_invoice_amount_with_merchant_assistant').val(totalInvoiceAmountWithMerchantAssistant);
+                    $('.total-amount-with-merchant-assitance').empty();
+                    $('.total-amount-with-merchant-assitance').append('<div> Total with merchant assitance is :<b>'+totalInvoiceAmountWithMerchantAssistant+'</b></div>');
+                }
+                else{
+                    $('.merchant-assitance-calculation').children().each(function( index ) {
+                        var matchedMerchantAssistanceId = $( this ).attr('data-merchantAssistanceId');
+                        if(type == 'Percentage'){
+                            if(matchedMerchantAssistanceId == merchantAssistanceId){
+                                let totalInvoiceAmount = $('#total_invoice_amount').val();
+                                let latestTotalInvoiceAmountWithMerchantAssistant = $('#total_invoice_amount_with_merchant_assistant').val();
+                                var totalInvoiceAmountWithMerchantAssistant = parseFloat(latestTotalInvoiceAmountWithMerchantAssistant) - (parseFloat(totalInvoiceAmount)/100)*parseFloat(amount);
+                                $('#total_invoice_amount_with_merchant_assistant').val(totalInvoiceAmountWithMerchantAssistant);
+                                $('.total-amount-with-merchant-assitance').empty();
+                                $('.total-amount-with-merchant-assitance').append('<div> Total with merchant assitance is :<b>'+totalInvoiceAmountWithMerchantAssistant+'</b></div>');
+                                $( this ).remove();
+                            }
+                        }
+                        else{
+                            if(matchedMerchantAssistanceId == merchantAssistanceId){
+                                var totalInvoiceAmountWithMerchantAssistant = parseFloat(totalInvoiceAmount) - parseFloat(amount);
+                                $('#total_invoice_amount_with_merchant_assistant').val(totalInvoiceAmountWithMerchantAssistant);
+                                $('.total-amount-with-merchant-assitance').empty();
+                                $('.total-amount-with-merchant-assitance').append('<div> Total with merchant assitance is :<b>'+totalInvoiceAmountWithMerchantAssistant+'</b></div>');
+                                $( this ).remove();
+
+                            }
+                        }
+
+                        
+                    });
+               
+                }
             });
         }); 
 

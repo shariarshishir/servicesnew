@@ -23,6 +23,8 @@ use App\Models\ShipmentType;
 use App\Models\UOM;
 use App\Models\ProformaProduct;
 use App\Models\ProFormaTermAndCondition;
+use App\Models\MerchantAssistance;
+use App\Models\ProformaCheckedMerchantAssistance;
 use App\Models\SupplierCheckedProFormaTermAndCondition;
 use Carbon\Carbon;
 use App\Events\NewProfromaInvoiceHasCreatedEvent;
@@ -149,7 +151,7 @@ class PoController extends Controller
             $data->payable_party = $request->input('payable_party');
             
             $data->po_no = '';
-            $data->condition = json_encode($request->input('terms_conditions'));
+            $data->condition = $request->input('terms_conditions') ? json_encode($request->input('terms_conditions')) : array();
             $data->status = 0;
             $data->created_by= auth()->id();
             $data->save();
@@ -272,20 +274,24 @@ class PoController extends Controller
     public function openProformaSingleHtml($id)
     {
         $users[] = auth()->id();
-        $po = Proforma::with('performa_items','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
+        $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
+        $merchantAssistances = MerchantAssistance::all();
         $conditionArray = [];
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
         $supplierInfo = User::where('id', $po->created_by)->first();
-        return view('my_order.inquiries._open_proforma_single_html',compact('po','users','supplierInfo','totalInvoice'));
+        return view('my_order.inquiries._open_proforma_single_html',compact('po','users','supplierInfo','totalInvoice','merchantAssistances'));
     }
 
     public function acceptProformaInvoice(Request $request)
     {
-
-        Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'status' => 1]);
-        return response()->json([
-            'success' => $request
-        ]);
+        Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id,'total_invoice_amount_with_merchant_assistant'=>$request->total_invoice_amount_with_merchant_assistant,'status' => 1]);
+        foreach($request->merchant_assistances as $checkedMerchantAssistance){
+            $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
+            $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
+            $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
+            $proformaCheckedMerchantAssistance->save();
+        }
+        return redirect()->route('po.index');
         //Performa::where('id', $request->input('proforma_id'))->update(['po_no' => $request->input('po_id'), 'status' => 1]);
         //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');
         //return redirect()->action('RFQController@proformainvoices');

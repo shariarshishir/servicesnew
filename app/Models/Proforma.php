@@ -18,6 +18,9 @@ class Proforma extends Model
     public function performa_items(){
         return $this->hasMany('App\Models\ProformaProduct','performa_id');
     }
+    public function checkedMerchantAssistances(){
+        return $this->hasMany('App\Models\ProformaCheckedMerchantAssistance');
+    }
     public function proFormaShippingDetails(){
         return $this->hasMany('App\Models\ProFormaShippingDetails');
     }
@@ -42,5 +45,5 @@ class Proforma extends Model
     public function shipmentTerm(){
         return $this->belongsTo('App\Models\ShipmentTerm');
     }
-    
+
 }

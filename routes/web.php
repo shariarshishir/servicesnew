@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ShipmentTermController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\ProFormaTermAndConditionController;
+use App\Http\Controllers\Admin\ProFormaInvoiceController as AdminProFormaInvoiceController;
+use App\Http\Controllers\Admin\MerchantAssistanceController;
 use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
@@ -450,12 +452,16 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('shipment-term', ShipmentTermController::class);
         Route::get('shipping-charge/change/status/{order_id}', [ShippingChargeController::class, 'changeStatus'])->name('shipping.charge.change.status');
         Route::resource('shipping-charge', ShippingChargeController::class);
+        Route::resource('merchant-assistances', MerchantAssistanceController::class);
 
         // Blogs api start
         Route::resource('blogs', BlogController::class);
 
         //profroma terms and conditions
         Route::resource('proforma-terms-and-conditions', ProFormaTermAndConditionController::class);
+
+        Route::get('/proforma-invoices',[AdminProFormaInvoiceController::class,'index'])->name('proforma_invoices.index');
+        Route::get('/proforma-invoices/{proformaInvoice}',[AdminProFormaInvoiceController::class,'show'])->name('proforma_invoices.show');
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');

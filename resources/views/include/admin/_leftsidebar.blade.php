@@ -148,12 +148,25 @@
                             <p>Shipping Type</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('merchant-assistances.index')}}" class="nav-link {{ Route::is('merchant-assistances*') ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Merchant Assistance</p>
+                        </a>
+                    </li>
+                    
                 </ul>
           </li>
           <li class="nav-item">
             <a href="{{route('proforma-terms-and-conditions.index')}}" class="nav-link {{ Route::is('profroma-terms-and-conditions*') ? 'active' : ''}} ">
                 <i class="far fa-file nav-icon"></i>
                 <p>Proforma terms and conditions</p>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a href="{{route('proforma_invoices.index')}}" class="nav-link {{ Route::is('proforma_invoices*') ? 'active' : ''}} ">
+                <i class="far fa-file nav-icon"></i>
+                <p>Proforma invoices</p>
             </a>
           </li>          
           <li class="nav-item">

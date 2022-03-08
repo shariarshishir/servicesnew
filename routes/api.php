@@ -167,11 +167,11 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     //poforma
     Route::post('/proforma-invoices/store', [ProformaInvoiceController::class,'store']);
-    Route::post('/proforma-invoice-form', [ProformaInvoiceController::class,'allInformationNeededToCreateProFormaInvoice']);
+    Route::get('/proforma-invoice-form', [ProformaInvoiceController::class,'allInformationNeededToCreateProFormaInvoice']);
     
     Route::get('/created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'createdProformaByAuthUser']);
     Route::get('/received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'receivedProformaByAuthUser']);
-    Route::get('/product-list-by-business-profile-id', [ProformaInvoiceController::class, 'getProductListByBuisnessProfileId']);
+    Route::get('/product-list-by-business-profile-id/{businessProfileID}', [ProformaInvoiceController::class, 'getProductListByBuisnessProfileId']);
     Route::get('/proforma-invoices/{id}', [ProformaInvoiceController::class, 'proformaInvoiceDetails']);
     Route::post('/proforma-invoice-accept', [ProformaInvoiceController::class, 'acceptProformaInvoice']);
     Route::post('/proforma-invoice-reject',[ProformaInvoiceController::class, 'rejectProformaInvoice']);

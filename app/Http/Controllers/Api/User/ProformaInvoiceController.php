@@ -95,9 +95,9 @@ class ProformaInvoiceController extends Controller
             ],200);
 	}
 
-    public function getProductListByBuisnessProfileId(Request $request){
+    public function getProductListByBuisnessProfileId($id){
         
-        $products = Product::select('id','title')->where('business_profile_id', $request->id)->latest()->get();
+        $products = Product::select('id','title','created_by')->where('business_profile_id', $id)->latest()->get();
         
         if(count($products)>0){
             return response()->json([
@@ -116,6 +116,7 @@ class ProformaInvoiceController extends Controller
     
     public function store(Request $request)
 	{ 
+       
         $data = new Proforma;
         $data->buyer_id = $request->input('selected_buyer_id');
         $data->business_profile_id = $request->input('business_profile_id');

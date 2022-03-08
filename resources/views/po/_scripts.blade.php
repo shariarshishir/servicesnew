@@ -155,7 +155,7 @@
         $j_object.each( function(){
             let taxp = $(this).closest("tr").find(".total_price").val() != "" ? parseFloat($(this).closest("tr").find(".total_price").val()) : 0;
             totaltax += parseFloat(parseFloat($(this).val()) - taxp);
-              totalp += parseFloat($(this).val());
+            totalp += parseFloat($(this).val());
         });
         $('#total_price_amount').html(unit+' '+totalp.toFixed(2));
         //$('#total_tax_price_amount').html(unit+' '+totaltax.toFixed(2));

@@ -49,8 +49,7 @@
                                         <div class="col s12 m6">
                                             <div class="form-group has-feedback">
                                                 <label>Beneficiary</label>
-                                                <select name="business_profile_id" id="buyerOptionsList" class="form-control select2" onChange = "getProductListBybusinessProfileId(this.value)" required>
-                                                    <option value="">--Select a Beneficiary--</option>
+                                                <select name="business_profile_id" id="buyerOptionsList" class="form-control select2 required" onChange = "getProductListBybusinessProfileId(this.value)" required>
                                                     @foreach($businessProfileList as $businessProfile)
                                                         <option value="{{$businessProfile->id}}">{{$businessProfile->business_name}}</option>
                                                     @endforeach

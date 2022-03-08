@@ -38,6 +38,16 @@ class MessageController extends Controller
     }
 
     public function message_center(){
+        
+        //$currentURL = url()->full();
+        $currentURL = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        
+        $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
+        foreach($messageCenterNotifications as $messageCenterNotification){
+            if($currentURL == url($messageCenterNotification->data['url'])){
+                $messageCenterNotification->markAsRead();
+            }
+        }
 
         $user=Auth::user();
         $allusers=[];

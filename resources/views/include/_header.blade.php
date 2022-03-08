@@ -116,7 +116,7 @@
 					<div class="notifications_icon_wrap">
 						<a href="javascript:void(0);" class="dropdown-trigger" data-target="countdown-dropdown">
 							<i class="material-icons">notifications</i>
-							<span id="" class="noticication_counter">{{count($userNotifications)}}</span>
+							<span id="" class="noticication_counter">{{ count($userNotifications) - count($messageCenterNotifications) }}</span>
 						</a>
 					</div>
 
@@ -216,10 +216,32 @@
 					</ul>
 
 					<div class="header_message_box">
-						<a href="{{route('message.center')}}">
+						<a href="{{route('message.center')}}" class="message-center-dropdown-trigger" data-target="message-countdown-dropdown">
 							<i class="material-icons">message</i>
-							<span class="sms_counter">0</span>
+							<span class="sms_counter">{{ count($messageCenterNotifications) }}</span>
 						</a>
+
+						<ul id="message-countdown-dropdown" class="dropdown-content card">
+							@if(count($userNotifications)>0)
+								@foreach($userNotifications as $notification)
+									@if($notification->type == 'App\Notifications\BuyerWantToContact')
+									<li class="notifications-list">
+										<a href="{{ url($notification->data['url']) }}" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i>
+											<div class="admin-notification-content">
+												<div class="admin-notification-title"> {{ $notification->data['title'] }} </div>
+												<div class="text-muted text-sm">{{$notification->created_at}}</div>
+											</div>
+										</a>
+									</li>
+									@endif	
+								@endforeach
+							@else
+							<li class="no-notifications">
+								No notifications
+							</li>
+							@endif
+						</ul>
 					</div>
 
 					@endif

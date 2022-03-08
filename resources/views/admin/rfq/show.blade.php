@@ -31,7 +31,7 @@
 
 
     <!-- Main content -->
-    <section class="content admin_rfq_wrapper" style="margin-top: 30px;">
+    <section class="content admin_rfq_wrapper">
       <div class="container-fluid">
         <div class="card">
           <div class="row">

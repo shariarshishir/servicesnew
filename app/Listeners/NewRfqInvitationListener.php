@@ -63,7 +63,7 @@ class NewRfqInvitationListener implements ShouldQueue
             $data=[
                 'supplier'=>$user->name,
                 'rfq'=>$rfq,
-                'url'=>"/rfq"
+                'url'=>route('rfq.index')
             ];
 
             Mail::to($user->email)->send(new NewRfqInvitationMail($data));

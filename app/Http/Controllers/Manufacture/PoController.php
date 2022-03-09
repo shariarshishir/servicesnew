@@ -285,12 +285,16 @@ class PoController extends Controller
     public function acceptProformaInvoice(Request $request)
     {
         Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id,'total_invoice_amount_with_merchant_assistant'=>$request->total_invoice_amount_with_merchant_assistant,'status' => 1]);
-        foreach($request->merchant_assistances as $checkedMerchantAssistance){
-            $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
-            $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
-            $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
-            $proformaCheckedMerchantAssistance->save();
+        if($request->merchant_assistances){
+            foreach($request->merchant_assistances as $checkedMerchantAssistance){
+                $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
+                $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
+                $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
+                $proformaCheckedMerchantAssistance->save();
+            }
+
         }
+   
         return redirect()->route('po.index');
         //Performa::where('id', $request->input('proforma_id'))->update(['po_no' => $request->input('po_id'), 'status' => 1]);
         //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');

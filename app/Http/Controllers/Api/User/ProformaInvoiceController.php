@@ -81,7 +81,18 @@ class ProformaInvoiceController extends Controller
         $shipmentTypes = ShipmentType::latest()->get();
         $uoms = UOM::latest()->get();
         $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
-        $businessProfileList = BusinessProfile::select('id','business_name')->where('user_id', $user->id)->where('business_type',1)->get();
+
+        $businessProfileIds=[];
+        if($user->businessProfile()->exists()){
+            foreach($user->businessProfile as $profile){
+                array_push($businessProfileIds, $profile->id);
+            }
+        }
+        if($user->businessProfileForRepresentative()->exists()){
+            array_push($businessProfileIds, $user->businessProfileForRepresentative->id);
+        }
+
+        $businessProfileList = BusinessProfile::select('id','business_name')->whereIn('id', $businessProfileIds )->where('business_type',1)->get();
         return response()->json([
                 'user'=>$user,
                 'paymentTerms'=> $paymentTerms,
@@ -131,7 +142,7 @@ class ProformaInvoiceController extends Controller
         $data->payable_party = $request->input('payable_party');
         
         $data->po_no = '';
-        $data->condition = json_encode($request->input('terms_conditions'));
+        $data->condition = $data->condition = $request->input('terms_conditions') ? json_encode($request->input('terms_conditions')) : json_encode(array());
         $data->status = 0;
         $data->created_by= auth()->id();
         $data->save();
@@ -250,7 +261,13 @@ class ProformaInvoiceController extends Controller
 
     public function acceptProformaInvoice(Request $request)
     {
-        $result = Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'status' => 1]);
+        $result = Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id,'total_invoice_amount_with_merchant_assistant' => $request->total_invoice_amount_with_merchant_assistant,'status' => 1]);
+        foreach( $request->merchant_assistances as $checkedMerchantAssistance ){
+            $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
+            $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
+            $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
+            $proformaCheckedMerchantAssistance->save();
+        }
         if($result){
             return response()->json([
                 'success' => true,

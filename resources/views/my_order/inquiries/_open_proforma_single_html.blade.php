@@ -188,10 +188,12 @@
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{ $assistance->merchantAssistance->amount }}<b> {{ $assistance->merchantAssistance->type=='Percentage' ? '%' :'USD'}} <b></td>
                                         </tr>
                                         @endforeach
+                                        @if($po->total_invoice_amount_with_merchant_assistant)
                                         <tr>
                                             <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>Your total order amount with merchant assistant : </b></td>
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{$po->total_invoice_amount_with_merchant_assistant}} <b> USD <b></td>
                                         </tr>
+                                        @endif
                                         
                                     </table>
                                 </div>

@@ -39,7 +39,7 @@ class ProformaInvoiceController extends Controller
     public function show($id)
     {
         $users[] = auth()->id();
-        $po = Proforma::with('performa_items','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
+        $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
         $supplierInfo = User::where('id', $po->created_by)->first();
         if($po){

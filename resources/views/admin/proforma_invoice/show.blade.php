@@ -24,15 +24,15 @@
                 <div class="col-md-12">
                     
                     @include('include.admin._message')
-
+                        <div class="row">
+                            <div class="offset-6 col-6">
+                                <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
+                            </div>
+                        </div>
                         <div class="main_content_wrapper invoice_container_wrap purchase_order_wrap" id="purchase_order_wrap">
         
                             <div class="card">
-                                <div class="row">
-                                    <div class="offset-6 col-6">
-                                        <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="invoice_page_header">
                                     <legend>
@@ -203,6 +203,18 @@
                                                                     <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>Total Invoice Amount: </b></td>
                                                                     <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount"><b>{{$totalInvoice}}<b></td>
                                                                 </tr>
+                                                                @foreach($po->checkedMerchantAssistances as $assistance)
+                                                                <tr>
+                                                                    <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>{{$assistance->merchantAssistance->name}}: </b></td>
+                                                                    <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{ $assistance->merchantAssistance->amount }}<b> {{ $assistance->merchantAssistance->type=='Percentage' ? '%' :'USD'}} <b></td>
+                                                                </tr>
+                                                                @endforeach
+                                                                @if($po->total_invoice_amount_with_merchant_assistant)
+                                                                <tr>
+                                                                    <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>Your total order amount with merchant assistant : </b></td>
+                                                                    <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{$po->total_invoice_amount_with_merchant_assistant}} <b> USD <b></td>
+                                                                </tr>
+                                                                @endif
                                                             </table>
                                                         </div>
                                                     </div>
@@ -322,5 +334,16 @@
 
 
 @endsection
+@push('js')
+<script>
+function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+</script>
+@end
 
 

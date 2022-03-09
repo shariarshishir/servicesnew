@@ -353,38 +353,56 @@
 <div class="modal accept_order_details_modal" id="acceptOrderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="acceptOrderDetailsModal"  aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
        <div class="modal-content">
-            <div class="modal-header modal-hdr-custum" style="background: rgb(85, 168, 96) none repeat scroll 0% 0%;">
+            <!-- <div class="modal-header modal-hdr-custum" style="background: rgb(85, 168, 96) none repeat scroll 0% 0%;">
             	<h4 class="modal-title" style="color: #fff; font-size: 14px;">
             		PO: {{ $po->proforma_id }} <br />
             		Date: {{$po->proforma_date}}
             	</h4>
-            </div>
+            </div> -->
             <div class="modal-body modal-bdy-bdr">
                 <div class="row">
-                    <div class="col-md-12" style="margin-bottom: 35px;">
+                    <div class="assistance_option_wrap">
+                        <h3>Want to explore Merchant Assistance options?</h3>
+                        <div class="option_info">
+                            <p>When you take Merchant Assistance, Merchant Bay takes all the responsivities  f your order. Merchant Bay ensures you get high quality product on time. </p>
+                        </div>
+                        <h4>Please select Assistance options:        </h4>
                     	<form action="{{route('accept.proforma.invoice')}}" class="rejectRfqForm" method="post" enctype="multipart/form-data">
                     		@csrf
 						    <input type="hidden" id="proforma_id" name="proforma_id" value="{{ $po->proforma_id }}">
                             <input type="hidden" id="total_invoice_amount" name="total_invoice_amount" value="{{$totalInvoice}}">
                             <input type="hidden" id="total_invoice_amount_with_merchant_assistant" name="total_invoice_amount_with_merchant_assistant" value="">
 						    <input type="hidden" id="po_id" name="po_id" value="{{ $po->id }}" />
-                                @foreach($merchantAssistances as $key=>$merchantAssistance)
-                                <label>
-                                    <input type="checkbox"  class="merchant-assiatance-checkbox" data-merchant_assistance_name ="{{$merchantAssistance->name}}" data-merchant_assistance_id ="{{$merchantAssistance->id}}"  data-merchant_assistance_type ="{{$merchantAssistance->type}}" data-merchant_assistance_amount = "{{$merchantAssistance->amount}}" name="merchant_assistances[{{$key}}]" value="{{$merchantAssistance->id}}" >
-                                    <span> {{$merchantAssistance->name}} @if($merchantAssistance->type  == "Percentage") ( {{$merchantAssistance->amount}} % )@elseif($merchantAssistance->type  == "USD") ( {{$merchantAssistance->amount}} USD )@endif</span> 
-                                </label>
-                                <br>
-                                @endforeach
-                                <br>
-                            <div>Your total order amount : <b>{{$totalInvoice}}</b></div>
+                                
+                                <ul>
+                                    @foreach($merchantAssistances as $key=>$merchantAssistance)
+                                    <li>
+                                        <label>
+                                            <input type="checkbox"  class="merchant-assiatance-checkbox" data-merchant_assistance_name ="{{$merchantAssistance->name}}" data-merchant_assistance_id ="{{$merchantAssistance->id}}"  data-merchant_assistance_type ="{{$merchantAssistance->type}}" data-merchant_assistance_amount = "{{$merchantAssistance->amount}}" name="merchant_assistances[{{$key}}]" value="{{$merchantAssistance->id}}"/>
+                                            <span> {{$merchantAssistance->name}} @if($merchantAssistance->type  == "Percentage") ( {{$merchantAssistance->amount}} % )@elseif($merchantAssistance->type  == "USD") ( {{$merchantAssistance->amount}} USD )@endif</span> 
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                               
+                            <div class="order_amount">Your total order amount : <b>{{$totalInvoice}}</b></div>
+
                             <div class="merchant-assitance-calculation">
 
                             </div>
                             <div class="total-amount-with-merchant-assitance">
     
                             </div>
-	                        <div class="right-align">
-                                <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Submit</button>
+	                        <div class="accept_submit_wrap">
+                                <div class="row">
+                                    <div class="col s12 m6">
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat btn_grBorder">No</a>
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Yes</button>
+                                    </div>
+                                </div>
+                                
                             </div>
                             
                     	</form>
@@ -392,9 +410,9 @@
                 </div>
             </div>
        </div>
-       <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-      </div>
+       <!-- <div class="modal-footer">
+            
+      </div> -->
     </div>
 </div>
 

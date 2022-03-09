@@ -8,6 +8,9 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('admin-assets/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin-assets/css/admin_style.css')}}">
+
+  <link rel="stylesheet" href="{{asset('admin-assets/css/pdf-style.css')}}" media="print">
+
   <!-- Google Font: Source Sans Pro -->
 
   <link rel="stylesheet" href="{{asset('admin-assets/css/image-uploader.min.css')}}">

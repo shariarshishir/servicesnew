@@ -44,21 +44,21 @@
                                         <tr>
                                             <td>{{$key+1}}</td>
                                             <td data-title="proforma_id">
-                                                <a>{{$proformaInvoice->proforma_date}}</a>
+                                                {{$proformaInvoice->proforma_date}}
                                             </td>
                                             <td data-title="buyer_name">
-                                                <a>{{$proformaInvoice->buyer->name}}</a>
+                                                {{$proformaInvoice->buyer->name}}
                                             </td>
                                             <td data-title="supplier_name">
-                                                <a>{{$proformaInvoice->businessProfile->user->name}}</a>
+                                                {{$proformaInvoice->businessProfile->user->name}}
                                             </td>
                                             <td data-title="PI_status">
                                                 @if($proformaInvoice->status == 1)
-                                                <a>Accepted</a>
+                                                <span class="accepted_po">Accepted</span>
                                                 @elseif($proformaInvoice->status == 0)
-                                                <a>Pending</a>
+                                                <span class="pending_po">Pending</span>
                                                 @else
-                                                <a>Rejected</a>
+                                                <span class="rejected_po">Rejected</span>
                                                 @endif
                                             </td>
                                             <td data-title="Action" class="text-center">

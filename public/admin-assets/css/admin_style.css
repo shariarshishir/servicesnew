@@ -538,23 +538,19 @@ p {
     font-size: 14px;
     margin-right: 0;
 } 
-
 .table.table-striped a.colorSizeModal {
     display: block;
 }
-
 .admin_order_query_table table thead tr th,
 .admin_order_create_form table thead tr th,
 .shipping-charge-block table thead tr th {
     white-space: nowrap;
     font-size: 14px;
 }
-
 .sidebar-mini .nav-sidebar .nav-link {
     white-space: normal;
     display: flex;
 }
-
 .admin_rfq_wrapper p {
     margin-bottom: 5px;
 }
@@ -569,6 +565,67 @@ p {
 .rfq_replay_box p {
     margin-bottom: 0;
 }
+
+
+/* ################################## */
+.invoice_top_button_wrap {
+    padding-bottom: 20px;
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+}
+
+.buyerdata_info_admin {
+    padding: 10px 10px 20px;
+}
+.buyerdata_info_top {
+    padding-bottom: 10px;
+}
+.purchase_order_wrap .no_more_tables table {
+    border-radius: 0;
+}
+.purchase_order_wrap .no_more_tables table thead {
+    background: none;
+    color: #212529;
+}
+.buyerdata_info_admin .grand_total_title {
+    text-align: right;
+}
+.shipping_details {
+    padding-bottom: 20px;
+}
+.shipping_details label {
+    margin-bottom: 0;
+}
+.purchase_order_wrap label{
+    font-weight: 600;    
+    font-size: 14px;
+}
+
+.has_feedback_wrap .has-feedback label {
+    display: block;
+}
+.invoice_terms_conditions .list-group-item label {
+    font-weight: 400 !important;  
+    font-size: 16px;
+}
+
+.invoice_terms_conditions .list-group-item {
+    border: none;
+    padding: 0 0 5px;
+}
+.invoice_terms_conditions .list-group-item .fa {
+    margin-right: 10px;
+}
+
+.shipping_attachment_wrap ul {
+    padding-left: 10px;
+    list-style: none;
+}
+.shipping_attachment_wrap ul li {
+    margin-bottom: 5px;
+}
+
 
 
 @media only screen and (max-width: 800px) {

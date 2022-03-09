@@ -7982,7 +7982,7 @@ nav .pagination li.active .page-link {
     text-align: center;
 }
 .landing_provide_wrap h3 span {
-    border-bottom: 1px solid #262626;
+    /* border-bottom: 1px solid #262626; */
     max-width: 100px;
     padding-bottom: 10px;
 }
@@ -8099,9 +8099,9 @@ nav .pagination li.active .page-link {
     font-size: 42px;
     font-weight: 300;
     line-height: 60px;
-    border-bottom: 1px solid #262626;
     display: inline-block;
-    margin-bottom: 50px;
+    margin-bottom: 0;
+    display: block;
 }
 .sourcing_apps_box h3 {
     font-size: 20px;
@@ -8114,15 +8114,13 @@ nav .pagination li.active .page-link {
     margin-right: 20px;
 }
 .landing_tools_wrap {
-    padding: 50px 0 100px;
+    padding: 50px 0 0;
 }
 .landing_tools_infobox {
     font-size: 18px;
     line-height: 28px;
 }
-.landing_tools_infobox h1 {
-    margin-bottom: 30px;
-}
+
 .landing_tools_infobox .tools_button_box {
     padding-top: 40px;
 }
@@ -8133,7 +8131,9 @@ nav .pagination li.active .page-link {
     padding: 50px 0 80px;
 }
 .landing_request_wrap h1 {
-    padding-bottom: 20px;
+    display: inline-block;
+    border-bottom: 1px solid #262626;
+    margin-bottom: 25px;
 }
 .landing_request_wrap h5 {
     font-size: 22px;
@@ -8628,9 +8628,9 @@ nav .pagination li.active .page-link {
     font-size: 42px;
     font-weight: 300;
     line-height: 60px;
-    border-bottom: 1px solid #262626;
+    /* border-bottom: 1px solid #262626; */
     display: inline-block;
-    margin-bottom: 30px;
+    margin-bottom: 0;
 }
 .mvc_produce_design_wrap .visit_studio {
     padding-top: 30px;
@@ -8684,6 +8684,72 @@ nav .pagination li.active .page-link {
     line-height: 20px;
 }
 
+.accept_order_details_modal {
+    
+}
+
+.assistance_option_wrap {
+    text-align: center;
+    padding-bottom: 10px;
+}
+.assistance_option_wrap h3 {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+.assistance_option_wrap h4 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+.assistance_option_wrap .rejectRfqForm {
+    text-align: left;
+    max-width: 650px;
+    margin: 0 auto;
+}
+.assistance_option_wrap .rejectRfqForm ul {
+    padding: 20px 0;
+    display: inline-block;
+    width: 100%;
+}
+.assistance_option_wrap .rejectRfqForm ul li {
+    width: 50%;
+    float: left;
+    padding: 3px 0;
+    font-size: 14px;
+}
+
+
+.assistance_option_wrap .rejectRfqForm ul li span {
+    color: #484848;
+}
+.accept_submit_wrap {
+    padding-top: 50px;
+}
+
+.accept_submit_wrap .btn_grBorder {
+    height: 38px;
+    padding: 5px 20px;
+    line-height: 26px;
+}
+.accept_submit_wrap .btn_green  {
+    float: right;
+    height: 36px;
+    margin: 0;
+}
+
+.title_border {
+    border-bottom: 1px solid #262626;
+    height: 1px;
+    display: inline-block;
+    min-width: 300px;
+    margin-bottom: 50px;
+}
+.landing_tools_infobox .title_border {
+    min-width: 400px;
+}
+
+
 /* ******************** Media css style start *********************** */
 
 @media only screen and (min-width: 1500px) {
@@ -8721,9 +8787,9 @@ nav .pagination li.active .page-link {
         padding-top: 30px;
     }
 
-    .mvc_produce_design_wrap h1 {
+    /* .mvc_produce_design_wrap h1 {
         margin-bottom: 50px;
-    }
+    } */
 
     .mvc_produce_design_wrap .visit_studio {
         padding-top: 50px;
@@ -8748,6 +8814,14 @@ nav .pagination li.active .page-link {
     .invoice_container_wrap #shipping-details-table-body .select2-container,
     .invoice_container_wrap table #shipping-details-table-body input{
         width: 178px !important;
+    }
+
+    .user-profile-info-block .user_my_order_btnwrap {
+        top: -100px;
+    }
+
+    .sourcing_img_box img {
+        max-width: 580px;
     }
 
 
@@ -10760,6 +10834,16 @@ nav .pagination li.active .page-link {
         height: 325px;
     }
 
+    .assistance_option_wrap .rejectRfqForm ul li {
+        width: 100%;
+    }
+    .accept_submit_wrap {
+        text-align: center;
+    }
+    .accept_submit_wrap .btn_green {
+        float: none;
+        margin: 0 !important;
+    }
 
 }
 

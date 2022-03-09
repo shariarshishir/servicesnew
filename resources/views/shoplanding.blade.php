@@ -186,7 +186,8 @@
                 <div class="col s12 m6 product_video_infobox">
                     <div class="product_3d_info_box">
                         <h1><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h1>
-                        <p>Our 3D design service helps you to reduce lead time<br />significantly. We have a huge library of 1000+ designs<br />ranging from outerwear to underwear. Our product<br />development team brings the design to life as best<br />valued products with our technical expertise and<br />wide sourcing network.</p>
+                        <span class="title_border">&nbsp;</span>
+                        <p>Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and<br>wide sourcing network.</p>
                     </div>
 
                     <div class="visit_studio">
@@ -204,7 +205,8 @@
               <div class="col s12 m6">
                 <div class="sourcing_info_box">
                     <h1><span> Bring the <span style="font-weight: 600;">Sourcing</span> <br/>
-                    to your <span style="font-weight: 600;">Pocket</span></h1>
+                    to your <span style="font-weight: 600;">Pocket</span> </h1>
+                    <span class="title_border">&nbsp;</span>
                     <p>Everything you need for your Apparel Business.</p>
                     <p><span style="font-weight: 600;">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
                 </div>
@@ -239,6 +241,7 @@
                     <div class="col s12 m6 landing_tools_right">
                         <div class="landing_tools_infobox">
                             <h1>Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h1>
+                            <span class="title_border">&nbsp;</span>
                             <p>Subscribe to the Smart Order Management Dashboard and a suit of BI tools offered by Merchant Bay to make your operation data driven and transparent.</p>
                             <div class="tools_button_box">
                                 <a href="https://tools.merchantbay.com/" class="btn_border_black" target="_blank" >Explore MB Smart Tools</a>

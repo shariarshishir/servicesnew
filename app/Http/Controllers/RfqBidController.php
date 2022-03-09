@@ -15,7 +15,7 @@ class RfqBidController extends Controller
 {
     public function create($rfq_id)
     {
-        $business_profile=BusinessProfile::where('user_id',auth()->id())->get();
+        $business_profile=BusinessProfile::where('user_id',auth()->id())->where('business_type',1)->get();
         if($business_profile->isEmpty())
         {
             $business_profile=BusinessProfile::where('representative_user_id',auth()->id())->get();

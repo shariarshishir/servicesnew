@@ -16,10 +16,12 @@ use App\Http\Controllers\Admin\ShipmentTermController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\ShippingMethodController;
 use App\Http\Controllers\Admin\ProFormaTermAndConditionController;
-use App\Http\Controllers\Admin\ProFormaInvoiceController as AdminProFormaInvoiceController;
+// use App\Http\Controllers\Admin\ProFormaInvoiceController as AdminProFormaInvoiceController;
+use App\Http\Controllers\Admin\AdminPoController;
 use App\Http\Controllers\Admin\MerchantAssistanceController;
 use App\Http\Controllers\Admin\UomContorller;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
@@ -460,8 +462,10 @@ Route::group(['prefix'=>'/admin'],function (){
         //profroma terms and conditions
         Route::resource('proforma-terms-and-conditions', ProFormaTermAndConditionController::class);
 
-        Route::get('/proforma-invoices',[AdminProFormaInvoiceController::class,'index'])->name('proforma_invoices.index');
-        Route::get('/proforma-invoices/{proformaInvoice}',[AdminProFormaInvoiceController::class,'show'])->name('proforma_invoices.show');
+        // Route::get('/proforma-invoices',[AdminProFormaInvoiceController::class,'index'])->name('proforma_invoices.index');
+        // Route::get('/proforma-invoices/{proformaInvoice}',[AdminProFormaInvoiceController::class,'show'])->name('proforma_invoices.show');
+        Route::get('/proforma-invoices',[AdminPoController::class,'index'])->name('proforma_invoices.index');
+        Route::get('/proforma-invoices/{proformaInvoice}',[AdminPoController::class,'show'])->name('proforma_invoices.show');
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Rfq;
-use Illuminate\Http\Request;
 use DataTables;
+use App\Models\Rfq;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Events\NewRfqHasAddedEvent;
+use App\Http\Controllers\Controller;
 
 class RfqController extends Controller
 {
@@ -28,6 +30,16 @@ class RfqController extends Controller
                     ->editColumn('created_by', function($row){
                         return $row->user->name;
                     })
+                    ->editColumn('status', function($row){
+                        $ucfirst=ucfirst($row->status);
+                        if($row->status== 'pending'){
+                            $status= '<span class="text-danger">'.$ucfirst.'</span>';
+                        }else{
+                            $status= '<span class="text-primary">'.$ucfirst.'</span>';
+                        }
+
+                       return $status;
+                    })
                     ->editColumn('created_at', function ($row) {
                         return \Carbon\Carbon::parse($row->created_at)->isoFormat('MMMM Do YYYY');
                     })
@@ -36,7 +48,7 @@ class RfqController extends Controller
                         $action='<a href="'.$route.'">Details</a>';
                         return $action;
                     })
-                    ->rawColumns(['details'])
+                    ->rawColumns(['details','status'])
                     ->make(true);
         }
 
@@ -47,5 +59,28 @@ class RfqController extends Controller
     {
        $rfq=Rfq::with('user','bids')->findOrFail($id);
        return view('admin.rfq.show', compact('rfq'));
+    }
+
+    public function status($id)
+    {
+        $rfq=Rfq::findOrFail($id);
+        if($rfq->status == 'pending'){
+            $rfq->update(['status' => 'approved']);
+            if(env('APP_ENV') == 'production')
+            {
+                $selectedUsersToSendMail = User::where('id','<>', $rfq->created_by)->take(10)->get();
+                foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                    event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+                }
+            }
+
+            return redirect()->back()->withSuccess('Rfq published successfully');
+        }
+        if($rfq->status == 'approved'){
+            $rfq->update(['status' => 'pending']);
+            return redirect()->back()->withSuccess('Rfq unpublished successfully');
+        }
+
+
     }
 }

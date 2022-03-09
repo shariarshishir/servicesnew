@@ -1,7 +1,15 @@
 @extends('layouts.admin')
 @section('content')
 
-
+@if(auth()->guard('admin')->user()->unreadNotifications)
+    @foreach (auth()->guard('admin')->user()->unreadNotifications as $notification)
+        @if($notification->type == "App\Notifications\NewRfqNotification")
+            @if($notification->data['rfq_data']['id']== $rfq->id)
+               {{  $notification->markAsRead(); }}
+            @endif
+        @endif
+    @endforeach
+@endif
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -14,8 +22,13 @@
             </ol>
           </div>
         </div>
+        <div class="row float-sm-right">
+            <a href="{{route('admin.rfq.status', $rfq->id)}}" class="btn btn-info" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+        </div>
+        <div class="clearfix"></div>
       </div><!-- /.container-fluid -->
     </section>
+
 
     <!-- Main content -->
     <section class="content admin_rfq_wrapper">
@@ -79,7 +92,7 @@
         </div>
 
 
-        
+
       </div>
     </section>
 </div>

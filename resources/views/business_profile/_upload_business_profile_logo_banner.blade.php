@@ -10,7 +10,7 @@
                     <input class="input-field file_upload" name="logo" type="file">
                 </div>
                 <div class="form-group">
-                    <legend>Banner</legend>
+                    <legend>Banner - <span style="font-size: 14px; font-weight: 200;">(1920px X 300px)</span></legend>
                     <input class="input-field file_upload" name="banner" type="file">
                 </div>
             </div>

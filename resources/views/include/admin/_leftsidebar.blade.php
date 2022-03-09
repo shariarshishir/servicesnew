@@ -29,6 +29,42 @@
               <p>Dashboard</p>
             </a>
           </li>
+          {{-- business profile --}}
+          <li class="nav-item has-treeview {{ Route::is('admin.business.profile.list.type*')  ? 'menu-open' : ''}}">
+            <a href="javascript:void(0);" class="nav-link {{  Route::is('admin.business.profile.list.type*') ? 'active' : ''}}">
+                <i class="fa fa-user nav-icon"></i>
+                <p>Business Profiles <i class="right fas fa-angle-left"></i></p>
+            </a>
+                <ul class="nav nav-treeview">
+                    @php
+                        $getTypeBySegment=  Request::segment(3);
+                    @endphp
+                    <li class="nav-item">
+                        <a href="{{route('admin.business.profile.list.type', 'manufacturer')}}" class="nav-link {{ Route::is('admin.business.profile.list.type', 'manufacturer') && $getTypeBySegment == 'manufacturer' ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Manufacturer</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.business.profile.list.type', 'wholesaler')}}" class="nav-link {{ Route::is('admin.business.profile.list.type', 'wholesaler') && $getTypeBySegment == 'wholesaler' ? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Wholesaler</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.business.profile.list.type', 'design_studio')}}" class="nav-link {{ Route::is('admin.business.profile.list.type', 'design_studio') && $getTypeBySegment == 'design_studio'? 'active' : ''}} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Design Studio</p>
+                        </a>
+                    </li>
+                </ul>
+          </li>
+        <li class="nav-item">
+            <a href="{{ Route('verification.request.index')}}" class="nav-link">
+                <i class="fa fa-certificate nav-icon"></i>
+                <p>Business Profile Verification Request</p>
+            </a>
+        </li>          
           {{-- new users registered list --}}
           <li class="nav-item has-treeview {{ Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'menu-open' : ''}}">
             <a href="javascript:void(0);" class="nav-link  {{Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'active' : ''}}">
@@ -192,13 +228,6 @@
                 <p>Certification</p>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="{{ Route('verification.request.index')}}" class="nav-link">
-                <i class="fa fa-certificate nav-icon"></i>
-                <p>Business Profile Verification Request</p>
-            </a>
-        </li>
-
         <li class="nav-item">
             <a href="{{ Route('admin.rfq.index')}}" class="nav-link">
                 <i class="fas fa-quote-left nav-icon"></i>

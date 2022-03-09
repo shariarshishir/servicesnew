@@ -18,19 +18,32 @@ use App\Models\UOM;
 use App\Http\Traits\PushNotificationTrait;
 
 class OrderController extends Controller
-{ 
+{
     use PushNotificationTrait;
+
+    //orders for business profle and user
+    public function index($business_profile_id)
+    {
+       $collection=VendorOrder::Where('business_profile_id',$business_profile_id)->latest()->paginate(10);
+       return view('admin.orders.index',compact('collection','business_profile_id'));
+    }
+
+    public function show($business_profile_id,$order_id)
+    {
+        $vendorOrder=VendorOrder::where('business_profile_id',$business_profile_id)->where('id',$order_id)->with(['billingAddress','shippingAddress','orderItems','shippingCharge'])->first();
+        $shippingMethod=ShippingMethod::pluck('name');
+        $shipMentType=ShipmentType::pluck('name');
+        $uom=UOM::pluck('name');
+
+        return view('admin.orders.show',compact('vendorOrder','shippingMethod','shipMentType','uom'));
+
+    }
+    //end orders for business profle and user
+
     public function orderList()
     {
        $collection=VendorOrder::latest()->paginate(10);
        return view('admin.order.index',compact('collection'));
-    }
-
-
-    public function index($business_profile_id)
-    {
-       $collection=VendorOrder::Where('business_profile_id',$business_profile_id)->latest()->paginate(10);
-       return view('admin.users.orders.index',compact('collection','business_profile_id'));
     }
 
     public function create($vendorId)
@@ -60,17 +73,6 @@ class OrderController extends Controller
     {
         $order=VendorOrder::where('id',$order_id)->first();
         return view('admin.vendor.order.edit',compact('order','vendorId'));
-
-    }
-
-    public function show($business_profile_id,$order_id)
-    {
-        $vendorOrder=VendorOrder::where('business_profile_id',$business_profile_id)->where('id',$order_id)->with(['billingAddress','shippingAddress','orderItems','shippingCharge'])->first();
-        $shippingMethod=ShippingMethod::pluck('name');
-        $shipMentType=ShipmentType::pluck('name');
-        $uom=UOM::pluck('name');
-
-        return view('admin.users.orders.show',compact('vendorOrder','shippingMethod','shipMentType','uom'));
 
     }
 

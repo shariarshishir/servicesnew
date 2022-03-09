@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prodcuts-list">
+                        <div class="product_design_wrapper">
                             @include('product._all_product_data')
                         </div>
                     </div>

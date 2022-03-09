@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prodcuts-list">
+                        <div class="product_design_wrapper">
                             <div class="product_wrapper">
                                 <div class="product_boxwrap row">
                                     <h3>Customizable Products</h3>

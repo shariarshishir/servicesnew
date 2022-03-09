@@ -20,8 +20,113 @@ use App\Models\BusinessProfile;
 use App\Models\BusinessProfileVerificationsRequest;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
+use DataTables;
+
+
 class BusinessProfileController extends Controller
 {
+
+
+    public function index(Request $request,$type)
+    {
+
+        if ($request->ajax()) {
+            switch ($type) {
+                case 'manufacturer':
+                    $type= 1;
+                    break;
+                case 'wholesaler':
+                    $type= 2;
+                    break;
+                case 'design_studio':
+                    $type= 3;
+                    break;
+            }
+            $data=BusinessProfile::with(['user','representativeUser','businessCategory'])->withTrashed()->where('business_type', $type);
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    // ->editColumn('email', function($row) {
+                    //    $route= route('user.show', $row->id);
+                    //    $action='<a href="'.$route.'">'.$row->email.'</a>';
+                    //    return $action;
+                    // })
+                    // ->editColumn('created_at', function ($user) {
+                    //     return \Carbon\Carbon::parse($user->created_at)->isoFormat('MMMM Do YYYY');
+                    // })
+                    // ->orderColumn('name', function ($query) {
+                    //     $query->orderBy('created_at', 'desc');
+                    // })
+                    ->addColumn('category', function($row){
+                        if($row->business_type == 1){
+                            return $row->businessCategory->name ?? '';
+                        }
+                        return '';
+                    })
+                    ->addColumn('parent_user', function($row){
+                        return $row->user->name;
+                    })
+                    ->addColumn('representative_name', function($row){
+                       if($row->representativeUser){
+                           return $row->representativeUser->name;
+                       }
+                       return '';
+                    })
+                    ->addColumn('representative_email', function($row){
+                        if($row->representativeUser){
+                            return $row->representativeUser->email;
+                        }
+                        return '';
+                     })
+                     ->addColumn('phone', function($row){
+                        return $row->user->phone;
+                     })
+                     ->addColumn('badge', function($row){
+                        return 'badge';
+                     })
+                     ->addColumn('action', function($row){
+                        if($row->deleted_at){
+                            $checked= '';
+                            $status = 'block';
+                        }else{
+                            $checked= 'checked';
+                            $status = 'active';
+                        }
+                        $button='<div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input selectRow" id="customSwitch1'.$row->id.'" '.$checked.' data-id="'.$row->id.'">
+                        <label class="custom-control-label" for="customSwitch1'.$row->id.'">'.$status.'</label>
+                        </div>';
+                        return $button;
+                     })
+                     ->addColumn('push', function($row){
+                        $route= route('admin.business.profile.details', $row->id);
+                        $action='<a href="'.$route.'"><i class="fa fa-arrow-right"></i></a>';
+                        return $action;
+                     })
+                     ->editColumn('business_name', function($row) {
+                        $route= route('admin.business.profile.details', $row->id);
+                        $action='<a href="'.$route.'">'.$row->business_name.'</a>';
+                        return $action;
+                    })
+                    ->orderColumn('business_name', function ($query) {
+                        $query->orderBy('created_at', 'desc');
+                    })
+                    ->rawColumns(['push','business_name','action'])
+                    ->make(true);
+        }
+        return view('admin.business_profile.index', compact('type'));
+
+    }
+
+    public function businessProfileDetails($profile_id)
+    {
+        $business_profile=BusinessProfile::withTrashed()->where('id', $profile_id)->with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->first();
+        if(!$business_profile)
+        {
+            abort(404);
+        }
+        return view('admin.business_profile.business_profile_details', compact('business_profile'));
+    }
+
     public function companyOverviewVarifie(Request $request,$company_overview_id)
     {
         $company_overview=CompanyOverview::findOrFail($company_overview_id);
@@ -783,26 +888,26 @@ class BusinessProfileController extends Controller
         auth()->guard('admin')->user()->unreadNotifications->where('type','App\Notifications\NewBusinessProfileVerificationRequestNotification')->where('read_at',null)->markAsRead();
 
         $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::latest()->paginate(10);
-       
+
         return view('admin.business_profile_verification_request.index',compact('businessProfileVerificationsRequest'));
     }
 
     public function spotlightBusinessProfile(Request $request) {
         //dd($request->all());
-        
-        if($request->spotlightVal == 1) 
+
+        if($request->spotlightVal == 1)
         {
             $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
             $businessProfile->is_spotlight = 0;
             $businessProfile->save();
-        } 
-        else 
+        }
+        else
         {
             $businessProfile = BusinessProfile::where("id", $request->profileId)->first();
             $businessProfile->is_spotlight = 1;
             $businessProfile->save();
         }
-        
+
         return response()->json(["status"=>1, "message"=>"successful"]);
     }
 }

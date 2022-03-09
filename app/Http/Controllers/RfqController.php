@@ -25,7 +25,7 @@ class RfqController extends Controller
 {
     public function index()
     {
-        $rfqList=Rfq::withCount('bids')->with('images','user','businessProfile')->latest()->get();
+        $rfqList=Rfq::withCount('bids')->with('images','user','businessProfile')->where('status', 'approved')->latest()->get();
 
         foreach($rfqList as $list){
             $bid_user_id=[];
@@ -76,7 +76,7 @@ class RfqController extends Controller
 
         $rfqData = $request->except(['_token','captcha_token','product_images']);
         $rfqData['created_by']=auth()->id();
-        $rfqData['status']='approved';
+        $rfqData['status']='pending';
         $rfqData['link'] = $this->generateUniqueLink();
 
         $rfq=Rfq::create($rfqData);
@@ -112,14 +112,14 @@ class RfqController extends Controller
             NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
 
             */
-            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
-            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
-                event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-            }
+            // $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            // foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+            //     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            // }
 
             $selectedUserToSendMail="success@merchantbay.com";
             event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-        }        
+        }
 
 
         $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";

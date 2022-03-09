@@ -77,8 +77,12 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer('include._header', function($view) {
             if(auth()->check())
             {
-                $userNotifications =auth()->user()->unreadNotifications;
-                $view->with(['userNotifications'=>$userNotifications]);
+                //$userNotifications =auth()->user()->unreadNotifications;
+                //$view->with(['userNotifications'=>$userNotifications]);
+
+                $userNotifications = auth()->user()->unreadNotifications->where('read_at',NULL);
+                $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
+                $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);                
             }
 
         });

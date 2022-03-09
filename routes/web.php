@@ -503,10 +503,14 @@ Route::group(['prefix'=>'/admin'],function (){
 
         Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
         //rfq
+        Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
         Route::get('new/user/request/edit/{id}', [NewUserRequestController::class, 'edit'])->name('new.user.request.edit');
+        //business profile
+        Route::get('business-profile/{type}',[AdminBusinessProfileController::class, 'index'])->name('admin.business.profile.list.type');
+        Route::get('business-profile/details/{business_profile_id}',[AdminBusinessProfileController::class, 'businessProfileDetails'])->name('admin.business.profile.details');
 
     });
 

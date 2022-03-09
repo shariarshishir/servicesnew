@@ -8,7 +8,7 @@
         <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
             @foreach ($products  as $list )
 
-                <div class="col s6 m4 filter_product_item">
+                <div class="col s6 m4 product_item_box">
                     <div class="productBox">
                         <div class="favorite">
                             @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))

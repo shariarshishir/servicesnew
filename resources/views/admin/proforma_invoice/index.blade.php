@@ -83,7 +83,7 @@
 @endsection
 @push('js')
   <script>
-      $('.proforma-table').DataTable();
+       $('.proforma-table').DataTable();
   </script>
 @endpush
 

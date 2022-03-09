@@ -182,7 +182,7 @@
                                                                     <tr>
                                                                         <td data-title="Sl. No.">{{$key+1 }}</td>
                                                                         <td data-title="Item / Description">
-                                                                            <span>{{ $proFormaItem->product->title }}</span>
+                                                                            <span>{{ $proFormaItem->item_title }}</span>
                                                                         </td>
                                                                         <td data-title="Quantity">
                                                                             <span>{{ $proFormaItem->unit }}</span>

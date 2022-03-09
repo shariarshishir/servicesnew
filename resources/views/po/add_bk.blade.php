@@ -10,7 +10,7 @@
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
-         8               @foreach ($errors->all() as $error)
+                        @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
@@ -232,9 +232,7 @@
                                                     </tr>
                                                     
                                                     </tbody>
-                                                    
                                                 </table>
-                                                
                                             </div>
                                             
                                             <div class="add_more_box">
@@ -247,9 +245,9 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-                                    </div>
+                                    <!-- <div class="modal-footer">
+                                        <a href="javascript:void(0);" class="btn_green modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+                                    </div> -->
                                 </div>
 
 
@@ -273,7 +271,12 @@
                                                 <tr>
                                                     <td data-title="Sl. No.">1</td>
                                                     <td data-title="Item / Description">
-                                                        <input type="text" class="item_title" name="item_title[]" required>
+                                                        <select class="select2 product-dropdown" onchange="changecat(this)">
+                                                            <option value="">Select Products</option>
+                                                            @foreach($products as $product)
+                                                                <option value="{{ $product->id }}">{{ $product->title }}</option>
+                                                            @endforeach
+                                                        </select>
                                                         <input type="hidden" name="supplier[]" required/>
                                                         <input type="hidden" name="product[]" required/>
                                                         <input type="hidden" name="price_unit[]" required/>

@@ -4707,6 +4707,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .business_list_wrapper .list_box span {
     font-weight: 600;
 }
+.business_list_wrapper .list_box a {
+    display: block;
+}
 .business_list_inner_wrap {
     display: flex;
     flex-flow: row wrap;
@@ -4716,11 +4719,11 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 .business_list_inner_wrap .business_list_itembox {
     text-transform: capitalize;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     width: 25%;
 }
 .business_list_inner_wrap .business_list_itembox .list_box {
-    margin: 0 25px 50px;
+    margin: 0 15px 50px;
     height: 100%;
     position: relative;
 }
@@ -4740,8 +4743,8 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box .switch,
 .business_list_inner_wrap .business_list_itembox .list_box .switch {
     position: absolute;
-    right: 25px;
-    top: 10px;
+    right: 18px;
+    top: 7px;
     width: auto;
     text-align: right;
 }
@@ -4771,7 +4774,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     font-weight: 400 !important;
     font-size: 12px;
     display: block;
-
+    line-height: 12px;
 }
 .my_businesses_wrap .my_businesses_box .switch label .lever,
 .business_list_itembox .list_box .switch label .lever {
@@ -8035,11 +8038,10 @@ nav .pagination li.active .page-link {
 }
 .sayel_group_logo_box img {
     max-width: 200px;
-    height: 150px;
+    height: 80px;
 }
 .spotlight_inner_info {
     padding: 30px 0 50px;
-    margin-top: -88px;
 }
 .landing_spotlight_wrap h3 {
     font-size: 32px;
@@ -8629,7 +8631,7 @@ nav .pagination li.active .page-link {
     font-weight: 300;
     line-height: 60px;
     /* border-bottom: 1px solid #262626; */
-    display: inline-block;
+    display: block;
     margin-bottom: 0;
 }
 .mvc_produce_design_wrap .visit_studio {
@@ -8756,7 +8758,7 @@ nav .pagination li.active .page-link {
 }
 .single-product-details-block-wrapper .store-more-products .more-products-block {
     max-height: 360px;
-    overflow: scroll;
+    overflow: auto;
 }
 .single-product-details-block-wrapper .store-more-products {
     padding-top: 30px;
@@ -8789,7 +8791,9 @@ nav .pagination li.active .page-link {
     box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
     width: 100% !important;
 }
-
+.landing_request_img img {
+    width: 70%;
+}
 /* ******************** Media css style start *********************** */
 
 @media only screen and (min-width: 1500px) {
@@ -8881,6 +8885,9 @@ nav .pagination li.active .page-link {
     }
     .blog_detail_info_wrap .feature_img img {
         min-height: 450px;
+    }
+    .spotlight_inner_info {
+        margin-top: -70px;
     }
 
 }
@@ -9061,12 +9068,10 @@ nav .pagination li.active .page-link {
     }
     .business_list_inner_wrap .business_list_itembox {
         width: 33%;
+        margin-bottom: 30px;
     }
     .business_list_inner_wrap .business_list_itembox .list_box {
         margin: 0 15px 30px;
-    }
-    .business_list_inner_wrap .business_list_itembox {
-        margin-bottom: 30px;
     }
     .business_list_wrapper .list_box {
         font-size: 16px;
@@ -9225,26 +9230,17 @@ nav .pagination li.active .page-link {
     .landing_request_wrap h5 br {
         display: none;
     }
+
+
     .footer_topWrap_inner h4,
     .landing_request_wrap h5 {
         font-size: 18px;
     }
-    .sayel_group_logo_box {
-        padding-top: 45px;
-        text-align: center;
-    }
-
     .banner_search .module-search #system_search {
         padding-left: 120px;
     }
     .module-search .select2-container {
         width: 115px !important;
-    }
-
-    .mvc_produce_design_wrap h1,
-    .sourcing_info_box h1,
-    .landing_intro_wrapper h1 {
-        margin-bottom: 20px;
     }
     .landing_intro_wrapper .banner_search {
         padding: 20px 0 30px;
@@ -9272,13 +9268,17 @@ nav .pagination li.active .page-link {
     .footer_apps_box {
         margin-top: 20px;
     }
-
-    
     .invoice_container_wrap table #shipping-details-table-body input {
         width: 80% !important;
     }
     .invoice_container_wrap #shipping-details-table-body .select2-container {
         width: 90px !important;
+    }
+    .title_border {
+        min-width: 222px;
+    }
+    .landing_tools_infobox .title_border {
+        min-width: 288px;
     }
     
 
@@ -9957,6 +9957,10 @@ nav .pagination li.active .page-link {
         max-width: inherit;
         min-width: auto;
     }
+    /* #orders .order_inquiries_table #po-table_wrapper table .btn_green {
+        min-width: 158px;
+    } */
+
     .profile_tabNav_wrap .editBox .btn_green_White.btn_delete {
         margin-left: 8px;
     }
@@ -10105,6 +10109,16 @@ nav .pagination li.active .page-link {
 
     .invoice_container_wrap .input-field label {
         font-size: 14px;
+    }
+
+    .my_businesses_wrap .my_businesses_box .switch .enable_disable_label, 
+    .business_list_itembox .list_box .switch .enable_disable_label {
+        font-size: 9px;
+    }
+
+    .my_businesses_wrap .my_businesses_box .switch label input[type=checkbox]:checked+.lever, 
+    .business_list_itembox .list_box .switch label input[type=checkbox]:checked+.lever {
+        margin: 0;
     }
 
 
@@ -10377,6 +10391,15 @@ nav .pagination li.active .page-link {
     .business-shortcut-bar ul li {
         padding-bottom: 10px;
     }
+
+    
+    #orders .order_inquiries_table table .btn_green {
+        max-width: 120px;
+        min-width: 120px;
+        font-size: 12px;
+        padding: 5px;
+    }
+
 
 
 }
@@ -10727,15 +10750,15 @@ nav .pagination li.active .page-link {
         display: none;
     }
     .landing_page_wrapper .carousel.carousel-slider {
-        height: 560px !important;
+        height: 490px !important;
     }
     .spotlight_info {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 7;
+        -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
-        height: 182px;
+        height: 160px;
     }
     .landing_intro_wrapper {
         padding: 60px 0;
@@ -10883,6 +10906,13 @@ nav .pagination li.active .page-link {
     .accept_submit_wrap .btn_green {
         float: none;
         margin: 0 !important;
+    }
+
+    .title_border {
+        min-width: 165px;
+    }
+    .landing_tools_infobox .title_border {
+        min-width: 212px;
     }
 
 }
@@ -11235,6 +11265,10 @@ nav .pagination li.active .page-link {
         height: 335px;
     }
 
+    .landing_request_img img {
+        width: 100%;
+    }
+
 
 
 }
@@ -11370,12 +11404,7 @@ nav .pagination li.active .page-link {
     .no_more_tables td:before {
         font-size: 12px
     }
-    #orders .order_inquiries_table table .btn_green {
-        max-width: 120px;
-        min-width: 120px;
-        font-size: 12px;
-        padding: 5px;
-    }
+
     .profile_table_design .sustainability-commitment-table-body tr td,
     .profile_table_design .special-customization-table-body tr td {
         width: 88%;

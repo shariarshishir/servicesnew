@@ -980,11 +980,11 @@ $reviewsCount = count($productReviews);
 
                         @if($relatedProducts->isNotEmpty())
                         <div class="store-more-products">
+                            <legend>More Products from this store</legend>
                             <div class="more-products-block">
                                 <div class="row">
-                                    <legend>More Products from this store</legend>
                                     @foreach ($relatedProducts as $item)
-                                    <div class="more-product-item col m12">
+                                    <div class="more-product-item col s12">
                                         <div class="product_img">
                                             @foreach ($item->images as $image)
                                                 <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" alt="" width="100px" />

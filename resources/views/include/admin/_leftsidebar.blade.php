@@ -32,7 +32,7 @@
           {{-- business profile --}}
           <li class="nav-item has-treeview {{ Route::is('admin.business.profile.list.type*')  ? 'menu-open' : ''}}">
             <a href="javascript:void(0);" class="nav-link {{  Route::is('admin.business.profile.list.type*') ? 'active' : ''}}">
-                <i class="fa fa-user nav-icon"></i>
+                <i class="nav-icon fa fa-briefcase"></i>
                 <p>Business Profiles <i class="right fas fa-angle-left"></i></p>
             </a>
                 <ul class="nav nav-treeview">
@@ -64,7 +64,7 @@
                 <i class="fa fa-certificate nav-icon"></i>
                 <p>Business Profile Verification Request</p>
             </a>
-        </li>          
+        </li>
           {{-- new users registered list --}}
           <li class="nav-item has-treeview {{ Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'menu-open' : ''}}">
             <a href="javascript:void(0);" class="nav-link  {{Route::is('new.user.request','buyer') || Route::is('new.user.request','supplier')? 'active' : ''}}">
@@ -91,6 +91,17 @@
                 </ul>
           </li>
             {{--end new users registered list --}}
+        {{-- product list --}}
+        <li class="nav-item">
+            @php
+                $getTypeBySegment=  Request::segment(2);
+            @endphp
+            <a href="{{ Route('admin.products.index')}}" class="nav-link {{  $getTypeBySegment == 'products' ? 'active' : ''}}">
+                <i class="fas fa-thumbtack nav-icon"></i>
+                <p>Products</p>
+            </a>
+        </li>
+
           <li class="nav-item">
               <a href="{{ Route('product-categories.index')}}" class="nav-link {{ Route::is('product-categories.index')||Route::is('product-categories.create')||Route::is('product-categories.edit')? 'active' : ''}}">
                   <i class="fas fa-network-wired nav-icon"></i>

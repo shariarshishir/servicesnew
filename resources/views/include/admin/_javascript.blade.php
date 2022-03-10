@@ -17,6 +17,9 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 {{-- datatable --}}
 <script src="{{ asset('admin-assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+{{-- date range picker --}}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
   tinymce.init({
       selector:'textarea.description',

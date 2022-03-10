@@ -505,7 +505,10 @@ Route::group(['prefix'=>'/admin'],function (){
         //business profile
         Route::get('business-profile/{type}',[AdminBusinessProfileController::class, 'index'])->name('admin.business.profile.list.type');
         Route::get('business-profile/details/{business_profile_id}',[AdminBusinessProfileController::class, 'businessProfileDetails'])->name('admin.business.profile.details');
-
+        //products
+        Route::get('products',[ProductController::class, 'index'])->name('admin.products.index');
+        Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
+        Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');
     });
 
 });

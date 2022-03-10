@@ -58,6 +58,12 @@
         'unisex' => 3,
      ],
 
+     'priority_level' => [
+        'high' => 1,
+        'medium' => 2,
+        'low' => 3,
+     ],
+
 
 
 

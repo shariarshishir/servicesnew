@@ -296,7 +296,7 @@ class PoController extends Controller
         //     DB::rollback();
         // }
 
-        \Session::flash('success','Po Created Successfully');
+        \Session::flash('success','PI Created Successfully');
         return redirect()->route('po.index');
         //return back()->withSuccess('Created Successfully');
 

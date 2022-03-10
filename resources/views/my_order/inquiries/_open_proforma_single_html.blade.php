@@ -183,13 +183,13 @@
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount"><b>{{$totalInvoice}}<b></td>
                                         </tr>
                                         @foreach($po->checkedMerchantAssistances as $assistance)
-                                        <tr>
+                                        <tr style="display: none;">
                                             <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>{{$assistance->merchantAssistance->name}}: </b></td>
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{ $assistance->merchantAssistance->amount }}<b> {{ $assistance->merchantAssistance->type=='Percentage' ? '%' :'USD'}} <b></td>
                                         </tr>
                                         @endforeach
                                         @if($po->total_invoice_amount_with_merchant_assistant)
-                                        <tr>
+                                        <tr style="display: none;">
                                             <td colspan="5" class="right-align grand_total_title" style="padding-right: 20px"><b>Your total order amount with merchant assistant : </b></td>
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{$po->total_invoice_amount_with_merchant_assistant}} <b> USD <b></td>
                                         </tr>
@@ -380,18 +380,18 @@
                                     <li>
                                         <label>
                                             <input type="checkbox"  class="merchant-assiatance-checkbox" data-merchant_assistance_name ="{{$merchantAssistance->name}}" data-merchant_assistance_id ="{{$merchantAssistance->id}}"  data-merchant_assistance_type ="{{$merchantAssistance->type}}" data-merchant_assistance_amount = "{{$merchantAssistance->amount}}" name="merchant_assistances[{{$key}}]" value="{{$merchantAssistance->id}}"/>
-                                            <span> {{$merchantAssistance->name}} @if($merchantAssistance->type  == "Percentage") ( {{$merchantAssistance->amount}} % )@elseif($merchantAssistance->type  == "USD") ( {{$merchantAssistance->amount}} USD )@endif</span> 
+                                            <span> {{$merchantAssistance->name}} </span> 
                                         </label>
                                     </li>
                                     @endforeach
                                 </ul>
                                
-                            <div class="order_amount">Your total order amount : <b>{{$totalInvoice}}</b></div>
+                            <div class="order_amount" style="display: none;">Your total order amount : <b>{{$totalInvoice}}</b></div>
 
-                            <div class="merchant-assitance-calculation">
+                            <div class="merchant-assitance-calculation" style="display: none;">
 
                             </div>
-                            <div class="total-amount-with-merchant-assitance">
+                            <div class="total-amount-with-merchant-assitance" style="display: none;">
     
                             </div>
 	                        <div class="accept_submit_wrap">

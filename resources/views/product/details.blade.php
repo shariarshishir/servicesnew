@@ -28,7 +28,7 @@ $reviewsCount = count($productReviews);
 
         <div class="row product_details_content_wrap">
 
-            <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m12 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
+            <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col s12 m12 l9':'col s12 m12 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
                 <div class="row">
                     <div class="col s12 m5 l4 product_preview_wrap">
                         @if($product->video)
@@ -983,7 +983,7 @@ $reviewsCount = count($productReviews);
 
 
             @if($relatedProducts->isNotEmpty())
-            <div class="col m3 store-more-products">
+            <div class="col s12 store-more-products">
                 <div class="more-products-block col m12">
                     <div class="row">
                         <legend>More Products from this store</legend>
@@ -1037,9 +1037,6 @@ $reviewsCount = count($productReviews);
             @endif
         </div>
     </div>
-
-
-
 
     <div class="row single-product-related-products">
         <div class="related-products col s12">

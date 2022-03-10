@@ -1872,6 +1872,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .product_preview_info_wrap .product_preview_wrap a img {
     padding: 10px;
 } 
+.product_preview_info_wrap .simpleLens-thumbnails-container a img {
+    padding: 3px;
+}
 .product_preview_info_wrap .product_preview_wrap img {
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
@@ -1886,7 +1889,6 @@ div.dataTables_wrapper table.mdc-data-table__table {
     min-height: 120px;
 }
 
-
 .single-product-related-products .product_img {
     padding: 10px 10px 5px 10px;
     min-height: 175px;
@@ -1897,18 +1899,19 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .single-product-related-products .product_img img {
     max-height: 150px;
     border-radius: 5px;
+    display: inline-block;
+    box-shadow: none;
 }
 
-.simpleLens-thumbnails-container {
-    padding-top: 10px;
-}
 .simpleLens-thumbnails-container a img,
 .product_details_wrapper .product-list-images-block a img {
     border-radius: 5px;
     -webkit-box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 20%);
+    padding: 3px;
 }
+
 .product_details_content_wrap .product_preview_wrap video {
     height: 170px;
     margin-bottom: 10px;
@@ -8035,11 +8038,10 @@ nav .pagination li.active .page-link {
 }
 .sayel_group_logo_box img {
     max-width: 200px;
-    height: 150px;
+    height: 100px;
 }
 .spotlight_inner_info {
     padding: 30px 0 50px;
-    margin-top: -88px;
 }
 .landing_spotlight_wrap h3 {
     font-size: 32px;
@@ -8629,7 +8631,7 @@ nav .pagination li.active .page-link {
     font-weight: 300;
     line-height: 60px;
     /* border-bottom: 1px solid #262626; */
-    display: inline-block;
+    display: block;
     margin-bottom: 0;
 }
 .mvc_produce_design_wrap .visit_studio {
@@ -8825,6 +8827,7 @@ nav .pagination li.active .page-link {
     }
 
 
+
 }
 
 @media only screen and (min-width: 1300px) {
@@ -8841,6 +8844,10 @@ nav .pagination li.active .page-link {
     }
     .blog_detail_info_wrap .feature_img img {
         min-height: 450px;
+    }
+
+    .spotlight_inner_info {
+        margin-top: -70px;
     }
 
 }
@@ -8884,6 +8891,7 @@ nav .pagination li.active .page-link {
         height: 200px !important;
     }
 
+    .product_3d_info_box p br,
     .home_intro_left p br {
         display: none;
     }
@@ -8896,6 +8904,8 @@ nav .pagination li.active .page-link {
     .invoice_container_wrap table #shipping-details-table-body input {
         width: 150px !important;
     }
+
+
 
 }
 
@@ -9185,12 +9195,17 @@ nav .pagination li.active .page-link {
     .landing_request_wrap h5 br {
         display: none;
     }
+    .title_border {
+        min-width: 222px;
+    }
+    .landing_tools_infobox .title_border {
+        min-width: 288px;
+    }
     .footer_topWrap_inner h4,
     .landing_request_wrap h5 {
         font-size: 18px;
     }
     .sayel_group_logo_box {
-        padding-top: 45px;
         text-align: center;
     }
 
@@ -9201,11 +9216,6 @@ nav .pagination li.active .page-link {
         width: 115px !important;
     }
 
-    .mvc_produce_design_wrap h1,
-    .sourcing_info_box h1,
-    .landing_intro_wrapper h1 {
-        margin-bottom: 20px;
-    }
     .landing_intro_wrapper .banner_search {
         padding: 20px 0 30px;
     }
@@ -10066,7 +10076,18 @@ nav .pagination li.active .page-link {
     .invoice_container_wrap .input-field label {
         font-size: 14px;
     }
+    .landing_request_img img {
+        max-width: 80%;
+    }
 
+    .spotlight_info {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        height: 155px;
+    }
 
 }
 
@@ -10689,14 +10710,6 @@ nav .pagination li.active .page-link {
     .landing_page_wrapper .carousel.carousel-slider {
         height: 560px !important;
     }
-    .spotlight_info {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 7;
-        -webkit-box-orient: vertical;
-        height: 182px;
-    }
     .landing_intro_wrapper {
         padding: 60px 0;
     }
@@ -10843,6 +10856,10 @@ nav .pagination li.active .page-link {
     .accept_submit_wrap .btn_green {
         float: none;
         margin: 0 !important;
+    }
+
+    .product_design_wrapper .product_moq, .product_design_wrapper .product_lead_time {
+        font-size: 12px;
     }
 
 }
@@ -11300,10 +11317,10 @@ nav .pagination li.active .page-link {
         line-height: 16px;
         margin-bottom: 3px;
     }
-    .productBox .priceBox .apperal {
+    /* .productBox .priceBox .apperal {
         margin-bottom: 10px;
         height: 26px;
-    }
+    } */
     .chatting_app_wrapper .content-area .card {
         padding-top: 45px !important;
     }
@@ -11470,6 +11487,7 @@ nav .pagination li.active .page-link {
         font-size: 22px;
     }
 
+
 }
 
 @media only screen and (max-width: 380px) {
@@ -11477,6 +11495,7 @@ nav .pagination li.active .page-link {
     .product_design_wrapper .product_item_box{
         width: 100% !important;
     }
+
 }
 
 @media only screen and (max-width: 320px) {
@@ -11597,6 +11616,10 @@ nav .pagination li.active .page-link {
     .profile_left_address_wrap,
     .profile_left_pic_wrap {
         width: 100% !important;
+    }
+
+    .product_design_wrapper .product_moq, .product_design_wrapper .product_lead_time {
+        font-size: 14px;
     }
 
 }

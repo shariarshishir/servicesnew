@@ -20,40 +20,40 @@
                                     @if(array_key_exists('rfq_bid_id', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Quotation Id</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['rfq_bid_id'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Quotation Id</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['rfq_bid_id'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('title', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Quote Title</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['title'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Quote Title</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['title'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('unit_price', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Unit Price</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['unit_price'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Unit Price</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['unit_price'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('total_price', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Total Price</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['total_price'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Total Price</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['total_price'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('delivery_time', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Delivery Time</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['delivery_time'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Delivery Time</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['delivery_time'] }}</div>
                                             </div>
                                         </div>
                                     @endif
@@ -61,64 +61,64 @@
                                     @if(array_key_exists('description', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Description</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['description'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Description</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['description'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('name', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Product Name</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['name'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Product Name</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['name'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('category', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Category</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['category'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Category</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['category'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('moq', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Min Quantity</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['moq'] }} Pcs</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Min Quantity</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['moq'] }} Pcs</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('quantity', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Quantity</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['quantity'] }} Pcs</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Quantity</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['quantity'] }} Pcs</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('price', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list bbdis">
-                                                <div class="col m6 plr0">Unit Price</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['price'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Unit Price</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['price'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('destination', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list">
-                                                <div class="col m6 plr0">Destination</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['destination'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Destination</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['destination'] }}</div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(array_key_exists('payment_method', $data['product']))
                                         <div class="col m12">
                                             <div class="row prd-lt-con-list bbdis">
-                                                <div class="col m6 plr0">Payement Method</div>
-                                                <div class="col m6 pr0">: {{ $data['product']['payment_method'] }}</div>
+                                                <div class="col m6 plr0" style="font-size: 12px; font-weight: bold;">Payement Method</div>
+                                                <div class="col m6 pr0" style="font-size: 12px; font-weight: bold;">: {{ $data['product']['payment_method'] }}</div>
                                             </div>
                                         </div>
                                     @endif
@@ -132,10 +132,10 @@
                                         </div>
                                     @endif
                                     @if(array_key_exists('id', $data['product']))
-                                        <div class="row cer-ctxt2">Product ID: {{ $data['product']['id'] }}</div>
+                                        <div class="row cer-ctxt2" style="font-size: 12px; font-weight: bold;">Product ID: {{ $data['product']['id'] }}</div>
                                     @endif
                                     @if(array_key_exists('quote_id', $data['product']))
-                                        <div class="row cer-ctxt2">Quotation ID: {{ $data['product']['quote_id'] }}</div>
+                                        <div class="row cer-ctxt2" style="font-size: 12px; font-weight: bold;">Quotation ID: {{ $data['product']['quote_id'] }}</div>
                                     @endif
                                 </div>
                             </div>

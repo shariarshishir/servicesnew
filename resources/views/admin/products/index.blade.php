@@ -144,17 +144,6 @@
       });
 
 
-      $(function() {
-        $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
-        }, function(start, end, label) {
-            // $('input[name=start_date]').val(start.format('YYYY-MM-DD'));
-            // $('input[name=end_date]').val(end.format('YYYY-MM-DD'));
-            $('#product_filter_form').submit();
-            //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
-    });
-
     $(function() {
 
         $('input[name="datefilter"]').daterangepicker({
@@ -174,67 +163,6 @@
 
 
     });
-
-    /*$(function () {
-        var url="{{ route('admin.products.index') }}";
-        var table = $('.data-table').DataTable({
-            searching: false,
-            processing: true,
-            serverSide: true,
-            order: [['3', 'desc']],
-            ajax:{
-                    "url": url,
-                    "data": function (d) {
-                        d.product_category = $('#product_category').val();
-                        // d.product_type = $('#filter_product_type').val();
-                        // d.arrival = $('#filter_arrival').val();
-                        // d.featured = $('#filter_featured').val();
-                        //d.search  =$('#dt-product-name-search').val();
-
-                    },
-                    beforeSend: function() {
-                    $("body").addClass("loading");
-                    },
-                    complete: function(){
-                        $("body").removeClass("loading");
-                    },
-
-                },
-            columns: [
-                {data: 'product_name', name: 'product_name'},
-                {data: 'business_name', name: 'business_name'},
-                {data: 'category', name: 'category'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'details', name: 'details', orderable: false, searchable: false},
-            ]
-        });
-
-
-        //filter
-        // $(document).on( 'keyup','#dt-product-name-search', function () {
-        //     table.draw();
-        //      table.on('draw', function () {
-        //             var isEmpty = table.rows().count() === 0;
-        //             if (isEmpty)
-        //             {
-        //                  $('.not-exists-seller-product-list').hide();
-        //                  $('.exists-seller-product-list').show();
-        //             }
-
-        //         });
-        // });
-        $(document).on('change', '#product_category',
-            function () {
-                table.ajax.reload();
-        });
-
-
-
-
-    });*/
-
-
-
 
   </script>
 @endpush

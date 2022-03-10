@@ -18,9 +18,9 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->withTrashed()->get();
-        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->withTrashed()->get();
-        $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
+        $wholesaler_products=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->withTrashed()->get();
+        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('business_profile_id', '!=', null)->withTrashed()->get();
+        $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortByDesc('created_at')->values();
 
         if(isset($request->product_name)){
             $search=$request->product_name;

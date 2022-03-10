@@ -14,7 +14,7 @@ class AddPrioritylevelToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->tinyInteger('priority_level')->after('sample_availability')->nullable();
+            $table->tinyInteger('priority_level')->after('sample_availability')->nullable()->default(4);
         });
     }
 

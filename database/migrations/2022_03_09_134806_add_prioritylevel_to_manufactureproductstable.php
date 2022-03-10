@@ -14,7 +14,7 @@ class AddPrioritylevelToManufactureproductstable extends Migration
     public function up()
     {
         Schema::connection('mysql2')->table('products', function (Blueprint $table) {
-            $table->tinyInteger('priority_level')->after('sample_availability')->nullable();
+            $table->tinyInteger('priority_level')->after('sample_availability')->nullable()->default(4);
         });
     }
 

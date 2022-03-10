@@ -1880,7 +1880,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     height: auto;
 }
 .product_preview_wrap .product_details_imgwrap .slick-current {
-    width: 100% !important;
+    /*width: 100% !important;*/
 }
 .product_preview_wrap .product_details_imgwrap a img {
     min-height: 120px;

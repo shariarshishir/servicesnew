@@ -33,7 +33,7 @@ class AdminPoController extends Controller
 {
     public function index ()
     {
-        $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->paginate(10);
+        $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
         return view('admin.proforma_invoice.index',compact('proformaInvoices'));
     }
     

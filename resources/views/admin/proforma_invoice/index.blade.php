@@ -28,46 +28,50 @@
                     <legend>Proforma invoice List</legend>
 
                     <div class="no_more_tables">
-                      <table class="table table-bordered proforma-table">
-                          <thead>
-                              <tr>
-                                  <th>SL</th>
-                                  <th>Date</th>
-                                  <th>Buyer Name</th>
-                                  <th>Supplier Name</th>
-                                  <th>PI Status</th>
-                                  <th class="text-center">Action</th>
-                              </tr>
-                          </thead>
-                          <tbody>
+                        <table class="table table-bordered admin-proforma-table">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Invoice Title</th>
+                                    <th>Date</th>
+                                    <th>Buyer Name</th>
+                                    <th>Supplier Name</th>
+                                    <th>PI Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach($proformaInvoices as $key=>$proformaInvoice)
-                                        <tr>
-                                            <td>{{$key+1}}</td>
-                                            <td data-title="proforma_id">
-                                                {{$proformaInvoice->proforma_date}}
-                                            </td>
-                                            <td data-title="buyer_name">
-                                                {{$proformaInvoice->buyer->name}}
-                                            </td>
-                                            <td data-title="supplier_name">
-                                                {{$proformaInvoice->businessProfile->user->name}}
-                                            </td>
-                                            <td data-title="PI_status">
-                                                @if($proformaInvoice->status == 1)
-                                                <span class="accepted_po">Accepted</span>
-                                                @elseif($proformaInvoice->status == 0)
-                                                <span class="pending_po">Pending</span>
-                                                @else
-                                                <span class="rejected_po">Rejected</span>
-                                                @endif
-                                            </td>
-                                            <td data-title="Action" class="text-center">
-                                                <a href="{{ route('proforma_invoices.show', $proformaInvoice->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td data-title="proforma_id">
+                                            {{$proformaInvoice->proforma_id}}
+                                        </td>
+                                        <td data-title="proforma_date">
+                                            {{$proformaInvoice->proforma_date}}
+                                        </td>
+                                        <td data-title="buyer_name">
+                                            {{$proformaInvoice->buyer->name}}
+                                        </td>
+                                        <td data-title="supplier_name">
+                                            {{$proformaInvoice->businessProfile->user->name}}
+                                        </td>
+                                        <td data-title="PI_status">
+                                            @if($proformaInvoice->status == 1)
+                                            <span class="accepted_po">Accepted</span>
+                                            @elseif($proformaInvoice->status == 0)
+                                            <span class="pending_po">Pending</span>
+                                            @else
+                                            <span class="rejected_po">Rejected</span>
+                                            @endif
+                                        </td>
+                                        <td data-title="Action" class="text-center">
+                                            <a href="{{ route('proforma_invoices.show', $proformaInvoice->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
                                 @endforeach
-                          </tbody>
-                      </table>
+                            </tbody>
+                        </table>
                     </div>
                     
 
@@ -83,7 +87,7 @@
 @endsection
 @push('js')
   <script>
-       $('.proforma-table').DataTable();
+       $('.admin-proforma-table').DataTable();
   </script>
 @endpush
 

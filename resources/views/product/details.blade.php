@@ -28,7 +28,7 @@ $reviewsCount = count($productReviews);
 
         <div class="row product_details_content_wrap">
 
-            <div class="@php echo ($relatedProducts->isNotEmpty()) ? 'col m5':'col s12 m12 l9 product_preview_info_wrap' @endphp single-product-details-wrapper">
+            <div class="col s12 m12 l9 product_preview_info_wrap single-product-details-wrapper">
                 <div class="row">
                     <div class="col s12 m5 l4 product_preview_wrap">
                         @if($product->video)
@@ -977,64 +977,61 @@ $reviewsCount = count($productReviews);
                             <b style="color:#4CAF50">Year Established :</b> {{$product->business_profile->vendor_yearest}}<p>
                             <b style="color:#4CAF50">Certification :</b> {{$product->business_profile->vendor_certification}}<p> --}}
                         </div>
-                    </div>
-                </div>
-            </div>
 
-
-            @if($relatedProducts->isNotEmpty())
-            <div class="col m3 store-more-products">
-                <div class="more-products-block col m12">
-                    <div class="row">
-                        <legend>More Products from this store</legend>
-                        @foreach ($relatedProducts as $item)
-                        <div class="more-product-item col m12">
-                            <div class="product_img">
-                                @foreach ($item->images as $image)
-                                    <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" alt="" width="100px" />
-                                    @break
-                                @endforeach
-                            </div>
-                            <div class="product_short_details">
-                                <!--a class="waves-effect waves-light btn modal-trigger" href="#modal3">View</a-->
-                                <div class="product-title">
-                                    <a href="{{route('productdetails',$item->sku)}}">{{$item->name}}</a>
-                                </div>
-                                <div class="product_price">
-                                    @if($item->full_stock == 1)
-                                        <span class="full-stock btn_grBorder">Full Stock</span>
-                                    @else
-                                        @php
-                                            $count= count(json_decode($item->attribute));
-                                            $count = $count-2;
-                                        @endphp
-                                        $ @foreach (json_decode($item->attribute) as $k => $v)
-                                            @if($k == 0 && $v[2] == 'Negotiable')
-                                            {{ '(Negotiable)' }}
-                                            @endif
-                                            @if($loop->last && $v[2] != 'Negotiable')
-                                                {{ $v[2] }}
-                                            @endif
-                                            @if($loop->last && $v[2] == 'Negotiable')
-                                                @foreach (json_decode($product->attribute) as $k => $v)
-                                                        @if($k == $count)
-                                                            {{ $v[2]  }} {{ 'Negotiable' }}
+                        @if($relatedProducts->isNotEmpty())
+                        <div class="store-more-products">
+                            <div class="more-products-block">
+                                <div class="row">
+                                    <legend>More Products from this store</legend>
+                                    @foreach ($relatedProducts as $item)
+                                    <div class="more-product-item col m12">
+                                        <div class="product_img">
+                                            @foreach ($item->images as $image)
+                                                <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" alt="" width="100px" />
+                                                @break
+                                            @endforeach
+                                        </div>
+                                        <div class="product_short_details">
+                                            <!--a class="waves-effect waves-light btn modal-trigger" href="#modal3">View</a-->
+                                            <div class="product-title">
+                                                <a href="{{route('productdetails',$item->sku)}}">{{$item->name}}</a>
+                                            </div>
+                                            <div class="product_price">
+                                                @if($item->full_stock == 1)
+                                                    <span class="full-stock btn_grBorder">Full Stock</span>
+                                                @else
+                                                    @php
+                                                        $count= count(json_decode($item->attribute));
+                                                        $count = $count-2;
+                                                    @endphp
+                                                    $ @foreach (json_decode($item->attribute) as $k => $v)
+                                                        @if($k == 0 && $v[2] == 'Negotiable')
+                                                        {{ '(Negotiable)' }}
                                                         @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </div>
-                                <div class="product_info_details">
-                                    <div class="star-rating" data-score="0"></div>
+                                                        @if($loop->last && $v[2] != 'Negotiable')
+                                                            {{ $v[2] }}
+                                                        @endif
+                                                        @if($loop->last && $v[2] == 'Negotiable')
+                                                            @foreach (json_decode($product->attribute) as $k => $v)
+                                                                    @if($k == $count)
+                                                                        {{ $v[2]  }} {{ 'Negotiable' }}
+                                                                    @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-                        @endforeach
+                        @endif                        
+
                     </div>
                 </div>
             </div>
-            @endif
         </div>
     </div>
 

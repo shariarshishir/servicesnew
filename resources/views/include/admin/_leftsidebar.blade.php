@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('shipment-term.index')}}" class="nav-link {{ Route::is('shipping-term*') ? 'active' : ''}} ">
+                        <a href="{{route('shipment-term.index')}}" class="nav-link {{ Route::is('shipment-term*') ? 'active' : ''}} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Shipping Term</p>
                         </a>

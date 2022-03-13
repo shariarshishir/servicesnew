@@ -424,7 +424,7 @@ legend {
 
 .header_wrap .top_right {
     text-align: right;
-    padding-top: 17px;
+    padding-top: 15px;
     position: relative;
 }
 .fixedHeader.header_wrap .top_right {
@@ -445,7 +445,7 @@ legend {
 /* Header Top right css end  */
 /* ******* Nav css start ********** */
 .mainnav_wrap {
-    padding-top: 25px !important;
+    padding-top: 22px !important;
 }
 .fixedHeader .mainnav_wrap {
     padding-top: 25px !important;
@@ -8046,7 +8046,7 @@ nav .pagination li.active .page-link {
 }
 .landing_spotlight_wrap h3 {
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 20px;
 }
 .landing_spotlight_wrap h5 {
@@ -8765,7 +8765,7 @@ nav .pagination li.active .page-link {
     padding-top: 30px;
 }
 .single-product-details-block-wrapper .store-more-products .product_img img {
-    width: 25%;
+    width: 70px;
 }
 .single-product-details-block-wrapper .store-more-products .more-product-item {
     padding-top: 10px;    
@@ -9190,7 +9190,7 @@ nav .pagination li.active .page-link {
     }
     /* ************************************** */
     .spotlight_inner_info {
-        padding-bottom: 15px;
+        padding: 20px 0 15px;
     }
     .landing_spotlight_top {
         min-height: 150px;
@@ -9533,6 +9533,7 @@ nav .pagination li.active .page-link {
     }
     .logo img {
         max-width: 70px;
+        margin-top: 3px;
     }
     .login_button_wrap .signin,
     .login_button_wrap .btn-forgot-password,
@@ -10120,6 +10121,25 @@ nav .pagination li.active .page-link {
     .my_businesses_wrap .my_businesses_box .switch label input[type=checkbox]:checked+.lever, 
     .business_list_itembox .list_box .switch label input[type=checkbox]:checked+.lever {
         margin: 0;
+    }
+    .spotlight_info {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        max-height: 160px;
+    }
+    .landing_spotlight_wrap h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        line-height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-height: 48px;
     }
 
 
@@ -10753,14 +10773,7 @@ nav .pagination li.active .page-link {
     .landing_page_wrapper .carousel.carousel-slider {
         height: 490px !important;
     }
-    .spotlight_info {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 6;
-        -webkit-box-orient: vertical;
-        height: 160px;
-    }
+    
     .landing_intro_wrapper {
         padding: 60px 0;
     }
@@ -10880,7 +10893,6 @@ nav .pagination li.active .page-link {
     .footer_right_bottom ul li a:visited {
         font-size: 14px;
     }
-
     .product_design_wrapper .productBox .priceBox {
         padding: 10px 0;
     }
@@ -10893,11 +10905,9 @@ nav .pagination li.active .page-link {
     .product_design_wrapper .productBox .imgBox img {
         max-height: 120px;
     }
-
     .product_design_wrapper .productBox {
         height: 325px;
     }
-
     .assistance_option_wrap .rejectRfqForm ul li {
         width: 100%;
     }
@@ -10908,7 +10918,6 @@ nav .pagination li.active .page-link {
         float: none;
         margin: 0 !important;
     }
-
     .title_border {
         min-width: 165px;
     }
@@ -11193,16 +11202,13 @@ nav .pagination li.active .page-link {
     .blog_content_box .blog_imgbox img {
         max-height: inherit;
     }
-
     .footer_left_bottom .addressWrap {
         text-align: center;
     }
-
     .respones_box .rfq_profile_info .right-align,
     .rfq_content_box .respones_detail_wrap .rfq_profile_info {
         text-align: center;
     }
-
     .manufactrue_product_details_wrap {
         padding-top: 0;
     }
@@ -11228,7 +11234,6 @@ nav .pagination li.active .page-link {
     .landing_tools_wrap .landing_tools_left {
         order: 2;
     }
-
     .mvc_produce_design_wrap .visit_studio {
         padding-bottom: 30px;
     }
@@ -11244,7 +11249,6 @@ nav .pagination li.active .page-link {
         display: block !important;
         padding: 0 0 30px;
     }
-
     .mvc_produce_design_wrap,
     .landing_provide_wrap h3,
     .sourcing_apps_box,
@@ -11265,12 +11269,9 @@ nav .pagination li.active .page-link {
     .product_design_wrapper .productBox {
         height: 335px;
     }
-
     .landing_request_img img {
         width: 100%;
     }
-
-
 
 }
 
@@ -11392,7 +11393,6 @@ nav .pagination li.active .page-link {
     .profile_not_updated {
         padding: 50px 0;
     }
-
     .single-product-related-products .product_img {
         text-align: center;
     }
@@ -11405,7 +11405,6 @@ nav .pagination li.active .page-link {
     .no_more_tables td:before {
         font-size: 12px
     }
-
     .profile_table_design .sustainability-commitment-table-body tr td,
     .profile_table_design .special-customization-table-body tr td {
         width: 88%;
@@ -11520,7 +11519,6 @@ nav .pagination li.active .page-link {
     .footer_bottomWrap .footer_right_bottom .product_menu {
         padding-bottom: 20px;
     }
-
     .footer_right_bottom .footer_buttonWrap .btn_industry {
         line-height: 22px;
         padding: 5px 10px;
@@ -11535,7 +11533,6 @@ nav .pagination li.active .page-link {
         padding: 5px 10px;
         min-height: auto;
     }
-
     .product_wrapper .productBox .favorite .product-add-wishlist .material-icons {
         font-size: 22px;
     }
@@ -11547,6 +11544,7 @@ nav .pagination li.active .page-link {
     .product_design_wrapper .product_item_box{
         width: 100% !important;
     }
+
 }
 
 @media only screen and (max-width: 320px) {

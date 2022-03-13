@@ -20,7 +20,11 @@
             <div class="products_filter_wrapper">
                 <div class="row">
                     <div class="col s12 m12 l3 left-column">
-                        <div class="products_filter_list">
+
+                        <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">menu</i></a>
+
+                        <div class="products_filter_list" id="productSidenav">
+						<a href="javascript:void(0)" class="closebtn" onclick="closeProductNav()"><i class="material-icons right">keyboard_backspace</i></a>
                             <h3>Filter by</h3>
                             <form action="{{route('products')}}" method="get" id="product_filter_form">
                                 {{--location search  --}}

@@ -365,7 +365,7 @@
                     <div class="assistance_option_wrap">
                         <h3>Want to explore Merchant Assistance options?</h3>
                         <div class="option_info">
-                            <p>When you take Merchant Assistance, Merchant Bay takes all the responsivities  f your order. Merchant Bay ensures you get high quality product on time. </p>
+                            <p>When you take Merchant Assistance, Merchant Bay takes all the responsibilities of your order. Merchant Bay ensures you get high quality products on time.</p>
                         </div>
                         <h4>Please select Assistance options:        </h4>
                     	<form action="{{route('accept.proforma.invoice')}}" class="rejectRfqForm" method="post" enctype="multipart/form-data">

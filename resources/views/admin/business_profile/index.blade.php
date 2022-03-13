@@ -113,29 +113,6 @@
 
     });
 
-    $(document).ready(function() {
-            // $(document).on('change','.selectRow',function() {
-            //     confirm("Are you sure?");
-            //     var status = $(this).prop('checked') == true ? 1 : 0;
-            //     var profile_id = $(this).data('id');
-            //     if(status  == false){
-            //         var url = '{{ route("admin.business.profile.delete", ":slug") }}';
-            //     }else{
-            //         var url = '{{ route("admin.business.profile.restore", ":slug") }}';
-            //     }
-            //     url = url.replace(':slug', profile_id);
 
-            //     $.ajax({
-            //         type: "GET",
-            //         dataType: "json",
-            //         url: url,
-            //         //data: {'status': status, 'profile_id': user_id},
-            //         success: function(data){
-            //         console.log(data)
-            //         }
-            //     });
-            // })
-
-    });
   </script>
 @endpush

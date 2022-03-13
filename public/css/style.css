@@ -412,6 +412,7 @@ legend {
 .logo img {
     max-width: 72px;
     height: auto;
+    margin-top: -5px;
 }
 .fixedHeader .logo img {
     max-width: 70px;

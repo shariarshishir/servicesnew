@@ -51,17 +51,16 @@ class PoController extends Controller
         //             $q->where('supplier_id', Auth::id());
         //         })
         //         ->get();
-        $giving=Proforma::with('performa_items')->whereIn('business_profile_id', $user_business_id)->get();
+        $giving=Proforma::with('performa_items')->whereIn('business_profile_id', $user_business_id)->latest()->get();
         foreach($giving as $g){
             $g['proforma_type'] = 'giving';
         }
-        $received=Proforma::with('performa_items')->where('buyer_id', auth()->id())->get();
+        $received=Proforma::with('performa_items')->where('buyer_id', auth()->id())->latest()->get();
         foreach($received as $r){
             $r['proforma_type'] = 'received';
         }
 
         $proforma=$giving->merge($received);
-
         if(isset($request->business_id)){
             $proforma = $proforma->where('business_profile_id' , $request->business_id)->where('proforma_type', 'giving');
             $proforma->all();

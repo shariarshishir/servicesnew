@@ -3,6 +3,7 @@
         <table id="po-table">
             <thead class="cf">
                 <tr >
+                    <th>created_at</th>
                     <th> Invoice Id</th>
                     <th> Date</th>
                     <th> Total Price</th>
@@ -19,6 +20,7 @@
                         @php $total_price_wt += $item->tax_total_price; @endphp
                     @endforeach
                     <tr>
+                        <td>{{$po->created_at}}</td>
                         <td data-title="Invoice Id">{{ $po->proforma_id }}<br>
                             @if($po->status == 1)
                                 PO ID: {{$po->po_no}}

@@ -51,7 +51,7 @@ class HomeController extends Controller
 
         $wholesaler_products=Product::with(['images','businessProfile'])->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
         $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('business_profile_id', '!=', null)->get();
-        $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
+        $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
 
         if(isset($request->product_name)){
             $search=$request->product_name;
@@ -207,7 +207,7 @@ class HomeController extends Controller
 
         }
 
-        $products=Product::latest()->with(['images','businessProfile','category'])->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request, $price_id){
+        $products=Product::orderBy('priority_level', 'ASC')->orderBy('created_at', 'DESC')->with(['images','businessProfile','category'])->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request, $price_id){
 
             if(isset($request->product_name)){
                 $query->where('name', 'like', '%'.$request->product_name.'%')->get();
@@ -308,7 +308,7 @@ class HomeController extends Controller
             }
 
         }
-        $products=Product::latest()->with(['images','businessProfile','category'])->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request,$price_id,$lead_time){
+        $products=Product::orderBy('priority_level', 'ASC')->orderBy('created_at', 'DESC')->with(['images','businessProfile','category'])->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request,$price_id,$lead_time){
 
              if(isset($request->product_name)){
                  $query->where('name', 'like', '%'.$request->product_name.'%')->get();
@@ -369,7 +369,7 @@ class HomeController extends Controller
             }
 
         }
-        $products=Product::latest()->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request,$price_id, $lead_time){
+        $products=Product::orderBy('priority_level', 'ASC')->orderBy('created_at', 'DESC')->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->where(function($query) use ($request,$price_id, $lead_time){
 
              if(isset($request->product_name)){
                  $query->where('name', 'like', '%'.$request->product_name.'%')->get();
@@ -970,7 +970,7 @@ class HomeController extends Controller
     {
         $wholesaler_products=Product::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->get();
         $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('moq','!=', null)->where('business_profile_id', '!=', null)->get();
-        $merged = $wholesaler_products->merge($manufacture_products)->sortByDesc('created_at')->values();
+        $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
 
         if(isset($request->product_name)){
             $search=$request->product_name;
@@ -1123,7 +1123,7 @@ class HomeController extends Controller
                 }
             }
          }
-        $products=ManufactureProduct::latest()->with(['product_images','businessProfile','category'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->where(function($query) use ($request, $location_id){
+        $products=ManufactureProduct::orderBy('priority_level', 'ASC')->orderBy('created_at', 'DESC')->with(['product_images','businessProfile','category'])->where('lead_time','!=', null)->where('business_profile_id', '!=', null)->where(function($query) use ($request, $location_id){
 
              if(isset($request->product_name)){
                  $query->where('title', 'like', '%'.$request->product_name.'%')->get();

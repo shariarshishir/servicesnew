@@ -1157,6 +1157,7 @@ legend {
 .profile_contentCol .add-new-product-button .green {
     height: 42px;
     line-height: 33px;
+    margin-right: 0;
 }
 .profile_contentCol .add-new-product-button .green .material-icons {
     float: left;
@@ -8256,6 +8257,7 @@ nav .pagination li.active .page-link {
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     width: 326px;
+    height: 100%;
     overflow: auto;
 }
 .products_filter_list label {
@@ -8438,12 +8440,22 @@ nav .pagination li.active .page-link {
     width: 100%;
     font-size: 14px;
 }
-.products_filter_search_wrap .btn-product-sidenav {
+.products_filter_search_wrap .filter_by {
     padding: 8px 0px 0 15px;
     float: right;
 }
+.products_filter_search_wrap .filter_by span {
+    display: block;
+    font-size: 10px;
+    font-weight: 300;
+}
+.products_filter_search_wrap .btn-product-sidenav {
+    display: block;
+    line-height: 5px;
+}
 .products_filter_search_wrap .btn-product-sidenav .material-icons {
     font-size: 35px;
+    line-height: 25px;
 }
 .product_design_wrapper .productBox .imgBox img {
     /* max-height: 150px; */
@@ -8458,6 +8470,10 @@ nav .pagination li.active .page-link {
     /* min-height: 170px; */
     border-radius: 0 0px 10px 10px;
     height: 55px;
+}
+
+.profile_contentCol .product_design_wrapper .products_inner_textbox {
+    height: 5px 8px;
 }
 .product_design_wrapper .product_wrapper {
     padding-bottom: 50px;
@@ -8555,6 +8571,10 @@ nav .pagination li.active .page-link {
     text-align: center;
     height: 300px;
 }
+
+.profile_contentCol .product_design_wrapper .productBox .imgBox {
+    height: 200px;
+}
 .product_design_wrapper .price_negotiable {
     font-size: 16px;
     color: #0A0A0A;
@@ -8589,6 +8609,12 @@ nav .pagination li.active .page-link {
     text-align: right;
 }
 
+.profile_contentCol .product_design_wrapper .product_moq {
+    font-size: 14px;
+    line-height: 14px;
+    margin-left: -15px;
+}
+
 .product_design_wrapper .product_moq .moq {
     display: block;
     font-size: 10px;
@@ -8602,6 +8628,10 @@ nav .pagination li.active .page-link {
     color: #484848;
     line-height: 12px;
     margin-left: 2px;
+}
+.profile_contentCol .product_design_wrapper .product_moq .moq,
+.profile_contentCol .product_design_wrapper .product_moq .moq-unit {
+    font-size: 8px;
 }
 
 /* products_filter_boxwrap css style end */

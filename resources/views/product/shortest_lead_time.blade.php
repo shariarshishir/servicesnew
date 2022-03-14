@@ -22,7 +22,10 @@
                         <div class="show-product-results-wrapper products_filter_search_wrap">
                             <div class="filter_search">
                                 <form action="{{route('products')}}" method="get">
-                                    <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">filter_alt</i></a>
+                                    <div class="filter_by">
+                                        <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">filter_alt</i></a>
+                                        <span>Filter By</span>
+                                    </div>
                                     <div class="search_inputbox_wrap">
                                         <div class="filter_search_inputbox">
                                             <i class="material-icons">search</i>
@@ -123,11 +126,7 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="pagination-block-wrapper">
-                                        <div class="col s12 center">
-                                            {!! $products->appends(request()->query())->links() !!}
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -237,8 +236,11 @@
                 </div>
             </div>
 
-
-
+            <div class="pagination-block-wrapper">
+                <div class="center">
+                    {!! $products->appends(request()->query())->links() !!}
+                </div>
+            </div>
 
 
         </div>

@@ -16,7 +16,7 @@
                         <legend>Products List</legend>
                         <div class="seller-product-list">
                             <div class="exists-seller-product-list">
-                                <div class="col s12 m12 product-search-block">
+                                <div class="product-search-block">
                                     <div class="row">
                                         <div class="col s12 m4">
                                             <div class="input-field">

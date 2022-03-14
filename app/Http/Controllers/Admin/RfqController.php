@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use DataTables;
 use App\Models\Rfq;
+use App\Models\BusinessProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Events\NewRfqHasAddedEvent;
@@ -58,7 +59,9 @@ class RfqController extends Controller
     public function show($id)
     {
        $rfq=Rfq::with('user','bids')->findOrFail($id);
-       return view('admin.rfq.show', compact('rfq'));
+       $businessProfiles = BusinessProfile::select('id','business_name','alias')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin',1)->get()->toArray();
+       //$businessProfiles = BusinessProfile::select('id','business_name')->where('business_category_id',$rfq->category_id)->get()->toArray();
+       return view('admin.rfq.show', compact('rfq','businessProfiles'));
     }
 
     public function status($id)

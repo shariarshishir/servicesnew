@@ -626,7 +626,17 @@ p {
     margin-bottom: 5px;
 }
 
-
+.business_profile_name {
+    display: flex;
+    margin-bottom: 10px;
+}
+.business_profile_name .propose_price {
+    width: 50px;
+}
+.rfq_business_profile_list {
+    height: 315px;
+    overflow-y: auto;
+}
 
 @media only screen and (max-width: 800px) {
     .no_more_tables {

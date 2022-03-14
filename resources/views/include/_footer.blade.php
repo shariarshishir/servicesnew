@@ -1394,6 +1394,15 @@ function askForPrice($sku)
     document.getElementById("mySidenav").style.width = "0";
     }
 </script>
+<script>
+    function openProductNav() {
+    document.getElementById("productSidenav").style.width = "100%";
+    }
+
+    function closeProductNav() {
+    document.getElementById("productSidenav").style.width = "0";
+    }
+</script>
 
 <script>
     $('.subnev_arrow').on('click', function() {

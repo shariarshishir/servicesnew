@@ -286,38 +286,6 @@
 			</div>
 			<div class="row">
 				<div class="col s2 mainNav_mobile_wrap">
-					<!-- <nav class="mainNav_mobile">
-						<span onclick="openNav()" href="javascript:void(0);" class="btn-sidenav-left"><i class="material-icons">menu</i></span>
-						<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-						<ul id='mySidenav' class='mySidenav'>
-							<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-							<li>
-								<a class="" href="javascript:void(0);" >Products</a>
-								<ul class="subNav">
-									<li><a href="{{route('products')}}">All</a></li>
-									<li><a href="{{route('readystockproducts')}}">Ready to Ship</a></li>
-									<li><a href="{{route('buydesignsproducts')}}">Designs</a></li>
-									<li><a href="{{route('low.moq')}}">Low MOQ</a></li>
-									<li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
-									<li><a href="{{route('customizable')}}">Customizablee</a></li>
-								</ul>
-							</li>
-							<li><a href="{{route('suppliers')}}">Suppliers</a></li>
-							<li><a href="{{route('front.tools')}}">Tools</a></li>
-							<li><a href="{{route('rfq.index')}}">RFQ</a></li>
-							<li>
-								<a class="" href="javascript:void(0);" >More</a>
-								<ul class="subNav">
-									<li><a href="{{route('industry.blogs')}}">Blogs</a></li>
-									<li><a href="http://insight.merchantbay.com/">Insights</a></li>
-									<li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
-									<li style="display: none;"><a href="javascript:void(0);">FAQs</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav> -->
-
-
 					<a onclick="openNav()" href="javascript:void(0);" class="btn-sidenav-left"><i class="material-icons">menu</i></a>
 					<div id="mySidenav" class="mySidenav">
 						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
@@ -349,10 +317,7 @@
 							</li>
 						</ul>
 					</div>
-
-
 				</div>
-
 
 				<div class="col s10 right-align mobile_top_right">
 
@@ -632,18 +597,6 @@
 
 						@endif
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 					<div class="cart-icon-outer-wrapper mobile_top_icon_box">
                         <div class="cart-icon-wrapper cart-icon-wrapper-mobile">

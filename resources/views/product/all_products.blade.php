@@ -19,12 +19,36 @@
         <div class="container">
             <div class="products_filter_wrapper">
                 <div class="row">
-                    <div class="col s12 m12 l3 left-column">
+                    <div class="col s12 content-column">
+                        <div class="show-product-results-wrapper products_filter_search_wrap">
+                            <div class="filter_search">
+                                <form action="{{route('products')}}" method="get">
+                                    <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">filter_alt</i></a>
+                                    <div class="search_inputbox_wrap">
+                                        <div class="filter_search_inputbox">
+                                            <i class="material-icons">search</i>
+                                            <input class="filter_search_input " type="text" name="product_name" placeholder="Type product name" value="{{$product_name}}">
+                                            <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
+                                        </div>
+                                        <div class="show-product-results-inside-wrapper">
+                                            <div class="show-total-results">
+                                                Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}} of  {{$products->total()}} results
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                        <div class="product_design_wrapper">
+                            @include('product._all_product_data')
+                        </div>
+                    </div>
 
-                        <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">menu</i></a>
 
-                        <div class="products_filter_list" id="productSidenav">
-						<a href="javascript:void(0)" class="closebtn" onclick="closeProductNav()"><i class="material-icons right">keyboard_backspace</i></a>
+                    <div class="productSidenav" id="productSidenav">
+                        <div class="products_filter_list">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeProductNav()"><i class="material-icons">east</i></a>
                             <h3>Filter by</h3>
                             <form action="{{route('products')}}" method="get" id="product_filter_form">
                                 {{--location search  --}}
@@ -154,27 +178,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col s12 m12 l9 content-column">
-                        <div class="show-product-results-wrapper products_filter_search_wrap">
-                            <div class="filter_search">
-                                <form action="{{route('products')}}" method="get">
-                                    <div class="filter_search_inputbox">
-                                        <i class="material-icons">search</i>
-                                        <input class="filter_search_input " type="text" name="product_name" placeholder="Type product name" value="{{$product_name}}">
-                                        <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="show-product-results-inside-wrapper">
-                                <div class="show-total-results">
-                                    Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}} of  {{$products->total()}} results
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product_design_wrapper">
-                            @include('product._all_product_data')
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

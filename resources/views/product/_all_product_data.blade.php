@@ -8,7 +8,7 @@
         <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
             @foreach ($products  as $list )
 
-                <div class="col s6 m4 product_item_box">
+                <div class="col s6 m3 product_item_box">
                     <div class="productBox">
                         <div class="favorite">
                             @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))
@@ -42,9 +42,10 @@
                         @endphp
 
                         <div class="inner_productBox">
-                            <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
-                            <div class="products_inner_textbox">
-                                    <div class="priceBox row">
+                            <a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">
+                                <div class="imgBox"><img src="{{$img}}"></div>
+                                <div class="products_inner_textbox">
+                                    <!-- <div class="priceBox row">
                                         <div class="col s12 m12 l4 apperal">
                                             <a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
                                                 @if($list->flag == 'mb')
@@ -78,10 +79,22 @@
                                                 @endforeach
                                             @endif
                                         </div>
+                                    </div> -->
+
+                                    <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4> -->
+                                    
+                                    <div class="row">
+                                        <div class="col s12 m8">
+                                            <h4><span> {{$title}} </span></h4>
+                                        </div>
+                                        <div class="col s12 m4">
+                                            @if(isset($list->moq))
+                                                <div class="product_moq"><span class="moq">MOQ:</span>{{$list->moq}}<span class="moq-unit">{{$list->flag == 'mb' ? $list-> qty_unit : $list->product_unit}}</span></div>
+                                            @endif
+                                        </div>
                                     </div>
 
-                                    <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4>
-                                    @if(isset($list->moq))
+                                    <!-- @if(isset($list->moq))
                                         <div class="product_moq">MOQ: {{$list->moq}} {{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</div>
                                     @endif
                                     @if($list->flag == 'mb' && isset($list->lead_time))
@@ -117,8 +130,9 @@
                                                 @endforeach --}}
                                             </div>
                                         @endif
-                                    @endif
-                            </div>
+                                    @endif -->
+                                </div>
+                            </a>
 
                         </div>
 

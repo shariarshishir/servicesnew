@@ -19,155 +19,162 @@
     <div class="mainContainer">
         <div class="container">
 
-        <div class="products_filter_wrapper">
-                <div class="row">
-                    <div class="col s12 m12 l3 left-column">
-                        <div class="products_filter_list">
-                            <h3>Filter by</h3>
-                            <form action="{{route('low.moq')}}" method="get" id="product_filter_form">
-                                {{--location search  --}}
-                                <div class="filter_search filter_box">
-                                    <h4>Location</h4>
-                                    <div class="filter_search_inputbox">
-                                        <i class="material-icons">pin_drop</i>
-                                        <input class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
-                                        {{-- <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();"> --}}
+            <div class="products_filter_wrapper">
+                <div class="productSidenav" id="productSidenav">
+                    <div class="products_filter_list">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeProductNav()"><i class="material-icons">east</i></a>
+                        <h3>Filter by</h3>
+                        <form action="{{route('low.moq')}}" method="get" id="product_filter_form">
+                            {{--location search  --}}
+                            <div class="filter_search filter_box">
+                                <h4>Location</h4>
+                                <div class="filter_search_inputbox">
+                                    <i class="material-icons">pin_drop</i>
+                                    <input class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
+                                    {{-- <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();"> --}}
 
+                                </div>
+                            </div>
+                            {{-- product_type --}}
+                            <div class="filter_box">
+                                <h4>Product Type</h4>
+                                <p>
+                                    <label>
+                                        <input class="btn_radio" type="checkbox" value="2"  name="product_type[]" {{ (in_array('2', $product_type))?'checked':'' }} onclick="this.form.submit();"/>
+                                        <span>Ready to Ship</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                    <input class="btn_radio" type="checkbox" value="1" name="product_type[]" {{ (in_array('1', $product_type))?'checked':'' }}  onclick="this.form.submit();"/>
+                                        <span>Design</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            {{--category--}}
+                            <div class="filter_box filter_min_max">
+                                <h4>Product Category</h4>
+                                <select class="select2" name="product_category" id="product_category">
+                                    <option value="">Select</option>
+                                    @foreach($product_category as $category)
+                                    <option value="{{$category->id}}" {{$category->id == $select_product_category ? 'selected' : ''}}>
+                                        {{$category['name']}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{--factory category--}}
+                            <div class="filter_box filter_min_max">
+                                <h4>Factory Category</h4>
+                                <select class="select2" name="factory_category" id="factory_category">
+                                    <option value="">Select</option>
+                                    @foreach($manufacture_product_categories as $category)
+                                    <option value="{{$category->id}}" {{$category->id == $factory_category ? 'selected' : ''}}>
+                                        {{$category['name']}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- price --}}
+                            <div class="filter_box filter_min_max">
+                                <h4>Price</h4>
+                                <div class="price-slider-wrapper">
+                                    <div class="row price-value">
+                                        <input type="text" name="price_minimum_range" id="minimum_range" class="form-control filter-search-price-range" placeholder="min"  value="{{$price_minimum_range}}" />
+                                        <span class="price-divider to">to</span>
+                                        <input type="text" name="price_maximum_range" id="maximum_range" class="form-control filter-search-price-range" placeholder="max" value="{{$price_maximum_range}}" />
+                                        <span class="price-divider"></span>
+                                        {{-- <a href="javascript:void(0);"class="waves-effect waves-block waves-light btn green lighten-1 btn-filter-search-price-range filter-search-check-price-range" style="display: none;">Ok </a> --}}
+                                        <input class="btn_green btn_search btn_filter_submit" type="submit" value="ok" onclick="this.form.submit();">
                                     </div>
                                 </div>
-                                {{-- product_type --}}
-                                <div class="filter_box">
-                                    <h4>Product Type</h4>
-                                    <p>
-                                        <label>
-                                            <input class="btn_radio" type="checkbox" value="2"  name="product_type[]" {{ (in_array('2', $product_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                            <span>Ready to Ship</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                        <input class="btn_radio" type="checkbox" value="1" name="product_type[]" {{ (in_array('1', $product_type))?'checked':'' }}  onclick="this.form.submit();"/>
-                                            <span>Design</span>
-                                        </label>
-                                    </p>
-                                </div>
+                            </div>
 
-                                {{--category--}}
-                                <div class="filter_box filter_min_max">
-                                    <h4>Product Category</h4>
-                                    <select class="select2" name="product_category" id="product_category">
-                                        <option value="">Select</option>
-                                        @foreach($product_category as $category)
-                                        <option value="{{$category->id}}" {{$category->id == $select_product_category ? 'selected' : ''}}>
-                                            {{$category['name']}}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                {{--factory category--}}
-                                <div class="filter_box filter_min_max">
-                                    <h4>Factory Category</h4>
-                                    <select class="select2" name="factory_category" id="factory_category">
-                                        <option value="">Select</option>
-                                        @foreach($manufacture_product_categories as $category)
-                                        <option value="{{$category->id}}" {{$category->id == $factory_category ? 'selected' : ''}}>
-                                            {{$category['name']}}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                {{-- price --}}
-                                <div class="filter_box filter_min_max">
-                                    <h4>Price</h4>
-                                    <div class="price-slider-wrapper">
-                                        <div class="row price-value">
-                                            <input type="text" name="price_minimum_range" id="minimum_range" class="form-control filter-search-price-range" placeholder="min"  value="{{$price_minimum_range}}" />
-                                            <span class="price-divider to">to</span>
-                                            <input type="text" name="price_maximum_range" id="maximum_range" class="form-control filter-search-price-range" placeholder="max" value="{{$price_maximum_range}}" />
-                                            <span class="price-divider"></span>
-                                            {{-- <a href="javascript:void(0);"class="waves-effect waves-block waves-light btn green lighten-1 btn-filter-search-price-range filter-search-check-price-range" style="display: none;">Ok </a> --}}
-                                            <input class="btn_green btn_search btn_filter_submit" type="submit" value="ok" onclick="this.form.submit();">
-                                        </div>
+                            {{-- lead time --}}
+                            <div class="filter_box filter_min_max">
+                                <h4>Lead Time</h4>
+                                <div class="price-slider-wrapper">
+                                    <div class="row price-value">
+                                        <input type="text" name="lead_minimum_range" id="minimum_range" class="form-control filter-search-price-range" placeholder="min"  value="{{$lead_minimum_range}}" />
+                                        <span class="price-divider to">to</span>
+                                        <input type="text" name="lead_maximum_range" id="maximum_range" class="form-control filter-search-price-range" placeholder="max" value="{{$lead_maximum_range}}" />
+                                        <span class="price-divider"></span>
+                                        {{-- <a href="javascript:void(0);"class="waves-effect waves-block waves-light btn green lighten-1 btn-filter-search-price-range filter-search-check-price-range" style="display: none;">Ok </a> --}}
+                                        <input class="btn_green btn_search btn_filter_submit" type="submit" value="ok" onclick="this.form.submit();">
                                     </div>
                                 </div>
+                            </div>
 
-                                {{-- lead time --}}
-                                <div class="filter_box filter_min_max">
-                                    <h4>Lead Time</h4>
-                                    <div class="price-slider-wrapper">
-                                        <div class="row price-value">
-                                            <input type="text" name="lead_minimum_range" id="minimum_range" class="form-control filter-search-price-range" placeholder="min"  value="{{$lead_minimum_range}}" />
-                                            <span class="price-divider to">to</span>
-                                            <input type="text" name="lead_maximum_range" id="maximum_range" class="form-control filter-search-price-range" placeholder="max" value="{{$lead_maximum_range}}" />
-                                            <span class="price-divider"></span>
-                                            {{-- <a href="javascript:void(0);"class="waves-effect waves-block waves-light btn green lighten-1 btn-filter-search-price-range filter-search-check-price-range" style="display: none;">Ok </a> --}}
-                                            <input class="btn_green btn_search btn_filter_submit" type="submit" value="ok" onclick="this.form.submit();">
-                                        </div>
-                                    </div>
-                                </div>
+                            {{-- gender --}}
+                            <div class="filter_box">
+                                <h4>Gender</h4>
+                                <p>
+                                    <label>
+                                        <input class="btn_radio" type="checkbox" value="1"  name="gender[]" {{in_array(1, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
+                                        <span>Male</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="btn_radio" type="checkbox" value="2"  name="gender[]" {{in_array(2, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
+                                        <span>Female</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="btn_radio" type="checkbox" value="3"  name="gender[]" {{in_array(3, $gender) ? 'checked' : ''}} onclick="this.form.submit();"/>
+                                        <span>Unisex</span>
+                                    </label>
+                                </p>
+                            </div>
 
-                                {{-- gender --}}
-                                <div class="filter_box">
-                                    <h4>Gender</h4>
-                                    <p>
-                                        <label>
-                                            <input class="btn_radio" type="checkbox" value="1"  name="gender[]" {{in_array(1, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
-                                            <span>Male</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input class="btn_radio" type="checkbox" value="2"  name="gender[]" {{in_array(2, $gender) ? 'checked' : ''}}  onclick="this.form.submit();"/>
-                                            <span>Female</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input class="btn_radio" type="checkbox" value="3"  name="gender[]" {{in_array(3, $gender) ? 'checked' : ''}} onclick="this.form.submit();"/>
-                                            <span>Unisex</span>
-                                        </label>
-                                    </p>
-                                </div>
+                            {{-- Sample availability --}}
+                            <div class="filter_box">
+                                <h4>Sample availability</h4>
+                                <p>
+                                    <label>
+                                        <input class="btn_radio" type="checkbox" value="1"  name="sample_availability[]" {{in_array(1, $sample_availability) ? 'checked' : ''}}  onclick="this.form.submit();"/>
+                                        <span>Yes</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="btn_radio" type="checkbox" value="0"  name="sample_availability[]" {{in_array(0, $sample_availability) ? 'checked' : ''}}   onclick="this.form.submit();"/>
+                                        <span>No</span>
+                                    </label>
+                                </p>
+                            </div>
 
-                                {{-- Sample availability --}}
-                                <div class="filter_box">
-                                    <h4>Sample availability</h4>
-                                    <p>
-                                        <label>
-                                            <input class="btn_radio" type="checkbox" value="1"  name="sample_availability[]" {{in_array(1, $sample_availability) ? 'checked' : ''}}  onclick="this.form.submit();"/>
-                                            <span>Yes</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input class="btn_radio" type="checkbox" value="0"  name="sample_availability[]" {{in_array(0, $sample_availability) ? 'checked' : ''}}   onclick="this.form.submit();"/>
-                                            <span>No</span>
-                                        </label>
-                                    </p>
-                                </div>
-
-                                <a class='btn_green btn_clear' href="{{route('low.moq')}}"> Reset </a>
-                            </form>
-                        </div>
+                            <a class='btn_green btn_clear' href="{{route('low.moq')}}"> Reset </a>
+                        </form>
                     </div>
-                    <div class="col s12 m12 l9 content-column">
+                </div>
+                <div class="row">
+                    <div class="col s12 content-column">
                         <div class="show-product-results-wrapper products_filter_search_wrap">
                             <div class="filter_search">
-                                <form action="" method="get">
-                                    <div class="filter_search_inputbox">
-                                        <i class="material-icons">search</i>
-                                        <input class="filter_search_input " type="text" name="product_name" placeholder="Type product name" value="{{$product_name}}">
-                                        <input class="btn_green btn_search" type="submit" value="search" onclick="">
+
+                                <form action="{{route('products')}}" method="get">
+                                    <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">filter_alt</i></a>
+                                    <div class="search_inputbox_wrap">
+                                        <div class="filter_search_inputbox">
+                                            <i class="material-icons">search</i>
+                                            <input class="filter_search_input " type="text" name="product_name" placeholder="Type product name" value="{{$product_name}}">
+                                            <input class="btn_green btn_search" type="submit" value="search" onclick="">
+                                        </div>
+                                        <div class="show-product-results-inside-wrapper">
+                                            <div class="show-total-results">
+                                                Showing {{($low_moq_lists->currentpage()-1)*$low_moq_lists->perpage()+1}} to {{$low_moq_lists->currentpage()*$low_moq_lists->perpage()}} of  {{$low_moq_lists->total()}} results
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
+                                
                             </div>
-                            <div class="show-product-results-inside-wrapper">
-                                <div class="show-total-results">
-                                    Showing {{($low_moq_lists->currentpage()-1)*$low_moq_lists->perpage()+1}} to {{$low_moq_lists->currentpage()*$low_moq_lists->perpage()}} of  {{$low_moq_lists->total()}} results
-                                </div>
-                            </div>
+                            
                         </div>
                         @if(count($low_moq_lists)>0)
                         <div class="product_design_wrapper">
@@ -176,7 +183,7 @@
                                 <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
                                 @foreach ($low_moq_lists  as $list )
 
-                                    <div class="col s6 m4 product_item_box">
+                                    <div class="col s6 m3 product_item_box">
                                         <div class="productBox">
                                             @php
                                                 if($list->flag == 'shop'){
@@ -208,9 +215,10 @@
                                             </div>
 
                                             <div class="inner_productBox">
-                                                <div class="imgBox"><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}"><img src="{{$img}}"></a></div>
-                                                <div class="products_inner_textbox">
-                                                        <div class="priceBox row">
+                                                <a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">
+                                                    <div class="imgBox"><img src="{{$img}}"></div>
+                                                    <div class="products_inner_textbox">
+                                                        <!-- <div class="priceBox row">
                                                             <div class="col s12 m12 l4 apperal">
                                                                 <a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
                                                                     @if($list->flag == 'mb')
@@ -244,9 +252,20 @@
                                                                     @endforeach
                                                                 @endif
                                                             </div>
+                                                        </div> -->
+
+                                                        <div class="row">
+                                                            <div class="col s12 m8">
+                                                                <h4><span>{{$title}}</span></h4>
+                                                            </div>
+                                                            <div class="col s12 m4">
+                                                                @if(isset($list->moq))
+                                                                    <div class="product_moq"><span class="moq">MOQ:</span> {{$list->moq}} <span class="moq-unit">{{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</span></div>
+                                                                @endif
+                                                            </div>
                                                         </div>
 
-                                                        <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4>
+                                                        <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4>
 
                                                         @if(isset($list->moq))
                                                             <div class="product_moq">MOQ: {{$list->moq}} {{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</div>
@@ -285,8 +304,9 @@
                                                                     @endforeach --}}
                                                                 </div>
                                                             @endif
-                                                        @endif
-                                                </div>
+                                                        @endif -->
+                                                    </div>
+                                                </a>
 
                                             </div>
                                         </div>

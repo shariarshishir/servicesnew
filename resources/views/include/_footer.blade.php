@@ -1396,7 +1396,7 @@ function askForPrice($sku)
 </script>
 <script>
     function openProductNav() {
-    document.getElementById("productSidenav").style.width = "250px";
+    document.getElementById("productSidenav").style.width = "100%";
     }
 
     function closeProductNav() {

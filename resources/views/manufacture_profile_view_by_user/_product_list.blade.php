@@ -16,54 +16,67 @@
                         @endif
                     </div>
                     <div class="inner_productBox">
-                        <div class="imgBox">
-                            @foreach($product->product_images as $key=>$image)
-                                <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
-                                @break
-                            @endforeach
-                        </div>
-
-                        <div class="products_inner_textbox">
-                            <div class="priceBox row">
-                                <div class="col s12 m12 l4 apperal">
-                                    <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
-                                            {{ucfirst($product->category->name)}}
-                                    </a>
-                                </div>
-                                <div class="col s12 m12 l8 right-align price">
-                                    $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
-                                </div>
+                        <a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >
+                            <div class="imgBox">
+                                @foreach($product->product_images as $key=>$image)
+                                    <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+                                    @break
+                                @endforeach
                             </div>
 
-                            <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
+                            <div class="products_inner_textbox">
+                                <!-- <div class="priceBox row">
+                                    <div class="col s12 m12 l4 apperal">
+                                        <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
+                                                {{ucfirst($product->category->name)}}
+                                        </a>
+                                    </div>
+                                    <div class="col s12 m12 l8 right-align price">
+                                        $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
+                                    </div>
+                                </div> -->
 
-                            @if(isset($product->moq))
-                                <div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
-                            @endif
-                            @if(isset($product->lead_time))
-                                <div class="product_lead_time">Lead time:
-                                    @php
-                                        $pattern= '/[^0-9\-]/';
-                                        $preg_replace= preg_replace($pattern, '', $product->lead_time);
-                                    @endphp
-                                    {{$preg_replace}} days
+                                <div class="row">
+                                    <div class="col s12 m8">
+                                        <h4><span> {{$product->title}} </span></h4>
+                                    </div>
+                                    <div class="col s12 m4">
+                                        @if(isset($product->moq))
+                                            <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
+                                        @endif
+                                    </div>
                                 </div>
-                            @endif
-                            {{-- <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
-                                <div class="priceBox row">
-                                    <!-- <div class="col s12 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div> -->
-                                    <div class="col s12 m6 apperal">{{ $product->businessProfile->business_name }}</div>
-                                    <div class="price col s12 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
-                                </div>
-                                <h4>{{$product->title}}</h4>
-                                @if(isset($list->moq))
-                                    <div class="product_moq">MOQ: {{$list->moq}}</div>
-                                @endif
-                                @if(isset($list->lead_time))
-                                    <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
-                                @endif
-                            </a> --}}
-                        </div>
+
+                                <!-- <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
+                                @if(isset($product->moq))
+                                    <div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
+                                @endif -->
+                                <!-- @if(isset($product->lead_time))
+                                    <div class="product_lead_time">Lead time:
+                                        @php
+                                            $pattern= '/[^0-9\-]/';
+                                            $preg_replace= preg_replace($pattern, '', $product->lead_time);
+                                        @endphp
+                                        {{$preg_replace}} days
+                                    </div>
+                                @endif -->
+                                {{-- <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
+                                    <div class="priceBox row">
+                                        <!-- <div class="col s12 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div> -->
+                                        <div class="col s12 m6 apperal">{{ $product->businessProfile->business_name }}</div>
+                                        <div class="price col s12 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
+                                    </div>
+                                    <h4>{{$product->title}}</h4>
+                                    @if(isset($list->moq))
+                                        <div class="product_moq">MOQ: {{$list->moq}}</div>
+                                    @endif
+                                    @if(isset($list->lead_time))
+                                        <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
+                                    @endif
+                                </a> --}}
+                            </div>
+                        </a>
+                        
 
 
                         <!-- <div class="priceBox row"></div>

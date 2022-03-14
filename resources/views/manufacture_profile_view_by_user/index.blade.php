@@ -119,15 +119,7 @@
 								<div class="annaouncement_icon">&nbsp;</div>
 								<p style="font-size: 25px;"> You do not have access to view this profile.</p>
 								<p>Become a verified buyer to get full access of Merchant Bay.</p>
-								<!-- <p> This profile will be available to view after verification. Meanwhile, <a href="#">Book a Call</a> for more information.</p> -->
 							</span>
-
-							<!-- <span class="profile_not_updated_inner">
-								<div class="annaouncement_icon">&nbsp;</div>
-								<p>You do not have access to view this profile.</p>
-								<p>Become a verified buyer to get full access to Merchant Bay services.</p>
-								<p> Please <a href="#"> Book a Call </a> for any further information. </p>
-							</span> -->
 
 							<div class="center-align">
 							<a href="javascript:void(0);" class="button talk-to-us btn_green" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk To Us</a>
@@ -206,8 +198,6 @@
                                         <div class="certificate_img_wrap">
                                             @if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
                                             <div class="certificate_img">
-                                                <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-                                                <br> -->
                                                 <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_file_down" >&nbsp;</a>
                                             </div>
 											<div class="certificate_infoBox">
@@ -217,8 +207,6 @@
                                             @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
                                             <div class="certificate_img">
-                                                <!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-                                                <br> -->
                                                 <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_doc certification_file_down" >&nbsp;</a>
                                             </div>
 											<div class="certificate_infoBox">
@@ -246,11 +234,10 @@
 										<div class="col s6 m6">
 											<h3>Main Products</h3>
 										</div>
-										<!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
 									</div>
 									<div class="product_boxwrap row">
 											@foreach($mainProducts as $product)
-											<div class="col s6 m4 product_item_box">
+											<div class="col s6 m3 product_item_box">
 												<div class="productBox">
 													<div class="favorite">
 														<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
@@ -259,67 +246,28 @@
 													</div>
 
 													<div class="inner_productBox">
-														<div class="imgBox">
-															@foreach($product->product_images as $image)
-																<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
-																@break
-															@endforeach
-														</div>
-
-														<div class="products_inner_textbox">
-															<div class="priceBox row">
-																<div class="col s12 m12 l4 apperal">
-																	<a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
-																			{{ucfirst($product->category->name)}}
-																	</a>
-																</div>
-																<div class="col s12 m12 l8 right-align price">
-																	$ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
-																</div>
+														<a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >
+															<div class="imgBox">
+																@foreach($product->product_images as $image)
+																	<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+																	@break
+																@endforeach
 															</div>
 
-															<h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
-
-															@if(isset($product->moq))
-																<div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
-															@endif
-															@if(isset($product->lead_time))
-																<div class="product_lead_time">Lead time:
-																	@php
-																		$pattern= '/[^0-9\-]/';
-																		$preg_replace= preg_replace($pattern, '', $product->lead_time);
-																	@endphp
-																	{{$preg_replace}} days
+															<div class="products_inner_textbox">
+																<div class="row">
+																	<div class="col s12 m8">
+																		<h4><span> {{$product->title}} </span></h4>
+																	</div>
+																	<div class="col s12 m4">
+																		@if(isset($product->moq))
+																			<div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
+																		@endif
+																	</div>
 																</div>
-															@endif
-															{{-- <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
-																<div class="priceBox row">
-																	<!-- <div class="col s12 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div> -->
-																	<div class="col s12 m6 apperal">{{ $product->businessProfile->business_name }}</div>
-																	<div class="price col s12 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
-																</div>
-																<h4>{{$product->title}}</h4>
-																@if(isset($list->moq))
-																	<div class="product_moq">MOQ: {{$list->moq}}</div>
-																@endif
-																@if(isset($list->lead_time))
-																	<div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
-																@endif
-															</a> --}}
-														</div>
-
-													</div>
-
-
-													
-													<!-- <div class="priceBox row"></div>
-													<h4>
-														<a href="{{route('mix.product.details', ['mb', $product->id])}}">
-															{{ \Illuminate\Support\Str::limit($product->title, 35, '...') }}
+															</div>
 														</a>
-													</h4>
-													<div class="moq" style="display: none;">MOQ  150 <span>pcs</span></div>
-													<div class="leadTime" style="display: none;">Lead time 10 <span>days</span></div> -->
+													</div>
 												
 												</div>
 											</div>
@@ -336,7 +284,6 @@
                                     <div class="col s6 m6">
                                         <h3>Factory Images</h3>
                                     </div>
-                                    <!--div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div-->
                                 </div>
 
                                 <div class="row">
@@ -378,18 +325,18 @@
                             <div class="export_destination_wrap">
                                 <h3>Export Destinations</h3>
                                 <div class="row flag_wrap center-align export-destination-block">
-                                        @foreach($business_profile->exportDestinations as $exportDestination)
-                                            <div class="col s6 m4 l2">
-												<ddiv class="flag_innerBox">
-													<div class="flag_img export-destination-img">
-														<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
-													</div>
-													<div class="flag_infoBox">
-														<h5>{{$exportDestination->country->name}}</h5>
-													</div>
-												</ddiv>
-                                            </div>
-                                        @endforeach
+									@foreach($business_profile->exportDestinations as $exportDestination)
+										<div class="col s6 m4 l2">
+											<ddiv class="flag_innerBox">
+												<div class="flag_img export-destination-img">
+													<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
+												</div>
+												<div class="flag_infoBox">
+													<h5>{{$exportDestination->country->name}}</h5>
+												</div>
+											</ddiv>
+										</div>
+									@endforeach
                                 </div>
                             </div>
                         @endif
@@ -431,44 +378,6 @@
                                         </div>
                                     </div> --}}
                                     <div class="row capacity_table">
-
-                                        <!-- <div class="col s12 m6">
-                                            <h4>Production Capacity (Annual)</h4>
-                                            <div class="production-capacity-wrapper">
-                                                @if(count($business_profile->productionCapacities)>0)
-                                                <div class="overview_table box_shadow">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Machine Type</th>
-                                                                <th>Annual Capacity</th>
-                                                                <th>&nbsp;</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="production-capacity-table-body">
-                                                            @foreach($business_profile->productionCapacities as $productionCapacity)
-                                                                <tr>
-                                                                    <td>{{$productionCapacity->machine_type}}</td>
-                                                                    <td>{{$productionCapacity->annual_capacity}}</td>
-                                                                    @if($productionCapacity->status==1)
-                                                                    <td><i class="material-icons" style="color:green">check_circle</i></td>
-                                                                    @else
-                                                                    <td><i class="material-icons "style="color:gray">check_circle</i></td>
-                                                                    @endif
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                @else
-                                                    <div class="card-alert card cyan lighten-5">
-                                                        <div class="card-content cyan-text">
-                                                            <p>INFO : No data found.</p>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div> -->
                                         @if(count($business_profile->categoriesProduceds)>0)
                                             <div class="col s12 m12">
                                                 <h3>Categories Produced</h3>
@@ -595,8 +504,6 @@
 										<div class="certificate_img_wrap">
 											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 												<div class="certificate_img">
-													<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-													<br> -->
 													<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_file_down tooltipped">&nbsp;</a>
 												</div>
 												<div class="certificate_infoBox">
@@ -646,48 +553,6 @@
 										</div>
 									@endif
 								</div>
-
-
-
-
-                                <!-- <div class="certifications-block">
-                                    @foreach($business_profile->certifications as $certification)
-                                        <div class="certificate_img_wrap">
-
-											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
-											<div class="certificate_img">
-												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-												<br> -->
-												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_pdf_down" >&nbsp;</a>
-											</div>
-											<div class="certificate_infoBox">
-												<span class="certificate_title">{{$certification->title}}</span>
-											</div>
-
-											@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
-
-											<div class="certificate_img">
-												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-												<br> -->
-												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="doc_icon" >&nbsp;</a>
-											</div>
-											<div class="certificate_infoBox">
-												<span class="certificate_title" >{{$certification->title}}</span>
-											</div>
-
-											@else
-											@php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
-											<div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
-											<div class="certificate_infoBox">
-												<span class="certificate_title" >{{$certification->title}}</span>
-											</div>
-											@endif
-
-                                        </div>
-                                    @endforeach
-                                </div> -->
-
-								
                             </div>
                         @endif
 
@@ -719,37 +584,24 @@
                                     <div class="col s6 m6">
                                         <h3>Export Destinations</h3>
                                     </div>
-
                                 </div>
                                 <div class="row flag_wrap center-align">
                                     <div class="flagBox export-destination-block">
-                                            @foreach($business_profile->exportDestinations as $exportDestination)
-                                            <div class="col s6 m4 l2">
-												<div class="flag_innerBox">
-													<div class="flag_img export-destination-img">
-														<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-														<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
-													</div>
-													<div class="flag_infoBox">
-														<h5>{{$exportDestination->country->name}}</h5>
-													</div>
+										@foreach($business_profile->exportDestinations as $exportDestination)
+										<div class="col s6 m4 l2">
+											<div class="flag_innerBox">
+												<div class="flag_img export-destination-img">
+													<a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
+													<img  src="{{ asset('images/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png') }}" alt="">
 												</div>
-                                            </div>
-                                            @endforeach
+												<div class="flag_infoBox">
+													<h5>{{$exportDestination->country->name}}</h5>
+												</div>
+											</div>
+										</div>
+										@endforeach
                                     </div>
                                 </div>
-
-                                <!-- <div class="row flag_wrap center-align">
-                                    <div class="col s6 m4 l2 flagBox export-destination-block">
-                                    @foreach($business_profile->exportDestinations as $exportDestination)
-                                        <div class="flag_img export-destination-img">
-                                            <a href="javascript:void(0)" style="display: none;"data-id="{{$exportDestination->id}}" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>
-                                            <img  src="{{ asset('storage/'.$exportDestination->image) }}" alt="">
-                                        </div>
-                                        <h5>{{$exportDestination->title}}</h5>
-                                    @endforeach
-                                    </div>
-                                </div> -->
                             </div>
                         @endif
 
@@ -789,7 +641,6 @@
                                     <div class="col s6 m6">
                                         <h3>Sampling and R&D</h3>
                                     </div>
-
                                 </div>
                                 <div class="sampling_table_wrapper">
                                     <div class="overview_table box_shadow">
@@ -1222,77 +1073,6 @@
 						</div>
 
 					</div>
-					<!-- <div id="factorytour" class="tabcontent">
-						<div class="profile_factory_tourWrap">
-							<div class="row top_titleWrap">
-								<div class="col s6 m6">
-									<h3>Virtual Tour</h3>
-								</div>
-								<div class="col s6 m6 right-align">
-									<a href="javascript:void(0);">Watch on YouTube</a>
-								</div>
-							</div>
-							<div class="factory_video_box">
-								<img src="{{asset('images/frontendimages/new_layout_images/video_img.png')}}" />
-							</div>
-							<div class="factory_imgbox_wrap video_gallery_box">
-								<div class="row top_titleWrap">
-									<div class="col s6 m6 gallery_navbar">
-										<ul>
-											<li class="active"><a href="javascript:void(0);">Factory Images</a></li>
-											<li><a href="javascript:void(0);">360 Degree Images</a></li>
-										</ul>
-									</div>
-									<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
-								</div>
-								<div class="row factory_image_gallery">
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_2.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_3.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_4.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_5.jpg')}}" alt=""></div>
-									</div>
-									<div class="col s6 m4 l4">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
-									</div>
-								</div>
-							</div>
-							<div class="factory_imgbox_wrap video_gallery_box">
-								<div class="row top_titleWrap">
-									<div class="col s6 m6 gallery_navbar">
-										<ul>
-											<li><a href="javascript:void(0);">Factory Images</a></li>
-											<li class="active"><a href="javascript:void(0);">360 Degree Images</a></li>
-										</ul>
-									</div>
-									<div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div>
-								</div>
-								<div class="row 360_degree_video_gallery">
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img1.png')}}" alt=""></div>
-									</div>
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img2.png')}}" alt=""></div>
-									</div>
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img3.png')}}" alt=""></div>
-									</div>
-									<div class="col s12 m6 l6">
-										<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img4.png')}}" alt=""></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
 					<div id="factorytour" class="tabcontent">
 						<div class="profile_factory_tourWrap">
 							@if(count($business_profile->companyFactoryTour)>0)
@@ -1301,9 +1081,6 @@
 									<div class="col s6 m6">
 										<h3>Virtual Tour</h3>
 									</div>
-									<!-- <div class="col s6 m6 right-align">
-										<a href="javascript:void(0);">Watch on YouTube</a>
-									</div> -->
 								</div>
 								@php
 									$youTubeUrl = explode('/', $companyFactoryTour->virtual_tour);
@@ -1312,7 +1089,6 @@
 									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$youTubeUrl[3]}}" allowfullscreen></iframe>
 								</div>
 								@endif
-								<!-- <div class="col s6 m6 product_view right-align"><a href="javascript:void(0);"> View all </a></div> -->
 								<div class="row">
 									<div class="row top_titleWrap">
 										<div class="col s12 gallery_navbar">

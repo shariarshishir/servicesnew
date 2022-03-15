@@ -108,7 +108,7 @@ class ProformaInvoiceController extends Controller
 
     public function getProductListByBuisnessProfileId($id){
         
-        $products = Product::select('id','title','created_by')->where('business_profile_id', $id)->latest()->get();
+        $products = Product::select('id','title','price_per_unit','price_unit','created_by')->where('business_profile_id', $id)->latest()->get();
         
         if(count($products)>0){
             return response()->json([
@@ -127,7 +127,7 @@ class ProformaInvoiceController extends Controller
     
     public function store(Request $request)
 	{ 
-       
+        // return response()->json($request->all());
         $data = new Proforma;
         $data->buyer_id = $request->input('selected_buyer_id');
         $data->business_profile_id = $request->input('business_profile_id');
@@ -148,19 +148,20 @@ class ProformaInvoiceController extends Controller
         $data->save();
         $performa_id = $data->id;
 
-        foreach($request->input('supplier') as $i => $sup)
+        foreach($request->input('unit') as $i => $sup)
         {
-            $dataitem = new ProformaProduct;
-            $dataitem->performa_id = $performa_id;
-            $dataitem->supplier_id = $request->input('supplier')[$i];
-            $dataitem->product_id = $request->input('product')[$i];
-            $dataitem->unit = $request->input('unit')[$i];
-            $dataitem->unit_price = $request->input('unit_price')[$i];
-            $dataitem->tax = $request->input('tax')[$i];
-            $dataitem->total_price = $request->input('total_price')[$i];
-            $dataitem->tax_total_price = $request->input('tax_total_price')[$i];
-            $dataitem->price_unit = $request->input('price_unit')[$i];
-            $dataitem->save();
+                $dataitem = new ProformaProduct;
+                $dataitem->performa_id = $performa_id;
+                $dataitem->supplier_id = auth()->id();
+                $dataitem->product_id = NULL;
+                $dataitem->item_title = $request->input('item_title')[$i];
+                $dataitem->unit = $request->input('unit')[$i];
+                $dataitem->unit_price = $request->input('unit_price')[$i];
+                $dataitem->tax = 0.0;
+                $dataitem->total_price = $request->input('total_price')[$i];
+                $dataitem->tax_total_price = $request->input('tax_total_price')[$i];
+                $dataitem->price_unit = 'USD';
+                $dataitem->save();
             
         }
 

@@ -8935,24 +8935,6 @@ nav .pagination li.active .page-link {
 /* ******************** Media css style start *********************** */
 
 
-@media only screen and (min-width: 1900px) {
-    .product_design_wrapper .productBox .imgBox img {
-        width: auto;
-    }
-
-    .product_design_wrapper .productBox .imgBox img {
-
-        /* position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical; */     
-    }
-
-
-}
 @media only screen and (min-width: 1500px) {
 
     /* .container {
@@ -9030,6 +9012,16 @@ nav .pagination li.active .page-link {
         height: 400px;
     } */
 
+}
+
+@media only screen and (min-width: 1900px) {
+    .container {
+        max-width: 1800px;
+        width: 100%;
+    }    
+    .product_design_wrapper .productBox .imgBox img {
+        width: auto;
+    }
 }
 
 @media only screen and (min-width: 1300px) {

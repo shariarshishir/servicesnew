@@ -127,6 +127,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
+            
             var selectedValues = [];
             var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
             var socket = io.connect(serverURL);
@@ -153,7 +154,13 @@
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
                     });
-                    let message = {'message': html, 'image': "", 'from_id' : '5552', 'to_id' : "{{$rfq->user->id}}", 'product': null};
+                    var envMode = "{{ env('APP_ENV') }}";
+                    if(envMode == 'production') {
+                        var fromId = '5771';
+                    } else {
+                        var fromId = '5552';
+                    }
+                    let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
                     swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
                 } 

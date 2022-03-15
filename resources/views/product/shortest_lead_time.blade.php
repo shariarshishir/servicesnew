@@ -47,7 +47,7 @@
                                     <h3>Shortest Lead Time Products</h3>
                                     <div class="low_moq_products_wrap shortest_lead_product_wrap row">
                                         @foreach ($products as $product)
-                                            <div class="col s6 m3 product_item_box">
+                                            <div class="col s6 m4 l3 product_item_box">
                                                 <div class="productBox">
                                                     <div class="favorite">
                                                         @if(in_array($product->id,$wishListShopProductsIds) || in_array($product->id,$wishListMfProductsIds))
@@ -66,6 +66,7 @@
                                                                 @if($product->product_images()->exists())
                                                                     <img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt="">
                                                                 @endif
+                                                                <h4><span>{{$product->title}} </span></h4>
                                                             </div>
                                                             <div class="products_inner_textbox">
                                                                 <!-- <div class="priceBox row">
@@ -80,15 +81,18 @@
                                                                 </div> -->
 
                                                                 <div class="row">
-                                                                    <div class="col s12 m8">
-                                                                        <h4><span>{{$product->title}} </span></h4>
+                                                                    <div class="col s12 m6">
+                                                                        <div class="pro_price">
+                                                                            <span class="price">Price</span>
+                                                                            $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>                                 
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="col s12 m4">
+                                                                    <div class="col s12 m6">
                                                                         @if(isset($product->moq))
                                                                             <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
                                                                         @endif
                                                                     </div>
-                                                                </div>
+                                                                </div>                                                                
 
                                                                 
                                                                 <!-- <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>

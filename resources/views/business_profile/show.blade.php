@@ -264,7 +264,7 @@
 								<div class="product_boxwrap row">
 									@if(count($mainProducts)>0)
 										@foreach($mainProducts as $product)
-										<div class="col s6 m3 product_item_box">
+										<div class="col s6 m4 l3 product_item_box">
 											<div class="productBox">
 												<div class="favorite">
 													<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">

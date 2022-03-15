@@ -2,7 +2,7 @@
 @if(count($products)>0)
     <div class="active_grid product_boxwrap row ">
         @foreach($products as $key=>$product)
-            <div class="col s6 m3 product_item_box">
+            <div class="col s6 m4 l3 product_item_box">
                 <div class="productBox">
                     <div class="favorite">
                         @if(in_array($product->id,$wishListShopProductsIds))
@@ -34,6 +34,7 @@
                                     @endif
                                     @break
                                 @endforeach
+                                <h4><span> {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }} </span></h4>
                             </div>
 
                             <div class="products_inner_textbox">
@@ -48,15 +49,18 @@
                                     </div> -->
 
                                     <div class="row">
-                                        <div class="col s12 m8">
-                                            <h4><span> {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }} </span></h4>
+                                        <div class="col s12 m6">
+                                            <div class="pro_price">
+                                                <span class="price">Price</span>
+                                                @include('product._product_price')                                                                                       
+                                            </div>
                                         </div>
-                                        <div class="col s12 m4">
+                                        <div class="col s12 m6">
                                             @if(isset($product->moq))
                                                 <div class="product_moq"><span class="moq">MOQ:</a> {{$product->moq}} <span class="moq-unit">{{$product->product_unit}}</span></div>
-                                            @endif
+                                            @endif                                            
                                         </div>
-                                    </div>
+                                    </div>                                    
 
                                     <!-- <h4><a href="{{route('productdetails',$product->sku)}}" > {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}</a></h4>
 

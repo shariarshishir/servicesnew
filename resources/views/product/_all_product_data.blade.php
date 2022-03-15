@@ -7,7 +7,7 @@
     <div class="low_moq_products_wrap product_boxwrap row"  id="low_moq_body">
         @foreach ($products  as $list )
 
-            <div class="col s6 m3 product_item_box">
+            <div class="col s6 m4 l3 product_item_box">
                 <div class="productBox">
                     <div class="favorite">
                         @if(in_array($list->id,$wishListShopProductsIds) || in_array($list->id,$wishListMfProductsIds))
@@ -42,7 +42,10 @@
 
                     <div class="inner_productBox">
                         <a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">
-                            <div class="imgBox"><img src="{{$img}}"></div>
+                            <div class="imgBox">
+                                <img src="{{$img}}">
+                                <h4>{{$title}}</h4>
+                            </div>
                             <div class="products_inner_textbox">
                                 <!-- <div class="priceBox row">
                                     <div class="col s12 m12 l4 apperal">
@@ -81,17 +84,41 @@
                                 </div> -->
 
                                 <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4> -->
-                                
+
                                 <div class="row">
-                                    <div class="col s12 m8">
-                                        <h4><span> {{$title}} </span></h4>
+                                    <div class="col s12 m6">
+                                        <div class="pro_price">
+                                            <span class="price">Price</span>
+                                            @if($list->flag == 'mb') ${{$list->price_per_unit}} / <span class="unit"> {{$list->qty_unit}} @endif </span>
+                                            @if($list->flag == 'shop')
+                                                @php
+                                                    $count= count(json_decode($list->attribute));
+                                                    $count = $count-2;
+                                                @endphp
+                                                @foreach (json_decode($list->attribute) as $k => $v)
+                                                    @if($k == 0 && $v[2] == 'Negotiable')
+                                                        <span class="price_negotiable">$ {{ 'Negotiable' }}</span>
+                                                    @endif
+                                                    @if($loop->last && $v[2] != 'Negotiable')
+                                                        ${{ $v[2] }} / <span class="unit">{{$list->product_unit}}</span> {{-- $ is the value for price unite --}}
+                                                    @endif
+                                                    @if($loop->last && $v[2] == 'Negotiable')
+                                                        @foreach (json_decode($list->attribute) as $k => $v)
+                                                            @if($k == $count)
+                                                                ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            @endif                                            
+                                        </div>
                                     </div>
-                                    <div class="col s12 m4">
+                                    <div class="col s12 m6">
                                         @if(isset($list->moq))
                                             <div class="product_moq"><span class="moq">MOQ:</span>{{$list->moq}}<span class="moq-unit">{{$list->flag == 'mb' ? $list-> qty_unit : $list->product_unit}}</span></div>
                                         @endif
                                     </div>
-                                </div>
+                                </div>                                
 
                                 <!-- @if(isset($list->moq))
                                     <div class="product_moq">MOQ: {{$list->moq}} {{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</div>

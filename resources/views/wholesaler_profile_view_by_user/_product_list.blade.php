@@ -1,7 +1,7 @@
 @if($business_profile->wholesalerProducts()->exists())
 <div class="product_design_wrapper">
     @foreach($business_profile->wholesalerProducts as $key=>$product)
-        <div class="col s6 m3 product_item_box">
+        <div class="col s6 m4 l3 product_item_box">
             <div class="productBox">
                 <div class="favorite">
                     @if(in_array($product->id,$wishListShopProductsIds))

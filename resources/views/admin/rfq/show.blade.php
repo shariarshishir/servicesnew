@@ -83,8 +83,8 @@
                                         <input type="number" value="" name="propose_price" class="propose_price"/>
                                     </div>
                                     @endforeach
-                                    <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend">Send To the Buyer</a>
                                 </div>
+                                <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
                             </div>
                         </div>
                     </div>
@@ -144,8 +144,6 @@
                 }
                
             });
-
-
 
 
             $(".business_profile_list_trigger_from_backend").click(function(){

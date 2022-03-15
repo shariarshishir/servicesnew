@@ -150,6 +150,25 @@
 
             $(".business_profile_list_trigger_from_backend").click(function(){
                 if(selectedValues.length > 0){
+                    /*
+                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
+                    var html ='<div class="chat chat-right">';
+                    html +='<div class="chat-avatar">';
+                    html +='<a class="avatar">';
+                    html +='<img src='+user_image+' class="circle" alt="avatar">';
+                    html +='</a>';
+                    html +='</div>';
+                    html +='<div class="chat-body left-align">';
+                    html +='<div class="chat-text">';
+                    html +='<b>Our Suggested Profiles</b><br/>';
+                    selectedValues.forEach(function(value){
+                        html += value + '<br/>';
+                    });
+                    html +='</div>';
+                    html +='</div>';
+                    html +='</div>';
+                    */
+                    // var user_image = "{{asset('storage')}}"+'/'+"images/supplier.png";
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
@@ -160,6 +179,7 @@
                     } else {
                         var fromId = '5552';
                     }
+                    console.log(html);
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
                     swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});

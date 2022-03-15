@@ -72,7 +72,7 @@
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Pro-forma Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                    <input type="date" class="form-control" readonly name="po_date" value="{{ $po->proforma_date }}"/>
+                                                    <input type="text" class="form-control" readonly name="po_date" value="{{ $po->proforma_date}}"/>
                                                 </div>
                                             </div>
                                             <div class="col s12 m4 l2">
@@ -272,12 +272,7 @@
                                             <tr>
                                                 <td data-title="Sl. No.">{{$key+1 }}</td>
                                                 <td data-title="Item / Description">
-                                                    <select class="select2 product-dropdown" onchange="changecat(this)">
-                                                        <option value="">Select Products</option>
-                                                        @foreach($products as $product)
-                                                            <option value="{{ $product->id }}" {{ $proFormaItem->product->id == $product->id ? 'selected' :''}} >{{ $product->title }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" value="{{$proFormaItem->item_title}}"class="item_title" name="item_title[]" required>
                                                     <input type="hidden" name="supplier[]" value="{{ $proFormaItem->supplier_id }}" required/>
                                                     <input type="hidden" name="product[]" value="{{ $proFormaItem->product_id }}" required/>
                                                     <input type="hidden" name="price_unit[]" value="{{ $proFormaItem->price_unit }}" required/>

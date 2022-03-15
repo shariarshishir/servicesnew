@@ -264,7 +264,7 @@
 								<div class="product_boxwrap row">
 									@if(count($mainProducts)>0)
 										@foreach($mainProducts as $product)
-										<div class="col s6 m4 product_item_box">
+										<div class="col s6 m3 product_item_box">
 											<div class="productBox">
 												<div class="favorite">
 													<a href="javascript:void(0);" id="favorite" data-productSku="{{$product->sku}}" class="product-add-wishlist">
@@ -742,8 +742,7 @@
 										<a href="javascript:void(0)" style="display: none;" data-id="{{$certification->id}}" class="remove-certificate" ><i class="material-icons dp48">remove_circle_outline</i></a>
 										@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 											<div class="certificate_img">
-												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-												<br> -->
+												
 												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_file_down" >&nbsp;</a>
 											</div>
 											<div class="certificate_infoBox">
@@ -758,8 +757,7 @@
 										@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
 											<div class="certificate_img">
-												<!-- <i class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i>
-												<br> -->
+												
 												<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_doc certification_file_down" >&nbsp;</a>
 											</div>
 											<div class="certificate_infoBox">
@@ -1456,7 +1454,7 @@
 					</div>
 					<div id="products" class="tabcontent">
 
-						<div class="col m12 add-new-product-button">
+						<div class="add-new-product-button">
 							<a href="javascript:void(0);" class="modal-trigger tooltipped product-add-modal-trigger btn waves-effect waves-light green btn_green" data-position="top" data-tooltip="add new product">
 								<i class="material-icons dp48">add</i> Add New product
 							</a>
@@ -1466,7 +1464,7 @@
 							@include('business_profile._product_table_data')
 						</div>
 
-						<!--div class="profile_products_wrap">
+						<!-- <div class="profile_products_wrap">
 							<div class="row top_titleWrap">
 								<div class="col s6 m6">
 									<h3>Main Products</h3>
@@ -1537,9 +1535,11 @@
 									</div>
 								</div>
 							</div>
-						</div-->
-					</div>
-					<!--div id="womenproducts" class="tabcontent">
+						</div> -->
+
+					<div>
+
+					<!--  <div id="womenproducts" class="tabcontent">
 						<div class="tab_navMenu">
 							<ul>
 								<li><a href="javascript:void(0);">Main Products</a></li>
@@ -1718,7 +1718,8 @@
 								</div>
 							</div>
 						</div>
-					</div-->
+					</div> -->
+
 					<div id="factorytour" class="tabcontent">
 						<div class="profile_factory_tourWrap">
 							@if(count($business_profile->companyFactoryTour)>0)

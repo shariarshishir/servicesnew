@@ -60,13 +60,14 @@ class RFQController extends Controller
     public function rfqListByCategoryId($id)
     {
         $rfqs=Rfq::withCount('bids')->with('images','user','bids')->where('category_id',$id)->latest()->paginate(5);
+        $rfqIdsWithBid = SupplierBid::where('supplier_id',auth()->user()->id)->pluck('rfq_id')->toArray();
         if($rfqs->total()>0){
 
-            return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
+            return response()->json(['rfqs'=>$rfqs,'rfqIdsWithBid'=>$rfqIdsWithBid,"success"=>true],200);
         }
         else{
             
-            return response()->json(['rfqs'=> $rfqs,"success"=>false],200);
+            return response()->json(['rfqs'=> $rfqs, 'rfqIdsWithBid'=>$rfqIdsWithBid ,"success"=>false],200);
         }
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewProfromaInvoiceHasCreatedMailToBuyer;
 use App\Http\Traits\PushNotificationTrait;
 
-class NewProfromaInvoiceHasCreatedListener 
+class NewProfromaInvoiceHasCreatedListener implements ShouldQueue
 {
     use PushNotificationTrait;
     public function handle($event)

@@ -149,18 +149,16 @@
 
 
             $(".business_profile_list_trigger_from_backend").click(function(){
-                if(selectedValues.length > 0)
-                {
+                if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
                     });
-                    let message = {'message': html, 'product': null, 'from_id' : 7, 'to_id' : "{{$rfq->user->id}}"};
+                    let message = {'message': html, 'image': "", 'from_id' : '5552', 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
 
                 } 
-                else 
-                {
+                else{
                     alert('Enter offer price first');
                 }
             })

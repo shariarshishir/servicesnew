@@ -185,45 +185,22 @@ class PoController extends Controller
             $performa_id = $data->id;
 
             $noOfProducts = count($request->input('unit'));
-            $products = Product::where('business_profile_id',$request->business_profile_id)->where('price_unit','USD')->inRandomOrder()->limit($noOfProducts)->get();
+            // $products = Product::where('business_profile_id',$request->business_profile_id)->where('price_unit','USD')->inRandomOrder()->limit($noOfProducts)->get();
             foreach($request->input('unit') as $i => $sup)
             {
                
-                if(count($products)==1){
-                    $dataitem = new ProformaProduct;
-                    $dataitem->performa_id = $performa_id;
-                    $dataitem->supplier_id = $products[0]->businessProfile->user->id;
-                    $dataitem->product_id = $products[0]->id;
-                    $dataitem->item_title = $request->input('item_title')[$i];
-                    $dataitem->unit = $request->input('unit')[$i];
-                    $dataitem->unit_price = $request->input('unit_price')[$i];
-                    $dataitem->tax = $request->input('tax')[$i];
-                    $dataitem->total_price = $request->input('total_price')[$i];
-                    $dataitem->tax_total_price = $request->input('tax_total_price')[$i];
-                    $dataitem->price_unit = $products[0]->price_unit;
-                    $dataitem->save();
-                    
-                }
-                else{
-                    $dataitem = new ProformaProduct;
-                    $dataitem->performa_id = $performa_id;
-                    $dataitem->supplier_id = $products[$i]->businessProfile->user->id;
-                    $dataitem->product_id = $products[$i]->id;
-                    $dataitem->item_title = $request->input('item_title')[$i];
-                    $dataitem->unit = $request->input('unit')[$i];
-                    $dataitem->unit_price = $request->input('unit_price')[$i];
-                    $dataitem->tax = $request->input('tax')[$i];
-                    $dataitem->total_price = $request->input('total_price')[$i];
-                    $dataitem->tax_total_price = $request->input('tax_total_price')[$i];
-                    $dataitem->price_unit = $products[$i]->price_unit;
-                    $dataitem->save();
-
-                    
-
-                }
-                
-               
-
+                $dataitem = new ProformaProduct;
+                $dataitem->performa_id = $performa_id;
+                $dataitem->supplier_id = auth()->id();
+                $dataitem->product_id = NULL;
+                $dataitem->item_title = $request->input('item_title')[$i];
+                $dataitem->unit = $request->input('unit')[$i];
+                $dataitem->unit_price = $request->input('unit_price')[$i];
+                $dataitem->tax = $request->input('tax')[$i];
+                $dataitem->total_price = $request->input('total_price')[$i];
+                $dataitem->tax_total_price = $request->input('tax_total_price')[$i];
+                $dataitem->price_unit = 'USD';
+                $dataitem->save();
             }
             
 

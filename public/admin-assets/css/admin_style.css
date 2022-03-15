@@ -628,10 +628,17 @@ p {
 
 .business_profile_name {
     display: flex;
-    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+.business_profile_name:nth-child(odd) {
+    background: #fff;
+}
+.business_profile_name:nth-child(even) {
+    background: #f1f1f1;
 }
 .business_profile_name .propose_price {
     width: 50px;
+    margin-left: auto;
 }
 .rfq_business_profile_list {
     height: 315px;

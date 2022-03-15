@@ -83,8 +83,8 @@
                                         <input type="number" value="" name="propose_price" class="propose_price"/>
                                     </div>
                                     @endforeach
-                                    <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend">Send To the Buyer</a>
                                 </div>
+                                <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
                             </div>
                         </div>
                     </div>
@@ -124,6 +124,7 @@
 
 @endsection
 @push('js')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
             var selectedValues = [];
@@ -146,8 +147,6 @@
             });
 
 
-
-
             $(".business_profile_list_trigger_from_backend").click(function(){
                 if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
@@ -156,7 +155,7 @@
                     });
                     let message = {'message': html, 'image': "", 'from_id' : '5552', 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
-
+                    swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
                 } 
                 else{
                     alert('Enter offer price first');

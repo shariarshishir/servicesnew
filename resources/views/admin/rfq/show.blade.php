@@ -124,6 +124,7 @@
 
 @endsection
 @push('js')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
             var selectedValues = [];
@@ -154,7 +155,7 @@
                     });
                     let message = {'message': html, 'image': "", 'from_id' : '5552', 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
-
+                    swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
                 } 
                 else{
                     alert('Enter offer price first');

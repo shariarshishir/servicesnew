@@ -446,6 +446,7 @@ legend {
 /* ******* Nav css start ********** */
 .mainnav_wrap {
     padding-top: 22px !important;
+    padding-left: 17px !important;
 }
 .fixedHeader .mainnav_wrap {
     padding-top: 25px !important;
@@ -754,6 +755,9 @@ legend {
     font-weight: 600;
     margin: 0 0 40px;
 }
+/* .product_design_wrapper .product_wrapper h3 {
+    padding-left: 15px;
+} */
 .product_slider .slick-prev {
     background : url('../images/frontendimages/new_layout_images/prev.png') no-repeat center;
     background-size: 55px;
@@ -5928,7 +5932,7 @@ nav {
 }
 .pagination-block-wrapper nav {
     height: inherit;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
 }
 nav .pagination {
     width: 100%;
@@ -8477,7 +8481,11 @@ nav .pagination li.active .page-link {
     height: 5px 8px;
 }
 .product_design_wrapper .product_boxwrap {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
+    margin: 0 -25px;
+}
+.product_design_wrapper .active_grid.product_boxwrap  {
+    margin: 0px;
 }
 .product_design_wrapper .productBox .sold-out {
     position: absolute;
@@ -8579,11 +8587,12 @@ nav .pagination li.active .page-link {
     position: relative;
     background: #13131312;
     /* height: 335px; */
-    margin-bottom: 30px;
     border: 1px solid #E5E4E2;
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    margin: 0 5px 30px;
+
 }
 .product_design_wrapper .productBox .imgBox {
     /* padding: 7px; */
@@ -8644,6 +8653,8 @@ nav .pagination li.active .page-link {
     font-weight: 500;
     color: #54A958;
     text-align: right;
+    height: 30px;
+    overflow: hidden;
 }
 .product_design_wrapper .product_item_box .pro_price {
     text-align: left;

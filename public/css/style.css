@@ -7984,11 +7984,12 @@ nav .pagination li.active .page-link {
     color: #000000;
 }
 .landing_intro_wrapper h1 {
-    font-size: 35px;
-    line-height: 46px;
+    font-size: 40px;
+    line-height: 55px;
     color: #404040;
     font-weight: 500;
     margin-bottom: 50px;
+    width: 470px;
 }
 .landing_intro_wrapper .banner_search {
     padding: 50px 0 80px;
@@ -8066,8 +8067,8 @@ nav .pagination li.active .page-link {
 .landing_spotlight_infoWrap {
     background-size: cover;
     color: #ffffff;
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 30px;
     font-weight: 300;
     min-height: 200px;
     position: relative;
@@ -8086,7 +8087,7 @@ nav .pagination li.active .page-link {
 .landing_spotlight_wrap h3 {
     font-size: 32px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .landing_spotlight_wrap h5 {
     font-size: 22px;
@@ -8138,9 +8139,9 @@ nav .pagination li.active .page-link {
 .landing_request_wrap h1,
 .landing_tools_infobox h1,
 .sourcing_info_box h1 {
-    font-size: 35px;
+    font-size: 40px;
     font-weight: 300;
-    line-height: 42px;
+    line-height: 55px;
     display: inline-block;
     margin-bottom: 0;
     display: block;
@@ -8784,8 +8785,8 @@ nav .pagination li.active .page-link {
 }
 
 .mvc_produce_design_wrap h1 {
-    font-size: 35px;
-    line-height: 48px;
+    font-size: 40px;
+    line-height: 55px;
     font-weight: 300;
     /* border-bottom: 1px solid #262626; */
     display: block;
@@ -8899,11 +8900,11 @@ nav .pagination li.active .page-link {
     border-bottom: 1px solid #262626;
     height: 1px;
     display: inline-block;
-    min-width: 300px;
+    min-width: 290px;
     margin-bottom: 50px;
 }
 .landing_tools_infobox .title_border {
-    min-width: 400px;
+    min-width: 380px;
 }
 .single-product-details-block-wrapper .store-more-products .row {
     margin: 0;
@@ -8950,9 +8951,19 @@ nav .pagination li.active .page-link {
 .landing_request_img img {
     width: 70%;
 }
+
+
+/* ******************** Product upload style start *********************** */
+.product_upload_boxwrap .qty_available {
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+/* ******************** Product upload style end *********************** */
+
+
+
 /* ******************** Media css style start *********************** */
-
-
 @media only screen and (min-width: 1500px) {
 
     /* .container {
@@ -8960,7 +8971,7 @@ nav .pagination li.active .page-link {
         width: 100%;
     } */
     .container {
-        max-width: 92%;
+        max-width: 90%;
         width: 100%;
     }
 
@@ -9034,6 +9045,10 @@ nav .pagination li.active .page-link {
     }    
     .product_design_wrapper .productBox .imgBox img {
         width: auto;
+    }
+
+    .spotlight-inside-image img {
+        height: auto;
     }
 }
 
@@ -10951,6 +10966,7 @@ nav .pagination li.active .page-link {
     }
     .landing_page_wrapper .carousel.carousel-slider {
         height: 490px !important;
+        overflow: hidden;
     }
     
     .landing_intro_wrapper {

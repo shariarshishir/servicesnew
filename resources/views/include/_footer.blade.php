@@ -283,6 +283,15 @@
         }
     });
 
+    $(document).ready(function(){
+        var screenWidth = $(window).width();
+        var productFilterEmptyArea = screenWidth - 326;
+        $(".product_filter_empty_area").css({"width": productFilterEmptyArea, "height": "100%"});
+        $(".product_filter_empty_area").click(function(){
+            $(this).closest(".productSidenav").css({"width":"0px"});
+        })
+    })
+
 
 </script>
 

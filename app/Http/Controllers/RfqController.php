@@ -72,6 +72,9 @@ class RfqController extends Controller
             'payment_method' => 'required',
             'delivery_time'  => 'required',
             'destination'   => 'required',
+            'short_description' => 'required',
+            'full_specification' => 'required',
+
         ]);
 
         $rfqData = $request->except(['_token','captcha_token','product_images']);
@@ -210,6 +213,8 @@ class RfqController extends Controller
             'destination'   => 'required',
             'edit_rfq_id'  => 'required',
             'product_images.*' => 'max:10000',
+            'short_description' => 'required',
+            'full_specification' => 'required',
 
         ]);
 

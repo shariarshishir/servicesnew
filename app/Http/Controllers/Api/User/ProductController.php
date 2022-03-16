@@ -15,6 +15,7 @@ use App\Rules\ReadyStockPriceBreakDownRule;
 use App\Rules\NonClothingPriceBreakDownRule;
 use App\Rules\NonClothingFullStockRule;
 use App\Rules\ReadyStockFullStockRule;
+use App\Models\ProductVideo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -561,6 +562,9 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
 
         ]);
 
@@ -667,6 +671,8 @@ class ProductController extends Controller
                 'full_stock_price' =>  $full_stock_price,
                 'full_stock_negotiable' => $full_stock_negotiable,
                 'customize'      => isset($request->customize) ? true : false,
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
                 'created_by'  => auth()->id(),
 
             ]);
@@ -696,6 +702,16 @@ class ProductController extends Controller
                     ]);
                 }
 
+            }
+
+            //upload video
+            if($request->hasFile('video')){
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                    ]);
             }
             DB::commit();
             // all good
@@ -892,6 +908,9 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
 
         ]);
 
@@ -983,6 +1002,8 @@ class ProductController extends Controller
                 'full_stock_price' =>  $full_stock_price,
                 'customize'      => isset($request->customize) ? true : false,
                 'full_stock_negotiable' => $full_stock_negotiable,
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
                 'updated_by'  => auth()->id(),
             ]);
             $product=Product::where('id',$productId)->first();
@@ -1018,6 +1039,30 @@ class ProductController extends Controller
                     ]);
                 }
             }
+
+            //video
+            if(isset($request->remove_video_id)){
+                if( count(json_decode($request->remove_video_id)) > 0 ){
+                    $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+                    if($productVideo){
+                        if(Storage::exists($productVideo->video)){
+                            Storage::delete($productVideo->video);
+                        }
+                        $productVideo->delete();
+                    }
+                }
+            }
+ 
+            if($request->hasFile('video')){
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
+            }
+
+
             //related products
             if(!isset($request->related_products))
             {

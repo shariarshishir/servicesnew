@@ -44,7 +44,7 @@
 
                         <div class="row input-field input-wrapper">
                             <div class="col s12 m4 l3">
-                                <label>Short Description</label>
+                                <label>Short Description <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
                                 <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="row input-field input-wrapper">
                             <div class="col s12 m4 l3">
-                                <label>Full Description</label>
+                                <label>Full Description <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
                                 <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>

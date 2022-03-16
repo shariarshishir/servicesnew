@@ -8,6 +8,7 @@ use App\Models\Manufacture\Product;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Manufacture\ProductImage;
+use App\Models\Manufacture\ProductVideo;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -32,17 +33,31 @@ class ManufactureProductController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'business_profile_id' => 'required',
             'title'=>'required',
+            //'price_per_unit'=>'required|numeric',
             'moq'=>'required|numeric',
             'product_details'=>'required',
             'product_specification'=>'required',
             'lead_time'=>'required',
             'industry' => 'required',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'price_unit' => 'required',
+            'qty_unit'   => 'required',
+            'colors'  => 'required',
+            'sizes'  => 'required',
+            'product_images' => 'required',
+            'price_per_unit'=> 'required',
+            'gender' => 'required',
+            'sample_availability' => 'required',
+        ],[
+            'price_per_unit.required' => 'The price range field is required.',
+            'category_id.required' => 'The product category field is required',
         ]);
-
+        
         if ($validator->fails())
         {
             return response()->json(array(
@@ -70,8 +85,11 @@ class ManufactureProductController extends Controller
                 'price_unit'   => $request->price_unit,
                 'qty_unit'    =>$request->qty_unit,
                 'created_by' => auth()->id(),
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
 
             ];
+            
             $product=Product::create($Data);
 
             if($request->hasFile('product_images')){
@@ -90,6 +108,18 @@ class ManufactureProductController extends Controller
 
                     ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
                 }
+            }
+
+            if($request->hasFile('video')){
+                $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+                $business_profile_name=$business_profile->business_name;
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
+
             }
             DB::commit();
             $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
@@ -116,12 +146,20 @@ class ManufactureProductController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'title'=>'required',
+            'price_per_unit'=>'required',
+            'price_unit' => 'required',
             'moq'=>'required|numeric',
+            'qty_unit'   => 'required',
+            'colors'  => 'required',
+            'sizes'  => 'required',
             'product_details'=>'required',
             'product_specification'=>'required',
             'lead_time'=>'required',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
            
-        ]);
+        ]); 
 
         if ($validator->fails()){
             return response()->json(array(
@@ -146,6 +184,8 @@ class ManufactureProductController extends Controller
             $product->colors=$request->colors ?? [];
             $product->sizes=$request->sizes ?? [];
             $product->lead_time=$request->lead_time;
+            $product->gender=$request->gender;
+            $product->sample_availability=$request->sample_availability;
             $product->save();
 
             $productImages=ProductImage::whereIn('id',$request->product_images_id)->get();
@@ -177,6 +217,31 @@ class ManufactureProductController extends Controller
 
                     ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
                 }
+            }
+
+            if(isset($request->remove_video_id)){
+                if( count(json_decode($request->remove_video_id)) > 0 )
+                {
+                    $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+                    if($productVideo){
+        
+                        if(Storage::exists($productVideo->video)){
+                            Storage::delete($productVideo->video);
+                        }
+                        $productVideo->delete();
+                    }
+                }
+            }
+    
+            if($request->hasFile('video')){
+                $business_profile=BusinessProfile::where('id', $product->businessProfile->id)->first();
+                $business_profile_name=$business_profile->business_name;
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
             }
             $product=Product::with(['product_images','category'])->where('id',$productId)->first();
             return response()->json([

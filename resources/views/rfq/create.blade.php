@@ -44,11 +44,11 @@
 
                             <div class="row input-field input-wrapper">
                                 <div class="col s12 m6">
-                                    <label>Short Description</label>
+                                    <label>Short Description<span>*</span></label>
                                     <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
                                 </div>
                                 <div class=" col s12 m6">
-                                    <label>Full Description</label>
+                                    <label>Full Description<span>*</span></label>
                                     <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
                                 </div>
                             </div>
@@ -341,6 +341,30 @@
             {
                 $('input[name="title"]').closest('.input-wrapper').removeClass(errorClass);
                 $('input[name="title"]').removeClass('invalid');
+            }
+
+            if ($('input[name="short_description"]').val()=="" || $('input[name="short_description"]').val()=="undefined")
+            {
+                errCount++;
+                $('input[name="short_description"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="short_description"]').addClass('invalid');
+            }
+            else
+            {
+                $('input[name="short_description"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="short_description"]').removeClass('invalid');
+            }
+
+            if ($('input[name="full_specification"]').val()=="" || $('input[name="full_specification"]').val()=="undefined")
+            {
+                errCount++;
+                $('input[name="full_specification"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="full_specification"]').addClass('invalid');
+            }
+            else
+            {
+                $('input[name="full_specification"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="full_specification"]').removeClass('invalid');
             }
 
             if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")

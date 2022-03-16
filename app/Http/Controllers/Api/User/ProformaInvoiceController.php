@@ -40,8 +40,9 @@ class ProformaInvoiceController extends Controller
                 ->latest()->get();
         if(count($proformaInvoices)>0){
             return response()->json([
-                'proformaInvoices'=>$proformaInvoices,
-                'success'=>True
+                'success'=>True,
+                'proformaInvoices'=>$proformaInvoices
+                
             ],200);
 
         }

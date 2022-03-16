@@ -8245,7 +8245,7 @@ nav .pagination li.active .page-link {
     z-index: 999;
     top: 0px;
     right: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.1);
     transition: 0.9s;
     overflow-x: hidden;
 }

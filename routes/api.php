@@ -175,6 +175,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('/proforma-invoices/{id}', [ProformaInvoiceController::class, 'proformaInvoiceDetails']);
     Route::post('/proforma-invoice-accept', [ProformaInvoiceController::class, 'acceptProformaInvoice']);
     Route::post('/proforma-invoice-reject',[ProformaInvoiceController::class, 'rejectProformaInvoice']);
+    Route::get('/merchant-assistanes',[ProformaInvoiceController::class, 'merchantAssistances']);
+
 
 
     //manufacture product api

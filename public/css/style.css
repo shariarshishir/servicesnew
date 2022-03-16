@@ -511,7 +511,7 @@ legend {
 .header_dasktop .mainNav .subNav li a:visited {
     padding: 8px 15px;
     background: none !important;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 18px;
 }
 .header_dasktop .mainNav .subNav li a.active,
@@ -8961,7 +8961,25 @@ nav .pagination li.active .page-link {
 
 /* ******************** Product upload style end *********************** */
 
-
+.product-list-images-block,
+.product-large-image-block {
+    display: none;
+}
+.product-list-images-block.slick-initialized,
+.product-large-image-block.slick-initialized {
+    display: block;
+}
+.product_preview_info_wrap .product_preview_wrap .pre-loading-image-gallery {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+}
+.product_preview_info_wrap .product_preview_wrap .pre-loading-image-gallery img {
+    box-shadow: none;
+    height: 80px;
+    width: 80px;
+}
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1500px) {

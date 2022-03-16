@@ -22,6 +22,12 @@
                         <div class="show-product-results-wrapper products_filter_search_wrap">
                             <div class="filter_search">
                                 <form action="{{route('products')}}" method="get">
+                                    @if($location || $product_name || $lead_minimum_range || $lead_maximum_range || $select_product_category || $price_minimum_range || $price_maximum_range || $gender || $sample_availability)
+                                    <div class="filter_by">
+                                        <a href="{{route('products')}}" class="reset_product_filter_trigger btn-product-sidenav"><i class="material-icons">restart_alt</i></a>
+                                        <span>Reset All</span>
+                                    </div>
+                                    @endif
                                     <div class="filter_by">
                                         <a onclick="openProductNav()" href="javascript:void(0);" class="btn-product-sidenav"><i class="material-icons">filter_alt</i></a>
                                         <span>Filter By</span>
@@ -136,6 +142,7 @@
                         </div>
                     </div>
                     <div class="productSidenav" id="productSidenav">
+                        <div class="product_filter_empty_area"></div>
                         <div class="products_filter_list">
                             <a href="javascript:void(0)" class="closebtn" onclick="closeProductNav()"><i class="material-icons">east</i></a>
                             <h3>Filter by</h3>

@@ -49,94 +49,91 @@
                         </div>
                         <div class="product_design_wrapper">
                             <div class="product_wrapper">
-                                <div class="product_boxwrap row">
-                                    <h3>Shortest Lead Time Products</h3>
-                                    <div class="low_moq_products_wrap shortest_lead_product_wrap row">
-                                        @foreach ($products as $product)
-                                            <div class="col s6 m4 l3 product_item_box">
-                                                <div class="productBox">
-                                                    <div class="favorite">
-                                                        @if(in_array($product->id,$wishListShopProductsIds) || in_array($product->id,$wishListMfProductsIds))
-                                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));"  class="product-add-wishlist active">
-                                                                <i class="material-icons dp48">favorite</i>
-                                                            </a>
-                                                        @else
-                                                            <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
-                                                                <i class="material-icons dp48">favorite</i>
-                                                            </a>
-                                                        @endif
-                                                    </div>
-                                                    <div class="inner_productBox">
-                                                        <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
-                                                            <div class="imgBox">
-                                                                @if($product->product_images()->exists())
-                                                                    <img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt="">
-                                                                @endif
-                                                                <h4><span>{{$product->title}} </span></h4>
-                                                            </div>
-                                                            <div class="products_inner_textbox">
-                                                                <!-- <div class="priceBox row">
-                                                                    <div class="col s12 m12 l4 apperal">
-                                                                        <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
-                                                                                {{ucfirst($product->category->name)}}
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="col s12 m12 l8 right-align price">
-                                                                        $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
-                                                                    </div>
-                                                                </div> -->
-
-                                                                <div class="row">
-                                                                    <div class="col s12 m6">
-                                                                        <div class="pro_price">
-                                                                            <span class="price">Price</span>
-                                                                            $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>                                 
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col s12 m6">
-                                                                        @if(isset($product->moq))
-                                                                            <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>                                                                
-
-                                                                
-                                                                <!-- <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
-                                                                @if(isset($product->moq))
-                                                                    <div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
-                                                                @endif
-                                                                @if(isset($product->lead_time))
-                                                                    <div class="product_lead_time">Lead time:
-                                                                        @php
-                                                                            $pattern= '/[^0-9\-]/';
-                                                                            $preg_replace= preg_replace($pattern, '', $product->lead_time);
-                                                                        @endphp
-                                                                        {{$preg_replace}} days
-                                                                    </div>
-                                                                @endif
-                                                                <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
-                                                                    <div class="priceBox row">
-                                                                    <div class="col s12 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div>
-                                                                        <div class="col s12 m6 apperal">{{ $product->businessProfile->business_name }}</div>
-                                                                        <div class="price col s12 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
-                                                                    </div>
-                                                                    <h4>{{$product->title}}</h4>
-                                                                    @if(isset($list->moq))
-                                                                        <div class="product_moq">MOQ: {{$list->moq}}</div>
-                                                                    @endif
-                                                                    @if(isset($list->lead_time))
-                                                                        <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
-                                                                    @endif
-                                                                </a>  -->
-                                                            </div>
+                                <h3>Shortest Lead Time Products</h3>
+                                <div class="low_moq_products_wrap product_boxwrap row">
+                                    @foreach ($products as $product)
+                                        <div class="col s6 m4 l3 product_item_box">
+                                            <div class="productBox">
+                                                <div class="favorite">
+                                                    @if(in_array($product->id,$wishListShopProductsIds) || in_array($product->id,$wishListMfProductsIds))
+                                                        <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));"  class="product-add-wishlist active">
+                                                            <i class="material-icons dp48">favorite</i>
                                                         </a>
-                                                    </div>
-
+                                                    @else
+                                                        <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist">
+                                                            <i class="material-icons dp48">favorite</i>
+                                                        </a>
+                                                    @endif
                                                 </div>
+                                                <div class="inner_productBox">
+                                                    <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
+                                                        <div class="imgBox">
+                                                            @if($product->product_images()->exists())
+                                                                <img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt="">
+                                                            @endif
+                                                            <h4><span>{{$product->title}} </span></h4>
+                                                        </div>
+                                                        <div class="products_inner_textbox">
+                                                            <!-- <div class="priceBox row">
+                                                                <div class="col s12 m12 l4 apperal">
+                                                                    <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
+                                                                            {{ucfirst($product->category->name)}}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col s12 m12 l8 right-align price">
+                                                                    $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
+                                                                </div>
+                                                            </div> -->
+
+                                                            <div class="row">
+                                                                <div class="col s12 m6">
+                                                                    <div class="pro_price">
+                                                                        <span class="price">Price</span>
+                                                                        $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>                                 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col s12 m6">
+                                                                    @if(isset($product->moq))
+                                                                        <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>                                                                
+
+                                                            
+                                                            <!-- <h4><a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >{{$product->title}}</a></h4>
+                                                            @if(isset($product->moq))
+                                                                <div class="product_moq">MOQ: {{$product->moq}} {{ $product->qty_unit }}</div>
+                                                            @endif
+                                                            @if(isset($product->lead_time))
+                                                                <div class="product_lead_time">Lead time:
+                                                                    @php
+                                                                        $pattern= '/[^0-9\-]/';
+                                                                        $preg_replace= preg_replace($pattern, '', $product->lead_time);
+                                                                    @endphp
+                                                                    {{$preg_replace}} days
+                                                                </div>
+                                                            @endif
+                                                            <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
+                                                                <div class="priceBox row">
+                                                                <div class="col s12 m6 apperal"><a href="{{route('supplier.profile',$product->businessProfile->alias)}}">{{ $product->businessProfile->business_name }}</a></div>
+                                                                    <div class="col s12 m6 apperal">{{ $product->businessProfile->business_name }}</div>
+                                                                    <div class="price col s12 m6 right-align lead-time-value">lead time: {{$product->lead_time}}</div>
+                                                                </div>
+                                                                <h4>{{$product->title}}</h4>
+                                                                @if(isset($list->moq))
+                                                                    <div class="product_moq">MOQ: {{$list->moq}}</div>
+                                                                @endif
+                                                                @if(isset($list->lead_time))
+                                                                    <div class="product_lead_time">Lead time: {{$list->lead_time}}</div>
+                                                                @endif
+                                                            </a>  -->
+                                                        </div>
+                                                    </a>
+                                                </div>
+
                                             </div>
-                                        @endforeach
-                                    </div>
-                                    
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

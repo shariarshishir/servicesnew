@@ -1,10 +1,10 @@
 
 @extends('layouts.app_containerless')
 
-@section('title', 'Merchant Bay, Fashion Sourcing Solution, Tech Enabled B2B Platform')
-@section('description', 'Merchant Bay, B2B platform, Communication channel for buyer and supplier, Digital Platform, Manage Orders, Post RFQ, Best Suppliers in Bangladesh, Bangladesh RMG Sourching')
+@section('title', 'Merchant Bay, B2B platform, B2B fashion, Fashion e-commerce, B2B e-commerce, RMG e-commerce, Fabric e-commerce, YARN e-commerce, Marketplace, RMG Marketplace, Fashion, Fashion Sourching, Best Suppliers in Bangladesh, Bangladesh RMG Sourching, Apparel Sourcing, Garments in Bangladesh, Post RFQ, RMG RFQ, RMG, Bulk RMG, RFQ, RMG Sourching, 3D Design, 3D Fashion, Merchandiser, Suppliers, Request for quotation, Fabric, Fabric Sourcing, Fabric Marketplace, Fabric Suppliers, Fabric RFQ, Fabric Suppliers in Bangladesh, Bulk Fabric, YARN, YARN Sourcing, YARN Marketplace, YARN Suppliers, YARN RFQ, YARN Suppliers in Bangladesh, Bulk YARN, Live fashion market, Ready Stock, merchantbay.com')
+@section('description', 'Merchant Bay is the best RMG sourcing platform in the world, where million of trusted suppliers are ready to serve you. You will get the best quelity febrics, 3D designes, and sampales as your requirements.')
 @section('image', asset('images/frontendimages/merchantbay_logoX200.png'))
-@section('keywords', 'Supply Chain, B2B Fashion, Transparency, BI Tool, Fashion Marketplace, B2B Marketplace, Bangladesh RMG, RMG Sourcing, RMG, Smart Tool, T&A, Suppliers, Buyers, QC, Global, Live Fashion Market, Wholesaler, Sourcing, Platform, Export, RFQ, Quotation, Tool, MB, Merchant, Digitisation, Digitization, Digital Fashion, 3D Fashion, Bulk Fabric, Bulk Design, Bangladesh Fashion, Connect Fashion, Spotlight, Ready Stock, 1000 Suppliers, Yarn, Fabric, Garments, SaaS, Apparel sourcing, Best Suppliers in Bangladesh')
+@section('keywords', 'Merchant Bay, B2B platform, B2B fashion, Fashion e-commerce, B2B e-commerce, RMG e-commerce, Fabric e-commerce, YARN e-commerce, Marketplace, RMG Marketplace, Fashion, Fashion Sourching, Best Suppliers in Bangladesh, Bangladesh RMG Sourching, Apparel Sourcing, Garments in Bangladesh, Post RFQ, RMG RFQ, RMG, Bulk RMG, RFQ, RMG Sourching, 3D Design, 3D Fashion, Merchandiser, Suppliers, Request for quotation, Fabric, Fabric Sourcing, Fabric Marketplace, Fabric Suppliers, Fabric RFQ, Fabric Suppliers in Bangladesh, Bulk Fabric, YARN, YARN Sourcing, YARN Marketplace, YARN Suppliers, YARN RFQ, YARN Suppliers in Bangladesh, Bulk YARN, Live fashion market, Ready Stock, merchantbay.com')
 @section('robots', 'index, nofollow')
 
 @section('content')

@@ -2436,6 +2436,26 @@
     });
 
 
+     $(document).ready(function(){
+        $(document).on('change', '.overlay-image', function() {
+            var dom = $(this).parent().parent().parent().find('.overlay-image-preview');
+            var obj = $(this);
+            const file = this.files[0];
+            console.log(file);
+            if (file){
+            let reader = new FileReader();
+            reader.onload = function(event){
+               
+                dom.attr('src', event.target.result);
+            }
+            reader.readAsDataURL(file);
+            }
+        });
+
+       
+    });
+    
+
     </script>
 
 @endpush

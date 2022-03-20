@@ -317,7 +317,22 @@
                         </div>
 
                     </div><br>
-                    {{-- video --}}
+                    <div class="overlay-image-div">
+                        <div class="overlay-image-preview-block">
+                            <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+                            alt="preview image" style="max-height: 150px;">
+                        </div>
+                    
+                        <div class="row input-field product-upload-block">
+                            <div class="col s12 m3 l3">
+                                <label class="active">Overlay Image:</label>
+                            </div>
+                            <div class="col s12 m9 l9" id="lineitems">
+                                <input class="uplodad_video_box overlay-image" type="file" name="overlay_image">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row input-field product-upload-block">
                         <div class="col s12 m3 l3">
                             <label class="active">Video:</label>

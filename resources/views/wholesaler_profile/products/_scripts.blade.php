@@ -239,6 +239,7 @@
 
     $(document).on('click', '.seller-edit-product',function(){
 
+        
         var sku=$(this).attr('id');
         var url = '{{ route("wholesaler.product.edit", ":slug") }}';
             url = url.replace(':slug', sku);
@@ -271,6 +272,11 @@
                         $('#product-edit-modal-block .edit-video-upload-block').show();
                         $('#product-edit-modal-block .edit-video-show-block').html('');
                         $('#product-edit-modal-block .edit-video-show-div').hide();
+
+                        if(data.product.overlay_original_image){
+                            var src='{{asset("storage")}}'+'/'+data.product.overlay_original_image;
+                            $('.overlay-image-preview').attr("src", src);
+                        }
                         if(data.product.video){
                                 $('#product-edit-modal-block .edit-video-upload-block').hide();
                                 $('#product-edit-modal-block .edit-video-show-div').show();
@@ -925,9 +931,40 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
 
     }
 
+    $(document).ready(()=>{
+        $('.overlay-image').change(function(){
+        var dom = $(this).parent().parent().parent().find('.overlay-image-preview');
+            var obj = $(this);
+            const file = this.files[0];
+            console.log(file);
+            if (file){
+            let reader = new FileReader();
+            reader.onload = function(event){
+               
+                dom.attr('src', event.target.result);
+            }
+            reader.readAsDataURL(file);
+            }
+        });
+    });
 
+
+    // $(document).ready(function (e) {
+    //     $('#over-lay-image').change(function(){
+    //         let reader = new FileReader();
+    //         reader.onload = (e) => {
+    //         $('#profile_image').attr('src', e.target.result);
+    //         $('.user-block .avatar-status img').attr('src', e.target.result);
+    //     }
+    //     reader.readAsDataURL(this.files[0]);
+    //         $('.profile-image-upload-button').show();
+
+    //     });
+
+    // });
 
 
 </script>
+
 
 @endpush

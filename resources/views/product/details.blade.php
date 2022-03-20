@@ -53,6 +53,7 @@ $reviewsCount = count($productReviews);
                         @else
                             <div class="product-images">
                                 <div class="product-main-image">
+                                    <div class="pre-loading-image-gallery"><img src="{{asset('images/frontendimages/ajax-search-loader-bar.gif')}}" width="80" height="80" alt="Loading"></div>
                                     <div class="product-large-image-block product_details_imgwrap">
                                         @if(count($product->images)> 0)
                                             @foreach ($product->images as $image)

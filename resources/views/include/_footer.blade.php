@@ -292,6 +292,20 @@
         })
     })
 
+    $(window).on('load', function () {
+        $('.pre-loading-image-gallery').hide();
+    }) 
+
+    // document.onreadystatechange = function() {
+    //     if (document.readyState !== "complete") {
+    //         document.querySelector(".product_preview_wrap").style.visibility = "hidden";
+    //         document.querySelector(".pre-loading-image-gallery").style.visibility = "visible";
+    //     } else {
+    //         document.querySelector(".pre-loading-image-gallery").style.display = "none";
+    //         document.querySelector(".product_preview_wrap").style.visibility = "visible";
+    //     }
+    // };    
+
 
 </script>
 

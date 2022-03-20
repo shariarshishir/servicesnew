@@ -126,7 +126,7 @@ class HomeController extends Controller
 
 
         $page = Paginator::resolveCurrentPage() ?: 1;
-        $perPage = 12;
+        $perPage = 32;
         $products = new \Illuminate\Pagination\LengthAwarePaginator(
             $merged->forPage($page, $perPage),
             $merged->count(),
@@ -196,7 +196,7 @@ class HomeController extends Controller
         $product_category= ProductCategory::all();
         $price_id=[];
         if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
-            $products = Product::latest()->with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            $products = Product::latest()->with('images')->whereIn('product_type', [2,3])->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(32);
             foreach($products as $q){
                 foreach(json_decode($q->attribute) as $price){
                     if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
@@ -234,7 +234,7 @@ class HomeController extends Controller
             }
 
 
-        })->paginate(12);
+        })->paginate(32);
 
         return view('product.ready_stock_product',compact('products', 'product_category'));
     }
@@ -286,7 +286,7 @@ class HomeController extends Controller
         $price_id=[];
         $lead_time=[];
         if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
-            $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(32);
             foreach($products as $q){
                 foreach(json_decode($q->attribute) as $price){
                     if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
@@ -298,7 +298,7 @@ class HomeController extends Controller
         }
 
         if(isset($request->lead_minimum_range) && isset($request->lead_maximum_range)){
-            $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            $products = Product::latest()->with('images')->where('customize', true)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(32);
             foreach($products as $q){
                 foreach(json_decode($q->attribute) as $price){
                     if (  $price[3] >= $request->lead_minimum_range && $price[3] <= $request->lead_maximum_range){
@@ -336,7 +336,7 @@ class HomeController extends Controller
                 $query->whereIn('id', $lead_time)->get();
             }
 
-         })->paginate(12);
+         })->paginate(32);
         return view('product.customizable',compact('products','product_category'));
     }
 
@@ -347,7 +347,7 @@ class HomeController extends Controller
         $price_id=[];
         $lead_time=[];
         if(isset($request->price_minimum_range) && isset($request->price_maximum_range)){
-            $products = Product::latest()->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(12);
+            $products = Product::latest()->with(['images','businessProfile','category'])->where('product_type', 1)->where('business_profile_id', '!=', null)->where('state',1)->where('sold',0)->paginate(32);
             foreach($products as $q){
                 foreach(json_decode($q->attribute) as $price){
                     if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
@@ -400,7 +400,7 @@ class HomeController extends Controller
             }
 
 
-         })->paginate(12);
+         })->paginate(32);
         return view('product.buy_design_product',compact('products', 'product_category'));
     }
 
@@ -1043,7 +1043,7 @@ class HomeController extends Controller
         }
 
         $page = Paginator::resolveCurrentPage() ?: 1;
-        $perPage = 12;
+        $perPage = 32;
         $low_moq_lists = new \Illuminate\Pagination\LengthAwarePaginator(
             $merged->forPage($page, $perPage),
             $merged->count(),
@@ -1151,7 +1151,7 @@ class HomeController extends Controller
             }
 
 
-         })->paginate(12);
+         })->paginate(32);
          //return $products;
         return view('product.shortest_lead_time',compact('products', 'product_category'));
     }

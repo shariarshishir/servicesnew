@@ -52,10 +52,8 @@
                         </div>
                         <div class="product_design_wrapper">
                             <div class="product_wrapper">
-                                <div class="product_boxwrap">
-                                    <h3>Designs</h3>
-                                    @include('product._products_list')
-                                </div>
+                                <h3>Designs</h3>
+                                @include('product._products_list')
                             </div>
                         </div>
                     </div>

@@ -71,7 +71,6 @@
                                                             @if($product->product_images()->exists())
                                                                 <img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt="">
                                                             @endif
-                                                            <h4><span>{{$product->title}} </span></h4>
                                                         </div>
                                                         <div class="products_inner_textbox">
                                                             <!-- <div class="priceBox row">
@@ -84,18 +83,18 @@
                                                                     $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
                                                                 </div>
                                                             </div> -->
-
+                                                            <h4><span>{{$product->title}} </span></h4>
                                                             <div class="row">
+                                                                <div class="col s12 m6">
+                                                                    @if(isset($product->moq))
+                                                                        <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
+                                                                    @endif
+                                                                </div>
                                                                 <div class="col s12 m6">
                                                                     <div class="pro_price">
                                                                         <span class="price">Price</span>
                                                                         $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>                                 
                                                                     </div>
-                                                                </div>
-                                                                <div class="col s12 m6">
-                                                                    @if(isset($product->moq))
-                                                                        <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
-                                                                    @endif
                                                                 </div>
                                                             </div>                                                                
 

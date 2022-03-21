@@ -75,6 +75,50 @@ class ProformaInvoiceController extends Controller
           
     }
 
+    public function searchProformaCreatedByAuthUser(Request $request)
+    {
+        $proformaInvoices = Proforma::with('performa_items')->where('proforma_id','like','%'.$request->search_input.'%')->whereHas('performa_items', function($q){
+                    $q->where('supplier_id', Auth::id());
+                })
+                ->latest()->get();
+        if(count($proformaInvoices)>0){
+            return response()->json([
+                'success'=>True,
+                'proformaInvoices'=>$proformaInvoices
+                
+            ],200);
+
+        }
+        else{
+            return response()->json([
+                'proformaInvoices'=>$proformaInvoices,
+                'success'=>false
+            ],200);
+        }
+          
+    }
+
+    public function searchProformaReceivedByAuthUser(Request $request)
+    {
+        $proformaInvoices = Proforma::with('performa_items')->where('proforma_id','like','%'.$request->search_input.'%')->where('buyer_id', auth()->id())->latest()->get();
+        
+        if(count($proformaInvoices)>0){
+            return response()->json([
+                'proformaInvoices'=>$proformaInvoices,
+                'success'=>True
+            ],200);
+
+        }
+        else{
+            return response()->json([
+                'proformaInvoices'=>$proformaInvoices,
+                'success'=>false
+            ],200);
+        }
+          
+    }
+
+
     public function allInformationNeededToCreateProFormaInvoice()
 	{
 		$user = Auth::user();

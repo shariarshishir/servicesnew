@@ -108,7 +108,8 @@ class RFQController extends Controller
            
             $rfqData = $request->except(['product_images']);
             $rfqData['created_by']=auth()->id();
-            $rfqData['status']='approved';
+            $rfqData['status']='pending';
+            $rfqData['link'] = $this->generateUniqueLink();
             $rfq = Rfq::create($rfqData);
             if ($request->hasFile('product_images')){
                 foreach ($request->file('product_images') as $index=>$product_image){
@@ -183,7 +184,8 @@ class RFQController extends Controller
             $rfqData = $request->except(['product_images','user','sso_reference_id']);
             $rfqData['is_from_omd']=1;
             $rfqData['created_by']=$user->id;
-            $rfqData['status']='approved';
+            $rfqData['status']='pending';
+            $rfqData['link'] = $this->generateUniqueLink();
             $rfq=Rfq::create($rfqData);
 
             if ($request->hasFile('product_images')){
@@ -237,6 +239,34 @@ class RFQController extends Controller
 
             }
         }
+    }
+
+
+    public function getRfqShareableLink($id)
+    {
+        $rfq=Rfq::where('id',$id)->first();
+        if(!$rfq){
+            return response()->json(['error' => 'Record not found'],404);
+        }
+
+        if($rfq->link){
+            $link=route('show.rfq.using.link',$rfq->link);
+            return response()->json(['link'=> $link],200);
+        }
+
+        $link=$this->generateUniqueLink();
+        $rfq->update(['link'=> $link]);
+        $link=route('show.rfq.using.link',$rfq->link);
+        return response()->json(['link'=> $link],200);
+    }
+
+    public function generateUniqueLink()
+    {
+        do {
+            $link = Str::random(20);
+        } while (Rfq::where('link', $link)->first());
+
+        return $link;
     }
 
     

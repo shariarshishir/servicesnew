@@ -70,6 +70,13 @@ class ManufactureProductController extends Controller
 
         try{
 
+            if ($request->hasFile('overlay_image')){
+                $path = $request->overlay_image->store('images','public');
+                $small_image = Image::make(Storage::get($path))->fit(370, 370)->encode();
+                Storage::put('overlay_large_image/'.$path, $path);
+                Storage::put('overlay_small_image/'.$path, $small_image);
+            }
+
             $Data=[
                 'business_profile_id' => $request->business_profile_id,
                 'product_category' => $request->category_id,
@@ -87,6 +94,7 @@ class ManufactureProductController extends Controller
                 'created_by' => auth()->id(),
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
+                'overlay_image' => $path
 
             ];
             
@@ -172,6 +180,19 @@ class ManufactureProductController extends Controller
 
         try{
             $product = Product::find($productId);
+
+            if ($request->hasFile('overlay_image')){
+                if($product->overlay_image){
+
+                    if(Storage::exists($product->overlay_image)){
+                        Storage::delete($product->overlay_image);
+                    }
+                }
+                $path = $request->overlay_image->store('images','public');
+                $small_image = Image::make(Storage::get($path))->fit(370, 370)->encode();
+                Storage::put('overlay_large_image/'.$path, $path);
+                Storage::put('overlay_small_image/'.$path, $small_image);
+            }
             $product->created_by=auth()->id();
             $product->title=$request->title;
             $product->price_per_unit=$request->price_per_unit;
@@ -186,6 +207,7 @@ class ManufactureProductController extends Controller
             $product->lead_time=$request->lead_time;
             $product->gender=$request->gender;
             $product->sample_availability=$request->sample_availability;
+            $product->overlay_image = $path;
             $product->save();
 
             $productImages=ProductImage::whereIn('id',$request->product_images_id)->get();

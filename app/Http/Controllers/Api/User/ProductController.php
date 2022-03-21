@@ -648,6 +648,17 @@ class ProductController extends Controller
             $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
 
+            //overlay image
+            if($request->overlay_image){
+                
+                $filename = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_small','public');
+                $image_resize = Image::make(public_path('storage/'.$filename));
+                $image_resize->fit(300, 300);
+                $image_resize->save(public_path('storage/'.$filename));
+                $original = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_original','public');
+
+            }
+
             $product=Product::create([
                 'business_profile_id' => $request->business_profile_id,
                 'name'      => $request->name,
@@ -673,6 +684,8 @@ class ProductController extends Controller
                 'customize'      => isset($request->customize) ? true : false,
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
+                'overlay_small_image' =>$filename,
+                'overlay_original_image' =>$original,
                 'created_by'  => auth()->id(),
 
             ]);
@@ -908,6 +921,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+            'overlay-image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
             'gender' => 'required',
             'sample_availability' => 'required',
@@ -982,6 +996,26 @@ class ProductController extends Controller
                 $availability=$request->availability;
             }
 
+            $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
+            $business_profile_name=$business_profile->business_name;
+
+            //overlay image
+            if($request->overlay_image){
+
+                if($product->overlay_original_image){
+                    if(Storage::exists($product->overlay_original_image) ){
+                        Storage::delete($product->overlay_original_image);
+                        Storage::delete($product->overlay_small_image);
+                    }
+                }
+                $filename = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_small','public');
+                $image_resize = Image::make(public_path('storage/'.$filename));
+                $image_resize->fit(300, 300);
+                $image_resize->save(public_path('storage/'.$filename));
+                $original = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_original','public');
+
+            }
+
             Product::where('id',$productId)->update([
                 'name'      => $request->name,
                 'product_category_id' => $request->product_category_id,
@@ -1004,14 +1038,10 @@ class ProductController extends Controller
                 'full_stock_negotiable' => $full_stock_negotiable,
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
+                'overlay_small_image' =>$filename,
+                'overlay_original_image' =>$original,
                 'updated_by'  => auth()->id(),
             ]);
-            $product=Product::where('id',$productId)->first();
-            // $user=User::where('id',auth()->id())->first();
-            // $vendorName=Str::slug($user->vendor->vendor_name,'-');
-
-            $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
-            $business_profile_name=$business_profile->business_name;
             $product=Product::where('id',$productId)->first();
             $user=User::where('id',auth()->id())->first();
             $productImages = ProductImage::whereIn('id',$request->product_images_id)->get();

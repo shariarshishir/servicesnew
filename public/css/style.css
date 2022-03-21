@@ -337,11 +337,10 @@ legend {
     text-transform: capitalize;
 }
 
-
 /************************** common style css start  ************************************/
 .page_content_wrap {
     border-radius: 30px;
-    padding: 50px;
+    padding: 0;
     border: 1px solid #54A958;
     position: relative;
 }
@@ -729,9 +728,13 @@ legend {
 /* *************** Banner css end ***************** */
 
 /* *************** Main Container css start ***************** */
-.mainContainer {
+#main {
     padding: 50px 0;
 }
+#main.mainContainer {
+    padding: 0;
+}
+
 .product_innrer_wrap {
     padding: 30px 70px;
     border-radius: 10px;
@@ -2827,7 +2830,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 
 /********************* suppliers page start ************************/
 .suppliers_container {
-    padding: 50px 15px 50px 10px;
+    padding: 0px 15px 0px 10px;
 }
 .suppliers_container .suppliers_filter_wrap {
     padding-bottom: 50px;
@@ -3242,7 +3245,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
 
 /********************* Blog page css start **************************/
 .blog_container {
-    padding: 50px 0;
+    padding: 0;
+    margin: 0 20px;
 }
 .blog_info_wrap {
     padding: 40px 30px 10px;
@@ -3370,6 +3374,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
+    padding: 40px;
 }
 .blog_detail_info_wrap .mainTitle {
     background: #fff url('../images/frontendimages/new_layout_images/home_arrow.png') no-repeat 15px center;
@@ -3538,7 +3543,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_content_box {
     font-size: 18px;
     line-height: 28px;
-    margin: 50px 0;
+    margin: 0px 20px 50px;
     padding: 0 50px 10px;
 }
 .quick_rfq_wrap {
@@ -5954,8 +5959,8 @@ nav .pagination li a:link,
 nav .pagination li a:active,
 nav .pagination li a:visited {
     font-size: 14px;
-    height: 30px;
-    line-height: 20px;
+    height: 28px;
+    line-height: 25px;
     padding: 3px 10px;
     border-radius: 5px;
 }
@@ -8170,7 +8175,7 @@ nav .pagination li.active .page-link {
     padding: 10px 15px;
 }
 .landing_request_wrap {
-    padding: 50px 0 80px;
+    padding: 50px 0 20px;
 }
 .landing_request_wrap h1 {
     display: inline-block;
@@ -9180,6 +9185,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     transform: none;
 }
 
+.product_preview_info_wrap .product_preview_wrap a.simpleLens-thumbnail-wrapper img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
 /* ******************** Product upload style end *********************** */
 
 /* ******************** Media css style start *********************** */
@@ -9357,6 +9367,8 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .product_upload_innerBox .input-field .price_leadtime_table input {
         width: 80% !important;
     }
+
+
 
 }
 
@@ -9711,6 +9723,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .product_upload_innerBox .uom_box .select2-container {
         width: 60px !important;
     }
+
 
     
 
@@ -10089,6 +10102,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .rfq_content_box {
         padding: 0;
         box-shadow: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .blog_container {
+        margin: 0;
     }
     .rfq_content_box .rfq_profile_detail {
         padding: 30px 15px;
@@ -10462,7 +10480,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         max-height: 140px;
     }
     .page_content_wrap {
-        padding: 20px;
+        padding: 40px 20px 20px;
     }
     .user-profile-info-block .user_my_order_btnwrap {
         position: inherit;
@@ -11103,10 +11121,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         margin-bottom: 15px !important;
     }
     .product_details_info_wrap {
-        padding: 30px 20px !important;
+        padding: 30px 0px !important;
     }
     .single-product-description-block-wrapper .card {
         font-size: 15px;
+        padding: 15px !important;
     }
     .single_product_review_wrap .single-product-write-review ul {
         float: left;
@@ -11751,8 +11770,16 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         padding-top: 0;
     }
     .product_preview_info_wrap .product_preview_wrap a img {
-        max-height: 200px;
+        max-height: 300px;
         width: auto;
+    }
+
+    .single-product-description-block-wrapper {
+        padding: 20px 0px;
+    }
+    .product_details_tab_wrap table td, 
+    .product_details_tab_wrap table th {
+        word-break: break-word;
     }
 
     /* ********************************** */
@@ -11822,6 +11849,22 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     }
     .product_design_wrapper .price_negotiable {
         font-size: 12px;
+    }
+
+    .product_preview_info_wrap .mysizebox,
+    .mycolorwrapper .mycolorbox {
+        margin: 3px 0;
+        line-height: 25px;
+    }
+    .product_preview_info_wrap .mysizebox-panel span,
+    .product_preview_info_wrap .mycolorbox-color {
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+    .product_preview_info_wrap .mysizebox-panel span {
+        margin-bottom: 0;
+        line-height: 20px;
     }
 
 

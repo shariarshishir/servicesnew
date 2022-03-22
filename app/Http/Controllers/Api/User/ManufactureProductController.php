@@ -151,6 +151,7 @@ class ManufactureProductController extends Controller
 
     public function update(Request $request,$productId)
     {
+        
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'title'=>'required',
@@ -207,7 +208,8 @@ class ManufactureProductController extends Controller
             $product->lead_time=$request->lead_time;
             $product->gender=$request->gender;
             $product->sample_availability=$request->sample_availability;
-            $product->overlay_image = $path;
+            $product->overlay_image = $path?? $product->overlay_image;
+
             $product->save();
 
             $productImages=ProductImage::whereIn('id',$request->product_images_id)->get();

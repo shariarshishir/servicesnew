@@ -62,7 +62,6 @@ class RfqController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required',
@@ -80,6 +79,7 @@ class RfqController extends Controller
         $rfqData = $request->except(['_token','captcha_token','product_images']);
         $rfqData['created_by']=auth()->id();
         $rfqData['status']='pending';
+        $rfqData['rfq_from'] = "service";
         $rfqData['link'] = $this->generateUniqueLink();
 
         $rfq=Rfq::create($rfqData);
@@ -101,6 +101,10 @@ class RfqController extends Controller
             }
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
+        //SEND CREATED RFQ DATA TO RFQ APP
+        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[ 
+        //     $rfq
+        // ]);
 
         // if(env('APP_ENV') == 'production')
         // {

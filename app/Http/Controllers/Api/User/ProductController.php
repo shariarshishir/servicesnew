@@ -68,6 +68,10 @@ class ProductController extends Controller
                 $newFormatedProduct->additional_description=$product->additional_description;
                 $newFormatedProduct->availability=$product->availability;
                 $newFormatedProduct->images=$product->images;
+                $newFormatedProduct->gender=$product->gender;
+                $newFormatedProduct->sample_availability=$product->sample_availability;
+                $newFormatedProduct->overlay_small_image=$product->overlay_small_image;
+                $newFormatedProduct->overlay_original_image=$product->overlay_original_image;
                 $newFormatedProduct->productReviews=$product->productReview;
                 $newFormatedProduct->productTotalAverageRating=productRating($product->id);
                 array_push($productsArray,$newFormatedProduct);
@@ -384,6 +388,10 @@ class ProductController extends Controller
             $newFormatedProduct->productReview=$product->productReview;
             $newFormatedProduct->productTotalAverageRating=productRating($product->id);
             $newFormatedProduct->images=$product->images;
+            $newFormatedProduct->gender=$product->gender;
+            $newFormatedProduct->sample_availability=$product->sample_availability;
+            $newFormatedProduct->overlay_small_image=$product->overlay_small_image;
+            $newFormatedProduct->overlay_original_image=$product->overlay_original_image;
             $newFormatedProduct->userId=$product->businessProfile->user->id;
             $newFormatedProduct->userName=$product->businessProfile->user->name;
             $newFormatedProduct->userImage=$product->businessProfile->user->image;
@@ -996,6 +1004,7 @@ class ProductController extends Controller
                 $availability=$request->availability;
             }
 
+            $product=Product::where('id',$productId)->first();
             $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
 
@@ -1038,8 +1047,8 @@ class ProductController extends Controller
                 'full_stock_negotiable' => $full_stock_negotiable,
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
-                'overlay_small_image' =>$filename,
-                'overlay_original_image' =>$original,
+                'overlay_small_image' =>$filename ?? $product->overlay_original_image,
+                'overlay_original_image' =>$original ?? $product->overlay_small_image,
                 'updated_by'  => auth()->id(),
             ]);
             $product=Product::where('id',$productId)->first();

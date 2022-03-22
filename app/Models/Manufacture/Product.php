@@ -2,12 +2,13 @@
 
 namespace App\Models\Manufacture;
 
-use App\Models\BusinessProfile;
-use App\Models\ManufactureProductVideo;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BusinessProfile;
+use App\Models\Admin\ProductDiscount;
+use App\Models\ManufactureProductVideo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -41,6 +42,11 @@ class Product extends Model
 
     public function product_video(){
         return $this->hasOne('App\Models\\Manufacture\ProductVideo','product_id','id');
+    }
+
+    public function discount()
+    {
+        return $this->setConnection('mysql')->hasOne('App\Models\Admin\ProductDiscount','product_id','id')->where('type', 'mb');
     }
 
 }

@@ -764,6 +764,11 @@ $reviewsCount = count($productReviews);
                                     @else
                                     <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_grBorder" disabled="disabled">Add to cart</a>
                                     @endif
+
+                                    {{-- discount --}}
+                                    @if($product->discount->discount)
+                                        <p>Discount : {{$product->discount->discount->ttl_discount}} %</p>
+                                    @endif
                                 </div>
                             </div>
 
@@ -1027,7 +1032,7 @@ $reviewsCount = count($productReviews);
                                 </div>
                             </div>
                         </div>
-                        @endif                        
+                        @endif
 
                     </div>
                 </div>
@@ -1081,7 +1086,7 @@ $reviewsCount = count($productReviews);
                                     {{-- <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" /> --}}
                                     @break
                                 @endforeach
-                                
+
                             </div>
                             <div class="product_short_details">
                                 <div class="product-title">

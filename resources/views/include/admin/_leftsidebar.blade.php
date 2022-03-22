@@ -201,7 +201,7 @@
                             <p>Merchant Assistance</p>
                         </a>
                     </li>
-                    
+
                 </ul>
           </li>
           <li class="nav-item">
@@ -209,13 +209,13 @@
                 <i class="far fa-file nav-icon"></i>
                 <p>Proforma terms and conditions</p>
             </a>
-          </li> 
+          </li>
           <li class="nav-item">
             <a href="{{route('proforma_invoices.index')}}" class="nav-link {{ Route::is('proforma_invoices*') ? 'active' : ''}} ">
                 <i class="far fa-file nav-icon"></i>
                 <p>Proforma invoices</p>
             </a>
-          </li>          
+          </li>
           <li class="nav-item">
             <a href="{{ Route('blogs.index')}}" class="nav-link {{ Route::is('blogs.index')? 'active' : ''}}">
                 <i class="far fa-newspaper nav-icon"></i>
@@ -243,6 +243,13 @@
             <a href="{{ Route('admin.rfq.index')}}" class="nav-link">
                 <i class="fas fa-quote-left nav-icon"></i>
                 <p>RFQ</p>
+            </a>
+        </li>
+        {{-- discounts --}}
+        <li class="nav-item">
+            <a href="{{ Route('admin.discount.index')}}" class="nav-link {{ Route::is('admin.discount.*') ? 'active' : ''}}">
+                <i class="fas fa-network-wired nav-icon"></i>
+                <p>Discounts</p>
             </a>
         </li>
 

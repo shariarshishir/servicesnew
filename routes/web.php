@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ManageBusinessProfileController;
 use App\Http\Controllers\Admin\NewUserRequestController;
 use App\Http\Controllers\Admin\RfqController as AdminRfqController;
@@ -519,6 +520,13 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('products',[ProductController::class, 'index'])->name('admin.products.index');
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');
+        //discounts
+        Route::post('discount/store/products', [DiscountController::class, 'storeProducts'])->name('admin.discount.store.products');
+        Route::get('discount/add/products/{id}', [DiscountController::class, 'addProducts'])->name('admin.discount.add.products');
+        Route::get('get/products/from/business/{id}', [DiscountController::class, 'getProductsFromBusiness'])->name('get.products.from.business');
+        Route::resource('discount',DiscountController::class, [
+            'as' => 'admin'
+        ]);
     });
 
 });

@@ -664,35 +664,56 @@ class SellerProductController extends Controller
         $input_value=$request->value;
         $product=Product::where('sku',$request->product_sku)->first();
         //full stock
+        $discount=0;
         if($product->full_stock== 1){
             if($product->full_stock_negotiable == true){
-                return response()->json(['flag'=>1,'total_price'=>"Negotiable", 'unit_price' => "Negotiable" ]);
+                return response()->json(['flag'=>1,'total_price'=>"Negotiable", 'unit_price' => "Negotiable", 'discount' => $discount ]);
             }
             $unit_price=$product->full_stock_price / $input_value;
             $total_price= $product->full_stock_price;
-            return response()->json(['total_price'=> number_format($total_price, 2, '.', ''), 'unit_price' =>   number_format($unit_price, 2, '.', '') ]);
+            if($product->discount->discount){
+                $discount_price= $total_price*$product->discount->discount->ttl_discount / 100;
+                $original_price= $total_price;
+                $total_price -= $discount_price;
+                $discount= 1;
+            }
+            return response()->json(['total_price'=> number_format($total_price, 2, '.', ''), 'unit_price' =>   number_format($unit_price, 2, '.', ''), 'discount' => $discount ]);
         }
         $attribute=json_decode($product->attribute);
         $count_list=count($attribute);
 
         if ($input_value < $product->moq) {
-            return response()->json(['flag'=>0,'total_price' => 'You must add Mimium order quantity '.$product->moq]);
+            return response()->json(['flag'=>0,'total_price' => 'You must add Mimium order quantity '.$product->moq , 'discount' => $discount ]);
          }
         foreach($attribute as $key => $list){
 
             if($input_value >= $list[0] && $input_value <= $list[1]){
                 if($list[2] == "Negotiable"){
-                    return response()->json(['flag'=>1,'total_price'=>"Negotiable", 'unit_price' => "Negotiable" ]);
+                    return response()->json(['flag'=>1,'total_price'=>"Negotiable", 'unit_price' => "Negotiable" , 'discount' => $discount ]);
                 }
-                return response()->json(['total_price'=>number_format($input_value*$list[2], 2, '.', ''), 'unit_price' => $list[2] ]);
+                $total_price =$input_value*$list[2];
+                if($product->discount->discount){
+                    $discount_price= $total_price*$product->discount->discount->ttl_discount / 100;
+                    $original_price= $total_price;
+                    $total_price -= $discount_price;
+                    $discount= 1;
+                }
+                return response()->json(['total_price'=>number_format($total_price, 2, '.', ''), 'unit_price' => $list[2], 'discount' => $discount ]);
             }
             //if cross the range
             if( ++$key==$count_list){
                 if($list[1] < $input_value){
                      if($list[2] == "Negotiable"){
-                         return response()->json(['flag'=>1,'total_price'=>"Negotiable", 'unit_price' => "Negotiable" ]);
+                         return response()->json(['flag'=>1,'total_price'=>"Negotiable", 'unit_price' => "Negotiable", 'discount' => $discount ]);
                      }
-                  return response()->json(['total_price'=>number_format($input_value*$list[2], 2, '.', ''), 'unit_price' => $list[2] ]);
+                    $total_price =$input_value*$list[2];
+                    if($product->discount->discount){
+                        $discount_price= $total_price*$product->discount->discount->ttl_discount / 100;
+                        $original_price= $total_price;
+                        $total_price -= $discount_price;
+                        $discount= 1;
+                    }
+                  return response()->json(['total_price'=>number_format($total_price, 2, '.', ''), 'unit_price' => $list[2] ,'discount' => $discount]);
                 }
              }
 

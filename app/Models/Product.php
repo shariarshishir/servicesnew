@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\ProductDiscount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -46,6 +47,11 @@ class Product extends Model
     public function video()
     {
         return $this->hasOne(ProductVideo::class);
+    }
+
+    public function discount()
+    {
+        return $this->hasOne(ProductDiscount::class)->where('type', 'shop');
     }
 
 

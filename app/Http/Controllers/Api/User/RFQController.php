@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\SupplierBid;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewRfqHasAddedEvent;
+use Illuminate\Support\Str;
 
 
 class RFQController extends Controller
@@ -84,7 +85,6 @@ class RFQController extends Controller
         }
     }
 
-   
     public function store(Request $request){
         
         // $validator = Validator::make($request->all(), [
@@ -108,7 +108,8 @@ class RFQController extends Controller
            
             $rfqData = $request->except(['product_images']);
             $rfqData['created_by']=auth()->id();
-            $rfqData['status']='approved';
+            $rfqData['status']='pending';
+            $rfqData['link'] = $this->generateUniqueLink();
             $rfq = Rfq::create($rfqData);
             if ($request->hasFile('product_images')){
                 foreach ($request->file('product_images') as $index=>$product_image){
@@ -154,9 +155,10 @@ class RFQController extends Controller
     }
 
     public function storeRfqFromOMD(Request $request){
-      
-        try{  
+        // try{  
+        //     return response()->json()
             $userObj = json_decode($request->user);
+            return response()->json(['user'=>$userObj]);
             //user loging credential
             $email = $userObj->email;
             $password = base64_decode($userObj->password);
@@ -181,9 +183,9 @@ class RFQController extends Controller
             }
         
             $rfqData = $request->except(['product_images','user','sso_reference_id']);
-            $rfqData['is_from_omd']=1;
             $rfqData['created_by']=$user->id;
-            $rfqData['status']='approved';
+            $rfqData['status']='pending';
+            $rfqData['link'] = $this->generateUniqueLink();
             $rfq=Rfq::create($rfqData);
 
             if ($request->hasFile('product_images')){
@@ -194,25 +196,27 @@ class RFQController extends Controller
                     RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
             }
-            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
-            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+            if(env('APP_ENV') == 'production')
+            {
+                $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
+                foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                    event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+                }
+
+                $selectedUserToSendMail="success@merchantbay.com";
                 event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             }
-
-            $selectedUserToSendMail="success@merchantbay.com";
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){
                 return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"success"=>true],200);
             }
 
-        }catch(\Exception $e){
-            return response()->json([
-                'success' => false,
-                'error'   => ['msg' => $e->getMessage()],
-            ],500);
-        }
+        // }catch(\Exception $e){
+        //     return response()->json([
+        //         'success' => false,
+        //         'error'   => ['msg' => $e->getMessage()],
+        //     ],500);
+        // }
     }
 
 
@@ -237,6 +241,34 @@ class RFQController extends Controller
 
             }
         }
+    }
+
+
+    public function getRfqShareableLink($id)
+    {
+        $rfq=Rfq::where('id',$id)->first();
+        if(!$rfq){
+            return response()->json(['error' => 'Record not found'],404);
+        }
+
+        if($rfq->link){
+            $link=route('show.rfq.using.link',$rfq->link);
+            return response()->json(['link'=> $link],200);
+        }
+
+        $link=$this->generateUniqueLink();
+        $rfq->update(['link'=> $link]);
+        $link=route('show.rfq.using.link',$rfq->link);
+        return response()->json(['link'=> $link],200);
+    }
+
+    public function generateUniqueLink()
+    {
+        do {
+            $link = Str::random(20);
+        } while (Rfq::where('link', $link)->first());
+
+        return $link;
     }
 
     

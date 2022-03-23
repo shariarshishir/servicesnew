@@ -1,6 +1,6 @@
 <!-- live_market section start -->
-<div class="live_market">
-    <a href="https://live.merchantbay.com/" target="_blank">
+<div class="live_market" itemscope>
+    <a href="https://live.merchantbay.com/" target="_blank" itemprop="Live Market">
         <i class="material-icons">live_tv</i>
         <span>Live Market</span>
         <span class="live-img"> <img src="{{asset('images/frontendimages/new-home/live-img.gif')}}" /></images> </span>
@@ -8,77 +8,77 @@
 </div>
 <!-- live_market section end -->
 <!-- Footer section start -->
-<footer class="footer_wrap">
+<footer class="footer_wrap" itemscope>
     @if(request()->route()->getName() == 'home')
-    <div class="footer_topWrap">
-        <div class="container center">
-            <div class="footer_topWrap_inner">
-                <h2>Sign up and Get connected</h2>
-                <h4>With thousands of Suppliers and Products that meet your needs.</h4>
-                <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green footer_signUp">Sign up</a>
+    <div class="footer_topWrap" itemscope>
+        <div class="container center" itemscope>
+            <div class="footer_topWrap_inner" itemscope>
+                <h2 itemprop="title">Sign up and Get connected</h2>
+                <h4 itemprop="title">With thousands of Suppliers and Products that meet your needs.</h4>
+                <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green footer_signUp" itemprop="Sign Up">Sign up</a>
             </div>
         </div>
     </div>
     @endif
-    <div class="footer_bottomWrap">
-        <div class="container">
-        <div class="row">
-                <div class="col s12 l6"></div>
-                <div class="col s12 l6 footer_newsletter_bar">
-                    <h6>Subscribe to our weekly newsletter on industry and product updates</h6>
-                    <div class="footer_buttonWrap right-align">
-                        <form method="post" id="newsletter_signup_form">
+    <div class="footer_bottomWrap" itemscope>
+        <div class="container" itemscope>
+        <div class="row" itemscope>
+                <div class="col s12 l6" itemscope></div>
+                <div class="col s12 l6 footer_newsletter_bar" itemscope>
+                    <h6 itemprop="title">Subscribe to our weekly newsletter on industry and product updates</h6>
+                    <div class="footer_buttonWrap right-align" itemscope>
+                        <form method="post" id="newsletter_signup_form" itemscope>
                             @csrf
-                            <input type="text" id="newsletter_email_address" class="industry_textbox" placeholder="Get the latest Industry Insights" required/>
-                            <button type="submit" id="newsletter_signup" class="btn_lightgr btn_email"> <img src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
+                            <input type="text" id="newsletter_email_address" itemprop="Get the latest Industry Insights" class="industry_textbox" placeholder="Get the latest Industry Insights" required/>
+                            <button type="submit" id="newsletter_signup" class="btn_lightgr btn_email" itemprop="Email Button"> <img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
                         </form>
 					</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col s12 m4 l6 footer_left_bottom">
-                    <div class="addressWrap">
-                        <div class="addressBox">
-                            <h4>Office Address:</h4>
-                            <p>Meem Tower, <br />
+            <div class="row" itemscope>
+                <div class="col s12 m4 l6 footer_left_bottom" itemscope>
+                    <div class="addressWrap" itemscope>
+                        <div class="addressBox" itemprop="location" itemscope itemtype="https://schema.org/Place">
+                            <h4 itemprop="title">Office Address:</h4>
+                            <p itemprop="streetAddress">Meem Tower, <br />
                             Floor: 8, House: 18, <br />
                             Road: 12, Sector: 6, <br />
                             Uttara, Dhaka. </p>
                         </div>
-                        <a href="https://www.google.com/maps/place/Merchant+Bay+Office/@23.8710895,90.3987335,17z/data=!3m1!4b1!4m5!3m4!1s0x3755c59804b59f57:0xa5156d3fe206198c!8m2!3d23.8710846!4d90.4009222" target="_blank" class="btn_direct btn_grBorder">Get Direction</a>
+                        <a itemprop="Location Map" href="https://www.google.com/maps/place/Merchant+Bay+Office/@23.8710895,90.3987335,17z/data=!3m1!4b1!4m5!3m4!1s0x3755c59804b59f57:0xa5156d3fe206198c!8m2!3d23.8710846!4d90.4009222" target="_blank" class="btn_direct btn_grBorder">Get Direction</a>
 
                         <!-- <a href="javascript:void(0);" class="btn_tour btn_lightgr">Virtual Tour</a> -->
                     </div>
                 </div>
-                <div class="col s12 m8 l6 footer_right_bottom">
-                    <div class="row">
-                        <div class="col s4 l4 help_menu">
-                            <ul>
-                                <li><a href="{{route('front.tools')}}">Tools</a></li>
-                                <li><a href="{{route('suppliers')}}">Suppliers</a></li>
-                                <li><a href="{{route('rfq.index')}}">RFQ</a></li>
-                                <li><a href="{{route('industry.blogs')}}">Blogs/Insights</a></li>
-                                <li><a href="{{route('front.policy')}}">Policies</a></li>
-                                <li style="display: none;"><a href="javascript:void(0);">Helps</a></li>
+                <div class="col s12 m8 l6 footer_right_bottom" itemscope>
+                    <div class="row" itemscope>
+                        <div class="col s4 l4 help_menu" itemscope>
+                            <ul itemscope itemtype="https://schema.org/ListItem">
+                                <li itemprop="itemListElement"><a href="{{route('front.tools')}}" itemmprop="Tools">Tools</a></li>
+                                <li itemprop="itemListElement"><a href="{{route('suppliers')}}" itemprop="Suppliers">Suppliers</a></li>
+                                <li itemprop="itemListElement"><a href="{{route('rfq.index')}}" itemprop="RFQ">RFQ</a></li>
+                                <li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blogs">Blogs/Insights</a></li>
+                                <li itemprop="itemListElement"><a href="{{route('front.policy')}}" itemprop="Policies">Policies</a></li>
+                                <li style="display: none;" itemprop="itemListElement"><a href="javascript:void(0);" itemprop="Helps">Helps</a></li>
                             </ul>
                             </div>
-                            <div class="col s4 l5 product_menu">
-                                <h4>Products</h4>
-                                <ul>
-                                    <li><a href="{{route('buydesignsproducts')}}">Designs</a></li>
-                                    <li style="display: none;"><a href="javascript:void(0);">New Arrivals</a></li>
-                                    <li><a href="{{route('readystockproducts')}}">Ready to Ship</a></li>
-                                    <li><a href="{{route('low.moq')}}">Low MOQ</a></li>
-                                    <li><a href="{{route('customizable')}}">Customizable</a></li>
-                                    <li><a href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
+                            <div class="col s4 l5 product_menu" itemscope>
+                                <h4 itemprop="title">Products</h4>
+                                <ul itemscope itemtype="https://schema.org/ListItem">
+                                    <li itemprop="itemListElement"><a itemprop="Designs" href="{{route('buydesignsproducts')}}">Designs</a></li>
+                                    <li style="display: none;" itemprop="itemListElement"><a itemprop="New Arrivals" href="javascript:void(0);">New Arrivals</a></li>
+                                    <li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('readystockproducts')}}">Ready to Ship</a></li>
+                                    <li itemprop="itemListElement"><a itemprop="Low MOQ" href="{{route('low.moq')}}">Low MOQ</a></li>
+                                    <li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('customizable')}}">Customizable</a></li>
+                                    <li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
                                 </ul>
                             </div>
-                            <div class="col s4 l3 info_menu">
-                                <ul>
-                                    <li><a href="{{route('front.aboutus')}}">About us</a></li>
-                                    <li><a href="mailto:success@merchantbay.com">Contact us</a></li>
-                                    <li style="display: none;"><a href="javascript:void(0);">Tutorials</a></li>
-                                    <li style="display: none;"><a href="javascript:void(0);">Submit a dispute</a></li>
+                            <div class="col s4 l3 info_menu" itemscope>
+                                <ul itemscope itemtype="https://schema.org/ListItem">
+                                    <li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
+                                    <li itemprop="itemListElement"><a itemprop="Contact Us" href="mailto:success@merchantbay.com">Contact us</a></li>
+                                    <li itemprop="itemListElement" style="display: none;"><a itemprop="Tutorials" href="javascript:void(0);">Tutorials</a></li>
+                                    <li itemprop="itemListElement" style="display: none;"><a itemprop="Submit a dispute" href="javascript:void(0);">Submit a dispute</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -87,30 +87,30 @@
             </div>
         </div>
     </div>
-    <div class="footer_bottom_part">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6 l2">
-                    <div class="footer_copyright">
+    <div class="footer_bottom_part" itemscope>
+        <div class="container" itemscope>
+            <div class="row" itemscope>
+                <div class="col s12 m6 l2" itemscope>
+                    <div class="footer_copyright" itemprop="Copyright Merchantbay 2022">
                         &copy;2022 Merchant Bay
                     </div>
                 </div>
-                <div class="col s12 m6 l2">
-                    <div class="footer_privacy"><a href="">Terms & Privacy</a></div>
+                <div class="col s12 m6 l2" itemscope>
+                    <div class="footer_privacy" itemprop="Terms & Privacy"><a href="{{route('front.policy')}}">Terms & Privacy</a></div>
                 </div>
-                <div class="col s12 m6 l4">
-                    <div class="socialWrap">
+                <div class="col s12 m6 l4" itemscope>
+                    <div class="socialWrap" itemscope itemtype="http://schema.org/Organization">
                         <span>Follow us on</span>
-                        <a target="_blank" href="https://www.facebook.com/merchantbaybd"> <img src="{{asset('images/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
-                        <a target="_blank" href="https://twitter.com/merchantbay_com"><img src="{{asset('images/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
-                        <a target="_blank" href="https://www.linkedin.com/company/merchantbay"><img src="{{asset('images/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
-                        <a target="_blank" href="https://www.instagram.com/merchant.bay/"><img src="{{asset('images/frontendimages/new-home/insta.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/merchantbaybd"> <img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://twitter.com/merchantbay_com"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.linkedin.com/company/merchantbay"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/merchant.bay/"><img itemprop="img" src="{{asset('images/frontendimages/new-home/insta.png')}}" alt="" /></a>
                     </div>
                 </div>
-                <div class="col s12 m6 l4">
-                    <div class="footer_apps_box">
-                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /></a>
-                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /></a>
+                <div class="col s12 m6 l4" itemscope>
+                    <div class="footer_apps_box" itemscope>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img itemprop="img" src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img itemprop="img" src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -289,7 +289,7 @@
         $(".product_filter_empty_area").css({"width": productFilterEmptyArea, "height": "100%"});
         $(".product_filter_empty_area").click(function(){
             $(this).closest(".productSidenav").css({"width":"0px"});
-        })
+        });
     })
 
     $(window).on('load', function () {

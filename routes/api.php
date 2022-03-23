@@ -171,10 +171,17 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     
     Route::get('/created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'createdProformaByAuthUser']);
     Route::get('/received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'receivedProformaByAuthUser']);
+
+    
+    Route::post('/search-created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'searchProformaCreatedByAuthUser']);
+    Route::post('/search-received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'searchProformaReceivedByAuthUser']);
+
     Route::get('/product-list-by-business-profile-id/{businessProfileID}', [ProformaInvoiceController::class, 'getProductListByBuisnessProfileId']);
     Route::get('/proforma-invoices/{id}', [ProformaInvoiceController::class, 'proformaInvoiceDetails']);
     Route::post('/proforma-invoice-accept', [ProformaInvoiceController::class, 'acceptProformaInvoice']);
     Route::post('/proforma-invoice-reject',[ProformaInvoiceController::class, 'rejectProformaInvoice']);
+    Route::get('/merchant-assistanes',[ProformaInvoiceController::class, 'merchantAssistances']);
+
 
 
     //manufacture product api

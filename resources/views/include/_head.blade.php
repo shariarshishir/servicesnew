@@ -52,12 +52,12 @@
 <!-- Calendly link widget end -->
 <link rel="shortcut icon" href="{{ asset('images/frontendimages/favicon/favicon.png') }}" type="image/x-icon">
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141181864-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S7SWXJM7V"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-141181864-1');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3S7SWXJM7V');
 </script>
 
 @yield('css')

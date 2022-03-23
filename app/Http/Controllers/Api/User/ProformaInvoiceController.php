@@ -22,7 +22,9 @@ use App\Models\ProFormaSignature;
 use App\Models\ShipmentType;
 use App\Models\UOM;
 use App\Models\ProformaProduct;
+use App\Models\MerchantAssistance;
 use App\Models\ProFormaTermAndCondition;
+use App\Models\ProformaCheckedMerchantAssistance;
 use App\Models\SupplierCheckedProFormaTermAndCondition;
 use Carbon\Carbon;
 use App\Events\NewProfromaInvoiceHasCreatedEvent;
@@ -35,11 +37,12 @@ class ProformaInvoiceController extends Controller
         $proformaInvoices = Proforma::with('performa_items')->whereHas('performa_items', function($q){
                     $q->where('supplier_id', Auth::id());
                 })
-                ->get();
+                ->latest()->get();
         if(count($proformaInvoices)>0){
             return response()->json([
-                'proformaInvoices'=>$proformaInvoices,
-                'success'=>True
+                'success'=>True,
+                'proformaInvoices'=>$proformaInvoices
+                
             ],200);
 
         }
@@ -54,7 +57,7 @@ class ProformaInvoiceController extends Controller
 
     public function receivedProformaByAuthUser()
     {
-        $proformaInvoices = Proforma::with('performa_items')->where('buyer_id', auth()->id())->get();
+        $proformaInvoices = Proforma::with('performa_items')->where('buyer_id', auth()->id())->latest()->get();
         
         if(count($proformaInvoices)>0){
             return response()->json([
@@ -71,6 +74,50 @@ class ProformaInvoiceController extends Controller
         }
           
     }
+
+    public function searchProformaCreatedByAuthUser(Request $request)
+    {
+        $proformaInvoices = Proforma::with('performa_items')->where('proforma_id','like','%'.$request->search_input.'%')->whereHas('performa_items', function($q){
+                    $q->where('supplier_id', Auth::id());
+                })
+                ->latest()->get();
+        if(count($proformaInvoices)>0){
+            return response()->json([
+                'success'=>True,
+                'proformaInvoices'=>$proformaInvoices
+                
+            ],200);
+
+        }
+        else{
+            return response()->json([
+                'proformaInvoices'=>$proformaInvoices,
+                'success'=>false
+            ],200);
+        }
+          
+    }
+
+    public function searchProformaReceivedByAuthUser(Request $request)
+    {
+        $proformaInvoices = Proforma::with('performa_items')->where('proforma_id','like','%'.$request->search_input.'%')->where('buyer_id', auth()->id())->latest()->get();
+        
+        if(count($proformaInvoices)>0){
+            return response()->json([
+                'proformaInvoices'=>$proformaInvoices,
+                'success'=>True
+            ],200);
+
+        }
+        else{
+            return response()->json([
+                'proformaInvoices'=>$proformaInvoices,
+                'success'=>false
+            ],200);
+        }
+          
+    }
+
 
     public function allInformationNeededToCreateProFormaInvoice()
 	{
@@ -260,19 +307,47 @@ class ProformaInvoiceController extends Controller
         }
     }
 
+    public function merchantAssistances(){
+        $merchantAssistances = MerchantAssistance::all();
+        return response()->json([
+            'success' => true,
+            'merchantAssistances' => $merchantAssistances,
+            'message'=>'Proforma updated successfully'
+        ],200);
+
+    }
     public function acceptProformaInvoice(Request $request)
     {
-        $result = Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id,'total_invoice_amount_with_merchant_assistant' => $request->total_invoice_amount_with_merchant_assistant,'status' => 1]);
-        foreach( $request->merchant_assistances as $checkedMerchantAssistance ){
+        $merchantAssistances = MerchantAssistance::whereIn('id',$request->merchantAssistances)->get();
+        $total_merchant_assistant = 0;
+        foreach( $merchantAssistances as $checkedMerchantAssistance ){
+            if($checkedMerchantAssistance->type == 'USD' ){
+                $total_merchant_assistant = $total_merchant_assistant + $checkedMerchantAssistance->amount;
+            }
+            else{
+                $total_merchant_assistant = $total_merchant_assistant + ( $request->tax_total_price * $checkedMerchantAssistance->amount )/100;
+            }
+        }
+        $invoice_amount_with_merchant_assistant = $request->tax_total_price +  $total_merchant_assistant ;
+      
+        $proforma = Proforma::where('id' , $request->po_id)->first();
+        $proforma->po_no = $request->po_id;
+        $proforma->total_invoice_amount_with_merchant_assistant = $invoice_amount_with_merchant_assistant;
+        $proforma->status = 1;
+        $proforma->save();
+        $proforma = Proforma::where('id' , $request->po_id)->first();
+        
+        foreach( $request->merchantAssistances as $checkedMerchantAssistance ){
             $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
             $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
             $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
             $proformaCheckedMerchantAssistance->save();
         }
-        if($result){
+        if($proforma){
             return response()->json([
                 'success' => true,
-                'message'=>'Proforma updated successfully'
+                'message'=>'Proforma updated successfully',
+                'proforma' => $proforma
             ],200);
 
         }
@@ -287,7 +362,7 @@ class ProformaInvoiceController extends Controller
 
     public function rejectProformaInvoice(Request $request)
     {
-        $result = Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'reject_message' => $request->reject_message, 'status' => -1]);
+        $result = Proforma::where([ 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'reject_message' => $request->reject_message, 'status' => -1]);
         if($result){
             return response()->json([
                 'success' => true,

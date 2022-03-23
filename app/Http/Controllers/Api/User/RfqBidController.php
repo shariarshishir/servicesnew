@@ -79,7 +79,7 @@ class RfqBidController extends Controller
                 //$newFormatedBid->supplier_id = $bid->supplier_id;
                 $newFormatedBid->title = $bid->rfq->title;
                 //$newFormatedBid->description = $bid->description;
-                //$newFormatedBid->rfq_short_description = $bid->rfq->short_description;
+                $newFormatedBid->description = $bid->description;
                 //$newFormatedBid->media = json_decode($bid->media);
                 //$newFormatedBid->quantity =$bid->quantity;
                 //$newFormatedBid->unit   = $bid->unit;

@@ -15,6 +15,7 @@ use App\Rules\ReadyStockPriceBreakDownRule;
 use App\Rules\NonClothingPriceBreakDownRule;
 use App\Rules\NonClothingFullStockRule;
 use App\Rules\ReadyStockFullStockRule;
+use App\Models\ProductVideo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -67,6 +68,10 @@ class ProductController extends Controller
                 $newFormatedProduct->additional_description=$product->additional_description;
                 $newFormatedProduct->availability=$product->availability;
                 $newFormatedProduct->images=$product->images;
+                $newFormatedProduct->gender=$product->gender;
+                $newFormatedProduct->sample_availability=$product->sample_availability;
+                $newFormatedProduct->overlay_small_image=$product->overlay_small_image;
+                $newFormatedProduct->overlay_original_image=$product->overlay_original_image;
                 $newFormatedProduct->productReviews=$product->productReview;
                 $newFormatedProduct->productTotalAverageRating=productRating($product->id);
                 array_push($productsArray,$newFormatedProduct);
@@ -383,6 +388,10 @@ class ProductController extends Controller
             $newFormatedProduct->productReview=$product->productReview;
             $newFormatedProduct->productTotalAverageRating=productRating($product->id);
             $newFormatedProduct->images=$product->images;
+            $newFormatedProduct->gender=$product->gender;
+            $newFormatedProduct->sample_availability=$product->sample_availability;
+            $newFormatedProduct->overlay_small_image=$product->overlay_small_image;
+            $newFormatedProduct->overlay_original_image=$product->overlay_original_image;
             $newFormatedProduct->userId=$product->businessProfile->user->id;
             $newFormatedProduct->userName=$product->businessProfile->user->name;
             $newFormatedProduct->userImage=$product->businessProfile->user->image;
@@ -561,6 +570,9 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
 
         ]);
 
@@ -644,6 +656,17 @@ class ProductController extends Controller
             $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
 
+            //overlay image
+            if($request->overlay_image){
+                
+                $filename = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_small','public');
+                $image_resize = Image::make(public_path('storage/'.$filename));
+                $image_resize->fit(300, 300);
+                $image_resize->save(public_path('storage/'.$filename));
+                $original = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_original','public');
+
+            }
+
             $product=Product::create([
                 'business_profile_id' => $request->business_profile_id,
                 'name'      => $request->name,
@@ -667,6 +690,10 @@ class ProductController extends Controller
                 'full_stock_price' =>  $full_stock_price,
                 'full_stock_negotiable' => $full_stock_negotiable,
                 'customize'      => isset($request->customize) ? true : false,
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
+                'overlay_small_image' =>$filename,
+                'overlay_original_image' =>$original,
                 'created_by'  => auth()->id(),
 
             ]);
@@ -696,6 +723,16 @@ class ProductController extends Controller
                     ]);
                 }
 
+            }
+
+            //upload video
+            if($request->hasFile('video')){
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                    ]);
             }
             DB::commit();
             // all good
@@ -892,6 +929,10 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->product_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->product_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->product_type)],
+            'overlay-image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
+            'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
+            'gender' => 'required',
+            'sample_availability' => 'required',
 
         ]);
 
@@ -962,6 +1003,27 @@ class ProductController extends Controller
                 $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
                 $availability=$request->availability;
             }
+            
+            $product=Product::where('id',$productId)->first();
+            $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
+            $business_profile_name=$business_profile->business_name;
+
+            //overlay image
+            if($request->overlay_image){
+
+                if($product->overlay_original_image){
+                    if(Storage::exists($product->overlay_original_image) ){
+                        Storage::delete($product->overlay_original_image);
+                        Storage::delete($product->overlay_small_image);
+                    }
+                }
+                $filename = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_small','public');
+                $image_resize = Image::make(public_path('storage/'.$filename));
+                $image_resize->fit(300, 300);
+                $image_resize->save(public_path('storage/'.$filename));
+                $original = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_original','public');
+
+            }
 
             Product::where('id',$productId)->update([
                 'name'      => $request->name,
@@ -983,14 +1045,12 @@ class ProductController extends Controller
                 'full_stock_price' =>  $full_stock_price,
                 'customize'      => isset($request->customize) ? true : false,
                 'full_stock_negotiable' => $full_stock_negotiable,
+                'gender'     => $request->gender,
+                'sample_availability' =>$request->sample_availability,
+                'overlay_small_image' =>$filename ?? $product->overlay_original_image,
+                'overlay_original_image' =>$original ?? $product->overlay_small_image,
                 'updated_by'  => auth()->id(),
             ]);
-            $product=Product::where('id',$productId)->first();
-            // $user=User::where('id',auth()->id())->first();
-            // $vendorName=Str::slug($user->vendor->vendor_name,'-');
-
-            $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
-            $business_profile_name=$business_profile->business_name;
             $product=Product::where('id',$productId)->first();
             $user=User::where('id',auth()->id())->first();
             $productImages = ProductImage::whereIn('id',$request->product_images_id)->get();
@@ -1018,6 +1078,30 @@ class ProductController extends Controller
                     ]);
                 }
             }
+
+            //video
+            if(isset($request->remove_video_id)){
+                if( count(json_decode($request->remove_video_id)) > 0 ){
+                    $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+                    if($productVideo){
+                        if(Storage::exists($productVideo->video)){
+                            Storage::delete($productVideo->video);
+                        }
+                        $productVideo->delete();
+                    }
+                }
+            }
+ 
+            if($request->hasFile('video')){
+                $folder='video/'.$business_profile_name;
+                $filename = $request->video->store($folder,'public');
+                $product_video = ProductVideo::create([
+                    'product_id' => $product->id,
+                    'video' => $filename,
+                ]);
+            }
+
+
             //related products
             if(!isset($request->related_products))
             {

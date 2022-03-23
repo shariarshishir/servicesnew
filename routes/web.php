@@ -85,6 +85,9 @@ Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');
 Route::post('import',[ImportController::class, 'import'])->name('import');
+Route::fallback(function () {
+    return view('404');
+});
 
 // Frontend API's endpoint start
 Auth::routes();

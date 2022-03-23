@@ -4,7 +4,7 @@
 <div id="create-rfq-form" class="rfq_detail_from_wrap">
     <div class="modal-content">
         <section class="ic-buying-req rfq_create_wrap">
-            <div class="container">
+            <div class="product_add_wrap_modal">
 
                 <div class="card">
                     <legend style="text-align: center" >Create RFQ </legend>

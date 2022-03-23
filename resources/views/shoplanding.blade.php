@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="home_intro_left" itemscope>
-                            <h1 itemprop="title">Find Your Next Apparel Manufacturing Partner</h1>
+                            <h1 itemprop="title">Find Your Next Apparel <br/> Manufacturing Partner</h1>
                             <p itemprop="text">Join the tech enabled fashion sourcing platform to connect <br/>
                                 directly with fashion manufacturers and <br/>
                                 wholesalers in BANGLADESH</p>
@@ -189,7 +189,7 @@
                 </div>
                 <div class="col s12 m6 product_video_infobox">
                     <div class="product_3d_info_box" itemscope>
-                        <h1 itemprop="title"><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h1>
+                        <h3 itemprop="title"><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h3>
                         <span class="title_border">&nbsp;</span>
                         <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and<br>wide sourcing network.</p>
                     </div>
@@ -208,7 +208,7 @@
             <div class="row">
               <div class="col s12 m6">
                 <div class="sourcing_info_box" itemscope>
-                    <h1 itemprop="title"><span> Bring the <span style="font-weight: 600;">Sourcing</span> <br/>
+                    <h3 itemprop="title"><span> Bring the <span style="font-weight: 600;">Sourcing</span> <br/>
                     to your <span style="font-weight: 600;">Pocket</span> </h1>
                     <span class="title_border">&nbsp;</span>
                     <p itemprop="text">Everything you need for your Apparel Business.</p>
@@ -244,7 +244,7 @@
                     </div>
                     <div class="col s12 m6 landing_tools_right">
                         <div class="landing_tools_infobox" itemscope>
-                            <h1 itemprop="title">Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h1>
+                            <h3 itemprop="title">Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h3>
                             <span class="title_border">&nbsp;</span>
                             <p itemprop="text">Subscribe to the Smart Order Management Dashboard and a suit of BI tools offered by Merchant Bay to make your operation data driven and transparent.</p>
                             <div class="tools_button_box" itemscope>
@@ -260,7 +260,7 @@
         <div class="landing_request_wrap">
             <div class="container">
                 <div class="request_innter_box center-align" itemscope>
-                    <h1 itemprop="title">Want to start real quick?</h1>
+                    <h3 itemprop="title">Want to start real quick?</h3>
                     <h5 itemprop="title">Submit a request for quotation enjoy sourcing <br/> from Bangladesh like never before</h5>
                     <div class="landing_request_img" itemscope>
                         <img itemprop="img" src="{{asset('images/frontendimages/new-home/landing-rfq.png')}}" alt="" />

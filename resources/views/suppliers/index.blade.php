@@ -23,40 +23,43 @@
         ];
 @endphp
 
-    <div class="suppliers_container suppliers_filter_wrapper row">
-        <div class="col s12 m4 l3">
-            <div class="suppliers_filter_list">
-                <h3>Filter by</h3>
-                <form action="{{route('suppliers')}}" method="get">
-                    {{--location search  --}}
-                    <div class="filter_search">
-                        <h4>Location</h4>
-                        <div class="filter_search_inputbox">
-                            <i class="material-icons">pin_drop</i>
-                            <input class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
-                        </div>
+    <div class="suppliers_container suppliers_filter_wrapper row" itemscope>
+        <div class="col s12 m4 l3" itemscope>
+            <div class="suppliers_filter_list" itemscope itemtype="https://schema.org/WebSite">
+                <h3 itemprop="title">Filter by</h3>
 
+                <link itemprop="url" href="http://www.example.com/"/>
+                <form action="{{route('suppliers')}}" method="get" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+                    <meta itemprop="target" content="http://example.com/search?q={location}"/>
+                    
+                    {{--location search  --}}
+                    <div class="filter_search" itemscope itemtype="https://schema.org/SearchAction">
+                        <h4 itemprop="address">Location</h4>
+                        <div itemprop="address" class="filter_search_inputbox" itemscope>
+                            <i class="material-icons">pin_drop</i>
+                            <input itemprop="query" class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
+                        </div>
                         <!-- <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();"> -->
                     </div>
                     {{-- industry_type --}}
-                    <div class="filter_box">
-                        <h4>Industry Type</h4>
+                    <div class="filter_box" itemscope itemtype="https://schema.org/manufacturer" >
+                        <h4 itemprop="title">Industry Type</h4>
                         <p>
-                            <label>
+                            <label itemprop="name">
                                 <input class="btn_radio" type="checkbox" value="apparel"  name="industry_type[]" {{ (in_array('apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
                                 <span>Apparel</span>
                             </label>
                         </p>
                         <p>
-                            <label>
+                            <label itemprop="name">
                             <input class="btn_radio" type="checkbox" value="non-apparel" name="industry_type[]" {{ (in_array('non-apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
                                 <span>Non-Apparel</span>
                             </label>
                         </p>
                     </div>
                     {{-- factory type --}}
-                    <div class="filter_box">
-                        <h4>Factory Type</h4>
+                    <div class="filter_box" itemscope itemtype="https://schema.org/industry">
+                        <h4 itemprop="title">Factory Type</h4>
                         @foreach ($factory_type_array as $key => $list)
                         <p>
                             <label>
@@ -68,8 +71,8 @@
                     </div>
 
                     {{-- standard --}}
-                    <div class="filter_box">
-                        <h4>Standard</h4>
+                    <div class="filter_box" itemscope>
+                        <h4 itemprop="title">Standard</h4>
                         <p>
                             <label>
                                 <input class="btn_radio" type="checkbox" value="compliance"  name="standard[]" {{ (in_array('compliance', $standard))?'checked':'' }} onclick="this.form.submit();"/>
@@ -85,8 +88,8 @@
                     </div>
 
                     {{-- standard --}}
-                    <div class="filter_box">
-                        <h4>Badge</h4>
+                    <div class="filter_box" itemscope>
+                        <h4 temprop="title">Badge</h4>
                         <p>
                             <label>
                                 <input class="btn_radio" type="checkbox" value="1"  name="verified[]" {{ (in_array('1', $verified))?'checked':'' }} onclick="this.form.submit();"/>
@@ -105,15 +108,21 @@
             </div>
 
         </div>
-        <div class="col s12 m8 l9">
-            <div class="suppliers_filter_content">
+        <div class="col s12 m8 l9" itemscope>
+            <div class="suppliers_filter_content" itemscope>
                 {{-- business name search --}}
-                <div class="filter_search row">
-                    <div class="col s12">
-                        <form action="{{route('suppliers')}}" method="get">
-                            <div class="filter_search_inputbox">
+                <div class="filter_search row" itemscope>
+                    <div class="col s12" itemscope itemtype="https://schema.org/WebSite">
+
+                        <link itemprop="url" href="http://www.example.com/"/>
+                        
+                        <form action="{{route('suppliers')}}" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+                            
+                            <meta itemprop="target" content="http://example.com/search?q={business_name}"/>
+                            
+                            <div class="filter_search_inputbox" itemscope>
                                 <i class="material-icons">search</i>
-                                <input class="filter_search_input " type="text" name="business_name" placeholder="business name" value="{{$business_name_from_home ?? $business_name}}">
+                                <input itemprop="business_name" itemprop="query" class="filter_search_input " type="text" name="business_name" placeholder="business name" value="{{$business_name_from_home ?? $business_name}}">
                                 <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();">
                             </div>
                         </form>
@@ -125,33 +134,45 @@
                         @php
                             $mainProductsJson = json_decode($supplier->companyOverview['data']);
                         @endphp
-                        <div class="industry_infoBox">
-                            <div class="industry_info_inner_box">
-                                <div class="row">
-                                    <div class="supplier_profile_image_block col s12 m12 l3">
+                        <div class="industry_infoBox" itemscope itemtype="https://schema.org/Organization">
+                            <div class="industry_info_inner_box" itemscope>
+                                <div class="row" itemscope>
+                                    <div class="supplier_profile_image_block col s12 m12 l3" itemscope itemtype="https://schema.org/manufacturer">
                                         @if($supplier->business_profile_logo)
-                                        <img src="{{ asset('storage/'.$supplier->business_profile_logo) }}" alt="avatar" >
+                                        <img itemprop="logo" src="{{ asset('storage/'.$supplier->business_profile_logo) }}" alt="avatar" >
                                         @else
                                         @php
                                             $img=$supplier->user->image ?'storage/'.$supplier->user->image : 'images/frontendimages/no-image.png';
                                         @endphp
-                                        <img src="{{asset($img)}}" alt="avatar" >
+                                        <img itemprop="image" src="{{asset($img)}}" alt="avatar" >
                                         @endif
 
                                         @if(Auth::guard('web')->check())
-                                            <a href="{{route('supplier.profile', $supplier->alias)}}">Visit Profile</a>
+                                            <a itemprop="profile" href="{{route('supplier.profile', $supplier->alias)}}">Visit Profile</a>
                                         @else
-                                            <a href="#supplier-view-auth-check-modal" class="modal-trigger">Visit Profile</a>
+                                            <a itemprop="profile" href="#supplier-view-auth-check-modal" class="modal-trigger">Visit Profile</a>
                                         @endif
                                     </div>
-                                    <div class="supplier_profile_short_info_block col s12 m12 l9">
-                                        <h5>{{$supplier->business_name}}</h5>
-                                        <div class="industry_location short_info_box"><span class="title_label">Location:</span> <span class="info_details">{{$supplier->location}}</span></div>
-                                        <div class="industry_type short_info_box"><span class="title_label">Industry Type: </span> <span class="info_details">{{$supplier->industry_type}}</span></div>
-                                        <div class="factory_type short_info_box"><span class="title_label">Factory Type:</span> <span class="info_details">{{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</span></div>
+                                    <div class="supplier_profile_short_info_block col s12 m12 l9" itemscope itemtype="https://schema.org/manufacturer" >
+                                        <h5 itemprop="name">{{$supplier->business_name}}</h5>
+                                        <div class="industry_location short_info_box" itemscope itemtype="https://schema.org/location">
+                                            <span class="title_label">Location:</span> 
+                                            <span itemprop="address" class="info_details">{{$supplier->location}}</span>
+                                        </div>
+                                        <div class="industry_type short_info_box" itemscope itemtype="https://schema.org/industry">
+                                            <span class="title_label">Industry Type: </span> 
+                                            <span itemprop="name" class="info_details">{{$supplier->industry_type}}</span>
+                                        </div>
+                                        <div class="factory_type short_info_box" itemscope itemtype="https://schema.org/category">
+                                            <span class="title_label">Factory Type:</span> 
+                                            <span itemprop="name" class="businessCategory info_details">{{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</span>
+                                        </div>
                                         @foreach($mainProductsJson as $mainProducts)
                                             @if($mainProducts->name == 'main_products')
-                                            <div class="main_products short_info_box"><span class="title_label">Main Products:</span> <span class="info_details">{{$mainProducts->value}}</span></div>
+                                            <div class="main_products short_info_box" itemscope itemtype="https://schema.org/Product">
+                                                <span class="title_label" itemprop="name">Main Products:</span> 
+                                                <span itemprop="value" class="info_details">{{$mainProducts->value}}</span>
+                                            </div>
                                             @endif
                                         @endforeach
                                     </div>

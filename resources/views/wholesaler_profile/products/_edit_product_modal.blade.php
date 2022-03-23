@@ -3,11 +3,12 @@
     <div class="modal-content">
 
             <legend>Edit Product</legend>
-            <div class="col-md-12">
+            <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+            <!-- <div class="col-md-12">
                 <div class="row">
-                    <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+                    
                 </div>
-            </div>
+            </div> -->
             <form method="POST" action="javascript:void(0);" enctype="multipart/form-data" id="seller_product_form_update">
                 @method('PUT')
                 @csrf

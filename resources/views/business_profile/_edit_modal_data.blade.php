@@ -1,14 +1,15 @@
 <section class="ic-buying-req">
-    <div class="container">
+    <div class="product_add_wrap_modal">
         <div class="row">
             <div class="col-xs-12 title">
                 <legend>Upload Product</legend>
+                <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
                 <!-- <p>Upload your new product</p> -->
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="row">
-                        <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+                        
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 

@@ -4,7 +4,7 @@
 
     <div class="row">
     <section class="manufactrue_product_details_top">
-        <div class="container">
+        <div class="manufactrue_product_details_inner">
             <div class="row ic-breadcrumb product_category_bar">
                 <div class="category_nav">
                     <a class="dropdown-trigger" href="#!" data-target="categories_dropdown">
@@ -23,7 +23,7 @@
     </section>
 
     <section class="ic-single-product-details manufactrue_product_details_wrap">
-        <div class="container">
+        <div class="manufactrue_product_details_inner">
             <div class="row ic-pg-container">
 
                 <div class="col s12 m12 l9 product_preview_info_wrap">

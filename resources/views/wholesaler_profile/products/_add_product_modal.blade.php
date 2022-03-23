@@ -1,11 +1,12 @@
 <div id="product-add-modal-block" class="modal fullscreen-modal wholesaler_add_product_modal profile_form_modal">
     <div class="modal-content">
         <legend>Upload Product</legend>
-        <div class="col-md-12">
+        <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+        <!-- <div class="col-md-12">
             <div class="row">
-                <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
+                
             </div>
-        </div>
+        </div> -->
         <form method="POST" action="javascript:void(0);" enctype="multipart/form-data" id="seller_product_form">
             @csrf
             <div class="input-field ">
@@ -20,7 +21,7 @@
                     </ul>
                 </div>
             @endif
-            <div class="wholesaler_add_product_form container">
+            <div class="wholesaler_add_product_form">
 
                 {{-- <div class="row input-field product-upload-block">
                     <div class="col s12 m3 l3">

@@ -1,7 +1,7 @@
 <div id="edit-rfq-form" class="modal rfq_detail_from_wrap">
     <div class="modal-content">
         <section class="ic-buying-req">
-            <div class="container">
+            <div class="product_add_wrap_modal">
                 <!-- <div class="col-md-12 my-prd-hd-cont">
                     <div class="row">
                         <div class="col-md-12 plr0">

@@ -904,10 +904,10 @@ legend {
     height: 100% !important;
     position: relative;
     text-align: center;
-    margin-top: -32px;
+    margin-top: -48px;
     background-color: #E4E4E4;
     padding-bottom: 60px;
-    border-radius: 20px 20px 0 0;
+    /* border-radius: 20px 20px 0 0; */
 }
 .profile_bannerwrap .banner_overlay {
     background : url('../images/frontendimages/new_layout_images/profile-banner-update.png') no-repeat center;
@@ -921,11 +921,11 @@ legend {
     vertical-align: middle;
     color: #fff;
     align-items: center;
-    border-radius: 20px 20px 0 0;
+    /* border-radius: 20px 20px 0 0; */
     padding: 80px 20px 50px;
 }
 .profile_bannerwrap h1 {
-    font-size: 38px;
+    font-size: 30px;
     font-weight: 600;
     color: #fff;
     margin-bottom: 25px;
@@ -942,9 +942,9 @@ legend {
 .profile_bannerwrap .erified {
     background : url('../images/frontendimages/new_layout_images/mark_icon.png') no-repeat left 8px;
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
     right: 70px;
-    padding: 18px 28px 18px 35px;
+    padding: 18px 10px 18px 35px;
     font-size: 18px;
     line-height: 30px;
 }
@@ -961,7 +961,7 @@ legend {
 .profile_bannerwrap .edit_profile_option {
     position: absolute;
     top: 58px;
-    right: 100px;
+    right: 80px;
 }
 .edit_wholesaler_profile_trigger,
 .profile_bannerwrap .edit_profile_option .edit_profile_trigger {
@@ -980,15 +980,15 @@ legend {
 /* profile banner css end */
 
 .profile_container {
-    padding-top: 0;
     position: relative;
     z-index: 1;
+    padding: 0 20px;
 }
 /* profile_leftCol css end */
 .profile_container .profile_leftCol {
-    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
-    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
-    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     border-radius: 500px 500px 50px 50px;
     padding: 30px !important;
     margin-top: -186px;
@@ -1026,7 +1026,7 @@ legend {
 .profile_leftCol .office_address h3,
 .leftCol_wrap .office_address h3 {
     font-size: 18px;
-    line-height: 22px;
+    line-height: 28px;
     color: #464545;
     font-weight: 600;
     margin: 0 0 15px 0;
@@ -1866,7 +1866,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 0px 0 50px;
 }
 .single-product-details-block-wrapper {
-    padding-bottom: 50px;
+    padding: 0 5px;
 }
 .product_details_wrapper a ul {
     text-align: center;
@@ -2828,6 +2828,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 #factory-tour-add-modal-block .factory_add_more,
 #factory-tour-edit-modal-block .factory_add_more {
     padding-top: 15px;
+    font-size: 16px;
 }
 #factory-tour-add-modal-block .factory_add_more .material-icons,
 #factory-tour-edit-modal-block .factory_add_more .material-icons {
@@ -3571,6 +3572,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: inline-block;
     margin-left: 10px;
 }
+.rfq_top_navbar ul li a {
+    padding-top: 7px;
+}
 .rfq_top_navbar ul li.active a {
     background: #73D578;
     color: #ffffff;
@@ -3585,7 +3589,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_top_navbar ul li.rfq_filter_select select {
     text-align: left;
     padding: 0 10px;
-    height: 41px;
+    height: 42px;
 }
 .rfq_leftCol .rfq_follow_wrap {
     padding-top: 20px;
@@ -3602,8 +3606,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: block;
 }
 .rfq_content_box {
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 26px;
     margin: 0px 20px 50px;
     padding: 0 50px 10px;
 }
@@ -4017,7 +4021,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     border: 2px solid #54A958;
 }
 .rfq_detail_from .input-field label {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #54A958;
     padding-top: 0;
@@ -4038,7 +4042,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_detail_from .input-field input {
     border: 1px solid #54A958 !important;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     height: 48px;
     line-height: 40px;
     padding: 3px 2%;
@@ -4210,9 +4214,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding-bottom: 30px;
 }
 .rfq_content_box .rfq_profile_info .rfq_thum_imgs img {
-    -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
-    -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
-    box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     border-radius: 10px;
     margin: 0;
     height: 100%;
@@ -4245,7 +4249,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 15px;
 }
 .rfq_content_box .rfq_view_detail_wrap .btn_view_detail {
-    font-size: 20px;
+    font-size: 18px;
     color: #54A958;
     font-weight: 500;
     padding: 0;
@@ -4364,9 +4368,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 600;
 }
 .rfq_profile_info .short_description {
-    font-size: 22px;
+    font-size: 18px;
     color: #000000;
-    line-height: 32px;
+    line-height: 28px;
     font-weight: 400;
     padding-right: 10px;
 }
@@ -4461,10 +4465,10 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 3px 10px;
     border-radius: 5px;
     color: #fff;
-    line-height: 28px;
+    line-height: 26px;
     box-shadow: none;
     margin: 0 !important;
-    height: 33px;
+    height: 32px;
 }
 .rfq_content_box .btn_share span {
     color: #fff;
@@ -4472,9 +4476,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_content_box .btn_share .material-icons {
     float: left;
-    font-size: 18px;
-    margin-top: 5px;
+    font-size: 16px;
     color: #fff;
+    margin-top: 4px;
     margin-right: 5px;
 }
 
@@ -5103,7 +5107,8 @@ input.input-field[type=text]:not(.browser-default) {
     float: left;
 }
 .profile_form_modal .add_more_box {
-    padding: 15px 0 50px;
+    padding: 15px 0 10px;
+    display: block;
 }
 .profile_form_modal .add_more_box .add-more-block {
     font-weight: 500;
@@ -5364,7 +5369,7 @@ input.input-field[type=text]:not(.browser-default) {
 }
 #order-modification,
 #order-query {
-    margin-bottom: 50px;
+    padding: 0 15px !important;
 }
 #order-query-communication-modal textarea {
     height: 150px !important;
@@ -5491,6 +5496,11 @@ input.input-field[type=text]:not(.browser-default) {
     color: red;
     font-size: 14px;
     padding: 20px 40px 0;
+}
+
+.checkout_content_wrap.main_content_wrapper,
+.cart_content_wrap.main_content_wrapper {
+    padding: 0 20px;
 }
 
 /* ************************************************** */
@@ -5822,7 +5832,7 @@ input.input-field[type=text]:not(.browser-default) {
 /* order css start */
 
 .profile-menu-list {
-    padding: 50px 20px !important;
+    padding: 0px 15px 50px !important;
 }
 .profile-menu-list ul {
     box-shadow: none;
@@ -6036,9 +6046,9 @@ nav .pagination li.active .page-link {
     width: 80%;
     min-height: 80%;
 }
-#orders {
+/* #orders {
     padding-bottom: 50px;
-}
+} */
 .order-details-modal .product-details-table-block {
     padding-bottom: 30px;
 }
@@ -8646,6 +8656,11 @@ nav .pagination li.active .page-link {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: 0.3s;
+}
+
+.product_design_wrapper .productBox .imgBox img:hover {
+    transition: 0.3s;
 }
 
 .profile_contentCol .product_design_wrapper .productBox .imgBox {
@@ -11888,9 +11903,9 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     }
     .rfq_content_box .rfq_profile_info .rfq_thum_imgs img {
         border: 1px solid #eee;
-        -webkit-box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 20%);
-        -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.20);
-        box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 20%);
+        -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+        -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+        box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     }
     .rfq_thum_img .xlsx_icon,
     .rfq_thum_img .pdf_icon,

@@ -48,16 +48,15 @@
                     </div>
                 </div>
                 <div class="overlay-image-div">
-                    <div class="overlay-image-preview-block">
-                        <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
-                        alt="preview image" style="max-height: 150px;">
-                    </div>
-                
                     <div class="row input-field product-upload-block">
                         <div class="col s12 m3 l3">
                             <label class="active">Overlay Image:</label>
                         </div>
                         <div class="col s12 m9 l9" id="lineitems">
+                            <div class="overlay-image-preview-block">
+                                <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+                                alt="preview image" style="max-height: 100px; margin-bottom: 10px">
+                            </div>
                             <input class="uplodad_video_box overlay-image" type="file" name="overlay_image">
                         </div>
                     </div>
@@ -214,7 +213,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                    <div class="add_more_box">
+                                        <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                    </div>
+                                    
                                 </div>
 
                                 {{-- <div class="add_more_box" style="padding-top: 20px">
@@ -358,7 +360,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addReadyOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                    <div class="add_more_box">
+                                        <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                    </div>
+                                    
 
                                 </div>
 
@@ -475,7 +480,10 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="javascript:void(0);" class="add-more-block add_more_box" onclick="addNonClothingPriceBreakDown(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                <div class="add_more_box">
+                                    <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown(this)"><i class="material-icons dp48">add</i> Add More</a>
+                                </div>
+                                
                             </div>
                             {{-- <div class="add_more_box" style="padding-top: 20px">
                                 <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>

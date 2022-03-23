@@ -23,6 +23,7 @@
                     @php
                         if($list->flag == 'shop'){
                             $title=$list->name;
+                            $overLayImage = $list->overlay_original_image ?? NULL;
                             if($list->images()->exists()){
                                 $img= asset('storage').'/'.$list->images[0]->image;
                             }else{
@@ -31,6 +32,7 @@
 
                         }else{
                             $title=$list->title;
+                            $overLayImage = $list->overlay_image ?? NULL;
                             if($list->product_images()->exists()){
                                 $img= asset('storage').'/'.$list->product_images[0]->product_image;
                             }else{
@@ -40,10 +42,19 @@
                         }
                     @endphp
 
-                    <div class="inner_productBox">
+                    <div class="inner_productBox @php echo($overLayImage) ? 'has-overlay':'' @endphp" ">
                         <a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}">
-                            <div class="imgBox">
-                                <img src="{{$img}}">
+                            <div class="imgBox" >
+                                <img src="{{$img}}" class="single-product-img" alt="">
+                                @if( $list->flag == 'shop')
+                                    @if($list->overlay_original_image)
+                                    <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;">
+                                    @endif
+                                @else
+                                    @if($list->overlay_image)
+                                        <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;" >
+                                    @endif
+                                @endif
                                 <h4>{{$title}}</h4>
                             </div>
                             <div class="products_inner_textbox">

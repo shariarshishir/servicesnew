@@ -20,20 +20,23 @@
                         <div class="sold-out">Sold Out</div>
                     @endif
 
-                    <div class="inner_productBox">
+                    <div class="inner_productBox @php echo($product->overlay_original_image) ? 'has-overlay':'' @endphp">
                         <a href="{{route('productdetails',$product->sku)}}">
                             <div class="imgBox">
                                 @foreach($product->images as $key=>$image)
                                     @if($product->businessProfile()->exists())
                                         
                                         <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
-                                    
                                     @else
                                         <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
                                         
                                     @endif
                                     @break
                                 @endforeach
+
+                                @if($product->overlay_original_image)
+                                <img src="{{asset('storage/'.$product->overlay_original_image)}}" class="single-product-overlay-img" alt="" style="display: none;" />
+                                @endif
                                 <h4><span> {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }} </span></h4>
                             </div>
 

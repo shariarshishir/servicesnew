@@ -222,7 +222,7 @@ public function update(Request $request, $product_id)
         $product->lead_time=$request->lead_time;
         $product->gender=$request->gender;
         $product->sample_availability=$request->sample_availability;
-        $product->overlay_image = $path;
+        $product->overlay_image = $path ?? $product->overlay_image;
         $product->save();
 
         if ($request->hasFile('product_images')){

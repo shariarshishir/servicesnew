@@ -1003,7 +1003,7 @@ class ProductController extends Controller
                 $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
                 $availability=$request->availability;
             }
-
+            
             $product=Product::where('id',$productId)->first();
             $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;

@@ -289,7 +289,7 @@
         $(".product_filter_empty_area").css({"width": productFilterEmptyArea, "height": "100%"});
         $(".product_filter_empty_area").click(function(){
             $(this).closest(".productSidenav").css({"width":"0px"});
-        })
+        });
     })
 
     $(window).on('load', function () {

@@ -66,11 +66,14 @@
                                                             </a>
                                                         @endif
                                                     </div>
-                                                    <div class="inner_productBox">
+                                                    <div class="inner_productBox @php echo($product->overlay_image) ? 'has-overlay':''; @endphp ">
                                                         <a href="{{route('mix.product.details',['flag' => $product->flag, 'id' => $product->id])}}">
                                                             <div class="imgBox">
                                                                 @if($product->product_images()->exists())
                                                                     <img src="{{asset('storage/'.$product->product_images[0]['product_image'])}}" alt="">
+                                                                @endif
+                                                                @if($product->overlay_image)
+                                                                    <img src="{{asset('storage/'.$product->overlay_image)}}" class="single-product-overlay-img" alt="" style="display: none;">
                                                                 @endif
                                                                 <h4><span>{{$product->title}} </span></h4>
                                                             </div>

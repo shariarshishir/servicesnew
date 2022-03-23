@@ -46,6 +46,13 @@
                                                 <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
                                             </a>
                                         @endforeach
+                                        @if($product->overlay_image)
+                                            <a href="{{ asset('storage/'.$product->overlay_image) }}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
+                                                data-lens-image="{{ asset('storage/'.$product->overlay_image) }}"
+                                                data-big-image="{{ asset('storage/'.$product->overlay_image) }}">
+                                                <img src="{{ asset('storage/'.$product->overlay_image) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                            </a>
+                                        @endif
 
                                         @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
                                     </div>
@@ -69,7 +76,13 @@
                                                 <img src="{{ asset('storage/'.$product_image['product_image']) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
                                             </a>
                                         @endforeach
-
+                                        @if($product->overlay_image)
+                                            <a href="{{ asset('storage/'.$product->overlay_image) }}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
+                                                data-lens-image="{{ asset('storage/'.$product->overlay_image) }}"
+                                                data-big-image="{{ asset('storage/'.$product->overlay_image) }}">
+                                                <img src="{{ asset('storage/'.$product->overlay_image) }}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                            </a>
+                                        @endif
                                         @php $productImage = (!empty($product->product_images[0]->product_image))?asset('storage/' .$product->product_images[0]->product_image):asset('images/supplier.png'); @endphp
                                     </div>
                                 </div>

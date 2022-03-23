@@ -71,6 +71,20 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             @endforeach
                                         @endif
+                                        @if($product->overlay_original_image)
+                                        <div>
+                                            <center>
+                                                <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
+                                                    <img src="{{asset('storage/'.$product->overlay_original_image)}}" class="responsive-img" width="300px"/>
+
+                                                    <div class="click-to-zoom">
+                                                        <i class="material-icons dp48">zoom_in</i>
+                                                        <!-- Click on image to view large size. -->
+                                                    </div>
+                                                </a>
+                                            </center>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <ul class="product-list-images-block">
@@ -78,6 +92,9 @@ $reviewsCount = count($productReviews);
                                         @foreach ($product->images as $image)
                                             <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
                                         @endforeach
+                                    @endif
+                                    @if($product->overlay_original_image)
+                                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$product->overlay_original_image)}}" class="responsive-img" width="100px" /></a></li>
                                     @endif
                                 </ul>
                             </div>

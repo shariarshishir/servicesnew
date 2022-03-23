@@ -21,6 +21,53 @@
                     <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                     <input type="hidden" name="industry" value="{{$business_profile->industry_type}}">
                     {{-- <div class="row"> --}}
+                        {{-- product type mapping --}}
+                        <div class="row input-field ">
+                            <div class="col s12 m3 l3">
+                                <label for="gender">Product Type Mapping<span class="text-danger">*</span></label>
+                                <span class="text-danger error-text product_type_mapping_error rm-error"></span>
+                            </div>
+                            <div class="col s12 m9 l9">
+                                <div class="radio-block">
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="product_type_mapping" type="radio" value="1" />
+                                        <span>Studio</span>
+                                    </label>
+                                    <label class="radio_box">
+                                        <input class="with-gap" name="product_type_mapping" type="radio" value="2" />
+                                        <span>Raw Materials</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row input-field studio" style="display: none;">
+                            <div class="col s12 m9 l9">
+                                <div class="input-field col s12">
+                                    <select class="select2 dropdownOptions" multiple name="studio_id[]">
+                                        <option value="3">Design</option>
+                                        <option value="4">Product sample</option>
+                                        <option value="5">Ready stock</option>
+                                    </select>
+                                    <label>Select studio</label>
+                                </div>
+                            </div>
+                            <span class="text-danger error-text studio_id_error rm-error"></span>
+                        </div>
+                        <div class="row input-field raw-materials" style="display: none;">
+                            <div class="col s12 m9 l9">
+                                <div class="input-field col s12">
+                                    <select class="select2 dropdownOptions" multiple name="raw_materials_id[]">
+                                        <option value="6">Textile</option>
+                                        <option value="7">Yarn</option>
+                                        <option value="8">Trims and Accessories</option>
+                                    </select>
+                                    <label>Select raw materials</label>
+                                </div>
+                            </div>
+                            <span class="text-danger error-text raw_materials_id_error rm-error"></span>
+                        </div>
+
                         <div class="form-group input-field row">
                             <div class="col s12 m3 l3">
                                 <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
@@ -464,6 +511,18 @@
             $(".select2-drop ul").removeClass("myErrorClass");
         }
     });
+    });
+
+    $(document).on('change','input[name=product_type_mapping]',function(){
+        if ($(this).val() == 1) {
+            $('.studio').show();
+            $('.raw-materials').hide();
+
+        }else if ($(this).val() == 2){
+            $('.studio').hide();
+            $('.raw-materials').show();
+        }
+
     });
 
     </script>

@@ -21,6 +21,11 @@
             $('#product-add-modal-block .product_unit').val('');
             $('#product-add-modal-block .product_unit').trigger('change');
             $('.error-rm').html('');
+            $('.select2').val('');
+            $('.select2').trigger('change');
+            $('.studio').hide();
+            $('.raw-materials').hide();
+
 
         })
 
@@ -267,6 +272,24 @@
                         $('#edit_category_id').trigger('change');
                         $('.product_unit').val(data.product.product_unit);
                         $('.product_unit').trigger('change');
+                        //product type mapping
+                        if(data.product.product_type_mapping_id != null){
+                            if(data.product.product_type_mapping_id ==1){
+                                $('.studio').show();
+                                $('.raw-materials').hide();
+                                $("#studio-checked").prop('checked', true);
+                                $('.studio-id').val(data.product.product_type_mapping_child_id).trigger('change');
+                            }else{
+                                $('.studio').hide();
+                                $('.raw-materials').show();
+                                $("#raw-materials-checked").prop('checked', true);
+                                $('.raw-materials').val(data.product.product_type_mapping_child_id).trigger('change');
+                            }
+                        }else{
+                            $('.studio').hide();
+                            $('.raw-materials').hide();
+                            $('#product-edit-modal-block input[name=product_type_mapping]').prop('checked', false);
+                        }
                         // video
                         $('#product-edit-modal-block input[name=remove_video_id]').val('');
                         $('#product-edit-modal-block .edit-video-upload-block').show();
@@ -947,6 +970,18 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
             }
         });
     });
+
+    $(document).on('change','input[name=product_type_mapping]',function(){
+        if ($(this).val() == 1) {
+            $('.studio').show();
+            $('.raw-materials').hide();
+        }else if ($(this).val() == 2){
+            $('.studio').hide();
+            $('.raw-materials').show();
+        }
+
+    });
+
 
 
     // $(document).ready(function (e) {

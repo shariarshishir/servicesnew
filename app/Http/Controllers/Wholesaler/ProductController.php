@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use DB;
 use App\Models\ProductCategory;
+use App\Models\ProductTypeMapping;
 use App\Models\ProductVideo;
 use App\Models\Vendor;
 use DataTables;
@@ -109,7 +110,6 @@ class ProductController extends Controller
 
    public function store(Request $request)
    {
-
         $validator = Validator::make($request->all(), [
             'business_profile_id' => 'required',
             'images'  => 'required',
@@ -138,6 +138,9 @@ class ProductController extends Controller
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
             'gender' => 'required',
             'sample_availability' => 'required',
+            'product_type_mapping' => 'required',
+            'studio_id'         => 'required_if:product_type_mapping,1',
+            'raw_materials_id'  => 'required_if:product_type_mapping,2',
 
 
         ],[
@@ -147,6 +150,8 @@ class ProductController extends Controller
             'quantity_max.*.required_if' => 'the :attribute are required',
             'price.*.required_if' => 'the :attribute are required',
             'lead_time.*.required_if' => 'the :attribute are required',
+            'studio_id.required_if' => 'the studio type is required when studio selected',
+            'raw_materials_id.required_if' => 'the raw materials type is required when raw materials selected',
         ]);
 
         if ($validator->fails())
@@ -300,6 +305,8 @@ class ProductController extends Controller
                 'overlay_small_image' => $filename ,
                 'overlay_original_image' => $original,
                 'created_by'  => auth()->id(),
+                'product_type_mapping_id' => $request->product_type_mapping,
+                'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
 
            ]);
 
@@ -414,6 +421,9 @@ class ProductController extends Controller
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
             'gender' => 'required',
             'sample_availability' => 'required',
+            'product_type_mapping' => 'required',
+            'studio_id'         => 'required_if:product_type_mapping,1',
+            'raw_materials_id'  => 'required_if:product_type_mapping,2',
 
         ],[
             'non_clothing_availability.required_if' => 'The  availability field is required when product type is Non Clothing.',
@@ -422,6 +432,9 @@ class ProductController extends Controller
             'quantity_max.*.required_if' => 'the :attribute are required',
             'price.*.required_if' => 'the :attribute are required',
             'lead_time.*.required_if' => 'the :attribute are required',
+            'studio_id.required_if' => 'the studio type is required when studio selected',
+            'raw_materials_id.required_if' => 'the raw materials type is required when raw materials selected',
+
         ]);
 
         if ($validator->fails())
@@ -552,6 +565,8 @@ class ProductController extends Controller
                     'updated_by'  => auth()->id(),
                     'gender'     => $request->gender,
                     'sample_availability' =>$request->sample_availability,
+                    'product_type_mapping_id' => $request->product_type_mapping,
+                    'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
             ]);
             $product=Product::withTrashed()->where('sku',$sku)->first();
             // $user=User::where('id',auth()->id())->first();

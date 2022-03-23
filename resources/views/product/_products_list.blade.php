@@ -37,7 +37,6 @@
                                 @if($product->overlay_original_image)
                                 <img src="{{asset('storage/'.$product->overlay_original_image)}}" class="single-product-overlay-img" alt="" style="display: none;" />
                                 @endif
-                                <h4><span> {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }} </span></h4>
                             </div>
 
                             <div class="products_inner_textbox">

@@ -12402,5 +12402,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         margin-top: 3px;
     }
 }
+.productBox .inner_productBox.has-overlay:hover .single-product-img {
+    display: none;
+}
+.productBox .inner_productBox.has-overlay:hover .single-product-overlay-img {
+    display: block !important;
+}
 
 /* ******************** Media css style end *********************** */

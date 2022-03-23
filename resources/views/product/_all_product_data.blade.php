@@ -55,7 +55,6 @@
                                         <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;" >
                                     @endif
                                 @endif
-                                <h4>{{$title}}</h4>
                             </div>
                             <div class="products_inner_textbox">
                                 <!-- <div class="priceBox row">

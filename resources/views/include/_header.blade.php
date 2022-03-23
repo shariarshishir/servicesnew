@@ -10,12 +10,12 @@
 								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products">Products<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('products')}}">All</a></li>
-									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('readystockproducts')}}">Ready to Ship</a></li>
-									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('buydesignsproducts')}}">Designs</a></li>
-									<li itemprop="itemListElement"><a itemprop="Low MOQ" href="{{route('low.moq')}}">Low MOQ</a></li>
-									<li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li>
-									<li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('customizable')}}">Customizable</a></li>
+									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('products')}}" class="{{ Route::is('products') ? 'active' : ''}}">All</a></li>
+									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('readystockproducts')}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Ready to Ship</a></li>
+									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('buydesignsproducts')}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Designs</a></li>
+									<li itemprop="itemListElement"><a itemprop="Low MOQ" href="{{route('low.moq')}}" class="{{ Route::is('low.moq') ? 'active' : ''}}">Low MOQ</a></li>
+									<li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('shortest.lead.time')}}" class="{{ Route::is('shortest.lead.time') ? 'active' : ''}}">Shortest Lead Time</a></li>
+									<li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('customizable')}}" class="{{ Route::is('customizable') ? 'active' : ''}}">Customizable</a></li>
 								</ul>
 							</li>
 							<li itemprop="itemListElement"><a itemprop="Suppliers" href="{{route('suppliers')}}">Suppliers</a></li>
@@ -25,7 +25,7 @@
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-links" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blog">Blogs</a></li>
+									<li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blog" class="{{ Route::is('industry.blogs') ? 'active' : ''}}">Blogs</a></li>
 									<li itemprop="itemListElement"><a href="http://insight.merchantbay.com/" itemprop="Insights">Insights</a></li>
 									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="Helps">Helps</a></li>
 									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="FAQs">FAQs</a></li>

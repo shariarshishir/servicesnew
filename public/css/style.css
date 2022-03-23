@@ -475,6 +475,11 @@ legend {
     font-weight: 500;
     padding: 0;
 }
+.mainNav ul li a.active:link,
+.mainNav ul li a.active:active,
+.mainNav ul li a.active:visited {
+    color: #394e3a;
+}
 .mainNav ul li a:hover {
     background: none;
 }

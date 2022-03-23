@@ -18,9 +18,9 @@
 									<li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('customizable')}}" class="{{ Route::is('customizable') ? 'active' : ''}}">Customizable</a></li>
 								</ul>
 							</li>
-							<li itemprop="itemListElement"><a itemprop="Suppliers" href="{{route('suppliers')}}">Suppliers</a></li>
-							<li itemprop="itemListElement"><a itemprop="Tools" href="{{route('front.tools')}}">Tools</a></li>
-							<li itemprop="itemListElement"><a itemprop="RFQ" href="{{route('rfq.index')}}">RFQ</a></li>
+							<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
+							<li itemprop="itemListElement"><a itemprop="Tools" class="{{ Route::is('front.tools') ? 'active' : ''}}" href="{{route('front.tools')}}">Tools</a></li>
+							<li itemprop="itemListElement"><a itemprop="RFQ" class="{{ Route::is('rfq.index') ? 'active' : ''}}" href="{{route('rfq.index')}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->

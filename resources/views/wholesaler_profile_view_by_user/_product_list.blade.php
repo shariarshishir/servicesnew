@@ -38,10 +38,10 @@
                                 </div>
                             </div> -->
                             <div class="row">
-                                <div class="col s12 m8">
+                                <div class="col s6">
                                     <h4><span> {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }} </span></h4>
                                 </div>
-                                <div class="col s12 m4">
+                                <div class="col s6">
                                     <div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
                                 </div>
                             </div>

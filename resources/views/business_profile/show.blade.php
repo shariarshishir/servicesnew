@@ -283,12 +283,12 @@
 														<div class="products_inner_textbox">
 
 															<div class="row">
-																<div class="col s12 m8">
+																<div class="col s6">
 																	<h4><span>{{$product->title}}</span></h4>
 																</div>
-																<div class="col s12 m4">
+																<div class="col s6">
 																	@if(isset($product->moq))
-																		<div class="product_moq"><span class="moq">MOQ:</a> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
+																		<div class="product_moq"><span class="moq">MOQ:</span> {{$product->moq}} <span class="moq-unit">{{ $product->qty_unit }}</span></div>
 																	@endif
 																</div>
 															</div>

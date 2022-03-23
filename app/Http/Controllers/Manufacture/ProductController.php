@@ -42,9 +42,14 @@ class ProductController extends Controller
             'price_per_unit'=> 'required',
             'gender' => 'required',
             'sample_availability' => 'required',
+            'product_type_mapping' => 'required',
+            'studio_id'         => 'required_if:product_type_mapping,1',
+            'raw_materials_id'  => 'required_if:product_type_mapping,2',
         ],[
             'price_per_unit.required' => 'The price range field is required.',
             'category_id.required' => 'The product category field is required',
+            'studio_id.required_if' => 'the studio type is required when studio selected',
+            'raw_materials_id.required_if' => 'the raw materials type is required when raw materials selected',
         ]);
 
         if ($validator->fails())
@@ -76,6 +81,8 @@ class ProductController extends Controller
                 'created_by' => auth()->id(),
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
+                'product_type_mapping_id' => $request->product_type_mapping,
+                'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
 
             ];
             $product=Product::create($Data);
@@ -171,9 +178,14 @@ public function update(Request $request, $product_id)
         'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
         'gender' => 'required',
         'sample_availability' => 'required',
+        'product_type_mapping' => 'required',
+        'studio_id'         => 'required_if:product_type_mapping,1',
+        'raw_materials_id'  => 'required_if:product_type_mapping,2',
     ],[
         'price_per_unit.required' => 'The price range field is required.',
         'category_id.required' => 'The product category field is required',
+        'studio_id.required_if' => 'the studio type is required when studio selected',
+        'raw_materials_id.required_if' => 'the raw materials type is required when raw materials selected',
     ]);
 
     if ($validator->fails())
@@ -199,6 +211,8 @@ public function update(Request $request, $product_id)
         $product->lead_time=$request->lead_time;
         $product->gender=$request->gender;
         $product->sample_availability=$request->sample_availability;
+        $product->product_type_mapping_id = $request->product_type_mapping;
+        $product->product_type_mapping_child_id = $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id;
         $product->save();
 
         if ($request->hasFile('product_images')){

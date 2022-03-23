@@ -11,6 +11,9 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $connection = 'mysql';
+    protected $casts = [
+        'product_type_mapping_child_id' => 'array',
+    ];
 
     protected $guarded=[];
 

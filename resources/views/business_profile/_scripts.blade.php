@@ -304,6 +304,10 @@
             $('.img-thumbnail').attr('src', 'https://via.placeholder.com/80');
             $('#manufacture-product-upload-errors').empty();
             $('.rm-error').html('');
+            $('.select2').val('');
+            $('.select2').trigger('change');
+            $('.studio').hide();
+            $('.raw-materials').hide();
         });
     });
 
@@ -401,6 +405,7 @@
                         $('#product-edit-modal-block .modal-content').html('');
                         $('input[name=remove_video_id]').val('');
                         $('#product-edit-modal-block .modal-content').html(data.data);
+                        $('.product-type-mapping-select').select2();
 
                     },
                 error: function(xhr, status, error)

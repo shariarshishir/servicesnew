@@ -18,6 +18,7 @@ class Product extends Model
         'product_image'=>'array',
         'colors'=>'array',
         'sizes'=>'array',
+        'product_type_mapping_child_id' => 'array',
     ];
 
     public function category()

@@ -281,7 +281,13 @@
                                                                 </div>
                                                             </div> -->
 
+                                                            <h4><span>{{$title}}</span></h4>
                                                             <div class="row">
+                                                                <div class="col s12 m6">
+                                                                    @if(isset($list->moq))
+                                                                        <div class="product_moq"><span class="moq">MOQ:</span> {{$list->moq}} <span class="moq-unit">{{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</span></div>
+                                                                    @endif
+                                                                </div>
                                                                 <div class="col s12 m6">
                                                                     <div class="pro_price">
                                                                         <span class="price">Price</span>
@@ -308,11 +314,6 @@
                                                                             @endforeach
                                                                         @endif                                            
                                                                     </div>
-                                                                </div>
-                                                                <div class="col s12 m6">
-                                                                    @if(isset($list->moq))
-                                                                        <div class="product_moq"><span class="moq">MOQ:</span> {{$list->moq}} <span class="moq-unit">{{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</span></div>
-                                                                    @endif
                                                                 </div>
                                                             </div>                                                            
 
@@ -384,12 +385,14 @@
 
 
         </div>
-    </div>
-    <div class="pagination-block-wrapper">
-        <div class="col s12 center">
-            {!! $low_moq_lists->appends(request()->query())->links() !!}
+        
+        <div class="pagination-block-wrapper">
+            <div class="center">
+                {!! $low_moq_lists->appends(request()->query())->links() !!}
+            </div>
         </div>
     </div>
+    
     {{-- @else
         <div class="card-alert card cyan">
             <div class="card-content white-text">

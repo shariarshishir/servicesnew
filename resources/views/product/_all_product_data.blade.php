@@ -95,8 +95,14 @@
                                 </div> -->
 
                                 <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4> -->
-
+                                
+                                <h4><span>{{$title}}</span></h4>
                                 <div class="row">
+                                    <div class="col s12 m6">
+                                        @if(isset($list->moq))
+                                            <div class="product_moq"><span class="moq">MOQ:</span>{{$list->moq}}<span class="moq-unit">{{$list->flag == 'mb' ? $list-> qty_unit : $list->product_unit}}</span></div>
+                                        @endif
+                                    </div>
                                     <div class="col s12 m6">
                                         <div class="pro_price">
                                             <span class="price">Price</span>
@@ -123,11 +129,6 @@
                                                 @endforeach
                                             @endif                                            
                                         </div>
-                                    </div>
-                                    <div class="col s12 m6">
-                                        @if(isset($list->moq))
-                                            <div class="product_moq"><span class="moq">MOQ:</span>{{$list->moq}}<span class="moq-unit">{{$list->flag == 'mb' ? $list-> qty_unit : $list->product_unit}}</span></div>
-                                        @endif
                                     </div>
                                 </div>                                
 

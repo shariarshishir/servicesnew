@@ -492,18 +492,19 @@ legend {
     margin-left: 0;
 }
 .header_dasktop .mainNav .subNav {
-    min-width: 235px;
+    width: 275px;
     background: #fff;
     -webkit-box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 2px 15px 0px rgb(0 0 0 / 20%);
-    border-radius: 15px;
+    border-radius: 10px;
     border: 1px solid #54A958;
     padding: 15px 5px;
     top: 38px !important;
 }
 .header_dasktop .mainNav ul li li {
-    padding: 0 0 5px !important;
+    padding: 0px !important;
+    min-height: 40px;
 }
 .header_dasktop .mainNav .subNav li,
 .header_dasktop .mainNav .subNav li:focus,
@@ -517,12 +518,13 @@ legend {
     padding: 8px 15px;
     background: none !important;
     /* display: inline-block; */
-    font-size: 18px;
+    font-size: 16px;
 }
 .header_dasktop .mainNav .subNav li a.active,
 .header_dasktop .mainNav .subNav li a:hover {
     background: #D2CFCF !important;
     border-radius: 5px;
+    color: #484848;
 }
 
 /* Mobile header css :start */
@@ -2884,7 +2886,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 
 /********************* suppliers page start ************************/
 .suppliers_container {
-    padding: 0px 15px 0px 10px;
+    padding: 0px 5px;
 }
 .suppliers_container .suppliers_filter_wrap {
     padding-bottom: 50px;
@@ -4178,7 +4180,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     transform: translate(-50%, -50%);
 }
 .rfq_content_box .rfq_profile_detail {
-    padding: 35px;
+    padding: 35px 0;
     -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
     -moz-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12);
     box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
@@ -4388,7 +4390,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_profile_info h6 {
     margin-bottom: 10px;
     color: #54A958;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 .rfq_profile_info .short_description {
@@ -4417,7 +4419,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 
 .rfq_profile_info .rfq_thum_imgs {
-    padding: 20px 0;
+    padding: 20px 15px;
 }
 .rfq_thum_imgs .rfq_thum_img {
     width: 120px;
@@ -4947,7 +4949,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-top: 0;
 }
 .input-field label {
-    font-size: 16px;
+    font-size: 14px;
     color: #000000;
     font-weight: 500;
     padding: 12px 0 0;
@@ -5199,7 +5201,7 @@ input.input-field[type=text]:not(.browser-default) {
 /* ************************************** */
 
 .profile_form_modal label {
-    font-size: 16px;
+    font-size: 14px;
     color: #000000;
     font-weight: 400;
     padding: 0 0 10px 0;
@@ -7640,6 +7642,7 @@ nav .pagination li.active .page-link {
 #product-add-modal-block .text-danger,
 #product-edit-modal-block .text-danger {
     font-size: 11px;
+    text-transform: capitalize;
 }
 #manufacture-product-upload-form .select2-container,
 #manufacture-product-update-form .select2-container {
@@ -7787,6 +7790,17 @@ nav .pagination li.active .page-link {
     position: absolute;
     left: 76px;
     bottom: -10px;
+}
+
+#product-edit-modal-block .studio .select2-container,
+#product-edit-modal-block .raw-materials .select2-container,
+#product-add-modal-block .studio .select2-container,
+#product-add-modal-block .raw-materials .select2-container {
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20);
+    box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
+    display: block;
 }
 
 
@@ -8502,7 +8516,7 @@ nav .pagination li.active .page-link {
 
 .products_filter_search_wrap .filter_search {
     display: block;
-    max-width: 660px;
+    max-width: 725px;
     float: right;
 }
 .products_filter_search_wrap form {
@@ -9342,6 +9356,10 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .invoice_container_wrap .shipping_details_wrap table thead tr th,
     .invoice_container_wrap .shipping_details_wrap table tr td {
         width: 20%;
+    }
+
+    .rfq_content_box .rfq_view_detail_wrap {
+        padding-right: 50px;
     }
 
 
@@ -10514,9 +10532,6 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .rfq_content_box .rfq_view_detail_wrap .btn_view_detail {
         font-size: 16px;
     }
-    .rfq_profile_info h6 {
-        font-size: 18px;
-    }
     #edit-rfq-form .rfq_detail_from .input-field label {
         margin-bottom: 10px;
     }
@@ -10698,7 +10713,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         width: 100%;
     }
     .products_filter_search_wrap .search_inputbox_wrap {
-        width: 80%;
+        width: 78%;
         padding-left: 32px;
     }
 
@@ -12096,7 +12111,10 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         border-radius: 3px;
         font-size: 12px;
     }
-
+    
+    .products_filter_search_wrap .search_inputbox_wrap {
+        width: 72%;
+    }
 
 }
 
@@ -12361,7 +12379,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 
     .products_filter_search_wrap .filter_search_input:focus, 
     .products_filter_search_wrap .filter_search_input {
-        width: 60% !important;
+        width: 75% !important;
     }
 
     .product_design_wrapper .product_item_box{
@@ -12371,24 +12389,13 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .product_design_wrapper .productBox .imgBox {
         min-height: 300px;
     }
-
     .products_filter_search_wrap .show-total-results {
         font-size: 12px;
     }
-
     .product_design_wrapper .product_moq, 
     .product_design_wrapper .product_item_box .pro_price {
         font-size: 14px;
     }
-
-    .products_filter_search_wrap .search_inputbox_wrap {
-        width: 82%;
-        padding-left: 32px;
-    }
-    .products_filter_search_wrap .filter_by {
-        padding-left: 8px;
-    }
-
     .product_design_wrapper .product_boxwrap {
         margin: 0;
     }
@@ -12401,6 +12408,18 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 
     .products_filter_wrapper .content-column {
         padding: 0;
+    }
+    .products_filter_search_wrap .filter_search {
+        text-align: center;
+    }
+    .products_filter_search_wrap .search_inputbox_wrap {
+        width: 100%;
+        text-align: left;
+    }
+    .products_filter_search_wrap .filter_by {
+        padding: 0 0px 10px;
+        display: inline-block;
+        float: none;
     }
 
 }

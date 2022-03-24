@@ -15,52 +15,51 @@
         <input type="hidden" name="edit_product_id" value="{{$product->id}}" >
         {{-- <div class="row"> --}}
         {{-- product type mapping --}}
-        <div class="row input-field ">
-            <div class="col s12 m3 l3">
-                <label for="gender">Product Type Mapping<span class="text-danger">*</span></label>
-                <span class="text-danger error-text product_type_mapping_error rm-error"></span>
-            </div>
-            <div class="col s12 m9 l9">
-                <div class="radio-block">
-                    <label class="radio_box">
-                        <input class="with-gap" name="product_type_mapping" type="radio" value="1" {{$product->product_type_mapping_id == 1 ? 'checked' : ''}}/>
-                        <span>Studio</span>
-                    </label>
-                    <label class="radio_box">
-                        <input class="with-gap" name="product_type_mapping" type="radio" value="2" {{$product->product_type_mapping_id == 2 ? 'checked' : ''}}/>
-                        <span>Raw Materials</span>
-                    </label>
+        <div class="input-field">
+            <div class="row">
+                <div class="col s12 m3 l3">
+                    <label for="gender">Product Type Mapping<span class="text-danger">*</span></label>
+                    <span class="text-danger error-text product_type_mapping_error rm-error"></span>
+                </div>
+                <div class="col s12 m9 l9">
+                    <div class="radio-block">
+                        <label class="radio_box">
+                            <input class="with-gap" name="product_type_mapping" type="radio" value="1" {{$product->product_type_mapping_id == 1 ? 'checked' : ''}}/>
+                            <span>Studio</span>
+                        </label>
+                        <label class="radio_box">
+                            <input class="with-gap" name="product_type_mapping" type="radio" value="2" {{$product->product_type_mapping_id == 2 ? 'checked' : ''}}/>
+                            <span>Raw Materials</span>
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
-        @php $none= 'style=display:none';@endphp
-        <div class="row input-field studio" {{$product->product_type_mapping_id == 1 ? '' : $none}} >
-            <div class="col s12 m9 l9">
-                <div class="input-field col s12">
+            @php $none= 'style=display:none';@endphp
+            <div class="row studio" {{$product->product_type_mapping_id == 1 ? '' : $none}} >
+                <div class="col s12">
+                    <label>Select studio</label>
                     <select  class="select2 dropdownOptions product-type-mapping-select" multiple name="studio_id[]">
                         <option value="3" {{isset($product->product_type_mapping_child_id) &&  in_array(3, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Design</option>
                         <option value="4" {{isset($product->product_type_mapping_child_id) && in_array(4, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Product sample</option>
                         <option value="5" {{isset($product->product_type_mapping_child_id) && in_array(5, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Ready stock</option>
                     </select>
-                    <label>Select studio</label>
+                    <span class="text-danger error-text studio_id_error rm-error"></span>
                 </div>
             </div>
-            <span class="text-danger error-text studio_id_error rm-error"></span>
-        </div>
-
-        <div class="row input-field raw-materials" {{$product->product_type_mapping_id == 2 ? '' : $none}}>
-            <div class="col s12 m9 l9">
-                <div class="input-field col s12">
+            <div class="row raw-materials" {{$product->product_type_mapping_id == 2 ? '' : $none}}>
+                <div class="col s12">
+                    <label>Select raw materials</label>
                     <select class="select2 dropdownOptions product-type-mapping-select" multiple name="raw_materials_id[]">
                         <option value="6"  {{isset($product->product_type_mapping_child_id) && in_array(6, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Textile</option>
                         <option value="7" {{isset($product->product_type_mapping_child_id) && in_array(7, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Yarn</option>
                         <option value="8" {{isset($product->product_type_mapping_child_id) &&  in_array(8, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Trims and Accessories</option>
                     </select>
-                    <label>Select raw materials</label>
+                    <span class="text-danger error-text raw_materials_id_error rm-error"></span>
                 </div>
             </div>
-            <span class="text-danger error-text raw_materials_id_error rm-error"></span>
         </div>
+        
+        
 
         <div class="form-group row input-field">
             <div class="col s12 m3 l3">

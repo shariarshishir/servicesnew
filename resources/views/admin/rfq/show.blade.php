@@ -22,11 +22,6 @@
                     </ol>
                 </div>
             </div>
-            <div class="row float-sm-right">
-                <a href="{{route('admin.rfq.status', $rfq->id)}}" class="btn btn-info" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
-            </div>
-            <div class="clearfix">
-            </div>
         </div><!-- /.container-fluid -->
     </section>
 
@@ -35,42 +30,69 @@
     <section class="content admin_rfq_wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <legend>Buyer Info</legend>
+                            <div class="col-sm-6 col-md-6">
                                 <div class="admin_rfq_left">
-                                    <p><b>Name:</b> {{$rfq->user->name}}</p>
-                                    <p><b>Email: </b> {{$rfq->user->email}}</p>
-                                    <p><b>Phone:</b> {{$rfq->user->phone}}</p>
+                                    <legend>RFQ Details</legend>
+                                    <div class="rfq_buyer_info">
+                                        <p><b>Name:</b> {{$rfq->user->name}}</p>
+                                        <p><b>Email: </b> {{$rfq->user->email}}</p>
+                                        <p><b>Phone:</b> {{$rfq->user->phone}}</p>
+                                    </div>
+                                    <div class="rfq_info_details">
+                                        <p><b>Title :</b> {{$rfq->title}}</p>
+                                        <p><b>Category :</b> {{$rfq->category->name}}</p>
+                                        <p><b>Quantity :</b> {{$rfq->quantity}}</p>
+                                        <p><b>Unit :</b> {{$rfq->unit}}</p>
+                                        <p><b>Unit Price :</b> {{$rfq->unit_price}}</p>
+                                        <p><b>Destination :</b> {{$rfq->destination}}</p>
+                                        <p><b>Payment Method :</b> {{$rfq->payment_method}}</p>
+                                        <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
+                                        <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
+                                        <p><b>Short Description :</b> {{$rfq->short_description}}</p>
+                                        <p><b>Full Specification :</b> {{$rfq->full_specification}}</p>                                                                    
+                                    </div>
+                                    <a href="{{route('admin.rfq.status', $rfq->id)}}" class="{{$rfq->status== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+                                    <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-info" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                    
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-8">
-                                <div class="admin_rfq_right">
-                                    <legend>Details</legend>
-                                    <p><b>Title :</b> {{$rfq->title}}</p>
-                                    <p><b>Category :</b> {{$rfq->category->name}}</p>
-                                    <p><b>Quantity :</b> {{$rfq->quantity}}</p>
-                                    <p><b>Unit :</b> {{$rfq->unit}}</p>
-                                    <p><b>Unit Price :</b> {{$rfq->unit_price}}</p>
-                                    <p><b>Destination :</b> {{$rfq->destination}}</p>
-                                    <p><b>Payment Method :</b> {{$rfq->payment_method}}</p>
-                                    <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                    <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                    <p><b>Short Description :</b> {{$rfq->short_description}}</p>
-                                    <p><b>Full Specification :</b> {{$rfq->full_specification}}</p>
-                                </div>
+                            <div class="col-md-6">
+                                
+
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Home</div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Profile</div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Contact</div>
+                                </div>                               
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12">
-                                <legend>Business Profiles Of Category {{$rfq->category->name}}</legend>
+                <div class="modal fade" id="businessProfileListByCategoryModal" tabindex="-1" role="dialog" aria-labelledby="businessProfileListByCategoryModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="businessProfileListByCategoryModalLabel">Business Profiles Of Category {{$rfq->category->name}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
                                 <div class="rfq_business_profile_list">
                                     @foreach($businessProfiles as $key=>$businessProfile)
                                     <div class="business_profile_name">
@@ -85,38 +107,13 @@
                                     @endforeach
                                 </div>
                                 <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
 
-            </div>    
-
-            <div class="card">
-                <div class="row">
-                    <legend>Replay</legend>
-                    @foreach ($rfq->bids as $bid)
-                        <div class="col-md-12">
-                            <div class="rfq_replay_box">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h6>Company Info</h6>
-                                        <p>Company Name: <b>{{$bid->businessProfile->business_name}}</b></p>
-                                        <p>Phone : {{$bid->user->phone}}</p>
-                                        <p>Email: {{$bid->user->email}}</p>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6>Replay Details</h6>
-                                        <p>Offer Price: <b>{{$bid->unit_price}}</b></p>
-                                        <p>Description : {!! $bid->description !!}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
             </div>
-
             
         </div>
     </section>
@@ -193,4 +190,3 @@
         
     </script>
 @endpush
-

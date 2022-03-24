@@ -19,6 +19,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 
 class RfqController extends Controller
@@ -100,11 +101,37 @@ class RfqController extends Controller
                 RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
             }
         }
-        $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
         //SEND CREATED RFQ DATA TO RFQ APP
-        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[ 
-        //     $rfq
-        // ]);
+                $rfq = Rfq::with('images')->where('id',$rfq->id)->first();
+                $category = [];
+                array_push($category,$rfq->category);
+                $newRfq= new stdClass();
+                $newRfq->id =  $rfq->id;
+                $newRfq->link =  $rfq->link;
+                $newRfq->rfq_deal_status =  $rfq->rfq_deal_status;
+                $newRfq->category_id =  $rfq->category_id;
+                $newRfq->title =  $rfq->title;
+                $newRfq->quantity =  $rfq->quantity;
+                $newRfq->unit =  $rfq->unit;
+                $newRfq->unit_price =  $rfq->unit_price;
+                $newRfq->industry =  $rfq->industry;
+                $newRfq->destination =  $rfq->destination;
+                $newRfq->payment_method =  $rfq->payment_method;
+                $newRfq->delivery_time =  $rfq->delivery_time;
+                $newRfq->short_description =  $rfq->short_description;
+                $newRfq->full_specification =  $rfq->full_specification;
+                $newRfq->status =  $rfq->status;
+                $newRfq->rfq_from =  $rfq->rfq_from;
+                $newRfq->reason =  $rfq->reason;
+                $newRfq->created_by =  $rfq->created_by;
+                $newRfq->created_at =  $rfq->created_at;
+                $newRfq->updated_at =  $rfq->updated_at;
+                $newRfq->images =  $rfq->images;
+                $newRfq->category=$category;
+                
+        $response = Http::post('http://192.168.68.148:8888/api/quotation', [
+            $newRfq
+        ]);
 
         // if(env('APP_ENV') == 'production')
         // {
@@ -124,8 +151,8 @@ class RfqController extends Controller
             //     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             // }
 
-            $selectedUserToSendMail="success@merchantbay.com";
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            // $selectedUserToSendMail="success@merchantbay.com";
+            // event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
         // }
 
 

@@ -15,6 +15,8 @@ use App\Models\SupplierBid;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewRfqHasAddedEvent;
 use Illuminate\Support\Str;
+use App\Models\Manufacture\ProductCategory;
+use stdClass;
 
 
 class RFQController extends Controller
@@ -156,9 +158,11 @@ class RFQController extends Controller
 
     public function storeRfqFromOMD(Request $request){
         // try{  
-        //     return response()->json()
+           // return $request->all();
             $userObj = json_decode($request->user);
-            return response()->json(['user'=>$userObj]);
+            // if( $request->rfq_from == "rfqapp" ){
+            //     $userObj = json_decode($userObj);
+            // }
             //user loging credential
             $email = $userObj->email;
             $password = base64_decode($userObj->password);
@@ -182,20 +186,36 @@ class RFQController extends Controller
                 ]);
             }
         
-            $rfqData = $request->except(['product_images','user','sso_reference_id']);
-            $rfqData['created_by']=$user->id;
+            $rfqData = $request->except(['product_images','user','sso_reference_id','category_id']);
+            $rfqData['category_id'] = $request->rfq_from == 'omd' ? $request->category_id : $request->category_id[0];
+            $rfqData['created_by'] = $user->id;
             $rfqData['status']='pending';
             $rfqData['link'] = $this->generateUniqueLink();
             $rfq=Rfq::create($rfqData);
-
-            if ($request->hasFile('product_images')){
-                foreach ($request->file('product_images') as $index=>$product_image){
-                    $path=$product_image->store('images','public');
-                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                    Storage::put($path, $image);
-                    RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
+            if($request->rfq_from == 'omd'){
+                if ($request->hasFile('product_images')){
+                    foreach ($request->file('product_images') as $index=>$product_image){
+                        $path=$product_image->store('images','public');
+                        $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+                        Storage::put($path, $image);
+                        RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
+                    }
                 }
             }
+            else{
+
+                if($request->product_images){
+                    foreach($request->product_images as $image){
+                        $image_64 = $image; //your base64 encoded data
+                        $imageName = '/images/'.Str::random(40).'.'.'jpeg';
+                        Storage::disk('public')->put($imageName, base64_decode($image_64));
+                        RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$imageName]);
+                    }
+                }
+            }
+            
+
+           
             if(env('APP_ENV') == 'production')
             {
                 $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(5)->get();
@@ -207,8 +227,41 @@ class RFQController extends Controller
                 event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             }
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
-            if($rfq){
+            if($rfq  && $request->rfq_from == "omd"){
                 return response()->json(['rfq'=>$rfq,'rfqImages'=>$rfq->images,"success"=>true],200);
+            }
+            else{
+
+                $rfq = Rfq::with('images')->where('id',$rfq->id)->first();
+                $categoryIds = [];
+                foreach($request->category_id as $categoryId ){
+                    array_push($categoryIds,$categoryId);
+                }
+                $categories = ProductCategory::whereIn('id',$categoryIds)->get();
+                $newRfq= new stdClass();
+                $newRfq->id =  $rfq->id;
+                $newRfq->link =  $rfq->link;
+                $newRfq->rfq_deal_status =  $rfq->rfq_deal_status;
+                $newRfq->category_id =  $rfq->category_id;
+                $newRfq->title =  $rfq->title;
+                $newRfq->quantity =  $rfq->quantity;
+                $newRfq->unit =  $rfq->unit;
+                $newRfq->unit_price =  $rfq->unit_price;
+                $newRfq->industry =  $rfq->industry;
+                $newRfq->destination =  $rfq->destination;
+                $newRfq->payment_method =  $rfq->payment_method;
+                $newRfq->delivery_time =  $rfq->delivery_time;
+                $newRfq->short_description =  $rfq->short_description;
+                $newRfq->full_specification =  $rfq->full_specification;
+                $newRfq->status =  $rfq->status;
+                $newRfq->rfq_from =  $rfq->rfq_from;
+                $newRfq->reason =  $rfq->reason;
+                $newRfq->created_by =  $rfq->created_by;
+                $newRfq->created_at =  $rfq->created_at;
+                $newRfq->updated_at =  $rfq->updated_at;
+                $newRfq->images =  $rfq->images;
+                $newRfq->category=$categories;
+                return response()->json([$newRfq,"success"=>true],200);
             }
 
         // }catch(\Exception $e){
@@ -218,6 +271,7 @@ class RFQController extends Controller
         //     ],500);
         // }
     }
+
 
 
     public function  newRfqNotificationMarkAsRead(Request $request){

@@ -52,7 +52,7 @@
                                     @endif
                                 @else
                                     @if($list->overlay_image)
-                                        <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;" >
+                                        <img src="{{asset('storage').'/'.$list->overlay_image}}" class="single-product-overlay-img" alt="" style="display: none;" >
                                     @endif
                                 @endif
                             </div>

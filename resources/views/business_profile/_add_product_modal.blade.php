@@ -22,50 +22,47 @@
                     <input type="hidden" name="industry" value="{{$business_profile->industry_type}}">
                     {{-- <div class="row"> --}}
                         {{-- product type mapping --}}
-                        <div class="row input-field ">
-                            <div class="col s12 m3 l3">
-                                <label for="gender">Product Type Mapping<span class="text-danger">*</span></label>
-                                <span class="text-danger error-text product_type_mapping_error rm-error"></span>
-                            </div>
-                            <div class="col s12 m9 l9">
-                                <div class="radio-block">
-                                    <label class="radio_box">
-                                        <input class="with-gap" name="product_type_mapping" type="radio" value="1" />
-                                        <span>Studio</span>
-                                    </label>
-                                    <label class="radio_box">
-                                        <input class="with-gap" name="product_type_mapping" type="radio" value="2" />
-                                        <span>Raw Materials</span>
-                                    </label>
+                        <div class="input-field">
+                            <div class="row">
+                                <div class="col s12 m3 l3">
+                                    <label for="gender">Product Type Mapping<span class="text-danger">*</span></label>
+                                    <span class="text-danger error-text product_type_mapping_error rm-error"></span>
+                                </div>
+                                <div class="col s12 m9 l9">
+                                    <div class="radio-block">
+                                        <label class="radio_box">
+                                            <input class="with-gap" name="product_type_mapping" type="radio" value="1" />
+                                            <span>Studio</span>
+                                        </label>
+                                        <label class="radio_box">
+                                            <input class="with-gap" name="product_type_mapping" type="radio" value="2" />
+                                            <span>Raw Materials</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row input-field studio" style="display: none;">
-                            <div class="col s12 m9 l9">
-                                <div class="input-field col s12">
+                            <div class="row studio" style="display: none;">
+                                <div class="col s12">
+                                    <label>Select studio</label>
                                     <select class="select2 dropdownOptions" multiple name="studio_id[]">
                                         <option value="3">Design</option>
                                         <option value="4">Product sample</option>
                                         <option value="5">Ready stock</option>
                                     </select>
-                                    <label>Select studio</label>
+                                    <span class="text-danger error-text studio_id_error rm-error"></span>
                                 </div>
                             </div>
-                            <span class="text-danger error-text studio_id_error rm-error"></span>
-                        </div>
-                        <div class="row input-field raw-materials" style="display: none;">
-                            <div class="col s12 m9 l9">
-                                <div class="input-field col s12">
+                            <div class="row raw-materials" style="display: none;">
+                                <div class="col s12">
+                                    <label>Select raw materials</label>
                                     <select class="select2 dropdownOptions" multiple name="raw_materials_id[]">
                                         <option value="6">Textile</option>
                                         <option value="7">Yarn</option>
                                         <option value="8">Trims and Accessories</option>
                                     </select>
-                                    <label>Select raw materials</label>
+                                    <span class="text-danger error-text raw_materials_id_error rm-error"></span>
                                 </div>
                             </div>
-                            <span class="text-danger error-text raw_materials_id_error rm-error"></span>
                         </div>
 
                         <div class="form-group input-field row">

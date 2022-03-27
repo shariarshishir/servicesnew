@@ -1750,64 +1750,68 @@
     //submit form for sampling
 
     $('#sampling-form').on('submit',function(e){
-    e.preventDefault();
-    $.ajax({
-      url: '{{route("sampling.create-or-update")}}',
-      type:"POST",
-      data: $('#sampling-form').serialize(),
-      beforeSend: function() {
-        $('.loading-message').html("Please Wait.");
-        $('#loadingProgressContainer').show();
-        },
-      success:function(response){
-        $('.loading-message').html("");
-        $('#loadingProgressContainer').hide();
-        var samplings=response.samplings;
-        var nohtml="";
-        if(samplings.length >0){
+        e.preventDefault();
+        $.ajax({
+            url: '{{route("sampling.create-or-update")}}',
+            type:"POST",
+            data: $('#sampling-form').serialize(),
+            beforeSend: function() 
+            {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+            },
+            success:function(response)
+            {
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                var samplings=response.samplings;
+                var nohtml="";
+                if(samplings.length >0)
+                {
 
-            $('.sampling_table_wrapper').html(nohtml);
-            var  html ='<div class="overview_table box_shadow">';
-            html +='<table>';
-            html +='<tbody class="sampling-table-body">';
+                    $('.sampling_table_wrapper').html(nohtml);
+                    var  html ='<div class="overview_table box_shadow">';
+                    html +='<table>';
+                    html +='<tbody class="sampling-table-body">';
 
-            for(let i=0;i<samplings.length ;i++){
-                html += '<tr>';
-                html += '<td>'+samplings[i].title+'</td>';
-                html += '<td>'+samplings[i].quantity+'</td>';
-                if(samplings[i].status==1)
-                html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
-                else{
-                html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                    for(let i=0;i<samplings.length ;i++){
+                        html += '<tr>';
+                        html += '<td>'+samplings[i].title+'</td>';
+                        html += '<td>'+samplings[i].quantity+'</td>';
+                        if(samplings[i].status==1)
+                        html += '<td><i class="material-icons" style="color:green">check_circle</i></td>';
+                        else{
+                        html += '<td><i class="material-icons "style="color:gray">check_circle</i></td>';
+                        }
+                        html += '</tr>';
+                    }
+                    $('.sampling_table_wrapper').append(html)
                 }
-                html += '</tr>';
-            }
-            $('.sampling_table_wrapper').append(html)
-        }
-        else{
+                else
+                {
 
-            $('.sampling_table_wrapper').html(nohtml);
-            var html='';
-            html +='<div class="card-alert card cyan lighten-5">';
-            html +='<div class="card-content cyan-text">';
-            html +='<p>INFO : No data found.</p>';
-            html +='</div>';
-            $('.sampling_table_wrapper').append(html);
+                    $('.sampling_table_wrapper').html(nohtml);
+                    var html='';
+                    html +='<div class="card-alert card cyan lighten-5">';
+                    html +='<div class="card-content cyan-text">';
+                    html +='<p>INFO : No data found.</p>';
+                    html +='</div>';
+                    $('.sampling_table_wrapper').append(html);
 
-            //append in form
-            $('.sampling-table-block tbody').children().html(nohtml);
-            var html='<tr id="sampling-details-table-no-data">';
-            html += '<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
-            html +='<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
-            html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
-            html +='</tr>';
-            $('.sampling-table-block tbody').append(html);
-        }
+                    //append in form
+                    $('.sampling-table-block tbody').children().html(nohtml);
+                    var html='<tr id="sampling-details-table-no-data">';
+                    html += '<td data-title="Name"><input name="sampling_title[]" id="sampling-title" type="text" class="input-field" value="" ></td>';
+                    html +='<td data-title="Quantity"><input name="sampling_quantity[]" id="sampling-quantity" type="number" class="input-field"  value="" ></td>';
+                    html +='<td><a href="javascript:void(0);" class="btn_delete" onclick="removeSamplingDetails(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a></td>';
+                    html +='</tr>';
+                    $('.sampling-table-block tbody').append(html);
+                }
 
-        $('#sampling-modal').modal('close');
-        swal("Done!", response.message,"success");
-      },
-      error: function(xhr, status, error)
+                $('#sampling-modal').modal('close');
+                swal("Done!", response.message,"success");
+            },
+            error: function(xhr, status, error)
             {
                 $('#sampling-errors').empty();
                 $("#sampling-errors").append("<div class=''>"+error+"</div>");
@@ -1816,7 +1820,7 @@
                     $("#sampling-errors").append("<div class='danger'>"+item+"</div>");
                 });
             }
-      });
+        });
     });
 
 

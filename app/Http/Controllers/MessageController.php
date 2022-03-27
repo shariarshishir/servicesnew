@@ -359,7 +359,7 @@ class MessageController extends Controller
             ->where('id', $request->supplier_id)
             ->first();
         */
-        return 'notify';
+        //return 'notify';
         $user = User::find($request->supplier_id);
 
         if ($user && in_array(\auth()->user()->user_type, ['buyer', 'both']))

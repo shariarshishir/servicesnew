@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="{{asset('admin-assets/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('admin-assets/css/adminlte.min.css')}}">
+  <link href="{{asset('admin-assets/css/app-chat.min.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('admin-assets/css/admin_style.css')}}">
-
   <link rel="stylesheet" href="{{asset('admin-assets/css/pdf-style.css')}}" media="print">
 
   <!-- Google Font: Source Sans Pro -->

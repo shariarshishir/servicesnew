@@ -644,7 +644,70 @@ p {
     height: 315px;
     overflow-y: auto;
 }
-
+.rfq-info-details {
+    position: relative;
+}
+.rfq-status-trigger {
+    position: absolute;
+    top: 4px;
+    right: 15px;
+}
+.business-profile-list-trigger {
+    position: absolute;
+    top: 4px;
+    right: 140px;
+}
+/* Message Center Styles start */
+.chatting_app_wrapper {
+    word-break: initial;
+    padding: 0px !important;
+}
+.chatting_app_wrapper .circle {
+    border-radius: 50%;
+}
+.chatting_app_wrapper .z-depth-2 {
+    -webkit-box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 30%);
+    box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 30%);
+}
+.chatting_app_wrapper .chat-sidebar .user-section .media-image img {
+    margin-top: 10px;
+}
+.chatting_app_wrapper img.responsive-img {
+    max-width: 100%;
+    height: auto;
+}
+.chatting_app_wrapper .chat-application .app-chat .chat-content .sidebar {
+    width: 250px !important;
+}
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
+    display: block !important;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .message {
+    border: none;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-body .chat-text p a:link,
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-body .chat-text p a:visited,
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-body .chat-text p a:active {
+    color: #ceffd4;
+}
+.chat-application .app-chat .btn_green {
+    background: #448547;
+    border: 1px solid #448547;
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin: 5px 10px;
+    padding: 5px 15px;
+    -webkit-box-shadow: 0px 0px 14px -3px rgb(68 133 71);
+    -moz-box-shadow: 0px 0px 14px -3px rgba(68,133,71,1);
+    box-shadow: 0px 0px 14px -3px rgb(68 133 71);
+    min-width: 120px;
+    display: inline-block;
+    /* line-height: 22px; */
+}
+/* Message Center Styles end */
 @media only screen and (max-width: 800px) {
     .no_more_tables {
         padding: 10px 5px;

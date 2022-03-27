@@ -22,11 +22,6 @@
                     </ol>
                 </div>
             </div>
-            <div class="row float-sm-right">
-                <a href="{{route('admin.rfq.status', $rfq->id)}}" class="btn btn-info" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
-            </div>
-            <div class="clearfix">
-            </div>
         </div><!-- /.container-fluid -->
     </section>
 
@@ -35,42 +30,189 @@
     <section class="content admin_rfq_wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <legend>Buyer Info</legend>
+                            <div class="col-sm-6 col-md-6">
                                 <div class="admin_rfq_left">
-                                    <p><b>Name:</b> {{$rfq->user->name}}</p>
-                                    <p><b>Email: </b> {{$rfq->user->email}}</p>
-                                    <p><b>Phone:</b> {{$rfq->user->phone}}</p>
+                                    <legend>RFQ Details</legend>
+                                    <div class="rfq_buyer_info">
+                                        <p><b>Name:</b> {{$rfq->user->name}}</p>
+                                        <p><b>Email: </b> {{$rfq->user->email}}</p>
+                                        <p><b>Phone:</b> {{$rfq->user->phone}}</p>
+                                    </div>
+                                    <div class="rfq_info_details">
+                                        <p><b>Title :</b> {{$rfq->title}}</p>
+                                        <p><b>Category :</b> {{$rfq->category->name}}</p>
+                                        <p><b>Quantity :</b> {{$rfq->quantity}}</p>
+                                        <p><b>Unit :</b> {{$rfq->unit}}</p>
+                                        <p><b>Unit Price :</b> {{$rfq->unit_price}}</p>
+                                        <p><b>Destination :</b> {{$rfq->destination}}</p>
+                                        <p><b>Payment Method :</b> {{$rfq->payment_method}}</p>
+                                        <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
+                                        <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
+                                        <p><b>Short Description :</b> {{$rfq->short_description}}</p>
+                                        <p><b>Full Specification :</b> {{$rfq->full_specification}}</p>                                                                    
+                                    </div>
+                                    <a href="{{route('admin.rfq.status', $rfq->id)}}" class="{{$rfq->status== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+                                    <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-info" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                    
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-8">
-                                <div class="admin_rfq_right">
-                                    <legend>Details</legend>
-                                    <p><b>Title :</b> {{$rfq->title}}</p>
-                                    <p><b>Category :</b> {{$rfq->category->name}}</p>
-                                    <p><b>Quantity :</b> {{$rfq->quantity}}</p>
-                                    <p><b>Unit :</b> {{$rfq->unit}}</p>
-                                    <p><b>Unit Price :</b> {{$rfq->unit_price}}</p>
-                                    <p><b>Destination :</b> {{$rfq->destination}}</p>
-                                    <p><b>Payment Method :</b> {{$rfq->payment_method}}</p>
-                                    <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                    <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                    <p><b>Short Description :</b> {{$rfq->short_description}}</p>
-                                    <p><b>Full Specification :</b> {{$rfq->full_specification}}</p>
+                            <div class="col-md-6">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="buyer-tab" data-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">Buyer</a>
+                                    </li>
+                                    <li class="nav-item" style="display: none;">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BP 1</a>
+                                    </li>
+                                    <li class="nav-item" style="display: none;">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">BP 2</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="buyer" role="tabpanel" aria-labelledby="buyer-tab">
+
+                                        <div class="chatting_app_wrapper">
+                                            <div class="chat-application">
+                                                <div class="app-chat">
+                                                    <div class="content-area content-right">
+                                                        <div class="app-wrapper">
+                                                            <div class="card card card-default scrollspy border-radius-6 fixed-width">
+                                                                <div class="card-content chat-content p-0">
+                                                                    <!-- Sidebar Area -->
+                                                                    <div class="sidebar-left sidebar-fixed animate fadeUp animation-fast">
+                                                                        <div class="sidebar animate fadeUp">
+                                                                            <div class="sidebar-content">
+                                                                                <div id="sidebar-list" class="sidebar-menu chat-sidebar list-group position-relative">
+                                                                                    <div class="sidebar-list-padding app-sidebar" id="chat-sidenav">
+                                                                                        <!-- Sidebar Content List -->
+                                                                                        <div class="sidebar-content sidebar-chat ps ps--active-y">
+                                                                                            <div class="chat-list">
+                                                                                                <div class="chat-user animate fadeUp delay-1">
+                                                                                                    <div class="user-section">
+                                                                                                        <div class="row valign-wrapper">
+                                                                                                            <div class="col s2 media-image online pr-0">
+                                                                                                                <img src="https://www.merchantbay.com/global/public/storage/images/mahmood.sakib/profile/Poo6IM1kjon2lAVFCGTggUOcvsQ8A8LzOgJkkMDE.jpg" alt="" class="circle z-depth-2 responsive-img">
+                                                                                                            </div>
+                                                                                                            <div class="col s10">
+                                                                                                                <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">Gorge Fernandis</p>
+                                                                                                                <p class="m-0 info-text">Apple pie bonbon cheesecake tiramisu</p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="info-section">
+                                                                                                        <div class="star-timing">
+                                                                                                            <div class="time">
+                                                                                                                <span>2.38 pm</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="no-data-found">
+                                                                                                <h6 class="center">No Results Found</h6>
+                                                                                            </div>
+                                                                                            <div class="ps__rail-x" style="left: 0px; bottom: -236px;">
+                                                                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                                                                            </div>
+                                                                                            <div class="ps__rail-y" style="top: 236px; height: 356px; right: 0px;">
+                                                                                                <div class="ps__thumb-y" tabindex="0" style="top: 142px; height: 213px;"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!--/ Sidebar Content List -->
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--/ Sidebar Area -->
+                                                                    <!-- Content Area -->
+                                                                    <div class="chat-content-area animate fadeUp">
+                                                                        <!-- Chat content area -->
+                                                                        <div class="chat-area ps ps--active-y">
+                                                                            <div class="chats">
+                                                                                <div class="chats">
+                                                                                    <div class="chat chat-right">
+                                                                                        <div class="chat-avatar">
+                                                                                            <a class="avatar">
+                                                                                            <img src="https://www.merchantbay.com/global/public/storage/images/wholesaler1/profile/piMjUGflrBvXUeMg3KiRs67lYPw8qMLoLdF34P8o.png" class="circle" alt="avatar">
+                                                                                            </a>
+                                                                                        </div>
+                                                                                        <div class="chat-body left-align">
+                                                                                            <div class="chat-text">
+                                                                                                <p>
+                                                                                                    <b>Our Suggested Profiles</b><br />
+                                                                                                    <a href="javascript:void(0);"><b>XYZ Fashion</b></a> Offers - 300<br />
+                                                                                                    <a href="javascript:void(0);"><b>T.J. Sweaters Ltd.</b></a> Offers - 250<br />
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="chat">
+                                                                                        <div class="chat-avatar">
+                                                                                            <a class="avatar">
+                                                                                            <img src="https://www.merchantbay.com/global/public/storage/images/mahmood.sakib/profile/Poo6IM1kjon2lAVFCGTggUOcvsQ8A8LzOgJkkMDE.jpg" class="circle" alt="avatar">
+                                                                                            </a>
+                                                                                        </div>
+                                                                                        <div class="chat-body left-align">
+                                                                                            <div class="chat-text">
+                                                                                                <p>Thanks, for your suggestion. Soon, I will check it and let you know.</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ps__rail-x" style="">
+                                                                                <div class="ps__thumb-x" tabindex="0" style=""></div>
+                                                                            </div>
+                                                                            <div class="ps__rail-y" style="">
+                                                                                <div class="ps__thumb-y" tabindex="0" style=""></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--/ Chat content area -->
+                                                                        <!-- Chat footer <-->
+                                                                        <div class="chat-footer">
+                                                                            <form onsubmit="enter_chat();" action="javascript:void(0);" class="chat-input">
+                                                                                <input type="text" placeholder="Type message here.." class="message mb-0">
+                                                                                <a class="btn_green send" onclick="enter_chat();">Send</a>
+                                                                            </form>
+                                                                        </div>
+                                                                        <!--/ Chat footer -->
+                                                                    </div>
+                                                                    <!--/ Content Area -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+
+                                    </div>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        Business Profile 1
+                                    </div>
+                                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                        Business Profile 2
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12">
-                                <legend>Business Profiles Of Category {{$rfq->category->name}}</legend>
+                <div class="modal fade" id="businessProfileListByCategoryModal" tabindex="-1" role="dialog" aria-labelledby="businessProfileListByCategoryModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="businessProfileListByCategoryModalLabel">Business Profiles Of Category {{$rfq->category->name}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
                                 <div class="rfq_business_profile_list">
                                     @foreach($businessProfiles as $key=>$businessProfile)
                                     <div class="business_profile_name">
@@ -85,38 +227,13 @@
                                     @endforeach
                                 </div>
                                 <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
 
-            </div>    
-
-            <div class="card">
-                <div class="row">
-                    <legend>Replay</legend>
-                    @foreach ($rfq->bids as $bid)
-                        <div class="col-md-12">
-                            <div class="rfq_replay_box">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h6>Company Info</h6>
-                                        <p>Company Name: <b>{{$bid->businessProfile->business_name}}</b></p>
-                                        <p>Phone : {{$bid->user->phone}}</p>
-                                        <p>Email: {{$bid->user->email}}</p>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6>Replay Details</h6>
-                                        <p>Offer Price: <b>{{$bid->unit_price}}</b></p>
-                                        <p>Description : {!! $bid->description !!}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
             </div>
-
             
         </div>
     </section>
@@ -126,6 +243,7 @@
 @push('js')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        function enter_chat(a){var e=$(".message").val();if(""!=e){var t='<div class="chat-text"><p>'+e+"</p></div>";$(".chat:last-child .chat-body").append(t),$(".message").val(""),$(".chat-area").scrollTop($(".chat-area > .chats").height())}}
         $(document).ready(function() {
             
             var selectedValues = [];
@@ -193,4 +311,3 @@
         
     </script>
 @endpush
-

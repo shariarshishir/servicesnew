@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Product;
-use App\Models\Manufacture\Product as ManufactureProduct;
+use DB;
+use Image;
+use Helper;
+use stdClass;
+use Carbon\Carbon;
 use App\Models\User;
-use App\Models\ProductImage;
-use App\Models\BusinessProfile;
-use App\Models\RelatedProduct;
+use App\Models\Product;
 use App\Rules\MoqUnitRule;
+use Illuminate\Support\Str;
+use App\Models\ProductImage;
+use App\Models\ProductVideo;
+use Illuminate\Http\Request;
+use App\Models\RelatedProduct;
+use App\Models\BusinessProfile;
+use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
+use App\Rules\ReadyStockFullStockRule;
+use App\Rules\NonClothingFullStockRule;
+use Illuminate\Database\Schema\Builder;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Rules\ReadyStockPriceBreakDownRule;
 use App\Rules\NonClothingPriceBreakDownRule;
-use App\Rules\NonClothingFullStockRule;
-use App\Rules\ReadyStockFullStockRule;
-use App\Models\ProductVideo;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use Image;
-use DB;
-use Illuminate\Http\Request;
-use stdClass;
-use Helper;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Manufacture\Product as ManufactureProduct;
 
 
 class ProductController extends Controller
@@ -121,20 +124,20 @@ class ProductController extends Controller
         if($readyStockProducts->total()>0){
             foreach($readyStockProducts as $product){
                 if($product->product_type==2){
-                    
+
                     foreach(json_decode($product->attribute) as $attribute){
                         $attribute_array[] = (object) array('ready_quantity_min' =>$attribute[0], 'ready_quantity_max' => $attribute[1],'ready_price'=>$attribute[2]);
                     }
 
                 }
                 else{
-                   
+
                     foreach(json_decode($product->attribute) as $attribute){
-    
+
                         $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
                     }
                 }
-             
+
                 $newFormatedProduct= new stdClass();
                 $newFormatedProduct->id=$product->id;
                 $newFormatedProduct->name=$product->name;
@@ -164,7 +167,7 @@ class ProductController extends Controller
                 $attribute_array=[];
 
             }
-           
+
         }
         if(count($readyStockProductsArray)>0){
             return response()->json(array('success' => true, 'products' => $readyStockProductsArray),200);
@@ -482,7 +485,7 @@ class ProductController extends Controller
                         foreach(json_decode($product->attribute) as $attribute){
                             $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
                         }
-        
+
                     }
 
 
@@ -544,8 +547,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-     
-        
+
+
         $validator = Validator::make($request->all(), [
             'business_profile_id' => 'required',
             'images'  => 'required',
@@ -652,13 +655,13 @@ class ProductController extends Controller
                 $availability=$request->non_clothing_availability;
                 $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
             }
-           
+
             $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
 
             //overlay image
             if($request->overlay_image){
-                
+
                 $filename = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_small','public');
                 $image_resize = Image::make(public_path('storage/'.$filename));
                 $image_resize->fit(300, 300);
@@ -753,8 +756,8 @@ class ProductController extends Controller
     public function storeBk(Request $request,$storeId)
     {
 
-        
-      
+
+
         $request->validate([
 
             'images'  => 'required',
@@ -837,7 +840,7 @@ class ProductController extends Controller
                 $full_stock_price = isset($request->full_stock_price) ? $request->full_stock_price : null;
                 $availability=$request->availability;
             }
-           
+
 
             $product=Product::create([
                 'vendor_id' => $storeId,
@@ -1003,7 +1006,7 @@ class ProductController extends Controller
                 $full_stock_negotiable= isset($request->non_clothing_full_stock_negotiable) ? true : false;
                 $availability=$request->availability;
             }
-            
+
             $product=Product::where('id',$productId)->first();
             $business_profile=BusinessProfile::where('id', $product->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
@@ -1091,7 +1094,7 @@ class ProductController extends Controller
                     }
                 }
             }
- 
+
             if($request->hasFile('video')){
                 $folder='video/'.$business_profile_name;
                 $filename = $request->video->store($folder,'public');
@@ -1148,7 +1151,7 @@ class ProductController extends Controller
 
 
     public function searchByProductName(Request $request){
-          
+
         if(!empty($request->search_input) && $request->type=="wholesaler"){
             $products=Product::with('images','businessProfile','productReview')->where('business_profile_id', '!=', null)->where('name', 'like', '%'.$request->search_input.'%')->paginate(20);
                 if($products->total()>0){
@@ -1349,6 +1352,124 @@ class ProductController extends Controller
     //             500);
     //     }
     // }
+
+    public function studio(Request $request)
+    {
+
+        $manufacture_products=ManufactureProduct::with(['product_images:product_id,product_image as image','category'])->where(['product_type_mapping_id' => 1])->get();
+        $wholesaler_products= Product::with(['images:product_id,image','category'])->where(['product_type_mapping_id' => 1, 'state' => 1, 'sold' => 0])->get();
+
+        $collection = $manufacture_products->mergeRecursive($wholesaler_products)->values();
+        $merged=collect();
+        foreach($collection as $item){
+            $merged->push(
+                ['title' => $item->name ?? $item->title,
+                'flag' => $item->flag,
+                'category' => $item->category->name,
+                'moq' => $item->moq ?? null,
+                'price' => $item->price ?? null,
+                'image' => $item->images ?? $item->product_images,
+                'attribute' =>$item->attribute ?  json_decode($item->attribute) : null,
+                'product_type' => $item->product_type ?? null ,
+                'created_at' => $item->created_at,
+                'priority_level' => $item->priority_level,
+                'product_type_mapping_id' => $item->product_type_mapping_id,
+                'product_type_mapping_child_id' => $item->product_type_mapping_child_id,
+            ]);
+        }
+
+        if(isset($request->product_type_mapping_child_id)){
+            $merged = $merged->filter(function ($value, $key) use ($request) {
+                    $result=array_intersect($value['product_type_mapping_child_id'],$request->product_type_mapping_child_id);
+                    if(count($result) > 0){
+                        return true;
+                    }
+                return false;
+            });
+
+            $merged->all();
+
+        }
+
+        if(isset($request->search)){
+            $search=$request->search;
+            $merged = $merged->filter(function($item) use ($search) {
+                return stripos($item['title'],$search) !== false;
+            });
+        }
+
+
+        $items_per_page = 2;
+        $current_page = LengthAwarePaginator::resolveCurrentPage();
+        $products = new LengthAwarePaginator(
+            collect($merged)->forPage($current_page, $items_per_page)->values(),
+            count($merged),
+            $items_per_page,
+            $current_page,
+            ['path' =>  Paginator::resolveCurrentPath()]
+        );
+
+        return response()->json(['products' => $products], 200);
+    }
+
+    public function rawMaterials(Request $request)
+    {
+        $manufacture_products=ManufactureProduct::with(['product_images:product_id,product_image as image', 'category'])->where(['product_type_mapping_id' => 2])->get();
+        $wholesaler_products= Product::with(['images:product_id,image', 'category'])->where(['product_type_mapping_id' => 2, 'state' => 1, 'sold' => 0])->get();
+
+        $collection = $manufacture_products->mergeRecursive($wholesaler_products)->values();
+        $merged=collect();
+        foreach($collection as $item){
+            $merged->push(
+                ['title' => $item->name ?? $item->title,
+                'flag' => $item->flag,
+                'category' => $item->category->name,
+                'moq' => $item->moq ?? null,
+                'price' => $item->price ?? null,
+                'image' => $item->images ?? $item->product_images,
+                'attribute' =>$item->attribute ?  json_decode($item->attribute) : null,
+                'product_type' => $item->product_type ?? null ,
+                'created_at' => $item->created_at,
+                'priority_level' => $item->priority_level,
+                'product_type_mapping_id' => $item->product_type_mapping_id,
+                'product_type_mapping_child_id' => $item->product_type_mapping_child_id,
+            ]);
+        }
+
+
+        if(isset($request->product_type_mapping_child_id)){
+            $merged = $merged->filter(function ($value, $key) use ($request) {
+                    $result=array_intersect($value->product_type_mapping_child_id,$request->product_type_mapping_child_id);
+                    if(count($result) > 0){
+                        return true;
+                    }
+                return false;
+            });
+
+            $merged->all();
+
+        }
+
+        if(isset($request->search)){
+            $search=$request->search;
+            $merged = $merged->filter(function($item) use ($search) {
+                return stripos($item['title'],$search) !== false;
+            });
+        }
+
+        $items_per_page = 2;
+        $current_page = LengthAwarePaginator::resolveCurrentPage();
+        $products = new LengthAwarePaginator(
+            collect($merged)->forPage($current_page, $items_per_page)->values(),
+            count($merged),
+            $items_per_page,
+            $current_page,
+            ['path' =>  Paginator::resolveCurrentPath()]
+        );
+
+
+        return response()->json(['products' => $products], 200);
+    }
 
 
 }

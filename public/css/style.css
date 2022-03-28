@@ -7858,7 +7858,7 @@ nav .pagination li.active .page-link {
     margin: 20px 0 15px;
     max-width: 160px;
     display: block;
-    padding-top: 50px;
+    padding-top: 7px;
 }
 .footer_left_bottom .addressWrap .btn_tour {
     margin-bottom: 12px;
@@ -10773,7 +10773,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         display: -webkit-box;
         -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
-        max-height: 160px;
+        max-height: 156px;
     }
     .landing_spotlight_wrap h3 {
         font-size: 20px;
@@ -10813,6 +10813,13 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         font-size: 14px;
     }
 
+    .rfq_detail_from .input-field .col {
+        padding: 0;
+    }
+    .rfq_detail_from .inpuboxt_group_wrap .row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
 
 }
 
@@ -11710,6 +11717,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 
     .blog_detail_info_wrap .feature_img {
         margin-bottom: 10px;
+    }
+
+    .blog_detail_info_wrap {
+        font-size: 14px;
+        line-height: 24px;
     }
 
 

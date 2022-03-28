@@ -12,7 +12,7 @@
 								<ul id="studio-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
 									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Product Sample</a></li>
-									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" class="{{ Route::is('product.type.mapping',['studio', 'ready_stock']) ? 'active' : ''}}">Ready Stock</a></li>
+									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
 								</ul>
 							</li>
                             <li itemprop="itemListElement">

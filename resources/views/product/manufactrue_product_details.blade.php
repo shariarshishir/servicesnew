@@ -182,7 +182,7 @@
                                             <form class="contact-supplier-form" id="contactSupplierForm" action="" method="POST">
                                                 @csrf
                                                 <div class="modal-content">
-                                                    <h2>Contact Supplier</h2>
+                                                    <h2>Send Query</h2>
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control" name="name" placeholder="Name*" required>
@@ -356,9 +356,9 @@
 
                         @endif
                         @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button>
                         @else
-                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Send Query</button>
                         @endif
                         <br/>
 

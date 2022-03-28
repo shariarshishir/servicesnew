@@ -1359,7 +1359,7 @@ class ProductController extends Controller
         $manufacture_products=ManufactureProduct::with(['product_images:product_id,product_image as image','category'])->where(['product_type_mapping_id' => 1])->get();
         $wholesaler_products= Product::with(['images:product_id,image','category'])->where(['product_type_mapping_id' => 1, 'state' => 1, 'sold' => 0])->get();
 
-        $collection = $manufacture_products->mergeRecursive($wholesaler_products)->values();
+        $collection = $manufacture_products->mergeRecursive($wholesaler_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
         $merged=collect();
         foreach($collection as $item){
             $merged->push(
@@ -1417,7 +1417,7 @@ class ProductController extends Controller
         $manufacture_products=ManufactureProduct::with(['product_images:product_id,product_image as image', 'category'])->where(['product_type_mapping_id' => 2])->get();
         $wholesaler_products= Product::with(['images:product_id,image', 'category'])->where(['product_type_mapping_id' => 2, 'state' => 1, 'sold' => 0])->get();
 
-        $collection = $manufacture_products->mergeRecursive($wholesaler_products)->values();
+        $collection = $manufacture_products->mergeRecursive($wholesaler_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
         $merged=collect();
         foreach($collection as $item){
             $merged->push(

@@ -34,6 +34,8 @@
 <link href="{{asset('css/app-chat.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/icon.css')}}" rel="stylesheet">
 <link href="{{asset('css/image-uploader.min.css')}}" rel="stylesheet">
+<link href="{{asset('fonts/nexa.css')}}" rel="stylesheet">
+
 {{-- jasny-bootstrap.min --}}
 <link href="{{asset('css/jasny-bootstrap.min.css')}}" rel="stylesheet">
 {{-- <link rel="stylesheet" href="http://demo.discoverprograming.com/plugin/bootstrap-3.min.css">

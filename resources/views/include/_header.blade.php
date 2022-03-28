@@ -1,7 +1,8 @@
 <!-- Header section start  -->
 <section class="header_wrap sticky_header" itemscope>
-	<header class="header_dasktop" itemscope>
-		<div class="container" itemscope>
+	<div class="container" itemscope>
+		<!-- Desktop header start -->
+		<header class="header_dasktop" itemscope>
 			<div class="row header_innrer" itemscope>
 				<div class="col m5 mainnav_wrap" itemscope>
 					<nav class="mainNav" itemscope>
@@ -11,7 +12,7 @@
 								<!-- Dropdown Structure -->
 								<ul id="studio-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
-									<li itemprop="itemListElement"><a itemprop="Product Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Product Sample</a></li>
+									<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
 									<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
 								</ul>
 							</li>
@@ -252,41 +253,25 @@
 
 					@endif
 
-                    <div class="cart-icon-outer-wrapper" itemscope>
-                        <div class="cart-icon-wrapper" itemscope>
-                            <a href="javascript:void(0);" itemprop="Shopping Cart" class="btn waves-effect waves-light green lighten-1 cart-btn">
-                                <i class="material-icons dp48">shopping_cart</i>
-                            </a>
-							<span id="cartItems"class="cart_counter" itemprop="Count">{{$cartItems}}</span>
-                            <ul id="cart-dropdown" class="card" style="display: none;" itemscope itemtype="https://schema.org/ListItem">
-                                {{-- @if(Cart::content()->count() > 0) --}}
-
-                                <li tabindex="0" itemprop="itemListElement">
-                                    <a class="grey-text text-darken-1" itemprop="My cart" href="{{route('cart.index')}}"><i class="material-icons">shopping_basket</i> My Cart</a>
-                                </li>
-                                <li tabindex="0" itemprop="itemListElement">
-                                    <a class="grey-text text-darken-1" itemprop="Remove cart" href="{{route('cart.destroy')}}"><i class="material-icons">delete</i> Delete all cart item</a>
-                                </li>
-                                {{-- @else
-                                <li tabindex="0" itemprop="itemListElement">
-                                    <a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">shopping_basket</i> Basket is empty</a>
-                                </li>
-                                @endif --}}
-                            </ul>
-                        </div>
-                    </div>
-
-					<a href="{{route('business.profile.create')}}" itemprop="Business Profile" type="button" class="btn_profile btn_green">
-					    <span class="material-icons"> add </span> Business Profile
+					<a href="javascript:void(0)" itemprop="Join MB Pool" type="button" class="btn_profile btn_green">
+					     Join MB Pool
 					</a>
+
+					<button class="header_search_bar">
+						<i class="material-icons dp48">search</i>
+					</button>
+
+					<!-- <a href="{{route('business.profile.create')}}" itemprop="Business Profile" type="button" class="btn_profile btn_green">
+					    <span class="material-icons"> add </span> Business Profile
+					</a> -->
 
 				</div>
 			</div>
-		</div>
-	</header>
-
-	<header class="mobile_header header_wrap" itemscope>
-		<div class="container" itemscope>
+		</header>
+		<!-- Desktop header end -->
+		
+		<!-- Mobile header -->
+		<header class="mobile_header header_wrap" itemscope>
 			<div class="col m2 logo center-align" itemscope>
 				<a href="{{route('home')}}" itemprop="Logo"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a>
 			</div>
@@ -297,17 +282,17 @@
 						<a href="javascript:void(0)" class="closebtn" itemprop="Close Nav" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
 						
 						<ul itemscope itemtype="https://schema.org/ListItem">
-                            <li itemprop="itemListElement">
+							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="studio-products-mobile">Studio <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 								
 								<!-- Dropdown Structure -->
 								<ul id="studio-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
-									<li itemprop="itemListElement"><a itemprop="Product Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Product Sample</a></li>
+									<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
 									<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
 								</ul>
 							</li>
-                            <li itemprop="itemListElement">
+							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products-mobile">Raw Materials <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
@@ -640,41 +625,64 @@
 						@endif
 					</div>
 
-					<div class="cart-icon-outer-wrapper mobile_top_icon_box" itemscope>
-                        <div class="cart-icon-wrapper cart-icon-wrapper-mobile" itemscope>
-							<a class='dropdown-trigger' href='#' data-target='cart-dropdown-mobile' itemprop="Cart Count">
-								<i class="material-icons dp48">shopping_cart</i>
-								<span id="cartItems"class="cart_counter">{{$cartItems}}</span>
-							</a>
-							<!-- Dropdown Structure -->
-							<ul id="cart-dropdown-mobile" class="card dropdown-content" itemscope itemtype="https://schema.org/ListItem">
-								{{-- @if(Cart::content()->count() > 0) --}}
-								<li tabindex="0" itemprop="itemListElement">
-									<a class="grey-text text-darken-1" itemprop="My Cart" href="{{route('cart.index')}}"><i class="material-icons">shopping_basket</i> My Cart</a>
-								</li>
-								<li tabindex="0" itemprop="itemListElement">
-									<a class="grey-text text-darken-1" itemprop="Remove Cart" href="{{route('cart.destroy')}}"><i class="material-icons">delete</i> Delete all cart item</a>
-								</li>
-								{{-- @else
-								<li tabindex="0" itemprop="itemListElement">
-									<a class="grey-text text-darken-1" href="javascript:void(0);"><i class="material-icons">shopping_basket</i> Basket is empty</a>
-								</li>
-								@endif --}}
-							</ul>
-                        </div>
-                    </div>
-
 					<div class="mobile_top_icon_box" itemscope>
 						<a href="{{route('business.profile.create')}}" itemprop="My Profile" type="button" class="btn_profile_mobile">
 							<span class="material-icons"> add </span>
 						</a>
 					</div>
 
+					<button class="header_search_bar">
+						<i class="material-icons dp48">search</i>
+					</button>
+
+				</div>
+			</div>
+		</header>
+		<!-- Mobile header end -->
+
+		<div class="banner_search" itemscope style="display: none;">
+			@php
+				$searchType= request()->get('search_type');
+			@endphp
+			<div class="module-search">
+				<select id="searchOption" class="select2 browser-default select-search-type">
+					<option value="all" name="search_key" {{ $searchType=="all" ? 'selected' : '' }}>All</option>
+					<option value="product" name="search_key" {{ $searchType=="product" ? 'selected' : '' }}>Products</option>
+					<option value="vendor"  name="search_key" {{ $searchType=="vendor" ? 'selected' : '' }}>Manufacturers</option>
+				</select>
+				<form name="system_search" action="{{route('onsubmit.search')}}" id="system_search" method="get">
+					@if(Route::is('onsubmit.search'))
+					<input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="{{$searchInputValue}}" class="search_input"  name="search_input"/>
+					@else
+					<input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="" class="search_input"  name="search_input"/>
+					@endif
+					<input type="hidden" name="search_type" class="search_type" value="" />
+					<button class="btn waves-effect waves-light green darken-1 search-btn" type="submit" ><i class="material-icons dp48">search</i></button>
+				</form>
+				<div id="search-results-wrapper" style="display: none;">
+					<div id="loadingSearchProgressContainer">
+						<div id="loadingSearchProgressElement">
+							<img src="{{asset('images/frontendimages/new_layout_images/loading-gray.gif')}}" width="128" height="15" alt="Loading">
+							<div class="loading-message" style="display: none;">Loading...</div>
+						</div>
+					</div>
+					<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>                    
+					<div id="search-results" style="display: none;"></div>
 				</div>
 			</div>
 		</div>
-	</header>
+
+
+
+	</div>
+
+	
+
+	
 </section>
+
+
+
 <!-- Header section end -->
 
 

@@ -7,6 +7,7 @@ html {
 }
 body {
     font-family: 'Poppins', sans-serif;
+    /* font-family: 'nexaregular'; */
     font-size: 14px;
     word-break: break-word;
     color: #484848;
@@ -84,7 +85,7 @@ table {
     background: #54A958;
     border: 1px solid #54A958;
     color: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
     text-transform: capitalize;
@@ -116,7 +117,7 @@ table {
     background: #FFFFFF;
     border: none;
     color: #54A958;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
     text-transform: capitalize;
@@ -128,11 +129,11 @@ table {
     min-width: 120px;
     cursor: pointer;
     display: inline-block;
+    border: 1px solid #54A958;
 }
 .btn_white:focus,
 .btn_white:hover {
     background: #fff;
-    border: none;
     -webkit-box-shadow: 0px 0px 18px -5px rgba(68,133,71,1);
     -moz-box-shadow: 0px 0px 18px -5px rgba(68,133,71,1);
     box-shadow: 0px 0px 18px -5px rgba(68,133,71,1);
@@ -143,7 +144,7 @@ table {
     color: #73D578;
     border: 2px solid #73D578;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     display: inline-block;
     padding: 5px 18px;
     font-weight: 500;
@@ -159,7 +160,7 @@ table {
     max-width: 186px;
     border: 2px solid #73D578;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     font-weight: 500;
     padding: 5px 15px;
     min-width: 120px;
@@ -170,7 +171,7 @@ table {
     font-weight: 500;
     color: #54A958;
     border: 2px solid #54A958;
-    border-radius: 10px;
+    border-radius: 5px;
     display: inline-block;
     padding: 5px 15px;
     min-width: 120px;
@@ -200,7 +201,7 @@ button:hover {
     font-size: 14px;
     font-weight: 500;
     color: #000000;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #000000;
     padding: 5px 15px;
     margin: 5px;
@@ -262,7 +263,7 @@ textarea:focus {
     -webkit-box-shadow: 0px 3px 9px 4px rgb(0 0 0 / 30%);
     -moz-box-shadow: 0px 3px 9px 4px rgba(0,0,0,0.30);
     box-shadow: 0px 3px 9px 4px rgb(0 0 0 / 30%);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -445,7 +446,7 @@ legend {
 /* Header Top right css end  */
 /* ******* Nav css start ********** */
 .mainnav_wrap {
-    padding-top: 22px !important;
+    padding-top: 25px !important;
     padding-left: 17px !important;
 }
 .fixedHeader .mainnav_wrap {
@@ -491,6 +492,7 @@ legend {
     height: auto;
     margin-left: 0;
     width: 10px;
+    line-height: 20px;
 }
 .header_dasktop .mainNav .subNav {
     width: 275px;
@@ -653,6 +655,26 @@ legend {
     font-weight: 300;
     text-align: center;
 }
+
+
+.header_wrap .container {
+    position: relative;
+}
+.banner_search {
+    padding: 20px; 
+    word-break: inherit;
+    transition: 0.5s;
+    position: absolute;
+    width: 700px;
+    right: 0;
+    background: #ffffff;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+
+    animation-duration: 3s;
+    animation-name: slidein;
+}
 .banner_search .module-search #system_search {
     display: flex;
     border: 1px solid rgba(129,169,90,1);
@@ -729,12 +751,41 @@ legend {
 }
 .banner_search .material-icons {
     font-size: 2rem;
-    margin-top: 3px;
+    /* margin-top: 3px; */
 }
 .banner_inner .search_verified {
     font-weight: 200;
     font-size: 15px;
 }
+
+.header_search_bar {
+    float: right;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.header_search_bar:focus,
+.header_search_bar:hover {
+    outline: none;
+    box-shadow: none;
+    background: none !important;
+}
+
+.header_search_bar .material-icons {
+    font-size: 30px !important;
+}
+.mobile_header .header_search_bar {
+    margin-top: 0;
+}
+.mobile_header .header_search_bar .material-icons {
+    font-size: 22px !important;
+}
+.mobile_header .banner_search {
+    width: 100%;
+}
+
 /* *************** Banner css end ***************** */
 
 /* *************** Main Container css start ***************** */
@@ -5547,7 +5598,7 @@ input.input-field[type=text]:not(.browser-default) {
 /* ************************************************** */
 /* New style start */
 .header_dasktop .btn_profile {
-    line-height: 26px;
+    line-height: 30px;
     font-size: 14px;
     margin-right: 10px;
     margin-top: 0px;
@@ -8126,9 +8177,10 @@ nav .pagination li.active .page-link {
     color: #000000;
 }
 .landing_intro_wrapper h1 {
+    /* font-family: 'nexaregular'; */
     font-size: 45px;
     line-height: 60px;
-    color: #404040;
+    color: #285460;
     font-weight: 500;
     margin-bottom: 40px;
     max-width: 560px;
@@ -8370,6 +8422,37 @@ nav .pagination li.active .page-link {
     padding-top: 5px;
 }
 
+.home_intro_left .quotation_request {
+    background: #D7DF23;
+    padding: 10px 10px 10px 20px;
+    border-radius: 0 30px 30px 0;
+    margin-top: 60px;
+    height: 58px;
+    width: 425px;
+}
+.home_intro_left .quotation_request a {
+    color: #285460;
+    display: inline-block;
+    width: 100%;
+}
+.home_intro_left .quotation_text {
+    padding-top: 5px;
+    font-size: 20px;
+    float: left;
+}
+.home_intro_left .quotation_request .quotation_arrow {
+    float: right;
+    background: #ffffff;
+    padding: 8px 10px;
+    border-radius: 20px;
+    width: 65px;
+    height: 38px;
+    text-align: center
+}
+.home_intro_left .quotation_request .quotation_arrow .material-icons {
+    font-size: 30px;
+    line-height: 24px;
+}
 /* ************New Landing page design style end**************** */
 
 #association-membership-upload-form-modal.profile_form_modal td,
@@ -9427,6 +9510,8 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         height: 400px;
     } */
 
+
+
 }
 
 @media only screen and (min-width: 1900px) {
@@ -9930,6 +10015,14 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         width: 60px !important;
     }
 
+    .home_intro_left .quotation_request {
+        margin-top: 30px;
+    }
+    .home_intro_left .quotation_text {
+        font-size: 18px;
+    }
+
+
 
     
 
@@ -9941,6 +10034,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     }
     .mainnav_wrap {
         padding-top: 19px !important;
+    }
+
+    .header_search_bar {
+        margin-top: 3px;
+        margin-right: 5px;
     }
 
     .top_right .btn_white,
@@ -10088,6 +10186,8 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         height: 200px;
     }
 
+
+
 }
 
 
@@ -10209,13 +10309,17 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         width: 90%;
     }
     .banner_search .search-btn {
-        width: 48px;
+        width: 60px;
         height: 53px;
         line-height: 54px;
      }
 
      .landing_intro_wrapper {
          padding: 60px 0;
+     }
+
+     .banner_search .material-icons {
+         margin-top: 2px;
      }
 
 
@@ -10242,6 +10346,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .profile_bannerwrap h1 {
         margin: 10px 0;
         font-size: 30px;
+        line-height: 35px;
     }
     .profile_bannerwrap h2 {
         font-size: 16px;
@@ -10268,7 +10373,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         background-size: 40px;
         bottom: 0px;
         font-size: 16px;
-        right: 0;
+        right: 10px;
     }
     .profile_bannerwrap .edit_profile_option {
         top: 48px;
@@ -10862,6 +10967,33 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .rfq_detail_from .inpuboxt_group_wrap .row {
         margin-left: -5px;
         margin-right: -5px;
+    }
+
+    .banner_search {
+        right: 15px;
+        left: 15px;
+        top: 122px;
+        z-index: 999;
+        width: auto;
+    }
+
+    .home_intro_left .quotation_text {
+        font-size: 16px;
+        line-height: 20px;
+        width: 200px;
+    }
+    .home_intro_left .quotation_request {
+        height: 65px;
+        width: 280px;
+    }
+    .home_intro_left .quotation_request .quotation_arrow {
+        padding: 4px 5px;
+        width: 45px;
+        height: 30px;
+        margin-top: 7px;
+    }
+    .home_intro_left .quotation_request .quotation_arrow .material-icons {
+        font-size: 20px;
     }
 
 }
@@ -12195,6 +12327,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     
     .products_filter_search_wrap .search_inputbox_wrap {
         width: 72%;
+    }
+
+    .home_intro_left .quotation_request {
+        margin: 30px auto 0;
+        border-radius: 30px;
     }
 
 }

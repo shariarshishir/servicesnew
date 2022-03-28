@@ -54,6 +54,7 @@ use App\Http\Controllers\Api\User\MessageController;
 // product type mapping
 Route::get('studio',[ProductController::class, 'studio']);
 Route::get('raw-materials',[ProductController::class, 'rawMaterials']);
+Route::get('product/details/{flag}/{id}', [ProductController::class,'productDetails']);
 // sso user registation
 Route::post('user/signup',[UserController::class, 'signUp']);
 

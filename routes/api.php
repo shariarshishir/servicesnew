@@ -51,6 +51,9 @@ use App\Http\Controllers\Api\User\MessageController;
 //     return $request->user();
 // });
 
+// product type mapping
+Route::get('studio',[ProductController::class, 'studio']);
+Route::get('raw-materials',[ProductController::class, 'rawMaterials']);
 // sso user registation
 Route::post('user/signup',[UserController::class, 'signUp']);
 
@@ -90,7 +93,7 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
     Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
-    
+
     //active inactive business profile by user
     Route::post('/business-profile/publish-unpublish', [BusinessProfileController::class, 'profilePublishOrUnpublish']);
     Route::post('/business-profile',[BusinessProfileController::class,'store']);
@@ -158,21 +161,21 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('/bids/{bid}', [RfqBidController::class, 'bidDetails']);
     Route::get('/rfq-bids-created-by-auth-user', [RfqBidController::class, 'rfqBidCreatedByAuthUser']);
 
-    
-    
+
+
     Route::post('/rfq-notification-mark-as-read',[RFQController::class,'newRfqNotificationMarkAsRead']);
     Route::post('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'newRfqBidNotificationMarkAsRead']);
-    
+
 
 
     //poforma
     Route::post('/proforma-invoices/store', [ProformaInvoiceController::class,'store']);
     Route::get('/proforma-invoice-form', [ProformaInvoiceController::class,'allInformationNeededToCreateProFormaInvoice']);
-    
+
     Route::get('/created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'createdProformaByAuthUser']);
     Route::get('/received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'receivedProformaByAuthUser']);
 
-    
+
     Route::post('/search-created-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'searchProformaCreatedByAuthUser']);
     Route::post('/search-received-proforma-invoices-by-auth-user',[ProformaInvoiceController::class,'searchProformaReceivedByAuthUser']);
 
@@ -204,8 +207,8 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('/orders/{orderId}',[OrderController::class,'orderDetails']);
     Route::get('/orders-by-authenticated-user',[OrderController::class,'orderByAuthenticatedUser']);
     Route::post('/order-approved-notification-mark-as-read',[OrderController::class,'orderApprovedNotificationMarkAsRead']);
-    
-    
+
+
 
     //order query
     Route::post('/order-queries', [OrderQueryController::class, 'store']);

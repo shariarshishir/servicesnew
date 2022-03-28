@@ -7,7 +7,7 @@
                 <!-- <p>Upload your new product</p> -->
                 <!-- <div class="col-md-12">
                     <div class="row">
-                        
+
                     </div>
                 </div> -->
             </div>
@@ -38,7 +38,7 @@
             <div class="row studio" {{$product->product_type_mapping_id == 1 ? '' : $none}} >
                 <div class="col s12">
                     <label>Select studio</label>
-                    <select  class="select2 dropdownOptions product-type-mapping-select" multiple name="studio_id[]">
+                    <select  class="select2 dropdownOptions " multiple name="studio_id[]">
                         <option value="3" {{isset($product->product_type_mapping_child_id) &&  in_array(3, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Design</option>
                         <option value="4" {{isset($product->product_type_mapping_child_id) && in_array(4, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Product sample</option>
                         <option value="5" {{isset($product->product_type_mapping_child_id) && in_array(5, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Ready stock</option>
@@ -49,7 +49,7 @@
             <div class="row raw-materials" {{$product->product_type_mapping_id == 2 ? '' : $none}}>
                 <div class="col s12">
                     <label>Select raw materials</label>
-                    <select class="select2 dropdownOptions product-type-mapping-select" multiple name="raw_materials_id[]">
+                    <select class="select2 dropdownOptions " multiple name="raw_materials_id[]">
                         <option value="6"  {{isset($product->product_type_mapping_child_id) && in_array(6, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Textile</option>
                         <option value="7" {{isset($product->product_type_mapping_child_id) && in_array(7, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Yarn</option>
                         <option value="8" {{isset($product->product_type_mapping_child_id) &&  in_array(8, $product->product_type_mapping_child_id) ? 'selected' : ''}}>Trims and Accessories</option>
@@ -58,8 +58,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
 
         <div class="form-group row input-field">
             <div class="col s12 m3 l3">
@@ -147,38 +147,30 @@
 
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> <span class="text-danger">*</span></label>
+                <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> </label>
             </div>
             <div class="col s12 m9 l9">
                 <select class="select2 browser-default product-colors" name="colors[]" multiple>
-                    @if(isset($product->colors))
+
                         @foreach ($colors as $color)
                             <option value="{{ $color }}" {{ (in_array($color, $product->colors))?'selected':'' }}>{{ ucfirst($color) }}</option>
                         @endforeach
-                    @else
-                        @foreach ($colors as $color)
-                            <option value="{{ $color }}">{{ ucfirst($color) }}</option>
-                        @endforeach
-                    @endif
+
                 </select>
                 <span class="text-danger error-text colors_error rm-error"></span>
             </div>
         </div>
         <div class="row input-field">
             <div class="col s12 m3 l3">
-                <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> <span class="text-danger">*</span></label>
+                <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> </label>
             </div>
             <div class="col s12 m9 l9">
                 <select class="select2 browser-default product-sizes" name="sizes[]"  multiple="multiple">
-                    @if(isset($product->colors))
+
                         @foreach ($sizes as $size)
                                 <option value="{{ $size }}" {{ (in_array($size, $product->sizes))?'selected':'' }}>{{ ucfirst($size) }}</option>
                         @endforeach
-                    @else
-                        @foreach ($sizes as $size)
-                            <option value="{{ $size }}">{{ ucfirst($size) }}</option>
-                        @endforeach
-                    @endif
+
                 </select>
                 <span class="text-danger error-text sizes_error rm-error"></span>
             </div>

@@ -1363,7 +1363,9 @@ class ProductController extends Controller
         $merged=collect();
         foreach($collection as $item){
             $merged->push(
-                ['title' => $item->name ?? $item->title,
+                [
+                'id' => $item->id,
+                'title' => $item->name ?? $item->title,
                 'flag' => $item->flag,
                 'category' => $item->category->name,
                 'moq' => (int)$item->moq ?? null,
@@ -1399,7 +1401,7 @@ class ProductController extends Controller
         }
 
 
-        $items_per_page = 2;
+        $items_per_page = 10;
         $current_page = LengthAwarePaginator::resolveCurrentPage();
         $products = new LengthAwarePaginator(
             collect($merged)->forPage($current_page, $items_per_page)->values(),
@@ -1421,7 +1423,9 @@ class ProductController extends Controller
         $merged=collect();
         foreach($collection as $item){
             $merged->push(
-                ['title' => $item->name ?? $item->title,
+                [
+                'id' => $item->id,
+                'title' => $item->name ?? $item->title,
                 'flag' => $item->flag,
                 'category' => $item->category->name,
                 'moq' =>  (int)$item->moq ?? null,
@@ -1439,7 +1443,7 @@ class ProductController extends Controller
 
         if(isset($request->product_type_mapping_child_id)){
             $merged = $merged->filter(function ($value, $key) use ($request) {
-                    $result=array_intersect($value->product_type_mapping_child_id,$request->product_type_mapping_child_id);
+                    $result=array_intersect($value['product_type_mapping_child_id'],$request->product_type_mapping_child_id);
                     if(count($result) > 0){
                         return true;
                     }
@@ -1457,7 +1461,7 @@ class ProductController extends Controller
             });
         }
 
-        $items_per_page = 2;
+        $items_per_page = 10;
         $current_page = LengthAwarePaginator::resolveCurrentPage();
         $products = new LengthAwarePaginator(
             collect($merged)->forPage($current_page, $items_per_page)->values(),
@@ -1469,6 +1473,100 @@ class ProductController extends Controller
 
 
         return response()->json(['products' => $products], 200);
+    }
+
+
+    public function productDetails($flag,$id)
+    {
+        if($flag == 'shop')
+        {
+            $product = Product::with('images','productReview')->where('business_profile_id', '!=', null)->where('id',$id)->where('state',1)->where('sold',0)->first();
+
+            if($product)
+            {
+
+                if($product->product_type==1 ){
+                    foreach(json_decode($product->attribute) as $attribute){
+                        $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
+                    }
+                }else if($product->product_type==2 ){
+                    foreach(json_decode($product->attribute) as $attribute){
+                        $attribute_array[] = (object) array('ready_quantity_min' =>$attribute[0], 'ready_quantity_max' => $attribute[1],'ready_price'=>$attribute[2]);
+                    }
+                }
+                else{
+                    foreach(json_decode($product->attribute) as $attribute){
+                        $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
+                    }
+
+                }
+
+
+                $newFormatedProduct= new stdClass();
+                $newFormatedProduct->id=$product->id;
+                $newFormatedProduct->name=$product->name;
+                $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->business_name=$product->businessProfile->business_name;
+                $newFormatedProduct->sku=$product->sku;
+                $newFormatedProduct->copyright_price=$product->copyright_price;
+                $newFormatedProduct->full_stock= $product->full_stock;
+                $newFormatedProduct->full_stock_price= $product->full_stock_price;
+                $newFormatedProduct->attribute=  $attribute_array;
+                $newFormatedProduct->colors_sizes=$product->product_type==1 ? [] :json_decode($product->colors_sizes);
+                $newFormatedProduct->product_category_id=$product->product_category_id;
+                $newFormatedProduct->product_category_name=$product->category->name;
+                $newFormatedProduct->product_type=$product->product_type;
+                $newFormatedProduct->moq=$product->moq;
+                $newFormatedProduct->product_unit=$product->product_unit;
+                $newFormatedProduct->is_new_arrival=$product->is_new_arrival;
+                $newFormatedProduct->is_featured=$product->is_featured;
+                $newFormatedProduct->description=$product->description;
+                $newFormatedProduct->state= $product->state;
+                $newFormatedProduct->sold= $product->sold;
+                $newFormatedProduct->additional_description=$product->additional_description;
+                $newFormatedProduct->availability=$product->availability;
+                $newFormatedProduct->productReview=$product->productReview;
+                $newFormatedProduct->productTotalAverageRating=productRating($product->id);
+                $newFormatedProduct->images=$product->images;
+                $newFormatedProduct->gender=$product->gender;
+                $newFormatedProduct->sample_availability=$product->sample_availability;
+                $newFormatedProduct->overlay_small_image=$product->overlay_small_image;
+                $newFormatedProduct->overlay_original_image=$product->overlay_original_image;
+                $newFormatedProduct->userId=$product->businessProfile->user->id;
+                $newFormatedProduct->userName=$product->businessProfile->user->name;
+                $newFormatedProduct->userImage=$product->businessProfile->user->image;
+
+                if(isset($newFormatedProduct)){
+                    return response()->json(array('success' => true, 'product' => $newFormatedProduct),200);
+                }
+                else{
+                    return response()->json(array('success' => false, 'message' => "No products found"),200);
+                }
+
+            }
+
+            return response()->json(array('success' => false, 'message' => "No products found"),200);
+
+        }
+
+        if($flag == 'mb')
+        {
+            $product=ManufactureProduct::with('product_images','category','businessProfile.user')->where('id',$id)->first();
+            if($product){
+                return response()->json([
+                    'success' => true,
+                    'product' => $product,
+                    ],200);
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Product not found',
+                    ],404);
+            }
+        }
+
+
     }
 
 

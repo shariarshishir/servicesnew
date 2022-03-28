@@ -301,6 +301,7 @@
             $('#sizes').val('');
             $('#sizes').trigger('change');
             $('.file').val('');
+            $('.overlay-image').val('');
             $('.img-thumbnail').attr('src', 'https://via.placeholder.com/80');
             $('#manufacture-product-upload-errors').empty();
             $('.rm-error').html('');
@@ -405,7 +406,7 @@
                         $('#product-edit-modal-block .modal-content').html('');
                         $('input[name=remove_video_id]').val('');
                         $('#product-edit-modal-block .modal-content').html(data.data);
-                        $('.product-type-mapping-select').select2();
+                        $('.select2').select2();
 
                     },
                 error: function(xhr, status, error)
@@ -1755,7 +1756,7 @@
             url: '{{route("sampling.create-or-update")}}',
             type:"POST",
             data: $('#sampling-form').serialize(),
-            beforeSend: function() 
+            beforeSend: function()
             {
                 $('.loading-message').html("Please Wait.");
                 $('#loadingProgressContainer').show();
@@ -2454,16 +2455,16 @@
             if (file){
             let reader = new FileReader();
             reader.onload = function(event){
-               
+
                 dom.attr('src', event.target.result);
             }
             reader.readAsDataURL(file);
             }
         });
 
-       
+
     });
-    
+
 
     </script>
 

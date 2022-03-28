@@ -113,8 +113,8 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'business_profile_id' => 'required',
             'images'  => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
-            'overlay-image' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
+            'overlay_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
             'name'      => 'required',
             'category_id' => 'required',
             'product_type' => 'required',
@@ -267,7 +267,7 @@ class ProductController extends Controller
             }
             //overlay image
             if($request->overlay_image){
-                
+
                 $filename = $request->overlay_image->store('images/'.$business_profile_name.'/products/overlay_small','public');
                 $image_resize = Image::make(public_path('storage/'.$filename));
                 $image_resize->fit(300, 300);
@@ -302,8 +302,8 @@ class ProductController extends Controller
                 'customize'      => isset($request->customize) ? true : false,
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
-                'overlay_small_image' => $filename ,
-                'overlay_original_image' => $original,
+                'overlay_small_image' => $filename ?? null,
+                'overlay_original_image' => $original ?? null,
                 'created_by'  => auth()->id(),
                 'product_type_mapping_id' => $request->product_type_mapping,
                 'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
@@ -324,8 +324,8 @@ class ProductController extends Controller
                     'original' => $original,
                 ]);
             }
-            
-           
+
+
             //related products
             if($request->related_products)
             {
@@ -395,7 +395,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $sku)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'name'      => 'required',
             'category_id' => 'required',
@@ -417,7 +417,7 @@ class ProductController extends Controller
             'non_clothing_price.*' => [new NonClothingPriceBreakDownRule($request, $request->p_type)],
             'full_stock_price' => [new ReadyStockFullStockRule($request, $request->p_type)],
             'non_clothing_full_stock_price' => [new NonClothingFullStockRule($request, $request->p_type)],
-            'overlay_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:5120',
+            'overlay_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
             'gender' => 'required',
             'sample_availability' => 'required',
@@ -520,9 +520,9 @@ class ProductController extends Controller
                 $product = Product::withTrashed()->where('sku',$sku)->first();
                 $business_profile=BusinessProfile::withTrashed()->where('id', $product->business_profile_id)->first();
                 $business_profile_name=$business_profile->business_name;
-                
+
                 //overlay image
-               
+
                 if($request->overlay_image){
 
                     if($product->overlay_original_image){
@@ -572,7 +572,7 @@ class ProductController extends Controller
             // $user=User::where('id',auth()->id())->first();
             // $vendorName=Str::slug($user->vendor->vendor_name,'-');
 
-           
+
              //tiny mc text editor file upload
              $temporary_folder= public_path('storage/temp').'/'. $business_profile_name.'/'.'pdf/';
              if (!file_exists($temporary_folder)) {

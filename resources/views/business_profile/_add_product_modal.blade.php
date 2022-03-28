@@ -10,7 +10,7 @@
                         <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
                         <!-- <div class="col-md-12">
                             <div class="row">
-                                
+
                             </div>
                         </div> -->
                     </div>
@@ -146,7 +146,7 @@
                     <div class="product_colorSizw_wrap">
                         <div class="input-field row">
                             <div class="col s12 m3 l3 ">
-                                <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> <span class="text-danger">*</span></label>
+                                <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> </label>
                             </div>
                             <div class="col s12 m9 l9 product_color_box">
                                 <select class="select2 browser-default product-colors" name="colors[]" id="colors" multiple>
@@ -159,7 +159,7 @@
                         </div>
                         <div class="input-field row">
                             <div class="col s12 m3 l3 ">
-                                <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> <span class="text-danger">*</span></label>
+                                <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> </label>
                             </div>
                             <div class="col s12 m9 l9 product_size_box">
                                 <select class="select2 browser-default product-sizes" name="sizes[]" id="sizes"  multiple="multiple">

@@ -36,9 +36,11 @@ class ProductController extends Controller
             'video' => 'mimes:mp4,3gp,mkv,mov|max:150000',
             'price_unit' => 'required',
             'qty_unit'   => 'required',
-            'colors'  => 'required',
-            'sizes'  => 'required',
-            'product_images' => 'required',
+            // 'colors'  => 'required',
+            // 'sizes'  => 'required',
+            'product_images' =>'required',
+            'product_images.*' =>'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
+            'overlay_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
             'price_per_unit'=> 'required',
             'gender' => 'required',
             'sample_availability' => 'required',
@@ -63,7 +65,7 @@ class ProductController extends Controller
         DB::beginTransaction();
 
         try{
-
+            $path=null;
             if ($request->hasFile('overlay_image')){
                 $path = $request->overlay_image->store('images','public');
                 $small_image = Image::make(Storage::get($path))->fit(370, 370)->encode();
@@ -179,8 +181,9 @@ public function update(Request $request, $product_id)
         'price_unit' => 'required',
         'moq'=>'required|numeric',
         'qty_unit'   => 'required',
-        'colors'  => 'required',
-        'sizes'  => 'required',
+        'overlay_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
+        // 'colors'  => 'required',
+        // 'sizes'  => 'required',
         'product_details'=>'required',
         'product_specification'=>'required',
         'lead_time'=>'required',

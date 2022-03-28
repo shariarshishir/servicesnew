@@ -191,7 +191,7 @@
                     <div class="product_3d_info_box" itemscope>
                         <h3 itemprop="title"><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h3>
                         <span class="title_border">&nbsp;</span>
-                        <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and<br>wide sourcing network.</p>
+                        <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and <br> wide sourcing network.</p>
                     </div>
 
                     <div class="visit_studio" itemscope>

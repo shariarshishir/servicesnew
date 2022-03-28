@@ -458,7 +458,7 @@ legend {
     line-height: inherit;
 }
 .header_dasktop .mainNav ul li {
-    padding: 0 20px;
+    padding: 0 0 0 25px;
     position: relative;
 }
 .header_dasktop .mainNav ul li:first-child {
@@ -490,6 +490,7 @@ legend {
     line-height: initial;
     height: auto;
     margin-left: 0;
+    width: 10px;
 }
 .header_dasktop .mainNav .subNav {
     width: 275px;
@@ -7432,8 +7433,9 @@ nav .pagination li.active .page-link {
     font-weight: 500;
     display: block;
     line-height: 22px;
-    padding: 14px 35px 10px 15px;
+    padding: 14px 10px 10px 15px;
     position: relative;
+    word-break: initial;
 }
 .mainNav_mobile_wrap .mySidenav a:hover {
     background: rgba(0,0,0,0.1);
@@ -7499,9 +7501,9 @@ nav .pagination li.active .page-link {
 }
 .mainNav_mobile_wrap .mySidenav .subnev_arrow.active {
     top: 14px;
-    right: 0;
+    right: -3px;
 }
-.mainNav_mobile_wrap .mySidenav .subnev_arrow.active span:last-of-type {
+.mainNav_mobile_wrap .mySidenav .subnev_arrow.active i:last-of-type {
     transform: rotate(180deg);
 }
 .order-query-message-show {
@@ -7858,7 +7860,7 @@ nav .pagination li.active .page-link {
     margin: 20px 0 15px;
     max-width: 160px;
     display: block;
-    padding-top: 50px;
+    padding-top: 7px;
 }
 .footer_left_bottom .addressWrap .btn_tour {
     margin-bottom: 12px;
@@ -9477,7 +9479,12 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         line-height: 40px;
     }
     .header_dasktop .mainNav ul li {
-        padding: 0 15px;
+        padding-left: 20px;
+    }
+    .mainNav ul li a:link, 
+    .mainNav ul li a:active, 
+    .mainNav ul li a:visited {
+        font-size: 14px;
     }
     .slick-initialized .productBox .imgBox {
         min-height: 215px;
@@ -9542,9 +9549,9 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .mainNav ul li .material-icons {
         margin-left: 0;
     }
-    .header_dasktop .mainNav ul li {
+    /* .header_dasktop .mainNav ul li {
         padding: 0 10px;
-    }
+    } */
     .profile_factory_tourWrap .factory_image_gallery .imgBox {
         height: 210px;
     }
@@ -9625,6 +9632,41 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 
 
 @media only screen and (max-width: 1280px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .header_dasktop .mainNav ul li {
+        padding-left: 15px;
+    }
+
+    .header_wrap .top_right .btn_profile {
+        padding: 5px 10px 4px 5px;
+        margin-right: 5px;
+    }
+    .header_wrap .top_right .cart-icon-wrapper, 
+    .header_wrap .top_right .notifications_icon_wrap, 
+    .header_wrap .top_right .header_message_box {
+        padding: 10px 5px 0;
+    }
+    .header_dasktop .user-block .avatar-status {
+        margin-left: 0;
+    }
+    
+    .top_right .btn_white, .top_right .btn_green,
+    .mainNav ul li a:link, .mainNav ul li a:active, .mainNav ul li a:visited {
+        font-size: 13px;
+    }
+
+    .mainNav ul li .material-icons {
+        line-height: 19px;
+    }
+
+    /* ************************************* */
+
+
+
     .top_right .btn_white,
     .top_right .btn_green {
         padding: 7px 15px;
@@ -10114,6 +10156,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .product_design_wrapper .price_negotiable {
         font-size: 11px;
     }
+
 
 }
 
@@ -10773,7 +10816,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         display: -webkit-box;
         -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
-        max-height: 160px;
+        max-height: 156px;
     }
     .landing_spotlight_wrap h3 {
         font-size: 20px;
@@ -10813,6 +10856,13 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         font-size: 14px;
     }
 
+    .rfq_detail_from .input-field .col {
+        padding: 0;
+    }
+    .rfq_detail_from .inpuboxt_group_wrap .row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
 
 }
 
@@ -11710,6 +11760,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 
     .blog_detail_info_wrap .feature_img {
         margin-bottom: 10px;
+    }
+
+    .blog_detail_info_wrap {
+        font-size: 14px;
+        line-height: 24px;
     }
 
 

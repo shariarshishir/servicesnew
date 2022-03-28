@@ -527,6 +527,9 @@ Route::group(['prefix'=>'/admin'],function (){
 });
 
 Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
+// product type mapping
+Route::get('/{product_type_mapping}/{child}',[HomeController::class, 'productTypeMapping'])->name('product.type.mapping');
+
 
 
 

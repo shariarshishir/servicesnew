@@ -979,9 +979,9 @@ $reviewsCount = count($productReviews);
                     <div class="right-align">
                         {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
                         @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button>
                         @else
-                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Contact supplier</button>
+                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Send Query</button>
                         @endif
                     </div>
                     <div class="card card-with-padding">

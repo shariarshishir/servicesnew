@@ -1195,6 +1195,148 @@ class HomeController extends Controller
         return response()->json(["status" => 1, "message" => "Success", "data" => $userObj]);
     }
 
+    public function productTypeMapping(Request $request,$type, $child)
+    {
+        switch($type) {
+            case('studio'):
+                $product_type_mapping_id=1;
+                break;
+            case('raw_materials'):
+                $product_type_mapping_id=2;
+                break;
+            default:
+                $product_type_mapping_id=null;
+        }
+
+        switch($child) {
+            case('design'):
+                $product_type_mapping_child_id=3;
+                break;
+            case('product_sample'):
+                $product_type_mapping_child_id=4;
+                break;
+            case('ready_stock'):
+                $product_type_mapping_child_id=5;
+                break;
+            case('textile'):
+                $product_type_mapping_child_id=6;
+                break;
+            case('yarn'):
+                $product_type_mapping_child_id=7;
+                break;
+            case('trims_and_accessories'):
+                $product_type_mapping_child_id=8;
+                break;
+            default:
+                $product_type_mapping_child_id=null;
+
+        }
+        if(empty($product_type_mapping_id) || empty($product_type_mapping_child_id)){
+            $product_category= ProductCategory::all();
+            $products=[];
+            return view('product.all_products',compact('products', 'product_category'));
+        }
+
+
+        $wholesaler_products=Product::with(['images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
+        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where('business_profile_id', '!=', null)->get();
+        $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
+
+        $merged = $merged->filter(function($item) use ($product_type_mapping_child_id) {
+                    $result=array_intersect($item->product_type_mapping_child_id,(array)$product_type_mapping_child_id);
+                    if(count($result) > 0){
+                        return true;
+                    }
+
+        });
+
+        if(isset($request->product_name)){
+            $search=$request->product_name;
+            $merged = $merged->filter(function($item) use ($search) {
+                if($item->flag == 'mb'){
+                    return stripos($item['title'],$search) !== false;
+                }
+                return stripos($item['name'],$search) !== false;
+            });
+        }
+        if(isset($request->product_type)){
+            $array=$request->product_type;
+            if(in_array(2, $request->product_type)){
+                array_push($array, '3');
+            }
+            $merged = $merged->whereIn('product_type', $array);
+            $merged->all();
+        }
+
+        if(isset($request->location)){
+            $search=$request->location;
+            $merged = $merged->filter(function($item) use ($search) {
+                    return stripos($item->businessProfile->location,$search) !== false;
+            });
+        }
+
+        if(isset($request->product_category)){
+            $merged = $merged->where('flag', 'shop')->where('product_category_id', $request->product_category);
+            $merged->all();
+        }
+
+        if(isset($request->factory_category)){
+            $merged = $merged->where('flag', 'mb')->where('product_category', $request->factory_category);
+            $merged->all();
+        }
+
+        if(isset($request->lead_minimum_range) &&  isset($request->lead_maximum_range)){
+
+            $merged = $merged->where('flag', 'mb')->whereBetween('lead_time', [$request->lead_minimum_range, $request->lead_maximum_range]);
+            $merged->all();
+        }
+
+        if(isset($request->price_minimum_range) &&  isset($request->price_maximum_range)){
+            $price_id=[];
+            foreach($merged as $product){
+                if($product->flag == 'shop' && isset($product->attribute)){
+                    foreach(json_decode($product->attribute) as $price)
+                    {
+                        if (  $price[2] >= $request->price_minimum_range && $price[2] <= $request->price_maximum_range){
+                            array_push($price_id,$product->id);
+                        }
+                    }
+                }
+            }
+            $merged = $merged->where('flag', 'shop')->whereIn('id', $price_id);
+            $merged->all();
+
+        }
+
+        if(isset($request->gender)){
+
+            $merged = $merged->whereIn('gender', $request->gender);
+            $merged->all();
+        }
+
+        if(isset($request->sample_availability)){
+
+            $merged = $merged->whereIn('sample_availability', $request->sample_availability);
+            $merged->all();
+        }
+
+
+
+        $page = Paginator::resolveCurrentPage() ?: 1;
+        $perPage = 32;
+        $products = new \Illuminate\Pagination\LengthAwarePaginator(
+            $merged->forPage($page, $perPage),
+            $merged->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
+
+        $product_category= ProductCategory::all();
+        return view('product.all_products',compact('products', 'product_category'));
+
+    }
+
 
 
 }

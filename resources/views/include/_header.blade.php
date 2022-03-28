@@ -6,16 +6,22 @@
 				<div class="col m5 mainnav_wrap" itemscope>
 					<nav class="mainNav" itemscope>
 						<ul class="left hide-on-med-and-down" itemscope itemtype="https://schema.org/ListItem">
-							<li itemprop="itemListElement">
-								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products">Products<i class="material-icons right">arrow_drop_down</i></a>
+                            <li itemprop="itemListElement">
+								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="studio-products">Studio<i class="material-icons right">arrow_drop_down</i></a>
+								<!-- Dropdown Structure -->
+								<ul id="studio-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
+									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
+									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Product Sample</a></li>
+									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+								</ul>
+							</li>
+                            <li itemprop="itemListElement">
+								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products">Raw Materials<i class="material-icons right">arrow_drop_down</i></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('products')}}" class="{{ Route::is('products') ? 'active' : ''}}">All</a></li>
-									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('readystockproducts')}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Ready to Ship</a></li>
-									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('buydesignsproducts')}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Designs</a></li>
-									<li itemprop="itemListElement"><a itemprop="Low MOQ" href="{{route('low.moq')}}" class="{{ Route::is('low.moq') ? 'active' : ''}}">Low MOQ</a></li>
-									<li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('shortest.lead.time')}}" class="{{ Route::is('shortest.lead.time') ? 'active' : ''}}">Shortest Lead Time</a></li>
-									<li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('customizable')}}" class="{{ Route::is('customizable') ? 'active' : ''}}">Customizable</a></li>
+									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
+									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
+									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
 								</ul>
 							</li>
 							<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
@@ -234,7 +240,7 @@
 											</div>
 										</a>
 									</li>
-									@endif	
+									@endif
 								@endforeach
 							@else
 							<li class="no-notifications" itemprop="itemListElement">

@@ -13,8 +13,6 @@
     $price_maximum_range = array_key_exists('price_maximum_range', app('request')->input())?app('request')->input('price_maximum_range'): '';
     $gender = array_key_exists('gender', app('request')->input())?app('request')->input('gender'): [];
     $sample_availability = array_key_exists('sample_availability', app('request')->input())?app('request')->input('sample_availability'): [];
-    $mapping_type= Request::segment(1);
-    $mapping_type_child= Request::segment(2);
 @endphp
 <div id="main" class="mainContainer">
     <div class="main-content-area">
@@ -24,10 +22,10 @@
                     <div class="col s12 content-column">
                         <div class="show-product-results-wrapper products_filter_search_wrap">
                             <div class="filter_search">
-                                <form action="{{route('product.type.mapping',[$mapping_type, $mapping_type_child])}}" method="get">
+                                <form action="{{route('products')}}" method="get">
                                     @if($product_type || $location || $product_name || $lead_minimum_range || $lead_maximum_range || $select_product_category || $factory_category || $price_minimum_range || $price_maximum_range || $gender || $sample_availability)
                                     <div class="filter_by">
-                                        <a href="{{route('product.type.mapping',[$mapping_type, $mapping_type_child])}}" class="reset_product_filter_trigger btn-product-sidenav"><i class="material-icons">restart_alt</i></a>
+                                        <a href="{{route('products')}}" class="reset_product_filter_trigger btn-product-sidenav"><i class="material-icons">restart_alt</i></a>
                                         <span>Reset All</span>
                                     </div>
                                     @endif
@@ -49,11 +47,11 @@
                                     </div>
                                 </form>
                             </div>
-
+                            
                         </div>
                         <div class="product_design_wrapper">
                             <div class="product_wrapper">
-                                <h3>{{ucwords(str_replace("_", " ", $mapping_type_child))}}</h3>
+                                <h3>All Products</h3>
                                 @include('product._all_product_data')
                             </div>
                         </div>
@@ -65,7 +63,7 @@
                         <div class="products_filter_list">
                             <a href="javascript:void(0)" class="closebtn" onclick="closeProductNav()"><i class="material-icons">east</i></a>
                             <h3>Filter by</h3>
-                            <form action="{{route('product.type.mapping',[$mapping_type, $mapping_type_child])}}" method="get" id="product_filter_form">
+                            <form action="{{route('products')}}" method="get" id="product_filter_form">
                                 {{--location search  --}}
                                 <div class="filter_search filter_box">
                                     <h4>Location</h4>
@@ -189,7 +187,7 @@
                                     </p>
                                 </div>
 
-                                <a class='btn_green btn_clear' href="{{route('product.type.mapping',[$mapping_type, $mapping_type_child])}}"> Reset </a>
+                                <a class='btn_green btn_clear' href="{{route('products')}}"> Reset </a>
                             </form>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
             <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
             <!-- <div class="col-md-12">
                 <div class="row">
-                    
+
                 </div>
             </div> -->
             <form method="POST" action="javascript:void(0);" enctype="multipart/form-data" id="seller_product_form_update">
@@ -70,7 +70,7 @@
                         <div class="row raw-materials" style="display: none;">
                             <div class="col s12">
                                 <label>Select raw materials</label>
-                                <select class="select2 dropdownOptions" multiple name="raw_materials_id[]">
+                                <select class="select2 dropdownOptions raw-materials-id" multiple name="raw_materials_id[]">
                                     <option value="6">Textile</option>
                                     <option value="7">Yarn</option>
                                     <option value="8">Trims and Accessories</option>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="row input-field product-upload-block edit-image-block">
                         <div class="col s12 m3 l3">
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="overlay-image-div">
-                
+
                         <div class="row input-field product-upload-block">
                             <div class="col s12 m3 l3">
                                 <label class="active">Overlay Image:</label>
@@ -251,7 +251,7 @@
                                             <div class="add_more_box">
                                                 <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
                                             </div>
-                                            
+
                                         </div>
                                         {{-- <div class="add_more_box" style="padding-top: 20px">
                                             <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute()"><i class="material-icons dp48">add</i> Add More</a>

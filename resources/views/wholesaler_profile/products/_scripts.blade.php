@@ -244,7 +244,7 @@
 
     $(document).on('click', '.seller-edit-product',function(){
 
-        
+
         var sku=$(this).attr('id');
         var url = '{{ route("wholesaler.product.edit", ":slug") }}';
             url = url.replace(':slug', sku);
@@ -283,7 +283,7 @@
                                 $('.studio').hide();
                                 $('.raw-materials').show();
                                 $("#raw-materials-checked").prop('checked', true);
-                                $('.raw-materials').val(data.product.product_type_mapping_child_id).trigger('change');
+                                $('.raw-materials-id').val(data.product.product_type_mapping_child_id).trigger('change');
                             }
                         }else{
                             $('.studio').hide();
@@ -963,7 +963,7 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
             if (file){
             let reader = new FileReader();
             reader.onload = function(event){
-               
+
                 dom.attr('src', event.target.result);
             }
             reader.readAsDataURL(file);

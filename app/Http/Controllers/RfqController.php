@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
 use App\Events\NewRfqHasAddedEvent;
 use App\Jobs\NewRfqHasAddedJob;
+use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -404,12 +406,13 @@ class RfqController extends Controller
 
     public function storeFromProductDetails(Request $request)
     {
+
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required',
-            'quantity'    => 'required',
+            'rfq_quantity'    => 'required',
             'unit'        =>  'required',
-            'unit_price'     => 'required',
+            'rfq_unit_price'     => 'required',
             'payment_method' => 'required',
             'delivery_time'  => 'required',
             'destination'   => 'required',
@@ -418,11 +421,23 @@ class RfqController extends Controller
 
         ]);
 
-        $rfqData = $request->except(['_token','captcha_token','product_images']);
-        $rfqData['created_by']=auth()->id();
-        $rfqData['status']='pending';
-        $rfqData['rfq_from'] = "service";
-        $rfqData['link'] = $this->generateUniqueLink();
+        $rfqData = [
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'quantity' => $request->rfq_quantity,
+            'unit' => $request->unit,
+            'unit_price' => $request->rfq_unit_price,
+            'payment_method' => $request->payment_method,
+            'delivery_time' => $request->delivery_time,
+            'destination' => $request->destination,
+            'short_description' => $request->short_description,
+            'full_specification' => $request->full_specification,
+            'created_by' => auth()->id(),
+            'status' => 'pending',
+            'rfq_from' => "service",
+            'link' => $this->generateUniqueLink(),
+
+        ];
 
         $rfq=Rfq::create($rfqData);
 
@@ -442,8 +457,23 @@ class RfqController extends Controller
                 RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
             }
         }*/
-        if($request->flag== 'mb'){
-
+        if($request->flag == 'mb'){
+            $product=ManufactureProduct::with('product_images')->where('id', $request->product_id)->first();
+            foreach($product->product_images  as $key => $image){
+                RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$image->product_image]);
+               if($key == 2){
+                   break;
+               }
+            }
+        }
+        if($request->flag == 'shop'){
+            $product=Product::with('images')->where('id', $request->product_id)->first();
+            foreach($product->images  as $key => $image){
+                RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$image->image]);
+               if($key == 2){
+                   break;
+               }
+            }
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
         //SEND CREATED RFQ DATA TO RFQ APP

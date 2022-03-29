@@ -19,7 +19,7 @@
                 <form action="{{route('rfq.store.from.product.details')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="flag" value="{{$product->flag}}">
-                <input type="hidden" name="id" value="{{$product->id}}">
+                <input type="hidden" name="product_id" value="{{$product->id}}">
                     <div class="rfq_detail_from">
                         <!--3-->
                         <div class="row input-field input-wrapper">
@@ -69,7 +69,7 @@
                                             <label>Quantity <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
+                                            <input type="number" class="form-control- ig-new-rgt" name="rfq_quantity" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                             <label>Target Price <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
+                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="rfq_unit_price" required onchange="allowTwoDecimal()" />
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit();">
+                                        <button type="button" class="btn_green  btn-green right" onclick="onSubmit();">
                                             Post
                                         </button>
                                     </div>
@@ -413,28 +413,28 @@
                 $('input[name="title"]').removeClass('invalid');
             }
 
-            if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
+            if ($('input[name="rfq_quantity"]').val()=="" || $('input[name="rfq_quantity"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="quantity"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="quantity"]').addClass('invalid');
+                $('input[name="rfq_quantity"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="rfq_quantity"]').addClass('invalid');
             }
             else
             {
-                $('input[name="quantity"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="quantity"]').removeClass('invalid');
+                $('input[name="rfq_quantity"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="rfq_quantity"]').removeClass('invalid');
             }
 
-            if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined")
+            if ($('input[name="rfq_unit_price"]').val()=="" || $('input[name="rfq_unit_price"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="unit_price"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="unit_price"]').addClass('invalid');
+                $('input[name="rfq_unit_price"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="rfq_unit_price"]').addClass('invalid');
             }
             else
             {
-                $('input[name="unit_price"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="unit_price"]').removeClass('invalid');
+                $('input[name="rfq_unit_price"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="rfq_unit_price"]').removeClass('invalid');
             }
 
             if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")

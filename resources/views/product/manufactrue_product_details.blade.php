@@ -105,7 +105,7 @@
                             </div>
 
                             <div class="ic-pg-container">
-                                <div class="col-md-5 col-sm-12 ic-product-infobox">
+                                <div class="col-md-5 col-sm-12 ic-product-infobox product_details_wrapper">
                                     <div class="ic-product-details">
                                         {{-- <form id="productOrderForm" action="{{ route('orders.placeing', $product->id) }}" method="POST" style="padding:10px 15px"> --}}
                                             <h2 class="ic-product-title">{{ $product->title }}</h2>
@@ -204,6 +204,13 @@
                                             </form>
                                         </div>
                                     </div>
+
+                                    @if(Auth::guard('web')->check())
+                                        {{-- <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button> --}}
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#create-rfq-form">Send Query</button>
+                                    @else
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#login-register-modal">Send Query</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -354,11 +361,6 @@
                             {{-- <a href="{{ action('ProductController@contactSupplier', $product->id) }}" class="ic-btn">Place order</a> --}}
 
 
-                        @endif
-                        @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button>
-                        @else
-                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Send Query</button>
                         @endif
                         <br/>
 
@@ -564,6 +566,8 @@
             </div>
         </div>
     </section> -->
+
+    @include('product._create_rfq_form_modal')
 @endsection
 
 
@@ -660,6 +664,7 @@ var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
         }, 1000);
         }
         @endif
+
     </script>
 
 @endpush

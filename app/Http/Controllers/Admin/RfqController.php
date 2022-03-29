@@ -59,7 +59,7 @@ class RfqController extends Controller
     public function show($id)
     {
        $rfq=Rfq::with('user','bids')->findOrFail($id);
-       $businessProfiles = BusinessProfile::select('id','business_name','alias')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+       $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
        //$businessProfiles = BusinessProfile::select('id','business_name')->where('business_category_id',$rfq->category_id)->get()->toArray();
        return view('admin.rfq.show', compact('rfq','businessProfiles'));
     }

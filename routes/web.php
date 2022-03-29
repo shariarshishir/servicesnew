@@ -278,6 +278,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     Route::get('rfq/share/{rfq_id}',[RfqController::class, 'share'])->name('rfq.share');
     Route::get('rfq/create',[RfqController::class, 'create'])->name('rfq.crate');
+
+    Route::post('rfq/store/from/product/details',[RfqController::class, 'storeFromProductDetails'])->name('rfq.store.from.product.details');
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');

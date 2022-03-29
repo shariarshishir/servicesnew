@@ -2,37 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Chat;
-use App\Events\MessageCenter;
-use App\Events\ProductOrder;
-use App\Http\Resources\MerchantMessageResource;
-use App\Http\Resources\MerchantMessagesResource;
-use App\Http\Resources\SupplierMessageResource;
-use App\Http\Resources\UserSessionResource;
-use App\MerchantAssistanceMessage;
-use App\MerchantSupplierMessage;
-use App\Message;
-use App\Notifications\BuyerWantToContact;
-use App\Notifications\BuyerWantToContactFromProduct;
-use App\Notifications\RfqBidNotification;
-use App\Models\User;
-use App\UserSession;
-use App\Userchat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
-use App\RfqMerchantAssistanceMessage;
-use App\Http\Resources\RfqMerchantMessagesResource;
-use App\Http\Resources\RfqMerchantMessageResource;
-use App\Models\Rfq;
-use App\Models\BusinessProfile;
+use App\Models\User;
+use App\Userchat;
 
 class MessageController extends Controller
 {
     public function getchatdata(Request $request)
     {
-        $user = $request->user??"5552";
-        $to_id = $request->to_id??"3";
+        $user = $request->user;
+        $to_id = $request->to_id;
         $from_user=User::find($user);
         // dd($from_user);
         $to_user=User::find($to_id);
@@ -54,7 +33,6 @@ class MessageController extends Controller
                 'chatdata'    => $chatdata,
                 'from_user_image'=>$from_user_image,
                 'to_user_image'=>$to_user_image,
-                'about_company'=>$about_company
             ],200);
         }
         else{
@@ -65,7 +43,6 @@ class MessageController extends Controller
                 'chatdata'    => $chatdata,
                 'from_user_image'=>$from_user_image,
                 'to_user_image'=>$to_user_image,
-                'about_company'=>$about_company
             ],200);
         }
     }

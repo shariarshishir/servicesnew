@@ -85,35 +85,40 @@
                                                                         <!-- Chat content area -->
                                                                         <div class="chat-area ps ps--active-y">
                                                                             <div class="chats">
-                                                                                <div class="chats">
-                                                                                    <div class="chat chat-right">
-                                                                                        <div class="chat-avatar">
-                                                                                            <a class="avatar">
-                                                                                            <img src="https://www.merchantbay.com/global/public/storage/images/wholesaler1/profile/piMjUGflrBvXUeMg3KiRs67lYPw8qMLoLdF34P8o.png" class="circle" alt="avatar">
-                                                                                            </a>
-                                                                                        </div>
-                                                                                        <div class="chat-body left-align">
-                                                                                            <div class="chat-text">
-                                                                                                <p>
-                                                                                                    <b>Our Suggested Profiles</b><br />
-                                                                                                    <a href="javascript:void(0);"><b>XYZ Fashion</b></a> Offers - 300<br />
-                                                                                                    <a href="javascript:void(0);"><b>T.J. Sweaters Ltd.</b></a> Offers - 250<br />
-                                                                                                </p>
+                                                                                <div class="chats-box chat_messagedata" id="messagedata">
+                                                                                @if($chatdata)
+                                                                                    @foreach($chatdata as $chat)
+                                                                                        @if($chat['from_id'] == $user)
+                                                                                        <div class="chat chat-right">
+                                                                                            <div class="chat-avatar">
+                                                                                                <a class="avatar">
+                                                                                                    <img src='{{$from_user_image}}' class="circle" alt="avatar">
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="chat-body left-align">
+                                                                                                <div class="chat-text">
+                                                                                                    <p>
+                                                                                                    @php echo html_entity_decode($chat['message']); @endphp 
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>        
+                                                                                        @else
+                                                                                        <div class="chat chat-left">
+                                                                                            <div class="chat-avatar">
+                                                                                                <a class="avatar">
+                                                                                                    <img src='{{$to_user_image}}' class="circle" alt="avatar">
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="chat-body left-align">
+                                                                                                <div class="chat-text">
+                                                                                                    <p>@php echo html_entity_decode($chat['message']); @endphp </p>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="chat">
-                                                                                        <div class="chat-avatar">
-                                                                                            <a class="avatar">
-                                                                                            <img src="https://www.merchantbay.com/global/public/storage/images/mahmood.sakib/profile/Poo6IM1kjon2lAVFCGTggUOcvsQ8A8LzOgJkkMDE.jpg" class="circle" alt="avatar">
-                                                                                            </a>
-                                                                                        </div>
-                                                                                        <div class="chat-body left-align">
-                                                                                            <div class="chat-text">
-                                                                                                <p>Thanks, for your suggestion. Soon, I will check it and let you know.</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                @endif
                                                                                 </div>
                                                                             </div>
                                                                             <div class="ps__rail-x" style="">
@@ -126,9 +131,9 @@
                                                                         <!--/ Chat content area -->
                                                                         <!-- Chat footer <-->
                                                                         <div class="chat-footer">
-                                                                            <form onsubmit="enter_chat();" action="javascript:void(0);" class="chat-input">
+                                                                            <form action="javascript:void(0);" class="chat-input">
                                                                                 <input type="text" placeholder="Type message here.." class="message mb-0">
-                                                                                <a class="btn_green send" onclick="enter_chat();">Send</a>
+                                                                                <a class="btn_green send">Send</a>
                                                                             </form>
                                                                         </div>
                                                                         <!--/ Chat footer -->
@@ -223,9 +228,9 @@
 @push('js')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        function enter_chat(a){var e=$(".message").val();if(""!=e){var t='<div class="chat-text"><p>'+e+"</p></div>";$(".chat:last-child .chat-body").append(t),$(".message").val(""),$(".chat-area").scrollTop($(".chat-area > .chats").height())}}
+        //function enter_chat(a){var e=$(".message").val();if(""!=e){var t='<div class="chat-text"><p>'+e+"</p></div>";$(".chat:last-child .chat-body").append(t),$(".message").val(""),$(".chat-area").scrollTop($(".chat-area > .chats").height())}}
         $(document).ready(function() {
-            
+            $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];
             var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
             var socket = io.connect(serverURL);
@@ -274,12 +279,55 @@
                     var envMode = "{{ env('APP_ENV') }}";
                     if(envMode == 'production') {
                         var fromId = '5771';
-                    } else {
+                    } 
+                    else{
                         var fromId = '5552';
                     }
-                    console.log(html);
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
+                    $.ajax({
+                        url: '{{ route("admin.message.center.getchatdata") }}',
+                        type: "GET",
+                        data:{user:fromId,to_id:"{{$rfq->user->id}}"},
+                        success:function(response)
+                            {
+                                $('.chat-box').empty();
+                                response.chatdata.forEach((item, index)=>{
+                                    if(item['from_id'] ==  fromId ){
+                                        var msgHtml = '<div class="chat chat-right">';
+                                        msgHtml += '<div class="chat-avatar">';
+                                        msgHtml += '<a class="avatar">';
+                                        msgHtml += '<img src="'+response.from_user_image+'" class="circle" alt="avatar">';
+                                        msgHtml += '</a>';
+                                        msgHtml += '</div>';
+                                        msgHtml += '<div class="chat-body left-align">';
+                                        msgHtml += '<div class="chat-text">';
+                                        msgHtml += '<p>'+item['message']+'</p>';
+                                        msgHtml += '</div>';
+                                        msgHtml += '</div>';
+                                        msgHtml += '</div>';
+                                        $('.chat-box').append(msgHtml);
+                                    }
+                                    else{
+                                        var msgHtml = '<div class="chat chat-left">';
+                                        msgHtml += '<div class="chat-avatar">';
+                                        msgHtml += '<a class="avatar">';
+                                        msgHtml += '<img src="'+response.to_user_image+'" class="circle" alt="avatar">';
+                                        msgHtml += '</a>';
+                                        msgHtml += '</div>';
+                                        msgHtml += '<div class="chat-body left-align">';
+                                        msgHtml += '<div class="chat-text">';
+                                        msgHtml += '<p>'+item['message']+'</p>';
+                                        msgHtml += '</div>';
+                                        msgHtml += '</div>';
+                                        msgHtml += '</div>';
+                                        $('.chat-box').append(msgHtml);
+                                        //$(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                                        window.location.reload();
+                                    }
+                                })
+                            }
+                    });
                     swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
                 } 
                 else{

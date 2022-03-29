@@ -80,53 +80,6 @@
                                                         <div class="app-wrapper">
                                                             <div class="card card card-default scrollspy border-radius-6 fixed-width">
                                                                 <div class="card-content chat-content p-0">
-                                                                    <!-- Sidebar Area -->
-                                                                    <div class="sidebar-left sidebar-fixed animate fadeUp animation-fast">
-                                                                        <div class="sidebar animate fadeUp">
-                                                                            <div class="sidebar-content">
-                                                                                <div id="sidebar-list" class="sidebar-menu chat-sidebar list-group position-relative">
-                                                                                    <div class="sidebar-list-padding app-sidebar" id="chat-sidenav">
-                                                                                        <!-- Sidebar Content List -->
-                                                                                        <div class="sidebar-content sidebar-chat ps ps--active-y">
-                                                                                            <div class="chat-list">
-                                                                                                <div class="chat-user animate fadeUp delay-1">
-                                                                                                    <div class="user-section">
-                                                                                                        <div class="row valign-wrapper">
-                                                                                                            <div class="col s2 media-image online pr-0">
-                                                                                                                <img src="https://www.merchantbay.com/global/public/storage/images/mahmood.sakib/profile/Poo6IM1kjon2lAVFCGTggUOcvsQ8A8LzOgJkkMDE.jpg" alt="" class="circle z-depth-2 responsive-img">
-                                                                                                            </div>
-                                                                                                            <div class="col s10">
-                                                                                                                <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">Gorge Fernandis</p>
-                                                                                                                <p class="m-0 info-text">Apple pie bonbon cheesecake tiramisu</p>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="info-section">
-                                                                                                        <div class="star-timing">
-                                                                                                            <div class="time">
-                                                                                                                <span>2.38 pm</span>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="no-data-found">
-                                                                                                <h6 class="center">No Results Found</h6>
-                                                                                            </div>
-                                                                                            <div class="ps__rail-x" style="left: 0px; bottom: -236px;">
-                                                                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                                                                                            </div>
-                                                                                            <div class="ps__rail-y" style="top: 236px; height: 356px; right: 0px;">
-                                                                                                <div class="ps__thumb-y" tabindex="0" style="top: 142px; height: 213px;"></div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!--/ Sidebar Content List -->
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!--/ Sidebar Area -->
                                                                     <!-- Content Area -->
                                                                     <div class="chat-content-area animate fadeUp">
                                                                         <!-- Chat content area -->
@@ -213,13 +166,40 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <div class="business_profile_filter">
+                                    <div class="factory_type_filter">
+                                        <label>Factory Type</label>
+                                        <select class="form-select form-control" name="factory_type" id="factory_type">
+                                            <option value="knit">Knit</option>
+                                            <option value="woven">Woven</option>
+                                        </select>
+                                    </div>
+                                    <div class="rating_type_filter">
+                                        <label>Rating</label>
+                                        <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                            <option value="5">5 Start</option>
+                                            <option value="4">4 Start</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="rfq_business_profile_list">
                                     @foreach($businessProfiles as $key=>$businessProfile)
                                     <div class="business_profile_name">
                                         <div class="form-check">
                                             <input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >
                                             <label class="form-check-label" for="flexCheckDefault">
-                                                {{$businessProfile['business_name']}}
+                                                <p>{{$businessProfile['business_name']}}</p>
+                                                
+                                                @if($businessProfile['business_type'] == 1)
+                                                <p>Manufacturer</p>
+                                                @elseif($businessProfile['business_type'] == 2)
+                                                <p>Wholesaler</p>
+                                                @else
+                                                <p>Design Studio</p>
+                                                @endif
+
+                                                <p>Rating: 5 Start</p>
+                                                <p>Total Order: 100</p>
                                             </label>
                                         </div>
                                         <input type="number" value="" name="propose_price" class="propose_price"/>

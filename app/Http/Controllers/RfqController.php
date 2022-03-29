@@ -504,7 +504,7 @@ class RfqController extends Controller
         // }
 
 
-        $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+        $msg = "Your RFQ was posted successfully.<br><br>Thank you for your request. We will get back to you with quotations within 48 hours.";
         return back()->with(['rfq-success'=> $msg]);
     }
 }

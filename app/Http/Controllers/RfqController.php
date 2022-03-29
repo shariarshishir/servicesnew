@@ -102,7 +102,7 @@ class RfqController extends Controller
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
         //SEND CREATED RFQ DATA TO RFQ APP
-        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[ 
+        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[
         //     $rfq
         // ]);
 
@@ -400,5 +400,81 @@ class RfqController extends Controller
     public function create()
     {
         return view('rfq.create');
+    }
+
+    public function storeFromProductDetails(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'required',
+            'title'       => 'required',
+            'quantity'    => 'required',
+            'unit'        =>  'required',
+            'unit_price'     => 'required',
+            'payment_method' => 'required',
+            'delivery_time'  => 'required',
+            'destination'   => 'required',
+            'short_description' => 'required',
+            'full_specification' => 'required',
+
+        ]);
+
+        $rfqData = $request->except(['_token','captcha_token','product_images']);
+        $rfqData['created_by']=auth()->id();
+        $rfqData['status']='pending';
+        $rfqData['rfq_from'] = "service";
+        $rfqData['link'] = $this->generateUniqueLink();
+
+        $rfq=Rfq::create($rfqData);
+
+        /*if ($request->hasFile('product_images')){
+            foreach ($request->file('product_images') as $index=>$product_image){
+
+                $extension = $product_image->getClientOriginalExtension();
+                if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
+
+                    $path=$product_image->store('images','public');
+                }
+                else{
+                    $path=$product_image->store('images','public');
+                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
+                    Storage::put($path, $image);
+                }
+                RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
+            }
+        }*/
+        if($request->flag== 'mb'){
+
+        }
+        $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
+        //SEND CREATED RFQ DATA TO RFQ APP
+        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[
+        //     $rfq
+        // ]);
+
+        // if(env('APP_ENV') == 'production')
+        // {
+            /* code using redis-cli
+
+            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->get();
+            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
+            }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
+
+            */
+            // $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+            // foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+            //     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+            // }
+
+            $selectedUserToSendMail="success@merchantbay.com";
+            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+        // }
+
+
+        $msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+        return back()->with(['rfq-success'=> $msg]);
     }
 }

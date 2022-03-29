@@ -202,7 +202,7 @@ $reviewsCount = count($productReviews);
                                     </div>
 
                                     @if($product->customize == true)
-                                        <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label tooltipped" data-position="top" data-tooltip="Please click on request for modification to customize this product.">Can be Customized</span>
+                                        <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label" style="display: none">Can be Customized</span>
                                     @endif
                                 @endif
 
@@ -239,7 +239,7 @@ $reviewsCount = count($productReviews);
                                                 <input type="number" name="fresh_input" class="fresh_input_value" value="0" min="1" />
                                                 <button type="button" id="trigger_plus" class="trigger_plus btn green"><i class="material-icons dp48">add</i></button>
                                             </div> --}}
-                                            <div class="fresh_order_block_wrapper">
+                                            <div class="fresh_order_block_wrapper" style="display: none;">
                                                 <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#fresh_order_customize_block">Customize Your Order</a>
                                                 @if(auth::check())
                                                     <a class="waves-effect waves-light modal-trigger request_order_modification_trigger" href="#product-modification-modal">Request for Modification</a>
@@ -333,7 +333,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block" style="display: none;">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
@@ -613,7 +613,7 @@ $reviewsCount = count($productReviews);
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block" style="display: none;">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
@@ -777,10 +777,16 @@ $reviewsCount = count($productReviews);
                                     <input type="hidden" name="total_price" value="">
                                     <input type="hidden" name="product_type" value="{{$product->product_type}}">
                                     @if(Auth::check())
-                                    <button id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart" onclick="addToCart('{{$product->sku}}')" disabled="disabled">Add to cart</button>
+                                    <button id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart" onclick="addToCart('{{$product->sku}}')" disabled="disabled" style="display: none;">Add to cart</button>
                                     <button id="ask_for_price" data-id="{{$product->sku}}"class="btn waves-effect waves-light green askForPrice" onclick="askForPrice('{{$product->sku}}')" style="display: none">Ask For Price</button>
                                     @else
-                                    <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_grBorder" disabled="disabled">Add to cart</a>
+                                    <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_grBorder" disabled="disabled" style="display: none;">Add to cart</a>
+                                    @endif
+
+                                    @if(Auth::guard('web')->check())
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#create-rfq-form">Request for Quotation</button>
+                                    @else
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#login-register-modal">Request for Quotation</button>
                                     @endif
                                 </div>
                             </div>
@@ -976,14 +982,6 @@ $reviewsCount = count($productReviews);
 
             <div class="col s12 m12 l3">
                 <div class="single-product-store-information center-align">
-                    <div class="right-align">
-                        {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
-                        @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button>
-                        @else
-                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Send Query</button>
-                        @endif
-                    </div>
                     <div class="card card-with-padding">
                         <h6>Company Profile</h6>
                         <div class="company_profile_details">
@@ -1045,7 +1043,7 @@ $reviewsCount = count($productReviews);
                                 </div>
                             </div>
                         </div>
-                        @endif                        
+                        @endif
 
                     </div>
                 </div>
@@ -1099,7 +1097,7 @@ $reviewsCount = count($productReviews);
                                     {{-- <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" /> --}}
                                     @break
                                 @endforeach
-                                
+
                             </div>
                             <div class="product_short_details">
                                 <div class="product-title">
@@ -1176,7 +1174,7 @@ $reviewsCount = count($productReviews);
 </div>
 
 
-
+@include('product._create_rfq_form_modal')
 @endsection
 @push('js')
     <script>

@@ -24,19 +24,18 @@
 
     <section class="ic-single-product-details manufactrue_product_details_wrap">
         <div class="manufactrue_product_details_inner">
-            <div class="row ic-pg-container">
-
-                <div class="col s12 m12 l9 product_preview_info_wrap">
+            <div class="ic-pg-container">
+                <div class="s12 product_preview_info_wrap">
                     <div class="row">
-                        <div class="col s12 m5 l4 product_preview_wrap">
+                        <div class="col s12 m5 product_preview_wrap">
                             @if(isset($product->product_video->video))
                                 <div class="simpleLens-gallery-container" id="ic-gallery">
                                     <div class="video_content">
-                                        <center>
+                                        <div class="details_video_box">
                                             <video controls height="245" width="300">
                                                 <source src="{{asset('storage/'.$product->product_video->video)}}" />
                                             </video>
-                                        </center>
+                                        </div>
                                     </div>
                                     <div class="simpleLens-thumbnails-container">
                                         @foreach($product->product_images as $product_image)
@@ -62,9 +61,11 @@
                                     @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
-                                                <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
-                                                    <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
-                                                </a>
+                                                <div class="details_gallery_box">
+                                                    <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
+                                                        <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
@@ -90,7 +91,7 @@
                         </div>
 
 
-                        <div class="col s12 m7 l8 product_details_info_wrap">
+                        <div class="col s12 m7 product_details_info_wrap">
 
                             <div class="row">
                                 <div class="col s12 m6 l6">
@@ -345,7 +346,7 @@
 
                 </div>
 
-                <div class="col s12 m12 l3 product_preview_right center-align">
+                <!-- <div class="col s12 m12 l3 product_preview_right center-align">
                     <div id="place_order_buttons" class="ic-place-order right-align">
                         {{-- <a href="{{ route('wishlist.store',[$product->id,'product']) }}" class="ic-btn" style="margin-right:10px"><i class="fa fa-heart-o"></i></a> --}}
 
@@ -430,7 +431,7 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
 

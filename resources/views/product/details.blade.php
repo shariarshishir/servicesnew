@@ -26,19 +26,19 @@ $reviewsCount = count($productReviews);
     </div>
     <div class="single-product-details-block-wrapper">
 
-        <div class="row product_details_content_wrap">
+        <div class="product_details_content_wrap">
 
-            <div class="col s12 m12 l9 product_preview_info_wrap single-product-details-wrapper">
+            <div class="product_preview_info_wrap single-product-details-wrapper">
                 <div class="row">
-                    <div class="col s12 m5 l4 product_preview_wrap">
+                    <div class="col s12 m5 product_preview_wrap">
                         @if($product->video)
                             <div class="product-images">
                                 <div class="video_content">
-                                    <center>
+                                    <div class="details_video_box">
                                         <video controls height="245" width="300">
                                             <source src="{{asset('storage/'.$product->video->video)}}" />
                                         </video>
-                                    </center>
+                                    </div>
                                 </div>
                                 <ul class="product-list-images-block">
                                     @if(count($product->images)> 0)
@@ -57,17 +57,15 @@ $reviewsCount = count($productReviews);
                                     <div class="product-large-image-block product_details_imgwrap">
                                         @if(count($product->images)> 0)
                                             @foreach ($product->images as $image)
-                                                <div>
-                                                    <center>
-                                                        <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
-                                                            <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
+                                                <div class="details_gallery_box">
+                                                    <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
+                                                        <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
 
-                                                            <div class="click-to-zoom">
-                                                                <i class="material-icons dp48">zoom_in</i>
-                                                                <!-- Click on image to view large size. -->
-                                                            </div>
-                                                        </a>
-                                                    </center>
+                                                        <div class="click-to-zoom">
+                                                            <i class="material-icons dp48">zoom_in</i>
+                                                            <!-- Click on image to view large size. -->
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         @endif
@@ -100,7 +98,7 @@ $reviewsCount = count($productReviews);
                             </div>
                         @endif
                     </div>
-                    <div class="col s12 m7 l8 product_details_info_wrap">
+                    <div class="col s12 m7 product_details_info_wrap">
                         <div class="row">
                             <div class="col s12 m6 l6">
                                 <div class="seller-store">
@@ -980,7 +978,7 @@ $reviewsCount = count($productReviews);
 
             </div>
 
-            <div class="col s12 m12 l3">
+            <!-- <div class="col s12 m12 l3">
                 <div class="single-product-store-information center-align">
                     <div class="card card-with-padding">
                         <h6>Company Profile</h6>
@@ -1008,7 +1006,7 @@ $reviewsCount = count($productReviews);
                                             @endforeach
                                         </div>
                                         <div class="product_short_details">
-                                            <!--a class="waves-effect waves-light btn modal-trigger" href="#modal3">View</a-->
+                                            <a class="waves-effect waves-light btn modal-trigger" href="#modal3">View</a>
                                             <div class="product-title">
                                                 <a href="{{route('productdetails',$item->sku)}}">{{$item->name}}</a>
                                             </div>
@@ -1047,7 +1045,9 @@ $reviewsCount = count($productReviews);
 
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+
         </div>
     </div>
 

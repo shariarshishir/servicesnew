@@ -1926,7 +1926,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
 /* **************************************** */
 
 .product_details_wrapper {
-    padding: 0px 0 50px;
+    /* padding: 0px 15px 50px; */
+    padding-bottom: 50px;
 }
 .single-product-details-block-wrapper {
     padding: 0 5px;
@@ -2194,6 +2195,10 @@ div.dataTables_wrapper table.mdc-data-table__table {
     text-transform: capitalize;
     margin-right: 10px;
 }
+
+.product_details_wrapper .btn_grBorder {
+    margin-top: 30px !important;
+}
 #ready_stock_order_customize_block .modal-close {
     background: none;
     border: none;
@@ -2283,7 +2288,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 600;
 }
 .product_details_wrapper .btn_grBorder {
-    margin: 0 10px 10px 0;
+    margin: 20px 10px 10px 0;
     min-height: 38px;
     line-height: 28px;
     color: #54A958 !important;
@@ -2638,7 +2643,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 5px 20px;
 }
 .product_details_wrapper .back_to {
-    padding: 0 0 20px 15px;
+    padding: 0 0 20px 0px;
 }
 .manufactrue_product_details_top .back_to {
     padding: 0 0 20px 22px;
@@ -8827,11 +8832,10 @@ nav .pagination li.active .page-link {
     height: 100%;
     object-fit: cover;
     transition: transform .8s ease;
-    
 }
 
 .product_design_wrapper .productBox .imgBox img:hover {
-    transform: scale(1.2);
+    /* transform: scale(0.9); */
 }
 
 .profile_contentCol .product_design_wrapper .productBox .imgBox {
@@ -9459,10 +9463,24 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     margin: 23px 0 0;
 } 
 
+
+.product_preview_info_wrap .product_preview_wrap a img {
+    max-width: 550px;
+    width: 100%;
+}
+.product_preview_info_wrap .details_video_box video,
+.product_details_content_wrap .product_preview_wrap video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 550px;
+}
+
 /* ******************** Product upload style end *********************** */
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1500px) {
+
+
 
     /* .container {
         max-width: 1402px;
@@ -11548,7 +11566,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         padding: 30px 20px !important;
     }
     .manufactrue_product_details_wrap .product_details_info_wrap {
-        padding: 30px 0px !important;
+        padding: 30px 15px !important;
     }
     .product_preview_wrap .simpleLens-gallery-container {
         padding: 0;
@@ -12255,10 +12273,10 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .manufactrue_product_details_wrap {
         padding-top: 0;
     }
-    .product_preview_info_wrap .product_preview_wrap a img {
+    /* .product_preview_info_wrap .product_preview_wrap a img {
         max-height: 300px;
         width: auto;
-    }
+    } */
 
     .product_preview_info_wrap .product_preview_wrap .product-list-images-block.slick-slider a img {
         max-width: 50px;
@@ -12398,6 +12416,10 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     .modal .createRfqForm .rfq_detail_from .input-wrapper .add_short_description,
     .modal .createRfqForm .rfq_detail_from .input-wrapper input  {
         margin-bottom: 0;
+    }
+
+    .manufactrue_product_details_top .back_to {
+        padding-left: 10px;
     }
 
 }

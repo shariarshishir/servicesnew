@@ -46,6 +46,8 @@ use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\CompanyFactoryTourController;
 use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Admin\MessageController as AdminMessageController;
+
 
 
 
@@ -516,6 +518,7 @@ Route::group(['prefix'=>'/admin'],function (){
         //rfq
         Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
+        Route::get('message-center/getchatdata',[AdminMessageController::class,'getchatdata'])->name('admin.message.center.getchatdata');
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
         Route::get('new/user/request/edit/{id}', [NewUserRequestController::class, 'edit'])->name('new.user.request.edit');

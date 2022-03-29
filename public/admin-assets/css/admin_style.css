@@ -655,8 +655,9 @@ label:not(.form-check-label):not(.custom-file-label) {
     background: #f1f1f1;
 }
 .business_profile_name .propose_price {
-    width: 50px;
+    width: 120px;
     margin-left: auto;
+    height: 40px;
 }
 .rfq_business_profile_list {
     height: 315px;
@@ -835,7 +836,13 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 
 /* ********************************* */
-
+.business_profile_filter {
+    display: flex;
+    margin-bottom: 20px;
+}
+.business_profile_filter .factory_type_filter {
+    margin-right: 15px;
+}
 
 
 

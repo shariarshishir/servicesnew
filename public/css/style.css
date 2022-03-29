@@ -1981,6 +1981,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .product_preview_wrap .product_details_imgwrap .slick-current {
     /*width: 100% !important;*/
+    height: auto;
+ 
 }
 .product_preview_wrap .product_details_imgwrap a img {
     min-height: 120px;
@@ -2032,6 +2034,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .product_details_wrapper .product-main-image {
     position: relative;
+    max-height: 550px;
 }
 .product_details_wrapper .product-main-image .click-to-zoom {
     position: absolute;
@@ -8831,12 +8834,28 @@ nav .pagination li.active .page-link {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .8s ease;
+
+    transition: transform .5s;
+
+    
+    /* animation: moveToRight 2s ease-in-out;
+    animation-delay: 1000ms; */
+
 }
 
 .product_design_wrapper .productBox .imgBox img:hover {
-    /* transform: scale(0.9); */
+    transform: scale(1.1);
 }
+
+
+  /* @keyframes moveToRight {
+    0% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(300px);
+    }
+  } */
 
 .profile_contentCol .product_design_wrapper .productBox .imgBox {
     height: 200px;
@@ -9512,6 +9531,11 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     /* .blog_content_box .blog_imgbox img {
         width: 100%;
     } */
+
+    .product_preview_wrap .product_details_imgwrap .slick-current {
+        height: auto;
+        max-height: 535px;
+    }
 
 
     /* ***************************************** */

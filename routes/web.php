@@ -280,6 +280,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('rfq/create',[RfqController::class, 'create'])->name('rfq.crate');
 
     Route::post('rfq/store/from/product/details',[RfqController::class, 'storeFromProductDetails'])->name('rfq.store.from.product.details');
+
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
@@ -328,6 +329,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
 
 });
+
 
 //rfq show with shareable link
 Route::get('rfq/{link}',[RfqController::class, 'showRfqUsingLink'])->name('show.rfq.using.link');
@@ -531,6 +533,7 @@ Route::group(['prefix'=>'/admin'],function (){
 Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
 // product type mapping
 Route::get('/{product_type_mapping}/{child}',[HomeController::class, 'productTypeMapping'])->name('product.type.mapping');
+
 
 
 

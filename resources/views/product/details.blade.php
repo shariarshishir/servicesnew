@@ -1174,8 +1174,9 @@ $reviewsCount = count($productReviews);
 </div>
 
 
-@include('product._create_rfq_form_modal')
+
 @endsection
+@include('product._create_rfq_form_modal')
 @push('js')
     <script>
         // $('input[name=fresh_input]').change(function() {

@@ -114,9 +114,14 @@ return [
         // ],
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/chatdata?retryWrites=true&w=majority',
-            'database' => 'chatdata',
+            'dsn' => 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/rfqapp?retryWrites=true&w=majority',
+            'database' => 'rfqapp',
         ],
+        // 'mongodb' => [
+        //     'driver' => 'mongodb',
+        //     'dsn' => 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/chatdata?retryWrites=true&w=majority',
+        //     'database' => 'chatdata',
+        // ],
 
 
     ],

@@ -1,5 +1,58 @@
 @push('js')
 <script>
+
+    $('.createRfqForm').on('submit',function(e){
+        e.preventDefault();
+        var url = 'http://192.168.68.148:8888/api/quotation';
+        // var formData = new FormData($('.createRfqForm')[0]);
+        // console.log(formData);
+
+        var formData = new FormData();
+        var file_data = $('input[type="file"]')[0].files; // for multiple files
+        var files = [];
+        for (let i = 0; i < $('input[type="file"]').length; i++) {
+            formData.append("files", $('input[type="file"]')[i].files[0]);
+        }
+        
+        
+        var other_data = $('.createRfqForm').serializeArray();
+        $.each(other_data,function(key,input){
+            formData.append(input.name,input.value);
+        });
+        formData.append('_token', "{{ csrf_token() }}");
+        $.ajax({
+            method: 'post',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formData,
+            enctype: 'multipart/form-data',
+            url: url,
+            beforeSend: function() {
+            $('.loading-message').html("Please Wait.");
+            $('#loadingProgressContainer').show();
+            },
+
+        success:function(response){
+            $('.loading-message').html("");
+            $('#loadingProgressContainer').hide();
+            
+        },
+        error: function(xhr, status, error)
+                {
+                    // $('#association-membership-upload-errors').empty();
+                    // $("#association-membership-upload-errors").append("<div class=''>"+error+"</div>");
+                    // $.each(xhr.responseJSON.error, function (key, item)
+                    // {
+                    //     $("#association-membership-upload-errors").append("<div class='danger'>"+item+"</div>");
+                    // });
+                }
+        });
+        });
+
+
+
+
         //create bid rfq
         function openBidRfqModal(id){
             var rfq_id=id;

@@ -19,8 +19,10 @@
                             <p itemprop="text">Connecting demand directly to production powered <br/>
                             with tech and product development support.</p>
 
+                            <p>#SourcingMadeEasy</p>
+
                             <div class="quotation_request">
-                                <a href="{{route('rfq.index')}}">
+                                <a href="{{route('rfq.crate')}}">
                                     <span class="quotation_text">Submit a Request for Quotation</span>
                                     <span class="quotation_arrow"><i class="material-icons">arrow_forward</i></span>
                                 </a>

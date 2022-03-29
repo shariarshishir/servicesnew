@@ -149,7 +149,7 @@
 
 
                         <div class="row rfq_img_upload_wrap">
-                            <div class="col rfq_thumbnail_box">
+                            <div class="rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img1">
                                 </div>
@@ -167,7 +167,7 @@
                             <!--/1-->
 
                             <!--2-->
-                            <div class="col rfq_thumbnail_box">
+                            <div class="rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img2">
                                 </div>
@@ -185,7 +185,7 @@
                             <!--/2-->
 
                             <!--3-->
-                            <div class="col rfq_thumbnail_box">
+                            <div class="rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img3">
                                 </div>
@@ -203,7 +203,7 @@
                             <!--/3-->
 
                             <!--4-->
-                            <div class="col rfq_thumbnail_box">
+                            <div class="rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img4">
                                 </div>
@@ -221,7 +221,7 @@
                             <!--/4-->
 
                             <!--5-->
-                            <div class="col rfq_thumbnail_box">
+                            <div class="rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img5">
                                 </div>

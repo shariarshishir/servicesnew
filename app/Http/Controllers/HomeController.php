@@ -792,7 +792,7 @@ class HomeController extends Controller
 
     public function blogs(){
 
-        $blogs=Blog::latest()->paginate(10);
+        $blogs=Blog::latest()->paginate(12);
         return view('blog.index',compact('blogs'));
 
     }

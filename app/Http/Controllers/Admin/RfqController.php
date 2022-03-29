@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Events\NewRfqHasAddedEvent;
 use App\Http\Controllers\Controller;
+use App\Userchat;
 
 class RfqController extends Controller
 {
@@ -58,10 +59,34 @@ class RfqController extends Controller
 
     public function show($id)
     {
-       $rfq=Rfq::with('user','bids')->findOrFail($id);
-       $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
-       //$businessProfiles = BusinessProfile::select('id','business_name')->where('business_category_id',$rfq->category_id)->get()->toArray();
-       return view('admin.rfq.show', compact('rfq','businessProfiles'));
+        $rfq=Rfq::with('user','bids')->findOrFail($id);
+        $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+       
+        if( env('APP_ENV') == 'production') {
+            $user = "5771";
+        } 
+        else{
+            $user = "5552";
+        }
+        $to_id = (string)$rfq->user->id;
+        $from_user = User::find($user);
+        $to_user = User::find($to_id);
+        $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
+        $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
+        $chats = Userchat::where('participates', $user)->where('participates', $to_id);
+        if($chats->exists()){
+            $chat = $chats->first();
+            $chatdataAllData = $chat->chatdata;
+            $chatdata = $chatdataAllData;
+            foreach ($chatdataAllData as $key => $value) {
+                $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
+                $chatdata[$key]['message'] = $messageStr;
+            }
+        }
+        else{
+            $chatdata = [];
+        }
+        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user'));
     }
 
     public function status($id)

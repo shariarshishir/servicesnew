@@ -138,10 +138,10 @@ $reviewsCount = count($productReviews);
                             <div class="col s12">
 
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
-                                    <span class="new badge red" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
+                                    <span class="new badge red sold_out" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
                                 @endif
                                 @if($product->full_stock== 1)
-                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder" style="display: none;">Full Stock only</span>
+                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock" style="display: none;">Full Stock only</span>
                                 @else
 
                                     <div class="single-product-moq">
@@ -324,9 +324,9 @@ $reviewsCount = count($productReviews);
                                         <div class="ready_stock_block_wrapper">
                                             <div class="row" style="margin-bottom: 0px;">
                                                 <div class="col m12 ready_stock left-align">
-                                                    <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
+                                                    <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label ready_to_ship">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -604,9 +604,9 @@ $reviewsCount = count($productReviews);
                                         <div class="ready_stock_block_wrapper">
                                             <div class="row" style="margin-bottom: 0px;">
                                                 <div class="col m12">
-                                                    <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
+                                                    <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label btn_grBorder ready_to_ship">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>

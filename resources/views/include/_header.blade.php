@@ -261,7 +261,7 @@
 
 					@endif
 
-					<a href="javascript:void(0)" itemprop="Join MB Pool" type="button" class="btn_profile btn_green">
+					<a href="{{route('business.profile.create')}}" itemprop="Join MB Pool" type="button" class="btn_profile btn_green">
 					     Join MB Pool
 					</a>
 

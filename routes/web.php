@@ -513,11 +513,11 @@ Route::group(['prefix'=>'/admin'],function (){
         //active inactive business profile
         Route::get('admin/businessprofile/delete/{businessprofileid}', [ManageBusinessProfileController::class, 'delete'])->name('admin.business.profile.delete');
         Route::get('admin/businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('admin.business.profile.restore');
-
         Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
         //rfq
         Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
+        Route::get('business-profile-by-selected-category-form-rfq-details',[AdminRfqController::class, 'businessProfilesBySelectedCategoryId'])->name('admin.rfq.business.profiles.by.selectedCategory');
         Route::get('message-center/getchatdata',[AdminMessageController::class,'getchatdata'])->name('admin.message.center.getchatdata');
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
@@ -525,7 +525,7 @@ Route::group(['prefix'=>'/admin'],function (){
         //business profile
         Route::get('business-profile/{type}',[AdminBusinessProfileController::class, 'index'])->name('admin.business.profile.list.type');
         Route::get('business-profile/details/{business_profile_id}',[AdminBusinessProfileController::class, 'businessProfileDetails'])->name('admin.business.profile.details');
-        //products
+        //products 
         Route::get('products',[ProductController::class, 'index'])->name('admin.products.index');
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');

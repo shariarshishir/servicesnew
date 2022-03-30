@@ -9547,6 +9547,10 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     max-width: 550px;
 }
 
+#create-rfq-form.modal .submit_btn_wrap .btn_green {
+    padding: 10px 15px 6px;
+}
+
 /* ******************** Product upload style end *********************** */
 
 /* ******************** Media css style start *********************** */
@@ -9596,6 +9600,9 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
         text-align: center;
     }
 
+    .product_details_wrapper .product-images a {
+        height: 100%;
+    }
 
     /* ***************************************** */
     .product_video_box {

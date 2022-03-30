@@ -161,7 +161,7 @@
                                 @if($key == 2) @break @endif
                                 @endforeach
                             @else
-                                @foreach ($product->images as $image)
+                                @foreach ($product->images as $key => $image)
                                 <div class="col rfq_thumbnail_box">
                                     <div class="thumbnail_img">
                                         <img src="{{asset('storage/'.$image->image)}}" class="img-thumbnail">

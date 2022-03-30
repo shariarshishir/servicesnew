@@ -80,7 +80,7 @@ class ViewServiceProvider extends ServiceProvider
                 //$userNotifications =auth()->user()->unreadNotifications;
                 //$view->with(['userNotifications'=>$userNotifications]);
 
-                $userNotifications = auth()->user()->unreadNotifications->where('read_at',NULL);
+                $userNotifications = auth()->user()->unreadNotifications->whereNotIn('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
                 $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
                 $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);                
             }

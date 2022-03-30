@@ -172,7 +172,7 @@
                     </div>
 
                     <div class="visit_studio" itemscope>
-                        <a href="{{route('buydesignsproducts')}}" itemprop="Visit Studio" class="btn_green btn_visit_studio" >Visit Studio</a>
+                        <a href="{{route('product.type.mapping',['studio', 'design'])}}" itemprop="Visit Studio" class="btn_green btn_visit_studio" >Visit Studio</a>
                     </div>
                 </div>
               

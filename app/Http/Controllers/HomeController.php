@@ -1232,9 +1232,7 @@ class HomeController extends Controller
 
         }
         if(empty($product_type_mapping_id) || empty($product_type_mapping_child_id)){
-            $product_category= ProductCategory::all();
-            $products=[];
-            return view('product.all_products',compact('products', 'product_category'));
+            abort(404);
         }
 
 

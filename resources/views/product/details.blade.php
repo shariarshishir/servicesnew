@@ -6,6 +6,8 @@ $relatedProducts = relatedProductInformation($product->id);
 $productReviews = singleProductReviewInformation($product->id);
 $reviewsCount = count($productReviews);
 @endphp
+
+@include('product._create_rfq_form_modal')
 <input type="hidden" name="product_sku" value="{{$product->sku}}">
 
 
@@ -195,6 +197,9 @@ $reviewsCount = count($productReviews);
                                                     </div>
 
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <h6>Product code : shop-{{$product->id}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -1174,9 +1179,8 @@ $reviewsCount = count($productReviews);
 </div>
 
 
-
 @endsection
-@include('product._create_rfq_form_modal')
+
 @push('js')
     <script>
         // $('input[name=fresh_input]').change(function() {

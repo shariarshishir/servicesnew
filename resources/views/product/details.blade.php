@@ -193,13 +193,14 @@ $reviewsCount = count($productReviews);
                                                                 @if($product->product_type==1) <td data-title="Lead Time">{{$list[3]}} </td>@endif
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>Product Code:</td>
+                                                                <td>shop-{{$product->id}}</td>
+                                                            </tr>
                                                         </table>
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <h6>Product code : shop-{{$product->id}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -787,9 +788,9 @@ $reviewsCount = count($productReviews);
                                     @endif
 
                                     @if(Auth::guard('web')->check())
-                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#create-rfq-form">Request for Quotation</button>
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#create-rfq-form">Request for Quotation</button>
                                     @else
-                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#login-register-modal">Request for Quotation</button>
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#login-register-modal">Request for Quotation</button>
                                     @endif
                                 </div>
                             </div>
@@ -1179,8 +1180,8 @@ $reviewsCount = count($productReviews);
 </div>
 
 
-@endsection
 
+@endsection
 @push('js')
     <script>
         // $('input[name=fresh_input]').change(function() {

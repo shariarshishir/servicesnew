@@ -110,6 +110,7 @@ class ProductController extends Controller
 
    public function store(Request $request)
    {
+
         $validator = Validator::make($request->all(), [
             'business_profile_id' => 'required',
             'images'  => 'required',
@@ -167,11 +168,8 @@ class ProductController extends Controller
         try {
             $date=Carbon::now()->timestamp;
             $number=mt_rand(0,9999);
-            $remove[] = "'";
-            $remove[] = '"';
-            $remove[] = "-";
-            $remove[] = "#";
-            $FileName = str_replace($remove, "", $request->name);
+            $pattern= '/[^A-Za-z0-9\-]/';
+            $FileName= preg_replace($pattern, '', $request->name);
             $name= explode(' ',strtolower($FileName));
             $sku=$name[0].$date.$number;
 

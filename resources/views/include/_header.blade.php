@@ -275,7 +275,7 @@
 		<!-- Desktop header end -->
 		
 		<!-- Mobile header -->
-		<header class="mobile_header header_wrap" itemscope>
+		<header class="mobile_header" itemscope>
 			<div class="col m2 logo center-align" itemscope>
 				<a href="{{route('home')}}" itemprop="Logo"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a>
 			</div>

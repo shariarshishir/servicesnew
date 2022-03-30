@@ -184,8 +184,12 @@
                                     <div class="rating_type_filter">
                                         <label>Rating</label>
                                         <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                            <option value="5">5 Start</option>
-                                            <option value="4">4 Start</option>
+                                            <option value="0">Select Rating</option>
+                                            <option value="5">5 star</option>
+                                            <option value="4">4 star</option>
+                                            <option value="3">3 star</option>
+                                            <option value="2">2 star</option>
+                                            <option value="1">1 star</option>
                                         </select>
                                     </div>
                                 </div>
@@ -257,12 +261,60 @@
             });
 
             $(document).on('click', '#factory_type', function(){
-                var categoryId = $( "#factory_type option:selected" ).val();
-                if(categoryId != 0){
+
+                var category_id = $( "#factory_type option:selected" ).val();
+                var profile_rating = $( "#profile_rating option:selected" ).val();
+                if( category_id !=''){
                     $.ajax({
                         method: 'get',
-                        data: {id:categoryId},
-                        url: '{{ route("admin.rfq.business.profiles.by.selectedCategory") }}',
+                        data: {category_id:category_id,profile_rating:profile_rating},
+                        url: '{{ route("admin.rfq.business.profiles.filter") }}',
+                        success:function(response){
+                            console.log(response.businessProfiles);
+                            if(response.businessProfiles.length >0){
+                                $('.rfq_business_profile_list').empty();
+                                response.businessProfiles.forEach((item, index)=>{
+                                    var html ='<div class="business_profile_name">';
+                                    html+='<div class="form-check">';
+                                    html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                                    html+='<label class="form-check-label" for="flexCheckDefault">';
+                                    html+='<p>'+item.business_name+'</p>';
+                                    if( item.business_type == 1 ){
+                                        html+='<p>Manufacturer</p>';
+                                    }else if( item.business_type == 2){
+                                        html+='<p>Wholesaler</p>';
+                                    }
+                                    html+='<p>Rating: 5 Start</p>';
+                                    html+='<p>Total Order: 100</p>';
+                                    html+='</label>';
+                                    html+='</div>';
+                                    html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    html+='</div>';
+                                    $('.rfq_business_profile_list').append(html);
+                                })
+                            }else{
+                                $('.rfq_business_profile_list').empty();
+                                var html = '<div>';
+                                html += '<p>No Profile found</p>';
+                                html += '</div>';
+                                $('.rfq_business_profile_list').append(html);
+                            }
+                        }
+                    });
+                }
+                    
+            
+            });
+
+
+            $(document).on('click', '#profile_rating', function(){
+                var category_id = $( "#factory_type option:selected" ).val();
+                var profile_rating = $( "#profile_rating option:selected" ).val();
+                if( category_id !='' && profile_rating !=0){
+                    $.ajax({
+                        method: 'get',
+                        data: {category_id:category_id,profile_rating:profile_rating},
+                        url: '{{ route("admin.rfq.business.profiles.filter") }}',
                         success:function(response){
                             console.log(response.businessProfiles);
                             if(response.businessProfiles.length >0){

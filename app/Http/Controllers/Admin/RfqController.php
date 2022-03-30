@@ -112,14 +112,12 @@ class RfqController extends Controller
 
 
     }
-    public function businessProfilesBySelectedCategoryId(Request $request){
-        $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->id)->where('profile_verified_by_admin', '!=', 0)->get();
-        if($businessProfiles ){
-            return response()->json(['businessProfiles'=>$businessProfiles],200);
-        }else{
-            $businessProfiles = [];
-            return response()->json(['businessProfiles'=>$businessProfiles],200);
+    public function businessProfileFilter(Request $request){
+        if($request->category_id && $request->profile_rating !=0){
+            $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
+        }elseif($request->category_id && $request->profile_rating ==0){
+            $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
         }
-        
+        return response()->json(['businessProfiles'=>$businessProfiles],200);
     }
 }

@@ -14,9 +14,7 @@ use App\Models\Manufacture\ProductCategory;
 
 class RfqController extends Controller
 {
-    public function index(Request $request)
-    {
-
+    public function index(Request $request){
         if ($request->ajax()) {
             $data = Rfq::with('category','user')->select('*');
             return Datatables::of($data)
@@ -40,7 +38,6 @@ class RfqController extends Controller
                         }else{
                             $status= '<span class="text-primary">'.$ucfirst.'</span>';
                         }
-
                        return $status;
                     })
                     ->editColumn('created_at', function ($row) {
@@ -54,12 +51,10 @@ class RfqController extends Controller
                     ->rawColumns(['details','status'])
                     ->make(true);
         }
-
         return view('admin.rfq.index');
     }
 
-    public function show($id)
-    {
+    public function show($id){
         $rfq=Rfq::with('user','bids')->findOrFail($id);
         $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
         $productCategories = ProductCategory::all('id','name');
@@ -90,8 +85,7 @@ class RfqController extends Controller
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories'));
     }
 
-    public function status($id)
-    {
+    public function status($id){
         $rfq=Rfq::findOrFail($id);
         if($rfq->status == 'pending'){
             $rfq->update(['status' => 'approved']);
@@ -102,15 +96,12 @@ class RfqController extends Controller
                     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
                 }
             }
-
             return redirect()->back()->withSuccess('Rfq published successfully');
         }
         if($rfq->status == 'approved'){
             $rfq->update(['status' => 'pending']);
             return redirect()->back()->withSuccess('Rfq unpublished successfully');
         }
-
-
     }
     public function businessProfileFilter(Request $request){
         if($request->category_id && $request->profile_rating !=0){

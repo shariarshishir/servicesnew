@@ -72,7 +72,6 @@
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="buyer" role="tabpanel" aria-labelledby="buyer-tab">
-
                                         <div class="chatting_app_wrapper">
                                             <div class="chat-application">
                                                 <div class="app-chat">
@@ -146,7 +145,6 @@
                                                 </div>
                                             </div>
                                         </div>                                    
-
                                     </div>
                                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         Business Profile 1
@@ -155,7 +153,6 @@
                                         Business Profile 2
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -171,20 +168,21 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <form id="send_suggested_profiles_to_buyer">
                                 <div class="business_profile_filter">
                                     <div class="factory_type_filter">
                                         <label>Factory Type</label>
                                         <select class="form-select form-control" name="factory_type" id="factory_type">
                                             <option value="">Select factory type</option>
                                             @foreach($productCategories as $productCategory)
-                                                <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                                                <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq->category->id ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="rating_type_filter">
                                         <label>Rating</label>
                                         <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                            <option value="0">Select Rating</option>
+                                            <option value="0">All</option>
                                             <option value="5">5 star</option>
                                             <option value="4">4 star</option>
                                             <option value="3">3 star</option>
@@ -222,14 +220,13 @@
                                     @endif
                                 </div>
                                 <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" id="modal_close_button" data-dismiss="modal">Close</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>                
-
             </div>
-            
         </div>
     </section>
 </div>
@@ -257,13 +254,13 @@
                     $(this).prop("checked", false);
                     alert('Enter offer price first');
                 }
-               
             });
 
             $(document).on('click', '#factory_type', function(){
-
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
+                console.log(category_id);
+                console.log(profile_rating);
                 if( category_id !=''){
                     $.ajax({
                         method: 'get',
@@ -302,15 +299,14 @@
                         }
                     });
                 }
-                    
-            
             });
 
 
             $(document).on('click', '#profile_rating', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
-                if( category_id !='' && profile_rating !=0){
+                console.log(category_id);
+                console.log(profile_rating);
                     $.ajax({
                         method: 'get',
                         data: {category_id:category_id,profile_rating:profile_rating},
@@ -347,13 +343,8 @@
                             }
                         }
                     });
-                }
-            
             });
             
-
-
-
             $(".business_profile_list_trigger_from_backend").click(function(){
                 if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
@@ -383,13 +374,80 @@
                     msgHtml += '</div>';
                     $('.chats-box').append(msgHtml);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                    $('#businessProfileListByCategoryModal').modal('hide');
+                    $('#send_suggested_profiles_to_buyer')[0].reset();
+                    $("#factory_type option[value={{$rfq->category->id}}]").attr('selected', 'selected');
+                    $("#factory_type option[value=0]").attr('selected', 'selected');
+                    var businessProfiles = @json($businessProfiles);
+                    if( businessProfiles.length >0 ){
+                        $('.rfq_business_profile_list').empty();
+                        businessProfiles.forEach((item, index)=>{
+                            var html ='<div class="business_profile_name">';
+                            html+='<div class="form-check">';
+                            html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                            html+='<label class="form-check-label" for="flexCheckDefault">';
+                            html+='<p>'+item.business_name+'</p>';
+                            if( item.business_type == 1 ){
+                                html+='<p>Manufacturer</p>';
+                            }else if( item.business_type == 2){
+                                html+='<p>Wholesaler</p>';
+                            }
+                            html+='<p>Rating: 5 Start</p>';
+                            html+='<p>Total Order: 100</p>';
+                            html+='</label>';
+                            html+='</div>';
+                            html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                            html+='</div>';
+                            $('.rfq_business_profile_list').append(html);
+                        })
+                    }else{
+                        $('.rfq_business_profile_list').empty();
+                        var html = '<div>';
+                        html += '<p>No Profile found</p>';
+                        html += '</div>';
+                        $('.rfq_business_profile_list').append(html);
+                    }
                     swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
-
                 } 
                 else{
                     alert('Enter offer price first');
                 }
             })
+
+            $("#modal_close_button").click(function(){
+                $('#send_suggested_profiles_to_buyer')[0].reset();
+                $("#factory_type option[value={{$rfq->category->id}}]").attr('selected', 'selected');
+                $("#factory_type option[value=0]").attr('selected', 'selected');
+                var businessProfiles = @json($businessProfiles);
+                if( businessProfiles.length >0 ){
+                    $('.rfq_business_profile_list').empty();
+                    businessProfiles.forEach((item, index)=>{
+                        var html ='<div class="business_profile_name">';
+                        html+='<div class="form-check">';
+                        html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                        html+='<label class="form-check-label" for="flexCheckDefault">';
+                        html+='<p>'+item.business_name+'</p>';
+                        if( item.business_type == 1 ){
+                            html+='<p>Manufacturer</p>';
+                        }else if( item.business_type == 2){
+                            html+='<p>Wholesaler</p>';
+                        }
+                        html+='<p>Rating: 5 Start</p>';
+                        html+='<p>Total Order: 100</p>';
+                        html+='</label>';
+                        html+='</div>';
+                        html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                        html+='</div>';
+                        $('.rfq_business_profile_list').append(html);
+                    })
+                }else{
+                    $('.rfq_business_profile_list').empty();
+                    var html = '<div>';
+                    html += '<p>No Profile found</p>';
+                    html += '</div>';
+                    $('.rfq_business_profile_list').append(html);
+                }
+            });
 
             $('.messageSendButton').click(function(){
                 //event.preventDefault();
@@ -403,7 +461,6 @@
                 let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
                 socket.emit('new message', message);
                 var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
-
                 var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -421,9 +478,10 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 
+            
+
             socket.on('new message', function(data) {
                 var from_user_image= "{{asset('storage')}}"+'/'+"{{$rfq->user->image}}";
-                
                 var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -439,11 +497,6 @@
                     $('.chats-box').append(msgHtml);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
-
         }); 
-         
-
-        
-        
     </script>
 @endpush

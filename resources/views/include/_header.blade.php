@@ -127,7 +127,9 @@
 					<div class="notifications_icon_wrap" itemscope>
 						<a href="javascript:void(0);" class="dropdown-trigger" data-target="countdown-dropdown" itemprop="Message Notification">
 							<i class="material-icons">notifications</i>
-							<span id="" class="noticication_counter">{{ count($userNotifications) - count($messageCenterNotifications) }}</span>
+							@if(count($userNotifications) > 0)
+							<span id="" class="noticication_counter">{{ count($userNotifications) }}</span>
+							@endif
 						</a>
 					</div>
 
@@ -229,7 +231,9 @@
 					<div class="header_message_box" itemscope>
 						<a href="{{route('message.center')}}" itemprop="Message Notification Count" class="message-center-dropdown-trigger" data-target="message-countdown-dropdown">
 							<i class="material-icons">message</i>
+							@if(count($messageCenterNotifications) > 0)
 							<span class="sms_counter">{{ count($messageCenterNotifications) }}</span>
+							@endif
 						</a>
 
 						<ul id="message-countdown-dropdown" class="dropdown-content card" itemscope itemtype="https://schema.org/ListItem">
@@ -257,7 +261,7 @@
 
 					@endif
 
-					<a href="javascript:void(0)" itemprop="Join MB Pool" type="button" class="btn_profile btn_green">
+					<a href="{{route('business.profile.create')}}" itemprop="Join MB Pool" type="button" class="btn_profile btn_green">
 					     Join MB Pool
 					</a>
 
@@ -520,7 +524,10 @@
 							<div class="notifications_icon_wrap mobile_top_icon_box mobile_notifications_icon_wrap" itemscope>
 								<a href="javascript:void(0);" class="dropdown-trigger" data-target="countdown-dropdown-mobile" itemprop="User Notification">
 									<i class="material-icons">notifications</i>
-									<span id="" class="noticication_counter">{{count($userNotifications)}}</span>
+									<!-- <span id="" class="noticication_counter">{{count($userNotifications)}}</span> -->
+									@if(count($userNotifications) > 0)
+									<span id="" class="noticication_counter">{{ count($userNotifications) }}</span>
+									@endif
 								</a>
 							</div>
 
@@ -622,7 +629,9 @@
 							<div class="header_message_box mobile_top_icon_box" itemscope>
 								<a href="{{route('message.center')}}" itemprop="Message Center">
 									<i class="material-icons">message</i>
-									<span class="sms_counter ">0</span>
+									@if(count($messageCenterNotifications) > 0)
+									<span class="sms_counter">{{ count($messageCenterNotifications) }}</span>
+									@endif
 								</a>
 							</div>
 

@@ -61,7 +61,7 @@
                             <div class="col-md-6">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="buyer-tab" data-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">Buyer</a>
+                                        <a class="nav-link active" id="buyer-tab" data-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">{{$rfq->user->name}}</a>
                                     </li>
                                     <li class="nav-item" style="display: none;">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BP 1</a>
@@ -132,8 +132,8 @@
                                                                         <!-- Chat footer <-->
                                                                         <div class="chat-footer">
                                                                             <form action="javascript:void(0);" class="chat-input">
-                                                                                <input type="text" placeholder="Type message here.." class="message mb-0">
-                                                                                <a class="btn_green send">Send</a>
+                                                                                <input type="text" placeholder="Type message here.." id="messagebox" class="message mb-0">
+                                                                                <a class="btn_green send messageSendButton">Send</a>
                                                                             </form>
                                                                         </div>
                                                                         <!--/ Chat footer -->
@@ -175,19 +175,26 @@
                                     <div class="factory_type_filter">
                                         <label>Factory Type</label>
                                         <select class="form-select form-control" name="factory_type" id="factory_type">
-                                            <option value="knit">Knit</option>
-                                            <option value="woven">Woven</option>
+                                            <option value="">Select factory type</option>
+                                            @foreach($productCategories as $productCategory)
+                                                <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="rating_type_filter">
                                         <label>Rating</label>
                                         <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                            <option value="5">5 Start</option>
-                                            <option value="4">4 Start</option>
+                                            <option value="0">Select Rating</option>
+                                            <option value="5">5 star</option>
+                                            <option value="4">4 star</option>
+                                            <option value="3">3 star</option>
+                                            <option value="2">2 star</option>
+                                            <option value="1">1 star</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="rfq_business_profile_list">
+                                    @if($businessProfiles)
                                     @foreach($businessProfiles as $key=>$businessProfile)
                                     <div class="business_profile_name">
                                         <div class="form-check">
@@ -210,6 +217,9 @@
                                         <input type="number" value="" name="propose_price" class="propose_price"/>
                                     </div>
                                     @endforeach
+                                    @else
+                                        <div><p>No profile found</p></div>
+                                    @endif
                                 </div>
                                 <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -250,28 +260,102 @@
                
             });
 
+            $(document).on('click', '#factory_type', function(){
+
+                var category_id = $( "#factory_type option:selected" ).val();
+                var profile_rating = $( "#profile_rating option:selected" ).val();
+                if( category_id !=''){
+                    $.ajax({
+                        method: 'get',
+                        data: {category_id:category_id,profile_rating:profile_rating},
+                        url: '{{ route("admin.rfq.business.profiles.filter") }}',
+                        success:function(response){
+                            console.log(response.businessProfiles);
+                            if(response.businessProfiles.length >0){
+                                $('.rfq_business_profile_list').empty();
+                                response.businessProfiles.forEach((item, index)=>{
+                                    var html ='<div class="business_profile_name">';
+                                    html+='<div class="form-check">';
+                                    html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                                    html+='<label class="form-check-label" for="flexCheckDefault">';
+                                    html+='<p>'+item.business_name+'</p>';
+                                    if( item.business_type == 1 ){
+                                        html+='<p>Manufacturer</p>';
+                                    }else if( item.business_type == 2){
+                                        html+='<p>Wholesaler</p>';
+                                    }
+                                    html+='<p>Rating: 5 Start</p>';
+                                    html+='<p>Total Order: 100</p>';
+                                    html+='</label>';
+                                    html+='</div>';
+                                    html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    html+='</div>';
+                                    $('.rfq_business_profile_list').append(html);
+                                })
+                            }else{
+                                $('.rfq_business_profile_list').empty();
+                                var html = '<div>';
+                                html += '<p>No Profile found</p>';
+                                html += '</div>';
+                                $('.rfq_business_profile_list').append(html);
+                            }
+                        }
+                    });
+                }
+                    
+            
+            });
+
+
+            $(document).on('click', '#profile_rating', function(){
+                var category_id = $( "#factory_type option:selected" ).val();
+                var profile_rating = $( "#profile_rating option:selected" ).val();
+                if( category_id !='' && profile_rating !=0){
+                    $.ajax({
+                        method: 'get',
+                        data: {category_id:category_id,profile_rating:profile_rating},
+                        url: '{{ route("admin.rfq.business.profiles.filter") }}',
+                        success:function(response){
+                            console.log(response.businessProfiles);
+                            if(response.businessProfiles.length >0){
+                                $('.rfq_business_profile_list').empty();
+                                response.businessProfiles.forEach((item, index)=>{
+                                    var html ='<div class="business_profile_name">';
+                                    html+='<div class="form-check">';
+                                    html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                                    html+='<label class="form-check-label" for="flexCheckDefault">';
+                                    html+='<p>'+item.business_name+'</p>';
+                                    if( item.business_type == 1 ){
+                                        html+='<p>Manufacturer</p>';
+                                    }else if( item.business_type == 2){
+                                        html+='<p>Wholesaler</p>';
+                                    }
+                                    html+='<p>Rating: 5 Start</p>';
+                                    html+='<p>Total Order: 100</p>';
+                                    html+='</label>';
+                                    html+='</div>';
+                                    html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    html+='</div>';
+                                    $('.rfq_business_profile_list').append(html);
+                                })
+                            }else{
+                                $('.rfq_business_profile_list').empty();
+                                var html = '<div>';
+                                html += '<p>No Profile found</p>';
+                                html += '</div>';
+                                $('.rfq_business_profile_list').append(html);
+                            }
+                        }
+                    });
+                }
+            
+            });
+            
+
+
 
             $(".business_profile_list_trigger_from_backend").click(function(){
                 if(selectedValues.length > 0){
-                    /*
-                    var user_image= "{{asset('storage')}}"+'/'+"images/supplier.png";
-                    var html ='<div class="chat chat-right">';
-                    html +='<div class="chat-avatar">';
-                    html +='<a class="avatar">';
-                    html +='<img src='+user_image+' class="circle" alt="avatar">';
-                    html +='</a>';
-                    html +='</div>';
-                    html +='<div class="chat-body left-align">';
-                    html +='<div class="chat-text">';
-                    html +='<b>Our Suggested Profiles</b><br/>';
-                    selectedValues.forEach(function(value){
-                        html += value + '<br/>';
-                    });
-                    html +='</div>';
-                    html +='</div>';
-                    html +='</div>';
-                    */
-                    // var user_image = "{{asset('storage')}}"+'/'+"images/supplier.png";
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
@@ -279,63 +363,87 @@
                     var envMode = "{{ env('APP_ENV') }}";
                     if(envMode == 'production') {
                         var fromId = '5771';
-                    } 
-                    else{
+                    } else{
                         var fromId = '5552';
                     }
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
                     socket.emit('new message', message);
-                    $.ajax({
-                        url: '{{ route("admin.message.center.getchatdata") }}',
-                        type: "GET",
-                        data:{user:fromId,to_id:"{{$rfq->user->id}}"},
-                        success:function(response)
-                            {
-                                $('.chat-box').empty();
-                                response.chatdata.forEach((item, index)=>{
-                                    if(item['from_id'] ==  fromId ){
-                                        var msgHtml = '<div class="chat chat-right">';
-                                        msgHtml += '<div class="chat-avatar">';
-                                        msgHtml += '<a class="avatar">';
-                                        msgHtml += '<img src="'+response.from_user_image+'" class="circle" alt="avatar">';
-                                        msgHtml += '</a>';
-                                        msgHtml += '</div>';
-                                        msgHtml += '<div class="chat-body left-align">';
-                                        msgHtml += '<div class="chat-text">';
-                                        msgHtml += '<p>'+item['message']+'</p>';
-                                        msgHtml += '</div>';
-                                        msgHtml += '</div>';
-                                        msgHtml += '</div>';
-                                        $('.chat-box').append(msgHtml);
-                                    }
-                                    else{
-                                        var msgHtml = '<div class="chat chat-left">';
-                                        msgHtml += '<div class="chat-avatar">';
-                                        msgHtml += '<a class="avatar">';
-                                        msgHtml += '<img src="'+response.to_user_image+'" class="circle" alt="avatar">';
-                                        msgHtml += '</a>';
-                                        msgHtml += '</div>';
-                                        msgHtml += '<div class="chat-body left-align">';
-                                        msgHtml += '<div class="chat-text">';
-                                        msgHtml += '<p>'+item['message']+'</p>';
-                                        msgHtml += '</div>';
-                                        msgHtml += '</div>';
-                                        msgHtml += '</div>';
-                                        $('.chat-box').append(msgHtml);
-                                        //$(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-                                        window.location.reload();
-                                    }
-                                })
-                            }
-                    });
+                    var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                    var msgHtml = '<div class="chat chat-right">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+html+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
+
                 } 
                 else{
                     alert('Enter offer price first');
                 }
             })
 
-        });  
+            $('.messageSendButton').click(function(){
+                //event.preventDefault();
+                var msg = $('#messagebox').val();
+                var envMode = "{{ env('APP_ENV') }}";
+                if(envMode == 'production') {
+                    var fromId = '5771';
+                } else{
+                    var fromId = '5552';
+                }
+                let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
+                socket.emit('new message', message);
+                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+
+                var msgHtml = '<div class="chat chat-right">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+msg+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    $('#messagebox').val('');
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+            });
+
+            socket.on('new message', function(data) {
+                var from_user_image= "{{asset('storage')}}"+'/'+"{{$rfq->user->image}}";
+                
+                var msgHtml = '<div class="chat chat-left">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+            });
+
+        }); 
+         
+
+        
         
     </script>
 @endpush

@@ -156,7 +156,7 @@ class ProductController extends Controller
 //get business type by industy type
 public function edit($product_id)
 {
-    $product=Product::where('id', $product_id)->with('product_images','product_video')->first();
+    $product=Product::withTrashed()->where('id', $product_id)->with('product_images','product_video')->first();
     if(!$product){
         return response()->json([
             'success' => false,
@@ -207,7 +207,7 @@ public function update(Request $request, $product_id)
         'error' => $validator->getMessageBag()),
         400);
     }
-        $product=Product::find($product_id);
+        $product=Product::withTrashed()->find($product_id);
         if ($request->hasFile('overlay_image')){
             if($product->overlay_image){
 
@@ -283,7 +283,7 @@ public function update(Request $request, $product_id)
                 'video' => $filename,
             ]);
          }
-        $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
+        $products=Product::withTrashed()->where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
         $data=view('business_profile._product_table_data', compact('products'))->render();
         return response()->json([
             'success' => true,

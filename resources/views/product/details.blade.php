@@ -6,6 +6,8 @@ $relatedProducts = relatedProductInformation($product->id);
 $productReviews = singleProductReviewInformation($product->id);
 $reviewsCount = count($productReviews);
 @endphp
+
+@include('product._create_rfq_form_modal')
 <input type="hidden" name="product_sku" value="{{$product->sku}}">
 
 
@@ -138,10 +140,10 @@ $reviewsCount = count($productReviews);
                             <div class="col s12">
 
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
-                                    <span class="new badge red" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
+                                    <span class="new badge red sold_out" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
                                 @endif
                                 @if($product->full_stock== 1)
-                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder" style="display: none;">Full Stock only</span>
+                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock" style="display: none;">Full Stock only</span>
                                 @else
 
                                     <div class="single-product-moq">
@@ -191,6 +193,10 @@ $reviewsCount = count($productReviews);
                                                                 @if($product->product_type==1) <td data-title="Lead Time">{{$list[3]}} </td>@endif
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>Product Code:</td>
+                                                                <td>shop-{{$product->id}}</td>
+                                                            </tr>
                                                         </table>
                                                     </div>
 
@@ -324,9 +330,9 @@ $reviewsCount = count($productReviews);
                                         <div class="ready_stock_block_wrapper">
                                             <div class="row" style="margin-bottom: 0px;">
                                                 <div class="col m12 ready_stock left-align">
-                                                    <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
+                                                    <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label ready_to_ship">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -604,9 +610,9 @@ $reviewsCount = count($productReviews);
                                         <div class="ready_stock_block_wrapper">
                                             <div class="row" style="margin-bottom: 0px;">
                                                 <div class="col m12">
-                                                    <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
+                                                    <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label btn_grBorder ready_to_ship">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -782,9 +788,9 @@ $reviewsCount = count($productReviews);
                                     @endif
 
                                     @if(Auth::guard('web')->check())
-                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#create-rfq-form">Request for Quotation</button>
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#create-rfq-form">Request for Quotation</button>
                                     @else
-                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger" href="#login-register-modal">Request for Quotation</button>
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#login-register-modal">Request for Quotation</button>
                                     @endif
                                 </div>
                             </div>
@@ -1176,7 +1182,6 @@ $reviewsCount = count($productReviews);
 
 
 @endsection
-@include('product._create_rfq_form_modal')
 @push('js')
     <script>
         // $('input[name=fresh_input]').change(function() {

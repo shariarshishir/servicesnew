@@ -1,3 +1,4 @@
+@if($business_profile->is_business_profile_verified == 0)
 <div class="profile_verification_request_block">
     @if($business_profile->businessProfileVerificationsRequest)
     <div class="card-alert card orange lighten-5">
@@ -13,3 +14,4 @@
     </div>
     @endif
 </div>	
+@endif

@@ -239,7 +239,7 @@
         $(document).ready(function() {
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];
-            var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
+            var serverURL = "{{ env('CHAT_URL') }}?chatID={{$rfq->id}}";
             var socket = io.connect(serverURL);
             socket.on('connect', function(data) {
                 console.log("Socket Connect successfully.");
@@ -357,7 +357,7 @@
                     } else{
                         var fromId = '5552';
                     }
-                    let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
+                    let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'rfq_id': "{{$rfq->id}}",'factory':true,'product': null};
                     socket.emit('new message', message);
                     var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
                     var msgHtml = '<div class="chat chat-right">';
@@ -458,7 +458,7 @@
                 } else{
                     var fromId = '5552';
                 }
-                let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'product': null};
+                let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}",'rfq_id': "{{$rfq->id}}",'factory':false, 'product': null};
                 socket.emit('new message', message);
                 var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
                 var msgHtml = '<div class="chat chat-right">';
@@ -481,6 +481,7 @@
             
 
             socket.on('new message', function(data) {
+                console.log(data);
                 var from_user_image= "{{asset('storage')}}"+'/'+"{{$rfq->user->image}}";
                 var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';

@@ -16,7 +16,10 @@
                     </div>
                 </div>
                 <!--Add Product Form-->
-                <form action="#" class="createRfqForm " method="post" enctype="multipart/form-data">
+                <form action="{{route('rfq.store.from.product.details')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="flag" value="{{$product->flag}}">
+                <input type="hidden" name="product_id" value="{{$product->id}}">
                     <div class="rfq_detail_from">
                         <!--3-->
                         <div class="row input-field input-wrapper">
@@ -37,7 +40,7 @@
                                 <label>Title <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <input type="text" class="form-control- ig-new-rgt" name="title" required/>
+                                <input type="text" class="form-control- ig-new-rgt" name="title" value="{{$product->title ?? $product->name}}" required/>
                             </div>
                         </div>
 
@@ -46,7 +49,7 @@
                                 <label>Short Description <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
+                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description">@if($product->flag == 'mb') Product Code :mb-{{ $product->id }},Price per Unit : {{$product->price_unit}} {{$product->price_per_unit}}, Lead Time: {{ $product->lead_time }} days, Min Quantity: {{ $product->moq }} {{ $product->qty_unit }} @else Product Code :shop-{{ $product->id }},Moq : {{$product->moq}} @endif</textarea>
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">
@@ -54,7 +57,7 @@
                                 <label>Full Description <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
+                                <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification">@if($product->flag== 'mb'){!! $product->product_details !!},  {!! $product->product_specification !!} @else  {!! $product->description !!} @endif</textarea>
                             </div>
                         </div>
 
@@ -66,7 +69,7 @@
                                             <label>Quantity <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
+                                            <input type="number" class="form-control- ig-new-rgt" name="rfq_quantity" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +97,7 @@
                                             <label>Target Price <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
+                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="rfq_unit_price" required onchange="allowTwoDecimal()" />
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +151,26 @@
 
 
                         <div class="row rfq_img_upload_wrap">
-                            <div class="rfq_thumbnail_box">
+                            @if($product->flag == 'mb')
+                                @foreach ($product->product_images as $key => $image)
+                                <div class="col rfq_thumbnail_box">
+                                    <div class="thumbnail_img">
+                                        <img src="{{asset('storage/'.$image->product_image)}}" class="img-thumbnail">
+                                    </div>
+                                </div>
+                                @if($key == 2) @break @endif
+                                @endforeach
+                            @else
+                                @foreach ($product->images as $key => $image)
+                                <div class="col rfq_thumbnail_box">
+                                    <div class="thumbnail_img">
+                                        <img src="{{asset('storage/'.$image->image)}}" class="img-thumbnail">
+                                    </div>
+                                </div>
+                                @if($key == 2) @break @endif
+                                @endforeach
+                            @endif
+                            {{-- <div class="col rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img1">
                                 </div>
@@ -166,7 +188,7 @@
                             <!--/1-->
 
                             <!--2-->
-                            <div class="rfq_thumbnail_box">
+                            <div class="col rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img2">
                                 </div>
@@ -184,7 +206,7 @@
                             <!--/2-->
 
                             <!--3-->
-                            <div class="rfq_thumbnail_box">
+                            <div class="col rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img3">
                                 </div>
@@ -202,7 +224,7 @@
                             <!--/3-->
 
                             <!--4-->
-                            <div class="rfq_thumbnail_box">
+                            <div class="col rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img4">
                                 </div>
@@ -220,7 +242,7 @@
                             <!--/4-->
 
                             <!--5-->
-                            <div class="rfq_thumbnail_box">
+                            <div class="col rfq_thumbnail_box">
                                 <div class="thumbnail_img">
                                   <img src="https://via.placeholder.com/380" class="img-thumbnail" id="img5">
                                 </div>
@@ -237,7 +259,7 @@
                             </div>
                             <!--/5-->
 
-
+ --}}
 
                         </div>
 
@@ -260,13 +282,15 @@
                                 <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="padding-right: 6px; line-height: 18px;"></i>Submit
                             </button> -->
 
-                            <!-- <button type="submit" id="page_button" style="display: none;"></button> -->
+                            <button type="submit" id="page_button" style="display: none;"></button>
 
-                            <div class="submit_btn_wrap" style="padding-top: 30px;">
+                            <div class="submit_btn_wrap">
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit</button>
+                                        <button type="button" class="btn_green  btn-green right" onclick="onSubmit();">
+                                            Post
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -389,28 +413,28 @@
                 $('input[name="title"]').removeClass('invalid');
             }
 
-            if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
+            if ($('input[name="rfq_quantity"]').val()=="" || $('input[name="rfq_quantity"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="quantity"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="quantity"]').addClass('invalid');
+                $('input[name="rfq_quantity"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="rfq_quantity"]').addClass('invalid');
             }
             else
             {
-                $('input[name="quantity"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="quantity"]').removeClass('invalid');
+                $('input[name="rfq_quantity"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="rfq_quantity"]').removeClass('invalid');
             }
 
-            if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined")
+            if ($('input[name="rfq_unit_price"]').val()=="" || $('input[name="rfq_unit_price"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="unit_price"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="unit_price"]').addClass('invalid');
+                $('input[name="rfq_unit_price"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="rfq_unit_price"]').addClass('invalid');
             }
             else
             {
-                $('input[name="unit_price"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="unit_price"]').removeClass('invalid');
+                $('input[name="rfq_unit_price"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="rfq_unit_price"]').removeClass('invalid');
             }
 
             if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")

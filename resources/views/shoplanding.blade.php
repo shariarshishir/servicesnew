@@ -16,50 +16,27 @@
                     <div class="col s12 m6">
                         <div class="home_intro_left" itemscope>
                             <h1 itemprop="title">Find Your Next Apparel <br/> Manufacturing Partner</h1>
-                            <p itemprop="text">Join the tech enabled fashion sourcing platform to connect <br/>
-                                directly with fashion manufacturers and <br/>
-                                wholesalers in BANGLADESH</p>
-                            
-                            <div class="banner_search" itemscope>
-                                @php
-                                    $searchType= request()->get('search_type');
-                                @endphp
-                                <div class="module-search">
-                                    <select id="searchOption" class="select2 browser-default select-search-type">
-                                        <option value="all" name="search_key" {{ $searchType=="all" ? 'selected' : '' }}>All</option>
-                                        <option value="product" name="search_key" {{ $searchType=="product" ? 'selected' : '' }}>Products</option>
-                                        <option value="vendor"  name="search_key" {{ $searchType=="vendor" ? 'selected' : '' }}>Manufacturers</option>
-                                    </select>
-                                    <form name="system_search" action="{{route('onsubmit.search')}}" id="system_search" method="get">
-                                        @if(Route::is('onsubmit.search'))
-                                        <input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="{{$searchInputValue}}" class="search_input"  name="search_input"/>
-                                        @else
-                                        <input type="text" placeholder="Example: Baby Sweaters, T-Shirts, Viscose, Radiant Sweaters etc." value="" class="search_input"  name="search_input"/>
-                                        @endif
-                                        <input type="hidden" name="search_type" class="search_type" value="" />
-                                        <button class="btn waves-effect waves-light green darken-1 search-btn" type="submit" ><i class="material-icons dp48">search</i></button>
-                                    </form>
-                                    <div id="search-results-wrapper" style="display: none;">
-                                        <div id="loadingSearchProgressContainer">
-                                            <div id="loadingSearchProgressElement">
-                                                <img src="{{asset('images/frontendimages/new_layout_images/loading-gray.gif')}}" width="128" height="15" alt="Loading">
-                                                <div class="loading-message" style="display: none;">Loading...</div>
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>                    
-                                        <div id="search-results" style="display: none;"></div>
-                                    </div>
-                                </div>
+                            <p itemprop="text">Connecting demand directly to production powered <br/>
+                            with tech and product development support.</p>
+
+                            <p>#SourcingMadeEasy</p>
+
+                            <div class="quotation_request">
+                                <a href="{{route('rfq.crate')}}">
+                                    <span class="quotation_text">Submit a Request for Quotation</span>
+                                    <span class="quotation_arrow"><i class="material-icons">arrow_forward</i></span>
+                                </a>
                             </div>
 
-                            <div class="home_intro_right mobile_home_intro_img" itemscope style="display: none;">
+                            <!-- <div class="home_intro_right mobile_home_intro_img" itemscope style="display: none;">
                                 <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
                             </div>
 
                             <div class="landing_intro_button_box" itemscope>
                                 <a class="btn_howWrok btn_border_black" itemprop="How we work" data-fancybox href="https://youtu.be/8z7uqq_Zqzg"><i class="material-icons"> play_circle_outline </i> How we work</a>
                                 <a href="javascript:void(0);" itemprop="Talk to us" class="btn_green btn_talk" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
-                            </div>
+                            </div> -->
+
                         </div>
                     </div>
                     <div class="col s12 m6 ">
@@ -191,11 +168,11 @@
                     <div class="product_3d_info_box" itemscope>
                         <h3 itemprop="title"><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h3>
                         <span class="title_border">&nbsp;</span>
-                        <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and<br>wide sourcing network.</p>
+                        <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and <br> wide sourcing network.</p>
                     </div>
 
                     <div class="visit_studio" itemscope>
-                        <a href="{{route('buydesignsproducts')}}" itemprop="Visit Studio" class="btn_green btn_visit_studio" >Visit Studio</a>
+                        <a href="{{route('product.type.mapping',['studio', 'design'])}}" itemprop="Visit Studio" class="btn_green btn_visit_studio" >Visit Studio</a>
                     </div>
                 </div>
               

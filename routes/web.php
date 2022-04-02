@@ -46,6 +46,8 @@ use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\CompanyFactoryTourController;
 use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Admin\MessageController as AdminMessageController;
+
 
 
 
@@ -278,6 +280,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     Route::get('rfq/share/{rfq_id}',[RfqController::class, 'share'])->name('rfq.share');
     Route::get('rfq/create',[RfqController::class, 'create'])->name('rfq.crate');
+
+    Route::post('rfq/store/from/product/details',[RfqController::class, 'storeFromProductDetails'])->name('rfq.store.from.product.details');
+
     //message center
 
     Route::get('/message-center',[MessageController::class,'message_center'])->name('message.center');
@@ -326,6 +331,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
 
 });
+
 
 //rfq show with shareable link
 Route::get('rfq/{link}',[RfqController::class, 'showRfqUsingLink'])->name('show.rfq.using.link');
@@ -507,18 +513,19 @@ Route::group(['prefix'=>'/admin'],function (){
         //active inactive business profile
         Route::get('admin/businessprofile/delete/{businessprofileid}', [ManageBusinessProfileController::class, 'delete'])->name('admin.business.profile.delete');
         Route::get('admin/businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('admin.business.profile.restore');
-
         Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
         //rfq
         Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
+        Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');
+        Route::get('message-center/getchatdata',[AdminMessageController::class,'getchatdata'])->name('admin.message.center.getchatdata');
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
         Route::get('new/user/request/edit/{id}', [NewUserRequestController::class, 'edit'])->name('new.user.request.edit');
         //business profile
         Route::get('business-profile/{type}',[AdminBusinessProfileController::class, 'index'])->name('admin.business.profile.list.type');
         Route::get('business-profile/details/{business_profile_id}',[AdminBusinessProfileController::class, 'businessProfileDetails'])->name('admin.business.profile.details');
-        //products
+        //products 
         Route::get('products',[ProductController::class, 'index'])->name('admin.products.index');
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');
@@ -529,6 +536,7 @@ Route::group(['prefix'=>'/admin'],function (){
 Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
 // product type mapping
 Route::get('/{product_type_mapping}/{child}',[HomeController::class, 'productTypeMapping'])->name('product.type.mapping');
+
 
 
 

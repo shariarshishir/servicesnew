@@ -53,7 +53,11 @@
                         </div>
                         <div class="product_design_wrapper">
                             <div class="product_wrapper">
+                                @if($mapping_type_child == "product_sample")
+                                <h3>Production Sample</h3>
+                                @else
                                 <h3>{{ucwords(str_replace("_", " ", $mapping_type_child))}}</h3>
+                                @endif
                                 @include('product._all_product_data')
                             </div>
                         </div>

@@ -6,6 +6,8 @@ $relatedProducts = relatedProductInformation($product->id);
 $productReviews = singleProductReviewInformation($product->id);
 $reviewsCount = count($productReviews);
 @endphp
+
+@include('product._create_rfq_form_modal')
 <input type="hidden" name="product_sku" value="{{$product->sku}}">
 
 
@@ -26,19 +28,19 @@ $reviewsCount = count($productReviews);
     </div>
     <div class="single-product-details-block-wrapper">
 
-        <div class="row product_details_content_wrap">
+        <div class="product_details_content_wrap">
 
-            <div class="col s12 m12 l9 product_preview_info_wrap single-product-details-wrapper">
+            <div class="product_preview_info_wrap single-product-details-wrapper">
                 <div class="row">
-                    <div class="col s12 m5 l4 product_preview_wrap">
+                    <div class="col s12 m5 product_preview_wrap">
                         @if($product->video)
                             <div class="product-images">
                                 <div class="video_content">
-                                    <center>
+                                    <div class="details_video_box">
                                         <video controls height="245" width="300">
                                             <source src="{{asset('storage/'.$product->video->video)}}" />
                                         </video>
-                                    </center>
+                                    </div>
                                 </div>
                                 <ul class="product-list-images-block">
                                     @if(count($product->images)> 0)
@@ -57,17 +59,15 @@ $reviewsCount = count($productReviews);
                                     <div class="product-large-image-block product_details_imgwrap">
                                         @if(count($product->images)> 0)
                                             @foreach ($product->images as $image)
-                                                <div>
-                                                    <center>
-                                                        <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
-                                                            <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
+                                                <div class="details_gallery_box">
+                                                    <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
+                                                        <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
 
-                                                            <div class="click-to-zoom">
-                                                                <i class="material-icons dp48">zoom_in</i>
-                                                                <!-- Click on image to view large size. -->
-                                                            </div>
-                                                        </a>
-                                                    </center>
+                                                        <div class="click-to-zoom">
+                                                            <i class="material-icons dp48">zoom_in</i>
+                                                            <!-- Click on image to view large size. -->
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         @endif
@@ -100,7 +100,7 @@ $reviewsCount = count($productReviews);
                             </div>
                         @endif
                     </div>
-                    <div class="col s12 m7 l8 product_details_info_wrap">
+                    <div class="col s12 m7 product_details_info_wrap">
                         <div class="row">
                             <div class="col s12 m6 l6">
                                 <div class="seller-store">
@@ -140,10 +140,10 @@ $reviewsCount = count($productReviews);
                             <div class="col s12">
 
                                 @if($product->availability==0 && ($product->product_type==2 || $product->product_type== 3))
-                                    <span class="new badge red" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
+                                    <span class="new badge red sold_out" data-badge-caption="Sold Out" style="height: auto; line-height: normal; font-size: 16px; padding: 5px 10px;"></span>
                                 @endif
                                 @if($product->full_stock== 1)
-                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder" style="display: none;">Full Stock only</span>
+                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock" style="display: none;">Full Stock only</span>
                                 @else
 
                                     <div class="single-product-moq">
@@ -193,6 +193,10 @@ $reviewsCount = count($productReviews);
                                                                 @if($product->product_type==1) <td data-title="Lead Time">{{$list[3]}} </td>@endif
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>Product Code:</td>
+                                                                <td>shop-{{$product->id}}</td>
+                                                            </tr>
                                                         </table>
                                                     </div>
 
@@ -202,7 +206,7 @@ $reviewsCount = count($productReviews);
                                     </div>
 
                                     @if($product->customize == true)
-                                        <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label tooltipped" data-position="top" data-tooltip="Please click on request for modification to customize this product.">Can be Customized</span>
+                                        <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label" style="display: none">Can be Customized</span>
                                     @endif
                                 @endif
 
@@ -239,7 +243,7 @@ $reviewsCount = count($productReviews);
                                                 <input type="number" name="fresh_input" class="fresh_input_value" value="0" min="1" />
                                                 <button type="button" id="trigger_plus" class="trigger_plus btn green"><i class="material-icons dp48">add</i></button>
                                             </div> --}}
-                                            <div class="fresh_order_block_wrapper">
+                                            <div class="fresh_order_block_wrapper" style="display: none;">
                                                 <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#fresh_order_customize_block">Customize Your Order</a>
                                                 @if(auth::check())
                                                     <a class="waves-effect waves-light modal-trigger request_order_modification_trigger" href="#product-modification-modal">Request for Modification</a>
@@ -326,14 +330,14 @@ $reviewsCount = count($productReviews);
                                         <div class="ready_stock_block_wrapper">
                                             <div class="row" style="margin-bottom: 0px;">
                                                 <div class="col m12 ready_stock left-align">
-                                                    <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
+                                                    <span class="btn_grBorder badge badge pill green accent-2 mr-2 ready-to-ship-label ready_to_ship">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block" style="display: none;">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
@@ -606,14 +610,14 @@ $reviewsCount = count($productReviews);
                                         <div class="ready_stock_block_wrapper">
                                             <div class="row" style="margin-bottom: 0px;">
                                                 <div class="col m12">
-                                                    <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label">Ready to Ship</span>
+                                                    <span class="badge badge pill green accent-2 mr-2 ready-to-ship-label btn_grBorder ready_to_ship">Ready to Ship</span>
                                                     @if($product->full_stock==1)
-                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder">Full Stock only</span>
+                                                    <span class="badge badge pill blue accent-2 mr-2 ready-to-ship-label btn_grBorder full_stock">Full Stock only</span>
                                                     @endif
                                                 </div>
                                             </div>
                                             @if($product->availability != 0)
-                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block">Customize Your Order</a>
+                                            <a class="waves-effect waves-light modal-trigger customaize_order_trigger" href="#ready_stock_order_customize_block" style="display: none;">Customize Your Order</a>
                                             @endif
                                             <div id="ready_stock_order_customize_block" class="modal modal-fixed-footer">
                                                 <div class="modal-content">
@@ -777,10 +781,16 @@ $reviewsCount = count($productReviews);
                                     <input type="hidden" name="total_price" value="">
                                     <input type="hidden" name="product_type" value="{{$product->product_type}}">
                                     @if(Auth::check())
-                                    <button id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart" onclick="addToCart('{{$product->sku}}')" disabled="disabled">Add to cart</button>
+                                    <button id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart" onclick="addToCart('{{$product->sku}}')" disabled="disabled" style="display: none;">Add to cart</button>
                                     <button id="ask_for_price" data-id="{{$product->sku}}"class="btn waves-effect waves-light green askForPrice" onclick="askForPrice('{{$product->sku}}')" style="display: none">Ask For Price</button>
                                     @else
-                                    <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_grBorder" disabled="disabled">Add to cart</a>
+                                    <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_grBorder" disabled="disabled" style="display: none;">Add to cart</a>
+                                    @endif
+
+                                    @if(Auth::guard('web')->check())
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#create-rfq-form">Request for Quotation</button>
+                                    @else
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#login-register-modal">Request for Quotation</button>
                                     @endif
                                 </div>
                             </div>
@@ -974,16 +984,8 @@ $reviewsCount = count($productReviews);
 
             </div>
 
-            <div class="col s12 m12 l3">
+            <!-- <div class="col s12 m12 l3">
                 <div class="single-product-store-information center-align">
-                    <div class="right-align">
-                        {{-- <a class="btn_green" href="javascript:void(0);" style="margin-bottom: 30px" >Contact Supplier</a> --}}
-                        @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->name}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','@if(!empty(@$product->images[0]->image)){{ asset('storage/' .$product->images[0]->image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button>
-                        @else
-                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Send Query</button>
-                        @endif
-                    </div>
                     <div class="card card-with-padding">
                         <h6>Company Profile</h6>
                         <div class="company_profile_details">
@@ -1010,7 +1012,7 @@ $reviewsCount = count($productReviews);
                                             @endforeach
                                         </div>
                                         <div class="product_short_details">
-                                            <!--a class="waves-effect waves-light btn modal-trigger" href="#modal3">View</a-->
+                                            <a class="waves-effect waves-light btn modal-trigger" href="#modal3">View</a>
                                             <div class="product-title">
                                                 <a href="{{route('productdetails',$item->sku)}}">{{$item->name}}</a>
                                             </div>
@@ -1045,11 +1047,13 @@ $reviewsCount = count($productReviews);
                                 </div>
                             </div>
                         </div>
-                        @endif                        
+                        @endif
 
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+
         </div>
     </div>
 
@@ -1099,7 +1103,7 @@ $reviewsCount = count($productReviews);
                                     {{-- <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" /> --}}
                                     @break
                                 @endforeach
-                                
+
                             </div>
                             <div class="product_short_details">
                                 <div class="product-title">

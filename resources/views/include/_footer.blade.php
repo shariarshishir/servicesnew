@@ -1648,5 +1648,13 @@ $(document).on('keyup', '.negitive-or-text-not-allowed', function(){
     }
 });
 
+
+
+$(document).ready(function() {
+        $(".header_search_bar").click(function () {
+        $(".banner_search").toggle();
+    });
+});
+
 </script>
 

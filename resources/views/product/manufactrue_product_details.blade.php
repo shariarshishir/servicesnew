@@ -24,19 +24,18 @@
 
     <section class="ic-single-product-details manufactrue_product_details_wrap">
         <div class="manufactrue_product_details_inner">
-            <div class="row ic-pg-container">
-
-                <div class="col s12 m12 l9 product_preview_info_wrap">
+            <div class="ic-pg-container">
+                <div class="s12 product_preview_info_wrap">
                     <div class="row">
-                        <div class="col s12 m5 l4 product_preview_wrap">
+                        <div class="col s12 m5 product_preview_wrap">
                             @if(isset($product->product_video->video))
                                 <div class="simpleLens-gallery-container" id="ic-gallery">
                                     <div class="video_content">
-                                        <center>
+                                        <div class="details_video_box">
                                             <video controls height="245" width="300">
                                                 <source src="{{asset('storage/'.$product->product_video->video)}}" />
                                             </video>
-                                        </center>
+                                        </div>
                                     </div>
                                     <div class="simpleLens-thumbnails-container">
                                         @foreach($product->product_images as $product_image)
@@ -62,9 +61,11 @@
                                     @if(isset($product->product_images[0]['product_image']) && !is_null($product->product_images[0]['product_image']))
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
-                                                <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
-                                                    <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
-                                                </a>
+                                                <div class="details_gallery_box">
+                                                    <a class="simpleLens-lens-image" data-lens-image="{{ asset('storage/'. $product->product_images[0]['product_image']) }}">
+                                                        <img id="largeImage" src="{{ asset('storage/'. $product->product_images[0]['product_image']) }}" class="simpleLens-big-image" width="380px" height="320px">
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
@@ -90,7 +91,7 @@
                         </div>
 
 
-                        <div class="col s12 m7 l8 product_details_info_wrap">
+                        <div class="col s12 m7 product_details_info_wrap">
 
                             <div class="row">
                                 <div class="col s12 m6 l6">
@@ -105,7 +106,7 @@
                             </div>
 
                             <div class="ic-pg-container">
-                                <div class="col-md-5 col-sm-12 ic-product-infobox">
+                                <div class="col-md-5 col-sm-12 ic-product-infobox product_details_wrapper">
                                     <div class="ic-product-details">
                                         {{-- <form id="productOrderForm" action="{{ route('orders.placeing', $product->id) }}" method="POST" style="padding:10px 15px"> --}}
                                             <h2 class="ic-product-title">{{ $product->title }}</h2>
@@ -204,6 +205,13 @@
                                             </form>
                                         </div>
                                     </div>
+
+                                    @if(Auth::guard('web')->check())
+                                        {{-- <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button> --}}
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#create-rfq-form">Request for Quotation</button>
+                                    @else
+                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#login-register-modal">Request for Quotation</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -338,7 +346,7 @@
 
                 </div>
 
-                <div class="col s12 m12 l3 product_preview_right center-align">
+                <!-- <div class="col s12 m12 l3 product_preview_right center-align">
                     <div id="place_order_buttons" class="ic-place-order right-align">
                         {{-- <a href="{{ route('wishlist.store',[$product->id,'product']) }}" class="ic-btn" style="margin-right:10px"><i class="fa fa-heart-o"></i></a> --}}
 
@@ -354,11 +362,6 @@
                             {{-- <a href="{{ action('ProductController@contactSupplier', $product->id) }}" class="ic-btn">Place order</a> --}}
 
 
-                        @endif
-                        @if(Auth::guard('web')->check())
-                            <button type="button" class="ic-btn btn_green" onClick="contactSupplierFromProduct({{ $product->businessProfile->user->id}}); updateUserLastActivity('{{Auth::id()}}', '{{$product->businessProfile->user->id}}'); sendmessage('{{$product->id}}','{{$product->title}}','{{preg_replace('/[^A-Za-z0-9\-]/','',$product->category['name'])}}','{{$product->moq}}','{{$product->qty_unit}}','{{$product->price_per_unit}}','{{$product->price_unit}}','@if(!empty(@$product->product_images[0]->product_image)){{ asset('storage/' .$product->product_images[0]->product_image) }} @else{{ asset('images/supplier.png') }} @endif','{{$product->businessProfile->user->id}}')">Send Query</button>
-                        @else
-                            <button type="button" class="ic-btn btn_green modal-trigger" href="#login-register-modal">Send Query</button>
                         @endif
                         <br/>
 
@@ -428,7 +431,7 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
 
@@ -564,6 +567,8 @@
             </div>
         </div>
     </section> -->
+
+    @include('product._create_rfq_form_modal')
 @endsection
 
 
@@ -660,6 +665,7 @@ var serverURL = "{{ env('CHAT_URL'), 'localhost' }}:3000";
         }, 1000);
         }
         @endif
+
     </script>
 
 @endpush

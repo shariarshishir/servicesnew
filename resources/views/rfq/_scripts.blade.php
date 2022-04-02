@@ -13,6 +13,7 @@
         for (let i = 0; i < $('input[type="file"]').length; i++) {
             formData.append("files", $('input[type="file"]')[i].files[0]);
         }
+        formData.append("rfq_from", 'service');
         
         
         var other_data = $('.createRfqForm').serializeArray();

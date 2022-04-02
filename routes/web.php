@@ -257,6 +257,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
         Route::get('order-type-filter', [WholesalerOrderController::class, 'orderTypeFilter'])->name('wholesaler.order.type.filter');
         //profile info
         Route::get('profile/{alias}/info',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
+        //remove overlay image
+        Route::get('remove/overlay/image/{id}',[WholesalerProductController::class,'removeOverlayImage'])->name('remove.wholesaler.overlay.image');
 
     });
     //business profile logo banner
@@ -391,6 +393,9 @@ Route::group(['prefix'=>'/manufacture'],function (){
     Route::post('product/update/{product_id}',[ManufactureProductController::class, 'update'])->name('manufacture.product.update');
     Route::get('product/delete/{product_id}/{business_profile_id}',[ManufactureProductController::class, 'delete'])->name('manufacture.product.delete');
     Route::get('/product/publish-unpublish/{pid}/{bid}',[ManufactureProductController::class, 'publishUnpublish'])->name('manufacture.product.publish.unpublish');
+    Route::get('remove/overlay/image/{id}',[ManufactureProductController::class,'removeOverlayImage'])->name('remove.manufacture.overlay.image');
+    Route::get('remove/single/image/{id}',[ManufactureProductController::class,'removeSingleImage'])->name('remove.manufacture.single.image');
+
 
 });
 

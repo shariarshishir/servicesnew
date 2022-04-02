@@ -72,8 +72,11 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    
+
                                 </div>
+                            </div>
+                            <div id="pageInfo" class="right">
+
                             </div>
 
                             <div class="card-alert card cyan card-with-padding not-exists-seller-product-list">

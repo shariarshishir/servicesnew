@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Http;
 class RfqController extends Controller
 {
     public function index(Request $request){
-        $response = Http::get('192.168.68.148:8888/api/quotation/filter/null/page/1/limit/10');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqs = $data['data'];
         return view('admin.rfq.index',compact('rfqs'));
     }
 
     public function show($id){
-        $response = Http::get('192.168.68.148:8888/api/quotation/'.$id);
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
         $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();

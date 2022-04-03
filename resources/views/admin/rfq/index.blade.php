@@ -29,14 +29,11 @@
                             <table class="table table-bordered orders-table data-table">
                                 <thead class="cf">
                                     <tr>
-                                        <th>Sl No.</th>
-                                        <th>Title</th>
+                                        <th>Sl</th>
+                                        <th>Date</th>
+                                        <th>Buyer Name</th>
                                         <th>Category</th>
-                                        <th>Quantity</th>
-                                        <th>Delivery Time</th>
-                                        <th>User Name</th>
-                                        <th>Created_at</th>
-                                        <th>Status</th>
+                                        <th>Target price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -44,14 +41,14 @@
                                     @foreach($rfqs as $key=>$rfq)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>{{$rfq['title']}}</td>
-                                        <td>{{$rfq['category'][0]['name']}}</td>
-                                        <td>{{$rfq['quantity']}}</td>
-                                        <td>{{$rfq['delivery_time']}}</td>
-                                        <td>{{$rfq['user']['user_name']}}</td>
                                         <td>{{$rfq['created_at']}}</td>
-                                        <td>{{$rfq['status']}}</td>
-                                        <td><a href="{{route('admin.rfq.show', $rfq['id'])}}">Details</a></td>
+                                        <td>{{$rfq['user']['user_name']}}</td>
+                                        <td>{{$rfq['category'][0]['name']}}</td>
+                                        <td>$ {{$rfq['unit_price']}}</td>
+                                        <td>
+                                            <a href="{{route('admin.rfq.show', $rfq['id'])}}" class="show-rfq-details-trigger"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0);" class="remove-rfq-trigger"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

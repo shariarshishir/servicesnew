@@ -555,21 +555,21 @@
                 }
                 let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}",'rfq_id': "{{$rfq['id']}}",'factory':false, 'product': null};
                 socket.emit('new message', message);
-                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
-                var msgHtml = '<div class="chat chat-right">';
-                    msgHtml += '<div class="chat-avatar">';
-                    msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
-                    msgHtml += '</a>';
-                    msgHtml += '</div>';
-                    msgHtml += '<div class="chat-body left-align">';
-                    msgHtml += '<div class="chat-text">';
-                    msgHtml += '<p>'+msg+'</p>';
-                    msgHtml += '</div>';
-                    msgHtml += '</div>';
-                    msgHtml += '</div>';
+                // var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                // var msgHtml = '<div class="chat chat-right">';
+                //     msgHtml += '<div class="chat-avatar">';
+                //     msgHtml += '<a class="avatar">';
+                //     msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                //     msgHtml += '</a>';
+                //     msgHtml += '</div>';
+                //     msgHtml += '<div class="chat-body left-align">';
+                //     msgHtml += '<div class="chat-text">';
+                //     msgHtml += '<p>'+msg+'</p>';
+                //     msgHtml += '</div>';
+                //     msgHtml += '</div>';
+                //     msgHtml += '</div>';
                     $('#messagebox').val('');
-                    $('.chats-box').append(msgHtml);
+                //     $('.chats-box').append(msgHtml);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 

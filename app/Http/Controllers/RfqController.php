@@ -27,37 +27,18 @@ class RfqController extends Controller
 {
     public function index()
     {
-        $rfqList=Rfq::withCount('bids')->with('images','user','businessProfile')->where('status', 'approved')->latest()->get();
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
+        $data = $response->json();
+        $rfqLists = $data['data'];
 
-        foreach($rfqList as $list){
-            $bid_user_id=[];
-            if($list->bids()->exists()){
-                foreach($list->bids as $user){
-                    array_push($bid_user_id,$user->supplier_id);
-                }
-                $list['bid_user_id'] = array_unique($bid_user_id);
+        
+        // foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+        //     if($notification->type=="App\Notifications\NewRfqNotification"){
+        //         array_push($rfqIds,$notification->data['rfq_data']['id']);
+        //     }
+        // }
 
-            }
-
-        }
-
-        $page = Paginator::resolveCurrentPage() ?: 1;
-        $perPage = 6;
-        $rfqLists = new \Illuminate\Pagination\LengthAwarePaginator(
-            $rfqList->forPage($page, $perPage),
-            $rfqList->count(),
-            $perPage,
-            $page,
-            ['path' => Paginator::resolveCurrentPath()],
-        );
-        $rfqIds=[];
-        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
-            if($notification->type=="App\Notifications\NewRfqNotification"){
-                array_push($rfqIds,$notification->data['rfq_data']['id']);
-            }
-        }
-
-        return view('rfq.index',compact('rfqLists','rfqIds'));
+        return view('rfq.index',compact('rfqLists'));
     }
 
 

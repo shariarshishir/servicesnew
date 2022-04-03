@@ -29,6 +29,7 @@
             data: formData,
             enctype: 'multipart/form-data',
             url: url,
+            headers: { 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUxNTU2NzMxLCJqdGkiOiI4NzgyMTgyOTE3Yjc0YmVkYWM3ZTYwMzRjOTJlY2MyZiIsInVzZXJfaWQiOjEsImNvbXBhbnlfaWQiOjEsImlzX2FkbWluIjp0cnVlLCJ1c2VyX25hbWUiOiJUeWxlciBEZWxhY3J1eiIsInVzZXJfdHlwZSI6Im1lcmNoYW5kaXNlciIsImlkIjoxLCJuYW1lIjoiVHlsZXIgRGVsYWNydXoiLCJlbWFpbCI6ImthZGVyQGdtYWlsLmNvbSIsInBob25lIjoiKzEgKDM1NSkgOTk5LTQyMjUifQ.GfN-71tTqx9rlrD77P-C5zbLBubVaTCNjkb6newyiLOiSunPWjMOC-qQs3e_iTqFXpMD8d7XEetG1qmjjCpU3USMJkCfmDsLNe-HIbDFZyU_tsoJHNL0iLdfoP5J7lmuHOLoF6w-d7VcAblC5H5iwmJQH9Z2sYSSg2iZP8TNTCbgQGRNMWFTaumxS4UaPKsKUdiBgig2Ld3e4uH_-shVy5VperH9pqCbl40gKaSGd5UEsmvIdZLH5d_9FbE0G6-Fr40mmcI688JgIIlFqJNP25Xq23nNjpSavHCZljG3DyhpVwOF0gXhOD16tES6UlhSn4mjd_5DfQurmFoBoE39YccyaPXNMKnAOR76eSK9Ad7Tyhl30bfM6k-5ake8zb0fyryVM6VHXSyhV65njulqm4zXhleNq1zB6ZImTdLjNrYSg-s9adt_9lhp7K3a1sMvQ1T_I0efAQdQ6-dXBiQqgcIhkAehI5ipTtYPPw-JLlOAlszIYtQ4wPnbce6vGP9re6q8viK9rTK1B_AUh-TIomYNcN3dlUJWZxZ4myh3TqWGsuDBxVYod4-ERLDVyIIJ9nxL9wk9FiwI5GTTGzlAg4OeG8_VkE58rjudX3lZHBFvVzmwsEDUG9-5H58Es8XxbRPagmUkUakzLjm4Bx7C4zFDsyxQtFk-6r6gscWZavM' },
             beforeSend: function() {
             $('.loading-message').html("Please Wait.");
             $('#loadingProgressContainer').show();

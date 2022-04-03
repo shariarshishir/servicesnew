@@ -11,22 +11,53 @@ use App\Events\NewRfqHasAddedEvent;
 use App\Http\Controllers\Controller;
 use App\Userchat;
 use App\Models\Manufacture\ProductCategory;
-use Illuminate\Support\Facades\Http;
 
 class RfqController extends Controller
 {
     public function index(Request $request){
-            $response = Http::get('192.168.68.148:8888/api/quotation/filter/null/page/1/limit/10');
-            $data = $response->json();
-            $rfqs = $data['data'];
-            return view('admin.rfq.index',compact('rfqs'));
+        
+        if ($request->ajax()) {
+            $data = Rfq::with('category','user')->select('*');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->editColumn('title', function($row) {
+                       return ucwords($row->title);
+                    })
+                    ->editColumn('category_id', function($row){
+                        return $row->category->name;
+                    })
+                    ->editColumn('delivery_time', function ($row) {
+                        return \Carbon\Carbon::parse($row->delivery_time)->isoFormat('MMMM Do YYYY');
+                    })
+                    ->editColumn('created_by', function($row){
+                        return $row->user->name;
+                    })
+                    ->editColumn('status', function($row){
+                        $ucfirst=ucfirst($row->status);
+                        if($row->status== 'pending'){
+                            $status= '<span class="text-danger">'.$ucfirst.'</span>';
+                        }else{
+                            $status= '<span class="text-primary">'.$ucfirst.'</span>';
+                        }
+                       return $status;
+                    })
+                    ->editColumn('created_at', function ($row) {
+                        return \Carbon\Carbon::parse($row->created_at)->isoFormat('MMMM Do YYYY');
+                    })
+                    ->addColumn('details', function($row){
+                        $route= route('admin.rfq.show', $row->id);
+                        $action='<a href="'.$route.'">Details</a>';
+                        return $action;
+                    })
+                    ->rawColumns(['details','status'])
+                    ->make(true);
+        }
+        return view('admin.rfq.index');
     }
 
     public function show($id){
-        $response = Http::get('192.168.68.148:8888/api/quotation/'.$id);
-        $data = $response->json();
-        $rfq = $data['data']['data'];
-        $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+        $rfq=Rfq::with('user','bids')->findOrFail($id);
+        $businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq->category_id)->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
@@ -34,11 +65,12 @@ class RfqController extends Controller
         else{
             $user = "5552";
         }
+        $to_id = (string)$rfq->user->id;
         $from_user = User::find($user);
-        $to_user = User::where('email',$rfq['user']['email'])->first();
+        $to_user = User::find($to_id);
         $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
         $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
-        $chats = Userchat::where('participates', $user)->where('participates', $rfq['user']['user_id']);
+        $chats = Userchat::where('participates', $user)->where('participates', $to_id);
         if($chats->exists()){
             $chat = $chats->first();
             $chatdataAllData = $chat->chatdata;

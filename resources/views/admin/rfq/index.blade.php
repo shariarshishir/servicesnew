@@ -40,6 +40,21 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tbody class="cf">
+                                    @foreach($rfqs as $key=>$rfq)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$rfq['title']}}</td>
+                                        <td>{{$rfq['category'][0]['name']}}</td>
+                                        <td>{{$rfq['quantity']}}</td>
+                                        <td>{{$rfq['delivery_time']}}</td>
+                                        <td>{{$rfq['user']['user_name']}}</td>
+                                        <td>{{$rfq['created_at']}}</td>
+                                        <td>{{$rfq['status']}}</td>
+                                        <td><a href="{{route('admin.rfq.show', $rfq['id'])}}">Details</a></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -53,25 +68,25 @@
 @endsection
 @push('js')
   <script>
-       $(function () {
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            order: [['6', 'desc']],
-            ajax: "{{ route('admin.rfq.index') }}",
-            columns: [
-                {data:'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                {data: 'title', name: 'title'},
-                {data: 'category_id', name: 'category_id'},
-                {data: 'quantity', name: 'quantity'},
-                {data: 'delivery_time', name: 'delivery_time'},
-                {data: 'created_by', name: 'created_by'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'status', name: 'status'},
-                {data: 'details', name: 'details',  orderable: false, searchable: false},
-            ]
-        });
-    });
+    //    $(function () {
+    //     var table = $('.data-table').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         order: [['6', 'desc']],
+    //         ajax: "{{ route('admin.rfq.index') }}",
+    //         columns: [
+    //             {data:'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    //             {data: 'title', name: 'title'},
+    //             {data: 'category_id', name: 'category_id'},
+    //             {data: 'quantity', name: 'quantity'},
+    //             {data: 'delivery_time', name: 'delivery_time'},
+    //             {data: 'created_by', name: 'created_by'},
+    //             {data: 'created_at', name: 'created_at'},
+    //             {data: 'status', name: 'status'},
+    //             {data: 'details', name: 'details',  orderable: false, searchable: false},
+    //         ]
+    //     });
+    // });
   </script>
 @endpush
 

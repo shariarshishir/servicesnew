@@ -37,31 +37,31 @@
                                 <div class="admin_rfq_left">
                                     <legend>RFQ Details</legend>
                                     <div class="rfq_buyer_info">
-                                        <p><b>Name:</b> {{$rfq->user->name}}</p>
-                                        <p><b>Email: </b> {{$rfq->user->email}}</p>
-                                        <p><b>Phone:</b> {{$rfq->user->phone}}</p>
+                                        <p><b>Name:</b> {{$rfq['user']['user_name']}}</p>
+                                        <p><b>Email: </b> {{$rfq['user']['email']}}</p>
+                                        <p><b>Phone:</b> {{$rfq['user']['phone']}}</p>
                                     </div>
                                     <div class="rfq_info_details">
-                                        <p><b>Title :</b> {{$rfq->title}}</p>
-                                        <p><b>Category :</b> {{$rfq->category->name}}</p>
-                                        <p><b>Quantity :</b> {{$rfq->quantity}}</p>
-                                        <p><b>Unit :</b> {{$rfq->unit}}</p>
-                                        <p><b>Unit Price :</b> {{$rfq->unit_price}}</p>
-                                        <p><b>Destination :</b> {{$rfq->destination}}</p>
-                                        <p><b>Payment Method :</b> {{$rfq->payment_method}}</p>
-                                        <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                        <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                        <p><b>Short Description :</b> {{$rfq->short_description}}</p>
-                                        <p><b>Full Specification :</b> {{$rfq->full_specification}}</p>                                                                    
+                                        <p><b>Title :</b> {{$rfq['title']}}</p>
+                                        <p><b>Category :</b> {{$rfq['category'][0]['name']}}</p>
+                                        <p><b>Quantity :</b> {{$rfq['quantity']}}</p>
+                                        <p><b>Unit :</b> {{$rfq['unit']}}</p>
+                                        <p><b>Unit Price :</b> {{$rfq['unit_price']}}</p>
+                                        <p><b>Destination :</b> {{$rfq['destination']}}</p>
+                                        <p><b>Payment Method :</b> {{$rfq['payment_method']}}</p>
+                                        <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq['created_at'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
+                                        <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
+                                        <p><b>Short Description :</b> {{$rfq['short_description']}}</p>
+                                        <p><b>Full Specification :</b> {{$rfq['full_specification']}}</p>                                                                    
                                     </div>
-                                    <a href="{{route('admin.rfq.status', $rfq->id)}}" class="{{$rfq->status== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+                                    <a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status'] == 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status'] == 'pending' ? 'Published' : 'Unpublished'}}</a>
                                     <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-info" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                    
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="buyer-tab" data-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">{{$rfq->user->name}}</a>
+                                        <a class="nav-link active" id="buyer-tab" data-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">{{$rfq['user']['user_name']}}</a>
                                     </li>
                                     <li class="nav-item" style="display: none;">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BP 1</a>
@@ -162,7 +162,7 @@
                     <div class="modal-dialog modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="businessProfileListByCategoryModalLabel">Business Profiles Of Category {{$rfq->category->name}}</h5>
+                                <h5 class="modal-title" id="businessProfileListByCategoryModalLabel">Business Profiles Of Category {{$rfq['category'][0]['name']}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -175,7 +175,7 @@
                                         <select class="form-select form-control" name="factory_type" id="factory_type">
                                             <option value="">Select factory type</option>
                                             @foreach($productCategories as $productCategory)
-                                                <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq->category->id ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
+                                                <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -239,7 +239,7 @@
         $(document).ready(function() {
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];
-            var serverURL = "{{ env('CHAT_URL') }}?chatID={{$rfq->id}}";
+            var serverURL = "{{ env('CHAT_URL') }}?chatID={{$rfq['id']}}";
             var socket = io.connect(serverURL);
             socket.on('connect', function(data) {
                 console.log("Socket Connect successfully.");
@@ -357,7 +357,7 @@
                     } else{
                         var fromId = '5552';
                     }
-                    let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}", 'rfq_id': "{{$rfq->id}}",'factory':true,'product': null};
+                    let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                     socket.emit('new message', message);
                     var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
                     var msgHtml = '<div class="chat chat-right">';
@@ -376,7 +376,7 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     $('#businessProfileListByCategoryModal').modal('hide');
                     $('#send_suggested_profiles_to_buyer')[0].reset();
-                    $("#factory_type option[value={{$rfq->category->id}}]").attr('selected', 'selected');
+                    $("#factory_type option[value={{$rfq['category'][0]['id']}}]").attr('selected', 'selected');
                     $("#factory_type option[value=0]").attr('selected', 'selected');
                     var businessProfiles = @json($businessProfiles);
                     if( businessProfiles.length >0 ){
@@ -416,7 +416,7 @@
 
             $("#modal_close_button").click(function(){
                 $('#send_suggested_profiles_to_buyer')[0].reset();
-                $("#factory_type option[value={{$rfq->category->id}}]").attr('selected', 'selected');
+                $("#factory_type option[value={{$rfq['category'][0]['id']}}]").attr('selected', 'selected');
                 $("#factory_type option[value=0]").attr('selected', 'selected');
                 var businessProfiles = @json($businessProfiles);
                 if( businessProfiles.length >0 ){
@@ -458,7 +458,7 @@
                 } else{
                     var fromId = '5552';
                 }
-                let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq->user->id}}",'rfq_id': "{{$rfq->id}}",'factory':false, 'product': null};
+                let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}",'rfq_id': "{{$rfq['id']}}",'factory':false, 'product': null};
                 socket.emit('new message', message);
                 var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
                 var msgHtml = '<div class="chat chat-right">';
@@ -480,24 +480,7 @@
 
             
 
-            socket.on('new message', function(data) {
-                console.log(data);
-                var from_user_image= "{{asset('storage')}}"+'/'+"{{$rfq->user->image}}";
-                var msgHtml = '<div class="chat chat-left">';
-                    msgHtml += '<div class="chat-avatar">';
-                    msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
-                    msgHtml += '</a>';
-                    msgHtml += '</div>';
-                    msgHtml += '<div class="chat-body left-align">';
-                    msgHtml += '<div class="chat-text">';
-                    msgHtml += '<p>'+data.message+'</p>';
-                    msgHtml += '</div>';
-                    msgHtml += '</div>';
-                    msgHtml += '</div>';
-                    $('.chats-box').append(msgHtml);
-                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-            });
+            
         }); 
     </script>
 @endpush

@@ -75,7 +75,7 @@
 
                                 </div>
                             </div>
-                            <div id="pageInfo" class="right">
+                            <div id="pageInfo" class="right pageInfo">
 
                             </div>
 

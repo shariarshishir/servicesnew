@@ -166,7 +166,7 @@
                 </div>
                 <div class="col s12 m6 product_video_infobox">
                     <div class="product_3d_info_box" itemscope>
-                        <h3 itemprop="title"><span>Develop your product<br />with <span style="font-weight: 600;">MB Studio</span></span></h3>
+                        <h3 itemprop="title"><span>Develop your product<br />with <span class="bold_text" >MB Studio</span></span></h3>
                         <span class="title_border">&nbsp;</span>
                         <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and <br> wide sourcing network.</p>
                     </div>
@@ -185,11 +185,11 @@
             <div class="row">
               <div class="col s12 m6">
                 <div class="sourcing_info_box" itemscope>
-                    <h3 itemprop="title"><span> Bring the <span style="font-weight: 600;">Sourcing</span> <br/>
-                    to your <span style="font-weight: 600;">Pocket</span> </h1>
+                    <h3 itemprop="title"><span> Bring the <span class="bold_text" >Sourcing</span> <br/>
+                    to your <span class="bold_text">Pocket</span> </h1>
                     <span class="title_border">&nbsp;</span>
                     <p itemprop="text">Everything you need for your Apparel Business.</p>
-                    <p itemprop="text"><span style="font-weight: 600;" itemprop="text">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
+                    <p itemprop="text"><span class="bold_text" itemprop="text">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
                 </div>
                 <div class="sourcing_img_box mobile_sourcing_img_box" style="display: none;" itemscope>
                     <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/sourcing-img.jpg')}}" />
@@ -221,11 +221,11 @@
                     </div>
                     <div class="col s12 m6 landing_tools_right">
                         <div class="landing_tools_infobox" itemscope>
-                            <h3 itemprop="title">Increase your <span style="font-weight: 600;">Efficiency</span> <br/> with <span style="font-weight: 600;">Smart BI Tools</span></h3>
+                            <h3 itemprop="title">Increase your <span class="bold_text" >Efficiency</span> <br/> with <span class="bold_text" >Smart BI Tools</span></h3>
                             <span class="title_border">&nbsp;</span>
                             <p itemprop="text">Subscribe to the Smart Order Management Dashboard and a suit of BI tools offered by Merchant Bay to make your operation data driven and transparent.</p>
                             <div class="tools_button_box" itemscope>
-                                <a href="https://tools.merchantbay.com/" class="btn_border_black" itemprop="Explore MB Smart Tools" target="_blank" >Explore MB Smart Tools</a>
+                                <a href="https://tools.merchantbay.com/" class="btn_green" itemprop="Explore MB Smart Tools" target="_blank" >Explore MB Smart Tools</a>
                                 <!-- <button class="btn_green request_demo">Request a Demo</button> -->
                             </div>
                         </div>

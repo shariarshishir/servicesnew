@@ -253,7 +253,7 @@
 								@endforeach
 							@else
 							<li class="no-notifications" itemprop="itemListElement">
-								No notifications
+								No Messages
 							</li>
 							@endif
 						</ul>

@@ -33,31 +33,30 @@
                     <div class="card">
                         <div class="rfq_label_block">
                             <h4>RFQ Id: ABCD-001</h4>
-                            <a href="{{route('admin.rfq.status', $rfq->id)}}" class="{{$rfq->status== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+                            <a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status']== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a>
                             <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-default" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                                                
                         </div>
                         <div class="rfq_user_block">
                             <div class="rfq_user_img">
-                                <img src="{{asset('storage/' .$rfq->user->image)}}" alt="" />
+                                Image
                             </div>
                             <div class="rfq_user_info">
-                                <h4>{{$rfq->user->name}}</h4>
-                                <p>{{$rfq->user->email}}</p>
-                                <p>{{$rfq->user->phone}}</p>
+                                <h4>{{$rfq['user']['user_name']}}</h4>
+                                <p>{{$rfq['user']['email']}}</p>
+                                <p>{{$rfq['user']['phone']}}</p>
                             </div>
                         </div>
                         <div class="rfq_details_block">
-                            <h5>{{$rfq->title}}</h5>
-                            <p>Query for {{$rfq->category->name}}</p>
-                            <p>Details: {{$rfq->full_specification}}</p>
-                            <p>Qty: {{$rfq->quantity}} {{$rfq->unit}}, Target Price: $ {{$rfq->unit_price}}, Deliver To: {{$rfq->destination}}, Within: {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq->payment_method}}</p>
+                            <h5>{{$rfq['title']}}</h5>
+                            <p>Query for {{$rfq['category'][0]['name']}}</p>
+                            <p>Details: {{$rfq['full_specification']}}</p>
+                            <p>Qty: {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
                         </div>             
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="message_header">
-                        <img src="{{asset('storage/' .$rfq->user->image)}}" alt="" />
-                        {{$rfq->user->name}}
+                        {{$rfq['user']['user_name']}}
                     </div>
                     <div class="chatting_app_wrapper">
                         <div class="chat-application">
@@ -173,7 +172,6 @@
                                     @foreach($businessProfiles as $key=>$businessProfile)
                                     <div class="business_profile_name">
                                         <div class="form-check">
-                                            <!--input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" -->
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 <p>{{$businessProfile['business_name']}}</p>
                                                 
@@ -290,7 +288,6 @@
                                 response.businessProfiles.forEach((item, index)=>{
                                     var html ='<div class="business_profile_name">';
                                     html+='<div class="form-check">';
-                                    //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                                     html+='<label class="form-check-label" for="flexCheckDefault">';
                                     html+='<p>'+item.business_name+'</p>';
                                     if( item.business_type == 1 ){
@@ -302,12 +299,11 @@
                                     html+='<p>Total Order: 100</p>';
                                     html+='</label>';
                                     html+='</div>';
-                                    //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
                                     html+='<div class="propose_price_block">';
                                     html+='<div class="print_block">';
                                     html+='<label>Offer Price</label>';
                                     html+='<div class="propose_price_input_block">';
-                                    html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
                                     html+='</div>';
                                     html+='</div>';
                                     html+='<div class="separator_block"> / </div>';
@@ -357,7 +353,6 @@
                                 response.businessProfiles.forEach((item, index)=>{
                                     var html ='<div class="business_profile_name">';
                                     html+='<div class="form-check">';
-                                    //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                                     html+='<label class="form-check-label" for="flexCheckDefault">';
                                     html+='<p>'+item.business_name+'</p>';
                                     if( item.business_type == 1 ){
@@ -369,12 +364,11 @@
                                     html+='<p>Total Order: 100</p>';
                                     html+='</label>';
                                     html+='</div>';
-                                    //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
                                     html+='<div class="propose_price_block">';
                                     html+='<div class="print_block">';
                                     html+='<label>Offer Price</label>';
                                     html+='<div class="propose_price_input_block">';
-                                    html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
                                     html+='</div>';
                                     html+='</div>';
                                     html+='<div class="separator_block"> / </div>';
@@ -445,7 +439,6 @@
                         businessProfiles.forEach((item, index)=>{
                             var html ='<div class="business_profile_name">';
                             html+='<div class="form-check">';
-                            //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                             html+='<label class="form-check-label" for="flexCheckDefault">';
                             html+='<p>'+item.business_name+'</p>';
                             if( item.business_type == 1 ){
@@ -457,12 +450,11 @@
                             html+='<p>Total Order: 100</p>';
                             html+='</label>';
                             html+='</div>';
-                            //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
                             html+='<div class="propose_price_block">';
                             html+='<div class="print_block">';
                             html+='<label>Offer Price</label>';
                             html+='<div class="propose_price_input_block">';
-                            html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                            html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
                             html+='</div>';
                             html+='</div>';
                             html+='<div class="separator_block"> / </div>';
@@ -507,7 +499,6 @@
                     businessProfiles.forEach((item, index)=>{
                         var html ='<div class="business_profile_name">';
                         html+='<div class="form-check">';
-                        //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                         html+='<label class="form-check-label" for="flexCheckDefault">';
                         html+='<p>'+item.business_name+'</p>';
                         if( item.business_type == 1 ){
@@ -519,12 +510,11 @@
                         html+='<p>Total Order: 100</p>';
                         html+='</label>';
                         html+='</div>';
-                        //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
                         html+='<div class="propose_price_block">';
                         html+='<div class="print_block">';
                         html+='<label>Offer Price</label>';
                         html+='<div class="propose_price_input_block">';
-                        html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                        html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
                         html+='</div>';
                         html+='</div>';
                         html+='<div class="separator_block"> / </div>';

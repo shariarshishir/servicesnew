@@ -654,10 +654,17 @@ label:not(.form-check-label):not(.custom-file-label) {
 .business_profile_name:nth-child(even) {
     background: #f1f1f1;
 }
-.business_profile_name .propose_price {
-    width: 120px;
+.business_profile_name .propose_price_block {
     margin-left: auto;
+    display: flex;
+}
+.business_profile_name .propose_price {
+    width: 60px;
+    /* margin-left: auto; */
     height: 40px;
+}
+.business_profile_name .propose_price_block .separator_block {
+    padding: 40px 10px 0px;
 }
 .rfq_business_profile_list {
     height: 315px;
@@ -702,6 +709,8 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: block !important;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .message {
+    width: 75%;
+    margin-right: 0px;
     border: none;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-body .chat-text p a:link,

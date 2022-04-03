@@ -25,138 +25,115 @@
         </div><!-- /.container-fluid -->
     </section>
 
-
     <!-- Main content -->
     <section class="content admin_rfq_wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <div class="card">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <div class="admin_rfq_left">
-                                    <legend>RFQ Details</legend>
-                                    <div class="rfq_buyer_info">
-                                        <p><b>Name:</b> {{$rfq['user']['user_name']}}</p>
-                                        <p><b>Email: </b> {{$rfq['user']['email']}}</p>
-                                        <p><b>Phone:</b> {{$rfq['user']['phone']}}</p>
-                                    </div>
-                                    <div class="rfq_info_details">
-                                        <p><b>Title :</b> {{$rfq['title']}}</p>
-                                        <p><b>Category :</b> {{$rfq['category'][0]['name']}}</p>
-                                        <p><b>Quantity :</b> {{$rfq['quantity']}}</p>
-                                        <p><b>Unit :</b> {{$rfq['unit']}}</p>
-                                        <p><b>Unit Price :</b> {{$rfq['unit_price']}}</p>
-                                        <p><b>Destination :</b> {{$rfq['destination']}}</p>
-                                        <p><b>Payment Method :</b> {{$rfq['payment_method']}}</p>
-                                        <p><b>Created At :</b> {{\Carbon\Carbon::parse($rfq['created_at'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                        <p><b>Delivery Time :</b> {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</p>
-                                        <p><b>Short Description :</b> {{$rfq['short_description']}}</p>
-                                        <p><b>Full Specification :</b> {{$rfq['full_specification']}}</p>                                                                    
-                                    </div>
-                                    <a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status'] == 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status'] == 'pending' ? 'Published' : 'Unpublished'}}</a>
-                                    <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-info" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                    
-                                </div>
+                        <div class="rfq_label_block">
+                            <h4>RFQ Id: ABCD-001</h4>
+                            <a href="{{route('admin.rfq.status', $rfq->id)}}" class="{{$rfq->status== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq->status== 'pending' ? 'Published' : 'Unpublished'}}</a>
+                            <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-default" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                                                
+                        </div>
+                        <div class="rfq_user_block">
+                            <div class="rfq_user_img">
+                                <img src="{{asset('storage/' .$rfq->user->image)}}" alt="" />
                             </div>
-                            <div class="col-md-6">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="buyer-tab" data-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">{{$rfq['user']['user_name']}}</a>
-                                    </li>
-                                    <li class="nav-item" style="display: none;">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">BP 1</a>
-                                    </li>
-                                    <li class="nav-item" style="display: none;">
-                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">BP 2</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="buyer" role="tabpanel" aria-labelledby="buyer-tab">
-                                        <div class="chatting_app_wrapper">
-                                            <div class="chat-application">
-                                                <div class="app-chat">
-                                                    <div class="content-area content-right">
-                                                        <div class="app-wrapper">
-                                                            <div class="card card card-default scrollspy border-radius-6 fixed-width">
-                                                                <div class="card-content chat-content p-0">
-                                                                    <!-- Content Area -->
-                                                                    <div class="chat-content-area animate fadeUp">
-                                                                        <!-- Chat content area -->
-                                                                        <div class="chat-area ps ps--active-y">
-                                                                            <div class="chats">
-                                                                                <div class="chats-box chat_messagedata" id="messagedata">
-                                                                                @if($chatdata)
-                                                                                    @foreach($chatdata as $chat)
-                                                                                        @if($chat['from_id'] == $user)
-                                                                                        <div class="chat chat-right">
-                                                                                            <div class="chat-avatar">
-                                                                                                <a class="avatar">
-                                                                                                    <img src='{{$from_user_image}}' class="circle" alt="avatar">
-                                                                                                </a>
-                                                                                            </div>
-                                                                                            <div class="chat-body left-align">
-                                                                                                <div class="chat-text">
-                                                                                                    <p>
-                                                                                                    @php echo html_entity_decode($chat['message']); @endphp 
-                                                                                                    </p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>        
-                                                                                        @else
-                                                                                        <div class="chat chat-left">
-                                                                                            <div class="chat-avatar">
-                                                                                                <a class="avatar">
-                                                                                                    <img src='{{$to_user_image}}' class="circle" alt="avatar">
-                                                                                                </a>
-                                                                                            </div>
-                                                                                            <div class="chat-body left-align">
-                                                                                                <div class="chat-text">
-                                                                                                    <p>@php echo html_entity_decode($chat['message']); @endphp </p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="ps__rail-x" style="">
-                                                                                <div class="ps__thumb-x" tabindex="0" style=""></div>
-                                                                            </div>
-                                                                            <div class="ps__rail-y" style="">
-                                                                                <div class="ps__thumb-y" tabindex="0" style=""></div>
+                            <div class="rfq_user_info">
+                                <h4>{{$rfq->user->name}}</h4>
+                                <p>{{$rfq->user->email}}</p>
+                                <p>{{$rfq->user->phone}}</p>
+                            </div>
+                        </div>
+                        <div class="rfq_details_block">
+                            <h5>{{$rfq->title}}</h5>
+                            <p>Query for {{$rfq->category->name}}</p>
+                            <p>Details: {{$rfq->full_specification}}</p>
+                            <p>Qty: {{$rfq->quantity}} {{$rfq->unit}}, Target Price: $ {{$rfq->unit_price}}, Deliver To: {{$rfq->destination}}, Within: {{\Carbon\Carbon::parse($rfq->delivery_time, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq->payment_method}}</p>
+                        </div>             
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="message_header">
+                        <img src="{{asset('storage/' .$rfq->user->image)}}" alt="" />
+                        {{$rfq->user->name}}
+                    </div>
+                    <div class="chatting_app_wrapper">
+                        <div class="chat-application">
+                            <div class="app-chat">
+                                <div class="content-area content-right">
+                                    <div class="app-wrapper">
+                                        <div class="card card card-default scrollspy border-radius-6 fixed-width">
+                                            <div class="card-content chat-content p-0">
+                                                <!-- Content Area -->
+                                                <div class="chat-content-area animate fadeUp">
+                                                    <!-- Chat content area -->
+                                                    <div class="chat-area ps ps--active-y">
+                                                        <div class="chats">
+                                                            <div class="chats-box chat_messagedata" id="messagedata">
+                                                            @if($chatdata)
+                                                                @foreach($chatdata as $chat)
+                                                                    @if($chat['from_id'] == $user)
+                                                                    <div class="chat chat-right">
+                                                                        <div class="chat-avatar">
+                                                                            <a class="avatar">
+                                                                                <img src='{{$from_user_image}}' class="circle" alt="avatar">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="chat-body left-align">
+                                                                            <div class="chat-text">
+                                                                                <p>
+                                                                                @php echo html_entity_decode($chat['message']); @endphp 
+                                                                                </p>
                                                                             </div>
                                                                         </div>
-                                                                        <!--/ Chat content area -->
-                                                                        <!-- Chat footer <-->
-                                                                        <div class="chat-footer">
-                                                                            <form action="javascript:void(0);" class="chat-input">
-                                                                                <input type="text" placeholder="Type message here.." id="messagebox" class="message mb-0">
-                                                                                <a class="btn_green send messageSendButton">Send</a>
-                                                                            </form>
+                                                                    </div>        
+                                                                    @else
+                                                                    <div class="chat chat-left">
+                                                                        <div class="chat-avatar">
+                                                                            <a class="avatar">
+                                                                                <img src='{{$to_user_image}}' class="circle" alt="avatar">
+                                                                            </a>
                                                                         </div>
-                                                                        <!--/ Chat footer -->
+                                                                        <div class="chat-body left-align">
+                                                                            <div class="chat-text">
+                                                                                <p>@php echo html_entity_decode($chat['message']); @endphp </p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <!--/ Content Area -->
-                                                                </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
                                                             </div>
                                                         </div>
+                                                        <div class="ps__rail-x" style="">
+                                                            <div class="ps__thumb-x" tabindex="0" style=""></div>
+                                                        </div>
+                                                        <div class="ps__rail-y" style="">
+                                                            <div class="ps__thumb-y" tabindex="0" style=""></div>
+                                                        </div>
                                                     </div>
+                                                    <!--/ Chat content area -->
+                                                    <!-- Chat footer <-->
+                                                    <div class="chat-footer">
+                                                        <form action="javascript:void(0);" class="chat-input">
+                                                            <input type="text" placeholder="Type message here.." id="messagebox" class="message mb-0">
+                                                            <a class="btn_green send messageSendButton">Send</a>
+                                                        </form>
+                                                    </div>
+                                                    <!--/ Chat footer -->
                                                 </div>
+                                                <!--/ Content Area -->
                                             </div>
-                                        </div>                                    
-                                    </div>
-                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        Business Profile 1
-                                    </div>
-                                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                        Business Profile 2
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>           
                 </div>
+
 
                 <div class="modal fade" id="businessProfileListByCategoryModal" tabindex="-1" role="dialog" aria-labelledby="businessProfileListByCategoryModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl" role="document">
@@ -196,7 +173,7 @@
                                     @foreach($businessProfiles as $key=>$businessProfile)
                                     <div class="business_profile_name">
                                         <div class="form-check">
-                                            <input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >
+                                            <!--input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" -->
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 <p>{{$businessProfile['business_name']}}</p>
                                                 
@@ -212,14 +189,35 @@
                                                 <p>Total Order: 100</p>
                                             </label>
                                         </div>
-                                        <input type="number" value="" name="propose_price" class="propose_price"/>
+                                        <div class="propose_price_block">
+                                            <div class="print_block">
+                                                <label>Offer Price</label>
+                                                <div class="propose_price_input_block">
+                                                    $ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                </div>
+                                            </div>
+                                            <div class="separator_block"> / </div>
+                                            <div class="uom_block">
+                                                <label>Price Unit</label>
+                                                <select name="propose_uom" class="propose_uom form-select form-control">
+                                                    <option value="" selected="true" disabled="">Choose your option</option>
+                                                    <option value="Pcs">Pcs</option>
+                                                    <option value="Lbs">Lbs</option>
+                                                    <option value="Gauge">Gauge</option>
+                                                    <option value="Yard">Yards</option>
+                                                    <option value="Kg">Kg</option>
+                                                    <option value="Meter">Meter</option>
+                                                    <option value="Dozens">Dozens</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     @endforeach
                                     @else
                                         <div><p>No profile found</p></div>
                                     @endif
                                 </div>
-                                <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send To the Buyer</a>
+                                <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send Proposals</a>
                                 <button type="button" class="btn btn-secondary" id="modal_close_button" data-dismiss="modal">Close</button>
                                 </form>
                             </div>
@@ -244,17 +242,36 @@
             socket.on('connect', function(data) {
                 console.log("Socket Connect successfully.");
             });
-            $(document).on('click', '.business_profile_check', function(){
-                var price = $(this).closest(".business_profile_name").children(".propose_price").val();
+
+            // $(document).on('click', '.business_profile_check', function(){
+            //     var price = $(this).closest(".business_profile_name").children(".propose_price").val();
+            //     if(price != ''){
+            //         url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
+            //         selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - "+$(this).closest(".business_profile_name").children(".propose_price").val());
+            //     }
+            //     else{
+            //         $(this).prop("checked", false);
+            //         alert('Enter offer price first');
+            //     }
+            // });
+
+            // $(document).on("change", ".propose_price", function(){
+            //     var price = $(this).val();
+            //     var price_unit = $(this).closest(".business_profile_name").children(".propose_uom").val();
+            //     if(price != ''){
+            //         url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
+            //         selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/"+price_unit);
+            //     }                
+            // });
+
+            $(document).on("change", ".propose_price", function(){
+                var price = $(this).val();
+                //var price_unit = $(this).closest(".business_profile_name").children(".propose_uom").val();
                 if(price != ''){
                     url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
-                    selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - "+$(this).closest(".business_profile_name").children(".propose_price").val());
-                }
-                else{
-                    $(this).prop("checked", false);
-                    alert('Enter offer price first');
-                }
-            });
+                    selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
+                }                
+            });            
 
             $(document).on('click', '#factory_type', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
@@ -273,7 +290,7 @@
                                 response.businessProfiles.forEach((item, index)=>{
                                     var html ='<div class="business_profile_name">';
                                     html+='<div class="form-check">';
-                                    html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                                    //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                                     html+='<label class="form-check-label" for="flexCheckDefault">';
                                     html+='<p>'+item.business_name+'</p>';
                                     if( item.business_type == 1 ){
@@ -285,7 +302,29 @@
                                     html+='<p>Total Order: 100</p>';
                                     html+='</label>';
                                     html+='</div>';
-                                    html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    html+='<div class="propose_price_block">';
+                                    html+='<div class="print_block">';
+                                    html+='<label>Offer Price</label>';
+                                    html+='<div class="propose_price_input_block">';
+                                    html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='<div class="separator_block"> / </div>';
+                                    html+='<div class="uom_block">';
+                                    html+='<label>Price Unit</label>';
+                                    html+='<select name="propose_uom" class="propose_uom form-select form-control">';
+                                    html+='<option value="" selected="true" disabled="">Choose your option</option>';
+                                    html+='<option value="Pcs">Pcs</option>';
+                                    html+='<option value="Lbs">Lbs</option>';
+                                    html+='<option value="Gauge">Gauge</option>';
+                                    html+='<option value="Yard">Yards</option>';
+                                    html+='<option value="Kg">Kg</option>';
+                                    html+='<option value="Meter">Meter</option>';
+                                    html+='<option value="Dozens">Dozens</option>';
+                                    html+='</select>';
+                                    html+='</div>';
+                                    html+='</div>';
                                     html+='</div>';
                                     $('.rfq_business_profile_list').append(html);
                                 })
@@ -318,7 +357,7 @@
                                 response.businessProfiles.forEach((item, index)=>{
                                     var html ='<div class="business_profile_name">';
                                     html+='<div class="form-check">';
-                                    html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                                    //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                                     html+='<label class="form-check-label" for="flexCheckDefault">';
                                     html+='<p>'+item.business_name+'</p>';
                                     if( item.business_type == 1 ){
@@ -330,7 +369,29 @@
                                     html+='<p>Total Order: 100</p>';
                                     html+='</label>';
                                     html+='</div>';
-                                    html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                                    html+='<div class="propose_price_block">';
+                                    html+='<div class="print_block">';
+                                    html+='<label>Offer Price</label>';
+                                    html+='<div class="propose_price_input_block">';
+                                    html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='<div class="separator_block"> / </div>';
+                                    html+='<div class="uom_block">';
+                                    html+='<label>Price Unit</label>';
+                                    html+='<select name="propose_uom" class="propose_uom form-select form-control">';
+                                    html+='<option value="" selected="true" disabled="">Choose your option</option>';
+                                    html+='<option value="Pcs">Pcs</option>';
+                                    html+='<option value="Lbs">Lbs</option>';
+                                    html+='<option value="Gauge">Gauge</option>';
+                                    html+='<option value="Yard">Yards</option>';
+                                    html+='<option value="Kg">Kg</option>';
+                                    html+='<option value="Meter">Meter</option>';
+                                    html+='<option value="Dozens">Dozens</option>';
+                                    html+='</select>';
+                                    html+='</div>';
+                                    html+='</div>';
                                     html+='</div>';
                                     $('.rfq_business_profile_list').append(html);
                                 })
@@ -345,7 +406,7 @@
                     });
             });
             
-            $(".business_profile_list_trigger_from_backend").click(function(){
+            $(".business_profile_list_trigger_from_backend").click(function(){                
                 if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
@@ -384,7 +445,7 @@
                         businessProfiles.forEach((item, index)=>{
                             var html ='<div class="business_profile_name">';
                             html+='<div class="form-check">';
-                            html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                            //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                             html+='<label class="form-check-label" for="flexCheckDefault">';
                             html+='<p>'+item.business_name+'</p>';
                             if( item.business_type == 1 ){
@@ -396,7 +457,29 @@
                             html+='<p>Total Order: 100</p>';
                             html+='</label>';
                             html+='</div>';
-                            html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                            //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                            html+='<div class="propose_price_block">';
+                            html+='<div class="print_block">';
+                            html+='<label>Offer Price</label>';
+                            html+='<div class="propose_price_input_block">';
+                            html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<div class="separator_block"> / </div>';
+                            html+='<div class="uom_block">';
+                            html+='<label>Price Unit</label>';
+                            html+='<select name="propose_uom" class="propose_uom form-select form-control">';
+                            html+='<option value="" selected="true" disabled="">Choose your option</option>';
+                            html+='<option value="Pcs">Pcs</option>';
+                            html+='<option value="Lbs">Lbs</option>';
+                            html+='<option value="Gauge">Gauge</option>';
+                            html+='<option value="Yard">Yards</option>';
+                            html+='<option value="Kg">Kg</option>';
+                            html+='<option value="Meter">Meter</option>';
+                            html+='<option value="Dozens">Dozens</option>';
+                            html+='</select>';
+                            html+='</div>';
+                            html+='</div>';
                             html+='</div>';
                             $('.rfq_business_profile_list').append(html);
                         })
@@ -424,7 +507,7 @@
                     businessProfiles.forEach((item, index)=>{
                         var html ='<div class="business_profile_name">';
                         html+='<div class="form-check">';
-                        html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
+                        //html+='<input class="form-check-input business_profile_check" type="checkbox" value="{{$businessProfile['id']}}" data-businessprofilename="{{$businessProfile['business_name']}}"  data-alias="{{$businessProfile['alias']}}" >';
                         html+='<label class="form-check-label" for="flexCheckDefault">';
                         html+='<p>'+item.business_name+'</p>';
                         if( item.business_type == 1 ){
@@ -436,7 +519,29 @@
                         html+='<p>Total Order: 100</p>';
                         html+='</label>';
                         html+='</div>';
-                        html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                        //html+='<input type="number" value="" name="propose_price" class="propose_price"/>';
+                        html+='<div class="propose_price_block">';
+                        html+='<div class="print_block">';
+                        html+='<label>Offer Price</label>';
+                        html+='<div class="propose_price_input_block">';
+                        html+='$ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />';
+                        html+='</div>';
+                        html+='</div>';
+                        html+='<div class="separator_block"> / </div>';
+                        html+='<div class="uom_block">';
+                        html+='<label>Price Unit</label>';
+                        html+='<select name="propose_uom" class="propose_uom form-select form-control">';
+                        html+='<option value="" selected="true" disabled="">Choose your option</option>';
+                        html+='<option value="Pcs">Pcs</option>';
+                        html+='<option value="Lbs">Lbs</option>';
+                        html+='<option value="Gauge">Gauge</option>';
+                        html+='<option value="Yard">Yards</option>';
+                        html+='<option value="Kg">Kg</option>';
+                        html+='<option value="Meter">Meter</option>';
+                        html+='<option value="Dozens">Dozens</option>';
+                        html+='</select>';
+                        html+='</div>';
+                        html+='</div>';
                         html+='</div>';
                         $('.rfq_business_profile_list').append(html);
                     })

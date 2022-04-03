@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Http;
 class RfqController extends Controller
 {
     public function index(Request $request){
-            $response = Http::get('192.168.68.148:8888/api/quotation/filter/null/page/1/limit/10');
-            $data = $response->json();
-            $rfqs = $data['data'];
-            return view('admin.rfq.index',compact('rfqs'));
+        $response = Http::get('192.168.68.148:8888/api/quotation/filter/null/page/1/limit/10');
+        $data = $response->json();
+        $rfqs = $data['data'];
+        return view('admin.rfq.index',compact('rfqs'));
     }
 
     public function show($id){

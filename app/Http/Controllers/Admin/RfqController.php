@@ -38,19 +38,20 @@ class RfqController extends Controller
         $to_user = User::where('email',$rfq['user']['email'])->first();
         $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
         $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
-        $chats = Userchat::where('participates', $user)->where('participates', $rfq['user']['user_id']);
-        if($chats->exists()){
-            $chat = $chats->first();
-            $chatdataAllData = $chat->chatdata;
-            $chatdata = $chatdataAllData;
-            foreach ($chatdataAllData as $key => $value) {
-                $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
-                $chatdata[$key]['message'] = $messageStr;
-            }
-        }
-        else{
-            $chatdata = [];
-        }
+        $chats = Userchat::where('rfq_id',$id)->get();
+        // if($chats->exists()){
+        //     $chat = $chats->first();
+        //     $chatdataAllData = $chat->chatdata;
+        //     $chatdata = $chatdataAllData;
+        //     foreach ($chatdataAllData as $key => $value) {
+        //         $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
+        //         $chatdata[$key]['message'] = $messageStr;
+        //     }
+        // }
+        // else{
+        //     $chatdata = [];
+        // }
+        $chatdata = $chats;
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories'));
     }
 

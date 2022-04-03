@@ -235,7 +235,7 @@
         $(document).ready(function() {
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];
-            var serverURL = "{{ env('CHAT_URL') }}?chatID={{$rfq['id']}}";
+            var serverURL = "{{ env('CHAT_URL') }}?userId=5552";
             var socket = io.connect(serverURL);
             socket.on('connect', function(data) {
                 console.log("Socket Connect successfully.");
@@ -569,6 +569,22 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     $('#messagebox').val('');
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+            });
+
+            socket.on('new message', function(data) {
+                var msgHtml = '<div class="chat chat-left">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
                     $('.chats-box').append(msgHtml);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });

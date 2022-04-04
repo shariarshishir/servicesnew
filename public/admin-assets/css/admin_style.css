@@ -831,7 +831,6 @@ label:not(.form-check-label):not(.custom-file-label) {
 
 
 /* ********************************* */
-
 .rfq_admin_chat_topwrap .rfq_chat_top {
     display: inline-block;
     width: 100%;
@@ -840,7 +839,6 @@ label:not(.form-check-label):not(.custom-file-label) {
     float: left;
     font-size: 20px;
     font-weight: 600;
-    padding-top: 20px;
 }
 .rfq_chat_top .chat_idBox .rfq_id {
     color: #54A958;
@@ -853,7 +851,6 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: inline-block;
     padding-left: 10px;
 }
-
 .rfq_admin_chat_topwrap .chat_top_right ul li a:link,
 .rfq_admin_chat_topwrap .chat_top_right ul li a:active,
 .rfq_admin_chat_topwrap .chat_top_right ul li a:visited {
@@ -873,12 +870,10 @@ label:not(.form-check-label):not(.custom-file-label) {
     background: #73D578;
     color: #ffffff;
 }
-
 .rfq_admin_chat_topwrap .rfq_chat_info {
     display: inline-block;
     width: 100%;
 }
-
 .rfq_admin_chat_topwrap .chat_pro_infobox {
     display: inline-block;
     width: 100%;
@@ -886,7 +881,6 @@ label:not(.form-check-label):not(.custom-file-label) {
 .rfq_admin_chat_topwrap .chat_info_leftWrap {
     float: left;
 }
-
 .rfq_admin_chat_topwrap .chat_info_left {
     float: left;
     width: 150px;
@@ -908,7 +902,6 @@ label:not(.form-check-label):not(.custom-file-label) {
     height: 100%;
     width: auto;
 }
-
 .rfq_admin_chat_topwrap .chat_info_right {
     float: left;
     color: #000000;
@@ -922,7 +915,6 @@ label:not(.form-check-label):not(.custom-file-label) {
     color: #000000;
     line-height: 20px;
 } 
-
 .rfq_admin_chat_topwrap .chat_info_rightWrap {
     font-size: 14px;
     color: #000000;
@@ -930,14 +922,12 @@ label:not(.form-check-label):not(.custom-file-label) {
     float: right;
     padding-top: 30px;
 }
-
 .rfq_admin_chat_topwrap .infoBox {
-    font-size: 16px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 26px;
     color: infoBox;
     padding: 20px 0;
 }
-
 .matched_suppliers_wrap {
     display: inline-block;
     width: 100%;
@@ -947,22 +937,21 @@ label:not(.form-check-label):not(.custom-file-label) {
     line-height: 22px;
     color: #000000;
     font-weight: 600;
-}
-
-.matched_suppliers_wrap .suppliersBoxWrap {
-    display: inline-block;
-    width: 100^;
+    margin-bottom: 20px;
 }
 .matched_suppliers_wrap .suppliers_imgBox {
-    width: 150px;
+    width: 25%;
     text-align: center;
     float: left;
 }
-
-
+.suppliersBoxWrap {
+    border: 1px solid #707070;
+    padding: 10px;
+    margin-bottom: 20px;
+}
 .matched_suppliers_wrap .imgBox {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 65px;
     border-radius: 50%;
     margin: auto;
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
@@ -972,6 +961,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 .matched_suppliers_wrap .imgBox img {
     height: 100%;
@@ -981,9 +971,13 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-size: 14px;
     color: #54A958;
 }
-
+.matched_suppliers_wrap .suppliers_box {
+    display: inline-block;
+    width: 100%;
+}
 .matched_suppliers_wrap .suppliers_textBox {
-    float: left;
+    float: right;
+    width: 70%;
 }
 .matched_suppliers_wrap .sms_details_box,
 .matched_suppliers_wrap .title_box {
@@ -998,47 +992,38 @@ label:not(.form-check-label):not(.custom-file-label) {
     float: left;
 }
 .matched_suppliers_wrap .sms_img {
-    float: left;
-    margin: 4px 0 0 10px;
+    float: right;
+    margin: 0px 0 0 10px;
 }
-
+.matched_suppliers_wrap .sms_img img {
+    width: 25px;
+}
 .matched_suppliers_wrap .sms_details_box .sms_details {
     float: left;
     padding-right: 20px;
     color: #000000;
+    font-size: 12px;
+    width: 50%;
+}
+.matched_suppliers_wrap .sms_details_box .sms_details:last-child {
+    padding-right: 0;
 }
 .matched_suppliers_wrap .sms_details_box .sms_details span {
     font-weight: 500;
     margin-top: 8px;
     display: block;
 }
-
 .matched_suppliers_wrap .send_box {
     text-align: right;
     font-size: 16px;
     color: #000;
+    padding-top: 10px;
 }
-.matched_suppliers_wrap .send_box img {
-    width: 16px;
-    margin-left: 10px;
+.matched_suppliers_wrap .send_box button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
-.rfq_data_top {
-    display: flex;
-}
-.rfq_data_top .business_profile_filter {
-    margin-left: auto;
-}
-
-.rfq_business_profile_list .col-md-3 {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-}
-.rfq_business_profile_list .col-md-3 .form-check-label {
-    font-weight: bold;
-    font-size: 15px;
-}
-
 /* ********************************* */
 
 

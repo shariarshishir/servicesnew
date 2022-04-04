@@ -93,61 +93,86 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="rfq_business_profile_list row">
-                            @if($businessProfiles)
-                            @foreach($businessProfiles as $key=>$businessProfile)
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        <p>{{$businessProfile['business_name']}}</p>
-                                    </label>
-                                </div>
-                                <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>
-
-                                <div class="modal fade" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-body">
-                                            <h4>{{$businessProfile['business_name']}}</h4>
-                                            <div class="propose_price_block">
-                                                <div class="print_block">
-                                                    <label>Offer Price</label>
-                                                    <div class="propose_price_input_block">
-                                                        $ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                        <div class="matched_suppliers_wrap">
+                            <div class="rfq_business_profile_list row">
+                                @if($businessProfiles)
+                                @foreach($businessProfiles as $key=>$businessProfile)
+                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                    <div class="suppliersBoxWrap">
+                                        <div class="suppliers_box">
+                                            <div class="suppliers_imgBox">
+                                                <div class="imgBox">
+                                                    <img src="./images/logo.png" alt="" />
+                                                </div>
+                                                <h5>MB Pool</h5>
+                                            </div>
+                                            <div class="suppliers_textBox">
+                                                <div class="title_box">
+                                                    <h3>{{$businessProfile['business_name']}}</h3>
+                                                    <div class="sms_img">
+                                                        <a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
-                                                <div class="separator_block"> / </div>
-                                                <div class="uom_block">
-                                                    <label>Price Unit</label>
-                                                    <select name="propose_uom" class="propose_uom form-select form-control">
-                                                        <option value="" selected="true" disabled="">Choose your option</option>
-                                                        <option value="Pcs">Pcs</option>
-                                                        <option value="Lbs">Lbs</option>
-                                                        <option value="Gauge">Gauge</option>
-                                                        <option value="Yard">Yards</option>
-                                                        <option value="Kg">Kg</option>
-                                                        <option value="Meter">Meter</option>
-                                                        <option value="Dozens">Dozens</option>
-                                                    </select>
+                                                <div class="sms_details_box">
+                                                    <div class="sms_details">
+                                                        Contact Person <br/>
+                                                        <span>Ron Wisley</span>
+                                                    </div>
+                                                    <div class="sms_details">
+                                                        Contact Number <br/>
+                                                        <span>01234567899</span>
+                                                    </div>
+                                                </div>
+                                                <div class="send_box">
+                                                    <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" data-businessprofilename="{{$businessProfile['business_name']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
-                                        </div>
-                                        </div>
                                     </div>
-                                </div> 
 
-                            </div>
-                            @endforeach
-                            @else
-                                <div><p>No profile found</p></div>
-                            @endif
-                        </div>                    
-                    
+                                    <div class="modal fade" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h4>{{$businessProfile['business_name']}}</h4>
+                                                <div class="propose_price_block">
+                                                    <div class="print_block">
+                                                        <label>Offer Price</label>
+                                                        <div class="propose_price_input_block">
+                                                            $ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="separator_block"> / </div>
+                                                    <div class="uom_block">
+                                                        <label>Price Unit</label>
+                                                        <select name="propose_uom" class="propose_uom form-select form-control">
+                                                            <option value="" selected="true" disabled="">Choose your option</option>
+                                                            <option value="Pcs">Pcs</option>
+                                                            <option value="Lbs">Lbs</option>
+                                                            <option value="Gauge">Gauge</option>
+                                                            <option value="Yard">Yards</option>
+                                                            <option value="Kg">Kg</option>
+                                                            <option value="Meter">Meter</option>
+                                                            <option value="Dozens">Dozens</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" data-businessprofilename="{{$businessProfile['business_name']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                                                       
+                                </div>
+                                @endforeach
+                                @else
+                                    <div><p>No profile found</p></div>
+                                @endif
+                            </div>                    
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -469,7 +494,7 @@
                             }else if( item.business_type == 2){
                                 html+='<p>Wholesaler</p>';
                             }
-                            html+='<p>Rating: 5 Start</p>';
+                            html+='<p>Rating: 5 Star</p>';
                             html+='<p>Total Order: 100</p>';
                             html+='</label>';
                             html+='</div>';
@@ -542,7 +567,7 @@
                         }else if( item.business_type == 2){
                             html+='<p>Wholesaler</p>';
                         }
-                        html+='<p>Rating: 5 Start</p>';
+                        html+='<p>Rating: 5 Star</p>';
                         html+='<p>Total Order: 100</p>';
                         html+='</label>';
                         html+='</div>';

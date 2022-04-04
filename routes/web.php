@@ -71,6 +71,7 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
 use App\Http\Controllers\RfqBidController;
 use App\Models\BusinessProfile;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,51 @@ use App\Models\BusinessProfile;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('jsonDataForVerifiedBusinessProfiles', function(){
+
+    $exportData = array();
+    $businessProfiles = BusinessProfile::with('companyOverview')->where('is_business_profile_verified', 1)->get();
+    foreach($businessProfiles as $k => $businessProfile)
+    {     
+        $dataArr = array();
+        $dataArr['profile_name'] = $businessProfile->business_name;
+        $data = json_decode($businessProfile->companyOverview->data);
+        if(!empty($data)){
+            foreach($data as $info) {
+                if($info->name == "annual_revenue") {
+                    $dataArr['annual_revenue'] = $info->value;
+                }
+                if($info->name == "number_of_worker") {
+                    $dataArr['number_of_worker'] = $info->value;
+                }
+                if($info->name == "trade_license_number") {
+                    $dataArr['trade_license_number'] = $info->value;
+                }
+                if($info->name == "main_product") {
+                    $dataArr['main_product'] = $info->value;
+                }
+
+            }
+        }
+        array_push($exportData, $dataArr);
+    }
+
+    //echo "<pre>"; print_r($exportData); echo "</pre>";
+    //die();
+/*
+$fp = fopen(url('').'/servicesnew/business_profile.csv', 'w'); 
+foreach ($exportData as $fields) {
+    fputcsv($fp, $fields);
+}
+fclose($fp); 
+*/
+
+    //return Excel::download($exportData, 'business_profile.xlsx');
+    
+    return response()->json($exportData);
+});
+
 //test
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import

@@ -643,45 +643,21 @@ label:not(.form-check-label):not(.custom-file-label) {
 .shipping_attachment_wrap ul li {
     margin-bottom: 5px;
 }
-
-.business_profile_name {
-    display: flex;
-    padding: 5px 10px;
-}
-.business_profile_name:nth-child(odd) {
-    background: #fff;
-}
-.business_profile_name:nth-child(even) {
-    background: #f1f1f1;
-}
-.business_profile_name .propose_price_block {
-    margin-left: auto;
-    display: flex;
-}
-.business_profile_name .propose_price {
-    width: 60px;
-    /* margin-left: auto; */
-    height: 40px;
-}
-.business_profile_name .propose_price_block .separator_block {
-    padding: 40px 10px 0px;
-}
-.rfq_business_profile_list {
-    height: 315px;
-    overflow-y: auto;
-}
 .rfq-info-details {
     position: relative;
 }
-.rfq-status-trigger {
-    position: absolute;
-    top: 4px;
-    right: 15px;
+.rfq_label_block {
+    display: flex;
+    border-bottom: 1px solid #ccc;
 }
-.business-profile-list-trigger {
-    position: absolute;
-    top: 4px;
-    right: 140px;
+.rfq_label_block h4 {
+    color: #54A958;
+}
+.rfq_label_block h4 span {
+    color: #000;
+}
+.rfq_label_block .rfq_actions {
+    margin-left: auto;
 }
 /* Message Center Styles start */
 .chatting_app_wrapper {

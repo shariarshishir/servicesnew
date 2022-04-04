@@ -32,14 +32,15 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="rfq_label_block">
-                            <h4>RFQ Id: ABCD-001</h4>
-                            <a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status']== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a>
-                            <a href="javascript:void(0);" class="business-profile-list-trigger btn btn-default" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a>                                                                                                                                
+                            <h4><span>RFQ Id:</span> ABCD-001</h4>
+                            <div class="rfq_actions">
+                                <a href="javascript:void(0);" class="generate_pi btn btn-default">Generate PI</a>
+                                <a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status']== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a>
+                                <!--a href="javascript:void(0);" class="business-profile-list-trigger btn btn-default" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a-->
+                            </div>
                         </div>
                         <div class="rfq_user_block">
-                            <div class="rfq_user_img">
-                                Image
-                            </div>
+                            {{ \Carbon\Carbon::parse($rfq['created_at'])->isoFormat('MMMM Do YYYY, h:mm:ss a')}}
                             <div class="rfq_user_info">
                                 <h4>{{$rfq['user']['user_name']}}</h4>
                                 <p>{{$rfq['user']['email']}}</p>
@@ -52,6 +53,86 @@
                             <p>Details: {{$rfq['full_specification']}}</p>
                             <p>Qty: {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
                         </div>             
+                    </div>
+                    <div class="card">
+
+                        <div class="business_profile_filter">
+                            <div class="factory_type_filter">
+                                <label>Factory Type</label>
+                                <select class="form-select form-control" name="factory_type" id="factory_type">
+                                    <option value="">Select factory type</option>
+                                    @foreach($productCategories as $productCategory)
+                                        <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="rating_type_filter">
+                                <label>Rating</label>
+                                <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                    <option value="0">All</option>
+                                    <option value="5">5 star</option>
+                                    <option value="4">4 star</option>
+                                    <option value="3">3 star</option>
+                                    <option value="2">2 star</option>
+                                    <option value="1">1 star</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="rfq_business_profile_list row">
+                            @if($businessProfiles)
+                            @foreach($businessProfiles as $key=>$businessProfile)
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        <p>{{$businessProfile['business_name']}}</p>
+                                    </label>
+                                </div>
+                                <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>
+
+                                <div class="modal fade" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h4>{{$businessProfile['business_name']}}</h4>
+                                            <div class="propose_price_block">
+                                                <div class="print_block">
+                                                    <label>Offer Price</label>
+                                                    <div class="propose_price_input_block">
+                                                        $ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                    </div>
+                                                </div>
+                                                <div class="separator_block"> / </div>
+                                                <div class="uom_block">
+                                                    <label>Price Unit</label>
+                                                    <select name="propose_uom" class="propose_uom form-select form-control">
+                                                        <option value="" selected="true" disabled="">Choose your option</option>
+                                                        <option value="Pcs">Pcs</option>
+                                                        <option value="Lbs">Lbs</option>
+                                                        <option value="Gauge">Gauge</option>
+                                                        <option value="Yard">Yards</option>
+                                                        <option value="Kg">Kg</option>
+                                                        <option value="Meter">Meter</option>
+                                                        <option value="Dozens">Dozens</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" data-businessprofilename="{{$businessProfile['business_name']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                            </div>
+                            @endforeach
+                            @else
+                                <div><p>No profile found</p></div>
+                            @endif
+                        </div>                    
+                    
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -132,96 +213,7 @@
                         </div>
                     </div>           
                 </div>
-
-
-                <div class="modal fade" id="businessProfileListByCategoryModal" tabindex="-1" role="dialog" aria-labelledby="businessProfileListByCategoryModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="businessProfileListByCategoryModalLabel">Business Profiles Of Category {{$rfq['category'][0]['name']}}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="send_suggested_profiles_to_buyer">
-                                <div class="business_profile_filter">
-                                    <div class="factory_type_filter">
-                                        <label>Factory Type</label>
-                                        <select class="form-select form-control" name="factory_type" id="factory_type">
-                                            <option value="">Select factory type</option>
-                                            @foreach($productCategories as $productCategory)
-                                                <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="rating_type_filter">
-                                        <label>Rating</label>
-                                        <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                            <option value="0">All</option>
-                                            <option value="5">5 star</option>
-                                            <option value="4">4 star</option>
-                                            <option value="3">3 star</option>
-                                            <option value="2">2 star</option>
-                                            <option value="1">1 star</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="rfq_business_profile_list">
-                                    @if($businessProfiles)
-                                    @foreach($businessProfiles as $key=>$businessProfile)
-                                    <div class="business_profile_name">
-                                        <div class="form-check">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                <p>{{$businessProfile['business_name']}}</p>
-                                                
-                                                @if($businessProfile['business_type'] == 1)
-                                                <p>Manufacturer</p>
-                                                @elseif($businessProfile['business_type'] == 2)
-                                                <p>Wholesaler</p>
-                                                @else
-                                                <p>Design Studio</p>
-                                                @endif
-
-                                                <p>Rating: 5 Start</p>
-                                                <p>Total Order: 100</p>
-                                            </label>
-                                        </div>
-                                        <div class="propose_price_block">
-                                            <div class="print_block">
-                                                <label>Offer Price</label>
-                                                <div class="propose_price_input_block">
-                                                    $ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
-                                                </div>
-                                            </div>
-                                            <div class="separator_block"> / </div>
-                                            <div class="uom_block">
-                                                <label>Price Unit</label>
-                                                <select name="propose_uom" class="propose_uom form-select form-control">
-                                                    <option value="" selected="true" disabled="">Choose your option</option>
-                                                    <option value="Pcs">Pcs</option>
-                                                    <option value="Lbs">Lbs</option>
-                                                    <option value="Gauge">Gauge</option>
-                                                    <option value="Yard">Yards</option>
-                                                    <option value="Kg">Kg</option>
-                                                    <option value="Meter">Meter</option>
-                                                    <option value="Dozens">Dozens</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    @else
-                                        <div><p>No profile found</p></div>
-                                    @endif
-                                </div>
-                                <a href="javascript:void(0);" class="business_profile_list_trigger_from_backend btn btn-success">Send Proposals</a>
-                                <button type="button" class="btn btn-secondary" id="modal_close_button" data-dismiss="modal">Close</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>                
+               
             </div>
         </div>
     </section>
@@ -286,24 +278,24 @@
                             if(response.businessProfiles.length >0){
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
-                                    var html ='<div class="business_profile_name">';
+                                    var html ='<div class="col-md-3">';
                                     html+='<div class="form-check">';
                                     html+='<label class="form-check-label" for="flexCheckDefault">';
                                     html+='<p>'+item.business_name+'</p>';
-                                    if( item.business_type == 1 ){
-                                        html+='<p>Manufacturer</p>';
-                                    }else if( item.business_type == 2){
-                                        html+='<p>Wholesaler</p>';
-                                    }
-                                    html+='<p>Rating: 5 Start</p>';
-                                    html+='<p>Total Order: 100</p>';
                                     html+='</label>';
                                     html+='</div>';
+                                    html+='<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
+                                    html+='<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
+                                    html+='<div class="modal fade" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
+                                    html+='<div class="modal-dialog" role="document">';
+                                    html+='<div class="modal-content">';
+                                    html+='<div class="modal-body">';
+                                    html+='<h4>'+item.business_name+'</h4>';
                                     html+='<div class="propose_price_block">';
                                     html+='<div class="print_block">';
                                     html+='<label>Offer Price</label>';
                                     html+='<div class="propose_price_input_block">';
-                                    html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html+='$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
                                     html+='</div>';
                                     html+='</div>';
                                     html+='<div class="separator_block"> / </div>';
@@ -322,6 +314,14 @@
                                     html+='</div>';
                                     html+='</div>';
                                     html+='</div>';
+                                    html+='<div class="modal-footer">';
+                                    html+='<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                    html+='<button type="button" data-businessprofilename="'+item.business_name+'" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='</div>';      
                                     $('.rfq_business_profile_list').append(html);
                                 })
                             }else{
@@ -351,24 +351,24 @@
                             if(response.businessProfiles.length >0){
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
-                                    var html ='<div class="business_profile_name">';
+                                    var html ='<div class="col-md-3">';
                                     html+='<div class="form-check">';
                                     html+='<label class="form-check-label" for="flexCheckDefault">';
                                     html+='<p>'+item.business_name+'</p>';
-                                    if( item.business_type == 1 ){
-                                        html+='<p>Manufacturer</p>';
-                                    }else if( item.business_type == 2){
-                                        html+='<p>Wholesaler</p>';
-                                    }
-                                    html+='<p>Rating: 5 Start</p>';
-                                    html+='<p>Total Order: 100</p>';
                                     html+='</label>';
                                     html+='</div>';
+                                    html+='<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
+                                    html+='<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
+                                    html+='<div class="modal fade" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
+                                    html+='<div class="modal-dialog" role="document">';
+                                    html+='<div class="modal-content">';
+                                    html+='<div class="modal-body">';
+                                    html+='<h4>'+item.business_name+'</h4>';
                                     html+='<div class="propose_price_block">';
                                     html+='<div class="print_block">';
                                     html+='<label>Offer Price</label>';
                                     html+='<div class="propose_price_input_block">';
-                                    html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html+='$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
                                     html+='</div>';
                                     html+='</div>';
                                     html+='<div class="separator_block"> / </div>';
@@ -387,6 +387,14 @@
                                     html+='</div>';
                                     html+='</div>';
                                     html+='</div>';
+                                    html+='<div class="modal-footer">';
+                                    html+='<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                    html+='<button type="button" data-businessprofilename="'+item.business_name+'" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='</div>';
+                                    html+='</div>';      
                                     $('.rfq_business_profile_list').append(html);
                                 })
                             }else{
@@ -489,6 +497,19 @@
                 }
             })
 
+            //$(".send_offer_price_trigger").click(function(){        
+            $(document).on("click", ".send_offer_price_trigger", function(){
+                var html = $(this).data("businessprofilename")+" offers "+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
+                var envMode = "{{ env('APP_ENV') }}";
+                if(envMode == 'production') {
+                    var fromId = '5771';
+                } else{
+                    var fromId = '5552';
+                }
+                let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
+                socket.emit('new message', message);                
+            });
+
             $("#modal_close_button").click(function(){
                 $('#send_suggested_profiles_to_buyer')[0].reset();
                 $("#factory_type option[value={{$rfq['category'][0]['id']}}]").attr('selected', 'selected');
@@ -589,9 +610,6 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 
-            
-
-            
         }); 
     </script>
 @endpush

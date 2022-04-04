@@ -72,11 +72,11 @@
 			</div>
 
 			<div class="row rfq_thum_imgs left-align">
-				@if(count($rfqSentList->images)>0)
-						@foreach ($rfqSentList->images as  $key => $rfqImage )
+				@if(count($rfqSentList['images'])>0)
+						@foreach ($rfqSentList['images'] as  $key => $rfqImage )
 							<div class="rfq_thum_img">
-								<a data-fancybox="gallery-{{$i}}" href="{{$rfqImage->image}}">
-									<img src="{{$rfqImage->image}}" alt="" />
+								<a data-fancybox="gallery-{{$i}}" href="{{$rfqImage['image']}}">
+									<img src="{{$rfqImage['image']}}" alt="" />
 								</a>
 							</div>
                     @endforeach

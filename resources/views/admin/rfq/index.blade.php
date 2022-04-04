@@ -30,6 +30,7 @@
                                 <thead class="cf">
                                     <tr>
                                         <th>Sl</th>
+                                        <th>Title</th>
                                         <th>Date</th>
                                         <th>Buyer Name</th>
                                         <th>Category</th>
@@ -41,6 +42,7 @@
                                     @foreach($rfqs as $key=>$rfq)
                                     <tr>
                                         <td>{{$key+1}}</td>
+                                        <td>{{$rfq['title']}}</td>
                                         <td>{{$rfq['created_at']}}</td>
                                         <td>{{$rfq['user']['user_name']}}</td>
                                         <td>{{$rfq['category'][0]['name']}}</td>

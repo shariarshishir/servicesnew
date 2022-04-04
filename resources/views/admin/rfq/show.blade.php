@@ -31,51 +31,66 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="card">
-                        <div class="rfq_label_block">
-                            <h4><span>RFQ Id:</span> ABCD-001</h4>
-                            <div class="rfq_actions">
-                                <a href="javascript:void(0);" class="generate_pi btn btn-default">Generate PI</a>
-                                <a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status']== 'pending' ? 'btn btn-success' : 'btn btn-danger'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a>
-                                <!--a href="javascript:void(0);" class="business-profile-list-trigger btn btn-default" data-toggle="modal" data-target="#businessProfileListByCategoryModal">Send Proposals</a-->
+                        <div class="rfq_admin_chat_topwrap">
+                            <div class="rfq_chat_top">
+                                <span class="chat_idBox">RFQ ID: <span class="rfq_id">3669700</span></span>
+                                <div class="chat_top_right">
+                                    <ul>
+                                        <li class="active"><a href="javascript:void(0);" class="btn_grBorder">Generate PI</a></li>
+                                        <li><a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status']== 'pending' ? 'btn_grBorder' : 'btn_grBorder'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="rfq_user_block">
-                            {{ \Carbon\Carbon::parse($rfq['created_at'])->isoFormat('MMMM Do YYYY, h:mm:ss a')}}
-                            <div class="rfq_user_info">
-                                <h4>{{$rfq['user']['user_name']}}</h4>
-                                <p>{{$rfq['user']['email']}}</p>
-                                <p>{{$rfq['user']['phone']}}</p>
+                            <div class="rfq_chat_info">
+                                <div class="chat_pro_infobox">
+                                    <div class="chat_info_leftWrap">
+                                        <div class="chat_info_left">
+                                            <div class="pro_omg">
+                                                <img src="{{asset('admin-assets/img/avatar04.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="chat_info_right">
+                                            <h3>{{$rfq['user']['user_name']}}</h3>
+                                            <p>{{$rfq['user']['email']}}, <br/> {{$rfq['user']['phone']}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="chat_info_rightWrap">
+                                        <span><i class="fa fa-clock"></i> {{ \Carbon\Carbon::parse($rfq['created_at'])->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</span>
+                                    </div>
+                                </div>
+                                <div class="infoBox">
+                                    <p>{{$rfq['title']}}</p>
+                                    <p>Query for {{$rfq['category'][0]['name']}}</p>
+                                    <p>Details: {{$rfq['full_specification']}}</p>
+                                    <p>Qty: {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="rfq_details_block">
-                            <h5>{{$rfq['title']}}</h5>
-                            <p>Query for {{$rfq['category'][0]['name']}}</p>
-                            <p>Details: {{$rfq['full_specification']}}</p>
-                            <p>Qty: {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
-                        </div>             
+                        </div>           
                     </div>
                     <div class="card">
-
-                        <div class="business_profile_filter">
-                            <div class="factory_type_filter">
-                                <label>Factory Type</label>
-                                <select class="form-select form-control" name="factory_type" id="factory_type">
-                                    <option value="">Select factory type</option>
-                                    @foreach($productCategories as $productCategory)
-                                        <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="rating_type_filter">
-                                <label>Rating</label>
-                                <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                    <option value="0">All</option>
-                                    <option value="5">5 star</option>
-                                    <option value="4">4 star</option>
-                                    <option value="3">3 star</option>
-                                    <option value="2">2 star</option>
-                                    <option value="1">1 star</option>
-                                </select>
+                        <div class="rfq_data_top">
+                            <h3>Matched Suppliers</h3>
+                            <div class="business_profile_filter">
+                                <div class="factory_type_filter">
+                                    <label>Factory Type</label>
+                                    <select class="form-select form-control" name="factory_type" id="factory_type">
+                                        <option value="">Select factory type</option>
+                                        @foreach($productCategories as $productCategory)
+                                            <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="rating_type_filter">
+                                    <label>Rating</label>
+                                    <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                        <option value="0">All</option>
+                                        <option value="5">5 star</option>
+                                        <option value="4">4 star</option>
+                                        <option value="3">3 star</option>
+                                        <option value="2">2 star</option>
+                                        <option value="1">1 star</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="rfq_business_profile_list row">

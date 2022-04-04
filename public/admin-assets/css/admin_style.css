@@ -830,10 +830,216 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 
 
+/* ********************************* */
+
+.rfq_admin_chat_topwrap .rfq_chat_top {
+    display: inline-block;
+    width: 100%;
+}
+.rfq_admin_chat_topwrap .rfq_chat_top .chat_idBox {
+    float: left;
+    font-size: 20px;
+    font-weight: 600;
+    padding-top: 20px;
+}
+.rfq_chat_top .chat_idBox .rfq_id {
+    color: #54A958;
+    font-style: italic;
+}
+.rfq_admin_chat_topwrap .chat_top_right {
+    text-align: right;
+}
+.rfq_admin_chat_topwrap .chat_top_right ul li {
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.rfq_admin_chat_topwrap .chat_top_right ul li a:link,
+.rfq_admin_chat_topwrap .chat_top_right ul li a:active,
+.rfq_admin_chat_topwrap .chat_top_right ul li a:visited {
+    font-size: 14px;
+    color: #73D578;
+    border: 2px solid #73D578;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 18px;
+    font-weight: 500;
+    background: none;
+    min-width: 120px;
+    display: inline-block;
+}
+.rfq_admin_chat_topwrap .chat_top_right ul li.active a {
+    background: #73D578;
+    color: #ffffff;
+}
+
+.rfq_admin_chat_topwrap .rfq_chat_info {
+    display: inline-block;
+    width: 100%;
+}
+
+.rfq_admin_chat_topwrap .chat_pro_infobox {
+    display: inline-block;
+    width: 100%;
+}
+.rfq_admin_chat_topwrap .chat_info_leftWrap {
+    float: left;
+}
+
+.rfq_admin_chat_topwrap .chat_info_left {
+    float: left;
+    width: 150px;
+}
+.rfq_admin_chat_topwrap .pro_omg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rfq_admin_chat_topwrap .pro_omg img {
+    height: 100%;
+    width: auto;
+}
+
+.rfq_admin_chat_topwrap .chat_info_right {
+    float: left;
+    color: #000000;
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 15px;
+}
+.rfq_admin_chat_topwrap .chat_info_right h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #000000;
+    line-height: 20px;
+} 
+
+.rfq_admin_chat_topwrap .chat_info_rightWrap {
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+    float: right;
+    padding-top: 30px;
+}
+
+.rfq_admin_chat_topwrap .infoBox {
+    font-size: 16px;
+    line-height: 25px;
+    color: infoBox;
+    padding: 20px 0;
+}
+
+.matched_suppliers_wrap {
+    display: inline-block;
+    width: 100%;
+}
+.matched_suppliers_wrap h3 {
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+    font-weight: 600;
+}
+
+.matched_suppliers_wrap .suppliersBoxWrap {
+    display: inline-block;
+    width: 100^;
+}
+.matched_suppliers_wrap .suppliers_imgBox {
+    width: 150px;
+    text-align: center;
+    float: left;
+}
 
 
+.matched_suppliers_wrap .imgBox {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.matched_suppliers_wrap .imgBox img {
+    height: 100%;
+    width: auto;
+}
+.matched_suppliers_wrap .suppliers_imgBox h5 {
+    font-size: 14px;
+    color: #54A958;
+}
 
+.matched_suppliers_wrap .suppliers_textBox {
+    float: left;
+}
+.matched_suppliers_wrap .sms_details_box,
+.matched_suppliers_wrap .title_box {
+    display: inline-block;
+    width: 100%;
+}
+.matched_suppliers_wrap .suppliers_textBox .title_box h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+    float: left;
+}
+.matched_suppliers_wrap .sms_img {
+    float: left;
+    margin: 4px 0 0 10px;
+}
 
+.matched_suppliers_wrap .sms_details_box .sms_details {
+    float: left;
+    padding-right: 20px;
+    color: #000000;
+}
+.matched_suppliers_wrap .sms_details_box .sms_details span {
+    font-weight: 500;
+    margin-top: 8px;
+    display: block;
+}
+
+.matched_suppliers_wrap .send_box {
+    text-align: right;
+    font-size: 16px;
+    color: #000;
+}
+.matched_suppliers_wrap .send_box img {
+    width: 16px;
+    margin-left: 10px;
+}
+.rfq_data_top {
+    display: flex;
+}
+.rfq_data_top .business_profile_filter {
+    margin-left: auto;
+}
+
+.rfq_business_profile_list .col-md-3 {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+.rfq_business_profile_list .col-md-3 .form-check-label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* ********************************* */
 
 
 @media only screen and (max-width: 800px) {

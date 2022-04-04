@@ -497,7 +497,8 @@
                 }
             })
 
-            $(".send_offer_price_trigger").click(function(){                
+            //$(".send_offer_price_trigger").click(function(){        
+            $(document).on("click", ".send_offer_price_trigger", function(){
                 var html = $(this).data("businessprofilename")+" offers "+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
                 var envMode = "{{ env('APP_ENV') }}";
                 if(envMode == 'production') {
@@ -609,9 +610,6 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 
-            
-
-            
         }); 
     </script>
 @endpush

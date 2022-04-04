@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Rfq;
+use App\RfqApp;
 use App\Models\User;
 use App\Models\RfqImage;
 use Illuminate\Support\Str;
@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
 use App\Events\NewRfqHasAddedEvent;
 use App\Jobs\NewRfqHasAddedJob;
-use App\Models\Manufacture\Product as ManufactureProduct;
-use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -23,28 +21,65 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
-class RfqController extends Controller
+class RfqAppController extends Controller
 {
     public function index()
     {
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
-        $data = $response->json();
-        $rfqLists = $data['data'];
+        $rfqList = RfqApp::get();
+        dd($rfqList);
 
-        
-        // foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
-        //     if($notification->type=="App\Notifications\NewRfqNotification"){
-        //         array_push($rfqIds,$notification->data['rfq_data']['id']);
-        //     }
-        // }
+        foreach($rfqList as $list){
+            $bid_user_id=[];
+            if($list->bids()->exists()){
+                foreach($list->bids as $user){
+                    array_push($bid_user_id,$user->supplier_id);
+                }
+                $list['bid_user_id'] = array_unique($bid_user_id);
 
-        return view('rfq.index',compact('rfqLists'));
+            }
+
+        }
+
+        $page = Paginator::resolveCurrentPage() ?: 1;
+        $perPage = 6;
+        $rfqLists = new \Illuminate\Pagination\LengthAwarePaginator(
+            $rfqList->forPage($page, $perPage),
+            $rfqList->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
+        $rfqIds=[];
+        foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
+            if($notification->type=="App\Notifications\NewRfqNotification"){
+                array_push($rfqIds,$notification->data['rfq_data']['id']);
+            }
+        }
+
+        return view('rfq.index',compact('rfqLists','rfqIds'));
     }
 
 
 
     public function store(Request $request)
     {
+            foreach ($request->file('product_images') as $index=>$product_image){
+                if($index == 0){
+                    $image = $product_image;
+                }
+            }
+            //dd(file_get_contents($image));
+            // $response = Http::attach('attachment', file_get_contents($image), 'image.*')
+            //     ->post('http://192.168.68.148:8888/api/quotation', $request->all());
+
+        
+       
+        // Http::post('http://192.168.68.148:8888/api/quotation', [
+        //     $request->all()
+        // ]);
+        // $result = Http::attach(
+        //     'product_images', file_get_contents($request->product_images[0]),'photo.jpg'
+        // )->post('http://192.168.68.148:8888/api/quotation', );
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required',
@@ -85,7 +120,7 @@ class RfqController extends Controller
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
         //SEND CREATED RFQ DATA TO RFQ APP
-        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[
+        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[ 
         //     $rfq
         // ]);
 
@@ -384,108 +419,5 @@ class RfqController extends Controller
     {
         return view('rfq.create');
     }
-
-    public function storeFromProductDetails(Request $request)
-    {
-
-        $request->validate([
-            'category_id' => 'required',
-            'title'       => 'required',
-            'rfq_quantity'    => 'required',
-            'unit'        =>  'required',
-            'rfq_unit_price'     => 'required',
-            'payment_method' => 'required',
-            'delivery_time'  => 'required',
-            'destination'   => 'required',
-            'short_description' => 'required',
-            'full_specification' => 'required',
-
-        ]);
-
-        $rfqData = [
-            'category_id' => $request->category_id,
-            'title' => $request->title,
-            'quantity' => $request->rfq_quantity,
-            'unit' => $request->unit,
-            'unit_price' => $request->rfq_unit_price,
-            'payment_method' => $request->payment_method,
-            'delivery_time' => $request->delivery_time,
-            'destination' => $request->destination,
-            'short_description' => $request->short_description,
-            'full_specification' => $request->full_specification,
-            'created_by' => auth()->id(),
-            'status' => 'pending',
-            'rfq_from' => "service",
-            'link' => $this->generateUniqueLink(),
-
-        ];
-
-        $rfq=Rfq::create($rfqData);
-
-        /*if ($request->hasFile('product_images')){
-            foreach ($request->file('product_images') as $index=>$product_image){
-
-                $extension = $product_image->getClientOriginalExtension();
-                if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
-
-                    $path=$product_image->store('images','public');
-                }
-                else{
-                    $path=$product_image->store('images','public');
-                    $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-                    Storage::put($path, $image);
-                }
-                RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
-            }
-        }*/
-        if($request->flag == 'mb'){
-            $product=ManufactureProduct::with('product_images')->where('id', $request->product_id)->first();
-            foreach($product->product_images  as $key => $image){
-                RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$image->product_image]);
-               if($key == 2){
-                   break;
-               }
-            }
-        }
-        if($request->flag == 'shop'){
-            $product=Product::with('images')->where('id', $request->product_id)->first();
-            foreach($product->images  as $key => $image){
-                RfqImage::create(['rfq_id'=>$rfq->id, 'image'=>$image->image]);
-               if($key == 2){
-                   break;
-               }
-            }
-        }
-        $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
-        //SEND CREATED RFQ DATA TO RFQ APP
-        // $response = Http::post(env('RFQ_APP_URL').'/api/quotation',[
-        //     $rfq
-        // ]);
-
-        // if(env('APP_ENV') == 'production')
-        // {
-            /* code using redis-cli
-
-            $selectedUsersToSendMail = User::where('id','<>',auth()->id())->get();
-            foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
-                NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
-            }
-
-            $selectedUserToSendMail="success@merchantbay.com";
-            NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
-
-            */
-            // $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
-            // foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
-            //     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-            // }
-
-            $selectedUserToSendMail="success@merchantbay.com";
-            event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-        // }
-
-
-        $msg = "Your RFQ was posted successfully.<br><br>Thank you for your request. We will get back to you with quotations within 48 hours.";
-        return back()->with(['rfq-success'=> $msg]);
-    }
 }
+

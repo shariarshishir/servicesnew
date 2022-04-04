@@ -52,9 +52,6 @@
         });
         });
 
-
-
-
         //create bid rfq
         function openBidRfqModal(id){
             var rfq_id=id;
@@ -149,25 +146,8 @@
             }
             return;
         }
-        // tinymce.init({
-        //     selector: 'textarea',
-        //     setup: function(editor) {
-        //         editor.on('init', function(e) {
-        //             var body = editor.get("product-bidding-desc").getBody();
-        //             var content = editor.trim(body.innerText || body.textContent).split(' ');
-        //             var max = 1;
-        //             var count = content.length;
-        //             if (count > max) {
-        //                 alert("Maximum " + max + " words allowed.your given words length is "+count + "")
-        //             }
-
-        //                 });
-        //     }
-        // });
-
         $('#rfq-bid-form').on('submit',function(e){
             e.preventDefault();
-
             var unit_value= $('#rfq-bid-modal input[name=unit_price]').val().length;
             if(unit_value == 0){
                 $('#rfq-bid-form .validation-error-unit-price').text('Unit price required');

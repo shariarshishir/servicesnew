@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col s12 m12">
                                     <div class="content row">
-                                        <div class="product_img col s12 m5 l3">
+                                        <div class="product_img col s12 m4 l2">
                                             @if($item->flag == 'shop')
                                                 @if($item->product->images()->exists())
                                                     <a href="{{route('mix.product.details',['flag' => $item->product->flag, 'id' => $item->product->id])}}"><img src="{{URL::asset('storage/'.$item->product->images[0]->image)}}" class="responsive-img" alt="" /></a>
@@ -25,7 +25,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="product_short_details col s12 m7 l9">
+                                        <div class="product_short_details col s12 m8 l10">
 
                                             <div class="product-title">{{$item->product->name ?? $item->manufacture_product->title}}</div>
                                             @if($item->flag == 'shop')

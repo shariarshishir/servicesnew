@@ -210,9 +210,10 @@ public function update(Request $request, $product_id)
         $product=Product::withTrashed()->find($product_id);
         if ($request->hasFile('overlay_image')){
             if($product->overlay_image){
-
-                if(Storage::exists($product->overlay_image)){
+                if(Storage::exists($product->overlay_image) && (Storage::exists('overlay_large_image/'.$product->overlay_image) && Storage::exists('overlay_small_image/'.$product->overlay_image)) ){
                     Storage::delete($product->overlay_image);
+                    Storage::delete('overlay_large_image/'.$product->overlay_image);
+                    Storage::delete('overlay_small_image/'.$product->overlay_image);
                 }
             }
             $path = $request->overlay_image->store('images','public');
@@ -324,6 +325,40 @@ public function publishUnpublish($pid, $bid)
         $data=view('business_profile._product_table_data', compact('products'))->render();
         return response()->json(array('success' => true, 'msg' => 'Product Unpublished Successfully', 'data' => $data),200);
       }
+    }
+
+    public function removeOverlayImage($id)
+    {
+        $product=Product::where('id',$id)->first();
+        if(!$product){
+            return response()->json(['msg' => 'product not found'], 404);
+        }
+        if(Storage::exists($product->overlay_image) && (Storage::exists('overlay_large_image/'.$product->overlay_image) && Storage::exists('overlay_small_image/'.$product->overlay_image)) ){
+            Storage::delete($product->overlay_image);
+            Storage::delete('overlay_large_image/'.$product->overlay_image);
+            Storage::delete('overlay_small_image/'.$product->overlay_image);
+            $product->update(['overlay_image' => null]);
+            return response()->json(['msg' => 'overlay image removed'], 200);
+        }
+        return response()->json(['msg' => 'folder not exists'], 500);
+    }
+
+    public function removeSingleImage($id)
+    {
+        $product_image=ProductImage::where('id',$id)->first();
+        if(!$product_image){
+            return response()->json(['msg' => 'record not found'], 404);
+        }
+        if(Storage::exists($product_image->product_image)){
+            if((Storage::exists('large/'.$product_image->product_image) && Storage::exists('medium/'.$product_image->product_image)) && Storage::exists('small/'.$product_image->product_image))
+            Storage::delete($product_image->product_image);
+            Storage::delete('large/'.$product_image->product_image);
+            Storage::delete('medium/'.$product_image->product_image);
+            Storage::delete('small/'.$product_image->product_image);
+            $product_image->delete();
+            return response()->json(['msg' => 'image removed'], 200);
+        }
+        return response()->json(['msg' => 'folder not exists'], 500);
     }
 
 

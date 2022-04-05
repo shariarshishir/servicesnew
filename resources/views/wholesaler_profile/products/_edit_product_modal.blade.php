@@ -99,6 +99,9 @@
                             </div>
                             <div class="col s12 m9 l9" id="lineitems">
                                 <div class="overlay-image-preview-block">
+                                    <div class="remove-overlay-image">
+
+                                    </div>
                                     <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
                                     alt="preview image" style="max-height: 100px; margin-bottom: 10px;">
                                 </div>
@@ -107,7 +110,16 @@
                         </div>
                     </div>
 
+                    <div class="row input-field edit-video-show-div">
+                        <div class="col s12 m3 l3">
+                            <label class="active">Video: </label>
+                        </div>
+                        <div class="col s12 m9 l9">
+                            <div class="edit-video-show-block">
 
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row input-field edit-video-upload-block">
                         <div class="col s12 m3 l3">

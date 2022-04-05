@@ -253,7 +253,7 @@
 								@endforeach
 							@else
 							<li class="no-notifications" itemprop="itemListElement">
-								No notifications
+								No Messages
 							</li>
 							@endif
 						</ul>
@@ -639,9 +639,12 @@
 					</div>
 
 					<div class="mobile_top_icon_box" itemscope>
-						<a href="{{route('business.profile.create')}}" itemprop="My Profile" type="button" class="btn_profile_mobile">
+						<a href="javascript:void(0)" itemprop="Join MB Pool" type="button" class="btn_joinpool_mobile">
 							<span class="material-icons"> add </span>
 						</a>
+						<!-- <a href="{{route('business.profile.create')}}" itemprop="My Profile" type="button" class="btn_profile_mobile">
+							<span class="material-icons"> add </span>
+						</a> -->
 					</div>
 
 					<button class="header_search_bar">

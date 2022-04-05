@@ -29,17 +29,31 @@
                             <table class="table table-bordered orders-table data-table">
                                 <thead class="cf">
                                     <tr>
-                                        <th>Sl No.</th>
+                                        <th>Sl</th>
                                         <th>Title</th>
+                                        <th>Date</th>
+                                        <th>Buyer Name</th>
                                         <th>Category</th>
-                                        <th>Quantity</th>
-                                        <th>Delivery Time</th>
-                                        <th>User Name</th>
-                                        <th>Created_at</th>
-                                        <th>Status</th>
+                                        <th>Target price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tbody class="cf">
+                                    @foreach($rfqs as $key=>$rfq)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$rfq['title']}}</td>
+                                        <td>{{$rfq['created_at']}}</td>
+                                        <td>{{$rfq['user']['user_name']}}</td>
+                                        <td>{{$rfq['category'][0]['name']}}</td>
+                                        <td>$ {{$rfq['unit_price']}}</td>
+                                        <td>
+                                            <a href="{{route('admin.rfq.show', $rfq['id'])}}" class="show-rfq-details-trigger"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0);" class="remove-rfq-trigger"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -53,25 +67,25 @@
 @endsection
 @push('js')
   <script>
-       $(function () {
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            order: [['6', 'desc']],
-            ajax: "{{ route('admin.rfq.index') }}",
-            columns: [
-                {data:'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                {data: 'title', name: 'title'},
-                {data: 'category_id', name: 'category_id'},
-                {data: 'quantity', name: 'quantity'},
-                {data: 'delivery_time', name: 'delivery_time'},
-                {data: 'created_by', name: 'created_by'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'status', name: 'status'},
-                {data: 'details', name: 'details',  orderable: false, searchable: false},
-            ]
-        });
-    });
+    //    $(function () {
+    //     var table = $('.data-table').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         order: [['6', 'desc']],
+    //         ajax: "{{ route('admin.rfq.index') }}",
+    //         columns: [
+    //             {data:'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    //             {data: 'title', name: 'title'},
+    //             {data: 'category_id', name: 'category_id'},
+    //             {data: 'quantity', name: 'quantity'},
+    //             {data: 'delivery_time', name: 'delivery_time'},
+    //             {data: 'created_by', name: 'created_by'},
+    //             {data: 'created_at', name: 'created_at'},
+    //             {data: 'status', name: 'status'},
+    //             {data: 'details', name: 'details',  orderable: false, searchable: false},
+    //         ]
+    //     });
+    // });
   </script>
 @endpush
 

@@ -643,38 +643,21 @@ label:not(.form-check-label):not(.custom-file-label) {
 .shipping_attachment_wrap ul li {
     margin-bottom: 5px;
 }
-
-.business_profile_name {
-    display: flex;
-    padding: 5px 10px;
-}
-.business_profile_name:nth-child(odd) {
-    background: #fff;
-}
-.business_profile_name:nth-child(even) {
-    background: #f1f1f1;
-}
-.business_profile_name .propose_price {
-    width: 120px;
-    margin-left: auto;
-    height: 40px;
-}
-.rfq_business_profile_list {
-    height: 315px;
-    overflow-y: auto;
-}
 .rfq-info-details {
     position: relative;
 }
-.rfq-status-trigger {
-    position: absolute;
-    top: 4px;
-    right: 15px;
+.rfq_label_block {
+    display: flex;
+    border-bottom: 1px solid #ccc;
 }
-.business-profile-list-trigger {
-    position: absolute;
-    top: 4px;
-    right: 140px;
+.rfq_label_block h4 {
+    color: #54A958;
+}
+.rfq_label_block h4 span {
+    color: #000;
+}
+.rfq_label_block .rfq_actions {
+    margin-left: auto;
 }
 /* Message Center Styles start */
 .chatting_app_wrapper {
@@ -702,6 +685,8 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: block !important;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .message {
+    width: 75%;
+    margin-right: 0px;
     border: none;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-body .chat-text p a:link,
@@ -845,10 +830,201 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 
 
-
-
-
-
+/* ********************************* */
+.rfq_admin_chat_topwrap .rfq_chat_top {
+    display: inline-block;
+    width: 100%;
+}
+.rfq_admin_chat_topwrap .rfq_chat_top .chat_idBox {
+    float: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+.rfq_chat_top .chat_idBox .rfq_id {
+    color: #54A958;
+    font-style: italic;
+}
+.rfq_admin_chat_topwrap .chat_top_right {
+    text-align: right;
+}
+.rfq_admin_chat_topwrap .chat_top_right ul li {
+    display: inline-block;
+    padding-left: 10px;
+}
+.rfq_admin_chat_topwrap .chat_top_right ul li a:link,
+.rfq_admin_chat_topwrap .chat_top_right ul li a:active,
+.rfq_admin_chat_topwrap .chat_top_right ul li a:visited {
+    font-size: 14px;
+    color: #73D578;
+    border: 2px solid #73D578;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 18px;
+    font-weight: 500;
+    background: none;
+    min-width: 120px;
+    display: inline-block;
+}
+.rfq_admin_chat_topwrap .chat_top_right ul li.active a {
+    background: #73D578;
+    color: #ffffff;
+}
+.rfq_admin_chat_topwrap .rfq_chat_info {
+    display: inline-block;
+    width: 100%;
+}
+.rfq_admin_chat_topwrap .chat_pro_infobox {
+    display: inline-block;
+    width: 100%;
+}
+.rfq_admin_chat_topwrap .chat_info_leftWrap {
+    float: left;
+}
+.rfq_admin_chat_topwrap .chat_info_left {
+    float: left;
+    width: 150px;
+}
+.rfq_admin_chat_topwrap .pro_omg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rfq_admin_chat_topwrap .pro_omg img {
+    height: 100%;
+    width: auto;
+}
+.rfq_admin_chat_topwrap .chat_info_right {
+    float: left;
+    color: #000000;
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 15px;
+}
+.rfq_admin_chat_topwrap .chat_info_right h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #000000;
+    line-height: 20px;
+} 
+.rfq_admin_chat_topwrap .chat_info_rightWrap {
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+    float: right;
+    padding-top: 30px;
+}
+.rfq_admin_chat_topwrap .infoBox {
+    font-size: 14px;
+    line-height: 26px;
+    color: infoBox;
+    padding: 20px 0;
+}
+.matched_suppliers_wrap {
+    display: inline-block;
+    width: 100%;
+}
+.matched_suppliers_wrap h3 {
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.matched_suppliers_wrap .suppliers_imgBox {
+    width: 25%;
+    text-align: center;
+    float: left;
+}
+.suppliersBoxWrap {
+    border: 1px solid #707070;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.matched_suppliers_wrap .imgBox {
+    width: 70px;
+    height: 65px;
+    border-radius: 50%;
+    margin: auto;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.matched_suppliers_wrap .imgBox img {
+    height: 100%;
+    width: auto;
+}
+.matched_suppliers_wrap .suppliers_imgBox h5 {
+    font-size: 14px;
+    color: #54A958;
+}
+.matched_suppliers_wrap .suppliers_box {
+    display: inline-block;
+    width: 100%;
+}
+.matched_suppliers_wrap .suppliers_textBox {
+    float: right;
+    width: 70%;
+}
+.matched_suppliers_wrap .sms_details_box,
+.matched_suppliers_wrap .title_box {
+    display: inline-block;
+    width: 100%;
+}
+.matched_suppliers_wrap .suppliers_textBox .title_box h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+    float: left;
+}
+.matched_suppliers_wrap .sms_img {
+    float: right;
+    margin: 0px 0 0 10px;
+}
+.matched_suppliers_wrap .sms_img img {
+    width: 25px;
+}
+.matched_suppliers_wrap .sms_details_box .sms_details {
+    float: left;
+    padding-right: 20px;
+    color: #000000;
+    font-size: 12px;
+    width: 50%;
+}
+.matched_suppliers_wrap .sms_details_box .sms_details:last-child {
+    padding-right: 0;
+}
+.matched_suppliers_wrap .sms_details_box .sms_details span {
+    font-weight: 500;
+    margin-top: 8px;
+    display: block;
+}
+.matched_suppliers_wrap .send_box {
+    text-align: right;
+    font-size: 16px;
+    color: #000;
+    padding-top: 10px;
+}
+.matched_suppliers_wrap .send_box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+/* ********************************* */
 
 
 @media only screen and (max-width: 800px) {

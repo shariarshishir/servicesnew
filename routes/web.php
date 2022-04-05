@@ -71,6 +71,7 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
 use App\Http\Controllers\RfqBidController;
 use App\Models\BusinessProfile;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,51 @@ use App\Models\BusinessProfile;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('jsonDataForVerifiedBusinessProfiles', function(){
+
+    $exportData = array();
+    $businessProfiles = BusinessProfile::with('companyOverview')->where('is_business_profile_verified', 1)->get();
+    foreach($businessProfiles as $k => $businessProfile)
+    {     
+        $dataArr = array();
+        $dataArr['profile_name'] = $businessProfile->business_name;
+        $data = json_decode($businessProfile->companyOverview->data);
+        if(!empty($data)){
+            foreach($data as $info) {
+                if($info->name == "annual_revenue") {
+                    $dataArr['annual_revenue'] = $info->value;
+                }
+                if($info->name == "number_of_worker") {
+                    $dataArr['number_of_worker'] = $info->value;
+                }
+                if($info->name == "trade_license_number") {
+                    $dataArr['trade_license_number'] = $info->value;
+                }
+                if($info->name == "main_product") {
+                    $dataArr['main_product'] = $info->value;
+                }
+
+            }
+        }
+        array_push($exportData, $dataArr);
+    }
+
+    //echo "<pre>"; print_r($exportData); echo "</pre>";
+    //die();
+/*
+$fp = fopen(url('').'/servicesnew/business_profile.csv', 'w'); 
+foreach ($exportData as $fields) {
+    fputcsv($fp, $fields);
+}
+fclose($fp); 
+*/
+
+    //return Excel::download($exportData, 'business_profile.xlsx');
+    
+    return response()->json($exportData);
+});
+
 //test
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import
@@ -257,6 +303,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
         Route::get('order-type-filter', [WholesalerOrderController::class, 'orderTypeFilter'])->name('wholesaler.order.type.filter');
         //profile info
         Route::get('profile/{alias}/info',[ProfileInfoController::class,'index'])->name('wholesaler.profile.info');
+        //remove overlay image
+        Route::get('remove/overlay/image/{id}',[WholesalerProductController::class,'removeOverlayImage'])->name('remove.wholesaler.overlay.image');
 
     });
     //business profile logo banner
@@ -391,6 +439,9 @@ Route::group(['prefix'=>'/manufacture'],function (){
     Route::post('product/update/{product_id}',[ManufactureProductController::class, 'update'])->name('manufacture.product.update');
     Route::get('product/delete/{product_id}/{business_profile_id}',[ManufactureProductController::class, 'delete'])->name('manufacture.product.delete');
     Route::get('/product/publish-unpublish/{pid}/{bid}',[ManufactureProductController::class, 'publishUnpublish'])->name('manufacture.product.publish.unpublish');
+    Route::get('remove/overlay/image/{id}',[ManufactureProductController::class,'removeOverlayImage'])->name('remove.manufacture.overlay.image');
+    Route::get('remove/single/image/{id}',[ManufactureProductController::class,'removeSingleImage'])->name('remove.manufacture.single.image');
+
 
 });
 

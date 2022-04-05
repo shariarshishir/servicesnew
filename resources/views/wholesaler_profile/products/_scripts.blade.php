@@ -25,6 +25,7 @@
             $('.select2').trigger('change');
             $('.studio').hide();
             $('.raw-materials').hide();
+            $('#product-add-modal-block .overlay-image-preview').attr("src", 'https://www.riobeauty.co.uk/images/product_image_not_found.gif');
 
 
         })
@@ -66,6 +67,12 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+
+        $('#seller-product-datatable').on('page.dt', function () {
+            var info = table.page.info();
+            $('#pageInfo').html( 'Showing page: '+(info.page+1)+' of '+info.pages );
+        } );
+
         //check exists or not product list
         table.on('draw', function () {
                 /* Now you can count rows */
@@ -82,6 +89,8 @@
                         $('.exists-seller-product-list').show();
                     }
                 //  }, 1000);
+                var info = table.page.info();
+                $('#pageInfo').html( 'Showing page: '+(info.page+1)+' of '+info.pages );
 
         });
         //filter
@@ -94,6 +103,8 @@
                          $('.not-exists-seller-product-list').hide();
                          $('.exists-seller-product-list').show();
                     }
+                    var info = table.page.info();
+                    $('#pageInfo').html( 'Showing page: '+(info.page+1)+' of '+info.pages );
 
                 });
         });
@@ -107,6 +118,9 @@
                          $('.not-exists-seller-product-list').hide();
                          $('.exists-seller-product-list').show();
                     }
+
+                    var info = table.page.info();
+                    $('#pageInfo').html( 'Showing page: '+(info.page+1)+' of '+info.pages );
 
                 });
 
@@ -298,7 +312,12 @@
 
                         if(data.product.overlay_original_image){
                             var src='{{asset("storage")}}'+'/'+data.product.overlay_original_image;
-                            $('.overlay-image-preview').attr("src", src);
+                            $('#product-edit-modal-block .overlay-image-preview').attr("src", src);
+                            const overlay_image_delete_button='<a href="javascript:void(0);" class="btn_delete" onclick="removeWholesalerOverlayImage('+data.product.id+');"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>';
+                            $('#product-edit-modal-block .remove-overlay-image').html(overlay_image_delete_button);
+                        }else{
+                            $('#product-edit-modal-block .remove-overlay-image').html('');
+                            $('#product-edit-modal-block .overlay-image-preview').attr("src", 'https://www.riobeauty.co.uk/images/product_image_not_found.gif');
                         }
                         if(data.product.video){
                                 $('#product-edit-modal-block .edit-video-upload-block').hide();
@@ -605,7 +624,7 @@
                         // $('.modal-close').click();
                         $('#product-edit-modal-block').modal('close');
                         var table = $('#seller-product-datatable').DataTable();
-                        table.ajax.reload();
+                        table.ajax.reload(null, false);
 
                     },
                 error: function(xhr, status, error)
@@ -982,6 +1001,39 @@ $(document).on('click', '.btn-back-to-product-list', function (e) {
 
     });
 
+    function removeWholesalerOverlayImage(id){
+        var check= confirm('are you sure?');
+        if(check != true){
+            return false;
+        }
+        var url = '{{ route("remove.wholesaler.overlay.image", ":product_id") }}';
+            url = url.replace(':product_id', id);
+            $.ajax({
+                method: 'get',
+                processData: false,
+                contentType: false,
+                cache: false,
+                url: url,
+                beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $('#product-edit-modal-block .remove-overlay-image').html('');
+                        $('#product-edit-modal-block .overlay-image-preview').attr("src", 'https://www.riobeauty.co.uk/images/product_image_not_found.gif');
+
+                    },
+                error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        alert(error + '. Please try again');
+                    }
+            });
+    }
 
 
     // $(document).ready(function (e) {

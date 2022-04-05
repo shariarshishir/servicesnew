@@ -1362,6 +1362,26 @@ class ProductController extends Controller
         $collection = $manufacture_products->mergeRecursive($wholesaler_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
         $merged=collect();
         foreach($collection as $item){
+            $attribute_array=[];
+            if($item->flag == 'shop')
+            {
+                if($item->product_type==1 ){
+                    foreach(json_decode($item->attribute) as $attribute){
+                        $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
+                    }
+                }else if($item->product_type==2 ){
+                    foreach(json_decode($item->attribute) as $attribute){
+                        $attribute_array[] = (object) array('ready_quantity_min' =>$attribute[0], 'ready_quantity_max' => $attribute[1],'ready_price'=>$attribute[2]);
+                    }
+                }
+                else{
+                    foreach(json_decode($item->attribute) as $attribute){
+                        $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
+                    }
+
+                }
+
+            }
             $merged->push(
                 [
                 'id' => $item->id,
@@ -1369,9 +1389,10 @@ class ProductController extends Controller
                 'flag' => $item->flag,
                 'category' => $item->category->name,
                 'moq' => (int)$item->moq ?? null,
-                'price' => $item->price ?? null,
+                'price' => $item->price_per_unit ?? null,
+                'quantity_unit' => $item->product_unit ?? $item->qty_unit,
                 'image' => $item->images ?? $item->product_images,
-                'attribute' =>$item->attribute ?  json_decode($item->attribute) : null,
+                'attribute' => $item->flag == 'shop' ? $attribute_array : null,
                 'product_type' => $item->product_type ?? null ,
                 'created_at' => $item->created_at,
                 'priority_level' => $item->priority_level,
@@ -1422,6 +1443,26 @@ class ProductController extends Controller
         $collection = $manufacture_products->mergeRecursive($wholesaler_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
         $merged=collect();
         foreach($collection as $item){
+            $attribute_array=[];
+            if($item->flag == 'shop')
+            {
+                if($item->product_type==1 ){
+                    foreach(json_decode($item->attribute) as $attribute){
+                        $attribute_array[] = (object) array('quantity_min' =>$attribute[0], 'quantity_max' => $attribute[1],'price'=>$attribute[2],'lead_time'=>$attribute[3]);
+                    }
+                }else if($item->product_type==2 ){
+                    foreach(json_decode($item->attribute) as $attribute){
+                        $attribute_array[] = (object) array('ready_quantity_min' =>$attribute[0], 'ready_quantity_max' => $attribute[1],'ready_price'=>$attribute[2]);
+                    }
+                }
+                else{
+                    foreach(json_decode($item->attribute) as $attribute){
+                        $attribute_array[] = (object) array('non_clothing_quantity_min' =>$attribute[0], 'non_clothing_quantity_max' => $attribute[1],'non_clothing_price'=>$attribute[2]);
+                    }
+
+                }
+
+            }
             $merged->push(
                 [
                 'id' => $item->id,
@@ -1429,9 +1470,10 @@ class ProductController extends Controller
                 'flag' => $item->flag,
                 'category' => $item->category->name,
                 'moq' =>  (int)$item->moq ?? null,
-                'price' => $item->price ?? null,
+                'price' => $item->price_per_unit ?? null,
+                'quantity_unit' => $item->product_unit ?? $item->qty_unit,
                 'image' => $item->images ?? $item->product_images,
-                'attribute' =>$item->attribute ?  json_decode($item->attribute) : null,
+                'attribute' => $item->flag == 'shop' ? $attribute_array : null,
                 'product_type' => $item->product_type ?? null ,
                 'created_at' => $item->created_at,
                 'priority_level' => $item->priority_level,

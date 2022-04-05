@@ -18,7 +18,7 @@
 			<li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
 			<li class="{{ Route::is('rfq.my') ? 'active' : ''}}"><a href="{{route('rfq.my')}}" class="btn_grBorder">My RFQs</a></li>
 			<li style="display: none;"><a href="javascript:void(0);" class="btn_grBorder">Saved RFQs</a></li>
-			<li><a class="btn_grBorder modal-trigger" href="#create-rfq-form">Create RFQ</a></li>
+			<li><a class="btn_grBorder modal-trigger open-create-rfq-modal">Create RFQ</a></li>
 		</ul>
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
@@ -41,7 +41,7 @@
 						{{ $rfqSentList['user']['user_name']}}
 					</h4>
 				</div>
-				
+
 				<div class="profile_view_time right-align col s12 m4 l4">
 					<div style="float: right;" class="rfq_share_box">
 						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList['id']}})"> <i class="material-icons"> share </i> <span>Share</span></a>

@@ -252,7 +252,7 @@
                 </label>
             </div>
             <div class="center-align row profile_edit_img">
-                @foreach($product->product_images as $product_image)
+                @foreach($product->product_images as $key => $product_image)
                     <!--1-->
                     <div class="col s6 m2 l2 center-align">
                         <div class="media_img">
@@ -265,11 +265,13 @@
                             <div class="input-group my-3" style="display:block;">
                                 <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;" />
                                 <div class="input-group-append">
-                                    <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                    <a href="javascript:void(0);" dataid="{{$product_image->id}}" onclick="removeManufactureImage(this);">remove</a>
+                                    <button type="button" class="browse btn btn-search btn-default btn-upload-wholesaler-img" style="background:#55A860; color:#fff; display:none;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @if($key == 4) @break @endif
                     <!--/1-->
                 @endforeach
                 @if(count($product->product_images) < 5)
@@ -302,8 +304,9 @@
                         <label class="active">Overlay Image:</label>
                     </div>
                     <div class="col s12 m9 l9" id="lineitems">
-                        <div class="overlay-image-preview-block">
+                        <div class="overlay-image-preview-block overlay-img-div">
                             @if( $product->overlay_image )
+                                <a href="javascript:void(0);" class="btn_delete rm-overlay-btn" onclick="removeManufactureOverlayImage({{$product->id}});"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
                                 <img class="overlay-image-preview" src="{{asset('storage/'.$product->overlay_image)}}"
                                 alt="preview image" style="max-height: 150px;">
                             @else

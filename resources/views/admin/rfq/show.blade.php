@@ -33,7 +33,7 @@
                     <div class="card">
                         <div class="rfq_admin_chat_topwrap">
                             <div class="rfq_chat_top">
-                                <span class="chat_idBox">RFQ ID: <span class="rfq_id">3669700</span></span>
+                                <span class="chat_idBox">RFQ ID: <span class="rfq_id">{{$rfq['id']}}</span></span>
                                 <div class="chat_top_right">
                                     <ul>
                                         <li class="active"><a href="javascript:void(0);" class="btn_grBorder">Generate PI</a></li>
@@ -59,37 +59,58 @@
                                     </div>
                                 </div>
                                 <div class="infoBox">
-                                    <p>{{$rfq['title']}}</p>
-                                    <p>Query for {{$rfq['category'][0]['name']}}</p>
-                                    <p>Details: {{$rfq['full_specification']}}</p>
-                                    <p>Qty: {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
+                                    <h6>{{$rfq['title']}}</h6>
+                                    <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
+                                    <p><b>Details:</b> {{$rfq['full_specification']}}</p>
+                                    <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                 </div>
                             </div>
                         </div>           
                     </div>
                     <div class="card">
                         <div class="rfq_data_top">
-                            <h3>Matched Suppliers</h3>
                             <div class="business_profile_filter">
-                                <div class="factory_type_filter">
-                                    <label>Factory Type</label>
-                                    <select class="form-select form-control" name="factory_type" id="factory_type">
-                                        <option value="">Select factory type</option>
-                                        @foreach($productCategories as $productCategory)
-                                            <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="rating_type_filter">
-                                    <label>Rating</label>
-                                    <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                        <option value="0">All</option>
-                                        <option value="5">5 star</option>
-                                        <option value="4">4 star</option>
-                                        <option value="3">3 star</option>
-                                        <option value="2">2 star</option>
-                                        <option value="1">1 star</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4">
+                                        <h3>Matched Suppliers</h3>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="factory_type_filter">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <label>Factory Type</label>
+                                                </div>
+                                                <div class="col-sm-12 col-md-8">
+                                                    <select class="form-select form-control" name="factory_type" id="factory_type">
+                                                        <option value="">Select factory type</option>
+                                                        @foreach($productCategories as $productCategory)
+                                                            <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="rating_type_filter">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <label>Rating</label>
+                                                </div>
+                                                <div class="col-sm-12 col-md-8">
+                                                    <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                                        <option value="0">All</option>
+                                                        <option value="5">5 star</option>
+                                                        <option value="4">4 star</option>
+                                                        <option value="3">3 star</option>
+                                                        <option value="2">2 star</option>
+                                                        <option value="1">1 star</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +123,7 @@
                                         <div class="suppliers_box">
                                             <div class="suppliers_imgBox">
                                                 <div class="imgBox">
-                                                    <img src="./images/logo.png" alt="" />
+                                                    <img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />
                                                 </div>
                                                 <h5>MB Pool</h5>
                                             </div>
@@ -116,11 +137,11 @@
                                                 <div class="sms_details_box">
                                                     <div class="sms_details">
                                                         Contact Person <br/>
-                                                        <span>Ron Wisley</span>
+                                                        <span>{{$businessProfile['user']['name']}}</span>
                                                     </div>
                                                     <div class="sms_details">
                                                         Contact Number <br/>
-                                                        <span>01234567899</span>
+                                                        <span>{{$businessProfile['user']['phone']}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="send_box">
@@ -133,35 +154,43 @@
                                     <div class="modal fade" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                            <div class="modal-body">
-                                                <h4>{{$businessProfile['business_name']}}</h4>
-                                                <div class="propose_price_block">
-                                                    <div class="print_block">
-                                                        <label>Offer Price</label>
-                                                        <div class="propose_price_input_block">
-                                                            $ <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                <div class="modal-body">
+                                                    <legend>{{$businessProfile['business_name']}}</legend>
+                                                    <div class="propose_price_block">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-6">
+                                                            <div class="print_block">
+                                                                <label>Offer Price ($)</label>
+                                                                <div class="propose_price_input_block">
+                                                                    <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6">
+                                                            <div class="uom_block">
+                                                                <label>Price Unit</label>
+                                                                <select name="propose_uom" class="propose_uom form-select form-control">
+                                                                    <option value="" selected="true" disabled="">Choose your option</option>
+                                                                    <option value="Pcs">Pcs</option>
+                                                                    <option value="Lbs">Lbs</option>
+                                                                    <option value="Gauge">Gauge</option>
+                                                                    <option value="Yard">Yards</option>
+                                                                    <option value="Kg">Kg</option>
+                                                                    <option value="Meter">Meter</option>
+                                                                    <option value="Dozens">Dozens</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="separator_block"> / </div>
-                                                    <div class="uom_block">
-                                                        <label>Price Unit</label>
-                                                        <select name="propose_uom" class="propose_uom form-select form-control">
-                                                            <option value="" selected="true" disabled="">Choose your option</option>
-                                                            <option value="Pcs">Pcs</option>
-                                                            <option value="Lbs">Lbs</option>
-                                                            <option value="Gauge">Gauge</option>
-                                                            <option value="Yard">Yards</option>
-                                                            <option value="Kg">Kg</option>
-                                                            <option value="Meter">Meter</option>
-                                                            <option value="Dozens">Dozens</option>
-                                                        </select>
+
+                                                    <!-- <div class="separator_block"> / </div> -->
+                                                        
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" data-businessprofilename="{{$businessProfile['business_name']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" data-businessprofilename="{{$businessProfile['business_name']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div> 
@@ -239,7 +268,7 @@
                                                     <div class="chat-footer">
                                                         <form action="javascript:void(0);" class="chat-input">
                                                             <input type="text" placeholder="Type message here.." id="messagebox" class="message mb-0">
-                                                            <a class="btn_green send messageSendButton">Send</a>
+                                                            <a class="btn_green send messageSendButton">Send <i class="fa fa-chevron-circle-right"></i> </a>
                                                         </form>
                                                     </div>
                                                     <!--/ Chat footer -->
@@ -303,7 +332,7 @@
                 }                
             });            
 
-            $(document).on('click', '#factory_type', function(){
+            $(document).on('change', '#factory_type', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
                 console.log(category_id);
@@ -318,50 +347,74 @@
                             if(response.businessProfiles.length >0){
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
-                                    var html ='<div class="col-md-3">';
-                                    html+='<div class="form-check">';
-                                    html+='<label class="form-check-label" for="flexCheckDefault">';
-                                    html+='<p>'+item.business_name+'</p>';
-                                    html+='</label>';
-                                    html+='</div>';
-                                    html+='<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
-                                    html+='<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
-                                    html+='<div class="modal fade" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
-                                    html+='<div class="modal-dialog" role="document">';
-                                    html+='<div class="modal-content">';
-                                    html+='<div class="modal-body">';
-                                    html+='<h4>'+item.business_name+'</h4>';
-                                    html+='<div class="propose_price_block">';
-                                    html+='<div class="print_block">';
-                                    html+='<label>Offer Price</label>';
-                                    html+='<div class="propose_price_input_block">';
-                                    html+='$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='<div class="separator_block"> / </div>';
-                                    html+='<div class="uom_block">';
-                                    html+='<label>Price Unit</label>';
-                                    html+='<select name="propose_uom" class="propose_uom form-select form-control">';
-                                    html+='<option value="" selected="true" disabled="">Choose your option</option>';
-                                    html+='<option value="Pcs">Pcs</option>';
-                                    html+='<option value="Lbs">Lbs</option>';
-                                    html+='<option value="Gauge">Gauge</option>';
-                                    html+='<option value="Yard">Yards</option>';
-                                    html+='<option value="Kg">Kg</option>';
-                                    html+='<option value="Meter">Meter</option>';
-                                    html+='<option value="Dozens">Dozens</option>';
-                                    html+='</select>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='<div class="modal-footer">';
-                                    html+='<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                                    html+='<button type="button" data-businessprofilename="'+item.business_name+'" class="btn btn-primary send_offer_price_trigger">Send</button>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';      
+                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4">';
+                                    html += '<div class="suppliersBoxWrap">';
+                                    html += '<div class="suppliers_box">';
+                                    html += '<div class="suppliers_imgBox">';
+                                    html += '<div class="imgBox">';
+                                    html += '<img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />';
+                                    html += '</div>';
+                                    html += '<h5>MB Pool</h5>';
+                                    html += '</div>';
+                                    html += '<div class="suppliers_textBox">';
+                                    html += '<div class="title_box">';
+                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<div class="sms_img">';
+                                    html += '<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details_box">';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Person <br/>';
+                                    html += '<span>'+item.user.name+'</span>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Number <br/>';
+                                    html += '<span>'+item.user.phone+'</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="send_box">';
+                                    html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal fade" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
+                                    html += '<div class="modal-dialog" role="document">';
+                                    html += '<div class="modal-content">';
+                                    html += '<div class="modal-body">';
+                                    html += '<h4>'+item.business_name+'</h4>';
+                                    html += '<div class="propose_price_block">';
+                                    html += '<div class="print_block">';
+                                    html += '<label>Offer Price</label>';
+                                    html += '<div class="propose_price_input_block">';
+                                    html += '$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="separator_block"> / </div>';
+                                    html += '<div class="uom_block">';
+                                    html += '<label>Price Unit</label>';
+                                    html += '<select name="propose_uom" class="propose_uom form-select form-control">';
+                                    html += '<option value="" selected="true" disabled="">Choose your option</option>';
+                                    html += '<option value="Pcs">Pcs</option>';
+                                    html += '<option value="Lbs">Lbs</option>';
+                                    html += '<option value="Gauge">Gauge</option>';
+                                    html += '<option value="Yard">Yards</option>';
+                                    html += '<option value="Kg">Kg</option>';
+                                    html += '<option value="Meter">Meter</option>';
+                                    html += '<option value="Dozens">Dozens</option>';
+                                    html += '</select>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal-footer">';
+                                    html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                    html += '<button type="button" data-businessprofilename="'+item.business_name+'" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';    
                                     $('.rfq_business_profile_list').append(html);
                                 })
                             }else{
@@ -377,7 +430,7 @@
             });
 
 
-            $(document).on('click', '#profile_rating', function(){
+            $(document).on('change', '#profile_rating', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
                 console.log(category_id);
@@ -391,50 +444,74 @@
                             if(response.businessProfiles.length >0){
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
-                                    var html ='<div class="col-md-3">';
-                                    html+='<div class="form-check">';
-                                    html+='<label class="form-check-label" for="flexCheckDefault">';
-                                    html+='<p>'+item.business_name+'</p>';
-                                    html+='</label>';
-                                    html+='</div>';
-                                    html+='<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
-                                    html+='<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
-                                    html+='<div class="modal fade" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
-                                    html+='<div class="modal-dialog" role="document">';
-                                    html+='<div class="modal-content">';
-                                    html+='<div class="modal-body">';
-                                    html+='<h4>'+item.business_name+'</h4>';
-                                    html+='<div class="propose_price_block">';
-                                    html+='<div class="print_block">';
-                                    html+='<label>Offer Price</label>';
-                                    html+='<div class="propose_price_input_block">';
-                                    html+='$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='<div class="separator_block"> / </div>';
-                                    html+='<div class="uom_block">';
-                                    html+='<label>Price Unit</label>';
-                                    html+='<select name="propose_uom" class="propose_uom form-select form-control">';
-                                    html+='<option value="" selected="true" disabled="">Choose your option</option>';
-                                    html+='<option value="Pcs">Pcs</option>';
-                                    html+='<option value="Lbs">Lbs</option>';
-                                    html+='<option value="Gauge">Gauge</option>';
-                                    html+='<option value="Yard">Yards</option>';
-                                    html+='<option value="Kg">Kg</option>';
-                                    html+='<option value="Meter">Meter</option>';
-                                    html+='<option value="Dozens">Dozens</option>';
-                                    html+='</select>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='<div class="modal-footer">';
-                                    html+='<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                                    html+='<button type="button" data-businessprofilename="'+item.business_name+'" class="btn btn-primary send_offer_price_trigger">Send</button>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';
-                                    html+='</div>';      
+                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4">';
+                                    html += '<div class="suppliersBoxWrap">';
+                                    html += '<div class="suppliers_box">';
+                                    html += '<div class="suppliers_imgBox">';
+                                    html += '<div class="imgBox">';
+                                    html += '<img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />';
+                                    html += '</div>';
+                                    html += '<h5>MB Pool</h5>';
+                                    html += '</div>';
+                                    html += '<div class="suppliers_textBox">';
+                                    html += '<div class="title_box">';
+                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<div class="sms_img">';
+                                    html += '<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details_box">';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Person <br/>';
+                                    html += '<span>'+item.user.name+'</span>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Number <br/>';
+                                    html += '<span>'+item.user.phone+'</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="send_box">';
+                                    html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal fade" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
+                                    html += '<div class="modal-dialog" role="document">';
+                                    html += '<div class="modal-content">';
+                                    html += '<div class="modal-body">';
+                                    html += '<h4>'+item.business_name+'</h4>';
+                                    html += '<div class="propose_price_block">';
+                                    html += '<div class="print_block">';
+                                    html += '<label>Offer Price</label>';
+                                    html += '<div class="propose_price_input_block">';
+                                    html += '$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="separator_block"> / </div>';
+                                    html += '<div class="uom_block">';
+                                    html += '<label>Price Unit</label>';
+                                    html += '<select name="propose_uom" class="propose_uom form-select form-control">';
+                                    html += '<option value="" selected="true" disabled="">Choose your option</option>';
+                                    html += '<option value="Pcs">Pcs</option>';
+                                    html += '<option value="Lbs">Lbs</option>';
+                                    html += '<option value="Gauge">Gauge</option>';
+                                    html += '<option value="Yard">Yards</option>';
+                                    html += '<option value="Kg">Kg</option>';
+                                    html += '<option value="Meter">Meter</option>';
+                                    html += '<option value="Dozens">Dozens</option>';
+                                    html += '</select>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal-footer">';
+                                    html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                    html += '<button type="button" data-businessprofilename="'+item.business_name+'" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';     
                                     $('.rfq_business_profile_list').append(html);
                                 })
                             }else{

@@ -23,39 +23,63 @@
         <div class="container-fluid">
             <div class="row admin_order_list_table_wrap">
                 <div class="col-md-12">
-                    <div class="card">
-                        <legend>Rfqs List</legend>
-                        <div class="no_more_tables">
-                            <table class="table table-bordered orders-table data-table">
-                                <thead class="cf">
-                                    <tr>
-                                        <th>Sl</th>
-                                        <th>Title</th>
-                                        <th>Date</th>
-                                        <th>Buyer Name</th>
-                                        <th>Category</th>
-                                        <th>Target price</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="cf">
-                                    @foreach($rfqs as $key=>$rfq)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$rfq['title']}}</td>
-                                        <td>{{$rfq['created_at']}}</td>
-                                        <td>{{$rfq['user']['user_name']}}</td>
-                                        <td>{{$rfq['category'][0]['name']}}</td>
-                                        <td>$ {{$rfq['unit_price']}}</td>
-                                        <td>
-                                            <a href="{{route('admin.rfq.show', $rfq['id'])}}" class="show-rfq-details-trigger"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0);" class="remove-rfq-trigger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="rfq_order_list_top">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <h3>Rfq</h3>
+                                <div class="select_show">
+                                    <label>Show</label>
+                                    <select>
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                    </select>
+                                    <label>Entries</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="rfq_order_list_search">
+                                    <label>Search</label>
+                                    <input placeholder="Search" type="text" />
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                    <div class="no_more_tables">
+                        <table class="table table-bordered orders-table data-table">
+                            <thead class="cf">
+                                <tr>
+                                    <th>Sl</th>
+                                    <th>Date</th>
+                                    <th>RFQ Title</th>
+                                    <th>Category</th>
+                                    <th>Quantity</th>
+                                    <th>Target price</th>
+                                    <th>Delivery Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cf">
+                                @foreach($rfqs as $key=>$rfq)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$rfq['created_at']}}</td>
+                                    <td>{{$rfq['title']}}</td>
+                                    <td>{{$rfq['category'][0]['name']}}</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>$ {{$rfq['unit_price']}}</td>
+                                    <!-- <td>{{$rfq['user']['user_name']}}</td> -->
+                                    <td>
+                                        <a href="{{route('admin.rfq.show', $rfq['id'])}}" class="show-rfq-details-trigger"><i class="fa fa-eye"></i></a>
+                                        <a href="javascript:void(0);" class="remove-rfq-trigger"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -67,6 +91,7 @@
 @endsection
 @push('js')
   <script>
+
     //    $(function () {
     //     var table = $('.data-table').DataTable({
     //         processing: true,
@@ -86,6 +111,7 @@
     //         ]
     //     });
     // });
+
   </script>
 @endpush
 

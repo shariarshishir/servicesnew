@@ -31,12 +31,13 @@ a {
 }
 legend {
     background-color: #ddd;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: #000;
     padding: 10px;
     display: block;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 p {
     margin-bottom: 10px;
@@ -63,6 +64,27 @@ p {
 b,
 label:not(.form-check-label):not(.custom-file-label) {
     font-weight: 600;
+}
+
+.btn-secondary {
+    font-size: 14px;
+    color: #73D578;
+    border: 2px solid #73D578;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 18px;
+    background: none;
+}
+.btn-secondary:focus,
+.btn-secondary:hover {
+    background: none !important;
+    color: #73D578 !important;
+    border: 2px solid #73D578;
+    outline: none;
+}
+.btn-primary:focus,
+.btn-primary:hover {
+    background: #54A958 !important;
 }
 
 #dashborad-panel div {
@@ -592,7 +614,6 @@ label:not(.form-check-label):not(.custom-file-label) {
     text-align: right;
     width: 100%;
 }
-
 .buyerdata_info_admin {
     padding: 10px 10px 20px;
 }
@@ -829,20 +850,37 @@ label:not(.form-check-label):not(.custom-file-label) {
     margin-right: 15px;
 }
 
+.rfq_data_top .business_profile_filter {
+    display: inherit;
+    padding-bottom: 20px;
+}
+
+.rfq_data_top .business_profile_filter label {
+    font-size: 12px;
+    margin: 5px 0 0;
+}
+
 
 /* ********************************* */
+.admin_rfq_wrapper {
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+}
+
 .rfq_admin_chat_topwrap .rfq_chat_top {
     display: inline-block;
     width: 100%;
 }
 .rfq_admin_chat_topwrap .rfq_chat_top .chat_idBox {
     float: left;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
 }
 .rfq_chat_top .chat_idBox .rfq_id {
     color: #54A958;
     font-style: italic;
+    font-size: 16px;
 }
 .rfq_admin_chat_topwrap .chat_top_right {
     text-align: right;
@@ -904,9 +942,6 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .rfq_admin_chat_topwrap .chat_info_right {
     float: left;
-    color: #000000;
-    font-size: 12px;
-    line-height: 18px;
     padding-top: 15px;
 }
 .rfq_admin_chat_topwrap .chat_info_right h3 {
@@ -923,35 +958,34 @@ label:not(.form-check-label):not(.custom-file-label) {
     padding-top: 30px;
 }
 .rfq_admin_chat_topwrap .infoBox {
-    font-size: 14px;
-    line-height: 26px;
     color: infoBox;
     padding: 20px 0;
 }
-.matched_suppliers_wrap {
-    display: inline-block;
-    width: 100%;
-}
-.matched_suppliers_wrap h3 {
-    font-size: 16px;
+
+.rfq_data_top h3 {
+    font-size: 20px;
     line-height: 22px;
     color: #000000;
     font-weight: 600;
     margin-bottom: 20px;
 }
+.matched_suppliers_wrap {
+    display: inline-block;
+    width: 100%;
+}
 .matched_suppliers_wrap .suppliers_imgBox {
-    width: 25%;
+    width: 22%;
     text-align: center;
     float: left;
 }
 .suppliersBoxWrap {
     border: 1px solid #707070;
-    padding: 10px;
+    padding: 10px 10px 0px;
     margin-bottom: 20px;
 }
 .matched_suppliers_wrap .imgBox {
-    width: 70px;
-    height: 65px;
+    width: 60px;
+    height: 55px;
     border-radius: 50%;
     margin: auto;
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
@@ -977,7 +1011,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .matched_suppliers_wrap .suppliers_textBox {
     float: right;
-    width: 70%;
+    width: 74%;
 }
 .matched_suppliers_wrap .sms_details_box,
 .matched_suppliers_wrap .title_box {
@@ -990,19 +1024,31 @@ label:not(.form-check-label):not(.custom-file-label) {
     color: #000000;
     font-weight: 500;
     float: left;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-height: 30px;
+    width: 80%;
 }
 .matched_suppliers_wrap .sms_img {
     float: right;
     margin: 0px 0 0 10px;
 }
-.matched_suppliers_wrap .sms_img img {
-    width: 25px;
+.matched_suppliers_wrap .sms_img .fa-envelope {
+    font-size: 20px;
+}
+.matched_suppliers_wrap .sms_img:hover .fa-envelope {
+    color: #73D578;
 }
 .matched_suppliers_wrap .sms_details_box .sms_details {
     float: left;
-    padding-right: 20px;
+    padding-right: 10px;
     color: #000000;
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 16px;
     width: 50%;
 }
 .matched_suppliers_wrap .sms_details_box .sms_details:last-child {
@@ -1015,17 +1061,90 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .matched_suppliers_wrap .send_box {
     text-align: right;
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
     padding-top: 10px;
 }
-.matched_suppliers_wrap .send_box button {
-    background: none;
-    border: none;
-    cursor: pointer;
+.matched_suppliers_wrap .send_box .fa {
+    font-size: 12px;
+}
+.matched_suppliers_wrap .send_box:hover .fa,
+.matched_suppliers_wrap .send_box:hover a {
+    color: #73D578;
 }
 /* ********************************* */
 
+
+.rfq_order_list_top {
+    padding: 0 10px 10px;
+}
+.rfq_order_list_top h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.select_show label {
+    margin-right: 10px;
+}
+.select_show select {
+    margin-right: 10px;
+}
+.rfq_order_list_search {
+    text-align: right;
+    padding-top: 20px;
+}
+.admin_order_list_table_wrap table {
+    background: #FFFFFF;
+    border-radius: 0;
+}
+.admin_order_list_table_wrap table thead {
+    background: none;
+    color: #000000;
+}
+.remove-rfq-trigger .fa {
+    color: red;
+    margin: 0 5px;
+}
+
+.message_header {
+    background: #4E9C52;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px 10px 0 0;
+}
+.chatting_app_wrapper .card {
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px 5px;
+}
+
+.chatting_app_wrapper .chat-application .app-chat .chat-content .chat-content-area .chat-area {
+    padding: 0;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .send,
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text p {
+    padding: 5px;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
+    margin: 0;
+}
+
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .fa-chevron-circle-right {
+    margin-left: 10px;
+}
+
+/* *************** RFQ modal css ****************** */
+
+.admin_rfq_wrapper .modal .modal-dialog {
+    max-width: 50%;
+}
+.propose_price_input_block input {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    height: 38px;
+}
+
+
+/* ********************************* */
 
 @media only screen and (max-width: 800px) {
     .no_more_tables {

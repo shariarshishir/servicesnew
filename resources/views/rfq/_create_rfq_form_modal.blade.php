@@ -24,7 +24,7 @@
                                 <label>Select Product Category <span >*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <select class="select2" name="category_id" required>
+                                <select class="select2" name="category[]" id="category_id" required multiple >
                                     <option>Select an option</option>
                                     @foreach($manufacture_product_categories as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
@@ -76,7 +76,7 @@
                                             <label>Select Unit <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <select class="select2" name="unit">
+                                            <select class="select2" name="unit" id="unit">
                                                 <option value="">Select an option</option>
                                                 @php $units = units(); @endphp
                                                 @foreach($units as $unit=>$value)
@@ -116,7 +116,7 @@
                                             <label>Select Payment Method <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <select class="select2" name="payment_method" required>
+                                            <select class="select2" name="payment_method" id="payment_method" required>
                                                 <option>Select an option</option>
                                                 <option value="cash">Cash</option>
                                                 <option value="card">Card</option>

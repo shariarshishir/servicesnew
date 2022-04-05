@@ -19,7 +19,8 @@ class RfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqs = $data['data'];
-        return view('admin.rfq.index',compact('rfqs'));
+        $rfqsCount = $data['count'];
+        return view('admin.rfq.index',compact('rfqs','rfqsCount'));
     }
 
     public function show($id){
@@ -75,10 +76,13 @@ class RfqController extends Controller
         }
     }
     public function businessProfileFilter(Request $request){
-        if($request->category_id && $request->profile_rating !=0){
+        if($request->category_id && $request->profile_rating !=0)
+        {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
-            $businessProfiles = BusinessProfile::with('user')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
-        }elseif($request->category_id && $request->profile_rating ==0){
+            $businessProfiles = BusinessProfile::with('user')->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+        }
+        elseif($request->category_id && $request->profile_rating ==0)
+        {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
             $businessProfiles = BusinessProfile::with('user')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
         }

@@ -2465,7 +2465,39 @@
 
     });
 
+    function removeManufactureOverlayImage(id){
+        var check= confirm('are you sure?');
+        if(check != true){
+            return false;
+        }
+        var url = '{{ route("remove.manufacture.overlay.image", ":product_id") }}';
+            url = url.replace(':product_id', id);
+            $.ajax({
+                method: 'get',
+                processData: false,
+                contentType: false,
+                cache: false,
+                url: url,
+                beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $('.overlay-img-div .rm-overlay-btn').remove();
+                        $('.overlay-img-div .overlay-image-preview').attr("src", 'https://www.riobeauty.co.uk/images/product_image_not_found.gif');
 
+                    },
+                error: function(xhr, status, error)
+                    {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        alert(error + '. Please try again');
+                    }
+            });
+    }
     </script>
 
 @endpush

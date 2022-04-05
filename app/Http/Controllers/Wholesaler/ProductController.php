@@ -700,4 +700,19 @@ class ProductController extends Controller
         return response()->json(array('success' => true, 'msg' => 'Product Published Successfully'),200);
       }
     }
+
+    public function removeOverlayImage($id)
+    {
+        $product=Product::where('id',$id)->first();
+        if(!$product){
+            return response()->json(['msg' => 'product not found'], 404);
+        }
+        if(Storage::exists($product->overlay_small_image) && Storage::exists($product->overlay_original_image)){
+            Storage::delete($product->overlay_small_image);
+            Storage::delete($product->overlay_original_image);
+            $product->update(['overlay_original_image' => null, 'overlay_small_image' => null]);
+            return response()->json(['msg' => 'overlay image removed'], 200);
+        }
+        return response()->json(['msg' => 'folder not exists'], 500);
+    }
 }

@@ -1,11 +1,23 @@
 @push('js')
 <script>
 
+    $('.open-create-rfq-modal').click(function(){
+        $('#create-rfq-form').modal('open');
+        $('.createRfqForm')[0].reset();
+        $('#create-rfq-form #category_id').val('');
+        $('#create-rfq-form #category_id').trigger('change');
+        $('#create-rfq-form #unit').val('');
+        $('#create-rfq-form #unit').trigger('change');
+        $('#create-rfq-form #payment_method').val('');
+        $('#create-rfq-form #payment_method').trigger('change');
+        $('#create-rfq-form .img-thumbnail').attr('src','https://via.placeholder.com/380');
+    });
+
     $('.createRfqForm').on('submit',function(e){
         e.preventDefault();
-        var url = 'http://192.168.68.148:8888/api/quotation';
-        // var formData = new FormData($('.createRfqForm')[0]);
-        // console.log(formData);
+        const rfq_app_url = "{{env('RFQ_APP_URL')}}";
+        var url = rfq_app_url+'/api/quotation';
+        const sso_token = "Bearer " +"{{ Cookie::get('sso_token') }}";
 
         var formData = new FormData();
         var file_data = $('input[type="file"]')[0].files; // for multiple files
@@ -14,13 +26,24 @@
             formData.append("files", $('input[type="file"]')[i].files[0]);
         }
         formData.append("rfq_from", 'service');
-        
-        
+
+
         var other_data = $('.createRfqForm').serializeArray();
-        $.each(other_data,function(key,input){
-            formData.append(input.name,input.value);
+        var category_id=[];
+        $("#category_id :selected").each(function() {
+            category_id.push(this.value);
         });
+        var stringCatId=category_id.toString();
+
+        $.each(other_data,function(key,input){
+            if(input.name != 'category[]'){
+                formData.append(input.name,input.value);
+            }
+        });
+
+        formData.append('category_id', stringCatId);
         formData.append('_token', "{{ csrf_token() }}");
+
         $.ajax({
             method: 'post',
             processData: false,
@@ -29,27 +52,24 @@
             data: formData,
             enctype: 'multipart/form-data',
             url: url,
-            headers: { 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUxNTU2NzMxLCJqdGkiOiI4NzgyMTgyOTE3Yjc0YmVkYWM3ZTYwMzRjOTJlY2MyZiIsInVzZXJfaWQiOjEsImNvbXBhbnlfaWQiOjEsImlzX2FkbWluIjp0cnVlLCJ1c2VyX25hbWUiOiJUeWxlciBEZWxhY3J1eiIsInVzZXJfdHlwZSI6Im1lcmNoYW5kaXNlciIsImlkIjoxLCJuYW1lIjoiVHlsZXIgRGVsYWNydXoiLCJlbWFpbCI6ImthZGVyQGdtYWlsLmNvbSIsInBob25lIjoiKzEgKDM1NSkgOTk5LTQyMjUifQ.GfN-71tTqx9rlrD77P-C5zbLBubVaTCNjkb6newyiLOiSunPWjMOC-qQs3e_iTqFXpMD8d7XEetG1qmjjCpU3USMJkCfmDsLNe-HIbDFZyU_tsoJHNL0iLdfoP5J7lmuHOLoF6w-d7VcAblC5H5iwmJQH9Z2sYSSg2iZP8TNTCbgQGRNMWFTaumxS4UaPKsKUdiBgig2Ld3e4uH_-shVy5VperH9pqCbl40gKaSGd5UEsmvIdZLH5d_9FbE0G6-Fr40mmcI688JgIIlFqJNP25Xq23nNjpSavHCZljG3DyhpVwOF0gXhOD16tES6UlhSn4mjd_5DfQurmFoBoE39YccyaPXNMKnAOR76eSK9Ad7Tyhl30bfM6k-5ake8zb0fyryVM6VHXSyhV65njulqm4zXhleNq1zB6ZImTdLjNrYSg-s9adt_9lhp7K3a1sMvQ1T_I0efAQdQ6-dXBiQqgcIhkAehI5ipTtYPPw-JLlOAlszIYtQ4wPnbce6vGP9re6q8viK9rTK1B_AUh-TIomYNcN3dlUJWZxZ4myh3TqWGsuDBxVYod4-ERLDVyIIJ9nxL9wk9FiwI5GTTGzlAg4OeG8_VkE58rjudX3lZHBFvVzmwsEDUG9-5H58Es8XxbRPagmUkUakzLjm4Bx7C4zFDsyxQtFk-6r6gscWZavM' },
+            headers: { 'Authorization': sso_token },
             beforeSend: function() {
-            $('.loading-message').html("Please Wait.");
-            $('#loadingProgressContainer').show();
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
             },
 
-        success:function(response){
-            $('.loading-message').html("");
-            $('#loadingProgressContainer').hide();
-            
-        },
-        error: function(xhr, status, error)
+            success:function(response){
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                $('#create-rfq-form').modal('close');
+            },
+            error: function(xhr, status, error)
                 {
-                    // $('#association-membership-upload-errors').empty();
-                    // $("#association-membership-upload-errors").append("<div class=''>"+error+"</div>");
-                    // $.each(xhr.responseJSON.error, function (key, item)
-                    // {
-                    //     $("#association-membership-upload-errors").append("<div class='danger'>"+item+"</div>");
-                    // });
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                alert(error);
                 }
-        });
+            });
         });
 
 

@@ -167,12 +167,19 @@
                     let message = {'message': $('#messagebox').val(), 'image': "", 'from_id' : from_id, 'to_id' : '5552', 'rfq_id': "19b7c320-b3c7-11ec-9015-c14cf8f032b4",'factory':true,'product': null};
                     socket.emit('new message', message);
                     $('#messagebox').val('');
-                    $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
-                    var height = 0;
-                    $('#messagedata div').each(function(i, value){
-                        height += parseInt($(this).height());
-                    });
-                    height += '';
+                    var msgHtml = '<div class="chat chat-right">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+response.from_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+item.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    
                     $('.chat-area').animate({scrollTop: (height + 10)});
                 }else{
                     alert('Select a RFQ first');

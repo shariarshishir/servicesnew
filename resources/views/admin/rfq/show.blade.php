@@ -294,9 +294,17 @@
     <script>
         //function enter_chat(a){var e=$(".message").val();if(""!=e){var t='<div class="chat-text"><p>'+e+"</p></div>";$(".chat:last-child .chat-body").append(t),$(".message").val(""),$(".chat-area").scrollTop($(".chat-area > .chats").height())}}
         $(document).ready(function() {
+            var envMode = "{{ env('APP_ENV') }}";
+            var fromId;
+            if(envMode == 'production') {
+                fromId = '5771';
+            } else{
+                fromId = '5552';
+            }     
+                   
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];
-            var serverURL = "{{ env('CHAT_URL') }}?userId=5552";
+            var serverURL = "{{ env('CHAT_URL') }}?userId="+fromId;
             var socket = io.connect(serverURL);
             socket.on('connect', function(data) {
                 console.log("Socket Connect successfully.");
@@ -531,12 +539,6 @@
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
                     });
-                    var envMode = "{{ env('APP_ENV') }}";
-                    if(envMode == 'production') {
-                        var fromId = '5771';
-                    } else{
-                        var fromId = '5552';
-                    }
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                     socket.emit('new message', message);
                     var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
@@ -617,12 +619,6 @@
             //$(".send_offer_price_trigger").click(function(){        
             $(document).on("click", ".send_offer_price_trigger", function(){
                 var html = $(this).data("businessprofilename")+" offers "+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
-                var envMode = "{{ env('APP_ENV') }}";
-                if(envMode == 'production') {
-                    var fromId = '5771';
-                } else{
-                    var fromId = '5552';
-                }
                 let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                 socket.emit('new message', message);                
             });
@@ -685,12 +681,6 @@
             $('.messageSendButton').click(function(){
                 //event.preventDefault();
                 var msg = $('#messagebox').val();
-                var envMode = "{{ env('APP_ENV') }}";
-                if(envMode == 'production') {
-                    var fromId = '5771';
-                } else{
-                    var fromId = '5552';
-                }
                 let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}",'rfq_id': "{{$rfq['id']}}",'factory':false, 'product': null};
                 socket.emit('new message', message);
                 // var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
@@ -710,8 +700,28 @@
                 //     $('.chats-box').append(msgHtml);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
-
-            socket.on('new message', function(data) {
+            
+            if(fromId = '5552') 
+            {
+                socket.on('new message', function(data) {
+                var msgHtml = '<div class="chat chat-right">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                });
+            }
+            else 
+            {
+                socket.on('new message', function(data) {
                 var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -725,7 +735,8 @@
                     msgHtml += '</div>';
                     $('.chats-box').append(msgHtml);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-            });
+                });
+            }
 
         }); 
     </script>

@@ -42,14 +42,15 @@ class MessageController extends Controller
         
        
         $user=Auth::user();
-        $allusers=[];
-        $rfqs = RfqApp::where('created_by',1)->get();
-        // dd($rfqs[1]['id']);
-        $chatdatas = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
-        $chatusers = [];
-        $userData = UserChat::where('id',5552)->get();
-        $chatusers = $userData;
-        return view('message.message_center', compact('rfqs','user','chatusers'));
+        $rfqs = RfqApp::where('sso_reference_id',$user->sso_reference_id)->get();
+        $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
+        if(env('APP_ENV') == 'local'){
+            $adminUser = User::Find('5552');
+        }else{
+            $adminUser = User::Find('5771');
+        }
+        $adminUserImage = asset($adminUser->image);
+        return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage'));
     }
 
     public function message_center_selected($id)
@@ -144,9 +145,12 @@ class MessageController extends Controller
         $rfq_id = $request->rfq_id;
         $from_user_image =  asset('storage/images/supplier.png');
         $to_user_image =  asset('storage/images/supplier.png');
-
         $chatdata = Userchat::where('rfq_id',$rfq_id)->get();
-        return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
+        return response()->json([
+            'from_user_image' => $from_user_image,
+            'to_user_image' => $to_user_image ,
+            'chatdata' => $chatdata
+        ],200);
     }
 
     public function updateuserlastactivity(Request $response)

@@ -38,8 +38,8 @@
                                                             <div class="sidebar-content sidebar-chat ps ps--active-y">
                                                                 @if(count($rfqs) > 0)
                                                                     <div class="chat-list" id="allchatter">
-                                                                        @foreach($rfqs as $rfq)
-                                                                            <div class="chat-user animate fadeUp delay-1 all-chatter-div select-rfq-for-chat-data" data-formid="{{$rfq['created_by']}}" data-toid="5552" data-rfqid="{{ $rfq['id'] }}"  style="cursor: pointer;">
+                                                                        @foreach($rfqs as $key=>$rfq)
+                                                                            <div class="chat-user animate fadeUp delay-1 all-chatter-div select-rfq-for-chat-data  {{ ( $key == 0 ) ? 'active' : ''  }}" data-formid="{{$rfq['created_by']}}" data-toid="{{$adminUser}}" data-rfqid="{{ $rfq['id'] }}"  style="cursor: pointer;">
                                                                                 <div class="user-section">
                                                                                     <div class="row valign-wrapper">
                                                                                         <div class="col s12">
@@ -68,15 +68,48 @@
                                     <!-- Content Area -->
                                     <div class="chat-content-area animate fadeUp messagedata_content_wrap">
                                         <!-- Chat header -->
-                                        <div class="chat-header" id="chatheader"></div>
-                                        @if(auth()->check() && auth()->user()->businessProfile()->exists() && Request::get('uid'))
-                                                <a href="{{route('po.add',Request::get('uid'))}}" class="btn_green btn-success generate-po-btn" style="position: absolute; top: 25px; right: 20px;border: 1px solid #398439;">Generate Pro-Forma Invoice</a>
-                                        @endif
+                                        <div class="chat-header" id="chatheader">
+
+                                        </div>
                                         <!--/ Chat header -->
                                         <!-- Chat content area -->
                                         <div class="chat-area ps ps--active-y">
                                             <div class="chats">
-                                                <div class="chats chat_messagedata" id="messagedata"></div>
+                                                <div class="chats-box chat_messagedata" id="messagedata">
+                                                    @if($chatdata)
+                                                        @foreach($chatdata as $chat)
+                                                            @if($chat['from_id'] == auth()->user()->sso_reference_id)
+                                                            <div class="chat chat-right">
+                                                                <div class="chat-avatar">
+                                                                    <a class="avatar">
+                                                                        <img src="{{asset('storage/'.auth()->user()->image)}}" class="circle" alt="avatar">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="chat-body left-align">
+                                                                    <div class="chat-text">
+                                                                        <p>
+                                                                        @php echo html_entity_decode($chat['message']); @endphp 
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>        
+                                                            @else
+                                                            <div class="chat chat-left">
+                                                                <div class="chat-avatar">
+                                                                    <a class="avatar">
+                                                                        <img src="{{$adminUserImage??asset('images/frontendimages/no-image.png')}}" class="circle" alt="avatar">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="chat-body left-align">
+                                                                    <div class="chat-text">
+                                                                        <p>@php echo html_entity_decode($chat['message']); @endphp </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="ps__rail-x" style="">
                                                 <div class="ps__thumb-x" tabindex="0" style=""></div>
@@ -121,21 +154,30 @@
             });
             var serverURL = "{{ env('CHAT_URL') }}?userId=5552";
             var socket = io.connect(serverURL);
-                socket.on('connect', function(data) {
+            socket.on('connect', function(data) {
+                console.log("Socket Connect successfully.");
             });
 
             $('.messageSendButton').click(function(){
                 event.preventDefault();
-                let message = {'message': $('#messagebox').val(), 'image': "", 'from_id' : "1", 'to_id' : '5552', 'rfq_id': "19b7c320-b3c7-11ec-9015-c14cf8f032b4",'factory':true,'product': null};
-                socket.emit('new message', message);
-                $('#messagebox').val('');
-                $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
-                var height = 0;
-                $('#messagedata div').each(function(i, value){
-                    height += parseInt($(this).height());
-                });
-                height += '';
-                $('.chat-area').animate({scrollTop: (height + 10)});
+                var rfq_id =  $('.select-rfq-for-chat-data').hasClass('active').data("rfqid");
+                var from_id = {{auth()->user()->sso_reference_id}};
+                //var to_id = {{$adminUser->sso_reference_id}};
+                if( $('.select-rfq-for-chat-data').hasClass('active').length >0 ){
+                    let message = {'message': $('#messagebox').val(), 'image': "", 'from_id' : from_id, 'to_id' : '5552', 'rfq_id': "19b7c320-b3c7-11ec-9015-c14cf8f032b4",'factory':true,'product': null};
+                    socket.emit('new message', message);
+                    $('#messagebox').val('');
+                    $('#messagedata').append('<div class="col-md-offset-3 col-md-8 rgt-cbb"><p class="prd-gr2">'+message.message+'</P><div class="col-md-12" style="color:#55A860;"><div class="byr-pb-ld text-right">Just Now</div></div></div>');
+                    var height = 0;
+                    $('#messagedata div').each(function(i, value){
+                        height += parseInt($(this).height());
+                    });
+                    height += '';
+                    $('.chat-area').animate({scrollTop: (height + 10)});
+                }else{
+                    alert('Select a RFQ first');
+                }
+               
             });    
 
             function extractEmails (text) {
@@ -143,23 +185,51 @@
             }
 
             $('.select-rfq-for-chat-data').click(function() {
+                $(".select-rfq-for-chat-data").removeClass("active");
+                $(this).addClass("active");
                 var url='{{route("message.center.getchatdata")}}';
                 var rfq_id =  $(this).data("rfqid");
+                var user_id = {{auth()->user()->sso_reference_id}};
                 jQuery.ajax({
                     type : "POST",
-                    data : rfq_id,
+                    data : {'rfq_id':rfq_id},
                     url : url,
-                    cache : false,
-                    beforeSend: function(){
-                    },
-                    complete: function(){
-                    },
-                    success : function(msg){
-                        $("#messagedata").html(msg);
+                    success : function(response){
+                        console.log(response);
+                        $(".chats-box").empty();
                         $("#messagebox").removeAttr("disabled");
-                        $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">'+name+'</p><p class="m-0 chat-text truncate"></p></div></div>');
-                        // $("#chatheader").css('border-bottom', '2px solid #55A860');
-                        // $("#messagedata").animate({ scrollTop: $('#messagedata').prop("scrollHeight")});
+                        response.chatdata.forEach((item, index)=>{
+                            if(item.from_id == user_id ){
+                                var msgHtml = '<div class="chat chat-right">';
+                                msgHtml += '<div class="chat-avatar">';
+                                msgHtml += '<a class="avatar">';
+                                msgHtml += '<img src="'+response.from_user_image+'" class="circle" alt="avatar">';
+                                msgHtml += '</a>';
+                                msgHtml += '</div>';
+                                msgHtml += '<div class="chat-body left-align">';
+                                msgHtml += '<div class="chat-text">';
+                                msgHtml += '<p>'+item.message+'</p>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                            }else{
+                                var msgHtml = '<div class="chat chat-left">';
+                                msgHtml += '<div class="chat-avatar">';
+                                msgHtml += '<a class="avatar">';
+                                msgHtml += '<img src="'+response.to_user_image+'" class="circle" alt="avatar">';
+                                msgHtml += '</a>';
+                                msgHtml += '</div>';
+                                msgHtml += '<div class="chat-body left-align">';
+                                msgHtml += '<div class="chat-text">';
+                                msgHtml += '<p>'+item.message+'</p>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                            }
+                           
+                            $('.chats-box').append(msgHtml);
+                        })
+                        $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+response.to_user_image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Merchant bAY</p><p class="m-0 chat-text truncate"></p></div></div>');
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
 
                     }

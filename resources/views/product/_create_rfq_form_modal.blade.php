@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <!--Add Product Form-->
-                <form action="{{route('rfq.store.from.product.details')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
+                <form action="#" class="createRfqForm " method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="flag" value="{{$product->flag}}">
                 <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -27,8 +27,8 @@
                                 <label>Select Product Category <span >*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <select class="select2" name="category_id" required>
-                                    <option>Select an option</option>
+                                <select class="select2" name="category[]" id="category_id" required multiple>
+                                    <option value="">Select an option</option>
                                     @foreach($manufacture_product_categories as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
                                     @endforeach
@@ -79,7 +79,7 @@
                                             <label>Select Unit <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <select class="select2" name="unit">
+                                            <select class="select2" name="unit" required>
                                                 <option value="">Select an option</option>
                                                 @php $units = units(); @endphp
                                                 @foreach($units as $unit=>$value)
@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="col s12 m8 l7">
                                             <select class="select2" name="payment_method" required>
-                                                <option>Select an option</option>
+                                                <option value="">Select an option</option>
                                                 <option value="cash">Cash</option>
                                                 <option value="card">Card</option>
                                                 <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
@@ -152,22 +152,20 @@
 
                         <div class="row rfq_img_upload_wrap">
                             @if($product->flag == 'mb')
-                                @foreach ($product->product_images as $key => $image)
-                                <div class="col rfq_thumbnail_box">
-                                    <div class="thumbnail_img">
-                                        <img src="{{asset('storage/'.$image->product_image)}}" class="img-thumbnail">
+                                @foreach ($product->product_images as $key => $wpimg)
+                                    <div class="col rfq_thumbnail_box">
+                                        <div class="thumbnail_img">
+                                            <img src="{{asset('storage/'.$wpimg->product_image)}}" class="img-thumbnail">
+                                        </div>
                                     </div>
-                                </div>
-                                @if($key == 2) @break @endif
                                 @endforeach
                             @else
                                 @foreach ($product->images as $key => $image)
-                                <div class="col rfq_thumbnail_box">
-                                    <div class="thumbnail_img">
-                                        <img src="{{asset('storage/'.$image->image)}}" class="img-thumbnail">
+                                    <div class="col rfq_thumbnail_box">
+                                        <div class="thumbnail_img">
+                                            <img src="{{asset('storage/'.$image->image)}}" class="img-thumbnail">
+                                        </div>
                                     </div>
-                                </div>
-                                @if($key == 2) @break @endif
                                 @endforeach
                             @endif
                             {{-- <div class="col rfq_thumbnail_box">
@@ -288,7 +286,7 @@
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button type="button" class="btn_green  btn-green right" onclick="onSubmit();">
+                                        <button type="submit" class="btn_green  btn-green right" >
                                             Post
                                         </button>
                                     </div>
@@ -335,6 +333,73 @@
             reader.readAsDataURL(input.files[0]); // convert to base64 string
         }
         }
+
+        $('.createRfqForm').on('submit',function(e){
+            e.preventDefault();
+            const rfq_app_url = "{{env('RFQ_APP_URL')}}";
+            var url = rfq_app_url+'/api/quotation';
+            const sso_token = "Bearer " +"{{ Cookie::get('sso_token') }}";
+
+            var formData = new FormData();
+
+            var images = {!! str_replace("'", "\'", json_encode($product->images ?? $product->product_images)) !!};
+            var images_array = [];
+            $.each(images, function(index, value){
+                let obj = {'product_image' :  value.product_image ? value.product_image : value.image , 'created_at' : value.created_at, 'updated_at' : value.updated_at };
+                formData.append(`images[]`, JSON.stringify(obj));
+            });
+
+
+
+            var category_id=[];
+            $("#category_id :selected").each(function() {
+                category_id.push(this.value);
+            });
+            var stringCatId=category_id.toString();
+
+            var other_data = $('.createRfqForm').serializeArray();
+            $.each(other_data,function(key,input){
+                if(input.name != 'category[]'){
+                    formData.append(input.name,input.value);
+                }
+            });
+
+            const full_path= "{{url()->full()}}";
+
+            formData.append("rfq_from", 'product');
+            formData.append('category_id', stringCatId);
+            formData.append('product_url', full_path);
+            formData.append('_token', "{{ csrf_token() }}");
+
+
+            $.ajax({
+                method: 'post',
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                enctype: 'multipart/form-data',
+                url: url,
+                headers: { 'Authorization': sso_token },
+                beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                },
+
+                success:function(response){
+                    $('.loading-message').html("");
+                    $('#loadingProgressContainer').hide();
+                    $('#create-rfq-form').modal('close');
+                   alert('Your RFQ was posted successfully')
+                },
+                error: function(xhr, status, error)
+                    {
+                    $('.loading-message').html("");
+                    $('#loadingProgressContainer').hide();
+                    alert(error);
+                    }
+                });
+        });
 
         function onSubmit()
         {
@@ -389,16 +454,16 @@
             //     $('select[name="industry"]').removeClass('invalid');
             // }
 
-            if ($('select[name="category_id"]').val()==null || $('select[name="category_id"]').val()=="Select an option")
+            if ($('select[name="category[]"]').val()==null || $('select[name="category[]"]').val()=="Select an option")
             {
                 errCount++;
-                $('select[name="category_id"]').closest('.input-wrapper').addClass(errorClass);
-                $('select[name="category_id"]').addClass('invalid');
+                $('select[name="category[]"]').closest('.input-wrapper').addClass(errorClass);
+                $('select[name="category[]"]').addClass('invalid');
             }
             else
             {
-                $('select[name="category_id"]').closest('.input-wrapper').removeClass(errorClass);
-                $('select[name="category_id"]').removeClass('invalid');
+                $('select[name="category[]"]').closest('.input-wrapper').removeClass(errorClass);
+                $('select[name="category[]"]').removeClass('invalid');
             }
 
             if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
@@ -484,8 +549,9 @@
                 // if (grecaptcha.getResponse()==""){
                 //     jQuery('.messageContent').html('Captcha Required');
                 // } else {
-                    $("#page_button").click();
+                    // $("#page_button").click();
                 // }
+                return true;
             }
             else
             {
@@ -505,6 +571,8 @@
                 // Disable submit button
             }
         });
+
+
 
 </script>
 @endpush

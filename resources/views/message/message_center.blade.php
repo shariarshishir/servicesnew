@@ -150,6 +150,8 @@
     <script src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
     <script>
         $(document).ready(function(){
+
+            $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             $(".scrollabled").each(function(){
                 $(this).tinyscrollbar();
             });
@@ -160,33 +162,89 @@
             });
 
             socket.on('new message', function(data) {
-               
+                console.log(data);
+                var auth_user_image = '{{$userImage}}';
+                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                var auth_user_sso_reference_id = '{{$user->sso_reference_id}}';
+                if( data.from_id == auth_user_sso_reference_id ){
+                    var msgHtml = '<div class="chat chat-right">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                }else{
+                    var msgHtml = '<div class="chat chat-left">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                }
+                $('.chats-box').append(msgHtml);
+                $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 
             $('.messageSendButton').click(function(){
                 event.preventDefault();
                 var from_user_image = '{{$userImage}}';
                 let sent_message = $('#messagebox').val();
-                
-                    let message = {'message': sent_message, 'image': "", 'from_id' : "1", 'to_id' : '5552', 'rfq_id': $(".active_rfq_id").val(),'factory':true,'product': null};
-                    socket.emit('new message', message);
-                    var from_user_image = '{{$userImage}}';
-                    var msgHtml = '<div class="chat chat-right">';
-                        msgHtml += '<div class="chat-avatar">';
-                        msgHtml += '<a class="avatar">';
-                        msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
-                        msgHtml += '</a>';
-                        msgHtml += '</div>';
-                        msgHtml += '<div class="chat-body left-align">';
-                        msgHtml += '<div class="chat-text">';
-                        msgHtml += '<p>'+sent_message+'</p>';
-                        msgHtml += '</div>';
-                        msgHtml += '</div>';
-                        msgHtml += '</div>';
-                        $('.chats-box').append(msgHtml);
-                        $('#messagebox').val('');
-                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-            });    
+                let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
+                var envMode = "{{ env('APP_ENV') }}";
+                var to_user_id;
+                if(envMode == 'production') {
+                    to_user_id = '5771';
+                } else{
+                    to_user_id = '5552';
+                }     
+                let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':true,'product': null};
+                socket.emit('new message', message);
+                $('#messagebox').val('');
+            });
+
+            // $('.messageSendButton').click(function(){
+            //     event.preventDefault();
+            //     var from_user_image = '{{$userImage}}';
+            //     let sent_message = $('#messagebox').val();
+            //     let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
+            //     var envMode = "{{ env('APP_ENV') }}";
+            //     var to_user_id;
+            //     if(envMode == 'production') {
+            //         to_user_id = '5771';
+            //     } else{
+            //         to_user_id = '5552';
+            //     }     
+            //     let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':true,'product': null};
+            //     socket.emit('new message', message);
+            //     var from_user_image = '{{$userImage}}';
+            //     var msgHtml = '<div class="chat chat-right">';
+            //         msgHtml += '<div class="chat-avatar">';
+            //         msgHtml += '<a class="avatar">';
+            //         msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
+            //         msgHtml += '</a>';
+            //         msgHtml += '</div>';
+            //         msgHtml += '<div class="chat-body left-align">';
+            //         msgHtml += '<div class="chat-text">';
+            //         msgHtml += '<p>'+sent_message+'</p>';
+            //         msgHtml += '</div>';
+            //         msgHtml += '</div>';
+            //         msgHtml += '</div>';
+            //         $('.chats-box').append(msgHtml);
+            //         $('#messagebox').val('');
+            //         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+            // });    
 
             function extractEmails (text) {
                 return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);

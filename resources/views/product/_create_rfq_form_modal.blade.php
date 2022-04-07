@@ -69,7 +69,7 @@
                                             <label>Quantity <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <input type="number" class="form-control- ig-new-rgt" name="rfq_quantity" required/>
+                                            <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                             <label>Target Price <span>*</span></label>
                                         </div>
                                         <div class="col s12 m8 l7">
-                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="rfq_unit_price" required onchange="allowTwoDecimal()" />
+                                            <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
                                         </div>
                                     </div>
                                 </div>

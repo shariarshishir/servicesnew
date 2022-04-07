@@ -29,7 +29,7 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $rfq = $data['data']['data'];
         //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
-        $businessProfiles = BusinessProfile::with('user', 'supplierQuotationToBuyer')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+        $businessProfiles = BusinessProfile::with('user','supplierQuotationToBuyer')->whereIn('business_category_id',$rfq['category_id'])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";

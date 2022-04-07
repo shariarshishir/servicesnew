@@ -86,7 +86,7 @@
                                                     <select class="form-select form-control" name="factory_type" id="factory_type">
                                                         <option value="">Select factory type</option>
                                                         @foreach($productCategories as $productCategory)
-                                                            <option value="{{$productCategory->id}}" {{ ( $productCategory->id == $rfq['category'][0]['id'] ) ? ' selected' : '' }}>{{$productCategory->name}}</option>
+                                                            <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -376,7 +376,8 @@
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
                                     html += '<div class="imgBox">';
-                                    html += '<img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />';
+                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
                                     html += '<h5>MB Pool</h5>';
                                     html += '</div>';
@@ -473,7 +474,8 @@
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
                                     html += '<div class="imgBox">';
-                                    html += '<img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />';
+                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
                                     html += '<h5>MB Pool</h5>';
                                     html += '</div>';
@@ -705,6 +707,18 @@
                     html += '<p>No Profile found</p>';
                     html += '</div>';
                     $('.rfq_business_profile_list').append(html);
+                }
+            });
+
+            $('#messagebox').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){                
+                    //event.preventDefault();
+                    var msg = $('#messagebox').val();
+                    let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}",'rfq_id': "{{$rfq['id']}}",'factory':false, 'product': null};
+                    socket.emit('new message', message);
+                    $('#messagebox').val('');
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
             });
 

@@ -135,6 +135,9 @@ class BusinessProfile extends Model
         return $this->hasMany(OrderModificationRequest::class)->where('type', 1);
     }
 
-
+    public function supplierQuotationToBuyer()
+    {
+        return $this->hasMany(supplierQuotationToBuyer::class);
+    }
 
 }

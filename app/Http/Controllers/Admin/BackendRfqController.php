@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use DataTables;
 use App\Models\Rfq;
 use App\Models\BusinessProfile;
+use App\Models\supplierQuotationToBuyer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Events\NewRfqHasAddedEvent;
@@ -28,7 +29,7 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $rfq = $data['data']['data'];
         //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
-        $businessProfiles = BusinessProfile::with('user')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+        $businessProfiles = BusinessProfile::with('user','supplierQuotationToBuyer')->whereIn('business_category_id',$rfq['category_id'])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
@@ -88,4 +89,27 @@ class BackendRfqController extends Controller
         }
         return response()->json(['businessProfiles'=>$businessProfiles],200);
     }
+
+    public function supplierQuotationToBuyer(Request $request){
+        //dd($request->all());
+
+        $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->first();
+        
+        if($quotation) 
+        {
+            $quotation->update(['offer_price_unit'=> $request->offer_price_unit]);
+            $quotation->update(['offer_price'=> $request->offer_price]);
+        }
+        else 
+        {
+            $supplierQuotationToBuyer = new supplierQuotationToBuyer();
+            $supplierQuotationToBuyer->rfq_id = $request->rfq_id;
+            $supplierQuotationToBuyer->business_profile_id = $request->business_profile_id;
+            $supplierQuotationToBuyer->offer_price = $request->offer_price;
+            $supplierQuotationToBuyer->offer_price_unit = $request->offer_price_unit;
+            $supplierQuotationToBuyer->save();
+        }
+
+        return response()->json(["status" => 1, "message" => "successful"]);
+    }    
 }

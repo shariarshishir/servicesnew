@@ -658,6 +658,7 @@
                 var business_profile_id = $(this).data("businessprofileid");
                 var offerHtml = "Offer Price : "+offer_price+" - "+offer_price_unit;
                 $(this).closest(".col-sm-12").find(".offer_price_block").show().text(offerHtml);
+                $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
                     data: {rfq_id:rfq_id, business_profile_id:business_profile_id, offer_price:offer_price, offer_price_unit:offer_price_unit},

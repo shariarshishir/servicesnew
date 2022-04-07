@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Http;
 class BackendRfqController extends Controller
 {
     public function index(Request $request){
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqs = $data['data'];
         $rfqsCount = $data['count'];
@@ -58,23 +58,17 @@ class BackendRfqController extends Controller
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories'));
     }
 
-    public function status($id){
-        $rfq=Rfq::findOrFail($id);
-        if($rfq->status == 'pending'){
-            $rfq->update(['status' => 'approved']);
-            if(env('APP_ENV') == 'production')
-            {
-                $selectedUsersToSendMail = User::where('id','<>', $rfq->created_by)->take(10)->get();
-                foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
-                    event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
-                }
-            }
-            return redirect()->back()->withSuccess('Rfq published successfully');
+    public function status(Request $request,$id){
+
+        $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$id, [
+            'status' => ( $request->status == 'pending' ) ? 'approved' : 'pending',
+        ]);
+        if( $response->status()  == 200){
+            return redirect()->back()->withSuccess('Rfq status updated successfully');
+        }else{
+            return redirect()->back()->withSuccess('Something went wrong!!');
         }
-        if($rfq->status == 'approved'){
-            $rfq->update(['status' => 'pending']);
-            return redirect()->back()->withSuccess('Rfq unpublished successfully');
-        }
+        
     }
     public function businessProfileFilter(Request $request){
         if($request->category_id && $request->profile_rating !=0)

@@ -567,7 +567,7 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('admin/businessprofile/restore/{businessprofileid}', [ManageBusinessProfileController::class, 'restore'])->name('admin.business.profile.restore');
         Route::get('business-profile-verification-list',[AdminBusinessProfileController::class, 'showBusinessProfileVerificationRequest'])->name('verification.request.index');
         //rfq
-        Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
+        Route::put('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
         //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');

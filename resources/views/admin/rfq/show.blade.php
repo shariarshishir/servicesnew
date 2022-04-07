@@ -37,8 +37,14 @@
                                 <div class="chat_top_right">
                                     <ul>
                                         <li class="active"><a href="javascript:void(0);" class="btn_grBorder">Generate PI</a></li>
-                                        <li style="display: none;"><a href="{{route('admin.rfq.status', $rfq['id'])}}" class="{{$rfq['status']== 'pending' ? 'btn_grBorder' : 'btn_grBorder'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a></li>
-                                        <li><a href="javascript:void(0);" class="{{$rfq['status']== 'pending' ? 'btn_grBorder' : 'btn_grBorder'}} rfq-status-trigger" onclick="return confirm('are you sure?');">{{$rfq['status']== 'pending' ? 'Published' : 'Unpublished'}}</a></li>
+                                        <li>
+                                            <form method="POST" action="{{route('admin.rfq.status', $rfq['id'])}}"> 
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="status" value="{{$rfq['status']}}">
+                                                <button  class="{{ ($rfq['status'] == 'pending') ? 'btn_grBorder' : 'btn_grBorder'; }} rfq-status-trigger"  type="submit"> {{ ($rfq['status'] == 'pending') ? 'Published' : 'Unpublished' }}</button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -730,50 +736,48 @@
                 $('#messagebox').val('');
                 $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
+
             
-            if(fromId = '5552') 
-            {
-                socket.on('new message', function(data) {
-                    if(data.rfq_id == "{{$rfq['id']}}") 
-                    {
-                        var msgHtml = '<div class="chat chat-right">';
-                        msgHtml += '<div class="chat-avatar">';
-                        msgHtml += '<a class="avatar">';
-                        msgHtml += '</a>';
-                        msgHtml += '</div>';
-                        msgHtml += '<div class="chat-body left-align">';
-                        msgHtml += '<div class="chat-text">';
-                        msgHtml += '<p>'+data.message+'</p>';
-                        msgHtml += '</div>';
-                        msgHtml += '</div>';
-                        msgHtml += '</div>';
-                        $('.chats-box').append(msgHtml);
-                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-                    }
-                });
+            socket.on('new message', function(data) {
+                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id) 
+                {
+                    console.log('from admin');
+                    var msgHtml = '<div class="chat chat-right">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                }
+                else if(data.rfq_id == "{{$rfq['id']}}" && fromId != data.from_id)
+                {      
+                    var msgHtml = '<div class="chat chat-left">';
+                    msgHtml += '<div class="chat-avatar">';
+                    msgHtml += '<a class="avatar">';
+                    msgHtml += '<img src="'+data.to_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '</a>';
+                    msgHtml += '</div>';
+                    msgHtml += '<div class="chat-body left-align">';
+                    msgHtml += '<div class="chat-text">';
+                    msgHtml += '<p>'+data.message+'</p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+                    $('.chats-box').append(msgHtml);
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                }
+            });
                 
-            }
-            else
-            {
-                socket.on('new message', function(data) {
-                    if(data.rfq_id == "{{$rfq['id']}}")
-                    {                    
-                        var msgHtml = '<div class="chat chat-left">';
-                        msgHtml += '<div class="chat-avatar">';
-                        msgHtml += '<a class="avatar">';
-                        msgHtml += '</a>';
-                        msgHtml += '</div>';
-                        msgHtml += '<div class="chat-body left-align">';
-                        msgHtml += '<div class="chat-text">';
-                        msgHtml += '<p>'+data.message+'</p>';
-                        msgHtml += '</div>';
-                        msgHtml += '</div>';
-                        msgHtml += '</div>';
-                        $('.chats-box').append(msgHtml);
-                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-                    }
-                });
-            }
+            
 
         }); 
     </script>

@@ -67,11 +67,12 @@
                                     <td>{{$rfq['created_at']}}</td>
                                     <td>{{$rfq['title']}}</td>
                                     <td>{{$rfq['category'][0]['name']}}</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td>{{$rfq['quantity']}}</td>
                                     <td>$ {{$rfq['unit_price']}}</td>
-                                    <!-- <td>{{$rfq['user']['user_name']}}</td> -->
+                                    <td>{{$rfq['delivery_time']}}</td>
+                                    <td>
+                                        <span style="@php echo($rfq['status'] == 'pending')? 'color:red':'color:green'; @endphp">{{$rfq['status']}}</span>
+                                    </td>
                                     <td>
                                         <a href="{{route('admin.rfq.show', $rfq['id'])}}" class="show-rfq-details-trigger"><i class="fa fa-eye"></i></a>
                                         <a href="javascript:void(0);" class="remove-rfq-trigger"><i class="fa fa-trash"></i></a>

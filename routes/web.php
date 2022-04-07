@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BusinessProfileController as AdminBusinessProfile
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductController;
+//use App\Http\Controllers\Admin\BackendRfqController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\QueryController;
 use App\Http\Controllers\Admin\PaymentTermController;
@@ -27,7 +28,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
 use App\Http\Controllers\Admin\ManageBusinessProfileController;
 use App\Http\Controllers\Admin\NewUserRequestController;
-use App\Http\Controllers\Admin\RfqController as AdminRfqController;
+use App\Http\Controllers\Admin\BackendRfqController as AdminRfqController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -568,7 +569,9 @@ Route::group(['prefix'=>'/admin'],function (){
         //rfq
         Route::get('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
+        //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');
+        Route::get('supplier-quotation-to-buyer',[AdminRfqController::class, 'supplierQuotationToBuyer'])->name('admin.rfq.supplier.quotation.to.buyer');
         Route::get('message-center/getchatdata',[AdminMessageController::class,'getchatdata'])->name('admin.message.center.getchatdata');
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
@@ -583,7 +586,6 @@ Route::group(['prefix'=>'/admin'],function (){
     });
 
 });
-
 Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
 // product type mapping
 Route::get('/{product_type_mapping}/{child}',[HomeController::class, 'productTypeMapping'])->name('product.type.mapping');

@@ -33,4 +33,10 @@ class Rfq extends Model
     {
         return $this->belongsTo('App\Models\BusinessProfile', 'created_by')->withTrashed();
     }
+
+    public function supplierQuotationToBuyer()
+    {
+        return $this->belongsTo('App\Models\BusinessProfile', 'rfq_id')->withTrashed();
+    }
+
 }

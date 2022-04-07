@@ -39,7 +39,11 @@
 				<div class="profile_info col s12 m8 l8">
 					<h4>
 						{{ $rfqSentList['user']['user_name']}}
+						@if(isset($rfqSentList->businessProfile->is_business_profile_verified))
+						<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" />
+						@endif						
 					</h4>
+					<!--p>Fashion Tex Ltd.</p-->
 				</div>
 
 				<div class="profile_view_time right-align col s12 m4 l4">
@@ -83,6 +87,13 @@
                 @endif
 			</div>
 
+			<div class="responses_wrap right-align">
+                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+				<button class="none_button btn_responses" id="rfqResponse" >
+					Responses <span class="respons_count">0</span>
+				</button>				
+                
+			</div>
 
 		</div>
 	</div>

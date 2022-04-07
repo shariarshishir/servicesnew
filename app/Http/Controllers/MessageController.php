@@ -18,6 +18,7 @@ use App\Notifications\RfqBidNotification;
 use App\Models\User;
 use App\UserSession;
 use App\Userchat;
+use App\RfqApp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -39,84 +40,18 @@ class MessageController extends Controller
 
     public function message_center(){
         
-        //$currentURL = url()->full();
-        $currentURL = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        
-        $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
-        foreach($messageCenterNotifications as $messageCenterNotification){
-            if($currentURL == url($messageCenterNotification->data['url'])){
-                $messageCenterNotification->markAsRead();
-            }
-        }
-
+       
         $user=Auth::user();
-        $allusers=[];
-
-        /*
-        if($user->is_group == 1)
-        {
-            $allusers = User::with('profile','badges','tour_photos')->where(['group_id' => Auth::id(), 'is_active' => 1])->get();
-            $user=User::with('profile','badges','tour_photos')->where('id', $allusers[0]->id)->first();
+        $rfqs = RfqApp::where('sso_reference_id',$user->sso_reference_id)->get();
+        $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
+        if(env('APP_ENV') == 'local'){
+            $adminUser = User::Find('5552');
+        }else{
+            $adminUser = User::Find('5771');
         }
-        */
-        $allusers = User::where('id', $user->id)->get();
-        //dd($allusers);
-        $chatdatas = Userchat::all();
-        $chatusers = [];
-        $users = [];
-        foreach($chatdatas as $chat)
-        {
-            if(in_array($user->id, $chat->participates))
-            {
-                foreach($chat->participates as $participate)
-                {
-                    if($participate != $user->id)
-                    {
-                        $users[] = $participate;
-                    }
-                }
-            }
-        }
-
-        $userData = User::whereIn('id',$users)->get();
-
-        $chatusers = $userData;
-        $buyers = [];
-        $allbuyers = User::where('user_type','buyer');
-        if($allbuyers->exists())
-        {
-            foreach($allbuyers->get() as $buyer)
-            {
-                $data = [];
-                $data['id'] = $buyer->id;
-                $data['name'] = $buyer->name;
-                $data['image'] = asset(!empty($buyer->profile['profile_image'])? 'storage/' .$buyer->profile['profile_image'] : "images/supplier.png");
-                $buyers[] = $data;
-            }
-        }
-
-        /*
-        $userSupplier = User::find($request->uid);
-        //dd($userSupplier);
-
-        $user_session = UserSession::create([
-            'user1_id'=>$user->id,
-            'user2_id'=>$userSupplier->id,
-        ]);
-
-        $message = Message::create([
-            'session_id'=>$user_session->id,
-            'content'=>'Hello '.$userSupplier->name
-        ]);
-
-        Chat::insert([['message_id'=>$message->id, 'user_id'=>$user->id,'type'=>0 ],
-        ['message_id'=>$message->id, 'user_id'=>$userSupplier->id,'type'=>1 ]]);
-
-        $notification_data=['url'=>'/message-center'];
-        Notification::send($userSupplier, new BuyerWantToContact($notification_data));
-        */
-
-        return view('message.message_center', compact('user','chatusers','buyers','allusers'));
+        $adminUserImage = asset($adminUser->image) ?? asset('images/frontendimages/no-image.png');
+        $userImage = $user->image;
+        return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage'));
     }
 
     public function message_center_selected($id)
@@ -208,31 +143,15 @@ class MessageController extends Controller
 
     public function getchatdata(Request $request)
     {
-        $user = $request->user;
-        $to_id = $request->to_id;
-        $from_user=User::find($user);
-        $to_user=User::find($to_id);
-        $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
-        $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
-
-        $chats = Userchat::whereIn('participates', [$user])->whereIn('participates', [$to_id]);
-        if($chats->exists())
-        {
-            $chat = $chats->first();
-            $chatdataAllData = $chat->chatdata;
-            $chatdata = $chatdataAllData;
-            foreach ($chatdataAllData as $key => $value) {
-                $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
-                $chatdata[$key]['message'] = $messageStr;
-                //echo "<pre>"; print_r($chatdataAllData[$key]); exit();
-            }
-            return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
-        }
-        else
-        {
-            $chatdata = [];
-            return view('message.chatdata', compact('user','chatdata', 'from_user_image' , 'to_user_image'));
-        }
+        $rfq_id = $request->rfq_id;
+        $from_user_image =  asset('storage/images/supplier.png');
+        $to_user_image =  asset('storage/images/supplier.png');
+        $chatdata = Userchat::where('rfq_id',$rfq_id)->get();
+        return response()->json([
+            'from_user_image' => $from_user_image,
+            'to_user_image' => $to_user_image ,
+            'chatdata' => $chatdata
+        ],200);
     }
 
     public function updateuserlastactivity(Request $response)

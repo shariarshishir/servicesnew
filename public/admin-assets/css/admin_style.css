@@ -1000,7 +1000,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     overflow: hidden;
 }
 .already-sent .suppliersBoxWrap {
-    border: 1px solid #ff6407;
+    border: 1px solid #ffc107;
 }
 .matched_suppliers_wrap .imgBox {
     width: 60px;
@@ -1087,7 +1087,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: inline-block;
     width: 100%;
     font-weight: 500;
-    color: #ff6407;
+    color: #ffc107;
     font-size: 11px;
     line-height: 16px;
 }

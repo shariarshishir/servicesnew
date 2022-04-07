@@ -967,7 +967,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     line-height: 22px;
     color: #000000;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 .matched_suppliers_wrap {
     display: inline-block;
@@ -1122,10 +1122,13 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .send,
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text p {
-    padding: 5px;
+    padding: 5px 10px;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
     margin: 0;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text {
+    margin: 0 5px;
 }
 
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .fa-chevron-circle-right {

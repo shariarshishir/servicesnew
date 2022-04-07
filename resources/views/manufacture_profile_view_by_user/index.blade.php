@@ -678,7 +678,7 @@
                                         <tbody class="special-customization-table-body">
                                             @foreach($business_profile->specialCustomizations as $specialCustomization)
                                             <tr>
-                                                <td>{{$specialCustomization->title}}</td>
+                                                <td data-title="Title">{{$specialCustomization->title}}</td>
                                                 @if($specialCustomization->status==1)
                                                 <td><i class="material-icons" style="color:green">check_circle</i></td>
                                                 @else
@@ -999,7 +999,6 @@
                                     <div class="col s6 m6">
                                         <h3>Sustainability commitments</h3>
                                     </div>
-
                                 </div>
                                 <div class="sustainability_commitment_table_wrap">
                                     <div class="overview_table box_shadow">
@@ -1007,7 +1006,7 @@
                                             <tbody class="sustainability-commitment-table-body">
                                                 @foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
                                                 <tr>
-                                                    <td>{{$sustainabilityCommitment->title}}</td>
+                                                    <td data-title="Title">{{$sustainabilityCommitment->title}}</td>
                                                     @if($sustainabilityCommitment->status==1)
                                                     <td><i class="material-icons" style="color:green">check_circle</i></td>
                                                     @else

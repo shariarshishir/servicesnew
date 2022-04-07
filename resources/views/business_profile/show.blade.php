@@ -499,7 +499,7 @@
 								</div>
 								@endif
 							</div>
-							<div class="overview_table box_shadow">
+							<div class="overview_table company_overview_table box_shadow">
 								<table>
 									<tbody>
 										@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
@@ -1003,7 +1003,7 @@
 											<tbody class="special-customization-table-body">
 												@foreach($business_profile->specialCustomizations as $specialCustomization)
 												<tr>
-													<td data-title="Name">{{$specialCustomization->title}}</td>
+													<td data-title="Title">{{$specialCustomization->title}}</td>
 													@if($specialCustomization->status==1)
 													<td><i class="material-icons" style="color:green">check_circle</i></td>
 													@else
@@ -1358,7 +1358,7 @@
 											<tbody class="sustainability-commitment-table-body">
 												@foreach($business_profile->sustainabilityCommitments as $sustainabilityCommitment)
 												<tr>
-													<td data-title="Name">{{$sustainabilityCommitment->title}}</td>
+													<td data-title="Title">{{$sustainabilityCommitment->title}}</td>
 													@if($sustainabilityCommitment->status==1)
 													<td><i class="material-icons" style="color:green">check_circle</i></td>
 													@else

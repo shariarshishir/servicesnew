@@ -72,7 +72,7 @@
                                     <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                 </div>
                             </div>
-                        </div>           
+                        </div>
                     </div>
                     <div class="card">
                         <div class="rfq_data_top">
@@ -137,7 +137,7 @@
                                             }
                                         }
                                     }
-                                
+
                                 @endphp
                                 <div class="col-sm-12 col-md-6 col-lg-4 {{$className}}">
                                     <div class="suppliersBoxWrap">
@@ -164,6 +164,17 @@
                                                         Contact Number <br/>
                                                         <span>{{$businessProfile['user']['phone']}}</span>
                                                     </div>
+                                                </div>
+                                                <div class="offer_price_block" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
+                                                @php
+                                                foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
+                                                    if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
+                                                        if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
+                                                            echo "Offer Price : ". $supplierQuotationToBuyer['offer_price'] .' - '. $supplierQuotationToBuyer['offer_price_unit'];
+                                                        }
+                                                    }
+                                                }
+                                                @endphp
                                                 </div>
                                                 <div class="send_box">
                                                     <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
@@ -205,7 +216,7 @@
                                                     </div>
 
                                                     <!-- <div class="separator_block"> / </div> -->
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -214,14 +225,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
-                                                                       
+                                    </div>
+
                                 </div>
                                 @endforeach
                                 @else
                                     <div><p>No profile found</p></div>
                                 @endif
-                            </div>                    
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -254,11 +265,11 @@
                                                                         <div class="chat-body left-align">
                                                                             <div class="chat-text">
                                                                                 <p>
-                                                                                @php echo html_entity_decode($chat['message']); @endphp 
+                                                                                @php echo html_entity_decode($chat['message']); @endphp
                                                                                 </p>
                                                                             </div>
                                                                         </div>
-                                                                    </div>        
+                                                                    </div>
                                                                     @else
                                                                     <div class="chat chat-left">
                                                                         <div class="chat-avatar">
@@ -301,9 +312,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>           
+                    </div>
                 </div>
-               
+
             </div>
         </div>
     </section>
@@ -321,8 +332,8 @@
                 fromId = '5771';
             } else{
                 fromId = '5552';
-            }     
-                   
+            }
+
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];
             var serverURL = "{{ env('CHAT_URL') }}?userId="+fromId;
@@ -349,7 +360,7 @@
             //     if(price != ''){
             //         url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
             //         selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/"+price_unit);
-            //     }                
+            //     }
             // });
 
             $(document).on("change", ".propose_price", function(){
@@ -358,18 +369,19 @@
                 if(price != ''){
                     url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
                     selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
-                }                
-            });            
+                }
+            });
 
             $(document).on('change', '#factory_type', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
+                var rfq_id ="{{$rfq['id']}}";
                 console.log(category_id);
                 console.log(profile_rating);
                 if( category_id !=''){
                     $.ajax({
                         method: 'get',
-                        data: {category_id:category_id,profile_rating:profile_rating},
+                        data: {category_id:category_id,profile_rating:profile_rating, rfq_id:rfq_id},
                         url: '{{ route("admin.rfq.business.profiles.filter") }}',
                         success:function(response){
                             console.log(response.businessProfiles);
@@ -377,7 +389,17 @@
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
                                     console.log(item);
-                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4">';
+                                    var  className = 'no-class';
+                                    var  display  = 'display:none';
+                                    var offer_price = '';
+                                    if(item.supplier_quotation_to_buyer.length > 0){
+                                        className = 'already-sent';
+                                        display  = 'display:block';
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            offer_price ='Offer Price:'+i.offer_price+'-'+i.offer_price_unit;
+                                        });
+                                    }
+                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
                                     html += '<div class="suppliersBoxWrap">';
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
@@ -403,6 +425,9 @@
                                     html += 'Contact Number <br/>';
                                     html += '<span>'+item.user.phone+'</span>';
                                     html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="offer_price_block" style="'+display+'">';
+                                    html +=  offer_price;
                                     html += '</div>';
                                     html += '<div class="send_box">';
                                     html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
@@ -445,7 +470,7 @@
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '</div>';    
+                                    html += '</div>';
                                     $('.rfq_business_profile_list').append(html);
                                 })
                             }else{
@@ -464,18 +489,29 @@
             $(document).on('change', '#profile_rating', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
+                var rfq_id ="{{$rfq['id']}}";
                 console.log(category_id);
                 console.log(profile_rating);
                     $.ajax({
                         method: 'get',
-                        data: {category_id:category_id,profile_rating:profile_rating},
+                        data: {category_id:category_id,profile_rating:profile_rating,rfq_id:rfq_id},
                         url: '{{ route("admin.rfq.business.profiles.filter") }}',
                         success:function(response){
                             console.log(response.businessProfiles);
                             if(response.businessProfiles.length >0){
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
-                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4">';
+                                    var  className = 'no-class';
+                                    var  display  = 'display:none';
+                                    var offer_price = '';
+                                    if(item.supplier_quotation_to_buyer.length > 0){
+                                        className = 'already-sent';
+                                        display  = 'display:block';
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            offer_price ='Offer Price:'+i.offer_price+'-'+i.offer_price_unit;
+                                        });
+                                    }
+                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
                                     html += '<div class="suppliersBoxWrap">';
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
@@ -501,6 +537,9 @@
                                     html += 'Contact Number <br/>';
                                     html += '<span>'+item.user.phone+'</span>';
                                     html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="offer_price_block" style="'+display+'">';
+                                    html +=  offer_price;
                                     html += '</div>';
                                     html += '<div class="send_box">';
                                     html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
@@ -543,7 +582,7 @@
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '</div>';     
+                                    html += '</div>';
                                     $('.rfq_business_profile_list').append(html);
                                 })
                             }else{
@@ -556,8 +595,8 @@
                         }
                     });
             });
-            
-            $(".business_profile_list_trigger_from_backend").click(function(){                
+
+            $(".business_profile_list_trigger_from_backend").click(function(){
                 if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
@@ -634,23 +673,26 @@
                         $('.rfq_business_profile_list').append(html);
                     }
                     swal({  icon: 'success',  title: 'Success !!',  text: 'Proposal Sent successfully!',buttons: false});
-                } 
+                }
                 else{
                     alert('Enter offer price first');
                 }
             })
 
-            //$(".send_offer_price_trigger").click(function(){        
+            //$(".send_offer_price_trigger").click(function(){
             $(document).on("click", ".send_offer_price_trigger", function(){
                 var html = $(this).data("businessprofilename")+" offers "+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
                 let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
-                socket.emit('new message', message);     
-                
+                socket.emit('new message', message);
+
                 $(this).closest(".businessProfileModal").modal("hide");
                 var offer_price = $(this).closest(".modal-dialog").find(".propose_price").val();
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
+                var offerHtml = "Offer Price : "+offer_price+" - "+offer_price_unit;
+                $(this).closest(".col-sm-12").find(".offer_price_block").show().text(offerHtml);
+                $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
                     data: {rfq_id:rfq_id, business_profile_id:business_profile_id, offer_price:offer_price, offer_price_unit:offer_price_unit},
@@ -718,7 +760,7 @@
 
             $('#messagebox').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
-                if(keycode == '13'){                
+                if(keycode == '13'){
                     //event.preventDefault();
                     var msg = $('#messagebox').val();
                     let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}",'rfq_id': "{{$rfq['id']}}",'factory':false, 'product': null};
@@ -779,6 +821,6 @@
                 
             
 
-        }); 
+        });
     </script>
 @endpush

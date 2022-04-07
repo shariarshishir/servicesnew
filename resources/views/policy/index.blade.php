@@ -14,7 +14,7 @@
       <p>Policy Published on: May 2019</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <p>Merchant Bay Limited (MBL) take privacy and data protection issues seriously. We understand the importance of confidentiality and trust when handling personal and private financial information. We have designed this Privacy Policy to explain how we handle personally identifiable information collected from Buyers and Suppliers who register for services and submit information to MBL. To stay updated on our current Privacy Policy, please visit this page often. If you have a question about how a certain type of information is handled, please e-mail us at: <a href="mailto:info@merchantbay.com">info@merchantbay.com</a></p>
+      <p>Merchant Bay Limited (MBL) takes privacy and data protection issues seriously. We understand the importance of confidentiality and trust when handling personal and private financial information. We have designed this Privacy Policy to explain how we handle personally identifiable information collected from Buyers and Suppliers who register for services and submit information to MBL. To stay updated on our current Privacy Policy, please visit this page often. If you have a question about how a certain type of information is handled, please e-mail us at: <a href="mailto:info@merchantbay.com">info@merchantbay.com</a></p>
       <p>&nbsp;</p>
       <h3><strong>Information that we collect</strong></h3>
       <p>&nbsp;</p>
@@ -22,10 +22,10 @@
       <p>When Buyers and Suppliers register, they provide us with their address, email, phone number, bank details. Buyer and Suppliers may also provide us with their credit card number, fax number and company affiliation and details.</p>
       <p>&nbsp;</p>
       <p><strong>Inquiries</strong></p>
-      <p>When Buyers and Suppliers contact us, we may ask for information that allows us to contact them, validate the seriousness of their inquiry and request specific information related to the reason they have contacted us. Buyer and Suppliers’ Inquiry Information may be associated with other information, such as Cookies and information from Tracking Software.</p>
+      <p>When Buyers and Suppliers contact us, we may ask for information that allows us to contact them, validate the seriousness of their inquiry and request specific information related to the reason they have contacted us. Buyers and Suppliers’ Inquiry Information may be associated with other information, such as Cookies and information from Tracking Software.</p>
       <p>&nbsp;</p>
       <p><strong>Surveys</strong></p>
-      <p>Buyers and Suppliers may be offered the opportunity to respond to surveys, questionnaires and other requests for information (Survey Information). The types of data that Buyer and Suppliers provide to us is set out in the survey request.</p>
+      <p>Buyers and Suppliers may be offered the opportunity to respond to surveys, questionnaires and other requests for information (Survey Information). The types of data that Buyers and Suppliers provide to us is set out in the survey request.</p>
       <p>&nbsp;</p>
       <p><strong>Statistical Information</strong></p>
       <p>All of our servers collect statistical information such as Buyer and Suppliers’ IP addresses, dates Buyer and Suppliers visit, computers Buyer and Suppliers are using, and operating system, among other data (Statistical Information).</p>

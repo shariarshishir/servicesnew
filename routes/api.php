@@ -50,6 +50,7 @@ use App\Http\Controllers\Api\User\MessageController;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::get('rfq/showmore/quotation/{rfq_id}/{cat_id}',[RFQController::class, 'showMoreQuotation']);
 
 // product type mapping
 Route::get('studio',[ProductController::class, 'studio']);
@@ -166,7 +167,6 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
 
     Route::post('/rfq-notification-mark-as-read',[RFQController::class,'newRfqNotificationMarkAsRead']);
     Route::post('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'newRfqBidNotificationMarkAsRead']);
-
 
 
     //poforma

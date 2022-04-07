@@ -2,7 +2,7 @@
 @section('content')
 @include('sweet::alert')
 
-    <div class="row">
+    <!-- <div class="row"> -->
     <section class="manufactrue_product_details_top">
         <div class="manufactrue_product_details_inner">
             <div class="row ic-breadcrumb product_category_bar">
@@ -18,7 +18,6 @@
             <div class="back_to">
                 <a  href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
             </div>
-
         </div>
     </section>
 
@@ -89,7 +88,6 @@
                                 </div>
                             @endif
                         </div>
-
 
                         <div class="col s12 m7 product_details_info_wrap">
 
@@ -162,13 +160,13 @@
                                                     <h3>Sizes</h3>
                                                     <div class="mysizeboxs">
 
-                                                            <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
-                                                                @foreach($sizes as $size)
-                                                                    <div class="mysizebox" data-size="{{ $size }}">
-                                                                        <span>{{ strtoupper($size) }}</span>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
+                                                        <div id="mysizeboxPanel_{{ $color }}" data-color="{{ $color }}" class="mysizebox-panel{{ ($idx===0)? ' itChecked' : '' }}" style="display:{{ ($idx===0)? 'block' : 'none' }}">
+                                                            @foreach($sizes as $size)
+                                                                <div class="mysizebox" data-size="{{ $size }}">
+                                                                    <span>{{ strtoupper($size) }}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -220,11 +218,11 @@
                     <section class="single-product-description-block-wrapper product_details_tab_wrap">
                         <div class="row">
                             <div class="col s12">
-                            <ul class="tabs">
-                                <li class="tab col s4"><a class="active"  href="#product-details">Product Details</a></li>
-                                <li class="tab col s4"><a href="#company-profile">Company Profile</a></li>
-                                <li class="tab col s4"><a href="#factory-tour">Factory Tour</a></li>
-                            </ul>
+                                <ul class="tabs">
+                                    <li class="tab col s4"><a class="active"  href="#product-details">Product Details</a></li>
+                                    <li class="tab col s4"><a href="#company-profile">Company Profile</a></li>
+                                    <li class="tab col s4"><a href="#factory-tour">Factory Tour</a></li>
+                                </ul>
                             </div>
                             <div id="product-details" class="col s12">
                                 <div class="card product_details_tab">
@@ -248,7 +246,6 @@
                                                 <tr>
                                                     <td>Company Name:</td>
                                                     <td>{{ $product->businessProfile->business_name}}</td>
-
                                                 </tr>
                                                 <tr>
                                                     <td>Business type:</td>
@@ -269,7 +266,6 @@
                                                             @endswitch
                                                         @endif
                                                     </td>
-
                                                 </tr>
                                                 <tr>
                                                     <td>Main products:</td>

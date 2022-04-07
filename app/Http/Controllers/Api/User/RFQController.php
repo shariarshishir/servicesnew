@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\SupplierBid;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewRfqHasAddedEvent;
+use App\Models\BusinessProfile;
+use App\Models\supplierQuotationToBuyer;
 use Illuminate\Support\Str;
 
 
@@ -56,7 +58,7 @@ class RFQController extends Controller
             return response()->json(['rfqs'=>$rfqs,"success"=>true],200);
         }
         else{
-            
+
             return response()->json(['rfqs'=> $rfqs,"success"=>false],200);
         }
     }
@@ -69,13 +71,13 @@ class RFQController extends Controller
             return response()->json(['rfqs'=>$rfqs,'rfqIdsWithBid'=>$rfqIdsWithBid,"success"=>true],200);
         }
         else{
-            
+
             return response()->json(['rfqs'=> $rfqs, 'rfqIdsWithBid'=>$rfqIdsWithBid ,"success"=>false],200);
         }
     }
 
     public function searchRfqByTitle(Request $request){
-         
+
         if(!empty($request->search_input)){
             $rfqs = Rfq::with('images','user','bids')->where('title', 'like', '%'.$request->search_input.'%')->paginate(10);
             if($rfqs->total()>0){
@@ -88,7 +90,7 @@ class RFQController extends Controller
     }
 
     public function store(Request $request){
-        
+
         // $validator = Validator::make($request->all(), [
         //     'category_id' => 'required',
         //     'title'       => 'required',
@@ -107,7 +109,7 @@ class RFQController extends Controller
         //     400);
         // }
         try{
-           
+
             $rfqData = $request->except(['product_images']);
             $rfqData['created_by']=auth()->id();
             $rfqData['status']='pending';
@@ -120,11 +122,11 @@ class RFQController extends Controller
                         $path=$product_image->store('images','public');
                     }
                     else{
-                        
+
                         $path=$product_image->store('images','public');
                         $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
                         Storage::put($path, $image);
-                      
+
                     }
                     RfQImage::create(['rfq_id'=>$rfq->id, 'image'=>$path]);
                 }
@@ -139,7 +141,7 @@ class RFQController extends Controller
                 $selectedUserToSendMail="success@merchantbay.com";
                 event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
             }
-            
+
             $message = "Congratulations! Your RFQ was posted successfully. Soon you will receive quotation from Merchant Bay verified relevant suppliers.";
             if($rfq){
 
@@ -157,7 +159,7 @@ class RFQController extends Controller
     }
 
     public function storeRfqFromOMD(Request $request){
-        // try{  
+        // try{
         //     return response()->json()
             $userObj = json_decode($request->user);
             return response()->json(['user'=>$userObj]);
@@ -183,7 +185,7 @@ class RFQController extends Controller
                     'is_email_verified' => 1,
                 ]);
             }
-        
+
             $rfqData = $request->except(['product_images','user','sso_reference_id']);
             $rfqData['created_by']=$user->id;
             $rfqData['status']='pending';
@@ -233,7 +235,7 @@ class RFQController extends Controller
                 $message="Notification mark as read successfully";
                 return response()->json(['code'=>true,'message'=>$message,'noOfnotification'=>$noOfnotification]);
 
-                        
+
             }
             else{
                 $unreadNotifications=auth()->user()->unreadNotifications->where('read_at',null);
@@ -273,7 +275,15 @@ class RFQController extends Controller
         return $link;
     }
 
-    
+    public function showMoreQuotation($id, $cat)
+    {
+        $cat= explode(',',$cat);
+        $rfq_with_quotation=supplierQuotationToBuyer::where('rfq_id', $id)->pluck('business_profile_id');
+        $business_profile= BusinessProfile::whereIn('business_category_id', $cat)->whereNotIn('id', $rfq_with_quotation)->get();
+        return response()->json(['business_profile' => $business_profile], 200);
+    }
+
+
 
 
 }

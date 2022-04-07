@@ -33,7 +33,7 @@ class BackendRfqController extends Controller
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
-        } 
+        }
         else{
             $user = "5552";
         }
@@ -71,15 +71,20 @@ class BackendRfqController extends Controller
         
     }
     public function businessProfileFilter(Request $request){
+
         if($request->category_id && $request->profile_rating !=0)
         {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
-            $businessProfiles = BusinessProfile::with('user')->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+            $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+                $q->where('rfq_id', $request->rfq_id);
+            } ])->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
         }
         elseif($request->category_id && $request->profile_rating ==0)
         {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
-            $businessProfiles = BusinessProfile::with('user')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
+            $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+                $q->where('rfq_id', $request->rfq_id);
+            } ])->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
         }
         return response()->json(['businessProfiles'=>$businessProfiles],200);
     }
@@ -88,13 +93,13 @@ class BackendRfqController extends Controller
         //dd($request->all());
 
         $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->first();
-        
-        if($quotation) 
+
+        if($quotation)
         {
             $quotation->update(['offer_price_unit'=> $request->offer_price_unit]);
             $quotation->update(['offer_price'=> $request->offer_price]);
         }
-        else 
+        else
         {
             $supplierQuotationToBuyer = new supplierQuotationToBuyer();
             $supplierQuotationToBuyer->rfq_id = $request->rfq_id;
@@ -105,5 +110,5 @@ class BackendRfqController extends Controller
         }
 
         return response()->json(["status" => 1, "message" => "successful"]);
-    }    
+    }
 }

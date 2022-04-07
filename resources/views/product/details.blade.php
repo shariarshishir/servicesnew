@@ -194,8 +194,8 @@ $reviewsCount = count($productReviews);
                                                             </tr>
                                                             @endforeach
                                                             <tr>
-                                                                <td>Product Code:</td>
-                                                                <td>shop-{{$product->id}}</td>
+                                                                <td data-title="Product Code">Product Code: </td>
+                                                                <td data-title="Shop Id" >shop-{{$product->id}}</td>
                                                             </tr>
                                                         </table>
                                                     </div>

@@ -29,11 +29,11 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $rfq = $data['data']['data'];
         //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
-        $businessProfiles = BusinessProfile::with('user', 'supplierQuotationToBuyer')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+        $businessProfiles = BusinessProfile::with('user', 'supplierQuotationToBuyer')->whereIn('business_category_id',$rfq['category_id'])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
-        } 
+        }
         else{
             $user = "5552";
         }
@@ -94,13 +94,13 @@ class BackendRfqController extends Controller
         //dd($request->all());
 
         $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->first();
-        
-        if($quotation) 
+
+        if($quotation)
         {
             $quotation->update(['offer_price_unit'=> $request->offer_price_unit]);
             $quotation->update(['offer_price'=> $request->offer_price]);
         }
-        else 
+        else
         {
             $supplierQuotationToBuyer = new supplierQuotationToBuyer();
             $supplierQuotationToBuyer->rfq_id = $request->rfq_id;
@@ -111,5 +111,5 @@ class BackendRfqController extends Controller
         }
 
         return response()->json(["status" => 1, "message" => "successful"]);
-    }    
+    }
 }

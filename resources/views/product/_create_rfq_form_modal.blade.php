@@ -28,7 +28,7 @@
                             </div>
                             <div class=" col s12 m8 l9">
                                 <select class="select2" name="category[]" id="category_id" required multiple>
-                                    <option value="">Select an option</option>
+                                    <option value="" disabled>Select an option</option>
                                     @foreach($manufacture_product_categories as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
                                     @endforeach
@@ -390,13 +390,14 @@
                     $('.loading-message').html("");
                     $('#loadingProgressContainer').hide();
                     $('#create-rfq-form').modal('close');
-                   alert('Your RFQ was posted successfully')
+                    const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+                    swal("Done!", msg,"success");
                 },
                 error: function(xhr, status, error)
                     {
                     $('.loading-message').html("");
                     $('#loadingProgressContainer').hide();
-                    alert(error);
+                    swal("Error!", error,"error");
                     }
                 });
         });

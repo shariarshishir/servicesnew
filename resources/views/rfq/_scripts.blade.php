@@ -62,12 +62,14 @@
                 $('.loading-message').html("");
                 $('#loadingProgressContainer').hide();
                 $('#create-rfq-form').modal('close');
+                const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+                swal("Done!", msg,"success");
             },
             error: function(xhr, status, error)
                 {
                 $('.loading-message').html("");
                 $('#loadingProgressContainer').hide();
-                alert(error);
+                swal("Error!", error,"error");
                 }
             });
         });

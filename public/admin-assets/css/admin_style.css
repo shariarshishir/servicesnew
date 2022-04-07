@@ -982,6 +982,13 @@ label:not(.form-check-label):not(.custom-file-label) {
     border: 1px solid #707070;
     padding: 10px 10px 0px;
     margin-bottom: 20px;
+    height: 145px;
+    overflow: hidden;
+    position: relative;
+}
+
+.already-sent .suppliersBoxWrap {
+    border: 1px solid #ffc107;
 }
 .matched_suppliers_wrap .imgBox {
     width: 60px;
@@ -995,19 +1002,14 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 .matched_suppliers_wrap .imgBox img {
     height: 100%;
     width: auto;
 }
-.matched_suppliers_wrap .suppliers_imgBox h5 {
-    font-size: 14px;
-    color: #54A958;
-}
 .matched_suppliers_wrap .suppliers_box {
-    display: inline-block;
     width: 100%;
+    float: left;
 }
 .matched_suppliers_wrap .suppliers_textBox {
     float: right;
@@ -1056,14 +1058,48 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .matched_suppliers_wrap .sms_details_box .sms_details span {
     font-weight: 500;
-    margin-top: 8px;
+    margin-top: 3px;
     display: block;
+}
+.matched_suppliers_wrap .offer_price_block {
+    color: #000000;
+    font-size: 11px;
+    line-height: 16px;
+    display: inline-block !important;
+    width: 100%;
+}
+.matched_suppliers_wrap .offer_price_block span {
+    font-weight: 500;
+    width: 50%;
+    float: left;
+    color: #ffc107;
+}
+
+.matched_suppliers_wrap .send_box_wrap {
+    display: inline-block;
+    position: absolute;
+    bottom: 10px;
+    left: 8px;
+    right: 8px;
+}
+.matched_suppliers_wrap .send_box_wrap h5 {
+    font-size: 14px;
+    color: #54A958;
+    float: left;
+    margin: 3px 0 0;
+    width: 80%;
+    height: 18px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .matched_suppliers_wrap .send_box {
     text-align: right;
     font-size: 14px;
     color: #000;
-    padding-top: 10px;
+    float: right;
 }
 .matched_suppliers_wrap .send_box .fa {
     font-size: 12px;
@@ -1072,6 +1108,8 @@ label:not(.form-check-label):not(.custom-file-label) {
 .matched_suppliers_wrap .send_box:hover a {
     color: #73D578;
 }
+
+
 /* ********************************* */
 
 

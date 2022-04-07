@@ -38,11 +38,13 @@ class RFQController extends Controller
     public function rfqListforMigration()
     {
         $rfqs = Rfq::with('images','bids.businessProfile','category')->get();
-        if(count($rfqs)>0){
-            return response()->json(['rfqs'=>$rfqs,'success'=>true],200);
+        if(count($rfqs) > 0)
+        {
+            return response()->json(['count'=>count($rfqs),'rfqs'=>$rfqs,'success'=>true],200);
         }
-        else{
-            return response()->json(['rfqs'=>$rfqs,"success"=>false],200);
+        else
+        {
+            return response()->json(['count'=>count($rfqs),'rfqs'=>$rfqs,"success"=>false],200);
         }
     }
 

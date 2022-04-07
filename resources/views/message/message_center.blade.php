@@ -128,6 +128,7 @@
                                             <input type="text" placeholder="Type message here.." class="message mb-0" id="messagebox">
                                             <input type="hidden" id="to_id" value="">
                                             <a class="btn_green send messageSendButton" >Send</a>
+                                            <input type="hidden" name="rfq_id" class="active_rfq_id" value="{{ $rfqs[0]['id'] }}" />
                                             </form>
                                         </div>
                                         <!--/ Chat footer -->
@@ -158,33 +159,33 @@
                 console.log("Socket Connect successfully.");
             });
 
+            socket.on('new message', function(data) {
+               
+            });
+
             $('.messageSendButton').click(function(){
                 event.preventDefault();
-                var rfq_id =  $('.select-rfq-for-chat-data').hasClass('active').data("rfqid");
-                var from_id = {{auth()->user()->sso_reference_id}};
-                //var to_id = {{$adminUser->sso_reference_id}};
-                if( $('.select-rfq-for-chat-data').hasClass('active').length >0 ){
-                    let message = {'message': $('#messagebox').val(), 'image': "", 'from_id' : from_id, 'to_id' : '5552', 'rfq_id': "19b7c320-b3c7-11ec-9015-c14cf8f032b4",'factory':true,'product': null};
+                var from_user_image = '{{$userImage}}';
+                let sent_message = $('#messagebox').val();
+                
+                    let message = {'message': sent_message, 'image': "", 'from_id' : "1", 'to_id' : '5552', 'rfq_id': $(".active_rfq_id").val(),'factory':true,'product': null};
                     socket.emit('new message', message);
-                    $('#messagebox').val('');
+                    var from_user_image = '{{$userImage}}';
                     var msgHtml = '<div class="chat chat-right">';
-                    msgHtml += '<div class="chat-avatar">';
-                    msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+response.from_user_image+'" class="circle" alt="avatar">';
-                    msgHtml += '</a>';
-                    msgHtml += '</div>';
-                    msgHtml += '<div class="chat-body left-align">';
-                    msgHtml += '<div class="chat-text">';
-                    msgHtml += '<p>'+item.message+'</p>';
-                    msgHtml += '</div>';
-                    msgHtml += '</div>';
-                    msgHtml += '</div>';
-                    
-                    $('.chat-area').animate({scrollTop: (height + 10)});
-                }else{
-                    alert('Select a RFQ first');
-                }
-               
+                        msgHtml += '<div class="chat-avatar">';
+                        msgHtml += '<a class="avatar">';
+                        msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
+                        msgHtml += '</a>';
+                        msgHtml += '</div>';
+                        msgHtml += '<div class="chat-body left-align">';
+                        msgHtml += '<div class="chat-text">';
+                        msgHtml += '<p>'+sent_message+'</p>';
+                        msgHtml += '</div>';
+                        msgHtml += '</div>';
+                        msgHtml += '</div>';
+                        $('.chats-box').append(msgHtml);
+                        $('#messagebox').val('');
+                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });    
 
             function extractEmails (text) {
@@ -197,6 +198,7 @@
                 var url='{{route("message.center.getchatdata")}}';
                 var rfq_id =  $(this).data("rfqid");
                 var user_id = {{auth()->user()->sso_reference_id}};
+                $(".active_rfq_id").val(rfq_id);
                 jQuery.ajax({
                     type : "POST",
                     data : {'rfq_id':rfq_id},

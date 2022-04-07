@@ -49,8 +49,9 @@ class MessageController extends Controller
         }else{
             $adminUser = User::Find('5771');
         }
-        $adminUserImage = asset($adminUser->image);
-        return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage'));
+        $adminUserImage = asset($adminUser->image) ?? asset('images/frontendimages/no-image.png');
+        $userImage = $user->image;
+        return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage'));
     }
 
     public function message_center_selected($id)

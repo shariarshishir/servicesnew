@@ -159,6 +159,17 @@
                                                         <span>{{$businessProfile['user']['phone']}}</span>
                                                     </div>
                                                 </div>
+                                                <div class="offer_price_block" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
+                                                @php
+                                                foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
+                                                    if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
+                                                        if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
+                                                            echo "Offer Price : ". $supplierQuotationToBuyer['offer_price'] .' - '. $supplierQuotationToBuyer['offer_price_unit'];
+                                                        }
+                                                    }
+                                                }
+                                                @endphp
+                                                </div>
                                                 <div class="send_box">
                                                     <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
                                                 </div>
@@ -645,6 +656,8 @@
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
+                var offerHtml = "Offer Price : "+offer_price+" - "+offer_price_unit;
+                $(this).closest(".col-sm-12").find(".offer_price_block").show().text(offerHtml);
                 $.ajax({
                     method: 'get',
                     data: {rfq_id:rfq_id, business_profile_id:business_profile_id, offer_price:offer_price, offer_price_unit:offer_price_unit},

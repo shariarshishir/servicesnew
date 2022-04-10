@@ -593,6 +593,8 @@
             });
 
             $(".business_profile_list_trigger_from_backend").click(function(){
+                var from_user_image = "{{$from_user_image}}";
+                var to_user_image = "{{$to_user_image}}";
                 if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
@@ -600,11 +602,12 @@
                     });
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                     socket.emit('new message', message);
-                    var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                    var from_user_image = "{{$from_user_image}}";
+                    var to_user_image = "{{$to_user_image}}";
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';
@@ -777,14 +780,15 @@
 
             
             socket.on('new message', function(data) {
-                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                var from_user_image = "{{$from_user_image}}";
+                var to_user_image = "{{$to_user_image}}";
                 if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id) 
                 {
                     console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';
@@ -801,7 +805,7 @@
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+data.to_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';

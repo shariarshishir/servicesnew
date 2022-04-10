@@ -170,9 +170,12 @@
 
             socket.on('new message', function(data) {
                 var auth_user_image = '{{$userImage}}';
-                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                var admin_user_image= "{{$adminUserImage}}";
                 var auth_user_sso_reference_id = '{{$user->sso_reference_id}}';
-                if( data.from_id == auth_user_sso_reference_id ){
+                var rfq_id = $(".active_rfq_id").val();
+                var message_rfq_id = data.rfq_id;
+
+                if( data.from_id == auth_user_sso_reference_id && $(".active_rfq_id").val() == data.rfq_id ){
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -185,7 +188,7 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                }else{
+                }else if(data.from_id != auth_user_sso_reference_id && $(".active_rfq_id").val() == data.rfq_id){
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -240,6 +243,7 @@
                 $('#messagebox').val('');
             });
 
+
             function extractEmails (text) {
                 return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
             }
@@ -247,6 +251,8 @@
             $('.select-rfq-for-chat-data').click(function() {
                 $(".select-rfq-for-chat-data").removeClass("active");
                 $(this).addClass("active");
+                var auth_user_image = "{{$userImage}}";
+                var admin_user_image = "{{$adminUserImage}}";
                 var url='{{route("message.center.getchatdata")}}';
                 var rfq_id =  $(this).data("rfqid");
                 var user_id = {{auth()->user()->sso_reference_id}};
@@ -264,7 +270,7 @@
                                 var msgHtml = '<div class="chat chat-right">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                msgHtml += '<img src="'+response.from_user_image+'" class="circle" alt="avatar">';
+                                msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';
                                 msgHtml += '<div class="chat-body left-align">';
@@ -277,7 +283,7 @@
                                 var msgHtml = '<div class="chat chat-left">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                msgHtml += '<img src="'+response.to_user_image+'" class="circle" alt="avatar">';
+                                msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';
                                 msgHtml += '<div class="chat-body left-align">';
@@ -287,6 +293,7 @@
                                 msgHtml += '</div>';
                                 msgHtml += '</div>';
                             }
+                           
                             $('.chats-box').append(msgHtml);
                         })
                         $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+response.to_user_image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Merchant bAY</p><p class="m-0 chat-text truncate"></p></div></div>');

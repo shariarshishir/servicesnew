@@ -39,8 +39,8 @@ class BackendRfqController extends Controller
         }
         $from_user = User::find($user);
         $to_user = User::where('email',$rfq['user']['email'])->first();
-        $from_user_image= isset($from_user->image) ? asset('storage').'/'.$from_user->image : asset('storage/images/supplier.png');
-        $to_user_image= isset($to_user->image) ? asset('storage').'/'.$to_user->image : asset('storage/images/supplier.png');
+        $from_user_image = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        $to_user_image = $rfq['user']['user_picture'];
         $chats = Userchat::where('rfq_id',$id)->get();
         // if($chats->exists()){
         //     $chat = $chats->first();

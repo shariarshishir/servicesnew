@@ -57,7 +57,7 @@
                                 <label>Full Description <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
-                                <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification">@if($product->flag== 'mb'){!! $product->product_details !!},  {!! $product->product_specification !!} @else  {!! $product->description !!} @endif</textarea>
+                                <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification">@if($product->flag== 'mb'){{strip_tags($product->product_details) }},  {{strip_tags($product->product_specification) }} @else  {{strip_tags($product->description )}} @endif</textarea>
                             </div>
                         </div>
 

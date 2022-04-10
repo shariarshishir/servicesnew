@@ -848,6 +848,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .business_profile_filter .factory_type_filter {
     margin-right: 15px;
+    margin-left: auto;
 }
 
 .rfq_data_top .business_profile_filter {
@@ -1184,7 +1185,9 @@ label:not(.form-check-label):not(.custom-file-label) {
     width: -moz-available;
     height: 38px;
 }
-
+.filter_block {
+    display: flex;
+}
 
 /* ********************************* */
 

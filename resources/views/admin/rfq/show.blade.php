@@ -4,7 +4,7 @@
 @if(auth()->guard('admin')->user()->unreadNotifications)
     @foreach (auth()->guard('admin')->user()->unreadNotifications as $notification)
         @if($notification->type == "App\Notifications\NewRfqNotification")
-            @if($notification->data['rfq_data']['id']== $rfq->id)
+            @if($notification->data['rfq_data']['id']== $rfq['id'])
                {{  $notification->markAsRead(); }}
             @endif
         @endif

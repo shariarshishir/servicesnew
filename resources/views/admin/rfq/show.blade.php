@@ -4,7 +4,7 @@
 @if(auth()->guard('admin')->user()->unreadNotifications)
     @foreach (auth()->guard('admin')->user()->unreadNotifications as $notification)
         @if($notification->type == "App\Notifications\NewRfqNotification")
-            @if($notification->data['rfq_data']['id']== $rfq->id)
+            @if($notification->data['rfq_data']['id']== $rfq['id'])
                {{  $notification->markAsRead(); }}
             @endif
         @endif
@@ -53,7 +53,7 @@
                                     <div class="chat_info_leftWrap">
                                         <div class="chat_info_left">
                                             <div class="pro_omg">
-                                                <img src="{{asset('admin-assets/img/avatar04.png')}}" alt="">
+                                                <img src="{{ $rfq['user']['user_picture'] }}" alt="">
                                             </div>
                                         </div>
                                         <div class="chat_info_right">
@@ -81,42 +81,27 @@
                                     <div class="col-sm-12 col-md-4">
                                         <h3>Matched Suppliers</h3>
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
-                                        <div class="factory_type_filter">
-
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label>Factory Type</label>
-                                                </div>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <select class="form-select form-control" name="factory_type" id="factory_type">
-                                                        <option value="">Select factory type</option>
-                                                        @foreach($productCategories as $productCategory)
-                                                            <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
+                                    <div class="col-sm-12 col-md-8 filter_block">
+                                        <div class="factory_type_filter">    
+                                            <label>Factory Type</label>
+                                            <select class="form-select form-control" name="factory_type" id="factory_type">
+                                                <option value="">Select factory type</option>
+                                                @foreach($productCategories as $productCategory)
+                                                    <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4">
                                         <div class="rating_type_filter">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label>Rating</label>
-                                                </div>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                                        <option value="0">All</option>
-                                                        <option value="5">5 star</option>
-                                                        <option value="4">4 star</option>
-                                                        <option value="3">3 star</option>
-                                                        <option value="2">2 star</option>
-                                                        <option value="1">1 star</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            <label>Rating</label>
+                                            <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                                <option value="0">All</option>
+                                                <option value="5">5 star</option>
+                                                <option value="4">4 star</option>
+                                                <option value="3">3 star</option>
+                                                <option value="2">2 star</option>
+                                                <option value="1">1 star</option>
+                                            </select>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +155,7 @@
                                                 foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
                                                     if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
                                                         if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
-                                                            echo " <span> Offer Price :</span> <span>". $supplierQuotationToBuyer['offer_price'] .' - '. $supplierQuotationToBuyer['offer_price_unit']."</span>";
+                                                            echo " <span> Offer Price :</span> <span>$". $supplierQuotationToBuyer['offer_price'] .' / '. $supplierQuotationToBuyer['offer_price_unit']."</span>";
                                                         }
                                                     }
                                                 }
@@ -481,7 +466,7 @@
                                 })
                             }else{
                                 $('.rfq_business_profile_list').empty();
-                                var html = '<div>';
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
                                 html += '<p>No Profile found</p>';
                                 html += '</div>';
                                 $('.rfq_business_profile_list').append(html);
@@ -598,7 +583,7 @@
                                 })
                             }else{
                                 $('.rfq_business_profile_list').empty();
-                                var html = '<div>';
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
                                 html += '<p>No Profile found</p>';
                                 html += '</div>';
                                 $('.rfq_business_profile_list').append(html);
@@ -608,6 +593,8 @@
             });
 
             $(".business_profile_list_trigger_from_backend").click(function(){
+                var from_user_image = "{{$from_user_image}}";
+                var to_user_image = "{{$to_user_image}}";
                 if(selectedValues.length > 0){
                     var html = '<b>Our Suggested Profiles</b><br />';
                     selectedValues.forEach(function(value){
@@ -615,11 +602,12 @@
                     });
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                     socket.emit('new message', message);
-                    var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                    var from_user_image = "{{$from_user_image}}";
+                    var to_user_image = "{{$to_user_image}}";
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';
@@ -678,7 +666,7 @@
                         })
                     }else{
                         $('.rfq_business_profile_list').empty();
-                        var html = '<div>';
+                        var html = '<div class="alert alert-info" style="width: 100%;">';
                         html += '<p>No Profile found</p>';
                         html += '</div>';
                         $('.rfq_business_profile_list').append(html);
@@ -701,8 +689,8 @@
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
-                var offerHtml = "Offer Price : "+offer_price+" - "+offer_price_unit;
-                $(this).closest(".col-sm-12").find(" .offer_price_block ").show().text(offerHtml);
+                var offerHtml = "<span>Offer Price :</span> <span>$"+offer_price+" / "+offer_price_unit+"</span>";
+                $(this).closest(".col-sm-12").find(" .offer_price_block ").show().html(offerHtml);
                 $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
@@ -762,7 +750,7 @@
                     })
                 }else{
                     $('.rfq_business_profile_list').empty();
-                    var html = '<div>';
+                    var html = '<div class="alert alert-info" style="width: 100%;">';
                     html += '<p>No Profile found</p>';
                     html += '</div>';
                     $('.rfq_business_profile_list').append(html);
@@ -792,14 +780,15 @@
 
             
             socket.on('new message', function(data) {
-                var admin_user_image= "{{asset('storage')}}"+'/'+"images/merchantbay_admin/profile/uG2WX6gF2ySIX3igETUVoSy8oqlJ12Ff6BmD8K64.jpg";
+                var from_user_image = "{{$from_user_image}}";
+                var to_user_image = "{{$to_user_image}}";
                 if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id) 
                 {
                     console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '<img src="'+from_user_image+'" class="circle" alt="avatar">';
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';
@@ -816,7 +805,7 @@
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+data.to_user_image+'" class="circle" alt="avatar">';
+                    msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';

@@ -39,18 +39,20 @@ class MessageController extends Controller
     }
 
     public function message_center(){
-        
-       
-        $user=Auth::user();
+        $user = Auth::user();
         $rfqs = RfqApp::where('sso_reference_id',$user->sso_reference_id)->get();
-        $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
+        if(count($rfqs)>0){
+            $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
+        }else{
+            $chatdata = [];
+        }
         if(env('APP_ENV') == 'local'){
             $adminUser = User::Find('5552');
         }else{
             $adminUser = User::Find('5771');
         }
-        $adminUserImage = asset($adminUser->image) ?? asset('images/frontendimages/no-image.png');
-        $userImage = $user->image;
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        $userImage = $rfqs[0]['user']['user_picture'] ?? asset('images/frontendimages/no-image.png');
         return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage'));
     }
 

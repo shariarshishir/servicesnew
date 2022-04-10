@@ -53,7 +53,7 @@
                                     <div class="chat_info_leftWrap">
                                         <div class="chat_info_left">
                                             <div class="pro_omg">
-                                                <img src="{{asset('admin-assets/img/avatar04.png')}}" alt="">
+                                                <img src="{{ $rfq['user']['user_picture'] }}" alt="">
                                             </div>
                                         </div>
                                         <div class="chat_info_right">
@@ -81,42 +81,27 @@
                                     <div class="col-sm-12 col-md-4">
                                         <h3>Matched Suppliers</h3>
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
-                                        <div class="factory_type_filter">
-
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label>Factory Type</label>
-                                                </div>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <select class="form-select form-control" name="factory_type" id="factory_type">
-                                                        <option value="">Select factory type</option>
-                                                        @foreach($productCategories as $productCategory)
-                                                            <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
+                                    <div class="col-sm-12 col-md-8 filter_block">
+                                        <div class="factory_type_filter">    
+                                            <label>Factory Type</label>
+                                            <select class="form-select form-control" name="factory_type" id="factory_type">
+                                                <option value="">Select factory type</option>
+                                                @foreach($productCategories as $productCategory)
+                                                    <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4">
                                         <div class="rating_type_filter">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label>Rating</label>
-                                                </div>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                                        <option value="0">All</option>
-                                                        <option value="5">5 star</option>
-                                                        <option value="4">4 star</option>
-                                                        <option value="3">3 star</option>
-                                                        <option value="2">2 star</option>
-                                                        <option value="1">1 star</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            <label>Rating</label>
+                                            <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                                <option value="0">All</option>
+                                                <option value="5">5 star</option>
+                                                <option value="4">4 star</option>
+                                                <option value="3">3 star</option>
+                                                <option value="2">2 star</option>
+                                                <option value="1">1 star</option>
+                                            </select>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +155,7 @@
                                                 foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
                                                     if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
                                                         if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
-                                                            echo " <span> Offer Price :</span> <span>". $supplierQuotationToBuyer['offer_price'] .' - '. $supplierQuotationToBuyer['offer_price_unit']."</span>";
+                                                            echo " <span> Offer Price :</span> <span>$". $supplierQuotationToBuyer['offer_price'] .' / '. $supplierQuotationToBuyer['offer_price_unit']."</span>";
                                                         }
                                                     }
                                                 }
@@ -481,7 +466,7 @@
                                 })
                             }else{
                                 $('.rfq_business_profile_list').empty();
-                                var html = '<div>';
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
                                 html += '<p>No Profile found</p>';
                                 html += '</div>';
                                 $('.rfq_business_profile_list').append(html);
@@ -598,7 +583,7 @@
                                 })
                             }else{
                                 $('.rfq_business_profile_list').empty();
-                                var html = '<div>';
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
                                 html += '<p>No Profile found</p>';
                                 html += '</div>';
                                 $('.rfq_business_profile_list').append(html);
@@ -678,7 +663,7 @@
                         })
                     }else{
                         $('.rfq_business_profile_list').empty();
-                        var html = '<div>';
+                        var html = '<div class="alert alert-info" style="width: 100%;">';
                         html += '<p>No Profile found</p>';
                         html += '</div>';
                         $('.rfq_business_profile_list').append(html);
@@ -701,8 +686,8 @@
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
-                var offerHtml = "Offer Price : "+offer_price+" - "+offer_price_unit;
-                $(this).closest(".col-sm-12").find(" .offer_price_block ").show().text(offerHtml);
+                var offerHtml = "<span>Offer Price :</span> <span>$"+offer_price+" / "+offer_price_unit+"</span>";
+                $(this).closest(".col-sm-12").find(" .offer_price_block ").show().html(offerHtml);
                 $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
@@ -762,7 +747,7 @@
                     })
                 }else{
                     $('.rfq_business_profile_list').empty();
-                    var html = '<div>';
+                    var html = '<div class="alert alert-info" style="width: 100%;">';
                     html += '<p>No Profile found</p>';
                     html += '</div>';
                     $('.rfq_business_profile_list').append(html);

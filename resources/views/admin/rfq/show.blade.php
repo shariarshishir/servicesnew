@@ -215,7 +215,7 @@
                                 </div>
                                 @endforeach
                                 @else
-                                    <div><p>No profile found</p></div>
+                                    <div class="alert alert-info" style="width: 100%;"><p>No profile found</p></div>
                                 @endif
                             </div>
                         </div>

@@ -28,7 +28,7 @@
                             </div>
                             <div class=" col s12 m8 l9">
                                 <select class="select2" name="category[]" id="category_id" required multiple>
-                                    <option value="" disabled>Select an option</option>
+                                    <option  disabled>Select an option</option>
                                     @foreach($manufacture_product_categories as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
                                     @endforeach

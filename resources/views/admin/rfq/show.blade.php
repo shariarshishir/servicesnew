@@ -53,7 +53,7 @@
                                     <div class="chat_info_leftWrap">
                                         <div class="chat_info_left">
                                             <div class="pro_omg">
-                                                <img src="{{asset('admin-assets/img/avatar04.png')}}" alt="">
+                                                <img src="{{ $rfq['user']['user_picture'] }}" alt="">
                                             </div>
                                         </div>
                                         <div class="chat_info_right">
@@ -81,42 +81,27 @@
                                     <div class="col-sm-12 col-md-4">
                                         <h3>Matched Suppliers</h3>
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
-                                        <div class="factory_type_filter">
-
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label>Factory Type</label>
-                                                </div>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <select class="form-select form-control" name="factory_type" id="factory_type">
-                                                        <option value="">Select factory type</option>
-                                                        @foreach($productCategories as $productCategory)
-                                                            <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
+                                    <div class="col-sm-12 col-md-8 filter_block">
+                                        <div class="factory_type_filter">    
+                                            <label>Factory Type</label>
+                                            <select class="form-select form-control" name="factory_type" id="factory_type">
+                                                <option value="">Select factory type</option>
+                                                @foreach($productCategories as $productCategory)
+                                                    <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4">
                                         <div class="rating_type_filter">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label>Rating</label>
-                                                </div>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <select class="form-select form-control" name="profile_rating" id="profile_rating">
-                                                        <option value="0">All</option>
-                                                        <option value="5">5 star</option>
-                                                        <option value="4">4 star</option>
-                                                        <option value="3">3 star</option>
-                                                        <option value="2">2 star</option>
-                                                        <option value="1">1 star</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            <label>Rating</label>
+                                            <select class="form-select form-control" name="profile_rating" id="profile_rating">
+                                                <option value="0">All</option>
+                                                <option value="5">5 star</option>
+                                                <option value="4">4 star</option>
+                                                <option value="3">3 star</option>
+                                                <option value="2">2 star</option>
+                                                <option value="1">1 star</option>
+                                            </select>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +155,7 @@
                                                 foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
                                                     if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
                                                         if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
-                                                            echo "Offer Price : ". $supplierQuotationToBuyer['offer_price'] .' - '. $supplierQuotationToBuyer['offer_price_unit'];
+                                                            echo " <span> Offer Price :</span> <span>$". $supplierQuotationToBuyer['offer_price'] .' / '. $supplierQuotationToBuyer['offer_price_unit']."</span>";
                                                         }
                                                     }
                                                 }
@@ -396,7 +381,7 @@
                                         className = 'already-sent';
                                         display  = 'display:block';
                                         item.supplier_quotation_to_buyer.forEach((i, idx)=>{
-                                            offer_price ='Offer Price:'+i.offer_price+'-'+i.offer_price_unit;
+                                            offer_price ='<span>Offer Price :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
                                         });
                                     }
                                     var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
@@ -426,7 +411,7 @@
                                     html += '<span>'+item.user.phone+'</span>';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '<div class="offer_price_block" style="'+display+'">';
+                                    html += '<div class="offer_price_block" style=" ' + display + ' ">';
                                     html +=  offer_price;
                                     html += '</div>';
                                     html += '<div class="send_box">';
@@ -439,15 +424,19 @@
                                     html += '<div class="modal-dialog" role="document">';
                                     html += '<div class="modal-content">';
                                     html += '<div class="modal-body">';
-                                    html += '<h4>'+item.business_name+'</h4>';
+                                    html += '<legend>'+item.business_name+'</legend>';
                                     html += '<div class="propose_price_block">';
+
+                                    html += '<div class="row">';
+                                    html += '<div class="col-sm-12 col-md-6">';
                                     html += '<div class="print_block">';
-                                    html += '<label>Offer Price</label>';
+                                    html += '<label>Offer Price ($)</label>';
                                     html += '<div class="propose_price_input_block">';
-                                    html += '$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html += '<input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '<div class="separator_block"> / </div>';
+                                    html += '</div>';
+                                    html += '<div class="col-sm-12 col-md-6">';
                                     html += '<div class="uom_block">';
                                     html += '<label>Price Unit</label>';
                                     html += '<select name="propose_uom" class="propose_uom form-select form-control">';
@@ -463,6 +452,8 @@
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
                                     html += '<div class="modal-footer">';
                                     html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
                                     html += '<button type="button" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
@@ -475,7 +466,7 @@
                                 })
                             }else{
                                 $('.rfq_business_profile_list').empty();
-                                var html = '<div>';
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
                                 html += '<p>No Profile found</p>';
                                 html += '</div>';
                                 $('.rfq_business_profile_list').append(html);
@@ -508,7 +499,7 @@
                                         className = 'already-sent';
                                         display  = 'display:block';
                                         item.supplier_quotation_to_buyer.forEach((i, idx)=>{
-                                            offer_price ='Offer Price:'+i.offer_price+'-'+i.offer_price_unit;
+                                            offer_price ='<span>Offer Price :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
                                         });
                                     }
                                     var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
@@ -538,8 +529,8 @@
                                     html += '<span>'+item.user.phone+'</span>';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '<div class="offer_price_block" style="'+display+'">';
-                                    html +=  offer_price;
+                                    html += '<div class="offer_price_block" style=" ' + display + ' ">';
+                                    html += offer_price;
                                     html += '</div>';
                                     html += '<div class="send_box">';
                                     html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
@@ -551,15 +542,18 @@
                                     html += '<div class="modal-dialog" role="document">';
                                     html += '<div class="modal-content">';
                                     html += '<div class="modal-body">';
-                                    html += '<h4>'+item.business_name+'</h4>';
+                                    html += '<legend>'+item.business_name+'</legend>';
                                     html += '<div class="propose_price_block">';
+                                    html += '<div class="row">';
+                                    html += '<div class="col-sm-12 col-md-6">';
                                     html += '<div class="print_block">';
-                                    html += '<label>Offer Price</label>';
+                                    html += '<label>Offer Price ($)</label>';
                                     html += '<div class="propose_price_input_block">';
-                                    html += '$ <input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html += '<input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '<div class="separator_block"> / </div>';
+                                    html += '</div>';
+                                    html += '<div class="col-sm-12 col-md-6">';
                                     html += '<div class="uom_block">';
                                     html += '<label>Price Unit</label>';
                                     html += '<select name="propose_uom" class="propose_uom form-select form-control">';
@@ -575,6 +569,8 @@
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
                                     html += '<div class="modal-footer">';
                                     html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
                                     html += '<button type="button" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
@@ -587,7 +583,7 @@
                                 })
                             }else{
                                 $('.rfq_business_profile_list').empty();
-                                var html = '<div>';
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
                                 html += '<p>No Profile found</p>';
                                 html += '</div>';
                                 $('.rfq_business_profile_list').append(html);
@@ -642,9 +638,9 @@
                             html+='</div>';
                             html+='<div class="propose_price_block">';
                             html+='<div class="print_block">';
-                            html+='<label>Offer Price</label>';
+                            html+='<label>Offer Price $</label>';
                             html+='<div class="propose_price_input_block">';
-                            html+='$ <input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
+                            html+='<input data-businessprofilename="" type="number" value="" name="propose_price" class="propose_price" />';
                             html+='</div>';
                             html+='</div>';
                             html+='<div class="separator_block"> / </div>';
@@ -667,7 +663,7 @@
                         })
                     }else{
                         $('.rfq_business_profile_list').empty();
-                        var html = '<div>';
+                        var html = '<div class="alert alert-info" style="width: 100%;">';
                         html += '<p>No Profile found</p>';
                         html += '</div>';
                         $('.rfq_business_profile_list').append(html);
@@ -690,8 +686,8 @@
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
-                var offerHtml = "Offer Price : "+offer_price+" - "+offer_price_unit;
-                $(this).closest(".col-sm-12").find(".offer_price_block").show().text(offerHtml);
+                var offerHtml = "<span>Offer Price :</span> <span>$"+offer_price+" / "+offer_price_unit+"</span>";
+                $(this).closest(".col-sm-12").find(" .offer_price_block ").show().html(offerHtml);
                 $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
@@ -751,7 +747,7 @@
                     })
                 }else{
                     $('.rfq_business_profile_list').empty();
-                    var html = '<div>';
+                    var html = '<div class="alert alert-info" style="width: 100%;">';
                     html += '<p>No Profile found</p>';
                     html += '</div>';
                     $('.rfq_business_profile_list').append(html);

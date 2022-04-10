@@ -88,11 +88,11 @@
                                                                 <div class="chat-body left-align">
                                                                     <div class="chat-text">
                                                                         <p>
-                                                                        @php echo html_entity_decode($chat['message']); @endphp 
+                                                                        @php echo html_entity_decode($chat['message']); @endphp
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                            </div>        
+                                                            </div>
                                                             @else
                                                             <div class="chat chat-left">
                                                                 <div class="chat-avatar">
@@ -157,7 +157,7 @@
             } else{
                 fromId = '5552';
             }
-            
+
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             $(".scrollabled").each(function(){
                 $(this).tinyscrollbar();
@@ -208,8 +208,8 @@
 
             $('#messagebox').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
-                if(keycode == '13'){                
-                    //event.preventDefault();
+                if(keycode == '13'){
+                    event.preventDefault();
                     var from_user_image = '{{$userImage}}';
                     let sent_message = $('#messagebox').val();
                     let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
@@ -219,14 +219,15 @@
                         to_user_id = '5771';
                     } else{
                         to_user_id = '5552';
-                    }     
-                    let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':true,'product': null};
+                    }
+                    let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':false,'product': null};
                     socket.emit('new message', message);
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                    $('#messagebox').val('');
                 }
             });
 
-            $('.messageSendButton').click(function(){
+            $('.messageSendButton').click(function(event){
                 event.preventDefault();
                 var from_user_image = '{{$userImage}}';
                 let sent_message = $('#messagebox').val();
@@ -237,8 +238,8 @@
                     to_user_id = '5771';
                 } else{
                     to_user_id = '5552';
-                }     
-                let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':true,'product': null};
+                }
+                let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':false,'product': null};
                 socket.emit('new message', message);
                 $('#messagebox').val('');
             });
@@ -293,7 +294,7 @@
                                 msgHtml += '</div>';
                                 msgHtml += '</div>';
                             }
-                           
+
                             $('.chats-box').append(msgHtml);
                         })
                         $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+response.to_user_image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Merchant bAY</p><p class="m-0 chat-text truncate"></p></div></div>');
@@ -304,8 +305,8 @@
 
             });
 
-                
+
         });
-           
+
     </script>
 @endpush

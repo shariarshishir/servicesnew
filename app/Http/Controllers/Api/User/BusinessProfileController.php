@@ -10,6 +10,7 @@ use App\Models\CompanyOverview;
 use App\Models\CategoriesProduced;
 use App\Models\MachineriesDetail;
 use App\Models\ProductionCapacity;
+use App\Models\supplierQuotationToBuyer;
 use App\Models\Product as WholesalerProduct;
 use App\Models\Manufacture\Product;
 use Illuminate\Support\Facades\Validator;
@@ -608,6 +609,19 @@ class BusinessProfileController extends Controller
             ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
             return view('suppliers.index',compact('suppliers'));
         }
+
+        public function supplierQuotationToBuyer(Request $request){
+            //dd($request->all());
+            $supplierQuotationToBuyer = new supplierQuotationToBuyer();
+            $supplierQuotationToBuyer->rfq_id = $request->rfq_id;
+            $supplierQuotationToBuyer->business_profile_id = $request->business_profile_id;
+            $supplierQuotationToBuyer->offer_price = $request->offer_price;
+            $supplierQuotationToBuyer->offer_price_unit = $request->offer_price_unit;
+            $supplierQuotationToBuyer->from_backend = 0; // 0 means it come froms APP or Frontend
+            $supplierQuotationToBuyer->save();
+
+            return response()->json(["status" => 1, "message" => "successful"]);
+        }        
 
 
 

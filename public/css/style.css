@@ -7221,6 +7221,13 @@ nav .pagination li.active .page-link {
     overflow: hidden;
     border: 1px solid #ddd;
 }
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-avatar .avatar {
+    line-height: 45px;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-avatar .avatar span {
+    font-family: 'nexabold';
+    font-size: 20px;
+}
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-avatar .avatar img {
     width: 100%;
     height: 100%;
@@ -9379,6 +9386,52 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 }
 
 /* ******************** Product upload style end *********************** */
+
+.admin_chat_left_box {
+    padding: 0 !important;
+}
+.admin_chat_left_box h4 {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    height: 18px;
+    overflow: hidden;
+    font-size: 14px;
+    color: #54A958;
+    text-align: left;
+    line-height: 16px;
+    margin: 0 0 5px 0;
+}
+.admin_chat_left_box .admin_chat_inner {
+    float: left;
+    width: 100%;
+    font-size: 10px;
+    line-height: 14px;
+    text-transform: capitalize;
+    color: #999;
+}
+.admin_chat_left_box .admin_chat_inner span {
+    font-family: 'nexabold';
+    color: #484848;
+}
+.admin_chat_left_box .admin_chat_inner .chat_inner_left {
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+.admin_chat_left_box .admin_chat_inner .chat_inner_right {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
+    padding: 10px 15px !important;
+    border-bottom: 1px solid #eeeeee;
+}
+
+
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1500px) {

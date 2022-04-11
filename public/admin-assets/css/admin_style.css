@@ -707,6 +707,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .message {
     width: 75%;
+    height: 35px;
     margin-right: 0px;
     border: none;
 }
@@ -1157,22 +1158,60 @@ label:not(.form-check-label):not(.custom-file-label) {
     padding: 10px 5px;
 }
 
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats {
+    padding: 0 5px;
+}
+
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
+    margin: 0 0 10px 0;
+}
 .chatting_app_wrapper .chat-application .app-chat .chat-content .chat-content-area .chat-area {
     padding: 0;
 }
-.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .send,
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text p {
     padding: 5px 10px;
 }
-.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
-    margin: 0;
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer {
+    margin: 20px 10px 0;
 }
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .send {
+    min-width: inherit;
+    font-size: 14px;
+    width: 100px;
+    height: 35px;
+    line-height: 36px;
+    padding: 0 10px;
+}
+
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text {
     margin: 0 5px;
+    min-height: 38px;
 }
 
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .fa-chevron-circle-right {
-    margin-left: 10px;
+    margin-left: 5px;
+}
+
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body {
+    width: 200px;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat .chat-avatar {
+    width: 45px;
+    height: 45px;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-left .chat-avatar .avatar {
+    line-height: 45px;
+    text-align: center;
+    display: block;
+}
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-left .chat-avatar .avatar span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4E9C52;
 }
 
 /* *************** RFQ modal css ****************** */
@@ -1190,6 +1229,8 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 
 /* ********************************* */
+
+
 
 @media only screen and (max-width: 800px) {
     .no_more_tables {

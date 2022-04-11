@@ -31,7 +31,7 @@ class RfqController extends Controller
         $data = $response->json();
         $rfqLists = $data['data'];
 
-        
+
         // foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
         //     if($notification->type=="App\Notifications\NewRfqNotification"){
         //         array_push($rfqIds,$notification->data['rfq_data']['id']);
@@ -117,7 +117,7 @@ class RfqController extends Controller
 
     }
 
-    public function myRfq(Request $request)
+   /* public function myRfq(Request $request)
     {
         if(isset($request->filter)){
             if($request->filter== 'all'){
@@ -153,7 +153,19 @@ class RfqController extends Controller
         }
 
         return view('rfq.my_rfq',compact('rfqLists','rfqsWithNewBid'));
+    }*/
+
+    public function myRfq(Request $request)
+    {
+        $user = Auth::user();
+
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/20');
+        $data = $response->json();
+        $rfqLists = $data['data'];
+
+        return view('rfq.my_rfq',compact('rfqLists'));
     }
+
 
     public function delete($rfq_id)
     {

@@ -10,6 +10,7 @@ use App\Models\CompanyOverview;
 use App\Models\CategoriesProduced;
 use App\Models\MachineriesDetail;
 use App\Models\ProductionCapacity;
+use App\Models\supplierQuotationToBuyer;
 use App\Models\Product as WholesalerProduct;
 use App\Models\Manufacture\Product;
 use Illuminate\Support\Facades\Validator;
@@ -131,8 +132,10 @@ class BusinessProfileController extends Controller
         }
 
         //business profile list of auth user
-        public function businessProfileList(){
-            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->withTrashed()->get();
+        public function businessProfileList($id){
+            //dd($request);
+            $userObj = User::where('sso_reference_id', $id)->first();
+            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',$userObj['id'])->withTrashed()->get();
             if(count($businessProfiles)>0){
                 $companyOverviewArray=[];
                 foreach($businessProfiles as $businessProfile){
@@ -606,6 +609,18 @@ class BusinessProfileController extends Controller
             ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
             return view('suppliers.index',compact('suppliers'));
         }
+
+        public function supplierQuotationToBuyer(Request $request){
+            //dd($request->all());
+            $supplierQuotationToBuyer = new supplierQuotationToBuyer();
+            $supplierQuotationToBuyer->rfq_id = $request->rfq_id;
+            $supplierQuotationToBuyer->business_profile_id = $request->business_profile_id;
+            $supplierQuotationToBuyer->offer_price = $request->offer_price;
+            $supplierQuotationToBuyer->offer_price_unit = $request->offer_price_unit;
+            $supplierQuotationToBuyer->save();
+
+            return response()->json(["status" => 1, "message" => "successful"]);
+        }        
 
 
 

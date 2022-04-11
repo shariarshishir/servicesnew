@@ -42,7 +42,7 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="status" value="{{$rfq['status']}}">
-                                                <button  class="{{ ($rfq['status'] == 'pending') ? 'btn_grBorder' : 'btn_grBorder'; }} rfq-status-trigger"  type="submit"> {{ ($rfq['status'] == 'pending') ? 'Published' : 'Unpublished' }}</button>
+                                                <button  class="{{ ($rfq['status'] == 'pending') ? 'btn_grBorder' : 'btn_grBorder'; }} rfq-status-trigger"  type="submit"> {{ ($rfq['status'] == 'pending') ? 'Make it Published' : 'Make it Unpublished' }}</button>
                                             </form>
                                         </li>
                                     </ul>

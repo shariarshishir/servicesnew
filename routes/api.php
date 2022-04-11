@@ -81,6 +81,7 @@ Route::post('/omd-rfqs', [RFQController::class, 'storeRfqFromOMD']);
 //blogs
 Route::get('/blogs',[BlogController::class,'blogs']);
 Route::get('/blogs/{id}',[BlogController::class,'blogDetails']);
+Route::get('/business-profile-list/{id}',[BusinessProfileController::class,'businessProfileList']);
 
 Route::group(['middleware'=>['auth:sanctum']],function () {
     //user api
@@ -93,7 +94,6 @@ Route::group(['middleware'=>['auth:sanctum']],function () {
     Route::get('/manufacture-product-categories', [BusinessProfileController::class, 'manufactureProductCategories']);
     Route::get('/manufacture-product-categories-with-icon', [BusinessProfileController::class, 'manufactureProductCategoriesWithIcon']);
     Route::post('/manufacture-product-categories-by-industry-type', [BusinessProfileController::class, 'manufactureProductCategoriesByIndustryType']);
-    Route::get('/business-profile-list',[BusinessProfileController::class,'businessProfileList']);
     Route::get('/business-profile/{id}',[BusinessProfileController::class,'show']);
 
     //active inactive business profile by user
@@ -280,4 +280,4 @@ Route::get('/user/{userId}', [UserController::class, 'show']);
 Route::get('/product/{productId}/reviews',[ReviewController::class,'productReviews']);
 Route::get('/store/{vendorId}/reviews',[ReviewController::class,'vendorReviews']);
 
-
+Route::post('supplier-quotation-to-buyer',[BusinessProfileController::class, 'supplierQuotationToBuyer']);

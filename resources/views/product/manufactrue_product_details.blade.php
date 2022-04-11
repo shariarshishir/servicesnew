@@ -92,7 +92,7 @@
                         <div class="col s12 m7 product_details_info_wrap">
 
                             <div class="row">
-                                <div class="col s12 m6 l6">
+                                <div class="col s12">
                                     <div class="seller-store">
                                         <h3><a href="#">{{ $product->category['name'] }}</a></h3>
                                     </div>

@@ -52,8 +52,17 @@ class MessageController extends Controller
             $adminUser = User::Find('5771');
         }
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
-        $userImage = $rfqs[0]['user']['user_picture'] ?? asset('images/frontendimages/no-image.png');
-        return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage'));
+        if($rfqs[0]['user']['user_picture'] !=""){
+            $userImage = $rfqs[0]['user']['user_picture'];
+            $userNameShortForm = "";
+        }else{
+            $userImage = $rfqs[0]['user']['user_picture'];
+            $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+        }
+        return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage','userNameShortForm'));
     }
 
     public function message_center_selected($id)

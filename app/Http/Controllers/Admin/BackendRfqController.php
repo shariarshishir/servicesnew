@@ -40,22 +40,19 @@ class BackendRfqController extends Controller
         $from_user = User::find($user);
         $to_user = User::where('email',$rfq['user']['email'])->first();
         $from_user_image = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
-        $to_user_image = $rfq['user']['user_picture'];
+        if($rfq['user']['user_picture'] !=""){
+            $to_user_image = $rfq['user']['user_picture'];
+            $userNameShortForm = "";
+        }else{
+            $to_user_image = $rfq['user']['user_picture'];
+            $nameWordArray = explode(" ", $rfq['user']['user_name']);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+        }
         $chats = Userchat::where('rfq_id',$id)->get();
-        // if($chats->exists()){
-        //     $chat = $chats->first();
-        //     $chatdataAllData = $chat->chatdata;
-        //     $chatdata = $chatdataAllData;
-        //     foreach ($chatdataAllData as $key => $value) {
-        //         $messageStr = preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $value['message']);
-        //         $chatdata[$key]['message'] = $messageStr;
-        //     }
-        // }
-        // else{
-        //     $chatdata = [];
-        // }
         $chatdata = $chats;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories'));
+        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories','userNameShortForm'));
     }
 
     public function status(Request $request,$id){

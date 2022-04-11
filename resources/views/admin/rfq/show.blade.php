@@ -215,7 +215,7 @@
                                 </div>
                                 @endforeach
                                 @else
-                                    <div><p>No profile found</p></div>
+                                    <div class="alert alert-info" style="width: 100%;"><p>No profile found</p></div>
                                 @endif
                             </div>
                         </div>
@@ -259,7 +259,11 @@
                                                                     <div class="chat chat-left">
                                                                         <div class="chat-avatar">
                                                                             <a class="avatar">
-                                                                                <img src='{{$to_user_image}}' class="circle" alt="avatar">
+                                                                                @if( $to_user_image != "" )
+                                                                                    <img src='{{$to_user_image}}' class="circle" alt="avatar">
+                                                                                @else
+                                                                                    <span>{{$userNameShortForm}}</span>
+                                                                                @endif
                                                                             </a>
                                                                         </div>
                                                                         <div class="chat-body left-align">
@@ -593,6 +597,7 @@
             });
 
             $(".business_profile_list_trigger_from_backend").click(function(){
+                
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 if(selectedValues.length > 0){
@@ -600,6 +605,7 @@
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
                     });
+                    console.log(html);
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                     socket.emit('new message', message);
                     var from_user_image = "{{$from_user_image}}";
@@ -680,7 +686,7 @@
 
             //$(".send_offer_price_trigger").click(function(){
             $(document).on("click", ".send_offer_price_trigger", function(){
-                var html = $(this).data("businessprofilename")+" offers "+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
+                var html = $(this).data("businessprofilename")+" offers $"+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
                 let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                 socket.emit('new message', message);
 
@@ -780,6 +786,7 @@
 
             
             socket.on('new message', function(data) {
+                var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id) 
@@ -805,7 +812,11 @@
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
+                    if(to_user_image == ""){
+                        msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
+                    }else{
+                        msgHtml += '<span>'+userNameShortForm+'</span>'
+                    }
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';

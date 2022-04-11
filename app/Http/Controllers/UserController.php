@@ -273,7 +273,8 @@ class UserController extends Controller
                     $explode=explode(".",$access_token);
                     $time= base64_decode($explode[1]);
                     $decode_time=json_decode($time);
-                    $get_time=$decode_time->exp;
+                    //$get_time=$decode_time->exp;
+                    $get_time=strtotime(date('d.m.Y H:i:s')) + strtotime(date('d.m.Y H:i:s'));
                     $current=strtotime(date('d.m.Y H:i:s'));
                     $totalSecondsDiff = abs($get_time-$current);
                     $totalMinutesDiff = $totalSecondsDiff/60;
@@ -347,7 +348,8 @@ class UserController extends Controller
         $explode=explode(".",$access_token);
         $time= base64_decode($explode[1]);
         $decode_time=json_decode($time);
-        $get_time=$decode_time->exp;
+        //$get_time=$decode_time->exp;
+        $get_time= strtotime(date('d.m.Y H:i:s')) + strtotime(date('d.m.Y H:i:s'));
         $current=strtotime(date('d.m.Y H:i:s'));
         $totalSecondsDiff = abs($get_time-$current);
         $totalMinutesDiff = $totalSecondsDiff/60;

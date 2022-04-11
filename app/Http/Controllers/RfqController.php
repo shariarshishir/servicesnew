@@ -29,8 +29,7 @@ class RfqController extends Controller
     {
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         $data = $response->json();
-        $rfqLists = $data['data'];
-
+        $rfqLists = $data['data'] ?? [];
 
         // foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
         //     if($notification->type=="App\Notifications\NewRfqNotification"){
@@ -161,7 +160,7 @@ class RfqController extends Controller
 
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/20');
         $data = $response->json();
-        $rfqLists = $data['data'];
+        $rfqLists = $data['data'] ?? [];
 
         return view('rfq.my_rfq',compact('rfqLists'));
     }

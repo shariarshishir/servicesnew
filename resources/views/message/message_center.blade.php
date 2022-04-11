@@ -42,9 +42,20 @@
                                                                             <div class="chat-user animate fadeUp delay-1 all-chatter-div select-rfq-for-chat-data  {{ ( $key == 0 ) ? 'active' : ''  }}" data-formid="{{$rfq['created_by']}}" data-toid="{{$adminUser}}" data-rfqid="{{ $rfq['id'] }}"  style="cursor: pointer;">
                                                                                 <div class="user-section">
                                                                                     <div class="row valign-wrapper">
-                                                                                        <div class="col s12">
-                                                                                            <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $rfq['id'] }}</p>
+                                                                                        <div class="col s12 admin_chat_left_box">
+                                                                                            <h4>{{$rfq['title']}}</h4>
+                                                                                            <div class="admin_chat_inner">
+                                                                                                <div class="chat_inner_left"><span>Qty:</span> {{$rfq['quantity']}} {{$rfq['unit']}} </div>
+                                                                                                <div class="chat_inner_right"><span>Price:</span> $ {{$rfq['unit_price']}}</div>
+                                                                                            </div>
+                                                                                            <div class="admin_chat_inner">
+                                                                                                <div class="chat_inner_left"><span>Payment method:</span> {{$rfq['payment_method']}}</div>
+                                                                                                <div class="chat_inner_right"><span>Delivery date:</span> {{ date('F j, Y',strtotime($rfq['delivery_time'])) }}</div>
+                                                                                            </div>
+
+                                                                                            <!-- <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align ">{{ $rfq['id'] }}</p> -->
                                                                                             <p class="m-0 info-text"></p>
+                                                                                        
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

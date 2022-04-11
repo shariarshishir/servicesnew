@@ -102,7 +102,7 @@ $reviewsCount = count($productReviews);
                     </div>
                     <div class="col s12 m7 product_details_info_wrap">
                         <div class="row">
-                            <div class="col s12 m6 l6">
+                            <div class="col s12">
                                 <div class="seller-store">
                                     <a href="{{route('supplier.profile', $product->businessProfile->alias)}}">{{$product->businessProfile->business_name}}</a>
                                 </div>

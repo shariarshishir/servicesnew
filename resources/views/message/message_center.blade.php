@@ -82,8 +82,13 @@
                                                             <div class="chat chat-right">
                                                                 <div class="chat-avatar">
                                                                     <a class="avatar">
-                                                                        <img src="{{asset('storage/'.auth()->user()->image)}}" class="circle" alt="avatar">
+                                                                        @if($userImage != "")
+                                                                            <img src="{{$userImage}}" class="circle" alt="avatar">
+                                                                        @else
+                                                                            <span>{{$userNameShortForm}}</span>
+                                                                        @endif
                                                                     </a>
+                                                                   
                                                                 </div>
                                                                 <div class="chat-body left-align">
                                                                     <div class="chat-text">
@@ -169,6 +174,7 @@
             });
 
             socket.on('new message', function(data) {
+                var nameShortForm = "{{$userNameShortForm}}";
                 var auth_user_image = '{{$userImage}}';
                 var admin_user_image= "{{$adminUserImage}}";
                 var auth_user_sso_reference_id = '{{$user->sso_reference_id}}';
@@ -179,7 +185,11 @@
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
+                    if(auth_user_image != ""){
+                        msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
+                    }else{
+                        msgHtml += '<span>'+nameShortForm+'</span>'
+                    }
                     msgHtml += '</a>';
                     msgHtml += '</div>';
                     msgHtml += '<div class="chat-body left-align">';
@@ -251,6 +261,7 @@
             $('.select-rfq-for-chat-data').click(function() {
                 $(".select-rfq-for-chat-data").removeClass("active");
                 $(this).addClass("active");
+                var nameShortForm = "{{$userNameShortForm}}";
                 var auth_user_image = "{{$userImage}}";
                 var admin_user_image = "{{$adminUserImage}}";
                 var url='{{route("message.center.getchatdata")}}';
@@ -270,7 +281,11 @@
                                 var msgHtml = '<div class="chat chat-right">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
+                                if(auth_user_image == ""){
+                                    msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
+                                }else{
+                                    msgHtml += '<span>'+nameShortForm+'</span>'
+                                }
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';
                                 msgHtml += '<div class="chat-body left-align">';

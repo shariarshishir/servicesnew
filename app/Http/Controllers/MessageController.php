@@ -41,27 +41,34 @@ class MessageController extends Controller
     public function message_center(){
         $user = Auth::user();
         $rfqs = RfqApp::where('sso_reference_id',$user->sso_reference_id)->get();
+        
         if(count($rfqs)>0){
             $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
+            if($rfqs[0]['user']['user_picture'] !=""){
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $userNameShortForm = "";
+            }else{
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
+                $firstWordFirstLetter = $nameWordArray[0][0];
+                $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+                $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+            }
         }else{
             $chatdata = [];
+            $userImage ="";
+            $nameWordArray = explode(" ", $user->name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
+
         if(env('APP_ENV') == 'local'){
             $adminUser = User::Find('5552');
         }else{
             $adminUser = User::Find('5771');
         }
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
-        if($rfqs[0]['user']['user_picture'] !=""){
-            $userImage = $rfqs[0]['user']['user_picture'];
-            $userNameShortForm = "";
-        }else{
-            $userImage = $rfqs[0]['user']['user_picture'];
-            $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
-            $firstWordFirstLetter = $nameWordArray[0][0];
-            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
-            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
-        }
         return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage','userNameShortForm'));
     }
 

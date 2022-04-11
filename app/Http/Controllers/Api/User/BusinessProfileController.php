@@ -131,8 +131,10 @@ class BusinessProfileController extends Controller
         }
 
         //business profile list of auth user
-        public function businessProfileList(){
-            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',auth()->user()->id)->withTrashed()->get();
+        public function businessProfileList($id){
+            //dd($request);
+            $userObj = User::where('sso_reference_id', $id)->first();
+            $businessProfiles = BusinessProfile::with('user','businessCategory')->where('user_id',$userObj['id'])->withTrashed()->get();
             if(count($businessProfiles)>0){
                 $companyOverviewArray=[];
                 foreach($businessProfiles as $businessProfile){

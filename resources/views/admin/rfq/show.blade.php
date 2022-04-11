@@ -62,14 +62,14 @@
                                         </div>
                                     </div>
                                     <div class="chat_info_rightWrap">
-                                        <span><i class="fa fa-clock"></i> {{ \Carbon\Carbon::parse($rfq['created_at'])->isoFormat('MMMM Do YYYY, h:mm:ss a')}}</span>
+                                        <span><i class="fa fa-clock"></i> {{ \Carbon\Carbon::parse($rfq['created_at'])->isoFormat('MMMM Do YYYY')}}</span>
                                     </div>
                                 </div>
                                 <div class="infoBox">
                                     <h6>{{$rfq['title']}}</h6>
                                     <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
                                     <p><b>Details:</b> {{$rfq['full_specification']}}</p>
-                                    <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')}}, Payment Method: {{$rfq['payment_method']}}</p>
+                                    <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                 </div>
                             </div>
                         </div>

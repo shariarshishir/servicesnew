@@ -617,6 +617,7 @@ class BusinessProfileController extends Controller
             $supplierQuotationToBuyer->business_profile_id = $request->business_profile_id;
             $supplierQuotationToBuyer->offer_price = $request->offer_price;
             $supplierQuotationToBuyer->offer_price_unit = $request->offer_price_unit;
+            $supplierQuotationToBuyer->from_backend = 0; // 0 means it come froms APP or Frontend
             $supplierQuotationToBuyer->save();
 
             return response()->json(["status" => 1, "message" => "successful"]);

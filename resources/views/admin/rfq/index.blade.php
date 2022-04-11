@@ -71,7 +71,9 @@
                                     <td>$ {{$rfq['unit_price']}}</td>
                                     <td>{{$rfq['delivery_time']}}</td>
                                     <td>
-                                        <span style="@php echo($rfq['status'] == 'pending')? 'color:red':'color:green'; @endphp">{{$rfq['status']}}</span>
+                                        <span style="@php echo($rfq['status'] == 'pending')? 'color:red':'color:green'; @endphp">
+                                        @php echo($rfq['status'] == 'pending')? 'Unpublished':'Published'; @endphp
+                                        </span>
                                     </td>
                                     <td>
                                         <a href="{{route('admin.rfq.show', $rfq['id'])}}" class="show-rfq-details-trigger"><i class="fa fa-eye"></i></a>

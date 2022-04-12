@@ -293,7 +293,7 @@
                                 var msgHtml = '<div class="chat chat-right">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                if(auth_user_image == ""){
+                                if(auth_user_image != ""){
                                     msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
                                 }else{
                                     msgHtml += '<span>'+nameShortForm+'</span>'

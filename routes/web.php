@@ -527,6 +527,7 @@ Route::group(['prefix'=>'/admin'],function (){
         // Route::get('/proforma-invoices/{proformaInvoice}',[AdminProFormaInvoiceController::class,'show'])->name('proforma_invoices.show');
         Route::get('/proforma-invoices',[AdminPoController::class,'index'])->name('proforma_invoices.index');
         Route::get('/proforma-invoices/{proformaInvoice}',[AdminPoController::class,'show'])->name('proforma_invoices.show');
+        Route::get('/proforma-invoice/create',[AdminPoController::class,'create'])->name('proforma_invoices.create');
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');

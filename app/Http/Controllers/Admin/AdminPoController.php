@@ -31,6 +31,18 @@ use PDF;
 
 class AdminPoController extends Controller
 {
+    public function  create(){
+        $proformaInvoices = new Proforma();
+
+        $paymentTerms = PaymentTerm::get();
+        $shipmentTerms = ShipmentTerm::get();
+        $shippingMethods = ShippingMethod::latest()->get();
+        $shipmentTypes = ShipmentType::latest()->get();
+        $uoms = UOM::latest()->get();
+        $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
+
+        return view('admin.proforma_invoice.create',compact('proformaInvoices', 'paymentTerms', 'shipmentTerms', 'shippingMethods', 'shipmentTypes', 'uoms', 'proFormaTermAndConditions'));
+    }    
     public function index ()
     {
         $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();

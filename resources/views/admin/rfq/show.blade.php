@@ -70,6 +70,15 @@
                                     <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
                                     <p><b>Details:</b> {{$rfq['full_specification']}}</p>
                                     <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
+                                    @if(isset($rfq['images']))
+                                        <div class="rfq_image">
+                                            @foreach($rfq['images'] as $image)
+                                                <a href="{{ $image['image'] }}" data-fancybox>
+                                                    <img src="{{ $image['image'] }}" alt="" class="img-responsive" />
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

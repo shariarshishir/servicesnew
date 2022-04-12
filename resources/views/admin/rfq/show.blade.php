@@ -140,7 +140,7 @@
                                                 <div class="imgBox">
                                                     <img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />
                                                 </div>
-                                                <h5>MB Pool</h5>
+                                                <!--h5>MB Pool</h5-->
                                             </div>
                                             <div class="suppliers_textBox">
                                                 <div class="title_box">
@@ -423,7 +423,6 @@
                                     let image = "{{asset('storage')}}"+'/'+item.user.image;
                                     html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
-                                    html += '<h5>MB Pool</h5>';
                                     html += '</div>';
                                     html += '<div class="suppliers_textBox">';
                                     html += '<div class="title_box">';
@@ -557,7 +556,6 @@
                                     let image = "{{asset('storage')}}"+'/'+item.user.image;
                                     html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
-                                    html += '<h5>MB Pool</h5>';
                                     html += '</div>';
                                     html += '<div class="suppliers_textBox">';
                                     html += '<div class="title_box">';

@@ -998,11 +998,11 @@ label:not(.form-check-label):not(.custom-file-label) {
     padding: 10px 10px 0px;
     margin-bottom: 20px;
     position: relative;
-    height: 155px;
+    height: 185px;
     overflow: hidden;
 }
 .already-sent .suppliersBoxWrap {
-    border: 1px solid #ffc107;
+    border: 1px solid #ff07079c;
 }
 .matched_suppliers_wrap .imgBox {
     width: 60px;
@@ -1089,11 +1089,23 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: inline-block;
     width: 100%;
     font-weight: 500;
-    color: #ffc107;
+    color: #ff07079c;
     font-size: 11px;
     line-height: 16px;
 }
 .matched_suppliers_wrap .offer_price_block span {
+    width: 50%;
+    float: left;
+}
+.matched_suppliers_wrap .deal_price_block {
+    display: inline-block;
+    width: 100%;
+    font-weight: 500;
+    color: #0730ff9c;
+    font-size: 11px;
+    line-height: 16px;
+}
+.matched_suppliers_wrap .deal_price_block span {
     width: 50%;
     float: left;
 }

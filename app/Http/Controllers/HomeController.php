@@ -1171,6 +1171,9 @@ class HomeController extends Controller
     public function aboutusLandingPage(){
         return view('aboutus.index');
     }
+    public function howweworkLandingPage(){
+        return view('howwework.index');
+    }
 
     public function contactusLandingPage(){
         return view('contactus.index');

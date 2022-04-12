@@ -30,17 +30,19 @@ class RfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'];
-
-
-        // foreach(auth()->user()->unreadNotifications->where('read_at',null) as $notification){
-        //     if($notification->type=="App\Notifications\NewRfqNotification"){
-        //         array_push($rfqIds,$notification->data['rfq_data']['id']);
-        //     }
-        // }
-
-        return view('rfq.index',compact('rfqLists'));
+        $noOfPages = floor(count($rfqLists)/10);
+        return view('rfq.index',compact('rfqLists','noOfPages'));
     }
 
+    public function rfqByPageNumber(Request $request){
+        $page = $request->page; 
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/'.$page.'/1/limit/5');
+        $data = $response->json();
+        $rfqLists = $data['data'];
+        $noOfPages = floor(count($rfqLists)/5);
+        return view('rfq.rfq_list',compact('rfqLists','noOfPages'))->render();
+
+    }
 
 
     public function store(Request $request)

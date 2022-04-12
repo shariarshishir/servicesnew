@@ -320,6 +320,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     //rfq
 
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
+    Route::get('rfq-by-page-no',[RfqController::class, 'rfqByPageNumber'])->name('rfq.frontend.pagination');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     Route::delete('rfq/delete/{rfq_id}',[RfqController::class, 'delete'])->name('rfq.delete');
     Route::get('rfq/active/{rfq_id}',[RfqController::class, 'active'])->name('rfq.active');
@@ -569,6 +570,8 @@ Route::group(['prefix'=>'/admin'],function (){
         //rfq
         Route::put('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
+        
+        Route::get('admin/rfq/pagination',[AdminRfqController::class, 'fetchRFQsByQueryStringOrPagination'])->name('rfq.pagination');
         //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');
         Route::get('supplier-quotation-to-buyer',[AdminRfqController::class, 'supplierQuotationToBuyer'])->name('admin.rfq.supplier.quotation.to.buyer');

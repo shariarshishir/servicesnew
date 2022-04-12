@@ -1,6 +1,35 @@
 @push('js')
 <script>
 
+    $(document).on('click', '.page-link', function(event){
+        event.preventDefault(); 
+        var page = $(this).data("page");
+        var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
+        var filter_title = $(".filter_title").val();
+        if(page == 1){
+            $('.prev_link').data('page',page);
+        }else{
+            $('.prev_link').data('page',page-1);
+        }
+        $('.next_link').data('page',page+1);
+        
+        console.log(page);
+        $.ajax({
+                method: 'get',
+                data: {page:page},
+                url: '{{ route("rfq.frontend.pagination") }}',
+                beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                },
+                success:function(response){
+                    $('.loading-message').html("");
+                    $('#loadingProgressContainer').hide();
+                    $('.no_more_tables').html(response);
+                }
+            });
+        });
+
     $('.open-create-rfq-modal').click(function(){
         $('#create-rfq-form').modal('open');
         $('.createRfqForm')[0].reset();

@@ -164,6 +164,7 @@
                                                         @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
                                                                 @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == true)
                                                                     <span> Offered to buyer :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  /  {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                    @break
                                                                 @endif
                                                         @endforeach
                                                     </div>
@@ -171,6 +172,7 @@
                                                         @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
                                                                 @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == false)
                                                                     <span> Deal with supplier :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  / {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                    @break
                                                                 @endif
                                                         @endforeach
                                                     </div>
@@ -402,8 +404,14 @@
                                         item.supplier_quotation_to_buyer.forEach((i, idx)=>{
                                             if(i.from_backend == true){
                                                 offered_to_buyer ='<span>Offered to buyer :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
-                                            }else if( i.from_backend == false){
+                                                return false;
+                                            }
+
+                                        });
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            if( i.from_backend == false){
                                                 deal_with_supplier ='<span>Deal with supplier :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                                return false;
                                             }
                                         });
                                     }
@@ -530,8 +538,14 @@
                                         item.supplier_quotation_to_buyer.forEach((i, idx)=>{
                                             if(i.from_backend == true){
                                                 offered_to_buyer ='<span>Offered to buyer :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
-                                            }else if( i.from_backend == false){
+                                                return false;
+                                            }
+
+                                        });
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            if( i.from_backend == false){
                                                 deal_with_supplier ='<span>Deal with supplier :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                                return false;
                                             }
                                         });
                                     }
@@ -631,7 +645,7 @@
             });
 
             $(".business_profile_list_trigger_from_backend").click(function(){
-                
+
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 if(selectedValues.length > 0){

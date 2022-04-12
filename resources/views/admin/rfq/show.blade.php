@@ -38,7 +38,7 @@
                                     <ul>
                                         <li class="active"><a href="javascript:void(0);" class="btn_grBorder">Generate PI</a></li>
                                         <li>
-                                            <form method="POST" action="{{route('admin.rfq.status', $rfq['id'])}}"> 
+                                            <form method="POST" action="{{route('admin.rfq.status', $rfq['id'])}}">
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="status" value="{{$rfq['status']}}">
@@ -91,7 +91,7 @@
                                         <h3>Matched Suppliers</h3>
                                     </div>
                                     <div class="col-sm-12 col-md-8 filter_block">
-                                        <div class="factory_type_filter">    
+                                        <div class="factory_type_filter">
                                             <label>Factory Type</label>
                                             <select class="form-select form-control" name="factory_type" id="factory_type">
                                                 <option value="">Select factory type</option>
@@ -110,7 +110,7 @@
                                                 <option value="2">2 star</option>
                                                 <option value="1">1 star</option>
                                             </select>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -159,16 +159,21 @@
                                                         <span>{{$businessProfile['user']['phone']}}</span>
                                                     </div>
                                                 </div>
-                                                <div class="offer_price_block" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
-                                                @php
-                                                foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
-                                                    if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
-                                                        if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
-                                                            echo " <span> Offer Price :</span> <span>$". $supplierQuotationToBuyer['offer_price'] .' / '. $supplierQuotationToBuyer['offer_price_unit']."</span>";
-                                                        }
-                                                    }
-                                                }
-                                                @endphp
+                                                <div class="offer_price_block_wrapper" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
+                                                    <div class="offer_price_block">
+                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == true)
+                                                                    <span> Offered to buyer :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  /  {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="deal_price_block">
+                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == false)
+                                                                    <span> Deal with supplier :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  / {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                @endif
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                                 <div class="send_box">
                                                     <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
@@ -389,12 +394,17 @@
                                     console.log(item);
                                     var  className = 'no-class';
                                     var  display  = 'display:none';
-                                    var offer_price = '';
+                                    var offered_to_buyer = ' ';
+                                    var deal_with_supplier=' ';
                                     if(item.supplier_quotation_to_buyer.length > 0){
                                         className = 'already-sent';
                                         display  = 'display:block';
                                         item.supplier_quotation_to_buyer.forEach((i, idx)=>{
-                                            offer_price ='<span>Offer Price :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                            if(i.from_backend == true){
+                                                offered_to_buyer ='<span>Offered to buyer :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                            }else if( i.from_backend == false){
+                                                deal_with_supplier ='<span>Deal with supplier :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                            }
                                         });
                                     }
                                     var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
@@ -424,8 +434,13 @@
                                     html += '<span>'+item.user.phone+'</span>';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '<div class="offer_price_block" style=" ' + display + ' ">';
-                                    html +=  offer_price;
+                                    html += '<div class="offer_price_block_wrapper" style=" ' + display + ' ">';
+                                    html += '<div class="offer_price_block">';
+                                    html +=  offered_to_buyer;
+                                    html += '</div>';
+                                    html += '<div class="deal_price_block">';
+                                    html +=  deal_with_supplier;
+                                    html += '</div>';
                                     html += '</div>';
                                     html += '<div class="send_box">';
                                     html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
@@ -507,12 +522,17 @@
                                 response.businessProfiles.forEach((item, index)=>{
                                     var  className = 'no-class';
                                     var  display  = 'display:none';
-                                    var offer_price = '';
+                                    var offered_to_buyer = ' ';
+                                    var deal_with_supplier=' ';
                                     if(item.supplier_quotation_to_buyer.length > 0){
                                         className = 'already-sent';
                                         display  = 'display:block';
                                         item.supplier_quotation_to_buyer.forEach((i, idx)=>{
-                                            offer_price ='<span>Offer Price :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                            if(i.from_backend == true){
+                                                offered_to_buyer ='<span>Offered to buyer :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                            }else if( i.from_backend == false){
+                                                deal_with_supplier ='<span>Deal with supplier :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                            }
                                         });
                                     }
                                     var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
@@ -542,8 +562,13 @@
                                     html += '<span>'+item.user.phone+'</span>';
                                     html += '</div>';
                                     html += '</div>';
-                                    html += '<div class="offer_price_block" style=" ' + display + ' ">';
-                                    html += offer_price;
+                                    html += '<div class="offer_price_block_wrapper" style=" ' + display + ' ">';
+                                    html += '<div class="offer_price_block">';
+                                    html +=  offered_to_buyer;
+                                    html += '</div>';
+                                    html += '<div class="deal_price_block">';
+                                    html +=  deal_with_supplier;
+                                    html += '</div>';
                                     html += '</div>';
                                     html += '<div class="send_box">';
                                     html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
@@ -704,8 +729,9 @@
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
-                var offerHtml = "<span>Offer Price :</span> <span>$"+offer_price+" / "+offer_price_unit+"</span>";
-                $(this).closest(".col-sm-12").find(" .offer_price_block ").show().html(offerHtml);
+                var offerHtml = "<span>Offered to buyer :</span> <span>$"+offer_price+" / "+offer_price_unit+"</span>";
+                $(this).closest(".col-sm-12").find(" .offer_price_block_wrapper ").show();
+                $(this).closest(".col-sm-12").find(" .offer_price_block ").html(offerHtml);
                 $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
@@ -793,12 +819,12 @@
                 $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 
-            
+
             socket.on('new message', function(data) {
                 var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
-                if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id) 
+                if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id)
                 {
                     console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
@@ -817,7 +843,7 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
                 else if(data.rfq_id == "{{$rfq['id']}}" && fromId != data.from_id)
-                {      
+                {
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -838,8 +864,8 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
             });
-                
-            
+
+
 
         });
     </script>

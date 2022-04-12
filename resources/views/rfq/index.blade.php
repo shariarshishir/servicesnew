@@ -41,7 +41,7 @@
 						{{ $rfqSentList['user']['user_name']}}
 						@if(isset($rfqSentList->businessProfile->is_business_profile_verified))
 						<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" />
-						@endif						
+						@endif
 					</h4>
 					<!--p>Fashion Tex Ltd.</p-->
 				</div>
@@ -88,11 +88,11 @@
 			</div>
 
 			<div class="responses_wrap right-align">
-                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+                <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">0</span>
-				</button>				
-                
+					Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">0</span>
+				</button>
+
 			</div>
 
 		</div>

@@ -23,6 +23,7 @@
 	</div>
 	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
 	@php $i = 1; @endphp
+    @if(count($rfqLists)>0)
 	@foreach ($rfqLists as $rfqSentList)
 	<div class="rfq_profile_detail row">
 		<div class="col s12 m3 l2">
@@ -88,7 +89,7 @@
 			</div>
 
 			<div class="responses_wrap right-align">
-                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+                {{-- <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a> --}}
 				<button class="none_button btn_responses" id="rfqResponse" >
 					Responses <span class="respons_count">0</span>
 				</button>
@@ -99,6 +100,13 @@
 	</div>
 	@php $i++; @endphp
 	@endforeach
+    @else
+    <div class="card-alert card cyan">
+        <div class="card-content white-text">
+            <p>INFO : you don't have any rfq.</p>
+        </div>
+    </div>
+@endif
 </div>
 <!-- RFQ html end -->
 

@@ -48,7 +48,7 @@
 
 				<div class="profile_view_time right-align col s12 m4 l4">
 					<div style="float: right;" class="rfq_share_box">
-						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList['id']}})"> <i class="material-icons"> share </i> <span>Share</span></a>
+						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel('{{$rfqSentList['id']}}')"> <i class="material-icons"> share </i> <span>Share</span></a>
 					</div>
 				</div>
 			</div>

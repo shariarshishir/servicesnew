@@ -99,7 +99,7 @@ class BackendRfqController extends Controller
     public function supplierQuotationToBuyer(Request $request){
         //dd($request->all());
 
-        $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->first();
+        $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->where('from_backend',1)->first();
 
         if($quotation)
         {

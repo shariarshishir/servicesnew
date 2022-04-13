@@ -21,7 +21,20 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $rfqs = $data['data'];
         $rfqsCount = $data['count'];
-        return view('admin.rfq.index',compact('rfqs','rfqsCount'));
+        $noOfPages = floor($data['count']/10);
+        return view('admin.rfq.index',compact('rfqs','rfqsCount','noOfPages'));
+    }
+
+    public function fetchRFQsByQueryStringOrPagination(Request $request){
+        $limit = $request->limit;
+        $filter = $request->filter??'null';
+        $page = $request->page??'1';
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/'.$filter.'/page/'.$page.'/limit/'.$limit);
+        $data = $response->json();
+        $rfqs = $data['data'];
+        $rfqsCount = $data['count'];
+        $noOfPages = floor($data['count']/10);
+        return view('admin.rfq.table',compact('rfqs'))->render();
     }
 
     public function show($id){

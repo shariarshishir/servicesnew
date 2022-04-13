@@ -1,6 +1,59 @@
 @push('js')
 <script>
 
+    $(document).on('click', '.page-link', function(event){
+        event.preventDefault(); 
+        var page = $(this).data("page");
+        if(page == 1){
+            $('.prev_link').data('page',page);
+        }else{
+            $('.prev_link').data('page',page-1);
+        }
+        $('.next_link').data('page',page+1);
+        $.ajax({
+            method: 'get',
+            data: {page:page},
+            url: '{{ route("rfq.frontend.pagination") }}',
+            beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+            },
+            success:function(response){
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                $('.no_more_tables').html(response);
+                $("html, body").animate({ scrollTop: "0" });
+            }
+        });
+    });
+    $(document).on('click', '.my-rfq-page-link', function(event){
+        event.preventDefault(); 
+        var page = $(this).data("page");
+        if(page == 1){
+            $('.my_rfq_prev_link').data('page',page);
+        }else{
+            $('.my_rfq_prev_link').data('page',page-1);
+        }
+        $('.my_rfq_next_link').data('page',page+1);
+        $.ajax({
+            method: 'get',
+            data: {page:page},
+            url: '{{ route("my.rfq.frontend.pagination") }}',
+            beforeSend: function() {
+                $('.loading-message').html("Please Wait.");
+                $('#loadingProgressContainer').show();
+            },
+            success:function(response){
+                $('.loading-message').html("");
+                $('#loadingProgressContainer').hide();
+                $('.no_more_tables').html(response);
+                $("html, body").animate({ scrollTop: "0" });
+            }
+        });
+    });
+
+        
+
     $('.open-create-rfq-modal').click(function(){
         $('#create-rfq-form').modal('open');
         $('.createRfqForm')[0].reset();

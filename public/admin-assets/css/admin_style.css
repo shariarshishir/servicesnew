@@ -1144,6 +1144,8 @@ label:not(.form-check-label):not(.custom-file-label) {
 .rfq_order_list_search {
     text-align: right;
     padding-top: 20px;
+    position: relative;
+    margin-left: auto;
 }
 .admin_order_list_table_wrap table {
     background: #FFFFFF;
@@ -1241,6 +1243,13 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 
 /* ********************************* */
+.spinner-class {
+    color: #000 !important;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 25px;
+    right: 10px;
 .rfq_image {
     margin-top: 15px;
 }

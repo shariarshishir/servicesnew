@@ -579,6 +579,7 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');
         Route::get('supplier-quotation-to-buyer',[AdminRfqController::class, 'supplierQuotationToBuyer'])->name('admin.rfq.supplier.quotation.to.buyer');
         Route::get('message-center/getchatdata',[AdminMessageController::class,'getchatdata'])->name('admin.message.center.getchatdata');
+        Route::get('/message-center/getsupplierchatdata',[AdminMessageController::class,'getSupplierChatData'])->name('admin.message.center.getsupplierchatdata');
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
         Route::get('new/user/request/edit/{id}', [NewUserRequestController::class, 'edit'])->name('new.user.request.edit');

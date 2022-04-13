@@ -146,7 +146,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -324,6 +324,8 @@
         </div>
     </section>
 </div>
+
+<div id="dialog-form" title="Message Box" style="display: none;"></div>
 
 @endsection
 @push('js')
@@ -877,8 +879,40 @@
                 }
             });
 
+            dialog = $( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    Send: function() {
+                        messageSendToUser();
+                    }
+                }                
+            });		
+            $( ".sms_trigger" ).on( "click", function() {
+                var rfq_id = $(this).data("rfqid");
+                var business_profile_id = $(this).data("businessprofileid");
+                $.ajax({
+                    method: 'GET',
+                    data: {business_profile_id:business_profile_id, rfq_id:rfq_id, _token:"{{ csrf_token() }}"},
+                    url: '{{ route("admin.message.center.getsupplierchatdata") }}',
+                    success:function(response){
+                        console.log(response);
+                        var html = "RFQ ID = "+rfq_id+"<br />";
+                        html += "Business Profile ID = "+business_profile_id;
+                        $("#dialog-form").html(html);
+                        dialog.dialog( "open" );
+                    }
+                });
+            });
 
 
         });
+
+        function messageSendToUser()
+        {
+            alert("I am ready to emit message");
+        }
     </script>
 @endpush

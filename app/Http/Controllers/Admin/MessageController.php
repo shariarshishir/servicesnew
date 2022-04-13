@@ -46,4 +46,14 @@ class MessageController extends Controller
             ],200);
         }
     }
+    public function getSupplierChatData(Request $request)
+    {
+        //dd($request->all());
+        return response()->json([
+            'success' => false,
+            'msg'     => 'Hi, Welcome To Merchantbay.',
+            'rfq_id' => $request['rfq_id'],
+            'business_profile_id' => $request['business_profile_id'],
+        ],200);        
+    }    
 }

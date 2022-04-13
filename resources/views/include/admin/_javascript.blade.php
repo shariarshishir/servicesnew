@@ -2,6 +2,7 @@
 <script src="{{asset('admin-assets/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('admin-assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<link rel="stylesheet" href="{{asset('admin-assets/plugins/jquery-ui/jquery-ui.min.css')}}" />
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script type="text/javascript">
   $.widget.bridge('uibutton', $.ui.button)

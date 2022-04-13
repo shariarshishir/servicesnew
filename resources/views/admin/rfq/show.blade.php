@@ -325,7 +325,13 @@
     </section>
 </div>
 
-<div id="dialog-form" title="Message Box" style="display: none;"></div>
+<div id="dialog-form" title="Message Box" style="display: none;">
+    <div class="dialog-form-box"></div>
+    <div class="dialog-form-button">
+        <input type="text" class="messageContent" value="" />
+        <input type="button" class="btn messageSendToUser" value="Send" />
+    </div>
+</div>
 
 @endsection
 @push('js')
@@ -886,9 +892,7 @@
                 width: 350,
                 modal: true,
                 buttons: {
-                    Send: function() {
-                        messageSendToUser();
-                    }
+                    //Send: messageSendToUser
                 }                
             });		
             $( ".sms_trigger" ).on( "click", function() {
@@ -916,7 +920,7 @@
                         console.log(response);
                         var html = "RFQ ID = "+rfq_id+"<br />";
                         html += "Business Profile ID = "+business_profile_id;
-                        $("#dialog-form").html(html);
+                        $(".dialog-form-box").html(html);
                         dialog.dialog( "open" );
                     }
                 });
@@ -925,9 +929,9 @@
 
         });
 
-        function messageSendToUser()
-        {
-            alert("I am ready to emit message");
-        }
+        $(".messageSendToUser").click(function(){
+            var msgText = $(this).prev('.messageContent').val();
+            alert(msgText + " Ready to emit.");
+        })
     </script>
 @endpush

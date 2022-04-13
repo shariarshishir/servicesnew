@@ -190,7 +190,7 @@ $reviewsCount = count($productReviews);
                                                             <tr class="ready_attr_data">
                                                                 <td data-title="Quantity" class="price-range-block"><span class="min-price">{{$list[0]}}</span> <span class="price-range-separator">-</span> <span class="max-price">{{$list[1]}}</span></td>
                                                                 <td data-title="Price">{{$list[2]}}</td>
-                                                                @if($product->product_type==1) <td data-title="Lead Time">{{$list[3]}} </td>@endif
+                                                                @if($product->product_type==1) <td data-title="Lead Time">{{$list[3]}} days</td>@endif
                                                             </tr>
                                                             @endforeach
                                                             <tr>

@@ -136,6 +136,7 @@
                         <option value="Pcs" {{($product->qty_unit == 'Pcs') ? 'selected' : ''}}>Pcs</option>
                         <option value="Lbs" {{($product->qty_unit == 'Lbs') ? 'selected' : ''}}>Lbs</option>
                         <option value="Gauge" {{($product->qty_unit == 'Gauge') ? 'selected' : ''}}>Gauge</option>
+                        <option value="Yards" {{($product->qty_unit == 'Yards') ? 'selected' : ''}}>Yards</option>
                         <option value="Kg" {{($product->qty_unit == 'Kg') ? 'selected' : ''}}>Kg</option>
                         <option value="Meter" {{($product->qty_unit == 'Meter') ? 'selected' : ''}}>Meter</option>
                         <option value="Dozens" {{($product->qty_unit == 'Dozens') ? 'selected' : ''}}>Dozens</option>

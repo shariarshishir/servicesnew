@@ -135,7 +135,7 @@
                                     <option value="Pcs">Pcs</option>
                                     <option value="Lbs">Lbs</option>
                                     <option value="Gauge">Gauge</option>
-                                    <option value="Yard">Yards</option>
+                                    <option value="Yards">Yards</option>
                                     <option value="Kg">Kg</option>
                                     <option value="Meter">Meter</option>
                                     <option value="Dozens">Dozens</option>

@@ -30,18 +30,18 @@ class RfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'];
-        $noOfPages = floor(count($rfqLists)/10);
+        $rfqsCount = $data['count'];
+        $noOfPages = floor($data['count']/10);
         return view('rfq.index',compact('rfqLists','noOfPages'));
     }
 
-    public function rfqByPageNumber(Request $request){
+    public function rfqByPageNumber(Request $request)
+    {
         $page = $request->page; 
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/'.$page.'/1/limit/5');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/'.$page.'/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'];
-        $noOfPages = floor(count($rfqLists)/5);
-        return view('rfq.rfq_list',compact('rfqLists','noOfPages'))->render();
-
+        return view('rfq.rfq_list',compact('rfqLists'))->render();
     }
 
 
@@ -160,15 +160,21 @@ class RfqController extends Controller
     public function myRfq(Request $request)
     {
         $user = Auth::user();
-
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/20');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'];
-
-        return view('rfq.my_rfq',compact('rfqLists'));
+        $rfqsCount = $data['count'];
+        $noOfPages = floor($data['count']/10);
+        return view('rfq.my_rfq',compact('rfqLists','noOfPages'));
     }
 
-
+    public function myRfqByPageNumber(Request $request){
+        $user = Auth::user();
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
+        $data = $response->json();
+        $rfqLists = $data['data'];
+        return view('rfq.my_rfq_list',compact('rfqLists'))->render();
+    }
     public function delete($rfq_id)
     {
         $rfq=Rfq::findOrFail($rfq_id);

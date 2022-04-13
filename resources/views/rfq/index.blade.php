@@ -21,8 +21,10 @@
 			<li><a class="btn_grBorder modal-trigger open-create-rfq-modal">Create RFQ</a></li>
 		</ul>
 	</div>
-	<!--div class="rfq_day_wrap center-align"><span>Today</span></div-->
-	@include('rfq.rfq_list')
+	<div class="no_more_tables">
+		@include('rfq.rfq_list')
+    </div>
+	
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item">

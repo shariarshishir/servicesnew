@@ -321,6 +321,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
     Route::get('rfq-by-page-no',[RfqController::class, 'rfqByPageNumber'])->name('rfq.frontend.pagination');
+    Route::get('my-rfq-by-page-no',[RfqController::class, 'myRfqByPageNumber'])->name('my.rfq.frontend.pagination');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     Route::delete('rfq/delete/{rfq_id}',[RfqController::class, 'delete'])->name('rfq.delete');
     Route::get('rfq/active/{rfq_id}',[RfqController::class, 'active'])->name('rfq.active');

@@ -336,33 +336,16 @@
         });
 
         //open share model
-        function openShareModel(id){
-            var rfq_id=id;
-            var url = '{{ route("rfq.share", ":slug") }}';
-            url = url.replace(':slug', rfq_id);
-            $.ajax({
-                    method: 'get',
-                    url: url,
-                    beforeSend: function() {
-                        $('.loading-message').html("Please Wait.");
-                        $('#loadingProgressContainer').show();
-                    },
-                    success:function(data)
-                        {
-                            $('.loading-message').html("");
-                            $('#loadingProgressContainer').hide();
-                            $('#share-modal').modal('open');
-                            $('#share-modal input[name=share_text]').val();
-                            $('#share-modal input[name=share_text]').val(data.link);
-                        },
-
-                    error: function(xhr, status, error)
-                        {
-                            $('.loading-message').html("");
-                            $('#loadingProgressContainer').hide();
-                            swal("Done!",xhr.responseJSON.error,"error");
-                        }
-            });
+        function openShareModel(link){
+            var rfq_link=link;
+            var url = '{{ route("show.rfq.using.link", ":slug") }}';
+            url = url.replace(':slug', rfq_link);
+            $('#share-modal').modal('open');
+            $('#share-modal input[name=share_text]').val();
+            $('#share-modal input[name=share_text]').val(url);
         }
+
+
+
 </script>
 @endpush

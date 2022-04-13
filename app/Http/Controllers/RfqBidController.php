@@ -18,12 +18,12 @@ class RfqBidController extends Controller
     public function create($rfq_id)
     {
         $business_profile=BusinessProfile::with(['supplierQuotationToBuyer' => function($q) use ($rfq_id){
-            $q->where('rfq_id', $rfq_id);
+            $q->where('rfq_id', $rfq_id)->where('from_backend', 0);
         }])->where('user_id',auth()->id())->get();
         if($business_profile->isEmpty())
         {
             $business_profile=BusinessProfile::with(['supplierQuotationToBuyer' => function($q) use ($rfq_id){
-                $q->where('rfq_id', $rfq_id);
+                $q->where('rfq_id', $rfq_id)->where('from_backend', 0);
             }])->where('representative_user_id',auth()->id())->get();
         }
 

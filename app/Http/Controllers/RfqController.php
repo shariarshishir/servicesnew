@@ -31,7 +31,7 @@ class RfqController extends Controller
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
-        $noOfPages = floor($data['count']/10);
+        $noOfPages = ceil($data['count']/10);
         return view('rfq.index',compact('rfqLists','noOfPages'));
     }
 
@@ -164,7 +164,7 @@ class RfqController extends Controller
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
-        $noOfPages = floor($data['count']/10);
+        $noOfPages = ceil($data['count']/10);
         return view('rfq.my_rfq',compact('rfqLists','noOfPages'));
     }
 
@@ -296,18 +296,10 @@ class RfqController extends Controller
 
     public function showRfqUsingLink($link)
     {
-        $rfq=Rfq::withCount('bids')->with('user','businessProfile','category','images')->where('link',$link)->firstOrFail();
-
-        if($rfq->bids()->exists()){
-            $bid_user_id=[];
-            foreach($rfq->bids as $user){
-                array_push($bid_user_id,$user->supplier_id);
-            }
-            $rfq['bid_user_id'] = array_unique($bid_user_id);
-
-        }
-
-        return view('rfq.show_using_link',compact('rfq'));
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$link);
+        $data = $response->json();
+        $rfqLists = $data['data'] ?? [];
+        return view('rfq.show_using_link',compact('rfqLists'));
     }
 
     public function share($rfq_id)

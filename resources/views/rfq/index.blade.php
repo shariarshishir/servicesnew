@@ -24,21 +24,23 @@
 	<div class="no_more_tables">
 		@include('rfq.rfq_list')
     </div>
-	
+	@if( $noOfPages > 1)
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item">
-				<a class="page-link prev_link" href="#" data-page="1" tabindex="-1">Previous</a>
+				<a class="page-link prev_link" href="#" data-page="0" tabindex="-1">Previous</a>
 			</li>
-			@for($i=1; $i<=$noOfPages; $i++)
-				<li class="page-item" ><a class="page-link" href="#" data-page="{{$i}}">{{$i}}</a></li>
+			@for( $i=1; $i<=$noOfPages; $i++)
+			<li class="page-item" >
+				<a class="page-link" href="#" data-page="{{$i}}">{{$i}}</a>
+			</li>
 			@endfor
 			<li class="page-item">
 				<a class="page-link next_link" href="#" data-page="2">Next</a>
 			</li>
 		</ul>
 	</nav>    
-                
+    @endif      
 
 </div>
 <!-- RFQ html end -->

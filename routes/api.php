@@ -280,4 +280,4 @@ Route::get('/user/{userId}', [UserController::class, 'show']);
 Route::get('/product/{productId}/reviews',[ReviewController::class,'productReviews']);
 Route::get('/store/{vendorId}/reviews',[ReviewController::class,'vendorReviews']);
 
-Route::post('supplier-quotation-to-buyer',[BusinessProfileController::class, 'supplierQuotationToBuyer']);
+Route::post('/supplier-quotation-to-buyer',[BusinessProfileController::class, 'supplierQuotationToBuyer']);

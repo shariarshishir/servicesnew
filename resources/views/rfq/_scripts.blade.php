@@ -128,8 +128,9 @@
         });
 
         //create bid rfq
-        function openBidRfqModal(id){
+        function openBidRfqModal(id, unit){
             var rfq_id=id;
+            var unit= unit;
             var url = '{{ route("rfq.bid.create", ":slug") }}';
             url = url.replace(':slug', rfq_id);
             $.ajax({
@@ -151,7 +152,9 @@
                             $('#rfq-bid-modal').modal('open');
                             $('#rfq-bid-form')[0].reset();
                             $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", false);
-                            $('#rfq-bid-modal input[name=rfq_id]').val(data.data.id);
+                            $('#rfq-bid-modal input[name=rfq_id]').val(rfq_id);
+                            $('#rfq-bid-modal #offer_price_unit').val(unit);
+                            $('#rfq-bid-modal #offer_price_unit').trigger('change');
                             $('#rfq_bid_store_errors').empty();
                             $('#rfq-bid-modal .rfq-replay-submit').show();
 
@@ -162,11 +165,14 @@
                                         text : item.business_name
                                     }));
                             });
-                            if(data.hasOwnProperty('bid')){
-                                $('#my_business_list').val(data.bid.business_profile_id);
+                            if(data.bid.length > 0){
+
+                                $('#my_business_list').val(data.bid[0]['business_profile_id']);
                                 $('#my_business_list').trigger('change');
-                                tinymce.get("product-bidding-desc").setContent(data.bid.description);
-                                $('#rfq-bid-modal input[name=unit_price]').val(data.bid.unit_price);
+                                // tinymce.get("product-bidding-desc").setContent(data.bid.description);
+                                $('#rfq-bid-modal input[name=offer_price]').val(data.bid[0]['offer_price']);
+                                $('#rfq-bid-modal #offer_price_unit').val(data.bid[0]['offer_price_unit']);
+                                $('#rfq-bid-modal #offer_price_unit').trigger('change');
                                 // $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
                                   $('#rfq-bid-modal .rfq-replay-submit').hide();
 
@@ -223,46 +229,41 @@
         }
         $('#rfq-bid-form').on('submit',function(e){
             e.preventDefault();
-            var unit_value= $('#rfq-bid-modal input[name=unit_price]').val().length;
+            var unit_value= $('#rfq-bid-modal input[name=offer_price]').val().length;
             if(unit_value == 0){
-                $('#rfq-bid-form .validation-error-unit-price').text('Unit price required');
+                $('#rfq-bid-form .validation-error-unit-price').text('Offer price required');
                 return false;
             }else{
                 $('#rfq-bid-form .validation-error-unit-price').text('');
             }
+            var sso_auth_token = "Bearer " +"{{ Cookie::get('sso_token') }}";
 
-            var max = 50;
-            var theEditor = tinymce.activeEditor;
-            var wordCount = theEditor.plugins.wordcount.getCount();
-            if(wordCount == 0){
-                $('#rfq-bid-form .validation-error-description').text('Short description required');
-                return false;
-            }else{
-                $('#rfq-bid-form .validation-error-description').text(' ');
-            }
-            if (wordCount > max) {
-                alert("Short description Maximum " + max + " words allowed.your given words length is "+wordCount + "")
-                return false;
-            }
+            var formData = {
+                rfq_id :$("#rfq-bid-modal input[name=rfq_id]").val(),
+                business_profile_id: $("#rfq-bid-modal #my_business_list").val(),
+                offer_price:$("#rfq-bid-modal input[name=offer_price]").val(),
+                offer_price_unit:$("#rfq-bid-modal #offer_price_unit").val(),
+                from_backend : 0,
+            };
+            var url="{{env('RFQ_APP_URL')}}/api/supplier-quotation-to-buyer";
 
-            tinyMCE.triggerSave();
-            var formData = new FormData(this);
-            var url = '{{ route("rfq.bid.store") }}';
-            formData.append('_token', "{{ csrf_token() }}");
             $.ajax({
                 method: 'post',
                 processData: false,
-                contentType: false,
+                dataType: 'json',
+                contentType: 'application/json',
                 cache: false,
-                data: formData,
+                data: JSON.stringify(formData),
                 enctype: 'multipart/form-data',
                 url: url,
+                headers: { 'Authorization': sso_auth_token },
                 beforeSend: function() {
                 $('.loading-message').html("Please Wait.");
                 $('#loadingProgressContainer').show();
                 },
                 success:function(data)
                     {
+                        console.log(data);
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
                         $('#rfq_bid_store_errors').empty();
@@ -272,7 +273,8 @@
                             res_count=parseInt(res_count);
                         $(".res_count_"+rfq_id+"_").text(res_count+1);
                         $(".res_count_"+rfq_id+"_").closest('.responses_wrap').find('.bid_rfq').text('Replied');
-                        swal("Done!", data.msg,"success");
+                        const msg= 'Congratulations!!! Your Quotation has been successfully submitted. Buyer will contact you upon interest for further communication';
+                        swal("Done!",msg,"success");
 
                     },
                 error: function(xhr, status, error)

@@ -17,7 +17,7 @@ class CreateRfqQuotationSentSupplierToBuyerRelTable extends Migration
             $table->id();
             $table->string('rfq_id');
             $table->unsignedBigInteger('business_profile_id')->nullable();
-            $table->integer('offer_price');      
+            $table->float('offer_price', 8, 2);      
             $table->string('offer_price_unit'); 
             $table->timestamps();
         });

@@ -22,15 +22,7 @@
                                                         <div class="sidebar-list-padding app-sidebar" id="chat-sidenav">
                                                             <!-- Sidebar Header -->
                                                             <div class="sidebar-header">
-                                                                <div class="row valign-wrapper">
-                                                                <div class="col s2 media-image pr-0">
-                                                                    <img src="../images/img.jpg" alt="" class="circle z-depth-2 responsive-img">
-                                                                </div>
-                                                                <div class="col s10">
-                                                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">RFQ</p>
-                                                                    <p class="m-0 info-text left-align">Currently online</p>
-                                                                </div>
-                                                                </div>
+                                                                <h4>Messages</h4>
                                                             </div>
                                                             <!--/ Sidebar Header -->
 

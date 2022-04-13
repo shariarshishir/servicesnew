@@ -3,23 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rfq;
+use App\Models\SupplierBid;
 use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
-use App\Models\SupplierBid;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use App\Events\NewRfqHasBidEvent;
+use Illuminate\Support\Facades\Http;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use App\Models\supplierQuotationToBuyer;
+use Illuminate\Support\Facades\Validator;
 
 class RfqBidController extends Controller
 {
     public function create($rfq_id)
     {
-        $business_profile=BusinessProfile::where('user_id',auth()->id())->where('business_type',1)->get();
+        $business_profile=BusinessProfile::with(['supplierQuotationToBuyer' => function($q) use ($rfq_id){
+            $q->where('rfq_id', $rfq_id);
+        }])->where('user_id',auth()->id())->get();
         if($business_profile->isEmpty())
         {
-            $business_profile=BusinessProfile::where('representative_user_id',auth()->id())->get();
+            $business_profile=BusinessProfile::with(['supplierQuotationToBuyer' => function($q) use ($rfq_id){
+                $q->where('rfq_id', $rfq_id);
+            }])->where('representative_user_id',auth()->id())->get();
         }
+
         if(count($business_profile) <= 0 ){
             return response()->json(array(
                 'success' => false,
@@ -27,21 +34,22 @@ class RfqBidController extends Controller
                 401);
 
         }
-        $rfq=Rfq::findOrFail($rfq_id);
-        // if($rfq->bids()->exists()){
-            $bid=SupplierBid::where('rfq_id', $rfq->id)->where('supplier_id',auth()->id())->first();
-            if($bid){
-                return response()->json(array(
-                    'success' => true,
-                    'data' => $rfq,
-                    'bid'  => $bid,
-                    'my_business' => $business_profile),
-                    200);
+
+        $bidData=[];
+        foreach($business_profile as $profile){
+            if($profile->supplierQuotationToBuyer()->exists()){
+                foreach($profile->supplierQuotationToBuyer as $quotation){
+                    $dt=['business_profile_id' => $quotation->business_profile_id, 'offer_price' => $quotation->offer_price, 'offer_price_unit' => $quotation->offer_price_unit];
+                    array_push($bidData, $dt);
+                    break;
+                }
+
             }
-        // }
+        }
+
         return response()->json(array(
             'success' => true,
-            'data' => $rfq,
+            'bid' =>   $bidData,
             'my_business' => $business_profile),
             200);
     }
@@ -51,13 +59,8 @@ class RfqBidController extends Controller
         $validator = Validator::make($request->all(), [
             'rfq_id' => 'required',
             'business_profile_id'=>'required',
-            'unit_price'=>'required',
-            'description' => 'required',
-            'delivery_time'=>'required',
-            //'total_price'=>'required',
-            // 'payment_method'=>'required',
-            // 'quantity'=>'required',
-            // 'delivery_time'=>'required',
+            'offer_price'=>'required',
+            'offer_price_unit' => 'required',
            ]);
            if ($validator->fails())
          {
@@ -67,56 +70,17 @@ class RfqBidController extends Controller
              400);
          }
 
-            $allData=$request->only('rfq_id','business_profile_id','unit_price','description','delivery_time');
-            $allData['supplier_id']=auth()->id();
-            $rfq = Rfq::find($request->rfq_id);
-            // $allData['title'] =$rfq->title;
-            // $allData['unit'] = $rfq->unit;
-            // $allData['destination'] =$rfq->destination;
-
-            // if ($request->hasFile('rfq_images')){
-            //     foreach ($request->file('rfq_images') as $product_image){
-            //         $extension = $product_image->getClientOriginalExtension();
-
-            //         if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
-
-            //             $path=$product_image->store('images','public');
-            //         }
-            //         else{
-            //             $path=$product_image->store('images','public');
-            //             $image = Image::make(Storage::get($path))->fit(555, 555)->encode();
-            //             Storage::put($path, $image);
-            //         }
-            //         $image_path[] = $path;
-            //     }
-
-            //     unset($allData['rfq_images']);
-            // }else{
-
-            //     foreach($rfq->images as $item){
-            //         $image_path[] = $item->image;
-            //     }
-
-            //  }
-            // $allData['media'] = json_encode($image_path);
-
-            $bidData=SupplierBid::create($allData);
-
-            //send mail to the user who had created rfq
-            if(env('APP_ENV') == 'production')
-            {
-                $selectedUserToSendMail= $rfq;
-                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
-
-                //send mail to merchantbay
-                $selectedUserToSendMail="success@merchantbay.com";
-                event(new NewRfqHasBidEvent($selectedUserToSendMail, $bidData));
-            }
+            $allData=$request->only('rfq_id','business_profile_id','offer_price','offer_price_unit');
+            $allData['from_backend']=false;
+            $postBidApi= env('RFQ_APP_URL').'/api/supplier-quotation-to-buyer';
+            $response = Http::post($postBidApi, $allData);
+            return $response;
 
             return response()->json([
                 'success' => true,
                 'msg'    => 'Congratulations!!! Your Quotation has been successfully submitted. Buyer will contact you upon interest for further communication'
             ]);
+
 
     }
 

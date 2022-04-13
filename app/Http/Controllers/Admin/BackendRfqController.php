@@ -41,8 +41,17 @@ class BackendRfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
-        //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$rfq['category_id'][0])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
-        $businessProfiles = BusinessProfile::with('user','supplierQuotationToBuyer')->whereIn('business_category_id',$rfq['category_id'])->where('profile_verified_by_admin', '!=', 0)->get()->toArray();
+        $businessProfiles = BusinessProfile::select('business_profiles.*')
+        ->leftJoin('rfq_quotation_sent_supplier_to_buyer_rel', 'rfq_quotation_sent_supplier_to_buyer_rel.business_profile_id', '=', 'business_profiles.id')
+        ->with(['user','supplierQuotationToBuyer'=> function($q) use ($id){
+            $q->where('rfq_id', $id);}])
+        ->whereIn('business_category_id',$rfq['category_id'])
+        ->where('profile_verified_by_admin', '!=', 0)
+        ->groupBy('business_profiles.id')
+        ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
+        ->get()
+        ->toArray();
+
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
@@ -78,22 +87,23 @@ class BackendRfqController extends Controller
         }else{
             return redirect()->back()->withSuccess('Something went wrong!!');
         }
-        
+
     }
     public function businessProfileFilter(Request $request){
+
 
         if($request->category_id && $request->profile_rating !=0)
         {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
             $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
-                $q->where('rfq_id', $request->rfq_id);
+                $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
             } ])->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
         }
         elseif($request->category_id && $request->profile_rating ==0)
         {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
             $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
-                $q->where('rfq_id', $request->rfq_id);
+                $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
             } ])->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
         }
         return response()->json(['businessProfiles'=>$businessProfiles],200);
@@ -102,7 +112,7 @@ class BackendRfqController extends Controller
     public function supplierQuotationToBuyer(Request $request){
         //dd($request->all());
 
-        $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->first();
+        $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->where('from_backend',1)->first();
 
         if($quotation)
         {

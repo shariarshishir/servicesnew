@@ -22,32 +22,27 @@
 
                 <div class="row input-field input-wrapper">
                     <div class="col s12 m4 l3">
-                        <label for="product-bidding-desc">Short description <span >*</span></label>
+                        <label for="product-unit">Offer Price <span >*</span></label>
                     </div>
-                    <div class=" col s12 m8 l9">
-                        <textarea name="description" id="product-bidding-desc" for="product-bidding-desc" class="editor product-bidding-desc" cols="30" rows="10"></textarea>
-                        <span class="validation-error-description red"></span>
+                    <div class="col s12 m8 l9">
+                        <input type="text" id="product-unit" name="offer_price" class="form-control bid-price-range-value" placeholder="$ Price in USD/pc" value="" >
+                        <span class="validation-error-unit-price red"></span>
                     </div>
                 </div>
                 <div class="row input-field input-wrapper">
                     <div class="col s12 m4 l3">
-                        <label for="product-unit">Offer Price <span >*</span></label>
+                        <label for="product-unit">Offer Unit Price <span >*</span></label>
                     </div>
                     <div class="col s12 m8 l9">
-                        <input type="text" id="product-unit" name="unit_price" class="form-control bid-price-range-value" placeholder="$ Price in USD/pc" value="" >
-                        <span class="validation-error-unit-price red"></span>
+                        <select class="select2" name="offer_price_unit" id="offer_price_unit">
+                            <option value="">Select an option</option>
+                            @php $units = units(); @endphp
+                            @foreach($units as $unit=>$value)
+                                <option value="{{$unit}}">{{ $value }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <div class="input-field row input-wrapper">
-                    <div class="col s12 m4 l5">
-                        <label for="delivery_time">Expected Delivery Time <span>*</span></label>
-                    </div>
-                    <div class="col s12 m8 l7">
-                        <input type="date" id="delivery_time" class="form-control- ig-new-rgt" name="delivery_time" required/>
-                    </div>
-                </div>
-
-
 
             </div>
             <!-- rfq_detail_from end -->

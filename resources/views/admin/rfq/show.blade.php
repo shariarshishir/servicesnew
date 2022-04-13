@@ -146,7 +146,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -378,6 +378,7 @@
                     selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
                 }
             });
+
 
             $(document).on('change', '#factory_type', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
@@ -893,6 +894,20 @@
             $( ".sms_trigger" ).on( "click", function() {
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
+                var sso_reference_id = $(this).data('sso_reference_id');
+                console.log(sso_reference_id);
+                $.ajax({
+                    method: 'GET',
+                    data: {sso_reference_id:sso_reference_id, rfq_id:rfq_id},
+                    url: '{{ route("admin.message.center.getsupplierchatdata") }}',
+                    success:function(response){
+                        console.log(response);
+                        var html = "RFQ ID = "+rfq_id+"<br />";
+                        html += "Business Profile ID = "+business_profile_id;
+                        $("#dialog-form").html(html);
+                        dialog.dialog( "open" );
+                    }
+                });
                 $.ajax({
                     method: 'GET',
                     data: {business_profile_id:business_profile_id, rfq_id:rfq_id, _token:"{{ csrf_token() }}"},

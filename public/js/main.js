@@ -55,6 +55,7 @@ $(document).ready(function() {
     //$("#modal3").modal("close");
 
     $('.tabs').tabs();
+    $('.document_tabs').tabs();
     
     $('.spotlight_tabs').tabs({
         "swipeable": true

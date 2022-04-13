@@ -1,13 +1,565 @@
 @extends('layouts.app')
-
-@section('style')
-<style >
-
-</style>
-@endsection
-
 @section('content')
 
-Coming Soon...
+    <!-- Content Wrapper. Contains page content -->
+    <div id="main" itemprop="mainEntity">
+        <div class="switch_buttons mb-80">
+            <div class="switch_button_container">
+                <div class="switch_button_wrapper">
+                    <p>How Merchant Bay works</p>
+                    <ul class="document_tabs">
+                        <li class="tab"><a class="active" href="#brands">BRANDS</a></li>
+                        <li class="tab"><a href="#manufacturers">MANUFACTURERS</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="brands">
+            <div class="page_title py-70">
+                <div class="title_and_tags">
+                    <h2>Start or Scale your clothing brand
+                        with modern sourcing solution</h2>
+                    <ul>
+                        <li class="px-40">Fast</li>
+                        <li class="px-40">Reliable</li>
+                        <li class="px-40">Traceable</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="steps_section py-70">
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/sign-up.svg')}}" alt="icon"
+                                    style="transform: translate(15px, 15px);" />    
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>1</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Sign up as Buyer</h3>
+                                    <p>Start with signing up as a buyer. It does not take more
+                                        than 30 seconds. We will get in touch within 24 hours
+                                        to know your requirements and brand visions better. <a href="javascript:void(0);">Read More</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/rfq.svg')}}" alt="icon"
+                                    style="transform: translate(15px, 15px);" />
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>2</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Post a Request for quotation (RFQ)</h3>
+                                    <p>We are enabling you to get hassle free direct access to
+                                        production in Bangladesh RMG industry. You just send us
+                                        a simple request for quotation and we will ta...<a href="javascript:void(0);">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/manufacturer.svg')}}" alt="icon"
+                                    style="transform: translate(15px, 15px);" />
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>3</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Select the best fit manufacturer</h3>
+                                    <p>Select the best match. You can evaluate suppliers by
+                                        certifications, capacity, years in operation, brands they
+                                        previously worked for etc. All manufacturers...<a href="javascript:void(0);">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/escrow-pay.svg')}}" alt="icon"
+                                    style="transform: translate(15px, 15px);" />
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>4</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Pay securely via escrow</h3>
+                                    <p>Merchant Bay offers a secure payment account between
+                                        you and your supplier. After you complete your payment
+                                        for the proposal, a percentage is paid to the...<a href="javascript:void(0);">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/product-development.svg')}}" alt="icon"
+                                    style="transform: translate(0px, 5px);" />
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>5</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Become the integral part of the product development</h3>
+                                    <p>You can develop a design or tech pack in collaboration with
+                                        our designers and run your product development with our
+                                        expert technical development team. Our pro...<a href="javascript:void(0);">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/quality-control.svg')}}" alt="icon"
+                                    style="transform: translate(0px, 5px);" />
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>6</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Quality control</h3>
+                                    <p>Assuring the right product within the promised quality
+                                        standard is our core competencies. Unlike all other platforms
+                                        in the world, we do not leave you alone du...<a href="javascript:void(0);">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps_box">
+                    <div class="row">
+                        <div class="col l3">
+                            <div class="icon_box">
+                                <img src="{{asset('images/frontendimages/work-image/icon/shipment.svg')}}" alt="icon"
+                                    style="transform: translate(0px, 5px);" />
+                            </div>
+                        </div>
+                        <div class="col l9">
+                            <div class="count_and_details">
+                                <div class="count">
+                                    <div class="count_number">
+                                        <span>7</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="details">
+                                    <h3>Shipment</h3>
+                                    <p>Our commercial team and partnered logistic companies can
+                                        assist you in smooth shipment too. As mentioned, you just
+                                        start by submitting your query and Merch...<a href="javascript:void(0);">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="features py-70">
+                <div class="row">
+                    <div class="col s12 l4 m6">
+                        <div class="feature_box">
+                            <div class="icon">
+                                <img src="{{asset('images/frontendimages/work-image/icon/fast-fevelopment.svg')}}" alt="icon" />
+                            </div>
+                            <h5>Fast Development</h5>
+                        </div>
+                    </div>
+                    <div class="col s12 l4 m6">
+                        <div class="feature_box">
+                            <div class="icon">
+                                <img src="{{asset('images/frontendimages/work-image/icon/secured-payement.svg')}}" alt="icon" />
+                            </div>
+                            <h5>Secured Payement</h5>
+                        </div>
+                    </div>
+                    <div class="col s12 l4 m6">
+                        <div class="feature_box">
+                            <div class="icon">
+                                <img src="{{asset('images/frontendimages/work-image/icon/complete-traceability.svg')}}" alt="icon" />
+                            </div>
+                            <h5>Complete Traceability</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="why_us py-70">
+                <div class="why_us_box">
+                    <div class="row">
+                        <div class="col l4 s12">
+                            <div class="box_img">
+                                <img src="{{asset('images/frontendimages/work-image/health-care-for-rmg-workers.jpg')}}" alt="img" />
+                            </div>
+                        </div>
+                        <div class="col l8 s12" style="align-self: center;">
+                            <div class="box_description">
+                                <h3>100 years of sourcing experience</h3>
+                                <p>Our 100 years of combined sourcing experience
+                                    enables us to offer you the most efficient sourcing
+                                    so that you can concentrate on brand building while
+                                    we take care of the rest.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why_us_box right_img">
+                    <div class="row">
+                        <div class="col l8 s12" style="align-self: center;">
+                            <div class="box_description">
+                                <h3>Unmatched access to the industry
+                                    and supply chain</h3>
+                                <p>Our unmatched industry access and manufacturing
+                                    expertise enables us to source any complex product
+                                    for you. With us opportunity is endless.</p>
+                            </div>
+                        </div>
+                        <div class="col l4 s12" style="justify-content: right;">
+                            <div class="box_img">
+                                <img src="{{asset('images/frontendimages/work-image/warehousing.jpg')}}" alt="img" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why_us_box">
+                    <div class="row">
+                        <div class="col l4 s12">
+                            <div class="box_img">
+                                <img src="{{asset('images/frontendimages/work-image/oip.jpg')}}" alt="img" />
+                            </div>
+                        </div>
+                        <div class="col l8 s12" style="align-self: center;">
+                            <div class="box_description">
+                                <h3>Suppliers for any MOQ and any price</h3>
+                                <p>Bangladesh is known for its most competitive price.
+                                    We connect you to the most competitive market in
+                                    a modern way. Now you can order with MOQ as low
+                                    as 100 pcs. Win unfair advantage with more varieties
+                                    in your product range.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="request_quotation py-70">
+                <div>
+                    <h3>We make sure you get Right Product at
+                        the Right Price within the Right Time ....</h3>
+                </div>
+                <button class="btn_green">Request for Quotation</button>
+            </div>
+        </div>
+        <div id="manufacturers">
+            <div class="container">
+                <div class="page_title py-70">
+                    <div class="title_and_tags">
+                        <h2>Create a profile, Join MB Pool and
+                            start growing business</h2>
+                        <ul>
+                            <li class="px-40">Get more business</li>
+                            <li class="px-40">Generate more profit</li>
+                            <li class="px-40">Grow Fast</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="steps_section py-70">
+                    <div class="steps_box">
+                        <div class="row">
+                            <div class="col l3">
+                                <div class="icon_box">
+                                    <img src="{{asset('images/frontendimages/work-image/sign-up.svg')}}" alt="icon"
+                                        style="transform: translate(15px, 15px);" />
+                                </div>
+                            </div>
+                            <div class="col l9">
+                                <div class="count_and_details">
+                                    <div class="count">
+                                        <div class="count_number">
+                                            <span>1</span>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="details">
+                                        <h4>Sign up as a Manufacturer</h4>
+                                        <p>Start with signing up as a buyer. It does not take more
+                                            than 30 seconds. We will get in touch within 24 hours
+                                            to know your requirements and brand visions better. <a href="#">Read
+                                                More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps_box">
+                        <div class="row">
+                            <div class="col l3">
+                                <div class="icon_box">
+                                    <img src="{{asset('images/frontendimages/work-image/icon/business-profile.svg')}}" alt="icon"
+                                        style="transform: translate(15px, 15px);" />
+                                </div>
+                            </div>
+                            <div class="col l9">
+                                <div class="count_and_details">
+                                    <div class="count">
+                                        <div class="count_number">
+                                            <span>2</span>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="details">
+                                        <h4>Setting up Business Profile</h4>
+                                        <p>We are enabling you to get hassle free direct access to
+                                            production in Bangladesh RMG industry. You just send us
+                                            a simple request for quotation and we will ta...<a href="javascript:void(0);">Read More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps_box">
+                        <div class="row">
+                            <div class="col l3">
+                                <div class="icon_box">
+                                    <img src="{{asset('images/frontendimages/work-image/icon/storefront.svg')}}" alt="icon"
+                                        style="transform: translate(15px, 15px);" />
+                                </div>
+                            </div>
+                            <div class="col l9">
+                                <div class="count_and_details">
+                                    <div class="count">
+                                        <div class="count_number">
+                                            <span>3</span>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="details">
+                                        <h4>Build your Storefront</h4>
+                                        <p>Select the best match. You can evaluate suppliers by
+                                            certifications, capacity, years in operation, brands they
+                                            previously worked for etc. All manufacturers...<a href="javascript:void(0);">Read More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps_box">
+                        <div class="row">
+                            <div class="col l3">
+                                <div class="icon_box">
+                                    <img src="{{asset('images/frontendimages/work-image/icon/join-mb-pool.svg')}}" alt="icon"
+                                        style="transform: translate(15px, 15px);" />
+                                </div>
+                            </div>
+                            <div class="col l9">
+                                <div class="count_and_details">
+                                    <div class="count">
+                                        <div class="count_number">
+                                            <span>4</span>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="details">
+                                        <h4>Join MB Pool</h4>
+                                        <p>Merchant Bay offers a secure payment account between
+                                            you and your supplier. After you complete your payment
+                                            for the proposal, a percentage is paid to the...<a href="javascript:void(0);">Read More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps_box">
+                        <div class="row">
+                            <div class="col l3">
+                                <div class="icon_box">
+                                    <img src="{{asset('images/frontendimages/work-image/icon/payment-security.svg')}}" alt="icon"
+                                        style="transform: translate(0px, 5px);" />
+                                </div>
+                            </div>
+                            <div class="col l9">
+                                <div class="count_and_details">
+                                    <div class="count">
+                                        <div class="count_number">
+                                            <span>5</span>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="details">
+                                        <h4>Stop worrying about payment security</h4>
+                                        <p>You can develop a design or tech pack in collaboration with
+                                            our designers and run your product development with our
+                                            expert technical development team. Our pro...<a href="javascript:void(0);">Read More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="why_us manufacture py-70">
+                <h2>We get you the right queries and support
+                    to help you grow your business faster</h2>
+                <div class="manufacture_container">
+                    <div class="row">
+                        <div class="col s2 d-l-none"></div>
+                        <div class="col s12 m6 l4">
+                            <div class="why_us_box" style="margin-bottom: 140px;">
+                                <div class="title">
+                                    <div class="icon">
+                                        <img src="{{asset('images/frontendimages/work-image/icon/get-queries.svg')}}" alt="icon" />
+                                    </div>
+                                    <h3>Get Queries every day</h3>
+                                </div>
+                                <p>Once you are in MB Pool, you will get queries
+                                    in a priority basis. Whenever a query comes in
+                                    for your category you are notified.</p>
+                            </div>
+                        </div>
+                        <div class="col s6 d-l-none"></div>
+                        <div class="col s6 d-l-none"></div>
+                        <div class="col s12 m6 l4">
+                            <div class="why_us_box" style="margin-bottom: 140px;">
+                                <div class="title">
+                                    <div class="icon">
+                                        <img src="{{asset('images/frontendimages/work-image/icon/product-develolpment-2.svg')}}" alt="icon" />
+                                    </div>
+                                    <h3>Gain advantage in
+                                        product development</h3>
+                                </div>
+                                <p>Merchant Bay stay with you during all the
+                                    process in the product development so that
+                                    you are assured to have the order developed
+                                    in the most effective way which will increase
+                                    your production efficiency.</p>
+                            </div>
+                        </div>
+                        <div class="col s2 d-l-none"></div>
+                        <div class="col m12 l6" style="align-self: center;">
+                            <div class="middle_text_card" style="margin-bottom: 140px;">
+                                <h3>Pioneering the decentralized
+                                    manufacturing network with
+                                    Merchant Bay</h3>
+                            </div>
+                        </div>
+                        <div class="col s2 d-l-none" style="margin: 0;"></div>
+                        <div class="col s12 m6 l4">
+                            <div class="why_us_box" style="margin-bottom: 140px;">
+                                <div class="title">
+                                    <div class="icon">
+                                        <img src="{{asset('images/frontendimages/work-image/icon/empowered-with-tech.svg')}}" alt="icon" />
+                                    </div>
+                                    <h3>Get empowered with Tech</h3>
+                                </div>
+                                <p>MB Pool factories get privileged access to
+                                    Merchant Bay tools. They never have to go for
+                                    expensive ERP solutions to digitize their factory.
+                                    Merchant Bay ensure they are digitized steps by
+                                    step in the right hierarchy.</p>
+                            </div>
+                        </div>
+                        <div class="col s6 d-l-none"></div>
+                        <div class="col s12 m6 l4">
+                            <div class="why_us_box" style="margin-bottom: 140px;">
+                                <div class="title">
+                                    <div class="icon">
+                                        <img src="{{asset('images/frontendimages/work-image/icon/global-storefront.svg')}}" alt="icon" />
+                                    </div>
+                                    <h3>Global footprint</h3>
+                                </div>
+                                <p>In Merchant Bay, your profile acts as your
+                                    microsite. We guarantee your MB profile going
+                                    more places than your own website.</p>
+                            </div>
+                        </div>
+                        <div class="col s2 d-l-none" style="margin: 0;"></div>
+                        <div class="col s2 d-l-none"></div>
+                        <div class="col s12 m6 l4">
+                            <div class="why_us_box">
+                                <div class="title">
+                                    <div class="icon">
+                                        <img src="{{asset('images/frontendimages/work-image/icon/manage-easily.svg')}}" alt="icon" />
+                                    </div>
+                                    <h3>Manage it easily</h3>
+                                </div>
+                                <p>We know how hard it is to run a manufacturing
+                                    business. So, we bring our services to your
+                                    pocket. Now you can review a query on the go.
+                                    Also look into key analytics and production
+                                    through OMD app.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="request_quotation py-70">
+                    <div>
+                        <h3>Be a Merchant Bay manufacturing partner now!</h3>
+                    </div>
+                    <button class="btn_green">Join MB Pool</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /.content-wrapper -->
 
 @endsection

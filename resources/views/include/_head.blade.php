@@ -35,7 +35,10 @@
 <link href="{{asset('css/icon.css')}}" rel="stylesheet">
 <link href="{{asset('css/image-uploader.min.css')}}" rel="stylesheet">
 <link href="{{asset('fonts/nexa.css')}}" rel="stylesheet">
-
+@if(Route::is('front.howwework'))
+<link href="{{asset('css/nexafonts.css')}}" rel="stylesheet" />
+<link href="{{asset('css/work-style.css')}}" rel="stylesheet" />
+@endif
 {{-- jasny-bootstrap.min --}}
 <link href="{{asset('css/jasny-bootstrap.min.css')}}" rel="stylesheet">
 {{-- <link rel="stylesheet" href="http://demo.discoverprograming.com/plugin/bootstrap-3.min.css">

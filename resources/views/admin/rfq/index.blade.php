@@ -54,6 +54,7 @@
                     <div class="no_more_tables">
                         @include('admin.rfq.table')
                     </div>
+                    @if($noOfPages>1)
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item">
@@ -66,7 +67,8 @@
                                 <a class="page-link next_link" href="#" data-page="2">Next</a>
                             </li>
                         </ul>
-                    </nav>           
+                    </nav>
+                    @endif         
 
                                    
                 </div>

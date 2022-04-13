@@ -31,7 +31,7 @@ class RfqController extends Controller
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
-        $noOfPages = floor($data['count']/10);
+        $noOfPages = ceil($data['count']/10);
         return view('rfq.index',compact('rfqLists','noOfPages'));
     }
 
@@ -164,7 +164,7 @@ class RfqController extends Controller
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
-        $noOfPages = floor($data['count']/10);
+        $noOfPages = ceil($data['count']/10);
         return view('rfq.my_rfq',compact('rfqLists','noOfPages'));
     }
 

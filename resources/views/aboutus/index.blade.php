@@ -36,17 +36,16 @@
             <div class="col m6">
               <div class="about_content">
                 <h4>What we do.....</h4>
-                <p>
+                <p class="show-read-more">
                   We thoroughly verify and welcome factories, textile mills,
                   yarn spinners, trims & accessories suppliers to our
                   platform. We create their digital profile to increase their
                   visibility and be a part of the visible supply chain. Our
                   multi-tire supplier base enables to match with suitable
-                  partners for demand <a href="#">Read More...</a>
-                  <!-- generated instantly. Constantly updating
+                  partners for demand generated instantly. Constantly updating
                   raw material library helps us to do costing more
                   efficiently, so that buyers can benefit from end to end
-                  sourcing support. -->
+                  sourcing support.
                 </p>
               </div>
             </div>
@@ -601,6 +600,22 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
       slidesPerView: 2,
       spaceBetween: 30,
     });
+
+    var maxLength = 414;
+    $(".show-read-more").each(function(){
+      var myStr = $(this).text();
+      if($.trim(myStr).length > maxLength){
+        var newStr = myStr.substring(0, maxLength);
+        var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+        $(this).empty().html(newStr);
+        $(this).append('<a href="javascript:void(0);" class="read-more">Read More...</a>');
+        $(this).append('<span class="more-text">' + removedStr + '</span>');
+      }
+    });
+    $(".read-more").click(function(){
+      $(this).siblings(".more-text").contents().unwrap();
+      $(this).remove();
+    });    
 
 
 </script>

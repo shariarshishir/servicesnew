@@ -31,9 +31,11 @@ use PDF;
 
 class AdminPoController extends Controller
 {
-    public function  create(){
-        $proformaInvoices = new Proforma();
+    public function  create($buyerId){
 
+        $buyer=User::findOrFail($buyerId);
+
+        $proformaInvoices = new Proforma();
         $paymentTerms = PaymentTerm::get();
         $shipmentTerms = ShipmentTerm::get();
         $shippingMethods = ShippingMethod::latest()->get();
@@ -41,14 +43,14 @@ class AdminPoController extends Controller
         $uoms = UOM::latest()->get();
         $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
 
-        return view('admin.proforma_invoice.create',compact('proformaInvoices', 'paymentTerms', 'shipmentTerms', 'shippingMethods', 'shipmentTypes', 'uoms', 'proFormaTermAndConditions'));
-    }    
+        return view('admin.proforma_invoice.create',compact('buyer','proformaInvoices', 'paymentTerms', 'shipmentTerms', 'shippingMethods', 'shipmentTypes', 'uoms', 'proFormaTermAndConditions'));
+    }
     public function index ()
     {
         $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
         return view('admin.proforma_invoice.index',compact('proformaInvoices'));
     }
-    
+
     public function show($id)
     {
         $users[] = auth()->id();
@@ -58,7 +60,7 @@ class AdminPoController extends Controller
         if($po){
             return view('admin.proforma_invoice.show',compact('po','users','supplierInfo','totalInvoice'));
         }
-       
+
     }
 
 

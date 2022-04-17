@@ -90,7 +90,7 @@ Route::get('jsonDataForVerifiedBusinessProfiles', function(){
     $exportData = array();
     $businessProfiles = BusinessProfile::with('companyOverview')->where('is_business_profile_verified', 1)->get();
     foreach($businessProfiles as $k => $businessProfile)
-    {     
+    {
         $dataArr = array();
         $dataArr['profile_name'] = $businessProfile->business_name;
         $data = json_decode($businessProfile->companyOverview->data);
@@ -117,15 +117,15 @@ Route::get('jsonDataForVerifiedBusinessProfiles', function(){
     //echo "<pre>"; print_r($exportData); echo "</pre>";
     //die();
 /*
-$fp = fopen(url('').'/servicesnew/business_profile.csv', 'w'); 
+$fp = fopen(url('').'/servicesnew/business_profile.csv', 'w');
 foreach ($exportData as $fields) {
     fputcsv($fp, $fields);
 }
-fclose($fp); 
+fclose($fp);
 */
 
     //return Excel::download($exportData, 'business_profile.xlsx');
-    
+
     return response()->json($exportData);
 });
 
@@ -530,7 +530,7 @@ Route::group(['prefix'=>'/admin'],function (){
         // Route::get('/proforma-invoices/{proformaInvoice}',[AdminProFormaInvoiceController::class,'show'])->name('proforma_invoices.show');
         Route::get('/proforma-invoices',[AdminPoController::class,'index'])->name('proforma_invoices.index');
         Route::get('/proforma-invoices/{proformaInvoice}',[AdminPoController::class,'show'])->name('proforma_invoices.show');
-        Route::get('/proforma-invoice/create',[AdminPoController::class,'create'])->name('proforma_invoices.create');
+        Route::get('/proforma-invoice/create/{buyerId}',[AdminPoController::class,'create'])->name('proforma_invoices.create');
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
@@ -573,7 +573,7 @@ Route::group(['prefix'=>'/admin'],function (){
         //rfq
         Route::put('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
-        
+
         Route::get('admin/rfq/pagination',[AdminRfqController::class, 'fetchRFQsByQueryStringOrPagination'])->name('rfq.pagination');
         //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');
@@ -586,7 +586,7 @@ Route::group(['prefix'=>'/admin'],function (){
         //business profile
         Route::get('business-profile/{type}',[AdminBusinessProfileController::class, 'index'])->name('admin.business.profile.list.type');
         Route::get('business-profile/details/{business_profile_id}',[AdminBusinessProfileController::class, 'businessProfileDetails'])->name('admin.business.profile.details');
-        //products 
+        //products
         Route::get('products',[ProductController::class, 'index'])->name('admin.products.index');
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');

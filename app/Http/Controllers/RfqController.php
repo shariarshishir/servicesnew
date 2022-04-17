@@ -27,10 +27,13 @@ class RfqController extends Controller
 {
     public function index()
     {
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
+        $token = Cookie::get('sso_token');
+        $response = Http::withToken($token)
+        ->get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
+        
         $noOfPages = ceil($data['count']/10);
         return view('rfq.index',compact('rfqLists','noOfPages'));
     }
@@ -160,7 +163,9 @@ class RfqController extends Controller
     public function myRfq(Request $request)
     {
         $user = Auth::user();
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
+        $token = Cookie::get('sso_token');
+        $response = Http::withToken($token)
+        ->get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];

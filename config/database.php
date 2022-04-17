@@ -107,22 +107,19 @@ return [
             'prefix_indexes' => true,
         ],
 
-        // 'mongodb' => [
-        //     'driver' => 'mongodb',
-        //     'dsn' => 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/chatdata?retryWrites=true&w=majority',
-        //     'database' => 'myshop',
-        // ],
+       
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/rfqapp?retryWrites=true&w=majority',
-            'database' => 'rfqapp',
+            'dsn' => env('APP_ENV') == 'production' ? 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/rfqapp?retryWrites=true&w=majority' : 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/rfqdev?retryWrites=true&w=majority',
+            'database' => env('APP_ENV') == 'production' ? 'rfqapp' : 'rfqdev',
         ],
+
         // 'mongodb' => [
         //     'driver' => 'mongodb',
-        //     'dsn' => 'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/chatdata?retryWrites=true&w=majority',
-        //     'database' => 'chatdata',
+        //     'dsn' =>  'mongodb+srv://chatapp:merchantbay@cluster0.18q56.mongodb.net/rfqdev?retryWrites=true&w=majority',
+        //     'database' => 'rfqdev',
         // ],
-
+        
 
     ],
 

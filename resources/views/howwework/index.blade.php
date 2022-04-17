@@ -17,8 +17,8 @@
         <div class="container" id="brands">
             <div class="page_title ">
                 <div class="title_and_tags">
-                    <h2>Start or Scale your clothing brand <br/>
-                        with modern sourcing solution</h2>
+                    <h2>Start or Scale Your Clothing Brand <br/>
+                        with Modern Sourcing Solution</h2>
                     <ul>
                         <li class="px-20">Fast</li>
                         <li class="px-20">Reliable</li>
@@ -294,12 +294,11 @@
             <div class="container">
                 <div class="page_title py-70">
                     <div class="title_and_tags">
-                        <h2>Create a profile, Join MB Pool <br/>
-                        and start growing business</h2>
+                        <h2>Create a Profile, Join MB Pool <br/> Start Growing Business</h2>
                         <ul>
-                            <li class="px-40">Get more business</li>
-                            <li class="px-40">Generate more profit</li>
-                            <li class="px-40">Grow Fast</li>
+                            <li class="px-20">Get more business</li>
+                            <li class="px-20">Generate more profit</li>
+                            <li class="px-20">Grow Fast</li>
                         </ul>
                     </div>
                 </div>

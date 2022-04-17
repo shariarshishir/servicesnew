@@ -3,6 +3,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div id="main" itemprop="mainEntity">
+    <div id="how_we_work">
         <div class="switch_buttons mb-80">
             <div class="switch_button_container">
                 <div class="switch_button_wrapper">
@@ -45,10 +46,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Sign up as Buyer</h3>
-                                    <p>Start with signing up as a buyer. It does not take more
-                                        than 30 seconds. We will get in touch within 24 hours
-                                        to know your requirements and brand visions better. <a href="javascript:void(0);">Read More</a>
-                                    </p>
+                                    <p class="show-read-more">Start with signing up as a buyer. It does not take more than 30 seconds. We will get in touch within 24 hours to know your requirements and brand visions better.</p>
                                 </div>
                             </div>
                         </div>
@@ -72,9 +70,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Post a Request for quotation (RFQ)</h3>
-                                    <p>We are enabling you to get hassle free direct access to
-                                        production in Bangladesh RMG industry. You just send us
-                                        a simple request for quotation and we will ta...<a href="javascript:void(0);">Read More</a></p>
+                                    <p class="show-read-more">We are enabling you to get hassle free direct access to production in Bangladesh RMG industry. You just send us a simple request for quotation and we will take it forward. Request for quotation is a simple form which only contains the most important high-level information about your sourcing. We will present you with multiple quotations from top matched suppliers within 48 hours.</p>
                                 </div>
                             </div>
                         </div>
@@ -98,9 +94,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Select the best fit manufacturer</h3>
-                                    <p>Select the best match. You can evaluate suppliers by
-                                        certifications, capacity, years in operation, brands they
-                                        previously worked for etc. All manufacturers...<a href="javascript:void(0);">Read More</a></p>
+                                    <p class="show-read-more">Select the best match. You can evaluate suppliers by certifications, capacity, years in operation, brands they previously worked for etc. All manufacturers with Merchant Bay are pre vetted and reliable. Merchant Bay will assist you in having a mutual agreement with trade assurance and quickly generate a industry standard purchase order. Now, your order is on the roll.</p>
                                 </div>
                             </div>
                         </div>
@@ -124,9 +118,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Pay securely via escrow</h3>
-                                    <p>Merchant Bay offers a secure payment account between
-                                        you and your supplier. After you complete your payment
-                                        for the proposal, a percentage is paid to the...<a href="javascript:void(0);">Read More</a></p>
+                                    <p class="show-read-more">Merchant Bay offers a secure payment account between you and your supplier. After you complete your payment for the proposal, a percentage is paid to the manufacturer immediately, leaving the second part on hold until the job is completed in full. We can also assist you in working with letter of credit or deferred payment terms as well in the long run.</p>
                                 </div>
                             </div>
                         </div>
@@ -150,9 +142,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Become the integral part of the product development</h3>
-                                    <p>You can develop a design or tech pack in collaboration with
-                                        our designers and run your product development with our
-                                        expert technical development team. Our pro...<a href="javascript:void(0);">Read More</a></p>
+                                    <p class="show-read-more">You can develop a design or tech pack in collaboration with our designers and run your product development with our expert technical development team. Our product development team incorporate your feedbacks to create the best version of your vision. Proto sample will be sent to your doorsteps from us.</p>
                                 </div>
                             </div>
                         </div>
@@ -176,9 +166,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Quality control</h3>
-                                    <p>Assuring the right product within the promised quality
-                                        standard is our core competencies. Unlike all other platforms
-                                        in the world, we do not leave you alone du...<a href="javascript:void(0);">Read More</a></p>
+                                    <p class="show-read-more">Assuring the right product within the promised quality standard is our core competencies. Unlike all other platforms in the world, we do not leave you alone during the most critical production part. Our in-house quality assurance team and liaison with third party quality inspectors allow us to promise the required quality in all steps. All the QC updates are also sent to you via order management dashboard in real time.</p>
                                 </div>
                             </div>
                         </div>
@@ -202,9 +190,7 @@
                                 </div>
                                 <div class="details">
                                     <h3>Shipment</h3>
-                                    <p>Our commercial team and partnered logistic companies can
-                                        assist you in smooth shipment too. As mentioned, you just
-                                        start by submitting your query and Merch...<a href="javascript:void(0);">Read More</a></p>
+                                    <p class="show-read-more">Our commercial team and partnered logistic companies can assist you in smooth shipment too. As mentioned, you just start by submitting your query and Merchant Bay takes care of you thorough out the complete apparel production journey.</p>
                                 </div>
                             </div>
                         </div>
@@ -301,7 +287,7 @@
                     <h3>We make sure you get Right Product at
                         the Right Price within the Right Time ....</h3>
                 </div>
-                <button class="btn_green">Request for Quotation</button>
+                <a href="{{route('rfq.index')}}" class="btn_green">Request for Quotation</a>
             </div>
         </div>
         <div id="manufacturers">
@@ -322,7 +308,7 @@
                         <div class="row">
                             <div class="col l3">
                                 <div class="icon_box">
-                                    <img src="{{asset('images/frontendimages/work-image/sign-up.svg')}}" alt="icon"
+                                    <img src="{{asset('images/frontendimages/work-image/icon/sign-up.svg')}}" alt="icon"
                                         style="transform: translate(15px, 15px);" />
                                 </div>
                             </div>
@@ -335,12 +321,8 @@
                                         <div class="line"></div>
                                     </div>
                                     <div class="details">
-                                        <h4>Sign up as a Manufacturer</h4>
-                                        <p>Start with signing up as a buyer. It does not take more
-                                            than 30 seconds. We will get in touch within 24 hours
-                                            to know your requirements and brand visions better. <a href="#">Read
-                                                More</a>
-                                        </p>
+                                        <h3>Sign up as a Manufacturer</h3>
+                                        <p class="show-read-more">Creating manufacturer account is an easy process, provide basic info about you and your business and you are good to go.</p>
                                     </div>
                                 </div>
                             </div>
@@ -363,11 +345,8 @@
                                         <div class="line"></div>
                                     </div>
                                     <div class="details">
-                                        <h4>Setting up Business Profile</h4>
-                                        <p>We are enabling you to get hassle free direct access to
-                                            production in Bangladesh RMG industry. You just send us
-                                            a simple request for quotation and we will ta...<a href="javascript:void(0);">Read More</a>
-                                        </p>
+                                        <h3>Setting up Business Profile</h3>
+                                        <p class="show-read-more">You can open multiple business profiles under your supplier account. Make your profile as detailed as possible to get more targeted queries. Your profiles will be verified by Merchant Bay before publishing. After verification your profile will be available for query matching.</p>
                                     </div>
                                 </div>
                             </div>
@@ -390,10 +369,8 @@
                                         <div class="line"></div>
                                     </div>
                                     <div class="details">
-                                        <h4>Build your Storefront</h4>
-                                        <p>Select the best match. You can evaluate suppliers by
-                                            certifications, capacity, years in operation, brands they
-                                            previously worked for etc. All manufacturers...<a href="javascript:void(0);">Read More</a></p>
+                                        <h3>Build your Storefront</h3>
+                                        <p class="show-read-more">Brand and buyers like it when you showcase your products and samples in your digital profile. It creates more credibility and trust. Upload all your developed samples to your digital profile to get direct queries from buyers.</p>
                                     </div>
                                 </div>
                             </div>
@@ -416,11 +393,8 @@
                                         <div class="line"></div>
                                     </div>
                                     <div class="details">
-                                        <h4>Join MB Pool</h4>
-                                        <p>Merchant Bay offers a secure payment account between
-                                            you and your supplier. After you complete your payment
-                                            for the proposal, a percentage is paid to the...<a href="javascript:void(0);">Read More</a>
-                                        </p>
+                                        <h3>Join MB Pool</h3>
+                                        <p class="show-read-more">Join Merchant Bay pool to start getting orders instantly. You can join with your full capacity or you can dedicate as low as one line for Merchant Bay. Once you assign a line to MB pool you won’t have to worry about those lines production. You will keep getting best fit orders according to your capabilities to feed in the line. Win-Win deals doesn’t get better that this.</p>
                                     </div>
                                 </div>
                             </div>
@@ -443,10 +417,8 @@
                                         <div class="line"></div>
                                     </div>
                                     <div class="details">
-                                        <h4>Stop worrying about payment security</h4>
-                                        <p>You can develop a design or tech pack in collaboration with
-                                            our designers and run your product development with our
-                                            expert technical development team. Our pro...<a href="javascript:void(0);">Read More</a></p>
+                                        <h3>Stop worrying about payment security</h3>
+                                        <p class="show-read-more">You will receive your payment as stated in the payment terms. All buyers at Merchant Bay are authentic and have payment assurance. Our escrow service makes sure there is no misconduct.</p>
                                     </div>
                                 </div>
                             </div>
@@ -554,12 +526,35 @@
                     <div>
                         <h3>Be a Merchant Bay manufacturing partner now!</h3>
                     </div>
-                    <button class="btn_green">Join MB Pool</button>
+                    <a href="{{route('business.profile.create')}}" class="btn_green">Join MB Pool</a>
                 </div>
             </div>
         </div>
     </div>
     </div>
+    </div>
     <!-- /.content-wrapper -->
 
 @endsection
+
+@push('js')
+<script>
+$(document).ready(function(){
+	var maxLength = 150;
+	$(".show-read-more").each(function(){
+		var myStr = $(this).text();
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+			$(this).empty().html(newStr);
+			$(this).append('<a href="javascript:void(0);" class="read-more">Read More</a>');
+			$(this).append('<span class="more-text">' + removedStr + '</span>');
+		}
+	});
+	$(".read-more").click(function(){
+		$(this).siblings(".more-text").contents().unwrap();
+		$(this).remove();
+	});
+});
+</script>
+@endpush

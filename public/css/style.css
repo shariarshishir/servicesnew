@@ -39,7 +39,7 @@ ul {
 }
 h1,h2,h3,h4,h5,h6 {
     margin: 0 0 10px;
-    font-weight: 600;
+    font-family: 'nexabold';
 }
 h1 {
     font-size: 45px;
@@ -9469,6 +9469,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         height: 100%;
     }
 
+    .header_dasktop .mainNav ul li.item_whyus {
+        margin-left: 30px;
+    }
+
     /* ***************************************** */
     .product_video_box {
         padding-right: 100px;
@@ -9547,6 +9551,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .mainNav ul li .material-icons {
         padding-left: 5px;
         margin-top: 2px;
+    }
+
+    .header_dasktop .mainNav ul li.item_whyus {
+        margin-left: 45px;
     }
 
 }

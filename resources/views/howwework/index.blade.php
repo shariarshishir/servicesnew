@@ -455,7 +455,7 @@
                                     <h3>Gain advantage in
                                         product development</h3>
                                 </div>
-                                <p>Merchant Bay stay with you during all the
+                                <p>Merchant Bay stays with you during all the
                                     process in the product development so that
                                     you are assured to have the order developed
                                     in the most effective way which will increase
@@ -482,8 +482,7 @@
                                 <p>MB Pool factories get privileged access to
                                     Merchant Bay tools. They never have to go for
                                     expensive ERP solutions to digitize their factory.
-                                    Merchant Bay ensure they are digitized steps by
-                                    step in the right hierarchy.</p>
+                                    Merchant Bay ensures they are digitized step by step in the right hierarchy.</p>
                             </div>
                         </div>
                         <div class="col s5 l3 d-l-none"></div>

@@ -8,10 +8,10 @@
 
 @section('content')
 
-<div id="main" itemprop="mainEntity">
+<div id="mb_about_wrap" itemprop="mainEntity">
     <div id="mb_about">
-      <div class="about_us py-100">
-        <div class="container">
+      <div class="about_us">
+        <div class="about_us_container">
           <div class="section_title">
             <h1>Simplest way to source apparel from Bangladesh</h1>
             <div class="title_bottom">
@@ -40,22 +40,21 @@
                   We thoroughly verify and welcome factories, textile mills,
                   yarn spinners, trims & accessories suppliers to our
                   platform. We create their digital profile to increase their
-                  visibility and be a part of the visible supply chain. Our
-                  multi-tire supplier base enables to match with suitable
-                  partners for demand generated instantly. Constantly updating
-                  raw material library helps us to do costing more
-                  efficiently, so that buyers can benefit from end to end
-                  sourcing support.
+                  visibility and be a part of the visible supply chain. 
+                  Our multi-tire supplier base enables us to match with 
+                  suitable partners for demand generated instantly. Constantly 
+                  updating the raw material library helps us to do costing more 
+                  efficiently so that buyers can benefit from end to end.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="why_us py-100">
-        <div class="container">
+      <div class="why_us py-80">
+        <div class="why_us_container">
           <div class="section_title">
-            <h1>Things are different here at Merchant Bay</h1>
+            <h3>Things are different here at Merchant Bay</h3>
           </div>
           <div>
             <ul class="why_us-tab py-50">
@@ -84,12 +83,11 @@
           <div class="why_us-content" id="why_us-any-quantity">
             <h4>Any Quantity</h4>
             <p>
-              We know emerging DTC brands need more styles at flexible
-              quantities to avoid dead stocks and edge fast fashion. So, we
-              prepare manufacturers to support low minimum order quantity
-              orders and scale together. Our pool suppliers are also assisted
-              with our technical and raw materials support which enables them
-              to cater short quantity orders.
+              We know emerging DTC brands need more styles in flexible quantities 
+              to avoid dead stocks and edge fast fashion. So, we prepare 
+              manufacturers to support low minimum order quantity orders and 
+              scale together. Our pool suppliers are also assisted with our 
+              technical and raw materials support which enables them to cater to short quantity orders.
             </p>
           </div>
           <div class="why_us-content" id="why_us-instant-responses">
@@ -112,9 +110,9 @@ optimum technical specifications to produce efficiently</p>
           </div>
           <div class="why_us-content" id="why_us-complete-visibility">
             <h4>Complete Visibility</h4>
-            <p>We do not stop by giving you visibility over the supply chain. We also give full traceability over the 
-production process. For the first time you will see the real time production updates from anywhere in 
-the world, eliminating the cons of off-shoring.</p>
+            <p>We do not stop by giving you visibility over the supply chain. We also give full traceability 
+              over the production process. For the first time, you will see real-time production updates 
+              from anywhere in the world, eliminating the cons of off-shoring.</p>
           </div>
           <div class="why_us-content" id="why_us-preferred-payment-method">
             <h4>Preferred Payment Method</h4>
@@ -123,9 +121,9 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="work_process py-100">
-        <div class="container">
-          <h1>Our work process....</h1>
+      <div class="work_process py-80">
+        <div class="work_process_container">
+          <h3>Our work process....</h3>
           <div class="row py-50">
             <div class="col s6 m4 xl2">
               <div class="work_process-box">
@@ -186,8 +184,8 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             </span></a>
         </div>
       </div>
-      <div class="features py-100">
-        <div class="container">
+      <div class="features py-80">
+        <div class="features_container">
           <div class="features_slider">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
@@ -196,9 +194,9 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>Detailed profiling of
-                        the suppliers </h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>Detailed profiling of <br/>
+                        the suppliers </h3>
                       <p>Based on vast experience and R&D, we have
                         developed a standardized supplier profiling
                         system that is accepted by the brands and
@@ -206,7 +204,9 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/profile.png')}}" alt="Profile" />
+                      <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/profile.png')}}" alt="Profile" />
+                      </div>
                   </div>
                 </div>
               </div>
@@ -214,15 +214,17 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary</h3>
-                      <h2>Digital library of designs, samples, textiles, yarns, trims and accessories</h2>
-                      <p>Buyers can source from our trendy 3D designs
-                        catalogue, suppliers’ samples. They can also
-                        source raw materials from the same place.</p>
+                      <h5>Tools that made us revolutionary</h5>
+                      <h3>Digital library of designs, samples, textiles, yarns, trims and accessories</h3>
+                      <p>Buyers can source from our trendy 3D designs catalogue and suppliers' samples. 
+                        They can also source raw materials from the same place.</p>
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/design-catelogue.png')}}" alt="Design Catelogue" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/design-catelogue.png')}}" alt="Design Catelogue" />
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -230,15 +232,16 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>Matching algorithm</h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>Matching algorithm</h3>
                       <p>Matchmaking algorithm instantly matches
-                        suppliers to your requirement. This tool
-                        cuts the process time by 50%.</p>
+                        suppliers to your requirement. This tool cuts the processing time by 50%.</p>
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/supplier-matching.png')}}" alt="Supplier Matching" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/supplier-matching.png')}}" alt="Supplier Matching" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -246,14 +249,16 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>Secure conversation channel</h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>Secure conversation channel</h3>
                       <p>Suppliers, buyers and platform are connected
                         through our secure conversation panel.</p>
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/message-centre.png')}}" alt="Message Centre" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/message-centre.png')}}" alt="Message Centre" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -261,15 +266,17 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>Product development studio</h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>Product development studio</h3>
                       <p>Our team of expert product developers
                         develops a digital sample engaging you in
                         the whole process.</p>
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/development-pool.png')}}" alt="profile" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/development-pool.png')}}" alt="profile" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -277,16 +284,18 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>MB pool manufacturing capacity</h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>MB pool manufacturing capacity</h3>
                       <p>We are pioneering a decentralized factory
-                        network. We are calling it MB Pool. Pool network
-                        enable us to cater any MOQ, reduce lead time
-                        significantly and ensure highest quality.</p>
+                        network. We are calling it MB Pool. 
+                        Pool network enables us to cater for any MOQ, reduce lead time significantly and ensure the highest quality.
+                      </p>
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/capacity-check.png')}}" alt="Development Pool" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/capacity-check.png')}}" alt="Development Pool" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -294,17 +303,18 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>Order management dashboard</h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>Order management dashboard</h3>
                       <p>OMD is an always online service accessible
-                        from anywhere in the world. OMD provides
-                        key matrices related to T&A, production
-                        update and organizes files, conversations in
-                        a single dashboard.</p>
+                        from anywhere in the world.
+                        OMD provides a single dashboard for key matrices related to T&A, production updates, file organization, and conversations.
+                      </p>
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/omd-for-mock-up.png')}}" alt="omd" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/omd-for-mock-up.png')}}" alt="omd" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -312,8 +322,8 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="row">
                   <div class="col m6">
                     <div class="feature_left">
-                      <h3>Tools that made us revolutionary </h3>
-                      <h2>Smart factory business intelligence tools</h2>
+                      <h5>Tools that made us revolutionary </h5>
+                      <h3>Smart factory business intelligence tools</h3>
                       <p>Our Smart factory tools like production intelligence,
                         store management, BTB monitoring, planning etc.
                         are all connected to make rich insights so that you
@@ -321,7 +331,9 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                     </div>
                   </div>
                   <div class="col m6">
-                    <img src="{{asset('images/frontendimages/about-image/supplier-admin.png')}}" alt="omd" />
+                    <div class="feature_right_img">
+                        <img src="{{asset('images/frontendimages/about-image/supplier-admin.png')}}" alt="omd" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -341,27 +353,26 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="we_believe py-100">
+      <div class="we_believe py-80">
         <div class="section_title">
           <img src="{{asset('images/frontendimages/about-image/icons/we-believe.png')}}" src="We Believe" />
-          <h1 class="py-50">
+          <h3 class="py-50">
             We believe traceability is the first step to sustainability
-          </h1>
+          </h3>
         </div>
-        <div class="container">
+        <div class="we_believe_container">
           <p>
-            Our goal is to help you with intelligence to take better decisions
-            about reducing your product's carbon footprint. Our traceable
-            supply chain enables us to develop sustainability score of a
-            product and calculate carbon footprint. Multi-tire supplier
-            mapping system also enables us to track down the main source of
-            carbon within the supply chain.
+            Our goal is to help you with intelligence to make better decisions about 
+            reducing your product's carbon footprint. Our traceable supply chain enables 
+            us to develop the sustainability score of a product and calculate its 
+            carbon footprint. Multi-tire supplier mapping system also enables us to 
+            track down the main source of carbon within the supply chain.
           </p>
         </div>
       </div>
-      <div class="achivement py-100">
-        <h1>What have we achieved?</h1>
-        <div class="container">
+      <div class="achivement py-80">
+        <h3>What have we achieved?</h3>
+        <div class="achivement_container">
           <div class="row">
             <div class="col m6">
               <div class="achivement_box">
@@ -402,8 +413,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
-                  Brought all sourcing support and services at a click of
-                  button.
+                  Brought all sourcing support and services at a click of a button.
                 </div>
               </div>
             </div>
@@ -432,8 +442,8 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="vision_and_mission py-100">
-        <div class="container">
+      <div class="vision_and_mission py-80">
+        <div class="vision_and_mission_container">
           <div class="row">
             <div class="col m6">
               <div class="vision_and_mission_box">
@@ -458,11 +468,11 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="paths py-100">
-        <div class="container">
-          <h1>Let's get you to</h1>
+      <div class="paths py-80">
+        <div class="paths_container">
+          <h3>Let's get you to</h3>
           <div class="row">
-            <div class="col s6 m-4 l2">
+            <div class="col s12 m4 l2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/design-studio.svg')}}" alt="icon" />
@@ -472,7 +482,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s6 m-4 l2">
+            <div class="col s12 m4 l2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/sample-storefront.svg')}}" alt="icon" />
@@ -482,7 +492,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s6 m-4 l2">
+            <div class="col s12 m4 l2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/fabric-library.svg')}}" alt="icon" />
@@ -492,7 +502,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s6 m-4 l2">
+            <div class="col s12 m4 l2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/yarn-library.svg')}}" alt="icon" />
@@ -502,7 +512,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s6 m-4 l2">
+            <div class="col s12 m4 l2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/accessories-library.svg')}}" alt="icon" />
@@ -512,7 +522,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s6 m-4 l2">
+            <div class="col s12 m4 l2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/industry-isights.svg')}}" alt="icon" />
@@ -525,8 +535,8 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <!-- <div class="partners py-100"></div> -->
-      <!-- <div class="testemonial py-100">
+      <!-- <div class="partners py-80"></div> -->
+      <!-- <div class="testemonial py-80">
         <div class="container">
           <h1>What our partners say...</h1>
           <div class="testemonial_slider">
@@ -563,8 +573,8 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div> -->
-      <div class="ending py-100">
-        <h2>We have 300+ mentions in the media.</h2>
+      <div class="ending py-80">
+        <h3>We have 300+ mentions in the media.</h3>
       </div>
     </div>
   </div>

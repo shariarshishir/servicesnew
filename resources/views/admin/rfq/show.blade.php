@@ -68,7 +68,7 @@
                                 <div class="infoBox">
                                     <h6>{{$rfq['title']}}</h6>
                                     <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
-                                    <p><b>Details:</b> {{$rfq['full_specification']}}</p>
+                                    <span style="display: flex;"><p><b>Details:</b></p> {!! $rfq['full_specification'] !!}</span>
                                     <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                     @if(isset($rfq['images']))
                                         <div class="rfq_image">
@@ -146,7 +146,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);"  data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -329,7 +329,7 @@
     <div class="dialog-form-box"></div>
     <div class="dialog-form-button">
         <input type="text" class="messageContent" value="" />
-        <input type="button" class="btn messageSendToUser" value="Send" />
+        <input type="button" class="btn btn_green messageSendToUser" value="Send" />
     </div>
 </div>
 
@@ -383,7 +383,7 @@
                     url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
                     selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
                 }
-            });
+            });        
 
 
             $(document).on('change', '#factory_type', function(){
@@ -896,7 +896,6 @@
                 }                
             });		
             $( ".sms_trigger" ).on( "click", function() {
-                alert('hi');
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
                 var sso_reference_id = $(this).data('sso_reference_id');

@@ -2,9 +2,8 @@
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
-    <div id="main" itemprop="mainEntity">
     <div id="how_we_work">
-        <div class="switch_buttons mb-80">
+        <div class="switch_buttons">
             <div class="switch_button_container">
                 <div class="switch_button_wrapper">
                     <p>How Merchant Bay works</p>
@@ -16,18 +15,18 @@
             </div>
         </div>
         <div class="container" id="brands">
-            <div class="page_title py-70">
+            <div class="page_title ">
                 <div class="title_and_tags">
-                    <h2>Start or Scale your clothing brand
-                        with modern sourcing solution</h2>
+                    <h2>Start or Scale Your Clothing Brand <br/>
+                        with Modern Sourcing Solution</h2>
                     <ul>
-                        <li class="px-40">Fast</li>
-                        <li class="px-40">Reliable</li>
-                        <li class="px-40">Traceable</li>
+                        <li class="px-20">Fast</li>
+                        <li class="px-20">Reliable</li>
+                        <li class="px-20">Traceable</li>
                     </ul>
                 </div>
             </div>
-            <div class="steps_section py-70">
+            <div class="steps_section py-50">
                 <div class="steps_box">
                     <div class="row">
                         <div class="col l3">
@@ -284,22 +283,22 @@
             </div>
             <div class="request_quotation py-70">
                 <div>
-                    <h3>We make sure you get Right Product at
+                    <h3>We make sure you get Right Product at <br/>
                         the Right Price within the Right Time ....</h3>
                 </div>
                 <a href="{{route('rfq.index')}}" class="btn_green">Request for Quotation</a>
             </div>
         </div>
+        
         <div id="manufacturers">
             <div class="container">
                 <div class="page_title py-70">
                     <div class="title_and_tags">
-                        <h2>Create a profile, Join MB Pool and
-                            start growing business</h2>
+                        <h2>Create a Profile, Join MB Pool <br/> Start Growing Business</h2>
                         <ul>
-                            <li class="px-40">Get more business</li>
-                            <li class="px-40">Generate more profit</li>
-                            <li class="px-40">Grow Fast</li>
+                            <li class="px-20">Get more business</li>
+                            <li class="px-20">Generate more profit</li>
+                            <li class="px-20">Grow Fast</li>
                         </ul>
                     </div>
                 </div>
@@ -405,7 +404,7 @@
                             <div class="col l3">
                                 <div class="icon_box">
                                     <img src="{{asset('images/frontendimages/work-image/icon/payment-security.svg')}}" alt="icon"
-                                        style="transform: translate(0px, 5px);" />
+                                        style="transform: translate(0px, 5px); max-width: 90px " />
                                 </div>
                             </div>
                             <div class="col l9">
@@ -431,7 +430,7 @@
                     to help you grow your business faster</h2>
                 <div class="manufacture_container">
                     <div class="row">
-                        <div class="col s2 d-l-none"></div>
+                        <div class="col s12 l1 d-l-none"></div>
                         <div class="col s12 m6 l4">
                             <div class="why_us_box" style="margin-bottom: 140px;">
                                 <div class="title">
@@ -445,8 +444,8 @@
                                     for your category you are notified.</p>
                             </div>
                         </div>
-                        <div class="col s6 d-l-none"></div>
-                        <div class="col s6 d-l-none"></div>
+                        <div class="col s12 m2 l7 d-l-none"></div>
+                        <div class="col s5 l3 d-l-none"></div>
                         <div class="col s12 m6 l4">
                             <div class="why_us_box" style="margin-bottom: 140px;">
                                 <div class="title">
@@ -463,16 +462,16 @@
                                     your production efficiency.</p>
                             </div>
                         </div>
-                        <div class="col s2 d-l-none"></div>
-                        <div class="col m12 l6" style="align-self: center;">
+                        <div class="col s2 l3 d-l-none"></div>
+                        <div class="col s12 m6 l4" style="align-self: center;">
                             <div class="middle_text_card" style="margin-bottom: 140px;">
                                 <h3>Pioneering the decentralized
                                     manufacturing network with
                                     Merchant Bay</h3>
                             </div>
                         </div>
-                        <div class="col s2 d-l-none" style="margin: 0;"></div>
-                        <div class="col s12 m6 l4">
+                        <div class="col s1 l1 d-l-none" style="margin: 0;"></div>
+                        <div class="col s12 m6 l7">
                             <div class="why_us_box" style="margin-bottom: 140px;">
                                 <div class="title">
                                     <div class="icon">
@@ -487,8 +486,8 @@
                                     step in the right hierarchy.</p>
                             </div>
                         </div>
-                        <div class="col s6 d-l-none"></div>
-                        <div class="col s12 m6 l4">
+                        <div class="col s5 l3 d-l-none"></div>
+                        <div class="col s12 m6 l6">
                             <div class="why_us_box" style="margin-bottom: 140px;">
                                 <div class="title">
                                     <div class="icon">
@@ -501,8 +500,8 @@
                                     more places than your own website.</p>
                             </div>
                         </div>
-                        <div class="col s2 d-l-none" style="margin: 0;"></div>
-                        <div class="col s2 d-l-none"></div>
+                        <div class="col s2 l3 d-l-none" style="margin: 0;"></div>
+                        <div class="col s2 l1 d-l-none"></div>
                         <div class="col s12 m6 l4">
                             <div class="why_us_box">
                                 <div class="title">
@@ -518,6 +517,7 @@
                                     through OMD app.</p>
                             </div>
                         </div>
+                        <div class="col s2 l7 d-l-none"></div>
                     </div>
                 </div>
             </div>
@@ -530,7 +530,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
     <!-- /.content-wrapper -->
@@ -547,7 +546,7 @@ $(document).ready(function(){
 			var newStr = myStr.substring(0, maxLength);
 			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
 			$(this).empty().html(newStr);
-			$(this).append('<a href="javascript:void(0);" class="read-more">Read More</a>');
+			$(this).append('<a href="javascript:void(0);" class="read-more">Read More...</a>');
 			$(this).append('<span class="more-text">' + removedStr + '</span>');
 		}
 	});

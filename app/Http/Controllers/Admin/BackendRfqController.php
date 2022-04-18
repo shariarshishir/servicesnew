@@ -72,7 +72,10 @@ class BackendRfqController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
-        $chats = Userchat::where('rfq_id',$id)->get();
+        
+        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq['id'].'/user/'.$rfq['created_by']);
+        $data = $response->json();
+        $chats = $data['data']['messages'];
         $chatdata = $chats;
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories','userNameShortForm'));
     }

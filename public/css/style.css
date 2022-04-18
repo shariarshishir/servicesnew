@@ -9440,7 +9440,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: 100%;
     }
     .header_dasktop .mainNav ul li {
-        padding-left: 36px;
+        padding-left: 22px;
     }
     .suppliers_content_wrap .industries_boxWrap {
         justify-content: left;
@@ -9539,6 +9539,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .landing_tools_infobox {
         padding-top: 50px;
+    }
+
+    .header_dasktop .mainNav ul li {
+        padding-left: 35px;
+    }
+    .mainNav ul li .material-icons {
+        padding-left: 5px;
+        margin-top: 2px;
     }
 
 }
@@ -9726,7 +9734,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
 
     .header_dasktop .mainNav ul li {
-        padding-left: 15px;
+        padding-left: 10px;
     }
     .header_wrap .top_right .btn_profile {
         padding: 5px 10px 4px 5px;
@@ -9740,12 +9748,16 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .header_dasktop .user-block .avatar-status {
         margin-left: 0;
     }
-    .top_right .btn_white, .top_right .btn_green,
-    .mainNav ul li a:link, .mainNav ul li a:active, .mainNav ul li a:visited {
+    .top_right .btn_white, 
+    .top_right .btn_green {
         font-size: 13px;
+    }
+    .mainNav ul li a:link, .mainNav ul li a:active, .mainNav ul li a:visited {
+        font-size: 12px;
     }
     .mainNav ul li .material-icons {
         line-height: 19px;
+        font-size: 20px;
     }
     .header_wrap .cart-icon-wrapper .cart_counter,
     .header_wrap .notifications_icon_wrap .noticication_counter,
@@ -10057,7 +10069,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
     .mainnav_wrap {
-        padding-top: 25px !important;
+        padding: 25px 0 0 !important;
     }
     .header_search_bar {
         margin-top: 3px;

@@ -818,7 +818,9 @@ class HomeController extends Controller
     //suppliers
     public function suppliers(Request $request)
     {
-        $suppliers=BusinessProfile::with(['businessCategory', 'user', 'companyOverview'])->where(function($query) use ($request){
+        $suppliers=BusinessProfile::select('business_profiles.*')
+            ->leftJoin('certifications', 'certifications.business_profile_id', '=', 'business_profiles.id')
+            ->with(['businessCategory', 'user', 'companyOverview'])->where(function($query) use ($request){
             // if($request->business_type){
             //     $query->whereIn('business_type',$request->business_type)->get();
             // }
@@ -856,7 +858,10 @@ class HomeController extends Controller
 
             }
         })
-        ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
+        ->groupBy('business_profiles.id')
+        ->orderBy('profile_verified_by_admin', 'desc')
+        ->orderBy('certifications.created_at', 'desc')
+        ->paginate(12);
         return view('suppliers.index',compact('suppliers'));
     }
     //supplier profile

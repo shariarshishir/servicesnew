@@ -11,15 +11,15 @@
     $verified = array_key_exists('verified', app('request')->input())?app('request')->input('verified'): [];
 
     $factory_type_array=[
-        '2'=>'woven',
-        '4'=>'knit',
-        '5'=>'sweater',
-        '6'=>'accessories',
-        '8'=>'denim',
-        '9'=>'lingerie',
-        '11'=>'textile',
-        '12'=>'yarn & spinning',
-        '33'=>'others',
+        '2002'=>'woven',
+        '2004'=>'knit',
+        '2005'=>'sweater',
+        '2006'=>'accessories',
+        '2008'=>'denim',
+        '2009'=>'lingerie',
+        '2011'=>'textile',
+        '2012'=>'yarn & spinning',
+        '2033'=>'others',
         ];
 @endphp
 
@@ -31,13 +31,13 @@
                 <link itemprop="url" href="http://www.example.com/"/>
                 <form action="{{route('suppliers')}}" method="get" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
                     <meta itemprop="target" content="http://example.com/search?q={location}"/>
-                    
+
                     {{--location search  --}}
                     <div class="filter_search" itemscope itemtype="https://schema.org/SearchAction">
                         <h4 itemprop="address">Location</h4>
                         <div itemprop="address" class="filter_search_inputbox" itemscope>
                             <i class="material-icons">pin_drop</i>
-                            <input itemprop="query" class="filter_search_input typeahead" type="text" name="location" placeholder="Type any location" value="{{$location}}">
+                            <input itemprop="query" class="filter_search_input" type="text" name="location" placeholder="Type any location" value="{{$location}}">
                         </div>
                         <!-- <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();"> -->
                     </div>
@@ -115,11 +115,11 @@
                     <div class="col s12" itemscope itemtype="https://schema.org/WebSite">
 
                         <link itemprop="url" href="http://www.example.com/"/>
-                        
+
                         <form action="{{route('suppliers')}}" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-                            
+
                             <meta itemprop="target" content="http://example.com/search?q={business_name}"/>
-                            
+
                             <div class="filter_search_inputbox" itemscope>
                                 <i class="material-icons">search</i>
                                 <input itemprop="business_name" itemprop="query" class="filter_search_input " type="text" name="business_name" placeholder="business name" value="{{$business_name_from_home ?? $business_name}}">
@@ -156,21 +156,21 @@
                                     <div class="supplier_profile_short_info_block col s12 m12 l9" itemscope itemtype="https://schema.org/manufacturer" >
                                         <h5 itemprop="name">{{$supplier->business_name}}</h5>
                                         <div class="industry_location short_info_box" itemscope itemtype="https://schema.org/location">
-                                            <span class="title_label">Location:</span> 
+                                            <span class="title_label">Location:</span>
                                             <span itemprop="address" class="info_details">{{$supplier->location}}</span>
                                         </div>
                                         <div class="industry_type short_info_box" itemscope itemtype="https://schema.org/industry">
-                                            <span class="title_label">Industry Type: </span> 
+                                            <span class="title_label">Industry Type: </span>
                                             <span itemprop="name" class="info_details">{{$supplier->industry_type}}</span>
                                         </div>
                                         <div class="factory_type short_info_box" itemscope itemtype="https://schema.org/category">
-                                            <span class="title_label">Factory Type:</span> 
+                                            <span class="title_label">Factory Type:</span>
                                             <span itemprop="name" class="businessCategory info_details">{{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</span>
                                         </div>
                                         @foreach($mainProductsJson as $mainProducts)
                                             @if($mainProducts->name == 'main_products')
                                             <div class="main_products short_info_box" itemscope itemtype="https://schema.org/Product">
-                                                <span class="title_label" itemprop="name">Main Products:</span> 
+                                                <span class="title_label" itemprop="name">Main Products:</span>
                                                 <span itemprop="value" class="info_details">{{$mainProducts->value}}</span>
                                             </div>
                                             @endif

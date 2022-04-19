@@ -73,6 +73,10 @@ class BackendRfqController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
+
+        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq['id'].'/user/'.$rfq['created_by']);
+        $data = $response->json();
+        $chats = $data['data']['messages'];
         $profromaInvoice = Proforma::where('generated_po_from_rfq',$id)->first();
         $chats = Userchat::where('rfq_id',$id)->get();
         $chatdata = $chats;

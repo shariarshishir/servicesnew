@@ -72,7 +72,7 @@
                                 <div class="infoBox">
                                     <h6>{{$rfq['title']}}</h6>
                                     <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
-                                    <p><b>Details:</b> {{$rfq['full_specification']}}</p>
+                                    <span style="display: flex;"><p><b>Details:</b></p> {!! $rfq['full_specification'] !!}</span>
                                     <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                     @if(isset($rfq['images']))
                                         <div class="rfq_image">
@@ -150,7 +150,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -329,7 +329,13 @@
     </section>
 </div>
 
-<div id="dialog-form" title="Message Box" style="display: none;"></div>
+<div id="dialog-form" title="Message Box" style="display: none;">
+    <div class="dialog-form-box"></div>
+    <div class="dialog-form-button">
+        <input type="text" class="messageContent" value="" />
+        <input type="button" class="btn btn_green messageSendToUser" value="Send" />
+    </div>
+</div>
 
 @endsection
 @push('js')
@@ -381,7 +387,8 @@
                     url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
                     selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
                 }
-            });
+            });        
+
 
             $(document).on('change', '#factory_type', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
@@ -889,34 +896,34 @@
                 width: 350,
                 modal: true,
                 buttons: {
-                    Send: function() {
-                        messageSendToUser();
-                    }
+                    //Send: messageSendToUser
                 }                
             });		
             $( ".sms_trigger" ).on( "click", function() {
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
-                $.ajax({
-                    method: 'GET',
-                    data: {business_profile_id:business_profile_id, rfq_id:rfq_id, _token:"{{ csrf_token() }}"},
-                    url: '{{ route("admin.message.center.getsupplierchatdata") }}',
-                    success:function(response){
-                        console.log(response);
-                        var html = "RFQ ID = "+rfq_id+"<br />";
-                        html += "Business Profile ID = "+business_profile_id;
-                        $("#dialog-form").html(html);
-                        dialog.dialog( "open" );
-                    }
-                });
+                var sso_reference_id = $(this).data('sso_reference_id');
+                console.log(rfq_id);
+                console.log(business_profile_id);
+                console.log(sso_reference_id);
+                var html = '<div>';
+                html += '<p>'+rfq_id+'test</p>';
+                html+='</div>';
+                let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : sso_reference_id,'rfq_id': rfq_id,'factory':false, 'product': null};
+                socket.emit('new message', message);
+                var html = "RFQ ID = "+rfq_id+"<br />";
+                    html += "Business Profile ID = "+business_profile_id;
+                    $(".dialog-form-box").html(html);
+                    dialog.dialog( "open" );
+                
             });
 
 
         });
 
-        function messageSendToUser()
-        {
-            alert("I am ready to emit message");
-        }
+        $(".messageSendToUser").click(function(){
+            var msgText = $(this).prev('.messageContent').val();
+            alert(msgText + " Ready to emit.");
+        })
     </script>
 @endpush

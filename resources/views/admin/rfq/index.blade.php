@@ -61,7 +61,7 @@
                                 <a class="page-link prev_link" href="#" data-page="1" tabindex="-1">Previous</a>
                             </li>
                             @for($i=1; $i<=$noOfPages; $i++)
-                                <li class="page-item" ><a class="page-link" href="#" data-page="{{$i}}">{{$i}}</a></li>
+                                <li class="page-item page-element"><a class="page-link" href="#" data-page="{{$i}}">{{$i}}</a></li>
                             @endfor
                             <li class="page-item">
                                 <a class="page-link next_link" href="#" data-page="2">Next</a>
@@ -82,6 +82,7 @@
 @push('js')
 <script>
     $(document).ready(function(){
+        $(".pagination").children(".page-element").first().addClass("active");
         $(document).on('click', '.rfq-per-page', function(event){
         event.preventDefault(); 
         var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
@@ -106,6 +107,10 @@
         });
 
         $(document).on('click', '.page-link', function(event){
+            if($(this).data('page') > 1) {
+                $(".pagination").children(".page-element").removeClass("active");
+                $(this).parent(".page-element").addClass("active");
+            }
         event.preventDefault(); 
         var page = $(this).data("page");
         var rfqPerPage = $( ".rfq-per-page option:selected" ).val();

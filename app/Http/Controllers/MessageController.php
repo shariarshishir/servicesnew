@@ -40,8 +40,7 @@ class MessageController extends Controller
 
     public function message_center(){
         $user = Auth::user();
-        $rfqs = RfqApp::where('sso_reference_id',$user->sso_reference_id)->get();
-        
+        $rfqs = RfqApp::where('created_by',$user->sso_reference_id)->latest()->get();
         if(count($rfqs)>0){
             $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
             if($rfqs[0]['user']['user_picture'] !=""){

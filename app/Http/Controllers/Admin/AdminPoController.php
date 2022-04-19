@@ -91,7 +91,13 @@ class AdminPoController extends Controller
             $data->condition = $request->input('terms_conditions') ? json_encode($request->input('terms_conditions')) : json_encode(array());
 
             $data->status = 0;
-            $data->created_by= 1;
+            if(env('APP_ENV') == 'local'){
+                //$adminUser = User::Find('5552');
+                $data->created_by = 5552;
+            }else{
+                //$adminUser = User::Find('5771');
+                $data->created_by = 5771;
+            }            
             $data->save();
             $performa_id = $data->id;
 
@@ -102,7 +108,13 @@ class AdminPoController extends Controller
 
                 $dataitem = new ProformaProduct;
                 $dataitem->performa_id = $performa_id;
-                $dataitem->supplier_id = 1;
+                if(env('APP_ENV') == 'local'){
+                    //$adminUser = User::Find('5552');
+                    $data->supplier_id = 5552;
+                }else{
+                    //$adminUser = User::Find('5771');
+                    $data->supplier_id = 5771;
+                }                
                 $dataitem->product_id = NULL;
                 $dataitem->item_title = $request->input('item_title')[$i];
                 $dataitem->unit = $request->input('unit')[$i];
@@ -176,7 +188,7 @@ class AdminPoController extends Controller
             $proFormaAdvisingBank->swift_code = $request->input('swift_code');
             $proFormaAdvisingBank->save();
 
-            event(new NewProfromaInvoiceHasCreatedEvent($data));
+            //event(new NewProfromaInvoiceHasCreatedEvent($data));
 
 
         // } catch (\Exception $e) {

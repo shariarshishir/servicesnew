@@ -34,7 +34,7 @@
                                     <!-- <div class="col s12 m6 l6"> -->
                                     <div class="col-sm-12 input-field beneficiary_address_bar">
                                         <legend class="">Create Pro-Forma Invoice </legend>
-                                        <div class="row">
+                                        <div class="row" style="margin: 0;">
                                             <div class="col-sm-12 col-md-6" id="buyerdata">
                                                 <h3>Buyer</h3>
                                                 <p>{{$buyer->name}}</p>
@@ -43,16 +43,14 @@
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="form-group has-feedback">
                                                     <label>Beneficiary</label>
-                                                    <select class="form-control select2">
-                                                        <option value="On Delivery">Merchantbay.Ltd</option>
-                                                    </select>
+                                                    <p>Merchantbay.Ltd</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <input type="hidden" name="selected_buyer_id" value="{{$buyer->id}}" />
                                     </div>
                                     <div class="col-sm-12" style="padding-bottom: 15px;">
-                                        <div class="row">
+                                        <div class="row" style="margin: 0;">
                                             <div class="col-sm-12 col-md-6 col-lg-2 input-field">
                                                 <div class="form-group has-feedback">
                                                     <label>Pro-forma ID <span class="required_star" style="color: rgb(255, 0, 0)" >*</span> </label>
@@ -210,7 +208,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -228,8 +226,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
-                                                        <td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
+                                                        <td><input class="input-field form-control" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
+                                                        <td><input class="input-field file_upload form-control" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
                                                         <td class="right-align"><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                                     </tr>
                                                     </tbody>

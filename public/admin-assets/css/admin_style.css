@@ -1402,10 +1402,13 @@ label:not(.form-check-label):not(.custom-file-label) {
     background: none;
     color: #484848;
 }
-.proforma_invoices_wrap .no_more_tables thead th {
+.proforma_invoices_wrap table thead th {
     border: none;
     font-weight: 500;
     white-space: nowrap;
+}
+.proforma_invoices_wrap label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 500;
 }
 .shipping_details_table #shipping-details-table-body .select2, 
 .shipping_details_table table #shipping-details-table-body input {
@@ -1446,12 +1449,70 @@ label:not(.form-check-label):not(.custom-file-label) {
     margin-bottom: 0;
     font-weight: 400;
 }
-
-
-.add_more_condi {
-
+.invoice_terms_conditions .add_more_condi {
+    padding-bottom: 15px;
+}
+.invoice_terms_conditions .add_more_condi a:hover {
+    color: #73D578;
 }
 
+.invoice_terms_conditions .btn-danger:not(:disabled):not(.disabled), 
+.invoice_terms_conditions .btn-danger:not(:disabled):not(.disabled), 
+.invoice_terms_conditions .show>.btn-danger.dropdown-toggle {
+    background: none !important;
+    border: none !important;
+}
+
+.invoice_terms_conditions .list-group-item .fa-trash {
+    color: red;
+}
+
+.proforma_invoices_wrap .invoice_advising_bank {
+    padding-bottom: 30px;
+}
+.proforma_invoices_wrap .invoice_signature_wrap h6 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.proforma_invoices_wrap .invoice_signature_wrap .row,
+.proforma_invoices_wrap .invoice_advising_bank .row {
+    margin: 0;
+}
+.proforma_invoices_wrap .invoice_signature_wrap .row .row {
+    margin-right: -7.5px;
+    margin-left: -7.5px;
+}
+
+.proforma_invoices_wrap .invoice_submit {
+    text-align: right;
+}
+
+#exampleModal .modal-dialog {
+    border-radius: 20px;
+    max-width: 60%;
+}
+#exampleModal .modal-dialog .no_more_tables table {
+    width: 100%;
+}
+#exampleModal .modal-dialog .no_more_tables table tr {
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+#exampleModal .modal-dialog table tr td {
+    padding: 20px 10px;
+}
+
+#exampleModal .modal-dialog table tr td .file_upload  {
+    border: none;
+}
+
+#exampleModal .modal-dialog .fa-trash {
+    color: red;
+}
+
+#exampleModal .add_more_box {
+    padding-top: 10px;
+}
 
 /* ************** Media css start ******************* */
 

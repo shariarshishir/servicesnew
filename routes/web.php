@@ -530,7 +530,7 @@ Route::group(['prefix'=>'/admin'],function (){
         // Route::get('/proforma-invoices/{proformaInvoice}',[AdminProFormaInvoiceController::class,'show'])->name('proforma_invoices.show');
         Route::get('/proforma-invoices',[AdminPoController::class,'index'])->name('proforma_invoices.index');
         Route::get('/proforma-invoices/{proformaInvoice}',[AdminPoController::class,'show'])->name('proforma_invoices.show');
-        Route::get('/proforma-invoice/create/{buyerId}',[AdminPoController::class,'create'])->name('proforma_invoices.create');
+        Route::get('/proforma-invoice/create/buyer/{buyerId}/rfq/{rfqId}',[AdminPoController::class,'create'])->name('proforma_invoices.create');
         Route::post('/proforma-invoice/store',[AdminPoController::class,'store'])->name('proforma_invoices.store');
         //users
         Route::get('users',[AdminUserController::class, 'index'])->name('users.index');

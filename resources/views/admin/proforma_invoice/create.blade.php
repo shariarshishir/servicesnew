@@ -44,6 +44,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="selected_buyer_id" value="{{$buyer->id}}" />
+                                    <input type="hidden" name="generated_po_from_rfq" value="{{$rfqId}}" />
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="row">

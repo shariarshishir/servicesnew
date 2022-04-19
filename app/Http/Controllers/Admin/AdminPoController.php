@@ -31,7 +31,7 @@ use PDF;
 
 class AdminPoController extends Controller
 {
-    public function  create($buyerId){
+    public function  create($buyerId,$rfqId){
 
         $buyer=User::findOrFail($buyerId);
 
@@ -43,7 +43,7 @@ class AdminPoController extends Controller
         $uoms = UOM::latest()->get();
         $proFormaTermAndConditions = ProFormaTermAndCondition::latest()->get();
 
-        return view('admin.proforma_invoice.create',compact('buyer','proformaInvoices', 'paymentTerms', 'shipmentTerms', 'shippingMethods', 'shipmentTypes', 'uoms', 'proFormaTermAndConditions'));
+        return view('admin.proforma_invoice.create',compact('buyer','proformaInvoices', 'paymentTerms', 'shipmentTerms', 'shippingMethods', 'shipmentTypes', 'uoms', 'proFormaTermAndConditions','rfqId'));
     }
     public function index ()
     {
@@ -75,6 +75,7 @@ class AdminPoController extends Controller
             $data = new Proforma;
             $data->buyer_id = $request->input('selected_buyer_id');
             $data->business_profile_id = $request->input('business_profile_id');
+            $data->generated_po_from_rfq = $request->input('generated_po_from_rfq');
             $data->proforma_id = $request->input('po_id');
             $data->proforma_date = $request->input('po_date');
             $data->payment_within = $request->input('payment_within');

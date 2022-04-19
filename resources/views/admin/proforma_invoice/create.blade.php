@@ -26,7 +26,7 @@
                     @include('include.admin._message')
 
                     <div class="widget-body p-0">
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('proforma_invoices.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <!-- <div style="padding-top: 30px;"></div> -->
                             <div class="row beneficiary_info_wrap">

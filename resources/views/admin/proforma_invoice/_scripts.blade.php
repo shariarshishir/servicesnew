@@ -52,7 +52,7 @@
         function addlineitem()
         {
             var lineitemcontent = '<tr><td data-title="Sl. No."></td><td data-title="Item / Description">';
-            lineitemcontent  += '<input type="text" class="item_title" name="item_title[]" required/>';
+            lineitemcontent  += '<input type="text" class="item_title form-control" name="item_title[]" required/>';
             lineitemcontent  +='</td><td data-title="Quantity" ><input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="unit[]" onkeyup="changeunit(this)" required/></td><td data-title="Unit Price*"><input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="unit_price[]" onkeyup="changeunitprice(this)" required/></td><td data-title="Sub Total"><input type="text" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;" name="total_price[]" readonly/><input type="hidden" class="taxprice" name="tax[]" value="0" /></td><td data-title="Total Price"><input type="text" class="form-control tax_total_price" style="border:1px solid #ccc; margin-bottom:0;" name="tax_total_price[]" readonly/></td><td><a href="javascript:void(0);" class="ic-btn4" onclick="removelineitem(this)"><i aria-hidden="true" class="fa fa-minus fa-lg"></i></a></td></tr>';
             $('#lineitems').append(lineitemcontent);
             for(var i = 0; i < $('#lineitems').children().length; i++)

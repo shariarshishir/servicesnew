@@ -146,7 +146,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);"  data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger"  data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -326,9 +326,27 @@
 </div>
 
 <div id="dialog-form" title="Message Box" style="display: none;">
-    <div class="dialog-form-box"></div>
+    <div class="dialog-form-box">
+        <div class="chat-content-area animate fadeUp">
+            <div class="chat-area ps ps--active-y">
+                <div class="chats">
+                    <div class="supplier-chats-box chat_messagedata" id="messagedata">
+                    </div>
+                </div>
+                <div class="ps__rail-x" style="">
+                    <div class="ps__thumb-x" tabindex="0" style=""></div>
+                </div>
+                <div class="ps__rail-y" style="">
+                    <div class="ps__thumb-y" tabindex="0" style=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="dialog-form-button">
-        <input type="text" class="messageContent" value="" />
+        <input type="hidden" class="dialouge_box_rfq_id" name="dialouge_box_rfq_id" value=""/>
+        <input type="hidden" class="dialouge_box_from_id" name="dialouge_box_from_id" value=""/>
+        <input type="hidden" class="dialouge_box_to_id" name="dialouge_box_to_id" value=""/>
+        <input type="text" placeholder="Type message here.."  class="message mb-0 dialouge_box_message_content">
         <input type="button" class="btn messageSendToUser" value="Send" />
     </div>
 </div>
@@ -437,7 +455,7 @@
                                     html += '<div class="title_box">';
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
-                                    html += '<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
+                                    html += '<a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '<div class="sms_details_box">';
@@ -570,7 +588,7 @@
                                     html += '<div class="title_box">';
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
-                                    html += '<a href="javascript:void(0);"><i class="fa fa-envelope"></i></a>';
+                                    html += '<a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '<div class="sms_details_box">';
@@ -894,33 +912,76 @@
                 buttons: {
                     //Send: messageSendToUser
                 }                
-            });		
-            $( ".sms_trigger" ).on( "click", function() {
-                alert('hi');
+            });	
+
+            $(document).on("click",".sms_trigger", function() {
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
                 var sso_reference_id = $(this).data('sso_reference_id');
-                console.log(rfq_id);
-                console.log(business_profile_id);
-                console.log(sso_reference_id);
-                var html = '<div>';
-                html += '<p>'+rfq_id+'test</p>';
-                html+='</div>';
-                let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : sso_reference_id,'rfq_id': rfq_id,'factory':false, 'product': null};
-                socket.emit('new message', message);
-                var html = "RFQ ID = "+rfq_id+"<br />";
-                    html += "Business Profile ID = "+business_profile_id;
-                    $(".dialog-form-box").html(html);
-                    dialog.dialog( "open" );
+                var envMode = "{{ env('APP_ENV') }}";
+                $('.dialouge_box_rfq_id').val(rfq_id);
+                $('.dialouge_box_from_id').val(fromId);
+                $('.dialouge_box_to_id').val(sso_reference_id);
+                jQuery.ajax({
+                    type : "get",
+                    data : {'rfq_id':rfq_id,'admin_id':fromId,'supplier_id':sso_reference_id},
+                    url : "{{route('getchatdata.by.supplierid')}}",
+                    success : function(response){
+                        response.chatdata.forEach((item, index)=>{
+                            if(item.rfq_id == "{{$rfq['id']}}" && fromId == item.from_id)
+                            {
+                                var msgHtml = '<div class="chat chat-right">';
+                                msgHtml += '<div class="chat-avatar">';
+                                msgHtml += '<a class="avatar">';
+                                msgHtml += '<img src="" class="circle" alt="avatar">';
+                                msgHtml += '</a>';
+                                msgHtml += '</div>';
+                                msgHtml += '<div class="chat-body left-align">';
+                                msgHtml += '<div class="chat-text">';
+                                msgHtml += '<p>'+item.message+'</p>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                                $('.supplier-chats-box').append(msgHtml);
+                            }
+                            else if(item.rfq_id == "{{$rfq['id']}}" && fromId != item.from_id)
+                            {
+                                var msgHtml = '<div class="chat chat-left">';
+                                msgHtml += '<div class="chat-avatar">';
+                                msgHtml += '<a class="avatar">';
+                                msgHtml += '<img src="" class="circle" alt="avatar">';
+                               
+                                msgHtml += '</a>';
+                                msgHtml += '</div>';
+                                msgHtml += '<div class="chat-body left-align">';
+                                msgHtml += '<div class="chat-text">';
+                                msgHtml += '<p>'+item.message+'</p>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                                msgHtml += '</div>';
+                                $('.supplier-chats-box').append(msgHtml);
+                            }
+                        })
+                        dialog.dialog("open");
+
+                    }
+                });
                 
+                
+            });
+
+            $(".messageSendToUser").click(function(){
+                var msgText = $('.dialouge_box_message_content').val();
+                var rfqId = $('.dialouge_box_rfq_id').val();
+                var fromId = $('.dialouge_box_from_id').val();
+                var toId = $('.dialouge_box_to_id').val();
+                let message = {'message': msgText, 'image': "", 'from_id' : fromId, 'to_id' : toId,'rfq_id': rfqId,'factory':false, 'product': null};
+                socket.emit('new message', message);
             });
 
 
         });
 
-        $(".messageSendToUser").click(function(){
-            var msgText = $(this).prev('.messageContent').val();
-            alert(msgText + " Ready to emit.");
-        })
+       
     </script>
 @endpush

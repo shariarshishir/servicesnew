@@ -40,7 +40,9 @@ class MessageController extends Controller
 
     public function message_center(){
         $user = Auth::user();
-        $rfqs = RfqApp::where('created_by',$user->sso_reference_id)->latest()->get();
+        $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
+        $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){
             $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
             if($rfqs[0]['user']['user_picture'] !=""){
@@ -61,7 +63,6 @@ class MessageController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
-
         if(env('APP_ENV') == 'local'){
             $adminUser = User::Find('5552');
         }else{

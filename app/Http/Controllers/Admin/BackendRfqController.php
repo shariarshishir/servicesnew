@@ -80,6 +80,17 @@ class BackendRfqController extends Controller
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories','userNameShortForm'));
     }
 
+    public function getChatDataBySupplierId(Request $request){
+        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfq_id.'/user/'.$request->supplier_id);
+        $data = $response->json();
+        $chats = $data['data']['messages'];
+        $chatdata = $chats;
+        return response()->json([
+            'chatdata' => $chatdata
+        ],200);
+
+    }
+
     public function status(Request $request,$id){
 
         $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$id, [

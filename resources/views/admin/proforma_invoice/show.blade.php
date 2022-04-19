@@ -28,7 +28,7 @@
 
                             <div class="card">
                                 <div class="invoice_top_button_wrap">
-                                    <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
+                                    <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton" style="display: none;">Print</button>
                                 </div>
                                 <div class="invoice_page_header">
                                     <legend>

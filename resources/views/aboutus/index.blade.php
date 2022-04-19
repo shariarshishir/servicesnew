@@ -36,7 +36,7 @@
             <div class="col m6">
               <div class="about_content">
                 <h4>What we do.....</h4>
-                <p class="show-read-more">
+                <p>
                   We thoroughly verify and welcome factories, textile mills,
                   yarn spinners, trims & accessories suppliers to our
                   platform. We create their digital profile to increase their

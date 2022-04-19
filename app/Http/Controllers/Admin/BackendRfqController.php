@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Events\NewRfqHasAddedEvent;
 use App\Http\Controllers\Controller;
 use App\Userchat;
+use App\Models\Proforma;
 use App\Models\Manufacture\ProductCategory;
 use Illuminate\Support\Facades\Http;
 
@@ -72,9 +73,11 @@ class BackendRfqController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
+        $profromaInvoice = Proforma::where('generated_po_from_rfq',$id)->first();
         $chats = Userchat::where('rfq_id',$id)->get();
         $chatdata = $chats;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','productCategories','userNameShortForm'));
+        $buyer = $to_user;
+        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice'));
     }
 
     public function status(Request $request,$id){

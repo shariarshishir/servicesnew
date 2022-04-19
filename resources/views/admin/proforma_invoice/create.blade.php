@@ -112,7 +112,12 @@
                                             </div>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                     <!-- </div> -->
+=======
+                                    <input type="hidden" name="selected_buyer_id" value="{{$buyer->id}}" />
+                                    <input type="hidden" name="generated_po_from_rfq" value="{{$rfqId}}" />
+>>>>>>> 295f07bb1eccb5b100f0012d9a58477435d9a8d8
                                 </div>
                                 <div class="line_item_wrap shipping_details_wrap">
                                     <legend>Shipping Details</legend>

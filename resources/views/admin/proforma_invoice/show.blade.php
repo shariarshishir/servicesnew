@@ -347,6 +347,6 @@ function printDiv(divName) {
             document.body.innerHTML = originalContents;
         }
 </script>
-@end
+@endpush
 
 

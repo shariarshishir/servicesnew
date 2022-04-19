@@ -184,7 +184,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             </span></a>
         </div>
       </div>
-      <div class="features py-80">
+      <div class="features py-50">
         <div class="features_container">
           <div class="features_slider">
             <!-- Additional required wrapper -->
@@ -375,7 +375,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
         <div class="achivement_container">
           <div class="row">
             <div class="col m6">
-              <div class="achivement_box">
+              <div class="achivement_box top_border">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
@@ -386,7 +386,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
             </div>
             <div class="col m6">
-              <div class="achivement_box">
+              <div class="achivement_box top_border">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>

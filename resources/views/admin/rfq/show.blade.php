@@ -36,7 +36,11 @@
                                 <span class="chat_idBox">RFQ ID: <span class="rfq_id">{{$rfq['id']}}</span></span>
                                 <div class="chat_top_right">
                                     <ul>
-                                        <li class="active"><a href="javascript:void(0);" class="btn_grBorder">Generate PI</a></li>
+                                        @if($profromaInvoice)
+                                        <li class="active"><a href="{{route('proforma_invoices.show',$profromaInvoice->id)}}" class="btn_grBorder">Generated PO</a></li>
+                                        @else
+                                        <li class="active"><a href="{{ route('proforma_invoices.create',['buyerId' => $buyer->id,'rfqId'=>$rfq['id']]) }}" class="btn_grBorder">Generate PI</a></li>
+                                        @endif
                                         <li>
                                             <form method="POST" action="{{route('admin.rfq.status', $rfq['id'])}}">
                                                 @csrf

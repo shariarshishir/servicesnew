@@ -22,27 +22,29 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     @include('include.admin._message')
-                    
+
                     <div class="widget-body p-0">
-                        <form action="{{route('proforma_invoices.create')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('proforma_invoices.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <!-- <div style="padding-top: 30px;"></div> -->
                             <div class="row beneficiary_info_wrap">
                                 <!-- <div class="col s12 m6 l6"> -->
-                                <div class="col-sm-12 input-field beneficiary_address_bar">
-                                    <div class="col-sm-12 col-md-6" id="buyerdata"></div>
+                                <div class="row col-sm-12 input-field beneficiary_address_bar">
+                                    <div class="col-sm-12 col-md-6" id="buyerdata">
+                                        <label>Buyer</label>
+                                        <p>{{$buyer->name}}</p>
+                                        <p>{{$buyer->email}}</p>
+                                    </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group has-feedback">
                                             <label>Beneficiary</label>
-                                            <select name="business_profile_id" id="buyerOptionsList" class="form-control select2 required" onChange = "getProductListBybusinessProfileId(this.value)" required>
-                                                <option value="Business 1">Business 1</option>
-                                                <option value="Business 2">Business 2</option>
-                                            </select>
+                                            <p>Merchantbay.Ltd</p>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="selected_buyer_id" value="" />
+                                    <input type="hidden" name="selected_buyer_id" value="{{$buyer->id}}" />
+                                    <input type="hidden" name="generated_po_from_rfq" value="{{$rfqId}}" />
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="row">
@@ -134,7 +136,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#modal1" class="waves-effect waves-light modal-trigger btn_green shipment-file-upload-trigger"> <i class="material-icons"> attach_file </i> Attach file</a>
+                                    <a  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-file-upload"></i> Attach file</a>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="no_more_tables">
@@ -180,7 +182,7 @@
                                                     <td data-title="Per UOM Price ($)">
                                                         <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
                                                     </td>
-                                                    <td data-title="QTY"> 
+                                                    <td data-title="QTY">
                                                         <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
                                                     </td>
                                                     <td data-title="Total ($)">
@@ -190,17 +192,25 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
-                            
+
                             <!-- Modal Structure -->
-                            <div id="modal1" class="modal shipment_file_upload_modal" >
-                                <div class="modal-content">
-                                    <div class="shipment-file-upload--block">
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+
                                         <div class="no_more_tables">
                                             <table class="shipment-file-upload-table-block">
                                                 <thead class="cf">
@@ -214,28 +224,23 @@
                                                 <tr>
                                                     <td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
                                                     <td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
-                                                    <td class="right-align"><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>
+                                                    <td class="right-align"><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                                 </tr>
-                                                
                                                 </tbody>
-                                                
                                             </table>
-                                            
                                         </div>
-                                        
+
                                         <div class="add_more_box">
-                                            <a href="javascript:void(0);" class="add-more-block" onclick="addShippingDetailsFile()"><i class="material-icons dp48">add</i> Add More</a>
+                                            <a href="javascript:void(0);" class="add-more-block" onclick="addShippingDetailsFile()"><i class="fa fa-plus" aria-hidden="true"></i> Add More</a>
                                         </div>
-                                        <div class="right-align">
-                                            <a href="javascript:void(0);" class="btn_green modal-action modal-close waves-effect waves-green btn-flat">Save</a>
-                                        </div>
-                                        
-                                        
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                      </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-                                </div>
+                                  </div>
+
                             </div>
 
 
@@ -286,13 +291,13 @@
                                             <td colspan="5"class="right-align grand_total_title" style="padding-right: 20px"><b>Total Invoice Amount</b></td>
                                             <td data-title="Total Invoice Amount" colspan="2" align="left" id="total_price_amount">0.00</td>
                                         </tr>
-                                        
+
                                         <tfoot>
                                             <!--tr>
                                                 <td colspan="6" align="right"><b>Total Tax</b></td>
                                                 <td colspan="2" align="left" id="total_tax_price_amount">0.00</td>
                                             </tr-->
-                                            
+
                                         </tfoot>
                                     </table>
                                 </div>
@@ -314,7 +319,7 @@
                                         @endforeach
                                     </ul>
                                     <div class="add_more_condi"><span><a href="javascript:void(0);" class="ic-btn4" onclick="addMoreTermAndCondition()"><i aria-hidden="true" class="fa fa-plus fa-lg"></i>More terms & conditions</a></span></div>
-                                    
+
                                     <ul class="list-group terms-lists more-term-and-condition-unorder-list">
                                         <!--li class="list-group-item ">
                                             <div class="input-group input-field">
@@ -394,15 +399,15 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="right invoice_submit">
                                 <button type="submit" class="btn_green btn-success">
                                     <i class="fa fa-send"></i> Submit
                                 </button>
                             </div>
                         </form>
-                    </div>                    
-                    
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -411,3 +416,6 @@
 
 
 @endsection
+
+
+@include('admin.proforma_invoice._scripts')

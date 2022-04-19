@@ -54,7 +54,7 @@
                                             {{$proformaInvoice->buyer->name}}
                                         </td>
                                         <td data-title="supplier_name">
-                                            {{$proformaInvoice->businessProfile->user->name}}
+                                            {{$merchantbayUserInfo->name}}
                                         </td>
                                         <td data-title="PI_status">
                                             @if($proformaInvoice->status == 1)
@@ -73,7 +73,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
 
             </div>
           </div>

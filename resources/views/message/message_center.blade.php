@@ -161,9 +161,9 @@
             var envMode = "{{ env('APP_ENV') }}";
             var fromId;
             if(envMode == 'production') {
-                fromId = '5771';
+                fromId = '{{auth()->user()->sso_reference_id}}';
             } else{
-                fromId = '5552';
+                fromId = '{{auth()->user()->sso_reference_id}}';
             }
 
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});

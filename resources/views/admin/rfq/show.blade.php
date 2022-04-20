@@ -253,7 +253,7 @@
                                                     <!-- Chat content area -->
                                                     <div class="chat-area ps ps--active-y">
                                                         <div class="chats">
-                                                            <div class="chats-box chat_messagedata" id="messagedata">
+                                                            <div class="chats-box chat_messagedata" id="messagedata" data-buyer_id="{{$rfq['user']['sso_reference_id']}}" >
                                                             @if($chatdata)
                                                                 @foreach($chatdata as $chat)
                                                                     @if($chat['from_id'] == $user)
@@ -330,7 +330,7 @@
         <div class="chat-content-area animate fadeUp">
             <div class="chat-area ps ps--active-y">
                 <div class="chats">
-                    <div class="supplier-chats-box chat_messagedata" id="messagedata">
+                    <div class="supplier-chats-box chat_messagedata" id="supplier-messagedata" data-supplierid="">
                     </div>
                 </div>
                 <div class="ps__rail-x" style="">
@@ -863,7 +863,11 @@
                 var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
-                if(data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id)
+                var supplierId = $('#supplier-messagedata').data('supplierid');
+                var buyerId = $('.messagedata').data('buyer_id');
+                console.log(supplierId);
+                console.log(buyerId);
+                if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
                     console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
@@ -878,7 +882,11 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    $('.chats-box').append(msgHtml);
+                    if( supplierId ){
+                        $('.supplier-chats-box').append(msgHtml);
+                    }else{
+                        $('.chats-box').append(msgHtml);
+                    }
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
                 else if(data.rfq_id == "{{$rfq['id']}}" && fromId != data.from_id)
@@ -899,7 +907,11 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    $('.chats-box').append(msgHtml);
+                    if( supplierId == data.from_id ){
+                        $('.supplier-chats-box').append(msgHtml);
+                    }else{
+                        $('.chats-box').append(msgHtml);
+                    }
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
             });
@@ -922,11 +934,14 @@
                 $('.dialouge_box_rfq_id').val(rfq_id);
                 $('.dialouge_box_from_id').val(fromId);
                 $('.dialouge_box_to_id').val(sso_reference_id);
+                $('#supplier-messagedata').attr('data-supplierid',sso_reference_id);
+                $('.supplier-chats-box').empty();
                 jQuery.ajax({
                     type : "get",
                     data : {'rfq_id':rfq_id,'admin_id':fromId,'supplier_id':sso_reference_id},
                     url : "{{route('getchatdata.by.supplierid')}}",
                     success : function(response){
+                        console.log(response.chatdata);
                         response.chatdata.forEach((item, index)=>{
                             if(item.rfq_id == "{{$rfq['id']}}" && fromId == item.from_id)
                             {
@@ -977,6 +992,7 @@
                 var toId = $('.dialouge_box_to_id').val();
                 let message = {'message': msgText, 'image': "", 'from_id' : fromId, 'to_id' : toId,'rfq_id': rfqId,'factory':false, 'product': null};
                 socket.emit('new message', message);
+                $('.dialouge_box_message_content').val('');
             });
 
 

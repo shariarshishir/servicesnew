@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 buyer-message-card">
                     <div class="message_header">
                         {{$rfq['user']['user_name']}}
                     </div>
@@ -1001,6 +1001,15 @@
 
 
         });
+
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll >= 180) {
+                $(".buyer-message-card").css({"position": "fixed", "top": "0px", "right": "0px", "max-width": "22%"});
+            } else {
+                $(".buyer-message-card").css({"position": "inherit", "top": "inherit", "right": "inherit", "max-width": "25%"});
+            }
+        });        
 
        
     </script>

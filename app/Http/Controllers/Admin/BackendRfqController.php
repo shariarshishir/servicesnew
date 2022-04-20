@@ -78,7 +78,6 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $chats = $data['data']['messages'];
         $profromaInvoice = Proforma::where('generated_po_from_rfq',$id)->first();
-        $chats = Userchat::where('rfq_id',$id)->get();
         $chatdata = $chats;
         $buyer = $to_user;
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice'));
@@ -97,12 +96,13 @@ class BackendRfqController extends Controller
 
         if(isset($supplier->image)){
             $supplierImage = asset($supplier->image);
+            $supplierNameShortForm = "";
         }else{
             $nameWordArray = explode(" ", $request->business_name);
             $firstWordFirstLetter = $nameWordArray[0][0];
             $secondWordFirstLetter = $nameWordArray[1][0] ??'';
-            $userNameShortForm = $firstWordFirstLetter.$secondWordFirstLetter;
-            $supplierImage = $userNameShortForm;
+            $supplierNameShortForm = $firstWordFirstLetter.$secondWordFirstLetter;
+            $supplierImage = "";
         }
 
         
@@ -113,6 +113,7 @@ class BackendRfqController extends Controller
         return response()->json([
             'chatdata' => $chatdata,
             'supplierImage' => $supplierImage,
+            'supplierNameShortForm'=>$supplierNameShortForm,
             'adminUserImage' => $adminUserImage
         ],200);
 

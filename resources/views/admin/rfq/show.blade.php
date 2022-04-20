@@ -864,15 +864,17 @@
 
 
             socket.on('new message', function(data) {
+                console.log(data);
                 var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 var supplierId = $('#supplier-messagedata').data('supplierid');
                 var buyerId = $('.messagedata').data('buyer_id');
-                console.log(supplierId);
-                console.log(buyerId);
+                console.log("supplier id:",supplierId);
+                console.log("buyer id",buyerId);
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
+
                     console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
@@ -886,7 +888,8 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    if( supplierId ){
+                    if( supplierId  && supplierId == data.to_id){
+                        console.log()
                         $('.supplier-chats-box').append(msgHtml);
                     }else{
                         $('.chats-box').append(msgHtml);
@@ -969,8 +972,11 @@
                                 var msgHtml = '<div class="chat chat-left">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                msgHtml += '<img src="'+response.supplierImage+'" class="circle" alt="avatar">';
-                               
+                                if(response.supplierImage != ""){
+                                    msgHtml += '<img src="'+response.supplierImage+'" class="circle" alt="avatar">';
+                                }else{
+                                    msgHtml += '<span>'+response.supplierNameShortForm+'</span>'
+                                }
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';
                                 msgHtml += '<div class="chat-body left-align">';

@@ -1324,6 +1324,154 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: flex;
 }
 
+.ui-widget.ui-widget-content {
+    background: #fff;
+    -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
+    -moz-box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.18);
+    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
+    border-radius: 0px 0px 10px 10px;
+    border: none !important;
+    padding: 0;
+    border-radius: 10px;
+}
+.ui-widget.ui-widget-content .ui-dialog-titlebar {
+    background: #4E9C52;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px 10px 0 0;
+}
+.ui-dialog .ui-dialog-content {
+    padding: 15px;
+}
+.ui-widget.ui-widget-content #dialog-form .dialog-form-button {
+    padding: 10px;
+}
+.ui-widget.ui-widget-content .dialouge_box_message_content {
+    width: 75%;
+    height: 35px;
+    border: none !important;
+    padding: 0 1.5rem;
+    color: #3D3D3D;
+    border-bottom: 0;
+    border-radius: 5px;
+    background-color: #eceff1;
+}
+.ui-widget.ui-widget-content .dialouge_box_message_content:focus {
+    border: none;
+    outline: none;
+}
+.ui-widget.ui-widget-content .btn_green {
+    margin: 0 0 0 10px;
+}
+
+
+.ui-widget.ui-widget-content .chat_messagedata .chat {
+    margin: 0 0 10px 0;
+    display: inline-block;
+    width: 100%;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    float: left;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-avatar {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-avatar .avatar {
+    line-height: 45px;
+    text-align: center;
+    display: block;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-avatar .avatar img {
+    width: 45px;
+    border-radius: 50%;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-body {
+    float: left;
+    padding-left: 10px;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-body .chat-text {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-body p {
+    max-width: 210px;
+    padding: 0.5rem 1rem;
+    color: #757575;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 14%);
+    margin: 0;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat .chat-body .chat-text:first-child:before {
+    box-sizing: border-box;
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    content: '';
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: 12px 18px;
+    -ms-transform-origin: 12px 18px;
+    transform-origin: 12px 18px;
+    border: 7px solid transparent;
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+    box-shadow: -2px 3px 4px -3px rgb(0 0 0 / 40%);
+}
+
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right {
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-avatar {
+    float: right;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body {
+    float: right;
+    margin-right: 20px;
+}
+
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text p {
+    color: #fff;
+    background-color: #4E9C52;
+    min-height: 35px;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text {
+    position: relative;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text:first-child:before {
+    box-sizing: border-box;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: 3px -5px;
+    -ms-transform-origin: 3px -5px;
+    transform-origin: 3px -5px;
+    border-top-color: #4E9C52!important;
+    border-right-color: #4E9C52!important;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    box-shadow: 2px -2px 4px -3px rgb(0 0 0 / 40%);
+    position: absolute;
+    right: -15px;
+}
+
+
 /* ********************************* */
 .spinner-class {
     color: #000 !important;

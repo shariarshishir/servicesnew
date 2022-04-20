@@ -4027,6 +4027,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_detail_from_wrap {
     padding: 0 15px;
 }
+.create_rfq_detail_from_wrap {
+    overflow: hidden;
+}
 .modal.rfq_detail_from_wrap {
     padding: 0;
 }
@@ -9426,6 +9429,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     border-bottom: 1px solid #eeeeee;
 }
 
+.createRfqForm .rfq_detail_from .input-wrapper ul.select2-selection__rendered {
+    border: 1px solid #54A958;
+    border-radius: 5px;
+}
+
 
 
 /* ******************** Media css style start *********************** */
@@ -12383,6 +12391,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .modal .createRfqForm .rfq_detail_from .input-wrapper input  {
         margin-bottom: 0;
     }
+    
     .banner_search {
         top: 115px;
     }

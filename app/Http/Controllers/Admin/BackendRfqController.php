@@ -85,12 +85,35 @@ class BackendRfqController extends Controller
     }
 
     public function getChatDataBySupplierId(Request $request){
+        $supplier = User::where('sso_reference_id',$request->sso_reference_id)->first();
+        if( env('APP_ENV') == 'production') {
+            $user = "5771";
+        }
+        else{
+            $user = "5552";
+        }
+        $adminUser = User::find($user);
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+
+        if(isset($supplier->image)){
+            $supplierImage = asset($supplier->image);
+        }else{
+            $nameWordArray = explode(" ", $request->business_name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secondWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secondWordFirstLetter;
+            $supplierImage = $userNameShortForm;
+        }
+
+        
         $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfq_id.'/user/'.$request->supplier_id);
         $data = $response->json();
         $chats = $data['data']['messages'];
         $chatdata = $chats;
         return response()->json([
-            'chatdata' => $chatdata
+            'chatdata' => $chatdata,
+            'supplierImage' => $supplierImage,
+            'adminUserImage' => $adminUserImage
         ],200);
 
     }

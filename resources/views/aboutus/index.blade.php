@@ -192,18 +192,20 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               <!-- Slides -->
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>Detailed profiling of <br/>
                         the suppliers </h3>
-                      <p>Based on vast experience and R&D, we have
-                        developed a standardized supplier profiling
-                        system that is accepted by the brands and
-                        buyers all over the world.</p>
+                        <div class="feature_info_text">
+                          <p>Based on vast experience and R&D, we have
+                          developed a standardized supplier profiling
+                          system that is accepted by the brands and
+                          buyers all over the world.</p>
+                        </div>
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                       <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/profile.png')}}" alt="Profile" />
                       </div>
@@ -212,15 +214,17 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary</h5>
                       <h3>Digital library of designs, samples, textiles, yarns, trims and accessories</h3>
-                      <p>Buyers can source from our trendy 3D designs catalogue and suppliers' samples. 
-                        They can also source raw materials from the same place.</p>
+                      <div class="feature_info_text">
+                        <p>Buyers can source from our trendy 3D designs catalogue and suppliers' samples. 
+                          They can also source raw materials from the same place.</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/design-catelogue.png')}}" alt="Design Catelogue" />
                     </div>
@@ -230,15 +234,17 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>Matching algorithm</h3>
-                      <p>Matchmaking algorithm instantly matches
-                        suppliers to your requirement. This tool cuts the processing time by 50%.</p>
+                      <div class="feature_info_text">
+                        <p>Matchmaking algorithm instantly matches
+                            suppliers to your requirement. This tool cuts the processing time by 50%.</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/supplier-matching.png')}}" alt="Supplier Matching" />
                     </div>
@@ -247,15 +253,17 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>Secure conversation channel</h3>
-                      <p>Suppliers, buyers and platform are connected
-                        through our secure conversation panel.</p>
+                      <div class="feature_info_text">
+                        <p>Suppliers, buyers and platform are connected
+                            through our secure conversation panel.</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/message-centre.png')}}" alt="Message Centre" />
                     </div>
@@ -264,16 +272,19 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>Product development studio</h3>
-                      <p>Our team of expert product developers
-                        develops a digital sample engaging you in
-                        the whole process.</p>
+                      <div class="feature_info_text">
+                        <p>Our team of expert product developers
+                            develops a digital sample engaging you in
+                            the whole process.</p>
+                      </div>
+                      
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/development-pool.png')}}" alt="profile" />
                     </div>
@@ -282,17 +293,20 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>MB pool manufacturing capacity</h3>
-                      <p>We are pioneering a decentralized factory
-                        network. We are calling it MB Pool. 
-                        Pool network enables us to cater for any MOQ, reduce lead time significantly and ensure the highest quality.
-                      </p>
+                      <div class="feature_info_text">
+                        <p>We are pioneering a decentralized factory
+                            network. We are calling it MB Pool. 
+                            Pool network enables us to cater for any MOQ, reduce lead time significantly and ensure the highest quality.
+                        </p>
+                      </div>
+                      
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/capacity-check.png')}}" alt="Development Pool" />
                     </div>
@@ -301,17 +315,20 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>Order management dashboard</h3>
-                      <p>OMD is an always online service accessible
-                        from anywhere in the world.
-                        OMD provides a single dashboard for key matrices related to T&A, production updates, file organization, and conversations.
-                      </p>
+                      <div class="feature_info_text">
+                        <p>OMD is an always online service accessible
+                            from anywhere in the world.
+                            OMD provides a single dashboard for key matrices related to T&A, production updates, file organization, and conversations.
+                        </p>
+                      </div>
+                      
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/omd-for-mock-up.png')}}" alt="omd" />
                     </div>
@@ -320,17 +337,19 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
               <div class="swiper-slide">
                 <div class="row">
-                  <div class="col m6">
+                  <div class="col s12 m6 l5">
                     <div class="feature_left">
                       <h5>Tools that made us revolutionary </h5>
                       <h3>Smart factory business intelligence tools</h3>
-                      <p>Our Smart factory tools like production intelligence,
-                        store management, BTB monitoring, planning etc.
-                        are all connected to make rich insights so that you
-                        can manage your factory efficiently.</p>
+                      <div class="feature_info_text">
+                        <p>Our Smart factory tools like production intelligence,
+                            store management, BTB monitoring, planning etc.
+                            are all connected to make rich insights so that you
+                            can manage your factory efficiently.</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col m6">
+                  <div class="col s12 m6 l7">
                     <div class="feature_right_img">
                         <img src="{{asset('images/frontendimages/about-image/supplier-admin.png')}}" alt="omd" />
                     </div>
@@ -343,10 +362,12 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               <div class="prev_after">
                 <div class="features_slider-button-prev"><span class="material-icons">
                     west
-                  </span></div>
+                  </span>
+                </div>
                 <div class="features_slider-button-next"><span class="material-icons">
                     east
-                  </span></div>
+                  </span>
+                </div>
               </div>
               <div class="features_slider-pagination"></div>
             </div>

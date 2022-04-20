@@ -22,12 +22,13 @@
 					</h4>
 					<!--p>Fashion Tex Ltd.</p-->
 				</div>
-
+				@if(auth::check())
 				<div class="profile_view_time right-align col s12 m4 l4">
 					<div style="float: right;" class="rfq_share_box">
 						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList['id']}})"> <i class="material-icons"> share </i> <span>Share</span></a>
 					</div>
 				</div>
+				@endif
 			</div>
 
 			<div class="rfq_view_detail_wrap">
@@ -63,7 +64,7 @@
                     @endforeach
                 @endif
 			</div>
-
+			@if(auth::check())
 			<div class="responses_wrap right-align">
                 <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
 				<button class="none_button btn_responses" id="rfqResponse" >
@@ -71,6 +72,7 @@
 				</button>				
                 
 			</div>
+			@endif
 
 		</div>
 	</div>

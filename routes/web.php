@@ -201,6 +201,9 @@ Route::get('/add-to-wishlist',[ProductWishlistController::class,'addToWishlist']
 Route::get('/copyright-price',[ProductCartController::class,'copyRightPrice'])->name('copyright.price');
 Route::get('user/profile/vendor/{vendor}/order/{order}/notification/{notification}',[OrderController::class, 'showVendorOrderNotifactionFromFrontEnd'])->name('user.order.notification.show');
 
+Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
+Route::get('rfq-by-page-no',[RfqController::class, 'rfqByPageNumber'])->name('rfq.frontend.pagination');
+
 Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/cart',[ProductCartController::class,'index'])->name('cart.index');
     Route::get('/cart-item-delete/{rowId}',[ProductCartController::class,'cartItemDelete'])->name('cart.delete');
@@ -320,8 +323,6 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('my-order',[MyOrderController::class, 'index'])->name('myorder');
     //rfq
 
-    Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
-    Route::get('rfq-by-page-no',[RfqController::class, 'rfqByPageNumber'])->name('rfq.frontend.pagination');
     Route::get('my-rfq-by-page-no',[RfqController::class, 'myRfqByPageNumber'])->name('my.rfq.frontend.pagination');
     Route::post('rfq/store',[RfqController::class, 'store'])->name('rfq.store');
     Route::delete('rfq/delete/{rfq_id}',[RfqController::class, 'delete'])->name('rfq.delete');

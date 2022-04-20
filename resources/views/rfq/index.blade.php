@@ -13,6 +13,7 @@
 <!-- RFQ html start -->
 
 <div class="box_shadow_radius rfq_content_box ">
+	@if(auth::check())
 	<div class="rfq_info_wrap right-align rfq_top_navbar">
 		<ul>
 			<li class="{{ Route::is('rfq.index') ? 'active' : ''}}"><a href="{{route('rfq.index')}}" class="btn_grBorder">RFQ Home</a></li>
@@ -21,6 +22,7 @@
 			<li><a class="btn_grBorder modal-trigger open-create-rfq-modal">Create RFQ</a></li>
 		</ul>
 	</div>
+	@endif
 	<div class="no_more_tables">
 		@include('rfq.rfq_list')
     </div>

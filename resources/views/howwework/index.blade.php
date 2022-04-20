@@ -17,8 +17,8 @@
         <div class="container" id="brands">
             <div class="page_title ">
                 <div class="title_and_tags">
-                    <h2>Start or Scale your clothing brand <br/>
-                        with modern sourcing solution</h2>
+                    <h2>Start or Scale Your Clothing Brand <br/>
+                        with Modern Sourcing Solution</h2>
                     <ul>
                         <li class="px-20">Fast</li>
                         <li class="px-20">Reliable</li>
@@ -294,12 +294,11 @@
             <div class="container">
                 <div class="page_title py-70">
                     <div class="title_and_tags">
-                        <h2>Create a profile, Join MB Pool <br/>
-                        and start growing business</h2>
+                        <h2>Create a Profile, Join MB Pool <br/> Start Growing Business</h2>
                         <ul>
-                            <li class="px-40">Get more business</li>
-                            <li class="px-40">Generate more profit</li>
-                            <li class="px-40">Grow Fast</li>
+                            <li class="px-20">Get more business</li>
+                            <li class="px-20">Generate more profit</li>
+                            <li class="px-20">Grow Fast</li>
                         </ul>
                     </div>
                 </div>
@@ -456,7 +455,7 @@
                                     <h3>Gain advantage in
                                         product development</h3>
                                 </div>
-                                <p>Merchant Bay stay with you during all the
+                                <p>Merchant Bay stays with you during all the
                                     process in the product development so that
                                     you are assured to have the order developed
                                     in the most effective way which will increase
@@ -483,8 +482,7 @@
                                 <p>MB Pool factories get privileged access to
                                     Merchant Bay tools. They never have to go for
                                     expensive ERP solutions to digitize their factory.
-                                    Merchant Bay ensure they are digitized steps by
-                                    step in the right hierarchy.</p>
+                                    Merchant Bay ensures they are digitized step by step in the right hierarchy.</p>
                             </div>
                         </div>
                         <div class="col s5 l3 d-l-none"></div>

@@ -22,13 +22,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     @include('include.admin._message')
                         <div class="main_content_wrapper invoice_container_wrap purchase_order_wrap" id="purchase_order_wrap">
-        
+
                             <div class="card">
                                 <div class="invoice_top_button_wrap">
-                                    <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
+                                    <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton" style="display: none;">Print</button>
                                 </div>
                                 <div class="invoice_page_header">
                                     <legend>
@@ -52,7 +52,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group has-feedback">
                                                                 <label style="margin-bottom: 0;"><b>Beneficiary</b></label>
-                                                                <span style="display: block">{{ $po->businessProfile->business_name }}</span>
+                                                                <span style="display: block">Merchantbay</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -100,7 +100,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="line_item_wrap buyer_shipping_details">
                                                     <legend>Shipping Details</legend>
                                                     <div class="buyerdata_info_admin">
@@ -146,7 +146,7 @@
                                                                         <td data-title="Per UOM Price ($)">
                                                                             <span>{{ $shippingDetails->shipping_details_uom }}</span>
                                                                         </td>
-                                                                        <td data-title="QTY"> 
+                                                                        <td data-title="QTY">
                                                                             <span>{{ $shippingDetails->shipping_details_qty }}</span>
                                                                         </td>
                                                                         <td data-title="Total ($)">
@@ -159,7 +159,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="line_item_wrap">
                                                     <legend>Line Items</legend>
                                                     <div class="buyerdata_info_admin">
@@ -247,7 +247,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="invoice_advising_bank">
                                                     <legend>Advising Bank</legend>
                                                     <div class="buyerdata_info_admin">
@@ -305,7 +305,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    
+
                                             </div>
                                             <!-- end widget content -->
 
@@ -323,7 +323,7 @@
 
                                     </article>
                                     <!-- WIDGET END -->
-                                    
+
                                 </section>
                                 <!-- end widget grid -->
 
@@ -347,6 +347,6 @@ function printDiv(divName) {
             document.body.innerHTML = originalContents;
         }
 </script>
-@end
+@endpush
 
 

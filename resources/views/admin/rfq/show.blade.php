@@ -36,7 +36,11 @@
                                 <span class="chat_idBox">RFQ ID: <span class="rfq_id">{{$rfq['id']}}</span></span>
                                 <div class="chat_top_right">
                                     <ul>
-                                        <li class="active"><a href="javascript:void(0);" class="btn_grBorder">Generate PI</a></li>
+                                        @if($profromaInvoice)
+                                        <li class="active"><a href="{{route('proforma_invoices.show',$profromaInvoice->id)}}" class="btn_grBorder">Generated PO</a></li>
+                                        @else
+                                        <li class="active"><a href="{{ route('proforma_invoices.create',['buyerId' => $buyer->id,'rfqId'=>$rfq['id']]) }}" class="btn_grBorder">Generate PI</a></li>
+                                        @endif
                                         <li>
                                             <form method="POST" action="{{route('admin.rfq.status', $rfq['id'])}}">
                                                 @csrf
@@ -68,7 +72,7 @@
                                 <div class="infoBox">
                                     <h6>{{$rfq['title']}}</h6>
                                     <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
-                                    <p><b>Details:</b> {{$rfq['full_specification']}}</p>
+                                    <span style="display: flex;"><p><b>Details:</b></p> {!! $rfq['full_specification'] !!}</span>
                                     <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                     @if(isset($rfq['images']))
                                         <div class="rfq_image">
@@ -347,7 +351,7 @@
         <input type="hidden" class="dialouge_box_from_id" name="dialouge_box_from_id" value=""/>
         <input type="hidden" class="dialouge_box_to_id" name="dialouge_box_to_id" value=""/>
         <input type="text" placeholder="Type message here.."  class="message mb-0 dialouge_box_message_content">
-        <input type="button" class="btn messageSendToUser" value="Send" />
+        <input type="button" class="btn btn_green messageSendToUser" value="Send" />
     </div>
 </div>
 
@@ -401,7 +405,7 @@
                     url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
                     selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
                 }
-            });
+            });        
 
 
             $(document).on('change', '#factory_type', function(){

@@ -226,8 +226,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td><input class="input-field" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
-                                                        <td><input class="input-field file_upload" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
+                                                        <td><input class="input-field form-control" name="shipping_details_file_names[]" id="shipping-details-title" type="text"  ></td>
+                                                        <td><input class="input-field file_upload form-control" name="shipping_details_files[]" id="shipping-details-file" type="file"></td>
                                                         <td class="right-align"><a href="javascript:void(0);" class="btn_delete" onclick="removeShippingDetailsFile(this)"><i class="material-icons dp48">delete_outline</i><span>Delete</span> </a></td>
                                                     </tr>
                                                     

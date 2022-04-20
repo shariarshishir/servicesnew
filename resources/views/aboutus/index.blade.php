@@ -12,7 +12,7 @@
     <div id="mb_about">
       <div class="about_us">
         <div class="about_us_container">
-          <div class="section_title">
+          <div class="section_title about-section-title">
             <h1>Simplest way to source apparel from Bangladesh</h1>
             <div class="title_bottom">
               <p>We match the right partners</p>
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col m6 animated fadeInLeft delayp1">
+            <div class="col m6 about-content-left">
               <div class="about_content">
                 <h4>Who we are.....</h4>
                 <p>
@@ -33,7 +33,7 @@
                 </p>
               </div>
             </div>
-            <div class="col m6 animated fadeInRight delayp1">
+            <div class="col m6 about-content-right">
               <div class="about_content">
                 <h4>What we do.....</h4>
                 <p>
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="why_us py-80">
+      <div class="why_us py-80 yellow-box">
         <div class="why_us_container">
           <div class="section_title">
             <h3>Things are different here at Merchant Bay</h3>
@@ -123,9 +123,9 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
       </div>
       <div class="work_process py-80">
         <div class="work_process_container">
-          <h3>Our work process....</h3>
+          <h3 class="work-process-title">Our work process....</h3>
           <div class="row py-50">
-            <div class="col s6 m4 xl2">
+            <div class="col s6 m4 xl2 work_process-box-1">
               <div class="work_process-box">
                 <div class="left_side">
                   <img src="{{asset('images/frontendimages/about-image/icons/sign-up.svg')}}" alt="icon" />
@@ -134,7 +134,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
-            <div class="col s6 m4 xl2">
+            <div class="col s6 m4 xl2 work_process-box-2">
               <div class="work_process-box">
                 <div class="left_side">
                   <img src="{{asset('images/frontendimages/about-image/icons/post-an-rfq.svg')}}" alt="icon" />
@@ -143,7 +143,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
-            <div class="col s6 m4 xl2">
+            <div class="col s6 m4 xl2 work_process-box-3">
               <div class="work_process-box">
                 <div class="left_side">
                   <img src="{{asset('images/frontendimages/about-image/icons/select-the-best-offer.svg')}}" alt="icon" />
@@ -152,7 +152,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
-            <div class="col s6 m4 xl2">
+            <div class="col s6 m4 xl2 work_process-box-4">
               <div class="work_process-box">
                 <div class="left_side">
                   <img src="{{asset('images/frontendimages/about-image/icons/develop-together.svg')}}" alt="icon" />
@@ -161,7 +161,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
-            <div class="col s6 m4 xl2">
+            <div class="col s6 m4 xl2 work_process-box-5">
               <div class="work_process-box">
                 <div class="left_side">
                   <img src="{{asset('images/frontendimages/about-image/icons/see-real-time-update.svg')}}" alt="icon" />
@@ -170,7 +170,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
-            <div class="col s6 m4 xl2">
+            <div class="col s6 m4 xl2 work_process-box-6">
               <div class="work_process-box">
                 <div class="left_side">
                   <img src="{{asset('images/frontendimages/about-image/icons/get-shipment.svg')}}" alt="icon" />
@@ -179,7 +179,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
               </div>
             </div>
           </div>
-          <a href="{{route('front.howwework')}}" class="btn btn_green lg">How we Work <span class="material-icons">
+          <a href="{{route('front.howwework')}}" class="btn btn_green lg how-we-work-btn">How we Work <span class="material-icons">
               east
             </span></a>
         </div>
@@ -376,8 +376,8 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
       </div>
       <div class="we_believe py-80">
         <div class="section_title">
-          <img src="{{asset('images/frontendimages/about-image/icons/we-believe.png')}}" src="We Believe" />
-          <h3 class="py-50">
+          <img src="{{asset('images/frontendimages/about-image/icons/we-believe.png')}}" class="we-believe-img" src="We Believe" />
+          <h3 class="py-50 we-believe-title">
             We believe traceability is the first step to sustainability
           </h3>
         </div>
@@ -392,10 +392,10 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
         </div>
       </div>
       <div class="achivement py-80">
-        <h3>What have we achieved?</h3>
+        <h3 class="achieved-title">What have we achieved?</h3>
         <div class="achivement_container">
           <div class="row">
-            <div class="col m6">
+            <div class="col m6 achivement-box-1">
               <div class="achivement_box top_border">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
@@ -406,7 +406,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </div>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 achivement-box-2">
               <div class="achivement_box top_border">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
@@ -417,7 +417,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </div>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 achivement-box-3">
               <div class="achivement_box">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
@@ -428,7 +428,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </div>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 achivement-box-4">
               <div class="achivement_box">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
@@ -438,7 +438,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </div>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 achivement-box-5">
               <div class="achivement_box">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
@@ -449,7 +449,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </div>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 achivement-box-6">
               <div class="achivement_box">
                 <div class="icon">
                   <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
@@ -466,7 +466,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
       <div class="vision_and_mission py-80">
         <div class="vision_and_mission_container">
           <div class="row">
-            <div class="col m6">
+            <div class="col m6 vision-box">
               <div class="vision_and_mission_box">
                 <img src="{{asset('images/frontendimages/about-image/icons/vision.svg')}}" alt="">
                 <h4>Our Vision</h4>
@@ -476,7 +476,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   through technology.</p>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 mission-box">
               <div class="vision_and_mission_box">
                 <img src="{{asset('images/frontendimages/about-image/icons/mission.svg')}}" alt="">
                 <h4>Our Mission</h4>
@@ -491,9 +491,9 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
       </div>
       <div class="paths py-80">
         <div class="paths_container">
-          <h3>Let's get you to</h3>
+          <h3 class="paths-title">Let's get you to</h3>
           <div class="row">
-            <div class="col s12 m4 l2">
+            <div class="col s12 m4 l2 path-box-1">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/design-studio.svg')}}" alt="icon" />
@@ -503,7 +503,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s12 m4 l2">
+            <div class="col s12 m4 l2 path-box-2">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/sample-storefront.svg')}}" alt="icon" />
@@ -513,7 +513,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s12 m4 l2">
+            <div class="col s12 m4 l2 path-box-3">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/fabric-library.svg')}}" alt="icon" />
@@ -523,7 +523,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s12 m4 l2">
+            <div class="col s12 m4 l2 path-box-4">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/yarn-library.svg')}}" alt="icon" />
@@ -533,7 +533,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s12 m4 l2">
+            <div class="col s12 m4 l2 path-box-5">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/accessories-library.svg')}}" alt="icon" />
@@ -543,7 +543,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 </a>
               </div>
             </div>
-            <div class="col s12 m4 l2">
+            <div class="col s12 m4 l2 path-box-6">
               <div class="path_box">
                 <div class="imgbox">
                   <img src="{{asset('images/frontendimages/about-image/icons/industry-isights.svg')}}" alt="icon" />

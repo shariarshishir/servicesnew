@@ -25,8 +25,8 @@
                 <div class="col-md-12">
                     <div class="rfq_order_list_top">
                         <div class="row">
+                            <legend>RFQ</legend>
                             <div class="col-sm-12 col-md-6">
-                                <h3>Rfq</h3>
                                 <div class="select_show">
                                     <label>Show</label>
                                         <select name="rfq_per_page" class="rfq-per-page" >

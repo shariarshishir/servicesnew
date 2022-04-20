@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="main_content_wrapper invoice_container_wrap purchase_order_wrap" id="purchase_order_wrap">
-    
+
     <div class="card">
         <div class="invoice_top_button_wrap">
-            @if(auth()->id() == $po->buyer_id && $po->status != 1)
+           {{-- @if(auth()->id() == $po->buyer_id && $po->status != 1)
             <!-- <button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm" >Accept</button> -->
             <a class="waves-effect waves-light btn_green modal-trigger"  href="#acceptOrderDetailsModal">Accept</a>
             <a class="waves-effect waves-light btn_green modal-trigger"  href="#rejectOrderDetailsModal">Reject</a>
-            @endif
-            <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button>
+            @endif --}}
+            {{-- <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button> --}}
         </div>
 
         <div class="invoice_page_header">
@@ -34,7 +34,7 @@
                             <div class="col m6 input-field">
                                 <div class="form-group has-feedback">
                                     <label style="margin-bottom: 0; left: 0;"><b>Beneficiary</b></label>
-                                    <span style="display: block">{{ $po->businessProfile->business_name }}</span>
+                                    <span style="display: block">Merchantbay</span>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="line_item_wrap buyer_shipping_details">
                             <legend>Shipping Details</legend>
                             <div class="shipping_details input-field row">
@@ -126,7 +126,7 @@
                                             <td data-title="Per UOM Price ($)">
                                                 <span>{{ $shippingDetails->shipping_details_uom }}</span>
                                             </td>
-                                            <td data-title="QTY"> 
+                                            <td data-title="QTY">
                                                 <span>{{ $shippingDetails->shipping_details_qty }}</span>
                                             </td>
                                             <td data-title="Total ($)">
@@ -138,7 +138,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+
                         <div class="line_item_wrap">
                             <legend>Line Items</legend>
                             <div class="col s12">
@@ -194,7 +194,7 @@
                                             <td data-title="Total Invoice Amount:" colspan="2" id="total_price_amount">{{$po->total_invoice_amount_with_merchant_assistant}} <b> USD <b></td>
                                         </tr>
                                         @endif
-                                        
+
                                     </table>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <div class="invoice_advising_bank">
                             <legend>Advising Bank</legend>
                             <div class="row input-field">
@@ -281,7 +281,7 @@
                                 </div>
                             </div>
                         </div>
-                            
+
                     </div>
                     <!-- end widget content -->
 
@@ -300,7 +300,7 @@
 
             </article>
             <!-- WIDGET END -->
-            
+
         </section>
         <!-- end widget grid -->
 
@@ -331,7 +331,7 @@
 	                        <div class="right-align">
                                 <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Submit</button>
                             </div>
-                            
+
                     	</form>
                     </div>
                 </div>
@@ -374,25 +374,25 @@
                             <input type="hidden" id="total_invoice_amount" name="total_invoice_amount" value="{{$totalInvoice}}">
                             <input type="hidden" id="total_invoice_amount_with_merchant_assistant" name="total_invoice_amount_with_merchant_assistant" value="">
 						    <input type="hidden" id="po_id" name="po_id" value="{{ $po->id }}" />
-                                
+
                                 <ul>
                                     @foreach($merchantAssistances as $key=>$merchantAssistance)
                                     <li>
                                         <label>
                                             <input type="checkbox"  class="merchant-assiatance-checkbox" data-merchant_assistance_name ="{{$merchantAssistance->name}}" data-merchant_assistance_id ="{{$merchantAssistance->id}}"  data-merchant_assistance_type ="{{$merchantAssistance->type}}" data-merchant_assistance_amount = "{{$merchantAssistance->amount}}" name="merchant_assistances[{{$key}}]" value="{{$merchantAssistance->id}}"/>
-                                            <span> {{$merchantAssistance->name}} </span> 
+                                            <span> {{$merchantAssistance->name}} </span>
                                         </label>
                                     </li>
                                     @endforeach
                                 </ul>
-                               
+
                             <div class="order_amount" style="display: none;">Your total order amount : <b>{{$totalInvoice}}</b></div>
 
                             <div class="merchant-assitance-calculation" style="display: none;">
 
                             </div>
                             <div class="total-amount-with-merchant-assitance" style="display: none;">
-    
+
                             </div>
 	                        <div class="accept_submit_wrap">
                                 <div class="row">
@@ -403,16 +403,16 @@
                                         <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Yes</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                     	</form>
                     </div>
                 </div>
             </div>
        </div>
        <!-- <div class="modal-footer">
-            
+
       </div> -->
     </div>
 </div>
@@ -565,12 +565,12 @@
                             }
                         }
 
-                        
+
                     });
-               
+
                 }
             });
-        }); 
+        });
 
         function work_trigger()
         {
@@ -588,7 +588,7 @@
 
             let message = {'message': 'Your PI have been '+status+'. To see the PI please check this URL : {{ $app->make('url')->to('/') }}/open-proforma-single-html/{{$po->id}}','from_id' : "{{Auth::user()->id}}", 'to_id' : "{{ $supplierInfo->id }}"};
             socket.emit('new message', message);
-            
+
         }
 
         function sendRejectedMessageToSupplier(status, statusmessage)
@@ -596,9 +596,9 @@
             //let message = '/open-proforma-single-html/{{$po->id}}';
             let message = {'message': 'Your PI have been '+status+'. Due to: '+statusmessage+'. To see the PI please check this URL : {{ $app->make('url')->to('/') }}/open-proforma-single-html/{{$po->id}}','from_id' : "{{Auth::user()->id}}", 'to_id' : "{{ $supplierInfo->id }}"};
             socket.emit('new message', message);
-            
+
         }
- 
+
         function printDiv(divName) {
             var printContents = document.getElementById(divName).innerHTML;
             var originalContents = document.body.innerHTML;
@@ -606,7 +606,7 @@
             window.print();
             document.body.innerHTML = originalContents;
         }
-       
+
     </script>
 
 @endpush

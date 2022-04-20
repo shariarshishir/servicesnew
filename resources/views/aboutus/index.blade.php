@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col m6">
+            <div class="col m6 animated fadeInLeft delayp1">
               <div class="about_content">
                 <h4>Who we are.....</h4>
                 <p>
@@ -33,7 +33,7 @@
                 </p>
               </div>
             </div>
-            <div class="col m6">
+            <div class="col m6 animated fadeInRight delayp1">
               <div class="about_content">
                 <h4>What we do.....</h4>
                 <p>

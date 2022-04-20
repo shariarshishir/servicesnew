@@ -61,6 +61,8 @@
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 <!-- Calendly link widget end -->
+<link href="{{asset('css/animate.css')}}" rel="stylesheet">
+<script src="{{asset('js/animations.js')}}" type="text/javascript"></script>
 <link rel="shortcut icon" href="{{ asset('images/frontendimages/favicon/favicon.png') }}" type="image/x-icon">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3S7SWXJM7V"></script>

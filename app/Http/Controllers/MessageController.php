@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Notification;
 use App\RfqMerchantAssistanceMessage;
 use App\Http\Resources\RfqMerchantMessagesResource;
 use App\Http\Resources\RfqMerchantMessageResource;
+use Illuminate\Support\Facades\Http;
 
 
 class MessageController extends Controller
@@ -40,7 +41,9 @@ class MessageController extends Controller
 
     public function message_center(){
         $user = Auth::user();
-        $rfqs = RfqApp::where('created_by',$user->sso_reference_id)->latest()->get();
+        $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
+        $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){
             $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
             if($rfqs[0]['user']['user_picture'] !=""){
@@ -61,7 +64,6 @@ class MessageController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
-
         if(env('APP_ENV') == 'local'){
             $adminUser = User::Find('5552');
         }else{
@@ -69,6 +71,23 @@ class MessageController extends Controller
         }
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
         return view('message.message_center', compact('rfqs','user','chatdata','adminUser','adminUserImage','userImage','userNameShortForm'));
+    }
+
+    public function getchatdata(Request $request)
+    {
+        $rfq_id = $request->rfq_id;
+        $user = auth()->user();
+        $from_user_image =  asset('storage/images/supplier.png');
+        $to_user_image =  asset('storage/images/supplier.png');
+        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq_id.'/user/'.$user->sso_reference_id);
+        $data = $response->json();
+        $chats = $data['data']['messages'];
+        $chatdata = $chats;
+        return response()->json([
+            'from_user_image' => $from_user_image,
+            'to_user_image' => $to_user_image ,
+            'chatdata' => $chatdata
+        ],200);
     }
 
     public function message_center_selected($id)
@@ -158,18 +177,7 @@ class MessageController extends Controller
         return view('message.message_center', compact('user','chatusers','buyers','allusers'));
     }
 
-    public function getchatdata(Request $request)
-    {
-        $rfq_id = $request->rfq_id;
-        $from_user_image =  asset('storage/images/supplier.png');
-        $to_user_image =  asset('storage/images/supplier.png');
-        $chatdata = Userchat::where('rfq_id',$rfq_id)->get();
-        return response()->json([
-            'from_user_image' => $from_user_image,
-            'to_user_image' => $to_user_image ,
-            'chatdata' => $chatdata
-        ],200);
-    }
+   
 
     public function updateuserlastactivity(Request $response)
     {

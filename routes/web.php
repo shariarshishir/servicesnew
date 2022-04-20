@@ -574,7 +574,8 @@ Route::group(['prefix'=>'/admin'],function (){
         //rfq
         Route::put('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
-
+        Route::get('rfq-chat-data-by-supplier-id',[AdminRfqController::class, 'getChatDataBySupplierId'])->name('getchatdata.by.supplierid');
+        
         Route::get('admin/rfq/pagination',[AdminRfqController::class, 'fetchRFQsByQueryStringOrPagination'])->name('rfq.pagination');
         //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');

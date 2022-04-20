@@ -9365,6 +9365,9 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     padding: 5px 15px 6px;
     font-size: 16px;
 }
+#create-rfq-form.modal .submit_btn_wrap .btn_green:hover {
+    color: #54A958;
+}
 #order-details-modal_8 .shipping-charge-div .no_more_tables {
     margin-top: 20px;
 }

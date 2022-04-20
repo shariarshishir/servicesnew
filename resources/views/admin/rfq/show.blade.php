@@ -257,7 +257,7 @@
                                                     <!-- Chat content area -->
                                                     <div class="chat-area ps ps--active-y">
                                                         <div class="chats">
-                                                            <div class="chats-box chat_messagedata" id="messagedata" data-buyer_id="{{$rfq['user']['sso_reference_id']}}" >
+                                                            <div class="chats-box chat_messagedata" id="messagedata" data-buyer_id="{{$rfq['sso_reference_id']}}" >
                                                             @if($chatdata)
                                                                 @foreach($chatdata as $chat)
                                                                     @if($chat['from_id'] == $user)

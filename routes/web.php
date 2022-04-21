@@ -332,7 +332,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('rfq/single/image/delete/{rfq_image_id}',[RfqController::class, 'singleImageDelete'])->name('rfq.single.image.delete');
     Route::get('my-rfq',[RfqController::class, 'myRfq'])->name('rfq.my');
     Route::get('rfq/share/{rfq_id}',[RfqController::class, 'share'])->name('rfq.share');
-    Route::get('rfq/create',[RfqController::class, 'create'])->name('rfq.crate');
+
 
     Route::post('rfq/store/from/product/details',[RfqController::class, 'storeFromProductDetails'])->name('rfq.store.from.product.details');
 
@@ -384,8 +384,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
 
 });
-
-
+Route::post('rfq/store/with/login',[RfqController::class, 'storeWithLogin'])->name('rfq.store.with.login');
+Route::get('rfq/create',[RfqController::class, 'create'])->name('rfq.crate');
 //rfq show with shareable link
 Route::get('rfq/{link}',[RfqController::class, 'showRfqUsingLink'])->name('show.rfq.using.link');
 
@@ -576,7 +576,7 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::put('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin']);
         Route::get('rfq-chat-data-by-supplier-id',[AdminRfqController::class, 'getChatDataBySupplierId'])->name('getchatdata.by.supplierid');
-        
+
         Route::get('admin/rfq/pagination',[AdminRfqController::class, 'fetchRFQsByQueryStringOrPagination'])->name('rfq.pagination');
         //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');

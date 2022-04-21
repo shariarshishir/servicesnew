@@ -150,7 +150,6 @@ class UserController extends Controller
     //registration from sso for app user
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -164,7 +163,7 @@ class UserController extends Controller
         if($checkExistingUser){
             return response()->json('user already exists', 403);
         }
-    
+
         $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
         $user = User::create([
             'user_id'=>$user_id,
@@ -398,7 +397,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-            
+
         }
 
         if($sso->successful()){
@@ -553,7 +552,7 @@ class UserController extends Controller
     // user registration from sso
     public function signUp(Request $request)
     {
-         
+
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -561,8 +560,8 @@ class UserController extends Controller
             // 'user_type' => 'required',
             'company_name' => 'required',
             'sso_reference_id' =>'required',
-            'phone'           => 'required',
-            'country'=>'required',
+            //'phone'           => 'required',
+            //'country'=>'required',
 
         ]);
         $checkExistingUser=User::Where('email', $request->email)->first();
@@ -579,9 +578,9 @@ class UserController extends Controller
             'sso_reference_id' =>$request->sso_reference_id,
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
-            'phone'     => $request->phone,
+            'phone'     => $request->phone ?? null,
             'company_name' => $request->company_name,
-            'country' => $request->country,
+            'country' => $request->country ?? null,
             'is_email_verified' => 1,
             'designation'       => $request->designation,
             'business_type'     => $request->business_type,
@@ -644,21 +643,21 @@ class UserController extends Controller
         return response()->json(["message"=>"notification marked as read successfully ","code"=>true],200);
     }
 
-       //profile update from sso 
+       //profile update from sso
         public function profileUpdate(Request $request)
         {
-           
+
             $validator = Validator::make($request->all(), [
                 'email'   => 'required',
             ]);
-            
+
             if($validator->fails()){
                 return response()->json(array(
                 'success' => false,
                 'error' => $validator->getMessageBag()->toArray()),
                 400);
             }
-            
+
             $user=User::where('email', $request->email)->first();
             if($user){
                 if(isset($request->password)){
@@ -684,7 +683,7 @@ class UserController extends Controller
                         500]);
 
                 }
-               
+
             }
             else{
                 return response()->json([
@@ -693,6 +692,6 @@ class UserController extends Controller
                     404]);
             }
         }
-           
+
 
 }

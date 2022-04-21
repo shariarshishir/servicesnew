@@ -29,21 +29,21 @@ class RfqController extends Controller
     {
         $token = Cookie::get('sso_token');
         if($token) {
-            $response = Http::withToken($token)->get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');    
+            $response = Http::withToken($token)->get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         } else {
             $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         }
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
-        
+
         $noOfPages = ceil($data['count']/10);
         return view('rfq.index',compact('rfqLists','noOfPages'));
     }
 
     public function rfqByPageNumber(Request $request)
     {
-        $page = $request->page; 
+        $page = $request->page;
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/'.$page.'/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
@@ -508,4 +508,133 @@ class RfqController extends Controller
         $msg = "Your RFQ was posted successfully.<br><br>Thank you for your request. We will get back to you with quotations within 48 hours.";
         return back()->with(['rfq-success'=> $msg]);
     }
+
+    public function storeWithLogin(Request $request)
+    {
+        if(env('APP_ENV') == 'local')
+        {
+            return  response()->json(['error' => "change the environment.now environment is local"],401);
+        }
+        $validator = Validator::make($request->all(), [
+            'email' => 'required_without:r_email',
+            'password' => 'required_without:r_password',
+            'r_email' => 'required_without:email|unique:users,email',
+            'r_password' => 'required_without:password',
+            'name'      => 'required_without:email',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
+
+
+        if(isset($request->email) && isset($request->password))
+        {
+            $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
+            if($sso->successful()){
+                $access_token=$sso['access'];
+                $explode=explode(".",$access_token);
+                $time= base64_decode($explode[1]);
+                $decode_time=json_decode($time);
+                $get_time=$decode_time->exp;
+                $get_time=strtotime(date('d.m.Y H:i:s')) + strtotime(date('d.m.Y H:i:s'));
+                $current=strtotime(date('d.m.Y H:i:s'));
+                $totalSecondsDiff = abs($get_time-$current);
+                $totalMinutesDiff = $totalSecondsDiff/60;
+
+                if(Cookie::has('sso_token')){
+                    Cookie::queue(Cookie::forget('sso_token'));
+                }
+                Cookie::queue(Cookie::make('sso_token', $access_token, $totalMinutesDiff));
+
+                if($request->session()->has('sso_password')){
+                    $request->session()->forget('sso_password');
+                }
+                $request->session()->put('sso_password', $request->password);
+
+
+            }
+            else{
+                return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
+            }
+
+            $credentials = [
+                'email' => $request->email,
+                'password' => $request->password,
+            ];
+
+            if(!Auth::attempt($credentials))
+            {
+                return  response()->json(['error' => "Wrong email or password"],401);
+            }
+
+            return response()->json(['access_token' =>  $access_token],200);
+
+        }else{
+            $registration_data = [
+                'email' => $request->r_email,
+                'password' => $request->r_password,
+                'name' => $request->name,
+                'company' =>'No Company',
+                'user_type' => 'buyer',
+            ];
+
+            $registration=Http::post(env('SSO_REGISTRATION_URL').'/api/auth/signup/',$registration_data);
+            if(!$registration->successful()){
+                return  response()->json(['error' => 'Registration failed, please try again'],403);
+            }
+
+
+            $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
+            if($sso->successful()){
+                $access_token=$sso['access'];
+                $explode=explode(".",$access_token);
+                $time= base64_decode($explode[1]);
+                $decode_time=json_decode($time);
+                $get_time=$decode_time->exp;
+                $get_time=strtotime(date('d.m.Y H:i:s')) + strtotime(date('d.m.Y H:i:s'));
+                $current=strtotime(date('d.m.Y H:i:s'));
+                $totalSecondsDiff = abs($get_time-$current);
+                $totalMinutesDiff = $totalSecondsDiff/60;
+
+                if(Cookie::has('sso_token')){
+                    Cookie::queue(Cookie::forget('sso_token'));
+                }
+                Cookie::queue(Cookie::make('sso_token', $access_token, $totalMinutesDiff));
+
+                if($request->session()->has('sso_password')){
+                    $request->session()->forget('sso_password');
+                }
+                $request->session()->put('sso_password', $request->password);
+
+
+            }
+            else{
+                return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
+            }
+
+            $credentials = [
+                'email' => $request->email,
+                'password' => $request->password,
+            ];
+            if(!Auth::attempt($credentials))
+            {
+                return  response()->json(['error' =>  "Wrong email or password"],401);
+            }
+
+            return response()->json(['access_token' =>  $access_token],200);
+        }
+
+
+    }
+
 }

@@ -553,7 +553,7 @@ class UserController extends Controller
     public function signUp(Request $request)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -564,6 +564,14 @@ class UserController extends Controller
             //'country'=>'required',
 
         ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(array(
+            'success' => false,
+            'error' => $validator->getMessageBag()),
+            400);
+        }
         $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
             return response()->json('user already exists', 403);

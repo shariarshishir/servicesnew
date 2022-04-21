@@ -903,7 +903,7 @@
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    if(to_user_image == ""){
+                    if(to_user_image != ""){
                         msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
                     }else{
                         msgHtml += '<span>'+userNameShortForm+'</span>'
@@ -943,6 +943,7 @@
                 var business_name = $(this).data("business_name");
                 var sso_reference_id = $(this).data('sso_reference_id');
                 var envMode = "{{ env('APP_ENV') }}";
+                $('#dialog-form').dialog({title: business_name});
                 $('.dialouge_box_rfq_id').val(rfq_id);
                 $('.dialouge_box_from_id').val(fromId);
                 $('.dialouge_box_to_id').val(sso_reference_id);

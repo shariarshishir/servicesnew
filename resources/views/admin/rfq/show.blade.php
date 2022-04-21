@@ -332,7 +332,7 @@
 <div id="dialog-form" title="Message Box" style="display: none;">
     <div class="dialog-form-box">
         <div class="chat-content-area animate fadeUp">
-            <div class="chat-area ps ps--active-y">
+            <div class="chat-area supplier-chat-area ps ps--active-y">
                 <div class="chats">
                     <div class="supplier-chats-box chat_messagedata" id="supplier-messagedata" data-supplierid="">
                     </div>
@@ -852,7 +852,9 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
             });
+           
 
+            
             $('.messageSendButton').click(function(){
                 //event.preventDefault();
                 var msg = $('#messagebox').val();
@@ -874,7 +876,6 @@
                 console.log("buyer id",buyerId);
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
-
                     console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
@@ -889,19 +890,20 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     if( supplierId  && supplierId == data.to_id){
-                        console.log()
                         $('.supplier-chats-box').append(msgHtml);
+                        $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
                     }else{
                         $('.chats-box').append(msgHtml);
+                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
-                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                    
                 }
                 else if(data.rfq_id == "{{$rfq['id']}}" && fromId != data.from_id)
                 {
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    if(to_user_image == ""){
+                    if(to_user_image != ""){
                         msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
                     }else{
                         msgHtml += '<span>'+userNameShortForm+'</span>'
@@ -916,10 +918,12 @@
                     msgHtml += '</div>';
                     if( supplierId == data.from_id ){
                         $('.supplier-chats-box').append(msgHtml);
+                        $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
                     }else{
                         $('.chats-box').append(msgHtml);
+                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
-                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                    
                 }
             });
 
@@ -939,6 +943,7 @@
                 var business_name = $(this).data("business_name");
                 var sso_reference_id = $(this).data('sso_reference_id');
                 var envMode = "{{ env('APP_ENV') }}";
+                $('#dialog-form').dialog({title: business_name});
                 $('.dialouge_box_rfq_id').val(rfq_id);
                 $('.dialouge_box_from_id').val(fromId);
                 $('.dialouge_box_to_id').val(sso_reference_id);
@@ -1004,6 +1009,20 @@
                 let message = {'message': msgText, 'image': "", 'from_id' : fromId, 'to_id' : toId,'rfq_id': rfqId,'factory':false, 'product': null};
                 socket.emit('new message', message);
                 $('.dialouge_box_message_content').val('');
+            });
+            $('.dialouge_box_message_content').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    //event.preventDefault();
+                    var msgText = $('.dialouge_box_message_content').val();
+                    var rfqId = $('.dialouge_box_rfq_id').val();
+                    var fromId = $('.dialouge_box_from_id').val();
+                    var toId = $('.dialouge_box_to_id').val();
+                    let message = {'message': msgText, 'image': "", 'from_id' : fromId, 'to_id' : toId,'rfq_id': rfqId,'factory':false, 'product': null};
+                    socket.emit('new message', message);
+                    $('.dialouge_box_message_content').val('');
+                    $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
+                }
             });
 
 

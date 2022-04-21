@@ -1355,7 +1355,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .ui-widget.ui-widget-content .chat_messagedata .chat .chat-avatar .avatar img {
     border-radius: 50%;
-    width: auto;
+    width: 100%;
     height: 100%;
     object-fit: cover;
 }

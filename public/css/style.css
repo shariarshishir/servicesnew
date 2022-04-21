@@ -645,7 +645,7 @@ legend {
     margin: 0 0 20px;
     font-size: 20px;
     line-height: 30px;
-    font-weight: 300;
+    font-family: 'nexalight';
     text-align: center;
 }
 .header_wrap .container {
@@ -718,7 +718,7 @@ legend {
     margin: 0;
     height: 52px;
     font-size: 18px;
-    font-weight: 300;
+    font-family: 'nexalight';
     padding: 1px 15px;
 }
 .banner_search .module-search .search_input:focus {
@@ -2030,7 +2030,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 500;
 }
 .product_description {
-    font-weight: 300;
+    font-family: 'nexalight';
     padding-bottom: 10px;
 }
 .single-product-review-stars {
@@ -2676,7 +2676,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: block;
     font-size: 11px;
     line-height: 12px;
-    font-weight: 300;
+    font-family: 'nexalight';
 }
 .wishlist_more_details {
     padding-top: 15px !important;
@@ -3155,7 +3155,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     right: 10px;
     bottom: 0;
     width: 83%!important;
-    font-weight: 300;
+    font-family: 'nexalight';
     background: none !important;
     text-transform: capitalize;
 }
@@ -3264,7 +3264,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .suppliers_filter_content .short_info_box .title_label {
     width: 30%;
     float: left;
-    font-weight: 300;
+    font-family: 'nexalight';
 }
 .suppliers_filter_content .short_info_box .info_details {
     width: 70%;
@@ -3674,7 +3674,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     background: #fff;
     padding: 10px 20px;
     font-size: 18px;
-    font-weight: 300;
+    font-family: 'nexalight';
     margin: 0;
 }
 .rfq_select {
@@ -3686,7 +3686,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     background: #fff;
     font-size: 13px;
     color: #54A958;
-    font-weight: 300;
+    font-family: 'nexalight';
     min-height: 30px;
     line-height: 35px;
     border: 1px solid #54A958;
@@ -3928,7 +3928,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     background: #fff;
     padding: 10px 20px;
     font-size: 18px;
-    font-weight: 300;
+    font-family: 'nexalight';
     margin: 0;
 }
 .rfq_content_box .rfq_select {
@@ -3940,7 +3940,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     background: #fff;
     font-size: 13px;
     color: #54A958;
-    font-weight: 300;
+    font-family: 'nexalight';
     min-height: 30px;
     line-height: 35px;
     border: 1px solid #54A958;
@@ -4377,7 +4377,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 4px;
     font-size: 12px;
     border-radius: 3px;
-    font-weight: 300;
+    font-family: 'nexalight';
     border: 1px solid #000;
 }
 .rfq_content_box .rfq_view_detail_wrap .btn_view_detail span {
@@ -4411,7 +4411,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_content_box .respones_detail_wrap .full_specification,
 .rfq_content_box .respones_detail_wrap .full_details .title {
-    font-weight: 300;
+    font-family: 'nexalight';
 }
 .rfq_content_box .respones_detail_wrap .full_specification .title {
     font-weight: 500;
@@ -4510,7 +4510,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_view_detail_info .full_specification {
     padding-bottom: 10px;
-    font-weight: 300;
+    font-family: 'nexalight';
 }
 .rfq_view_detail_info .full_specification .title {
     font-weight: 500;
@@ -4519,7 +4519,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     text-transform: capitalize;
 }
 .rfq_view_detail_info .full_details .title {
-    font-weight: 300;
+    font-family: 'nexalight';
     font-size: 15px;
 }
 .respones_img_wrap .rfq_thum_img .xlsx_icon,
@@ -5716,7 +5716,7 @@ input.input-field[type=text]:not(.browser-default) {
     font-weight: 500;
 }
 #search-results .product-item .product-short-intro h5 span {
-    font-weight: 300;
+    font-family: 'nexalight';
     font-size: 12px;
 }
 #search-results .vendor-info {
@@ -7838,7 +7838,7 @@ nav .pagination li.active .page-link {
     width: 230px;
     margin: 0 auto;
     font-size: 14px;
-    font-weight: 300;
+    font-family: 'nexalight';
     line-height: 25px;
     float: right;
 }
@@ -7852,7 +7852,7 @@ nav .pagination li.active .page-link {
     margin: 0 0 6px;
 }
 .footer_left_bottom .copyright_text span {
-    font-weight: 300;
+    font-family: 'nexalight';
     font-style: italic;
 }
 .footer_left_bottom .addressWrap .btn_direct {
@@ -8008,7 +8008,7 @@ nav .pagination li.active .page-link {
 }
 .footer_topWrap_inner h4 {
     font-size: 20px;
-    font-weight: 300;
+    font-family: 'nexalight';
     margin-bottom: 30px;
 }
 .footer_topWrap_inner .footer_signUp {
@@ -8219,7 +8219,7 @@ nav .pagination li.active .page-link {
     color: #ffffff;
     font-size: 18px;
     line-height: 30px;
-    font-weight: 300;
+    font-family: 'nexalight';
     min-height: 200px;
     position: relative;
 }
@@ -8240,7 +8240,7 @@ nav .pagination li.active .page-link {
 }
 .landing_spotlight_wrap h5 {
     font-size: 22px;
-    font-weight: 300;
+    font-family: 'nexalight';
     margin-bottom: 50px;
 }
 .landing_spotlight_wrap .landing_view_profile {
@@ -8285,8 +8285,8 @@ nav .pagination li.active .page-link {
 .landing_request_wrap h3,
 .landing_tools_infobox h3,
 .sourcing_info_box h3 {
+    font-family: 'nexalight';
     font-size: 40px;
-    font-weight: 300;
     line-height: 55px;
     display: inline-block;
     margin-bottom: 0;
@@ -8325,7 +8325,7 @@ nav .pagination li.active .page-link {
 .landing_request_wrap h5 {
     font-size: 20px;
     line-height: 30px;
-    font-weight: 300;
+    font-family: 'nexalight';
     margin-bottom: 20px;
 }
 .request_button_box {
@@ -8398,19 +8398,19 @@ nav .pagination li.active .page-link {
 .home_intro_left .quotation_request .quotation_arrow .material-icons {
     font-size: 30px;
     line-height: 23px;
-    -webkit-transition: transform 0.1s ease-out;
-    -moz-transition: transform 0.1s ease-out;
-    -ms-transition: transform 0.1s ease-out;
-    -o-transition: transform 0.1s ease-out;
-    transition: transform 0.1s ease-out;
+    width: 65px;
+    animation:  
+        nudge 2s linear infinite alternate;
 }
-.home_intro_left .quotation_request:hover .quotation_arrow .material-icons {
-    -webkit-transform: translateX(3px);
-    -moz-transform: translateX(3px);
-    -ms-transform: translateX(3px);
-    -o-transform: translateX(3px);
-    transform: translateX(3px);
-}
+@keyframes nudge {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    
+    50% {
+      transform: translate(-20px, 0);
+    }
+  }
 
 /* ************New Landing page design style end**************** */
 #association-membership-upload-form-modal.profile_form_modal td,
@@ -8648,7 +8648,7 @@ nav .pagination li.active .page-link {
     display: block;
     font-size: 10px;
     line-height: 12px;
-    font-weight: 300;
+    font-family: 'nexalight';
 }
 .products_filter_search_wrap .btn-product-sidenav {
     display: block;
@@ -8826,7 +8826,7 @@ nav .pagination li.active .page-link {
 .product_design_wrapper .products_inner_textbox .unit {
     font-size: 10px;
     color: #484848;
-    font-weight: 300;
+    font-family: 'nexalight';
     margin-left: -2px;
 }
 .profile_contentCol .product_design_wrapper .products_inner_textbox .row,
@@ -8975,9 +8975,9 @@ nav .pagination li.active .page-link {
     padding: 50px 0 0;
 }
 .mvc_produce_design_wrap h3 {
+    font-family: 'nexalight';
     font-size: 40px;
     line-height: 55px;
-    font-weight: 300;
     display: block;
     margin-bottom: 0;
 }
@@ -9262,7 +9262,7 @@ nav .pagination li.active .page-link {
     font-size: 15px;
     color: #448547;
     font-style: italic;
-    font-weight: 300;
+    font-family: 'nexalight';
 }
 .product_upload_boxwrap table tr th {
     color: #3D3D3D;

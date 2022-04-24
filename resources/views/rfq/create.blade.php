@@ -631,13 +631,16 @@
                 },
                 error: function(xhr, status, error)
                     {
+
                         $('.loading-message').html("");
                         $('#loadingProgressContainer').hide();
                         $("#errors").empty();
-                        if(xhr.responseJSON.status == 400){
+                        if(xhr.status == 400){
                             $.each(xhr.responseJSON.error, function (key, item)
-                            {
-                                $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
+                            {   $("html, body").animate({
+                                    scrollTop: 0
+                                }, 500);
+                                $("#errors").append("<li class='red darken-1'>"+item+"</li>")
                             });
                         }else{
                             swal("Error!", xhr.responseJSON.error,"error");

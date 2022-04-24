@@ -521,6 +521,8 @@ class RfqController extends Controller
             'r_email' => 'required_without:email|unique:users,email',
             'r_password' => 'required_without:password',
             'name'      => 'required_without:email',
+        ],[
+            'r_email.unique' => 'The email has already been taken.'
         ]);
         if ($validator->fails())
         {
@@ -561,7 +563,7 @@ class RfqController extends Controller
 
             }
             else{
-                return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
+                return response()->json(['error' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
             }
 
             $credentials = [
@@ -592,10 +594,11 @@ class RfqController extends Controller
 
 
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
-                'email' => $request->email,
-                'password' => $request->password,
+                'email' => $request->r_email,
+                'password' => $request->r_password,
             ]);
-            if($sso->successful()){
+            if($sso->successful())
+            {
                 $access_token=$sso['access'];
                 $explode=explode(".",$access_token);
                 $time= base64_decode($explode[1]);
@@ -614,17 +617,17 @@ class RfqController extends Controller
                 if($request->session()->has('sso_password')){
                     $request->session()->forget('sso_password');
                 }
-                $request->session()->put('sso_password', $request->password);
+                $request->session()->put('sso_password', $request->r_password);
 
 
             }
             else{
-                return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
+                return response()->json(['error' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
             }
 
             $credentials = [
-                'email' => $request->email,
-                'password' => $request->password,
+                'email' => $request->r_email,
+                'password' => $request->r_password,
             ];
             if(!Auth::attempt($credentials))
             {

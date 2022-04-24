@@ -52,8 +52,8 @@
             <div class="container" itemscope>
                 <h2 itemprop="title" class="landing_provide_title" >Values we provide...</h2>
                 <div class="row">
-                    <div class="col s12 m12 l2">&nbsp;</div>
-                    <div class="col s12 m6 l4 animate_provide_items_box_left">
+                    <div class="col s12 m12 l1">&nbsp;</div>
+                    <div class="col s12 m6 l5 animate_provide_items_box_left">
                         <div class="provide_items_box provide_left" itemscope>
                             <h3 class="landing_provide_innerTitle_left"><span itemprop="title">For Buyers</span></h3>
                             <ul itemscope itemtype="https://schema.org/ListItem">
@@ -65,7 +65,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col s12 m6 l4 animate_provide_items_box_right">
+                    <div class="col s12 m6 l5 animate_provide_items_box_right">
                         <div class="provide_items_box" itemscope>
                             <h3 class="landing_provide_innerTitle_right"><span itemprop="title">For Suppliers</span></h3>
                             <ul itemscope itemtype="https://schema.org/ListItem">
@@ -77,7 +77,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col s12 m12 l2">&nbsp;</div>
+                    <div class="col s12 m12 l1">&nbsp;</div>
                 </div>
                 <div class="center-align provide_btn_wrap animate_provide_btn_wrap" itemscope>
                     <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green" itemprop="Sign up">Sign up</a>

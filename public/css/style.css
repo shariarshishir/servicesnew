@@ -4116,6 +4116,11 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: block;
     box-shadow: none !important;
 }
+
+.product_add_wrap_modal .btn_delete.rm-overlay-btn {
+    float: right;
+    display: inherit;
+}
 .rfq_detail_from .input-field textarea {
     margin: 0;
 }
@@ -8165,12 +8170,12 @@ nav .pagination li.active .page-link {
 }
 .landing_provide_wrap h2 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 70px;
     font-size: 35px;
     font-weight: 500;
 }
 .landing_provide_wrap h3 {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 40px;
     font-weight: 400;
     margin-bottom: 50px;
@@ -8181,22 +8186,18 @@ nav .pagination li.active .page-link {
     padding-bottom: 10px;
 }
 .landing_provide_wrap ul li {
-    background: url(../images/frontendimages/new-home/li-logo-bg.png) no-repeat left center;
-    padding: 3px 0 3px 35px;
-    background-size: 18px;
-}
-.landing_provide_wrap ul li a:link,
-.landing_provide_wrap ul li a:active,
-.landing_provide_wrap ul li a:visited {
+    background: url(../images/frontendimages/about-image/icons/success-achievement.png) no-repeat left center;
+    padding: 16px 0 16px 60px;
+    background-size: 30px;
+    border-bottom: 1px solid #eee;
+    font-family: 'nexabold';
     font-size: 18px;
-    line-height: 30px;
+    line-height: 25px;
     color: #484848;
 }
-.landing_provide_wrap ul li a:hover {
-    color: #448547;
-}
+
 .landing_provide_wrap .provide_btn_wrap {
-    padding-top: 50px;
+    padding-top: 80px;
 }
 .landing_provide_wrap .provide_btn_wrap .btn_green {
     padding: 8px 35px;
@@ -8966,6 +8967,10 @@ nav .pagination li.active .page-link {
 #business_profile_logo_banner .submit_btn_wrap .btn_green {
     margin-top: 0;
 }
+#business_profile_logo_banner .submit_btn_wrap .btn_green:focus,
+#business_profile_logo_banner .submit_btn_wrap .btn_green:hover {
+    color: #54A958;
+}
 #business_profile_logo_banner input {
     height: 40px;
     padding: 5px 10px;
@@ -9506,7 +9511,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         max-width: 300px;
     }
     .landing_provide_wrap .provide_items_box:last-child {
-        padding-left: 70px;
+        padding: 0 50px;
     }
     .landing_page_wrapper .home_intro_right {
         text-align: right;
@@ -10907,9 +10912,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         max-height: 48px;
     }
     .landing_provide_wrap ul li {
-        background: url(../images/frontendimages/new-home/li-logo-bg.png) no-repeat left 2px;
-        padding: 3px 0 10px 35px;
-        line-height: 20px;
+        background-size: 22px;
+        padding: 12px 0 12px 40px;
+        font-size: 16px;
     }
     .landing_provide_wrap h2 {
         margin-bottom: 0;
@@ -11800,9 +11805,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         font-size: 14px;
         line-height: 22px;
     }
-    .landing_provide_wrap ul li {
-        padding-bottom: 5px;
-    }
+
     .home_intro_left .btn_border_black .material-icons {
         margin-top: 2px;
         font-size: 18px;
@@ -11827,12 +11830,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         font-size: 18px;
         margin-bottom: 20px;
     }
-    .landing_provide_wrap ul li a:link,
-    .landing_provide_wrap ul li a:active,
-    .landing_provide_wrap ul li a:visited {
-        font-size: 14px;
-        line-height: 20px;
-    }
+
     .landing_tab_menu ul.spotlight_tabs {
         text-align: center;
     }
@@ -11872,9 +11870,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         max-height: 35px;
         margin-right: 10px;
     }
-    .landing_provide_wrap .provide_btn_wrap {
+    /* .landing_provide_wrap .provide_btn_wrap {
         padding-top: 0;
-    }
+    } */
     .landing_sourcing_wrap {
         padding: 30px 0 0;
     }
@@ -12329,7 +12327,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin-bottom: 30px;
     }
     .landing_provide_wrap .provide_left {
-        padding-bottom: 30px;
+        padding-bottom: 40px;
     }
     .landing_request_img img {
         width: auto;

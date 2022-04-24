@@ -1539,7 +1539,7 @@ legend {
 .profile_tabNav_wrap .profile_table_design .production-flow-and-manpower-table-wrapper table td,
 .profile_tabNav_wrap .profile_table_design .production-flow-and-manpower-table-wrapper table th {
     width: 100% !important;
-    
+
 }
 .profile_tabNav_wrap .overview_table .material-icons {
     float: right;
@@ -3559,7 +3559,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 2px 20px;
 }
 .helps_content_wrap .helps_top_bar a.active {
-    background: #54A958;   
+    background: #54A958;
     color: #fff;
 }
 .helps_content_wrap .helps_menu {
@@ -4030,6 +4030,14 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .create_rfq_detail_from_wrap {
     overflow: hidden;
 }
+
+.create_rfq_detail_from_wrap .rfq_detail_from ul.select2-selection__rendered {
+    border: 1px solid #54A958;
+    border-radius: 5px;
+    height: 48px;
+    overflow: auto;
+}
+
 .modal.rfq_detail_from_wrap {
     padding: 0;
 }
@@ -4091,6 +4099,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     top: -3px;
     right: -10px;
 }
+
 .rfq_detail_from .input-field input[type=date]:not(.browser-default),
 .rfq_detail_from .input-field input[type=number]:not(.browser-default),
 .rfq_detail_from .input-field .select2-container--default .select2-selection--single,
@@ -4106,6 +4115,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 3px 2%;
     box-shadow: none !important;
 }
+
 .product_add_wrap_modal .rfq_detail_from .input-field select.select2 {
     border: 1px solid #54A958 !important;
     border-radius: 5px;
@@ -7449,7 +7459,7 @@ nav .pagination li.active .page-link {
     box-shadow: none;
     background: none;
     -moz-transition: all 0.4s ease-out;
-    -o-transition: all 0.4s ease-out; 
+    -o-transition: all 0.4s ease-out;
     -webkit-transition: all 0.4s ease-out;
     -ms-transition: all 0.4s ease-out;
     transition: all 0.4s ease-out;
@@ -8400,14 +8410,14 @@ nav .pagination li.active .page-link {
     font-size: 30px;
     line-height: 23px;
     width: 65px;
-    animation:  
+    animation:
         nudge 2s linear infinite alternate;
 }
 @keyframes nudge {
     0%, 100% {
       transform: translate(0, 0);
     }
-    
+
     50% {
       transform: translate(-20px, 0);
     }
@@ -9443,6 +9453,22 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 }
 
 
+.rfq_user_information_wrap {
+    padding-top: 50px;
+}
+.rfq_user_information_wrap .user_login_info .input-field {
+    margin: 0 0 20px 0 !important;
+}
+.rfq_detail_from .rfq_user_information_wrap .input-field label {
+    position: inherit;
+    transform: inherit
+}
+.rfq_detail_from .rfq_user_information_wrap .input-field input {
+    border: 1px solid #54A958 !important;
+    box-shadow: none !important;
+    float: none;
+}
+
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1500px) {
@@ -9771,7 +9797,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .header_dasktop .user-block .avatar-status {
         margin-left: 0;
     }
-    .top_right .btn_white, 
+    .top_right .btn_white,
     .top_right .btn_green {
         font-size: 13px;
     }
@@ -10993,12 +11019,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     } */
     .landing_provide_wrap .provide_btn_wrap {
         padding-top: 20px;
-    } 
+    }
     .rfq_content_box .respones_detail_wrap .rfq_profile_info .btn_green {
         margin: 10px 0 0 !important;
     }
 
-    
+
     .fullscreen-modal.profile_form_modal, .wholesaler_add_product_modal {
         top: 20% !important;
     }
@@ -11180,8 +11206,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 		text-align:left;
 		font-weight: bold;
 	}
-    .no_more_tables td:before { 
-        content: attr(data-title); 
+    .no_more_tables td:before {
+        content: attr(data-title);
     }
 
     #profile.profile_table_design .no_more_tables td:before,
@@ -11282,8 +11308,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: -webkit-fill-available !important;
         width: -moz-available !important;
     }
-    .modal table tr td input, #certification-upload-form-modal .select2-container, 
-    #certification-upload-form-modal tr td input, 
+    .modal table tr td input, #certification-upload-form-modal .select2-container,
+    #certification-upload-form-modal tr td input,
     .modal .color-and-size-block .color-size-table-block tr td input {
         width: -webkit-fill-available !important;
         width: -moz-available !important;
@@ -11729,7 +11755,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .profile_contentCol {
         padding: 0 !important;
-    } 
+    }
 
     /* *************************************** */
 
@@ -12285,7 +12311,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin: 0px;
     }
 
-    
+
 
     /* ********************************** */
 
@@ -12392,11 +12418,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .createRfqForm .rfq_detail_from .input-wrapper input  {
         margin-bottom: 15px;
     }
+
+    .createRfqForm .rfq_user_information_wrap .input-wrapper input,
     .modal .createRfqForm .rfq_detail_from .input-wrapper .add_short_description,
     .modal .createRfqForm .rfq_detail_from .input-wrapper input  {
         margin-bottom: 0;
     }
-    
+
     .banner_search {
         top: 115px;
     }
@@ -12421,7 +12449,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .product_img img {
         max-height: inherit;
         margin-bottom: 20px;
-    } 
+    }
     .pro_porma_invoice .invoice_advising_bank .form-group {
         padding-bottom: 15px;
     }
@@ -12478,6 +12506,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .footer_newsletter_bar h6 {
         text-align: center;
+    }
+
+    .create_rfq_detail_from_wrap .card {
+        box-shadow: none;
+        padding: 0 !important;
+    }
+    .create_rfq_detail_from_wrap {
+        padding: 0;
+    }
+    .create_rfq_detail_from_wrap .rfq_create_wrap .row {
+        margin-left: -8px;
+        margin-right: -8x;
     }
 
 
@@ -12661,7 +12701,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     /* #order-query .card {
         padding: 15px 10px!important;
     } */
-    .profile_contentCol .contentBox, 
+    .profile_contentCol .contentBox,
     #about-company-information {
         font-size: 14px;
         line-height: 24px;

@@ -5,22 +5,24 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Rfq;
 use App\Models\User;
+use App\Models\Product;
 use App\Models\RfqImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Jobs\NewRfqHasAddedJob;
 use App\Models\BusinessProfile;
 use App\Events\NewRfqHasAddedEvent;
-use App\Jobs\NewRfqHasAddedJob;
-use App\Models\Manufacture\Product as ManufactureProduct;
-use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 Use DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Models\Manufacture\Product as ManufactureProduct;
 
 
 class RfqController extends Controller
@@ -585,15 +587,31 @@ class RfqController extends Controller
                 'name' => $request->name,
                 'company' =>'No Company',
                 'user_type' => 'buyer',
-                'user_flag' => 'service',
+                'user_flag' => 'rfq',
             ];
 
             $registration=Http::post(env('SSO_REGISTRATION_URL').'/api/auth/signup/',$registration_data);
             if(!$registration->successful()){
                 return  response()->json(['error' => 'Registration failed, please try again'],403);
             }
-
-
+            $fromSso=json_decode($registration->getBody());
+            $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
+            $registration_data_new_user = [
+                'user_id'=>$user_id,
+                'sso_reference_id' => $fromSso->id,
+                'email' => $request->r_email,
+                'password' => Hash::make($request->r_password),
+                'name' => $request->name,
+                'company_name' =>'No Company',
+                'user_type' => 'buyer',
+                'is_email_verified' => 1,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->header('User-Agent'),
+            ];
+            $new_user=User::create($registration_data_new_user);
+            if(!$new_user){
+                return  response()->json(['error' => 'Somethings went wrong'],403);
+            }
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->r_email,
                 'password' => $request->r_password,

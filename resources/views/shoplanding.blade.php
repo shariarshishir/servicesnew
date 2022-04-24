@@ -13,7 +13,7 @@
         <div class="landing_intro_wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="col s12 m6">
+                    <div class="col s12 m6 animate_home_intro_left">
                         <div class="home_intro_left" itemscope>
                             <h1 itemprop="title">Find Your Next Apparel <br/> Manufacturing Partner</h1>
                             <p itemprop="text">Connecting demand directly to production powered <br/>
@@ -24,7 +24,7 @@
                             <div class="quotation_request">
                                 <a href="{{route('rfq.crate')}}">
                                     <span class="quotation_text">Submit a Request for Quotation</span>
-                                    <span class="quotation_arrow"><i class="material-icons">arrow_forward</i></span>
+                                    <span class="quotation_arrow animate_quotation_arrow"><i class="material-icons">arrow_forward</i></span>
                                 </a>
                             </div>
 
@@ -39,7 +39,7 @@
 
                         </div>
                     </div>
-                    <div class="col s12 m6 ">
+                    <div class="col s12 m6 animate_home_intro_right">
                         <div class="home_intro_right" itemscope>
                             <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
                         </div>
@@ -50,12 +50,12 @@
 
         <div class="landing_provide_wrap">
             <div class="container" itemscope>
-                <h2 itemprop="title">Values we provide...</h2>
+                <h2 itemprop="title" class="landing_provide_title" >Values we provide...</h2>
                 <div class="row">
-                    <div class="col s12 m12 l2">&nbsp;</div>
-                    <div class="col s12 m6 l4">
+                    <div class="col s12 m12 l1">&nbsp;</div>
+                    <div class="col s12 m6 l5 animate_provide_items_box_left">
                         <div class="provide_items_box provide_left" itemscope>
-                            <h3><span itemprop="title">For Buyers</span></h3>
+                            <h3 class="landing_provide_innerTitle_left"><span itemprop="title">For Buyers</span></h3>
                             <ul itemscope itemtype="https://schema.org/ListItem">
                                 <li itemprop="itemListElement">Find Vetted Manufacturers</li>
                                 <li itemprop="itemListElement">Find Manufacturers for Low MOQ</li>
@@ -65,9 +65,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col s12 m6 l4">
+                    <div class="col s12 m6 l5 animate_provide_items_box_right">
                         <div class="provide_items_box" itemscope>
-                            <h3><span itemprop="title">For Suppliers</span></h3>
+                            <h3 class="landing_provide_innerTitle_right"><span itemprop="title">For Suppliers</span></h3>
                             <ul itemscope itemtype="https://schema.org/ListItem">
                                 <li itemprop="itemListElement">Create and Promote Your Digital Presence</li>
                                 <li itemprop="itemListElement">Create Your Digital Product Library</li>
@@ -77,9 +77,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col s12 m12 l2">&nbsp;</div>
+                    <div class="col s12 m12 l1">&nbsp;</div>
                 </div>
-                <div class="center-align provide_btn_wrap" itemscope>
+                <div class="center-align provide_btn_wrap animate_provide_btn_wrap" itemscope>
                     <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green" itemprop="Sign up">Sign up</a>
                 </div>
             </div>
@@ -88,10 +88,10 @@
         <div class="landing_spotlight_wrap">
             <div class="landing_spotlight_top">
                 <div class="container">
-                    <div class="spotlight_box" itemscope><img itemprop="img" src="{{asset('images/frontendimages/new-home/Spotlight.png')}}" alt="Spotlight" /></div>
+                    <div class="spotlight_box animate_spotlight_box" itemscope><img itemprop="img" src="{{asset('images/frontendimages/new-home/Spotlight.png')}}" alt="Spotlight" /></div>
                 </div>
             </div>
-            <div class="landing_spotlight_infoWrap">
+            <div class="landing_spotlight_infoWrap animate_landing_spotlight_infoWrap">
                 <div class="container-full-width">
                     @php 
                         $spotlightCount = 0;
@@ -159,19 +159,19 @@
         <div class="mvc_produce_design_wrap">
           <div class="container">
             <div class="row"> 
-                <div class="col s12 m6 product_video_wrap">
+                <div class="col s12 m6 product_video_wrap animate_product_video_wrap">
                     <div class="product_video_box" itemscope>
                         <img itemprop="img" src="{{asset('images/frontendimages/new-home/360-white.GIF')}}" alt="Animated Image" />
                     </div>
                 </div>
-                <div class="col s12 m6 product_video_infobox">
+                <div class="col s12 m6 product_video_infobox animate_product_video_infobox">
                     <div class="product_3d_info_box" itemscope>
                         <h3 itemprop="title"><span>Develop your product<br />with <span class="bold_text" >MB Studio</span></span></h3>
                         <span class="title_border">&nbsp;</span>
                         <p itemprop="text">Our 3D design service helps you to reduce lead time significantly. <br> We have a huge library of 1000+ designs ranging from outerwear <br> to underwear. Our product development team brings the design <br> to life as best valued products with our technical expertise and <br> wide sourcing network.</p>
                     </div>
 
-                    <div class="visit_studio" itemscope>
+                    <div class="visit_studio animate_visit_studio" itemscope >
                         <a href="{{route('product.type.mapping',['studio', 'design'])}}" itemprop="Visit Studio" class="btn_green btn_visit_studio" >Visit Studio</a>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
         <div class="landing_sourcing_wrap">
           <div class="container">
             <div class="row">
-              <div class="col s12 m6">
+              <div class="col s12 m6 animate_sourcing_info_box_left">
                 <div class="sourcing_info_box" itemscope>
                     <h3 itemprop="title"><span> Bring the <span class="bold_text" >Sourcing</span> <br/>
                     to your <span class="bold_text">Pocket</span> </h1>
@@ -197,12 +197,12 @@
                 <div class="sourcing_apps_box" itemscope>
                     <h3 itemprop="title">Download the App</h3>
                     <div class="apps_wrap" itemscope>
-                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img src="{{asset('images/frontendimages/new-home/app-store.png')}}" itemprop="img" alt="App Store" /></a>
-                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img src="{{asset('images/frontendimages/new-home/google-play.png')}}" itemprop="img" alt="Google Play Store" /></a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img class="animate-app-store" src="{{asset('images/frontendimages/new-home/app-store.png')}}" itemprop="img" alt="App Store" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img class="google-play-store" src="{{asset('images/frontendimages/new-home/google-play.png')}}" itemprop="img" alt="Google Play Store" /></a>
                     </div>
                 </div>
               </div>
-              <div class="col s12 m6">
+              <div class="col s12 m6 animate_sourcing_info_box_right">
                     <div class="sourcing_img_box" itemscope>
                         <img alt="Sourcing Image" src="{{asset('images/frontendimages/new-home/sourcing-img.png')}}" itemprop="img" />
                     </div>
@@ -214,17 +214,17 @@
         <div class="landing_tools_wrap">
             <div class="container">
                 <div class="row">
-                    <div class="col s12 m6 landing_tools_left">
+                    <div class="col s12 m6 landing_tools_left animate_landing_tools_left">
                         <div class="landing_tools_img" itemscope>
                             <img itemprop="img" src="{{asset('images/frontendimages/new-home/tools-img.png')}}" alt="Tools Image" />
                         </div>
                     </div>
-                    <div class="col s12 m6 landing_tools_right">
+                    <div class="col s12 m6 landing_tools_right animate_landing_tools_right">
                         <div class="landing_tools_infobox" itemscope>
                             <h3 itemprop="title">Increase your <span class="bold_text" >Efficiency</span> <br/> with <span class="bold_text" >Smart BI Tools</span></h3>
                             <span class="title_border">&nbsp;</span>
                             <p itemprop="text">Subscribe to the Smart Order Management Dashboard and a suit of BI tools offered by Merchant Bay to make your operation data driven and transparent.</p>
-                            <div class="tools_button_box" itemscope>
+                            <div class="tools_button_box animate_tools_button_box" itemscope>
                                 <a href="https://tools.merchantbay.com/" class="btn_green" itemprop="Explore MB Smart Tools" target="_blank" >Explore MB Smart Tools</a>
                                 <!-- <button class="btn_green request_demo">Request a Demo</button> -->
                             </div>
@@ -237,14 +237,14 @@
         <div class="landing_request_wrap">
             <div class="container">
                 <div class="request_innter_box center-align" itemscope>
-                    <h3 itemprop="title">Want to start real quick?</h3>
-                    <h5 itemprop="title">Submit a request for quotation enjoy sourcing <br/> from Bangladesh like never before</h5>
-                    <div class="landing_request_img" itemscope>
+                    <h3 itemprop="title" class="landing_request_toptitle">Want to start real quick?</h3>
+                    <h5 itemprop="title" class="landing_request_title">Submit a request for quotation enjoy sourcing <br/> from Bangladesh like never before</h5>
+                    <div class="landing_request_img animate_landing_request_img" itemscope>
                         <img itemprop="img" src="{{asset('images/frontendimages/new-home/landing-rfq.png')}}" alt="" />
                     </div>
                     <div class="request_button_box center-align" itemscope>
-                        <a href="{{route('rfq.index')}}" class="btn_border_black" itemprop="Submit RFQ">Submit RFQ</a>
-                        <a href="javascript:void(0);" class="btn_green btn_talk" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
+                        <a href="{{route('rfq.index')}}" class="btn_border_black animate_btn_border_black" itemprop="Submit RFQ">Submit RFQ</a>
+                        <a href="javascript:void(0);" class="btn_green btn_talk animate_btn_talk" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us <i class="material-icons"> east </i></a>
                     </div>
                 </div>
             </div>

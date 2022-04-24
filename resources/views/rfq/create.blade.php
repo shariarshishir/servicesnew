@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="create-rfq-form" class="rfq_detail_from_wrap">
+<div id="create-rfq-form" class="rfq_detail_from_wrap create_rfq_detail_from_wrap">
     <div class="modal-content">
         <section class="ic-buying-req rfq_create_wrap">
             <div class="product_add_wrap_modal">

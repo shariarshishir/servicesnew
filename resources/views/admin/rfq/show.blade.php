@@ -150,7 +150,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);" class="sms_trigger"  data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$rfq['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 buyer-message-card">
                     <div class="message_header">
                         {{$rfq['user']['user_name']}}
                     </div>
@@ -332,7 +332,7 @@
 <div id="dialog-form" title="Message Box" style="display: none;">
     <div class="dialog-form-box">
         <div class="chat-content-area animate fadeUp">
-            <div class="chat-area ps ps--active-y">
+            <div class="chat-area supplier-chat-area ps ps--active-y">
                 <div class="chats">
                     <div class="supplier-chats-box chat_messagedata" id="supplier-messagedata" data-supplierid="">
                     </div>
@@ -459,7 +459,7 @@
                                     html += '<div class="title_box">';
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
-                                    html += '<a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
+                                    html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '<div class="sms_details_box">';
@@ -592,7 +592,7 @@
                                     html += '<div class="title_box">';
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
-                                    html += '<a href="javascript:void(0);" class="sms_trigger" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
+                                    html += '<a href="javascript:void(0);" class="sms_trigger"   data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '<div class="sms_details_box">';
@@ -852,7 +852,9 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
             });
+           
 
+            
             $('.messageSendButton').click(function(){
                 //event.preventDefault();
                 var msg = $('#messagebox').val();
@@ -864,13 +866,14 @@
 
 
             socket.on('new message', function(data) {
+                console.log(data);
                 var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 var supplierId = $('#supplier-messagedata').data('supplierid');
                 var buyerId = $('.messagedata').data('buyer_id');
-                console.log(supplierId);
-                console.log(buyerId);
+                console.log("supplier id:",supplierId);
+                console.log("buyer id",buyerId);
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
                     console.log('from admin');
@@ -886,19 +889,21 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    if( supplierId ){
+                    if( supplierId  && supplierId == data.to_id){
                         $('.supplier-chats-box').append(msgHtml);
+                        $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
                     }else{
                         $('.chats-box').append(msgHtml);
+                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
-                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                    
                 }
                 else if(data.rfq_id == "{{$rfq['id']}}" && fromId != data.from_id)
                 {
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    if(to_user_image == ""){
+                    if(to_user_image != ""){
                         msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
                     }else{
                         msgHtml += '<span>'+userNameShortForm+'</span>'
@@ -913,10 +918,12 @@
                     msgHtml += '</div>';
                     if( supplierId == data.from_id ){
                         $('.supplier-chats-box').append(msgHtml);
+                        $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
                     }else{
                         $('.chats-box').append(msgHtml);
+                        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
-                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                    
                 }
             });
 
@@ -933,8 +940,10 @@
             $(document).on("click",".sms_trigger", function() {
                 var rfq_id = $(this).data("rfqid");
                 var business_profile_id = $(this).data("businessprofileid");
+                var business_name = $(this).data("business_name");
                 var sso_reference_id = $(this).data('sso_reference_id');
                 var envMode = "{{ env('APP_ENV') }}";
+                $('#dialog-form').dialog({title: business_name});
                 $('.dialouge_box_rfq_id').val(rfq_id);
                 $('.dialouge_box_from_id').val(fromId);
                 $('.dialouge_box_to_id').val(sso_reference_id);
@@ -942,17 +951,17 @@
                 $('.supplier-chats-box').empty();
                 jQuery.ajax({
                     type : "get",
-                    data : {'rfq_id':rfq_id,'admin_id':fromId,'supplier_id':sso_reference_id},
+                    data : {'rfq_id':rfq_id,'admin_id':fromId,'supplier_id':sso_reference_id,'business_name':business_name},
                     url : "{{route('getchatdata.by.supplierid')}}",
                     success : function(response){
-                        console.log(response.chatdata);
+                        console.log(response);
                         response.chatdata.forEach((item, index)=>{
                             if(item.rfq_id == "{{$rfq['id']}}" && fromId == item.from_id)
                             {
                                 var msgHtml = '<div class="chat chat-right">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                msgHtml += '<img src="" class="circle" alt="avatar">';
+                                msgHtml += '<img src="'+response.adminUserImage+'" class="circle" alt="avatar">';
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';
                                 msgHtml += '<div class="chat-body left-align">';
@@ -968,8 +977,11 @@
                                 var msgHtml = '<div class="chat chat-left">';
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
-                                msgHtml += '<img src="" class="circle" alt="avatar">';
-                               
+                                if(response.supplierImage != ""){
+                                    msgHtml += '<img src="'+response.supplierImage+'" class="circle" alt="avatar">';
+                                }else{
+                                    msgHtml += '<span>'+response.supplierNameShortForm+'</span>'
+                                }
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';
                                 msgHtml += '<div class="chat-body left-align">';
@@ -998,9 +1010,32 @@
                 socket.emit('new message', message);
                 $('.dialouge_box_message_content').val('');
             });
+            $('.dialouge_box_message_content').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    //event.preventDefault();
+                    var msgText = $('.dialouge_box_message_content').val();
+                    var rfqId = $('.dialouge_box_rfq_id').val();
+                    var fromId = $('.dialouge_box_from_id').val();
+                    var toId = $('.dialouge_box_to_id').val();
+                    let message = {'message': msgText, 'image': "", 'from_id' : fromId, 'to_id' : toId,'rfq_id': rfqId,'factory':false, 'product': null};
+                    socket.emit('new message', message);
+                    $('.dialouge_box_message_content').val('');
+                    $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
+                }
+            });
 
 
         });
+
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll >= 180) {
+                $(".buyer-message-card").css({"position": "fixed", "top": "0px", "right": "0px", "max-width": "22%"});
+            } else {
+                $(".buyer-message-card").css({"position": "inherit", "top": "inherit", "right": "inherit", "max-width": "25%"});
+            }
+        });        
 
        
     </script>

@@ -78,19 +78,43 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $chats = $data['data']['messages'];
         $profromaInvoice = Proforma::where('generated_po_from_rfq',$id)->first();
-        $chats = Userchat::where('rfq_id',$id)->get();
         $chatdata = $chats;
         $buyer = $to_user;
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice'));
     }
 
     public function getChatDataBySupplierId(Request $request){
+        $supplier = User::where('sso_reference_id',$request->sso_reference_id)->first();
+        if( env('APP_ENV') == 'production') {
+            $user = "5771";
+        }
+        else{
+            $user = "5552";
+        }
+        $adminUser = User::find($user);
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+
+        if(isset($supplier->image)){
+            $supplierImage = asset($supplier->image);
+            $supplierNameShortForm = "";
+        }else{
+            $nameWordArray = explode(" ", $request->business_name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secondWordFirstLetter = $nameWordArray[1][0] ??'';
+            $supplierNameShortForm = $firstWordFirstLetter.$secondWordFirstLetter;
+            $supplierImage = "";
+        }
+
+        
         $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfq_id.'/user/'.$request->supplier_id);
         $data = $response->json();
         $chats = $data['data']['messages'];
         $chatdata = $chats;
         return response()->json([
-            'chatdata' => $chatdata
+            'chatdata' => $chatdata,
+            'supplierImage' => $supplierImage,
+            'supplierNameShortForm'=>$supplierNameShortForm,
+            'adminUserImage' => $adminUserImage
         ],200);
 
     }

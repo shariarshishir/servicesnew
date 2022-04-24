@@ -585,6 +585,7 @@ class RfqController extends Controller
                 'name' => $request->name,
                 'company' =>'No Company',
                 'user_type' => 'buyer',
+                'user_flag' => 'service',
             ];
 
             $registration=Http::post(env('SSO_REGISTRATION_URL').'/api/auth/signup/',$registration_data);

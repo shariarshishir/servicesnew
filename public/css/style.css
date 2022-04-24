@@ -4027,6 +4027,17 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_detail_from_wrap {
     padding: 0 15px;
 }
+.create_rfq_detail_from_wrap {
+    overflow: hidden;
+}
+
+.create_rfq_detail_from_wrap .rfq_detail_from ul.select2-selection__rendered {
+    border: 1px solid #54A958;
+    border-radius: 5px;
+    height: 48px;
+    overflow: auto;
+}
+
 .modal.rfq_detail_from_wrap {
     padding: 0;
 }
@@ -4088,6 +4099,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     top: -3px;
     right: -10px;
 }
+
 .rfq_detail_from .input-field input[type=date]:not(.browser-default),
 .rfq_detail_from .input-field input[type=number]:not(.browser-default),
 .rfq_detail_from .input-field .select2-container--default .select2-selection--single,
@@ -4103,6 +4115,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 3px 2%;
     box-shadow: none !important;
 }
+
 .product_add_wrap_modal .rfq_detail_from .input-field select.select2 {
     border: 1px solid #54A958 !important;
     border-radius: 5px;
@@ -9427,6 +9440,22 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 }
 
 
+.rfq_user_information_wrap {
+    padding-top: 50px;
+}
+.rfq_user_information_wrap .user_login_info .input-field {
+    margin: 0 0 20px 0 !important;
+}
+.rfq_detail_from .rfq_user_information_wrap .input-field label {
+    position: inherit;
+    transform: inherit
+}
+.rfq_detail_from .rfq_user_information_wrap .input-field input {
+    border: 1px solid #54A958 !important;
+    box-shadow: none !important;
+    float: none;
+}
+
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1500px) {
@@ -12379,6 +12408,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .createRfqForm .rfq_detail_from .input-wrapper input  {
         margin-bottom: 15px;
     }
+
+    .createRfqForm .rfq_user_information_wrap .input-wrapper input,
     .modal .createRfqForm .rfq_detail_from .input-wrapper .add_short_description,
     .modal .createRfqForm .rfq_detail_from .input-wrapper input  {
         margin-bottom: 0;
@@ -12464,6 +12495,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .footer_newsletter_bar h6 {
         text-align: center;
+    }
+
+    .create_rfq_detail_from_wrap .card {
+        box-shadow: none;
+        padding: 0 !important;
+    }
+    .create_rfq_detail_from_wrap {
+        padding: 0;
+    }
+    .create_rfq_detail_from_wrap .rfq_create_wrap .row {
+        margin-left: -8px; 
+        margin-right: -8x;
     }
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="create-rfq-form" class="rfq_detail_from_wrap">
+<div id="create-rfq-form" class="rfq_detail_from_wrap create_rfq_detail_from_wrap">
     <div class="modal-content">
         <section class="ic-buying-req rfq_create_wrap">
             <div class="product_add_wrap_modal">
@@ -228,84 +228,59 @@
                             <input type="hidden" name="captcha_token" id="captcha_token" value="">
                             <div class="clear30"></div>
 
-                            <legend>User Information</legend>
-                            <div class="user_login_info">
-                                <div class=" col s12 m12 l12">
-                                    <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
-                                            <label>Email Address</label>
-                                        </div>
-                                        <div class="col s12 m8 l7">
-                                            <input type="email" class="form-control- ig-new-rgt" name="email" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" col s12 m12 l12">
-                                    <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
-                                            <label>Password</label>
-                                        </div>
-                                        <div class="col s12 m8 l7">
-                                            <input type="password" class="form-control- ig-new-rgt" name="password" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="javascript:void(0)" class="trigger_rfq_register">Click here to Register</a>
-                            </div>
-                            <div class="user_registration_info" style="display: none;">
-                                <div class=" col s12 m12 l12">
-                                    <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
-                                            <label>Name</label>
-                                        </div>
-                                        <div class="col s12 m8 l7">
-                                            <input type="text" class="form-control- ig-new-rgt" name="name" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" col s12 m12 l12">
-                                    <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
-                                            <label>Email Address</label>
-                                        </div>
-                                        <div class="col s12 m8 l7">
-                                            <input type="email" class="form-control- ig-new-rgt" name="r_email" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" col s12 m12 l12">
-                                    <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
-                                            <label>Password</label>
-                                        </div>
-                                        <div class="col s12 m8 l7">
-                                            <input type="password" class="form-control- ig-new-rgt" name="r_password" />
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <input type="hidden" name="company" value="No Company" /> --}}
-                                <a href="javascript:void(0)" class="trigger_rfq_login">Already register. Click here to login</a>
-                            </div>
-
-
-                            <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
-
-                                <button type="submit" id="page_button" style="display: none;"></button>
-
-                                <div class="submit_btn_wrap">
+                            <div class="rfq_user_information_wrap">
+                                <legend>User Information</legend>
+                                <div class="user_login_info">
                                     <div class="row">
-                                        <div class="col s12 m6 right-align">
-                                            <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit();">
-                                                Submit
-                                            </button>
+                                        <div class="col s12 m2 l3">&nbsp;</div>
+                                        <div class="col s12 m8 l6">
+                                            <div class="input-field input-wrapper">
+                                                <label>Email Address</label>
+                                                <input type="email" class="form-control- ig-new-rgt" name="email" />
+                                            </div>
+                                            <div class="input-field input-wrapper">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control- ig-new-rgt" name="password" />
+                                            </div>
+                                            <a href="javascript:void(0)" class="trigger_rfq_register">Click here to Register</a>
                                         </div>
+                                        <div class="col s12 m2 l3">&nbsp;</div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="user_registration_info" style="display: none;">
+                                    <div class="row">
+                                        <div class="col s12 m2 l3">&nbsp;</div>
+                                        <div class="col s12 m8 l6">
+                                            <div class="input-field input-wrapper">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control- ig-new-rgt" name="name" />
+                                            </div>
+                                            <div class="input-field input-wrapper">
+                                                <label>Email Address</label>
+                                                <input type="email" class="form-control- ig-new-rgt" name="r_email" />
+                                            </div>
+                                            <div class="input-field input-wrapper">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control- ig-new-rgt" name="r_password" />
+                                            </div>
+                                            {{-- <input type="hidden" name="company" value="No Company" /> --}}
+                                            <a href="javascript:void(0)" class="trigger_rfq_login">Already register. Click here to login</a>
+                                        </div>
+                                        <div class="col s12 m2 l3">&nbsp;</div>
                                     </div>
                                 </div>
 
-
+                                <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
+                                    <button type="submit" id="page_button" style="display: none;"></button>
+                                    <div class="submit_btn_wrap center-align">
+                                        <button type="button" class="btn_green btn_rfq_post btn-green" onclick="onSubmit();">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="clear20"></div>
                             </div>
-
-                            <div class="clear20"></div>
                             <!--/8-->
 
 

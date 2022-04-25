@@ -1112,6 +1112,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 .matched_suppliers_wrap .sms_img {
     float: right;
     margin: 0px 0 0 10px;
+    position: relative;
 }
 .matched_suppliers_wrap .sms_img .fa-envelope {
     font-size: 20px;
@@ -1119,6 +1120,20 @@ label:not(.form-check-label):not(.custom-file-label) {
 .matched_suppliers_wrap .sms_img:hover .fa-envelope {
     color: #73D578;
 }
+.matched_suppliers_wrap .sms_img a span {
+    position: absolute;
+    top: -8px;
+    right: -7px;
+    background: #ffc107;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 16px;
+}
+
 .matched_suppliers_wrap .sms_details_box .sms_details {
     float: left;
     padding-right: 10px;

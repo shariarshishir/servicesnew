@@ -466,7 +466,7 @@
                             </div>
                         </div>
                         <div class="col s12 m2 d-l-none"></div>
-                        <div class="col s12 m5 animate_why_us_box_3" style="align-self: center;">
+                        <div class="col s12 m4 animate_why_us_box_3" style="align-self: center;">
                             <div class="middle_text_card" style="margin-bottom: 140px;">
                                 <h3>Pioneering the decentralized
                                     manufacturing network with
@@ -519,7 +519,7 @@
                                     through OMD app.</p>
                             </div>
                         </div>
-                        <div class="col s2 l4 d-l-none"></div>
+                        <div class="col s2 m4 d-l-none"></div>
                     </div>
                 </div>
             </div>

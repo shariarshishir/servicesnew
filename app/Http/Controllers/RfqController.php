@@ -304,9 +304,17 @@ class RfqController extends Controller
         return $link;
     }
 
-    public function showRfqUsingLink($link)
+    public function showRfqUsingLink($link, Request $request)
     {
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$link);
+        if (Auth::check() && env('APP_ENV') == 'production'){
+            $token= $request->cookie('sso_token');
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->get(env('RFQ_APP_URL').'/api/quotation/'.$link);
+        }else{
+            $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$link);
+        }
+
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         return view('rfq.show_using_link',compact('rfqLists'));

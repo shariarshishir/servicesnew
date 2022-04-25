@@ -433,9 +433,9 @@
                     to help you grow your business faster</h2>
                 <div class="manufacture_container">
                     <div class="row">
-                        <div class="col s12 l1 d-l-none"></div>
-                        <div class="col s12 m6 l4 animate_why_us_box_1">
-                            <div class="why_us_box" style="margin-bottom: 140px;">
+                        <div class="col s12 m2 d-l-none"></div>
+                        <div class="col s12 m6 animate_why_us_box_1">
+                            <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
                                         <img src="{{asset('images/frontendimages/work-image/icon/get-queries.svg')}}" alt="icon" />
@@ -447,10 +447,10 @@
                                     for your category you are notified.</p>
                             </div>
                         </div>
-                        <div class="col s12 m2 l7 d-l-none"></div>
-                        <div class="col s5 l3 d-l-none"></div>
-                        <div class="col s12 m6 l4 animate_why_us_box_2">
-                            <div class="why_us_box" style="margin-bottom: 140px;">
+                        <div class="col s12 m4 d-l-none"></div>
+                        <div class="col s12 m4 d-l-none"></div>
+                        <div class="col s12 m6 animate_why_us_box_2">
+                            <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
                                         <img src="{{asset('images/frontendimages/work-image/icon/product-develolpment-2.svg')}}" alt="icon" />
@@ -465,17 +465,17 @@
                                     your production efficiency.</p>
                             </div>
                         </div>
-                        <div class="col s2 l3 d-l-none"></div>
-                        <div class="col s12 m6 l4 animate_why_us_box_3" style="align-self: center;">
+                        <div class="col s12 m2 d-l-none"></div>
+                        <div class="col s12 m5 animate_why_us_box_3" style="align-self: center;">
                             <div class="middle_text_card" style="margin-bottom: 140px;">
                                 <h3>Pioneering the decentralized
                                     manufacturing network with
                                     Merchant Bay</h3>
                             </div>
                         </div>
-                        <div class="col s1 l1 d-l-none" style="margin: 0;"></div>
-                        <div class="col s12 m6 l7 animate_why_us_box_4">
-                            <div class="why_us_box" style="margin-bottom: 140px;">
+                        <div class="col s12 m1 d-l-none" style="margin: 0;"></div>
+                        <div class="col s12 m6  animate_why_us_box_4">
+                            <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
                                         <img src="{{asset('images/frontendimages/work-image/icon/empowered-with-tech.svg')}}" alt="icon" />
@@ -488,9 +488,9 @@
                                     Merchant Bay ensures they are digitized step by step in the right hierarchy.</p>
                             </div>
                         </div>
-                        <div class="col s5 l3 d-l-none"></div>
+                        <div class="col s12 m4 d-l-none"></div>
                         <div class="col s12 m6 l6 animate_why_us_box_5">
-                            <div class="why_us_box" style="margin-bottom: 140px;">
+                            <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
                                         <img src="{{asset('images/frontendimages/work-image/icon/global-storefront.svg')}}" alt="icon" />
@@ -502,9 +502,9 @@
                                     more places than your own website.</p>
                             </div>
                         </div>
-                        <div class="col s2 l3 d-l-none" style="margin: 0;"></div>
-                        <div class="col s2 l1 d-l-none"></div>
-                        <div class="col s12 m6 l4 animate_why_us_box_6">
+                        <div class="col s12 m2 d-l-none" style="margin: 0;"></div>
+                        <div class="col s12 m2 d-l-none"></div>
+                        <div class="col s12 m6 animate_why_us_box_6">
                             <div class="why_us_box">
                                 <div class="title">
                                     <div class="icon">
@@ -519,7 +519,7 @@
                                     through OMD app.</p>
                             </div>
                         </div>
-                        <div class="col s2 l7 d-l-none"></div>
+                        <div class="col s2 l4 d-l-none"></div>
                     </div>
                 </div>
             </div>

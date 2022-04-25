@@ -3653,6 +3653,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     line-height: 26px;
     margin: 0px 20px 50px;
     box-shadow: none;
+    margin-bottom: 0;
 }
 .quick_rfq_wrap {
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
@@ -9369,6 +9370,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 #create-rfq-form.modal .submit_btn_wrap .btn_green {
     padding: 5px 15px 6px;
     font-size: 16px;
+    margin: 0;
 }
 #create-rfq-form.modal .submit_btn_wrap .btn_green:hover {
     color: #54A958;
@@ -9746,6 +9748,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .container {
         width: 95%;
     }
+
+    .rfq_content_box {
+        margin-left: 0;
+        margin-right: 0;
+    }
     .header_wrap .top_right {
         padding-right: 0;
     }
@@ -9789,7 +9796,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
 
     .home_intro_left .quotation_request {
-        margin-top: 28px;
+        margin-top: 30px;
     }
 
     /* ************************************* */
@@ -10058,7 +10065,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
 
     .landing_tools_infobox .tools_button_box {
-        padding-top: 10px;
+        padding-top: 25px;
     }
     .landing_request_wrap {
         padding-top: 0;
@@ -10069,6 +10076,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .landing_sourcing_wrap .sourcing_info_box {
         padding-top: 65px;
+        padding-bottom: 30px;
     }
     .landing_sourcing_wrap .sourcing_img_box img {
         max-height: 465px;
@@ -10084,6 +10092,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .product_preview_wrap .simpleLens-gallery-container {
         padding: 0;
+    }
+
+    .mvc_produce_design_wrap .visit_studio {
+        padding-top: 15px;
     }
 
 
@@ -10291,9 +10303,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         font-size: 14px;
         line-height: 22px;
     }
-    .home_intro_left .quotation_request {
+    /* .home_intro_left .quotation_request {
         margin-top: 20px;
-    }
+    } */
+
 
 }
 
@@ -10878,6 +10891,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         min-width: 70px;
         font-size: 14px;
         border-radius: 8px;
+        line-height: 42px;
     }
     .products_filter_search_wrap .filter_search_inputbox .material-icons {
         font-size: 25px;
@@ -10997,12 +11011,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .rfq_content_box .respones_detail_wrap .rfq_profile_info .btn_green {
         margin: 10px 0 0 !important;
     }
-
-    
     .fullscreen-modal.profile_form_modal, .wholesaler_add_product_modal {
         top: 20% !important;
     }
-
     #profile.profile_information_wrap {
         padding: 0px !important;
     }
@@ -11014,7 +11025,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding: 0px !important;
         box-shadow: none;
     }
-
     .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box {
         width: 100%;
     }
@@ -11027,7 +11037,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .landing_page_wrapper .sourcing_img_box img {
         max-height: 360px;
     }
-
+    
 }
 
 @media only screen and (max-width: 900px) {
@@ -11394,10 +11404,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .submit_btn_wrap .right-align{
         text-align: right;
     }
-    .rfq_detail_from_wrap .submit_btn_wrap .left-align,
-    .rfq_detail_from_wrap .submit_btn_wrap .right-align {
-        text-align: center;
-    }
     .rfq_detail_from_wrap .submit_btn_wrap .right-align button {
         float: none !important;
     }
@@ -11701,7 +11707,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .footer_left_bottom .addressWrap .btn_direct {
         display: inline-block;
         max-width: initial;
-        padding: 5px 15px;
+        padding: 6px 15px 3px;
     }
     .blog_detail_info_wrap h2 {
         font-size: 20px;
@@ -11780,9 +11786,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding: 20px 0;
         font-size: 14px;
     }
-    .landing_tools_infobox .tools_button_box {
-        padding-top: 20px;
-    }
     .landing_intro_wrapper h1 {
         font-size: 22px;
         line-height: 32px;
@@ -11817,7 +11820,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding-top: 7px;
     }
     .landing_spotlight_wrap .landing_view_profile {
-        padding-top: 4px;
+        /* padding-top: 4px; */
+        padding: 5px 0 1px;
     }
     .request_button_box .btn_talk .material-icons {
         margin-top: 2px;
@@ -11865,7 +11869,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .home_intro_right {
         text-align: center;
     }
-    .landing_tools_img,
+    .landing_tools_img {
+        padding-top: 25px;
+    }
     .sourcing_img_box {
         padding-top: 0px;
     }
@@ -11997,6 +12003,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .profile_wholesaler_inner .product_data_table_wrap table img {
         margin: inherit;
+    }
+
+    .landing_tools_infobox .tools_button_box {
+        padding-top: 15px;
+    }
+    .mvc_produce_design_wrap .visit_studio .btn_visit_studio,
+    .landing_tools_infobox .tools_button_box .btn_green {
+        margin: 0;
     }
 
 
@@ -12285,6 +12299,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin: 0px;
     }
 
+    .rfq_detail_from_wrap .submit_btn_wrap .left-align,
+    .rfq_detail_from_wrap .submit_btn_wrap .right-align {
+        text-align: center;
+    }
+
     
 
     /* ********************************** */
@@ -12475,11 +12494,21 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding-bottom: 30px !important;
         padding-left: 0px !important;
     }
-
     .footer_newsletter_bar h6 {
         text-align: center;
     }
 
+    .create_rfq_detail_from_wrap {
+        padding: 0;
+    }
+    .create_rfq_detail_from_wrap .card {
+        padding: 0 !important;
+        box-shadow: none;
+    }
+
+    .landing_tools_img {
+        padding-top: 0;
+    }
 
 }
 
@@ -12837,6 +12866,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .product_details_wrapper .back_to {
         padding-left: 0;
     }
+
+    .rfq_content_box .rfq_profile_detail .responses_wrap .btn_responses {
+        margin-left: 5px;
+    }
+
 
 }
 

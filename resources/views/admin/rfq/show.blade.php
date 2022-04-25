@@ -150,7 +150,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$rfq['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i></a>
+                                                        <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span id="sso_id_{{$businessProfile['user']['sso_reference_id']}}">@if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']])) {{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']] ? $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] : ''}} @endif</span></a>
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -377,27 +377,6 @@
                 console.log("Socket Connect successfully.");
             });
 
-            // $(document).on('click', '.business_profile_check', function(){
-            //     var price = $(this).closest(".business_profile_name").children(".propose_price").val();
-            //     if(price != ''){
-            //         url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
-            //         selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - "+$(this).closest(".business_profile_name").children(".propose_price").val());
-            //     }
-            //     else{
-            //         $(this).prop("checked", false);
-            //         alert('Enter offer price first');
-            //     }
-            // });
-
-            // $(document).on("change", ".propose_price", function(){
-            //     var price = $(this).val();
-            //     var price_unit = $(this).closest(".business_profile_name").children(".propose_uom").val();
-            //     if(price != ''){
-            //         url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
-            //         selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/"+price_unit);
-            //     }
-            // });
-
             $(document).on("change", ".propose_price", function(){
                 var price = $(this).val();
                 //var price_unit = $(this).closest(".business_profile_name").children(".propose_uom").val();
@@ -459,7 +438,11 @@
                                     html += '<div class="title_box">';
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
-                                    html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
+                                    if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
+                                    }else{
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                    }
                                     html += '</div>';
                                     html += '</div>';
                                     html += '<div class="sms_details_box">';
@@ -547,8 +530,6 @@
                 var category_id = $( "#factory_type option:selected" ).val();
                 var profile_rating = $( "#profile_rating option:selected" ).val();
                 var rfq_id ="{{$rfq['id']}}";
-                console.log(category_id);
-                console.log(profile_rating);
                     $.ajax({
                         method: 'get',
                         data: {category_id:category_id,profile_rating:profile_rating,rfq_id:rfq_id},
@@ -592,7 +573,11 @@
                                     html += '<div class="title_box">';
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
-                                    html += '<a href="javascript:void(0);" class="sms_trigger"   data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i></a>';
+                                    if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
+                                    }else{
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                    }
                                     html += '</div>';
                                     html += '</div>';
                                     html += '<div class="sms_details_box">';
@@ -682,7 +667,6 @@
                     selectedValues.forEach(function(value){
                         html += value + "<br />";
                     });
-                    console.log(html);
                     let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                     socket.emit('new message', message);
                     var from_user_image = "{{$from_user_image}}";
@@ -866,17 +850,14 @@
 
 
             socket.on('new message', function(data) {
-                console.log(data);
                 var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 var supplierId = $('#supplier-messagedata').data('supplierid');
                 var buyerId = $('.messagedata').data('buyer_id');
                 console.log("supplier id:",supplierId);
-                console.log("buyer id",buyerId);
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
-                    console.log('from admin');
                     var msgHtml = '<div class="chat chat-right">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
@@ -916,10 +897,15 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    if( supplierId == data.from_id ){
+                    var message_count_span = '#sso_id_'+data.from_id;
+                    var no_of_unseen_message = $(message_count_span).text();
+                    $(message_count_span).text(parseInt( no_of_unseen_message == '' ? '0' : no_of_unseen_message)+1);
+                    if( supplierId  && supplierId == data.from_id ){
+                        
                         $('.supplier-chats-box').append(msgHtml);
                         $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
-                    }else{
+                    }
+                    if( buyerId == data.from_id ){
                         $('.chats-box').append(msgHtml);
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
@@ -993,8 +979,10 @@
                                 $('.supplier-chats-box').append(msgHtml);
                             }
                         })
+                        var message_count_span = '#sso_id_'+sso_reference_id;
+                        $(message_count_span).text('');
                         dialog.dialog("open");
-
+                       
                     }
                 });
                 

@@ -45,7 +45,11 @@ class MessageController extends Controller
         $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){
-            $chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->get();
+            //$chatdata = Userchat::where('rfq_id',$rfqs[0]['id'])->orWhere('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->get();
+            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
+            $data = $response->json();
+            $chats = $data['data']['messages'];
+            $chatdata = $chats;
             if($rfqs[0]['user']['user_picture'] !=""){
                 $userImage = $rfqs[0]['user']['user_picture'];
                 $userNameShortForm = "";

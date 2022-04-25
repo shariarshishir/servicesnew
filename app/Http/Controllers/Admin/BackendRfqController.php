@@ -52,7 +52,7 @@ class BackendRfqController extends Controller
         ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
         ->get()
         ->toArray();
-
+       
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
@@ -74,13 +74,26 @@ class BackendRfqController extends Controller
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
 
-        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq['id'].'/user/'.$rfq['created_by']);
+        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq['id'].'/admin/'.$user.'/user/'.$rfq['created_by']);
         $data = $response->json();
         $chats = $data['data']['messages'];
         $profromaInvoice = Proforma::where('generated_po_from_rfq',$id)->first();
         $chatdata = $chats;
         $buyer = $to_user;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice'));
+
+        $userSsoIds = [];
+        foreach($businessProfiles as $profile){
+            array_push($userSsoIds, $profile['user']['sso_reference_id']);
+        }
+        $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
+        $response = Http::get(env('RFQ_APP_URL').'/api/rfq/'.$id.'/users/'.$commaSeparatedStringOfSsoId.'/conversations');
+        $data = $response->json();
+        $usersWithMessageUnseen = $data['data'] ?? [];
+        $associativeArrayUsingIDandCount = [];
+        foreach($usersWithMessageUnseen as $user){
+            $associativeArrayUsingIDandCount[$user['user_id']]  = $user;
+        }
+        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount'));
     }
 
     public function getChatDataBySupplierId(Request $request){
@@ -106,7 +119,7 @@ class BackendRfqController extends Controller
         }
 
         
-        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfq_id.'/user/'.$request->supplier_id);
+        $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfq_id.'/admin/'.$user.'/user/'.$request->supplier_id);
         $data = $response->json();
         $chats = $data['data']['messages'];
         $chatdata = $chats;
@@ -140,6 +153,7 @@ class BackendRfqController extends Controller
             $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
                 $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
             } ])->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+           
         }
         elseif($request->category_id && $request->profile_rating ==0)
         {
@@ -148,7 +162,21 @@ class BackendRfqController extends Controller
                 $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
             } ])->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
         }
-        return response()->json(['businessProfiles'=>$businessProfiles],200);
+
+        $userSsoIds = [];
+        foreach($businessProfiles as $profile){
+            array_push($userSsoIds, $profile['user']['sso_reference_id']);
+        }
+        $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
+        $response = Http::get('192.168.68.148:8888/api/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId.'/conversations');
+        $data = $response->json();
+        $usersWithMessageUnseen = $data['data'] ?? [];
+        $associativeArrayUsingIDandCount = [];
+        foreach($usersWithMessageUnseen as $user){
+            $associativeArrayUsingIDandCount[$user['user_id']]  = $user;
+        }
+
+        return response()->json(['businessProfiles'=>$businessProfiles, 'associativeArrayUsingIDandCount' => $associativeArrayUsingIDandCount],200);
     }
 
     public function supplierQuotationToBuyer(Request $request){

@@ -66,9 +66,13 @@
 			</div>
 			@if(auth::check())
 			<div class="responses_wrap right-align">
-                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+                @if($rfqSentList['isProposalSent'] == true)
+                    <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Replied</a>
+                @else
+                    <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
+                @endif
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">0</span>
+					Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">{{$rfqSentList['responseCount']}}</span>
 				</button>
 
 			</div>

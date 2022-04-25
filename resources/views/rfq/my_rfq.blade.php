@@ -38,11 +38,11 @@
 			</li>
 		</ul>
 	</nav>
-	@endif  
+	@endif
 </div>
 <!-- RFQ html end -->
 
-@include('rfq._create_rfq_bid_form_modal')
+
 @include('rfq.share_modal')
 @endsection
 

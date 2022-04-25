@@ -64,9 +64,9 @@
 			</div>
 
 			<div class="responses_wrap right-align">
-                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+                {{-- <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a> --}}
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">0</span>
+					Responses <span class="respons_count">{{$rfqSentList['responseCount']}}</span>
 				</button>
 
 			</div>

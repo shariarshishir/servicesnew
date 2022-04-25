@@ -168,14 +168,13 @@ class BackendRfqController extends Controller
             array_push($userSsoIds, $profile['user']['sso_reference_id']);
         }
         $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
-        $response = Http::get('192.168.68.148:8888/api/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId.'/conversations');
+        $response = Http::get(env('RFQ_APP_URL').'/api/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId.'/conversations');
         $data = $response->json();
         $usersWithMessageUnseen = $data['data'] ?? [];
         $associativeArrayUsingIDandCount = [];
         foreach($usersWithMessageUnseen as $user){
             $associativeArrayUsingIDandCount[$user['user_id']]  = $user;
         }
-
         return response()->json(['businessProfiles'=>$businessProfiles, 'associativeArrayUsingIDandCount' => $associativeArrayUsingIDandCount],200);
     }
 

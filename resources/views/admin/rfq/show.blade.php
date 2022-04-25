@@ -150,7 +150,11 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span id="sso_id_{{$businessProfile['user']['sso_reference_id']}}">@if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']])) {{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']] ? $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] : ''}} @endif</span></a>
+                                                        @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']])) 
+                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span id="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
+                                                        @else
+                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span style="display:none" id="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="sms_details_box">
@@ -404,6 +408,7 @@
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
                                     console.log(item);
+                                    
                                     var  className = 'no-class';
                                     var  display  = 'display:none';
                                     var offered_to_buyer = ' ';
@@ -441,7 +446,7 @@
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
                                         html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
                                     }else{
-                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span style="display: none" id="sso_id_'+item.user.sso_reference_id+'"></span></a>';
                                     }
                                     html += '</div>';
                                     html += '</div>';
@@ -899,6 +904,8 @@
                     msgHtml += '</div>';
                     var message_count_span = '#sso_id_'+data.from_id;
                     var no_of_unseen_message = $(message_count_span).text();
+                    $(message_count_span).show();
+                   
                     $(message_count_span).text(parseInt( no_of_unseen_message == '' ? '0' : no_of_unseen_message)+1);
                     if( supplierId  && supplierId == data.from_id ){
                         
@@ -981,6 +988,7 @@
                         })
                         var message_count_span = '#sso_id_'+sso_reference_id;
                         $(message_count_span).text('');
+                        $(message_count_span).hide();
                         dialog.dialog("open");
                        
                     }

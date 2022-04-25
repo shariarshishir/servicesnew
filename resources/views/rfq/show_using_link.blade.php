@@ -90,12 +90,17 @@
 
 			<div class="responses_wrap right-align">
                 @auth
-                     <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
+                     {{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a> --}}
+                    @if($rfqSentList['isProposalSent'] == true)
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Replied</a>
                     @else
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
+                    @endif
+                @else
                     <a class="modal-trigger" href="#from-rfq-link-login-register-modal" >Reply on this RFQ</a>
                 @endauth
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">0</span>
+					Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">{{$rfqSentList['responseCount']}}</span>
 				</button>
 
 			</div>

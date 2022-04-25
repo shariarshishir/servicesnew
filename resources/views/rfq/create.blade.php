@@ -8,21 +8,14 @@
 
                 <div class="card">
                     <legend style="text-align: center" >Create RFQ </legend>
-                    <!-- <div class="col-md-12 my-prd-hd-cont">
-                        <div class="row">
-                            <div class="col-md-12 plr0">
-                                <h5 class="my-prd-hd">Request For Quote</h5>
-                                <p>Submit Your Request for Quotation and let Merchant Bay source the best Supplier for you</p>
-                            </div>
-                        </div>
-                    </div> -->
+                    <div id=errors></div>
                     <div class="col-md-12">
                         <div class="row">
                             <span style="font-size: 12px; color: rgb(255, 0, 0); padding-bottom: 15px; display:block;">* Indicates Mandatory field</span>
                         </div>
                     </div>
                     <!--Add Product Form-->
-                    <form action="{{route('rfq.store')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
+                    <form action="{{route('rfq.store.with.login')}}" class="createRfqForm " method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="rfq_detail_from">
                             <!--3-->
@@ -33,7 +26,7 @@
                                 </div>
                                 <div class="col s12 m6">
                                     <label class="category_title">Select Product Category <span >*</span></label>
-                                    <select class="select2" name="category_id" required>
+                                    <select class="select2" id="category_id" name="category[]" multiple required >
                                         <option>Select an option</option>
                                         @foreach($manufacture_product_categories as $product_category)
                                             <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
@@ -52,7 +45,7 @@
                                     <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
                                 </div>
                             </div>
-                            
+
 
                             <div class="inpuboxt_group_wrap">
                                 <div class="row">
@@ -137,7 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row rfq_img_upload_wrap">
                                 <div class="thumbnail_img_box">
                                     <div class="thumbnail_img">
@@ -234,47 +227,67 @@
 
                             <input type="hidden" name="captcha_token" id="captcha_token" value="">
                             <div class="clear30"></div>
-                            <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
-            {{--
-                                <div class="captchaContent" style="margin-bottom: 15px;">
-                                    <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
-                                    <div class="messageContent" style="color: red; text-align: left;"></div>
-                                </div> --}}
 
-                                {{-- <button type="button" class="btn-red mr15" onclick="location.reload();">
-                                    <i aria-hidden="true" class="fa fa-times-circle fa-lg"></i>&nbsp;&nbsp;Cancel
-                                </button> --}}
-
-
-
-                                <!-- <button type="button" class="btn-green" onclick="onSubmit()">
-                                    <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="padding-right: 6px; line-height: 18px;"></i>Submit
-                                </button> -->
-
-                                <button type="submit" id="page_button" style="display: none;"></button>
-
-                                <div class="submit_btn_wrap">
+                            <div class="rfq_user_information_wrap">
+                                <legend>User Information</legend>
+                                <div class="user_login_info">
                                     <div class="row">
-                                        <div class="col s12 m6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
-                                        <div class="col s12 m6 right-align">
-                                            <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmit();">
-                                                Post
-                                            </button>
+                                        <div class="col s12 m2 l3">&nbsp;</div>
+                                        <div class="col s12 m8 l6">
+                                            <div class="input-field input-wrapper">
+                                                <label>Email Address</label>
+                                                <input type="email" class="form-control- ig-new-rgt" name="email" />
+                                            </div>
+                                            <div class="input-field input-wrapper">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control- ig-new-rgt" name="password" />
+                                            </div>
+                                            <a href="javascript:void(0)" class="trigger_rfq_register">Click here to Register</a>
                                         </div>
+                                        <div class="col s12 m2 l3">&nbsp;</div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="user_registration_info" style="display: none;">
+                                    <div class="row">
+                                        <div class="col s12 m2 l3">&nbsp;</div>
+                                        <div class="col s12 m8 l6">
+                                            <div class="input-field input-wrapper">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control- ig-new-rgt" name="name" />
+                                            </div>
+                                            <div class="input-field input-wrapper">
+                                                <label>Email Address</label>
+                                                <input type="email" class="form-control- ig-new-rgt" name="r_email" />
+                                            </div>
+                                            <div class="input-field input-wrapper">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control- ig-new-rgt" name="r_password" />
+                                            </div>
+                                            {{-- <input type="hidden" name="company" value="No Company" /> --}}
+                                            <a href="javascript:void(0)" class="trigger_rfq_login">Already register. Click here to login</a>
+                                        </div>
+                                        <div class="col s12 m2 l3">&nbsp;</div>
                                     </div>
                                 </div>
 
-
+                                <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
+                                    <button type="submit" id="page_button" style="display: none;"></button>
+                                    <div class="submit_btn_wrap center-align">
+                                        <button type="button" class="btn_green btn_rfq_post btn-green" onclick="onSubmit();">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="clear20"></div>
                             </div>
-
-                            <div class="clear20"></div>
                             <!--/8-->
 
 
                         </div>
                     </form>
                 </div>
-                
+
 
 
             </div>
@@ -292,6 +305,16 @@
 
 @push('js')
      <script type="text/javascript">
+         $(document).ready(function(){
+             $(".trigger_rfq_register").click(function(){
+                $(this).closest(".user_login_info").hide();
+                $(".user_registration_info").show();
+             })
+             $(".trigger_rfq_login").click(function(){
+                $(this).closest(".user_registration_info").hide();
+                $(".user_login_info").show();
+             })
+         })
 
         function allowTwoDecimal() {
             var num = $("#target_price").val();
@@ -319,16 +342,16 @@
             var errorClass = 'error';
 
 
-            if ($('select[name="category_id"]').val()==null || $('select[name="category_id"]').val()=="Select an option")
+            if ($('#category_id').val()==null || $('#category_id').val()=="Select an option")
             {
                 errCount++;
-                $('select[name="category_id"]').closest('.input-wrapper').addClass(errorClass);
-                $('select[name="category_id"]').addClass('invalid');
+                $('#category_id').closest('.input-wrapper').addClass(errorClass);
+                $('#category_id').addClass('invalid');
             }
             else
             {
-                $('select[name="category_id"]').closest('.input-wrapper').removeClass(errorClass);
-                $('select[name="category_id"]').removeClass('invalid');
+                $('#category_id').closest('.input-wrapper').removeClass(errorClass);
+                $('#category_id').removeClass('invalid');
             }
 
             if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
@@ -433,6 +456,43 @@
                 $('input[name="delivery_time"]').removeClass('invalid');
             }
 
+            if ($('input[name="email"]').val()=="" && $('input[name="r_email"]').val()=="")
+            {
+                errCount++;
+                $('input[name="email"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="email"]').addClass('invalid');
+            }
+            else
+            {
+                $('input[name="email"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="email"]').removeClass('invalid');
+            }
+
+            if ($('input[name="password"]').val()=="" && $('input[name="r_password"]').val()=="")
+            {
+                errCount++;
+                $('input[name="password"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="password"]').addClass('invalid');
+            }
+            else
+            {
+                $('input[name="password"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="password"]').removeClass('invalid');
+            }
+
+            if ($('input[name="email"]').val()=="" && $('input[name="name"]').val()=="")
+            {
+                errCount++;
+                $('input[name="name"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="name"]').addClass('invalid');
+            }
+            else
+            {
+                $('input[name="name"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="name"]').removeClass('invalid');
+            }
+
+
 
             if(errCount==0)
             {
@@ -464,6 +524,107 @@
             } else {
                 // Disable submit button
             }
+        });
+
+
+        $('.createRfqForm').on('submit',function(e){
+            e.preventDefault();
+
+
+            var formData = new FormData(this);
+            formData.append('_token', "{{ csrf_token() }}");
+
+            const rfq_login_check_url = "{{route('rfq.store.with.login')}}";
+            $.ajax({
+                method: 'post',
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                url: rfq_login_check_url,
+                beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                },
+
+                success:function(response){
+
+                    console.log(response);
+                    const rfq_app_url = "{{env('RFQ_APP_URL')}}";
+                    var url = rfq_app_url+'/api/quotation';
+                    const sso_token = "Bearer " +response.access_token;
+                    var formData = new FormData();
+                    var file_data = $('input[type="file"]')[0].files; // for multiple files
+                    var files = [];
+                    for (let i = 0; i < $('input[type="file"]').length; i++) {
+                        formData.append("files", $('input[type="file"]')[i].files[0]);
+                    }
+                    formData.append("rfq_from", 'service');
+
+
+                    var other_data = $('.createRfqForm').serializeArray();
+                    var category_id=[];
+                    $("#category_id :selected").each(function() {
+                        category_id.push(this.value);
+                    });
+                    var stringCatId=category_id.toString();
+
+                    $.each(other_data,function(key,input){
+                        if(input.name != 'category[]'){
+                            formData.append(input.name,input.value);
+                        }
+                    });
+
+                    formData.append('category_id', stringCatId);
+                    formData.append('_token', "{{ csrf_token() }}");
+
+                    $.ajax({
+                        method: 'post',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: formData,
+                        enctype: 'multipart/form-data',
+                        url: url,
+                        headers: { 'Authorization': sso_token },
+
+                        success:function(response){
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+                            swal("Done!", msg,"success");
+                            window.location.href = "{{ route('rfq.my')}}";
+                        },
+                        error: function(xhr, status, error)
+                            {
+                            $('.loading-message').html("");
+                            $('#loadingProgressContainer').hide();
+                            swal("Error!", error,"error");
+                            }
+                    });
+
+                },
+                error: function(xhr, status, error)
+                    {
+
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $("#errors").empty();
+                        if(xhr.status == 400){
+                            $.each(xhr.responseJSON.error, function (key, item)
+                            {   $("html, body").animate({
+                                    scrollTop: 0
+                                }, 500);
+                                $("#errors").append("<li class='red darken-1'>"+item+"</li>")
+                            });
+                        }else{
+                            swal("Error!", xhr.responseJSON.error,"error");
+                        }
+
+
+                    }
+            });
+
         });
 
 </script>

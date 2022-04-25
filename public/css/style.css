@@ -5855,7 +5855,9 @@ input.input-field[type=text]:not(.browser-default) {
     padding-left: 35px;
 }
 .password-block-wrap #hide-password,
-.password-block-wrap #show-password {
+.password-block-wrap #from-rfq-link-hide-password,
+.password-block-wrap #show-password,
+.password-block-wrap #from-rfq-link-show-password {
     position: absolute;
     top: 15px;
     z-index: 99;

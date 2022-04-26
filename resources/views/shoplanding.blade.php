@@ -22,7 +22,7 @@
                             <p>#SourcingMadeEasy</p>
 
                             <div class="quotation_request">
-                                <a href="{{route('rfq.crate')}}">
+                                <a href="{{route('rfq.create')}}">
                                     <span class="quotation_text">Submit a Request for Quotation</span>
                                     <span class="quotation_arrow animate_quotation_arrow"><i class="material-icons">arrow_forward</i></span>
                                 </a>
@@ -93,7 +93,7 @@
             </div>
             <div class="landing_spotlight_infoWrap animate_landing_spotlight_infoWrap">
                 <div class="container-full-width">
-                    @php 
+                    @php
                         $spotlightCount = 0;
                     @endphp
                     @foreach($spotlightBusinessProfile as $businessProfile)
@@ -115,7 +115,7 @@
                                         @else
                                             @php
                                                 $img = $businessProfile->user->image ?'storage/'.$businessProfile->user->image : 'images/frontendimages/no-image.png';
-                                            @endphp                                        
+                                            @endphp
                                             <img itemprop="img" itemprop="img" src="{{asset($img)}}" alt="avatar" />
                                         @endif
                                     </div>
@@ -132,9 +132,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
-                        @php $spotlightCount++; @endphp 
+                        @php $spotlightCount++; @endphp
                     @endforeach
                 </div>
             </div>
@@ -144,12 +144,12 @@
           <div class="container">
             <div class="landing_tab_menu" itemscope>
                 <ul class="spotlight_tabs" itemscope itemtype="https://schema.org/ListItem">
-                    @php 
+                    @php
                         $spotlightCount = 0;
                     @endphp
                     @foreach($spotlightBusinessProfile as $businessProfile)
                         <li class="tab" itemprop="itemListElement"><a itemprop="{{ $businessProfile->business_name }}" href="#spotlight-{{$spotlightCount}}">{{ $businessProfile->business_name }}</a></li>
-                        @php $spotlightCount++; @endphp 
+                        @php $spotlightCount++; @endphp
                     @endforeach
                 </ul>
             </div>
@@ -158,7 +158,7 @@
 
         <div class="mvc_produce_design_wrap">
           <div class="container">
-            <div class="row"> 
+            <div class="row">
                 <div class="col s12 m6 product_video_wrap animate_product_video_wrap">
                     <div class="product_video_box" itemscope>
                         <img itemprop="img" src="{{asset('images/frontendimages/new-home/360-white.GIF')}}" alt="Animated Image" />
@@ -175,7 +175,7 @@
                         <a href="{{route('product.type.mapping',['studio', 'design'])}}" itemprop="Visit Studio" class="btn_green btn_visit_studio" >Visit Studio</a>
                     </div>
                 </div>
-              
+
             </div>
           </div>
         </div>

@@ -261,7 +261,7 @@
                                                     <!-- Chat content area -->
                                                     <div class="chat-area ps ps--active-y">
                                                         <div class="chats">
-                                                            <div class="chats-box chat_messagedata" id="messagedata" data-buyer_id="{{$rfq['sso_reference_id']}}" >
+                                                            <div class="chats-box chat_messagedata" id="messagedata" data-buyerid="{{$rfq['sso_reference_id']}}" >
                                                             @if($chatdata)
                                                                 @foreach($chatdata as $chat)
                                                                     @if($chat['from_id'] == $user)
@@ -859,7 +859,7 @@
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
                 var supplierId = $('#supplier-messagedata').data('supplierid');
-                var buyerId = $('.messagedata').data('buyer_id');
+                var buyerId = $('#messagedata').data('buyerid');
                 console.log("supplier id:",supplierId);
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
@@ -879,7 +879,7 @@
                         $('.supplier-chats-box').append(msgHtml);
                         $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
                     }
-                    if( buyerId == data.from_id ){
+                    if( buyerId && buyerId == data.to_id ){
                         $('.chats-box').append(msgHtml);
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }

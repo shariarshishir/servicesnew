@@ -6486,7 +6486,7 @@ nav .pagination li.active .page-link {
     margin: 0 auto;
 }
 .registration-block .company-logo {
-    margin-top: 20px;
+    margin-top: 50px;
     text-align: center;
 }
 .registration-block .company-logo img {
@@ -8210,7 +8210,7 @@ nav .pagination li.active .page-link {
 }
 .landing_intro_wrapper {
     background: #ffffff url(../images/frontendimages/new-home/landing-intro-bg.jpg) no-repeat right 30px;
-    padding: 20px 0 100px;
+    padding: 50px 0 100px;
     background-size: contain;
 }
 .home_intro_left {
@@ -8218,7 +8218,7 @@ nav .pagination li.active .page-link {
     line-height: 32px;
     color: #000000;
     padding-right: 50px;
-    padding-top: 20px;
+    padding-top: 0;
 }
 .landing_intro_wrapper h1 {
     font-family: 'nexabold';
@@ -8271,7 +8271,7 @@ nav .pagination li.active .page-link {
     background-size: 30px;
     border-bottom: 1px solid #eee;
     font-family: 'nexabold';
-    font-size: 18px;
+    font-size: 16px;
     line-height: 25px;
     color: #484848;
 }
@@ -9542,6 +9542,25 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     float: none;
 }
 
+.home_intro_video_box {
+    padding-top: 15px;
+    text-align: right;
+}
+.home_intro_video_box .embed-responsive-item {
+    border: none;
+    height: 350px;
+    /* width: 512px; */
+    width: 100%;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
+
+
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1500px) {
@@ -9630,9 +9649,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin-right: -8px;
     }
 
-    .landing_intro_wrapper .row {
+    /* .landing_intro_wrapper .row {
         padding: 0 50px;
-    }
+    } */
 
 
 }
@@ -9679,8 +9698,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     #from-rfq-link-login-register-modal,
     #login-register-modal.modal.modal-fixed-footer {
-        height: 60%;
+        height: 435px;
         width: 50%;
+        max-width: 770px;
+    }
+    #from-rfq-link-login-register-modal .modal-content,
+    #login-register-modal.modal.modal-fixed-footer .modal-content {
+        padding-bottom: 10px;
+        max-height: 385px;
     }
     /* .blog_detail_info_wrap .feature_img img {
         min-height: 450px;
@@ -10006,7 +10031,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: 80% !important;
     }
     .login-block .input-field label.active {
-        left: 30px;
+        left: 0;
     }
     .product_details_content_wrap .product_preview_wrap video {
         width: 260px;
@@ -10068,7 +10093,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .landing_intro_wrapper h1 {
         font-size: 30px;
-        line-height: 40px;
+        line-height: 45px;
         margin-bottom: 20px;
     }
     .footer_topWrap_inner h2,
@@ -10197,7 +10222,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
 
 
+}
 
+@media only screen and (max-width: 1299px) { 
+    .home_intro_video_box .embed-responsive-item {
+        height: 290px;
+        /* width: 448px; */
+    }
+    
 }
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
@@ -10412,6 +10444,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin-top: 20px;
     } */
 
+    .home_intro_video_box {
+        padding-top: 0;
+    }
+    .home_intro_video_box .embed-responsive-item {
+        height: 260px;
+    }
 
 }
 
@@ -11141,6 +11179,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .landing_page_wrapper .sourcing_img_box img {
         max-height: 360px;
+    }
+
+    .home_intro_video_box {
+        padding-top: 0;
+    }
+    .home_intro_video_box .embed-responsive-item {
+        height: 250px;
+        width: 90%;
     }
 
 }
@@ -12118,8 +12164,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin: 0;
     }
 
-
-
 }
 
 
@@ -12151,7 +12195,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin-bottom: 20px;
     }
     .logo {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
     .business_login_inner {
         padding: 20px 0px !important;
@@ -12616,6 +12660,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .landing_tools_img {
         padding-top: 0;
     }
+    .home_intro_video_box {
+        text-align: center;
+    }
+
 
 }
 

@@ -236,17 +236,17 @@
                                         <div class="col s12 m8 l6">
                                             <div class="input-field input-wrapper">
                                                 <label>Email Address</label>
-                                                <input type="email" class="form-control- ig-new-rgt" name="email" />
+                                                <input type="email" class="form-control- ig-new-rgt" name="email" autocomplete="false"/>
                                             </div>
                                             <div class="input-field input-wrapper">
                                                 <label>Password</label>
-                                                <input type="password" class="form-control- ig-new-rgt" name="password" />
+                                                <input type="password" class="form-control- ig-new-rgt" name="password"  autocomplete="new-password"/>
                                             </div>
                                             <a href="javascript:void(0)" class="trigger_rfq_register">Click here to Register</a>
                                         </div>
                                         <div class="col s12 m2 l3">&nbsp;</div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="user_registration_info" style="display: none;">
                                     <div class="row">
@@ -254,15 +254,15 @@
                                         <div class="col s12 m8 l6">
                                             <div class="input-field input-wrapper">
                                                 <label>Name</label>
-                                                <input type="text" class="form-control- ig-new-rgt" name="name" />
+                                                <input type="text" class="form-control- ig-new-rgt" name="name" autocomplete="false"/>
                                             </div>
                                             <div class="input-field input-wrapper">
                                                 <label>Email Address</label>
-                                                <input type="email" class="form-control- ig-new-rgt" name="r_email" />
+                                                <input type="email" class="form-control- ig-new-rgt" name="r_email" autocomplete="false"/>
                                             </div>
                                             <div class="input-field input-wrapper">
                                                 <label>Password</label>
-                                                <input type="password" class="form-control- ig-new-rgt" name="r_password" />
+                                                <input type="password" class="form-control- ig-new-rgt" name="r_password" autocomplete="new-password"/>
                                             </div>
                                             {{-- <input type="hidden" name="company" value="No Company" /> --}}
                                             <a href="javascript:void(0)" class="trigger_rfq_login">Already register. Click here to login</a>

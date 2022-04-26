@@ -41,7 +41,11 @@
                     </div>
                     <div class="col s12 m6 animate_home_intro_right">
                         <div class="home_intro_right" itemscope>
-                            <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" />
+                            <!-- <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" /> -->
+
+                            <div class="home_intro_video_box">
+                                <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/ZvyTEE4vjZY" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>

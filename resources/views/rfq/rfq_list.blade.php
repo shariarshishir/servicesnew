@@ -1,4 +1,4 @@
-        
+
 @php $i = 1; @endphp
 	@foreach ($rfqLists as $rfqSentList)
 	<div class="rfq_profile_detail row">
@@ -18,17 +18,16 @@
 						{{ $rfqSentList['user']['user_name']}}
 						@if(isset($rfqSentList->businessProfile->is_business_profile_verified))
 						<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" />
-						@endif						
+						@endif
 					</h4>
 					<!--p>Fashion Tex Ltd.</p-->
 				</div>
-				@if(auth::check())
+
 				<div class="profile_view_time right-align col s12 m4 l4">
 					<div style="float: right;" class="rfq_share_box">
-						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList['id']}})"> <i class="material-icons"> share </i> <span>Share</span></a>
+						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel('{{$rfqSentList['id']}}')"> <i class="material-icons"> share </i> <span>Share</span></a>
 					</div>
 				</div>
-				@endif
 			</div>
 
 			<div class="rfq_view_detail_wrap">
@@ -64,15 +63,22 @@
                     @endforeach
                 @endif
 			</div>
-			@if(auth::check())
-			<div class="responses_wrap right-align">
-                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
-				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">0</span>
-				</button>				
-                
-			</div>
-			@endif
+
+                <div class="responses_wrap right-align">
+                    @if(auth::check())
+                        @if($rfqSentList['isProposalSent'] == true)
+                            <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Replied</a>
+                        @else
+                            <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
+                        @endif
+                    @else
+                        <a href="#login-register-modal" itemprop="Login / Register" class="modal-trigger">Reply on this RFQ</a>
+                    @endif
+                    <button class="none_button btn_responses" id="rfqResponse" >
+                        Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">{{$rfqSentList['responseCount']}}</span>
+                    </button>
+
+                </div>
 
 		</div>
 	</div>

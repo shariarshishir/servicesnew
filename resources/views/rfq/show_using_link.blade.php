@@ -90,12 +90,17 @@
 
 			<div class="responses_wrap right-align">
                 @auth
-                     <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
+                     {{-- <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a> --}}
+                    @if($rfqSentList['isProposalSent'] == true)
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Replied</a>
                     @else
+                        <a href="javascript:void(0);" class="bid_rfq" onclick="openBidRfqModal('{{$rfqSentList['id']}}', '{{$rfqSentList['unit']}}');">Reply on this RFQ</a>
+                    @endif
+                @else
                     <a class="modal-trigger" href="#from-rfq-link-login-register-modal" >Reply on this RFQ</a>
                 @endauth
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">0</span>
+					Responses <span class="respons_count  res_count_{{$rfqSentList['id']}}_">{{$rfqSentList['responseCount']}}</span>
 				</button>
 
 			</div>
@@ -131,8 +136,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input id="rfqemail_login" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                            <label for="email" class="">{{ __('E-Mail Address') }}</label>
+                            <input id="rfqemail_login" type="email" class="@error('email') is-invalid @enderror" name="from_rfq_link_email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <label for="from_rfq_link_email" class="">{{ __('E-Mail Address') }}</label>
                             <span class="text-danger error-text rfqemail_err"></span>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -145,16 +150,16 @@
                     <div class="row">
                         <div class="input-field col s12 password-block-wrap">
                             <i class="material-icons prefix">lock_outline</i>
-                            <input id="rfqpassword_login" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                            <label for="password" class="">{{ __('Password') }}</label>
+                            <input id="rfqpassword_login" type="password" class="@error('password') is-invalid @enderror" name="from_rfq_link_password" required autocomplete="current-password">
+                            <label for="from_rfq_link_password" class="">{{ __('Password') }}</label>
                             <span class="text-danger error-text password_err"></span>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <a href="javascript:void(0);" id="show-password"><i class="material-icons">visibility</i></a>
-                            <a href="javascript:void(0);" id="hide-password" style="display: none;"><i class="material-icons">visibility_off</i></a>
+                            <a href="javascript:void(0);" id="from-rfq-link-show-password"><i class="material-icons">visibility</i></a>
+                            <a href="javascript:void(0);" id="from-rfq-link-hide-password" style="display: none;"><i class="material-icons">visibility_off</i></a>
                         </div>
                     </div>
 
@@ -167,7 +172,7 @@
                         </div>
                     </div>
 
-                    <button class="btn green waves-effect waves-light right signin-from-rfq-share-link signin" type="submit" name="log-in">
+                    <button class="btn green waves-effect waves-light right signin-from-rfq-share-link" type="submit" name="log-in">
                         {{ __('Sign In') }} <i class="material-icons right">send</i>
                     </button>
                     {{-- @if (Route::has('password.request'))
@@ -204,7 +209,7 @@
                     if($.isEmptyObject(data.error)){
                        if(data.msg){
                         //$('.error-msg').show().text(data.msg);
-                        // alert(data.msg);
+                        alert(data.msg);
                         $('#rfqemail_login').addClass('invalid');
                         $('#rfqpassword_login').addClass('invalid');
                        }
@@ -224,5 +229,16 @@
           $('.'+key+'_err').text(value);
         });
     }
+
+    $("#from-rfq-link-show-password").click(function(){
+            $(this).hide();
+            $("#from-rfq-link-hide-password").show();
+            $("#rfqpassword_login").prop("type", "text");
+        });
+    $("#from-rfq-link-hide-password").click(function(){
+        $(this).hide();
+        $("#from-rfq-link-show-password").show();
+        $("#rfqpassword_login").prop("type", "password")
+    });
     </script>
 @endpush

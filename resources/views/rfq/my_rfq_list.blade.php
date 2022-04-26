@@ -24,7 +24,7 @@
 
 				<div class="profile_view_time right-align col s12 m4 l4">
 					<div style="float: right;" class="rfq_share_box">
-						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel({{$rfqSentList['id']}})"> <i class="material-icons"> share </i> <span>Share</span></a>
+						<a class="btn_green btn_share" href="javascript:void(0);" onclick= "openShareModel('{{$rfqSentList['id']}}')"> <i class="material-icons"> share </i> <span>Share</span></a>
 					</div>
 				</div>
 			</div>
@@ -64,9 +64,9 @@
 			</div>
 
 			<div class="responses_wrap right-align">
-                <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a>
+                {{-- <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a> --}}
 				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">0</span>
+					Responses <span class="respons_count">{{$rfqSentList['responseCount']}}</span>
 				</button>
 
 			</div>

@@ -4,29 +4,38 @@
 		<!-- Desktop header start -->
 		<header class="header_dasktop" itemscope>
 			<div class="row header_innrer" itemscope>
+				<div class="col m3 logo" itemscope><a href="{{route('home')}}" itemprop="Merchantbay Home"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
 				<div class="col m5 mainnav_wrap" itemscope>
 					<nav class="mainNav" itemscope>
 						<ul class="left hide-on-med-and-down" itemscope itemtype="https://schema.org/ListItem">
-                            <li itemprop="itemListElement">
-								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="studio-products">Studio<i class="material-icons right">arrow_drop_down</i></a>
-								<!-- Dropdown Structure -->
-								<ul id="studio-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
-									<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
-									<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+							<li>
+								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="explore-products">Explore<i class="material-icons right">arrow_drop_down</i></a>
+
+								<ul id="explore-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
+									<li itemprop="itemListElement">
+										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Studio<i class="material-icons right">arrow_drop_down</i></a>
+										<!-- Dropdown Structure -->
+										<ul id="" class="sub_dropdown" itemscope itemtype="https://schema.org/ListItem">
+											<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
+											<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
+											<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+										</ul>
+									</li>
+									<li itemprop="itemListElement">
+										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Raw Materials<i class="material-icons right">arrow_drop_down</i></a>
+										<!-- Dropdown Structure -->
+										<ul id="" class="sub_dropdown" itemscope itemtype="https://schema.org/ListItem">
+											<li itemprop="itemListElement"><a itemprop="Textile" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
+											<li itemprop="itemListElement"><a itemprop="Yarn" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
+											<li itemprop="itemListElement"><a itemprop="Trims and Accessories" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
+										</ul>
+									</li>	
+									<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 								</ul>
 							</li>
-                            <li itemprop="itemListElement">
-								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products">Raw Materials<i class="material-icons right">arrow_drop_down</i></a>
-								<!-- Dropdown Structure -->
-								<ul id="more-system-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a itemprop="Textile" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
-									<li itemprop="itemListElement"><a itemprop="Yarn" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
-									<li itemprop="itemListElement"><a itemprop="Trims and Accessories" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
-								</ul>
-							</li>							
+                            
+                            						
 							<li itemprop="itemListElement"><a itemprop="RFQ" class="{{ Route::is('rfq.index') ? 'active' : ''}}" href="{{route('rfq.index')}}">RFQ</a></li>
-							<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 								
@@ -59,9 +68,9 @@
 						</ul>
 					</nav>
 				</div>
-				<div class="col m2 logo" itemscope><a href="{{route('home')}}" itemprop="Merchantbay Home"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
+				
 
-				<div class="col m5 top_right " itemscope>
+				<div class="col m4 top_right " itemscope>
 					<div class="user-block" itemscope>
 						@if(env('APP_ENV') == 'production')
 							@if(Auth::guard('web')->check() && Cookie::has('sso_token'))
@@ -304,26 +313,32 @@
 						<a href="javascript:void(0)" class="closebtn" itemprop="Close Nav" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
 						
 						<ul itemscope itemtype="https://schema.org/ListItem">
-							<li itemprop="itemListElement">
-								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="studio-products-mobile">Studio <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
-								
-								<!-- Dropdown Structure -->
-								<ul id="studio-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
-									<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
-									<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+							<li>
+								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="explore-products-mobile">Explore<i class="material-icons right">keyboard_arrow_down</i></a>
+							
+								<ul id="explore-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
+									<li itemprop="itemListElement">
+										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Studio <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
+										
+										<!-- Dropdown Structure -->
+										<ul id="" class="dropdown-subNav-mobile" itemscope itemtype="https://schema.org/ListItem">
+											<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
+											<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
+											<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+										</ul>
+									</li>
+									<li itemprop="itemListElement">
+										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Raw Materials <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
+										<!-- Dropdown Structure -->
+										<ul id="" class="" itemscope itemtype="https://schema.org/ListItem">
+											<li itemprop="itemListElement"><a itemprop="Textile" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
+											<li itemprop="itemListElement"><a itemprop="Yarn" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
+											<li itemprop="itemListElement"><a itemprop="Trims and Accessories" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
+										</ul>
+									</li>
+									<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 								</ul>
 							</li>
-							<li itemprop="itemListElement">
-								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products-mobile">Raw Materials <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
-								<!-- Dropdown Structure -->
-								<ul id="more-system-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
-									<li itemprop="itemListElement"><a itemprop="Textile" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
-									<li itemprop="itemListElement"><a itemprop="Yarn" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
-									<li itemprop="itemListElement"><a itemprop="Trims and Accessories" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
-								</ul>
-							</li>							
-							<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 							<li itemprop="itemListElement"><a itemprop="RFQ" class="{{ Route::is('rfq.index') ? 'active' : ''}}" href="{{route('rfq.index')}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links-mobile">More <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>

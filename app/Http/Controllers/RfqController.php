@@ -598,7 +598,7 @@ class RfqController extends Controller
                 'user_flag' => 'rfq',
             ];
 
-            $registration=Http::post(env('SSO_REGISTRATION_URL').'/api/auth/signup/',$registration_data);
+            $registration=Http::post(env('SSO_URL').'/api/auth/signup/',$registration_data);
             if(!$registration->successful()){
                 return  response()->json(['error' => 'Registration failed, please try again'],403);
             }

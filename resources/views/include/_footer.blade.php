@@ -13,9 +13,12 @@
     <div class="footer_topWrap" itemscope>
         <div class="container center" itemscope>
             <div class="footer_topWrap_inner" itemscope>
-                <h2 itemprop="title">Sign up and Get connected</h2>
-                <h4 itemprop="title">With thousands of Suppliers and Products that meet your needs.</h4>
-                <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green footer_signUp" itemprop="Sign Up">Sign up</a>
+                <div class="footer_topWrap_inner_info">
+                    <h2 itemprop="title">Sign up and Get connected</h2>
+                    <h4 itemprop="title">With thousands of Suppliers and Products that meet your needs.</h4>
+                    <a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}" class="btn_green footer_signUp" itemprop="Sign Up">Sign up</a>
+                </div>
+                <div class="footer_topWrap_inner_right_bg">&nbsp;</div>
             </div>
         </div>
     </div>

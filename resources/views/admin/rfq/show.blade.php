@@ -878,7 +878,8 @@
                     if( supplierId  && supplierId == data.to_id){
                         $('.supplier-chats-box').append(msgHtml);
                         $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
-                    }else{
+                    }
+                    if( buyerId == data.from_id ){
                         $('.chats-box').append(msgHtml);
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }

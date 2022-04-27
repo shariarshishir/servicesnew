@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="infoBox">
                                     <h6>{{$rfq['title']}}</h6>
-                                    <p><b> Query </b> for {{$rfq['category'][0]['name']}}</p>
+                                    <p><b> Query:</b> For  @foreach($rfq['category'] as $category) {{$category['name']}} @if(!$loop->last) , @endif  @endforeach</p>
                                     <span style="display: flex;"><p><b>Details:</b></p> {!! $rfq['full_specification'] !!}</span>
                                     <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                     @if(isset($rfq['images']))
@@ -230,7 +230,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" data-businessprofilename="{{$businessProfile['business_name']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                                    <button type="button" data-businessprofilealias="{{$businessProfile['alias']}}" data-businessprofilename="{{$businessProfile['business_name']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -510,7 +510,7 @@
                                     html += '</div>';
                                     html += '<div class="modal-footer">';
                                     html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                                    html += '<button type="button" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html += '<button type="button" data-businessprofilealias="'+item.alias+'" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';
@@ -644,7 +644,7 @@
                                     html += '</div>';
                                     html += '<div class="modal-footer">';
                                     html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                                    html += '<button type="button" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html += '<button type="button" data-businessprofilealias="'+item.alias+'" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';
@@ -750,9 +750,11 @@
                 }
             })
 
-            //$(".send_offer_price_trigger").click(function(){
             $(document).on("click", ".send_offer_price_trigger", function(){
-                var html = $(this).data("businessprofilename")+" offers $"+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
+                var alias = $(this).data("businessprofilealias");
+                var businessName = $(this).data("businessprofilename");
+                var businessProfileNameWithUrl = '<a href="/'+alias+'">'+businessName+'</a>';
+                var html = businessProfileNameWithUrl+" offers $"+$(this).closest(".modal-content").find(".propose_price").val()+" / "+$(this).closest(".modal-content").find(".propose_uom").val();
                 let message = {'message': html, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}", 'rfq_id': "{{$rfq['id']}}",'factory':true,'product': null};
                 socket.emit('new message', message);
 
@@ -890,10 +892,25 @@
                     var msgHtml = '<div class="chat chat-left">';
                     msgHtml += '<div class="chat-avatar">';
                     msgHtml += '<a class="avatar">';
-                    if(to_user_image != ""){
-                        msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
-                    }else{
-                        msgHtml += '<span>'+userNameShortForm+'</span>'
+                    if( supplierId  && supplierId == data.from_id ){
+                        var imageSource = $('.active_supplier_image').attr('src');
+                        var supplierNameShortForm = $('.active_messaging_supplier_name_short_form').text();
+                        console.log("image: "+imageSource);
+                        console.log("supplierNameShortForm: "+supplierNameShortForm);
+
+                        if(imageSource != ""){
+                            msgHtml += '<img src="'+imageSource+'" class="circle" alt="avatar">';
+                        }else{
+                            msgHtml += '<span>'+supplierNameShortForm+'</span>'
+                        }
+
+                    }
+                    if( buyerId == data.from_id ){
+                        if(to_user_image != ""){
+                            msgHtml += '<img src="'+to_user_image+'" class="circle" alt="avatar">';
+                        }else{
+                            msgHtml += '<span>'+userNameShortForm+'</span>'
+                        }
                     }
                     msgHtml += '</a>';
                     msgHtml += '</div>';
@@ -972,9 +989,9 @@
                                 msgHtml += '<div class="chat-avatar">';
                                 msgHtml += '<a class="avatar">';
                                 if(response.supplierImage != ""){
-                                    msgHtml += '<img src="'+response.supplierImage+'" class="circle" alt="avatar">';
+                                    msgHtml += '<img src="'+response.supplierImage+'" class="circle active_supplier_image" alt="avatar">';
                                 }else{
-                                    msgHtml += '<span>'+response.supplierNameShortForm+'</span>'
+                                    msgHtml += '<span class="active_messaging_supplier_name_short_form">'+response.supplierNameShortForm+'</span>'
                                 }
                                 msgHtml += '</a>';
                                 msgHtml += '</div>';

@@ -244,11 +244,11 @@
                         <input type="hidden" name="captcha_token" id="captcha_token" value="">
                         <div class="clear30"></div>
                         <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
-        {{--
-                            <div class="captchaContent" style="margin-bottom: 15px;">
-                                <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
-                                <div class="messageContent" style="color: red; text-align: left;"></div>
-                            </div> --}}
+
+                        <div class="captchaContent" style="margin-bottom: 15px;">
+                            <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
+                            <div class="messageContent" style="color: red; text-align: left;"></div>
+                        </div>
 
                             {{-- <button type="button" class="btn-red mr15" onclick="location.reload();">
                                 <i aria-hidden="true" class="fa fa-times-circle fa-lg"></i>&nbsp;&nbsp;Cancel
@@ -260,13 +260,13 @@
                                 <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="padding-right: 6px; line-height: 18px;"></i>Submit
                             </button> -->
 
-                            <!-- <button type="submit" id="page_button" style="display: none;"></button> -->
+                            <button type="submit" id="page_button" style="display: none;"></button>
 
                             <div class="submit_btn_wrap" style="padding-top: 30px;">
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit</button>
+                                        <button class="btn waves-effect waves-light btn_green" type="button" name="action">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -316,54 +316,6 @@
         {
             var errCount = 0;
             var errorClass = 'error';
-
-            // if ($('input[name="name"]').val()=="" || $('input[name="name"]').val()=="undefined")
-            // {
-            //     errCount++;
-            //     $('input[name="name"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="name"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('input[name="name"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="name"]').removeClass('invalid');
-            // }
-
-            // if ($('input[name="email"]').val()=="" || $('input[name="email"]').val()=="undefined")
-            // {
-            //     errCount++;
-            //     $('input[name="email"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="email"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('input[name="email"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="email"]').removeClass('invalid');
-            // }
-
-            // if ($('input[name="mobile"]').val()=="" || $('input[name="mobile"]').val()=="undefined")
-            // {
-            //     errCount++;
-            //     $('input[name="mobile"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="mobile"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('input[name="mobile"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="mobile"]').removeClass('invalid');
-            // }
-
-            // if ($('select[name="industry"]').val()==null || $('select[name="industry"]').val()=="Select an option")
-            // {
-            //     errCount++;
-            //     $('select[name="industry"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('select[name="industry"]').addClass('invalid');
-            // }
-            // else
-            // {
-            //     $('select[name="industry"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('select[name="industry"]').removeClass('invalid');
-            // }
 
             if ($('select[name="category_id"]').val()==null || $('select[name="category_id"]').val()=="Select an option")
             {
@@ -449,19 +401,20 @@
                 $('input[name="delivery_time"]').removeClass('invalid');
             }
 
-
             if(errCount==0)
             {
-               var short_description= $('#create-rfq-form .add_short_description').val().length;
-                if($('#create-rfq-form .add_short_description').val().length > 512){
+                var short_description= $('#create-rfq-form .add_short_description').val().length;
+                if($('#create-rfq-form .add_short_description').val().length > 512)
+                {
                     alert('The short description character length limit is not more than 512, your given character length is '+short_description);
                     return false;
                 }
-                // if (grecaptcha.getResponse()==""){
-                //     jQuery('.messageContent').html('Captcha Required');
-                // } else {
+                                
+                if (grecaptcha.getResponse()==""){
+                    jQuery('.messageContent').html('Captcha Required');
+                } else {
                     $("#page_button").click();
-                // }
+                }
             }
             else
             {

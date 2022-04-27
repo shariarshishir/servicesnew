@@ -375,14 +375,11 @@ legend {
 
 /* ****************** Header css start r********************* */
 .header_wrap {
-    padding: 5px 0;
+    padding: 30px 0 5px;
     position: relative;
     z-index: 3;
     background: #fff;
     transition:all 0.5s;
-}
-.header_dasktop {
-    padding: 5px 0;
 }
 .header_wrap.fixed {
     background-color: rgba(255,255,255,1);
@@ -8223,7 +8220,7 @@ nav .pagination li.active .page-link {
 }
 .landing_intro_wrapper {
     background: #ffffff url(../images/frontendimages/new-home/landing-intro-bg.jpg) no-repeat right 30px;
-    padding: 50px 0 100px;
+    padding: 50px 0 130px;
     background-size: contain;
 }
 .home_intro_left {
@@ -8317,6 +8314,14 @@ nav .pagination li.active .page-link {
     min-height: 200px;
     position: relative;
 }
+
+/* ******************** */
+.landing_spotlight_wrap,
+.landing_nav_wrap {
+    display: none;
+}
+/* ******************** */
+
 .landing_spotlight_wrap .spotlight_box img {
     max-width: 380px;
 }
@@ -9562,8 +9567,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 .home_intro_video_box .embed-responsive-item {
     border: none;
     height: 355px;
-    /* width: 512px; */
-    width: 100%;
+    width: 512px;
+    /* width: 100%; */
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
@@ -9576,10 +9581,16 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
 
 /* ******************** Media css style start *********************** */
+
 @media only screen and (min-width: 1500px) {
-    .container {
+    /* .container {
         max-width: 92%;
         width: 100%;
+    } */
+    .container {
+        /* max-width: 1800px;
+        width: 100%; */
+        width: 1440px;
     }
     .header_dasktop .mainNav ul li {
         padding-left: 30px;
@@ -9681,13 +9692,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .landing_intro_wrapper {
         padding: 100px 0 150px;
+    
     }
-    .container {
-        /* max-width: 1800px; */
-        max-width: 1500px;
-        width: 100%;
-    }
-
     .landing_intro_wrapper h1 {
         margin-bottom: 50px;
         font-size: 48px;
@@ -10264,6 +10270,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .mvc_produce_design_wrap .visit_studio {
         padding-top: 15px;
+    }
+
+    .home_intro_video_box .embed-responsive-item {
+        width: 430px;
     }
 
 

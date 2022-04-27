@@ -42,6 +42,14 @@ legend {
 p {
     margin-bottom: 10px;
 }
+
+.admin_logo a {
+    padding: 0;
+    text-align: center;
+}
+.admin_logo a img {
+    width: 190px;
+}
 .main-header {
     padding: 10px;
 }

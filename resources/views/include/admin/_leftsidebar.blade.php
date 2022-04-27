@@ -1,17 +1,21 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('admin.dashboard')}}" class="brand-link">
-      <img src="{{asset('admin-assets/img/merchantbay_icon_white.png')}}" alt="Merchantbay Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">MerchantBay</span>
-    </a>
+    <div class="admin_logo">
+        <a href="{{route('admin.dashboard')}}" class="brand-link" >
+            <img src="{{asset('admin-assets/img/merchantbay_icon_white.png')}}" alt="Merchantbay Logo" class="brand-image-log0"
+                style="opacity: .8">
+            <span class="brand-text font-weight-light">&nbsp;</span>
+        </a>
+    </div>
+
+    
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('admin-assets/img/avatar04.png')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('admin-assets/img/avatar04.png')}}" class="img-circle elevation-2" alt="User Image" >
         </div>
         <div class="info">
           <a href="javascript:void(0);" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>

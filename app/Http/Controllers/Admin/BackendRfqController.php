@@ -38,7 +38,7 @@ class BackendRfqController extends Controller
         return view('admin.rfq.table',compact('rfqs'))->render();
     }
 
-    public function show($id){
+    public function show($id, $link = false){
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
@@ -52,7 +52,7 @@ class BackendRfqController extends Controller
         ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
         ->get()
         ->toArray();
-       
+
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
@@ -93,7 +93,11 @@ class BackendRfqController extends Controller
         foreach($usersWithMessageUnseen as $user){
             $associativeArrayUsingIDandCount[$user['user_id']]  = $user;
         }
-        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount'));
+
+        $proforma_invoice_url_for_buyer =$profromaInvoice ? route('open.proforma.single.html', $profromaInvoice->id) : '';
+        $url_exists=$link;
+
+        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists'));
     }
 
     public function getChatDataBySupplierId(Request $request){
@@ -118,7 +122,7 @@ class BackendRfqController extends Controller
             $supplierImage = "";
         }
 
-        
+
         $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfq_id.'/admin/'.$user.'/user/'.$request->supplier_id);
         $data = $response->json();
         $chats = $data['data']['messages'];
@@ -153,7 +157,7 @@ class BackendRfqController extends Controller
             $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
                 $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
             } ])->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
-           
+
         }
         elseif($request->category_id && $request->profile_rating ==0)
         {

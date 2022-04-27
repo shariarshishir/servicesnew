@@ -150,7 +150,7 @@
                                                 <div class="title_box">
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
-                                                        @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']])) 
+                                                        @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
                                                             <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span id="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
                                                         @else
                                                             <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span style="display:none" id="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
@@ -388,7 +388,7 @@
                     url = "{{ $app->make('url')->to('/') }}/"+$(this).data('alias');
                     selectedValues.push("<a href='"+url+"'><b>"+$(this).data("businessprofilename")+"</b></a>" + " Offers - $"+$(this).val()+"/ Pcs");
                 }
-            });        
+            });
 
 
             $(document).on('change', '#factory_type', function(){
@@ -408,7 +408,7 @@
                                 $('.rfq_business_profile_list').empty();
                                 response.businessProfiles.forEach((item, index)=>{
                                     console.log(item);
-                                    
+
                                     var  className = 'no-class';
                                     var  display  = 'display:none';
                                     var offered_to_buyer = ' ';
@@ -841,9 +841,9 @@
                     $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                 }
             });
-           
 
-            
+
+
             $('.messageSendButton').click(function(){
                 //event.preventDefault();
                 var msg = $('#messagebox').val();
@@ -883,7 +883,7 @@
                         $('.chats-box').append(msgHtml);
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
-                    
+
                 }
                 else if(data.rfq_id == "{{$rfq['id']}}" && fromId != data.from_id)
                 {
@@ -906,10 +906,10 @@
                     var message_count_span = '#sso_id_'+data.from_id;
                     var no_of_unseen_message = $(message_count_span).text();
                     $(message_count_span).show();
-                   
+
                     $(message_count_span).text(parseInt( no_of_unseen_message == '' ? '0' : no_of_unseen_message)+1);
                     if( supplierId  && supplierId == data.from_id ){
-                        
+
                         $('.supplier-chats-box').append(msgHtml);
                         $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
                     }
@@ -917,7 +917,7 @@
                         $('.chats-box').append(msgHtml);
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
-                    
+
                 }
             });
 
@@ -928,8 +928,8 @@
                 modal: true,
                 buttons: {
                     //Send: messageSendToUser
-                }                
-            });	
+                }
+            });
 
             $(document).on("click",".sms_trigger", function() {
                 var rfq_id = $(this).data("rfqid");
@@ -991,11 +991,11 @@
                         $(message_count_span).text('');
                         $(message_count_span).hide();
                         dialog.dialog("open");
-                       
+
                     }
                 });
-                
-                
+
+
             });
 
             $(".messageSendToUser").click(function(){
@@ -1023,6 +1023,16 @@
             });
 
 
+            //send proforma link for buyer if exists
+            var invoice_url_for_buyer='{{$proforma_invoice_url_for_buyer ?? ''}}';
+            var url_exists= '{{$url_exists}}';
+            if(url_exists == true){
+                var msg = invoice_url_for_buyer;
+                let message = {'message': msg, 'image': "", 'from_id' : fromId, 'to_id' : "{{$rfq['user']['user_id']}}",'rfq_id': "{{$rfq['id']}}",'factory':false, 'product': null};
+                socket.emit('new message', message);
+                $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+            }
+
         });
 
         $(window).scroll(function() {
@@ -1032,8 +1042,8 @@
             } else {
                 $(".buyer-message-card").css({"position": "inherit", "top": "inherit", "right": "inherit", "max-width": "25%"});
             }
-        });        
+        });
 
-       
+
     </script>
 @endpush

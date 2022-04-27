@@ -62,7 +62,11 @@
                     @endforeach
                 @endif
 			</div>
-
+            @if($rfqSentList['status'] == 'pending')
+                <div class="responses_wrap left-align">
+                    <p>Waiting for admin approval</p>
+                </div>
+            @endif
 			<div class="responses_wrap right-align">
                 {{-- <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a> --}}
 				<button class="none_button btn_responses" id="rfqResponse" >

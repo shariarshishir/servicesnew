@@ -9653,13 +9653,34 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding: 0 50px;
     } */
 
+    .home_intro_video_box .embed-responsive-item {
+        width: 600px;
+    }
 
 }
 @media only screen and (min-width: 1900px) {
+
+}
+@media only screen and (min-width: 1700px) {
+
+    .landing_intro_wrapper {
+        padding: 100px 0 150px;
+    }
     .container {
-        max-width: 1800px;
+        /* max-width: 1800px; */
+        max-width: 1500px;
         width: 100%;
     }
+
+    .landing_intro_wrapper h1 {
+        margin-bottom: 50px;
+        font-size: 48px;
+        line-height: 68px;
+    }
+    .home_intro_left .quotation_request {
+        margin-top: 60px;
+    }
+
     .product_design_wrapper .productBox .imgBox img {
         width: auto;
     }
@@ -9689,6 +9710,15 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     /* .header_dasktop .mainNav ul li.item_whyus {
         margin-left: 165px;
     } */
+
+
+    .home_intro_video_box {
+        padding-top: 0;
+    }
+    .home_intro_video_box .embed-responsive-item {
+        width: 750px;
+        height: 450px;
+    }
 
 }
 
@@ -11538,6 +11568,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
 
 @media only screen and (max-width: 768px) {
+    .logo {
+        margin-bottom: 20px;
+    }
     table {
         word-break: initial;
     }
@@ -12192,9 +12225,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .footer_newsletter_bar .footer_buttonWrap .industry_textbox {
         width: 90%;
-        margin-bottom: 20px;
-    }
-    .logo {
         margin-bottom: 20px;
     }
     .business_login_inner {

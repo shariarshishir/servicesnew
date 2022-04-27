@@ -552,7 +552,7 @@ legend {
 .header_dasktop .mainNav .subNav li li a:active,
 .header_dasktop .mainNav .subNav li li a:visited {
     font-family: 'nexaregular';
-    padding: 4px 15px;
+    padding: 7px 15px 5px;
 }
 /* Mobile header css :start */
 .mobile_header {
@@ -9738,8 +9738,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding-top: 0;
     }
     .home_intro_video_box .embed-responsive-item {
-        width: 750px;
-        height: 450px;
+        /* width: 600px; */
+        height: 410px;
     }
 
 }

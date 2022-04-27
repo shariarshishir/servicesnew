@@ -44,7 +44,9 @@
                             <!-- <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/home-intro.png')}}" /> -->
 
                             <div class="home_intro_video_box">
-                                <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/ZvyTEE4vjZY" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/LevhWgMGtDA?autoplay=1&mute=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+                                <!-- <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/ZvyTEE4vjZY?autoplay=1&mute=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
                             </div>
                         </div>
                     </div>

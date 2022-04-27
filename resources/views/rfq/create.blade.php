@@ -271,6 +271,17 @@
                                     </div>
                                 </div>
 
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col s12 m2 l3">&nbsp;</div>
+                                    <div class="col s12 m8 l6">
+                                        <div class="captchaContent" style="margin-bottom: 15px;">
+                                            <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
+                                            <div class="messageContent" style="color: red; text-align: left;"></div>
+                                        </div> 
+                                    </div>
+                                    <div class="col s12 m2 l3">&nbsp;</div>
+                                </div>                               
+
                                 <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
                                     <button type="submit" id="page_button" style="display: none;"></button>
                                     <div class="submit_btn_wrap center-align">
@@ -496,16 +507,18 @@
 
             if(errCount==0)
             {
-               var short_description= $('#create-rfq-form .add_short_description').val().length;
-                if($('#create-rfq-form .add_short_description').val().length > 512){
+                var short_description= $('#create-rfq-form .add_short_description').val().length;
+                if($('#create-rfq-form .add_short_description').val().length > 512)
+                {
                     alert('The short description character length limit is not more than 512, your given character length is '+short_description);
                     return false;
                 }
-                // if (grecaptcha.getResponse()==""){
-                //     jQuery('.messageContent').html('Captcha Required');
-                // } else {
+
+                if (grecaptcha.getResponse()==""){
+                    jQuery('.messageContent').html('Captcha Required');
+                } else {
                     $("#page_button").click();
-                // }
+                }
             }
             else
             {

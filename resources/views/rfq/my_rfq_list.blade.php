@@ -1,7 +1,8 @@
-@php $i = 1; @endphp
+
+	@php $i = 1; @endphp
 	@foreach ($rfqLists as $rfqSentList)
-	<div class="rfq_profile_detail row">
-		<div class="col s12 m3 l2">
+	<div class="rfq_profile_detail">
+		<!-- <div class="col s12 m3 l2">
 			<div class="rfq_profile_img">
 				@if(isset($rfqSentList['user']['image']))
 				<img src="{{ asset('storage/'.$rfqSentList['user']['image']) }}" alt="" />
@@ -9,8 +10,8 @@
 				<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
 				@endif
 			</div>
-		</div>
-		<div class="col s12 m9 l10 rfq_profile_info">
+		</div> -->
+		<div class="rfq_profile_info">
 			<div class="row">
 				<div class="profile_info col s12 m8 l8">
 					<h4>
@@ -62,19 +63,27 @@
                     @endforeach
                 @endif
 			</div>
-            @if($rfqSentList['status'] == 'pending')
-                <div class="responses_wrap left-align">
-                    <p>Waiting for admin approval</p>
-                </div>
-            @endif
-			<div class="responses_wrap right-align">
-                {{-- <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a> --}}
-				<button class="none_button btn_responses" id="rfqResponse" >
-					Responses <span class="respons_count">{{$rfqSentList['responseCount']}}</span>
-				</button>
+		</div>
 
+		<div class="responses_box_wrap">
+			<div class="row">
+				<div class="col s12 m6 right">
+					<div class="responses_wrap right-align">
+						{{-- <a href="javascript:void(0);" class="bid_rfq">Reply on this RFQ</a> --}}
+						<button class="none_button btn_responses" id="rfqResponse" >
+							Responses <span class="respons_count">{{$rfqSentList['responseCount']}}</span>
+						</button>
+					</div>
+				</div>
+				<div class="col s12 m6 left">
+					@if($rfqSentList['status'] == 'pending')
+						<div class="responses_wrap_right left-align">
+							<p>* Waiting for admin approval</p>
+						</div>
+					@endif
+				</div>
+				
 			</div>
-
 		</div>
 	</div>
 	@php $i++; @endphp

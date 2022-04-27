@@ -1,8 +1,8 @@
 
 @php $i = 1; @endphp
 	@foreach ($rfqLists as $rfqSentList)
-	<div class="rfq_profile_detail row">
-		<div class="col s12 m3 l2">
+	<div class="rfq_profile_detail">
+		<!-- <div class="col s12 m3 l2">
 			<div class="rfq_profile_img">
 				@if(isset($rfqSentList['user']['image']))
 				<img src="{{ asset('storage/'.$rfqSentList['user']['image']) }}" alt="" />
@@ -10,8 +10,8 @@
 				<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar">
 				@endif
 			</div>
-		</div>
-		<div class="col s12 m9 l10 rfq_profile_info">
+		</div> -->
+		<div class="rfq_profile_info">
 			<div class="row">
 				<div class="profile_info col s12 m8 l8">
 					<h4>

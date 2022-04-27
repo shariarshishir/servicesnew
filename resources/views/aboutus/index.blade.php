@@ -41,7 +41,7 @@
                   yarn spinners, trims & accessories suppliers to our
                   platform. We create their digital profile to increase their
                   visibility and be a part of the visible supply chain. 
-                  Our multi-tire supplier base enables us to match with 
+                  Our multi-tier supplier base enables us to match with 
                   suitable partners for demand generated instantly. Constantly 
                   updating the raw material library helps us to do costing more 
                   efficiently so that buyers can benefit from end to end.
@@ -386,7 +386,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             Our goal is to help you with intelligence to make better decisions about 
             reducing your product's carbon footprint. Our traceable supply chain enables 
             us to develop the sustainability score of a product and calculate its 
-            carbon footprint. Multi-tire supplier mapping system also enables us to 
+            carbon footprint. Multi-tier supplier mapping system also enables us to 
             track down the main source of carbon within the supply chain.
           </p>
         </div>

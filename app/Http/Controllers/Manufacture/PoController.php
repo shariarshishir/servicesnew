@@ -188,7 +188,7 @@ class PoController extends Controller
             // $products = Product::where('business_profile_id',$request->business_profile_id)->where('price_unit','USD')->inRandomOrder()->limit($noOfProducts)->get();
             foreach($request->input('unit') as $i => $sup)
             {
-               
+
                 $dataitem = new ProformaProduct;
                 $dataitem->performa_id = $performa_id;
                 $dataitem->supplier_id = auth()->id();
@@ -202,7 +202,7 @@ class PoController extends Controller
                 $dataitem->price_unit = 'USD';
                 $dataitem->save();
             }
-            
+
 
             foreach($request->input('shipping_details_method') as $i => $sup)
             {
@@ -216,7 +216,7 @@ class PoController extends Controller
                 $proFormaShippingDetails->shipping_details_total = $request->input('shipping_details_total')[$i];
                 $proFormaShippingDetails->save();
             }
-            
+
             foreach($request->input('fixed_terms_conditions') as $key => $value)
             {
                 $supplierCheckedProFormaTermAndCondition = new SupplierCheckedProFormaTermAndCondition;
@@ -304,8 +304,12 @@ class PoController extends Controller
 
     public function openProformaSingleHtml($id)
     {
+
         $users[] = auth()->id();
-        $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
+        $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->findOrFail($id);
+        if($po->buyer_id != auth()->id()){
+            abort(403, 'Unauthorized action.');
+        }
         $merchantAssistances = MerchantAssistance::all();
         $conditionArray = [];
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
@@ -325,7 +329,7 @@ class PoController extends Controller
             }
 
         }
-   
+
         return redirect()->route('po.index');
         //Performa::where('id', $request->input('proforma_id'))->update(['po_no' => $request->input('po_id'), 'status' => 1]);
         //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');

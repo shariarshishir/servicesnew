@@ -3,31 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\BusinessProfile;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use PDF;
+use Carbon\Carbon;
+use App\Models\UOM;
 use App\Models\User;
-use App\Models\Manufacture\Product;
 use App\Models\Proforma;
 use App\Models\PaymentTerm;
 use App\Models\ShipmentTerm;
-use App\Models\ShippingMethod;
-use App\Models\ProFormaShippingDetails;
-use App\Models\ProFormaShippingFile;
-use App\Models\ProFormaAdvisingBank;
-use App\Models\ProFormaSignature;
 use App\Models\ShipmentType;
-use App\Models\UOM;
+use Illuminate\Http\Request;
+use App\Models\ShippingMethod;
+use App\Models\BusinessProfile;
 use App\Models\ProformaProduct;
+use App\Models\ProFormaSignature;
+use Illuminate\Support\Facades\DB;
+use App\Models\Manufacture\Product;
+use App\Http\Controllers\Controller;
+use App\Models\ProFormaAdvisingBank;
+use App\Models\ProFormaShippingFile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Intervention\Image\Facades\Image;
+use App\Models\ProFormaShippingDetails;
+use Illuminate\Support\Facades\Storage;
 use App\Models\ProFormaTermAndCondition;
-use App\Models\SupplierCheckedProFormaTermAndCondition;
-use Carbon\Carbon;
+use App\Models\Manufacture\ProductCategory;
 use App\Events\NewProfromaInvoiceHasCreatedEvent;
-use PDF;
+use App\Models\SupplierCheckedProFormaTermAndCondition;
 
 class AdminPoController extends Controller
 {
@@ -97,7 +99,7 @@ class AdminPoController extends Controller
             }else{
                 //$adminUser = User::Find('5771');
                 $data->created_by = 5771;
-            }            
+            }
             $data->save();
             $performa_id = $data->id;
 
@@ -114,7 +116,7 @@ class AdminPoController extends Controller
                 }else{
                     //$adminUser = User::Find('5771');
                     $data->supplier_id = 5771;
-                }                
+                }
                 $dataitem->product_id = NULL;
                 $dataitem->item_title = $request->input('item_title')[$i];
                 $dataitem->unit = $request->input('unit')[$i];
@@ -200,9 +202,15 @@ class AdminPoController extends Controller
 
 
 		//return redirect()->route('po.all');
-		return redirect()->route('proforma_invoices.index');
+
+        return redirect()->route('admin.rfq.show',[$request->input('generated_po_from_rfq'), true]);
+
+
+     	//return redirect()->route('proforma_invoices.index');
 
 	}
+
+
 
 
 

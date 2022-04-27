@@ -266,7 +266,7 @@
                                 <div class="row">
                                     <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
                                     <div class="col s12 m6 l6 right-align">
-                                        <button class="btn waves-effect waves-light btn_green" type="button" name="action">Submit</button>
+                                        <button class="btn waves-effect waves-light btn_green" type="button" name="action" onclick="onSubmit()">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -317,16 +317,16 @@
             var errCount = 0;
             var errorClass = 'error';
 
-            if ($('select[name="category_id"]').val()==null || $('select[name="category_id"]').val()=="Select an option")
+            if ($('#category_id').val()==null || $('#category_id').val()=="Select an option")
             {
                 errCount++;
-                $('select[name="category_id"]').closest('.input-wrapper').addClass(errorClass);
-                $('select[name="category_id"]').addClass('invalid');
+                $('#category_id').closest('.input-wrapper').addClass(errorClass);
+                $('#category_id').addClass('invalid');
             }
             else
             {
-                $('select[name="category_id"]').closest('.input-wrapper').removeClass(errorClass);
-                $('select[name="category_id"]').removeClass('invalid');
+                $('#category_id').closest('.input-wrapper').removeClass(errorClass);
+                $('#category_id').removeClass('invalid');
             }
 
             if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
@@ -409,7 +409,7 @@
                     alert('The short description character length limit is not more than 512, your given character length is '+short_description);
                     return false;
                 }
-                                
+
                 if (grecaptcha.getResponse()==""){
                     jQuery('.messageContent').html('Captcha Required');
                 } else {

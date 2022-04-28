@@ -71,7 +71,7 @@
                     </div>
 
                     {{-- standard --}}
-                    <div class="filter_box" itemscope>
+                    <div class="filter_box" itemscope style="display: none;">
                         <h4 itemprop="title">Standard</h4>
                         <p>
                             <label>
@@ -88,7 +88,7 @@
                     </div>
 
                     {{-- standard --}}
-                    <div class="filter_box" itemscope>
+                    <div class="filter_box" itemscope style="display: none;">
                         <h4 temprop="title">Badge</h4>
                         <p>
                             <label>

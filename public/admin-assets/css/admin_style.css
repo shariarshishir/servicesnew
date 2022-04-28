@@ -1280,6 +1280,12 @@ label:not(.form-check-label):not(.custom-file-label) {
     overflow: hidden;
     border: 1px solid #ddd;
 }
+
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat .chat-avatar a.avatar {
+    width: 45px;
+    height: 45px;
+    display: block;
+}
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-left .chat-avatar .avatar {
     line-height: 45px;
     text-align: center;
@@ -1291,8 +1297,8 @@ label:not(.form-check-label):not(.custom-file-label) {
     color: #4E9C52;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-avatar .avatar img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
     object-fit: cover;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .fa-chevron-circle-right {
@@ -1433,9 +1439,15 @@ label:not(.form-check-label):not(.custom-file-label) {
     margin-right: 20px;
 }
 .ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text p {
-    color: #fff;
+    color: #ffffff;
     background-color: #4E9C52;
     min-height: 35px;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text p a {
+    color: #ffffff;
+}
+.ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text p {
+
 }
 .ui-widget.ui-widget-content .chat_messagedata .chat.chat-right .chat-body .chat-text {
     position: relative;

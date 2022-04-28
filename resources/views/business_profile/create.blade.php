@@ -9,7 +9,8 @@
 		<div class="col s12 m12 l4 leftbar">
 			<div class="logo-wrap">
 				<div class="logo-inner">
-					<img title="logo" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}">
+                    <img title="logo" src="{{asset('images/frontendimages/new_layout_images/merchantbay_logoX200.png')}}">
+					<img class="logo_white_img" title="logo" src="{{asset('images/frontendimages/new_layout_images/logo_white.png')}}">
 					<h4>Connect all the stakeholders in one place</h4>
 				</div>
 			</div>

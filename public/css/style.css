@@ -973,6 +973,15 @@ legend {
     background-color: #E4E4E4;
     padding-bottom: 60px;
 }
+
+/* ***************************** */
+/* .profile_banner_inner_info {
+    position: relative;
+    max-width: 1440px;
+} */
+/* ***************************** */
+
+
 .profile_bannerwrap .banner_overlay {
     background : url('../images/frontendimages/new_layout_images/profile-banner-update.png') no-repeat center;
     background-size: cover;
@@ -1882,11 +1891,11 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .product_data_table_wrap .product_size span {
     border: 1px solid #3D3D3D;
-    padding: 0px 5px;
+    padding: 2px 5px 0;
     border-radius: 5px;
     display: inline-block;
     margin: 2px;
-    line-height: 22px;
+    line-height: 20px;
 }
 .product_data_table_wrap .btn_product_edit {
     color: #54A958;
@@ -2324,7 +2333,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     line-height: 32px;
     float: left;
     margin-left: 0;
-    width: 155px;
+    width: 140px;
     font-size: 14px;
 }
 .profile-image-block .change_photo .material-icons {
@@ -2338,7 +2347,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     height: 40px;
     text-transform: capitalize;
     font-size: 16px;
-    width: 140px;
+    width: 115px;
     font-weight: 500;
 }
 .user-profile-basic-info-block .my_businesses_wrap {
@@ -4497,6 +4506,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     margin-bottom: 10px;
     color: #000000;
     font-size: 18px;
+    text-transform: capitalize;
 }
 .rfq_profile_info h6 {
     margin-bottom: 10px;
@@ -4687,13 +4697,21 @@ div.dataTables_wrapper table.mdc-data-table__table {
     align-items: center;
     justify-content: center;
 }
-.sign-wrap .leftbar .logo-wrap img  {
-    max-width: 180px;
-    margin-bottom: 20px;
-}
+
 .sign-wrap .logo-inner {
+    max-width: 450px;
+    padding: 0 30px;
+}
+.sign-wrap .leftbar .logo-wrap img  {
+    max-width: 400px;
+    margin-bottom: 30px;
     width: 100%;
 }
+.sign-wrap .leftbar .logo-wrap .logo_white_img {
+    max-width: 350px;
+    margin-bottom: 10px;
+}
+
 .sign-wrap .leftbar .logo-wrap h4 {
     font-size: 16px;
     color: #54A958;
@@ -6366,8 +6384,12 @@ nav .pagination li.active .page-link {
     max-height: 100px;
 }
 #rfq-bid-modal .rfq-replay-submit {
-    padding: 8px 15px 10px;
+    padding: 8px 15px 7px;
     margin: 0 !important;
+}
+
+#rfq-bid-modal .submit_btn_wrap {
+    padding-top: 30px;
 }
 .header_message_box .material-icons {
     margin-top: 0 !important;
@@ -7807,6 +7829,9 @@ nav .pagination li.active .page-link {
 }
 #send-verification-request-modal #profile_verification_request .btn {
     font-size: 16px;
+}
+#send-verification-request-modal #profile_verification_request .btn:hover {
+    color: #54A958;
 }
 #send-verification-request-modal #profile_verification_request i {
     vertical-align: middle;
@@ -9690,6 +9715,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 }
 @media only screen and (min-width: 1700px) {
 
+    .container {
+        max-width: 1440px;
+    }
+
     .landing_intro_wrapper {
         padding: 100px 0 150px;
     
@@ -9738,7 +9767,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding-top: 0;
     }
     .home_intro_video_box .embed-responsive-item {
-        /* width: 600px; */
+        width: 700px;
         height: 410px;
     }
 
@@ -10283,6 +10312,17 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .home_intro_video_box .embed-responsive-item {
         height: 290px;
         /* width: 448px; */
+    }
+
+    #orders table {
+        width: 100% !important;
+    }
+
+    #orders .order_inquiries_table td.dataTables_empty{
+        white-space: nowrap;
+        padding-left: 0 !important;
+        width: 100%;
+        text-align: center !important;
     }
     
 }

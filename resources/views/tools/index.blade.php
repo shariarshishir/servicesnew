@@ -9,6 +9,11 @@
   font-size: 14px;
 }
 
+#main {
+  padding: 0px !important;
+  padding-top: 30px !important;
+}
+
   /*============= Reset CSS =============*/
   #home h3,
   #home h2,

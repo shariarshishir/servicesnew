@@ -265,7 +265,7 @@
                         <div class="clear30"></div>
                         <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
         {{--
-                            <div class="captchaContent" style="margin-bottom: 15px;">
+                            <div class="captchaContent" style="margin-top: 20px; margin-bottom: 15px;">
                                 <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
                                 <div class="messageContent" style="color: red; text-align: left;"></div>
                             </div> --}}

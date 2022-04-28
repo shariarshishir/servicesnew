@@ -855,14 +855,14 @@
                 $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             });
 
-
             socket.on('new message', function(data) {
                 var userNameShortForm = "{{$userNameShortForm}}";
                 var from_user_image = "{{$from_user_image}}";
                 var to_user_image = "{{$to_user_image}}";
-                var supplierId = $('#supplier-messagedata').data('supplierid');
+                var supplierId = $(document).children().find('#supplier-messagedata').attr("data-supplierid");
                 var buyerId = $('#messagedata').data('buyerid');
-                console.log("supplier id:",supplierId);
+                console.log(data);
+
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
                     var msgHtml = '<div class="chat chat-right">';
@@ -877,6 +877,8 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
+                    console.log("supplier id:",supplierId);
+                    console.log("buyer id:",buyerId);
                     if( supplierId  && supplierId == data.to_id){
                         $('.supplier-chats-box').append(msgHtml);
                         $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
@@ -945,6 +947,9 @@
                 modal: true,
                 buttons: {
                     //Send: messageSendToUser
+                },
+                close: function( event, ui ) {
+                    $('#supplier-messagedata').attr('data-supplierid', "");
                 }
             });
 

@@ -8,7 +8,7 @@
         </a>
     </div>
 
-    
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -211,7 +211,7 @@
                             <p>Merchant Assistance</p>
                         </a>
                     </li>
-                    
+
                 </ul>
           </li>
           <li class="nav-item">
@@ -219,13 +219,13 @@
                 <i class="far fa-file nav-icon"></i>
                 <p>Proforma terms and conditions</p>
             </a>
-          </li> 
+          </li>
           <li class="nav-item">
             <a href="{{route('proforma_invoices.index')}}" class="nav-link {{ Route::is('proforma_invoices*') ? 'active' : ''}} ">
                 <i class="far fa-file nav-icon"></i>
                 <p>Proforma invoices</p>
             </a>
-          </li>          
+          </li>
           <li class="nav-item">
             <a href="{{ Route('blogs.index')}}" class="nav-link {{ Route::is('blogs.index')? 'active' : ''}}">
                 <i class="far fa-newspaper nav-icon"></i>
@@ -249,7 +249,13 @@
                 <p>Certification</p>
             </a>
         </li>
-       
+        {{-- product type mapping --}}
+        <li class="nav-item">
+            <a href="{{ Route('admin.product-type-mapping.index')}}" class="nav-link {{ Route::is('admin.product-type-mapping.index')||Route::is('admin.product-type-mapping.create')||Route::is('admin.product-type-mapping.edit')? 'active' : ''}}">
+                <i class="fas fa-network-wired nav-icon"></i>
+                <p>Product Type Mapping</p>
+            </a>
+        </li>
 
         </ul>
       </nav>

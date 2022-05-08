@@ -5,6 +5,7 @@ use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\RelatedProduct;
+use App\Models\ProductTypeMapping;
 
 if (!function_exists('vendorInformation')) {
 
@@ -140,6 +141,16 @@ if (!function_exists('getLeadTime')){
             }
         }
     }
+}
+
+
+if (!function_exists('productTypeMapping')){
+
+    function productTypeMapping($parent_id){
+        $product_type_mapping=ProductTypeMapping::where('parent_id',$parent_id)->pluck('title','id');
+        return $product_type_mapping;
+    }
+
 }
 
 

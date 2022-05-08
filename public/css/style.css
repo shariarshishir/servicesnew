@@ -248,11 +248,11 @@ button:hover {
 .radio_box [type="radio"]:not(:checked)+span:before,
 .radio_box [type="radio"]:not(:checked)+span:after {
     border: 2px solid #54A958;
-  }
+}
 .radio_box [type="radio"]:checked+span:after,
 [type="ra.radio_box dio"].with-gap:checked+span:after {
     background: #54A958;
-  }
+}
 .radio_box [type="radio"]:checked+span:after,
 .radio_box [type="radio"].with-gap:checked+span:before,
 .radio_box [type="radio"].with-gap:checked+span:after {
@@ -408,7 +408,9 @@ legend {
     -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
 }
-
+/* .header_innrer {
+    margin: 0 -10px;
+} */
  /* Logo css start  */
 
 .logo a {
@@ -813,9 +815,9 @@ legend {
     border-radius: 10px;
     margin-bottom: 50px;
 }
-.product_wrapper {
-    padding: 0 15px
-}
+/* .product_wrapper {
+    padding: 0 15px;
+} */
 .profile_contentCol .product_wrapper {
     padding: 0;
 }
@@ -2937,7 +2939,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 
 /********************* suppliers page start ************************/
 .suppliers_container {
-    padding: 0px 5px;
+    margin: 0 -10px;
 }
 .suppliers_container .suppliers_filter_wrap {
     padding-bottom: 50px;
@@ -9617,6 +9619,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: 100%; */
         width: 1440px;
     }
+    .profile_container .container {
+        padding-left: 15px;
+    }
     .header_dasktop .mainNav ul li {
         padding-left: 30px;
     }
@@ -9805,14 +9810,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         font-size: 30px;
         line-height: 40px;
     }
-    /* .header_dasktop .mainNav ul li {
-        padding-left: 20px;
-    } */
-    /* .mainNav ul li a:link,
-    .mainNav ul li a:active,
-    .mainNav ul li a:visited {
-        font-size: 14px;
-    } */
     .slick-initialized .productBox .imgBox {
         min-height: 215px;
     }
@@ -10328,6 +10325,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 }
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
+    /* .header_innrer {
+        margin: 0;
+    } */
     .mainnav_wrap {
         padding-top: 20px !important;
     }
@@ -10345,7 +10345,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .logo img {
         max-width: 210px;
-        margin-left: -5px;
         margin-top: 20px;
     }
     .header_wrap .top_right .btn_profile {
@@ -11049,7 +11048,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: 90%;
     }
     .page_content_wrap {
-        padding: 40px 20px 20px;
+        padding: 40px 0px 20px;
     }
     .blog_container .page_content_wrap{
         padding: 0;

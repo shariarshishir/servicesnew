@@ -343,16 +343,16 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td style="padding-left: 0; padding-right: 0; margin: 0;">
-                            <p style="color: #54A958; font-size: 18px; padding-top: 10px; margin-bottom: 15px"><b>Beneficiary</b></p>
-                            <p style="font-size: 14px; line-height: 22px"><b>Merchant Bay</b> <br/>
+                        <td style="padding: 0; margin: 0;">
+                            <p style="color: #54A958; font-size: 18px; margin-top: 15px; margin-bottom: 15px"><b>Beneficiary</b></p>
+                            <p style="font-size: 14px; line-height: 22px; margin: 0;"><b>Merchant Bay</b> <br/>
                             Email: info@merchantbay.com <br/>
                             House#27, Sector#6, Uttara, Dhaka, Bangladesh <br/>
                             Ph: +880 9611-677345 <br/>
                             www.merchantbay.com </p>
                         </td>
                         <td style="padding: 0; margin: 0;">
-                            <p style="color: #54A958; font-size: 18px; padding-top: 10px; margin-bottom: 15px"><b>Buyer Detail</b></p>
+                            <p style="color: #54A958; font-size: 18px; margin-top: 15px; margin-bottom: 15px"><b>Buyer Detail</b></p>
                             <p style="font-size: 14px; line-height: 22px">
                                 <b>{{$po->buyer->name}} </b><br/>
                                 {{$po->buyer->email}}</>
@@ -364,12 +364,12 @@
 
             <table class="table">
                 <thead style="background: #ddd;">
-                    <tr style="border: none; padding-top: 0; padding-bottom: 0; margin: 0;">
+                    <tr style="border: none; padding: 0; 0; margin: 0;">
                         <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="padding: 0; margin: 0; font-size: 16px; line-height: 22px;"><i class="fa fa-table fa-fw "></i> Pro-Forma Invoice</h6></th>
                     </tr>
                 </thead>
             </table>
-            <table class="table" style="margin-bottom:30px; border-bottom: 1px solid #ddd">
+            <table class="table" style="margin-bottom:20px; border-bottom: 1px solid #ddd">
                 <tbody>
                     <tr>
                         <td style="padding: 5px 10px 5px 0; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">Date</p></td>
@@ -398,7 +398,7 @@
                 </tbody>
             </table>
 
-            <table class="table" style="border: none; margin-top: 50px;">
+            <table class="table" style="border: none; margin-top: 20px;">
                 <thead style="background: #ddd;">
                     <tr style="border: none; padding-top: 0; padding-bottom: 0; margin: 0;">
                         <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="margin: 0; padding:0; font-size: 16px; line-height: 22px;"> <img src="{{asset('admin-assets/img/pdf-list.png')}}" alt="Line Items" style="width: 15px; margin-right: 5px;" > Line Items</h6></th>
@@ -420,7 +420,7 @@
                     </tr>
                 </thead>
                 <tbody id="lineitems" class="">
-                @foreach($po->performa_items as  $key => $proFormaItem)
+                    @foreach($po->performa_items as  $key => $proFormaItem)
                     <tr>
                         <td style="padding: 5px 10px 5px 0; margin: 0;" data-title="Sl. No."><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"> {{$key+1 }}</p></td>
                         <td style="padding: 5px 10px; margin: 0;" data-title="Item / Description">
@@ -459,9 +459,9 @@
                 @endif
             </table>
 
-            <table class="table" style="border: none; margin-top: 30px;">
+            <table class="table" style="border: none; margin: 20px 0 10px; ">
                 <thead style="background: #ddd;">
-                    <tr style="border: none; padding-top: 0; padding-bottom: 0; margin: 0;">
+                    <tr style="border: none; padding: 0; margin: 0;">
                         <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="margin: 0; padding:0; font-size: 16px; line-height: 22px;"> <img src="{{asset('admin-assets/img/terms-conditions.png')}}" alt="Terms Conditions" style="width: 20px;  " > Terms & Conditions</h6></th>
                     </tr>
                 </thead>
@@ -472,36 +472,27 @@
                         <td style="padding: 5px 10px; margin: 0; border: none;">
                             <ul class="list-group terms-lists" style="padding: 0; margin: 0; border: none;">
                                 @foreach($po->supplierCheckedProFormaTermAndConditions as $supplierCheckedProFormaTermAndCondition)
-                                <li class="list-group-item" style="padding: 3px 0; margin: 0; border: none;">
-                                    <div class="input-group">
-                                        <label class="terms-label">
-                                            <p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"> <i class="fa fa-light fa-check" style="margin-right: 10px"></i> {{$supplierCheckedProFormaTermAndCondition->proFormaTermAndCondition->term_and_condition}}</p>
-                                        </label>
-                                    </div>
+                                <li class="list-group-item" style="padding:0; margin: 0; border: none;">
+                                    <p style="font-size: 13px; line-height: 22px; margin: 0; padding: 0;"> <i class="fa fa-light fa-check" style="margin-right: 7px"></i> {{$supplierCheckedProFormaTermAndCondition->proFormaTermAndCondition->term_and_condition}}</p>
                                 </li>
                                 @endforeach
                             </ul>
                             <ul class="list-group terms-lists" style="padding: 0; margin: 0; border: none;">
                                 @foreach(json_decode($po->condition) as $key=>$condition)
-                                <li class="list-group-item" style="padding: 3px 0; margin: 0; border: none;">
-                                    <div class="input-group">
-                                        <label class="terms-label">
-                                            <p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"> <i class="fa fa-light fa-check" style="margin-right: 10px"></i> {{$condition}}</p>
-                                        </label>
-                                    </div>
+                                <li class="list-group-item" style="padding: 0; margin: 0; border: none;">
+                                    <p style="font-size: 13px; line-height: 22px; margin: 0; padding: 0;"> <i class="fa fa-light fa-check" style="margin-right: 7px"></i> {{$condition}}</p>
                                 </li>
                                 @endforeach
                             </ul>
                         </td>
                     </tr>
-                   
                 </tbody>
             </table>
 
-            <table class="table" style="border: none; margin-top: 30px;">
-                <thead style="background: #ddd;">
-                    <tr style="border: none; padding-top: 0; padding-bottom: 0; margin: 0;">
-                        <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="margin: 0; padding:0; font-size: 16px; line-height: 22px;"> <img src="{{asset('admin-assets/img/advising-bank.png')}}" alt="Advising Bank" style="width: 20px;  " > Advising Bank</h6></th>
+            <table class="table" style="border: none; margin: 0px; padding:0;">
+                <thead style="background: #ddd; margin: 0px; padding:0;">
+                    <tr style="border: none; padding: 0; margin: 0;">
+                        <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="margin: 0 0 10px; padding:0; font-size: 16px; line-height: 22px;"> <img src="{{asset('admin-assets/img/advising-bank.png')}}" alt="Advising Bank" style="width: 20px;  " > Advising Bank</h6></th>
                     </tr>
                 </thead>
             </table>
@@ -525,15 +516,15 @@
                 </tbody>
             </table>
 
-            <table class="table" style="border: none; margin-top: 50px;">
+            <table class="table" style="border: none; margin: 0; padding: 0;">
                 <thead style="background: #ddd;">
                     <tr style="border: none; padding-top: 0; padding-bottom: 0; margin: 0;">
-                        <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="margin: 0; padding:0; font-size: 16px; line-height: 22px;"> <img src="{{asset('admin-assets/img/signatories.png')}}" alt="Signature" style="width: 20px;  " > Signature</h6></th>
+                        <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="margin: 0 0 10px; padding:0; font-size: 16px; line-height: 22px;"> <img src="{{asset('admin-assets/img/signatories.png')}}" alt="Signature" style="width: 20px;  " > Signature</h6></th>
                     </tr>
                 </thead>
             </table>
 
-            <table class="table" style="margin-bottom:30px; border-top: 1px solid #ddd;">
+            <table class="table" style="margin: 0px; padding: 0; border-top: 1px solid #ddd;">
                 <thead style="background: #ddd;">
                     <tr>
                         <th style="padding: 10px 10px 40px 0; margin: 0; border: none;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"> Buyer Side</p></th>
@@ -563,7 +554,7 @@
             </table>
 
 
-            <table class="table" style="margin-top:50px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+            <table class="table" style="margin:30px 0 0; padding: 0; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
                 <tbody>
                     <tr>
                         <td style="padding: 20px 10px 10px; margin: 0; border: none; text-align: center;">

@@ -835,7 +835,7 @@ legend {
     margin: 0 0 40px;
 }
 .product_design_wrapper .product_wrapper h3 {
-    margin: 0 -10px 40px;
+    margin-bottom: 40px;
 }
 .product_slider .slick-prev {
     background : url('../images/frontendimages/new_layout_images/prev.png') no-repeat center;
@@ -2941,9 +2941,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
 /*************** Profile factory tour page start *******************/
 
 /********************* suppliers page start ************************/
-.suppliers_container {
+/* .suppliers_container {
     margin: 0 -10px;
-}
+} */
 .suppliers_container .suppliers_filter_wrap {
     padding-bottom: 50px;
     display: block;
@@ -8792,7 +8792,7 @@ nav .pagination li.active .page-link {
 
 .product_design_wrapper .product_boxwrap {
     padding-bottom: 10px;
-    margin: 0 -25px;
+    /* margin: 0 -25px; */
 }
 .product_design_wrapper .productBox .sold-out {
     position: absolute;
@@ -9715,6 +9715,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     }
     .rfq_content_box .rfq_profile_detail .responses_box_wrap .row {
         margin: 0 -10px;
+    }
+
+    #mb_about {
+        padding: 0 10px;
     }
 
 }
@@ -11239,9 +11243,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin-left: 0;
         margin-right: 0;
     }
-    .product_design_wrapper .product_boxwrap {
+    /* .product_design_wrapper .product_boxwrap {
         margin: 0 -10px;
-    }
+    } */
     /* .manufactrue_product_details_top .back_to {
         padding-left: 15px;
     } */

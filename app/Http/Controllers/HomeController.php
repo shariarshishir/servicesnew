@@ -23,7 +23,7 @@ use DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\Paginator;
 use App\Models\Manufacture\ProductCategory as ManufatureProductCategeory;
-
+use App\Models\ProductTypeMapping;
 
 class HomeController extends Controller
 {
@@ -1216,32 +1216,14 @@ class HomeController extends Controller
                 $product_type_mapping_id=null;
         }
 
-        switch($child) {
-            case('design'):
-                $product_type_mapping_child_id=3;
-                break;
-            case('product_sample'):
-                $product_type_mapping_child_id=4;
-                break;
-            case('ready_stock'):
-                $product_type_mapping_child_id=5;
-                break;
-            case('textile'):
-                $product_type_mapping_child_id=6;
-                break;
-            case('yarn'):
-                $product_type_mapping_child_id=7;
-                break;
-            case('trims_and_accessories'):
-                $product_type_mapping_child_id=8;
-                break;
-            default:
-                $product_type_mapping_child_id=null;
 
-        }
+        $product_type_mapping_child_id=ProductTypeMapping::select('id')->where('title',$child)->first();
+
         if(empty($product_type_mapping_id) || empty($product_type_mapping_child_id)){
             abort(404);
         }
+
+        $product_type_mapping_child_id =  $product_type_mapping_child_id->id;
 
 
         $wholesaler_products=Product::with(['images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where(['state' => 1])->where('business_profile_id', '!=', null)->get();

@@ -45,9 +45,10 @@
                                 <div class="col s12">
                                     <label>Select studio</label>
                                     <select class="select2 dropdownOptions" multiple name="studio_id[]">
-                                        <option value="3">Design</option>
-                                        <option value="4">Product sample</option>
-                                        <option value="5">Ready stock</option>
+                                        @php $studio_child= productTypeMapping(1); @endphp
+                                        @foreach ($studio_child as $id => $title)
+                                            <option value={{$id}}>{{$title}}</option>
+                                        @endforeach
                                     </select>
                                     <span class="text-danger error-text studio_id_error rm-error"></span>
                                 </div>
@@ -56,9 +57,10 @@
                                 <div class="col s12">
                                     <label>Select raw materials</label>
                                     <select class="select2 dropdownOptions" multiple name="raw_materials_id[]">
-                                        <option value="6">Textile</option>
-                                        <option value="7">Yarn</option>
-                                        <option value="8">Trims and Accessories</option>
+                                        @php $raw_materials_child= productTypeMapping(2); @endphp
+                                        @foreach ($raw_materials_child as $id => $title)
+                                            <option value={{$id}}>{{$title}}</option>
+                                        @endforeach
                                     </select>
                                     <span class="text-danger error-text raw_materials_id_error rm-error"></span>
                                 </div>

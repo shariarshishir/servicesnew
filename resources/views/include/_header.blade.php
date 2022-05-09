@@ -1,4 +1,6 @@
 <!-- Header section start  -->
+@php $studio_child= productTypeMapping(1); @endphp
+@php $raw_materials_child= productTypeMapping(2); @endphp
 <section class="header_wrap sticky_header" itemscope>
 	<div class="container" itemscope>
 		<!-- Desktop header start -->
@@ -16,29 +18,29 @@
 										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Studio<i class="material-icons right">arrow_drop_down</i></a>
 										<!-- Dropdown Structure -->
 										<ul id="" class="sub_dropdown" itemscope itemtype="https://schema.org/ListItem">
-											<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
-											<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
-											<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+                                            @foreach ($studio_child as $id => $title)
+											    <li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['studio', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
+                                            @endforeach
 										</ul>
 									</li>
 									<li itemprop="itemListElement">
 										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Raw Materials<i class="material-icons right">arrow_drop_down</i></a>
 										<!-- Dropdown Structure -->
 										<ul id="" class="sub_dropdown" itemscope itemtype="https://schema.org/ListItem">
-											<li itemprop="itemListElement"><a itemprop="Textile" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
-											<li itemprop="itemListElement"><a itemprop="Yarn" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
-											<li itemprop="itemListElement"><a itemprop="Trims and Accessories" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
+                                            @foreach ($raw_materials_child as $id => $title)
+                                                <li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['raw_materials', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
+                                            @endforeach
 										</ul>
-									</li>	
+									</li>
 									<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 								</ul>
 							</li>
-                            
-                            						
+
+
 							<li itemprop="itemListElement"><a itemprop="RFQ" class="{{ Route::is('rfq.index') ? 'active' : ''}}" href="{{route('rfq.index')}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
-								
+
 								<ul id="more-system-links" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blog" class="{{ Route::is('industry.blogs') ? 'active' : ''}}">Blogs</a></li>
 									<li itemprop="itemListElement"><a itemprop="Tools" class="{{ Route::is('front.tools') ? 'active' : ''}}" href="{{route('front.tools')}}">Tools</a></li>
@@ -47,16 +49,16 @@
 
 							<li itemprop="itemListElement" class="item_whyus">
 								<a class="dropdown-trigger" itemprop="Why Us" href="javascript:void(0);" data-target="whyus-system-links">Why Us<i class="material-icons right">arrow_drop_down</i></a>
-								
+
 								<ul id="whyus-system-links" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
 								</ul>
 							</li>
-							
+
 							<!-- <li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
-								
+
 								<ul id="more-system-links" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blog" class="{{ Route::is('industry.blogs') ? 'active' : ''}}">Blogs</a></li>
 									<li itemprop="itemListElement"><a href="http://insight.merchantbay.com/" itemprop="Insights">Insights</a></li>
@@ -68,7 +70,7 @@
 						</ul>
 					</nav>
 				</div>
-				
+
 
 				<div class="col m4 top_right " itemscope>
 					<div class="user-block" itemscope>
@@ -300,7 +302,7 @@
 			</div>
 		</header>
 		<!-- Desktop header end -->
-		
+
 		<!-- Mobile header -->
 		<header class="mobile_header" itemscope>
 			<div class="col m2 logo center-align" itemscope>
@@ -311,29 +313,29 @@
 					<a onclick="openNav()" itemprop="Menu Trigger" href="javascript:void(0);" class="btn-sidenav-left"><i class="material-icons">menu</i></a>
 					<div id="mySidenav" class="mySidenav" itemscope>
 						<a href="javascript:void(0)" class="closebtn" itemprop="Close Nav" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
-						
+
 						<ul itemscope itemtype="https://schema.org/ListItem">
 							<li>
 								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="explore-products-mobile">Explore<i class="material-icons right">keyboard_arrow_down</i></a>
-							
+
 								<ul id="explore-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement">
 										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Studio <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
-										
+
 										<!-- Dropdown Structure -->
 										<ul id="" class="dropdown-subNav-mobile" itemscope itemtype="https://schema.org/ListItem">
-											<li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Designs</a></li>
-											<li itemprop="itemListElement"><a itemprop="Production Sample" href="{{route('product.type.mapping',['studio', 'product_sample'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Production Sample</a></li>
-											<li itemprop="itemListElement"><a itemprop="Ready Stock" href="{{route('product.type.mapping',['studio', 'ready_stock'])}}" >Ready Stock</a></li>
+                                            @foreach ($studio_child as $id => $title)
+											    <li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['studio', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
+                                            @endforeach
 										</ul>
 									</li>
 									<li itemprop="itemListElement">
 										<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Raw Materials <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 										<!-- Dropdown Structure -->
 										<ul id="" class="" itemscope itemtype="https://schema.org/ListItem">
-											<li itemprop="itemListElement"><a itemprop="Textile" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}" class="{{ Route::is('products') ? 'active' : ''}}">Textile</a></li>
-											<li itemprop="itemListElement"><a itemprop="Yarn" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}" class="{{ Route::is('readystockproducts') ? 'active' : ''}}">Yarn</a></li>
-											<li itemprop="itemListElement"><a itemprop="Trims and Accessories" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}" class="{{ Route::is('buydesignsproducts') ? 'active' : ''}}">Trims and Accessories</a></li>
+                                            @foreach ($raw_materials_child as $id => $title)
+                                                <li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['raw_materials', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
+                                            @endforeach
 										</ul>
 									</li>
 									<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
@@ -353,18 +355,18 @@
 							</li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="Why Us" href="javascript:void(0);" data-target="whyus-system-links-mobile">Why Us <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
-								
+
 								<ul id="whyus-system-links-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
 								</ul>
 							</li>
 						</ul>
-						
+
 						<!-- <ul itemscope itemtype="https://schema.org/ListItem">
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="more-system-products-mobile">Products <span class="subnev_arrow"><span class="material-icons right">keyboard_arrow_down</span></span></a>
-								
+
 								<ul id="more-system-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a itemprop="All Products" href="{{route('products')}}">All</a></li>
 									<li itemprop="itemListElement"><a itemprop="Ready to Ship" href="{{route('readystockproducts')}}">Ready to Ship</a></li>
@@ -379,7 +381,7 @@
 							<li itemprop="itemListElement"><a itemprop="RFQ" href="{{route('rfq.index')}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger subnev_open" itemprop="More" href="javascript:void(0);" data-target="more-system-links-mobile">More <span class="subnev_arrow"><span class="material-icons right">keyboard_arrow_down</span></span></a>
-								
+
 								<ul id="more-system-links-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a itemprop="Blogs" href="{{route('industry.blogs')}}">Blogs</a></li>
 									<li itemprop="itemListElement"><a itemprop="Insights" href="http://insight.merchantbay.com/">Insights</a></li>
@@ -719,7 +721,7 @@
 							<div class="loading-message" style="display: none;">Loading...</div>
 						</div>
 					</div>
-					<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>                    
+					<a href="javascript:void(0)" class="close-search-modal-trigger"><i class="material-icons dp48">cancel</i></a>
 					<div id="search-results" style="display: none;"></div>
 				</div>
 			</div>
@@ -729,9 +731,9 @@
 
 	</div>
 
-	
 
-	
+
+
 </section>
 
 

@@ -4,7 +4,7 @@
         <span style="font-size: 12px; padding-bottom: 15px; display:block;" class="text-danger">* Indicates Mandatory field</span>
         <!-- <div class="col-md-12">
             <div class="row">
-                
+
             </div>
         </div> -->
         <form method="POST" action="javascript:void(0);" enctype="multipart/form-data" id="seller_product_form">
@@ -36,7 +36,7 @@
                         <input type="hidden" name="file_ids" id="file_ids" value="">
                     </div>
                 </div>--}}
-                
+
                 <div class="input-field">
                     <div class="row">
                         <div class="col s12 m3 l3">
@@ -61,9 +61,10 @@
                         <div class="col s12">
                             <label>Select studio</label>
                             <select class="select2 dropdownOptions" multiple name="studio_id[]">
-                                <option value="3">Design</option>
-                                <option value="4">Product sample</option>
-                                <option value="5">Ready stock</option>
+                                @php $studio_child= productTypeMapping(1); @endphp
+                                @foreach ($studio_child as $id => $title)
+                                    <option value={{$id}}>{{$title}}</option>
+                                @endforeach
                             </select>
                             <span class="studio_id_error text-danger error-rm"></span>
                         </div>
@@ -72,15 +73,16 @@
                         <div class="col s12">
                             <label>Select raw materials</label>
                             <select class="select2 dropdownOptions" multiple name="raw_materials_id[]">
-                                <option value="6">Textile</option>
-                                <option value="7">Yarn</option>
-                                <option value="8">Trims and Accessories</option>
+                                @php $raw_materials_child= productTypeMapping(2); @endphp
+                                @foreach ($raw_materials_child as $id => $title)
+                                    <option value={{$id}}>{{$title}}</option>
+                                @endforeach
                             </select>
                             <span class="raw_materials_id_error text-danger error-rm"></span>
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div class="row input-field product-upload-block">
                     <div class="col s12 m3 l3">
@@ -261,7 +263,7 @@
                                     <div class="add_more_box">
                                         <a href="javascript:void(0);" class="add-more-block" onclick="addFreshOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
-                                    
+
                                 </div>
 
                                 {{-- <div class="add_more_box" style="padding-top: 20px">
@@ -408,7 +410,7 @@
                                     <div class="add_more_box">
                                         <a href="javascript:void(0);" class="add-more-block" onclick="addReadyOrderAttribute(this)"><i class="material-icons dp48">add</i> Add More</a>
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -528,7 +530,7 @@
                                 <div class="add_more_box">
                                     <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown(this)"><i class="material-icons dp48">add</i> Add More</a>
                                 </div>
-                                
+
                             </div>
                             {{-- <div class="add_more_box" style="padding-top: 20px">
                                 <a href="javascript:void(0);" class="add-more-block" onclick="addNonClothingPriceBreakDown()"><i class="material-icons dp48">add</i> Add More</a>

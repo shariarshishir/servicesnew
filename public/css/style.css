@@ -364,6 +364,9 @@ legend {
     color: #54A958;
     margin-bottom: 25px;
 }
+.blog_container .page_content_wrap .mainTitle {
+    padding: 0 10px;
+}
 .leftCol_wrap {
     padding: 30px !important;
 }
@@ -3352,13 +3355,13 @@ div.dataTables_wrapper table.mdc-data-table__table {
 /********************* suppliers page End **************************/
 
 /********************* Blog page css start **************************/
-.blog_container {
+/* .blog_container {
     padding: 0;
     margin: 0 20px;
-}
-.blog_info_wrap {
+} */
+/* .blog_info_wrap {
     margin: 0 -12px;
-}
+} */
 .blog_info_wrap .mainTitle {
     position: absolute;
     top: -32px;
@@ -10065,7 +10068,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         padding: 0;
     }
     .page_content_wrap {
-        padding: 50px 20px 20px;
+        padding: 50px 0px 20px;
     }
     .blog_content_box h3 {
         font-size: 18px;
@@ -11281,6 +11284,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .home_intro_video_box .embed-responsive-item {
         height: 250px;
         width: 90%;
+    }
+
+    .blog_container .page_content_wrap .mainTitle {
+        padding: 0;
+    }
+    .blog_container .blog_info_wrap {
+        margin: 0 -10px;
     }
 
 }

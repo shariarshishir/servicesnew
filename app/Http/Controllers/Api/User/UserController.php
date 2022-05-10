@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\UserVerify;
+use App\Models\BusinessProfile;
+use App\Models\CompanyOverview;
 use App\Models\OrderModificationRequest;
 use Illuminate\Support\Facades\Hash;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -159,7 +161,7 @@ class UserController extends Controller
             'phone'           => 'required',
             'country'=>'required'
         ]);
-        $checkExistingUser=User::Where('email', $request->email)->first();
+        $checkExistingUser=User::Where('email', $request->email)->get();
         if($checkExistingUser){
             return response()->json('user already exists', 403);
         }
@@ -183,6 +185,18 @@ class UserController extends Controller
             'linkedin_profile'  => $request->linkedin_profile,
             'is_supplier'  => $request->user_type == 'supplier' ? 1 : 0,
         ]);
+        if($request->user_type == 'buyer'){
+            $business_profile_data=[
+                'business_name' => $request->company_name,
+                'alias'   => $this->createAlias($request->company_name),
+                'user_id'       => $user->id,
+                'business_type' => $request->business_type,
+                'has_representative'=> 1,
+                'industry_type' => 'apparel',
+            ];
+            $business_profile=BusinessProfile::create($business_profile_data);
+            $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+        }
 
         $email_verification_OTP = mt_rand(100000,999999);
         UserVerify::create([
@@ -202,6 +216,8 @@ class UserController extends Controller
 
 
     }
+
+    
 
     public function storeBk(Request $request)
     {
@@ -597,6 +613,18 @@ class UserController extends Controller
             'is_supplier'  => $request->user_type == 'supplier' ? 1 : 0,
 
         ]);
+        if($request->user_type == 'buyer'){
+            $business_profile_data=[
+                'business_name' => $request->company_name,
+                'alias'   => $this->createAlias($request->company_name),
+                'user_id'       => $user->id,
+                'business_type' => $request->business_type,
+                'has_representative'=> 1,
+                'industry_type' => 'apparel',
+            ];
+            $business_profile=BusinessProfile::create($business_profile_data);
+            $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+        }
 
         $token = Str::random(64);
         UserVerify::create([
@@ -609,6 +637,62 @@ class UserController extends Controller
         }
 
         return response()->json(['msg' => 'user created successfully'], 200);
+    }
+
+
+    public function removeSpecialCharacterFromAlais($alias)
+    {
+        $lowercase=strtolower($alias);
+        $pattern= '/[^A-Za-z0-9\-]/';
+        $preg_replace= preg_replace($pattern, '-', $lowercase);
+        $single_hypen= preg_replace('/-+/', '-', $preg_replace);
+        $alias= $single_hypen;
+        return $alias;
+    }
+
+
+    public function createAlias($name)
+    {
+        $alias=$this->removeSpecialCharacterFromAlais($name);
+        return $this->checkExistsAlias($alias);
+    }
+
+    public function checkExistsAlias($alias)
+    {
+        $check_exists=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists){
+            $create_array= explode('-',$alias);
+            $last_key=array_slice($create_array,-1,1);
+            $last_key_string=implode(' ',$last_key);
+            if(is_numeric($last_key_string)){
+                $last_key_string++;
+                array_pop($create_array);
+                array_push($create_array,$last_key_string);
+            }else{
+                array_push($create_array,1);
+            }
+            $alias=implode("-",$create_array);
+            return $this->checkExistsAlias($alias);
+
+        }
+        return $alias;
+    }
+
+    //company overview data
+    public function createCompanyOverview(Request $request, $profile_id)
+    {
+        $name=['annual_revenue','number_of_worker','number_of_female_worker','trade_license_number','year_of_establishment','opertaing_hours','shift_details','main_products'];
+        $value=[null,null,null,null,null,null,null,null,null];
+        $data=[];
+        foreach($name as $key => $value2){
+            array_push($data,['name' => $value2, 'value' => $value[$key], 'status' => 0]);
+        }
+        $companyOverview=CompanyOverview::create([
+            'business_profile_id' => $profile_id,
+            'data'        => json_encode($data),
+        ]);
+        return $companyOverview;
+
     }
 
 

@@ -1659,7 +1659,18 @@ label:not(.form-check-label):not(.custom-file-label) {
 #exampleModal .add_more_box {
     padding-top: 10px;
 }
-
+.show-suppliers-with-unseen-message {
+    float: right;
+    position: relative;
+}
+.show-suppliers-with-unseen-message .badge.badge-warning {
+    position: absolute;
+    top: -8px;
+    left: -12px;
+}
+.show-suppliers-with-unseen-message i {
+    color: #55a860;
+}
 /* ************** Media css start ******************* */
 
 @media only screen and (min-width: 1500px) {}

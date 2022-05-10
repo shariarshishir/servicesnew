@@ -85,7 +85,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <a href="javascript:void(0);" class="show-suppliers-with-unseen-message">Show Suppliers with unseen message @if($rfq['unseen_count']>0)<i class="fa fa-envelope"></i>@endif</a>
+                            <a href="javascript:void(0);" class="show-suppliers-with-unseen-message">Show Suppliers with unseen message @if($rfq['unseen_count']>0)<span class="badge badge-warning"><i class="fa fa-envelope"></i></span>@endif</a>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
 

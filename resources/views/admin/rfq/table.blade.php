@@ -18,7 +18,7 @@
             <tr>
                 <td>{{$key+1}}</td>
                 <td>{{ \Carbon\Carbon::parse($rfq['created_at'])->isoFormat('MMMM Do YYYY')}}</td>
-                <td><a href="{{route('admin.rfq.show', $rfq['id'])}}">{{$rfq['title']}}@if($rfq['unseen_count']>0)<span class="badge badge-warning">{{ $rfq['unseen_count']}}</span>@endif</a></td>
+                <td><a href="{{route('admin.rfq.show', $rfq['id'])}}">{{$rfq['title']}}@if($rfq['unseen_count']>0) <span class="badge badge-warning">{{ $rfq['unseen_count']}}</span>@endif</a></td>
                 <td>{{$rfq['category'][0]['name']}}</td>
                 <td>{{$rfq['quantity']}}</td>
                 <td>$ {{$rfq['unit_price']}}</td>

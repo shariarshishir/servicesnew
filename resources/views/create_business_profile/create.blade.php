@@ -72,9 +72,9 @@
                                         <div class="col s12 m8">
                                             <select id="business_type" class="select2 browser-default select-business-type" name="business_type">
                                                 <option value="" disabled selected>Choose your business type</option>
-                                                <option value="1" {{old('business_type') == 1 ? 'selected' : ''}}>Manufacturer</option>
-                                                <option value="2" {{old('business_type') == 2 ? 'selected' : ''}}>Wholesaler</option>
-                                                <option value="3" {{old('business_type') == 3 ? 'selected' : ''}}>Design Studio</option>
+                                                @foreach ($business_mapping_tree as $parent )
+                                                    <option value="{{$parent->name}}" {{old('business_type') == $parent->name ? 'selected' : ''}}>{{ucwords($parent->name)}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -123,22 +123,20 @@
                                         <div class="col s12 m8">
                                             <select id="industry_type" class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this.value)">
                                                 <option value="" disabled selected>Choose your industry type</option>
-                                                <option value="apparel" >Apparel</option>
-                                                <option value="non-apparel" >Non-Apparel</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="input-field col s12 business-category-div" style="display: none">
+                                    <div class="input-field col s12 business-category-div" >
                                         <div class="col s12 m4">
                                             <label>&nbsp;</label>
                                         </div>
                                         <div class="col s12 m8">
                                             <div class="row">
                                                 <div class="col s12 m5">
-                                                    <label for="categoryList">Category Type</label>
+                                                    <label for="factory_type">Factory Type</label>
                                                 </div>
                                                 <div class="col s12 m7">
-                                                    <select  class="select2 browser-default business-category"  name="business_category_id" id="categoryList"></select>
+                                                    <select  class="select2 browser-default business-category"  name="factory_type" id="factory_type"></select>
                                                 </div>
                                             </div>
                                         </div>
@@ -240,7 +238,7 @@
 
 @endsection
 
-@include('business_profile._scripts')
+@include('create_business_profile._scripts')
 @section('css')
 <style>
     .footer_wrap {
@@ -256,7 +254,7 @@
             var regex = /[0-9]|\./;
             if( !regex.test(value) ) {
                 swal('alert!', 'Text not allowed. You have to enter a valid number.', 'warning');
-            }            
+            }
             if(value == 0 || value < 0){
                 swal('alert!', 'Zero or negative not allowed', 'warning');
                 //$(this).val(1);

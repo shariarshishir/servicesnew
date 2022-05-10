@@ -66,32 +66,32 @@
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
                         <div class="my_businesses_box card user-business-profile-short-info" itemscope itemtype="https://schema.org/Organization">
-                            @if($businessprofile->business_type==1)
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
-                            @else
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
+                            @if($businessprofile->business_type== 'manufacturer')
+                                <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
+                            @elseif($businessprofile->business_type== 'wholesaler')
+                                <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             @endif
                             <p><span style="font-weight: 500;">Business Location:</span> <span itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $businessprofile->location }}</span></p>
-                            <p><span style="font-weight: 500;">Business Type:</span> @php echo ($businessprofile->business_type==1 ? 'Manufacturer':'Wholesaler') @endphp</p>
+                            <p><span style="font-weight: 500;">Business Type:</span> {{ucwords($businessprofile->business_type)}}</p>
                             <div class="business-shortcut-bar">
                                 <ul>
                                     <li><a href="javascript:void(0);">Messages</a></li>
                                     <li>
-                                        @if($businessprofile->business_type==1)
+                                        @if($businessprofile->business_type=='manufacturer')
                                             <a href="javascript:void(0);">Received Orders</a></li>
-                                        @else
+                                        @elseif($businessprofile->business_type=='wholesaler')
                                             <a href="{{route('wholesaler.order.index', $businessprofile->alias)}}">Received Orders <span>{{count($businessprofile->profileBasedOrders)}}</span></a></li>
                                         @endif
                                     <li><a href="javascript:void(0);">Submitted Orders</a></li>
                                     <li>
-                                        @if($businessprofile->business_type==1)
+                                        @if($businessprofile->business_type=='manufacturer')
                                             <a href="javascript:void(0);">Received Queries</a>
                                         @else
                                             <a href="{{route('user.order.query.index',  ['business_id' => $businessprofile->id])}}">Received Queries <span>{{count($businessprofile->profileBasedQueries)}}</span></a></li>
                                         @endif
                                     </li>
                                     <li>
-                                        @if($businessprofile->business_type == 1)
+                                        @if($businessprofile->business_type == 'manufacturer')
                                             <a href="{{route('po.index', ['business_id' => $businessprofile->id])}}">PI/PO <span>{{count($businessprofile->profileBasedPo)}}</span></a>
                                         @else
                                             <a href="javascript:void(0);">PI/PO</a>

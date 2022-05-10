@@ -251,6 +251,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
     Route::get('/manufacturer/profile/{alias}', [BusinessProfileController::class, 'show'])->name('manufacturer.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
+    Route::get('/business/mapping/child/{parent}', [BusinessProfileController::class, 'getBusinessMappingChild'])->name('business.mapping.child');
 
     //Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
     Route::post('/categories-produced-create-or-update', [BusinessProfileController::class, 'categoriesProducedCreateOrUpdate'])->name('categories.produced.create-or-update');

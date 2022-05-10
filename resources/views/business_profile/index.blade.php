@@ -15,26 +15,13 @@
                 <div class="box_shadow list_box">
                     <p>
                         <span>Business Name:</span>
-                        @if($profile->business_type==1)
-                        <a href="{{route('manufacturer.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
-                        @else
-                        <a href="{{route('wholesaler.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
+                        @if($profile->business_type == 'manufacturer')
+                            <a href="{{route('manufacturer.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
+                        @elseif($profile->business_type == 'wholesaler')
+                            <a href="{{route('wholesaler.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
                         @endif
                     </p>
-                    <p><span>Business Type:</span>
-                        @switch($profile->business_type)
-                            @case(1)
-                                Manufacture
-                                @break
-                            @case(2)
-                                Wholesaler
-                                @break
-                            @case(3)
-                                Design Studio
-                                @break
-                            @default
-                        @endswitch
-                    </p>
+                    <p><span>Business Type:</span> {{ucwords($profile->business_type)}}</p>
                     <p><span>Location:</span> {{ \Illuminate\Support\Str::limit($profile->location, 15, $end='...') }}</p>
                     <div class="switch profile_enable_disable_trigger">
                         <label>
@@ -43,10 +30,10 @@
                             <span class="enable_disable_label {{$profile->deleted_at ? '' : 'teal white-text text-darken-2'}}">{{$profile->deleted_at ? 'Unpublished' : 'Published'}}</span>
                         </label>
                     </div>
-                    @if($profile->business_type==1)
-                    <a class="business_view" href="{{route('manufacturer.profile.show',$profile->alias)}}">View Details</a>
-                    @else
-                    <a class="business_view" href="{{route('wholesaler.profile.show',$profile->alias)}}">View Details</a>
+                    @if($profile->business_type== 'manufacturer')
+                        <a class="business_view" href="{{route('manufacturer.profile.show',$profile->alias)}}">View Details</a>
+                    @elseif($profile->business_type == 'wholesaler')
+                        <a class="business_view" href="{{route('wholesaler.profile.show',$profile->alias)}}">View Details</a>
                     @endif
                 </div>
             </div>
@@ -60,4 +47,4 @@
 
 @endsection
 
-@include('business_profile._scripts')
+

@@ -65,7 +65,7 @@ class BusinessMappingTreeController extends Controller
         ]);
 
         $businessMappingTree=new BusinessMappingTree();
-        $businessMappingTree->name=$request->name;
+        $businessMappingTree->name=strtolower($request->name);
         $businessMappingTree->parent_id=$request->parent_id;
         $businessMappingTree->ip_address = $request->ip();
         $businessMappingTree->user_agent = $request->header('User-Agent');
@@ -119,7 +119,7 @@ class BusinessMappingTreeController extends Controller
 
 
         $businessMappingTree = BusinessMappingTree::find($id);
-        $businessMappingTree->name=$request->name;
+        $businessMappingTree->name=strtolower($request->name);
         $businessMappingTree->parent_id=$request->parent_id;
         $businessMappingTree->ip_address = $request->ip();
         $businessMappingTree->user_agent = $request->header('User-Agent');

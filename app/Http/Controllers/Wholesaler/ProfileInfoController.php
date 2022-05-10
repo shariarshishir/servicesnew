@@ -29,7 +29,7 @@ class ProfileInfoController extends Controller
             // if($business_profile->business_type == 1){
             //     return view('wholesaler_profile.index',compact('business_profile', 'colors', 'sizes','products'));
             // }
-            if($business_profile->business_type == 2){
+            if($business_profile->business_type == 'wholesaler'){
                return view('wholesaler_profile.index',compact('business_profile'));
             }
             abort(404);

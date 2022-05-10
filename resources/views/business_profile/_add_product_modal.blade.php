@@ -74,9 +74,9 @@
                             <div class="col s12 m9 l9">
                                 <select name="category_id" class="select2 browser-default">
                                     <option value="" selected="true" disabled>Choose your option</option>
-                                    @foreach($manufacture_product_categories_type[$business_profile->industry_type ?? 'apparel'] as $product_category)
+                                    {{-- @foreach($manufacture_product_categories_type[$business_profile->industry_type ?? 'apparel'] as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 <span class="text-danger error-text category_id_error rm-error"></span>
                             </div>

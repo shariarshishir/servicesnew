@@ -25,6 +25,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Events\NewBusinessProfileHasCreatedEvent;
 use App\Models\BusinessProfileVerificationsRequest;
 use App\Events\NewBusinessProfileVerificationRequestEvent;
+use App\Models\BusinessMappingTree;
 use Image;
 
 
@@ -56,8 +57,9 @@ class BusinessProfileController extends Controller
             return redirect()->back();
             abort(response('Your email already associated with '.$bf->business_name.'as a representative. you can not open your business with this email', 401) );
         }
+        $business_mapping_tree=BusinessMappingTree::where('parent_id',null)->get('name');
 
-        return view('business_profile.create');
+        return view('create_business_profile.create',compact('business_mapping_tree'));
     }
 
     public function store(Request $request)
@@ -68,17 +70,17 @@ class BusinessProfileController extends Controller
             'business_type' => 'required',
             'trade_license' => 'required',
             'industry_type' => 'required',
+            'factory_type'  => 'required',
             'number_of_outlets' => Rule::requiredIf(function () use ($request) {
-                return $request->business_type == 2;
+                return $request->business_type == 'wholesaler';
             }),
             'number_of_factories' => Rule::requiredIf(function () use ($request) {
-                return $request->business_type == 1;
+                return $request->business_type == 'manufacturer';
             }),
             'email' => 'required_if:has_representative,0|unique:users',
             'phone' => 'required_if:has_representative,0',
             //'nid_passport' => 'required_if:has_representative,0',
             'representive_name' =>'required_if:has_representative,0',
-            'business_category_id' => 'required_if:business_type,1',
          ],[
              'email.required_if' => 'The representive email field is required.',
              'phone.required_if' => 'The representive phone field is required.',
@@ -102,8 +104,8 @@ class BusinessProfileController extends Controller
                     'has_representative'=> $request->has_representative,
                     'number_of_outlets' => $request->number_of_outlets,
                     'number_of_factories' => $request->number_of_factories,
-                    'business_category_id' => $request->business_category_id,
                     'industry_type' => $request->industry_type,
+                    'factory_type' => $request->factory_type,
 
                 ];
 
@@ -234,7 +236,7 @@ class BusinessProfileController extends Controller
             $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
             $sizes=['S','M','L','XL','XXL','XXXL'];
             $products=Product::withTrashed()->with('product_images')->latest()->where('business_profile_id', $business_profile->id)->get();
-            if($business_profile->business_type == 1){
+            if($business_profile->business_type == 'manufacturer'){
                 $mainProducts=Product::withTrashed()->with('product_images')->where('business_profile_id',$business_profile->id)->inRandomOrder()
                 ->limit(4)
                 ->get();
@@ -686,6 +688,12 @@ class BusinessProfileController extends Controller
         return response()->json(['business_profile'=>$business_profile,'message'=>$message],200);
     }
 
+    public function getBusinessMappingChild($parent)
+    {
+        $business_mapping_tree=BusinessMappingTree::where('name',$parent)->first();
+        $child=BusinessMappingTree::where('parent_id',$business_mapping_tree->id)->get('name');
+        return response()->json($child,200);
+    }
 
 
 

@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 trait PushNotificationTrait {
 
         public  function pushNotificationSend($fcmToken,$title,$message,$action_url=null){
-        
             $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
             $notification = [
             'title'	=> $title,
@@ -37,6 +36,5 @@ trait PushNotificationTrait {
             $result = curl_exec($ch);
             curl_close($ch);
             $aa =  $result;
-
-    }
+        }
 }

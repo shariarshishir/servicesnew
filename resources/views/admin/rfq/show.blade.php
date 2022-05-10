@@ -85,8 +85,18 @@
                                     @endif
                                 </div>
                             </div>
+                            <a href="javascript:void(0);" class="show-suppliers-with-unseen-message">Show Suppliers with unseen message @if($rfq['unseen_count']>0)<i class="fa fa-envelope"></i>@endif</a>
                         </div>
                     </div>
+
+                    <div class="card" id="suppliers-with-unseen-message" style="display:none">
+                        <div class="matched_suppliers_wrap">
+                            <div class="rfq_business_profile_list_with_unseen_messages row">
+
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="rfq_data_top">
                             <div class="business_profile_filter">
@@ -151,9 +161,9 @@
                                                     <h3>{{$businessProfile['business_name']}}</h3>
                                                     <div class="sms_img">
                                                         @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
-                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span id="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
+                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span data-unseenmessagecount="{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }}" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
                                                         @else
-                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span style="display:none" id="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
+                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -444,9 +454,9 @@
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
-                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
                                     }else{
-                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span style="display: none" id="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span style="display: none" data-unseenmessagecount="0"  class="sso_id_'+item.user.sso_reference_id+'"></span></a>';
                                     }
                                     html += '</div>';
                                     html += '</div>';
@@ -529,7 +539,139 @@
                     });
                 }
             });
+            
+            $(document).on('click', '.show-suppliers-with-unseen-message', function(){
+               
+                var profile_rating = $( "#profile_rating option:selected" ).val();
+                var rfq_id ="{{$rfq['id']}}";
+                    $.ajax({
+                        method: 'get',
+                        data: {rfq_id:rfq_id},
+                        url: '{{ route("admin_rfq_business_profiles_with_unseen_message") }}',
+                        success:function(response){
+                            console.log(response.businessProfiles);
+                            if(response.businessProfiles.length >0){
+                                $('.rfq_business_profile_list_with_unseen_messages').empty();
+                                response.businessProfiles.forEach((item, index)=>{
+                                    var  className = 'no-class';
+                                    var  display  = 'display:none';
+                                    var offered_to_buyer = ' ';
+                                    var deal_with_supplier=' ';
+                                    if(item.supplier_quotation_to_buyer.length > 0){
+                                        className = 'already-sent';
+                                        display  = 'display:block';
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            if(i.from_backend == true){
+                                                offered_to_buyer ='<span>Offered to buyer :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                                return false;
+                                            }
 
+                                        });
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            if( i.from_backend == false){
+                                                deal_with_supplier ='<span>Deal with supplier :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                                return false;
+                                            }
+                                        });
+                                    }
+                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
+                                    html += '<div class="suppliersBoxWrap">';
+                                    html += '<div class="suppliers_box">';
+                                    html += '<div class="suppliers_imgBox">';
+                                    html += '<div class="imgBox">';
+                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    html += '<img src="'+image+'" alt="" />';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="suppliers_textBox">';
+                                    html += '<div class="title_box">';
+                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<div class="sms_img">';
+                                    if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
+                                    }else{
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                    }
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details_box">';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Person <br/>';
+                                    html += '<span>'+item.user.name+'</span>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Number <br/>';
+                                    html += '<span>'+item.user.phone+'</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="offer_price_block_wrapper" style=" ' + display + ' ">';
+                                    html += '<div class="offer_price_block">';
+                                    html +=  offered_to_buyer;
+                                    html += '</div>';
+                                    html += '<div class="deal_price_block">';
+                                    html +=  deal_with_supplier;
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="send_box">';
+                                    html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal fade businessProfileModal" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
+                                    html += '<div class="modal-dialog" role="document">';
+                                    html += '<div class="modal-content">';
+                                    html += '<div class="modal-body">';
+                                    html += '<legend>'+item.business_name+'</legend>';
+                                    html += '<div class="propose_price_block">';
+                                    html += '<div class="row">';
+                                    html += '<div class="col-sm-12 col-md-6">';
+                                    html += '<div class="print_block">';
+                                    html += '<label>Offer Price ($)</label>';
+                                    html += '<div class="propose_price_input_block">';
+                                    html += '<input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="col-sm-12 col-md-6">';
+                                    html += '<div class="uom_block">';
+                                    html += '<label>Price Unit</label>';
+                                    html += '<select name="propose_uom" class="propose_uom form-select form-control">';
+                                    html += '<option value="" selected="true" disabled="">Choose your option</option>';
+                                    html += '<option value="Pcs">Pcs</option>';
+                                    html += '<option value="Lbs">Lbs</option>';
+                                    html += '<option value="Gauge">Gauge</option>';
+                                    html += '<option value="Yard">Yards</option>';
+                                    html += '<option value="Kg">Kg</option>';
+                                    html += '<option value="Meter">Meter</option>';
+                                    html += '<option value="Dozens">Dozens</option>';
+                                    html += '</select>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal-footer">';
+                                    html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                    html += '<button type="button" data-businessprofilealias="'+item.alias+'" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    $('.rfq_business_profile_list_with_unseen_messages').append(html);
+                                })
+                            }else{
+                                $('.rfq_business_profile_list_with_unseen_messages').empty();
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
+                                html += '<p>No Profile found</p>';
+                                html += '</div>';
+                                $('.rfq_business_profile_list_with_unseen_messages').append(html);
+                            }
+                            $("#suppliers-with-unseen-message").show();
+                        }
+                    });
+            });
 
             $(document).on('change', '#profile_rating', function(){
                 var category_id = $( "#factory_type option:selected" ).val();
@@ -579,9 +721,9 @@
                                     html += '<h3>'+item.business_name+'</h3>';
                                     html += '<div class="sms_img">';
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
-                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
                                     }else{
-                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span id="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_'+item.user.sso_reference_id+'"></span></a>';
                                     }
                                     html += '</div>';
                                     html += '</div>';
@@ -861,7 +1003,6 @@
                 var to_user_image = "{{$to_user_image}}";
                 var supplierId = $(document).children().find('#supplier-messagedata').attr("data-supplierid");
                 var buyerId = $('#messagedata').data('buyerid');
-                console.log(data);
 
                 if( data.rfq_id == "{{$rfq['id']}}" && fromId == data.from_id )
                 {
@@ -877,8 +1018,6 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    console.log("supplier id:",supplierId);
-                    console.log("buyer id:",buyerId);
                     if( supplierId  && supplierId == data.to_id){
                         $('.supplier-chats-box').append(msgHtml);
                         $(".supplier-chat-area").animate({ scrollTop:$('#supplier-messagedata').prop("scrollHeight")});
@@ -897,9 +1036,6 @@
                     if( supplierId  && supplierId == data.from_id ){
                         var imageSource = $('.active_supplier_image').attr('src');
                         var supplierNameShortForm = $('.active_messaging_supplier_name_short_form').text();
-                        console.log("image: "+imageSource);
-                        console.log("supplierNameShortForm: "+supplierNameShortForm);
-
                         if(imageSource != ""){
                             msgHtml += '<img src="'+imageSource+'" class="circle" alt="avatar">';
                         }else{
@@ -922,11 +1058,21 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
-                    var message_count_span = '#sso_id_'+data.from_id;
-                    var no_of_unseen_message = $(message_count_span).text();
-                    $(message_count_span).show();
-
-                    $(message_count_span).text(parseInt( no_of_unseen_message == '' ? '0' : no_of_unseen_message)+1);
+                    var message_count_span = '.sso_id_'+data.from_id;
+                    var no_of_unseen_message = $(message_count_span).data('unseenmessagecount');
+                    console.log(no_of_unseen_message);
+                    console.log(typeof(no_of_unseen_message));
+                    if(no_of_unseen_message == 0){
+                        $(message_count_span).show();
+                        $(message_count_span).text(parseInt( no_of_unseen_message == '' ? '0' : no_of_unseen_message)+1);
+                        $(message_count_span).data('unseenmessagecount',parseInt(no_of_unseen_message)+1);
+                    }else{
+                        $(message_count_span).empty();
+                        $(message_count_span).text('');
+                        $(message_count_span).text(parseInt(no_of_unseen_message)+1);
+                        $(message_count_span).data('unseenmessagecount',parseInt(no_of_unseen_message)+1);
+                    }
+                    
                     if( supplierId  && supplierId == data.from_id ){
 
                         $('.supplier-chats-box').append(msgHtml);
@@ -937,6 +1083,16 @@
                         $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
                     }
 
+                }
+
+                if(fromId != data.from_id ){
+                    jQuery.ajax({
+                        type : "get",
+                        data : {'rfq_id':data.rfq_id},
+                        url : "{{route('send_firebase_push_notification_to_admin_for_rfq_message')}}",
+                        success : function(response){
+                        }
+                    });
                 }
             });
 
@@ -1009,8 +1165,9 @@
                                 $('.supplier-chats-box').append(msgHtml);
                             }
                         })
-                        var message_count_span = '#sso_id_'+sso_reference_id;
+                        var message_count_span = '.sso_id_'+sso_reference_id;
                         $(message_count_span).text('');
+                        $(message_count_span).data('unseenmessagecount',0);
                         $(message_count_span).hide();
                         dialog.dialog("open");
 

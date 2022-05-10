@@ -14,9 +14,12 @@ use App\Userchat;
 use App\Models\Proforma;
 use App\Models\Manufacture\ProductCategory;
 use Illuminate\Support\Facades\Http;
+use App\Http\Traits\PushNotificationTrait;
+use Illuminate\Support\Facades\Auth;
 
 class BackendRfqController extends Controller
 {
+    use PushNotificationTrait;
     public function index(Request $request){
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/1/limit/10');
         $data = $response->json();
@@ -52,7 +55,6 @@ class BackendRfqController extends Controller
         ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
         ->get()
         ->toArray();
-
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";
@@ -73,14 +75,12 @@ class BackendRfqController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
-
         $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq['id'].'/admin/'.$user.'/user/'.$rfq['created_by']);
         $data = $response->json();
         $chats = $data['data']['messages'];
         $profromaInvoice = Proforma::where('generated_po_from_rfq',$id)->first();
         $chatdata = $chats;
         $buyer = $to_user;
-
         $userSsoIds = [];
         foreach($businessProfiles as $profile){
             array_push($userSsoIds, $profile['user']['sso_reference_id']);
@@ -93,11 +93,41 @@ class BackendRfqController extends Controller
         foreach($usersWithMessageUnseen as $user){
             $associativeArrayUsingIDandCount[$user['user_id']]  = $user;
         }
-
         $proforma_invoice_url_for_buyer =$profromaInvoice ? route('open.proforma.single.html', $profromaInvoice->id) : '';
         $url_exists=$link;
-
         return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists'));
+    }
+
+    public function sendFireBasePushNotificationToAdminForNewMessage(Request $request){
+        $admin = Auth::guard('admin')->user();
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$request->rfq_id);
+        $data = $response->json();
+        $rfq = $data['data']['data'];
+        $fcmToken = $admin->fcm_token;
+        $title = "New message arrived";
+        $message = "A new message has arrived for rfq:".$rfq['title'];
+        $action_url = route('admin.rfq.show',$request->rfq_id);
+        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+        return response()->json(['message'=>'successfully send push notification'],200);
+    }
+
+    public function businessProfilesWithUnseenMessageCount(Request $request){
+        $response = Http::get(env('RFQ_APP_URL').'/api/conversations/unseen/rfq/'.$request->rfq_id);
+        $data = $response->json();
+        $suppliersWithMessageCount = $data['data'];
+        $supplierSsoIds = [];
+        foreach($suppliersWithMessageCount as $supplierWithMessageCount){
+            array_push($supplierSsoIds,$supplierWithMessageCount['user_id']);
+        }
+        $userIds = User::whereIn('sso_reference_id',$supplierSsoIds)->pluck('id')->toArray();
+        $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+            $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
+        } ])->whereIn('user_id',$userIds)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+        $associativeArrayUsingIDandCount = [];
+        foreach($suppliersWithMessageCount as $supplierWithMessageCount){
+            $associativeArrayUsingIDandCount[$supplierWithMessageCount['user_id']]  = $supplierWithMessageCount;
+        }
+        return response()->json(['businessProfiles'=>$businessProfiles, 'associativeArrayUsingIDandCount' => $associativeArrayUsingIDandCount],200);
     }
 
     public function getChatDataBySupplierId(Request $request){
@@ -149,8 +179,6 @@ class BackendRfqController extends Controller
 
     }
     public function businessProfileFilter(Request $request){
-
-
         if($request->category_id && $request->profile_rating !=0)
         {
             //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
@@ -166,13 +194,12 @@ class BackendRfqController extends Controller
                 $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
             } ])->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
         }
-
         $userSsoIds = [];
         foreach($businessProfiles as $profile){
             array_push($userSsoIds, $profile['user']['sso_reference_id']);
         }
         $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
-        $response = Http::get(env('RFQ_APP_URL').'/api/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId.'/conversations');
+        $response = Http::get(env('RFQ_APP_URL').'/api/conversations/unseen/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId);
         $data = $response->json();
         $usersWithMessageUnseen = $data['data'] ?? [];
         $associativeArrayUsingIDandCount = [];

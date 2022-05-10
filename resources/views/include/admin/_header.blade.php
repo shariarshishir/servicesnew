@@ -21,7 +21,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto admin-notification-dropdown">
       <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
                 <span class="badge badge-warning navbar-badge">{{count($notifications)}}</span>
@@ -97,17 +97,35 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-      <li class="nav-item menu-items">
-        <a href="{{ route('admin.logout') }}" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
-
-          <span class="menu-icon">
-            <i class="mdi mdi-speedometer"></i>
-          </span>
-          <span class="menu-title">Logout</span>
-      </a>
-      <form id="frm-logout" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-      </form>
-      </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-envelope"></i>
+                <span class="badge badge-warning navbar-badge">{{$messageNotifications['count']}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header" style="color: #55a860;">You have {{$messageNotifications['count']}} messages</span>
+                <div class="dropdown-order"></div>
+                @foreach($messageNotifications['data'] as $messageNotification)
+                <a href="{{route('admin.rfq.show',$messageNotification['rfq_id'])}}" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <div class="admin-notification-content">
+                        <div class="admin-notification-title">{{$messageNotification['rfq_title']}} <span class="badge badge-warning">{{$messageNotification['unseen_count']}}</span></div>
+                    </div>
+                </a>
+                @endforeach
+                <div class="dropdown-divider"></div>
+            </div>
+        </li>
+        <li class="nav-item menu-items">
+            <a href="{{ route('admin.logout') }}" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                <span class="menu-icon">
+                    <i class="mdi mdi-speedometer"></i>
+                </span>
+                <span class="menu-title">Logout</span>
+            </a>
+            <form id="frm-logout" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+        </li>
     </ul>
   </nav>

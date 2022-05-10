@@ -10,6 +10,7 @@ use Auth;
 use App\Models\Config;
 use App\Models\Manufacture\ProductCategory as ManufactureProductCategory;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -69,7 +70,9 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer('include.admin._header', function($view) {
             if(auth()->guard('admin')->check()){
                 $notifications =auth()->guard('admin')->user()->unreadNotifications->where('read_at',NULL);
-                $view->with(['notifications'=>$notifications]);
+                $response = Http::get(env('RFQ_APP_URL').'/api/notifications');
+                $messageNotifications = $response->json();
+                $view->with(['notifications'=>$notifications,'messageNotifications'=>$messageNotifications]);
             }
 
         });

@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\CertificationController as AdminCertificationCont
 use App\Http\Controllers\Admin\ManageBusinessProfileController;
 use App\Http\Controllers\Admin\NewUserRequestController;
 use App\Http\Controllers\Admin\BackendRfqController as AdminRfqController;
+use App\Http\Controllers\Admin\BusinessMappingTreeController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -594,7 +595,9 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');
         //product type mapping
-        Route::resource('product-type-mapping',ProductTypeMappingController::class,['as' => 'admin']);
+        Route::resource('product-type-mapping',ProductTypeMappingController::class,['as' => 'admin'])->except('show');
+        //business mapping tree
+        Route::resource('business-mapping-tree',BusinessMappingTreeController::class,['as' => 'admin'])->except('show');
     });
 
 });

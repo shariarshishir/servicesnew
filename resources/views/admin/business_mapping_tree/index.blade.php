@@ -32,7 +32,7 @@
 				<legend>List</legend>
 
 				<div class="no_more_tables">
-					<table class="table table-bordered">
+					<table class="table table-bordered" id="datatable">
 						<thead class="cf">
 						<tr>
 							<th>Name</th>
@@ -109,5 +109,19 @@
 
 
 @endsection
+
+@push('js')
+<script>
+    $('#datatable').DataTable({
+        columns: [
+            { orderable: false },
+            null,
+            null,
+            null,
+            null
+        ]
+    });
+</script>
+@endpush
 
 

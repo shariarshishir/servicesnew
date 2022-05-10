@@ -209,6 +209,30 @@ class BackendRfqController extends Controller
         return response()->json(['businessProfiles'=>$businessProfiles, 'associativeArrayUsingIDandCount' => $associativeArrayUsingIDandCount],200);
     }
 
+    public function businessProfileFilterByTitle(Request $request){
+        if($request->search_title)
+        {
+            //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
+            $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+                $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
+            } ])->where('business_name', 'LIKE',"%$request->search_title%")->get();
+
+        }
+        $userSsoIds = [];
+        foreach($businessProfiles as $profile){
+            array_push($userSsoIds, $profile['user']['sso_reference_id']);
+        }
+        $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
+        $response = Http::get(env('RFQ_APP_URL').'/api/conversations/unseen/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId);
+        $data = $response->json();
+        $usersWithMessageUnseen = $data['data'] ?? [];
+        $associativeArrayUsingIDandCount = [];
+        foreach($usersWithMessageUnseen as $user){
+            $associativeArrayUsingIDandCount[$user['user_id']]  = $user;
+        }
+        return response()->json(['businessProfiles'=>$businessProfiles, 'associativeArrayUsingIDandCount' => $associativeArrayUsingIDandCount],200);
+    }
+
     public function supplierQuotationToBuyer(Request $request){
         //dd($request->all());
 

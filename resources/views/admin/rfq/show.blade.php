@@ -37,7 +37,7 @@
                                 <div class="chat_top_right">
                                     <ul>
                                         @if($profromaInvoice)
-                                        <li class="active"><a href="{{route('proforma_invoices.show',$profromaInvoice->id)}}" class="btn_grBorder">Generated PO</a></li>
+                                        <li class="active"><a href="{{route('proforma_invoices.show',$profromaInvoice->id)}}" class="btn_grBorder yellow_btn">Generated PO</a></li>
                                         @else
                                         <li class="active"><a href="{{ route('proforma_invoices.create',['buyerId' => $buyer->id,'rfqId'=>$rfq['id']]) }}" class="btn_grBorder">Generate PI</a></li>
                                         @endif
@@ -106,6 +106,11 @@
                                         <h3>Matched Suppliers</h3>
                                     </div>
                                     <div class="col-sm-12 col-md-8 filter_block">
+                                        <div class="factory_filter_by_title">
+                                            <label>Filter by Title</label>
+                                            <input type="text" class="form-control factory_filter_by_title_trigger" value="" />
+                                            <a href="javascript:void(0)" class="factory_filter_by_title_cancel_trigger" style="display: none;"><i class="fa fa-times"></i></a>
+                                        </div>
                                         <div class="factory_type_filter">
                                             <label>Factory Type</label>
                                             <select class="form-select form-control" name="factory_type" id="factory_type">
@@ -1212,6 +1217,154 @@
                 socket.emit('new message', message);
                 $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             }
+
+            $(".factory_filter_by_title_trigger").change(function(){
+                var search_title = $(this).val();
+                var rfq_id = "{{$rfq['id']}}";
+                console.log(search_title);
+
+                if( search_title !='')
+                {
+                    $.ajax({
+                        method: 'get',
+                        data: {search_title:search_title, rfq_id:rfq_id},
+                        url: '{{ route("admin.rfq.business.profiles.filter.by.title") }}',
+                        success:function(response){
+                            console.log(response.businessProfiles);
+                            $(".factory_filter_by_title_cancel_trigger").show();
+                            if(response.businessProfiles.length >0)
+                            {
+                                $('.rfq_business_profile_list').empty();
+                                response.businessProfiles.forEach((item, index)=>{
+                                    console.log(item);
+
+                                    var  className = 'no-class';
+                                    var  display  = 'display:none';
+                                    var offered_to_buyer = ' ';
+                                    var deal_with_supplier=' ';
+                                    if(item.supplier_quotation_to_buyer.length > 0){
+                                        className = 'already-sent';
+                                        display  = 'display:block';
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            if(i.from_backend == true){
+                                                offered_to_buyer ='<span>Offered to buyer :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                                return false;
+                                            }
+
+                                        });
+                                        item.supplier_quotation_to_buyer.forEach((i, idx)=>{
+                                            if( i.from_backend == false){
+                                                deal_with_supplier ='<span>Deal with supplier :</span> <span>$'+i.offer_price+' / '+i.offer_price_unit+'</span>';
+                                                return false;
+                                            }
+                                        });
+                                    }
+                                    var html = '<div class="col-sm-12 col-md-6 col-lg-4"'+className+'>';
+                                    html += '<div class="suppliersBoxWrap">';
+                                    html += '<div class="suppliers_box">';
+                                    html += '<div class="suppliers_imgBox">';
+                                    html += '<div class="imgBox">';
+                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    html += '<img src="'+image+'" alt="" />';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="suppliers_textBox">';
+                                    html += '<div class="title_box">';
+                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<div class="sms_img">';
+                                    if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
+                                    }else{
+                                        html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'"><i class="fa fa-envelope"></i><span style="display: none" data-unseenmessagecount="0"  class="sso_id_'+item.user.sso_reference_id+'"></span></a>';
+                                    }
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details_box">';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Person <br/>';
+                                    html += '<span>'+item.user.name+'</span>';
+                                    html += '</div>';
+                                    html += '<div class="sms_details">';
+                                    html += 'Contact Number <br/>';
+                                    html += '<span>'+item.user.phone+'</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="offer_price_block_wrapper" style=" ' + display + ' ">';
+                                    html += '<div class="offer_price_block">';
+                                    html +=  offered_to_buyer;
+                                    html += '</div>';
+                                    html += '<div class="deal_price_block">';
+                                    html +=  deal_with_supplier;
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="send_box">';
+                                    html += '<a href="javascript:void(0);" class="businessProfileModal'+item.id+'" data-toggle="modal" data-target="#businessProfileModal'+item.id+'">Send <i class="fa fa-chevron-circle-right"></i></a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal fade businessProfileModal" id="businessProfileModal'+item.id+'" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal'+item.id+'Label" aria-hidden="true">';
+                                    html += '<div class="modal-dialog" role="document">';
+                                    html += '<div class="modal-content">';
+                                    html += '<div class="modal-body">';
+                                    html += '<legend>'+item.business_name+'</legend>';
+                                    html += '<div class="propose_price_block">';
+
+                                    html += '<div class="row">';
+                                    html += '<div class="col-sm-12 col-md-6">';
+                                    html += '<div class="print_block">';
+                                    html += '<label>Offer Price ($)</label>';
+                                    html += '<div class="propose_price_input_block">';
+                                    html += '<input data-businessprofilename="'+item.business_name+'" type="number" value="" name="propose_price" class="propose_price" />';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="col-sm-12 col-md-6">';
+                                    html += '<div class="uom_block">';
+                                    html += '<label>Price Unit</label>';
+                                    html += '<select name="propose_uom" class="propose_uom form-select form-control">';
+                                    html += '<option value="" selected="true" disabled="">Choose your option</option>';
+                                    html += '<option value="Pcs">Pcs</option>';
+                                    html += '<option value="Lbs">Lbs</option>';
+                                    html += '<option value="Gauge">Gauge</option>';
+                                    html += '<option value="Yard">Yards</option>';
+                                    html += '<option value="Kg">Kg</option>';
+                                    html += '<option value="Meter">Meter</option>';
+                                    html += '<option value="Dozens">Dozens</option>';
+                                    html += '</select>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="modal-footer">';
+                                    html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                    html += '<button type="button" data-businessprofilealias="'+item.alias+'" data-businessprofilename="'+item.business_name+'" data-businessprofileid="'+item.id+'" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    $('.rfq_business_profile_list').append(html);
+                                })
+                            }
+                            else
+                            {
+                                $('.rfq_business_profile_list').empty();
+                                var html = '<div class="alert alert-info" style="width: 100%;">';
+                                html += '<p>No Profile found</p>';
+                                html += '</div>';
+                                $('.rfq_business_profile_list').append(html);
+                            }
+                        }
+                    });
+                }
+            });
+
+            $(".factory_filter_by_title_cancel_trigger").click(function(){
+                $(".factory_filter_by_title_trigger").val("");
+                window.location.reload();
+            })
 
         });
 

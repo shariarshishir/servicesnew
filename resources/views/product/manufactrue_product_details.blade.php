@@ -253,7 +253,7 @@
                                                         @if($product->businessProfile)
                                                             @switch($product->businessProfile->business_type)
                                                                 @case(1)
-                                                                    Manufacture
+                                                                    Manufacturer
                                                                     @break
                                                                 @case(2)
                                                                     Wholesaler

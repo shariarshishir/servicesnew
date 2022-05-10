@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-				    <legend>{{ucfirst($type)}}</legend>
+				    <legend>{{ucwords(str_replace("_", " ", $type))}}</legend>
                 <div class="no_more_tables">
                       <table class="table table-bordered users-table data-table" >
                           <thead class="cf">

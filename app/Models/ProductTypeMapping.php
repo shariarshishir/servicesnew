@@ -18,4 +18,19 @@ class ProductTypeMapping extends Model
     {
         return $this->hasMany(ProductTypeMapping::class, 'parent_id', 'id')->where('parent_id', 2);
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(ProductTypeMapping::class,'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(ProductTypeMapping::class,'parent_id');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
+    }
 }

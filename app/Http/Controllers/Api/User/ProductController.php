@@ -1399,6 +1399,7 @@ class ProductController extends Controller
                 'priority_level' => $item->priority_level,
                 'product_type_mapping_id' => $item->product_type_mapping_id,
                 'product_type_mapping_child_id' => $item->product_type_mapping_child_id,
+                'lead_time' => $item->flag == 'mb' ? $item->lead_time : null,
             ]);
         }
 
@@ -1481,6 +1482,7 @@ class ProductController extends Controller
                 'priority_level' => $item->priority_level,
                 'product_type_mapping_id' => $item->product_type_mapping_id,
                 'product_type_mapping_child_id' => $item->product_type_mapping_child_id,
+                'lead_time' => $item->flag == 'mb' ? $item->lead_time : null,
             ]);
         }
 

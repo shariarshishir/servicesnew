@@ -48,10 +48,7 @@ use App\Http\Controllers\CompanyFactoryTourController;
 use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
-
-
-
-
+use App\Http\Controllers\Admin\ProductTypeMappingController;
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\SellerProductController;
@@ -600,6 +597,8 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('products',[ProductController::class, 'index'])->name('admin.products.index');
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');
+        //product type mapping
+        Route::resource('product-type-mapping',ProductTypeMappingController::class,['as' => 'admin']);
     });
 
 });

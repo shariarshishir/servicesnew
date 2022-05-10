@@ -916,9 +916,18 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: flex;
     margin-bottom: 20px;
 }
+.business_profile_filter .factory_filter_by_title {
+    margin-left: auto;
+    position: relative;
+}
+.business_profile_filter .factory_filter_by_title .factory_filter_by_title_cancel_trigger {
+    position: absolute;
+    top: 35px;
+    right: 10px;
+}
 .business_profile_filter .factory_type_filter {
     margin-right: 15px;
-    margin-left: auto;
+    margin-left: 15px;
 }
 .rfq_data_top .business_profile_filter {
     display: inherit;
@@ -987,6 +996,10 @@ label:not(.form-check-label):not(.custom-file-label) {
 .rfq_admin_chat_topwrap .chat_top_right ul li.active a {
     background: #73D578;
     color: #ffffff;
+}
+.rfq_admin_chat_topwrap .chat_top_right ul li a.yellow_btn {
+    background: #ffc107;
+    color: #fff;
 }
 .rfq_admin_chat_topwrap .rfq_chat_info {
     display: inline-block;

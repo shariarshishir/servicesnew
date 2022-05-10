@@ -36,7 +36,9 @@
                                     <th>Date</th>
                                     <th>Buyer Name</th>
                                     <th>Supplier Name</th>
+                                    <th>RFQ ID</th>
                                     <th>PI Status</th>
+                                    <th>Created Date</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -56,6 +58,9 @@
                                         <td data-title="supplier_name">
                                             {{$merchantbayUserInfo->name}}
                                         </td>
+                                        <td data-title="rfq_id">
+                                            {{$proformaInvoice->generated_po_from_rfq}}
+                                        </td>
                                         <td data-title="PI_status">
                                             @if($proformaInvoice->status == 1)
                                             <span class="accepted_po">Accepted</span>
@@ -65,6 +70,9 @@
                                             <span class="rejected_po">Rejected</span>
                                             @endif
                                         </td>
+                                        <td data-title="created">
+                                            {{$proformaInvoice->created_at}}
+                                        </td>                                        
                                         <td data-title="Action" class="text-center">
                                             <a href="{{ route('proforma_invoices.show', $proformaInvoice->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </td>

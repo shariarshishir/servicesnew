@@ -5,7 +5,7 @@
             <table style="background: #fff; max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
-                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/global/" title="logo" target="_blank">
+                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
                             <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
                         </a>
                     </td>
@@ -58,7 +58,7 @@
                     <td style="text-align: center; padding: 30px; margin: 0;">
                         <p style="margin: 0; padding: 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"> Merchant Bay is a B2B tech-enabled platforms created as a critical channel for sales, marketing and order management of apparel.</p>
                         <span style="text-align: center; display: block;  padding: 30px 0 40px; margin: 0; line-height: 45px;">
-                            <a target="_blank" href="https://www.merchantbay.com/global/" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Visit Merchant Bay</a>
+                            <a target="_blank" href="https://www.merchantbay.com/" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Visit Merchant Bay</a>
                         </span>
                     </td>
                 </tr>

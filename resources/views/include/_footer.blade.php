@@ -892,7 +892,7 @@ $(document).on("keyup",".search_input",function(){
                 var html="";
                 var nohtml = "";
                 if(is_env == 'production'){
-                    url  = window.location.origin+'/global';
+                    url  = window.location.origin;
                 } else {
                     url  = window.location.origin;
                 }

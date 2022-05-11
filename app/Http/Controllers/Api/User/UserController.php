@@ -161,7 +161,7 @@ class UserController extends Controller
             'phone'           => 'required',
             'country'=>'required'
         ]);
-        $checkExistingUser=User::Where('email', $request->email)->get();
+        $checkExistingUser=User::Where('email', $request->email)->first();
         if($checkExistingUser){
             return response()->json('user already exists', 403);
         }
@@ -568,7 +568,6 @@ class UserController extends Controller
     // user registration from sso
     public function signUp(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
@@ -588,7 +587,8 @@ class UserController extends Controller
             'error' => $validator->getMessageBag()),
             400);
         }
-        $checkExistingUser=User::Where('email', $request->email)->first();
+        $checkExistingUser = User::Where('email', $request->email)->first();
+        
         if($checkExistingUser){
             return response()->json('user already exists', 403);
         }

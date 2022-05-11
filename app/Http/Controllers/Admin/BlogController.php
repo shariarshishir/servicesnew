@@ -82,14 +82,13 @@ class BlogController extends Controller
         $metaInformation->meta_type = $request->meta_type;
         $metaInformation->meta_image = $meta_image_path??NULL;
         $metaInformation->save();
-
-
-        Session::flash('success','Blog post created successfully!!!!');
-
         return redirect()->route('blogs.index');
       
     }
     public function  edit($id){
+        Session::flash('success','Blog post created successfully!!!!');
+        Session::put('backUrl',  url()->previous());
+        
         $blog = Blog::with('metaInformation')->where('id',$id)->first();
         return view('admin.admin_blog.edit',compact('blog'));
     }
@@ -196,9 +195,9 @@ class BlogController extends Controller
             $metaInformation->meta_image = $meta_image_path ?? $metaInformation->meta_image;
             $metaInformation->save();
         }
-
+        $url = Session::get('backUrl');
         Session::flash('success','Blog post updated successfully!!!!');
-        return redirect()->route('blogs.index');
+        return redirect($url);
     }
 
     public function destroy($id)

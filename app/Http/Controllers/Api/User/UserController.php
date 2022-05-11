@@ -190,7 +190,7 @@ class UserController extends Controller
                 'business_name' => $request->company_name,
                 'alias'   => $this->createAlias($request->company_name),
                 'user_id'       => $user->id,
-                'business_type' => $request->business_type,
+                'business_type' => 2, // forcefully set Manufacturer type
                 'has_representative'=> 1,
                 'industry_type' => 'apparel',
             ];
@@ -618,7 +618,7 @@ class UserController extends Controller
                 'business_name' => $request->company_name,
                 'alias'   => $this->createAlias($request->company_name),
                 'user_id'       => $user->id,
-                'business_type' => $request->business_type,
+                'business_type' => 2, // forcefully set Manufacturer type
                 'has_representative'=> 1,
                 'industry_type' => 'apparel',
             ];

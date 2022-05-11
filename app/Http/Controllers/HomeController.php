@@ -868,6 +868,7 @@ class HomeController extends Controller
     public function supplierProfile($alias)
     {
         $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
+
         //manufacture
         // $flag=0;
         // if( $business_profile->companyOverview->about_company == null){
@@ -891,7 +892,7 @@ class HomeController extends Controller
         //     }
 
         // }
-        if($business_profile->business_type == 1 )
+        if($business_profile->business_type == 'manufacturer' )
         {
 
             $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations.country','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
@@ -927,7 +928,7 @@ class HomeController extends Controller
             return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour','userObj','flag'));
         }
         //wholesaler
-        if($business_profile->business_type == 2 )
+        if($business_profile->business_type == 'wholesaler' )
         {
             $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
             $userObj = User::where('id',$business_profile->user_id)->get();

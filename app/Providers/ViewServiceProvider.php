@@ -34,7 +34,7 @@ class ViewServiceProvider extends ServiceProvider
         //product tags
 
         //config
-        view()->composer(['business_profile.show','business_profile._edit_modal_data'], function($view){
+        view()->composer(['business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index'], function($view){
             $product_tags=ProductTag::get('name');
             $view->with(['product_tags'=>$product_tags]);
         });

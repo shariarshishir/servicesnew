@@ -201,26 +201,15 @@
 
                 <div class="row input-field ">
                     <div class="col s12 m3 l3">
-                        <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
+                        <label for="product_tag">Product Tag<span class="text-danger">*</span></label>
                     </div>
                     <div class="col s12 m9 l9">
-                        <select name="category_id" class="select2 browser-default" id="category_id">
-                            <option value="" selected="true">Choose your option</option>
-                            @foreach($categories as $categoryitem)
-                                <option value="{{$categoryitem['id']}}">{{$categoryitem['name']}}</option>
-                                    @if(!empty($categoryitem['children'])) <!-- 1st sub level -->
-                                        @foreach($categoryitem['children'] as $childcategoryitem)
-                                        <option value="{{ $childcategoryitem['id'] }}"> - {{ $childcategoryitem['name'] }}</option>
-                                            @if(!empty($childcategoryitem['children'])) <!-- 2nd sub level -->
-                                                @foreach($childcategoryitem['children'] as $subchildcategoryitem)
-                                                <option value="{{ $subchildcategoryitem['id'] }}"> -- {{ $subchildcategoryitem['name'] }}</option>
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif
+                        <select name="product_tag[]" class="select2 browser-default" id="product_tag" multiple>
+                            @foreach($product_tags as $product_tag)
+                                <option value="{{$product_tag->name}}">{{$product_tag->name}}</option>
                             @endforeach
                         </select>
-                        <span class="category_id_error text-danger error-rm"></span>
+                        <span class="product_tag_error text-danger error-rm"></span>
                     </div>
                 </div>
 

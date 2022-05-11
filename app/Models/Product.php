@@ -13,6 +13,7 @@ class Product extends Model
     protected $connection = 'mysql';
     protected $casts = [
         'product_type_mapping_child_id' => 'array',
+        'product_tag' => 'array',
     ];
 
     protected $guarded=[];

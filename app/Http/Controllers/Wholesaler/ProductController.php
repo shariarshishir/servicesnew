@@ -117,7 +117,7 @@ class ProductController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
             'overlay_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPEG,PNG,JPG,GIF,SVG|max:25600',
             'name'      => 'required',
-            'category_id' => 'required',
+            'product_tag' => 'required',
             'product_type' => 'required',
             'description'  => 'required',
             'moq'         => [new MoqUnitRule($request, $request->product_type)],
@@ -279,7 +279,7 @@ class ProductController extends Controller
                 'business_profile_id' => $business_profile->id,
                 'name'      => $request->name,
                 'sku'       => $sku,
-                'product_category_id' => $request->category_id,
+                'product_tag' => $request->product_tag,
                 'product_type'  => $request->product_type,
                 'attribute' => json_encode($price_break_down) ?? null,
                 'is_featured' => $request->is_featured=='on'? 1:0,
@@ -396,7 +396,7 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'      => 'required',
-            'category_id' => 'required',
+            'product_tag' => 'required',
             'description'  => 'required',
             'moq'         => [new MoqUnitRule($request, $request->p_type)],
             'product_unit'  =>[new MoqUnitRule($request, $request->p_type)],
@@ -540,7 +540,7 @@ class ProductController extends Controller
 
                 Product::withTrashed()->where('sku',$sku)->update([
                     'name'      => $request->name,
-                    'product_category_id' => $request->category_id,
+                    'product_tag' => $request->product_tag,
                     'is_featured' => $request->is_featured=='on'? 1:0,
                     'is_new_arrival' => $request->is_new_arrival=='on'? 1:0,
                     'state'   => $request->published=='on'? 1:0,

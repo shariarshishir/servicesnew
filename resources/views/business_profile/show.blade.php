@@ -296,7 +296,7 @@
 															<!-- <div class="priceBox row">
 																<div class="col s12 m12 l4 apperal">
 																	<a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
-																			{{ucfirst($product->category->name)}}
+
 																	</a>
 																</div>
 																<div class="col s12 m12 l8 right-align price">

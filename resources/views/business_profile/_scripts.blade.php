@@ -120,8 +120,8 @@
         $('.product-add-modal-trigger').click(function(){
             $("#product-add-modal-block").modal('open');
             $('#manufacture-product-upload-form')[0].reset();
-            $('#category_id').val('');
-            $('#category_id').trigger('change');
+            $('#product_tag').val('');
+            $('#product_tag').trigger('change');
             $('#colors').val('');
             $('#colors').trigger('change');
             $('#sizes').val('');

@@ -9,6 +9,7 @@ use App\Models\CartItem;
 use Auth;
 use App\Models\Config;
 use App\Models\Manufacture\ProductCategory as ManufactureProductCategory;
+use App\Models\ProductTag;
 use Illuminate\Support\Facades\Cache;
 
 class ViewServiceProvider extends ServiceProvider
@@ -30,6 +31,14 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //product tags
+
+        //config
+        view()->composer(['business_profile.show','business_profile._edit_modal_data'], function($view){
+            $product_tags=ProductTag::get('name');
+            $view->with(['product_tags'=>$product_tags]);
+        });
+
         view()->composer('*', function($view) {
             $categories = Cache::remember('categories', 60, function ()
             {
@@ -82,7 +91,7 @@ class ViewServiceProvider extends ServiceProvider
 
                 $userNotifications = auth()->user()->unreadNotifications->whereNotIn('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
                 $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
-                $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);                
+                $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);
             }
 
         });

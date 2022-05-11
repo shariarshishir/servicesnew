@@ -61,7 +61,7 @@
                                     <div class="col s12 m12 l4 apperal">
                                         <a href="{{ route("supplier.profile",$list->businessProfile->alias) }}">
                                             @if($list->flag == 'mb')
-                                                {{ucfirst($list->category->name)}}
+
                                             @else
                                                 {{$list->product_type == 3 ? 'Non-Clothing' : 'Apparel'}}
                                             @endif
@@ -94,7 +94,7 @@
                                 </div> -->
 
                                 <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4> -->
-                                
+
                                 <h4><span>{{$title}}</span></h4>
                                 <div class="row">
                                     <div class="col s12 m6">
@@ -126,10 +126,10 @@
                                                         @endforeach
                                                     @endif
                                                 @endforeach
-                                            @endif                                            
+                                            @endif
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
 
                                 <!-- @if(isset($list->moq))
                                     <div class="product_moq">MOQ: {{$list->moq}} {{$list->flag == 'mb' ? $list->qty_unit : $list->product_unit}}</div>
@@ -210,4 +210,4 @@
         </div>
     @endif
 
-    
+

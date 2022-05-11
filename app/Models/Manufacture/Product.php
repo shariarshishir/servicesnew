@@ -19,6 +19,7 @@ class Product extends Model
         'colors'=>'array',
         'sizes'=>'array',
         'product_type_mapping_child_id' => 'array',
+        'product_tag' => 'array',
     ];
 
     public function category()

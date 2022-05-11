@@ -1068,7 +1068,7 @@ class HomeController extends Controller
             return view('product.manufactrue_product_details',compact('product'));
         }
         else if($flag == 'shop'){
-            $category = ProductCategory::get();
+
             $product = Product::with('businessProfile')->where('id',$id)->first();
 
             $orderModificationRequest=OrderModificationRequest::where(['product_id' => $product->id, 'type' => 2, 'user_id' =>auth()->id() ])->get();
@@ -1113,7 +1113,7 @@ class HomeController extends Controller
             })
             ->with(['images'])
             ->get();
-            return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
+            return view('product.details',compact('product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
         }
     }
     //shortest lead time

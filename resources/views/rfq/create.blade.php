@@ -28,9 +28,9 @@
                                     <label class="category_title">Select Product Category <span >*</span></label>
                                     <select class="select2" id="category_id" name="category[]" multiple required >
                                         <option>Select an option</option>
-                                        @foreach($manufacture_product_categories as $product_category)
+                                        {{-- @foreach($manufacture_product_categories as $product_category)
                                             <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -277,10 +277,10 @@
                                         <div class="captchaContent" style="margin-bottom: 15px;">
                                             <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
                                             <div class="messageContent" style="color: red; text-align: left;"></div>
-                                        </div> 
+                                        </div>
                                     </div>
                                     <div class="col s12 m2 l3">&nbsp;</div>
-                                </div>                               
+                                </div>
 
                                 <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
                                     <button type="submit" id="page_button" style="display: none;"></button>

@@ -31,9 +31,9 @@
                             <div class=" col s12 m8 l9">
                                 <select class="select2" name="category_id" id="category_id" required>
                                     <option>Select an option</option>
-                                    @foreach($manufacture_product_categories as $product_category)
+                                    {{-- @foreach($manufacture_product_categories as $product_category)
                                         <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>

@@ -1074,7 +1074,7 @@ $reviewsCount = count($productReviews);
                     <div class="card">
                         <div class="card-content">
                             <div class="product_quick_options">
-                                <a href="{{route('productdetails',$product->sku)}}" class="quick_options_link">&nbsp;</a>
+                                <a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" class="quick_options_link">&nbsp;</a>
                                 <div class="poduct_quick_options_inside">
                                     @if(in_array($product->id,$wishListShopProductsIds))
                                         <a href="javascript:void(0);" onclick="addToWishList('{{$product->flag}}', '{{$product->id}}', $(this));" class="product-add-wishlist active">
@@ -1092,7 +1092,7 @@ $reviewsCount = count($productReviews);
                                 {{-- <a href="javascript:void();" class="overlay_hover"></a> --}}
                                 @foreach($product->images as $key=>$image)
                                     @if($product->businessProfile()->exists())
-                                        <a href="{{route('productdetails',$product->sku)}}">
+                                        <a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}">
                                             <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
                                         </a>
                                     @else
@@ -1107,7 +1107,7 @@ $reviewsCount = count($productReviews);
                             </div>
                             <div class="product_short_details">
                                 <div class="product-title">
-                                    <a href="{{route('productdetails',$product->sku)}}">
+                                    <a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}">
                                         {{ \Illuminate\Support\Str::limit($product->name, 35, '...') }}
                                     </a>
                                 </div>

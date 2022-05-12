@@ -297,7 +297,7 @@
 
     $(window).on('load', function () {
         $('.pre-loading-image-gallery').hide();
-    }) 
+    })
 
     // document.onreadystatechange = function() {
     //     if (document.readyState !== "complete") {
@@ -307,7 +307,7 @@
     //         document.querySelector(".pre-loading-image-gallery").style.display = "none";
     //         document.querySelector(".product_preview_wrap").style.visibility = "visible";
     //     }
-    // };    
+    // };
 
 
 </script>
@@ -908,7 +908,7 @@ $(document).on("keyup",".search_input",function(){
                             if(response.data[i].name && response.data[i].business_profile_id) // product for wholesaler
                             {
                                 html += '<div class="product-item">';
-                                html += '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                                html += '<a href="'+url+'/product/details/shop/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
                                 $.each(response.data[i].images,function(key,item){
                                     if(key==0){
                                         var url = window.location.origin;
@@ -994,7 +994,7 @@ $(document).on("keyup",".search_input",function(){
                             if(response.data[i].name) // product for wholesaler
                             {
                                 html+='<div class="product-item">';
-                                html+= '<a href="'+url+'/product/'+response.data[i].sku+'/details" class="overlay_hover">&nbsp;</a>';
+                                html+='<a href="'+url+'/product/details/shop/'+response.data[i].id+'" class="overlay_hover">&nbsp;</a>';
                                 $.each(response.data[i].images,function(key,item){
                                     if(key==0){
                                         var url  = window.location.origin;

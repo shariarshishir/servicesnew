@@ -34,7 +34,9 @@
                         <div class="row">
                             <div class="col s12 m12 l4">
                                 <div class="product-img center-align search_results_left">
-                                    <img src="{{asset('storage').'/'.$item->product_images[0]->product_image}}">
+                                    @if($item->product_images()->exists())
+                                        <img src="{{asset('storage').'/'.$item->product_images[0]->product_image}}">
+                                    @endif
                                 </div>
                             </div>
                             <div class="col s12 m12 l8">

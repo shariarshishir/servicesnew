@@ -27,9 +27,7 @@
                             <div class="products_inner_textbox">
                                 <!-- <div class="priceBox row">
                                     <div class="col s12 m12 l4 apperal">
-                                        <a href="{{ route("supplier.profile",$product->businessProfile->alias) }}">
-                                                {{ucfirst($product->category->name)}}
-                                        </a>
+
                                     </div>
                                     <div class="col s12 m12 l8 right-align price">
                                         $ {{$product->price_per_unit}}/<span class="unit"> {{$product->qty_unit}}</span>
@@ -76,7 +74,7 @@
                                 </a> --}}
                             </div>
                         </a>
-                        
+
 
 
                         <!-- <div class="priceBox row"></div>
@@ -88,7 +86,7 @@
                         <div class="moq" >MOQ  150 <span>pcs</span></div>
                         <div class="leadTime">Lead time 10 <span>days</span></div> -->
 
-                        
+
                     </div>
                 </div>
             </div>

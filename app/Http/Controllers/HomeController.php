@@ -481,23 +481,38 @@ class HomeController extends Controller
         $colors_sizes = json_decode($product->colors_sizes);
         $attr = json_decode($product->attribute);
         //recommandiation products
-        $recommandProducts=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->where('state',1)
-        ->where('id','!=',$product->id)
-        ->whereHas('category', function($q) use ($product){
-             $q->where('id',$product->product_category_id);
+        // $recommandProducts=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->where('state',1)
+        // ->where('id','!=',$product->id)
+        // ->whereHas('category', function($q) use ($product){
+        //      $q->where('id',$product->product_category_id);
 
-        })
-        ->orWhere(function($query) use ($product){
-            $query->where('product_type',$product->product_type)
-                  ->where('id', '!=', $product->id)
-                  ->where('business_profile_id', '!=', null);
-        })
-        ->whereHas('businessProfile', function($b){
-            $b->where('deleted_at' , null);
-        })
-        ->get();
+        // })
+        // ->orWhere(function($query) use ($product){
+        //     $query->where('product_type',$product->product_type)
+        //           ->where('id', '!=', $product->id)
+        //           ->where('business_profile_id', '!=', null);
+        // })
+        // ->whereHas('businessProfile', function($b){
+        //     $b->where('deleted_at' , null);
+        // })
+        // ->get();
+        $recommandProducts=Product::where('state',1)
+            ->where('id','!=',$product->id)
+            ->where('product_type', $product->product_type)
+            ->with(['images','businessProfile'])
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+         if(Auth()->check()){
+             $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+             $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+         }
+         else{
+             $wishListShopProductsIds=[];
+             $wishListMfProductsIds=[];
+         }
 
-        return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
+         return view('product.details',compact('product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts','wishListShopProductsIds','wishListMfProductsIds'));
     }
 
     public function sorting($value, $slug=null, $cat_id=null)
@@ -646,7 +661,6 @@ class HomeController extends Controller
     }
 
     public function searchByProductOrVendor(Request $request){
-
         $searchInputValue=$request->search_input;
         if(!empty($request->search_input)) {
 
@@ -664,7 +678,15 @@ class HomeController extends Controller
                     $page,
                     ['path' => Paginator::resolveCurrentPath()],
                 );
-                return view('product.low_moq',compact('low_moq_lists'));
+                if(Auth()->check()){
+                    $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+                    $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+                }
+                else{
+                    $wishListShopProductsIds=[];
+                    $wishListMfProductsIds=[];
+                }
+                return view('product.low_moq',compact('low_moq_lists','searchInputValue','wishListShopProductsIds','wishListMfProductsIds'));
             }
 
             elseif($request->search_type=="vendor")
@@ -692,7 +714,7 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($blogs);
                 $allItems = $allItems->merge($suppliers);
                 $resultCount = count($allItems);
-                return view('system_search',compact('allItems'));
+                return view('system_search',compact('allItems','searchInputValue'));
             }
             else
             {
@@ -869,7 +891,6 @@ class HomeController extends Controller
     public function supplierProfile($alias)
     {
         $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
-
         //manufacture
         // $flag=0;
         // if( $business_profile->companyOverview->about_company == null){
@@ -1058,8 +1079,15 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-        $product_category= ProductCategory::all();
-        return view('product.low_moq',compact('low_moq_lists','product_category'));
+        if(Auth()->check()){
+            $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+            $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+        }
+        else{
+            $wishListShopProductsIds=[];
+            $wishListMfProductsIds=[];
+        }
+        return view('product.low_moq',compact('low_moq_lists','wishListShopProductsIds','wishListMfProductsIds'));
     }
     //low moq details
     public function mixProductDetails($flag, $id)
@@ -1102,21 +1130,37 @@ class HomeController extends Controller
             $colors_sizes = json_decode($product->colors_sizes);
             $attr = json_decode($product->attribute);
             //recommandiation products
-            $product_tag=$product->product_tag ?? [];
+            //$product_tag=$product->product_tag ?? [];
+            // $recommandProducts=Product::where('state',1)
+            // ->where('id','!=',$product->id)
+            // ->whereIn('product_tag', $product_tag)
 
-            $recommandProducts=Product::with('businessProfile')->where('state',1)
-            ->where('id','!=',$product->id)
-            ->whereIn('product_tag', $product_tag)
             // ->whereHas('category', function($q) use ($product){
             //      $q->where('id',$product->product_category_id);
 
             // })
-            ->orWhere(function($query) use ($product){
-                $query->where('product_type',$product->product_type)
-                      ->where('id', '!=', $product->id);
-            })
-            ->with(['images'])
-            ->limit(10)
+            // ->orWhere(function($query) use ($product){
+            //     $query->where('product_type',$product->product_type)
+            //           ->where('id', '!=', $product->id);
+            // })
+            // ->with(['images','businessProfile'])
+            // ->limit(10)
+            // ->get();
+        //    $recommandProducts= Product::where('state',1)
+        //    ->where('id','!=',$product->id)
+        //    ->cursor()->filter(function($item) use ($product_tag){
+        //         if(isset($item->product_tag) && array_intersect($item->product_tag, $product_tag)){
+        //             return true;
+        //         }
+        //         return false;
+
+        //     });
+        $recommandProducts=Product::where('state',1)
+            ->where('id','!=',$product->id)
+            ->where('product_type', $product->product_type)
+            ->with(['images','businessProfile'])
+            ->inRandomOrder()
+            ->limit(5)
             ->get();
 
             if(Auth()->check()){

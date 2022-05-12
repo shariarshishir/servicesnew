@@ -40,7 +40,7 @@ class ProductTagController extends Controller
         ]);
 
         $product_tag=new ProductTag();
-        $product_tag->name=$request->name;
+        $product_tag->name=strtolower($request->name);
         $product_tag->save();
         Session::flash('success','Added successfully!!!!');
 
@@ -67,7 +67,7 @@ class ProductTagController extends Controller
             'name' => 'required|unique:product_tags,name,'.$id,
         ]);
         $product_tag = ProductTag::find($id);
-        $product_tag->name=$request->name;
+        $product_tag->name=strtolower($request->name);
         $product_tag->save();
         Session::flash('success','Updated successfully!!!!');
         return redirect()->route('admin.product-tag.index');

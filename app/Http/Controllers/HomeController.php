@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderModificationRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
+use DB;
+use Helper;
+use App\Models\Blog;
 use App\Models\User;
 use App\Models\Vendor;
-use App\Models\Blog;
-use App\Models\BusinessProfile;
-use App\Models\Manufacture\Product as ManufactureProduct;
-use App\Models\CompanyFactoryTour;
-use App\Models\ProductCategory;
-use App\Models\ProductImage;
-use App\Models\ProductReview;
-use App\Models\BusinessProfileVerification;
+use App\Models\Product;
 use App\Models\Category;
-use Helper;
-use DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Pagination\Paginator;
-use App\Models\Manufacture\ProductCategory as ManufatureProductCategeory;
+use App\Models\ProductImage;
+use Illuminate\Http\Request;
+use App\Models\ProductReview;
+use App\Models\BusinessProfile;
+use App\Models\ProductCategory;
+use App\Models\ProductWishlist;
+use App\Models\CompanyFactoryTour;
 use App\Models\ProductTypeMapping;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+use App\Models\OrderModificationRequest;
+use App\Models\BusinessProfileVerification;
+use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\Manufacture\ProductCategory as ManufatureProductCategeory;
 
 class HomeController extends Controller
 {
@@ -1101,19 +1102,33 @@ class HomeController extends Controller
             $colors_sizes = json_decode($product->colors_sizes);
             $attr = json_decode($product->attribute);
             //recommandiation products
+            $product_tag=$product->product_tag ?? [];
+
             $recommandProducts=Product::with('businessProfile')->where('state',1)
             ->where('id','!=',$product->id)
-            ->whereHas('category', function($q) use ($product){
-                 $q->where('id',$product->product_category_id);
+            ->whereIn('product_tag', $product_tag)
+            // ->whereHas('category', function($q) use ($product){
+            //      $q->where('id',$product->product_category_id);
 
-            })
+            // })
             ->orWhere(function($query) use ($product){
                 $query->where('product_type',$product->product_type)
                       ->where('id', '!=', $product->id);
             })
             ->with(['images'])
+            ->limit(10)
             ->get();
-            return view('product.details',compact('product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
+
+            if(Auth()->check()){
+                $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+                $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+            }
+            else{
+                $wishListShopProductsIds=[];
+                $wishListMfProductsIds=[];
+            }
+
+            return view('product.details',compact('product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts','wishListShopProductsIds','wishListMfProductsIds'));
         }
     }
     //shortest lead time
@@ -1321,8 +1336,15 @@ class HomeController extends Controller
             ['path' => Paginator::resolveCurrentPath()],
         );
 
-        $product_category= ProductCategory::all();
-        return view('product.all_products',compact('products', 'product_category'));
+        if(Auth()->check()){
+            $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+            $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+        }
+        else{
+            $wishListShopProductsIds=[];
+            $wishListMfProductsIds=[];
+        }
+        return view('product.all_products',compact('products','wishListShopProductsIds','wishListMfProductsIds'));
 
     }
 

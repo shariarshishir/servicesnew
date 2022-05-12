@@ -98,7 +98,7 @@
                                 </div>
 
                                 {{--category--}}
-                                <div class="filter_box filter_min_max">
+                                {{-- <div class="filter_box filter_min_max">
                                     <h4>Product Category</h4>
                                     <select class="select2" name="product_category" id="product_category">
                                         <option value="">Select</option>
@@ -108,20 +108,20 @@
                                         </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 {{--factory category--}}
-                                <div class="filter_box filter_min_max">
+                                {{-- <div class="filter_box filter_min_max">
                                     <h4>Factory Category</h4>
                                     <select class="select2" name="factory_category" id="factory_category">
                                         <option value="">Select</option>
-                                        {{-- @foreach($manufacture_product_categories as $category)
+                                        @foreach($manufacture_product_categories as $category)
                                         <option value="{{$category->id}}" {{$category->id == $factory_category ? 'selected' : ''}}>
                                             {{$category['name']}}
                                         </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 {{-- price --}}
                                 <div class="filter_box filter_min_max">

@@ -32,17 +32,10 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         //product tags
-
-        //config
         view()->composer(['business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index'], function($view){
             $product_tags=ProductTag::get('name');
             $view->with(['product_tags'=>$product_tags]);
         });
-
-
-
-
-
 
         view()->composer('include.admin._header', function($view) {
             if(auth()->guard('admin')->check()){
@@ -81,10 +74,8 @@ class ViewServiceProvider extends ServiceProvider
             }
         });
 
-        //For Manufacture Product Category
-
         //wishlist data
-        view()->composer(['product.*','manufacture_profile_view_by_user.index','wholesaler_profile_view_by_user.index'], function($view) {
+        view()->composer(['manufacture_profile_view_by_user.index','wholesaler_profile_view_by_user.index'], function($view) {
             if(Auth()->check()){
                 $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
                 $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();

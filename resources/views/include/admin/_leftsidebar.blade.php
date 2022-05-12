@@ -264,6 +264,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="{{ Route('admin.product-tag.index')}}" class="nav-link {{ Route::is('admin.product-tag.index')||Route::is('admin.product-tag.create')||Route::is('admin.product-tag.edit')? 'active' : ''}}">
+                <i class="fas fa-network-wired nav-icon"></i>
+                <p>Product Tag</p>
+            </a>
+        </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

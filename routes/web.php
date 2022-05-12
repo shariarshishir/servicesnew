@@ -49,6 +49,7 @@ use App\Http\Controllers\CompanyFactoryTourController;
 use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
+use App\Http\Controllers\Admin\ProductTagController;
 use App\Http\Controllers\Admin\ProductTypeMappingController;
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\MyOrderController;
@@ -599,6 +600,8 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::resource('product-type-mapping',ProductTypeMappingController::class,['as' => 'admin'])->except('show');
         //business mapping tree
         Route::resource('business-mapping-tree',BusinessMappingTreeController::class,['as' => 'admin'])->except('show');
+        Route::resource('product-tag',ProductTagController::class,['as' => 'admin'])->except('show');
+
     });
 
 });

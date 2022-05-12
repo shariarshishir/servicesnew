@@ -18,7 +18,7 @@
                     <tr style="cursor: pointer;" onclick="selecttr(this);">
                         <td data-title="Image">
                         @foreach($product->product_images as $image)
-                            <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+                            <img src="{{Storage::disk('s3')->url('public/images/'.$image->product_image)}}" class="single-product-img" alt="" />
                             @break
                         @endforeach
                         </td>

@@ -259,7 +259,7 @@
                     <!--1-->
                     <div class="col s6 m2 l2 center-align">
                         <div class="media_img">
-                            <img src="{{ asset('storage/' .$product_image->product_image) }}" id="img{{ $product_image->id }}" class="img-thumbnail">
+                            <img src="{{Storage::disk('s3')->url('public/images/'.$product_image->product_image)}}" id="img{{ $product_image->id }}" class="img-thumbnail">
                         </div>
                         <div class="clear10"></div>
                         <div class="col s12">
@@ -310,7 +310,7 @@
                         <div class="overlay-image-preview-block overlay-img-div">
                             @if( $product->overlay_image )
                                 <a href="javascript:void(0);" class="btn_delete rm-overlay-btn" onclick="removeManufactureOverlayImage({{$product->id}});"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
-                                <img class="overlay-image-preview" src="{{asset('storage/'.$product->overlay_image)}}"
+                                <img class="overlay-image-preview" src="{{Storage::disk('s3')->url('public/images/'.$product->overlay_image)}}"
                                 alt="preview image" style="max-height: 150px;">
                             @else
                                 <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
@@ -330,7 +330,7 @@
                     </div>
                     <div class="col s12 m9 l9">
                         <div class="edit-video-show-block">
-                            <video controls autoplay height="240" width="340"><source src="{{asset('storage/'.$product->product_video->video)}}" /></video><a class="btn_delete" onclick="manufactureRemoveEditVideoEl(this)" data-id="{{$product->product_video->id}}"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a>
+                            <video controls autoplay height="240" width="340"><source src="{{Storage::disk('s3')->url('public/video/'.$product->businessProfile->business_name.'/'.$product->product_video->video)}}" /></video><a class="btn_delete" onclick="manufactureRemoveEditVideoEl(this)" data-id="{{$product->product_video->id}}"><i class="material-icons dp48">delete_outline</i><span>Delete</span></a>
                         </div>
                     </div>
                 </div>

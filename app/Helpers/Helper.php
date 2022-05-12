@@ -153,6 +153,14 @@ if (!function_exists('productTypeMapping')){
 
 }
 
+if (!function_exists('generateUniqueString')){
+    function generateUniqueString(){
+        $str=rand();
+        $uniqueString = md5($str);
+        return $uniqueString;
+    }
+}
+
 
 
 

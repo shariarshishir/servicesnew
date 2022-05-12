@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 use App\Models\Blog;
 use App\Models\MetaInformation;
 
-
 class BlogController extends Controller
 {
 
@@ -21,45 +20,73 @@ class BlogController extends Controller
         return view('admin.admin_blog.index',compact('blogs'));
     }
     public function  create(){
+        
         $blog = new Blog();
         return view('admin.admin_blog.create',compact('blog'));
     }
     public function store(Request $request){
         // dd($request->all());
         $allData = $request->except('_token', 'meta_title', 'meta_description','meta_image','meta_type');
-        if ($request->hasFile('feature_image')){
-            $path=$request->file('feature_image')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path));
-            $image->save(public_path('storage/'.$path));
+        // if ($request->hasFile('feature_image')){
+        //     $path=$request->file('feature_image')->store('images','public');
+        //     $image = Image::make(public_path('storage/'.$path));
+        //     $image->save(public_path('storage/'.$path));
 
-            $path_small=$request->file('feature_image')->store('images/small/','public');
-            $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
-            $small_image->save(public_path('storage/'.$path_small));
-            $allData['feature_image']=$path;
+        //     $path_small=$request->file('feature_image')->store('images/small/','public');
+        //     $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+        //     $small_image->save(public_path('storage/'.$path_small));
+        //     $allData['feature_image']=$path;
            
+        // }
+        if ($request->hasFile('feature_image')){
+            $image = $request->file('feature_image');
+            $s3 = \Storage::disk('s3');
+            $uniqueString = generateUniqueString();
+            $feature_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+            $s3filePath = '/public/images/' . $feature_image_file_name;
+            $s3->put($s3filePath, file_get_contents($image));
+            $allData['feature_image']=$feature_image_file_name;
         }
 
+        // if ($request->hasFile('author_img')){
+        //     $path=$request->file('author_img')->store('images','public');
+        //     $image = Image::make(public_path('storage/'.$path))->encode();
+        //     $image->save(public_path('storage/'.$path));
+
+        //     $path_small=$request->file('author_img')->store('images/small','public');
+        //     $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
+        //     $small_image->save(public_path('storage/'.$path_small));
+        //     $allData['author_img']=$path;
+        // }
         if ($request->hasFile('author_img')){
-            $path=$request->file('author_img')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path))->encode();
-            $image->save(public_path('storage/'.$path));
-
-            $path_small=$request->file('author_img')->store('images/small','public');
-            $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
-            $small_image->save(public_path('storage/'.$path_small));
-            $allData['author_img']=$path;
+            $image = $request->file('author_img');
+            $s3 = \Storage::disk('s3');
+            $uniqueString = generateUniqueString();
+            $author_img_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+            $s3filePath = '/public/images/' . $author_img_file_name;
+            $s3->put($s3filePath, file_get_contents($image));
+            $allData['author_img']=$author_img_file_name;
         }
+
+        // if ($request->hasFile('meta_image')){
+        //     $path=$request->file('meta_image')->store('images','public');
+        //     $image = Image::make(public_path('storage/'.$path));
+        //     $image->save(public_path('storage/'.$path));
+
+        //     $path_small=$request->file('meta_image')->store('images/small/','public');
+        //     $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
+        //     $small_image->save(public_path('storage/'.$path_small));
+        //     $meta_image_path=$path;
+           
+        // }
 
         if ($request->hasFile('meta_image')){
-            $path=$request->file('meta_image')->store('images','public');
-            $image = Image::make(public_path('storage/'.$path));
-            $image->save(public_path('storage/'.$path));
-
-            $path_small=$request->file('meta_image')->store('images/small/','public');
-            $small_image = Image::make(public_path('storage/'.$path_small))->fit(360, 360);
-            $small_image->save(public_path('storage/'.$path_small));
-            $meta_image_path=$path;
-           
+            $image = $request->file('meta_image');
+            $s3 = \Storage::disk('s3');
+            $uniqueString = generateUniqueString();
+            $meta_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+            $s3filePath = '/public/images/' . $meta_image_file_name;
+            $s3->put($s3filePath, file_get_contents($image));
         }
 
         $allData['created_by']=Auth::guard('admin')->user()->id;
@@ -80,7 +107,7 @@ class BlogController extends Controller
         $metaInformation->meta_title = $request->meta_title;
         $metaInformation->meta_description = $request->meta_description;
         $metaInformation->meta_type = $request->meta_type;
-        $metaInformation->meta_image = $meta_image_path??NULL;
+        $metaInformation->meta_image = $meta_image_file_name??NULL;
         $metaInformation->save();
         return redirect()->route('blogs.index');
       
@@ -129,6 +156,8 @@ class BlogController extends Controller
         }
 
 
+
+
         if ($request->hasFile('author_img')){
             Storage::delete($blog->author_img);
             Storage::delete('small/'.$blog->author_img);
@@ -141,6 +170,16 @@ class BlogController extends Controller
             $small_image = Image::make(public_path('storage/'.$path_small))->fit(100, 100)->encode();
             $small_image->save(public_path('storage/'.$path_small));
             $blog->author_img = $path;
+        }
+        if ($request->hasFile('author_img')){
+            Storage::disk('s3')->delete($blog->author_img);
+            Storage::delete('small/'.$blog->author_img);
+            $image = $request->file('author_img');
+            $s3 = \Storage::disk('s3');
+            $author_img_file_name = uniqid() .'.'. $image->getClientOriginalExtension();
+            $s3filePath = '/blog_images/' . $author_img_file_name;
+            $s3->put($s3filePath, file_get_contents($image));
+            $allData['author_img']=$author_img_file_name;
         }
 
         $blog->updated_by = Auth::guard('admin')->user()->id;

@@ -105,6 +105,7 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header" style="color: #55a860;">You have {{$messageNotifications['count']}} messages</span>
                 <div class="dropdown-order"></div>
+                @if($messageNotifications['count'] > 0)
                 @foreach($messageNotifications['data'] as $messageNotification)
                 <a href="{{route('admin.rfq.show',$messageNotification['rfq_id'])}}" class="dropdown-item">
                     <i class="fas fa-envelope mr-2"></i>
@@ -113,6 +114,7 @@
                     </div>
                 </a>
                 @endforeach
+                @endif
                 <div class="dropdown-divider"></div>
             </div>
         </li>

@@ -47,7 +47,7 @@
                           <tr class="text-center">
                               <td data-title="ID">{{ $index+1 }}</td>
                               <td data-title="Title">{{ $blog->title }}</td>
-                              <td data-title="Feature image"><img class="img-fluid" src="{{ asset('storage/'.$blog->feature_image) }}"></td>
+                              <td data-title="Feature image"><img class="img-fluid" src="{{Storage::disk('s3')->url('public/images/'.$blog->feature_image)}}"></td>
                               <td data-title="Created by">{{ $blog->created_user['name'] }}</td>
                               <td data-title="Action" class="text-center"> 
                                   <a class="btn btn-success btn-xs" href="{{route('blogs.edit',$blog->id)}}">Edit</a>

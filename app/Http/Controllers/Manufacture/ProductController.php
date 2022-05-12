@@ -67,12 +67,12 @@ class ProductController extends Controller
         try{
             $path=null;
             if ($request->hasFile('overlay_image')){
-                $path = $request->overlay_image->store('images','public');
-                $small_image = Image::make(Storage::get($path))->fit(370, 370)->encode();
-                Storage::put('overlay_large_image/'.$path, $path);
-                Storage::put('overlay_small_image/'.$path, $small_image);
+                $image = $request->file('overlay_image');
+                $s3 = \Storage::disk('s3');
+                $overlay_image_file_name = uniqid() .'.'. $image->getClientOriginalExtension();
+                $s3filePath = '/overlay_images/' . $overlay_image_file_name;
+                $s3->put($s3filePath, file_get_contents($image));
             }
-
 
             $Data=[
                 'business_profile_id' => $request->business_profile_id,
@@ -91,7 +91,7 @@ class ProductController extends Controller
                 'created_by' => auth()->id(),
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
-                'overlay_image' => $path,
+                'overlay_image' => $overlay_image_file_name,
                 'product_type_mapping_id' => $request->product_type_mapping,
                 'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
 
@@ -100,19 +100,15 @@ class ProductController extends Controller
 
             if ($request->hasFile('product_images')){
                 foreach ($request->file('product_images') as $index=>$product_image){
-                    $path=$product_image->store('images','public');
+                    $image = $request->file('product_images');
+                    $s3 = \Storage::disk('s3');
+                    $file_name = uniqid() .'.'. $image->getClientOriginalExtension();
+                    $s3filePath = '/manuimages/' . $file_name;
+                    $s3->put($s3filePath, file_get_contents($image));
 
-                    $large_image = Image::make(Storage::get($path))->fit(1600, 1061)->encode();
-                    $image = Image::make(Storage::get($path))->fit(370, 370)->encode();
-                    $medium_image = Image::make(Storage::get($path))->fit(350, 231)->encode();
-                    $small_image = Image::make(Storage::get($path))->fit(66, 43)->encode();
+                    
 
-                    Storage::put($path, $image);
-                    Storage::put('large/'.$path, $large_image);
-                    Storage::put('medium/'.$path, $medium_image);
-                    Storage::put('small/'.$path, $small_image);
-
-                    ProductImage::create(['product_id'=>$product->id, 'product_image'=>$path]);
+                    ProductImage::create(['product_id'=>$product->id, 'product_image'=>$file_name]);
                 }
             }
 
@@ -121,11 +117,15 @@ class ProductController extends Controller
             if($request->hasFile('video')){
                 $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
                 $business_profile_name=$business_profile->business_name;
-                $folder='video/'.$business_profile_name;
-                $filename = $request->video->store($folder,'public');
+
+                $image = $request->file('video');
+                $s3 = \Storage::disk('s3');
+                $file_name = uniqid() .'.'. $image->getClientOriginalExtension();
+                $s3filePath = '/videos/' . $file_name;
+                $s3->put($s3filePath, file_get_contents($image));
                 $product_video = ProductVideo::create([
                     'product_id' => $product->id,
-                    'video' => $filename,
+                    'video' => $file_name,
                 ]);
 
             }

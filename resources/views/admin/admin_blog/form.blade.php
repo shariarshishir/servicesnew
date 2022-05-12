@@ -20,7 +20,7 @@
                     <label >Feature image :</label>
                     <div class="feature_image">
                         @if($blog->feature_image)
-                        <img id="preview-image-for-blog" src="{{ asset('storage/'.$blog->feature_image) }}"
+                        <img id="preview-image-for-blog" src="{{Storage::disk('s3')->url('public/images/'.$blog->feature_image)}}"
                             alt="preview image" >
                         @else
                         <img id="preview-image-for-blog" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
@@ -55,7 +55,7 @@
                     <label for="parent_id">Author image :</label>
                     <div class="blog_feature_image_wrap">
                         @if($blog->author_img)
-                        <img id="preview-image-for-author" src="{{ asset('storage/'.$blog->author_img) }}"
+                        <img id="preview-image-for-author" src="{{Storage::disk('s3')->url('public/images/'.$blog->author_img)}}"
                             alt="preview image">
                         @else
                         <img id="preview-image-for-author" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
@@ -145,7 +145,7 @@
                     <label >Meta image :</label>
                     <div class="meta_image">
                         @if(isset($blog->metaInformation->meta_image))
-                        <img id="preview-image-for-meta" src="{{ asset('storage/'.$blog->metaInformation->meta_image) }}"
+                        <img id="preview-image-for-meta" src="{{Storage::disk('s3')->url('public/images/'.$blog->metaInformation->meta_image)}}"
                             alt="preview image">
                         @else
                         <img id="preview-image-for-meta" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"

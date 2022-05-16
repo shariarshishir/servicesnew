@@ -210,91 +210,89 @@ public function update(Request $request, $product_id)
         400);
     }
         
-        if ($request->hasFile('overlay_image')){
-            $image = $request->file('overlay_image');
+    if ($request->hasFile('overlay_image')){
+        $image = $request->file('overlay_image');
+        $s3 = \Storage::disk('s3');
+        $uniqueString = generateUniqueString();
+        $overlay_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+        $s3filePath = '/public/images/' . $overlay_image_file_name;
+        $s3->put($s3filePath, file_get_contents($image));
+    }
+
+
+    $product->created_by=auth()->id();
+    $product->title=$request->title;
+    $product->price_per_unit=$request->price_per_unit;
+    $product->price_unit=$request->price_unit;
+    $product->moq=$request->moq;
+    $product->qty_unit=$request->qty_unit;
+    $product->product_category=$request->category_id;
+    $product->product_details=$request->product_details;
+    $product->product_specification=$request->product_specification;
+    $product->colors=$request->colors ?? [];
+    $product->sizes=$request->sizes ?? [];
+    $product->lead_time=$request->lead_time;
+    $product->gender=$request->gender;
+    $product->sample_availability=$request->sample_availability;
+    $product->overlay_image = $overlay_image_file_name ?? $product->overlay_image;
+    $product->product_type_mapping_id = $request->product_type_mapping;
+    $product->product_type_mapping_child_id = $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id;
+    $product->save();
+
+    
+
+    if ($request->hasFile('product_images')){
+        foreach ($request->file('product_images') as $index=>$product_image){
+            $image = $product_image;
             $s3 = \Storage::disk('s3');
             $uniqueString = generateUniqueString();
-            $overlay_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-            $s3filePath = '/public/images/' . $overlay_image_file_name;
+            $product_images_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+            $s3filePath = '/public/images/' . $product_images_file_name;
             $s3->put($s3filePath, file_get_contents($image));
+            ProductImage::create(['product_id'=>$product->id, 'product_image'=>$product_images_file_name]);
         }
+    }
 
-
-        $product->created_by=auth()->id();
-        $product->title=$request->title;
-        $product->price_per_unit=$request->price_per_unit;
-        $product->price_unit=$request->price_unit;
-        $product->moq=$request->moq;
-        $product->qty_unit=$request->qty_unit;
-        $product->product_category=$request->category_id;
-        $product->product_details=$request->product_details;
-        $product->product_specification=$request->product_specification;
-        $product->colors=$request->colors ?? [];
-        $product->sizes=$request->sizes ?? [];
-        $product->lead_time=$request->lead_time;
-        $product->gender=$request->gender;
-        $product->sample_availability=$request->sample_availability;
-        $product->overlay_image = $overlay_image_file_name ?? $product->overlay_image;
-        $product->product_type_mapping_id = $request->product_type_mapping;
-        $product->product_type_mapping_child_id = $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id;
-        $product->save();
+    //upload video
 
         
-
-        if ($request->hasFile('product_images')){
-            foreach ($request->file('product_images') as $index=>$product_image){
-                $image = $product_image;
-                $s3 = \Storage::disk('s3');
-                $uniqueString = generateUniqueString();
-                $product_images_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-                $s3filePath = '/public/images/' . $product_images_file_name;
-                $s3->put($s3filePath, file_get_contents($image));
-                ProductImage::create(['product_id'=>$product->id, 'product_image'=>$product_images_file_name]);
+    //video
+    if(isset($request->remove_video_id)){
+        if( count(json_decode($request->remove_video_id)) > 0 ){
+            $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
+            if($productVideo){
+                if(Storage::disk('s3')->exists('/public/video/'.$productVideo->video)){
+                    Storage::disk('s3')->delete('/public/video/'.$productVideo->video);
+                }
+                $productVideo->delete();
             }
         }
+    }
 
-        //upload video
+    if($request->hasFile('video')){
+        $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
+        $business_profile_name=$business_profile->business_name;
+        $folder='/public/video/'.$business_profile_name;
 
-        
-        //video
-        if(isset($request->remove_video_id)){
-            if( count(json_decode($request->remove_video_id)) > 0 )
-            {
-             $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
-             if($productVideo){
+        $video = $request->file('video');
+        $s3 = \Storage::disk('s3');
+        $uniqueString = generateUniqueString();
+        $video_file_name = uniqid().$uniqueString.'.'. $video->getClientOriginalExtension();
+        $s3filePath = $folder.'/'. $video_file_name;
+        $s3->put($s3filePath, file_get_contents($video));
+        $product_video = ProductVideo::create([
+            'product_id' => $product->id,
+            'video' => $video_file_name,
+        ]);
 
-                      if(Storage::exists($productVideo->video)){
-                          Storage::delete($productVideo->video);
-                      }
-                      $productVideo->delete();
-              }
-            }
-         }
-
-        if($request->hasFile('video')){
-            $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
-            $business_profile_name=$business_profile->business_name;
-            $folder='/public/video/'.$business_profile_name;
-
-            $video = $request->file('video');
-            $s3 = \Storage::disk('s3');
-            $uniqueString = generateUniqueString();
-            $video_file_name = uniqid().$uniqueString.'.'. $video->getClientOriginalExtension();
-            $s3filePath = $folder.'/'. $video_file_name;
-            $s3->put($s3filePath, file_get_contents($video));
-            $product_video = ProductVideo::create([
-                'product_id' => $product->id,
-                'video' => $video_file_name,
-            ]);
-
-        }
-        $products=Product::withTrashed()->where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
-        $data=view('business_profile._product_table_data', compact('products'))->render();
-        return response()->json([
-            'success' => true,
-            'msg' => 'Profile Updated Successfully',
-            'data' => $data,
-        ],200);
+    }
+    $products=Product::withTrashed()->where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
+    $data=view('business_profile._product_table_data', compact('products'))->render();
+    return response()->json([
+        'success' => true,
+        'msg' => 'Profile Updated Successfully',
+        'data' => $data,
+    ],200);
 
 }
 
@@ -337,10 +335,8 @@ public function publishUnpublish($pid, $bid)
         if(!$product){
             return response()->json(['msg' => 'product not found'], 404);
         }
-        if(Storage::exists($product->overlay_image) && (Storage::exists('overlay_large_image/'.$product->overlay_image) && Storage::exists('overlay_small_image/'.$product->overlay_image)) ){
-            Storage::delete($product->overlay_image);
-            Storage::delete('overlay_large_image/'.$product->overlay_image);
-            Storage::delete('overlay_small_image/'.$product->overlay_image);
+        if(Storage::disk('s3')->exists('/public/images/'.$product->overlay_image) ){
+            Storage::disk('s3')->delete('/public/images/'.$product->overlay_image);
             $product->update(['overlay_image' => null]);
             return response()->json(['msg' => 'overlay image removed'], 200);
         }
@@ -353,12 +349,8 @@ public function publishUnpublish($pid, $bid)
         if(!$product_image){
             return response()->json(['msg' => 'record not found'], 404);
         }
-        if(Storage::exists($product_image->product_image)){
-            if((Storage::exists('large/'.$product_image->product_image) && Storage::exists('medium/'.$product_image->product_image)) && Storage::exists('small/'.$product_image->product_image))
-            Storage::delete($product_image->product_image);
-            Storage::delete('large/'.$product_image->product_image);
-            Storage::delete('medium/'.$product_image->product_image);
-            Storage::delete('small/'.$product_image->product_image);
+        if(Storage::disk('s3')->exists('/public/images/'.$product_image->product_image)){
+            Storage::disk('s3')->delete('/public/images/'.$product_image->product_image);
             $product_image->delete();
             return response()->json(['msg' => 'image removed'], 200);
         }

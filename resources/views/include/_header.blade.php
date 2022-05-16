@@ -6,7 +6,7 @@
 		<!-- Desktop header start -->
 		<header class="header_dasktop" itemscope>
 			<div class="row header_innrer" itemscope>
-				<div class="col m3 logo" itemscope><a href="{{route('home')}}" itemprop="Merchantbay Home"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a></div>
+				<div class="col m3 logo" itemscope><a href="{{route('home')}}" itemprop="Merchantbay Home"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/logo.png')}}" alt="logo" /></a></div>
 				<div class="col m5 mainnav_wrap" itemscope>
 					<nav class="mainNav" itemscope>
 						<ul class="left hide-on-med-and-down" itemscope itemtype="https://schema.org/ListItem">
@@ -81,7 +81,7 @@
 										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar" itemprop="img">
 										@else
-										<img src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" itemprop="img">
+										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" alt="avatar" itemprop="img">
 										@endif
 									</span>
 								</a>
@@ -116,7 +116,7 @@
 										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
 										@else
-										<img src="{{asset('images/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
+										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
 										@endif
 									</span>
 								</a>
@@ -306,7 +306,7 @@
 		<!-- Mobile header -->
 		<header class="mobile_header" itemscope>
 			<div class="col m2 logo center-align" itemscope>
-				<a href="{{route('home')}}" itemprop="Logo"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a>
+				<a href="{{route('home')}}" itemprop="Logo"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/logo.png')}}" alt="logo" /></a>
 			</div>
 			<div class="row" itemscope>
 				<div class="col s2 mainNav_mobile_wrap" itemscope>
@@ -403,7 +403,7 @@
 										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
 										@else
-										<img src="{{asset('images/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
+										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
 										@endif
 									</span>
 								</a>
@@ -440,7 +440,7 @@
 										@if(auth()->user()->image)
 										<img src="{{ asset('storage/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
 										@else
-										<img src="{{asset('images/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
+										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
 										@endif
 									</span>
 								</a>
@@ -717,7 +717,7 @@
 				<div id="search-results-wrapper" style="display: none;">
 					<div id="loadingSearchProgressContainer">
 						<div id="loadingSearchProgressElement">
-							<img src="{{asset('images/frontendimages/new_layout_images/loading-gray.gif')}}" width="128" height="15" alt="Loading">
+							<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/loading-gray.gif')}}" width="128" height="15" alt="Loading">
 							<div class="loading-message" style="display: none;">Loading...</div>
 						</div>
 					</div>

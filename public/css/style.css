@@ -838,7 +838,7 @@ legend {
     margin-bottom: 40px;
 }
 .product_slider .slick-prev {
-    background : url('../images/frontendimages/new_layout_images/prev.png') no-repeat center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/prev.png') no-repeat center;
     background-size: 55px;
     width: 55px;
     height: 55px;
@@ -850,7 +850,7 @@ legend {
     cursor: pointer;
 }
 .product_slider .slick-next {
-    background : url('../images/frontendimages/new_layout_images/next.png') no-repeat center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/next.png') no-repeat center;
     background-size: 55px;
     width: 55px;
     height: 55px;
@@ -863,13 +863,13 @@ legend {
 }
 .product_slider .slick-prev:hover,
 .product_slider .slick-prev:focus {
-    background : url('../images/frontendimages/new_layout_images/prev.png') no-repeat center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/prev.png') no-repeat center;
     box-shadow: none;
     background-size: 55px;
 }
 .product_slider .slick-next:hover,
 .product_slider .slick-next:focus {
-    background : url('../images/frontendimages/new_layout_images/next.png') no-repeat center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/next.png') no-repeat center;
     box-shadow: none;
     background-size: 55px;
 }
@@ -988,7 +988,7 @@ legend {
 
 
 .profile_bannerwrap .banner_overlay {
-    background : url('../images/frontendimages/new_layout_images/profile-banner-update.png') no-repeat center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/profile-banner-update.png') no-repeat center;
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.2);
     left: 0;
@@ -1017,7 +1017,7 @@ legend {
     display: none;
 }
 .profile_bannerwrap .erified {
-    background : url('../images/frontendimages/new_layout_images/mark_icon.png') no-repeat left 8px;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/mark_icon.png') no-repeat left 8px;
     position: absolute;
     bottom: 70px;
     right: 70px;
@@ -1029,7 +1029,7 @@ legend {
     text-decoration: underline;
 }
 .profile_bannerwrap .rightText {
-    background : url('../images/frontendimages/new_layout_images/info_icon.png') no-repeat right center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/info_icon.png') no-repeat right center;
     padding-right: 30px;
 }
 .profile-image-block img {
@@ -1447,7 +1447,7 @@ legend {
     text-decoration: none;
 }
 .annaouncement_icon {
-    background: url('../images/frontendimages/new_layout_images/annaouncement-icon.png') no-repeat left top;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/annaouncement-icon.png') no-repeat left top;
     background-size: 50px;
     position: absolute;
     top: -28px;
@@ -1787,7 +1787,7 @@ legend {
 .profile_tabNav_wrap .tab_navMenu ul li a:link,
 .profile_tabNav_wrap .tab_navMenu ul li a:active,
 .profile_tabNav_wrap .tab_navMenu ul li a:visited {
-    background: url('../images/frontendimages/new_layout_images/path_arrow.png') no-repeat right center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/path_arrow.png') no-repeat right center;
     padding-right: 30px;
     font-size: 22px;
     color: #464545;
@@ -2431,7 +2431,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .category_nav ul li a:link,
 .category_nav ul li a:active,
 .category_nav ul li a:visited {
-    background : url('../images/frontendimages/new_layout_images/path_arrow.png') no-repeat 94% 20px;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/path_arrow.png') no-repeat 94% 20px;
     background-size: 10px;
     padding-right: 35px;
     border-radius: 10px;
@@ -3406,7 +3406,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     top: inherit;
     border-radius: 0 0 20px 20px;
     padding-bottom: 30px;
-    background: url('../images/frontendimages/new_layout_images/blog_inner_bg.png') no-repeat center center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/blog_inner_bg.png') no-repeat center center;
     background-size: 100% 100%;
 }
 .blog_content_box .rating_wrap {
@@ -3475,7 +3475,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 0;
 }
 .blog_detail_info_wrap .mainTitle {
-    background: #fff url('../images/frontendimages/new_layout_images/home_arrow.png') no-repeat 15px center;
+    background: #fff url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/home_arrow.png') no-repeat 15px center;
     padding-left: 80px;
     background-size: 50px;
 }
@@ -3787,7 +3787,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     min-height: 150px;
 }
 .quick_rfqForm_wrap .btn_detailed_rfq {
-    background: url('../images/frontendimages/new_layout_images/rfq_detaile_arrow_down.png.png') no-repeat center bottom;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/rfq_detaile_arrow_down.png.png') no-repeat center bottom;
 }
 .rfq_info_wrap {
     padding: 35px;
@@ -4463,7 +4463,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: inline-block;
 }
 .respones_detail_wrap .responses_open {
-    background : url('../images/frontendimages/new_layout_images/respons_bg.png') no-repeat center top;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/respons_bg.png') no-repeat center top;
     padding-bottom: 50px;
     position: absolute;
     right: 75px;
@@ -4552,7 +4552,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     float: left;
 }
 .rfq_thum_img .doc_icon {
-    background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/doc-bg.png') no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4560,7 +4560,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 0;
 }
 .rfq_thum_img .xlsx_icon {
-    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/excel-bg.png') no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4568,7 +4568,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 0;
 }
 .rfq_thum_img .pdf_icon {
-    background: url(../images/frontendimages/new_layout_images/pdf-bg.png) no-repeat center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/pdf-bg.png') no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4576,7 +4576,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 0;
 }
 .rfq_thum_img .zip_icon {
-    background: url(../images/frontendimages/new_layout_images/zip-bg.png) no-repeat center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/zip-bg.png') no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -5425,21 +5425,21 @@ input.input-field[type=text]:not(.browser-default) {
     margin: 10px 0 5px 0;
 }
 .profile_tabNav_wrap .certification_file_down {
-    background : url('../images/frontendimages/new_layout_images/pdf-bg.png') no-repeat center;
+    background : url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/pdf-bg.png') no-repeat center;
     background-size: 125px;
     height: 100%;
     display: block;
     width: 100%;
 }
 .certificate_img_wrap .certificate_img .xlsx_icon {
-    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/excel-bg.png') no-repeat center;
     background-size: 125px;
     height: 100%;
     display: block;
     width: 100%;
 }
 .certificate_img_wrap .certificate_img .certification_doc {
-    background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/doc-bg.png') no-repeat center;
     background-size: 125px;
     height: 100%;
     display: block;
@@ -6788,7 +6788,7 @@ nav .pagination li.active .page-link {
 /*============= Banner Section =============*/
 
 #homepage .banner {
-	background-image: url('../images/frontendimages/new-home/homepage/banner-bg.png');
+	background-image: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/homepage/banner-bg.png');
 	padding-bottom: 230px;
 	background-position: bottom center;
 	background-repeat: no-repeat;
@@ -6865,7 +6865,7 @@ nav .pagination li.active .page-link {
 /*============= About Section =============*/
 
 #homepage .about {
-	background-image: url('../images/frontendimages/new-home/homepage/about-bg.png');
+	background-image: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/homepage/about-bg.png');
 	background-size: 100% auto;
 	background-position: bottom center;
 	padding-bottom: 300px;
@@ -6984,7 +6984,7 @@ nav .pagination li.active .page-link {
 /*============= DemoButton Section =============*/
 
 #homepage .delivaryTime {
-	background-image: url('../images/frontendimages/new-home/homepage/delivaryTime-bg.png');
+	background-image: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/homepage/delivaryTime-bg.png');
 	background-position: bottom center;
 	background-size: cover;
 	padding-bottom: 360px;
@@ -7935,7 +7935,7 @@ nav .pagination li.active .page-link {
 /* *************** Footer Container css start ***************** */
 
 .footer_bottomWrap {
-    background: #191919 url('../images/frontendimages/new-home/footer-bg-update.png') no-repeat left center;
+    background: #191919 url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-bg-update.png') no-repeat left center;
     padding: 200px 100px 50px;
     color: #fff;
     background-size: cover;
@@ -8101,7 +8101,7 @@ nav .pagination li.active .page-link {
     z-index: 1;
 }
 .footer_topWrap_inner {
-    background: #ffffff url('../images/frontendimages/new-home/footer-half-logo-right.png') no-repeat -2px center;
+    background: #ffffff url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-right.png') no-repeat -2px center;
     background-size: 165px;
     padding: 50px 30px 30px;
     border-radius: 20px;
@@ -8116,7 +8116,7 @@ nav .pagination li.active .page-link {
 }
 
 .footer_topWrap_inner .footer_topWrap_inner_right_bg {
-    background: #ffffff url('../images/frontendimages/new-home/footer-half-logo-left.png') no-repeat right center;
+    background: #ffffff url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-left.png') no-repeat right center;
     background-size: 165px;
     position: absolute;
     right: 0;
@@ -8249,7 +8249,7 @@ nav .pagination li.active .page-link {
     margin: 0;
 }
 .landing_intro_wrapper {
-    background: #ffffff url(../images/frontendimages/new-home/landing-intro-bg.jpg) no-repeat right 30px;
+    background: #ffffff url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/landing-intro-bg.jpg') no-repeat right 30px;
     padding: 50px 0 130px;
     background-size: contain;
 }
@@ -8306,7 +8306,7 @@ nav .pagination li.active .page-link {
     padding-bottom: 10px;
 }
 .landing_provide_wrap ul li {
-    background: url(../images/frontendimages/about-image/icons/success-achievement.png) no-repeat left center;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/success-achievement.png') no-repeat left center;
     padding: 12px 0 12px 55px;
     background-size: 30px;
     border-bottom: 1px solid #eee;
@@ -8323,7 +8323,7 @@ nav .pagination li.active .page-link {
     padding: 8px 35px;
 }
 .landing_spotlight_top {
-    background: url(../images/frontendimages/new-home/spotlight-bg.png) no-repeat bottom right;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/spotlight-bg.png') no-repeat bottom right;
     padding: 50px 0;
     background-size: contain;
     min-height: 295px;
@@ -8435,7 +8435,7 @@ nav .pagination li.active .page-link {
     margin-right: 20px;
 }
 .landing_tools_wrap {
-    background: url(../images/frontendimages/new-home/landing_tools_wrap_bg.png) no-repeat left top;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/landing_tools_wrap_bg.png') no-repeat left top;
     background-size: 335px;
     padding: 50px 0 0;
 }
@@ -10657,7 +10657,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         margin-top: 50px;
     }
     .profile_bannerwrap .erified {
-        background: url(../images/frontendimages/new_layout_images/mark_icon.png) no-repeat left 14px;
+        background: url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/mark_icon.png') no-repeat left 14px;
         background-size: 40px;
         bottom: 0px;
         font-size: 16px;
@@ -11073,7 +11073,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         float: none;
     }
     .footer_bottomWrap {
-        background: #191919 url(../images/frontendimages/new-home/footer-sm-bg.jpg) repeat-x left top;
+        background: #191919 url('https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-sm-bg.jpg') repeat-x left top;
         border-radius: 15px 15px 0 0;
     }
     .footer_left_bottom .addressWrap {

@@ -193,7 +193,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("{{asset('images/frontendimages/tools_images/banner-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/banner-bg.png')}}");
     background-size: cover;
     background-position: bottom center;
   }
@@ -223,7 +223,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("{{asset('images/frontendimages/tools_images/banner-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/banner-bg.png')}}");
     background-size: cover;
     background-position: bottom center;
   }
@@ -260,7 +260,7 @@
 
   /*============= Pricing table Section =============*/
   #home .pricing-table {
-    background-image: url("{{asset('images/frontendimages/tools_images/pricing-table-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/pricing-table-bg.png')}}");
     background-position: bottom center;
     background-size: cover;
     padding-bottom: 200px;
@@ -344,7 +344,7 @@
 
   /*============= Features Section =============*/
   #home .features {
-    background-image: url("{{asset('images/frontendimages/tools_images/features-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/features-bg.png')}}");
     background-position: bottom center;
     background-repeat: no-repeat;
     background-size: cover;

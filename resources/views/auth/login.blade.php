@@ -8,7 +8,7 @@
         <div class="row card business_login_inner">
             <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
-                    <img src="{{asset('images/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo">
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo">
                 </div>
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>

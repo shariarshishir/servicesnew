@@ -26,7 +26,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div id="loadingProgressContainer" style="display: none;">
     <div id="loadingProgressElement">
-        <img src="{{asset('images/frontendimages/ajax-loader-bar.gif')}}" width="150" height="150" alt="Loading">
+        <img src="{{Storage::disk('s3')->url('public/frontendimages/ajax-loader-bar.gif')}}" width="150" height="150" alt="Loading">
         <div class="loading-message">Loading...</div>
     </div>
 </div>  

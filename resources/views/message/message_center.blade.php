@@ -105,7 +105,7 @@
                                                             <div class="chat chat-left">
                                                                 <div class="chat-avatar">
                                                                     <a class="avatar">
-                                                                        <img src="{{$adminUserImage??asset('images/frontendimages/no-image.png')}}" class="circle" alt="avatar">
+                                                                        <img src="{{$adminUserImage??Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" class="circle" alt="avatar">
                                                                     </a>
                                                                 </div>
                                                                 <div class="chat-body left-align">

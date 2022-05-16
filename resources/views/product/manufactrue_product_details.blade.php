@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="back_to">
-                <a  href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
+                <a  href="{{ url()->previous() }}"> <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
             </div>
         </div>
     </section>

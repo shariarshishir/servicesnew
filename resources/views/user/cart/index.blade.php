@@ -160,7 +160,7 @@
             <div class="col-md-12">
                 <div class="card card-with-padding empty-cart-content">
                     <legend>your cart is empty</legend>
-                    <img src="{{ asset('images/frontendimages/empty_cart_icon.png') }}" alt="empty cart" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/empty_cart_icon.png')}}" alt="empty cart" />
                 </div>
             </div>
         </div>

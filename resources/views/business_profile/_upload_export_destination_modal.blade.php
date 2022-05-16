@@ -124,7 +124,7 @@
             for(let i = 0;i < exportDestinations.length ;i++){
                 var html='';
                 var image_name=exportDestinations[i].country.code+'.png';
-                var image="{{asset('images/frontendimages/flags/')}}"+'/'+image_name.toLowerCase();
+                var image="{{Storage::disk('s3')->url('public/frontendimages/flags/')}}"+'/'+image_name.toLowerCase();
                 html +='<div class="col s6 m4 l2">';
                 html +='<div class="flag_img export-destination-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';
@@ -216,7 +216,7 @@
                                     for(let i = 0;i < exportDestinations.length ;i++){
                                         var html='';
                                         var image_name=exportDestinations[i].country.code+'.png';
-                                        var image="{{asset('images/frontendimages/flags/')}}"+'/'+image_name.toLowerCase();
+                                        var image="{{Storage::disk('s3')->url('public/frontendimages/flags/')}}"+'/'+image_name.toLowerCase();
                                         html +='<div class="col s6 m4 l2">';
                                         html +='<div class="flag_img export-destination-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+exportDestinations[i].id+'" class="remove-export-destination"><i class="material-icons dp48">remove_circle_outline</i></a>';

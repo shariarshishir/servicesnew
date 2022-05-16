@@ -16,7 +16,7 @@
                 @if($user->image)
                 <img itemprop="image" src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
                 @else
-                <img itemprop="image" src="{{asset('images/frontendimages/no-image.png')}}" alt="avatar" width="300px">
+                <img itemprop="image" src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" alt="avatar" width="300px">
                 @endif
             </div>
             <div class="change_photo">

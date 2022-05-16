@@ -9,8 +9,8 @@
 		<div class="col s12 m12 l4 leftbar">
 			<div class="logo-wrap">
 				<div class="logo-inner">
-                    <img title="logo" src="{{asset('images/frontendimages/new_layout_images/merchantbay_logoX200.png')}}">
-					<img class="logo_white_img" title="logo" src="{{asset('images/frontendimages/new_layout_images/logo_white.png')}}">
+                    <img title="logo" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/merchantbay_logoX200.png')}}">
+					<img class="logo_white_img" title="logo" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/logo_white.png')}}">
 					<h4>Connect all the stakeholders in one place</h4>
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 			<div class="signRight-innter business_stepper_wrap">
 				<div class="sign-from-wrap">
                     <div class="back_to" style="margin-bottom: 30px;">
-                        <a href="{{ url()->previous() }}"> <img src="{{asset('images/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
+                        <a href="{{ url()->previous() }}"> <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/back-arrow.png')}}" alt="" ></a>
                     </div>
                     <h3>Creating Business Profile...</h3>
                     <div class="row">

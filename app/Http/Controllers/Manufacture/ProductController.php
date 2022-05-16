@@ -209,13 +209,13 @@ public function update(Request $request, $product_id)
         'error' => $validator->getMessageBag()),
         400);
     }
-        
+    $product=Product::withTrashed()->find($product_id);   
     if ($request->hasFile('overlay_image')){
         $image = $request->file('overlay_image');
         $s3 = \Storage::disk('s3');
         $uniqueString = generateUniqueString();
         $overlay_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-        $s3filePath = '/public/images/' . $overlay_image_file_name;
+        $s3filePath = '/public/images/'.$overlay_image_file_name;
         $s3->put($s3filePath, file_get_contents($image));
     }
 
@@ -296,9 +296,7 @@ public function update(Request $request, $product_id)
 
 }
 
-public function delete($product_id, $business_profile_id)
-{
-
+public function delete($product_id, $business_profile_id){
     $product=Product::where('id',$product_id)->first();
     $product->delete();
     $products=Product::whereNotIn('id',[$product_id])->where('business_profile_id',$business_profile_id)->latest()->with(['product_images','category'])->get();
@@ -309,7 +307,6 @@ public function delete($product_id, $business_profile_id)
             'msg' => 'Profile Deleted Successfully',
             'data' => $data,
         ],200);
-
 }
 
 public function publishUnpublish($pid, $bid)
@@ -356,8 +353,5 @@ public function publishUnpublish($pid, $bid)
         }
         return response()->json(['msg' => 'folder not exists'], 500);
     }
-
-
-
 
 }

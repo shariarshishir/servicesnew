@@ -57,8 +57,7 @@ class BusinessProfileController extends Controller
             return redirect()->back();
             abort(response('Your email already associated with '.$bf->business_name.'as a representative. you can not open your business with this email', 401) );
         }
-        $business_mapping_tree=BusinessMappingTree::where('parent_id',null)->get('name');
-
+        $business_mapping_tree=BusinessMappingTree::where('parent_id',null)->get(['id','name']);
         return view('create_business_profile.create',compact('business_mapping_tree'));
     }
 
@@ -67,6 +66,7 @@ class BusinessProfileController extends Controller
          $validator = Validator::make($request->all(), [
             'business_name' => 'required',
             'location'      => 'required',
+            'profile_type'  => 'required',
             'business_type' => 'required',
             'trade_license' => 'required',
             'industry_type' => 'required',
@@ -106,6 +106,7 @@ class BusinessProfileController extends Controller
                     'number_of_factories' => $request->number_of_factories,
                     'industry_type' => $request->industry_type,
                     'factory_type' => $request->factory_type,
+                    'profile_type' => $request->profile_type,
 
                 ];
 
@@ -688,10 +689,9 @@ class BusinessProfileController extends Controller
         return response()->json(['business_profile'=>$business_profile,'message'=>$message],200);
     }
 
-    public function getBusinessMappingChild($parent)
+    public function getBusinessMappingChild($parent_id)
     {
-        $business_mapping_tree=BusinessMappingTree::where('name',$parent)->first();
-        $child=BusinessMappingTree::where('parent_id',$business_mapping_tree->id)->get('name');
+        $child=BusinessMappingTree::where('parent_id',$parent_id)->get(['id','name']);
         return response()->json($child,200);
     }
 

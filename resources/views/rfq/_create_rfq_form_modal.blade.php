@@ -23,12 +23,11 @@
                             <div class="col s12 m4 l3">
                                 <label>Select Product Category <span >*</span></label>
                             </div>
-                            <div class=" col s12 m8 l9">
-                                <select class="select2" name="category[]" id="category_id" required multiple >
-                                    <option disabled>Select an option</option>
-                                    {{-- @foreach($manufacture_product_categories as $product_category)
-                                        <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
-                                    @endforeach --}}
+                            <div class="col s12 m8 l9">
+                                <select class="select2 browser-default" id="category_id" name="category[]"  required multiple >
+                                    @foreach($product_tags as $product_tag)
+                                        <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

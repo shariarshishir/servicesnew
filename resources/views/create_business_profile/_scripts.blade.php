@@ -102,23 +102,29 @@
         }
     })
 
-    $(document).on('change', '.select-business-type', function(){
-        var value =$('.select-business-type option:selected').val();
-        if(value == 'manufacturer'){
 
-            $('.number_of_factories').show();
-            $('.number_of_outlets').hide();
+    function changecategory(obj,type){
+
+        if(type == 'business'){
+            var value =  $('#'+obj.id).children(":selected").val();
+            if(value == 'manufacturer'){
+
+                $('.number_of_factories').show();
+                $('.number_of_outlets').hide();
+            }
+            else if(value == 'wholesaler'){
+                $('.number_of_factories').hide();
+                $('.number_of_outlets').show();
+            }
+            else{
+                $('.number_of_factories').hide();
+                $('.number_of_outlets').hide();
+            }
         }
-        else if(value == 'wholesaler'){
-            $('.number_of_factories').hide();
-            $('.number_of_outlets').show();
-        }
-        else{
-            $('.number_of_factories').hide();
-            $('.number_of_outlets').hide();
-        }
+
+        var id = $('#'+obj.id).children(":selected").attr("data-id");
         var url = '{{ route("business.mapping.child", ":slug") }}';
-            url = url.replace(':slug', value);
+            url = url.replace(':slug', id);
         $.ajax({
                 method: 'get',
                 url: url,
@@ -130,54 +136,30 @@
                     {
                         $('.loading-message').html("");
 		                $('#loadingProgressContainer').hide();
-                        if(data){
-                            $("#industry_type").empty();
-                            $("#industry_type").append('<option value="" disabled selected >Choose your industry type</option>');
-                            $.each(data,function(key,value){
-                                $("#industry_type").append('<option value="'+value.name+'">'+value.name+'</option>');
-                            });
+                        if(type == 'business'){
+                                if(data){
+                                $("#industry_type").empty();
+                                $("#industry_type").append('<option value="" disabled selected >Choose your industry type</option>');
+                                $.each(data,function(key,value){
+                                    $("#industry_type").append('<option value="'+value.name+'" data-id="'+value.id+'">'+value.name+'</option>');
+                                });
 
-                        }else{
-                            $("#industry_type").empty();
+                            }else{
+                                $("#industry_type").empty();
+                            }
+
+                        }else if(type == 'industry'){
+                                if(data){
+                                $("#factory_type").empty();
+                                $("#factory_type").append('<option value="" disabled selected >Choose your factory type</option>');
+                                $.each(data,function(key,value){
+                                    $("#factory_type").append('<option value="'+value.name+'" data-id="'+value.id+'">'+value.name+'</option>');
+                                });
+
+                            }else{
+                                $("#factory_type").empty();
+                            }
                         }
-
-                    },
-                error: function(xhr, status, error)
-                    {
-                        $('.loading-message').html("");
-		                $('#loadingProgressContainer').hide();
-                        swal("Error!", error,"error");
-                    }
-        });
-
-    });
-
-
-    function changecategory($value){
-        var url = '{{ route("business.mapping.child", ":slug") }}';
-            url = url.replace(':slug', $value);
-        $.ajax({
-                method: 'get',
-                url: url,
-                beforeSend: function() {
-                $('.loading-message').html("Please Wait.");
-                $('#loadingProgressContainer').show();
-                },
-                success:function(data)
-                    {
-                        $('.loading-message').html("");
-		                $('#loadingProgressContainer').hide();
-                        if(data){
-                            $("#factory_type").empty();
-                            $("#factory_type").append('<option value="" disabled selected >Choose your factory type</option>');
-                            $.each(data,function(key,value){
-                                $("#factory_type").append('<option value="'+value.name+'">'+value.name+'</option>');
-                            });
-
-                        }else{
-                            $("#factory_type").empty();
-                        }
-
                     },
                 error: function(xhr, status, error)
                     {

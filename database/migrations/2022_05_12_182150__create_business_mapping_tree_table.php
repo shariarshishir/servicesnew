@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusinessMappingTreesTable extends Migration
+class CreateBusinessMappingTreeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,8 @@ class CreateBusinessMappingTreesTable extends Migration
     {
         Schema::create('business_mapping_trees', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
+            $table->string('alias')->unique();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('ip_address')->nullable();
             $table->string('user_agent')->nullable();

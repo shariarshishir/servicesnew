@@ -51,6 +51,17 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <div class="col s12 m4">
+                                            <label for="profile_type">Profile Act Like</label>
+                                        </div>
+                                        <div class="col s12 m8">
+                                            <select id="profile_type" class="select2 browser-default" name="profile_type">
+                                                    <option value="buyer"  {{auth()->user()->is_supplier == false ? 'selected' : ''}}>Buyer</option>
+                                                    <option value="supplier"  {{auth()->user()->is_supplier == true ? 'selected' : ''}}>Supplier</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <div class="col s12 m4">
                                             <label for="business_name">Organization Name</label>
                                         </div>
                                         <div class="col s12 m8">
@@ -70,10 +81,10 @@
                                             <label for="business_type">Business Type</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <select id="business_type" class="select2 browser-default select-business-type" name="business_type">
+                                            <select id="business_type" class="select2 browser-default select-business-type" name="business_type" onchange="changecategory(this,'business');">
                                                 <option value="" disabled selected>Choose your business type</option>
                                                 @foreach ($business_mapping_tree as $parent )
-                                                    <option value="{{$parent->name}}" {{old('business_type') == $parent->name ? 'selected' : ''}}>{{ucwords($parent->name)}}</option>
+                                                    <option value="{{$parent->name}}" data-id="{{$parent->id}}" {{old('business_type') == $parent->name ? 'selected' : ''}}>{{ucwords($parent->name)}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -121,7 +132,7 @@
                                             <label for="industry_type">Industry Type</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <select id="industry_type" class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this.value)">
+                                            <select id="industry_type" class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this,'industry');">
                                                 <option value="" disabled selected>Choose your industry type</option>
                                             </select>
                                         </div>

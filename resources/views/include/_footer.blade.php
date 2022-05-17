@@ -107,7 +107,7 @@
                         <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/merchantbaybd"> <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
                         <a itemprop="sameAs" target="_blank" href="https://twitter.com/merchantbay_com"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
                         <a itemprop="sameAs" target="_blank" href="https://www.linkedin.com/company/merchantbay"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
-                        <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/merchant.bay/"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/insta.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/merchant.bay/"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/insta.png')}}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col s12 m6 l4" itemscope>

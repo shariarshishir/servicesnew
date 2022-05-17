@@ -9,6 +9,8 @@ class BusinessMappingTree extends Model
 {
     use HasFactory;
 
+    protected $guarded=[];
+
     public function parent()
     {
         return $this->belongsTo(BusinessMappingTree::class,'parent_id');

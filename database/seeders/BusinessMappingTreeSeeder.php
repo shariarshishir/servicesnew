@@ -83,7 +83,7 @@ class BusinessMappingTreeSeeder extends Seeder
                         BusinessMappingTree::create(['name' =>strtolower($item), 'parent_id' => $child->id,'alias' => $this->createAlias($item)]);
                     }
                 }
-                if($parent->name == 'manufacturer' && $child->name == 'home tex' ){
+                if($parent->name == 'manufacturer' && $child->name == 'hometex' ){
                     foreach($home_tex as $item){
                         BusinessMappingTree::create(['name' =>strtolower($item), 'parent_id' => $child->id,'alias' => $this->createAlias($item)]);
                     }

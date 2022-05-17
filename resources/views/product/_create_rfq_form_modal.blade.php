@@ -24,7 +24,7 @@
                         <!--3-->
                         <div class="row input-field input-wrapper">
                             <div class="col s12 m4 l3">
-                                <label>Select Product Category <span >*</span></label>
+                                <label>Select Product Tags <span >*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
                                 <select class="select2" name="category[]" id="category_id" required multiple>

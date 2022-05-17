@@ -45,9 +45,9 @@
                 $("#review_trade_license").html("<b>Trade License:</b> "+tradeLicense);
                 $("#review_industry_type").html("<b>Industry Type:</b> "+industryType);
                 if(factory_type){
-                    $("#review_business_category_id").html("<b>Business Category:</b> "+factory_type);
+                    $("#review_factory_type").html("<b>Factory Type:</b> "+factory_type);
                 } else {
-                    $("#review_business_category_id").hide();
+                    $("#review_factory_type").hide();
                 }
 
                 if(representiveName){
@@ -81,7 +81,7 @@
                     alertHtml += '</div>';
                     alertHtml += '</div>';
                     $("#information_message").html(alertHtml);
-                    $("#review_name, #review_location, #review_business_type, #review_number_of_factories, #review_number_of_outlets, #review_trade_license, #review_industry_type, #review_business_category_id, #review_representative_name, #review_representatives_email, #review_representatives_contact, #review_representative_nidPassport").hide();
+                    $("#review_name, #review_location, #review_business_type, #review_number_of_factories, #review_number_of_outlets, #review_trade_license, #review_industry_type, #review_factory_type, #review_representative_name, #review_representatives_email, #review_representatives_contact, #review_representative_nidPassport").hide();
                 } else {
                     var infoHtml = '<div class="card-alert card cyan lighten-5">';
                     infoHtml += '<div class="card-content cyan-text">';
@@ -89,7 +89,7 @@
                     infoHtml += '</div>';
                     infoHtml += '</div>';
                     $("#information_message").html(infoHtml);
-                    $("#review_name, #review_location, #review_business_type, #review_number_of_factories, #review_number_of_outlets, #review_trade_license, #review_industry_type, #review_business_category_id, #review_representative_name, #review_representatives_email, #review_representatives_contact, #review_representative_nidPassport").show();
+                    $("#review_name, #review_location, #review_business_type, #review_number_of_factories, #review_number_of_outlets, #review_trade_license, #review_industry_type, #review_factory_type, #review_representative_name, #review_representatives_email, #review_representatives_contact, #review_representative_nidPassport").show();
                 }
             });
         });
@@ -141,7 +141,7 @@
                                 $("#industry_type").empty();
                                 $("#industry_type").append('<option value="" disabled selected >Choose your industry type</option>');
                                 $.each(data,function(key,value){
-                                    $("#industry_type").append('<option value="'+value.name+'" data-id="'+value.id+'">'+value.name+'</option>');
+                                    $("#industry_type").append('<option value="'+value.name+'" data-id="'+value.id+'">'+value.name.toUpperCase()+'</option>');
                                 });
 
                             }else{
@@ -153,7 +153,7 @@
                                 $("#factory_type").empty();
                                 $("#factory_type").append('<option value="" disabled selected >Choose your factory type</option>');
                                 $.each(data,function(key,value){
-                                    $("#factory_type").append('<option value="'+value.name+'" data-id="'+value.id+'">'+value.name+'</option>');
+                                    $("#factory_type").append('<option value="'+value.name+'" data-id="'+value.id+'">'+value.name.toUpperCase()+'</option>');
                                 });
 
                             }else{

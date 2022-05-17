@@ -25,7 +25,7 @@
                                     <input type="text" class="form-control- ig-new-rgt" name="title" required/>
                                 </div>
                                 <div class="col s12 m6">
-                                    <label class="category_title">Select Product Category <span >*</span></label>
+                                    <label class="category_title">Select Product Tags <span >*</span></label>
                                     <select class="select2" id="category_id" name="category[]" multiple required >
                                         <option>Select an option</option>
                                         @foreach($product_tags as $product_tag)

@@ -20,7 +20,6 @@
                     @csrf
                     <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
                     <input type="hidden" name="industry" value="{{$business_profile->industry_type}}">
-                    <p>{{$business_profile->business_type.'->'.$business_profile->industry_type.'->'.$business_profile->factory_type}}</p>
                     {{-- <div class="row"> --}}
                         {{-- product type mapping --}}
                         <div class="input-field">

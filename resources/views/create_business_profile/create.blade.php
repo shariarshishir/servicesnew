@@ -227,7 +227,7 @@
                                     <div id="review_number_of_outlets" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_trade_license" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_industry_type" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
-                                    <div id="review_business_category_id" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_factory_type" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representative_name" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representatives_email" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representatives_contact" class="review-profile-data-info" style="padding-bottom: 10px;"></div>

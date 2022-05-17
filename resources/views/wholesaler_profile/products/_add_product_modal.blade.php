@@ -640,7 +640,7 @@
 
                 <div class="submit_btn_wrap" style="padding-top: 30px;">
                     <div class="row">
-                        <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                        <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder btn-back-to-product-list">Cancel</a></div>
                         <div class="col s12 m6 l6 right-align">
                             <button type="submit" class="btn_green seller_product_create">Save</button>
                         </div>

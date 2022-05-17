@@ -311,7 +311,7 @@
                         $('#product-edit-modal-block .edit-video-show-div').hide();
 
                         if(data.product.overlay_original_image){
-                            var src='{{asset("storage")}}'+'/'+data.product.overlay_original_image;
+                            var src='{{Storage::disk('s3')->url('public')}}'+'/'+data.product.overlay_original_image;
                             $('#product-edit-modal-block .overlay-image-preview').attr("src", src);
                             const overlay_image_delete_button='<a href="javascript:void(0);" class="btn_delete" onclick="removeWholesalerOverlayImage('+data.product.id+');"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>';
                             $('#product-edit-modal-block .remove-overlay-image').html(overlay_image_delete_button);
@@ -322,7 +322,7 @@
                         if(data.product.video){
                                 $('#product-edit-modal-block .edit-video-upload-block').hide();
                                 $('#product-edit-modal-block .edit-video-show-div').show();
-                                var asset='{{asset("storage")}}'+'/'+data.product.video.video;
+                                var asset='{{Storage::disk('s3')->url('public')}}'+'/'+data.product.video.video;
                                 var html='<video controls autoplay width="320" height="240">';
                                     html+='<source src="'+asset+'" />';
                                     html+='</video>';

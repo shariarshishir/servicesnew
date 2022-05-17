@@ -14,13 +14,24 @@ class TinyMcController extends Controller
      public function tinyMcFileUpload(Request $request)
      {
         if($request->hasFile('tiny_mc_file')){
+            $file = $request->hasFile('tiny_mc_file');
+            //file original name
+            $originalFileName=$request->file('tiny_mc_file')->getClientOriginalName();
             $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
-            $filename=$request->tiny_mc_file->store('temp/'.$business_profile_name.'/pdf','public');
-            $basename=basename($filename);
-            $finalPath=asset('storage/images/'.$business_profile_name.'/pdf'.'/'.$basename);
-            $originalFileName=$request->file('tiny_mc_file')->getClientOriginalName();
+            $s3 = \Storage::disk('s3');
+            $uniqueStringForFile = generateUniqueString();
+            $tiny_mc_file_unique_name = uniqid().$uniqueStringForFile.'.'.$request->file('tiny_mc_file')->getClientOriginalExtension();
+            $s3TinymceFilePath='temp/'.$business_profile_name.'/pdf/';
+            //temprary file full path in s3 
+            $s3TinymceFullFilePath = '/public/'.$s3TinymceFilePath.'/'.$tiny_mc_file_unique_name;
+            //store tinymce file into temp folder
+            $s3->put($s3TinymceFullFilePath, file_get_contents($request->file('tiny_mc_file')));
+            //tinymce file final path after product upload
+            $finalPath = Storage::disk('s3')->url('public/images/'.$business_profile_name.'/pdf'.'/'.$tiny_mc_file_unique_name);
+            
             return response()->json(['fileName' => $finalPath, 'originalFileName' => $originalFileName], 200);
+
 
         }
      }
@@ -30,16 +41,15 @@ class TinyMcController extends Controller
      {
         $business_profile=BusinessProfile::where('id', $business_profile_id)->first();
         $business_profile_name=$business_profile->business_name;
-        $pdfFolder= File::files(public_path('storage/temp').'/'.$business_profile_name.'/'.'pdf/');
-         if($pdfFolder){
-             foreach($pdfFolder as $file){
-                 $path_info=pathinfo($file);
-                 $file_path='temp/'.$business_profile_name.'/'.'pdf/'.$path_info['basename'];
-                 Storage::delete($file_path);
-             }
-             return response()->json(['msg' => 'success'], 200);
-         }
-         return response()->json(['msg' => 'not exists'], 200);
+        $files = Storage::disk('s3')->allFiles('/public/temp/'.$business_profile_name.'/pdf/');
+        // if($files){
+        //     foreach($files as $file){
+        //         $file = str_replace('public/temp/','',$file);
+        //         Storage::disk('s3')->delete($file);
+        //     }
+        //     return response()->json(['msg' => 'success'], 200);
+        // }
+        return response()->json(['msg' => 'not exists'], 200);
 
      }
 

@@ -3,7 +3,7 @@
     <a href="https://live.merchantbay.com/" target="_blank" itemprop="Live Market">
         <i class="material-icons">live_tv</i>
         <span>Live Market</span>
-        <span class="live-img"> <img src="{{asset('images/frontendimages/new-home/live-img.gif')}}" /></images> </span>
+        <span class="live-img"> <img src="{{Storage::disk('s3')->url('public/frontendimages/new-home/live-img.gif')}}" /></images> </span>
     </a>
 </div>
 <!-- live_market section end -->
@@ -33,7 +33,7 @@
                         <form method="post" id="newsletter_signup_form" itemscope>
                             @csrf
                             <input type="text" id="newsletter_email_address" itemprop="Get the latest Industry Insights" class="industry_textbox" placeholder="Get the latest Industry Insights" required/>
-                            <button type="submit" id="newsletter_signup" class="btn_lightgr btn_email" itemprop="Email Button"> <img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
+                            <button type="submit" id="newsletter_signup" class="btn_lightgr btn_email" itemprop="Email Button"> <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/email.png')}}" alt="" />Email</button>
                         </form>
 					</div>
                 </div>
@@ -104,16 +104,16 @@
                 <div class="col s12 m6 l4" itemscope>
                     <div class="socialWrap" itemscope itemtype="http://schema.org/Organization">
                         <span>Follow us on</span>
-                        <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/merchantbaybd"> <img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
-                        <a itemprop="sameAs" target="_blank" href="https://twitter.com/merchantbay_com"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
-                        <a itemprop="sameAs" target="_blank" href="https://www.linkedin.com/company/merchantbay"><img itemprop="img" src="{{asset('images/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
-                        <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/merchant.bay/"><img itemprop="img" src="{{asset('images/frontendimages/new-home/insta.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/merchantbaybd"> <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/facebook.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://twitter.com/merchantbay_com"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/twitter.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.linkedin.com/company/merchantbay"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/linkedin.png')}}" alt="" /></a>
+                        <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/merchant.bay/"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/insta.png')}}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col s12 m6 l4" itemscope>
                     <div class="footer_apps_box" itemscope>
-                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img itemprop="img" src="{{asset('images/frontendimages/new-home/app-store.png')}}" alt="" /></a>
-                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img itemprop="img" src="{{asset('images/frontendimages/new-home/google-play.png')}}" alt="" /></a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/app-store.png')}}" alt="" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/google-play.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
         <div class="row">
             <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
-                    <img src="{{asset('images/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
                 </div>
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>
@@ -969,7 +969,7 @@ $(document).on("keyup",".search_input",function(){
                                 }
                                 else
                                 {
-                                image = "{{asset('images/frontendimages/no-image.png')}}";
+                                image = "{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}";
                                 }
                                 html += '<div class="product-img"><img src="'+image+'"></div>';
                                 html += '<div class="product-short-intro">';

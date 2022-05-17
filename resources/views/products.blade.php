@@ -39,7 +39,7 @@
                             <div class="slider banner-slider">
                                 <ul class="slides">
                                     <li>
-                                        <img src="{{asset('storage/images/frontendimages/banner_img.png')}}" alt="" /> <!-- random image -->
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/banner_img.png')}}" alt="" /> <!-- random image -->
                                     </li>
                                 </ul>
                             </div>

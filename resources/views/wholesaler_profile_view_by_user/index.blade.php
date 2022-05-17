@@ -148,7 +148,7 @@
 								@if($company_overview->name=='floor_space')
 								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/factory.png')}}" alt="" />
+										<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory.png')}}" alt="" />
 									</div>
 									<div class="title">Floor Space</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -157,7 +157,7 @@
 								@if($company_overview->name=='no_of_machines')
 								<div class="col s4 m3 l2">
 									<div class="company_stuff_img">
-										<img src="{{asset('images/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
+										<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" />
 									</div>
 									<div class="title">No. of Machines</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
@@ -165,7 +165,7 @@
 								@endif
 								@if($company_overview->name=='production_capacity')
 								<div class="col s4 m3 l3">
-									<img src="{{asset('images/frontendimages/new_layout_images/production.png')}}" alt="" />
+									<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/production.png')}}" alt="" />
 									<div class="title">Production Capacity</div>
 									<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
 								</div>
@@ -174,7 +174,7 @@
 									@if(isset($company_overview->value))
 									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
-											<img src="{{asset('images/frontendimages/new_layout_images/workers.png')}}" alt="" />
+											<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/workers.png')}}" alt="" />
 										</div>
 										<div class="title">No. of workers</div>
 										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -185,7 +185,7 @@
 									@if(isset($company_overview->value))
 									<div class="col s4 m3 l2">
 										<div class="company_stuff_img">
-											<img src="{{asset('images/frontendimages/new_layout_images/human.png')}}" alt="" />
+											<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/human.png')}}" alt="" />
 										</div>
 										<div class="title">No. of female workers</div>
 										<div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
@@ -301,7 +301,7 @@
 									</div>
 								</div>
 								<div class="factory_video_box">
-									<img src="{{asset('images/frontendimages/new_layout_images/video_img.png')}}" />
+									<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/video_img.png')}}" />
 								</div>
 								<div class="factory_imgbox_wrap video_gallery_box">
 									<div class="row top_titleWrap">
@@ -315,22 +315,22 @@
 									</div>
 									<div class="row factory_image_gallery">
 										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
 										</div>
 										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_2.jpg')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory_2.jpg')}}" alt=""></div>
 										</div>
 										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_3.jpg')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory_3.jpg')}}" alt=""></div>
 										</div>
 										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_4.jpg')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory_4.jpg')}}" alt=""></div>
 										</div>
 										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_5.jpg')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory_5.jpg')}}" alt=""></div>
 										</div>
 										<div class="col s6 m4 l4">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory_1.jpg')}}" alt=""></div>
 										</div>
 									</div>
 								</div>
@@ -346,16 +346,16 @@
 									</div>
 									<div class="row 360_degree_video_gallery">
 										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img1.png')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/360_degree_img1.png')}}" alt=""></div>
 										</div>
 										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img2.png')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/360_degree_img2.png')}}" alt=""></div>
 										</div>
 										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img3.png')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/360_degree_img3.png')}}" alt=""></div>
 										</div>
 										<div class="col s12 m6 l6">
-											<div class="imgBox"><img src="{{asset('images/frontendimages/new_layout_images/360_degree_img4.png')}}" alt=""></div>
+											<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/360_degree_img4.png')}}" alt=""></div>
 										</div>
 									</div>
 								</div>

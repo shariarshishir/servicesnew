@@ -47,7 +47,7 @@
 					<h4>
 						{{ $rfqSentList['user']['user_name']}}
 						@if(isset($rfqSentList->businessProfile->is_business_profile_verified))
-						<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" />
+						<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/verified.png')}}" alt="" />
 						@endif
 					</h4>
 					<!--p>Fashion Tex Ltd.</p-->
@@ -120,7 +120,7 @@
         <div class="row">
             <div class="col s12 m4 l5 registration-block">
                 <div class="company-logo">
-                    <img src="{{asset('images/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/merchantbay_logoX200.png')}}" alt="Merchant Bay Logo" />
                 </div>
                 <div class="registration-content">
                     <p>Not Yet Registered ?</p>

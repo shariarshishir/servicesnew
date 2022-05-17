@@ -17,7 +17,7 @@
 					<h4>
 						{{ $rfqSentList['user']['user_name']}}
 						@if(isset($rfqSentList->businessProfile->is_business_profile_verified))
-						<img src="{{asset('images/frontendimages/new_layout_images/verified.png')}}" alt="" />
+						<img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/verified.png')}}" alt="" />
 						@endif
 					</h4>
 					<!--p>Fashion Tex Ltd.</p-->

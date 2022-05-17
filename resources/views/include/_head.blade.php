@@ -62,7 +62,7 @@
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 <!-- Calendly link widget end -->
 <link href="{{asset('css/animate.css')}}" rel="stylesheet">
-<link rel="shortcut icon" href="{{ asset('images/frontendimages/favicon/favicon.png') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{Storage::disk('s3')->url('public/frontendimages/favicon/favicon.png')}}" type="image/x-icon">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3S7SWXJM7V"></script>
 <script>

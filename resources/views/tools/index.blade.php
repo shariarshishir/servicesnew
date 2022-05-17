@@ -193,7 +193,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("{{asset('images/frontendimages/tools_images/banner-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/banner-bg.png')}}");
     background-size: cover;
     background-position: bottom center;
   }
@@ -223,7 +223,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("{{asset('images/frontendimages/tools_images/banner-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/banner-bg.png')}}");
     background-size: cover;
     background-position: bottom center;
   }
@@ -260,7 +260,7 @@
 
   /*============= Pricing table Section =============*/
   #home .pricing-table {
-    background-image: url("{{asset('images/frontendimages/tools_images/pricing-table-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/pricing-table-bg.png')}}");
     background-position: bottom center;
     background-size: cover;
     padding-bottom: 200px;
@@ -344,7 +344,7 @@
 
   /*============= Features Section =============*/
   #home .features {
-    background-image: url("{{asset('images/frontendimages/tools_images/features-bg.png')}}");
+    background-image: url("{{Storage::disk('s3')->url('public/frontendimages/tools_images/features-bg.png')}}");
     background-position: bottom center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -576,7 +576,7 @@
               </div>
             </div>
             <div class="right-side col s12 l6 order-l-0">
-                <img src="{{asset('images/frontendimages/tools_images/banner.png')}}" alt="banner" />
+                <img src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/banner.png')}}" alt="banner" />
             </div>
           </div>
         </div>
@@ -593,7 +593,7 @@
               <div class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton1')" target-el="featureButton1">
                 <div class="tab-button-inner">
                   <div class="icon">
-                    <img src="{{asset('images/frontendimages/tools_images/icon-material-style.png')}}" alt="material-style" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/icon-material-style.png')}}" alt="material-style" />
                   </div>
 
                   <div class="text-color-white ms-2 semi-bold button-text">
@@ -607,7 +607,7 @@
               >
                 <div class="tab-button-inner">
                   <div class="icon">
-                    <img src="{{asset('images/frontendimages/tools_images/icon-awesome-link.png')}}" alt="link icon" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/icon-awesome-link.png')}}" alt="link icon" />
                   </div>
 
                   <div class="text-color-white text-left ms-2 semi-bold button-text">
@@ -620,7 +620,7 @@
                 class="tab-button link link-div-i col-6 col-md-3 icon-section" onclick="openCity(event, 'featureButton3')" target-el="featureButton3">
                 <div class="tab-button-inner">
                   <div class="icon">
-                    <img src="{{asset('images/frontendimages/tools_images/icon-awesome-calendar-check.png')}}" alt="calender" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/icon-awesome-calendar-check.png')}}" alt="calender" />
                   </div>
                   <div class="text-color-white ms-2 semi-bold button-text">
                     Smart Calendar
@@ -634,7 +634,7 @@
                 <div class="tab-button-inner">
                   <div class="icon">
                     <img
-                      src="{{asset('images/frontendimages/tools_images/icon-simple-campaignmonitor.png')}}"
+                      src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/icon-simple-campaignmonitor.png')}}"
                       alt="Simple Compaignmonitor Icon"
                     />
                   </div>
@@ -652,7 +652,7 @@
           <div class="share-list" id="featureButton1">
               <div class="row show-hide-content">
               <div class="col s12 l6 content-img">
-                  <img class="ms-auto mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/orderwise-panel.png')}}" alt="dashboard" />
+                  <img class="ms-auto mx-l-auto mb-l-32" src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/orderwise-panel.png')}}" alt="dashboard" />
               </div>
               <div class="col s12 l6 gray-text description">
                   <h4 class="title-1">Style-wise Panel</h4>
@@ -668,7 +668,7 @@
           <div class="share-list" id="featureButton2">
               <div class="row show-hide-content">
               <div class="col s12 l6 content-img">
-                  <img class="mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/dashboard-2.png')}}" alt="dashboard" />
+                  <img class="mx-l-auto mb-l-32" src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/dashboard-2.png')}}" alt="dashboard" />
               </div>
               <div class="col s12 l6 gray-text description">
                   <h4 class="title-1">Integrated Digital Supply Chain</h4>
@@ -684,7 +684,7 @@
           <div class="share-list" id="featureButton3">
               <div class="row show-hide-content">
               <div class="col s12 l6 content-img">
-                  <img class="mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/T&A-calender.png')}}" alt="dashboard" />
+                  <img class="mx-l-auto mb-l-32" src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/T&A-calender.png')}}" alt="dashboard" />
               </div>
               <div class="col s12 l6 gray-text description">
                   <h4 class="title-1">Smart Calendar Management</h4>
@@ -700,7 +700,7 @@
           <div class="share-list" id="featureButton4">
               <div class="row show-hide-content content-img">
               <div class="col s12 l6 content-img">
-                  <img class="mx-l-auto mb-l-32" src="{{asset('images/frontendimages/tools_images/production-report1.png')}}" alt="dashboard" />
+                  <img class="mx-l-auto mb-l-32" src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/production-report1.png')}}" alt="dashboard" />
               </div>
               <div class="col s12 l6 gray-text description">
                   <h4 class="title-1">Production and Quality Monitoring</h4>
@@ -716,7 +716,7 @@
       </div>
     </section>
     <section class="requestDemo py-60" style="background-color: #fff;">
-        <img src="{{asset('images/frontendimages/tools_images/problem-solve.svg')}}" alt="img" />
+        <img src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/problem-solve.svg')}}" alt="img" />
       <h3>Merchandising have never seemed so easy before.</h3>
     </section>
     <section id="pricing" class="pricing-table pt-75 pt-s-40">
@@ -802,7 +802,7 @@
             </div>
             <div class="col s12 l6 order-l-0">
               <div class="image">
-              <img src="{{asset('images/frontendimages/tools_images/mgmt-secret-weapon.png')}}" alt="secret weapon" />
+              <img src="{{Storage::disk('s3')->url('public/frontendimages/tools_images/mgmt-secret-weapon.png')}}" alt="secret weapon" />
               </div>
             </div>
           </div>

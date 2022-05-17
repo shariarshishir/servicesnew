@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_one">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/sign-up.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/sign-up.svg')}}" alt="icon"
                                     style="transform: translate(15px, 15px);" />    
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_two">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/rfq.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/rfq.svg')}}" alt="icon"
                                     style="transform: translate(15px, 15px);" />
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_three">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/manufacturer.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/manufacturer.svg')}}" alt="icon"
                                     style="transform: translate(15px, 15px);" />
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_four">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/escrow-pay.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/escrow-pay.svg')}}" alt="icon"
                                     style="transform: translate(15px, 15px);" />
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_five">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/product-development.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/product-development.svg')}}" alt="icon"
                                     style="transform: translate(0px, 5px);" />
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_six">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/quality-control.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/quality-control.svg')}}" alt="icon"
                                     style="transform: translate(0px, 5px);" />
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                     <div class="row">
                         <div class="col l3 animate_icon_box_seven">
                             <div class="icon_box">
-                                <img src="{{asset('images/frontendimages/work-image/icon/shipment.svg')}}" alt="icon"
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/shipment.svg')}}" alt="icon"
                                     style="transform: translate(0px, 5px);" />
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                     <div class="col s12 l4 m6 animate_feature_box_left">
                         <div class="feature_box">
                             <div class="icon">
-                                <img src="{{asset('images/frontendimages/work-image/icon/fast-fevelopment.svg')}}" alt="icon" />
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/fast-fevelopment.svg')}}" alt="icon" />
                             </div>
                             <h5>Fast Development</h5>
                         </div>
@@ -209,7 +209,7 @@
                     <div class="col s12 l4 m6 animate_feature_box_top">
                         <div class="feature_box">
                             <div class="icon">
-                                <img src="{{asset('images/frontendimages/work-image/icon/secured-payement.svg')}}" alt="icon" />
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/secured-payement.svg')}}" alt="icon" />
                             </div>
                             <h5>Secured Payement</h5>
                         </div>
@@ -217,7 +217,7 @@
                     <div class="col s12 l4 m6 animate_feature_box_right">
                         <div class="feature_box">
                             <div class="icon">
-                                <img src="{{asset('images/frontendimages/work-image/icon/complete-traceability.svg')}}" alt="icon" />
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/complete-traceability.svg')}}" alt="icon" />
                             </div>
                             <h5>Complete Traceability</h5>
                         </div>
@@ -229,7 +229,7 @@
                     <div class="row">
                         <div class="col l4 s12 animate_box_img_1">
                             <div class="box_img">
-                                <img src="{{asset('images/frontendimages/work-image/health-care-for-rmg-workers.jpg')}}" alt="img" />
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/health-care-for-rmg-workers.jpg')}}" alt="img" />
                             </div>
                         </div>
                         <div class="col l8 s12 animate_box_description_1" style="align-self: center;">
@@ -256,7 +256,7 @@
                         </div>
                         <div class="col l4 s12 animate_box_img_2" style="justify-content: right;">
                             <div class="box_img">
-                                <img src="{{asset('images/frontendimages/work-image/warehousing.jpg')}}" alt="img" />
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/warehousing.jpg')}}" alt="img" />
                             </div>
                         </div>
                     </div>
@@ -265,7 +265,7 @@
                     <div class="row">
                         <div class="col l4 s12 animate_box_img_3">
                             <div class="box_img">
-                                <img src="{{asset('images/frontendimages/work-image/oip.jpg')}}" alt="img" />
+                                <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/oip.jpg')}}" alt="img" />
                             </div>
                         </div>
                         <div class="col l8 s12 animate_box_description_3" style="align-self: center;">
@@ -310,7 +310,7 @@
                         <div class="row">
                             <div class="col l3 animate_icon_box_1">
                                 <div class="icon_box">
-                                    <img src="{{asset('images/frontendimages/work-image/icon/sign-up.svg')}}" alt="icon"
+                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/sign-up.svg')}}" alt="icon"
                                         style="transform: translate(15px, 15px);" />
                                 </div>
                             </div>
@@ -334,7 +334,7 @@
                         <div class="row">
                             <div class="col l3 animate_icon_box_2">
                                 <div class="icon_box">
-                                    <img src="{{asset('images/frontendimages/work-image/icon/business-profile.svg')}}" alt="icon"
+                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/business-profile.svg')}}" alt="icon"
                                         style="transform: translate(15px, 15px);" />
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
                         <div class="row">
                             <div class="col l3 animate_icon_box_3">
                                 <div class="icon_box">
-                                    <img src="{{asset('images/frontendimages/work-image/icon/storefront.svg')}}" alt="icon"
+                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/storefront.svg')}}" alt="icon"
                                         style="transform: translate(15px, 15px);" />
                                 </div>
                             </div>
@@ -382,7 +382,7 @@
                         <div class="row">
                             <div class="col l3 animate_icon_box_4">
                                 <div class="icon_box">
-                                    <img src="{{asset('images/frontendimages/work-image/icon/join-mb-pool.svg')}}" alt="icon"
+                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/join-mb-pool.svg')}}" alt="icon"
                                         style="transform: translate(15px, 15px);" />
                                 </div>
                             </div>
@@ -406,7 +406,7 @@
                         <div class="row">
                             <div class="col l3 animate_icon_box_5">
                                 <div class="icon_box">
-                                    <img src="{{asset('images/frontendimages/work-image/icon/payment-security.svg')}}" alt="icon"
+                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/payment-security.svg')}}" alt="icon"
                                         style="transform: translate(0px, 5px); max-width: 90px " />
                                 </div>
                             </div>
@@ -438,7 +438,7 @@
                             <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
-                                        <img src="{{asset('images/frontendimages/work-image/icon/get-queries.svg')}}" alt="icon" />
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/get-queries.svg')}}" alt="icon" />
                                     </div>
                                     <h3>Get Queries every day</h3>
                                 </div>
@@ -453,7 +453,7 @@
                             <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
-                                        <img src="{{asset('images/frontendimages/work-image/icon/product-develolpment-2.svg')}}" alt="icon" />
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/product-develolpment-2.svg')}}" alt="icon" />
                                     </div>
                                     <h3>Gain advantage in
                                         product development</h3>
@@ -478,7 +478,7 @@
                             <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
-                                        <img src="{{asset('images/frontendimages/work-image/icon/empowered-with-tech.svg')}}" alt="icon" />
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/empowered-with-tech.svg')}}" alt="icon" />
                                     </div>
                                     <h3>Get empowered with Tech</h3>
                                 </div>
@@ -493,7 +493,7 @@
                             <div class="why_us_box" style="margin-bottom: 100px;">
                                 <div class="title">
                                     <div class="icon">
-                                        <img src="{{asset('images/frontendimages/work-image/icon/global-storefront.svg')}}" alt="icon" />
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/global-storefront.svg')}}" alt="icon" />
                                     </div>
                                     <h3>Global footprint</h3>
                                 </div>
@@ -508,7 +508,7 @@
                             <div class="why_us_box">
                                 <div class="title">
                                     <div class="icon">
-                                        <img src="{{asset('images/frontendimages/work-image/icon/manage-easily.svg')}}" alt="icon" />
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/manage-easily.svg')}}" alt="icon" />
                                     </div>
                                     <h3>Manage it easily</h3>
                                 </div>

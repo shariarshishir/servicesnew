@@ -3,7 +3,7 @@
 
 @section('title', 'Merchant Bay, B2B platform, B2B fashion, Fashion e-commerce, B2B e-commerce, RMG e-commerce, Fabric e-commerce, YARN e-commerce, Marketplace, RMG Marketplace, Fashion, Fashion Sourching, Best Suppliers in Bangladesh, Bangladesh RMG Sourching, Apparel Sourcing, Garments in Bangladesh, Post RFQ, RMG RFQ, RMG, Bulk RMG, RFQ, RMG Sourching, 3D Design, 3D Fashion, Merchandiser, Suppliers, Request for quotation, Fabric, Fabric Sourcing, Fabric Marketplace, Fabric Suppliers, Fabric RFQ, Fabric Suppliers in Bangladesh, Bulk Fabric, YARN, YARN Sourcing, YARN Marketplace, YARN Suppliers, YARN RFQ, YARN Suppliers in Bangladesh, Bulk YARN, Live fashion market, Ready Stock, merchantbay.com')
 @section('description', 'Merchant Bay is the best RMG sourcing platform in the world, where million of trusted suppliers are ready to serve you. You will get the best quelity febrics, 3D designes, and sampales as your requirements.')
-@section('image', asset('images/frontendimages/merchantbay_logoX200.png'))
+@section('image', Storage::disk('s3')->url('public/frontendimages/merchantbay_logoX200.png'))
 @section('keywords', 'Merchant Bay, B2B platform, B2B fashion, Fashion e-commerce, B2B e-commerce, RMG e-commerce, Fabric e-commerce, YARN e-commerce, Marketplace, RMG Marketplace, Fashion, Fashion Sourching, Best Suppliers in Bangladesh, Bangladesh RMG Sourching, Apparel Sourcing, Garments in Bangladesh, Post RFQ, RMG RFQ, RMG, Bulk RMG, RFQ, RMG Sourching, 3D Design, 3D Fashion, Merchandiser, Suppliers, Request for quotation, Fabric, Fabric Sourcing, Fabric Marketplace, Fabric Suppliers, Fabric RFQ, Fabric Suppliers in Bangladesh, Bulk Fabric, YARN, YARN Sourcing, YARN Marketplace, YARN Suppliers, YARN RFQ, YARN Suppliers in Bangladesh, Bulk YARN, Live fashion market, Ready Stock, merchantbay.com')
 @section('robots', 'index, nofollow')
 
@@ -94,7 +94,7 @@
         <div class="landing_spotlight_wrap">
             <div class="landing_spotlight_top">
                 <div class="container">
-                    <div class="spotlight_box animate_spotlight_box" itemscope><img itemprop="img" src="{{asset('images/frontendimages/new-home/Spotlight.png')}}" alt="Spotlight" /></div>
+                    <div class="spotlight_box animate_spotlight_box" itemscope><img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/Spotlight.png')}}" alt="Spotlight" /></div>
                 </div>
             </div>
             <div class="landing_spotlight_infoWrap animate_landing_spotlight_infoWrap">
@@ -109,7 +109,7 @@
                                 @if($businessProfile->business_profile_banner)
                                 <img itemprop="img" src="{{ asset('storage/'.$businessProfile->business_profile_banner) }}" alt="Business profile banner" />
                                 @else
-                                <img itemprop="img" src="{{ asset('images/frontendimages/new-home/spot-li.png') }}" alt="Spot list" />
+                                <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/spot-li.png')}}" alt="Spot list" />
                                 @endif
                             </div>
                             <div class="container">
@@ -167,7 +167,7 @@
             <div class="row">
                 <div class="col s12 m6 product_video_wrap animate_product_video_wrap">
                     <div class="product_video_box" itemscope>
-                        <img itemprop="img" src="{{asset('images/frontendimages/new-home/360-white.GIF')}}" alt="Animated Image" />
+                        <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/360-white.GIF')}}" alt="Animated Image" />
                     </div>
                 </div>
                 <div class="col s12 m6 product_video_infobox animate_product_video_infobox">
@@ -198,19 +198,19 @@
                     <p itemprop="text"><span class="bold_text" itemprop="text">Yarn, Fabrics, Trims, Accessories, Garments </span> <br/> and many more....</p>
                 </div>
                 <div class="sourcing_img_box mobile_sourcing_img_box" style="display: none;" itemscope>
-                    <img itemprop="img" alt="" src="{{asset('images/frontendimages/new-home/sourcing-img.jpg')}}" />
+                    <img itemprop="img" alt="" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/sourcing-img.jpg')}}" />
                 </div>
                 <div class="sourcing_apps_box" itemscope>
                     <h3 itemprop="title">Download the App</h3>
                     <div class="apps_wrap" itemscope>
-                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img class="animate-app-store" src="{{asset('images/frontendimages/new-home/app-store.png')}}" itemprop="img" alt="App Store" /></a>
-                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img class="google-play-store" src="{{asset('images/frontendimages/new-home/google-play.png')}}" itemprop="img" alt="Google Play Store" /></a>
+                        <a href="https://apps.apple.com/dk/app/merchant-bay/id1590720968?l=en" itemscope itemprop="App Store"><img class="animate-app-store" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/app-store.png')}}" itemprop="img" alt="App Store" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" itemscope itemprop="Google Play Store"><img class="google-play-store" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/google-play.png')}}" itemprop="img" alt="Google Play Store" /></a>
                     </div>
                 </div>
               </div>
               <div class="col s12 m6 animate_sourcing_info_box_right">
                     <div class="sourcing_img_box" itemscope>
-                        <img alt="Sourcing Image" src="{{asset('images/frontendimages/new-home/sourcing-img.png')}}" itemprop="img" />
+                        <img alt="Sourcing Image" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/sourcing-img.png')}}" itemprop="img" />
                     </div>
               </div>
             </div>
@@ -222,7 +222,7 @@
                 <div class="row">
                     <div class="col s12 m6 landing_tools_left animate_landing_tools_left">
                         <div class="landing_tools_img" itemscope>
-                            <img itemprop="img" src="{{asset('images/frontendimages/new-home/tools-img.png')}}" alt="Tools Image" />
+                            <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/tools-img.png')}}" alt="Tools Image" />
                         </div>
                     </div>
                     <div class="col s12 m6 landing_tools_right animate_landing_tools_right">
@@ -246,7 +246,7 @@
                     <h3 itemprop="title" class="landing_request_toptitle">Want to start real quick?</h3>
                     <h5 itemprop="title" class="landing_request_title">Submit a request for quotation enjoy sourcing <br/> from Bangladesh like never before</h5>
                     <div class="landing_request_img animate_landing_request_img" itemscope>
-                        <img itemprop="img" src="{{asset('images/frontendimages/new-home/landing-rfq.png')}}" alt="" />
+                        <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/landing-rfq.png')}}" alt="" />
                     </div>
                     <div class="request_button_box center-align" itemscope>
                         <a href="{{route('rfq.index')}}" class="btn_border_black animate_btn_border_black" itemprop="Submit RFQ">Submit RFQ</a>

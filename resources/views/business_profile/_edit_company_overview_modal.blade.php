@@ -26,7 +26,7 @@
                     </button>
                 </div>
                 <div class="alias-loader" style="display: none;">
-                    <img src="{{asset('images/frontendimages/spinner.gif')}}" alt="" />
+                    <img src="{{Storage::disk('s3')->url('public/frontendimages/spinner.gif')}}" alt="" />
                 </div>
                 <span class="alias-msg"></span>
             </div>

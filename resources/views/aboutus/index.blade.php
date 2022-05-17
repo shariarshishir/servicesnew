@@ -128,52 +128,52 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s6 m4 xl2 work_process-box-1">
               <div class="work_process-box">
                 <div class="left_side">
-                  <img src="{{asset('images/frontendimages/about-image/icons/sign-up.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/sign-up.svg')}}" alt="icon" />
                   <h6>Sign up</h6>
                 </div>
-                <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
+                <img class="arrow" src="{{Storage::disk('s3')->url('public/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
             <div class="col s6 m4 xl2 work_process-box-2">
               <div class="work_process-box">
                 <div class="left_side">
-                  <img src="{{asset('images/frontendimages/about-image/icons/post-an-rfq.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/post-an-rfq.svg')}}" alt="icon" />
                   <h6>Post an RFQ</h6>
                 </div>
-                <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
+                <img class="arrow" src="{{Storage::disk('s3')->url('public/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
             <div class="col s6 m4 xl2 work_process-box-3">
               <div class="work_process-box">
                 <div class="left_side">
-                  <img src="{{asset('images/frontendimages/about-image/icons/select-the-best-offer.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/select-the-best-offer.svg')}}" alt="icon" />
                   <h6>Select the Best Offer</h6>
                 </div>
-                <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
+                <img class="arrow" src="{{Storage::disk('s3')->url('public/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
             <div class="col s6 m4 xl2 work_process-box-4">
               <div class="work_process-box">
                 <div class="left_side">
-                  <img src="{{asset('images/frontendimages/about-image/icons/develop-together.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/develop-together.svg')}}" alt="icon" />
                   <h6>Develop Together</h6>
                 </div>
-                <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
+                <img class="arrow" src="{{Storage::disk('s3')->url('public/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
             <div class="col s6 m4 xl2 work_process-box-5">
               <div class="work_process-box">
                 <div class="left_side">
-                  <img src="{{asset('images/frontendimages/about-image/icons/see-real-time-update.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/see-real-time-update.svg')}}" alt="icon" />
                   <h6>See Real Time Updates</h6>
                 </div>
-                <img class="arrow" src="{{asset('images/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
+                <img class="arrow" src="{{Storage::disk('s3')->url('public/frontendimages/about-image/right-arrow.png')}}" alt="arrow" />
               </div>
             </div>
             <div class="col s6 m4 xl2 work_process-box-6">
               <div class="work_process-box">
                 <div class="left_side">
-                  <img src="{{asset('images/frontendimages/about-image/icons/get-shipment.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/get-shipment.svg')}}" alt="icon" />
                   <h6>Get Shipment</h6>
                 </div>
               </div>
@@ -207,7 +207,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                       <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/profile.png')}}" alt="Profile" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/profile.png')}}" alt="Profile" />
                       </div>
                   </div>
                 </div>
@@ -226,7 +226,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/design-catelogue.png')}}" alt="Design Catelogue" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/design-catelogue.png')}}" alt="Design Catelogue" />
                     </div>
                     
                   </div>
@@ -246,7 +246,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/supplier-matching.png')}}" alt="Supplier Matching" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/supplier-matching.png')}}" alt="Supplier Matching" />
                     </div>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/message-centre.png')}}" alt="Message Centre" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/message-centre.png')}}" alt="Message Centre" />
                     </div>
                   </div>
                 </div>
@@ -286,7 +286,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/development-pool.png')}}" alt="profile" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/development-pool.png')}}" alt="profile" />
                     </div>
                   </div>
                 </div>
@@ -308,7 +308,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/capacity-check.png')}}" alt="Development Pool" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/capacity-check.png')}}" alt="Development Pool" />
                     </div>
                   </div>
                 </div>
@@ -330,7 +330,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/omd-for-mock-up.png')}}" alt="omd" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/omd-for-mock-up.png')}}" alt="omd" />
                     </div>
                   </div>
                 </div>
@@ -351,7 +351,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   </div>
                   <div class="col s12 m6 l7">
                     <div class="feature_right_img">
-                        <img src="{{asset('images/frontendimages/about-image/supplier-admin.png')}}" alt="omd" />
+                        <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/supplier-admin.png')}}" alt="omd" />
                     </div>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
       </div>
       <div class="we_believe py-80">
         <div class="section_title">
-          <img src="{{asset('images/frontendimages/about-image/icons/we-believe.png')}}" class="we-believe-img" src="We Believe" />
+          <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/we-believe.png')}}" class="we-believe-img" src="We Believe" />
           <h3 class="py-50 we-believe-title">
             We believe traceability is the first step to sustainability
           </h3>
@@ -398,7 +398,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col m6 achivement-box-1">
               <div class="achivement_box top_border">
                 <div class="icon">
-                  <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
                   Successfully created a visible supply chain of Bangladesh
@@ -409,7 +409,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col m6 achivement-box-2">
               <div class="achivement_box top_border">
                 <div class="icon">
-                  <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
                   Setup technical support for executing orders with faster
@@ -420,7 +420,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col m6 achivement-box-3">
               <div class="achivement_box">
                 <div class="icon">
-                  <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
                   Created a raw materials library of textile, yarn, trims and
@@ -431,7 +431,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col m6 achivement-box-4">
               <div class="achivement_box">
                 <div class="icon">
-                  <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
                   Brought all sourcing support and services at a click of a button.
@@ -441,7 +441,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col m6 achivement-box-5">
               <div class="achivement_box">
                 <div class="icon">
-                  <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
                   Opened doors to new markets for small medium manufacturers
@@ -452,7 +452,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col m6 achivement-box-6">
               <div class="achivement_box">
                 <div class="icon">
-                  <img src="{{asset('images/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/success-achievement.png')}}" alt="achivement" />
                 </div>
                 <div class="description">
                   Implemented easy to use order management system and factory
@@ -468,7 +468,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           <div class="row">
             <div class="col m6 vision-box">
               <div class="vision_and_mission_box">
-                <img src="{{asset('images/frontendimages/about-image/icons/vision.svg')}}" alt="">
+                <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/vision.svg')}}" alt="">
                 <h4>Our Vision</h4>
                 <p>To be the world's largest fashion
                   manufacturing platform with end-to-end
@@ -478,7 +478,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             </div>
             <div class="col m6 mission-box">
               <div class="vision_and_mission_box">
-                <img src="{{asset('images/frontendimages/about-image/icons/mission.svg')}}" alt="">
+                <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/mission.svg')}}" alt="">
                 <h4>Our Mission</h4>
                 <p>To simplify global fashion
                   manufacturing through a technology
@@ -496,7 +496,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s12 m4 l2 path-box-1">
               <div class="path_box">
                 <div class="imgbox">
-                  <img src="{{asset('images/frontendimages/about-image/icons/design-studio.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/design-studio.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('product.type.mapping',['studio', 'design'])}}">Design Studio
                   <span class="material-icons">navigate_next</span>
@@ -506,7 +506,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s12 m4 l2 path-box-2">
               <div class="path_box">
                 <div class="imgbox">
-                  <img src="{{asset('images/frontendimages/about-image/icons/sample-storefront.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/sample-storefront.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('product.type.mapping',['studio', 'product_sample'])}}">Sample Storefront
                   <span class="material-icons">navigate_next</span>
@@ -516,7 +516,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s12 m4 l2 path-box-3">
               <div class="path_box">
                 <div class="imgbox">
-                  <img src="{{asset('images/frontendimages/about-image/icons/fabric-library.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/fabric-library.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">Fabric Library
                   <span class="material-icons">navigate_next</span>
@@ -526,7 +526,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s12 m4 l2 path-box-4">
               <div class="path_box">
                 <div class="imgbox">
-                  <img src="{{asset('images/frontendimages/about-image/icons/yarn-library.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/yarn-library.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}">Yarn Library
                   <span class="material-icons">navigate_next</span>
@@ -536,7 +536,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s12 m4 l2 path-box-5">
               <div class="path_box">
                 <div class="imgbox">
-                  <img src="{{asset('images/frontendimages/about-image/icons/accessories-library.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/accessories-library.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}">Accessories Library
                   <span class="material-icons">navigate_next</span>
@@ -546,7 +546,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
             <div class="col s12 m4 l2 path-box-6">
               <div class="path_box">
                 <div class="imgbox">
-                  <img src="{{asset('images/frontendimages/about-image/icons/industry-isights.svg')}}" alt="icon" />
+                  <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/industry-isights.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('industry.blogs')}}">Industry Insights
                   <span class="material-icons">navigate_next</span>

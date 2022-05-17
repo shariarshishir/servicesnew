@@ -25,20 +25,20 @@
                             $title=$list->name;
                             $overLayImage = $list->overlay_original_image ?? NULL;
                             if($list->images()->exists()){
-                                $img= asset('storage').'/'.$list->images[0]->image;
+                                $img= Storage::disk('s3')->url('public/'.$list->images[0]->image);
                             }else{
-                                $img= asset('storage').'/'.'images/supplier.png';
+                                $img= Storage::disk('s3')->url('public/images/supplier.png');
                             }
 
                         }else{
                             $title=$list->title;
                             $overLayImage = $list->overlay_image ?? NULL;
+                            $img= \Storage::disk('s3')->url('public/images/'.$list->product_images[0]->product_image);
                             if($list->product_images()->exists()){
-                                $img= asset('storage').'/'.$list->product_images[0]->product_image;
+                                $img= \Storage::disk('s3')->url('public/images/'.$list->product_images[0]->product_image);
                             }else{
-                                $img= asset('storage').'/'.'images/supplier.png';
+                                $img= \Storage::disk('s3')->url('public/images/supplier.png');
                             }
-
                         }
                     @endphp
 
@@ -48,11 +48,11 @@
                                 <img src="{{$img}}" class="single-product-img" alt="">
                                 @if( $list->flag == 'shop')
                                     @if($list->overlay_original_image)
-                                    <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;">
+                                    <img src="{{Storage::disk('s3')->url('public/'.$list->overlay_original_image)}}" class="single-product-overlay-img" alt="" style="display: none;">
                                     @endif
                                 @else
                                     @if($list->overlay_image)
-                                        <img src="{{asset('storage').'/'.$list->overlay_image}}" class="single-product-overlay-img" alt="" style="display: none;" >
+                                        <img src="{{Storage::disk('s3')->url('public/images/'.$list->overlay_image)}}" class="single-product-overlay-img" alt="" style="display: none;" >
                                     @endif
                                 @endif
                             </div>

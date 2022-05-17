@@ -117,17 +117,16 @@ class ProductController extends Controller
             if($request->hasFile('video')){
                 $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
                 $business_profile_name=$business_profile->business_name;
-                $folder='/public/video/'.$business_profile_name;
 
                 $video = $request->file('video');
                 $s3 = \Storage::disk('s3');
                 $uniqueString = generateUniqueString();
-                $video_file_name = uniqid().$uniqueString.'.'. $video->getClientOriginalExtension();
-                $s3filePath = $folder.'/'. $video_file_name;
+                $video_file_name_in_db = 'video/'.$business_profile_name.'/'.uniqid().$uniqueString.'.'. $video->getClientOriginalExtension();
+                $s3filePath = '/public/'. $video_file_name_in_db;
                 $s3->put($s3filePath, file_get_contents($video));
                 $product_video = ProductVideo::create([
                     'product_id' => $product->id,
-                    'video' => $video_file_name,
+                    'video' => $video_file_name_in_db,
                 ]);
 
             }
@@ -261,8 +260,8 @@ public function update(Request $request, $product_id)
         if( count(json_decode($request->remove_video_id)) > 0 ){
             $productVideo=ProductVideo::where('id',json_decode($request->remove_video_id))->first();
             if($productVideo){
-                if(Storage::disk('s3')->exists('/public/video/'.$productVideo->video)){
-                    Storage::disk('s3')->delete('/public/video/'.$productVideo->video);
+                if(Storage::disk('s3')->exists('/public/'.$productVideo->video)){
+                    Storage::disk('s3')->delete('/public/'.$productVideo->video);
                 }
                 $productVideo->delete();
             }
@@ -270,19 +269,17 @@ public function update(Request $request, $product_id)
     }
 
     if($request->hasFile('video')){
-        $business_profile=BusinessProfile::where('id', $request->business_profile_id)->first();
-        $business_profile_name=$business_profile->business_name;
-        $folder='/public/video/'.$business_profile_name;
-
+        $business_profile = BusinessProfile::where('id', $product->business_profile_id)->first();
+        $business_profile_name = $business_profile->business_name;
         $video = $request->file('video');
         $s3 = \Storage::disk('s3');
         $uniqueString = generateUniqueString();
-        $video_file_name = uniqid().$uniqueString.'.'. $video->getClientOriginalExtension();
-        $s3filePath = $folder.'/'. $video_file_name;
+        $video_file_name_in_db = 'video/'.$business_profile_name.'/'.uniqid().$uniqueString.'.'. $video->getClientOriginalExtension();
+        $s3filePath = '/public/'. $video_file_name_in_db;
         $s3->put($s3filePath, file_get_contents($video));
         $product_video = ProductVideo::create([
             'product_id' => $product->id,
-            'video' => $video_file_name,
+            'video' => $video_file_name_in_db,
         ]);
 
     }

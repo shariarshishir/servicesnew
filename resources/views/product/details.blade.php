@@ -38,7 +38,7 @@ $reviewsCount = count($productReviews);
                                 <div class="video_content">
                                     <div class="details_video_box">
                                         <video controls height="245" width="300">
-                                            <source src="{{asset('storage/'.$product->video->video)}}" />
+                                            <source src="{{Storage::disk('s3')->url('public/'.$product->video->video)}}" />
                                         </video>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@ $reviewsCount = count($productReviews);
                                     @if(count($product->images)> 0)
                                         @foreach ($product->images as $image)
                                             <li>
-                                                <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a>
+                                                <a data-fancybox="gallery" href="{{Storage::disk('s3')->url('public/'.$image->original)}}"><img src="{{Storage::disk('s3')->url('public/'.$image->original)}}" class="responsive-img" width="100px" /></a>
                                             </li>
                                         @endforeach
                                     @endif
@@ -60,9 +60,8 @@ $reviewsCount = count($productReviews);
                                         @if(count($product->images)> 0)
                                             @foreach ($product->images as $image)
                                                 <div class="details_gallery_box">
-                                                    <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
-                                                        <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="300px"/>
-
+                                                    <a data-fancybox="gallery" href="{{Storage::disk('s3')->url('public/'.$image->original)}}">
+                                                        <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="responsive-img" width="300px"/>
                                                         <div class="click-to-zoom">
                                                             <i class="material-icons dp48">zoom_in</i>
                                                             <!-- Click on image to view large size. -->
@@ -74,8 +73,8 @@ $reviewsCount = count($productReviews);
                                         @if($product->overlay_original_image)
                                         <div>
                                             <center>
-                                                <a data-fancybox="gallery" href="{{asset('storage/'.$image->original)}}">
-                                                    <img src="{{asset('storage/'.$product->overlay_original_image)}}" class="responsive-img" width="300px"/>
+                                                <a data-fancybox="gallery" href="{{Storage::disk('s3')->url('public/'.$image->original)}}">
+                                                    <img src="{{Storage::disk('s3')->url('public/'.$product->overlay_original_image)}}" class="responsive-img" width="300px"/>
 
                                                     <div class="click-to-zoom">
                                                         <i class="material-icons dp48">zoom_in</i>
@@ -90,11 +89,11 @@ $reviewsCount = count($productReviews);
                                 <ul class="product-list-images-block">
                                     @if(count($product->images)> 0)
                                         @foreach ($product->images as $image)
-                                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
+                                            <li><a href="javascript:void(0);"><img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="responsive-img" width="100px" /></a></li>
                                         @endforeach
                                     @endif
                                     @if($product->overlay_original_image)
-                                            <li><a href="javascript:void(0);"><img src="{{asset('storage/'.$product->overlay_original_image)}}" class="responsive-img" width="100px" /></a></li>
+                                            <li><a href="javascript:void(0);"><img src="{{Storage::disk('s3')->url('public/'.$product->overlay_original_image)}}" class="responsive-img" width="100px" /></a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -1093,14 +1092,14 @@ $reviewsCount = count($productReviews);
                                 @foreach($product->images as $key=>$image)
                                     @if($product->businessProfile()->exists())
                                         <a href="{{route('productdetails',$product->sku)}}">
-                                            <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                            <img src="{{Storage::disk('s3')->url('public/'.$image->image)}} " class="single-product-img" alt="" />
                                         </a>
                                     @else
                                         <a href="javascript:void(0);">
-                                            <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                            <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="single-product-img" alt="" />
                                         </a>
                                     @endif
-                                    {{-- <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" /> --}}
+                                    {{-- <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="single-product-img" alt="" /> --}}
                                     @break
                                 @endforeach
 
@@ -1125,7 +1124,7 @@ $reviewsCount = count($productReviews);
                                     <div class="row">
                                         <div class="col m6 s12 modal-product-images">
                                         @foreach($product->images as $key=>$image)
-                                            <img src="{{asset('storage/'.$image->image)}}" class="responsive-img" alt="" />
+                                            <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="responsive-img" alt="" />
                                         @endforeach
                                         </div>
                                         <div class="col m6 s12">

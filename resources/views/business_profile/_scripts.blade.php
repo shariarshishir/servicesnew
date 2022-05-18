@@ -117,6 +117,7 @@
         });
     //add manufacture product modal open
     $(document).ready(function() {
+        selectRefresh();
         $('.product-add-modal-trigger').click(function(){
             $("#product-add-modal-block").modal('open');
             $('#manufacture-product-upload-form')[0].reset();

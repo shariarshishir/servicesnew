@@ -1,7 +1,7 @@
 @extends('layouts.app_containerless')
 @section('title', $blog->metaInformation->meta_title ?? '')
 @section('description', $blog->metaInformation->meta_description ?? '')
-@section('image', Storage::disk('s3')->url('public/images/'.$blog->metaInformation->meta_image) ?? '')
+@section('image', Storage::disk('s3')->url('public/'.$blog->metaInformation->meta_image) ?? '')
 @section('keywords', 'Industry Blogs')
 @section('robots', 'index, nofollow')
 
@@ -13,7 +13,7 @@
 
             <div class="ic-press-left ">
                 <div class="feature_img center-align">
-                    <img src="{{Storage::disk('s3')->url('public/images/'.$blog->feature_image)}}" class="img-responsive" alt="Missing" itemprop="image" />
+                    <img src="{{Storage::disk('s3')->url('public/'.$blog->feature_image)}}" class="img-responsive" alt="Missing" itemprop="image" />
                 </div>
                 
                 <div class="ic-press-caption">
@@ -47,7 +47,7 @@
             @if(!empty($blog->author_name))
             <div class="col-sm-12 col-md-6" style="margin-bottom:30px">
                 <div class="mymedia">
-                    <img class="mymedia-thum" src="@if(!empty($blog->author_img)){{Storage::disk('s3')->url('public/images/'.$blog->author_img)}} @else {{ 'https://via.placeholder.com/100' }} @endif" class="mr-3" alt="{{ $blog->author_name }}">
+                    <img class="mymedia-thum" src="@if(!empty($blog->author_img)){{Storage::disk('s3')->url('public/'.$blog->author_img)}} @else {{ 'https://via.placeholder.com/100' }} @endif" class="mr-3" alt="{{ $blog->author_name }}">
                     <div class="mymedia-body">
                         <h5 class="mt-0" itemprop="author">by <strong>{{ $blog->author_name }}</strong></h5>
                         <p>{!! $blog->author_note !!}</p>

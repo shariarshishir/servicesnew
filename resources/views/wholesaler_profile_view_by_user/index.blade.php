@@ -251,7 +251,7 @@
                                             @foreach($business_profile->associationMemberships as $associationMembership)
                                             <div class="center-align association-membership-img">
                                                 <a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
-                                                <div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
+                                                <div class="imgbox"><img  src="{{ Storage::disk('s3')->url('public/'.$associationMembership->image) }}" alt=""></div>
                                                 <p>{{$associationMembership->title}}</p>
                                             </div>
                                             @endforeach
@@ -272,7 +272,7 @@
                                                 <div class="col s6 m4 l2 paper_img press-highlight-img">
                                                     <a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
                                                     <div class="press_img">
-                                                        <img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+                                                        <img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
                                                     </div>
                                                 </div>
                                             @endforeach

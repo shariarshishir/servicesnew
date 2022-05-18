@@ -5,7 +5,7 @@
 
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
-	<div class="banner_overlay"  @if($business_profile->business_profile_banner) style="background:url('{{asset('storage').'/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
+	<div class="banner_overlay"  @if($business_profile->business_profile_banner) style="background:url('{{Storage::disk('s3')->url('public/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		@if($business_profile->is_business_profile_verified == 1)
@@ -198,7 +198,7 @@
                                         <div class="certificate_img_wrap">
                                             @if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
                                             <div class="certificate_img">
-                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_file_down" >&nbsp;</a>
+                                                <a href="{{ Storage::disk('s3')->url('public/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_file_down" >&nbsp;</a>
                                             </div>
 											<div class="certificate_infoBox">
 												<span class="certificate_title">{{$certification->title}}</span>
@@ -207,7 +207,7 @@
                                             @elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
                                             <div class="certificate_img">
-                                                <a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_doc certification_file_down" >&nbsp;</a>
+                                                <a href="{{ Storage::disk('s3')->url('public/'.$certification->image) }}" data-id="{{$certification->id}}" class="certification_doc certification_file_down" >&nbsp;</a>
                                             </div>
 											<div class="certificate_infoBox">
 												<span class="certificate_title" >{{$certification->title}}</span>
@@ -215,7 +215,7 @@
 
                                             @else
                                             @php $certification_image_src=$certification->image ? $certification->image :  $certification->default_certification->logo ; @endphp
-                                            <div class="certificate_img"> <img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></div>
+                                            <div class="certificate_img"> <img  src="{{ Storage::disk('s3')->url('public/'.$certification_image_src) }}" alt=""></div>
                                             <div class="certificate_infoBox">
 												<span class="certificate_title" >{{$certification->title}}</span>
 											</div>
@@ -290,7 +290,7 @@
                                     @if(count($companyFactoryTour->companyFactoryTourImages)>0)
                                         @foreach($companyFactoryTour->companyFactoryTourImages as $image)
                                             <div class="col s6 m4">
-                                                <div class="imgBox" ><a href="javascript:void(0);"><img src="{{asset('storage/'.$image->factory_image)}}" alt="" /></a></div>
+                                                <div class="imgBox" ><a href="javascript:void(0);"><img src="{{Storage::disk('s3')->url('public/'.$image->factory_image)}}" alt="" /></a></div>
                                             </div>
                                         @endforeach
                                     @else
@@ -312,7 +312,7 @@
                                         <div class="col s6 m4 l3 main_buyer_box">
                                             <a href="javascript:void(0);"></a>
                                             <div class="main_buyer_img">
-                                                <img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+                                                <img  src="{{ Storage::disk('s3')->url('public/'.$mainBuyers->image) }}" alt="">
                                             </div>
                                             <h5>{{$mainBuyers->title}}</h5>
                                         </div>
@@ -504,7 +504,7 @@
 										<div class="certificate_img_wrap">
 											@if(pathinfo($certification->image, PATHINFO_EXTENSION) == 'pdf' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'PDF')
 												<div class="certificate_img">
-													<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_file_down tooltipped">&nbsp;</a>
+													<a href="{{ Storage::disk('s3')->url('public/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_file_down tooltipped">&nbsp;</a>
 												</div>
 												<div class="certificate_infoBox">
 													<span class="certificate_title" >{{$certification->title}}</span>
@@ -519,7 +519,7 @@
 											@elseif(pathinfo($certification->image, PATHINFO_EXTENSION) == 'doc' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'docx' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOCX' || pathinfo($certification->image, PATHINFO_EXTENSION) == 'DOC' )
 
 												<div class="certificate_img">
-													<a href="{{ asset('storage/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_doc tooltipped certification_file_down">&nbsp;</a>
+													<a href="{{ Storage::disk('s3')->url('public/'.$certification->image) }}" data-id="{{$certification->id}}" data-position="top" data-tooltip="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" class="certification_doc tooltipped certification_file_down">&nbsp;</a>
 												</div>
 												<div class="certificate_infoBox">
 													<span class="certificate_title" >{{$certification->title}}</span>
@@ -532,7 +532,7 @@
 												</div>
 											@else
 												@php $certification_image_src=$certification->image ?$certification->image :  $certification->default_certification->logo ; @endphp
-												<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ asset('storage/'.$certification_image_src) }}"><img  src="{{ asset('storage/'.$certification_image_src) }}" alt=""></a></div>
+												<div class="certificate_img"><a data-fancybox="certificate-gallery" data-caption="Issue Date: {!! date('d-m-Y', strtotime($certification->issue_date)) !!}<br />Expiry Date: {!! date('d-m-Y', strtotime($certification->expiry_date)) !!}" href="{{ Storage::disk('s3')->url('public/'.$certification_image_src) }}"><img  src="{{ Storage::disk('s3')->url('public/'.$certification_image_src) }}" alt=""></a></div>
 												<div class="certificate_infoBox">
 													<span class="certificate_title" >{{$certification->title}}</span>
 													@if($certification->issue_date)
@@ -569,7 +569,7 @@
                                         <div class="col s6 m4 l3 main_buyer_box">
                                             <a href="javascript:void(0)" style="display: none;"data-id="{{$mainBuyers->id}}" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>
                                             <div class="main_buyer_img">
-                                                <img  src="{{ asset('storage/'.$mainBuyers->image) }}" alt="">
+                                                <img  src="{{ Storage::disk('s3')->url('public/'.$mainBuyers->image) }}" alt="">
                                             </div>
                                             <h5>{{$mainBuyers->title}}</h5>
                                         </div>
@@ -1033,7 +1033,7 @@
                                     @foreach($business_profile->associationMemberships as $associationMembership)
                                     <div class="center-align association-membership-img">
                                         <a href="javascript:void(0)" style="display: none;"data-id="{{$associationMembership->id}}" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>
-                                        <div class="imgbox"><img  src="{{ asset('storage/'.$associationMembership->image) }}" alt=""></div>
+                                        <div class="imgbox"><img  src="{{ Storage::disk('s3')->url('public/'.$associationMembership->image) }}" alt=""></div>
                                         <p>{{$associationMembership->title}}</p>
                                     </div>
                                     @endforeach
@@ -1054,7 +1054,7 @@
                                         <div class="col s6 m4 l2 paper_img press-highlight-img">
                                             <a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
                                             <div class="press_img">
-                                                <img src="{{ asset('storage/'.$pressHighlight->image) }}" alt="" />
+                                                <img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
                                             </div>
                                         </div>
                                     @endforeach
@@ -1102,7 +1102,7 @@
 										@if(count($companyFactoryTour->companyFactoryTourImages)>0)
 											@foreach($companyFactoryTour->companyFactoryTourImages as $image)
 												<div class="col s6 m4 l4">
-													<div class="imgBox"><img src="{{asset('storage/'.$image->factory_image)}}" alt=""></div>
+													<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/'.$image->factory_image)}}" alt=""></div>
 												</div>
 											@endforeach
 										@else
@@ -1120,7 +1120,7 @@
 										@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
 										@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
 											<div class="col s12 m6 l6">
-												<div class="imgBox"><img src="{{asset('storage/'.$image->factory_large_image)}}" alt=""></div>
+												<div class="imgBox"><img src="{{Storage::disk('s3')->url('public/'.$image->factory_large_image)}}" alt=""></div>
 											</div>
 										@endforeach
 										@else

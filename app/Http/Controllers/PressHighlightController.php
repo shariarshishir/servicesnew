@@ -31,15 +31,18 @@ class PressHighlightController extends Controller
                 if(count($request->title)>0){
                     for($i=0; $i<count($request->title) ;$i++){
                         $pressHighlight=new PressHighlight();
-                        if ($request->hasFile('image'))
-                        {
-                            $filename = $request->image[$i]->store('images/press-highlight','public');
-                            $image_resize = Image::make(public_path('storage/'.$filename));
-                            $image_resize->save(public_path('storage/'.$filename));
+                        if ($request->hasFile('image')){
+                            $s3 = \Storage::disk('s3');
+                            $uniqueString = generateUniqueString();
+                            $image_unique_file_name = uniqid().$uniqueString.'.'.$request->image[$i]->getClientOriginalExtension();
+                            $image_path_saved_in_db = 'images/press-highlight/'.$image_unique_file_name;
+                            $s3filePath = '/public/images/press-highlight/'.$image_unique_file_name;
+                            $s3->put($s3filePath, file_get_contents($request->image[$i]));
+                            
                         }
-                      
+                        
                         $pressHighlight->title=$request->title[$i];
-                        $pressHighlight->image=$filename;
+                        $pressHighlight->image=$image_path_saved_in_db;
                         $pressHighlight->short_description=$request->short_description[$i];
                         $pressHighlight->business_profile_id = $request->business_profile_id;
                         $pressHighlight->created_by = Auth::user()->id;

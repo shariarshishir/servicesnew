@@ -31,15 +31,17 @@ class AssociationMembershipController extends Controller
                 if(count($request->title)>0){
                     for($i=0; $i<count($request->title) ;$i++){
                         $associationMembership=new AssociationMembership();
-                        if ($request->hasFile('image'))
-                        {
-                            $filename = $request->image[$i]->store('images/association-memberships','public');
-                            $image_resize = Image::make(public_path('storage/'.$filename));
-                            $image_resize->save(public_path('storage/'.$filename));
+                        if ($request->hasFile('image')){
+                            $s3 = \Storage::disk('s3');
+                            $uniqueString = generateUniqueString();
+                            $image_unique_file_name = uniqid().$uniqueString.'.'.$request->image[$i]->getClientOriginalExtension();
+                            $image_path_saved_in_db = 'images/association-memberships/'.$image_unique_file_name;
+                            $s3filePath = '/public/images/association-memberships/'.$image_unique_file_name;
+                            $s3->put($s3filePath, file_get_contents($request->image[$i]));
                         }
                       
                         $associationMembership->title=$request->title[$i];
-                        $associationMembership->image=$filename;
+                        $associationMembership->image=$image_path_saved_in_db;
                         $associationMembership->short_description=$request->short_description[$i];
                         $associationMembership->business_profile_id = $request->business_profile_id;
                         $associationMembership->created_by = Auth::user()->id;

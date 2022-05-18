@@ -911,7 +911,7 @@
 
             for(let i = 0;i <certifications.length ;i++){
                 var html='';
-                var image="{{asset('storage/')}}"+'/'+certifications[i].image;
+                var image="{{Storage::disk('s3')->url('public')}}"+'/'+certifications[i].image;
                 // var strArray = image.slice(-3);
                 var strArray = image.split(".");
                 var file_extension = strArray[strArray.length - 1];
@@ -942,7 +942,7 @@
                 }
                 else {
                     var certification_image_src= certifications[i].image ? certifications[i].image : certifications[i].default_certification.logo;
-                    var image_src_with_storage="{{asset('storage')}}"+'/'+certification_image_src;
+                    var image_src_with_storage="{{Storage::disk('s3')->url('public')}}"+'/'+certification_image_src;
                     html +='<div class="certificate_img_wrap">';
                     html +='<a href="javascript:void(0)"  style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                     html +='<div class="certificate_img">';
@@ -1024,7 +1024,7 @@
                                     $('.certifications-block').html(nohtml);
                                     for(let i = 0;i <certifications.length ;i++){
                                         var html='';
-                                        var image="{{asset('storage/')}}"+'/'+certifications[i].image;
+                                        var image="{{Storage::disk('s3')->url('public')}}"+'/'+certifications[i].image;
                                         var strArray = image.split(".");
                                         var file_extension = strArray[strArray.length - 1];
 
@@ -1054,7 +1054,7 @@
                                         }
                                         else {
                                             var certification_image_src= certifications[i].image ? certifications[i].image : certifications[i].default_certification.logo;
-                                            var image_src_with_storage="{{asset('storage')}}"+'/'+certification_image_src;
+                                            var image_src_with_storage="{{Storage::disk('s3')->url('public')}}"+'/'+certification_image_src;
                                             html +='<div class="certificate_img_wrap">';
                                             html +='<a href="javascript:void(0)" style="display: none;" data-id="'+certifications[i].id+'" class="remove-certificate"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                             html +='<div class="certificate_img">';
@@ -1143,7 +1143,7 @@
 
             for(let i = 0;i < mainBuyers.length ;i++){
                 var html='';
-                var image="{{asset('storage/')}}"+'/'+mainBuyers[i].image;
+                var image="{{Storage::disk('s3')->url('public')}}"+'/'+mainBuyers[i].image;
                 html +='<div class="col m3 l3 main_buyer_box">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+mainBuyers[i].id+'" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<div class="main_buyer_img">';
@@ -1237,7 +1237,7 @@
                                     $('.main-buyers-block').html(nohtml);
                                     for(let i = 0;i < mainBuyers.length ;i++){
                                         var html='';
-                                        var image="{{asset('storage/')}}"+'/'+mainBuyers[i].image;
+                                        var image="{{Storage::disk('s3')->url('public')}}"+'/'+mainBuyers[i].image;
                                         html +='<div class="col m3 l3 main_buyer_box">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+mainBuyers[i].id+'" class="remove-main-buyer"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<div class="main_buyer_img">';
@@ -1330,7 +1330,7 @@
 
             for(let i = 0;i < associationMemberships.length ;i++){
                 var html='';
-                var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
+                var image="{{Storage::disk('s3')->url('public')}}"+'/'+associationMemberships[i].image;
                 html +='<div class="center-align association-membership-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<div class="imgbox">';
@@ -1420,7 +1420,7 @@
                                     $('.association-membership-block').html(nohtml);
                                     for(let i = 0;i < associationMemberships.length ;i++){
                                         var html='';
-                                        var image="{{asset('storage/')}}"+'/'+associationMemberships[i].image;
+                                        var image="{{Storage::disk('s3')->url('public')}}"+'/'+associationMemberships[i].image;
                                         html +='<div class="center-align association-membership-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+ associationMemberships[i].id+'" class="remove-association-membership"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<div class="imgbox">';
@@ -1508,7 +1508,7 @@
 
             for(let i = 0;i < pressHighlights.length ;i++){
                 var html='';
-                var image="{{asset('storage/')}}"+'/'+pressHighlights[i].image;
+                var image="{{Storage::disk('s3')->url('public')}}"+'/'+pressHighlights[i].image;
                 html +='<div class="col s6 m4 l2 paper_img press-highlight-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+pressHighlights[i].id+'" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<div class="press_img">';
@@ -1596,7 +1596,7 @@
                                     $('.press-highlight-block').html(nohtml);
                                     for(let i = 0;i < pressHighlights.length ;i++){
                                         var html='';
-                                        var image="{{asset('storage/')}}"+'/'+pressHighlights[i].image;
+                                        var image="{{Storage::disk('s3')->url('public')}}"+'/'+pressHighlights[i].image;
                                         html +='<div class="col s6 m4 l2 paper_img press-highlight-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+pressHighlights[i].id+'" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<div class="press_img">';

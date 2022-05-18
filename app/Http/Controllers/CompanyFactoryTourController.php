@@ -39,10 +39,13 @@ class CompanyFactoryTourController extends Controller
                     foreach($request->factory_images as $image){
                         $companyFactoryTourImage = new CompanyFactoryTourImage();
                         $companyFactoryTourImage->company_factory_tour_id = $companyFactoryTour->id;
-                        $filename = $image->store('images/factory','public');
-                        $image = Image::make(public_path('storage/'.$filename));
-                        $image->save(public_path('storage/'.$filename));
-                        $companyFactoryTourImage->factory_image = $filename;
+                        $s3 = \Storage::disk('s3');
+                        $uniqueString = generateUniqueString();
+                        $image_unique_file_name = uniqid().$uniqueString.'.'.$image->getClientOriginalExtension();
+                        $image_path_saved_in_db = 'images/factory/'.$image_unique_file_name;
+                        $s3filePath = '/public/images/factory/'.$image_unique_file_name;
+                        $s3->put($s3filePath, file_get_contents($image));
+                        $companyFactoryTourImage->factory_image = $image_path_saved_in_db;
                         $companyFactoryTourImage->save();
                     }
                 } 
@@ -51,10 +54,13 @@ class CompanyFactoryTourController extends Controller
                     foreach($request->factory_large_images as $image){
                         $companyFactoryTourLargeImage = new CompanyFactoryTourLargeImage();
                         $companyFactoryTourLargeImage->company_factory_tour_id = $companyFactoryTour->id;
-                        $filename = $image->store('images/factory','public');
-                        $image = Image::make(public_path('storage/'.$filename));
-                        $image->save(public_path('storage/'.$filename));
-                        $companyFactoryTourLargeImage->factory_large_image = $filename;
+                        $s3 = \Storage::disk('s3');
+                        $uniqueString = generateUniqueString();
+                        $image_unique_file_name = uniqid().$uniqueString.'.'.$image->getClientOriginalExtension();
+                        $image_path_saved_in_db = 'images/factory/'.$image_unique_file_name;
+                        $s3filePath = '/public/images/factory/'.$image_unique_file_name;
+                        $s3->put($s3filePath, file_get_contents($image));
+                        $companyFactoryTourLargeImage->factory_large_image = $image_path_saved_in_db;
                         $companyFactoryTourLargeImage->save();
                     }
                 } 
@@ -108,10 +114,13 @@ class CompanyFactoryTourController extends Controller
                     foreach($request->factory_images as $image){
                         $companyFactoryTourImage = new CompanyFactoryTourImage();
                         $companyFactoryTourImage->company_factory_tour_id = $companyFactoryTour->id;
-                        $filename = $image->store('images/factory','public');
-                        $image = Image::make(public_path('storage/'.$filename));
-                        $image->save(public_path('storage/'.$filename));
-                        $companyFactoryTourImage->factory_image = $filename;
+                        $s3 = \Storage::disk('s3');
+                        $uniqueString = generateUniqueString();
+                        $image_unique_file_name = uniqid().$uniqueString.'.'.$image->getClientOriginalExtension();
+                        $image_path_saved_in_db = 'images/factory/'.$image_unique_file_name;
+                        $s3filePath = '/public/images/factory/'.$image_unique_file_name;
+                        $s3->put($s3filePath, file_get_contents($image));
+                        $companyFactoryTourImage->factory_image = $image_path_saved_in_db;
                         $companyFactoryTourImage->save();
                     }
                 }
@@ -126,10 +135,13 @@ class CompanyFactoryTourController extends Controller
                     foreach($request->factory_large_images as $image){
                         $companyFactoryTourLargeImage = new CompanyFactoryTourLargeImage();
                         $companyFactoryTourLargeImage->company_factory_tour_id = $companyFactoryTour->id;
-                        $filename = $image->store('images/factory','public');
-                        $image = Image::make(public_path('storage/'.$filename));
-                        $image->save(public_path('storage/'.$filename));
-                        $companyFactoryTourLargeImage->factory_large_image = $filename;
+                        $s3 = \Storage::disk('s3');
+                        $uniqueString = generateUniqueString();
+                        $image_unique_file_name = uniqid().$uniqueString.'.'.$image->getClientOriginalExtension();
+                        $image_path_saved_in_db = 'images/factory/'.$image_unique_file_name;
+                        $s3filePath = '/public/images/factory/'.$image_unique_file_name;
+                        $s3->put($s3filePath, file_get_contents($image));
+                        $companyFactoryTourLargeImage->factory_large_image = $image_path_saved_in_db;
                         $companyFactoryTourLargeImage->save();
                     }
                 } 

@@ -33,13 +33,16 @@ class MainBuyerController extends Controller
                         $mainBuyer=new MainBuyer();
                         if ($request->hasFile('image'))
                         {
-                            $filename = $request->image[$i]->store('images/mainbuyers','public');
-                            $image_resize = Image::make(public_path('storage/'.$filename));
-                            $image_resize->save(public_path('storage/'.$filename));
+                            $s3 = \Storage::disk('s3');
+                            $uniqueString = generateUniqueString();
+                            $image_unique_file_name = uniqid().$uniqueString.'.'.$request->image[$i]->getClientOriginalExtension();
+                            $image_path_saved_in_db = 'images/mainbuyers/'.$image_unique_file_name;
+                            $s3filePath = '/public/images/mainbuyers/'.$image_unique_file_name;
+                            $s3->put($s3filePath, file_get_contents($request->image[$i]));
                         }
                       
                         $mainBuyer->title=$request->title[$i];
-                        $mainBuyer->image=$filename;
+                        $mainBuyer->image=$image_path_saved_in_db;
                         $mainBuyer->short_description=$request->short_description[$i];
                         $mainBuyer->business_profile_id = $request->business_profile_id;
                         $mainBuyer->created_by = Auth::user()->id;

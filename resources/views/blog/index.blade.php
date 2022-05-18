@@ -10,7 +10,7 @@
                     @foreach($blogs as $blog)
                         <div class="ic-press-left col s12 m6 l4">
                             <div class="blog_content_box">
-                                <div class="blog_imgbox"><a href="{{route('blogs.details',$blog->slug)}}" style="display:block"><img src="{{Storage::disk('s3')->url('public/images/'.$blog->feature_image)}}" class="img-responsive" alt=""></a></div>
+                                <div class="blog_imgbox"><a href="{{route('blogs.details',$blog->slug)}}" style="display:block"><img src="{{Storage::disk('s3')->url('public/'.$blog->feature_image)}}" class="img-responsive" alt=""></a></div>
                                 
                                 <!-- <div class="ic-press-caption blog_inner_box"> -->
                                     <!-- <div class="rating_wrap">

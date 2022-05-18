@@ -14,7 +14,7 @@
         <div class="col m3 profile-image-block">
             <div class="profile_image" itemscope itemtype="https://schema.org/Person">
                 @if($user->image)
-                <img itemprop="image" src="{{ asset('storage/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
+                <img itemprop="image" src="{{ Storage::disk('s3')->url('public/'.$user->image) }}" id="profile_image" alt="avatar" width="300px">
                 @else
                 <img itemprop="image" src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" alt="avatar" width="300px">
                 @endif

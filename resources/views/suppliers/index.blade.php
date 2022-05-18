@@ -142,7 +142,7 @@
                                         <img itemprop="logo" src="{{ Storage::disk('s3')->url('public/'.$supplier->business_profile_logo) }}" alt="avatar" >
                                         @else
                                         @php
-                                            $img=$supplier->user->image ?'storage/'.$supplier->user->image : 'images/frontendimages/no-image.png';
+                                            $img=$supplier->user->image ?Storage::disk('s3')->url('public/'.$supplier->user->image) : 'images/frontendimages/no-image.png';
                                         @endphp
                                         <img itemprop="image" src="{{asset($img)}}" alt="avatar" >
                                         @endif

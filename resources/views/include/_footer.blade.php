@@ -913,7 +913,8 @@ $(document).on("keyup",".search_input",function(){
                                     if(key==0){
                                         var url = window.location.origin;
                                         // var image=url+'/storage/'+item.image;
-                                        var image="{{asset('storage/')}}"+'/'+item.image;
+                                        
+                                        var image="{{Storage::disk('s3')->url('public/')}}"+item.image;
                                         html += '<div class="product-img"><img src="'+image+'"></div>';
                                     }
                                 })
@@ -932,7 +933,7 @@ $(document).on("keyup",".search_input",function(){
                                     if(key==0){
                                         var url  = window.location.origin;
                                         // var image=url+'/storage/'+item.image;
-                                        var image = "{{asset('storage/')}}"+'/'+item.product_image;
+                                        var image="{{Storage::disk('s3')->url('public/')}}"+item.product_image;
                                         html += '<div class="product-img"><img src="'+image+'"></div>';
                                     }
                                 })
@@ -947,7 +948,7 @@ $(document).on("keyup",".search_input",function(){
                             {
                                 html += '<div class="product-item">';
                                 html += '<a href="'+url+'/press-room/details/'+response.data[i].slug+'" class="overlay_hover">&nbsp;</a>';
-                                var image = "{{asset('storage/')}}"+'/'+response.data[i].feature_image;
+                                var image="{{Storage::disk('s3')->url('public/')}}"+response.data[i].feature_image;
                                 html += '<div class="product-img"><img src="'+image+'"></div>';
                                 html += '<div class="product-short-intro">';
                                 html += '<h4>'+response.data[i].title+'</h4>';
@@ -965,7 +966,7 @@ $(document).on("keyup",".search_input",function(){
                                 html += '<a href="'+profile_url+'" class="overlay_hover">&nbsp;</a>';
                                 if(response.data[i].user.image)
                                 {
-                                image = "{{asset('storage/')}}"+'/'+response.data[i].user.image;
+                                image="{{Storage::disk('s3')->url('public/')}}"+response.data[i].user.image;
                                 }
                                 else
                                 {
@@ -999,7 +1000,7 @@ $(document).on("keyup",".search_input",function(){
                                     if(key==0){
                                         var url  = window.location.origin;
                                         // var image=url+'/storage/'+item.image;
-                                        var image="{{asset('storage/')}}"+'/'+item.image;
+                                        var image="{{Storage::disk('s3')->url('public/')}}"+item.image;
                                         html+='<div class="product-img"><img src="'+image+'"></div>';
                                     }
                                 })
@@ -1018,7 +1019,7 @@ $(document).on("keyup",".search_input",function(){
                                     if(key==0){
                                         var url  = window.location.origin;
                                         // var image=url+'/storage/'+item.image;
-                                        var image="{{asset('storage/')}}"+'/'+item.product_image;
+                                        var image="{{Storage::disk('s3')->url('public/')}}"+item.product_image;
                                         html+='<div class="product-img"><img src="'+image+'"></div>';
                                     }
                                 })

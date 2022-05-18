@@ -25,11 +25,11 @@
                                     <input type="text" class="form-control- ig-new-rgt" name="title" required/>
                                 </div>
                                 <div class="col s12 m6">
-                                    <label class="category_title">Select Product Category <span >*</span></label>
+                                    <label class="category_title">Select Product Tags <span >*</span></label>
                                     <select class="select2" id="category_id" name="category[]" multiple required >
                                         <option>Select an option</option>
-                                        @foreach($manufacture_product_categories as $product_category)
-                                            <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
+                                        @foreach($product_tags as $product_tag)
+                                            <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -277,10 +277,10 @@
                                         <div class="captchaContent" style="margin-bottom: 15px;">
                                             <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
                                             <div class="messageContent" style="color: red; text-align: left;"></div>
-                                        </div> 
+                                        </div>
                                     </div>
                                     <div class="col s12 m2 l3">&nbsp;</div>
-                                </div>                               
+                                </div>
 
                                 <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
                                     <button type="submit" id="page_button" style="display: none;"></button>
@@ -540,105 +540,105 @@
         });
 
 
-        $('.createRfqForm').on('submit',function(e){
-            e.preventDefault();
+        // $('.createRfqForm').on('submit',function(e){
+        //     e.preventDefault();
 
 
-            var formData = new FormData(this);
-            formData.append('_token', "{{ csrf_token() }}");
+        //     var formData = new FormData(this);
+        //     formData.append('_token', "{{ csrf_token() }}");
 
-            const rfq_login_check_url = "{{route('rfq.store.with.login')}}";
-            $.ajax({
-                method: 'post',
-                processData: false,
-                contentType: false,
-                cache: false,
-                data: formData,
-                url: rfq_login_check_url,
-                beforeSend: function() {
-                    $('.loading-message').html("Please Wait.");
-                    $('#loadingProgressContainer').show();
-                },
+        //     const rfq_login_check_url = "{{route('rfq.store.with.login')}}";
+        //     $.ajax({
+        //         method: 'post',
+        //         processData: false,
+        //         contentType: false,
+        //         cache: false,
+        //         data: formData,
+        //         url: rfq_login_check_url,
+        //         beforeSend: function() {
+        //             $('.loading-message').html("Please Wait.");
+        //             $('#loadingProgressContainer').show();
+        //         },
 
-                success:function(response){
+        //         success:function(response){
 
-                    console.log(response);
-                    const rfq_app_url = "{{env('RFQ_APP_URL')}}";
-                    var url = rfq_app_url+'/api/quotation';
-                    const sso_token = "Bearer " +response.access_token;
-                    var formData = new FormData();
-                    var file_data = $('input[type="file"]')[0].files; // for multiple files
-                    var files = [];
-                    for (let i = 0; i < $('input[type="file"]').length; i++) {
-                        formData.append("files", $('input[type="file"]')[i].files[0]);
-                    }
-                    formData.append("rfq_from", 'service');
-
-
-                    var other_data = $('.createRfqForm').serializeArray();
-                    var category_id=[];
-                    $("#category_id :selected").each(function() {
-                        category_id.push(this.value);
-                    });
-                    var stringCatId=category_id.toString();
-
-                    $.each(other_data,function(key,input){
-                        if(input.name != 'category[]'){
-                            formData.append(input.name,input.value);
-                        }
-                    });
-
-                    formData.append('category_id', stringCatId);
-                    formData.append('_token', "{{ csrf_token() }}");
-
-                    $.ajax({
-                        method: 'post',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        data: formData,
-                        enctype: 'multipart/form-data',
-                        url: url,
-                        headers: { 'Authorization': sso_token },
-
-                        success:function(response){
-                            $('.loading-message').html("");
-                            $('#loadingProgressContainer').hide();
-                            const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
-                            swal("Done!", msg,"success");
-                            window.location.href = "{{ route('rfq.my')}}";
-                        },
-                        error: function(xhr, status, error)
-                            {
-                            $('.loading-message').html("");
-                            $('#loadingProgressContainer').hide();
-                            swal("Error!", error,"error");
-                            }
-                    });
-
-                },
-                error: function(xhr, status, error)
-                    {
-
-                        $('.loading-message').html("");
-                        $('#loadingProgressContainer').hide();
-                        $("#errors").empty();
-                        if(xhr.status == 400){
-                            $.each(xhr.responseJSON.error, function (key, item)
-                            {   $("html, body").animate({
-                                    scrollTop: 0
-                                }, 500);
-                                $("#errors").append("<li class='red darken-1'>"+item+"</li>")
-                            });
-                        }else{
-                            swal("Error!", xhr.responseJSON.error,"error");
-                        }
+        //             console.log(response);
+        //             const rfq_app_url = "{{env('RFQ_APP_URL')}}";
+        //             var url = rfq_app_url+'/api/quotation';
+        //             const sso_token = "Bearer " +response.access_token;
+        //             var formData = new FormData();
+        //             var file_data = $('input[type="file"]')[0].files; // for multiple files
+        //             var files = [];
+        //             for (let i = 0; i < $('input[type="file"]').length; i++) {
+        //                 formData.append("files", $('input[type="file"]')[i].files[0]);
+        //             }
+        //             formData.append("rfq_from", 'service');
 
 
-                    }
-            });
+        //             var other_data = $('.createRfqForm').serializeArray();
+        //             var category_id=[];
+        //             $("#category_id :selected").each(function() {
+        //                 category_id.push(this.value);
+        //             });
+        //             var stringCatId=category_id.toString();
 
-        });
+        //             $.each(other_data,function(key,input){
+        //                 if(input.name != 'category[]'){
+        //                     formData.append(input.name,input.value);
+        //                 }
+        //             });
+
+        //             formData.append('category_id', stringCatId);
+        //             formData.append('_token', "{{ csrf_token() }}");
+
+        //             $.ajax({
+        //                 method: 'post',
+        //                 processData: false,
+        //                 contentType: false,
+        //                 cache: false,
+        //                 data: formData,
+        //                 enctype: 'multipart/form-data',
+        //                 url: url,
+        //                 headers: { 'Authorization': sso_token },
+
+        //                 success:function(response){
+        //                     $('.loading-message').html("");
+        //                     $('#loadingProgressContainer').hide();
+        //                     const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+        //                     swal("Done!", msg,"success");
+        //                     window.location.href = "{{ route('rfq.my')}}";
+        //                 },
+        //                 error: function(xhr, status, error)
+        //                     {
+        //                     $('.loading-message').html("");
+        //                     $('#loadingProgressContainer').hide();
+        //                     swal("Error!", error,"error");
+        //                     }
+        //             });
+
+        //         },
+        //         error: function(xhr, status, error)
+        //             {
+
+        //                 $('.loading-message').html("");
+        //                 $('#loadingProgressContainer').hide();
+        //                 $("#errors").empty();
+        //                 if(xhr.status == 400){
+        //                     $.each(xhr.responseJSON.error, function (key, item)
+        //                     {   $("html, body").animate({
+        //                             scrollTop: 0
+        //                         }, 500);
+        //                         $("#errors").append("<li class='red darken-1'>"+item+"</li>")
+        //                     });
+        //                 }else{
+        //                     swal("Error!", xhr.responseJSON.error,"error");
+        //                 }
+
+
+        //             }
+        //     });
+
+        // });
 
 </script>
 @endpush

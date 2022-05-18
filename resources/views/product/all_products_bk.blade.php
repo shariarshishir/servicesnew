@@ -47,7 +47,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
                         </div>
                         <div class="product_design_wrapper">
                             <div class="product_wrapper">
@@ -109,11 +109,11 @@
                                     <h4>Factory Category</h4>
                                     <select class="select2" name="factory_category" id="factory_category">
                                         <option value="">Select</option>
-                                        @foreach($manufacture_product_categories as $category)
+                                        {{-- @foreach($manufacture_product_categories as $category)
                                         <option value="{{$category->id}}" {{$category->id == $factory_category ? 'selected' : ''}}>
                                             {{$category['name']}}
                                         </option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
 

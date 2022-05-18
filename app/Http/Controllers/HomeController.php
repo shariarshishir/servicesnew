@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderModificationRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
+use DB;
+use Helper;
+use App\Models\Blog;
 use App\Models\User;
 use App\Models\Vendor;
-use App\Models\Blog;
-use App\Models\BusinessProfile;
-use App\Models\Manufacture\Product as ManufactureProduct;
-use App\Models\CompanyFactoryTour;
-use App\Models\ProductCategory;
-use App\Models\ProductImage;
-use App\Models\ProductReview;
-use App\Models\BusinessProfileVerification;
+use App\Models\Product;
 use App\Models\Category;
-use Helper;
-use DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Pagination\Paginator;
-use App\Models\Manufacture\ProductCategory as ManufatureProductCategeory;
+use App\Models\ProductImage;
+use Illuminate\Http\Request;
+use App\Models\ProductReview;
+use App\Models\BusinessProfile;
+use App\Models\ProductCategory;
+use App\Models\ProductWishlist;
+use App\Models\CompanyFactoryTour;
 use App\Models\ProductTypeMapping;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+use App\Models\OrderModificationRequest;
+use App\Models\BusinessProfileVerification;
+use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\Manufacture\ProductCategory as ManufatureProductCategeory;
 
 class HomeController extends Controller
 {
@@ -480,23 +481,38 @@ class HomeController extends Controller
         $colors_sizes = json_decode($product->colors_sizes);
         $attr = json_decode($product->attribute);
         //recommandiation products
-        $recommandProducts=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->where('state',1)
-        ->where('id','!=',$product->id)
-        ->whereHas('category', function($q) use ($product){
-             $q->where('id',$product->product_category_id);
+        // $recommandProducts=Product::with(['images','businessProfile'])->where('business_profile_id', '!=', null)->where('state',1)
+        // ->where('id','!=',$product->id)
+        // ->whereHas('category', function($q) use ($product){
+        //      $q->where('id',$product->product_category_id);
 
-        })
-        ->orWhere(function($query) use ($product){
-            $query->where('product_type',$product->product_type)
-                  ->where('id', '!=', $product->id)
-                  ->where('business_profile_id', '!=', null);
-        })
-        ->whereHas('businessProfile', function($b){
-            $b->where('deleted_at' , null);
-        })
-        ->get();
+        // })
+        // ->orWhere(function($query) use ($product){
+        //     $query->where('product_type',$product->product_type)
+        //           ->where('id', '!=', $product->id)
+        //           ->where('business_profile_id', '!=', null);
+        // })
+        // ->whereHas('businessProfile', function($b){
+        //     $b->where('deleted_at' , null);
+        // })
+        // ->get();
+        $recommandProducts=Product::where('state',1)
+            ->where('id','!=',$product->id)
+            ->where('product_type', $product->product_type)
+            ->with(['images','businessProfile'])
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+         if(Auth()->check()){
+             $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+             $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+         }
+         else{
+             $wishListShopProductsIds=[];
+             $wishListMfProductsIds=[];
+         }
 
-        return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
+         return view('product.details',compact('product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts','wishListShopProductsIds','wishListMfProductsIds'));
     }
 
     public function sorting($value, $slug=null, $cat_id=null)
@@ -645,7 +661,6 @@ class HomeController extends Controller
     }
 
     public function searchByProductOrVendor(Request $request){
-
         $searchInputValue=$request->search_input;
         if(!empty($request->search_input)) {
 
@@ -663,7 +678,15 @@ class HomeController extends Controller
                     $page,
                     ['path' => Paginator::resolveCurrentPath()],
                 );
-                return view('product.low_moq',compact('low_moq_lists'));
+                if(Auth()->check()){
+                    $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+                    $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+                }
+                else{
+                    $wishListShopProductsIds=[];
+                    $wishListMfProductsIds=[];
+                }
+                return view('product.low_moq',compact('low_moq_lists','searchInputValue','wishListShopProductsIds','wishListMfProductsIds'));
             }
 
             elseif($request->search_type=="vendor")
@@ -691,7 +714,7 @@ class HomeController extends Controller
                 $allItems = $allItems->merge($blogs);
                 $allItems = $allItems->merge($suppliers);
                 $resultCount = count($allItems);
-                return view('system_search',compact('allItems'));
+                return view('system_search',compact('allItems','searchInputValue'));
             }
             else
             {
@@ -891,7 +914,7 @@ class HomeController extends Controller
         //     }
 
         // }
-        if($business_profile->business_type == 1 )
+        if($business_profile->business_type == 'manufacturer' )
         {
 
             $business_profile=BusinessProfile::with(['companyOverview','manufactureProducts.product_images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations.country','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
@@ -927,7 +950,7 @@ class HomeController extends Controller
             return view('manufacture_profile_view_by_user.index',compact('business_profile','mainProducts','companyFactoryTour','userObj','flag'));
         }
         //wholesaler
-        if($business_profile->business_type == 2 )
+        if($business_profile->business_type == 'wholesaler' )
         {
             $business_profile=BusinessProfile::with(['companyOverview','wholesalerProducts.images','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security'])->where('alias',$alias)->firstOrFail();
             $userObj = User::where('id',$business_profile->user_id)->get();
@@ -1056,18 +1079,25 @@ class HomeController extends Controller
             $page,
             ['path' => Paginator::resolveCurrentPath()],
         );
-        $product_category= ProductCategory::all();
-        return view('product.low_moq',compact('low_moq_lists','product_category'));
+        if(Auth()->check()){
+            $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+            $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+        }
+        else{
+            $wishListShopProductsIds=[];
+            $wishListMfProductsIds=[];
+        }
+        return view('product.low_moq',compact('low_moq_lists','wishListShopProductsIds','wishListMfProductsIds'));
     }
     //low moq details
     public function mixProductDetails($flag, $id)
     {
         if($flag == 'mb'){
-            $product = ManufactureProduct::with('category','product_images','businessProfile','product_video')->findOrFail($id);
+            $product = ManufactureProduct::with('product_images','businessProfile','product_video')->findOrFail($id);
             return view('product.manufactrue_product_details',compact('product'));
         }
         else if($flag == 'shop'){
-            $category = ProductCategory::get();
+
             $product = Product::with('businessProfile')->where('id',$id)->first();
 
             $orderModificationRequest=OrderModificationRequest::where(['product_id' => $product->id, 'type' => 2, 'user_id' =>auth()->id() ])->get();
@@ -1100,19 +1130,49 @@ class HomeController extends Controller
             $colors_sizes = json_decode($product->colors_sizes);
             $attr = json_decode($product->attribute);
             //recommandiation products
-            $recommandProducts=Product::with('businessProfile')->where('state',1)
-            ->where('id','!=',$product->id)
-            ->whereHas('category', function($q) use ($product){
-                 $q->where('id',$product->product_category_id);
+            //$product_tag=$product->product_tag ?? [];
+            // $recommandProducts=Product::where('state',1)
+            // ->where('id','!=',$product->id)
+            // ->whereIn('product_tag', $product_tag)
 
-            })
-            ->orWhere(function($query) use ($product){
-                $query->where('product_type',$product->product_type)
-                      ->where('id', '!=', $product->id);
-            })
-            ->with(['images'])
+            // ->whereHas('category', function($q) use ($product){
+            //      $q->where('id',$product->product_category_id);
+
+            // })
+            // ->orWhere(function($query) use ($product){
+            //     $query->where('product_type',$product->product_type)
+            //           ->where('id', '!=', $product->id);
+            // })
+            // ->with(['images','businessProfile'])
+            // ->limit(10)
+            // ->get();
+        //    $recommandProducts= Product::where('state',1)
+        //    ->where('id','!=',$product->id)
+        //    ->cursor()->filter(function($item) use ($product_tag){
+        //         if(isset($item->product_tag) && array_intersect($item->product_tag, $product_tag)){
+        //             return true;
+        //         }
+        //         return false;
+
+        //     });
+        $recommandProducts=Product::where('state',1)
+            ->where('id','!=',$product->id)
+            ->where('product_type', $product->product_type)
+            ->with(['images','businessProfile'])
+            ->inRandomOrder()
+            ->limit(5)
             ->get();
-            return view('product.details',compact('category','product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts'));
+
+            if(Auth()->check()){
+                $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+                $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+            }
+            else{
+                $wishListShopProductsIds=[];
+                $wishListMfProductsIds=[];
+            }
+
+            return view('product.details',compact('product','colors_sizes','attr','productReviewExistsOrNot','averageRating','orderModificationRequest','recommandProducts','wishListShopProductsIds','wishListMfProductsIds'));
         }
     }
     //shortest lead time
@@ -1320,8 +1380,15 @@ class HomeController extends Controller
             ['path' => Paginator::resolveCurrentPath()],
         );
 
-        $product_category= ProductCategory::all();
-        return view('product.all_products',compact('products', 'product_category'));
+        if(Auth()->check()){
+            $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
+            $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
+        }
+        else{
+            $wishListShopProductsIds=[];
+            $wishListMfProductsIds=[];
+        }
+        return view('product.all_products',compact('products','wishListShopProductsIds','wishListMfProductsIds'));
 
     }
 

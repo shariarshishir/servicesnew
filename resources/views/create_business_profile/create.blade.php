@@ -51,6 +51,17 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <div class="col s12 m4">
+                                            <label for="profile_type">Profile Act Like</label>
+                                        </div>
+                                        <div class="col s12 m8">
+                                            <select id="profile_type" class="select2 browser-default" name="profile_type">
+                                                    <option value="buyer"  {{auth()->user()->is_supplier == false ? 'selected' : ''}}>Buyer</option>
+                                                    <option value="supplier"  {{auth()->user()->is_supplier == true ? 'selected' : ''}}>Supplier</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <div class="col s12 m4">
                                             <label for="business_name">Organization Name</label>
                                         </div>
                                         <div class="col s12 m8">
@@ -70,11 +81,11 @@
                                             <label for="business_type">Business Type</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <select id="business_type" class="select2 browser-default select-business-type" name="business_type">
+                                            <select id="business_type" class="select2 browser-default select-business-type" name="business_type" onchange="changecategory(this,'business');">
                                                 <option value="" disabled selected>Choose your business type</option>
-                                                <option value="1" {{old('business_type') == 1 ? 'selected' : ''}}>Manufacturer</option>
-                                                <option value="2" {{old('business_type') == 2 ? 'selected' : ''}}>Wholesaler</option>
-                                                <option value="3" {{old('business_type') == 3 ? 'selected' : ''}}>Design Studio</option>
+                                                @foreach ($business_mapping_tree as $parent )
+                                                    <option value="{{$parent->name}}" data-id="{{$parent->id}}" {{old('business_type') == $parent->name ? 'selected' : ''}}>{{ucwords($parent->name)}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -121,24 +132,22 @@
                                             <label for="industry_type">Industry Type</label>
                                         </div>
                                         <div class="col s12 m8">
-                                            <select id="industry_type" class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this.value)">
+                                            <select id="industry_type" class="select2 browser-default select-industry-type"  name="industry_type" onchange="changecategory(this,'industry');">
                                                 <option value="" disabled selected>Choose your industry type</option>
-                                                <option value="apparel" >Apparel</option>
-                                                <option value="non-apparel" >Non-Apparel</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="input-field col s12 business-category-div" style="display: none">
+                                    <div class="input-field col s12 business-category-div" >
                                         <div class="col s12 m4">
                                             <label>&nbsp;</label>
                                         </div>
                                         <div class="col s12 m8">
                                             <div class="row">
                                                 <div class="col s12 m5">
-                                                    <label for="categoryList">Category Type</label>
+                                                    <label for="factory_type">Factory Type</label>
                                                 </div>
                                                 <div class="col s12 m7">
-                                                    <select  class="select2 browser-default business-category"  name="business_category_id" id="categoryList"></select>
+                                                    <select  class="select2 browser-default business-category"  name="factory_type" id="factory_type"></select>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +227,7 @@
                                     <div id="review_number_of_outlets" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_trade_license" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_industry_type" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
-                                    <div id="review_business_category_id" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
+                                    <div id="review_factory_type" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representative_name" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representatives_email" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
                                     <div id="review_representatives_contact" class="review-profile-data-info" style="padding-bottom: 10px;"></div>
@@ -240,7 +249,7 @@
 
 @endsection
 
-@include('business_profile._scripts')
+@include('create_business_profile._scripts')
 @section('css')
 <style>
     .footer_wrap {
@@ -256,7 +265,7 @@
             var regex = /[0-9]|\./;
             if( !regex.test(value) ) {
                 swal('alert!', 'Text not allowed. You have to enter a valid number.', 'warning');
-            }            
+            }
             if(value == 0 || value < 0){
                 swal('alert!', 'Zero or negative not allowed', 'warning');
                 //$(this).val(1);

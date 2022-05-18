@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\CertificationController as AdminCertificationCont
 use App\Http\Controllers\Admin\ManageBusinessProfileController;
 use App\Http\Controllers\Admin\NewUserRequestController;
 use App\Http\Controllers\Admin\BackendRfqController as AdminRfqController;
+use App\Http\Controllers\Admin\BusinessMappingTreeController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
@@ -48,6 +49,7 @@ use App\Http\Controllers\CompanyFactoryTourController;
 use App\Http\Controllers\ManageBusinessProfileController as UsersManageBusinessProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
+use App\Http\Controllers\Admin\ProductTagController;
 use App\Http\Controllers\Admin\ProductTypeMappingController;
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\MyOrderController;
@@ -250,6 +252,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/business/profile/store', [BusinessProfileController::class, 'store'])->name('business.profile.store');
     Route::get('/manufacturer/profile/{alias}', [BusinessProfileController::class, 'show'])->name('manufacturer.profile.show');
     Route::post('/company/overview/update/{id}', [BusinessProfileController::class, 'companyOverviewUpdate'])->name('company.overview.update');
+    Route::get('/business/mapping/child/{parent_id}', [BusinessProfileController::class, 'getBusinessMappingChild'])->name('business.mapping.child');
 
     //Route::post('/capacity-and-machineries-create-or-update', [BusinessProfileController::class, 'capacityAndMachineriesCreateOrUpdate'])->name('capacity-and-machineries.create-or-update');
     Route::post('/categories-produced-create-or-update', [BusinessProfileController::class, 'categoriesProducedCreateOrUpdate'])->name('categories.produced.create-or-update');
@@ -599,7 +602,11 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('product/show/{flag}/{id}',[ProductController::class, 'show'])->name('admin.products.show');
         Route::get('product/change/priority-level/{flag}/{id}',[ProductController::class, 'changePriorityLevel'])->name('admin.product.change.priority.level');
         //product type mapping
-        Route::resource('product-type-mapping',ProductTypeMappingController::class,['as' => 'admin']);
+        Route::resource('product-type-mapping',ProductTypeMappingController::class,['as' => 'admin'])->except('show');
+        //business mapping tree
+        Route::resource('business-mapping-tree',BusinessMappingTreeController::class,['as' => 'admin'])->except('show');
+        Route::resource('product-tag',ProductTagController::class,['as' => 'admin'])->except('show');
+
     });
 
 });

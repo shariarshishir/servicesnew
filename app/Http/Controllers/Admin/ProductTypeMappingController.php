@@ -65,7 +65,7 @@ class ProductTypeMappingController extends Controller
         ]);
 
         $productTypeMapping=new ProductTypeMapping();
-        $productTypeMapping->title=$request->title;
+        $productTypeMapping->title=strtolower($request->title);
         $productTypeMapping->parent_id=$request->parent_id ;
         $productTypeMapping->save();
         Session::flash('success','Added successfully!!!!');
@@ -118,7 +118,7 @@ class ProductTypeMappingController extends Controller
 
 
         $productTypeMapping = ProductTypeMapping::find($id);
-        $productTypeMapping->title=$request->title;
+        $productTypeMapping->title=strtolower($request->title);
         $productTypeMapping->parent_id=$request->parent_id;
         $productTypeMapping->save();
         Session::flash('success','Updated successfully!!!!');

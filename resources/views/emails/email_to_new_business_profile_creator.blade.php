@@ -28,9 +28,9 @@
                         <table style="max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td style="text-align: left; padding: 5px; margin: 0px; width: 50%;">
-                                    @if($business_profile->business_type==1)
+                                    @if($business_profile->business_type=='manufacturer')
                                     <a target="_blank" href="{{route('manufacturer.profile.show',$business_profile->alias)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
-                                    @else
+                                    @elseif($business_profile->business_type=='wholesaler')
                                     <a target="_blank" href="{{route('wholesaler.profile.info',$business_profile->alias)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Edit profile</a>
                                     @endif
                                 </td>

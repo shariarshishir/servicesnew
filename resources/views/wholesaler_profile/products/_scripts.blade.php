@@ -8,8 +8,8 @@
             $('.non-clothing-block').hide();
             $('#seller_product_form')[0].reset();
             $("#product-add-modal-block table").find("tr:not(:nth-child(1))").remove();
-            $('#category_id').val('');
-            $('#category_id').trigger('change');
+            $('#product_tag').val('');
+            $('#product_tag').trigger('change');
             $('#errors').empty();
             // $('.image-uploader').removeClass('has-files');
             // $('.image-uploader .uploaded').html('');
@@ -206,8 +206,6 @@
                         $("#product-add-modal-block table").find("tr:not(:nth-child(1))").remove();
                         // $('.modal-close').click();
                         $("#product-add-modal-block").modal('close');
-                        $('#category_id').val('');
-                        $('#category_id').trigger('change');
                         $('#errors').empty();
                         // $('.image-uploader').removeClass('has-files');
                         // $('.image-uploader .uploaded').html('');
@@ -282,8 +280,8 @@
                         $('.error-rm').html('');
                         $('#edit_errors').empty();
                         $('.edit-image-block .input-images-2').html('');
-                        $('#edit_category_id').val(data.product.product_category_id);
-                        $('#edit_category_id').trigger('change');
+                        $('#edit_product_tag').val(data.product.product_tag ?? '');
+                        $('#edit_product_tag').trigger('change');
                         $('.product_unit').val(data.product.product_unit);
                         $('.product_unit').trigger('change');
                         //product type mapping

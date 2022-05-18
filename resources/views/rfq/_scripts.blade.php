@@ -2,7 +2,7 @@
 <script>
 
     $(document).on('click', '.page-link', function(event){
-        event.preventDefault(); 
+        event.preventDefault();
         var page = $(this).data("page");
         if(page == 1){
             $('.prev_link').data('page',page);
@@ -27,7 +27,7 @@
         });
     });
     $(document).on('click', '.my-rfq-page-link', function(event){
-        event.preventDefault(); 
+        event.preventDefault();
         var page = $(this).data("page");
         if(page == 1){
             $('.my_rfq_prev_link').data('page',page);
@@ -52,13 +52,12 @@
         });
     });
 
-        
+
 
     $('.open-create-rfq-modal').click(function(){
         $('#create-rfq-form').modal('open');
         $('.createRfqForm')[0].reset();
-        $('#create-rfq-form #category_id').val('');
-        $('#create-rfq-form #category_id').trigger('change');
+        $('#create-rfq-form #category_id').val(null).trigger('change');
         $('#create-rfq-form #unit').val('');
         $('#create-rfq-form #unit').trigger('change');
         $('#create-rfq-form #payment_method').val('');

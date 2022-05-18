@@ -54,7 +54,7 @@
                             </div>
 
                             {{--category--}}
-                            <div class="filter_box filter_min_max">
+                            {{-- <div class="filter_box filter_min_max">
                                 <h4>Product Category</h4>
                                 <select class="select2" name="product_category" id="product_category">
                                     <option value="">Select</option>
@@ -64,20 +64,20 @@
                                     </option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
 
                             {{--factory category--}}
-                            <div class="filter_box filter_min_max">
+                            {{-- <div class="filter_box filter_min_max">
                                 <h4>Factory Category</h4>
                                 <select class="select2" name="factory_category" id="factory_category">
-                                    <option value="">Select</option>
-                                    @foreach($manufacture_product_categories as $category)
+                                    <option value="">Select</option> --}}
+                                    {{-- @foreach($manufacture_product_categories as $category)
                                     <option value="{{$category->id}}" {{$category->id == $factory_category ? 'selected' : ''}}>
                                         {{$category['name']}}
                                     </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                    @endforeach --}}
+                                {{-- </select>
+                            </div> --}}
 
                             {{-- price --}}
                             <div class="filter_box filter_min_max">
@@ -182,12 +182,12 @@
                                         </div>
                                     </div>
                                 </form>
-                                
+
                             </div>
-                            
+
                         </div>
 
-                        
+
                         <div class="product_design_wrapper">
                             <div class="product_wrapper">
                                 <h3>Low MOQ Products</h3>
@@ -242,7 +242,7 @@
                                                                 @endif
                                                             @endif
                                                         </div>
-                                                        
+
                                                         <div class="products_inner_textbox">
                                                             <!-- <div class="priceBox row">
                                                                 <div class="col s12 m12 l4 apperal">
@@ -311,10 +311,10 @@
                                                                                     @endforeach
                                                                                 @endif
                                                                             @endforeach
-                                                                        @endif                                            
+                                                                        @endif
                                                                     </div>
                                                                 </div>
-                                                            </div>                                                            
+                                                            </div>
 
                                                             <!-- <h4><a href="{{ route("mix.product.details", [$list->flag, $list->id]) }}" >{{$title}}</a></h4>
 
@@ -384,14 +384,14 @@
 
 
         </div>
-        
+
         <div class="pagination-block-wrapper">
             <div class="center">
                 {!! $low_moq_lists->appends(request()->query())->links() !!}
             </div>
         </div>
     </div>
-    
+
     {{-- @else
         <div class="card-alert card cyan">
             <div class="card-content white-text">

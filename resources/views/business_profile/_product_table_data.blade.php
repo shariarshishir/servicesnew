@@ -5,7 +5,7 @@
                 <tr>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Category</th>
+                    <th>Product Tag</th>
                     <th style="text-align:center;">Code</th>
                     <th style="text-align:center;">Price</th>
                     <th style="text-align:center;">MOQ</th>
@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody id="tbbdy">
-                @foreach($products as $mk => $product)                
+                @foreach($products as $mk => $product)
                     <tr style="cursor: pointer;" onclick="selecttr(this);">
                         <td data-title="Image">
                         @foreach($product->product_images as $image)
@@ -75,9 +75,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-title="Category">
-                            {{ $product->category->name }}
-                        </td>                        
+                        <td data-title="product_tag">
+                            {{$product->product_tag ? ucwords( implode(",",$product->product_tag)) : '' }}
+                        </td>
                         <td data-title="Code" style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">MB-{{$product->id}}</td>
                         <td data-title="Price" style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->price_unit }} {{ $product->price_per_unit }}</td>
                         <td data-title="MOQ" style="text-align:center;cursor: pointer;" onClick="openviewdetails({{ $mk }}, {{ count($products) }})">{{ $product->moq }} {{ $product->qty_unit }}</td>

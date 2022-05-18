@@ -65,16 +65,15 @@
 
         <div class="form-group row input-field">
             <div class="col s12 m3 l3">
-                <label for="product_category_id">{{ __('Product Category') }} <span class="text-danger">*</span></label>
+                <label for="product_tag">Product Tag <span class="text-danger">*</span></label>
             </div>
             <div class="col s12 m9 l9">
-                <select name="category_id" class="select2 browser-default" id="category_id">
-                    <option value="" selected="true">Choose your option</option>
-                    @foreach($manufacture_product_categories_type[$business_profile->industry_type ?? 'apparel'] as $product_category)
-                        <option value="{{ $product_category->id }}" @if($product_category->id == $product->product_category){{ 'selected' }} @endif>{{ $product_category->name }}</option>
+                <select name="product_tag[]" class="select2 browser-default" id="product_tag" multiple>
+                    @foreach($product_tags as $product_tag)
+                        <option value="{{ $product_tag->name }}" {{isset($product_tag->name) &&  in_array($product_tag->name, $product->product_tag) ? 'selected' : ''}}>{{ucwords($product_tag->name)}}</option>
                     @endforeach
                 </select>
-                <span class="text-danger error-text category_id_error rm-error"></span>
+                <span class="text-danger error-text product_tag_error rm-error"></span>
             </div>
         </div>
         {{-- <div class="row input-field">

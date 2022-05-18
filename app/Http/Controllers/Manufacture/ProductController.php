@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'category_id' => 'required',
+            'product_tag' => 'required',
             'business_profile_id' => 'required',
             'title'=>'required',
             //'price_per_unit'=>'required|numeric',
@@ -49,7 +49,6 @@ class ProductController extends Controller
             'raw_materials_id'  => 'required_if:product_type_mapping,2',
         ],[
             'price_per_unit.required' => 'The price range field is required.',
-            'category_id.required' => 'The product category field is required',
             'studio_id.required_if' => 'the studio type is required when studio selected',
             'raw_materials_id.required_if' => 'the raw materials type is required when raw materials selected',
         ]);
@@ -78,7 +77,7 @@ class ProductController extends Controller
 
             $Data=[
                 'business_profile_id' => $request->business_profile_id,
-                'product_category' => $request->category_id,
+                'product_tag' => $request->product_tag,
                 'title'=> $request->title,
                 'moq'=> $request->moq,
                 'product_details'=>$request->product_details,
@@ -176,7 +175,7 @@ public function edit($product_id)
 public function update(Request $request, $product_id)
 {
     $validator = Validator::make($request->all(), [
-        'category_id' => 'required',
+        'product_tag' => 'required',
         'title'=>'required',
         'price_per_unit'=>'required',
         'price_unit' => 'required',
@@ -196,7 +195,6 @@ public function update(Request $request, $product_id)
         'raw_materials_id'  => 'required_if:product_type_mapping,2',
     ],[
         'price_per_unit.required' => 'The price range field is required.',
-        'category_id.required' => 'The product category field is required',
         'studio_id.required_if' => 'the studio type is required when studio selected',
         'raw_materials_id.required_if' => 'the raw materials type is required when raw materials selected',
     ]);
@@ -225,7 +223,7 @@ public function update(Request $request, $product_id)
     $product->price_unit=$request->price_unit;
     $product->moq=$request->moq;
     $product->qty_unit=$request->qty_unit;
-    $product->product_category=$request->category_id;
+    $product->product_tag=$request->product_tag;
     $product->product_details=$request->product_details;
     $product->product_specification=$request->product_specification;
     $product->colors=$request->colors ?? [];

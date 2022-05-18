@@ -11,7 +11,7 @@
                         <i class="material-icons left">dashboard</i> Categories<i class="material-icons right">arrow_drop_down</i>
                     </a>
                     <ul id="categories_dropdown" class="dropdown-content subNav" tabindex="0" style="">
-                        <li tabindex="0"><a href="#">{{ $product->category['name'] }}</a></h3>
+                        <li tabindex="0"><a href="#">{{ $product->product_tag ? ucwords(implode(',',$product->product_tag)) : ''}}</a></h3>
                     </ul>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                             <div class="row">
                                 <div class="col s12">
                                     <div class="seller-store">
-                                        <h3><a href="#">{{ $product->category['name'] }}</a></h3>
+                                        <h3><a href="#">{{ $product->product_tag ? ucwords(implode(',',$product->product_tag)) : ''}}</a></h3>
                                     </div>
                                 </div>
 

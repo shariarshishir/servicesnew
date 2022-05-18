@@ -9,6 +9,7 @@ use App\Models\CartItem;
 use Auth;
 use App\Models\Config;
 use App\Models\Manufacture\ProductCategory as ManufactureProductCategory;
+use App\Models\ProductTag;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -31,41 +32,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*', function($view) {
-            $categories = Cache::remember('categories', 60, function ()
-            {
-                $source = ProductCategory::select('id', 'name', 'slug', 'status', 'parent_id')->where('status',1)->get()->toArray();
-                $inArray = array();
-                foreach($source as $key => $value)
-                {
-                    $inArray[$key] = $value;
-                }
-
-                $categories = array();
-                $this->makeParentChildRelations($inArray, $categories);
-                //dd($outArray);
-                //return ProductCategory::where('parent_id',NULL)->get();
-                if(!empty($categories)){
-                    return $categories;
-                } else {
-                    return false;
-                }
-            });
-
-
-            if(Auth()->check()){
-                $cartItems=CartItem::where('user_id',auth()->user()->id)->get();
-            }
-            else{
-                $cartItems=[];
-            }
-
-
-
-
-            $view->with(['cartItems'=>count($cartItems),'categories'=>$categories ]);
+        //product tags
+        view()->composer(['business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index','product.details','product.manufactrue_product_details','rfq.create','rfq._create_rfq_form_modal','rfq._edit_rfq_modal'], function($view){
+            $product_tags=ProductTag::get(['id','name']);
+            $view->with(['product_tags'=>$product_tags]);
         });
-
 
         view()->composer('include.admin._header', function($view) {
             if(auth()->guard('admin')->check()){
@@ -85,7 +56,7 @@ class ViewServiceProvider extends ServiceProvider
 
                 $userNotifications = auth()->user()->unreadNotifications->whereNotIn('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
                 $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
-                $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);                
+                $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);
             }
 
         });
@@ -106,20 +77,8 @@ class ViewServiceProvider extends ServiceProvider
             }
         });
 
-        //For Manufacture Product Category
-        view()->composer('*', function($view) {
-            $categories=ManufactureProductCategory::with('subcategories')->get();
-            $view->with([
-                'manufacture_product_categories'=>$categories,
-                'manufacture_product_categories_type'=>[
-                    'apparel'   => ManufactureProductCategory::where(['industry'=>'apparel'])->get(),
-                    'non-apparel'=> ManufactureProductCategory::where(['industry'=>'non-apparel'])->get()
-                ],
-            ]);
-        });
-
         //wishlist data
-        view()->composer(['product.*','manufacture_profile_view_by_user.index','wholesaler_profile_view_by_user.index'], function($view) {
+        view()->composer(['manufacture_profile_view_by_user.index','wholesaler_profile_view_by_user.index'], function($view) {
             if(Auth()->check()){
                 $wishListShopProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('product_id', '!=', null)->pluck('product_id')->toArray();
                 $wishListMfProductsIds=ProductWishlist::where('user_id' , auth()->user()->id)->where('manufacture_product_id', '!=', null)->pluck('manufacture_product_id')->toArray();
@@ -134,22 +93,4 @@ class ViewServiceProvider extends ServiceProvider
     }
 
 
-
-    public function makeParentChildRelations(&$inArray, &$outArray, $currentParentId = 0) {
-        if(!is_array($inArray)) {
-            return;
-        }
-
-        if(!is_array($outArray)) {
-            return;
-        }
-
-        foreach($inArray as $key => $tuple) {
-            if($tuple['parent_id'] == $currentParentId) {
-                $tuple['children'] = array();
-                $this->makeParentChildRelations($inArray, $tuple['children'], $tuple['id']);
-                $outArray[] = $tuple;
-            }
-        }
-    }
 }

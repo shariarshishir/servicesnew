@@ -1730,8 +1730,8 @@
 
 
 
-     //Add or remove Sustainability Commitment
-     function addSustainabilityCommitmentDetails()
+    //Add or remove Sustainability Commitment
+    function addSustainabilityCommitmentDetails()
     {
 
         var html = '<tr>';

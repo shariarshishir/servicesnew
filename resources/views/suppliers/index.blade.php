@@ -139,7 +139,7 @@
                                 <div class="row" itemscope>
                                     <div class="supplier_profile_image_block col s12 m12 l3" itemscope itemtype="https://schema.org/manufacturer">
                                         @if($supplier->business_profile_logo)
-                                        <img itemprop="logo" src="{{ asset('storage/'.$supplier->business_profile_logo) }}" alt="avatar" >
+                                        <img itemprop="logo" src="{{ Storage::disk('s3')->url('public/'.$supplier->business_profile_logo) }}" alt="avatar" >
                                         @else
                                         @php
                                             $img=$supplier->user->image ?'storage/'.$supplier->user->image : 'images/frontendimages/no-image.png';

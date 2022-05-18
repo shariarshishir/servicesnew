@@ -79,7 +79,7 @@
 								<a itemprop="Merchantbay Profile" href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online" itemprop="Merchantbay User avatar">
 										@if(auth()->user()->image)
-										<img src="{{ asset('storage/'.auth()->user()->image) }}" alt="avatar" itemprop="img">
+										<img src="{{Storage::disk('s3')->url('public/'.auth()->user()->image) }}" alt="avatar" itemprop="img">
 										@else
 										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" alt="avatar" itemprop="img">
 										@endif
@@ -114,7 +114,7 @@
 								<a href="javascript:void(0);" itemscope class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown">
 									<span class="avatar-status avatar-online" itemprop="Merchantbay User avatar">
 										@if(auth()->user()->image)
-										<img src="{{ asset('storage/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
+										<img src="{{Storage::disk('s3')->url('public/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
 										@else
 										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
 										@endif
@@ -401,7 +401,7 @@
 								<a href="javascript:void(0);" class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile" itemscope>
 									<span class="avatar-status avatar-online" itemprop="Merchantbay Profile Image">
 										@if(auth()->user()->image)
-										<img src="{{ asset('storage/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
+										<img src="{{Storage::disk('s3')->url('public/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
 										@else
 										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
 										@endif
@@ -438,7 +438,7 @@
 								<a href="javascript:void(0);" itemscope class="dropdown-trigger waves-effect waves-block waves-light" data-target="profile-dropdown-mobile">
 									<span class="avatar-status avatar-online" itemprop="Merchantbay Profile Image">
 										@if(auth()->user()->image)
-										<img src="{{ asset('storage/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
+										<img src="{{Storage::disk('s3')->url('public/'.auth()->user()->image) }}" itemprop="img" alt="avatar">
 										@else
 										<img src="{{Storage::disk('s3')->url('public/frontendimages/no-image.png')}}" itemprop="img" alt="avatar">
 										@endif

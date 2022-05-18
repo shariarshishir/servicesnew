@@ -30,7 +30,7 @@
 								    <img src="{{ Storage::disk('s3')->url('public/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
                                     @php
-                                    $img=$business_profile->user->image ?'storage/'.$business_profile->user->image : 'images/frontendimages/no-image.png';
+                                    $img=$business_profile->user->image ? Storage::disk('s3')->url('public/'.$business_profile->user->image) : 'images/frontendimages/no-image.png';
                                     @endphp
                                     <img src="{{asset($img)}}" alt="avatar" >
 								@endif

@@ -3,24 +3,25 @@
 @section('content')
 @include('sweet::alert')
 @php
-    $industry_type = array_key_exists('industry_type', app('request')->input())?app('request')->input('industry_type'):[];
+    $business_type = array_key_exists('business_type', app('request')->input())?app('request')->input('business_type'):[];
+    // $industry_type = array_key_exists('industry_type', app('request')->input())?app('request')->input('industry_type'):[];
     $factory_type = array_key_exists('factory_type', app('request')->input())?app('request')->input('factory_type'):[];
     $location = array_key_exists('location', app('request')->input())?app('request')->input('location'): '';
     $business_name = array_key_exists('business_name', app('request')->input())?app('request')->input('business_name'): '';
     $standard = array_key_exists('standard', app('request')->input())?app('request')->input('standard'): [];
     $verified = array_key_exists('verified', app('request')->input())?app('request')->input('verified'): [];
 
-    $factory_type_array=[
-        '2002'=>'woven',
-        '2004'=>'knit',
-        '2005'=>'sweater',
-        '2006'=>'accessories',
-        '2008'=>'denim',
-        '2009'=>'lingerie',
-        '2011'=>'textile',
-        '2012'=>'yarn & spinning',
-        '2033'=>'others',
-        ];
+    // $factory_type_array=[
+    //     '2002'=>'woven',
+    //     '2004'=>'knit',
+    //     '2005'=>'sweater',
+    //     '2006'=>'accessories',
+    //     '2008'=>'denim',
+    //     '2009'=>'lingerie',
+    //     '2011'=>'textile',
+    //     '2012'=>'yarn & spinning',
+    //     '2033'=>'others',
+    //     ];
 @endphp
 
     <div class="suppliers_container suppliers_filter_wrapper row" itemscope>
@@ -41,29 +42,25 @@
                         </div>
                         <!-- <input class="btn_green btn_search" type="submit" value="search" onclick="this.form.submit();"> -->
                     </div>
-                    {{-- industry_type --}}
+                    {{-- business_type --}}
                     <div class="filter_box" itemscope itemtype="https://schema.org/manufacturer" >
-                        <h4 itemprop="title">Industry Type</h4>
-                        <p>
-                            <label itemprop="name">
-                                <input class="btn_radio" type="checkbox" value="apparel"  name="industry_type[]" {{ (in_array('apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                <span>Apparel</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label itemprop="name">
-                            <input class="btn_radio" type="checkbox" value="non-apparel" name="industry_type[]" {{ (in_array('non-apparel', $industry_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                <span>Non-Apparel</span>
-                            </label>
-                        </p>
+                        <h4 itemprop="title">Business Type</h4>
+                        @foreach ($industry_type_cat as $item)
+                            <p>
+                                <label itemprop="name">
+                                <input class="btn_radio" type="checkbox" value="{{$item->name}}" name="business_type[]" {{ (in_array($item->name, $business_type))?'checked':'' }} onclick="this.form.submit();"/>
+                                    <span>{{ucwords($item->name)}}</span>
+                                </label>
+                            </p>
+                        @endforeach
                     </div>
                     {{-- factory type --}}
                     <div class="filter_box" itemscope itemtype="https://schema.org/industry">
                         <h4 itemprop="title">Factory Type</h4>
-                        @foreach ($factory_type_array as $key => $list)
+                        @foreach ($factory_type_cat as $list)
                         <p>
                             <label>
-                                <input class="btn_radio" type="checkbox" value="{{$key}}"  name="factory_type[]" {{ (in_array($key, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
+                                <input class="btn_radio" type="checkbox" value="{{$list}}"  name="factory_type[]" {{ (in_array($list, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
                                 <span>{{ucwords($list)}}</span>
                             </label>
                         </p>
@@ -165,7 +162,7 @@
                                         </div>
                                         <div class="factory_type short_info_box" itemscope itemtype="https://schema.org/category">
                                             <span class="title_label">Factory Type:</span>
-                                            <span itemprop="name" class="businessCategory info_details">{{$supplier->businessCategory ? $supplier->businessCategory->name : ''}}</span>
+                                            <span itemprop="name" class="businessCategory info_details">{{$supplier->factory_type ?? ''}}</span>
                                         </div>
                                         @foreach($mainProductsJson as $mainProducts)
                                             @if($mainProducts->name == 'main_products')

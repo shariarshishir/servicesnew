@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportUser;
 use App\Models\BusinessProfile;
+use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\Product;
+use App\Models\ProductTag;
 use Illuminate\Support\Str;
 
 class ImportController extends Controller
@@ -86,6 +89,38 @@ class ImportController extends Controller
         }
 
         return $alias;
+    }
+
+
+    public function productTagSet(){
+
+        $shop_product=Product::with('category')->get();
+        foreach($shop_product as $p){
+            if(isset($p->product_category_id) && !isset($p->product_tag)){
+                $product_tag=ProductTag::where('name',strtolower($p->category->name))->first();
+                if(!$product_tag){
+                    $product_tag=ProductTag::create(['name' => strtolower($p->category->name)]);
+                }
+                $new_product_tag=[$product_tag->name];
+                $p->update(['product_tag' => $new_product_tag ]);
+            }
+        }
+
+        //manufacturer product
+        $mb_product=ManufactureProduct::with('category')->get();
+        foreach($mb_product as $p){
+            if(isset($p->product_category) && !isset($p->product_tag)){
+                $product_tag=ProductTag::where('name',strtolower($p->category->name))->first();
+                if(!$product_tag){
+                    $product_tag=ProductTag::create(['name' => strtolower($p->category->name)]);
+                }
+                $new_product_tag=[$product_tag->name];
+                $p->update(['product_tag' => $new_product_tag ]);
+            }
+        }
+
+
+        return 'done';
     }
 
 

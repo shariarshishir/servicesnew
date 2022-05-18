@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Helper;
 use App\Models\Blog;
+use App\Models\BusinessMappingTree;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Product;
@@ -844,17 +845,20 @@ class HomeController extends Controller
         $suppliers=BusinessProfile::select('business_profiles.*')
             ->leftJoin('certifications', 'certifications.business_profile_id', '=', 'business_profiles.id')
             ->with(['businessCategory', 'user', 'companyOverview'])->where(function($query) use ($request){
-            // if($request->business_type){
-            //     $query->whereIn('business_type',$request->business_type)->get();
+            if($request->business_type){
+                $query->whereIn('business_type',$request->business_type)->get();
+            }
+            // if($request->industry_type){
+            //     $query->whereIn('industry_type',$request->industry_type)->get();
             // }
-            if($request->industry_type){
-                $query->whereIn('industry_type',$request->industry_type)->get();
-            }
             if($request->factory_type){
-                $query->whereHas('businessCategory', function ($sub_query) use ($request) {
-                    $sub_query->where('id', $request->factory_type);
-                })->get();
+                $query->whereIn('factory_type',$request->factory_type)->get();
             }
+            // if($request->factory_type){
+            //     $query->whereHas('businessCategory', function ($sub_query) use ($request) {
+            //         $sub_query->where('id', $request->factory_type);
+            //     })->get();
+            // }
             if(isset($request->business_name)){
                 $query-> where('business_name', 'like', '%'.$request->business_name.'%')->get();
             }
@@ -885,7 +889,22 @@ class HomeController extends Controller
         ->orderBy('profile_verified_by_admin', 'desc')
         ->orderBy('certifications.created_at', 'desc')
         ->paginate(12);
-        return view('suppliers.index',compact('suppliers'));
+
+        $industry_type_cat= BusinessMappingTree::with('children.children')->where('parent_id', null)->get();
+        $factory_type_cat=[];
+        foreach($industry_type_cat as $data){
+            if($data->children()->exists()){
+                foreach($data->children as $data2){
+                    if($data2->children()->exists()){
+                        foreach($data2->children as $data3){
+                            array_push($factory_type_cat, $data3->name);
+                        }
+                    }
+                }
+            }
+        }
+        $factory_type_cat= array_unique($factory_type_cat);
+        return view('suppliers.index',compact('suppliers', 'industry_type_cat', 'factory_type_cat'));
     }
     //supplier profile
     public function supplierProfile($alias)

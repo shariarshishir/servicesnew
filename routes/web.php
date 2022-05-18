@@ -136,6 +136,8 @@ Route::post('import',[ImportController::class, 'import'])->name('import');
 Route::fallback(function () {
     return view('404');
 });
+//product tag set product
+Route::get('product-tag-set-into-product-table',[ImportController::class, 'productTagSet']);
 
 // Frontend API's endpoint start
 Auth::routes();
@@ -583,8 +585,8 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('admin/rfq/pagination',[AdminRfqController::class, 'fetchRFQsByQueryStringOrPagination'])->name('rfq.pagination');
         Route::get('admin/rfq/send-push-notification-for-new-message-to-admin',[AdminRfqController::class, 'sendFireBasePushNotificationToAdminForNewMessage'])->name('send_firebase_push_notification_to_admin_for_rfq_message');
         Route::get('admin/rfq/business-profile-with-unseen-message',[AdminRfqController::class, 'businessProfilesWithUnseenMessageCount'])->name('admin_rfq_business_profiles_with_unseen_message');
-        
-        
+
+
         //Route::get('rfqs',[BackendRfqController::class, 'index'])->name('admin.rfq.index');
         Route::get('business-profile-filter-by-category-or-rating',[AdminRfqController::class, 'businessProfileFilter'])->name('admin.rfq.business.profiles.filter');
         Route::get('business-profile-filter-by-title',[AdminRfqController::class, 'businessProfileFilterByTitle'])->name('admin.rfq.business.profiles.filter.by.title');

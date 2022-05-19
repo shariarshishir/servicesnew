@@ -36,7 +36,15 @@
 				<button class="none_button btn_view_detail"  data-rfqId="{{$rfqSentList['id']}}" id="rfqViewDetail">Show More</button>
 
 				<div class="rfq_view_detail_info" style="display: none;">
-					<h6>Query for {{$rfqSentList['category'][0]['name']}}</h6>
+                    @php
+                        $category_list=[];
+                    @endphp
+                   @foreach ($rfqSentList['category'] as  $cat)
+                            @php
+                                array_push($category_list, $cat['name']);
+                            @endphp
+                   @endforeach
+					<h6>Query for {{implode(",",$category_list);}}</h6>
 					<div class="full_specification"><span class="title">Details:</span> {{$rfqSentList['full_specification']}}</div>
 					<div class="full_details">
 						<span class="title">Qty:</span> {{$rfqSentList['quantity']}} {{$rfqSentList['unit']}},

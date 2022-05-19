@@ -57,14 +57,25 @@
                     {{-- factory type --}}
                     <div class="filter_box" itemscope itemtype="https://schema.org/industry">
                         <h4 itemprop="title">Factory Type</h4>
-                        @foreach ($factory_type_cat as $list)
-                        <p>
-                            <label>
-                                <input class="btn_radio" type="checkbox" value="{{$list}}"  name="factory_type[]" {{ (in_array($list, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
-                                <span>{{ucwords($list)}}</span>
-                            </label>
-                        </p>
-                        @endforeach
+                        <div class="factory_type_checkbox">
+                            @php 
+                            $i = 1;
+                            foreach($factory_type_cat as $list) 
+                            {
+                            @endphp
+                            <p style="@php echo($i >= 6)?'display:none':'display:block'; @endphp">
+                                <label>
+                                    <input class="btn_radio" type="checkbox" value="{{$list}}"  name="factory_type[]" {{ (in_array($list, $factory_type))?'checked':'' }} onclick="this.form.submit();"/>
+                                    <span>{{ucwords($list)}}</span>
+                                </label>
+                            </p>
+                            @if($i == 5) <a href="javascript:void(0);" class="view_more_factory_type_trigger">View More</a> @endif
+                            @php 
+                            $i++;
+                            }
+                            @endphp
+                            <a href="javascript:void(0);" class="view_less_factory_type_trigger" style="display: none;">View Less</a>
+                        </div>
                     </div>
 
                     {{-- standard --}}

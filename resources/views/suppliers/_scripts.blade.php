@@ -28,5 +28,18 @@
     //     })
     // });
 
+    $(document).ready(function(){
+        $(".view_more_factory_type_trigger").click(function(){
+            $(this).hide();
+            $(this).closest(".factory_type_checkbox").children(".view_less_factory_type_trigger").show('slow');
+            $(this).closest(".factory_type_checkbox").children('p:nth-child(n+6)').show('slow');
+        });
+        $(".view_less_factory_type_trigger").click(function(){
+            $(this).hide();
+            $(this).closest(".factory_type_checkbox").children(".view_more_factory_type_trigger").show('slow');
+            $(this).closest(".factory_type_checkbox").children('p:nth-child(n+6)').hide('slow');
+        });
+    })
+
     </script>
 @endpush

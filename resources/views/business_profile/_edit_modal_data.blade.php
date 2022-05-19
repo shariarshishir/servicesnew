@@ -258,7 +258,7 @@
                     <!--1-->
                     <div class="col s6 m2 l2 center-align">
                         <div class="media_img">
-                            <img src="{{Storage::disk('s3')->url('public/images/'.$product_image->product_image)}}" id="img{{ $product_image->id }}" class="img-thumbnail">
+                            <img src="{{Storage::disk('s3')->url('public/'.$product_image->product_image)}}" id="img{{ $product_image->id }}" class="img-thumbnail">
                         </div>
                         <div class="clear10"></div>
                         <div class="col s12">
@@ -309,7 +309,7 @@
                         <div class="overlay-image-preview-block overlay-img-div">
                             @if( $product->overlay_image )
                                 <a href="javascript:void(0);" class="btn_delete rm-overlay-btn" onclick="removeManufactureOverlayImage({{$product->id}});"><i class="material-icons dp48">delete_outline</i> <span>Delete</span></a>
-                                <img class="overlay-image-preview" src="{{Storage::disk('s3')->url('public/images/'.$product->overlay_image)}}"
+                                <img class="overlay-image-preview" src="{{Storage::disk('s3')->url('public/'.$product->overlay_image)}}"
                                 alt="preview image" style="max-height: 150px;">
                             @else
                                 <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"

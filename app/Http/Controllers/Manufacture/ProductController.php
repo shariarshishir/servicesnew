@@ -69,8 +69,8 @@ class ProductController extends Controller
                 $image = $request->file('overlay_image');
                 $s3 = \Storage::disk('s3');
                 $uniqueString = generateUniqueString();
-                $overlay_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-                $s3filePath = '/public/images/' . $overlay_image_file_name;
+                $overlay_image_file_name = 'images/'.uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+                $s3filePath = '/public'.'/'.$overlay_image_file_name;
                 $s3->put($s3filePath, file_get_contents($image));
             }
 
@@ -211,8 +211,8 @@ public function update(Request $request, $product_id)
         $image = $request->file('overlay_image');
         $s3 = \Storage::disk('s3');
         $uniqueString = generateUniqueString();
-        $overlay_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-        $s3filePath = '/public/images/'.$overlay_image_file_name;
+        $overlay_image_file_name = 'images/'.uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+        $s3filePath = '/public'.'/'.$overlay_image_file_name;
         $s3->put($s3filePath, file_get_contents($image));
     }
 
@@ -327,8 +327,8 @@ public function publishUnpublish($pid, $bid)
         if(!$product){
             return response()->json(['msg' => 'product not found'], 404);
         }
-        if(Storage::disk('s3')->exists('/public/images/'.$product->overlay_image) ){
-            Storage::disk('s3')->delete('/public/images/'.$product->overlay_image);
+        if(Storage::disk('s3')->exists('/public'.'/'.$product->overlay_image) ){
+            Storage::disk('s3')->delete('/public'.'/'.$product->overlay_image);
             $product->update(['overlay_image' => null]);
             return response()->json(['msg' => 'overlay image removed'], 200);
         }
@@ -341,8 +341,8 @@ public function publishUnpublish($pid, $bid)
         if(!$product_image){
             return response()->json(['msg' => 'record not found'], 404);
         }
-        if(Storage::disk('s3')->exists('/public/images/'.$product_image->product_image)){
-            Storage::disk('s3')->delete('/public/images/'.$product_image->product_image);
+        if(Storage::disk('s3')->exists('/public'.'/'.$product_image->product_image)){
+            Storage::disk('s3')->delete('/public'.'/'.$product_image->product_image);
             $product_image->delete();
             return response()->json(['msg' => 'image removed'], 200);
         }

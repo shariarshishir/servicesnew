@@ -52,7 +52,7 @@
                                     @endif
                                 @else
                                     @if($list->overlay_image)
-                                        <img src="{{Storage::disk('s3')->url('public/images/'.$list->overlay_image)}}" class="single-product-overlay-img" alt="" style="display: none;" >
+                                        <img src="{{Storage::disk('s3')->url('public/'.$list->overlay_image)}}" class="single-product-overlay-img" alt="" style="display: none;" >
                                     @endif
                                 @endif
                             </div>

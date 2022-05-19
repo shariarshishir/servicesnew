@@ -15,8 +15,8 @@
                 <div class="box_shadow list_box">
                     <p>
                         <span>Business Name:</span>
-                        @if($profile->business_type == 'manufacturer')
-                            <a href="{{route('manufacturer.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
+                        @if($profile->profile_type == 'buyer')
+                            <a href="{{route('new.profile.buyer.index',$profile->alias)}}">{{$profile->business_name}}</a>
                         @elseif($profile->business_type == 'wholesaler')
                             <a href="{{route('wholesaler.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
                         @endif

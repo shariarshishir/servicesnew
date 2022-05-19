@@ -70,7 +70,7 @@
             <div class="col s12 m9 l9">
                 <select name="product_tag[]" class="select2 browser-default" id="product_tag" multiple>
                     @foreach($product_tags as $product_tag)
-                        <option value="{{ $product_tag->name }}" {{isset($product_tag->name) &&  in_array($product_tag->name, $product->product_tag) ? 'selected' : ''}}>{{ucwords($product_tag->name)}}</option>
+                        <option value="{{ $product_tag->name }}" {{isset($product->product_tag) &&  in_array($product_tag->name, $product->product_tag) ? 'selected' : ''}}>{{ucwords($product_tag->name)}}</option>
                     @endforeach
                 </select>
                 <span class="text-danger error-text product_tag_error rm-error"></span>
@@ -155,7 +155,7 @@
                 <select class="select2 browser-default product-colors" name="colors[]" multiple>
 
                         @foreach ($colors as $color)
-                            <option value="{{ $color }}" {{ (in_array($color, $product->colors))?'selected':'' }}>{{ ucfirst($color) }}</option>
+                            <option value="{{ $color }}" {{isset($product->sizes) && (in_array($color, $product->colors))?'selected':'' }}>{{ ucfirst($color) }}</option>
                         @endforeach
 
                 </select>
@@ -170,7 +170,7 @@
                 <select class="select2 browser-default product-sizes" name="sizes[]"  multiple="multiple">
 
                         @foreach ($sizes as $size)
-                                <option value="{{ $size }}" {{ (in_array($size, $product->sizes))?'selected':'' }}>{{ ucfirst($size) }}</option>
+                                <option value="{{ $size }}" {{ isset($product->sizes) && (in_array($size, $product->sizes))?'selected':'' }}>{{ ucfirst($size) }}</option>
                         @endforeach
 
                 </select>

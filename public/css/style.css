@@ -9733,7 +9733,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
     .landing_intro_wrapper {
         padding: 100px 0 150px;
-    
+
     }
     .landing_intro_wrapper h1 {
         margin-bottom: 50px;
@@ -10312,7 +10312,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 
 }
 
-@media only screen and (max-width: 1299px) { 
+@media only screen and (max-width: 1299px) {
     .home_intro_video_box .embed-responsive-item {
         height: 290px;
         /* width: 448px; */
@@ -10328,7 +10328,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: 100%;
         text-align: center !important;
     }
-    
+
 }
 
 @media only screen and (min-device-width: 993px) and (max-device-width: 1300px) {
@@ -12779,7 +12779,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
     .home_intro_video_box {
         text-align: center;
     }
-    
+
     .rfq_content_box .rfq_profile_detail .responses_wrap_right,
     .rfq_content_box .rfq_profile_detail .responses_wrap {
         text-align: center;
@@ -13337,6 +13337,23 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
         width: 100%;
     }
 
+}
+#myList li{ display:none;
+}
+#loadMore {
+    color:green;
+    cursor:pointer;
+}
+#loadMore:hover {
+    color:black;
+}
+#showLess {
+    color:red;
+    cursor:pointer;
+    display:none;
+}
+#showLess:hover {
+    color:black;
 }
 
 /* ******************** Media css style end *********************** */

@@ -28,18 +28,41 @@
     //     })
     // });
 
-    $(document).ready(function(){
-        $(".view_more_factory_type_trigger").click(function(){
-            $(this).hide();
-            $(this).closest(".factory_type_checkbox").children(".view_less_factory_type_trigger").show('slow');
-            $(this).closest(".factory_type_checkbox").children('p:nth-child(n+6)').show('slow');
+    $(document).ready(function () {
+        var factory = $('.get-checked-value');
+  			var checked_id = [];
+	  		$.each(factory, function() {
+	  			var $this = $(this);
+	  			if($this.is(":checked")) {
+                  checked_id.push($this.attr('data-id'));
+	  			}
+	  		});
+
+        size_li = $("#myList li").length;
+        x=3;
+        if(checked_id.length != 0){
+                var checked_id_get= Math.max.apply(Math,checked_id);
+                x=checked_id_get + 1;
+            }
+        $('#myList li:lt('+x+')').show();
+        $('#loadMore').click(function () {
+            x= (x+5 <= size_li) ? x+5 : size_li;
+            $('#myList li:lt('+x+')').show();
+            $('#showLess').show();
+            if(x == size_li){
+                $('#loadMore').hide();
+            }
         });
-        $(".view_less_factory_type_trigger").click(function(){
-            $(this).hide();
-            $(this).closest(".factory_type_checkbox").children(".view_more_factory_type_trigger").show('slow');
-            $(this).closest(".factory_type_checkbox").children('p:nth-child(n+6)').hide('slow');
+        $('#showLess').click(function () {
+            x=(x-5<0) ? 3 : x-5;
+            $('#myList li').not(':lt('+x+')').hide();
+            $('#loadMore').show();
+            $('#showLess').show();
+            if(x == 3){
+                $('#showLess').hide();
+            }
         });
-    })
+    });
 
     </script>
 @endpush

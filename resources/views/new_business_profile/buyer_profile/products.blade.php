@@ -23,7 +23,7 @@
                                     @include('new_business_profile.buyer_profile.profile_menu')
                                 </div>
                             </li>
-                            </ul>
+                        </ul>
                     </div>
                 </div>
                 

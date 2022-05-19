@@ -152,7 +152,7 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_explore {{ Route::is('new.profile.buyer.rfqs') ? 'active' : ''}}">
+                                <li class="profile_explore {{ Route::is('new.profile.buyer.rfqs',$alias) ? 'active' : ''}}">
                                     <a href="{{route('new.profile.buyer.rfqs')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Explore</h4>

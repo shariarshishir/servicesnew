@@ -394,6 +394,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/buyer/profile/{alias}/development-center', [BuyerBusinessProfileController::class, 'developmentCenter'])->name('new.profile.buyer.development_center');
     Route::get('/buyer/profile/{alias}/order-management', [BuyerBusinessProfileController::class, 'orderManagement'])->name('new.profile.buyer.order_management');
     Route::get('/buyer/profile/{alias}/products', [BuyerBusinessProfileController::class, 'products'])->name('new.profile.buyer.products');
+    Route::get('/buyer/profile/{alias}/insights', [BuyerBusinessProfileController::class, 'profileInsights'])->name('new.buyer.profile.insights');
+    Route::get('/buyer/profile/{alias}/home', [BuyerBusinessProfileController::class, 'profileHome'])->name('new.buyer.profile.home');
 
 
 

@@ -28,8 +28,9 @@ $('#business-profile-logo-banner-upload-form').submit(function(e) {
                         if (response) {
                             swal(response.message);
                             $('#business_profile_logo_banner').modal('close');
-                            var logo="{{asset('storage/')}}"+'/'+response.business_profile.business_profile_logo;
-                            var banner="{{asset('storage/')}}"+'/'+response.business_profile.business_profile_banner;
+                            var logo="{{Storage::disk('s3')->url('public')}}"+'/'+response.business_profile.business_profile_logo;
+                            var banner="{{Storage::disk('s3')->url('public')}}"+'/'+response.business_profile.business_profile_banner;
+                            console.log(banner);
                             $('.banner_overlay').css({"background": "url('"+banner+"')", "background-size" : "cover"});
                             $(".business_profile_logo img").attr('src', logo);
                             $('#business-profile-logo-banner-upload-form')[0].reset();

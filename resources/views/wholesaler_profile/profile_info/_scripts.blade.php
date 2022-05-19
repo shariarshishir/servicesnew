@@ -132,7 +132,7 @@
                         if (response) {
                         swal(response.message);
                         this.reset();
-                        var image="{{asset('storage/')}}"+'/'+response.user.image;
+                        var image="{{Storage::disk('s3')->url('public')}}"+'/'+response.user.image;
                         $(".profile-image-block  #profile_image").attr('src', image);
 
                         }
@@ -143,7 +143,7 @@
                 });
             }
             else {
-                var image="{{asset('storage/')}}"+'/'+previousImageSrc;
+                var image="{{Storage::disk('s3')->url('public')}}"+'/'+previousImageSrc;
                 $(".profile-image-block  #profile_image").attr('src', image);
                 e.dismiss;
             }

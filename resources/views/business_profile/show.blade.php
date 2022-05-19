@@ -6,7 +6,7 @@
 <div itemscope itemtype="https://schema.org/Organization">
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
-	<div class="banner_overlay" @if($business_profile->business_profile_banner) style="background:url('{{asset('storage').'/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
+	<div class="banner_overlay" @if($business_profile->business_profile_banner) style="background:url('Storage::disk('s3')->url('public/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		@if($business_profile->is_business_profile_verified == 1)
@@ -32,10 +32,10 @@
 						<div class="col s4 m6 l12 profile_left_pic_wrap">
 							<div class=" profile_pic center-align business_profile_logo">
 								@if($business_profile->business_profile_logo)
-								    <img itemprop="image" src="{{ asset('storage/'.$business_profile->business_profile_logo) }}" alt="avatar" >
+								    <img itemprop="image" src="{{ Storage::disk('s3')->url('public/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
 								    @php
-                                    $img=$business_profile->user->image ?'storage/'.$business_profile->user->image : 'images/frontendimages/no-image.png';
+                                    $img=$business_profile->user->image ?Storage::disk('s3')->url('public/'.$business_profile->user->image) : 'images/frontendimages/no-image.png';
                                     @endphp
 								    <img itemprop="image" src="{{asset($img)}}" alt="avatar" >
 								@endif

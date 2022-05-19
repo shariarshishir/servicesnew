@@ -599,13 +599,16 @@ class UserController extends Controller
             $userEmail=$user->email;
             $uniqueUserName=[];
             $uniqueUserName=explode("@",$userEmail);
-            $filename = $request->image->store('images/'.$uniqueUserName[0].'/profile','public');
-            $image_resize = Image::make(public_path('storage/'.$filename));
-            $image_resize->fit(250, 250);
-            $image_resize->save(public_path('storage/'.$filename));
+
+            $s3 = \Storage::disk('s3');
+            $uniqueString = generateUniqueString();
+            $image_unique_file_name = uniqid().$uniqueString.'.'.$request->image->getClientOriginalExtension();
+            $image_path_saved_in_db = 'images/'.$uniqueUserName[0].'/profile/'.$image_unique_file_name;
+            $s3filePath = '/public/images/'.$uniqueUserName[0].'/profile/'.$image_unique_file_name;
+            $s3->put($s3filePath, file_get_contents($request->image));
         }
 
-        $user->image= $filename;
+        $user->image= $image_path_saved_in_db;
         $user->save();
         $message="Image uploaded successfully";
         return response()->json(['user'=>$user,'message'=>$message]);

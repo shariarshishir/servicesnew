@@ -117,6 +117,7 @@
         });
     //add manufacture product modal open
     $(document).ready(function() {
+        selectRefresh();
         $('.product-add-modal-trigger').click(function(){
             $("#product-add-modal-block").modal('open');
             $('#manufacture-product-upload-form')[0].reset();
@@ -1730,8 +1731,8 @@
 
 
 
-     //Add or remove Sustainability Commitment
-     function addSustainabilityCommitmentDetails()
+    //Add or remove Sustainability Commitment
+    function addSustainabilityCommitmentDetails()
     {
 
         var html = '<tr>';

@@ -107,7 +107,7 @@
                             <div class="spotlight_overlay"></div>
                             <div class="spotlight-inside-image" itemscope>
                                 @if($businessProfile->business_profile_banner)
-                                <img itemprop="img" src="{{ asset('storage/'.$businessProfile->business_profile_banner) }}" alt="Business profile banner" />
+                                <img itemprop="img" src="{{ Storage::disk('s3')->url('public/'.$businessProfile->business_profile_banner) }}" alt="Business profile banner" />
                                 @else
                                 <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/spot-li.png')}}" alt="Spot list" />
                                 @endif
@@ -117,7 +117,7 @@
                                     <div class="right-align sayel_group_logo_box" itemscope>
                                         <!--img src="{{ asset('storage/'.$businessProfile->user->image) }}" alt="" /-->
                                         @if($businessProfile->business_profile_logo)
-                                        <img itemprop="img" src="{{ asset('storage/'.$businessProfile->business_profile_logo) }}" alt="Business profile logo" />
+                                        <img itemprop="img" src="{{ Storage::disk('s3')->url('public/'.$businessProfile->business_profile_logo) }}" alt="Business profile logo" />
                                         @else
                                             @php
                                                 $img = $businessProfile->user->image ?'storage/'.$businessProfile->user->image : 'images/frontendimages/no-image.png';

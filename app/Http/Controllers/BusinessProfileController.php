@@ -655,33 +655,37 @@ class BusinessProfileController extends Controller
 
         if($request->hasFile('logo')){
             if($business_profile->business_profile_logo){
-                if(Storage::exists($business_profile->business_profile_logo) )
+                if(Storage::disk('s3')->exists('public/'.$business_profile->business_profile_logo) )
                 {
-                    Storage::delete($business_profile->business_profile_logo);
+                    Storage::disk('s3')->delete('public/'.$business_profile->business_profile_logo);
                 }
             }
 
-            $filename = $request->logo->store('images/'.$business_profile->business_name.'/logo','public');
-            $image_resize = Image::make(public_path('storage/'.$filename));
-            $image_resize->fit(250, 250);
-            $image_resize->save(public_path('storage/'.$filename));
-            $business_profile->business_profile_logo= $filename;
+            $s3 = \Storage::disk('s3');
+            $uniqueString = generateUniqueString();
+            $image_unique_file_name = uniqid().$uniqueString.'.'.$request->logo->getClientOriginalExtension();
+            $image_path_saved_in_db = 'images/'.$business_profile->business_name.'/logo/'.$image_unique_file_name;
+            $s3filePath = '/public/images/'.$business_profile->business_name.'/logo/'.$image_unique_file_name;
+            $s3->put($s3filePath, file_get_contents($request->logo));
+            $business_profile->business_profile_logo= $image_path_saved_in_db;
 
         }
 
         if($request->hasFile('banner')){
             if($business_profile->business_profile_banner){
-                if(Storage::exists($business_profile->business_profile_banner) )
+                if(Storage::disk('s3')->exists('public/'.$business_profile->business_profile_banner))
                 {
-                    Storage::delete($business_profile->business_profile_banner);
+                    Storage::disk('s3')->delete('public/'.$business_profile->business_profile_banner);
                 }
             }
 
-            $filename = $request->banner->store('images/'.$business_profile->business_name.'/banner','public');
-            $image_resize = Image::make(public_path('storage/'.$filename));
-            $image_resize->fit(600, 200);
-            $image_resize->save(public_path('storage/'.$filename));
-            $business_profile->business_profile_banner= $filename;
+            $s3 = \Storage::disk('s3');
+            $uniqueString = generateUniqueString();
+            $image_unique_file_name = uniqid().$uniqueString.'.'.$request->banner->getClientOriginalExtension();
+            $image_path_saved_in_db = 'images/'.$business_profile->business_name.'/logo/'.$image_unique_file_name;
+            $s3filePath = '/public/images/'.$business_profile->business_name.'/logo/'.$image_unique_file_name;
+            $s3->put($s3filePath, file_get_contents($request->banner));
+            $business_profile->business_profile_banner= $image_path_saved_in_db;
         }
 
         $business_profile->save();

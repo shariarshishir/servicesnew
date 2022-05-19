@@ -104,8 +104,8 @@ class ProductController extends Controller
                     $image = $product_image;
                     $s3 = \Storage::disk('s3');
                     $uniqueString = generateUniqueString();
-                    $product_images_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-                    $s3filePath = '/public/images/' . $product_images_file_name;
+                    $product_images_file_name ='images/'.uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+                    $s3filePath = '/public'.'/'. $product_images_file_name;
                     $s3->put($s3filePath, file_get_contents($image));
                     ProductImage::create(['product_id'=>$product->id, 'product_image'=>$product_images_file_name]);
                 }
@@ -206,7 +206,7 @@ public function update(Request $request, $product_id)
         'error' => $validator->getMessageBag()),
         400);
     }
-    $product=Product::withTrashed()->find($product_id);   
+    $product=Product::withTrashed()->find($product_id);
     if ($request->hasFile('overlay_image')){
         $image = $request->file('overlay_image');
         $s3 = \Storage::disk('s3');
@@ -236,15 +236,15 @@ public function update(Request $request, $product_id)
     $product->product_type_mapping_child_id = $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id;
     $product->save();
 
-    
+
 
     if ($request->hasFile('product_images')){
         foreach ($request->file('product_images') as $index=>$product_image){
             $image = $product_image;
             $s3 = \Storage::disk('s3');
             $uniqueString = generateUniqueString();
-            $product_images_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
-            $s3filePath = '/public/images/' . $product_images_file_name;
+            $product_images_file_name ='images/'.uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
+            $s3filePath = '/public'.'/'. $product_images_file_name;
             $s3->put($s3filePath, file_get_contents($image));
             ProductImage::create(['product_id'=>$product->id, 'product_image'=>$product_images_file_name]);
         }
@@ -252,7 +252,7 @@ public function update(Request $request, $product_id)
 
     //upload video
 
-        
+
     //video
     if(isset($request->remove_video_id)){
         if( count(json_decode($request->remove_video_id)) > 0 ){

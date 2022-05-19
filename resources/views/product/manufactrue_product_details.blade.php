@@ -38,10 +38,10 @@
                                     </div>
                                     <div class="simpleLens-thumbnails-container">
                                         @foreach($product->product_images as $product_image)
-                                            <a href="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
-                                                data-lens-image="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}"
-                                                data-big-image="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}">
-                                                <img src="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                            <a href="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
+                                                data-lens-image="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}"
+                                                data-big-image="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}">
+                                                <img src="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
                                             </a>
                                         @endforeach
                                         @if($product->overlay_image)
@@ -51,7 +51,7 @@
                                                 <img src="{{Storage::disk('s3')->url('public/images/'.$product->overlay_image)}}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
                                             </a>
                                         @endif
-                                        @php $productImage = (!empty($product->product_images[0]->product_image))? Storage::disk('s3')->url('public/images/'.$product_image['product_image']):Storage::disk('s3')->url('images/supplier.png'); @endphp
+                                        @php $productImage = (!empty($product->product_images[0]->product_image))? Storage::disk('s3')->url('public/'.$product_image['product_image']):Storage::disk('s3')->url('images/supplier.png'); @endphp
                                     </div>
                                 </div>
                             @else
@@ -60,8 +60,8 @@
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
                                                 <div class="details_gallery_box">
-                                                    <a class="simpleLens-lens-image" data-lens-image="{{Storage::disk('s3')->url('public/images/'.$product->product_images[0]['product_image'])}}">
-                                                        <img id="largeImage" src="{{Storage::disk('s3')->url('public/images/'.$product->product_images[0]['product_image'])}}" class="simpleLens-big-image" width="380px" height="320px">
+                                                    <a class="simpleLens-lens-image" data-lens-image="{{Storage::disk('s3')->url('public/'.$product->product_images[0]['product_image'])}}">
+                                                        <img id="largeImage" src="{{Storage::disk('s3')->url('public/'.$product->product_images[0]['product_image'])}}" class="simpleLens-big-image" width="380px" height="320px">
                                                     </a>
                                                 </div>
                                             </div>
@@ -69,10 +69,10 @@
                                     @endif
                                     <div class="simpleLens-thumbnails-container">
                                         @foreach($product->product_images as $product_image)
-                                            <a href="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
-                                                data-lens-image="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}"
-                                                data-big-image="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}">
-                                                <img src="{{Storage::disk('s3')->url('public/images/'.$product_image['product_image'])}}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
+                                            <a href="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}" data-fancybox="gallery" class="simpleLens-thumbnail-wrapper"
+                                                data-lens-image="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}"
+                                                data-big-image="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}">
+                                                <img src="{{Storage::disk('s3')->url('public/'.$product_image['product_image'])}}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
                                             </a>
                                         @endforeach
                                         @if($product->overlay_image)
@@ -82,7 +82,7 @@
                                                 <img src="{{Storage::disk('s3')->url('public/images/'.$product->overlay_image)}}" style="width:80px !important; height:80px !important; margin-top:4px;" id="smallImages[]" />
                                             </a>
                                         @endif
-                                        @php $productImage = (!empty($product->product_images[0]->product_image))? Storage::disk('s3')->url('public/images/'.$product->product_images[0]->product_image) : Storage::disk('s3')->url('images/supplier.png'); @endphp
+                                        @php $productImage = (!empty($product->product_images[0]->product_image))? Storage::disk('s3')->url('public/'.$product->product_images[0]->product_image) : Storage::disk('s3')->url('images/supplier.png'); @endphp
                                     </div>
                                 </div>
                             @endif

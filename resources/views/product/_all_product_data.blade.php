@@ -35,7 +35,7 @@
                             $overLayImage = $list->overlay_image ?? NULL;
                             $img= \Storage::disk('s3')->url('public/images/'.$list->product_images[0]->product_image);
                             if($list->product_images()->exists()){
-                                $img= \Storage::disk('s3')->url('public/images/'.$list->product_images[0]->product_image);
+                                $img= \Storage::disk('s3')->url('public/'.$list->product_images[0]->product_image);
                             }else{
                                 $img= \Storage::disk('s3')->url('public/images/supplier.png');
                             }

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-!-- Main content -->
+<!-- Main content -->
 
 
 <div class="content-wrapper">
@@ -36,6 +36,7 @@
 						<thead class="cf">
 						<tr>
 							<th>Name</th>
+                            <th>Parent</th>
 							<th class="text-center">Action</th>
 						</tr>
 						</thead>
@@ -46,6 +47,7 @@
 									<td data-title="Product Tag">
 										<a href="{{ route('admin.product-tag.edit', $item->id) }}">{{$item->name}}</a>
 									</td>
+                                    <td>{{$item->tag_mapping_name ?? '' }}</td>
 									<td data-title="Action" class="text-center">
 										<form action="{{ route('admin.product-tag.destroy', $item->id) }}" method="POST">
 											@csrf

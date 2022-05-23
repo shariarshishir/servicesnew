@@ -25,4 +25,12 @@ class BusinessMappingTree extends Model
     {
         return $this->children()->with('allChildren');
     }
+
+     /**
+     * The business mapping that belong to the tag.
+     */
+    public function tagMapping()
+    {
+        return $this->belongsToMany(ProductTag::class, 'tag_mapping','business_mapping_id', 'product_tag_id');
+    }
 }

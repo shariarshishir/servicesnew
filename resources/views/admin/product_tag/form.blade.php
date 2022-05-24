@@ -13,8 +13,21 @@
             <div class="form-group">
                 <label for="parent">Parent :</label>
                 <select class="form-control select2" name="parent[]" multiple aria-label="multiple select example">
-                    @foreach ($parent as $item)
-                        <option value="{{$item['id']}}" {{$product_tag->tag_mapping_id && in_array($item['id'],$product_tag->tag_mapping_id) ? 'selected' : ''}}>{{$item['name']}}</option>
+                    @foreach ($business_mapping_tree as $first )
+                            @foreach ($first->children as $second)
+                                    <optgroup label="{{$second->name}}">
+                                        @foreach ($second->children as $item)
+                                        <option value="{{$item->id}}"
+                                            @if($product_tag->tagMapping)
+                                                @foreach ($product_tag->tagMapping as $tag)
+                                                    @if($tag->id == $item->id) selected @endif
+                                                @endforeach
+                                            @endif>
+                                            {{$item->name}}
+                                        </option>
+                                        @endforeach
+                                    </optgroup>
+                            @endforeach
                     @endforeach
                 </select>
                 @if($errors->has('parent'))

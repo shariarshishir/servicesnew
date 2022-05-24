@@ -47,7 +47,7 @@
 									<td data-title="Product Tag">
 										<a href="{{ route('admin.product-tag.edit', $item->id) }}">{{$item->name}}</a>
 									</td>
-                                    <td>{{$item->tag_mapping_name ?? '' }}</td>
+                                    <td>@if($item->tagMapping) @foreach ($item->tagMapping as $tag){{$tag->name}} @if(!$loop->last) , @endif @endforeach @endif</td>
 									<td data-title="Action" class="text-center">
 										<form action="{{ route('admin.product-tag.destroy', $item->id) }}" method="POST">
 											@csrf

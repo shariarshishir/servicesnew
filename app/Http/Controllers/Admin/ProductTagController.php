@@ -13,16 +13,6 @@ class ProductTagController extends Controller
     public function index()
     {
         $product_tag = ProductTag::with('tagMapping')->select('id', 'name')->get();
-
-        foreach($product_tag as $item){
-            if($item->tagMapping()->exists()){
-                $tag_mapping_name=[];
-                foreach($item->tagMapping as $item2){
-                    array_push($tag_mapping_name,$item2->name);
-                }
-                $item['tag_mapping_name']= implode(',',$tag_mapping_name);
-            }
-        }
         return view('admin.product_tag.index',compact('product_tag'));
     }
 
@@ -35,7 +25,8 @@ class ProductTagController extends Controller
     {
         $product_tag = new ProductTag();
         $parent=$this->getBusinessMappingTreeThirdLayer();
-        return view('admin.product_tag.create',compact('product_tag','parent'));
+        $business_mapping_tree=BusinessMappingTree::where('id',1)->with('children.children')->get(['id','name']);
+        return view('admin.product_tag.create',compact('product_tag','parent','business_mapping_tree'));
 
     }
 
@@ -73,14 +64,8 @@ class ProductTagController extends Controller
     {
         $product_tag = ProductTag::with('tagMapping')->find($id);
         $parent=$this->getBusinessMappingTreeThirdLayer();
-        $tag_mapping_id=[];
-        if($product_tag->tagMapping()->exists()){
-            foreach($product_tag->tagMapping as $item){
-                array_push($tag_mapping_id,$item->id);
-            }
-        }
-        $product_tag['tag_mapping_id']= $tag_mapping_id;
-        return view('admin.product_tag.edit',compact('product_tag','parent'));
+        $business_mapping_tree=BusinessMappingTree::where('id',1)->with('children.children')->get(['id','name']);
+        return view('admin.product_tag.edit',compact('product_tag','business_mapping_tree'));
     }
 
 

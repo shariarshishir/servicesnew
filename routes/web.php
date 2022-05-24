@@ -138,7 +138,7 @@ Route::fallback(function () {
 });
 //product tag set product
 Route::get('product-tag-set-into-product-table',[ImportController::class, 'productTagSet']);
-
+Route::get('product-tag-mapping',[ImportController::class, 'productTagMappingWithBusinessMappingTree']);
 // Frontend API's endpoint start
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');

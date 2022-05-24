@@ -15,6 +15,7 @@ use App\Models\Proforma;
 use App\Models\Manufacture\ProductCategory;
 use Illuminate\Support\Facades\Http;
 use App\Http\Traits\PushNotificationTrait;
+use App\Models\ProductTag;
 use Illuminate\Support\Facades\Auth;
 
 class BackendRfqController extends Controller
@@ -45,11 +46,27 @@ class BackendRfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
+        $product_tag=ProductTag::with('tagMapping')->whereIn('id',$rfq['category_id'])->get();
+        $factory_type=[];
+        $industry_type=[];
+        foreach($product_tag as $tag){
+            foreach($tag->tagMapping as $mapping){
+                array_push($factory_type,$mapping->name);
+                array_push($industry_type,$mapping->parent->name);
+            }
+        }
+        $factroy_unique= array_unique($factory_type);
+        $factory_values= array_values($factroy_unique);
+        $industry_unique= array_unique($industry_type);
+        $industry_values= array_values($industry_unique);
+
         $businessProfiles = BusinessProfile::select('business_profiles.*')
         ->leftJoin('rfq_quotation_sent_supplier_to_buyer_rel', 'rfq_quotation_sent_supplier_to_buyer_rel.business_profile_id', '=', 'business_profiles.id')
         ->with(['user','supplierQuotationToBuyer'=> function($q) use ($id){
             $q->where('rfq_id', $id);}])
-        ->whereIn('business_category_id',$rfq['category_id'])
+        ->whereIn('factory_type',$factory_values)
+        ->whereIn('industry_type',$industry_values)
+        ->where('business_type', 'manufacturer')
         ->where('profile_verified_by_admin', '!=', 0)
         ->groupBy('business_profiles.id')
         ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
@@ -64,7 +81,7 @@ class BackendRfqController extends Controller
         }
         $from_user = User::find($user);
         $to_user = User::where('email',$rfq['user']['email'])->first();
-        $from_user_image = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        $from_user_image = isset($from_user->image) ? asset($from_user->image) : asset('images/frontendimages/no-image.png');
         if($rfq['user']['user_picture'] !=""){
             $to_user_image = $rfq['user']['user_picture'];
             $userNameShortForm = "";

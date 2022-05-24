@@ -139,7 +139,7 @@
                             <h4>How can I buy from Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can access the catalog of designs, library of textile, yearn and accessories and/or send us an RFQ. We match your query with the best supplier of your interest within 48 hours. </p>
+                            <p>You can access the catalog of designs, library of textile, yarn and accessories and/or send us an RFQ. We match your query with the best supplier of your interest within 48 hours. </p>
                         </div>
                     </li>
                     <li data-title="How can I sell in Merchant Bay?">
@@ -448,7 +448,7 @@
                             <h4>How can I buy from Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can access the catalog of designs, library of textile, yearn and accessories and/or send us an RFQ. We match your query with the best supplier of your interest within 48 hours. </p>
+                            <p>You can access the catalog of designs, library of textile, yarn and accessories and/or send us an RFQ. We match your query with the best supplier of your interest within 48 hours. </p>
                         </div>
                     </li>
                     <li>

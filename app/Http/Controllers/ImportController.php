@@ -132,7 +132,7 @@ class ImportController extends Controller
         $product_tag=['jacket'   => ['Anoraks','Capes','Cloaks','Fur Coats','Jackets','Wind Jackets'],
                       'knit'     =>['Blouses','Caps','Cardigans','Corporate Uniform','Denim','Dress Pant','Flannel Pants','Flannel Shirt','Fleece Jackets','Hooded Sweat Shirt','Jackets','Jeans','Jerseys','Long Pant','Petticoats','Polo Shirts','Pullovers','Pyjamas','Scarfs ','Shirt-Blouses','Shirts','Shorts','Singlets','Skirts Dresses','Sports Wear','Suits','Sweat Shirts','Sweater','Tank Tops','Tops','Track-Suits','Trousers','T-Shirts','Underwear','Vests','Work Wear'],
                       'lingerie' => ['Brassisres','Briefs','Corselettes','Corsets','Garters','Girdles','Inner Wear','Negligee Dressing Gowns','Night Dresses','Night Gowns','Night Pajamas','Night Shirt','Panties','Panty-Girdles','Pantyhose','Slips','Stockings','Swimwear','Tights','Underpants'],
-                      'others'   => ['Brace','Gloves','Scarves','Veils'],
+                    //   'others'   => ['Brace','Gloves','Scarves','Veils'],
                       'suits'    => ['Blazers','Bow Ties','Cravats','Over Coats','Suits','Suspenders','Ties','Vests','Waistcoats'],
                       'sweater'  => ['Cardigan','Denim Pant','Mittens And Mitts','Mufflers','Pullover','Scarfs','Shawls','Ski Suits','Sock','Sweater','Vest','Wool Blazers','Wool Jackets','Woolen Caps'],
                       'woven'    =>['Basic 5 Pocket Trouser','Blouses','Bottom','Breeches','Cargo Pant','Cargo Shorts','Divided Skirts','Dresses','Dressing Gowns','Ensembles','Fleece Pullover','Frock','Handkerchiefs','Hoodie','Inner Wear','Jerseys','Laggings','Mantillas','Musk','Overall','Palazzo','Petticoats','Polo Shirts','Pyjamas','Shirts','Shorts','Skirts','Sleepwear','Top ','Track-Suits','Trousers'],
@@ -140,8 +140,8 @@ class ImportController extends Controller
                       'bed sheets' =>['Cotton Bed Sheets','Synthetic Flannel Bed Sheets','Tencel Bed Sheets','Silk Bed Sheets','Bamboo Bed Sheets','Microfiber Bed Sheets','Linen Bed Sheets'],
                       'trims'     =>['Sewing Thread','Button','Rivet','Lining','Interlining','Stopper','Lace','Braid','Elastic','Label','Zipper','Motif','Shoulder Pad','Hook & Loop','Twill Tape','Velcro Tape','Pon Pom','Wadding','Ribbon'],
                       'accessories' =>['Hanger','Hangtag','Tissu Paper','Backboard','Neck Board','Paper Band','Pin/Clip','Tag Pin','Poly Bag','Elastic Bag','Mini Poly Bag','Collar Stand','Gum Tape','Scotch Tape','P.P Band','Inner Carton','Outer Carton','Iron Seal','Trapaulin Paper','Carton Sticker','Safety Sticker','Arrow Sticker','Butterfly','Both Side Tape','Plastic Staple','Barcode'],
-                      'washing' =>['Normal Wash','Pigment Wash','Bleach Wash','Stone Wash','Acid Wash','Enzyme Wash','Sand Blasting','Super White Wash','Caustic Wash'],
-                      'embroidery' => ['Whitework embroidery','Candlewick embroidery','Cross stitch embroidery','Pulled thread embroidery','Hedebo embroidery','Drawn thread embroidery','Hardanger embroidery','Crewel embroidery','Surface embroidery','Goldwork embroidery','Redwork embroidery','Blackwork embroidery','Bluework embroidery','Sashiko embroider'],
+                    //   'washing' =>['Normal Wash','Pigment Wash','Bleach Wash','Stone Wash','Acid Wash','Enzyme Wash','Sand Blasting','Super White Wash','Caustic Wash'],
+                    //   'embroidery' => ['Whitework embroidery','Candlewick embroidery','Cross stitch embroidery','Pulled thread embroidery','Hedebo embroidery','Drawn thread embroidery','Hardanger embroidery','Crewel embroidery','Surface embroidery','Goldwork embroidery','Redwork embroidery','Blackwork embroidery','Bluework embroidery','Sashiko embroider'],
                       'cut & sew knit' => ['Crepe Jersey','Dobby/Jacquard','Double Knit/Interlock','Fleece','French Terry','Jersey','Loop Terry','Neoprene/Scuba','Pique','Pointelle','Polar Fleece','Ponte','Rib','Sherpa','Velour','Waffle'],
                       'warp knit' => ['Lace','Mesh/Tulle','Raschel','Tricot','Velvet'],
                       'lining' => ['Chiffon Lining','Satin Lining','Stretch Lining','Taffeta Lining','Interlining'],
@@ -154,13 +154,15 @@ class ImportController extends Controller
 
     ];
     foreach($product_tag as $key => $tag){
-        $businessMappingTree=BusinessMappingTree::where('name',$key)->first();
-        $tag_id=[];
-        foreach($tag as $tag2){
-            $product_tag=ProductTag::where('name',$tag2)->first();
-            array_push($tag_id,$product_tag->id);
-        }
-        $businessMappingTree->tagMapping()->sync($tag_id);
+        $businessMappingTree=BusinessMappingTree::with('parent.parent')->where('name',$key)->first();
+        if($businessMappingTree->parent->parent->name == 'manufacturer'){
+            $tag_id=[];
+            foreach($tag as $tag2){
+                $product_tag=ProductTag::where('name',$tag2)->first();
+                array_push($tag_id,$product_tag->id);
+            }
+            $businessMappingTree->tagMapping()->sync($tag_id);
+        };
     }
     return 'done';
         $jacket=['Anoraks','Capes','Cloaks','Fur Coats','Jackets','Wind Jackets'];

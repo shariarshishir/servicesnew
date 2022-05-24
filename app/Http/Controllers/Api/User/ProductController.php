@@ -9,7 +9,6 @@ use stdClass;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Product;
-use App\Models\ProductTag;
 use App\Rules\MoqUnitRule;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
@@ -28,6 +27,7 @@ use App\Rules\ReadyStockPriceBreakDownRule;
 use App\Rules\NonClothingPriceBreakDownRule;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\ProductTag;
 
 
 class ProductController extends Controller
@@ -1473,7 +1473,6 @@ class ProductController extends Controller
                 }
 
             }
-
             $product_tag=ProductTag::whereIn('name',$item->product_tag)->get();
             $product_tag_id=[];
             foreach($product_tag as $tag){
@@ -1563,6 +1562,16 @@ class ProductController extends Controller
 
                 }
 
+                $product_tag=ProductTag::whereIn('name',$product->product_tag)->get();
+                $product_tag_id=[];
+                $product_tag_name=[];
+                foreach($product_tag as $tag){
+                    array_push($product_tag_id,$tag->id);
+                    array_push($product_tag_name,$tag->name);
+                }
+                $product_tag_id= implode(',',$product_tag_id);
+                $product_tag_name= implode(',',$product_tag_name);
+
 
                 $newFormatedProduct= new stdClass();
                 $newFormatedProduct->id=$product->id;
@@ -1575,8 +1584,8 @@ class ProductController extends Controller
                 $newFormatedProduct->full_stock_price= $product->full_stock_price;
                 $newFormatedProduct->attribute=  $attribute_array;
                 $newFormatedProduct->colors_sizes=$product->product_type==1 ? [] :json_decode($product->colors_sizes);
-                $newFormatedProduct->product_category_id=$product->product_category_id;
-                $newFormatedProduct->product_category_name=$product->category->name;
+                $newFormatedProduct->product_category_id=$product_tag_id;
+                $newFormatedProduct->product_category_name=$product_tag_name;
                 $newFormatedProduct->product_type=$product->product_type;
                 $newFormatedProduct->moq=$product->moq;
                 $newFormatedProduct->product_unit=$product->product_unit;

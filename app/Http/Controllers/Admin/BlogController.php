@@ -45,7 +45,7 @@ class BlogController extends Controller
             $feature_image_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
             $s3filePath = '/public/images/' . $feature_image_file_name;
             $s3->put($s3filePath, file_get_contents($image));
-            $allData['feature_image']=$feature_image_file_name;
+            $allData['feature_image'] = 'images/'.$feature_image_file_name;
         }
 
         // if ($request->hasFile('author_img')){
@@ -65,7 +65,7 @@ class BlogController extends Controller
             $author_img_file_name = uniqid().$uniqueString.'.'. $image->getClientOriginalExtension();
             $s3filePath = '/public/images/' . $author_img_file_name;
             $s3->put($s3filePath, file_get_contents($image));
-            $allData['author_img']=$author_img_file_name;
+            $allData['author_img'] = 'images/'.$author_img_file_name;
         }
 
         // if ($request->hasFile('meta_image')){
@@ -107,7 +107,7 @@ class BlogController extends Controller
         $metaInformation->meta_title = $request->meta_title;
         $metaInformation->meta_description = $request->meta_description;
         $metaInformation->meta_type = $request->meta_type;
-        $metaInformation->meta_image = $meta_image_file_name??NULL;
+        $metaInformation->meta_image = 'images/'.$meta_image_file_name??NULL;
         $metaInformation->save();
         return redirect()->route('blogs.index');
       

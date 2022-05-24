@@ -92,7 +92,7 @@ class ProductController extends Controller
                 'created_by' => auth()->id(),
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
-                'overlay_image' => $overlay_image_file_name,
+                'overlay_image' => $overlay_image_file_name ?? NULL,
                 'product_type_mapping_id' => $request->product_type_mapping,
                 'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
 

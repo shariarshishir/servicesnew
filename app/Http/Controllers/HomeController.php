@@ -1263,6 +1263,10 @@ class HomeController extends Controller
         return view('contactus.index');
     }
 
+    public function faqLandingPage(){
+        return view('faq.index');
+    }    
+
     // get supplier location data
     public function getSupplierLocationData(Request $request)
     {

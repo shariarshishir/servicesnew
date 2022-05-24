@@ -9607,7 +9607,181 @@ button.mdc-button.mdc-button--colored.mdc-button--raised{
 }
 
 
+/* ******************** FAQ css style start *********************** */
+.faq_contentinfo_wrapper {
+    font-size: 16px;
+    color: #5A5A5A;
+}
+.faq_contentinfo_wrapper .collapsible {
+    box-shadow: none;
+    border: none;
+    margin-top: 0;
+}
+.faq_contentinfo_wrapper h2 {
+    font-family: 'nexabold';
+    font-size: 35px;
+    line-height: 45px;
+    margin: 0 auto;
+    color: #285460;
+    margin-bottom: 20px;
+}
+.faq_contentinfo_wrapper .faq_search_box {
+    border: 1px solid #285460;
+    border-radius: 6px;
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+}
+.faq_contentinfo_wrapper .faq_search_box .material-icons {
+    position: absolute;
+    top: 8px;
+    font-size: 25px;
+    left: 10px;
+}
+.faq_contentinfo_wrapper .faq_search_box .twitter-typeahead {
+    padding-left: 40px;
+    width: 100%;
+}
+.faq_contentinfo_wrapper .faq_search_box .tt-menu {
+    width: 100%;
+    top: 30px !important;
+}
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-suggestion {
+    font-size: 16px;
+    text-align: left;
+    border-bottom: 1px solid #eeeeee;
+    padding: 5px 15px;
+}
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-suggestion:hover {
+    background: #54a958;
+}
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-selectable .tt-highlight {
+    color: #54a958 !important;
+}
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-selectable strong.tt-highlight {
+    color: #484848 !important;
+    font-weight: normal !important;
+}
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-selectable:hover .tt-highlight {
+    color: #fff !important;
+}
+.faq_contentinfo_wrapper .faq_search_box .faq_search_input {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    margin: 0;
+    height: 40px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    font-size: 16px;
+    padding-right: 10px;
+}
+.faq_contentinfo_wrapper .faq_search_box .faq_search_input.tt-hint {
+    left: 40px !important;
+    width: 85% ;
+}
+.faq_contentinfo_wrapper .collapsible-body {
+    border: none;
+}
+.faq_contentinfo_wrapper h4 {
+    font-size: 17px;
+    color: #858585;  
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.faq_contentinfo_wrapper .faq_search_wrap {
+    padding-bottom: 50px;
+}
+.faq_contentinfo_wrapper .faq_search_wrap label {
+    font-size: 16px;
+    color: #B1B1B1;
+    display: block;
+    margin-bottom: 10px;
+}
+.faq_contentinfo_wrapper .faq_infobox_wrap {
+    display: inline-block;
+    width: 100%;
+}
+.faq_infobox_wrap .collapsible .collapsible-header {
+    border: none;
+    display: block;
+    padding: 0;
+}
+.faq_infobox_wrap .collapsible-header.active h4 {
+    color: #285460;
+}
+.faq_infobox_wrap .faq_collaps_content .collapsible-header h4 {
+    background: url(../images/account-images/arrow-down.png) no-repeat 98% center;
+    padding: 17px 40px 15px 20px;
+    background-size: 22px;
+}
+.faq_infobox_wrap .faq_collaps_content .collapsible-header.active h4 {
+    background: url(../images/account-images/arrow-active.png) no-repeat 98% center;
+    background-size: 22px;
+    font-family: 'nexablack';
+}
 
+.faq_contentinfo_wrapper .faq_collaps_content ul.collapsible li {
+    -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
+    -moz-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12);
+    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
+    margin-bottom: 20px;
+}
+.faq_contentinfo_wrapper .faq_collaps_content ul.collapsible li.active {
+    border: 1px solid #54a958;
+}
+.faq_contentinfo_wrapper .faq_collaps_content ul.collapsible li .collapsible-body {
+    padding: 0px 20px 15px;
+}
+.faq_contentinfo_wrapper .faq_talkToUs_boxWrap {
+    padding: 100px 0 0;
+    max-width: 260px;
+}
+.faq_contentinfo_wrapper .faq_talkToUs_boxWrap .btn_talk {
+    margin: 10px 0 0;
+    padding: 10px 20px 6px;
+    display: inline-block;
+}
+.faq_contentinfo_wrapper .faq_talkToUs_boxWrap .btn_talk .material-icons {
+    float: right;
+    margin-left: 8px;
+    font-size: 19px;
+}
+.faq_contentinfo_wrapper .tab {
+    float: left;
+    width: 25%;
+    min-height: 300px;
+}
+.faq_contentinfo_wrapper .tab button {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 280px;
+    padding: 15px 10px 12px 50px;
+    color: #B1B1B1;
+    background: none;
+    margin-bottom: 10px;
+}
+.faq_contentinfo_wrapper .tab button.active,
+.faq_contentinfo_wrapper .tab button:hover {
+    background:  #eeeeee;
+    border-radius: 6px;
+    font-family: 'nexablack';
+    color: #285460;
+}
+.faq_contentinfo_wrapper .tabcontent {
+    float: left;
+    padding: 0px 12px;
+    width: 75%;
+    border-left: none;
+    height: auto;
+}
+/* ******************** FAQ css style end *********************** */
 
 
 /* ******************** Media css style start *********************** */

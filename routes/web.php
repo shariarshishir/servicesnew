@@ -155,6 +155,7 @@ Route::get('/policy', [HomeController::class, 'policyLandingPage'])->name('front
 Route::get('/aboutus', [HomeController::class, 'aboutusLandingPage'])->name('front.aboutus');
 Route::get('/how-we-work', [HomeController::class, 'howweworkLandingPage'])->name('front.howwework');
 Route::get('/contactus', [HomeController::class, 'contactusLandingPage'])->name('front.contactus');
+Route::get('/faqs', [HomeController::class, 'faqLandingPage'])->name('front.faq');
 
 
 Route::get('/suppliers', [HomeController::class, 'suppliers'])->name('suppliers');

@@ -9,6 +9,7 @@ use stdClass;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\ProductTag;
 use App\Rules\MoqUnitRule;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
@@ -1382,13 +1383,20 @@ class ProductController extends Controller
                 }
 
             }
+            $product_tag=ProductTag::whereIn('name',$item->product_tag)->get();
+            $product_tag_id=[];
+            foreach($product_tag as $tag){
+                array_push($product_tag_id,$tag->id);
+            }
+            $product_tag_id= implode(',',$product_tag_id);
+
             $merged->push(
                 [
                 'id' => $item->id,
                 'title' => $item->name ?? $item->title,
                 'flag' => $item->flag,
-                'category' => $item->category->name,
-                'category_id' => (string)$item->category->id,
+                'category' => null,
+                'category_id' => (string) $product_tag_id,
                 'moq' => (int)$item->moq ?? null,
                 'price' => $item->price_per_unit ?? null,
                 'quantity_unit' => $item->product_unit ?? $item->qty_unit,
@@ -1465,13 +1473,21 @@ class ProductController extends Controller
                 }
 
             }
+
+            $product_tag=ProductTag::whereIn('name',$item->product_tag)->get();
+            $product_tag_id=[];
+            foreach($product_tag as $tag){
+                array_push($product_tag_id,$tag->id);
+            }
+            $product_tag_id= implode(',',$product_tag_id);
+
             $merged->push(
                 [
                 'id' => $item->id,
                 'title' => $item->name ?? $item->title,
                 'flag' => $item->flag,
-                'category' => $item->category->name,
-                'category_id' => (string)$item->category->id,
+                'category' => null,
+                'category_id' => (string) $product_tag_id,
                 'moq' =>  (int)$item->moq ?? null,
                 'price' => $item->price_per_unit ?? null,
                 'quantity_unit' => $item->product_unit ?? $item->qty_unit,

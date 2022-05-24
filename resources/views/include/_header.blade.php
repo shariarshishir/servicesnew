@@ -53,7 +53,7 @@
 								<ul id="whyus-system-links" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
-									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">Faqs</a></li>
+									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">FAQ</a></li>
 								</ul>
 							</li>
 
@@ -351,7 +351,7 @@
 									<li itemprop="itemListElement"><a itemprop="Tools" class="{{ Route::is('front.tools') ? 'active' : ''}}" href="{{route('front.tools')}}">Tools</a></li>
 									<li itemprop="itemListElement"><a href="http://insight.merchantbay.com/" itemprop="Insights">Insights</a></li>
 									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="Helps">Helps</a></li>
-									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="FAQs">FAQs</a></li>
+									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="FAQ">FAQ</a></li>
 								</ul>
 							</li>
 							<li itemprop="itemListElement">
@@ -360,7 +360,7 @@
 								<ul id="whyus-system-links-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
-									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">Faqs</a></li>
+									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">FAQ</a></li>
 								</ul>
 							</li>
 						</ul>

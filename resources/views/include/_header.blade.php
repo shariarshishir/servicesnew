@@ -53,6 +53,7 @@
 								<ul id="whyus-system-links" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
+									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">Faqs</a></li>
 								</ul>
 							</li>
 
@@ -359,6 +360,7 @@
 								<ul id="whyus-system-links-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
+									<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">Faqs</a></li>
 								</ul>
 							</li>
 						</ul>

@@ -8,13 +8,13 @@
         <div class="faq_search_box">
             <i class="material-icons">search</i>
             <input type="text" placeholder="Search anything" class="faq_search_input typeahead tt-query" autocomplete="off" spellcheck="false">
-            <a href="javascript:void(0);" class="reset_faq_filter" style="display: none;">Reset</a>
+            <a href="javascript:void(0);" class="reset_faq_filter" style="display: none;"><i class="material-icons">restart_alt</i></a>
         </div>
     </div>
     <div class="faq_infobox_wrap">
         <div class="tab">
             <div class="rfq_tab_item_box">
-                <button class="tablinks active" onclick="faqCategory(event, 'faqCategoryAll')" id="defaultOpen">All</button>
+                <button class="tablinks triggerEvent active" onclick="faqCategory(event, 'faqCategoryAll')" id="defaultOpen">All</button>
                 <button class="tablinks" onclick="faqCategory(event, 'faqCategoryWhat')">What</button>
                 <button class="tablinks" onclick="faqCategory(event, 'faqCategoryHow')">How</button>
                 <button class="tablinks" onclick="faqCategory(event, 'faqCategoryCan')">Can</button>
@@ -662,8 +662,108 @@
 
 @push('js')
 <script>
+function faqCategory(evt, faqCategory) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(faqCategory).style.display = "block";
+    evt.currentTarget.className += " active";
+}    
 $(document).ready(function(){
 
+    var $input = $(".typeahead");
+    $input.typeahead({
+        source: [
+            "What is Merchant Bay Limited?",
+            "What are the services Merchant Bay offers?",
+            "What makes Merchant Bay unique?",
+            "What products can I buy from Merchant Bay?",
+            "What is the price range for Merchant Bay's products?",
+            "How can I get latest updates from Merchant Bay?",
+            "What if I need to modify a product, like I need to attach my logo in design?",
+            "What to do if I don't find what I am looking for?",
+            "What is an RFQ?",
+            "What to do if I don't receive any reply on my RFQ?",
+            "What is a Smart Order Management Dashboard?",
+            "What modules Merchant Bay offers in Order Management Dashboard?",
+            "How can I buy from Merchant Bay?",
+            "How can I sell in Merchant Bay?",
+            "How can I open my business profile in Merchant Bay?",
+            "How can I connect with Merchant Bay?",
+            "How can I verify my business profile?",
+            "How to post an RFQ?",
+            "How does RFQ work?",
+            "How long does product development take in Merchant Bay?",
+            "Can I buy from abroad?",
+            "Can I buy one piece?",
+            "Can I open multiple business profiles?",
+            "Can I assign a representative in a profile?",
+            "Can I sell my designs in Merchant Bay?",
+            "Can Merchant Bay manage the compliance and regulatory aspect of a product?",
+            "Does Merchant Bay have a Mobile App?",
+            "Which Country is Merchant Bay Based in?",
+            "Does Merchant Bay share my data with anyone?",
+            "Does Merchant Bay offer design support?",
+            "Are Merchant Bay in-house designers up-to-date with latest fashion trends?",
+            "Do Merchant Bay work with start-up brands and small businesses?",
+            "Do Merchant Bay have factory support?",
+            "Do Merchant Bay have sample support?",
+            "Do Merchant Bay have merchandiser support?"
+        ],
+        autoSelect: true
+    });
+    $input.change(function() {
+        var current = $input.typeahead("getActive");
+        if (current) {
+            // Some item from your model is active!
+            if (current.name == $input.val()) {
+            // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+            } else {
+            // This means it is only a partial match, you can either add a new item
+            // or take the active if you don't want new items
+            }
+        } else {
+            // Nothing is active so it is a new value (or maybe empty value)
+        }
+    });    
+
+    $(".collapsible").collapsible({
+        accordion:true
+    });    
+
+    $(".faq_search_input").change(function(){
+        var inputText = String($(this).val());
+        $(".data-title-filter li").each(function() {
+            var listFind = String($(this).data("title"));
+            if (inputText == listFind)
+            {
+                $(".rfq_tab_item_box .tablinks").removeClass("active");
+                faqCategory(event, 'faqCategoryAll');
+                $(".triggerEvent").addClass("active");
+                $(this).css("display", "block");
+                $(".reset_faq_filter").show();
+                //console.log("Found");
+                return;
+            }
+            else 
+            {
+                $(this).css("display", "none");
+                //console.log("Not Found");
+                return;
+            }
+        });
+    });
+
+    $(".reset_faq_filter").click(function(){
+        $(".faq_search_input").val("");
+        window.location.reload();
+    });
 });
 </script>
 @endpush

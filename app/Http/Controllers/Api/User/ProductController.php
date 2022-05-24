@@ -1385,17 +1385,20 @@ class ProductController extends Controller
             }
             $product_tag=ProductTag::whereIn('name',$item->product_tag)->get();
             $product_tag_id=[];
+            $product_tag_name=[];
             foreach($product_tag as $tag){
                 array_push($product_tag_id,$tag->id);
+                array_push($product_tag_name,$tag->name);
             }
             $product_tag_id= implode(',',$product_tag_id);
+            $product_tag_name= implode(',',$product_tag_name);
 
             $merged->push(
                 [
                 'id' => $item->id,
                 'title' => $item->name ?? $item->title,
                 'flag' => $item->flag,
-                'category' => null,
+                'category' => $product_tag_name,
                 'category_id' => (string) $product_tag_id,
                 'moq' => (int)$item->moq ?? null,
                 'price' => $item->price_per_unit ?? null,

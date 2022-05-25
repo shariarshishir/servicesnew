@@ -158,7 +158,7 @@
                                         <div class="suppliers_box">
                                             <div class="suppliers_imgBox">
                                                 <div class="imgBox">
-                                                    <img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />
+                                                    <img src="{{Storage::disk('s3')->url('public/'.$businessProfile['user']['image'])}}" alt="" />
                                                 </div>
                                                 <!--h5>MB Pool</h5-->
                                             </div>

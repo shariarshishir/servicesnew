@@ -5,7 +5,7 @@
 
 <!-- Profile section start -->
 <section class="profile_bannerwrap">
-	<div class="banner_overlay"  @if($business_profile->business_profile_banner) style="background:url('{{Storage::disk('s3')->url('public/'.$business_profile->business_profile_banner}}'); background-size:cover;" @endif>
+	<div class="banner_overlay"  @if($business_profile->business_profile_banner) style="background:url('{{Storage::disk('s3')->url('public/'.$business_profile->business_profile_banner)}}'); background-size:cover;" @endif>
 		<h1>{{$business_profile->business_name}}</h1>
 		<h2>In Speed We believe</h2>
 		@if($business_profile->is_business_profile_verified == 1)

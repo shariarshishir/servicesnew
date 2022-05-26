@@ -16,7 +16,7 @@
                     <p>
                         <span>Business Name:</span>
                         @if($profile->profile_type == 'buyer')
-                            <a href="{{route('new.profile.buyer.index',$profile->alias)}}">{{$profile->business_name}}</a>
+                            <a href="{{route('new.profile.index',$profile->alias)}}">{{$profile->business_name}}</a>
                         @elseif($profile->business_type == 'wholesaler')
                             <a href="{{route('wholesaler.profile.show',$profile->alias)}}">{{$profile->business_name}}</a>
                         @endif

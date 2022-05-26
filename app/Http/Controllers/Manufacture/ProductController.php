@@ -132,12 +132,16 @@ class ProductController extends Controller
 
 
             DB::commit();
-            $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
-            $data=view('business_profile._product_table_data', compact('products'))->render();
+            // $products=Product::where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
+            // $data=view('business_profile._product_table_data', compact('products'))->render();
+            $data=$product;
+            $image= $product->product_images[0]->product_image;
+            $source=Storage::disk('s3')->url('public/'. $image);
             return response()->json([
                 'success' => true,
                 'msg' => 'Profile Created Successfully',
                 'data' => $data,
+                'image' => $source,
             ],200);
 
 

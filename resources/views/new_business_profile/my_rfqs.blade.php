@@ -7,7 +7,7 @@
             <div class="profile_account_desktop_menu">
                 @include('new_business_profile.buyer_profile.profile_menu')
             </div>
-    
+
             <div class="profile_account_mobile_menu" style="display: none;">
                 <div class="row">
                     <div class="col s12">
@@ -26,10 +26,10 @@
                             </ul>
                     </div>
                 </div>
-                
+
                 <div id="profileAccountRight">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
-                    
+
                     <div class="new_profile_account_rightsidebar_mobile">
                         <div class="new_profile_account_myrfq_details">
                             <div class="new_profile_myrfq_details_topbox">
@@ -143,7 +143,7 @@
         </div>
     </div>
 
-    
+
 
     <div class="profile_account_innerinfo_wrap">
         <div class="container">
@@ -152,14 +152,14 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_explore {{ Route::is('new.profile.buyer.rfqs',$alias) ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.rfqs')}}">
+                                <li class="profile_explore {{ Route::is('new.profile.rfqs',$alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.rfqs')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Explore</h4>
                                     </a>
                                 </li>
-                                <li class="profile_my_rfq {{ Route::is('new.profile.buyer.my_rfqs') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.my_rfqs')}}">
+                                <li class="profile_my_rfq {{ Route::is('new.profile.my_rfqs') ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.my_rfqs')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>My RFQs</h4>
                                     </a>
@@ -189,7 +189,7 @@
                                             </div>
                                         </div>
                                         <div class="profile_account_myrfq_innerbox">
-                                            
+
                                             <div class="row rfq_account_title_bar">
                                                 <div class="col s8">
                                                     <h4>My RFQs</h4>
@@ -280,7 +280,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -398,7 +398,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

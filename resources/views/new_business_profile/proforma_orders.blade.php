@@ -26,7 +26,7 @@
                             </ul>
                     </div>
                 </div>
-                
+
                 <!-- <div id="profileAccountRight">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
                     test
@@ -42,20 +42,20 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_pos_pending {{ Route::is('new.profile.buyer.profoma_orders.pending') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.profoma_orders.pending')}}">
+                                <li class="profile_pos_pending {{ Route::is('new.profile.profoma_orders.pending') ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.profoma_orders.pending')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Pending</h4>
                                     </a>
                                 </li>
-                                <li class="profile_pos_ongoing {{ Route::is('new.profile.buyer.profoma_orders.ongoing') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.profoma_orders.ongoing')}}">
+                                <li class="profile_pos_ongoing {{ Route::is('new.profile.profoma_orders.ongoing') ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.profoma_orders.ongoing')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>On Going</h4>
                                     </a>
                                 </li>
-                                <li class="profile_pos_shipped {{ Route::is('new.profile.buyer.profoma_orders.shipped') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.profoma_orders.shipped')}}">
+                                <li class="profile_pos_shipped {{ Route::is('new.profile.profoma_orders.shipped') ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.profoma_orders.shipped')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Shipped</h4>
                                     </a>
@@ -208,13 +208,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

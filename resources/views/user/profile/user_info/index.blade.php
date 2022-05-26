@@ -66,14 +66,15 @@
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
                         <div class="my_businesses_box card user-business-profile-short-info" itemscope itemtype="https://schema.org/Organization">
-                            @if($businessprofile->business_type== 'manufacturer')
+                            {{-- @if($businessprofile->business_type== 'manufacturer')
                                 <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('manufacturer.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             @elseif($businessprofile->business_type== 'wholesaler')
                                 <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
-                            @endif
+                            @endif --}}
+                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('new.profile.index',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             <p><span style="font-weight: 500;">Business Location:</span> <span itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $businessprofile->location }}</span></p>
                             <p><span style="font-weight: 500;">Business Type:</span> {{ucwords($businessprofile->business_type)}}</p>
-                            <div class="business-shortcut-bar">
+                            {{-- <div class="business-shortcut-bar">
                                 <ul>
                                     <li><a href="javascript:void(0);">Messages</a></li>
                                     <li>
@@ -98,7 +99,7 @@
                                         @endif
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
 
                             <div class="switch profile_enable_disable_trigger">
                                 <label>

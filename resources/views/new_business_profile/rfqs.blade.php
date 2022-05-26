@@ -27,10 +27,10 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div id="profileAccountRight">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
-                    
+
                     <div class="new_profile_account_rightsidebar_mobile">
                         <div class="new_profile_account_filterbar">
                             <h4>Filtered by</h4>
@@ -89,14 +89,14 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_explore {{ Route::is('new.profile.buyer.rfqs') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.rfqs')}}">
+                                <li class="profile_explore {{ Route::is('new.profile.rfqs') ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.rfqs')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Explore</h4>
                                     </a>
                                 </li>
-                                <li class="profile_my_rfq {{ Route::is('new.profile.buyer.my_rfqs') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.buyer.my_rfqs')}}">
+                                <li class="profile_my_rfq {{ Route::is('new.profile.my_rfqs') ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.my_rfqs')}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>My RFQs</h4>
                                     </a>
@@ -145,7 +145,7 @@
                                                                             Lead Time <br/> <span>30-45</span> days
                                                                         </div>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -171,7 +171,7 @@
                                                                             Lead Time <br/> <span>30-45</span> days
                                                                         </div>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -197,7 +197,7 @@
                                                                             Lead Time <br/> <span>30-45</span> days
                                                                         </div>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -223,7 +223,7 @@
                                                                             Lead Time <br/> <span>30-45</span> days
                                                                         </div>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -279,12 +279,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

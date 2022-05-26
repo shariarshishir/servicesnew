@@ -51,6 +51,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\ProductTagController;
 use App\Http\Controllers\Admin\ProductTypeMappingController;
+use App\Http\Controllers\BusinessProfile\BusinessProfileController as BusinessProfileBusinessProfileController;
 use App\Http\Controllers\Manufacture\ProductController as ManufactureProductController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\SellerProductController;
@@ -71,7 +72,6 @@ use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductContro
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
 use App\Http\Controllers\RfqBidController;
 
-use App\Http\Controllers\BuyerBusinessProfileController;
 
 use App\Models\BusinessProfile;
 use Maatwebsite\Excel\Facades\Excel;
@@ -388,18 +388,17 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/send-request-for-profile-verification', [BusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
 
 
-    Route::get('/buyer/profile/{alias}/general-info', [BuyerBusinessProfileController::class, 'index'])->name('new.profile.buyer.index');
-    Route::get('/buyer/profile/{alias}/rfqs', [BuyerBusinessProfileController::class, 'rfqs'])->name('new.profile.buyer.rfqs');
-    Route::get('/buyer/profile/{alias}/my-rfqs', [BuyerBusinessProfileController::class, 'myRfqs'])->name('new.profile.buyer.my_rfqs');
-    Route::get('/buyer/profile/{alias}/proforma-pending-orders', [BuyerBusinessProfileController::class, 'profomaPendingOrders'])->name('new.profile.buyer.profoma_orders.pending');
-    Route::get('/buyer/profile/{alias}/proforma-ongoing-orders', [BuyerBusinessProfileController::class, 'profomaOngoingOrders'])->name('new.profile.buyer.profoma_orders.ongoing');
-    Route::get('/buyer/profile/{alias}/proforma-shipped-orders', [BuyerBusinessProfileController::class, 'profomaShippedOrders'])->name('new.profile.buyer.profoma_orders.shipped');
-    Route::get('/buyer/profile/{alias}/development-center', [BuyerBusinessProfileController::class, 'developmentCenter'])->name('new.profile.buyer.development_center');
-    Route::get('/buyer/profile/{alias}/order-management', [BuyerBusinessProfileController::class, 'orderManagement'])->name('new.profile.buyer.order_management');
-    Route::get('/buyer/profile/{alias}/products', [BuyerBusinessProfileController::class, 'products'])->name('new.profile.buyer.products');
-    Route::get('/buyer/profile/{alias}/insights', [BuyerBusinessProfileController::class, 'profileInsights'])->name('new.buyer.profile.insights');
-    Route::get('/buyer/profile/{alias}/home', [BuyerBusinessProfileController::class, 'profileHome'])->name('new.buyer.profile.home');
-
+    Route::get('profile/{alias}/general-info', [BusinessProfileBusinessProfileController::class, 'index'])->name('new.profile.index');
+    Route::get('profile/{alias}/rfqs', [BusinessProfileBusinessProfileController::class, 'rfqs'])->name('new.profile.rfqs');
+    Route::get('profile/{alias}/my-rfqs', [BusinessProfileBusinessProfileController::class, 'myRfqs'])->name('new.profile.my_rfqs');
+    Route::get('profile/{alias}/proforma-pending-orders', [BusinessProfileBusinessProfileController::class, 'profomaPendingOrders'])->name('new.profile.profoma_orders.pending');
+    Route::get('profile/{alias}/proforma-ongoing-orders', [BusinessProfileBusinessProfileController::class, 'profomaOngoingOrders'])->name('new.profile.profoma_orders.ongoing');
+    Route::get('profile/{alias}/proforma-shipped-orders', [BusinessProfileBusinessProfileController::class, 'profomaShippedOrders'])->name('new.profile.profoma_orders.shipped');
+    Route::get('profile/{alias}/development-center', [BusinessProfileBusinessProfileController::class, 'developmentCenter'])->name('new.profile.development_center');
+    Route::get('profile/{alias}/order-management', [BusinessProfileBusinessProfileController::class, 'orderManagement'])->name('new.profile.order_management');
+    Route::get('profile/{alias}/products', [BusinessProfileBusinessProfileController::class, 'products'])->name('new.profile.products');
+    Route::get('profile/{alias}/insights', [BusinessProfileBusinessProfileController::class, 'profileInsights'])->name('new.profile.insights');
+    Route::get('profile/{alias}/home', [BusinessProfileBusinessProfileController::class, 'profileHome'])->name('new.profile.home');
 
 
 });

@@ -1,6 +1,7 @@
 @extends('layouts.app_containerless')
 @section('content')
-
+@include('new_business_profile.manufacturer_products._add_product_modal')
+@include('new_business_profile.manufacturer_products._edit_product_modal')
 <div class="account_profile_wrapper">
     <div class="account_profile_menu">
         <div class="container">
@@ -237,5 +238,5 @@
 </div>
 
 @endsection
-@include('new_business_profile.manufacturer_products._add_product_modal')
+
 @include('new_business_profile.manufacturer_products._scripts')

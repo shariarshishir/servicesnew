@@ -121,12 +121,39 @@
                     console.log(data);
                     $('.loading-message').html("");
                     $('#loadingProgressContainer').hide();
-                    $('#manufacture_edit_errors').empty();
-                    $('#product-edit-modal-block').modal('open');
-                    $('#product-edit-modal-block .modal-content').html('');
-                    $('input[name=remove_video_id]').val('');
-                    $('#product-edit-modal-block .modal-content').html(data.data);
-                    $('.select2').select2();
+                    // $('#manufacture_edit_errors').empty();
+                    $("#product-edit-modal-block").modal('open');
+                    // $('#product-edit-modal-block .modal-content').html('');
+                    // $('input[name=remove_video_id]').val('');
+                    //$('#product-edit-modal-block .modal-content').html(data.data);
+                    //$('.select2').select2();
+                    //product type mapping
+                    if(data.product.product_type_mapping_id != null){
+                        $("input[name=product_type_mapping][value=" + data.product.product_type_mapping_id + "]").prop('checked', true);
+                        if(data.product.product_type_mapping_id ==1){
+                            $('#product-edit-modal-block .studio').show();
+                            $('#product-edit-modal-block .raw-materials').hide();
+                            $('.studio-id').val(data.product.product_type_mapping_child_id).trigger('change');
+                        }else{
+                            $('#product-edit-modal-block .studio').hide();
+                            $('#product-edit-modal-block .raw-materials').show();
+                            $('#product-edit-modal-block .raw-materials-id').val(data.product.product_type_mapping_child_id).trigger('change');
+                        }
+                    }else{
+                        $('#product-edit-modal-block .studio').hide();
+                        $('#product-edit-modal-block .raw-materials').hide();
+                        $('#product-edit-modal-block input[name=product_type_mapping]').prop('checked', false);
+                    }
+                    $('#product-edit-modal-block #product_tag').val(data.product.product_tag ?? '').trigger('change');
+                    $('#product-edit-modal-block input[name=title]').val(data.product.title);
+                    $('#product-edit-modal-block input[name=price_per_unit]').val(data.product.price_per_unit);
+                    $('#product-edit-modal-block input[name=price_unit]').val(data.product.price_unit).trigger('change');
+                    $('#product-edit-modal-block input[name=moq]').val(data.product.moq);
+                    $('#product-edit-modal-block input[name=qty_unit]').val(data.product.qty_unit).trigger('change');
+                    $('#product-edit-modal-block .product-colors').val(data.product.colors).trigger('change');
+                    $('#product-edit-modal-block .product-sizes').val(data.product.sizes).trigger('change');
+
+
 
                 },
             error: function(xhr, status, error)

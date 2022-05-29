@@ -3285,7 +3285,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
   box-shadow: none !important;
   outline: none !important;
 }
-.suppliers_filter_wrapper .typeahead.dropdown-menu {
+.suppliers_filter_wrapper .typeahead.dropdown-menu,
+.profile_account_search .typeahead.dropdown-menu {
   -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
   -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
   box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
@@ -3297,7 +3298,8 @@ div.dataTables_wrapper table.mdc-data-table__table {
   right: 0;
   border-radius: 0 0 10px 10px;
 }
-.suppliers_filter_wrapper .typeahead.dropdown-menu li a {
+.suppliers_filter_wrapper .typeahead.dropdown-menu li a,
+.profile_account_search .typeahead.dropdown-menu li a {
   color: #4e4e4e;
   font-size: 16px;
   padding: 5px 10px;
@@ -10821,7 +10823,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     color: #54a958;
 }
 */
-.faq_search_box .typeahead.dropdown-menu {
+.faq_search_box .typeahead.dropdown-menu,
+.profile_account_search .typeahead.dropdown-menu {
     position: absolute;
     background-color: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -10832,7 +10835,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     text-align: left;
     left: 0px !important;
 }
-.faq_search_box .typeahead.dropdown-menu li a {
+.faq_search_box .typeahead.dropdown-menu li a,
+.profile_account_search .typeahead.dropdown-menu li a {
     font-size: 16px;
     text-align: left;
     border-bottom: 1px solid #eeeeee;
@@ -10840,12 +10844,17 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     display: block;
     color: #5A5A5A;
 }
-.faq_search_box .typeahead.dropdown-menu li a:hover {
+.faq_search_box .typeahead.dropdown-menu li a:hover,
+.profile_account_search .typeahead.dropdown-menu li a:hover {
     background-color: #54a958;
     color: #fff;
 }
 .faq_search_box .reset_faq_filter {
     position: absolute;
+}
+.profile_account_search .reset_po_filter {
+  position: absolute;
+  right: 40px;
 }
 /* ******************** FAQ css style end *********************** */
 

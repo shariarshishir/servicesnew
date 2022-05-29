@@ -71,18 +71,6 @@
                             <p>Price largely depends on <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a> and volume. To get the price for your design send us a <a href="{{route('rfq.create')}}">Request for Quotation</a>.</p>
                         </div>
                     </li>
-                    <li data-title="How can I get latest updates from Merchant Bay?">
-                        <div class="collapsible-header">
-                            <h4>How can I get latest updates from Merchant Bay?</h4>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay posts its updates in Facebook, Twitter, Linkedin and Instagram.</p>
-                            <p>Facebook: <a target="_blank" href="https://www.facebook.com/merchantbaybd">https://www.facebook.com/merchantbaybd</a></p>
-                            <p>Twitter: <a target="_blank" href="https://twitter.com/merchantbay_com">https://twitter.com/merchantbay_com</a></p>
-                            <p>LinkedIn: <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">https://www.linkedin.com/company/merchantbay/mycompany/</a></p>
-                            <p>Instagram: <a target="_blank" href="https://www.instagram.com/merchant.bay/">https://www.instagram.com/merchant.bay/</a></p>
-                        </div>
-                    </li>
                     <li data-title="What if I need to modify a product, like I need to attach my logo in design?">
                         <div class="collapsible-header">
                             <h4>What if I need to modify a product, like I need to attach my logo in design?</h4>
@@ -112,7 +100,7 @@
                             <h4>What to do if I don't receive any reply on my RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Report a complaint or Contact Merchant Bay, we will get in touch with you as soon as possible.</p>
+                            <p>Report a complaint or <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Contact</a> Merchant Bay, we will get in touch with you as soon as possible.</p>
                         </div>
                     </li>
                     <li data-title="What is a Smart Order Management Dashboard?">
@@ -147,7 +135,7 @@
                             <h4>How can I sell in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Sign up to Merchant Bay then open a business profile and list out your <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, production samples and <a href="{{route('product.type.mapping',['studio', 'ready_stock'])}}">ready stock products</a>. </p>
+                            <p><a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}">Sign up</a> to Merchant Bay then open a business profile and list out your <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, production samples and <a href="{{route('product.type.mapping',['studio', 'ready_stock'])}}">ready stock products</a>. </p>
                         </div>
                     </li>
                     <li data-title="How can I open my business profile in Merchant Bay?">
@@ -155,7 +143,7 @@
                             <h4>How can I open my business profile in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can open a business profile through a <a href="{{route('business.profile.create')}}">business profile builder</a>. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the Join MB Pool Button and start building your Business Profile.</p>
+                            <p>You can open a business profile through a <a href="{{route('business.profile.create')}}">business profile builder</a>. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the <a href="{{route('business.profile.create')}}">Join MB Pool</a> Button and start building your Business Profile.</p>
                         </div>
                     </li>
                     <li data-title="How can I connect with Merchant Bay?">
@@ -163,7 +151,7 @@
                             <h4>How can I connect with Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can connect with Merchant Bay through clicking the <a href="javascript:void(0);" class="btn_green btn_talk" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a> button and setting up an appointment.</p>
+                            <p>You can connect with Merchant Bay through clicking the <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a> button and setting up an appointment.</p>
                         </div>
                     </li>
                     <li data-title="How can I verify my business profile?">
@@ -179,7 +167,7 @@
                             <h4>How to post an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Ans: You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
+                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
                         </div>
                     </li>
                     <li data-title="How does RFQ work?">
@@ -187,7 +175,7 @@
                             <h4>How does RFQ work?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p><a href="{{route('rfq.create')}}">RFQ</a> is designed to handle the complexity of the sourcing. Our algorithm matches your query with suppliers and come back with suggestions instantly. </p>
+                            <p><a href="{{route('rfq.create')}}">RFQ</a> is designed to handle the complexity of the sourcing. Our algorithm matches your query with <a href="{{route('suppliers')}}">suppliers</a> and come back with suggestions instantly. </p>
                         </div>
                     </li>
                     <li data-title="How long does product development take in Merchant Bay?">
@@ -196,6 +184,14 @@
                         </div>
                         <div class="collapsible-body">
                             <p>Product development is subject to product complexity. We promise industry leading development time. </p>
+                        </div>
+                    </li>
+                    <li data-title="How can I get latest updates from Merchant Bay?">
+                        <div class="collapsible-header">
+                            <h4>How can I get latest updates from Merchant Bay?</h4>
+                        </div>
+                        <div class="collapsible-body">
+                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay posts its updates in <a target="_blank" href="https://www.facebook.com/merchantbaybd">Facebook</a>, <a target="_blank" href="https://twitter.com/merchantbay_com">Twitter</a>, <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">Linkedin</a> and <a target="_blank" href="https://www.instagram.com/merchant.bay/">Instagram</a>.</p>
                         </div>
                     </li>
                     <!-- How end -->
@@ -246,7 +242,7 @@
                             <h4>Can Merchant Bay manage the compliance and regulatory aspect of a product?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay suppliers are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
+                            <p>Merchant Bay <a href="{{route('suppliers')}}">suppliers</a> are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
                         </div>
                     </li>
                     <!-- Can End -->
@@ -376,18 +372,6 @@
                     </li>
                     <li>
                         <div class="collapsible-header">
-                            <h4>How can I get latest updates from Merchant Bay?</h4>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay posts its updates in Facebook, Twitter, Linkedin and Instagram.</p>
-                            <p>Facebook: <a target="_blank" href="https://www.facebook.com/merchantbaybd">https://www.facebook.com/merchantbaybd</a></p>
-                            <p>Twitter: <a target="_blank" href="https://twitter.com/merchantbay_com">https://twitter.com/merchantbay_com</a></p>
-                            <p>LinkedIn: <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">https://www.linkedin.com/company/merchantbay/mycompany/</a></p>
-                            <p>Instagram: <a target="_blank" href="https://www.instagram.com/merchant.bay/">https://www.instagram.com/merchant.bay/</a></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">
                             <h4>What if I need to modify a product, like I need to attach my logo in design?</h4>
                         </div>
                         <div class="collapsible-body">
@@ -415,7 +399,7 @@
                             <h4>What to do if I don’t receive any reply on my RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Report a complaint or Contact Merchant Bay, we will get in touch with you as soon as possible.</p>
+                            <p>Report a complaint or <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Contact</a> Merchant Bay, we will get in touch with you as soon as possible.</p>
                         </div>
                     </li>
                     <li>
@@ -431,7 +415,7 @@
                             <h4>What modules Merchant Bay offers in Order Management Dashboard?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay offers solutions for merchandising, production monitoring, BTB monitoring, and store management. </p>
+                            <p>Merchant Bay offers solutions for merchandising, production monitoring, BTB monitoring, and store management.</p>
                         </div>
                     </li>
                     <!-- What end -->
@@ -456,7 +440,7 @@
                             <h4>How can I sell in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Sign up to Merchant Bay then open a business profile and list out your <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, production samples and <a href="{{route('product.type.mapping',['studio', 'ready_stock'])}}">ready stock products</a>. </p>
+                            <p><a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}">Sign up</a> to Merchant Bay then open a business profile and list out your <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, production samples and <a href="{{route('product.type.mapping',['studio', 'ready_stock'])}}">ready stock products</a>.</p>
                         </div>
                     </li>
                     <li>
@@ -464,7 +448,7 @@
                             <h4>How can I open my business profile in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can open a business profile through a <a href="{{route('business.profile.create')}}">business profile builder</a>. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the Join MB Pool Button and start building your Business Profile.</p>
+                            <p>You can open a business profile through a <a href="{{route('business.profile.create')}}">business profile builder</a>. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the <a href="{{route('business.profile.create')}}">Join MB Pool</a> Button and start building your Business Profile.</p>
                         </div>
                     </li>
                     <li>
@@ -472,7 +456,7 @@
                             <h4>How can I connect with Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can connect with Merchant Bay through clicking the <a href="javascript:void(0);" class="btn_green btn_talk" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a> button and setting up an appointment.</p>
+                            <p>You can connect with Merchant Bay through clicking the <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a> button and setting up an appointment.</p>
                         </div>
                     </li>
                     <li>
@@ -488,7 +472,7 @@
                             <h4>How to post an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Ans: You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
+                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
                         </div>
                     </li>
                     <li>
@@ -496,7 +480,7 @@
                             <h4>How does RFQ work?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p><a href="{{route('rfq.create')}}">RFQ</a> is designed to handle the complexity of the sourcing. Our algorithm matches your query with suppliers and come back with suggestions instantly. </p>
+                            <p><a href="{{route('rfq.create')}}">RFQ</a> is designed to handle the complexity of the sourcing. Our algorithm matches your query with <a href="{{route('suppliers')}}">suppliers</a> and come back with suggestions instantly. </p>
                         </div>
                     </li>
                     <li>
@@ -505,6 +489,14 @@
                         </div>
                         <div class="collapsible-body">
                             <p>Product development is subject to product complexity. We promise industry leading development time. </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <h4>How can I get latest updates from Merchant Bay?</h4>
+                        </div>
+                        <div class="collapsible-body">
+                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay posts its updates in <a target="_blank" href="https://www.facebook.com/merchantbaybd">Facebook</a>, <a target="_blank" href="https://twitter.com/merchantbay_com">Twitter</a>, <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">Linkedin</a> and <a target="_blank" href="https://www.instagram.com/merchant.bay/">Instagram</a>.</p>
                         </div>
                     </li>
                     <!-- How end -->
@@ -561,7 +553,7 @@
                             <h4>Can Merchant Bay manage the compliance and regulatory aspect of a product? </h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay suppliers are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
+                            <p>Merchant Bay <a href="{{route('suppliers')}}">suppliers</a> are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
                         </div>
                     </li>
                     <!-- Can End -->

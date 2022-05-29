@@ -5,7 +5,7 @@
     <div class="account_profile_menu">
         <div class="container">
             <div class="profile_account_desktop_menu">
-                @include('new_business_profile.buyer_profile.profile_menu')
+                @include('new_business_profile.profile_menu')
             </div>
 
             <div class="profile_account_mobile_menu" style="display: none;">
@@ -20,7 +20,7 @@
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">menu</i></div>
                                 <div class="collapsible-body">
-                                    @include('new_business_profile.buyer_profile.profile_menu')
+                                    @include('new_business_profile.profile_menu')
                                 </div>
                             </li>
                             </ul>
@@ -70,7 +70,7 @@
                                     <div class="row">
                                         <div class="col s12 xl2 rfq_review_result_leftBox">
                                             <span class="new_rfq_avatar">
-                                                <img src="./images/account-images/avatar.jpg" alt="avatar" itemprop="img">
+                                                <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
                                             </span>
                                         </div>
                                         <div class="col s12 xl5 rfq_review_result_midBox">
@@ -93,7 +93,7 @@
                                     <div class="row">
                                         <div class="col s12 xl2 rfq_review_result_leftBox">
                                             <span class="new_rfq_avatar">
-                                                <img src="./images/account-images/avatar.jpg" alt="avatar" itemprop="img">
+                                                <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
                                             </span>
                                         </div>
                                         <div class="col s12 xl5 rfq_review_result_midBox">
@@ -116,7 +116,7 @@
                                     <div class="row">
                                         <div class="col s12 xl2 rfq_review_result_leftBox">
                                             <span class="new_rfq_avatar">
-                                                <img src="./images/account-images/avatar.jpg" alt="avatar" itemprop="img">
+                                                <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
                                             </span>
                                         </div>
                                         <div class="col s12 xl5 rfq_review_result_midBox">
@@ -152,14 +152,14 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_explore {{ Route::is('new.profile.rfqs',$alias) ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.rfqs')}}">
+                                <li class="profile_explore {{ Route::is('new.profile.rfqs', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.rfqs', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Explore</h4>
                                     </a>
                                 </li>
-                                <li class="profile_my_rfq {{ Route::is('new.profile.my_rfqs') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.my_rfqs')}}">
+                                <li class="profile_my_rfq {{ Route::is('new.profile.my_rfqs', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.my_rfqs', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>My RFQs</h4>
                                     </a>
@@ -325,7 +325,7 @@
                                                 <div class="row">
                                                     <div class="col s12 xl2 rfq_review_result_leftBox">
                                                         <span class="new_rfq_avatar">
-                                                            <img src="./images/account-images/avatar.jpg" alt="avatar" itemprop="img">
+                                                            <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
                                                         </span>
                                                     </div>
                                                     <div class="col s12 xl5 rfq_review_result_midBox">
@@ -348,7 +348,7 @@
                                                 <div class="row">
                                                     <div class="col s12 xl2 rfq_review_result_leftBox">
                                                         <span class="new_rfq_avatar">
-                                                            <img src="./images/account-images/avatar.jpg" alt="avatar" itemprop="img">
+                                                            <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
                                                         </span>
                                                     </div>
                                                     <div class="col s12 xl5 rfq_review_result_midtBox">
@@ -371,7 +371,7 @@
                                                 <div class="row">
                                                     <div class="col s12 xl2 rfq_review_result_leftBox">
                                                         <span class="new_rfq_avatar">
-                                                            <img src="./images/account-images/avatar.jpg" alt="avatar" itemprop="img">
+                                                            <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
                                                         </span>
                                                     </div>
                                                     <div class="col s12 xl5 rfq_review_result_midBox">

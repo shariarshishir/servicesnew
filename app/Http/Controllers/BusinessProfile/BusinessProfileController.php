@@ -70,11 +70,11 @@ class BusinessProfileController extends Controller
     }
 
     public function profileInsights($alias){
-        return view('new_business_profile.buyer_profile.profile_insights',compact('alias'));
+        return view('new_business_profile.profile_insights',compact('alias'));
     }
 
     public function profileHome($alias){
-        return view('new_business_profile.buyer_profile.profile_home',compact('alias'));
+        return view('new_business_profile.profile_home',compact('alias'));
     }
 
 

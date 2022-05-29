@@ -6,7 +6,7 @@
     <div class="account_profile_menu">
         <div class="container">
             <div class="profile_account_desktop_menu">
-                @include('new_business_profile.buyer_profile.profile_menu')
+                @include('new_business_profile.profile_menu')
             </div>
 
             <div class="profile_account_mobile_menu" style="display: none;">
@@ -21,7 +21,7 @@
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">menu</i></div>
                                 <div class="collapsible-body">
-                                    @include('new_business_profile.buyer_profile.profile_menu')
+                                    @include('new_business_profile.profile_menu')
                                 </div>
                             </li>
                         </ul>
@@ -89,14 +89,14 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_explore {{ Route::is('new.profile.rfqs') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.rfqs')}}">
+                                <li class="profile_explore {{ Route::is('new.profile.rfqs', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.rfqs', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Explore</h4>
                                     </a>
                                 </li>
-                                <li class="profile_my_rfq {{ Route::is('new.profile.my_rfqs') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.my_rfqs')}}">
+                                <li class="profile_my_rfq {{ Route::is('new.profile.my_rfqs', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.my_rfqs', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>My RFQs</h4>
                                     </a>
@@ -130,7 +130,7 @@
                                                     <div class="inner_productBox">
                                                         <a href="javascript:void(0);">
                                                             <div class="imgBox">
-                                                                <img src="./images/account-images/pro-1.png" class="" alt="">
+                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-1.png') }}" class="" alt="">
                                                             </div>
                                                             <div class="products_inner_textbox">
                                                                 <h4><span>Rugby Top-MB-2130</span></h4>
@@ -156,7 +156,7 @@
                                                     <div class="inner_productBox">
                                                         <a href="javascript:void(0);">
                                                             <div class="imgBox">
-                                                                <img src="./images/account-images/pro-2.png" class="" alt="">
+                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-2.png') }}" class="" alt="">
                                                             </div>
                                                             <div class="products_inner_textbox">
                                                                 <h4><span>Rugby Top-MB-2130</span></h4>
@@ -182,7 +182,7 @@
                                                     <div class="inner_productBox">
                                                         <a href="javascript:void(0);">
                                                             <div class="imgBox">
-                                                                <img src="./images/account-images/pro-1.png" class="" alt="">
+                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-1.png') }}" class="" alt="">
                                                             </div>
                                                             <div class="products_inner_textbox">
                                                                 <h4><span>Rugby Top-MB-2130</span></h4>
@@ -208,7 +208,7 @@
                                                     <div class="inner_productBox">
                                                         <a href="javascript:void(0);">
                                                             <div class="imgBox">
-                                                                <img src="./images/account-images/pro-2.png" class="" alt="">
+                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-2.png') }}" class="" alt="">
                                                             </div>
                                                             <div class="products_inner_textbox">
                                                                 <h4><span>Rugby Top-MB-2130</span></h4>

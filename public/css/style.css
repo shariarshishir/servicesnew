@@ -10053,130 +10053,108 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
   background-size: 45px;
 }
 .account_item_menu li.profile_insight .icon_img {
-  background: url(../images/account-images/profile-insights-non-active.png)
-    no-repeat center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-insights-non-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_insight.active .icon_img,
 .account_item_menu li.profile_insight:hover .icon_img {
-  background: url(../images/account-images/profile-insights-active.png)
-    no-repeat center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-insights-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile .icon_img {
-  background: url(../images/account-images/profile-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-non-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile.active .icon_img,
 .account_item_menu li.profile:hover .icon_img {
-  background: url(../images/account-images/profile-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_explore .icon_img {
-  background: url(../images/account-images/explore-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/explore-non-active.png") no-repeat center center;
   background-size: 55px;
 }
 .account_item_menu li.profile_explore.active .icon_img,
 .account_item_menu li.profile_explore:hover .icon_img {
-  background: url(../images/account-images/explore-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/explore-active.png") no-repeat center center;
   background-size: 55px;
 }
 .account_item_menu li.profile_my_rfq .icon_img {
-  background: url(../images/account-images/my-rfq-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/my-rfq-non-active.png") no-repeat center center;
   background-size: 45px;
   height: 60px;
 }
 .account_item_menu li.profile_my_rfq.active .icon_img,
 .account_item_menu li.profile_my_rfq:hover .icon_img {
-  background: url(../images/account-images/my-rfq-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/my-rfq-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_pos_pending .icon_img {
-  background: url(../images/account-images/pending-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/pending-non-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_pos_pending.active .icon_img,
 .account_item_menu li.profile_pos_pending:hover .icon_img {
-  background: url(../images/account-images/Pending-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/Pending-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_pos_ongoing .icon_img {
-  background: url(../images/account-images/ongoing-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/ongoing-non-active.png") no-repeat center center;
   background-size: 40px;
 }
 .account_item_menu li.profile_pos_ongoing.active .icon_img,
 .account_item_menu li.profile_pos_ongoing:hover .icon_img {
-  background: url(../images/account-images/ongoing-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/ongoing-active.png") no-repeat center center;
   background-size: 40px;
 }
 .account_item_menu li.profile_pos_shipped .icon_img {
-  background: url(../images/account-images/shipped-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/shipped-non-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_pos_shipped.active .icon_img,
 .account_item_menu li.profile_pos_shipped:hover .icon_img {
-  background: url(../images/account-images/shipped-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/shipped-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_dev_designs .icon_img {
-  background: url(../images/account-images/designs-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/designs-non-active.png") no-repeat center center;
   background-size: 45px;
   height: 52px;
 }
 .account_item_menu li.profile_dev_designs.active .icon_img,
 .account_item_menu li.profile_dev_designs:hover .icon_img {
-  background: url(../images/account-images/designs-active.png) no-repeat center
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/designs-active.png") no-repeat center center;
   background-size: 45px;
 }
 .account_item_menu li.profile_dev_tech .icon_img {
-  background: url(../images/account-images/tech-pack-non-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/tech-pack-non-active.png") no-repeat center center;
   background-size: 40px;
   height: 80px;
 }
 .account_item_menu li.profile_dev_tech.active .icon_img,
 .account_item_menu li.profile_dev_tech:hover .icon_img {
-  background: url(../images/account-images/tech-pack-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/tech-pack-active.png") no-repeat center center;
   background-size: 40px;
 }
 .account_item_menu li.profile_dev_supplyChain .icon_img {
-  background: url(../images/account-images/supply-chain-non-active.png)
-    no-repeat center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/supply-chain-non-active.png") no-repeat center center;
   background-size: 50px;
   height: 50px;
 }
 .account_item_menu li.profile_dev_supplyChain.active .icon_img,
 .account_item_menu li.profile_dev_supplyChain:hover .icon_img {
-  background: url(../images/account-images/supply-chain-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/supply-chain-active.png") no-repeat center center;
   background-size: 50px;
 }
 
 .account_item_menu li.profile_home .icon_img {
-  background: url(../images/account-images/profile-home-non-active.png)
-    no-repeat center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-home-non-active.png") no-repeat center center;
   background-size: 50px;
   height: 50px;
 }
 .account_item_menu li.profile_home.active .icon_img,
 .account_item_menu li.profile_home:hover .icon_img {
-  background: url(../images/account-images/profile-home-active.png) no-repeat
-    center center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-home-active.png") no-repeat center center;
   background-size: 50px;
 }
 .profile_account_searchBar {
@@ -10872,8 +10850,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 /* ******************** FAQ css style end *********************** */
 
 /***********************************/
-.profile_supplier_account_insight_wrap {
-}
 .supplier_account_progress {
   padding-bottom: 30px;
 }
@@ -10916,8 +10892,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .supllir_profile_incomplete_field ul li a:link,
 .supllir_profile_incomplete_field ul li a:active,
 .supllir_profile_incomplete_field ul li a:visited {
-  background: url(../images/account-images/down-arrow.png) no-repeat right
-    center;
+  background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/down-arrow.png") no-repeat right center;
   color: #000000;
   padding-right: 25px;
   background-size: 15px;
@@ -16928,7 +16903,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     width: 100%;
   }
 }
-#myList li{ display:none;
+#myList li{ 
+  display:none;
 }
 #loadMore {
     color:green;

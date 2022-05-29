@@ -6,7 +6,7 @@
         <div class="container">
             
             <div class="profile_account_desktop_menu">
-                @include('new_business_profile.buyer_profile.profile_menu')
+                @include('new_business_profile.profile_menu')
             </div>
             <div class="profile_account_mobile_menu" style="display: none;">
                 <div class="row">
@@ -20,7 +20,7 @@
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">menu</i></div>
                                 <div class="collapsible-body">
-                                    @include('new_business_profile.buyer_profile.profile_menu')
+                                    @include('new_business_profile.profile_menu')
                                 </div>
                             </li>
                             </ul>

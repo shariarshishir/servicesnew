@@ -5,7 +5,7 @@
     <div class="account_profile_menu">
         <div class="container">
             <div class="profile_account_desktop_menu">
-                @include('new_business_profile.buyer_profile.profile_menu')
+                @include('new_business_profile.profile_menu')
             </div>
 
             <div class="profile_account_mobile_menu" style="display: none;">
@@ -20,7 +20,7 @@
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">menu</i></div>
                                 <div class="collapsible-body">
-                                    @include('new_business_profile.buyer_profile.profile_menu')
+                                    @include('new_business_profile.profile_menu')
                                 </div>
                             </li>
                             </ul>
@@ -42,20 +42,20 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_pos_pending {{ Route::is('new.profile.profoma_orders.pending') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.profoma_orders.pending')}}">
+                                <li class="profile_pos_pending {{ Route::is('new.profile.profoma_orders.pending', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.profoma_orders.pending', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Pending</h4>
                                     </a>
                                 </li>
-                                <li class="profile_pos_ongoing {{ Route::is('new.profile.profoma_orders.ongoing') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.profoma_orders.ongoing')}}">
+                                <li class="profile_pos_ongoing {{ Route::is('new.profile.profoma_orders.ongoing', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.profoma_orders.ongoing', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>On Going</h4>
                                     </a>
                                 </li>
-                                <li class="profile_pos_shipped {{ Route::is('new.profile.profoma_orders.shipped') ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.profoma_orders.shipped')}}">
+                                <li class="profile_pos_shipped {{ Route::is('new.profile.profoma_orders.shipped', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.profoma_orders.shipped', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Shipped</h4>
                                     </a>
@@ -97,7 +97,7 @@
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
-                                                                    <a href="#"> <img src="./images/account-images/icon-download.png" /></a>
+                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -126,7 +126,7 @@
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
-                                                                    <a href="#"> <img src="./images/account-images/icon-download.png" /></a>
+                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -155,7 +155,7 @@
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
-                                                                    <a href="#"> <img src="./images/account-images/icon-download.png" /></a>
+                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -184,7 +184,7 @@
                                                             </div>
                                                             <div class="col s2">
                                                                 <div class="download_icon">
-                                                                    <a href="#"> <img src="./images/account-images/icon-download.png" /></a>
+                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -12537,6 +12537,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 /*# sourceMappingURL=style-sh.css.map */
 
 /* ******************** New Profile Account css style end *********************** */
+.po_block {
+  position: relative;
+}
+.po_block .po_overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+}
 
 /* ******************** Media css style start *********************** */
 

@@ -82,19 +82,27 @@
                                         <div class="profile_account_poinfo_innerbox">
                                             <div class="row poinfo_account_title_bar">
                                                 <div class="col s8">
-                                                    <h4>Pending PIs</h4>
+                                                    @if($status == 0)
+                                                        <h4>Pending PIs</h4>
+                                                    @elseif($status == 1)
+                                                        <h4>Ongoing PIs</h4>
+                                                    @else
+                                                        <h4>Shipped PIs</h4>
+                                                    @endif
                                                 </div>
                                                 <div class="col s4 right-align">
-                                                    <span class="rfqView">36 results</span>
+                                                    <span class="rfqView">{{count($proformas)}} results</span>
                                                 </div>
                                             </div>
+                                            @foreach($proformas as $proforma)
                                             <div class="row po_block_wrapper">
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 1">
+                                                <div class="col s12 m6 l4 po_block" data-potitle="{{$proforma->proforma_id}}">
+                                                    <a href="#po_block_{{$proforma->id}}" class="po_overlay modal-trigger"></a>
                                                     <div class="profile_account_poinfo_box active">
                                                         <div class="row top_download_bar">
                                                             <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 1</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
+                                                                <h5>{{$proforma->proforma_id}}</h5>
+                                                                <span class="poinfo">{{ date('d-m-Y', strtotime($proforma->created_at))}}</span>
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
@@ -103,138 +111,50 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
+                                                            @foreach($proforma->performa_items as $item)
                                                             <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
+                                                                <p>Quantity <br/> <b>{{$item->unit}}</b></p>
+                                                                <p>Unit Price <br/> <b>{{$item->unit_price}} {{$item->price_unit}}</b></p>
                                                             </div>
                                                             <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
                                                             <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
+                                                                <p>Shipping Date <br/> <b>{{$proforma->proforma_date}}</b></p>
+                                                                <p>Total Price <br/> <b>{{$item->tax_total_price}}</b></p>
+                                                            </div>
+                                                            @endforeach
+
+                                                        </div>
+
+                                                        <div id="po_block_{{$proforma->id}}" class="po_block_modal modal modal-fixed-footer">
+                                                            <div class="modal-content">
+                                                                @include('new_business_profile.proforma_orders_modal')
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 2">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 2</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s12 m2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
+
+                                                    <div id="po_reject_modal" class="modal modal-fixed-footer">
+                                                        <div class="modal-content">
+                                                            <legend>PO Id will be dynamic</legend>
+                                                            <form action="" method="POST">
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <label for="reject_message_box">Message</label>
+                                                                        <textarea id="reject_message_box" name="reject_message_box" class="materialize-textarea"></textarea>
+                                                                    </div>
+                                                                </div>                                
+                                                                <button class="reject_message_submit waves-effect waves-light btn_green" type="button">Submit</button>                                
+                                                            </form>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
+                                                        <div class="modal-footer">
+                                                            <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 3">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 3</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s12 m2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 4">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 4</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Lorem ipsum title">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Lorem ipsum title</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                    
                                                 </div>
                                             </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -307,6 +227,11 @@ $(document).ready(function(){
         $(".profile_filter_search").val("");
         window.location.reload();
     });    
+
+    $(".po_reject_trigger").click(function(){
+        $(".po_block_modal").modal("close");
+        $(this).closest(".po_block").children("#po_reject_modal").modal("open");
+    })    
 
 })
 </script>

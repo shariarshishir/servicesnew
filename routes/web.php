@@ -395,6 +395,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/proforma-pending-orders', [ProformaOrderController::class, 'profomaPendingOrders'])->name('new.profile.profoma_orders.pending');
     Route::get('profile/{alias}/proforma-ongoing-orders', [ProformaOrderController::class, 'profomaOngoingOrders'])->name('new.profile.profoma_orders.ongoing');
     Route::get('profile/{alias}/proforma-shipped-orders', [ProformaOrderController::class, 'profomaShippedOrders'])->name('new.profile.profoma_orders.shipped');
+    Route::get('profile/{alias}/accept-proforma-orders/{proformaId}', [ProformaOrderController::class, 'acceptProformaOrder'])->name('new.profile.profoma_orders.accept');
+    Route::post('profile/{alias}/reject-proforma-orders/{proformaId}', [ProformaOrderController::class, 'rejectProformaOrder'])->name('new.profile.profoma_orders.reject');
+
     Route::get('profile/{alias}/development-center', [BusinessProfileBusinessProfileController::class, 'developmentCenter'])->name('new.profile.development_center');
     Route::get('profile/{alias}/order-management', [BusinessProfileBusinessProfileController::class, 'orderManagement'])->name('new.profile.order_management');
     Route::get('profile/{alias}/products', [BusinessProfileBusinessProfileController::class, 'products'])->name('new.profile.products');

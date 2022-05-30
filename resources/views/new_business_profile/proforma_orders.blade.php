@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="row po_block_wrapper">
                                                 @foreach($proformas as $proforma)
-                                                <div class="col s12 m6 l4 po_block" data-potitle="{{$proforma->proforma_id}}">
+                                                <div class="col s12 m6 l4 po_block {{($proforma->status == -1) ? 'rejected':'' }}" data-potitle="{{$proforma->proforma_id}}">
                                                     <a href="#po_block_{{$proforma->id}}" class="po_overlay modal-trigger"></a>
                                                     <div class="profile_account_poinfo_box active">
                                                         <div class="row top_download_bar">
@@ -138,14 +138,15 @@
                                                     <div id="po_reject_modal" class="modal modal-fixed-footer">
                                                         <div class="modal-content">
                                                             <legend>PO Id will be dynamic</legend>
-                                                            <form action="" method="POST">
+                                                            <form action="{{route('new.profile.profoma_orders.reject',['alias'=>$alias,'proformaId'=>$proforma->id])}}" method="POST">
+                                                                @csrf
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <label for="reject_message_box">Message</label>
-                                                                        <textarea id="reject_message_box" name="reject_message_box" class="materialize-textarea"></textarea>
+                                                                        <textarea id="reject_message_box" name="reject_message" class="materialize-textarea"></textarea>
                                                                     </div>
-                                                                </div>                                
-                                                                <button class="reject_message_submit waves-effect waves-light btn_green" type="button">Submit</button>                                
+                                                                </div> 
+                                                                <button class="reject_message_submit waves-effect waves-light btn_green" type="submit">Submit</button>                                
                                                             </form>
                                                         </div>
                                                         <div class="modal-footer">

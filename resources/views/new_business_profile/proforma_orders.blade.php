@@ -94,8 +94,8 @@
                                                     <span class="rfqView">{{count($proformas)}} results</span>
                                                 </div>
                                             </div>
-                                            @foreach($proformas as $proforma)
                                             <div class="row po_block_wrapper">
+                                                @foreach($proformas as $proforma)
                                                 <div class="col s12 m6 l4 po_block" data-potitle="{{$proforma->proforma_id}}">
                                                     <a href="#po_block_{{$proforma->id}}" class="po_overlay modal-trigger"></a>
                                                     <div class="profile_account_poinfo_box active">
@@ -106,7 +106,7 @@
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
+                                                                    <a href="javascript:void(0);"><img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -153,8 +153,8 @@
                                                         </div>
                                                     </div>                                                    
                                                 </div>
+                                                @endforeach
                                             </div>
-                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -171,18 +171,20 @@
 
 @endsection
 
+@php
+    $proformaArr = array();
+    foreach($proformas as $proforma) {
+        array_push($proformaArr, $proforma->proforma_id);
+    }
+@endphp
+
 @push('js')
 <script>
 $(document).ready(function(){
+    var sourceArr = <?php echo json_encode($proformaArr); ?>;
     var $input = $(".typeahead");
     $input.typeahead({
-        source: [
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 1",
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 2",
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 3",
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 4",
-            "Lorem ipsum title"
-        ],
+        source: sourceArr,
         autoSelect: true
     });
     $input.change(function() {

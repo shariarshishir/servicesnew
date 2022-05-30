@@ -234,11 +234,11 @@
                                                             <img src="{{$img}}" class="single-product-img" alt="">
                                                             @if( $list->flag == 'shop')
                                                                 @if($list->overlay_original_image)
-                                                                <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;">
+                                                                <img src="{{Storage::disk('s3')->url('public/'.$list->overlay_original_image)}}" class="single-product-overlay-img" alt="" style="display: none;">
                                                                 @endif
                                                             @else
                                                                 @if($list->overlay_image)
-                                                                    <img src="{{asset('storage').'/'.$list->overlay_original_image}}" class="single-product-overlay-img" alt="" style="display: none;" >
+                                                                    <img src="{{Storage::disk('s3')->url('public/'.$list->overlay_original_image)}}" class="single-product-overlay-img" alt="" style="display: none;" >
                                                                 @endif
                                                             @endif
                                                         </div>

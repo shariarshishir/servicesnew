@@ -21,7 +21,7 @@
                     <a href="{{route('productdetails',$product->sku)}}">
                         <div class="imgBox">
                             @foreach($product->images as $key=>$image)
-                                <img src="{{asset('storage/'.$image->image)}}" class="single-product-img" alt="" />
+                                <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="single-product-img" alt="" />
                                 @break
                             @endforeach
                         </div>

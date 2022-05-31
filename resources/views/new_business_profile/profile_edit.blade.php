@@ -703,4 +703,4 @@
 
 @endsection
 
-@include('business_profile._scripts')
+@include('business_profile._profile.scripts')

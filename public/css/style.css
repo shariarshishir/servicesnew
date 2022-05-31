@@ -10580,9 +10580,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
   font-size: 13px;
   line-height: 20px;
 }
-
 .profile_account_poinfo_innerbox .profile_account_poinfo_box.active {
   border: 1px solid #707070;
+}
+.profile_account_poinfo_innerbox .po_block.rejected .profile_account_poinfo_box {
+  border: 1px solid #ff0000;
 }
 .profile_account_poinfo_innerbox .profile_account_poinfo_box {
   padding: 20px 20px 15px;
@@ -10618,10 +10620,19 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
   font-size: 15px;
   color: #1e1e1e;
 }
+.profile_account_poinfo_box .download_icon {
+  position: absolute;
+}
 .profile_account_poinfo_box .download_icon img {
   width: 22px;
   max-width: 22px;
   margin-top: 5px;
+}
+.top_download_bar .reject_message_box {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  z-index: 9;
 }
 
 /* ******************** FAQ css style start *********************** */

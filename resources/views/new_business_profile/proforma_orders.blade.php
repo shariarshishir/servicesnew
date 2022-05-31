@@ -98,15 +98,18 @@
                                                 @foreach($proformas as $proforma)
                                                 <div class="col s12 m6 l4 po_block {{($proforma->status == -1) ? 'rejected':'' }}" data-potitle="{{$proforma->proforma_id}}">
                                                     <a href="#po_block_{{$proforma->id}}" class="po_overlay modal-trigger"></a>
-                                                    <div class="profile_account_poinfo_box active">
+                                                    <div class="profile_account_poinfo_box">
                                                         <div class="row top_download_bar">
+                                                            @if(($proforma->status == -1))
+                                                            <a href="#po_reject_block_{{$proforma->id}}" class="reject_message_box modal-trigger" data-toggle="tooltip" title="Click here to see the cause of rejection"><i class="material-icons">message</i></a>
+                                                            @endif
                                                             <div class="col s12 m10">
                                                                 <h5>{{$proforma->proforma_id}}</h5>
                                                                 <span class="poinfo">{{ date('d-m-Y', strtotime($proforma->created_at))}}</span>
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
-                                                                    <a href="javascript:void(0);"><img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
+                                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Click here to download"><img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -130,14 +133,24 @@
                                                                 @include('new_business_profile.proforma_orders_modal')
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+                                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                                                             </div>
                                                         </div>
+
+                                                        <div id="po_reject_block_{{$proforma->id}}" class="po_reject_block_modal modal modal-fixed-footer">
+                                                            <div class="modal-content">
+                                                                <legend>Cause of rejection</legend>
+                                                                {{$proforma->reject_message}}
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                                                            </div>
+                                                        </div>                                                        
                                                     </div>
 
                                                     <div id="po_reject_modal" class="modal modal-fixed-footer">
                                                         <div class="modal-content">
-                                                            <legend>PO Id will be dynamic</legend>
+                                                            <legend>Write your comment why this proforma "{{$proforma->proforma_id}}" is rejected</legend>
                                                             <form action="{{route('new.profile.profoma_orders.reject',['alias'=>$alias,'proformaId'=>$proforma->id])}}" method="POST">
                                                                 @csrf
                                                                 <div class="row">

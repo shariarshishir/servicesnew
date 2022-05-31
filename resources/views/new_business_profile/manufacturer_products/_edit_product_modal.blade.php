@@ -9,10 +9,9 @@
                     </div>
                 </div>
 
-                <form action="" method="post" enctype="multipart/form-data" id="manufacture-product-upload-form">
+                <form action="" method="post" enctype="multipart/form-data" id="manufacture-product-update-form">
                     @csrf
-                    <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-                    <input type="hidden" name="industry" value="{{$business_profile->industry_type}}">
+                    <input type="hidden" name="edit_product_id">
                         {{-- product type mapping --}}
                         <div class="input-field">
                             <div class="row">
@@ -64,7 +63,7 @@
                                 <label for="product_tag">Product Tags<span class="text-danger">*</span></label>
                             </div>
                             <div class="col s12 m9 l9">
-                                <select name="product_tag[]" class="select2 browser-default" id="product_tag" multiple>
+                                <select name="product_tag[]" class="select2 browser-default" id="edit_product_tag" multiple>
                                     @foreach($product_tags as $product_tag)
                                         <option value="{{ $product_tag->name }}">{{$product_tag->name }}</option>
                                     @endforeach
@@ -134,7 +133,7 @@
                                 <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> </label>
                             </div>
                             <div class="col s12 m9 l9 product_color_box">
-                                <select class="select2 browser-default product-colors" name="colors[]" id="colors" multiple>
+                                <select class="select2 browser-default product-colors" name="colors[]" id="edit_colors" multiple>
                                     @foreach ($colors as $color)
                                         <option value="{{ $color }}">{{ ucfirst($color) }}</option>
                                     @endforeach
@@ -147,7 +146,7 @@
                                 <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> </label>
                             </div>
                             <div class="col s12 m9 l9 product_size_box">
-                                <select class="select2 browser-default product-sizes" name="sizes[]" id="sizes"  multiple="multiple">
+                                <select class="select2 browser-default product-sizes" name="sizes[]" id="edit_sizes"  multiple="multiple">
                                     @foreach ($sizes as $size)
                                         <option value="{{ $size }}">{{ ucfirst($size) }}</option>
                                     @endforeach
@@ -161,7 +160,7 @@
                             <label for="product-desc">Product Details <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 m9 l9 ">
-                            <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" ></textarea>
+                            <textarea name="product_details" id="edit-description" class="form-control editor" cols="30" rows="10" placeholder="Product Details" ></textarea>
                             <span class="text-danger error-text product_details_error rm-error"></span>
                         </div>
 
@@ -171,7 +170,7 @@
                             <label for="product-spec">Full specification <span class="text-danger">*</span></label>
                         </div>
                         <div class="col s12 m9 l9 ">
-                            <textarea name="product_specification" id="product-spec" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" ></textarea>
+                            <textarea name="product_specification" id="edit_full_specification" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" ></textarea>
                             <span class="text-danger error-text product_specification_error rm-error"></span>
                         </div>
                     </div>
@@ -234,111 +233,8 @@
                                 <label for="product-upload">Media <span class="text-danger">*</span></label>
                                 <span class="text-danger error-text product_images_error rm-error"></span>
                             </div>
-                            <div class="row center-align" style="padding-top: 25px;">
-                                <!--1-->
-                                <div class="col s6 m2 l2 center-align">
-                                    <div class="media_img">
-                                        <img src="https://via.placeholder.com/80" id="img1" class="img-thumbnail">
-                                    </div>
-                                    <div class="clear10"></div>
-                                    <div class="col-md-12" style="text-align:center;">
-                                    <div id="msg"></div>
-                                    {{-- <form method="post" id="image-form"> --}}
-                                        <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img1')">
-                                        <div class="input-group my-3" style="display:block;">
-                                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
-                                        <div class="input-group-append">
-                                            <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
-                                        </div>
-                                        </div>
-                                    {{-- </form> --}}
-                                    </div>
-                                </div>
-                                <!--/1-->
+                            <div class="row center-align media-list" style="padding-top: 25px;">
 
-                                <!--2-->
-                                <div class="col s6 m2 l2 center-align">
-                                    <div class="media_img">
-                                    <img src="https://via.placeholder.com/80" id="img2" class="img-thumbnail">
-                                    </div>
-                                    <div class="clear10"></div>
-                                    <div class="col-md-12" style="text-align:center;">
-                                    <div id="msg"></div>
-                                    {{-- <form method="post" id="image-form"> --}}
-                                        <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img2')">
-                                        <div class="input-group my-3" style="display:block;">
-                                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
-                                        <div class="input-group-append">
-                                            <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
-                                        </div>
-                                        </div>
-                                    {{-- </form> --}}
-                                    </div>
-                                </div>
-                                <!--/2-->
-
-                                <!--3-->
-                                <div class="col s6 m2 l2 center-align">
-                                    <div class="media_img">
-                                    <img src="https://via.placeholder.com/80" id="img3" class="img-thumbnail">
-                                    </div>
-                                    <div class="clear10"></div>
-                                    <div class="col-md-12" style="text-align:center;">
-                                    <div id="msg"></div>
-                                    {{-- <form method="post" id="image-form"> --}}
-                                        <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img3')">
-                                        <div class="input-group my-3" style="display:block;">
-                                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
-                                        <div class="input-group-append">
-                                            <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
-                                        </div>
-                                        </div>
-                                    {{-- </form> --}}
-                                    </div>
-                                </div>
-                                <!--/3-->
-
-                                <!--4-->
-                                <div class="col s6 m2 l2 center-align">
-                                    <div class="media_img">
-                                    <img src="https://via.placeholder.com/80" id="img4" class="img-thumbnail">
-                                    </div>
-                                    <div class="clear10"></div>
-                                    <div class="col-md-12" style="text-align:center;">
-                                    <div id="msg"></div>
-                                    {{-- <form method="post" id="image-form"> --}}
-                                        <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img4')">
-                                        <div class="input-group my-3" style="display:block;">
-                                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
-                                        <div class="input-group-append">
-                                            <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
-                                        </div>
-                                        </div>
-                                    {{-- </form> --}}
-                                    </div>
-                                </div>
-                                <!--/4-->
-
-                                <!--5-->
-                                <div class="col s6 m2 l2 center-align">
-                                    <div class="media_img">
-                                    <img src="https://via.placeholder.com/80" id="img5" class="img-thumbnail">
-                                    </div>
-                                    <div class="clear10"></div>
-                                    <div class="col-md-12" style="text-align:center;">
-                                    <div id="msg"></div>
-                                    {{-- <form method="post" id="image-form"> --}}
-                                        <input type="file" name="product_images[]" class="file" accept="image/*" style="display:none;" onchange="readURL(this,'img5')">
-                                        <div class="input-group my-3" style="display:block;">
-                                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file"  style="display:none;">
-                                        <div class="input-group-append">
-                                            <button type="button" class="browse btn btn-search btn-default" style="background:#55A860; color:#fff;" onclick="$(this).parent().parent().prev().click();"><i class="fa fa-upload" aria-hidden="true"></i></button>
-                                        </div>
-                                        </div>
-                                    {{-- </form> --}}
-                                    </div>
-                                </div>
-                                <!--/5-->
                             </div>
 
                             <div class="input-field">
@@ -354,7 +250,7 @@
                             </div>
                             <div class="col s12 m9 l9" id="lineitems">
                                 <div class="overlay-image-preview-block">
-                                    <img class="overlay-image-preview" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+                                    <img class="overlay-image-preview"  src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
                                     alt="preview image" style="max-height: 100px; margin-bottom: 10px">
                                 </div>
                                 <input class="uplodad_video_box overlay-image" type="file" name="overlay_image">
@@ -362,7 +258,27 @@
                         </div>
                     </div>
 
-                    <div class="row input-field product-upload-block">
+                    {{-- <div class="row input-field product-upload-block">
+                        <div class="col s12 m3 l3">
+                            <label class="active">Video:</label>
+                        </div>
+                        <div class="col s12 m9 l9" id="lineitems">
+                            <input class="uplodad_video_box" type="file" name="video">
+                        </div>
+                    </div> --}}
+
+                    <div class="row input-field edit-video-show-div" style="display: none;">
+                        <div class="col s12 m3 l3">
+                            <label class="active">Video: </label>
+                        </div>
+                        <div class="col s12 m9 l9">
+                            <div class="edit-video-show-block">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row input-field edit-video-upload-block">
                         <div class="col s12 m3 l3">
                             <label class="active">Video:</label>
                         </div>
@@ -370,8 +286,9 @@
                             <input class="uplodad_video_box" type="file" name="video">
                         </div>
                     </div>
+                    <input type="hidden" name="remove_video_id"  value="">
 
-                    <div id="manufacture-product-upload-errors" class="validaiton-errors" style="display: none;"></div>
+                    <div id="manufacture-update-errors" class="validaiton-errors" style="display: none;"></div>
 
                     <!-- <div class="submit_wrap right-align">
                         <button type="submit" class="btn_green btn waves-effect waves-light green seller_product_create">Save</button>
@@ -400,18 +317,7 @@
 
 @push('js')
     <script>
-         function readURL(input,id)
-        {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function(e) {
-                $('#'+id).attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]); // convert to base64 string
-            }
-        }
 
     //add more video
     var  lineitemcontent= '<input type="file" name="videos[]"><p onclick="removeVideoEl(this);">Remove</p>';

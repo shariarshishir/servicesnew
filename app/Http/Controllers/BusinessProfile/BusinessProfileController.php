@@ -52,13 +52,23 @@ class BusinessProfileController extends Controller
         return view('new_business_profile.order_management',compact('alias'));
     }
 
-    public function products($alias){
+    public function products($alias,Request $request){
 
         $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-            if($business_profile->profile_type == 'supplier' || $business_profile->business_type == 'manufacturer'){
-                $products=Product::withTrashed()->with('product_images')->latest()->where('business_profile_id', $business_profile->id)->get();
+            if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'manufacturer'){
+                $products=Product::withTrashed()
+                ->latest()
+                ->with('product_images','product_video')
+                ->where('business_profile_id', $business_profile->id)
+                ->where(function($query) use ($request){
+                    if(isset($request->search)){
+                        $query->where('title','like', '%'.$request->search.'%')->get();
+                    }
+
+                })
+                ->paginate(8);
                 $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
                 $sizes=['S','M','L','XL','XXL','XXXL'];
                 return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes'));

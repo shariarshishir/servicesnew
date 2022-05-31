@@ -210,8 +210,14 @@ public function update(Request $request, $product_id)
         'error' => $validator->getMessageBag()),
         400);
     }
-    $product=Product::withTrashed()->find($product_id);
+    $product=Product::withTrashed()->with('product_images')->find($product_id);
     if ($request->hasFile('overlay_image')){
+
+        if($product->overlay_image){
+            if(Storage::disk('s3')->exists('public/'.$product->overlay_image) ){
+                Storage::disk('s3')->delete('public/'.$product->overlay_image);
+            }
+        }
         $image = $request->file('overlay_image');
         $s3 = \Storage::disk('s3');
         $uniqueString = generateUniqueString();
@@ -285,12 +291,12 @@ public function update(Request $request, $product_id)
         ]);
 
     }
-    $products=Product::withTrashed()->where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
-    $data=view('business_profile._product_table_data', compact('products'))->render();
+    // $products=Product::withTrashed()->where('business_profile_id',$product->business_profile_id)->latest()->with(['product_images','category'])->get();
+    // $data=view('business_profile._product_table_data', compact('products'))->render();
     return response()->json([
         'success' => true,
         'msg' => 'Profile Updated Successfully',
-        'data' => $data,
+        'data' => $product,
     ],200);
 
 }

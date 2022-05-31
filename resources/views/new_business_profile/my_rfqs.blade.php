@@ -176,7 +176,7 @@
                                         <div class="profile_account_searchBar">
                                             <div class="row">
                                                 <div class="col s12 m5 l4">
-                                                    <a class="modal-trigger post_new" href="#profileAccountPostNew">
+                                                    <a class="modal-trigger open-create-rfq-modal post_new" href="#create-rfq-form">
                                                         <i class="material-icons">add</i><span>Post New</span>
                                                     </a>
                                                 </div>
@@ -195,23 +195,24 @@
                                                     <h4>My RFQs</h4>
                                                 </div>
                                                 <div class="col s4 right-align">
-                                                    <span class="rfqView">36 results</span>
+                                                    <span class="rfqView">{{count($rfqLists)}} results</span>
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                @foreach($rfqLists as $rfq)
                                                 <div class="col s12 m6">
                                                     <div class="profile_account_myrfq_box active">
-                                                        <h5>Women's Long-Sleeve 100% Cotton Cable Crewn with emb log</h5>
-                                                        <span class="posted_time">Posted 3m ago</span>
+                                                        <h5>{{$rfq['title']}}</h5>
+                                                        <span class="posted_time">{{date('Y-m-d', strtotime($rfq['created_at']))}}</span>
                                                         <div class="row">
                                                             <div class="col s6 m6 l5">
-                                                                <p>Quantity <br/> <b>15000 pcs</b></p>
-                                                                <p>Target Price <br/> <b>$7.50 /pc</b></p>
+                                                                <p>Quantity <br/> <b>{{$rfq['quantity']}} pcs</b></p>
+                                                                <p>Target Price <br/> <b>{{$rfq['unit_price']}} /pc</b></p>
                                                             </div>
                                                             <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
                                                             <div class="col s6 m6 l5">
-                                                                <p>Deliver in <br/> <b>18 days</b></p>
-                                                                <p>Deliver to <br/> <b>London</b></p>
+                                                                <p>Deliver in <br/> <b>{{ date('F j, Y',strtotime($rfq['delivery_time'])) }}</b></p>
+                                                                <p>Deliver to <br/> <b>{{$rfq['destination']}}</b></p>
                                                             </div>
                                                         </div>
                                                         <div class="account_rfq_btn_wrap" >
@@ -226,71 +227,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col s12 m6">
-                                                    <div class="profile_account_myrfq_box">
-                                                        <h5>Women's Long-Sleeve 100% Cotton Cable Crewn with emb log</h5>
-                                                        <span class="posted_time">Posted 3m ago</span>
-                                                        <div class="row">
-                                                            <div class="col s6 m6 l5">
-                                                                <p>Quantity <br/> <b>15000 pcs</b></p>
-                                                                <p>Target Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 l5">
-                                                                <p>Deliver in <br/> <b>18 days</b></p>
-                                                                <p>Deliver to <br/> <b>London</b></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="account_rfq_btn_wrap" >
-                                                            <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn">Quotations</button>
-                                                                <span>0</span>
-                                                            </div>
-                                                            <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn">Messages</button>
-                                                                <span>0</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6">
-                                                    <div class="profile_account_myrfq_box">
-                                                        <h5>Women's Long-Sleeve 100% Cotton Cable Crewn with emb log</h5>
-                                                        <span class="posted_time">Posted 3m ago</span>
-                                                        <div class="row">
-                                                            <div class="col s6 m6 l5">
-                                                                <p>Quantity <br/> <b>15000 pcs</b></p>
-                                                                <p>Target Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 l5">
-                                                                <p>Deliver in <br/> <b>18 days</b></p>
-                                                                <p>Deliver to <br/> <b>London</b></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="account_rfq_btn_wrap" >
-                                                            <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn">Quotations</button>
-                                                                <span>0</span>
-                                                            </div>
-                                                            <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn">Messages</button>
-                                                                <span>0</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col s12 m12 l5 new_profile_account_rightsidebar_desktop">
                                     <div class="new_profile_account_myrfq_details">
                                         <div class="new_profile_myrfq_details_topbox">
-                                            <h6>RFQ ID <span>785672990</span></h6>
-                                            <h5>Women's Long-Sleeve 100% Cotton Cable Crewn with emb log</h5>
-                                            <span class="posted_time">Posted 3m ago</span>
+                                            <h6>RFQ ID <span>{{$rfqLists[0]['id']}}</span></h6>
+                                            <h5>{{$rfqLists[0]['title']}}</h5>
+                                            <span class="posted_time">{{date('Y-m-d', strtotime($rfqLists[0]['created_at']))}}</span>
 
                                             <div class="center-align btn_accountrfq_info">
                                                 <a href="#" onclick="toggle_visibility('accountRfqDetailesInfo');"><i class="material-icons">keyboard_double_arrow_down</i></a>
@@ -298,13 +246,13 @@
                                             <div id="accountRfqDetailesInfo" class="account_rfqDetailes_infoWrap" style="display: none;">
                                                 <div class="row">
                                                     <div class="col s6 m6 l5">
-                                                        <p>Quantity <br/> <b>15000 pcs</b></p>
-                                                        <p>Target Price <br/> <b>$7.50 /pc</b></p>
+                                                        <p>Quantity <br/> <b>{{$rfqLists[0]['quantity']}} pcs</b></p>
+                                                        <p>Target Price <br/> <b>{{$rfqLists[0]['unit_price']}} /pc</b></p>
                                                     </div>
                                                     <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
                                                     <div class="col s6 m6 l5">
-                                                        <p>Deliver in <br/> <b>18 days</b></p>
-                                                        <p>Deliver to <br/> <b>London</b></p>
+                                                        <p>Deliver in <br/> <b>{{ date('F j, Y',strtotime($rfqLists[0]['delivery_time'])) }}</b></p>
+                                                        <p>Deliver to <br/> <b>{{$rfqLists[0]['destination']}}</b></p>
                                                     </div>
                                                 </div>
                                                 <div class="account_rfqDetailes_imgWrap">
@@ -402,5 +350,6 @@
         </div>
     </div>
 </div>
-
+@include('new_business_profile.create_rfq_modal')
+@include('new_business_profile._scripts')
 @endsection

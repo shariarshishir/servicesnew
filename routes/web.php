@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\BackendRfqController as AdminRfqController;
 use App\Http\Controllers\Admin\BusinessMappingTreeController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\BusinessProfile\ProformaOrderController;
+use App\Http\Controllers\BusinessProfile\RfqController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\MainBuyerController;
@@ -65,7 +66,6 @@ use App\Http\Controllers\ProductWishlistController;
 use App\Http\Controllers\SubscribedUserEmailController;
 use App\Http\Controllers\OrderModificationRequestController;
 use App\Http\Controllers\OrderController as UserOrderController;
-use App\Http\Controllers\RfqController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
@@ -390,8 +390,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
 
     Route::get('profile/{alias}/general-info', [BusinessProfileBusinessProfileController::class, 'index'])->name('new.profile.index');
-    Route::get('profile/{alias}/rfqs', [BusinessProfileBusinessProfileController::class, 'rfqs'])->name('new.profile.rfqs');
-    Route::get('profile/{alias}/my-rfqs', [BusinessProfileBusinessProfileController::class, 'myRfqs'])->name('new.profile.my_rfqs');
+    Route::get('profile/{alias}/rfqs', [RfqController::class, 'index'])->name('new.profile.rfqs');
+    Route::get('profile/{alias}/my-rfqs', [RfqController::class, 'myRfqList'])->name('new.profile.my_rfqs');
     Route::get('profile/{alias}/proforma-pending-orders', [ProformaOrderController::class, 'profomaPendingOrders'])->name('new.profile.profoma_orders.pending');
     Route::get('profile/{alias}/proforma-ongoing-orders', [ProformaOrderController::class, 'profomaOngoingOrders'])->name('new.profile.profoma_orders.ongoing');
     Route::get('profile/{alias}/proforma-shipped-orders', [ProformaOrderController::class, 'profomaShippedOrders'])->name('new.profile.profoma_orders.shipped');

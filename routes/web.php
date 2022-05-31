@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\BackendRfqController as AdminRfqController;
 use App\Http\Controllers\Admin\BusinessMappingTreeController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\BusinessProfile\ProformaOrderController;
+use App\Http\Controllers\BusinessProfile\UserProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\MainBuyerController;
@@ -402,8 +403,10 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/development-center', [BusinessProfileBusinessProfileController::class, 'developmentCenter'])->name('new.profile.development_center');
     Route::get('profile/{alias}/order-management', [BusinessProfileBusinessProfileController::class, 'orderManagement'])->name('new.profile.order_management');
     Route::get('profile/{alias}/products', [BusinessProfileBusinessProfileController::class, 'products'])->name('new.profile.products');
-    Route::get('profile/{alias}/insights', [BusinessProfileBusinessProfileController::class, 'profileInsights'])->name('new.profile.insights');
-    Route::get('profile/{alias}/home', [BusinessProfileBusinessProfileController::class, 'profileHome'])->name('new.profile.home');
+    
+    Route::get('profile/{alias}/insights', [UserProfileController::class, 'profileInsights'])->name('new.profile.insights');
+    Route::get('profile/{alias}/home', [UserProfileController::class, 'profileHome'])->name('new.profile.home');
+    Route::get('profile/{alias}/profile-edit', [UserProfileController::class, 'profileEdit'])->name('new.profile.edit');
 
 
 });

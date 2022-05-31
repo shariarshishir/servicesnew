@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\BusinessMappingTreeController;
 use App\Http\Controllers\BusinessProfileController;
 use App\Http\Controllers\BusinessProfile\ProformaOrderController;
 use App\Http\Controllers\BusinessProfile\RfqController;
+use App\Http\Controllers\BusinessProfile\UserProfileController;
 use App\Http\Controllers\ProductionFlowAndManpowerController;
 use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\MainBuyerController;
@@ -395,14 +396,17 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/proforma-pending-orders', [ProformaOrderController::class, 'profomaPendingOrders'])->name('new.profile.profoma_orders.pending');
     Route::get('profile/{alias}/proforma-ongoing-orders', [ProformaOrderController::class, 'profomaOngoingOrders'])->name('new.profile.profoma_orders.ongoing');
     Route::get('profile/{alias}/proforma-shipped-orders', [ProformaOrderController::class, 'profomaShippedOrders'])->name('new.profile.profoma_orders.shipped');
+    Route::get('profile/{alias}/proforma-search',[ProformaOrderController::class,'proformaSearchByTitle'])->name("new.profile.profoma_orders.search");
     Route::get('profile/{alias}/accept-proforma-orders/{proformaId}', [ProformaOrderController::class, 'acceptProformaOrder'])->name('new.profile.profoma_orders.accept');
     Route::post('profile/{alias}/reject-proforma-orders/{proformaId}', [ProformaOrderController::class, 'rejectProformaOrder'])->name('new.profile.profoma_orders.reject');
 
     Route::get('profile/{alias}/development-center', [BusinessProfileBusinessProfileController::class, 'developmentCenter'])->name('new.profile.development_center');
     Route::get('profile/{alias}/order-management', [BusinessProfileBusinessProfileController::class, 'orderManagement'])->name('new.profile.order_management');
     Route::get('profile/{alias}/products', [BusinessProfileBusinessProfileController::class, 'products'])->name('new.profile.products');
-    Route::get('profile/{alias}/insights', [BusinessProfileBusinessProfileController::class, 'profileInsights'])->name('new.profile.insights');
-    Route::get('profile/{alias}/home', [BusinessProfileBusinessProfileController::class, 'profileHome'])->name('new.profile.home');
+    
+    Route::get('profile/{alias}/insights', [UserProfileController::class, 'profileInsights'])->name('new.profile.insights');
+    Route::get('profile/{alias}/home', [UserProfileController::class, 'profileHome'])->name('new.profile.home');
+    Route::get('profile/{alias}/profile-edit', [UserProfileController::class, 'profileEdit'])->name('new.profile.edit');
 
 
 });

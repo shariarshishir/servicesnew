@@ -10866,6 +10866,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .profile_account_search .reset_po_filter {
   position: absolute;
   right: 40px;
+  top: 18px;
 }
 /* ******************** FAQ css style end *********************** */
 

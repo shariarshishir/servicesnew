@@ -5,7 +5,7 @@
     <div class="account_profile_menu">
         <div class="container">
             <div class="profile_account_desktop_menu">
-                @include('new_business_profile.buyer_profile.profile_menu')
+                @include('new_business_profile.profile_menu')
             </div>
     
             <div class="profile_account_mobile_menu" style="display: none;">
@@ -20,7 +20,7 @@
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">menu</i></div>
                                 <div class="collapsible-body">
-                                    @include('new_business_profile.buyer_profile.profile_menu')
+                                    @include('new_business_profile.profile_menu')
                                 </div>
                             </li>
                         </ul>
@@ -150,20 +150,20 @@
                     <div class="col s12 m3 l2">
                         <div class="account_item_menu">
                             <ul>
-                                <li class="profile_insight active">
-                                    <a href="javascript:void(0);">
+                                <li class="profile_insight {{ Route::is('new.profile.insights',$alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.insights', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Profile Insights</h4>
                                     </a>
                                 </li>
-                                <li class="profile_home">
-                                    <a href="supplier-account-profile-home.html">
+                                <li class="profile_home {{ Route::is('new.profile.home',$alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.home', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Profile Home</h4>
                                     </a>
                                 </li>
-                                <li class="profile">
-                                    <a href="supplier-account-profile-page.html">
+                                <li class="profile {{ Route::is('new.profile.edit',$alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.edit', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Profile</h4>
                                     </a>
@@ -202,12 +202,12 @@
                                 
                                 <p style="color: red; margin-top: 25px;">You have 6 incomplete fields.</p>
                                 <ul>
-                                    <li><a href="">Company Profile </a></li>
-                                    <li><a href="">Capacity and Machineries </a></li>
-                                    <li><a href="">Certifications </a></li>
-                                    <li><a href="">Main Buyers </a></li>
-                                    <li><a href="">Export Destinations </a></li>
-                                    <li><a href="">Business Terms </a></li>
+                                    <li><a href="javascript:void(0);">Company Profile </a></li>
+                                    <li><a href="javascript:void(0);">Capacity and Machineries </a></li>
+                                    <li><a href="javascript:void(0);">Certifications </a></li>
+                                    <li><a href="javascript:void(0);">Main Buyers </a></li>
+                                    <li><a href="javascript:void(0);">Export Destinations </a></li>
+                                    <li><a href="javascript:void(0);">Business Terms </a></li>
                                 </ul>
                             </div>
                         </div>

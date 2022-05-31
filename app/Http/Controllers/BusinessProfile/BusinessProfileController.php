@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BusinessProfile;
 use App\Http\Controllers\Controller;
 use App\Models\BusinessProfile;
 use App\Models\Manufacture\Product;
+use App\Models\Product as WholesalerProduct;
 use Illuminate\Http\Request;
 
 class BusinessProfileController extends Controller
@@ -72,6 +73,22 @@ class BusinessProfileController extends Controller
                 $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
                 $sizes=['S','M','L','XL','XXL','XXXL'];
                 return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes'));
+            }
+
+            if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'wholesaler'){
+                $products=WholesalerProduct::withTrashed()
+                ->latest()
+                ->with('images','video')
+                ->where(function($query) use ($request, $business_profile){
+                    $query->where('business_profile_id', $business_profile->id)->get();
+                    if(isset($request->search)){
+                        $query->where('name','like', '%'.$request->search.'%')->get();
+                    }
+
+                })
+                ->paginate(8);
+
+                return view('new_business_profile.wholesaler_products.index',compact('alias','products','business_profile'));
             }
 
         }

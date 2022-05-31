@@ -1,4 +1,9 @@
 @extends('layouts.app_containerless')
+
+@php
+$searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : '';
+@endphp
+
 @section('content')
 
 <div class="account_profile_wrapper">
@@ -72,9 +77,12 @@
                                             <div class="row">
                                                 <div class="col s12">
                                                     <div class="profile_account_search">
-                                                        <i class="material-icons">search</i>
-                                                        <input class="profile_filter_search typeahead" type="text" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
-                                                        <a href="javascript:void(0);" class="reset_po_filter" style="display: none;"><i class="material-icons">restart_alt</i></a>
+                                                        <form action="{{ route('new.profile.profoma_orders.search', $alias) }}" method="GET">
+                                                            @csrf
+                                                            <i class="material-icons">search</i>
+                                                            <input class="profile_filter_search typeahead" name="poSearchInput" type="text" placeholder="Search Merchant Bay Studio/Raw Material Libraries" value="{{$searchInput}}" />
+                                                            <a href="javascript:void(0);" class="reset_po_filter" style="@php echo isset($_REQUEST['poSearchInput']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,6 +94,8 @@
                                                         <h4>Pending PIs</h4>
                                                     @elseif($status == 1)
                                                         <h4>Ongoing PIs</h4>
+                                                    @elseif($status == 4)
+                                                        <h4>All PIs</h4>    
                                                     @else
                                                         <h4>Shipped PIs</h4>
                                                     @endif
@@ -185,63 +195,12 @@
 
 @endsection
 
-@php
-    $proformaArr = array();
-    foreach($proformas as $proforma) {
-        array_push($proformaArr, $proforma->proforma_id);
-    }
-@endphp
-
 @push('js')
 <script>
 $(document).ready(function(){
-    var sourceArr = <?php echo json_encode($proformaArr); ?>;
-    var $input = $(".typeahead");
-    $input.typeahead({
-        source: sourceArr,
-        autoSelect: true
-    });
-    $input.change(function() {
-        var current = $input.typeahead("getActive");
-        if (current) {
-            // Some item from your model is active!
-            if (current.name == $input.val()) {
-            // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-            } else {
-            // This means it is only a partial match, you can either add a new item
-            // or take the active if you don't want new items
-            }
-        } else {
-            // Nothing is active so it is a new value (or maybe empty value)
-        }
-    });  
     
-    $(".profile_filter_search").change(function(){
-        var inputText = String($(this).val());
-        $(".po_block").each(function() {
-            var listFind = String($(this).data("potitle"));
-            if (inputText == listFind)
-            {
-                //$(".rfq_tab_item_box .tablinks").removeClass("active");
-                //faqCategory(event, 'faqCategoryAll');
-                //$(".triggerEvent").addClass("active");
-                $(this).css("display", "block");
-                $(".reset_po_filter").show();
-                //console.log("Found");
-                return;
-            }
-            else 
-            {
-                $(this).css("display", "none");
-                //console.log("Not Found");
-                return;
-            }
-        });
-    });
-
     $(".reset_po_filter").click(function(){
-        $(".profile_filter_search").val("");
-        window.location.reload();
+        location.href = "{{route('new.profile.profoma_orders.pending', $alias)}}";
     });    
 
     $(".po_reject_trigger").click(function(){

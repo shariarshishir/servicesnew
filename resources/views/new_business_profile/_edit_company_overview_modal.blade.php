@@ -11,17 +11,8 @@
             <div class="row input-field" style="margin-bottom: 45px;">
                 <div class="col s12" style="position: relative;">
                     <label style="margin: 0; padding:0;">Customize Your Profile Url</label>
-                    <input type="text" class="form-control"
-                        style="box-shadow: none !important;
-                        border-bottom: 1px solid #9e9e9e !important;
-                        border-radius: 0;"   name="alias" value="{{$business_profile->alias}}">
-                    <button
-                        style="position: absolute;
-                        right: 5px;
-                        bottom: 1px;
-                        background: none;
-                        border: none;
-                        box-shadow: none;"  id="alias-submit-btn" disabled>
+                    <input type="text" class="form-control" style="box-shadow: none !important; border-bottom: 1px solid #9e9e9e !important; border-radius: 0;"   name="alias" value="{{$business_profile->alias}}">
+                    <button style="position: absolute; right: 5px; bottom: 1px; background: none; border: none; box-shadow: none;"  id="alias-submit-btn" disabled>
                         <i class="material-icons send-icon" style="color: #565856; font-size: 25px;">send</i>
                     </button>
                 </div>
@@ -160,8 +151,8 @@
                 text: "Want to update alias? if you update it will redirect to your profile page.",
                 type: "warning",
                 showCancelButton: !0,
-                confirmButtonText: "Yes, update it!",
-                cancelButtonText: "No, cancel!",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
                 reverseButtons: !0
             }).then(function (e) {
                 if (e.value === true)

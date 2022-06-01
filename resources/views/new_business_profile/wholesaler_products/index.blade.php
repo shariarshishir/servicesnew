@@ -164,6 +164,7 @@
                                                         <div class="profile_account_search">
                                                             <i class="material-icons">search</i>
                                                             <input class="profile_filter_search" type="search" placeholder="Search Merchant Bay Studio/Raw Material Libraries" name="search"/>
+                                                            <input type="hidden" name="view" value="{{request()->view}}">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -171,14 +172,20 @@
                                         </div>
                                         <div class="profile_product_view_menu">
                                             <ul>
-                                                <li class="grid_view active"><a href="javascript:void(0);"><i class="material-icons">grid_view</i></a></li>
-                                                <li class=""><a href="javascript:void(0);"><i class="material-icons">view_list</i></a></li>
+                                                <li class="grid_view {{$view == 'grid'? 'active' : ''}}">
+                                                    <a href="{{route('new.profile.products',['alias'=> $alias,'view' => 'grid','page' =>$products->currentPage()])}}" ><i class="material-icons">grid_view</i></a>
+                                                </li>
+                                                <li class="{{$view == 'list'? 'active' : ''}}">
+                                                    <a href="{{route('new.profile.products',['alias'=> $alias,'view' => 'list','page' =>$products->currentPage()])}}" ><i class="material-icons">view_list</i></a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="product_design_wrapper profile_account_product">
-                                            <div class="row product-list">
-                                                @include('new_business_profile.wholesaler_products.products_list')
-                                            </div>
+                                            @if($view == 'grid')
+                                                @include('new_business_profile.wholesaler_products.products_list_grid_view')
+                                            @else
+                                                @include('new_business_profile.wholesaler_products.products_list_list_view')
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col s12 m12 l3 new_profile_account_rightsidebar_desktop">

@@ -33,7 +33,7 @@ class BusinessProfileController extends Controller
         return view('new_business_profile.my_rfqs',compact('alias'));
     }
 
-    
+
 
     public function developmentCenter($alias){
         return view('new_business_profile.development_center',compact('alias'));
@@ -62,7 +62,8 @@ class BusinessProfileController extends Controller
                 ->paginate(8);
                 $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
                 $sizes=['S','M','L','XL','XXL','XXXL'];
-                return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes'));
+                $view=isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes','view'));
             }
 
             if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'wholesaler'){
@@ -77,8 +78,8 @@ class BusinessProfileController extends Controller
 
                 })
                 ->paginate(8);
-
-                return view('new_business_profile.wholesaler_products.index',compact('alias','products','business_profile'));
+                $view=isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.wholesaler_products.index',compact('alias','products','business_profile','view'));
             }
 
         }

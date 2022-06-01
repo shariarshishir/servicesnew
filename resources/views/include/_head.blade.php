@@ -127,4 +127,12 @@
         var regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
         return regex.test(value);
     }
+
+    function openProfileAccountNav() {
+        document.getElementById("profileAccountRight").style.width = "100%";
+    }
+
+    function closeProfileAccountNav() {
+        document.getElementById("profileAccountRight").style.width = "0";
+    }    
 </script>

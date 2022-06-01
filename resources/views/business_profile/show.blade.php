@@ -846,9 +846,9 @@
 									</button>
 								</div>
 							</div>
-							<div class="row flag_wrap center-align">
+							<div class="flag_wrap center-align">
 
-								<div class="flagBox export-destination-block">
+								<div class="flagBox export-destination-block row">
 									@if(count($business_profile->exportDestinations)>0)
 										@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
@@ -1435,7 +1435,7 @@
 										<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
 										<div class="press_img">
 											<div class="press_img_box"><img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" /></div>
-											<div>{{$pressHighlight->title}}</div>
+											<h5>{{$pressHighlight->title}}</h5>
 										</div>
 									</div>
 								@endforeach

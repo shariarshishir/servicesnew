@@ -562,7 +562,6 @@
                                     <div class="col s6 m6">
                                         <h3>Main Buyers</h3>
                                     </div>
-
                                 </div>
                                 <div class="buyers_logo_wrap row main-buyers-block">
                                         @foreach($business_profile->mainBuyers as $mainBuyers)
@@ -585,8 +584,8 @@
                                         <h3>Export Destinations</h3>
                                     </div>
                                 </div>
-                                <div class="row flag_wrap center-align">
-                                    <div class="flagBox export-destination-block">
+                                <div class="flag_wrap center-align">
+                                    <div class="flagBox export-destination-block row">
 										@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
 											<div class="flag_innerBox">

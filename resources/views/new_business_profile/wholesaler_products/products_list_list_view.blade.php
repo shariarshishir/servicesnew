@@ -12,7 +12,7 @@
                 </thead>
                 <tbody>
                     @foreach ($products  as $product)
-                        <tr  onclick="editproduct('{{ $product->id }}')" style="cursor: pointer;">
+                        <tr  onclick="editproduct('{{ $product->sku }}')" style="cursor: pointer;">
                             <td data-title="Image">
                                 @foreach($product->images as $image)
                                     <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="" alt="" height="60px">

@@ -3,15 +3,15 @@
     <div class="col s6 m4 l3 product_item_box">
         <div class="productBox">
             <div class="inner_productBox">
-                <a href="javascript:void(0);" onclick="editproduct('{{ $product->id }}')">
+                <a href="javascript:void(0);" onclick="editproduct('{{ $product->sku }}')">
                     <div class="imgBox">
-                        @foreach($product->product_images as $image)
-                            <img src="{{Storage::disk('s3')->url('public/'.$image->product_image)}}" class="" alt="">
+                        @foreach($product->images as $image)
+                            <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="" alt="">
                             @break
                         @endforeach
                     </div>
                     <div class="products_inner_textbox">
-                        <h4><span>{{$product->title}}</span></h4>
+                        <h4><span>{{$product->name}}</span></h4>
                         <div class="row">
                             <div class="col s12 m6">
                                 <div class="product_moq">
@@ -20,7 +20,7 @@
                             </div>
                             <div class="col s12 m6">
                                 <div class="pro_leadtime">
-                                    Lead Time <br> <span>{{$product->lead_time}}</span> days
+                                    Lead Time <br> <span>@include('new_business_profile.wholesaler_products._product_lead_time')</span> days
                                 </div>
                             </div>
                         </div>

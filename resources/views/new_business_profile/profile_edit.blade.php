@@ -65,6 +65,7 @@
                         <div class="profile_supplier_account_home_wrap">
                             <h3>Profile Edit</h3>
                             
+                            <!-- Company overview block start -->
                             <div class="overview_table_wrap">
                                 <div class="row top_titleWrap">
                                     <div class="col s9 m7">
@@ -96,9 +97,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>    
+                            </div>
+                            <!-- Company overview block end -->
                             
                             @if($business_profile->business_type == 'manufacturer') <!-- below content will show if business_type is manufacturer start -->
+                                <!-- Categories Produced block start -->
                                 <div class="overview_table_wrap capacity_machineries">
                                     <div class="row top_titleWrap">
                                         <div class="col s9 m7">
@@ -154,7 +157,9 @@
                                         </div>
                                     </div>
                                 </div> 
-
+                                <!-- Categories Produced block end -->
+                                
+                                <!-- Machinery Details block start -->
                                 <div class="row top_titleWrap">
                                     <div class="col s9 m7">
                                         <h3>Machinery Details</h3>
@@ -205,10 +210,10 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>       
+                                </div>   
+                                <!-- Machinery Details block end -->    
                                 
-
-
+                                <!-- Production Flow and Manpower block start -->
                                 <div class="overview_table_wrap">
                                     <div class="row top_titleWrap">
                                         <div class="col s9 m7">
@@ -260,10 +265,10 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>  
+                                </div> 
+                                <!-- Production Flow and Manpower block end -->
                                 
-                                
-
+                                <!-- Certifications block start -->
                                 <div class="certifications">
                                     <div class="row top_titleWrap upload_delete_wrap">
                                         <div class="col s7">
@@ -335,10 +340,10 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>   
+                                </div> 
+                                <!-- Certifications block end -->  
                                 
-                                
-
+                                <!-- Main Buyers block start -->
                                 <div class="main_buyers_wrap">
                                     <div class="row top_titleWrap upload_delete_wrap">
                                         <div class="col s7">
@@ -374,11 +379,10 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div> 
+                                </div>
+                                <!-- Main Buyers block end --> 
                                 
-
-
-
+                                <!-- Export Destinations block start -->
                                 <div class="export_destination_wrap">
                                     <div class="row top_titleWrap upload_delete_wrap">
                                         <div class="col s7">
@@ -421,9 +425,10 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>    
+                                </div> 
+                                <!-- Export Destinations block end -->   
                                 
-                                
+                                <!-- Business Terms block start -->
                                 <div class="overview_table_wrap overview_table_alignLeft">
                                     <div class="row top_titleWrap">
                                         <div class="col s9 m7">
@@ -468,11 +473,10 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>    
+                                </div>
+                                <!-- Business Terms block end -->    
                                 
-
-
-
+                                <!-- Sampling and R&D block start -->
                                 <div class="overview_table_wrap overview_table_alignLeft">
                                     <div class="row top_titleWrap">
                                         <div class="col s9 m7">
@@ -517,10 +521,9 @@
                                         @endif
                                     </div>
                                 </div>
+                                <!-- Sampling and R&D block end -->
 
-
-
-
+                                <!-- Special customization ability block start -->
                                 <div class="overview_table_wrap blank_overview_table_wrap">
                                     <div class="row top_titleWrap">
                                         <div class="col s9 m7">
@@ -563,9 +566,10 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>  
+                                </div> 
+                                <!-- Special customization ability block end --> 
                                 
-                                
+                                <!-- Sustainability commitments block start -->
                                 <div class="overview_table_wrap blank_overview_table_wrap">
                                     <div class="row top_titleWrap">
                                         <div class="col s9 m7">
@@ -608,11 +612,12 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>                                
+                                </div> 
+                                <!-- Sustainability commitments block end -->                               
                             
                             @endif <!-- below content will show if business_type is manufacturer end -->
 
-
+                            <!-- Association memberships block start -->
                             <div class="membership_wrap">
                                 <div class="row top_titleWrap upload_delete_wrap">
                                     <div class="col s7">
@@ -647,8 +652,9 @@
                                     @endif
                                 </div>
                             </div>
+                            <!-- Association memberships block end -->
 
-
+                            <!-- PR Highlights block start -->
                             <div class="pr_highlights_wrap">
                                 <div class="row top_titleWrap upload_delete_wrap">
                                     <div class="col s7">
@@ -685,10 +691,8 @@
                                     @endif
 
                                 </div>
-                            </div>                            
-                            
-
-                            
+                            </div>  
+                            <!-- PR Highlights block end -->
 
                         </div>
                     </div>
@@ -700,6 +704,21 @@
 
 
     @include('business_profile._edit_company_overview_modal')
+    @include('business_profile._edit_categories_produced')
+    @include('business_profile._edit_machinery_details')
+    @include('business_profile._edit_production_flow_and_manpower_modal')
+    
+    @include('business_profile._upload_certifications_modal')
+    @include('business_profile._upload_main_buyers_modal')
+    @include('business_profile._upload_export_destination_modal')
+
+    @include('business_profile._add_business_terms_modal')
+    @include('business_profile._add_sampling_modal')
+    @include('business_profile._add_special_customization_modal')
+    @include('business_profile._add_sustainability_commitment_modal')
+
+    @include('business_profile._upload_association_membership_modal')
+    @include('business_profile._upload_press_highlight_modal')
 
 @endsection
 

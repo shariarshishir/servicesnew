@@ -33,7 +33,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         //product tags
-        view()->composer(['new_business_profile.manufacturer_products.index','new_business_profile.wholesaler_products.index','business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index','product.details','product.manufactrue_product_details','rfq.create','rfq._create_rfq_form_modal','rfq._edit_rfq_modal'], function($view){
+        view()->composer(['new_business_profile.manufacturer_products.index','new_business_profile.wholesaler_products.index','new_business_profile.create_rfq_modal','business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index','product.details','product.manufactrue_product_details','rfq.create','rfq._create_rfq_form_modal','rfq._edit_rfq_modal'], function($view){
             $product_tags=ProductTag::get(['id','name']);
             $view->with(['product_tags'=>$product_tags]);
         });

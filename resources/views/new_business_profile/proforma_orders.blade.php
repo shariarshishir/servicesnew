@@ -1,4 +1,9 @@
 @extends('layouts.app_containerless')
+
+@php
+$searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : '';
+@endphp
+
 @section('content')
 
 <div class="account_profile_wrapper">
@@ -72,9 +77,12 @@
                                             <div class="row">
                                                 <div class="col s12">
                                                     <div class="profile_account_search">
-                                                        <i class="material-icons">search</i>
-                                                        <input class="profile_filter_search typeahead" type="text" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
-                                                        <a href="javascript:void(0);" class="reset_po_filter" style="display: none;"><i class="material-icons">restart_alt</i></a>
+                                                        <form action="{{ route('new.profile.profoma_orders.search', $alias) }}" method="GET">
+                                                            @csrf
+                                                            <i class="material-icons">search</i>
+                                                            <input class="profile_filter_search typeahead" name="poSearchInput" type="text" placeholder="Search Merchant Bay Studio/Raw Material Libraries" value="{{$searchInput}}" />
+                                                            <a href="javascript:void(0);" class="reset_po_filter" style="@php echo isset($_REQUEST['poSearchInput']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,158 +90,94 @@
                                         <div class="profile_account_poinfo_innerbox">
                                             <div class="row poinfo_account_title_bar">
                                                 <div class="col s8">
-                                                    <h4>Pending PIs</h4>
+                                                    @if($status == 0)
+                                                        <h4>Pending PIs</h4>
+                                                    @elseif($status == 1)
+                                                        <h4>Ongoing PIs</h4>
+                                                    @elseif($status == 4)
+                                                        <h4>All PIs</h4>    
+                                                    @else
+                                                        <h4>Shipped PIs</h4>
+                                                    @endif
                                                 </div>
                                                 <div class="col s4 right-align">
-                                                    <span class="rfqView">36 results</span>
+                                                    <span class="rfqView">{{count($proformas)}} results</span>
                                                 </div>
                                             </div>
                                             <div class="row po_block_wrapper">
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 1">
-                                                    <div class="profile_account_poinfo_box active">
+                                                @foreach($proformas as $proforma)
+                                                <div class="col s12 m6 l4 po_block {{($proforma->status == -1) ? 'rejected':'' }}" data-potitle="{{$proforma->proforma_id}}">
+                                                    <a href="#po_block_{{$proforma->id}}" class="po_overlay modal-trigger"></a>
+                                                    <div class="profile_account_poinfo_box">
                                                         <div class="row top_download_bar">
+                                                            @if(($proforma->status == -1))
+                                                            <a href="#po_reject_block_{{$proforma->id}}" class="reject_message_box modal-trigger" data-toggle="tooltip" title="Click here to see the cause of rejection"><i class="material-icons">message</i></a>
+                                                            @endif
                                                             <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 1</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
+                                                                <h5>{{$proforma->proforma_id}}</h5>
+                                                                <span class="poinfo">{{ date('d-m-Y', strtotime($proforma->created_at))}}</span>
                                                             </div>
                                                             <div class="col s12 m2">
                                                                 <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
+                                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Click here to download"><img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
+                                                            @foreach($proforma->performa_items as $item)
                                                             <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
+                                                                <p>Quantity <br/> <b>{{$item->unit}}</b></p>
+                                                                <p>Unit Price <br/> <b>{{$item->unit_price}} {{$item->price_unit}}</b></p>
                                                             </div>
                                                             <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
                                                             <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
+                                                                <p>Shipping Date <br/> <b>{{$proforma->proforma_date}}</b></p>
+                                                                <p>Total Price <br/> <b>{{$item->tax_total_price}}</b></p>
+                                                            </div>
+                                                            @endforeach
+
+                                                        </div>
+
+                                                        <div id="po_block_{{$proforma->id}}" class="po_block_modal modal modal-fixed-footer">
+                                                            <div class="modal-content">
+                                                                @include('new_business_profile.proforma_orders_modal')
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                                                             </div>
                                                         </div>
+
+                                                        <div id="po_reject_block_{{$proforma->id}}" class="po_reject_block_modal modal modal-fixed-footer">
+                                                            <div class="modal-content">
+                                                                <legend>Cause of rejection</legend>
+                                                                {{$proforma->reject_message}}
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                                                            </div>
+                                                        </div>                                                        
                                                     </div>
+
+                                                    <div id="po_reject_modal" class="modal modal-fixed-footer">
+                                                        <div class="modal-content">
+                                                            <legend>Write your comment why this proforma "{{$proforma->proforma_id}}" is rejected</legend>
+                                                            <form action="{{route('new.profile.profoma_orders.reject',['alias'=>$alias,'proformaId'=>$proforma->id])}}" method="POST">
+                                                                @csrf
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <label for="reject_message_box">Message</label>
+                                                                        <textarea id="reject_message_box" name="reject_message" class="materialize-textarea"></textarea>
+                                                                    </div>
+                                                                </div> 
+                                                                <button class="reject_message_submit waves-effect waves-light btn_green" type="submit">Submit</button>                                
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+                                                        </div>
+                                                    </div>                                                    
                                                 </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 2">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 2</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s12 m2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 3">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 3</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s12 m2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 4">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 4</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6 l4 po_block" data-potitle="Lorem ipsum title">
-                                                    <div class="profile_account_poinfo_box">
-                                                        <div class="row top_download_bar">
-                                                            <div class="col s12 m10">
-                                                                <h5>Lorem ipsum title</h5>
-                                                                <span class="poinfo">03-Apr-2022</span>
-                                                            </div>
-                                                            <div class="col s2">
-                                                                <div class="download_icon">
-                                                                    <a href="#"> <img src="{{ Storage::disk('s3')->url('public/account-images/icon-download.png') }}" /></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col s12">
-                                                                <p>Beneficiary <br> <b>Radiant Sweaters Ind. Ltd. </b></p>
-                                                            </div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Quantity <br/> <b>1500 pcs</b></p>
-                                                                <p>Unit Price <br/> <b>$7.50 /pc</b></p>
-                                                            </div>
-                                                            <div class="col s12 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 xl5">
-                                                                <p>Shipping Date <br/> <b>10-May-2022</b></p>
-                                                                <p>Total Price <br/> <b>$11,250</b></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -254,59 +198,15 @@
 @push('js')
 <script>
 $(document).ready(function(){
-    var $input = $(".typeahead");
-    $input.typeahead({
-        source: [
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 1",
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 2",
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 3",
-            "Women's Long-Sleeve 100% Cotton Cable Crewneck Sweater 4",
-            "Lorem ipsum title"
-        ],
-        autoSelect: true
-    });
-    $input.change(function() {
-        var current = $input.typeahead("getActive");
-        if (current) {
-            // Some item from your model is active!
-            if (current.name == $input.val()) {
-            // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-            } else {
-            // This means it is only a partial match, you can either add a new item
-            // or take the active if you don't want new items
-            }
-        } else {
-            // Nothing is active so it is a new value (or maybe empty value)
-        }
-    });  
     
-    $(".profile_filter_search").change(function(){
-        var inputText = String($(this).val());
-        $(".po_block").each(function() {
-            var listFind = String($(this).data("potitle"));
-            if (inputText == listFind)
-            {
-                //$(".rfq_tab_item_box .tablinks").removeClass("active");
-                //faqCategory(event, 'faqCategoryAll');
-                //$(".triggerEvent").addClass("active");
-                $(this).css("display", "block");
-                $(".reset_po_filter").show();
-                //console.log("Found");
-                return;
-            }
-            else 
-            {
-                $(this).css("display", "none");
-                //console.log("Not Found");
-                return;
-            }
-        });
-    });
-
     $(".reset_po_filter").click(function(){
-        $(".profile_filter_search").val("");
-        window.location.reload();
+        location.href = "{{route('new.profile.profoma_orders.pending', $alias)}}";
     });    
+
+    $(".po_reject_trigger").click(function(){
+        $(".po_block_modal").modal("close");
+        $(this).closest(".po_block").children("#po_reject_modal").modal("open");
+    })    
 
 })
 </script>

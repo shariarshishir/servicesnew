@@ -33,17 +33,7 @@ class BusinessProfileController extends Controller
         return view('new_business_profile.my_rfqs',compact('alias'));
     }
 
-    public function profomaPendingOrders($alias){
-        return view('new_business_profile.proforma_orders',compact('alias'));
-
-    }
-    public function profomaOngoingOrders($alias){
-        return view('new_business_profile.proforma_orders',compact('alias'));
-    }
-
-    public function profomaShippedOrders($alias){
-        return view('new_business_profile.proforma_orders',compact('alias'));
-    }
+    
 
     public function developmentCenter($alias){
         return view('new_business_profile.development_center',compact('alias'));

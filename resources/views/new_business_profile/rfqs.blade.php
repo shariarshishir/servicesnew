@@ -111,7 +111,7 @@
                                     <div class="profile_account_searchBar">
                                         <div class="row">
                                             <div class="col s12 m5 l4">
-                                                <a class="modal-trigger post_new" href="#profileAccountPostNew">
+                                                <a class="modal-trigger open-create-rfq-modal post_new" href="#create-rfq-form">
                                                     <i class="material-icons">add</i><span>Post New</span>
                                                 </a>
                                             </div>
@@ -125,24 +125,29 @@
                                     </div>
                                     <div class="product_design_wrapper profile_account_product">
                                         <div class="row">
+                                        @foreach ($rfqLists as $rfqSentList)
                                             <div class="col s6 m6 l4 product_item_box">
                                                 <div class="productBox">
                                                     <div class="inner_productBox">
                                                         <a href="javascript:void(0);">
-                                                            <div class="imgBox">
-                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-1.png') }}" class="" alt="">
-                                                            </div>
+                                                            @if(count($rfqSentList['images']) > 0)
+                                                                @foreach ($rfqSentList['images'] as  $key => $rfqImage )
+                                                                    <div class="imgBox">
+                                                                        <img src="{{ $rfqImage['image'] }}" class="" alt="">
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
                                                             <div class="products_inner_textbox">
-                                                                <h4><span>Rugby Top-MB-2130</span></h4>
+                                                                <h4><span>{{$rfqSentList['title']}}</span></h4>
                                                                 <div class="row">
                                                                     <div class="col s12 m6">
                                                                         <div class="product_moq">
-                                                                            MOQ: <br/> <span>1000</span>
+                                                                            Unit Price: <br/> <span>{{$rfqSentList['unit_price']}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col s12 m6">
                                                                         <div class="pro_leadtime">
-                                                                            Lead Time <br/> <span>30-45</span> days
+                                                                            Lead Time <br/> <span>{{ date('F j, Y',strtotime($rfqSentList['delivery_time'])) }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -151,84 +156,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col s6 m6 l4 product_item_box">
-                                                <div class="productBox">
-                                                    <div class="inner_productBox">
-                                                        <a href="javascript:void(0);">
-                                                            <div class="imgBox">
-                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-2.png') }}" class="" alt="">
-                                                            </div>
-                                                            <div class="products_inner_textbox">
-                                                                <h4><span>Rugby Top-MB-2130</span></h4>
-                                                                <div class="row">
-                                                                    <div class="col s12 m6">
-                                                                        <div class="product_moq">
-                                                                            MOQ: <br/> <span>1000</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col s12 m6">
-                                                                        <div class="pro_leadtime">
-                                                                            Lead Time <br/> <span>30-45</span> days
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col s6 m6 l4 product_item_box">
-                                                <div class="productBox">
-                                                    <div class="inner_productBox">
-                                                        <a href="javascript:void(0);">
-                                                            <div class="imgBox">
-                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-1.png') }}" class="" alt="">
-                                                            </div>
-                                                            <div class="products_inner_textbox">
-                                                                <h4><span>Rugby Top-MB-2130</span></h4>
-                                                                <div class="row">
-                                                                    <div class="col s12 m6">
-                                                                        <div class="product_moq">
-                                                                            MOQ: <br/> <span>1000</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col s12 m6">
-                                                                        <div class="pro_leadtime">
-                                                                            Lead Time <br/> <span>30-45</span> days
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col s6 m6 l4 product_item_box">
-                                                <div class="productBox">
-                                                    <div class="inner_productBox">
-                                                        <a href="javascript:void(0);">
-                                                            <div class="imgBox">
-                                                                <img src="{{ Storage::disk('s3')->url('public/account-images/pro-2.png') }}" class="" alt="">
-                                                            </div>
-                                                            <div class="products_inner_textbox">
-                                                                <h4><span>Rugby Top-MB-2130</span></h4>
-                                                                <div class="row">
-                                                                    <div class="col s12 m6">
-                                                                        <div class="product_moq">
-                                                                            MOQ: <br/> <span>1000</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col s12 m6">
-                                                                        <div class="pro_leadtime">
-                                                                            Lead Time <br/> <span>30-45</span> days
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -288,5 +216,6 @@
         </div>
     </div>
 </div>
-
+@include('new_business_profile.create_rfq_modal')
+@include('new_business_profile._scripts')
 @endsection

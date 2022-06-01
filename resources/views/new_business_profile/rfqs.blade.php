@@ -123,7 +123,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product_design_wrapper profile_account_product">
+                                    <div class="product_design_wrapper profile_account_rfqproduct">
                                         <div class="row">
                                         @foreach ($rfqLists as $rfqSentList)
                                             <div class="col s6 m6 l4 product_item_box">

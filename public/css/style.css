@@ -5162,6 +5162,10 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     position: inherit;
     background: none;
 }
+.modal .input-field label {
+    padding-top: 0;
+    font-weight: bold;
+}
 .input-field select,
 .sign-wrap .input-wrap input {
     font-size: 18px;
@@ -11670,6 +11674,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 #showLess:hover {
     color: black;
+}
+
+.account_profile_wrapper ul.pagination {
+    padding-top: 20px;
 }
 
 /* ******************** Media css style start *********************** */

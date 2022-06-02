@@ -20,10 +20,10 @@
                     <div class="rfq_detail_from">
                         <!--3-->
                         <div class="row input-field input-wrapper">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12">
                                 <label>Select Product Tags <span >*</span></label>
                             </div>
-                            <div class="col s12 m8 l9">
+                            <div class="col s12">
                                 <select class="select2 browser-default" id="category_id" name="category[]"  required multiple >
                                     @foreach($product_tags as $product_tag)
                                         <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12">
                                 <label>Title <span>*</span></label>
                             </div>
                             <div class=" col s12 m8 l9">
@@ -41,18 +41,18 @@
                         </div>
 
                         <div class="row input-field input-wrapper">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12">
                                 <label>Short Description <span>*</span></label>
                             </div>
-                            <div class=" col s12 m8 l9">
+                            <div class=" col s12">
                                 <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12">
                                 <label>Full Description <span>*</span></label>
                             </div>
-                            <div class=" col s12 m8 l9">
+                            <div class=" col s12">
                                 <textarea class="ig-new-rgt prd-txta" style="height:88px;" name="full_specification"></textarea>
                             </div>
                         </div>
@@ -61,20 +61,20 @@
                             <div class="row">
                                 <div class="col s12 m12 l6">
                                     <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
+                                        <div class="col s12">
                                             <label>Quantity <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <input type="number" class="form-control- ig-new-rgt" name="quantity" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class=" col s12 m12 l6">
                                     <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
+                                        <div class="col s12">
                                             <label>Select Unit <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <select class="select2" name="unit" id="unit">
                                                 <option value="">Select an option</option>
                                                 @php $units = units(); @endphp
@@ -89,20 +89,20 @@
                             <div class="row">
                                 <div class="col s12 m12 l6">
                                     <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
+                                        <div class="col s12">
                                             <label>Target Price <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <input type="text" class="form-control- ig-new-rgt" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class=" col s12 m12 l6">
                                     <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
+                                        <div class="col s12">
                                             <label>Destination <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <input type="text" class="form-control- ig-new-rgt" name="destination" required/>
                                         </div>
                                     </div>
@@ -111,10 +111,10 @@
                             <div class="row">
                                 <div class="col s12 m12 l6">
                                     <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
+                                        <div class="col s12">
                                             <label>Select Payment Method <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <select class="select2" name="payment_method" id="payment_method" required>
                                                 <option>Select an option</option>
                                                 <option value="cash">Cash</option>
@@ -130,21 +130,16 @@
                                 </div>
                                 <div class=" col s12 m12 l6">
                                     <div class="input-field row input-wrapper">
-                                        <div class="col s12 m4 l5">
+                                        <div class="col s12">
                                             <label>Expected Delivery Time <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <input type="date" class="form-control- ig-new-rgt" name="delivery_time" required/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
 
                         <div class="row rfq_img_upload_wrap">
                             <div class="rfq_thumbnail_box">

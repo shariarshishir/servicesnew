@@ -60,10 +60,10 @@
                         </div>
 
                         <div class="form-group input-field row">
-                            <div class="col s12 m3 l3">
+                            <div class="col s12">
                                 <label for="product_tag">Product Tags<span class="text-danger">*</span></label>
                             </div>
-                            <div class="col s12 m9 l9">
+                            <div class="col s12">
                                 <select name="product_tag[]" class="select2 browser-default" id="product_tag" multiple>
                                     @foreach($product_tags as $product_tag)
                                         <option value="{{ $product_tag->name }}">{{$product_tag->name }}</option>
@@ -74,10 +74,10 @@
                         </div>
                     <div class="row">
                         <div class="row input-field">
-                            <div class="col s12 m3 l3">
+                            <div class="col s12">
                                 <label for="producut-title">Title <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col s12 m9 l9">
+                            <div class="col s12">
                                 <input type="text" id="producut-title" name="title" class="form-control" placeholder="Product Title ..." >
                                 <span class="text-danger error-text title_error rm-error"></span>
                             </div>
@@ -130,10 +130,10 @@
                     </div>
                     <div class="product_colorSizw_wrap">
                         <div class="input-field row">
-                            <div class="col s12 m3 l3 ">
+                            <div class="col s12">
                                 <label for="product-colors">Colors <small>EXP: Red,Blue,...</small> </label>
                             </div>
-                            <div class="col s12 m9 l9 product_color_box">
+                            <div class="col s12 product_color_box">
                                 <select class="select2 browser-default product-colors" name="colors[]" id="colors" multiple>
                                     @foreach ($colors as $color)
                                         <option value="{{ $color }}">{{ ucfirst($color) }}</option>
@@ -143,10 +143,10 @@
                             </div>
                         </div>
                         <div class="input-field row">
-                            <div class="col s12 m3 l3 ">
+                            <div class="col s12">
                                 <label for="product-sizes">Sizes <small>EXP: XL,XXL,...</small> </label>
                             </div>
-                            <div class="col s12 m9 l9 product_size_box">
+                            <div class="col s12 product_size_box">
                                 <select class="select2 browser-default product-sizes" name="sizes[]" id="sizes"  multiple="multiple">
                                     @foreach ($sizes as $size)
                                         <option value="{{ $size }}">{{ ucfirst($size) }}</option>
@@ -157,20 +157,20 @@
                         </div>
                     </div>
                     <div class="input-field row">
-                        <div class="col s12 m3 l3">
+                        <div class="col s12">
                             <label for="product-desc">Product Details <span class="text-danger">*</span></label>
                         </div>
-                        <div class="col s12 m9 l9 ">
+                        <div class="col s12">
                             <textarea name="product_details" id="product-desc" class="form-control editor" cols="30" rows="10" placeholder="Product Details" ></textarea>
                             <span class="text-danger error-text product_details_error rm-error"></span>
                         </div>
 
                     </div>
                     <div class="input-field row">
-                        <div class="col s12 m3 l3 ">
+                        <div class="col s12">
                             <label for="product-spec">Full specification <span class="text-danger">*</span></label>
                         </div>
-                        <div class="col s12 m9 l9 ">
+                        <div class="col s12">
                             <textarea name="product_specification" id="product-spec" class="form-control editor" cols="30" rows="10" placeholder="Full Specification" ></textarea>
                             <span class="text-danger error-text product_specification_error rm-error"></span>
                         </div>
@@ -179,18 +179,18 @@
                         <div class="col s12 m3 l3 ">
                             <label for="lead_time">Lead time (days) <span class="text-danger">*</span></label>
                         </div>
-                        <div class="col s12 m9 l9 ">
+                        <div class="col s12">
                             <input type="text" name="lead_time" id="lead_time" class="form-control negitive-or-text-not-allowed" placeholder="days" >
                             <span class="text-danger error-text lead_time_error rm-error"></span>
                         </div>
                     </div>
                      {{-- gender --}}
                     <div class="row input-field ">
-                        <div class="col s12 m3 l3">
+                        <div class="col s12">
                             <label for="gender">Gender<span class="text-danger">*</span></label>
                             <span class="text-danger error-text gender_error rm-error"></span>
                         </div>
-                        <div class="col s12 m9 l9">
+                        <div class="col s12">
                             <div class="radio-block">
                                 <label class="radio_box">
                                     <input class="with-gap" name="gender" type="radio" value="1" />

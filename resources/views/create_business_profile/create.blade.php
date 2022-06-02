@@ -51,17 +51,6 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <div class="col s12 m4">
-                                            <label for="profile_type">Profile Act Like</label>
-                                        </div>
-                                        <div class="col s12 m8">
-                                            <select id="profile_type" class="select2 browser-default" name="profile_type">
-                                                    <option value="buyer"  {{auth()->user()->is_supplier == false ? 'selected' : ''}}>Buyer</option>
-                                                    <option value="supplier"  {{auth()->user()->is_supplier == true ? 'selected' : ''}}>Supplier</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <div class="col s12 m4">
                                             <label for="business_name">Organization Name</label>
                                         </div>
                                         <div class="col s12 m8">

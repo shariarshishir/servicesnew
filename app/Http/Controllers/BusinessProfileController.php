@@ -66,7 +66,6 @@ class BusinessProfileController extends Controller
          $validator = Validator::make($request->all(), [
             'business_name' => 'required',
             'location'      => 'required',
-            'profile_type'  => 'required',
             'business_type' => 'required',
             'trade_license' => 'required',
             'industry_type' => 'required',
@@ -106,7 +105,7 @@ class BusinessProfileController extends Controller
                     'number_of_factories' => $request->number_of_factories,
                     'industry_type' => $request->industry_type,
                     'factory_type' => $request->factory_type,
-                    'profile_type' => $request->profile_type,
+                    'profile_type' =>'supplier',
 
                 ];
 

@@ -140,4 +140,9 @@ class BusinessProfile extends Model
         return $this->hasMany(supplierQuotationToBuyer::class);
     }
 
+    public function businessProfileVerification()
+    {
+        return $this->hasOne(BusinessProfileVerification::class);
+    }
+
 }

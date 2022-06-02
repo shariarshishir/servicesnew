@@ -85,7 +85,7 @@
                             </form>
                         </div>
 
-                        @if($business_profile->business_type == 1)
+                        @if($business_profile->business_type == "manufacturer")
                         <div class="capacity-and-machineries">
                             {{-- <legend>Capacity and machineries</legend> --}}
                             {{-- <form action="{{route('capacity.machineries.verify')}}" method="post"> --}}

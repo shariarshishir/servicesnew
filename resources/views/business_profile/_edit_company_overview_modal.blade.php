@@ -8,21 +8,21 @@
 
         <form action="" method="POST" class="signup-form" id='alias-submit-form' enctype="multipart/form-data">
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
-            <div class="row input-field" style="margin-bottom: 45px;">
+            <div class="row input-field" style="margin-bottom: 20px;">
                 <div class="col s12" style="position: relative;">
-                    <label style="margin: 0; padding:0;">Customize Your Profile Url</label>
+                    <label style="margin: 0 0 10px 0; padding:0;">Customize Your Profile Url</label>
                     <input type="text" class="form-control"
                         style="box-shadow: none !important;
                         border-bottom: 1px solid #9e9e9e !important;
                         border-radius: 0;"   name="alias" value="{{$business_profile->alias}}">
                     <button
                         style="position: absolute;
-                        right: 5px;
-                        bottom: 1px;
+                        right: 15px;
+                        bottom: 8px;
                         background: none;
                         border: none;
                         box-shadow: none;"  id="alias-submit-btn" disabled>
-                        <i class="material-icons send-icon" style="color: #565856; font-size: 25px;">send</i>
+                        <i class="material-icons send-icon" style="color: #565856; font-size: 25px; ">send</i>
                     </button>
                 </div>
                 <div class="alias-loader" style="display: none;">
@@ -40,7 +40,7 @@
                 <input type="hidden" name="company_overview_id" value="{{$business_profile->companyOverview->id}}">
                 <div class="row">
                     @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-                        <div class="input-field col s12 m12 l6">
+                        <div class="input-field col s12 m6">
                             <label for="{{$company_overview->name}}">{{str_replace('_', ' ', ucfirst($company_overview->name))}}</label>
                             <input id="{{$company_overview->name}}" type="text" class="validate" name="name[{{$company_overview->name}}]" value="{{$company_overview->value}}">
                         </div>

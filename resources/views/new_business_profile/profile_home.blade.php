@@ -206,7 +206,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div id="factory_show_images" class="col s12 factory_imgbox_wrap">
+                                        <div id="factory_show_images" class="factory_imgbox_innerwrap">
                                             <div class="row factory_image_gallery">
                                             @if(count($companyFactoryTour->companyFactoryTourImages)>0)
                                                 @foreach($companyFactoryTour->companyFactoryTourImages as $image)
@@ -228,7 +228,7 @@
 
                                             </div>
                                         </div>
-                                        <div id="factory_degree_show_images" class="col s12 video_gallery_box">
+                                        <div id="factory_degree_show_images" class="video_gallery_box">
                                             <div class="row degree_360_video_gallery">
                                             @if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
                                             @foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)

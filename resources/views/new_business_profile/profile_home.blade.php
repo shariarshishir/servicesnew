@@ -62,60 +62,58 @@
                         </div>
                     </div>
                     <div class="col s12 m9 l10">
-                        <div class="profile_supplier_account_home_wrap">
-                            <h3>About the Company</h3>
-                            <div class="contentBox">
-                                <div class="company_stuff center-align row">
-                                    @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
-                                        @if($company_overview->name=='floor_space')
+                        <div class="profile_supplier_account_home_wrap account_profile_home_content">
+                            <legend>About the Company</legend>
+                            <div class="company_stuff center-align row">
+                                @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+                                    @if($company_overview->name=='floor_space')
+                                    <div class="col s4 m3 l2">
+                                        <div class="company_stuff_img">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
+                                        </div>
+                                        <div class="title">Floor Space</div>
+                                        <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
+                                    </div>
+                                    @endif
+                                    @if($company_overview->name=='no_of_machines')
+                                    <div class="col s4 m3 l2">
+                                        <div class="company_stuff_img">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
+                                        </div>
+                                        <div class="title">No. of Machines</div>
+                                        <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+                                    </div>
+                                    @endif
+                                    @if($company_overview->name=='production_capacity')
+                                    <div class="col s4 m3 l3">
+                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/production.png')}}" alt="" /> 
+                                        <div class="title">Production Capacity</div>
+                                        <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+                                    </div>
+                                    @endif
+                                    @if($company_overview->name=='number_of_worker')
+                                        @if(isset($company_overview->value))
                                         <div class="col s4 m3 l2">
                                             <div class="company_stuff_img">
-                                                <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/factory.png')}}" alt="" /> 
+                                                <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
                                             </div>
-                                            <div class="title">Floor Space</div>
+                                            <div class="title">No. of workers</div>
                                             <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
                                         </div>
                                         @endif
-                                        @if($company_overview->name=='no_of_machines')
+                                    @endif
+                                    @if($company_overview->name=='number_of_female_worker')
+                                        @if(isset($company_overview->value))
                                         <div class="col s4 m3 l2">
                                             <div class="company_stuff_img">
-                                                <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/sewing-machine.png')}}" alt="" /> 
+                                                <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/human.png')}}" alt="" /> 
                                             </div>
-                                            <div class="title">No. of Machines</div>
-                                            <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
+                                            <div class="title">No. of female workers</div>
+                                            <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
                                         </div>
                                         @endif
-                                        @if($company_overview->name=='production_capacity')
-                                        <div class="col s4 m3 l3">
-                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/production.png')}}" alt="" /> 
-                                            <div class="title">Production Capacity</div>
-                                            <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
-                                        </div>
-                                        @endif
-                                        @if($company_overview->name=='number_of_worker')
-                                            @if(isset($company_overview->value))
-                                            <div class="col s4 m3 l2">
-                                                <div class="company_stuff_img">
-                                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/workers.png')}}" alt="" /> 
-                                                </div>
-                                                <div class="title">No. of workers</div>
-                                                <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-                                            </div>
-                                            @endif
-                                        @endif
-                                        @if($company_overview->name=='number_of_female_worker')
-                                            @if(isset($company_overview->value))
-                                            <div class="col s4 m3 l2">
-                                                <div class="company_stuff_img">
-                                                    <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/human.png')}}" alt="" /> 
-                                                </div>
-                                                <div class="title">No. of female workers</div>
-                                                <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}</div>
-                                            </div>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </div>
+                                    @endif
+                                @endforeach
                             </div>
                             <!-- company_stuff -->
                             <div class="contentBox">
@@ -135,7 +133,7 @@
                             @if($business_profile->business_type == 'manufacturer') <!-- below content will show if business_type is manufacturer start -->
                                 <!-- Certifications Start -->
                                 <div class="certifications">
-                                    <h3>Certifications</h3>
+                                    <legend>Certifications</legend>
                                     <div class="certifications-block">
                                         @if(count($business_profile->certifications)>0)
                                             @foreach($business_profile->certifications as $certification)
@@ -198,7 +196,7 @@
                                 
                                 <!-- Factory Start -->
                                 <div class="factory_imgbox_wrap">
-                                    <h3>Factory Images</h3>
+                                    <legend>Factory Images</legend>
                                     @if(count($business_profile->companyFactoryTour)>0)
                                         <div class="row top_titleWrap">
                                             <div class="col s12 gallery_navbar">
@@ -208,7 +206,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div id="factory_show_images" class="col s12 factory_imgbox_wrap">
+                                        <div id="factory_show_images" class="factory_imgbox_innerwrap">
                                             <div class="row factory_image_gallery">
                                             @if(count($companyFactoryTour->companyFactoryTourImages)>0)
                                                 @foreach($companyFactoryTour->companyFactoryTourImages as $image)
@@ -230,7 +228,7 @@
 
                                             </div>
                                         </div>
-                                        <div id="factory_degree_show_images" class="col s12 video_gallery_box">
+                                        <div id="factory_degree_show_images" class="video_gallery_box">
                                             <div class="row degree_360_video_gallery">
                                             @if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
                                             @foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)
@@ -264,8 +262,8 @@
 
                                 <!-- Main Buyers Start -->
                                 <div class="main_buyers_wrap">
-                                    <h3>Main Buyers</h3>
-                                    <div class="buyers_logo_wrap row main-buyers-block">
+                                    <legend>Main Buyers</legend>
+                                    <div class="buyers_logo_wrap main-buyers-block row">
                                         @if(count($business_profile->mainBuyers)>0)
                                         @foreach($business_profile->mainBuyers as $mainBuyers)
                                             <div class="col s6 m4 l3 main_buyer_box">
@@ -289,7 +287,7 @@
 
                                 <!-- Export Destination Start -->
                                 <div class="export_destination_wrap">
-                                    <h3>Export Destinations</h3>
+                                    <legend>Export Destinations</legend>
                                     <div class="row flag_wrap center-align export-destination-block">
                                         @if(count($business_profile->exportDestinations)>0)
                                             @foreach($business_profile->exportDestinations as $exportDestination)

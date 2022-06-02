@@ -562,7 +562,6 @@
                                     <div class="col s6 m6">
                                         <h3>Main Buyers</h3>
                                     </div>
-
                                 </div>
                                 <div class="buyers_logo_wrap row main-buyers-block">
                                         @foreach($business_profile->mainBuyers as $mainBuyers)
@@ -585,8 +584,8 @@
                                         <h3>Export Destinations</h3>
                                     </div>
                                 </div>
-                                <div class="row flag_wrap center-align">
-                                    <div class="flagBox export-destination-block">
+                                <div class="flag_wrap center-align">
+                                    <div class="flagBox export-destination-block row">
 										@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
 											<div class="flag_innerBox">
@@ -1097,7 +1096,7 @@
 											</ul>
 										</div>
 									</div>
-									<div id="factory_images" class="col s12 factory_imgbox_wrap">
+									<div id="factory_images" class="factory_imgbox_innerwrap">
 										<div class="row factory_image_gallery">
 										@if(count($companyFactoryTour->companyFactoryTourImages)>0)
 											@foreach($companyFactoryTour->companyFactoryTourImages as $image)
@@ -1115,7 +1114,7 @@
 
 										</div>
 									</div>
-									<div id="factory_degree_images" class="col s12 video_gallery_box">
+									<div id="factory_degree_images" class="video_gallery_box">
 										<div class="row degree_360_video_gallery">
 										@if(count($companyFactoryTour->companyFactoryTourLargeImages)>0)
 										@foreach($companyFactoryTour->companyFactoryTourLargeImages as $image)

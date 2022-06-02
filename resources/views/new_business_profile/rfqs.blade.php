@@ -123,18 +123,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product_design_wrapper profile_account_product">
+                                    <div class="product_design_wrapper profile_account_rfqproduct">
                                         <div class="row">
                                         @foreach ($rfqLists as $rfqSentList)
                                             <div class="col s6 m6 l4 product_item_box">
                                                 <div class="productBox">
                                                     <div class="inner_productBox">
-                                                        <a href="javascript:void(0);">
+                                                        <a class="modal-trigger " href="#details-rfq-modal-{{$rfqSentList['id']}}">
                                                             @if(count($rfqSentList['images']) > 0)
                                                                 @foreach ($rfqSentList['images'] as  $key => $rfqImage )
-                                                                    <div class="imgBox">
-                                                                        <img src="{{ $rfqImage['image'] }}" class="" alt="">
+                                                                    @if( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'png' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'PNG' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'jpeg' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'JPEG' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'jpg' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'JPG')
+                                                                    <div class="imgBox rfq_thum_img">
+                                                                        <img src="{{ $rfqImage['image'] }}" class="rfqImage" alt="">
                                                                     </div>
+                                                                    @break
+                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'PDF')
+                                                                    <div class="imgBox rfq_thum_img">
+                                                                        <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/pdf-bg.png" class="rfqFileImage" alt="">
+                                                                    </div>
+                                                                    @break
+                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOC' ||  pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'docx') || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOCX') 
+                                                                    <div class="imgBox rfq_thum_img">
+                                                                        <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/doc-bg.png" class="rfqFileImage" alt="">
+                                                                    </div>
+                                                                    @break
+                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'xlsx' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'XLSX' ) 
+                                                                    <div class="imgBox rfq_thum_img">
+                                                                        <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/excel-bg.png" class="rfqFileImage" alt="">
+                                                                    </div>
+                                                                    @break
+                                                                    @endif
                                                                 @endforeach
                                                             @endif
                                                             <div class="products_inner_textbox">
@@ -153,6 +171,7 @@
                                                                 </div>
                                                             </div>
                                                         </a>
+                                                        @include('new_business_profile.rfq_details_modal')
                                                     </div>
                                                 </div>
                                             </div>
@@ -217,5 +236,6 @@
     </div>
 </div>
 @include('new_business_profile.create_rfq_modal')
-@include('new_business_profile._scripts')
+@include('new_business_profile._rfq_scripts')
+@include('new_business_profile.share_modal')
 @endsection

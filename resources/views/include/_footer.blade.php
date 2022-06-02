@@ -293,6 +293,10 @@
         $(".product_filter_empty_area").click(function(){
             $(this).closest(".productSidenav").css({"width":"0px"});
         });
+
+        $('.collapsible').collapsible({
+            accordion:true
+        });        
     })
 
     $(window).on('load', function () {

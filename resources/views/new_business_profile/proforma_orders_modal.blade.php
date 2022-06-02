@@ -1,4 +1,4 @@
-@if(($proforma->status != -1))
+@if(($proforma->status != -1 && $proforma->status != 1))
 <a href="{{route('new.profile.profoma_orders.accept',['alias'=>$alias,'proformaId'=>$proforma->id])}}" class="waves-effect waves-light btn_green po_accept_trigger">Accept</a>
 <a href="javascript:void(0);" class="waves-effect waves-light btn_green po_reject_trigger">Reject</a>
 @endif

@@ -175,10 +175,12 @@
                         <div class="profile_supplier_account_insight_wrap">
                             <div class="supplier_account_progress">
                                 <h4>Profile Progress</h4>
-                                <div class="supplier_profile_progress_box">
-                                    <img src="./images/account-images/progress-bar.png" alt="" />
+                                <div id="profile-progress-wrapper">
+                                    <div class="profile-progressbar-total" style="position: relative; width: 100%; background: #ccc; height: 10px;">
+                                        <div class="profile-progress-value" style="width: {{$profileProgressValue}}%; background: #54a958; height: 10px; position: absolute; top: 0px; left: 0px;"></div>
+                                    </div>
                                 </div>
-                                <div class="right-align">70% Completed</div>
+                                <div class="right-align">{{$profileProgressValue}}% Completed</div>
                             </div>
                             <div class="appearances_wrap center-align">
                                 <div class="row">

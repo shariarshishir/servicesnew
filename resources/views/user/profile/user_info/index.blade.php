@@ -50,19 +50,19 @@
                 $className = '';
                 if(count($businessProfiles)==3) {
                     //$className = "col m4";
-                    $className = "col m12";
+                    $className = "col s12 m6";
                 } elseif(count($businessProfiles)==2) {
                     //$className = "col m6";
-                    $className = "col m12";
+                    $className = "col s12 m6";
                 } else {
-                    $className = "col m12";
+                    $className = "col s12 m6";
                 }
             @endphp
             <div class="row profile-block business-profile-block">
-                <div class="col m12">
+                <div class="col s12">
                     <legend>My Businesses</legend>
                 </div>
-                <div class="col m12 my_businesses_wrap">
+                <div class="col s12 my_businesses_wrap">
                     @foreach($businessProfiles as $key=>$businessprofile)
                     <div class="<?php echo $className; ?>">
                         <div class="my_businesses_box card user-business-profile-short-info" itemscope itemtype="https://schema.org/Organization">
@@ -71,7 +71,7 @@
                             @elseif($businessprofile->business_type== 'wholesaler')
                                 <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             @endif --}}
-                            <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('new.profile.index',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
+                            <p class="businessName"span style="font-weight: 500;">Business Name:</span> <a href="{{route('new.profile.index',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             <p><span style="font-weight: 500;">Business Location:</span> <span itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $businessprofile->location }}</span></p>
                             <p><span style="font-weight: 500;">Business Type:</span> {{ucwords($businessprofile->business_type)}}</p>
                             {{-- <div class="business-shortcut-bar">

@@ -2384,18 +2384,22 @@ div.dataTables_wrapper table.mdc-data-table__table {
 /* ********************************* */
 .user-profile-basic-info-block .profile_image {
     margin-bottom: 20px;
-    min-height: 290px;
+    max-height: 160px;
     border-radius: 12px;
+    overflow: auto;
 }
 .user-profile-basic-info-block .profile_image img {
     height: 100%;
-    width: 100%;
-    min-height: 290px;
+    width: auto;
+    /* min-height: 290px; */
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     border-radius: 10px;
     display: block;
+    max-height: inherit;
+    object-fit: contain;
+    margin: 0 auto;
 }
 .user-profile-info-block .material-icons {
     color: #54a958;
@@ -2403,11 +2407,12 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .profile-image-block .change_photo {
     text-align: center;
+    margin-bottom: 20px;
 }
 .profile-image-block .profile-image-upload-trigger {
     height: 40px;
-    line-height: 32px;
-    float: left;
+    line-height: 30px;
+    /* float: left; */
     margin-left: 0;
     width: 140px;
     font-size: 14px;
@@ -2418,13 +2423,13 @@ div.dataTables_wrapper table.mdc-data-table__table {
     display: none;
 }
 .profile-image-block .green {
-    border-radius: 10px;
-    float: right;
+    width: 115px;
     height: 40px;
     text-transform: capitalize;
     font-size: 16px;
-    width: 115px;
     font-weight: 500;
+    border-radius: 5px;
+    float: right;
 }
 .user-profile-basic-info-block .my_businesses_wrap {
     text-transform: capitalize;
@@ -2433,9 +2438,14 @@ div.dataTables_wrapper table.mdc-data-table__table {
     align-content: stretch;
     justify-content: left;
 }
+.user-profile-basic-info-block .my_businesses_wrap .my_businesses_innerbox {
+    width: 33%;
+    padding: 0 15px 10px;
+}
 .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box {
     height: 90%;
     position: relative;
+    padding: 20px 20px 10px !important;
 }
 .product_details_info_wrap .ic-product-title {
     font-size: 22px;
@@ -2443,6 +2453,16 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 600;
     margin-bottom: 30px;
     text-transform: capitalize;
+}
+
+.user-profile-basic-info-block .my_businesses_wrap .my_businesses_box .businessName {
+    width: 85%;
+    max-height: 40px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /* *********************************** */
@@ -4678,6 +4698,14 @@ div.dataTables_wrapper table.mdc-data-table__table {
     background-size: 80px;
     height: 80px;
 }
+
+.modal .rfq_profile_info .profile_view_time {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: auto;
+    height: auto;
+}
 .rfq_profile_info .btn_share {
     font-size: 14px;
     min-width: inherit;
@@ -4781,7 +4809,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 0 30px;
 }
 .sign-wrap .leftbar .logo-wrap img {
-    max-width: 400px;
+    max-width: 350px;
     margin-bottom: 30px;
     width: 100%;
 }
@@ -9089,6 +9117,9 @@ nav .pagination li.active .page-link {
 .product_design_wrapper .modal {
     width: 80%;
 }
+.product_design_wrapper .modal .reject_message_submit  {
+    min-height: 35px;
+}
 
 /* products_filter_boxwrap css style end */
 /* ******************** products_filter css style end ******************** */
@@ -10179,7 +10210,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin: 3px;
 }
 .rfq_review_results_nav {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 .rfq_review_results_nav ul li {
     display: inline-block;
@@ -10220,17 +10251,30 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border-radius: 50%;
     display: block;
 }
+.rfq_review_results_box .new_rfq_review p {
+    margin-bottom: 7px;
+}
 .rfq_review_results_box .new_rfq_review p span {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
+}
+.rfq_review_results_box .new_rfq_review p span a {
+    height: 20px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 5px;
 }
 .rfq_review_results_box .rfqEatting {
     display: block;
     margin-bottom: 2px;
+    line-height: 10px;
 }
 .rfq_review_results_box .rqf_verified {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
 }
 .rfq_review_results_box .new_rfq_review .btn_green {
     margin: 0;
@@ -10240,10 +10284,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .rfq_review_message_box {
     display: inline-block;
     width: 100%;
+    max-height: 250px;
+    overflow: scroll;
 }
+
 .rfq_review_message_box .chat-text {
-    max-width: 230px;
-    margin-bottom: 30px;
+    max-width: 250px;
+    margin-bottom: 20px;
 }
 .rfq_review_message_box .chat-text span {
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
@@ -10252,6 +10299,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 5px 10px;
     border-radius: 10px;
     display: inline-block;
+}
+.rfq_review_message_box .rfq_message_box {
+    width: 100%;
+}
+.rfq_review_message_box .rfq_message_box.chat-right .chat-text {
+    float: right;
+    margin: 0 5px 10px 0;
 }
 .rfq_review_message_box .rfq_message_box.chat-right .chat-text span {
     background: #d2e9d4;
@@ -11758,10 +11812,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .sourcing_img_box img {
         max-width: 580px;
     }
-    .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box {
+    /* .user-profile-basic-info-block .my_businesses_wrap .my_businesses_box {
         margin-left: -8px;
         margin-right: -8px;
-    }
+    } */
     .home_intro_video_box .embed-responsive-item {
         width: 600px;
     }
@@ -12086,14 +12140,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .suppliers_filter_wrap .filter_search {
         margin: 10px auto 0;
     }
-    .user-profile-basic-info-block .profile_image {
+    /* .user-profile-basic-info-block .profile_image {
         min-height: 130px;
-    }
-    .user-profile-basic-info-block .profile_image img {
+    } */
+    /* .user-profile-basic-info-block .profile_image img {
         height: auto;
         width: auto;
         min-height: 130px;
-    }
+    } */
     .profile-image-block .change_photo {
         text-align: center;
     }
@@ -12750,9 +12804,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         top: 48px;
         right: 20px;
     }
-    .user-profile-basic-info-block .my_businesses_wrap {
+    /* .user-profile-basic-info-block .my_businesses_wrap {
         display: inline-block;
-    }
+    } */
     .user-profile-basic-info-block .my_businesses_wrap .col.m4 {
         width: 50% !important;
     }
@@ -13594,6 +13648,22 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .certificate_img_wrap .certificate_infoBox .issue-date,
     .certificate_img_wrap .certificate_infoBox .expiry-date {
         display: none;
+    }
+
+    .sign-wrap .leftbar .logo-wrap img {
+        max-width: 120px;
+        margin-bottom: 10px;
+    }
+    .sign-wrap .leftbar .logo-wrap .logo_white_img {
+        max-width: 150px;
+        display: block;
+        margin: 0 auto 10px;
+    }
+    .sign-wrap .leftbar .logo-wrap h4 {
+        font-size: 12px;
+    }
+    .user-profile-basic-info-block .my_businesses_wrap .my_businesses_innerbox {
+        width: 50%;
     }
 }
 
@@ -14827,8 +14897,15 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .video_upload_block .edit-video-show-block {
         text-align: center;
     }
-    .rfq_profile_info .btn_green {
-        margin: 10px 0 20px !important;
+    .modal .modal-content .rfq_profile_info h4 {
+        display: inherit;
+        text-align: center;
+    }
+    /* .rfq_profile_info .btn_green {
+        margin: 0px 0 20px !important;
+    } */
+    .rfq_profile_info .btn_share span {
+        display: none;
     }
     .rfq_thum_imgs .rfq_thum_img {
         float: none;
@@ -15204,6 +15281,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_account_myrfq_box p b {
         font-size: 14px;
     }
+    .user-profile-basic-info-block .my_businesses_wrap .my_businesses_innerbox {
+        width: 100%;
+    } 
     
 }
 

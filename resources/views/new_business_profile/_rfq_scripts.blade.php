@@ -21,12 +21,7 @@
         });
 
         socket.on('new message', function(data) {
-            var nameShortForm = "{{$userNameShortForm}}";
-            var auth_user_image = '{{$userImage}}';
-            var admin_user_image= "{{$adminUserImage}}";
-            var auth_user_sso_reference_id = '{{$user->sso_reference_id}}';
-            var rfq_id = $(".active_rfq_id").val();
-            var message_rfq_id = data.rfq_id;
+            
 
 
             if( data.from_id == '{{auth()->user()->sso_reference_id}}' ){
@@ -48,109 +43,12 @@
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
         });
 
-        $('#messagebox').keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-                event.preventDefault();
-                var from_user_image = '{{$userImage}}';
-                let sent_message = $('#messagebox').val();
-                let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
-                var envMode = "{{ env('APP_ENV') }}";
-                var to_user_id;
-                if(envMode == 'production') {
-                    to_user_id = '5771';
-                } else{
-                    to_user_id = '5552';
-                }
-                let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':false,'product': null};
-                socket.emit('new message', message);
-                $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-                $('#messagebox').val('');
-            }
-        });
-
-        $('.messageSendButton').click(function(event){
-            event.preventDefault();
-            var from_user_image = '{{$userImage}}';
-            let sent_message = $('#messagebox').val();
-            let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
-            var envMode = "{{ env('APP_ENV') }}";
-            var to_user_id;
-            if(envMode == 'production') {
-                to_user_id = '5771';
-            } else{
-                to_user_id = '5552';
-            }
-            let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':false,'product': null};
-            socket.emit('new message', message);
-            $('#messagebox').val('');
-        });
-
 
         function extractEmails (text) {
             return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
         }
 
-        $('.select-rfq-for-chat-data').click(function() {
-            $(".select-rfq-for-chat-data").removeClass("active");
-            $(this).addClass("active");
-            var nameShortForm = "{{$userNameShortForm}}";
-            var auth_user_image = "{{$userImage}}";
-            var admin_user_image = "{{$adminUserImage}}";
-            var url='{{route("message.center.getchatdata")}}';
-            var rfq_id =  $(this).data("rfqid");
-            var user_id = {{auth()->user()->sso_reference_id}};
-            $(".active_rfq_id").val(rfq_id);
-            jQuery.ajax({
-                type : "POST",
-                data : {'rfq_id':rfq_id},
-                url : url,
-                success : function(response){
-                    console.log(response);
-                    $(".chats-box").empty();
-                    $("#messagebox").removeAttr("disabled");
-                    response.chatdata.forEach((item, index)=>{
-                        if(item.from_id == user_id ){
-                            var msgHtml = '<div class="chat chat-right">';
-                            msgHtml += '<div class="chat-avatar">';
-                            msgHtml += '<a class="avatar">';
-                            if(auth_user_image != ""){
-                                msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
-                            }else{
-                                msgHtml += '<span>'+nameShortForm+'</span>'
-                            }
-                            msgHtml += '</a>';
-                            msgHtml += '</div>';
-                            msgHtml += '<div class="chat-body left-align">';
-                            msgHtml += '<div class="chat-text">';
-                            msgHtml += '<p>'+item.message+'</p>';
-                            msgHtml += '</div>';
-                            msgHtml += '</div>';
-                            msgHtml += '</div>';
-                        }else{
-                            var msgHtml = '<div class="chat chat-left">';
-                            msgHtml += '<div class="chat-avatar">';
-                            msgHtml += '<a class="avatar">';
-                            msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
-                            msgHtml += '</a>';
-                            msgHtml += '</div>';
-                            msgHtml += '<div class="chat-body left-align">';
-                            msgHtml += '<div class="chat-text">';
-                            msgHtml += '<p>'+item.message+'</p>';
-                            msgHtml += '</div>';
-                            msgHtml += '</div>';
-                            msgHtml += '</div>';
-                        }
-
-                        $('.chats-box').append(msgHtml);
-                    })
-                    $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+response.to_user_image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Merchant bAY</p><p class="m-0 chat-text truncate"></p></div></div>');
-                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-
-                }
-            });
-
-        });
+       
 
 
     });

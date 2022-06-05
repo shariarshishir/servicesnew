@@ -176,8 +176,8 @@
                             <div class="supplier_account_progress">
                                 <h4>Profile Progress</h4>
                                 <div id="profile-progress-wrapper">
-                                    <div class="profile-progressbar-total" style="position: relative; width: 100%; background: #ccc; height: 10px;">
-                                        <div class="profile-progress-value" style="width: {{$profileProgressValue}}%; background: #54a958; height: 10px; position: absolute; top: 0px; left: 0px;"></div>
+                                    <div class="profile-progressbar-total" style="position: relative; width: 100%; background: #ccc; height: 25px; border-radius: 4px;">
+                                        <div class="profile-progress-value" style="width: {{$profileProgressValue}}%; background: #54a958; height: 25px; border-radius: 4px; position: absolute; top: 0px; left: 0px;"></div>
                                     </div>
                                 </div>
                                 <div class="right-align">{{$profileProgressValue}}% Completed</div>
@@ -200,16 +200,23 @@
                                 </div>
                             </div>
                             <div class="supllir_profile_incomplete_field">
+                                @if($profileIncompleteValueCount > 0)
                                 <p style="font-style: italic;">*Complete your profile with more information to appear in more RFQ searches.</p>
-                                
-                                <p style="color: red; margin-top: 25px;">You have 6 incomplete fields.</p>
-                                <ul>
+                                <p style="color: red; margin-top: 25px;">You have {{$profileIncompleteValueCount}} incomplete fields. Click <a href="{{route('new.profile.edit', $alias)}}">here</a> to see details.</p>
+                                @endif
+                                <ul style="display: none;">
+                                    @if($business_profile->businessProfileVerification->company_overview == 0)
                                     <li><a href="javascript:void(0);">Company Profile </a></li>
+                                    @endif
+                                    @if($business_profile->businessProfileVerification->machinery_details == 0)
                                     <li><a href="javascript:void(0);">Capacity and Machineries </a></li>
-                                    <li><a href="javascript:void(0);">Certifications </a></li>
-                                    <li><a href="javascript:void(0);">Main Buyers </a></li>
-                                    <li><a href="javascript:void(0);">Export Destinations </a></li>
+                                    @endif
+                                    <!--li><a href="javascript:void(0);">Certifications </a></li-->
+                                    <!--li><a href="javascript:void(0);">Main Buyers </a></li-->
+                                    <!--li><a href="javascript:void(0);">Export Destinations </a></li-->
+                                    @if($business_profile->businessProfileVerification->business_terms == 0)
                                     <li><a href="javascript:void(0);">Business Terms </a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

@@ -16,33 +16,61 @@ class UserProfileController extends Controller
         $business_profile = BusinessProfile::withTrashed()->with('businessProfileVerification')->where('alias',$alias)->firstOrFail();
         if($business_profile->business_type == 'manufacturer') // manufacturer profile
         {
+            $profileIncompleteValueCount = 0;
             $profileProgressValue = 0;
             if($business_profile->businessProfileVerification->company_overview == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->machinery_details == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->categories_produced == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->capacity_and_machineries == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->business_terms == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->sampling == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->special_customizations == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->sustainability_commitments == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
             if($business_profile->businessProfileVerification->production_capacity == 1) {
                 $profileProgressValue += 11;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
 
             if($profileProgressValue == 99) {
@@ -51,15 +79,20 @@ class UserProfileController extends Controller
         } elseif($business_profile->business_type == 'wholesaler') // wholesaler profile
         {
             $profileProgressValue = 0;
+            $profileIncompleteValueCount = 0;
             if($business_profile->businessProfileVerification->company_overview == 1) {
                 $profileProgressValue += 100;
+                $profileIncompleteValueCount += 0;
+            } else {
+                $profileIncompleteValueCount += 1;
             }
         } else // design_studio profile
         {
+            $profileIncompleteValueCount = 0;
             $profileProgressValue = 0;
         }
         
-        return view('new_business_profile.profile_insights',compact('alias', 'profileProgressValue', 'business_profile'));
+        return view('new_business_profile.profile_insights',compact('alias', 'profileProgressValue', 'business_profile', 'profileIncompleteValueCount'));
     }
 
     public function profileHome($alias)

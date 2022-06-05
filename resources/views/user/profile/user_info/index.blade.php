@@ -8,7 +8,7 @@
 <div class="col m12 card user-profile-basic-info-block">
 
     <div class="row profile-block store-config-block">
-        <div class="col m12">
+        <div class="col s12">
             <legend style="margin-bottom: 20px;">Profile Information</legend>
         </div>
         <div class="col m3 profile-image-block">
@@ -45,17 +45,19 @@
                     <a class="btn_green" href="{{route('myorder')}}">My Orders</a>
                 </div>
             </div>
+        </div>
+        <div class="col s12">
             @if(count($businessProfiles) > 0)
             @php
                 $className = '';
                 if(count($businessProfiles)==3) {
-                    //$className = "col m4";
-                    $className = "col s12 m6";
+                    //$className = "col s12 m6 l3";
+                    $className = "my_businesses_innerbox";
                 } elseif(count($businessProfiles)==2) {
-                    //$className = "col m6";
-                    $className = "col s12 m6";
+                    //$className = "col s12 m6 l3";
+                    $className = "my_businesses_innerbox";
                 } else {
-                    $className = "col s12 m6";
+                    $className = "my_businesses_innerbox";
                 }
             @endphp
             <div class="row profile-block business-profile-block">
@@ -71,9 +73,9 @@
                             @elseif($businessprofile->business_type== 'wholesaler')
                                 <p><span style="font-weight: 500;">Business Name:</span> <a href="{{route('wholesaler.profile.show',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
                             @endif --}}
-                            <p class="businessName"span style="font-weight: 500;">Business Name:</span> <a href="{{route('new.profile.index',$businessprofile->alias)}}" itemprop="legalName">{{ $businessprofile->business_name }}</a></p>
-                            <p><span style="font-weight: 500;">Business Location:</span> <span itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $businessprofile->location }}</span></p>
-                            <p><span style="font-weight: 500;">Business Type:</span> {{ucwords($businessprofile->business_type)}}</p>
+                            <p class="businessName"span style="font-weight: 500;">Business Name:</span> <a href="{{route('new.profile.index',$businessprofile->alias)}}" itemprop="legalName"><b>{{ $businessprofile->business_name }}</b></a></p>
+                            <p><span style="font-weight: 500;">Business Location:</span> <span itemprop="location" itemscope itemtype="https://schema.org/Place"><b>{{ $businessprofile->location }}</b></span></p>
+                            <p><span style="font-weight: 500;">Business Type:</span> <b>{{ucwords($businessprofile->business_type)}}</b></p>
                             {{-- <div class="business-shortcut-bar">
                                 <ul>
                                     <li><a href="javascript:void(0);">Messages</a></li>
@@ -111,7 +113,6 @@
 
                         </div>
                     </div>
-
                     @endforeach
                 </div>
             </div>

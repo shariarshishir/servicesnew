@@ -21,36 +21,66 @@
         });
 
         socket.on('new message', function(data) {
-            
-
-
-            if( data.from_id == '{{auth()->user()->sso_reference_id}}' ){
+            var authUserId = '{{auth()->user()->sso_reference_id}}';
+            var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
+            console.log(data);
+            if( data.from_id == authUserId && activeRfqId == data.rfq_id ){
                 var msgHtml = '<div class="rfq_message_box chat-right right">';
                     msgHtml += '<div class="chat-text right-align">';
                     msgHtml += '<p><span>'+data['message']+'</span></p>';
                     msgHtml += '</div>';
                     msgHtml += '</div>';
             }
-            
-            else{
-                msgHtml += '<div class="rfq_message_box chat-left left" style="width: 100%">';
-                msgHtml += '<div class="chat-text left-align">';
-                msgHtml += '<p><span>'+data['message']+'</span></p>';
-                msgHtml +='</div>';
-                msgHtml +='</div>';
+            else if( data.to_id == authUserId && activeRfqId == data.rfq_id ){
+                var msgHtml = '<div class="rfq_message_box chat-left left">';
+                    msgHtml += '<div class="chat-text left-align">';
+                    msgHtml += '<p><span>'+data['message']+'</span></p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
             }
-            $('.rfq_review_message_box').append(html);
-            $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+            $('.rfq_review_message_box').append(msgHtml);
         });
 
+        $('#messagebox').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                event.preventDefault();
+                var from_user_image = '{{$userImage}}';
+                let sent_message = $('#messagebox').val();
+                var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
+                let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
+                var envMode = "{{ env('APP_ENV') }}";
+                var to_user_id;
+                if(envMode == 'production') {
+                    to_user_id = '5771';
+                } else{
+                    to_user_id = '5552';
+                }
+                let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': activeRfqId,'factory':false,'product': null};
+                socket.emit('new message', message);
+                $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                $('#messagebox').val('');
+            }
+        });
 
-        function extractEmails (text) {
-            return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-        }
-
+        $('.messageSendButton').click(function(event){
+            event.preventDefault();
+            var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
+            var from_user_image = '{{$userImage}}';
+            let sent_message = $('#messagebox').val();
+            let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
+            var envMode = "{{ env('APP_ENV') }}";
+            var to_user_id;
+            if(envMode == 'production') {
+                to_user_id = '5771';
+            } else{
+                to_user_id = '5552';
+            }
+            let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': activeRfqId,'factory':false,'product': null};
+            socket.emit('new message', message);
+            $('#messagebox').val('');
+        });
        
-
-
     });
 
 </script>
@@ -228,7 +258,7 @@
                                 $('#rfq-bid-modal #offer_price_unit').val(data.bid[0]['offer_price_unit']);
                                 $('#rfq-bid-modal #offer_price_unit').trigger('change');
                                 // $('#rfq-bid-modal .rfq-replay-submit').prop("disabled", true);
-                                  $('#rfq-bid-modal .rfq-replay-submit').hide();
+                                $('#rfq-bid-modal .rfq-replay-submit').hide();
 
                             }
 
@@ -391,7 +421,7 @@
                                 html+='</div>';
                                 html+='</div>';
                             }else{
-                                var html='<div class="rfq_message_box chat-left left" style="width: 100%">';
+                                var html='<div class="rfq_message_box chat-left left">';
                                 html+='<div class="chat-text left-align">';
                                 html+='<p><span>'+response.chats[i].message+'</span></p>';
                                 html+='</div>';
@@ -450,13 +480,13 @@
                         var authUserId = '{{auth()->user()->sso_reference_id}}';
                         for(var i=0;i<response.chats.length;i++){
                             if(response.chats[i].from_id == authUserId){
-                                var html='<div class="rfq_message_box chat-right right">';
+                                var html='<div class="rfq_message_box chat-right right ">';
                                 html+='<div class="chat-text right-align">';
                                 html+='<p><span>'+response.chats[i].message+'</span></p>';
                                 html+='</div>';
                                 html+='</div>';
                             }else{
-                                var html='<div class="rfq_message_box chat-left left" style="width: 100%">';
+                                var html='<div class="rfq_message_box chat-left left">';
                                 html+='<div class="chat-text left-align">';
                                 html+='<p><span>'+response.chats[i].message+'</span></p>';
                                 html+='</div>';

@@ -26,7 +26,7 @@ class BusinessProfileController extends Controller
 {
         public function show($id){
             $businessProfile= BusinessProfile::with('companyOverview','machineriesDetails','categoriesProduceds','productionCapacities','productionFlowAndManpowers','certifications','mainbuyers','exportDestinations','associationMemberships','pressHighlights','businessTerms','samplings','specialCustomizations','sustainabilityCommitments','walfare','security')->findOrFail($id);
-            
+
             if( $businessProfile){
 
                 //company overview without json
@@ -43,7 +43,7 @@ class BusinessProfileController extends Controller
                 else{
                     $companyOverview=[];
                 }
-            
+
                 //production flow and manpower without json
                 if(count($businessProfile->productionFlowAndManpowers)>0){
                     $productionFlowAndManpowerArray = [];
@@ -60,7 +60,7 @@ class BusinessProfileController extends Controller
                     $productionFlowAndManpowerArray=[];
 
                 }
-                    
+
 
                 //walfare and csr
                 if($businessProfile->walfare){
@@ -72,7 +72,7 @@ class BusinessProfileController extends Controller
                 else{
                     $walfareObject=[];
                 }
-            
+
                 //security and others
                 if($businessProfile->security){
                     $securityObject = new stdClass();
@@ -84,7 +84,7 @@ class BusinessProfileController extends Controller
                     $securityObject=[];
                 }
                 return response()->json(["businessProfile"=>$businessProfile,"companyOverview"=>$companyOverview,"productionFlowAndManpower"=>$productionFlowAndManpowerArray,"walfare"=>$walfareObject,"security"=>$securityObject,"success"=>true],200);
-                
+
             }
             else{
                 return response()->json(["success"=>false],404);
@@ -120,7 +120,7 @@ class BusinessProfileController extends Controller
             }
 
         }
-        
+
         public function manufactureProductCategoriesByIndustryType(Request $request){
             $manufactureProductCategoriesByInduestryType=ProductCategory::with('subcategories')->where('industry',$request->industry)->get();
             if( count($manufactureProductCategoriesByInduestryType)>0){
@@ -154,7 +154,7 @@ class BusinessProfileController extends Controller
                             $companyOverview=[];
                         }
                         array_push($companyOverviewArray,$companyOverview);
-            
+
                 }
                 return response()->json(["businessProfiles"=>$businessProfiles,"success"=>true,"companyOverviews"=>$companyOverviewArray],200);
             }
@@ -221,6 +221,7 @@ class BusinessProfileController extends Controller
                         'number_of_factories' => $request->number_of_factories,
                         'business_category_id' => $request->business_category_id,
                         'industry_type' => $request->industry_type,
+                        'profile_type' =>'buyer',
 
                     ];
 
@@ -233,7 +234,7 @@ class BusinessProfileController extends Controller
                             'success' => true,
                             'business_profile'=>$business_profile,
                             'companyOverview'=>$companyOverview
-                        
+
                         ],201);
                     }
                     if($request->has_representative == false){
@@ -275,11 +276,11 @@ class BusinessProfileController extends Controller
                         $user_id = IdGenerator::generate(['table' => 'users', 'field' => 'user_id','reset_on_prefix_change' =>true,'length' => 18, 'prefix' => date('ymd').time()]);
                         $representive_data['user_id'] =$user_id;
                         $user=User::create($representive_data);
-                        
+
                         //profile create
                         $business_profile_data['representative_user_id']= $user->id;
                         $business_profile=BusinessProfile::create($business_profile_data);
-                        
+
                         //create company overview
                         $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
                         event(new NewBusinessProfileHasCreatedEvent($business_profile));
@@ -357,7 +358,7 @@ class BusinessProfileController extends Controller
                 'data'        => json_encode($data),
             ]);
             return $companyOverview;
-    
+
         }
         public function LowMOQProducts(Request $request)
         {
@@ -386,16 +387,16 @@ class BusinessProfileController extends Controller
                     'products'=>[]
                 ],404);
             }
-           
+
         }
         public function wholesalerLowMOQProducts(Request $request)
         {
-           
+
             $products = WholesalerProduct::with(['images','businessProfile'])->where('moq','!=', null)->where(['state' => 1, 'sold' => 0,])->where('business_profile_id', '!=', null)->orderByDesc('moq')->paginate(10);
-            
+
             $productsArray=[];
             if($products->total()>0){
-            
+
                 foreach($products as $product){
 
                     if($product->product_type==1 ){
@@ -444,7 +445,7 @@ class BusinessProfileController extends Controller
                     $attribute_array=[];
 
                 }
-              
+
                 return response()->json([
                     'success' => true,
                     'products'=>$productsArray
@@ -456,7 +457,7 @@ class BusinessProfileController extends Controller
                     'products'=>[]
                 ],404);
             }
-           
+
         }
 
         public function manufactureLowMOQProducts(Request $request)
@@ -474,7 +475,7 @@ class BusinessProfileController extends Controller
                     'products'=>[]
                 ],404);
             }
-           
+
         }
 
         public function productsWithShortestLeadTime()
@@ -492,7 +493,7 @@ class BusinessProfileController extends Controller
                     'products'=>[]
                 ],200);
             }
-            
+
         }
 
 
@@ -500,14 +501,14 @@ class BusinessProfileController extends Controller
     {
         if($request->is_publish==false){
             $business_profile = BusinessProfile::where('id',$request->business_profile_id)->first();
-          
+
         }
         else{
             $business_profile=BusinessProfile::onlyTrashed()
                 ->where('id', $request->business_profile_id)
                 ->first();
         }
-        
+
         if(!$business_profile){
             return response()->json([
                 'code' => false,
@@ -533,7 +534,7 @@ class BusinessProfileController extends Controller
 
         }
         else{
-            
+
             $business_profile->restore();
             return response()->json([
                 'code' => true,
@@ -594,7 +595,7 @@ class BusinessProfileController extends Controller
                     if(count(array_intersect($request->standard, $target)) == count($target)){
                         $query->get();
                     }else{
-    
+
                         if(in_array('compliance', $request->standard)){
                             $query->has('certifications')->get();
                         }
@@ -602,8 +603,8 @@ class BusinessProfileController extends Controller
                             $query->has('certifications', '<', 1)->get();
                         }
                     }
-    
-    
+
+
                 }
             })
             ->orderBy('is_business_profile_verified', 'DESC')->paginate(12);
@@ -621,12 +622,12 @@ class BusinessProfileController extends Controller
             $supplierQuotationToBuyer->save();
 
             return response()->json(["status" => 1, "message" => "successful"]);
-        }        
+        }
 
 
 
 
-    
 
-       
+
+
 }

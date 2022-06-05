@@ -1243,6 +1243,12 @@ legend {
     padding: 15px;
     color: #3d3d3d;
 }
+.account_profile_home_content legend {
+    margin-bottom: 50px;
+}
+.account_profile_home_content .factory_imgbox_wrap legend {
+    margin-bottom: 15px;
+}
 .account_profile_wrapper .profile_supplier_account_home_wrap {
     padding-left: 30px;
     line-height: 30px;
@@ -1264,7 +1270,9 @@ legend {
 }
 .account_profile_wrapper .top_titleWrap h3 {
     margin: 0;
-    padding-top: 10px;
+    padding-top: 7px;
+    font-size: 16px;
+    color: #000000;
 }
 .account_profile_wrapper .company_stuff {
     padding: 25px 0;
@@ -1299,7 +1307,7 @@ legend {
     font-size: 16px;
 }
 .account_profile_wrapper .certifications {
-    padding: 0px 0px 70px;
+    padding: 0px 0px 50px;
 }
 .account_profile_wrapper .profile_product_wrap .product_boxwrap {
     padding-bottom: 50px;
@@ -1316,7 +1324,7 @@ legend {
     font-weight: 600;
 }
 .account_profile_wrapper .degree_360_video_gallery {
-    padding: 0 15px 80px;
+    padding: 0;
 }
 .account_profile_wrapper .degree_360_video_gallery .imgBox {
     height: 220px;
@@ -1332,14 +1340,21 @@ legend {
     object-fit: cover;
 }
 .account_profile_wrapper .main_buyers_wrap {
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 }
+/* .account_profile_home_content .main_buyers_wrap {
+    float: left;
+    width: 100%;
+} */
 .account_profile_wrapper .main_buyers_wrap h3 {
     margin-bottom: 40px;
 }
+.account_profile_wrapper .main_buyers_profileEdit h3 {
+    margin-bottom: 0;
+}
 .account_profile_wrapper .main_buyers_wrap .buyers_logo_wrap {
     text-align: center;
-    padding: 0 15px 0px;
+    padding: 0px 0px 0px;
 }
 .export-destination-block {
     padding: 0 15px;
@@ -1356,10 +1371,10 @@ legend {
     width: auto;
 }
 .account_profile_wrapper .main_buyers_wrap h5 {
-    font-size: 16px;
+    font-size: 14px;
     color: #3d3d3d;
     text-transform: capitalize;
-    margin: 10px 0 0px;
+    margin: 15px 0 0px;
     font-weight: 500;
     height: 30px;
     overflow: hidden;
@@ -1368,11 +1383,12 @@ legend {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-.export_destination_wrap {
-    padding-top: 50px;
-}
+/* .export_destination_wrap {
+    float: left;
+    width: 100%;
+} */
 .export_destination_wrap .flagBox {
-    padding-bottom: 20px;
+    padding: 20px 0 70px;
 }
 .export_destination_wrap .flag_innerBox {
     height: 175px;
@@ -1398,13 +1414,13 @@ legend {
     top: 0;
     right: -10px;
 }
+
 .export_destination_wrap h5 {
-    font-size: 16px;
     font-weight: 500;
     margin-top: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     line-height: 25px;
-    font-size: 16px;
+    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -1412,7 +1428,7 @@ legend {
     -webkit-box-orient: vertical;
     height: 23px;
 }
-.export_destination_wrap span {
+.export_destination_wrap .flag_innerBox span {
     font-size: 14px;
     line-height: 25px;
     overflow: hidden;
@@ -1420,8 +1436,7 @@ legend {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    height: 22px;
-    margin-top: 5px;
+    max-height: 22px;
 }
 .owner_info_wrap .owner_info_box {
     padding-bottom: 80px;
@@ -1495,7 +1510,19 @@ legend {
     margin-bottom: 20px;
 }
 .account_profile_wrapper .top_titleWrap {
-    margin-bottom: 30px;
+    margin: 0 0 40px;
+    /* Test style */
+    background-color: #ddd;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.account_profile_wrapper .factory_imgbox_wrap .top_titleWrap {
+    background: none;
+    margin-bottom: 20px;
+    padding: 0;
 }
 .account_profile_wrapper .editBox .btn_green_White {
     background: #fff;
@@ -1570,9 +1597,9 @@ legend {
     text-align: center;
     width: 40% !important;
 }
-.overview_table .production-flow-and-manpower-table-body table tr {
+/* .overview_table .production-flow-and-manpower-table-body table tr {
     display: flow-root;
-}
+} */
 .account_profile_wrapper table td,
 .account_profile_wrapper table th {
     padding: 8px 15px;
@@ -1600,16 +1627,8 @@ legend {
     width: 10%;
 }
 
-.account_profile_wrapper
-    .profile_table_design
-    .production-flow-and-manpower-table-wrapper
-    table
-    td,
-.account_profile_wrapper
-    .profile_table_design
-    .production-flow-and-manpower-table-wrapper
-    table
-    th {
+.account_profile_wrapper .profile_table_design .production-flow-and-manpower-table-wrapper table td,
+.account_profile_wrapper .profile_table_design .production-flow-and-manpower-table-wrapper table th {
     width: 100% !important;
 }
 .account_profile_wrapper .overview_table .material-icons {
@@ -1618,7 +1637,7 @@ legend {
 .account_profile_wrapper .overview_table tr {
     border: none;
     border-bottom: 1px solid rgba(19, 112, 10, 0.3);
-    display: flex;
+    /* display: flex; */
 }
 .pr_highlights_wrap .press-highlight-block {
     margin: 0;
@@ -1649,22 +1668,16 @@ legend {
 .account_profile_wrapper .overview_table tr td tr {
     border-top: none;
 }
-.account_profile_wrapper
-    .profile_table_design
-    .overview_table
-    .production-flow-and-manpower-table
-    tr
-    td {
+.account_profile_wrapper .production-flow-and-manpower-table tr td {
     padding: 0;
 }
-.account_profile_wrapper
-    .profile_table_design
-    .overview_table
-    .production-flow-and-manpower-table
-    tr
-    td
-    tr
-    td {
+.account_profile_wrapper .production-flow-and-manpower-table tr td tr td {
+    padding: 8px 15px;
+}
+.account_profile_wrapper .profile_table_design .overview_table .production-flow-and-manpower-table tr td {
+    padding: 0;
+}
+.account_profile_wrapper .profile_table_design .overview_table .production-flow-and-manpower-table tr td tr td {
     width: 50% !important;
     padding: 8px 15px;
 }
@@ -1708,11 +1721,7 @@ legend {
     line-height: 30px;
     font-weight: 400;
 }
-.account_profile_wrapper
-    .worker_welfare_wrap
-    .worker_welfare_box
-    .welfare_box
-    .title {
+.account_profile_wrapper .worker_welfare_wrap .worker_welfare_box .welfare_box .title {
     padding-left: 0;
 }
 .account_profile_wrapper .membership_wrap {
@@ -1725,13 +1734,15 @@ legend {
 }
 .association-membership-img {
     padding-bottom: 20px !important;
-    width: 25%;
+    width: 20%;
     line-height: 22px;
+    font-family: "nexabold";
+    text-transform: capitalize;
 }
 .account_profile_wrapper .membership_wrap .membership_textBox .imgbox {
-    height: 75px;
+    height: 85px;
     overflow: hidden;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1739,15 +1750,10 @@ legend {
 .account_profile_wrapper .membership_wrap .membership_textBox .imgbox img {
     height: auto;
     width: auto;
-    max-height: 75px;
+    max-height: 78px;
 }
 .account_profile_wrapper .pr_highlights_wrap .paper_img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-height: 100px;
-    height: 72px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .account_profile_wrapper .pr_highlights_wrap .paper_img .press_img {
     height: auto;
@@ -1755,10 +1761,29 @@ legend {
     text-align: center;
     line-height: 20px;
 }
+.account_profile_wrapper .pr_highlights_wrap .paper_img .press_img .press_img_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+}
 .account_profile_wrapper .pr_highlights_wrap .paper_img .press_img img {
     width: auto;
     height: auto;
     max-height: 60px;
+}
+.account_profile_wrapper .pr_highlights_wrap .paper_img .press_img h5 {
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 25px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    height: 23px;
 }
 /* Profile page Tab Profiel_menu css end */
 
@@ -1874,7 +1899,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     border-right: 1px solid rgba(19, 112, 10, 0.3);
     align-items: center;
     justify-content: center;
-    display: flex;
+    /* display: flex; */
 }
 .product_data_table_wrap td:first-child,
 .product_data_table_wrap th:first-child {
@@ -2632,27 +2657,15 @@ div.dataTables_wrapper table.mdc-data-table__table {
     line-height: 5px;
 }
 .product_design_wrapper .favorite .product-add-wishlist .material-icons,
-.product_details_wrapper
-    .related-products
-    .product_quick_options
-    a
-    .material-icons {
+.product_details_wrapper .related-products .product_quick_options a .material-icons {
     color: #b0b0b2;
     font-size: 26px;
     line-height: 18px;
 }
 .product_design_wrapper .favorite .product-add-wishlist:hover .material-icons,
 .product_design_wrapper .favorite .product-add-wishlist.active .material-icons,
-.product_details_wrapper
-    .related-products
-    .product_quick_options
-    a.active
-    .material-icons,
-.product_details_wrapper
-    .related-products
-    .product_quick_options
-    a:hover
-    .material-icons {
+.product_details_wrapper .related-products .product_quick_options a.active .material-icons,
+.product_details_wrapper .related-products .product_quick_options a:hover .material-icons {
     color: #54a958;
 }
 /* ****************************************** */
@@ -3526,12 +3539,10 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
-    padding: 0;
+    padding: 0 10px;
 }
 .blog_detail_info_wrap .mainTitle {
-    background: #fff
-        url("../images/frontendimages/new_layout_images/home_arrow.png")
-        no-repeat 15px center;
+    background: #fff url("../images/frontendimages/new_layout_images/home_arrow.png") no-repeat 15px center;
     padding-left: 80px;
     background-size: 50px;
 }
@@ -3649,6 +3660,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 5px;
     width: 550px;
     height: 315px;
+}
+#mb_about .why_us {
+    margin: 80px 10px 0;
 }
 /********************* Blog page css End **************************/
 
@@ -3859,11 +3873,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
-.rfq_profile_detail {
-    padding: 35px;
-}
+
 .rfq_view_detail_wrap {
-    padding: 30px 0;
+    /* padding: 30px 0; */
     color: #54a958;
     font-weight: 600;
 }
@@ -4177,29 +4189,20 @@ div.dataTables_wrapper table.mdc-data-table__table {
     border: 2px solid #54a958;
 }
 #edit-rfq-form .rfq_input_checkbox [type="radio"]:checked + span:after,
-#edit-rfq-form
-    .rfq_input_checkbox
-    [type="radio"].with-gap:checked
-    + span:after {
+#edit-rfq-form .rfq_input_checkbox [type="radio"].with-gap:checked + span:after {
     background: #54a958;
     width: 18px;
     height: 18px;
 }
 #edit-rfq-form .rfq_input_checkbox [type="radio"]:checked + span:after,
-#edit-rfq-form
-    .rfq_input_checkbox
-    [type="radio"].with-gap:checked
-    + span:before,
-#edit-rfq-form
-    .rfq_input_checkbox
-    [type="radio"].with-gap:checked
-    + span:after {
+#edit-rfq-form .rfq_input_checkbox [type="radio"].with-gap:checked + span:before,
+#edit-rfq-form .rfq_input_checkbox [type="radio"].with-gap:checked + span:after {
     border: 2px solid #54a958;
 }
 .rfq_detail_from .input-field label {
     font-size: 14px;
     font-weight: 500;
-    color: #54a958;
+    color: #000000;
     padding-top: 0;
     position: relative;
 }
@@ -4211,15 +4214,12 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_detail_from .input-field input[type="date"]:not(.browser-default),
 .rfq_detail_from .input-field input[type="number"]:not(.browser-default),
-.rfq_detail_from
-    .input-field
-    .select2-container--default
-    .select2-selection--single,
+.rfq_detail_from .input-field .select2-container--default .select2-selection--single,
 .rfq_detail_from .input-field input[type="text"]:not(.browser-default),
 .rfq_detail_from .select2-container--default .select2-selection--single,
 .rfq_detail_from .input-field textarea,
 .rfq_detail_from .input-field input {
-    border: 1px solid #54a958 !important;
+    border: 1px solid #707070 !important;
     border-radius: 5px;
     font-size: 14px;
     height: 48px;
@@ -4228,7 +4228,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     box-shadow: none !important;
 }
 .product_add_wrap_modal .rfq_detail_from .input-field select.select2 {
-    border: 1px solid #54a958 !important;
+    border: 1px solid #707070 !important;
     border-radius: 5px;
     font-size: 14px;
     height: 48px !important;
@@ -4244,16 +4244,10 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_detail_from .input-field textarea {
     margin: 0;
 }
-.rfq_detail_from
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+.rfq_detail_from .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 45px;
 }
-.rfq_detail_from
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__arrow {
+.rfq_detail_from .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 10px;
     right: 7px;
 }
@@ -4418,6 +4412,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .rfq_content_box .rfq_profile_info .tagS {
     padding-bottom: 30px;
 }
+.modal-content .rfq_profile_info .imgBox.rfq_thum_img img,
 .rfq_content_box .rfq_profile_info .rfq_thum_imgs img {
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
@@ -4428,6 +4423,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     vertical-align: middle;
     width: auto;
     object-fit: cover;
+    cursor: pointer;
 }
 .rfq_content_box .rfq_view_detail_wrap {
     padding: 15px 0;
@@ -4574,6 +4570,13 @@ div.dataTables_wrapper table.mdc-data-table__table {
     color: #54a958;
     padding: 5px 20px;
 }
+.modal .modal-content .rfq_profile_info h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    line-height: 24px;
+    background: none !important;
+    padding: 0;
+}
 .rfq_profile_info h5 {
     margin-bottom: 10px;
     color: #000000;
@@ -4581,7 +4584,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     text-transform: capitalize;
 }
 .rfq_profile_info h6 {
-    margin-bottom: 10px;
+    margin: 15px 0;
     color: #54a958;
     font-size: 16px;
 }
@@ -4608,19 +4611,22 @@ div.dataTables_wrapper table.mdc-data-table__table {
     height: 100%;
     border-radius: 10px;
 }
+.modal-content .rfq_profile_info .rfq_thum_imgs,
 .rfq_profile_info .rfq_thum_imgs {
     padding: 20px 10px 0;
 }
+.modal-content .rfq_profile_info .imgBox.rfq_thum_img,
 .rfq_thum_imgs .rfq_thum_img {
-    width: 90px;
-    margin-right: 10px;
+    width: 90px !important;
+    height: 90px !important;
+    margin-right: 15px;
     margin-bottom: 15px;
-    height: 80px;
     float: left;
+    min-height: inherit;
+    border-radius: 5px;
 }
 .rfq_thum_img .doc_icon {
-    background: url(../images/frontendimages/new_layout_images/doc-bg.png)
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/doc-bg.png)  no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4628,8 +4634,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 0;
 }
 .rfq_thum_img .xlsx_icon {
-    background: url(../images/frontendimages/new_layout_images/excel-bg.png)
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4637,8 +4642,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 0;
 }
 .rfq_thum_img .pdf_icon {
-    background: url(../images/frontendimages/new_layout_images/pdf-bg.png)
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/pdf-bg.png) no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4646,8 +4650,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 0;
 }
 .rfq_thum_img .zip_icon {
-    background: url(../images/frontendimages/new_layout_images/zip-bg.png)
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/zip-bg.png) no-repeat center;
     background-size: 75px;
     width: auto;
     height: 84px;
@@ -4675,7 +4678,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     background-size: 80px;
     height: 80px;
 }
-.rfq_content_box .btn_share {
+.rfq_profile_info .btn_share {
     font-size: 14px;
     min-width: inherit;
     padding: 3px 10px;
@@ -4687,16 +4690,16 @@ div.dataTables_wrapper table.mdc-data-table__table {
     height: 32px;
     background: #54a958 !important;
 }
-.rfq_content_box .btn_share span {
+.rfq_profile_info .btn_share span {
     color: #fff;
     font-size: 14px;
     line-height: 27px;
 }
-.rfq_content_box .btn_share span:hover,
-.rfq_content_box .btn_share:hover {
+.rfq_profile_info .btn_share span:hover,
+.rfq_profile_info .btn_share:hover {
     color: #fff;
 }
-.rfq_content_box .btn_share .material-icons {
+.rfq_profile_info .btn_share .material-icons {
     float: left;
     font-size: 16px;
     color: #fff;
@@ -5082,18 +5085,8 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .business_list_inner_wrap .business_list_itembox .list_box .switch {
     bottom: 50px;
 }
-.my_businesses_wrap
-    .my_businesses_box
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever,
-.business_list_itembox
-    .list_box
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever {
+.my_businesses_wrap .my_businesses_box .switch label input[type="checkbox"]:checked + .lever,
+.business_list_itembox .list_box .switch label input[type="checkbox"]:checked + .lever {
     background: #73d578;
     margin: 0 0 5px 0;
 }
@@ -5105,18 +5098,8 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     font-weight: 400 !important;
     font-size: 12px;
 }
-.my_businesses_wrap
-    .my_businesses_box
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever:after,
-.business_list_itembox
-    .list_box
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever:after {
+.my_businesses_wrap .my_businesses_box .switch label input[type="checkbox"]:checked + .lever:after,
+.business_list_itembox .list_box .switch label input[type="checkbox"]:checked + .lever:after {
     background: #54a958;
 }
 .my_businesses_wrap .my_businesses_box .switch .enable_disable_label,
@@ -5141,7 +5124,6 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 #certification-upload-form-modal {
     width: 72%;
 }
-
 .fullscreen-modal.profile_form_modal,
 .wholesaler_add_product_modal {
     top: 15% !important;
@@ -5163,6 +5145,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-top: 0;
 }
 .input-field label {
+    font-family: 'nexabold';
     font-size: 14px;
     color: #000000;
     font-weight: 500;
@@ -5179,6 +5162,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .input-field label.active {
     position: inherit;
     background: none;
+}
+.modal .input-field label {
+    padding-top: 0;
 }
 .input-field select,
 .sign-wrap .input-wrap input {
@@ -5201,13 +5187,14 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .input-field select,
 .input-field .select2-container--default .select2-selection--single,
 .input-field input {
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
+    border-radius: 5px;
+    /* -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
     -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20) !important;
-    box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important;
+    box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%) !important; */
+    box-shadow: none;
     padding: 0 10px !important;
     float: right;
-    height: 50px;
+    height: 45px;
     line-height: 52px;
     font-size: 16px;
     color: #000000;
@@ -5215,15 +5202,16 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     width: -webkit-fill-available !important;
     width: -moz-available !important;
     margin-bottom: 0;
-    border: none !important;
+    /* border: none !important; */
+    border: 1px solid #707070 !important;
 }
 .input-field input::placeholder {
     color: #000000;
     opacity: 0.5;
 }
-input.input-field[type="text"]:not(.browser-default) {
+/* input.input-field[type="text"]:not(.browser-default) {
     border-bottom: none !important;
-}
+} */
 .select2.product-colors {
     height: 230px;
     padding-top: 10px !important;
@@ -5237,7 +5225,7 @@ input.input-field[type="text"]:not(.browser-default) {
     text-align: center;
     float: left;
     border-radius: 5px !important;
-    margin-top: 8px !important;
+    margin: 0px !important;
 }
 #ready_stock_order_customize_block tr td input,
 .modal .color-and-size-block .color-size-table-block tr td input {
@@ -5285,50 +5273,29 @@ input.input-field[type="text"]:not(.browser-default) {
     height: 46px;
     border-radius: 5px !important;
 }
-#profileAccountPostNew
-    .input-field
-    .select2-container--default
-    .select2-selection--single {
+#profileAccountPostNew .input-field .select2-container--default .select2-selection--single {
     height: 50px;
 }
-#profileAccountPostNew
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+#profileAccountPostNew .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 52px;
 }
 .input-field .select2-container--default .select2-selection--multiple,
-.input-field
-    .select2-container--default.select2-container--focus
-    .select2-selection--multiple {
-    border: none;
+.input-field .select2-container--default.select2-container--focus .select2-selection--multiple {
+    /* border: none; */
 }
-.input-field
-    .select2-container--default
-    .select2-search--inline
-    .select2-search__field {
+.input-field .select2-container--default .select2-search--inline .select2-search__field {
     box-shadow: inherit !important;
+    border: none !important;
 }
-.select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+.select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 48px;
     padding-left: 0;
 }
-.banner_search
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+.banner_search .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 44px;
 }
-.pro_porma_invoice
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered,
-.line_item_wrap
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+.pro_porma_invoice .select2-container--default .select2-selection--single .select2-selection__rendered,
+.line_item_wrap .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 48px;
 }
 .modal .submit_wrap {
@@ -5528,9 +5495,9 @@ input.input-field[type="text"]:not(.browser-default) {
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 20%);
     border-radius: 12px;
 }
-.certificate_img_wrap .certificate_infoBox {
+/* .certificate_img_wrap .certificate_infoBox {
     height: 80px;
-}
+} */
 .certificate_img_wrap .certificate_infoBox span {
     display: block;
     font-size: 12px;
@@ -5541,6 +5508,7 @@ input.input-field[type="text"]:not(.browser-default) {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    font-family: "nexabold";
     font-size: 14px;
     font-weight: 500;
     height: 42px;
@@ -5551,24 +5519,21 @@ input.input-field[type="text"]:not(.browser-default) {
     margin: 10px 0 5px 0;
 }
 .account_profile_wrapper .certification_file_down {
-    background: url("../images/frontendimages/new_layout_images/pdf-bg.png")
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/pdf-bg.png) no-repeat center;
     background-size: 125px;
     height: 100%;
     display: block;
     width: 100%;
 }
 .certificate_img_wrap .certificate_img .xlsx_icon {
-    background: url(../images/frontendimages/new_layout_images/excel-bg.png)
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/excel-bg.png) no-repeat center;
     background-size: 125px;
     height: 100%;
     display: block;
     width: 100%;
 }
 .certificate_img_wrap .certificate_img .certification_doc {
-    background: url(../images/frontendimages/new_layout_images/doc-bg.png)
-        no-repeat center;
+    background: url(../images/frontendimages/new_layout_images/doc-bg.png) no-repeat center;
     background-size: 125px;
     height: 100%;
     display: block;
@@ -5622,12 +5587,13 @@ input.input-field[type="text"]:not(.browser-default) {
     padding: 5px 10px;
     min-height: 48px;
     max-height: 130px;
-    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%) !important;
+    /* -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%) !important;
     -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16) !important;
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%) !important;
     border: none !important;
+    margin-top: 20px; */
     float: left;
-    margin-top: 20px;
+    margin: 0;
     border-radius: 5px;
 }
 .profile_form_modal .file_upload {
@@ -5649,11 +5615,11 @@ input.input-field[type="text"]:not(.browser-default) {
     font-size: 15px;
 }
 .account_profile_wrapper .main_buyer_box {
-    margin-bottom: 40px;
     text-align: center;
     position: relative;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 .account_profile_wrapper .main_buyer_img {
     height: 55px;
@@ -5739,23 +5705,18 @@ input.input-field[type="text"]:not(.browser-default) {
     .select2-container
     .select2-selection--single {
     height: 46px;
-    -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
+    /* -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20);
     box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
-    border: none;
+    border: none; */
     margin-top: 5px;
+    border: 1px solid #707070 !important;
 }
-.certification-details-table-block
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+.certification-details-table-block .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 45px;
     padding-left: 10px;
 }
-.certification-details-table-block
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__arrow {
+.certification-details-table-block .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 10px;
     right: 5px;
 }
@@ -6944,8 +6905,7 @@ nav .pagination li.active .page-link {
 }
 #homepage .banner .description {
     background: transparent
-        linear-gradient(180deg, #21715610 0%, #f9f9f924 85%, #80808000 100%) 0%
-        0% no-repeat padding-box;
+    linear-gradient(180deg, #21715610 0%, #f9f9f924 85%, #80808000 100%) 0% 0% no-repeat padding-box;
     border-radius: 15px;
     position: relative;
 }
@@ -7017,8 +6977,7 @@ nav .pagination li.active .page-link {
     margin-top: -10px;
 }
 #homepage .about .about-item .icon-box {
-    background: transparent linear-gradient(270deg, #217156 0%, #81a95a 100%) 0%
-        0% no-repeat padding-box;
+    background: transparent linear-gradient(270deg, #217156 0%, #81a95a 100%) 0% 0% no-repeat padding-box;
     border-radius: 7px;
     height: 165px;
     display: flex;
@@ -7065,8 +7024,7 @@ nav .pagination li.active .page-link {
     transform: translateY(-50%);
 }
 #homepage .about .about-item .item-body .index-visible-circle {
-    background: transparent linear-gradient(180deg, #217156 0%, #81a95a 100%) 0%
-        0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #217156 0%, #81a95a 100%) 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     z-index: 1;
 }
@@ -7100,8 +7058,7 @@ nav .pagination li.active .page-link {
 /*============= DemoButton Section =============*/
 
 #homepage .demoButton {
-    background: transparent linear-gradient(90deg, #217156 0%, #81a95a 100%) 0%
-        0% no-repeat padding-box;
+    background: transparent linear-gradient(90deg, #217156 0%, #81a95a 100%) 0% 0% no-repeat padding-box;
 }
 #homepage .demoButton .content {
     display: flex;
@@ -7162,8 +7119,7 @@ nav .pagination li.active .page-link {
 }
 #homepage .delivaryTime .ontimeDescription .description {
     background: transparent
-        linear-gradient(180deg, #21715610 0%, #f9f9f924 85%, #80808000 100%) 0%
-        0% no-repeat padding-box;
+    linear-gradient(180deg, #21715610 0%, #f9f9f924 85%, #80808000 100%) 0% 0% no-repeat padding-box;
     border-radius: 15px;
 }
 #homepage .delivaryTime .ontimeDescription .description span {
@@ -7214,8 +7170,7 @@ nav .pagination li.active .page-link {
 }
 #homepage .tbm li a.active,
 .tbm li a:first-child:hover {
-    background: transparent linear-gradient(90deg, #217156 0%, #81a95a 100%) 0%
-        0% no-repeat padding-box;
+    background: transparent linear-gradient(90deg, #217156 0%, #81a95a 100%) 0% 0% no-repeat padding-box;
     text-decoration: none;
 }
 #homepage #book-call-modal .ic-signup-title {
@@ -7309,8 +7264,7 @@ nav .pagination li.active .page-link {
 #homepage .tbm li a:hover,
 #homepage .tbm li a.active,
 #homepage .tbm li a:first-child:hover {
-    background: transparent linear-gradient(90deg, #217156 0%, #81a95a 100%) 0%
-        0% no-repeat padding-box;
+    background: transparent linear-gradient(90deg, #217156 0%, #81a95a 100%) 0% 0% no-repeat padding-box;
     text-decoration: none;
     padding: 15px 30px;
     display: block;
@@ -7441,48 +7395,17 @@ nav .pagination li.active .page-link {
 .chat-application .app-chat .chat-content .chat-content-area .chat-area {
     background: #f5f5f5 !important;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .sidebar
-    .sidebar-chat
-    .chat-list
-    .chat-user {
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
     padding-left: 10px !important;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .sidebar
-    .sidebar-chat
-    .chat-list
-    .chat-user
-    .info-section
-    .star-timing {
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section .star-timing {
     width: 140px !important;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .sidebar
-    .sidebar-chat
-    .chat-list
-    .chat-user
-    .info-section
-    .star-timing
-    .time {
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section .star-timing .time {
     white-space: nowrap;
     line-height: 42px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat
-    .chat-avatar
-    .avatar {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-avatar .avatar {
     width: 45px;
     height: 45px;
     display: block;
@@ -7491,40 +7414,14 @@ nav .pagination li.active .page-link {
     border: 1px solid #ddd;
     padding: 8px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat.chat-right
-    .chat-avatar
-    .avatar {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-avatar .avatar {
     line-height: 30px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat.chat-right
-    .chat-avatar
-    .avatar
-    span {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-avatar .avatar span {
     font-family: "nexabold";
     font-size: 20px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat
-    .chat-avatar
-    .avatar
-    img {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-avatar .avatar img {
     width: 100%;
     height: 100%;
     border-radius: 0;
@@ -7533,28 +7430,10 @@ nav .pagination li.active .page-link {
     position: relative;
     padding-bottom: 30px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat
-    .chat-body
-    .chat_sms_box
-    p {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat_sms_box p {
     min-height: 40px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat
-    .chat-body
-    .chat-text
-    .sms_strtotime {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat-text .sms_strtotime {
     position: absolute;
     left: 18px;
     color: #757575;
@@ -7562,15 +7441,7 @@ nav .pagination li.active .page-link {
     font-size: 14px;
     white-space: nowrap;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat-right
-    .chat-text
-    .sms_strtotime {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat-right .chat-text .sms_strtotime {
     left: 0px !important;
 }
 .chat_messagedata .chat_sms {
@@ -7605,13 +7476,7 @@ nav .pagination li.active .page-link {
     display: inline-block;
     width: auto;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-footer
-    .chat-input
-    .message {
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .message {
     background: #f5f5f5 !important;
 }
 .chat-application .app-chat .chat-content .chat-content-area .chat-footer {
@@ -7627,6 +7492,7 @@ nav .pagination li.active .page-link {
     border-radius: inherit;
     width: 100%;
     height: 60px;
+    border: none !important;
 }
 
 /* ************************* chat message style end ******************************  */
@@ -7730,25 +7596,10 @@ nav .pagination li.active .page-link {
 .chat-application .app-chat .chat-content .chat-content-area .chat-header {
     min-height: 55px;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-footer
-    .chat-input
-    .send {
+.chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .send {
     padding: 5px 10px !important;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat.chat-right
-    .chat-body
-    .chat-text
-    p {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat.chat-right .chat-body .chat-text p {
     word-break: initial;
 }
 .mainNav_mobile_wrap .mySidenav {
@@ -8003,11 +7854,14 @@ nav .pagination li.active .page-link {
 #manufacture-product-upload-form .select2-container,
 #manufacture-product-update-form .select2-container {
     margin-bottom: 0px;
-    -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
+    /* -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20);
-    box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
-    border-radius: 10px;
+    box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%); */
+    border-radius: 3px;
+    box-shadow: none !important;
+    /* border: 1px solid #707070 !important; */
 }
+
 #manufacture-product-upload-errors,
 #manufacture-update-errors,
 #product-add-modal-block .validaiton-errors,
@@ -8128,10 +7982,7 @@ nav .pagination li.active .page-link {
 .messageCenter_leftTop .select2-selection {
     margin-top: 10px;
 }
-.messageCenter_leftTop
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__arrow {
+.messageCenter_leftTop .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 22px;
 }
 .header_message_box #message-countdown-dropdown {
@@ -8151,13 +8002,7 @@ nav .pagination li.active .page-link {
 .messageCenter_leftForm {
     width: 100%;
 }
-.chat-application
-    .app-chat
-    .chat-content
-    .chat-content-area
-    .chat-area
-    .chats
-    .chat {
+.chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
     position: relative;
 }
 .chat_messagedata .just_now {
@@ -8173,7 +8018,7 @@ nav .pagination li.active .page-link {
 #product-edit-modal-block .raw-materials .select2-container,
 #product-add-modal-block .studio .select2-container,
 #product-add-modal-block .raw-materials .select2-container {
-    border-radius: 10px;
+    border-radius: 3px;
     -webkit-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
     -moz-box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20);
     box-shadow: 0px 2px 9px 0px rgb(0 0 0 / 20%);
@@ -8193,9 +8038,7 @@ nav .pagination li.active .page-link {
 /* *************** Footer Container css start ***************** */
 
 .footer_bottomWrap {
-    background: #191919
-        url("../images/frontendimages/new-home/footer-bg-update.png") no-repeat
-        left center;
+    background: #191919 url(../images/frontendimages/new-home/footer-bg-update.png) no-repeat left center;
     padding: 200px 100px 50px;
     color: #fff;
     background-size: cover;
@@ -8363,9 +8206,7 @@ nav .pagination li.active .page-link {
     z-index: 1;
 }
 .footer_topWrap_inner {
-    background: #ffffff
-        url("../images/frontendimages/new-home/footer-half-logo-right.png")
-        no-repeat -2px center;
+    background: #ffffff url(../images/frontendimages/new-home/footer-half-logo-right.png) no-repeat -2px center;
     background-size: 165px;
     padding: 50px 30px 30px;
     border-radius: 20px;
@@ -8380,9 +8221,7 @@ nav .pagination li.active .page-link {
 }
 
 .footer_topWrap_inner .footer_topWrap_inner_right_bg {
-    background: #ffffff
-        url("../images/frontendimages/new-home/footer-half-logo-left.png")
-        no-repeat right center;
+    background: #ffffff url(../images/frontendimages/new-home/footer-half-logo-left.png) no-repeat right center;
     background-size: 165px;
     position: absolute;
     right: 0;
@@ -8515,9 +8354,7 @@ nav .pagination li.active .page-link {
     margin: 0;
 }
 .landing_intro_wrapper {
-    background: #ffffff
-        url(../images/frontendimages/new-home/landing-intro-bg.jpg) no-repeat
-        right 30px;
+    background: #ffffff url(../images/frontendimages/new-home/landing-intro-bg.jpg) no-repeat right 30px;
     padding: 50px 0 130px;
     background-size: contain;
 }
@@ -8574,8 +8411,7 @@ nav .pagination li.active .page-link {
     padding-bottom: 10px;
 }
 .landing_provide_wrap ul li {
-    background: url(../images/frontendimages/about-image/icons/success-achievement.png)
-        no-repeat left center;
+    background: url(../images/frontendimages/about-image/icons/success-achievement.png) no-repeat left center;
     padding: 12px 0 12px 55px;
     background-size: 30px;
     border-bottom: 1px solid #eee;
@@ -8591,8 +8427,7 @@ nav .pagination li.active .page-link {
     padding: 8px 35px;
 }
 .landing_spotlight_top {
-    background: url(../images/frontendimages/new-home/spotlight-bg.png)
-        no-repeat bottom right;
+    background: url(../images/frontendimages/new-home/spotlight-bg.png) no-repeat bottom right;
     padding: 50px 0;
     background-size: contain;
     min-height: 295px;
@@ -8704,8 +8539,7 @@ nav .pagination li.active .page-link {
     margin-right: 20px;
 }
 .landing_tools_wrap {
-    background: url(../images/frontendimages/new-home/landing_tools_wrap_bg.png)
-        no-repeat left top;
+    background: url(../images/frontendimages/new-home/landing_tools_wrap_bg.png) no-repeat left top;
     background-size: 335px;
     padding: 50px 0 0;
 }
@@ -8815,9 +8649,8 @@ nav .pagination li.active .page-link {
 #association-membership-upload-form-modal.profile_form_modal td,
 #press-highlight-upload-form-modal.profile_form_modal td,
 #export-destination-upload-form-modal.profile_form_modal td,
-#main-buyers-upload-form-modal.profile_form_modal td,
 #certification-upload-form-modal.profile_form_modal td {
-    padding-top: 0;
+    padding-top: 10px;
 }
 
 /* ******************** New design style end ******************** */
@@ -8895,9 +8728,7 @@ nav .pagination li.active .page-link {
     height: 50px;
     position: relative;
 }
-.products_filter_list
-    .filter_search
-    input[type="text"]:not(.browser-default):hover,
+.products_filter_list .filter_search input[type="text"]:not(.browser-default):hover,
 .products_filter_list .filter_search input[type="text"]:not(.browser-default) {
     background: none !important;
     padding-top: 2px;
@@ -9059,7 +8890,6 @@ nav .pagination li.active .page-link {
     font-size: 35px;
     line-height: 25px;
 }
-
 .product_design_wrapper .product_boxwrap {
     padding-bottom: 10px;
     margin: 0 -25px;
@@ -9100,11 +8930,9 @@ nav .pagination li.active .page-link {
     line-height: 18px;
     text-align: right;
 }
-
 .filter_search_inputbox .typeahead {
     background: #fff;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%),
-        0 1px 5px 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
     padding: 10px;
     width: 260px;
     margin-left: -40px;
@@ -9136,7 +8964,6 @@ nav .pagination li.active .page-link {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
     -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     -moz-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18);
     box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
@@ -9147,6 +8974,13 @@ nav .pagination li.active .page-link {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s;
+}
+.product_design_wrapper .productBox .imgBox .rfqFileImage {
+    object-fit: contain;
+    padding: 20px;
+}
+.product_design_wrapper .productBox .modal-content .rfq_profile_info .imgBox .rfqFileImage {
+    padding: 10px;
 }
 .product_design_wrapper .productBox .imgBox img:hover {
     transform: scale(1.1);
@@ -9251,6 +9085,9 @@ nav .pagination li.active .page-link {
     line-height: 12px;
     padding-top: 2px;
     opacity: 0.8;
+}
+.product_design_wrapper .modal {
+    width: 80%;
 }
 
 /* products_filter_boxwrap css style end */
@@ -9472,9 +9309,7 @@ nav .pagination li.active .page-link {
 .single-product-details-block-wrapper .store-more-products legend {
     font-size: 16px;
 }
-.single-product-details-block-wrapper
-    .store-more-products
-    .more-products-block {
+.single-product-details-block-wrapper .store-more-products .more-products-block {
     max-height: 360px;
     overflow: auto;
 }
@@ -9630,18 +9465,11 @@ nav .pagination li.active .page-link {
     height: 44px;
     margin: 3px;
 }
-.product_upload_innerBox
-    .uom_box
-    .select2-selection--single
-    .select2-selection__rendered {
+.product_upload_innerBox .uom_box .select2-selection--single .select2-selection__rendered {
     color: #ffffff;
     font-size: 13px;
 }
-.product_upload_innerBox
-    .uom_box
-    .select2-selection--single
-    .select2-selection__arrow
-    b {
+.product_upload_innerBox .uom_box .select2-selection--single .select2-selection__arrow b {
     border-color: #ffffff transparent transparent transparent;
 }
 .product_upload_innerBox .media_info {
@@ -9681,10 +9509,7 @@ nav .pagination li.active .page-link {
     border-radius: 0 !important;
     height: 40px;
 }
-.product_upload_innerBox
-    .select2-container
-    .select2-selection--single
-    .select2-selection__rendered {
+.product_upload_innerBox .select2-container .select2-selection--single .select2-selection__rendered {
     padding-right: 10px;
 }
 .product_upload_boxwrap .add_more_box {
@@ -9700,18 +9525,12 @@ nav .pagination li.active .page-link {
 .product_upload_boxwrap .switch label input[type="checkbox"]:checked + .lever {
     background: #448547;
 }
-.product_upload_boxwrap
-    input[type="checkbox"]:checked:not(:disabled)
-    ~ .lever:active::before,
+.product_upload_boxwrap input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before, 
 input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     background: none;
     transform: none;
 }
-.product_upload_boxwrap
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever:after {
+.product_upload_boxwrap .switch label input[type="checkbox"]:checked + .lever:after {
     background: #ffffff;
     transform: none;
 }
@@ -9723,16 +9542,8 @@ input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     width: 60px;
     height: 22px;
 }
-.product_upload_boxwrap
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever:before,
-.product_upload_boxwrap
-    .switch
-    label
-    input[type="checkbox"]:checked
-    + .lever:after {
+.product_upload_boxwrap .switch label input[type="checkbox"]:checked + .lever:before,
+.product_upload_boxwrap .switch label input[type="checkbox"]:checked + .lever:after {
     left: 38px;
     top: 1px;
     transform: none;
@@ -9743,10 +9554,7 @@ input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     top: 1px;
     transform: none;
 }
-.product_preview_info_wrap
-    .product_preview_wrap
-    a.simpleLens-thumbnail-wrapper
-    img {
+.product_preview_info_wrap .product_preview_wrap a.simpleLens-thumbnail-wrapper img {
     max-width: 60px;
     max-height: 55px;
 }
@@ -9833,23 +9641,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     width: 50%;
     text-align: right;
 }
-
-.chat-application
-    .app-chat
-    .chat-content
-    .sidebar
-    .sidebar-chat
-    .chat-list
-    .chat-user {
+.chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
     padding: 10px 15px !important;
     border-bottom: 1px solid #eeeeee;
 }
-
 .createRfqForm .rfq_detail_from .input-wrapper ul.select2-selection__rendered {
-    border: 1px solid #54a958;
+    /* border: 1px solid #707070; */
     border-radius: 5px;
 }
-
 .rfq_user_information_wrap {
     padding-top: 50px;
 }
@@ -9865,7 +9664,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     box-shadow: none !important;
     float: none;
 }
-
 .home_intro_video_box {
     padding-top: 15px;
     text-align: right;
@@ -9917,7 +9715,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .profile_account_innerinfo_wrap {
     padding: 50px 0;
 }
-
 .account_item_menu ul li {
     border: 1px solid #707070;
     border-radius: 10px;
@@ -9969,7 +9766,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-size: 16px;
     padding: 8px 0;
 }
-
 .account_item_menu li .icon_img {
     background-size: 45px;
     height: 45px;
@@ -9980,130 +9776,108 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     background-size: 45px;
 }
 .account_item_menu li.profile_insight .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-insights-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-insights-non-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_insight.active .icon_img,
 .account_item_menu li.profile_insight:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-insights-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-insights-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-non-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile.active .icon_img,
 .account_item_menu li.profile:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_explore .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/explore-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/explore-non-active.png") no-repeat center center;
     background-size: 55px;
 }
 .account_item_menu li.profile_explore.active .icon_img,
 .account_item_menu li.profile_explore:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/explore-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/explore-active.png") no-repeat center center;
     background-size: 55px;
 }
 .account_item_menu li.profile_my_rfq .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/my-rfq-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/my-rfq-non-active.png") no-repeat center center;
     background-size: 45px;
     height: 60px;
 }
 .account_item_menu li.profile_my_rfq.active .icon_img,
 .account_item_menu li.profile_my_rfq:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/my-rfq-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/my-rfq-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_pos_pending .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/pending-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/pending-non-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_pos_pending.active .icon_img,
 .account_item_menu li.profile_pos_pending:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/Pending-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/Pending-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_pos_ongoing .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/ongoing-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/ongoing-non-active.png") no-repeat center center;
     background-size: 40px;
 }
 .account_item_menu li.profile_pos_ongoing.active .icon_img,
 .account_item_menu li.profile_pos_ongoing:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/ongoing-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/ongoing-active.png") no-repeat center center;
     background-size: 40px;
 }
 .account_item_menu li.profile_pos_shipped .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/shipped-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/shipped-non-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_pos_shipped.active .icon_img,
 .account_item_menu li.profile_pos_shipped:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/shipped-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/shipped-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_dev_designs .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/designs-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/designs-non-active.png") no-repeat center center;
     background-size: 45px;
     height: 52px;
 }
 .account_item_menu li.profile_dev_designs.active .icon_img,
 .account_item_menu li.profile_dev_designs:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/designs-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/designs-active.png") no-repeat center center;
     background-size: 45px;
 }
 .account_item_menu li.profile_dev_tech .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/tech-pack-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/tech-pack-non-active.png") no-repeat center center;
     background-size: 40px;
     height: 80px;
 }
 .account_item_menu li.profile_dev_tech.active .icon_img,
 .account_item_menu li.profile_dev_tech:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/tech-pack-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/tech-pack-active.png") no-repeat center center;
     background-size: 40px;
 }
 .account_item_menu li.profile_dev_supplyChain .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/supply-chain-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/supply-chain-non-active.png") no-repeat center center;
     background-size: 50px;
     height: 50px;
 }
 .account_item_menu li.profile_dev_supplyChain.active .icon_img,
 .account_item_menu li.profile_dev_supplyChain:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/supply-chain-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/supply-chain-active.png") no-repeat center center;
     background-size: 50px;
 }
 
 .account_item_menu li.profile_home .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-home-non-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-home-non-active.png") no-repeat center center;
     background-size: 50px;
     height: 50px;
 }
 .account_item_menu li.profile_home.active .icon_img,
 .account_item_menu li.profile_home:hover .icon_img {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-home-active.png")
-        no-repeat center center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/profile-home-active.png") no-repeat center center;
     background-size: 50px;
 }
 .profile_account_searchBar {
@@ -10114,7 +9888,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border: 1px solid #707070;
     border-radius: 10px;
     padding: 10px;
-    height: 80px;
+    height: 82px;
     display: flex;
     align-items: center;
     color: #000000;
@@ -10166,7 +9940,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .account_profile_box .productBox .imgBox {
     height: 210px;
 }
-
 .account_profile_box .products_inner_textbox .row {
     padding-top: 8px;
 }
@@ -10227,7 +10000,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     background: #e8e7e7;
     border: 1px solid #448547;
 }
-
 .account_filter_progress_wrap {
     padding: 20px 0 0;
 }
@@ -10241,7 +10013,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
-
 #profileAccountPostNew .modal-content {
     padding-top: 0;
 }
@@ -10252,28 +10023,16 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     left: inherit !important;
 }
 
-#create_new_tech_pac
-    .input-field
-    .select2-container--default
-    .select2-selection--single,
-#create_new_design
-    .input-field
-    .select2-container--default
-    .select2-selection--single,
-#profileAccountPostNew
-    .input-field
-    .select2-container--default
-    .select2-selection--single,
+#create_new_tech_pac .input-field .select2-container--default .select2-selection--single,
+#create_new_design .input-field .select2-container--default .select2-selection--single,
+#profileAccountPostNew .input-field .select2-container--default .select2-selection--single,
 #profileAccountPostNew .input-field textarea,
 #profileAccountPostNew .input-field input {
     box-shadow: none !important;
     border: 1px solid #707070 !important;
     background: none;
 }
-#create_new_design
-    .select2-container--default
-    .select2-selection--single
-    .select2-selection__rendered {
+#create_new_design .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 44px;
 }
 #profileAccountPostNew .input-field textarea {
@@ -10291,7 +10050,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     line-height: 40px;
     margin-top: 40px;
 }
-
 .profile_account_myrfq_innerbox {
     font-family: "nexaregular";
     font-size: 15px;
@@ -10317,11 +10075,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin-bottom: 30px;
     border: 1px solid #eee;
     max-height: 330px;
+    min-height: 330px;
+    position: relative;
 }
 .profile_account_myrfq_innerbox .profile_account_myrfq_box.active {
     border: 1px solid #707070;
 }
-
 .new_profile_myrfq_details_topbox h5,
 .profile_account_myrfq_innerbox .profile_account_myrfq_box h5 {
     font-family: "nexabold";
@@ -10351,7 +10110,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     text-align: right;
     display: inline-block;
     width: 100%;
-    margin-top: 15px;
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
 }
 .profile_account_myrfq_innerbox .account_rfq_btn_wrap .rfq_btn_box {
     display: inline-block;
@@ -10382,7 +10143,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     right: -7px;
     top: -10px;
 }
-
 .new_profile_account_myrfq_details {
     border: 1px solid #707070;
     border-radius: 10px;
@@ -10390,7 +10150,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-size: 15px;
     color: #1e1e1e;
 }
-
 .new_profile_myrfq_details_topbox {
     padding-bottom: 15px;
 }
@@ -10432,7 +10191,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-size: 14px;
     color: #646565;
 }
-
 .rfq_review_results_nav ul li.active a {
     font-family: "nexabold";
     font-size: 16px;
@@ -10442,12 +10200,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border-bottom: 1px solid #707070;
     padding: 15px 0;
 }
-
 .rfq_review_results_box:last-child {
     border-bottom: none;
     padding-bottom: 0;
 }
-
 .rfq_review_results_box .new_rfq_avatar {
     width: 50px;
     height: 50px;
@@ -10468,7 +10224,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-size: 18px;
     font-weight: bold;
 }
-
 .rfq_review_results_box .rfqEatting {
     display: block;
     margin-bottom: 2px;
@@ -10482,7 +10237,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     height: 32px;
     width: 142px;
 }
-
 .rfq_review_message_box {
     display: inline-block;
     width: 100%;
@@ -10499,7 +10253,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border-radius: 10px;
     display: inline-block;
 }
-
 .rfq_review_message_box .rfq_message_box.chat-right .chat-text span {
     background: #d2e9d4;
 }
@@ -10527,7 +10280,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     color: #52ab57;
     font-size: 22px;
 }
-
 .profile_account_poinfo_innerbox {
     margin-bottom: 15px;
     font-size: 15px;
@@ -10648,19 +10400,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-selectable .tt-highlight {
     color: #54a958 !important;
 }
-.faq_contentinfo_wrapper
-    .faq_search_box
-    .tt-menu
-    .tt-selectable
-    strong.tt-highlight {
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-selectable strong.tt-highlight {
     color: #484848 !important;
     font-weight: normal !important;
 }
-.faq_contentinfo_wrapper
-    .faq_search_box
-    .tt-menu
-    .tt-selectable:hover
-    .tt-highlight {
+.faq_contentinfo_wrapper .faq_search_box .tt-menu .tt-selectable:hover .tt-highlight {
     color: #fff !important;
 }
 .faq_contentinfo_wrapper .faq_search_box .faq_search_input {
@@ -10706,19 +10450,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 0;
 }
 .faq_infobox_wrap .faq_collaps_content .collapsible-header h4 {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/arrow-down.png")
-        no-repeat 98% center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/arrow-down.png") no-repeat 98% center;
     padding: 17px 40px 15px 20px;
     background-size: 22px;
 }
-.faq_contentinfo_wrapper
-    .faq_collaps_content
-    ul.collapsible
-    li.active
-    .collapsible-header
-    h4 {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/arrow-active.png")
-        no-repeat 98% center;
+.faq_contentinfo_wrapper .faq_collaps_content ul.collapsible li.active .collapsible-header h4 {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/arrow-active.png") no-repeat 98% center;
     background-size: 22px;
     font-family: "nexablack";
     color: #285460;
@@ -10733,11 +10470,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .faq_contentinfo_wrapper .faq_collaps_content ul.collapsible li.active {
     border: 1px solid #54a958;
 }
-.faq_contentinfo_wrapper
-    .faq_collaps_content
-    ul.collapsible
-    li
-    .collapsible-body {
+.faq_contentinfo_wrapper .faq_collaps_content ul.collapsible li .collapsible-body {
     padding: 0px 20px 15px;
 }
 .faq_contentinfo_wrapper .faq_talkToUs_boxWrap {
@@ -10869,7 +10602,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 20px 20px 40px;
     margin-bottom: 10px;
 }
-
 .profile_supplier_account_insight_wrap .search_appearance_box {
     font-size: 20px;
     line-height: 30px;
@@ -10893,13 +10625,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .supllir_profile_incomplete_field ul li a:link,
 .supllir_profile_incomplete_field ul li a:active,
 .supllir_profile_incomplete_field ul li a:visited {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/down-arrow.png")
-        no-repeat right center;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/account-images/down-arrow.png") no-repeat right center;
     color: #000000;
     padding-right: 25px;
     background-size: 15px;
 }
-
 .profile_product_view_menu ul {
     display: inline-block;
     width: 100%;
@@ -10924,22 +10654,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .profile_product_view_menu ul li a:hover {
     color: #000000;
 }
-
 .profile_product_list_view table {
     border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .profile_product_list_view table thead {
     background: #e6e6e6;
 }
-
 .profile_product_list_view table thead th {
     padding: 10px 20px;
 }
-
 .profile_product_list_view table td {
     padding: 5px 20px;
 }
-
 .profile_product_list_view .size-lg {
     font-size: 18px;
 }
@@ -10967,10 +10693,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .account_profile_box form .input-field select,
 .account_profile_box form .input-field textarea,
-.account_profile_box
-    form
-    .input-field
-    input[type="text"]:not(.browser-default) {
+.account_profile_box form .input-field input[type="text"]:not(.browser-default) {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     border: 1px solid #707070 !important;
@@ -11058,7 +10781,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     cursor: pointer;
     font-size: 24px;
 }
-
 #create_new_supplyChain .create_new_supplyChain_form_wrap {
     padding-top: 30px;
 }
@@ -11130,13 +10852,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .account_profile_box .create_new_supplyChain_modal form .form_body {
     padding: 1rem 2rem;
 }
-.account_profile_box .create_new_tech_pac_modal form .form_body .tech_img,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img,
-.account_profile_box .create_new_supplyChain_modal form .form_body .tech_img {
+.account_profile_box .create_new_tech_pac_modal form .tech_img,
+.account_profile_box .tech_pach_details_modal_container form .tech_img,
+.account_profile_box .create_new_supplyChain_modal form .tech_img {
     margin-top: 30px;
     margin-bottom: 60px;
     display: -webkit-box;
@@ -11148,67 +10866,19 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.account_profile_box
-    .create_new_tech_pac_modal
-    form
-    .form_body
-    .tech_img
-    .img_upload,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img
-    .img_upload,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_body
-    .tech_img
-    .img_upload {
+.create_new_tech_pac_modal form .tech_img .img_upload,
+.tech_pach_details_modal_container form .tech_img .img_upload,
+.create_new_supplyChain_modal form .tech_img .img_upload {
     margin: 0;
 }
-.account_profile_box
-    .create_new_tech_pac_modal
-    form
-    .form_body
-    .tech_img
-    .img_upload
-    img,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img
-    .img_upload
-    img,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_body
-    .tech_img
-    .img_upload
-    img {
+.create_new_tech_pac_modal form .tech_img .img_upload img,
+.tech_pach_details_modal_container form .tech_img .img_upload img,
+.create_new_supplyChain_modal form .tech_img .img_upload img {
     width: 200px;
 }
-.account_profile_box
-    .create_new_tech_pac_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper {
+.create_new_tech_pac_modal form .tech_img .upload_img_buttons_wrapper,
+.tech_pach_details_modal_container form .tech_img .upload_img_buttons_wrapper,
+.create_new_supplyChain_modal form .tech_img .upload_img_buttons_wrapper {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
@@ -11219,81 +10889,21 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-align: center;
     align-items: center;
 }
-.account_profile_box
-    .create_new_tech_pac_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons {
+.create_new_tech_pac_modal form .tech_img .upload_img_buttons_wrapper .upload_img_buttons,
+.tech_pach_details_modal_container form .tech_img .upload_img_buttons_wrapper .upload_img_buttons,
+.create_new_supplyChain_modal form .tech_img .upload_img_buttons_wrapper .upload_img_buttons {
     text-align: center;
 }
-.account_profile_box
-    .create_new_tech_pac_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons
-    p,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons
-    p,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons
-    p {
+.create_new_tech_pac_modal form .tech_img .upload_img_buttons_wrapper .upload_img_buttons p,
+.tech_pach_details_modal_container form .tech_img .upload_img_buttons_wrapper .upload_img_buttons p,
+.create_new_supplyChain_modal form .tech_img .upload_img_buttons_wrapper .upload_img_buttons p {
     font-size: 18px;
     margin: 1.25rem 0;
 }
 
-.account_profile_box
-    .create_new_tech_pac_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons
-    a,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons
-    a,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_body
-    .tech_img
-    .upload_img_buttons_wrapper
-    .upload_img_buttons
-    a {
+.create_new_tech_pac_modal form .tech_img .upload_img_buttons_wrapper .upload_img_buttons a,
+.tech_pach_details_modal_container form .tech_img .upload_img_buttons_wrapper .upload_img_buttons a,
+.create_new_supplyChain_modal form .tech_img .upload_img_buttons_wrapper .upload_img_buttons a {
     height: 44px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -11305,13 +10915,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-pack: center;
     justify-content: center;
 }
-.account_profile_box .create_new_tech_pac_modal form .form_body .endLine,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_body
-    .endLine,
-.account_profile_box .create_new_supplyChain_modal form .form_body .endLine {
+.account_profile_box .create_new_tech_pac_modal form .endLine,
+.account_profile_box .tech_pach_details_modal_container form .endLine,
+.account_profile_box .create_new_supplyChain_modal form .endLine {
     margin-bottom: 0;
 }
 .account_profile_box .create_new_tech_pac_modal form .form_footer,
@@ -11321,11 +10927,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 1rem 2rem;
 }
 .account_profile_box .create_new_tech_pac_modal form .form_footer .buttons,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_footer
-    .buttons,
+.account_profile_box .tech_pach_details_modal_container form .form_footer .buttons,
 .account_profile_box .create_new_supplyChain_modal form .form_footer .buttons {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -11335,18 +10937,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     justify-content: space-between;
 }
 .account_profile_box .create_new_tech_pac_modal form .form_footer .buttons a,
-.account_profile_box
-    .tech_pach_details_modal_container
-    form
-    .form_footer
-    .buttons
-    a,
-.account_profile_box
-    .create_new_supplyChain_modal
-    form
-    .form_footer
-    .buttons
-    a {
+.account_profile_box .tech_pach_details_modal_container form .form_footer .buttons a,
+.account_profile_box .create_new_supplyChain_modal form .form_footer .buttons a {
     margin: 0;
     width: 190px;
     height: 42px;
@@ -11387,11 +10979,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 #create_new_supplyChain .modal_footer .buttons a,
 .account_profile_box .create_new_tech_pac_modal .modal_footer .buttons a,
-.account_profile_box
-    .tech_pach_details_modal_container
-    .modal_footer
-    .buttons
-    a,
+.account_profile_box .tech_pach_details_modal_container .modal_footer .buttons a,
 .account_profile_box .create_new_supplyChain_modal .modal_footer .buttons a {
     margin: 0;
     width: 190px;
@@ -11406,33 +10994,21 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-align: center;
     align-items: center;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .profile_account_searchBar
-    .create_new_design_modal {
+.profile_account_dev_design .profile_account_searchBar .create_new_design_modal {
     padding: 1.5rem;
 }
-.account_profile_box .profile_account_dev_design .product_cards .product_card {
+.profile_account_dev_design .product_cards .product_card {
     margin-bottom: 24px;
     border: 1px solid #707070;
     border-radius: 10px 10px 0 0;
     background-color: #fff;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card
-    .card_image {
+.profile_account_dev_design .product_cards .product_card .card_image {
     height: 340px;
     cursor: pointer;
     overflow: hidden;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card
-    .card_image
-    img {
+.profile_account_dev_design .product_cards .product_card .card_image img {
     height: 100%;
     width: auto;
     -o-object-fit: cover;
@@ -11440,81 +11016,37 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -webkit-transition: 0.3s;
     transition: 0.3s;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card
-    .card_description {
+.profile_account_dev_design .product_cards .product_card .card_description {
     border-top: 1px solid #707070;
     padding: 10px 20px;
     min-height: 64px;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card
-    .card_description
-    p
-    span {
+.profile_account_dev_design .product_cards .product_card .card_description p span {
     margin-left: 20px;
     display: inline-block;
     font-weight: 700;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card:hover
-    .card_image
-    img {
+.profile_account_dev_design .product_cards .product_card:hover .card_image img {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal {
+.profile_account_dev_design .product_card_modal {
     padding: 1.5rem;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .design_history {
+.profile_account_dev_design .product_card_modal .modal_contents .design_history {
     border-right: 1px solid #707070;
     padding-top: 24px;
     height: 100%;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .design_history
-    p {
+.profile_account_dev_design .product_card_modal .modal_contents .design_history p {
     margin: 0 0 60px;
     font-size: 18px;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .design_history
-    .design_history_tabs
-    .tab {
+.profile_account_dev_design .product_card_modal .modal_contents .design_history .tab {
     width: 140px;
     margin-bottom: 1.5rem;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .design_history
-    .design_history_tabs
-    .tab
-    a {
+.profile_account_dev_design .product_card_modal .modal_contents .design_history .tab a {
     font-size: 18px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -11526,32 +11058,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-pack: justify;
     justify-content: space-between;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .design_history
-    .design_history_tabs
-    .tab
-    a.active {
+.profile_account_dev_design .product_card_modal .modal_contents .design_history .tab a.active {
     font-weight: 700;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .model_content {
+.profile_account_dev_design .product_card_modal .modal_contents .model_content {
     padding-top: 1.5rem;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .model_content
-    .content_header {
+.profile_account_dev_design .product_card_modal .modal_contents .content_header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -11562,73 +11075,33 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     align-items: center;
     margin-bottom: 50px;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .model_content
-    .content_header
-    h5 {
+.profile_account_dev_design .product_card_modal .modal_contents .content_header h5 {
     margin: 0;
     color: #54a958;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .model_content
-    .content_header
-    p {
+.profile_account_dev_design .product_card_modal .modal_contents .content_header p {
     margin: 0;
     font-style: italic;
     color: #54a958;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .model_content
-    .content_header
-    a {
+.profile_account_dev_design .product_card_modal .modal_contents .content_header a {
     text-align: center;
     margin: 0;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .model_content
-    .content_body
-    img {
+.profile_account_dev_design .product_card_modal .modal_contents .content_body img {
     width: 100%;
 }
-.account_profile_box
-    .profile_account_dev_design
-    .product_cards
-    .product_card_modal
-    .modal_contents
-    .message_box {
+.profile_account_dev_design .product_card_modal .modal_contents .message_box {
     height: 100%;
     border: 1px solid #54a958;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card {
+.account_profile_box .profile_account_dev_tech .tech_pack_card {
     border: 1px solid #707070;
     border-radius: 10px;
     padding: 0.5rem;
     margin-bottom: 1.5rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_header {
+.account_profile_box .profile_account_dev_tech .card_header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -11640,12 +11113,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     align-items: center;
     margin: 0.5rem 0;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_header
-    h5 {
+.account_profile_box .profile_account_dev_tech .card_header h5 {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
@@ -11658,52 +11126,25 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     overflow: hidden;
     height: 26px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_header
-    .actions {
+.account_profile_box .profile_account_dev_tech .card_header .actions {
     -ms-flex-negative: 0;
     flex-shrink: 0;
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_header
-    .actions
-    span {
+.account_profile_box .profile_account_dev_tech .card_header .actions span {
     font-size: 2rem;
     cursor: pointer;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_header
-    .actions
-    .inbox {
+.account_profile_box .profile_account_dev_tech .card_header .inbox {
     color: #54a958;
     margin: 0 5px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_header
-    .actions
-    .delete {
+.account_profile_box .profile_account_dev_tech .card_header .delete {
     color: #ff0000;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_img {
+.account_profile_box .profile_account_dev_tech .card_img {
     border-top: 1px solid #ababab;
     border-bottom: 1px solid #ababab;
     height: 220px;
@@ -11711,38 +11152,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     overflow: hidden;
     text-align: center;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_img
-    img {
+.account_profile_box .profile_account_dev_tech .card_img img {
     height: 100%;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_footer {
+.account_profile_box .profile_account_dev_tech .card_footer {
     padding: 0.5rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_footer
-    p
-    span {
+.account_profile_box .profile_account_dev_tech .card_footer p span {
     font-weight: 700;
     display: inline-block;
     margin-left: 1.25rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_footer
-    .buttons {
+.account_profile_box .profile_account_dev_tech .card_footer .buttons {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -11750,51 +11171,23 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-pack: justify;
     justify-content: space-between;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    .card_footer
-    .buttons
-    a {
+.account_profile_box .profile_account_dev_tech .card_footer .buttons a {
     text-align: center;
     margin: 0;
     min-width: 90px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    #tech_pack_card1_modal {
+.account_profile_box #tech_pack_card1_modal {
     max-height: 90%;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    #tech_pack_card1_modal
-    .tech_pach_card_modal {
+.account_profile_box #tech_pack_card1_modal .tech_pach_card_modal {
     padding: 2rem;
     overflow: hidden;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    #tech_pack_card1_modal
-    .tech_pach_card_modal
-    .modal_body {
+.account_profile_box #tech_pack_card1_modal .tech_pach_card_modal .modal_body {
     padding: 3rem;
     text-align: center;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .tech_pack_cards
-    .tech_pack_card
-    #tech_pack_card1_modal
-    .tech_pach_card_modal
-    .modal_body
-    img {
+.account_profile_box #tech_pack_card1_modal .tech_pach_card_modal .modal_body img {
     height: 100%;
 }
 .account_profile_box .profile_account_dev_tech .modal {
@@ -11802,35 +11195,17 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     max-height: 90%;
     top: 5% !important;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .create_new_tech_pac_modal
-    .select_tech_pack_picture_modal
-    .modal_body {
+.account_profile_box .modal .select_tech_pack_picture_modal .modal_body {
     padding: 1rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .create_new_tech_pac_modal
-    .select_tech_pack_picture_modal
-    .modal_body
-    ul {
+.account_profile_box .modal .select_tech_pack_picture_modal .modal_body ul {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .create_new_tech_pac_modal
-    .select_tech_pack_picture_modal
-    .modal_body
-    ul
-    li {
+.account_profile_box .modal .select_tech_pack_picture_modal .modal_body ul li {
     width: 25%;
     text-align: center;
     display: -webkit-inline-box;
@@ -11844,93 +11219,38 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     justify-content: center;
     height: 200px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .create_new_tech_pac_modal
-    .select_tech_pack_picture_modal
-    .modal_body
-    ul
-    li
-    a {
+.account_profile_box .modal .select_tech_pack_picture_modal .modal_body ul li a {
     cursor: pointer;
     border: 1px solid transparent;
     display: inline-block;
     height: 100%;
     padding: 2rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .create_new_tech_pac_modal
-    .select_tech_pack_picture_modal
-    .modal_body
-    ul
-    li
-    a:focus {
+.account_profile_box .modal .select_tech_pack_picture_modal .modal_body ul li a:focus {
     border-color: #54a958;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .create_new_tech_pac_modal
-    .select_tech_pack_picture_modal
-    .modal_body
-    ul
-    li
-    a
-    img {
+.account_profile_box .modal .select_tech_pack_picture_modal .modal_body ul li a img {
     max-height: 100%;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container {
+.profile_account_dev_tech .modal .tech_pach_details_modal_container {
     height: 90vh !important;
     padding-top: 65px !important;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .modal_name_and_action {
+.profile_account_dev_tech .modal .modal_name_and_action {
     border-bottom: none;
     margin: 0;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body {
+.profile_account_dev_tech .modal .tech_pach_details_modal .modal_body {
     padding: 1.5rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .table_wrapper {
+.profile_account_dev_tech .modal .tech_pach_details_modal .table_wrapper {
     overflow: auto;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .tabs {
+.profile_account_dev_tech .modal .tech_pach_details_modal .tabs {
     border: none;
     margin-bottom: 0;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card {
     border: 1px solid #b2b2b2;
     padding: 0.5rem;
     display: -webkit-box;
@@ -11938,26 +11258,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     display: flex;
     margin-bottom: 1rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .title
-    p {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .title p {
     margin: 0;
     padding-top: 10px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item {
     -ms-flex-negative: 0;
     flex-shrink: 0;
     width: 50%;
@@ -11972,146 +11277,52 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-pack: center;
     justify-content: center;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item
-    .item_inner {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item_inner {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
     position: relative;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item
-    .item_inner
-    .main_img {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item_inner .main_img {
     height: 350px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item
-    .item_inner
-    .bottom_arrow,
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item
-    .item_inner
-    .left_arrow {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item_inner .bottom_arrow,
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item_inner .left_arrow {
     position: absolute;
     left: 0;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item
-    .item_inner
-    .left_arrow {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item_inner .left_arrow {
     top: 0;
     height: 100%;
     left: -1.5rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .item
-    .item_inner
-    .bottom_arrow {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .item_inner .bottom_arrow {
     bottom: -25px;
     width: 100%;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .actions {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .actions {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .roughArea_card
-    .actions
-    .actions_container {
+.profile_account_dev_tech .modal .tech_pach_details_modal .roughArea_card .actions_container {
     width: 100%;
     height: 40px;
     background-color: #f1efef;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .materials_card {
+.profile_account_dev_tech .modal .tech_pach_details_modal .materials_card {
     border: 1px solid #b2b2b2;
     padding: 0.5rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .materials_card
-    .table_wrapper {
+.profile_account_dev_tech .modal .tech_pach_details_modal .materials_card .table_wrapper {
     height: 145px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .details_list_card {
+.profile_account_dev_tech .modal .tech_pach_details_modal .details_list_card {
     border: 1px solid #b2b2b2;
     padding: 0.5rem;
     margin-bottom: 1rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .details_list_card
-    .inputForm {
+.profile_account_dev_tech .modal .tech_pach_details_modal .details_list_card .inputForm {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -12120,80 +11331,28 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-align: center;
     align-items: center;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .details_list_card
-    .inputForm
-    p {
+.profile_account_dev_tech .modal .tech_pach_details_modal .details_list_card .inputForm p {
     -ms-flex-negative: 0;
     flex-shrink: 0;
     padding-right: 1rem;
     margin: 0;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .details_list_card
-    .inputForm
-    select,
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .details_list_card
-    .inputForm
-    input {
+.profile_account_dev_tech .modal .tech_pach_details_modal .details_list_card .inputForm select,
+.profile_account_dev_tech .modal .tech_pach_details_modal .details_list_card .inputForm input {
     max-width: 300px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .details_list_card
-    .table_wrapper {
+.profile_account_dev_tech .modal .tech_pach_details_modal .details_list_card .table_wrapper {
     height: 150px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .photo_list_card {
+.profile_account_dev_tech .modal .photo_list_card {
     border: 1px solid #b2b2b2;
     padding: 0.5rem;
     margin-bottom: 1rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .photo_list_card
-    .title
-    p {
+.profile_account_dev_tech .modal .photo_list_card .title p {
     margin-bottom: 0;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .photo_list_card
-    .card_body {
+.profile_account_dev_tech .modal .photo_list_card .card_body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -12202,94 +11361,37 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     align-items: flex-end;
     margin-bottom: 1rem;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .photo_list_card
-    .card_body
-    .img {
+.profile_account_dev_tech .modal .photo_list_card .img {
     height: 80px;
     width: 80px;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .photo_list_card
-    .card_body
-    .img
-    img {
+.profile_account_dev_tech .modal .photo_list_card .img img {
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
     object-fit: cover;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .photo_list_card
-    .photo_list_table {
+.profile_account_dev_tech .modal .photo_list_table {
     height: 80px;
     overflow: auto;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .history_card {
+.profile_account_dev_tech .modal .history_card {
     padding: 0.5rem;
     border: 1px solid #b2b2b2;
 }
-.account_profile_box
-    .profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .history_card
-    .title {
+.profile_account_dev_tech .modal .history_card .title {
     margin-bottom: 0.5rem;
 }
 
-.profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .history_card
-    .title
-    p {
+.profile_account_dev_tech .modal .history_card .title p {
     margin-bottom: 0;
 }
-.profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .history_card
-    .photo_list {
+.profile_account_dev_tech .modal .history_card .photo_list {
     padding: 0;
     height: 112px;
     overflow: auto;
 }
-.profile_account_dev_tech
-    .modal
-    .tech_pach_details_modal_container
-    .tech_pach_details_modal
-    .modal_body
-    .history_card
-    .photo_list
-    li {
+.profile_account_dev_tech .modal .history_card .photo_list li {
     font-size: 14px;
     list-style: none;
     margin-bottom: 0.25rem;
@@ -12385,21 +11487,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .tech_pack_details .tech_pack_collapsible li .collapsible-body.attachments {
     padding: 1rem 0;
 }
-.tech_pack_details
-    .tech_pack_collapsible
-    li
-    .collapsible-body.attachments
-    .imgs {
+.tech_pack_details .tech_pack_collapsible li .collapsible-body.attachments .imgs {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
 }
-.tech_pack_details
-    .tech_pack_collapsible
-    li
-    .collapsible-body.attachments
-    .imgs
-    .img {
+.tech_pack_details .tech_pack_collapsible li .collapsible-body.attachments .imgs .img {
     height: 100px;
     width: 100px;
     margin-right: 0.5rem;
@@ -12407,13 +11500,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin-bottom: 1rem;
     overflow: hidden;
 }
-.tech_pack_details
-    .tech_pack_collapsible
-    li
-    .collapsible-body.attachments
-    .imgs
-    .img
-    img {
+.tech_pack_details .tech_pack_collapsible li .collapsible-body.attachments .imgs .img img {
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
@@ -12437,22 +11524,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -o-object-fit: cover;
     object-fit: cover;
 }
-.profile_account_dev_supplychain
-    .supplyChain_container
-    .products_inner_textbox {
+.profile_account_dev_supplychain .supplyChain_container .products_inner_textbox {
     border: none !important;
 }
-.profile_account_dev_supplychain
-    .supplyChain_container
-    .products_inner_textbox
-    .product_moq {
+.profile_account_dev_supplychain .supplyChain_container .products_inner_textbox .product_moq {
     font-size: 13px;
 }
-.profile_account_dev_supplychain
-    .supplyChain_container
-    .productBox:hover
-    .imgBox
-    img {
+.profile_account_dev_supplychain .supplyChain_container .productBox:hover .imgBox img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
@@ -12503,12 +11581,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     flex-wrap: wrap;
     height: 100%;
 }
-.account_profile_box
-    .send_rfq
-    .send_rfq_card
-    .card_body
-    .add_button_container
-    .add_button {
+.account_profile_box .send_rfq .send_rfq_card .card_body .add_button_container .add_button {
     height: 200px;
     width: 200px;
     border: 1px dashed #878686;
@@ -12523,21 +11596,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     align-items: center;
     margin-bottom: 1rem;
 }
-.account_profile_box
-    .send_rfq
-    .send_rfq_card
-    .card_body
-    .add_button_container
-    .add_button
-    span {
+.account_profile_box .send_rfq .send_rfq_card .card_body .add_button_container .add_button span {
     font-size: 70px;
 }
-.account_profile_box
-    .send_rfq
-    .send_rfq_card
-    .card_body
-    .add_button_container
-    p {
+.account_profile_box .send_rfq .send_rfq_card .card_body .add_button_container p {
     text-align: center;
     margin: 0;
 }
@@ -12545,12 +11607,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     height: 265px;
     overflow: auto;
 }
-.account_profile_box
-    .send_rfq
-    .send_rfq_card
-    .card_body
-    .item_list_container
-    .item_list {
+.account_profile_box .send_rfq .send_rfq_card .card_body .item_list_container .item_list {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -12563,26 +11620,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -ms-flex-pack: center;
     justify-content: center;
 }
-.account_profile_box
-    .send_rfq
-    .send_rfq_card
-    .card_body
-    .item_list_container
-    .item_list
-    .item {
+.account_profile_box .send_rfq .send_rfq_card .card_body .item_list_container .item_list .item {
     width: 90px;
     height: 100px;
     padding: 0.5rem;
     overflow: hidden;
 }
-.account_profile_box
-    .send_rfq
-    .send_rfq_card
-    .card_body
-    .item_list_container
-    .item_list
-    .item
-    img {
+.account_profile_box .send_rfq .send_rfq_card .card_body .item_list_container .item_list .item img {
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
@@ -12613,7 +11657,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     width: 100%;
     height: 100%;
 }
-
 #myList li {
     display: none;
 }
@@ -12631,6 +11674,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 #showLess:hover {
     color: black;
+}
+
+.account_profile_wrapper ul.pagination {
+    padding-top: 20px;
 }
 
 /* ******************** Media css style start *********************** */
@@ -12874,58 +11921,26 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_account_myrfq_innerbox .profile_account_myrfq_box {
         padding: 20px 10px 15px;
     }
-    .profile_account_myrfq_innerbox
-        .account_rfq_btn_wrap
-        .rfq_btn_box
-        .rfq_btn {
+    .profile_account_myrfq_innerbox .account_rfq_btn_wrap .rfq_btn_box .rfq_btn {
         font-size: 12px;
     }
     .account_profile_box .profile_account_dev_design .product_cards .modal {
         width: 80%;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab {
         width: 120px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab
-        a {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab a {
         font-size: 16px;
     }
     .account_profile_box .profile_account_dev_tech .modal {
         width: 80% !important;
     }
-    .account_profile_box
-        .send_rfq
-        .send_rfq_card
-        .card_body
-        .add_button_container
-        .add_button {
+    .account_profile_box .send_rfq .send_rfq_card .card_body .add_button_container .add_button {
         height: 160px;
         width: 160px;
     }
-    .account_profile_box
-        .profile_account_dev_tech
-        .modal
-        .tech_pach_details_modal_container
-        .tech_pach_details_modal
-        .modal_body
-        .roughArea_card
-        .item
-        .item_inner
-        .main_img {
+    .account_profile_box .profile_account_dev_tech .modal .tech_pach_details_modal_container .tech_pach_details_modal .modal_body .roughArea_card .item .item_inner .main_img {
         height: 270px;
     }
 }
@@ -12998,21 +12013,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .product_design_wrapper .product_item_box .pro_price {
         font-size: 13px;
     }
-    .account_profile_box
-        .send_rfq
-        .send_rfq_card
-        .card_body
-        .item_list_container
-        .item_list
-        .item {
+    .account_profile_box .send_rfq .send_rfq_card .card_body .item_list_container .item_list .item {
         width: 70px;
         height: 80px;
         padding: 0.5rem;
         overflow: hidden;
     }
-}
-
-@media only screen and (max-width: 1280px) {
 }
 
 @media only screen and (max-width: 1299px) {
@@ -13199,7 +12205,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .certificate_img_wrap .certificate_img .doc_icon {
         background-size: 145px;
     }
-    .rfq_content_box .rfq_profile_info h4 {
+    .rfq_profile_info h4 {
         font-size: 18px;
         margin-bottom: 10px;
         line-height: 24px;
@@ -13393,22 +12399,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         width: 100%;
         text-align: center !important;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card
-        .card_image {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card .card_image {
         height: 320px;
         text-align: center;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab {
         width: 100px;
     }
     .proinfo_account_blank {
@@ -13583,8 +12578,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         width: 25% !important;
     }
     .export_destination_wrap .flag_img {
-        height: 110px;
-        width: 110px;
+        height: 90px;
+        width: 90px;
+    }
+    .export_destination_wrap .flag_innerBox {
+        height: 145px;
     }
     .suppliers_filter_wrapper .filter_search_input {
         font-size: 14px !important;
@@ -13742,8 +12740,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         margin-top: 50px;
     }
     .profile_bannerwrap .erified {
-        background: url(../images/frontendimages/new_layout_images/mark_icon.png)
-            no-repeat left 14px;
+        background: url(../images/frontendimages/new_layout_images/mark_icon.png) no-repeat left 14px;
         background-size: 40px;
         bottom: 0px;
         font-size: 16px;
@@ -13897,15 +12894,19 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         font-size: 16px;
         line-height: 38px;
     }
-    .account_profile_wrapper
-        .tabcontent
-        .profile_product_wrap
-        .product_boxwrap {
+    .account_profile_wrapper .tabcontent .profile_product_wrap .product_boxwrap {
         margin: 0;
     }
     .certificate_img_wrap .certificate_infoBox .certificate_title,
     .certificate_img_wrap .certificate_infoBox {
         height: auto;
+        -webkit-line-clamp: 1;
+    }
+    .certifications .certificate_img_wrap .certificate_img {
+        height: 130px;
+    }
+    .certifications .certificate_img_wrap .certificate_img img {
+        max-height: 90px;
     }
     .banner_slider {
         padding: 30px;
@@ -14172,9 +13173,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         float: none;
     }
     .footer_bottomWrap {
-        background: #191919
-            url(../images/frontendimages/new-home/footer-sm-bg.jpg) repeat-x
-            left top;
+        background: #191919 url(../images/frontendimages/new-home/footer-sm-bg.jpg) repeat-x left top;
         border-radius: 15px 15px 0 0;
     }
     .footer_left_bottom .addressWrap {
@@ -14250,18 +13249,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .business_list_itembox .list_box .switch .enable_disable_label {
         font-size: 9px;
     }
-    .my_businesses_wrap
-        .my_businesses_box
-        .switch
-        label
-        input[type="checkbox"]:checked
-        + .lever,
-    .business_list_itembox
-        .list_box
-        .switch
-        label
-        input[type="checkbox"]:checked
-        + .lever {
+    .my_businesses_wrap .my_businesses_box .switch label input[type="checkbox"]:checked + .lever,
+    .business_list_itembox .list_box .switch label input[type="checkbox"]:checked + .lever {
         margin: 0;
     }
     .spotlight_info {
@@ -14414,12 +13403,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 
     .profile_account_myrfq_innerbox .account_rfq_btn_wrap {
         text-align: center;
+        right: 0;
     }
     .profile_account_myrfq_innerbox .profile_account_myrfq_box {
         max-height: 390px;
     }
     .profile_account_myrfq_innerbox .account_rfq_btn_wrap .rfq_btn_box {
-        margin: 0 5px 10px;
+        margin: 0 5px 0;
     }
     .rfq_review_results_box .new_rfq_review .btn_green {
         width: 100px;
@@ -14536,23 +13526,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         min-width: 90px;
         font-size: 12px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        p {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history p {
         margin-bottom: 30px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab {
         width: 120px;
     }
     .account_profile_box .profile_account_dev_tech .modal {
@@ -14561,15 +13538,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .account_profile_box .pack_details_desktop {
         display: none;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab
-        a {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab a {
         font-size: 14px;
     }
     #profileAccountRight .tech_pack_details {
@@ -14589,13 +13558,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     #profileAccountRight .tech_pack_details ul li .material-icons {
         right: 17px;
     }
-    .account_profile_box
-        .profile_account_dev_tech
-        .tech_pack_cards
-        .tech_pack_card
-        .card_footer
-        .buttons
-        a {
+    .account_profile_box .profile_account_dev_tech .tech_pack_cards .tech_pack_card .card_footer .buttons a {
         min-width: 80px;
     }
     #profileAccountRight .send_rfq .item_list {
@@ -14614,19 +13577,23 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     #profileAccountRight .add_button_container .material-icons {
         font-size: 60px;
     }
-    .account_profile_box
-        .profile_account_dev_tech
-        .modal
-        .create_new_tech_pac_modal
-        .select_tech_pack_picture_modal
-        .modal_body
-        ul
-        li {
+    .modal .create_new_tech_pac_modal .select_tech_pack_picture_modal .modal_body ul li {
         width: calc(100% / 3);
     }
     .account_profile_wrapper .contentBox {
         font-size: 14px;
         line-height: 25px;
+    }
+    .account_profile_wrapper .profile_supplier_account_home_wrap {
+        padding-left: 0;
+    }
+    .export_destination_wrap .flag_img {
+        height: 80px;
+        width: 80px;
+    }
+    .certificate_img_wrap .certificate_infoBox .issue-date,
+    .certificate_img_wrap .certificate_infoBox .expiry-date {
+        display: none;
     }
 }
 
@@ -14645,45 +13612,16 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .chat-application .app-chat .chat-content .sidebar {
         width: 100% !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
         width: 100% !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .user-section {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .user-section {
         width: 60%;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .info-section {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section {
         width: 40%;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .info-section
-        .star-timing
-        .time {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section .star-timing .time {
         white-space: inherit;
         word-break: break-word;
         line-height: 13px;
@@ -14698,16 +13636,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         height: auto !important;
     }
     .chat_messagedata .chat_sms_left,
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat
-        .chat-body
-        .chat_sms_box
-        p {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .chat-body .chat_sms_box p {
         width: 100% !important;
         font-size: 13px;
         min-height: 30px;
@@ -14720,24 +13649,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         margin: 0;
         font-size: 13px;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
         width: 100% !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat-right
-        .chat-text
-        .sms_strtotime {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat-right .chat-text .sms_strtotime {
         left: inherit !important;
         right: 14px !important;
     }
@@ -14832,6 +13747,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     }
     .no_more_tables td:before {
         content: attr(data-title);
+    }
+    .overview_table .no_more_tables td:before {
+        top: 8px;
     }
     #profile.profile_table_design .no_more_tables td:before,
     .order-details-modal .no_more_tables td:before,
@@ -15186,10 +14104,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         max-width: 100%;
         margin-bottom: 15px;
     }
-    .banner_search
-        .select2-container--default
-        .select2-selection--single
-        .select2-selection__rendered {
+    .banner_search .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 40px;
     }
     .suppliers_filter_list {
@@ -15284,13 +14199,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .line_item_wrap {
         overflow: auto;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
@@ -15315,8 +14224,20 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         font-size: 14px;
         line-height: 20px;
     }
+    .account_profile_wrapper table.production-flow-and-manpower-table td, 
+    .account_profile_wrapper table.production-flow-and-manpower-table th {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .account_profile_wrapper table.production-flow-and-manpower-table tr td tr td {
+        padding: 8px 10px;
+    }
+    .account_profile_wrapper .overview_table .material-icons {
+        font-size: 20px;
+    }
     .account_profile_wrapper .top_titleWrap {
-        margin: 0 0 10px;
+        margin: 0 0 20px;
+        padding-bottom: 0;
     }
     .account_profile_wrapper .editBox .btn_green_White .material-icons {
         font-size: 16px;
@@ -15401,7 +14322,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .product_slider .slick-prev {
         display: none !important;
     }
-
+    
     /* *************************************** */
     .landing_provide_wrap {
         padding-bottom: 10px;
@@ -15642,81 +14563,38 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .account_profile_box .profile_account_dev_design .product_cards .modal {
         width: calc(100% - 16px);
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card
-        .card_image {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card .card_image {
         height: 240px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab {
         width: 80px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .design_history
-        .design_history_tabs
-        .tab
-        a
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .design_history .design_history_tabs .tab a
         .material-icons {
         display: none;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .model_content
-        .content_header {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .model_content .content_header {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .model_content
-        .content_header
-        h5 {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .model_content .content_header h5 {
         width: 100%;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .model_content
-        .content_header
-        p {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .model_content .content_header p {
         -webkit-box-flex: 1;
         -ms-flex-positive: 1;
         flex-grow: 1;
     }
-    .account_profile_box
-        .profile_account_dev_tech
-        .modal
-        .create_new_tech_pac_modal
-        .select_tech_pack_picture_modal
-        .modal_body
-        ul
-        li {
+    .account_profile_box .profile_account_dev_tech .modal .create_new_tech_pac_modal .select_tech_pack_picture_modal .modal_body ul li {
         width: 50%;
     }
     .account_rfqDetailes_infoWrap p,
     .profile_account_myrfq_box p,
     .profile_account_poinfo_box p {
         font-size: 11px;
+    }
+    .account_profile_wrapper .export-destination-block .col.s6.m4.l2 {
+        width: 32% !important;
     }
 }
 
@@ -15757,7 +14635,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         font-size: 16px;
         line-height: 20px;
     }
-    .account_profile_wrapper .export-destination-block .col.s6.m4.l2,
     .account_profile_wrapper .pr_highlights_wrap .paper_img.col.s6.m4.l2,
     .export_destination_wrap .flagBox .col.s6.m4.l2,
     .account_profile_wrapper .main_buyers_wrap .main_buyer_box.col.s6.m4 {
@@ -15906,24 +14783,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_form_modal .submit_btn_wrap .btn_green {
         float: none;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-footer
-        .chat-input {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input {
         display: inherit !important;
     }
     .chat-application .app-chat .chat-content .chat-content-area .chat-footer {
         margin: 0 !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-footer
-        .chat-input
-        .message {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-footer .chat-input .message {
         width: 85% !important;
         padding: 0 10px !important;
         margin-right: 0 !important;
@@ -15940,25 +14806,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         text-align: left;
         float: none;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat
-        .col {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .col {
         padding-left: 6px;
         width: 100% !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat
-        .col.m12 {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat .col.m12 {
         margin-bottom: 10px;
     }
     .blog_detail_info_wrap iframe {
@@ -15982,7 +14834,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         float: none;
         display: inline-block;
         overflow: hidden;
-        margin: 00;
+        margin: 0;
         padding: 5px;
     }
     .rfq_content_box .rfq_profile_info .rfq_thum_imgs img {
@@ -16136,11 +14988,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         margin-bottom: 15px;
     }
     .createRfqForm .rfq_user_information_wrap .input-wrapper input,
-    .modal
-        .createRfqForm
-        .rfq_detail_from
-        .input-wrapper
-        .add_short_description,
+    .modal .createRfqForm .rfq_detail_from .input-wrapper .add_short_description,
     .modal .createRfqForm .rfq_detail_from .input-wrapper input {
         margin-bottom: 0;
     }
@@ -16331,25 +15179,21 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .account_item_menu ul li a:visited {
         padding: 8px 10px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card
-        .card_image {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card .card_image {
         height: 300px;
     }
-    .account_profile_box
-        .profile_account_dev_design
-        .product_cards
-        .product_card_modal
-        .modal_contents
-        .model_content
-        .content_header {
+    .account_profile_box .profile_account_dev_design .product_cards .product_card_modal .modal_contents .model_content .content_header {
         -webkit-box-pack: start;
         -ms-flex-pack: start;
     }
     .profile_account_myrfq_innerbox .profile_account_myrfq_box {
         text-align: center;
+        min-height: auto;
+    }
+    .profile_account_myrfq_innerbox .account_rfq_btn_wrap {
+        position: inherit;
+        bottom: inherit;
+        padding-top: 20px;
     }
     .account_rfqDetailes_infoWrap p,
     .profile_account_myrfq_box p,
@@ -16360,6 +15204,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_account_myrfq_box p b {
         font-size: 14px;
     }
+    
 }
 
 @media only screen and (max-width: 480px) {
@@ -16409,9 +15254,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     div.dataTables_wrapper div.dataTables_info {
         white-space: inherit !important;
     }
-    .account_profile_wrapper .certificate_img_wrap {
+    /* .account_profile_wrapper .certificate_img_wrap {
         width: 100%;
-    }
+    } */
     .user-profile-info-block .material-icons {
         margin-right: 0;
     }
@@ -16467,31 +15312,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .chatting_app_wrapper .content-area .card {
         padding-top: 45px !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
         display: block !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .info-section,
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .user-section {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section,
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .user-section {
         width: 100% !important;
     }
     .profile_not_updated {
@@ -16518,9 +15343,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         width: 22%;
     }
     .account_profile_wrapper .certificate_img_wrap .certificate_img img {
-        max-height: initial;
         height: auto;
-        max-width: 135px;
     }
     #production-flow-and-manpower-modal .no_more_tables td:before {
         width: 105px;
@@ -16741,14 +15564,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .rfq_content_box .rfq_profile_detail .responses_wrap .btn_responses {
         margin-left: 5px;
     }
-    .account_profile_box
-        .profile_account_dev_tech
-        .modal
-        .create_new_tech_pac_modal
-        .select_tech_pack_picture_modal
-        .modal_body
-        ul
-        li {
+    .account_profile_box .profile_account_dev_tech .modal .create_new_tech_pac_modal .select_tech_pack_picture_modal .modal_body ul li {
         width: 100%;
     }
 }
@@ -16789,14 +15605,24 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .logo img {
         max-width: 200px;
     }
+    .account_profile_wrapper .editBox .btn_green_White .btn_icon {
+        border-radius: 3px;
+        width: 25px;
+        line-height: 25px;
+    }
+    .account_profile_wrapper .editBox .btn_green_White {
+        height: 30px;
+    }
+    .account_profile_wrapper .editBox .btn_green_White .material-icons,
+    .account_profile_wrapper .editBox .btn_upload span .material-icons {
+        line-height: 32px;
+    }
 }
 
 @media only screen and (max-width: 320px) {
     .profile_product_wrap .col.s12.m4.l3,
     .account_profile_wrapper .manufacture-product-table-data .productBox,
-    .account_profile_wrapper .export-destination-block .col.s6.m4.l2,
     .account_profile_wrapper .pr_highlights_wrap .paper_img.col.s6.m4.l2,
-    .export_destination_wrap .flagBox .col.s6.m4.l2,
     .account_profile_wrapper .main_buyers_wrap .main_buyer_box.col.s6.m4 {
         width: 100% !important;
     }
@@ -16874,26 +15700,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_factory_tourWrap .factory_image_gallery .imgBox {
         height: auto;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat-right
-        .chat-text
-        .sms_strtotime {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat-right .chat-text .sms_strtotime {
         bottom: -5px;
         font-size: 10px;
         white-space: inherit;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .chat-content-area
-        .chat-area
-        .chats
-        .chat {
+    .chat-application .app-chat .chat-content .chat-content-area .chat-area .chats .chat {
         width: 245px !important;
     }
     .association-membership-img {

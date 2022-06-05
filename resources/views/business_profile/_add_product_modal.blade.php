@@ -247,7 +247,7 @@
 
                     <div class="product_media_wrap">
                         <div class="input-field">
-                            <div class="s12">
+                            <div class="col s12">
                                 <label for="product-upload">Media <span class="text-danger">*</span></label>
                                 <span class="text-danger error-text product_images_error rm-error"></span>
                             </div>

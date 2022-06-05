@@ -17,7 +17,7 @@ class BusinessProfileController extends Controller
     }
 
     public function index($alias){
-        $business_profile=BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             return view('new_business_profile.index',compact('alias','business_profile'));
@@ -33,14 +33,16 @@ class BusinessProfileController extends Controller
         return view('new_business_profile.my_rfqs',compact('alias'));
     }
 
-    
+
 
     public function developmentCenter($alias){
-        return view('new_business_profile.development_center',compact('alias'));
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        return view('new_business_profile.development_center',compact('alias', 'business_profile'));
     }
 
     public function orderManagement($alias){
-        return view('new_business_profile.order_management',compact('alias'));
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        return view('new_business_profile.order_management',compact('alias', 'business_profile'));
     }
 
     public function products($alias,Request $request){
@@ -62,7 +64,8 @@ class BusinessProfileController extends Controller
                 ->paginate(8);
                 $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
                 $sizes=['S','M','L','XL','XXL','XXXL'];
-                return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes'));
+                $view=isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes','view'));
             }
 
             if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'wholesaler'){
@@ -77,8 +80,8 @@ class BusinessProfileController extends Controller
 
                 })
                 ->paginate(8);
-
-                return view('new_business_profile.wholesaler_products.index',compact('alias','products','business_profile'));
+                $view=isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.wholesaler_products.index',compact('alias','products','business_profile','view'));
             }
 
         }

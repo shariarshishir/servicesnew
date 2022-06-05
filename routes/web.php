@@ -389,10 +389,11 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
 
     Route::post('/send-request-for-profile-verification', [BusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
 
-
+    //new business profile template routes
     Route::get('profile/{alias}/general-info', [BusinessProfileBusinessProfileController::class, 'index'])->name('new.profile.index');
     Route::get('profile/{alias}/rfqs', [RfqController::class, 'index'])->name('new.profile.rfqs');
     Route::get('profile/{alias}/my-rfqs', [RfqController::class, 'myRfqList'])->name('new.profile.my_rfqs');
+    Route::get('profile/{alias}/search-rfq', [RfqController::class, 'searchRfq'])->name('new.profile.search_rfqs');
     Route::get('profile/{alias}/proforma-pending-orders', [ProformaOrderController::class, 'profomaPendingOrders'])->name('new.profile.profoma_orders.pending');
     Route::get('profile/{alias}/proforma-ongoing-orders', [ProformaOrderController::class, 'profomaOngoingOrders'])->name('new.profile.profoma_orders.ongoing');
     Route::get('profile/{alias}/proforma-shipped-orders', [ProformaOrderController::class, 'profomaShippedOrders'])->name('new.profile.profoma_orders.shipped');
@@ -407,7 +408,9 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/insights', [UserProfileController::class, 'profileInsights'])->name('new.profile.insights');
     Route::get('profile/{alias}/home', [UserProfileController::class, 'profileHome'])->name('new.profile.home');
     Route::get('profile/{alias}/profile-edit', [UserProfileController::class, 'profileEdit'])->name('new.profile.edit');
-
+    //new message center template routes
+    Route::get('rfq/quotations', [RfqController::class, 'authUserQuotationsByRFQId'])->name('auth_user_quotations.by_rfq_id');
+    Route::get('rfq/conversations', [RfqController::class, 'authUserConversationsByRFQId'])->name('auth_user_conversations.by_rfq_id');
 
 });
 Route::post('rfq/store/with/login',[RfqController::class, 'storeWithLogin'])->name('rfq.store.with.login');

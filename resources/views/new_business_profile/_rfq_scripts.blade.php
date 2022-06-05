@@ -1,4 +1,161 @@
 @push('js')
+<script src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        var envMode = "{{ env('APP_ENV') }}";
+        var fromId;
+        if(envMode == 'production') {
+            fromId = '{{auth()->user()->sso_reference_id}}';
+        } else{
+            fromId = '{{auth()->user()->sso_reference_id}}';
+        }
+
+        $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+        $(".scrollabled").each(function(){
+            $(this).tinyscrollbar();
+        });
+        var serverURL = "{{ env('CHAT_URL') }}?userId="+fromId;
+            var socket = io.connect(serverURL);
+        socket.on('connect', function(data) {
+            console.log("Socket Connect successfully.");
+        });
+
+        socket.on('new message', function(data) {
+            var nameShortForm = "{{$userNameShortForm}}";
+            var auth_user_image = '{{$userImage}}';
+            var admin_user_image= "{{$adminUserImage}}";
+            var auth_user_sso_reference_id = '{{$user->sso_reference_id}}';
+            var rfq_id = $(".active_rfq_id").val();
+            var message_rfq_id = data.rfq_id;
+
+
+            if( data.from_id == '{{auth()->user()->sso_reference_id}}' ){
+                var msgHtml = '<div class="rfq_message_box chat-right right">';
+                    msgHtml += '<div class="chat-text right-align">';
+                    msgHtml += '<p><span>'+data['message']+'</span></p>';
+                    msgHtml += '</div>';
+                    msgHtml += '</div>';
+            }
+            
+            else{
+                msgHtml += '<div class="rfq_message_box chat-left left" style="width: 100%">';
+                msgHtml += '<div class="chat-text left-align">';
+                msgHtml += '<p><span>'+data['message']+'</span></p>';
+                msgHtml +='</div>';
+                msgHtml +='</div>';
+            }
+            $('.rfq_review_message_box').append(html);
+            $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+        });
+
+        $('#messagebox').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                event.preventDefault();
+                var from_user_image = '{{$userImage}}';
+                let sent_message = $('#messagebox').val();
+                let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
+                var envMode = "{{ env('APP_ENV') }}";
+                var to_user_id;
+                if(envMode == 'production') {
+                    to_user_id = '5771';
+                } else{
+                    to_user_id = '5552';
+                }
+                let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':false,'product': null};
+                socket.emit('new message', message);
+                $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+                $('#messagebox').val('');
+            }
+        });
+
+        $('.messageSendButton').click(function(event){
+            event.preventDefault();
+            var from_user_image = '{{$userImage}}';
+            let sent_message = $('#messagebox').val();
+            let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
+            var envMode = "{{ env('APP_ENV') }}";
+            var to_user_id;
+            if(envMode == 'production') {
+                to_user_id = '5771';
+            } else{
+                to_user_id = '5552';
+            }
+            let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': $(".active_rfq_id").val(),'factory':false,'product': null};
+            socket.emit('new message', message);
+            $('#messagebox').val('');
+        });
+
+
+        function extractEmails (text) {
+            return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+        }
+
+        $('.select-rfq-for-chat-data').click(function() {
+            $(".select-rfq-for-chat-data").removeClass("active");
+            $(this).addClass("active");
+            var nameShortForm = "{{$userNameShortForm}}";
+            var auth_user_image = "{{$userImage}}";
+            var admin_user_image = "{{$adminUserImage}}";
+            var url='{{route("message.center.getchatdata")}}';
+            var rfq_id =  $(this).data("rfqid");
+            var user_id = {{auth()->user()->sso_reference_id}};
+            $(".active_rfq_id").val(rfq_id);
+            jQuery.ajax({
+                type : "POST",
+                data : {'rfq_id':rfq_id},
+                url : url,
+                success : function(response){
+                    console.log(response);
+                    $(".chats-box").empty();
+                    $("#messagebox").removeAttr("disabled");
+                    response.chatdata.forEach((item, index)=>{
+                        if(item.from_id == user_id ){
+                            var msgHtml = '<div class="chat chat-right">';
+                            msgHtml += '<div class="chat-avatar">';
+                            msgHtml += '<a class="avatar">';
+                            if(auth_user_image != ""){
+                                msgHtml += '<img src="'+auth_user_image+'" class="circle" alt="avatar">';
+                            }else{
+                                msgHtml += '<span>'+nameShortForm+'</span>'
+                            }
+                            msgHtml += '</a>';
+                            msgHtml += '</div>';
+                            msgHtml += '<div class="chat-body left-align">';
+                            msgHtml += '<div class="chat-text">';
+                            msgHtml += '<p>'+item.message+'</p>';
+                            msgHtml += '</div>';
+                            msgHtml += '</div>';
+                            msgHtml += '</div>';
+                        }else{
+                            var msgHtml = '<div class="chat chat-left">';
+                            msgHtml += '<div class="chat-avatar">';
+                            msgHtml += '<a class="avatar">';
+                            msgHtml += '<img src="'+admin_user_image+'" class="circle" alt="avatar">';
+                            msgHtml += '</a>';
+                            msgHtml += '</div>';
+                            msgHtml += '<div class="chat-body left-align">';
+                            msgHtml += '<div class="chat-text">';
+                            msgHtml += '<p>'+item.message+'</p>';
+                            msgHtml += '</div>';
+                            msgHtml += '</div>';
+                            msgHtml += '</div>';
+                        }
+
+                        $('.chats-box').append(msgHtml);
+                    })
+                    $("#chatheader").html('<div class="row valign-wrapper"><div class="col media-image online pr-0"><img src="'+response.to_user_image+'" alt="" class="circle z-depth-2 responsive-img"></div><div class="col"><p class="m-0 blue-grey-text text-darken-4 font-weight-700 left-align">Merchant bAY</p><p class="m-0 chat-text truncate"></p></div></div>');
+                    $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
+
+                }
+            });
+
+        });
+
+
+    });
+
+</script>
 <script>
 
     $(document).on('click', '.page-link', function(event){
@@ -313,16 +470,264 @@
             $(".btn_responses_trigger").click(function(){
                 $(this).next(".respones_detail_wrap").toggle();
             });
+
+            $('.message_tab').on('click',function(event){
+                event.preventDefault();
+                let rfqId = $(this).attr("data-rfq_id");
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('auth_user_conversations.by_rfq_id')}}",
+                    data:{ rfqId: rfqId},
+                    success: function (response) {
+                        $('.quotation_tab_li').removeClass("active");
+                        $('.message_tab_li').addClass("active");
+                        $('.rfq_quotation_box').hide();
+                        $('.rfq_message_box').show();
+                        $('.rfq_review_message_box').empty()
+                        var authUserId = '{{auth()->user()->sso_reference_id}}';
+                        for(var i=0;i<response.chats.length;i++){
+                            if(response.chats[i].from_id == authUserId){
+                                var html='<div class="rfq_message_box chat-right right">';
+                                html+='<div class="chat-text right-align">';
+                                html+='<p><span>'+response.chats[i].message+'</span></p>';
+                                html+='</div>';
+                                html+='</div>';
+                            }else{
+                                var html='<div class="rfq_message_box chat-left left" style="width: 100%">';
+                                html+='<div class="chat-text left-align">';
+                                html+='<p><span>'+response.chats[i].message+'</span></p>';
+                                html+='</div>';
+                                html+='</div>';
+                            }
+                            $('.rfq_review_message_box').append(html);
+
+                        }
+                        
+                    }
+                });
+            });
+
+            $('.message-button').on('click',function(event){
+                event.preventDefault();
+                let rfqId = $(this).attr("data-rfq_id");
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('auth_user_conversations.by_rfq_id')}}",
+                    data:{ rfqId: rfqId},
+                    success: function (response) {
+                        $('.quotation_tab').attr("data-rfq_id",rfqId);
+                        $('.message_tab').attr("data-rfq_id",rfqId);
+                        $('.quotation_tab_li').removeClass("active");
+                        $('.message_tab_li').addClass("active");
+                        $('.rfq_quotation_box').hide();
+                        $('.rfq_message_box').show();
+                        $('.rfq_review_message_box').empty();
+                        
+                        var html='<h6>RFQ ID <span>'+response.rfq.id+'</span></h6>';
+                            html+='<h5>'+response.rfq.title+'</h5>';
+                            html+='<span class="posted_time">'+response.rfq.created_at+'</span>';
+                            html+='<div class="center-align btn_accountrfq_info">';
+                            html+='<a href="#" onclick=""><i class="material-icons">keyboard_double_arrow_down</i></a>';
+                            html+='</div>';
+                            html+='<div id="accountRfqDetailesInfo" class="account_rfqDetailes_infoWrap" style="display: none;">';
+                            html+='<div class="row">';
+                            html+='<div class="col s6 m6 l5">';
+                            html+='<p>Quantity <br/> <b>'+response.rfq.id+' pcs</b></p>';
+                            html+='<p>Target Price <br/> <b>'+response.rfq.unit_price+' /pc</b></p>';
+                            html+='</div>';
+                            html+='<div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>';
+                            html+='<div class="col s6 m6 l5">';
+                            html+='<p>Deliver in <br/> <b>'+response.rfq.delivery_time+'</b></p>';
+                            html+='<p>Deliver to <br/> <b>'+response.rfq.destination+'</b></p>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<div class="account_rfqDetailes_imgWrap">';
+                            html+='<h6>Attachments</h6>';
+                            html+='<img src="./images/account-images/pro-1.png" />';
+                            html+='<img src="./images/account-images/pro-2.png" />';
+                            html+='</div>';
+                            html+='</div>';
+                            $('.new_profile_myrfq_details_topbox').empty().append(html);
+
+                        var authUserId = '{{auth()->user()->sso_reference_id}}';
+                        for(var i=0;i<response.chats.length;i++){
+                            if(response.chats[i].from_id == authUserId){
+                                var html='<div class="rfq_message_box chat-right right">';
+                                html+='<div class="chat-text right-align">';
+                                html+='<p><span>'+response.chats[i].message+'</span></p>';
+                                html+='</div>';
+                                html+='</div>';
+                            }else{
+                                var html='<div class="rfq_message_box chat-left left" style="width: 100%">';
+                                html+='<div class="chat-text left-align">';
+                                html+='<p><span>'+response.chats[i].message+'</span></p>';
+                                html+='</div>';
+                                html+='</div>';
+                            }
+                            $('.rfq_review_message_box').append(html);
+                        }
+                    }
+                });
+            });
+
+
+            $('.quotation-button').on('click',function(event){
+                event.preventDefault();
+                let rfqId = $(this).attr("data-rfq_id");
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('auth_user_quotations.by_rfq_id')}}",
+                    data:{ rfqId: rfqId},
+                    success: function (response) {
+                        $('.quotation_tab').attr("data-rfq_id",rfqId);
+                        $('.message_tab').attr("data-rfq_id",rfqId);
+                        $('.quotation_tab_li').addClass("active");
+                        $('.message_tab_li').removeClass("active");
+                        $('.rfq_quotation_box').show();
+                        $('.rfq_message_box').hide();
+                        $('.rfq_review_message_box').empty();
+
+                        var html='<h6>RFQ ID <span>'+response.rfq.id+'</span></h6>';
+                            html+='<h5>'+response.rfq.title+'</h5>';
+                            html+='<span class="posted_time">'+response.rfq.created_at+'</span>';
+                            html+='<div class="center-align btn_accountrfq_info">';
+                            html+='<a href="#" onclick=""><i class="material-icons">keyboard_double_arrow_down</i></a>';
+                            html+='</div>';
+                            html+='<div id="accountRfqDetailesInfo" class="account_rfqDetailes_infoWrap" style="display: none;">';
+                            html+='<div class="row">';
+                            html+='<div class="col s6 m6 l5">';
+                            html+='<p>Quantity <br/> <b>'+response.rfq.id+' pcs</b></p>';
+                            html+='<p>Target Price <br/> <b>'+response.rfq.unit_price+' /pc</b></p>';
+                            html+='</div>';
+                            html+='<div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>';
+                            html+='<div class="col s6 m6 l5">';
+                            html+='<p>Deliver in <br/> <b>'+response.rfq.delivery_time+'</b></p>';
+                            html+='<p>Deliver to <br/> <b>'+response.rfq.destination+'</b></p>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<div class="account_rfqDetailes_imgWrap">';
+                            html+='<h6>Attachments</h6>';
+                            html+='<img src="./images/account-images/pro-1.png" />';
+                            html+='<img src="./images/account-images/pro-2.png" />';
+                            html+='</div>';
+                            html+='</div>';
+                            $('.new_profile_myrfq_details_topbox').empty().append(html);
+
+                        for(var i=0;i<response.quotations.length;i++){
+                            var html ='<div class="row">';
+                            html+='<div class="col s12 xl2 rfq_review_result_leftBox">';
+                            html+='<span class="new_rfq_avatar">';
+                            html+='<img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">';
+                            html+='</span>';
+                            html+='</div>';
+                            html+='<div class="col s12 xl5 rfq_review_result_midBox">';
+                            html+='<div class="new_rfq_review">';
+                            html+='<p><span>'+response.quotations[i].message+'</span> </p>';
+                            html+='<button class="btn_green">Ask for PI</button>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
+                            html+='<div class="new_rfq_review">';
+                            html+='<span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>';
+                            html+='<span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>';
+                            html+='<button class="btn_green">Issue PO</button>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='</div>';
+                        }
+                        
+                        $('.rfq_review_results_box').empty().append(html);
+                    }
+                });
+            });
+
+            
+
+            $('.quotation_tab').on('click',function(event){
+                event.preventDefault();
+                let rfqId = $(this).attr("data-rfq_id");
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('auth_user_quotations.by_rfq_id')}}",
+                    data:{ rfqId: rfqId},
+                    success: function (response) {
+                        for(var i=0;i<response.quotations.length;i++){
+                            var html ='<div class="row">';
+                            html+='<div class="col s12 xl2 rfq_review_result_leftBox">';
+                            html+='<span class="new_rfq_avatar">';
+                            html+='<img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">';
+                            html+='</span>';
+                            html+='</div>';
+                            html+='<div class="col s12 xl5 rfq_review_result_midBox">';
+                            html+='<div class="new_rfq_review">';
+                            html+='<p><span>'+response.quotations[i].message+'</span> </p>';
+                            html+='<button class="btn_green">Ask for PI</button>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
+                            html+='<div class="new_rfq_review">';
+                            html+='<span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>';
+                            html+='<span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>';
+                            html+='<button class="btn_green">Issue PO</button>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='</div>';
+                        }
+                        $('.quotation_tab_li').addClass("active");
+                        $('.message_tab_li').removeClass("active");
+                        $('.rfq_quotation_box').show();
+                        $('.rfq_message_box').hide();
+                        $('.rfq_review_results_box').empty().append(html);
+                    }
+                });
+            });
+
+            $('.quotation-button').on('click',function(event){
+                event.preventDefault();
+                let rfqId = $(this).attr("data-rfq_id");
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('auth_user_quotations.by_rfq_id')}}",
+                    data:{ rfqId: rfqId},
+                    success: function (response) {
+                        for(var i=0;i<response.quotations.length;i++){
+                            var html ='<div class="row">';
+                            html+='<div class="col s12 xl2 rfq_review_result_leftBox">';
+                            html+='<span class="new_rfq_avatar">';
+                            html+='<img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">';
+                            html+='</span>';
+                            html+='</div>';
+                            html+='<div class="col s12 xl5 rfq_review_result_midBox">';
+                            html+='<div class="new_rfq_review">';
+                            html+='<p><span>'+response.quotations[i].message+'</span> </p>';
+                            html+='<button class="btn_green">Ask for PI</button>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
+                            html+='<div class="new_rfq_review">';
+                            html+='<span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>';
+                            html+='<span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>';
+                            html+='<button class="btn_green">Issue PO</button>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='</div>';
+                        }
+                        $('.quotation_tab_li').addClass("active");
+                        $('.message_tab_li').removeClass("active");
+                        $('.rfq_quotation_box').show();
+                        $('.rfq_message_box').hide();
+                        $('.rfq_review_results_box').empty().append(html);
+                    }
+                });
+            });
+
         });
 
         $('.btn_view_detail').on('click',function(event){
             event.preventDefault();
             console.log('hi');
             let rfqId = $(this).attr("data-rfqId");
-
             let obj=$(this).closest('span');
-
-
             $.ajax({
                 type:'GET',
                 url: "{{route('notification-mark-as-read')}}",

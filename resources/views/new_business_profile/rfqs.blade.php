@@ -116,10 +116,13 @@
                                                 </a>
                                             </div>
                                             <div class="col s12 m7 l8">
-                                                <div class="profile_account_search">
-                                                    <i class="material-icons">search</i>
-                                                    <input class="profile_filter_search" type="search" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
-                                                </div>
+                                                <form action="{{route('new.profile.search_rfqs',$alias)}}">
+                                                    @csrf
+                                                    <div class="profile_account_search">
+                                                        <i class="material-icons">search</i>
+                                                        <input class="profile_filter_search" type="search" name="search_input" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -35,12 +35,13 @@ class RfqController extends Controller
         } else {
             $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
         }
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
         
         $noOfPages = ceil($data['count']/10);
-        return view('new_business_profile.rfqs',compact('rfqLists','noOfPages','alias'));
+        return view('new_business_profile.rfqs',compact('rfqLists','noOfPages','alias', 'business_profile'));
     }
 
     public function rfqSearchByTitle(Request $request,$alias)
@@ -62,6 +63,7 @@ class RfqController extends Controller
     }
     public function myRfqList($alias)
     {
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         $user = Auth::user();
         $token = Cookie::get('sso_token');
         $response = Http::withToken($token)
@@ -70,7 +72,7 @@ class RfqController extends Controller
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
-        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias'));
+        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias', 'business_profile'));
     }
 
     public function myRfqByPageNumber(Request $request){

@@ -59,7 +59,7 @@ class UserProfileController extends Controller
             $profileProgressValue = 0;
         }
         
-        return view('new_business_profile.profile_insights',compact('alias', 'profileProgressValue'));
+        return view('new_business_profile.profile_insights',compact('alias', 'profileProgressValue', 'business_profile'));
     }
 
     public function profileHome($alias)

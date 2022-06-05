@@ -5145,6 +5145,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-top: 0;
 }
 .input-field label {
+    font-family: 'nexabold';
     font-size: 14px;
     color: #000000;
     font-weight: 500;
@@ -5164,7 +5165,6 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 .modal .input-field label {
     padding-top: 0;
-    font-weight: bold;
 }
 .input-field select,
 .sign-wrap .input-wrap input {

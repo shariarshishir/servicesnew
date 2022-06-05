@@ -181,10 +181,13 @@
                                                     </a>
                                                 </div>
                                                 <div class="col s12 m7 l8">
-                                                    <div class="profile_account_search">
-                                                        <i class="material-icons">search</i>
-                                                        <input class="profile_filter_search" type="search" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
-                                                    </div>
+                                                    <form action="{{route('new.profile.search_rfqs',$alias)}}">
+                                                    @csrf
+                                                        <div class="profile_account_search">
+                                                            <i class="material-icons">search</i>
+                                                            <input class="profile_filter_search"  type="search" name="search_input" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,11 +220,11 @@
                                                         </div>
                                                         <div class="account_rfq_btn_wrap" >
                                                             <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn">Quotations</button>
+                                                                <button class="btn_white rfq_btn quotation-button" data-rfq_id="{{$rfq['id']}}">Quotations</button>
                                                                 <span>0</span>
                                                             </div>
                                                             <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn">Messages</button>
+                                                                <button class="btn_white rfq_btn message-button" data-rfq_id="{{$rfq['id']}}">Messages</button>
                                                                 <span>0</span>
                                                             </div>
                                                         </div>
@@ -265,76 +268,44 @@
                                         <div class="rfq_review_results_wrap">
                                             <div class="rfq_review_results_nav">
                                                 <ul>
-                                                    <li><a href="javascript:void(0);">Messages</a></li>
-                                                    <li class="active"><a href="javascript:void(0);">Quotations</a></li>
+                                                    <li  class="active message_tab_li"><a href="javascript:void(0);" class="message_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Messages</a></li>
+                                                    <li class="quotation_tab_li"><a href="javascript:void(0);" class="quotation_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Quotations</a></li>
                                                 </ul>
                                             </div>
-                                            <div class="rfq_review_results_box">
-                                                <div class="row">
-                                                    <div class="col s12 xl2 rfq_review_result_leftBox">
-                                                        <span class="new_rfq_avatar">
-                                                            <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
-                                                        </span>
-                                                    </div>
-                                                    <div class="col s12 xl5 rfq_review_result_midBox">
-                                                        <div class="new_rfq_review">
-                                                            <h6>Zex Fashions BD</h6>
-                                                            <p>Offer Price: <span>$1000</span> </p>
-                                                            <button class="btn_green">Ask for PI</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col s12 xl5 rfq_review_result_rightBox">
-                                                        <div class="new_rfq_review">
-                                                            <span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>
-                                                            <span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>
-                                                            <button class="btn_green">Issue PO</button>
-                                                        </div>
-                                                    </div>
+                                            <div class="rfq_quotation_box" style="display:none">
+                                                <div class="rfq_review_results_box">
+                                                    
                                                 </div>
                                             </div>
-                                            <div class="rfq_review_results_box">
-                                                <div class="row">
-                                                    <div class="col s12 xl2 rfq_review_result_leftBox">
-                                                        <span class="new_rfq_avatar">
-                                                            <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
-                                                        </span>
-                                                    </div>
-                                                    <div class="col s12 xl5 rfq_review_result_midtBox">
-                                                        <div class="new_rfq_review">
-                                                            <h6>Zex Fashions BD</h6>
-                                                            <p>Offer Price: <span>$1000</span> </p>
-                                                            <button class="btn_green">Ask for PI</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col s12 xl5 rfq_review_result_rightBox">
-                                                        <div class="new_rfq_review">
-                                                            <span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>
-                                                            <span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>
-                                                            <button class="btn_green">Issue PO</button>
-                                                        </div>
-                                                    </div>
+
+                                            <div class="rfq_message_box" >  
+                                                <div class="rfq_review_message_box">
+                                                    @if(count($chatdata)>0)
+                                                        @foreach($chatdata as $chat)
+                                                            @if( $chat['from_id'] == auth()->user()->sso_reference_id )
+                                                                <div class="rfq_message_box chat-right right">
+                                                                    <div class="chat-text right-align">
+                                                                        <p><span> @php echo html_entity_decode($chat['message']); @endphp</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="rfq_message_box chat-left left" style="width: 100%">
+                                                                    <div class="chat-text left-align">
+                                                                        <p><span>@php echo html_entity_decode($chat['message']); @endphp</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            <div class="rfq_review_results_box">
-                                                <div class="row">
-                                                    <div class="col s12 xl2 rfq_review_result_leftBox">
-                                                        <span class="new_rfq_avatar">
-                                                            <img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">
-                                                        </span>
-                                                    </div>
-                                                    <div class="col s12 xl5 rfq_review_result_midBox">
-                                                        <div class="new_rfq_review">
-                                                            <h6>Zex Fashions BD</h6>
-                                                            <p>Offer Price: <span>$1000</span> </p>
-                                                            <button class="btn_green">Ask for PI</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col s12 xl5 rfq_review_result_rightBox">
-                                                        <div class="new_rfq_review">
-                                                            <span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>
-                                                            <span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>
-                                                            <button class="btn_green">Issue PO</button>
-                                                        </div>
+                                                <div class="rfq_message_box_bottom">
+                                                    <input class="message_type_box" type="text" placeholder="Type a message..." />
+
+                                                    <div class="message_icon_box">
+                                                        <i class="material-icons">sentiment_satisfied</i>
+                                                        <i class="material-icons">attach_file</i>
+                                                        <i class="material-icons">image</i>
+                                                        <i class="material-icons">send</i>
                                                     </div>
                                                 </div>
                                             </div>

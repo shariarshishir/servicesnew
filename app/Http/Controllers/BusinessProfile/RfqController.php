@@ -8,6 +8,8 @@ use App\Models\Rfq;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\RfqImage;
+use App\Userchat;
+use App\RfqApp;
 use Illuminate\Support\Str;
 use App\Jobs\NewRfqHasAddedJob;
 use App\Models\BusinessProfile;
@@ -44,10 +46,9 @@ class RfqController extends Controller
         return view('new_business_profile.rfqs',compact('rfqLists','noOfPages','alias', 'business_profile'));
     }
 
-    public function rfqSearchByTitle(Request $request,$alias)
+    public function searchRfq(Request $request,$alias)
     {
-        $page = $request->page;
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/'.$page.'/limit/10');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/'.$request->search_input.'/page/1/limit/20');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         return view('new_business_profile.rfqs',compact('rfqLists','alias'));
@@ -72,7 +73,58 @@ class RfqController extends Controller
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
-        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias', 'business_profile'));
+        $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
+        $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
+        if(count($rfqs)>0){
+            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
+            $data = $response->json();
+            $chats = $data['data']['messages'];
+            $chatdata = $chats;
+            if($rfqs[0]['user']['user_picture'] !=""){
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $userNameShortForm = "";
+            }else{
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
+                $firstWordFirstLetter = $nameWordArray[0][0];
+                $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+                $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+            }
+        }else{
+            $chatdata = [];
+            $userImage ="";
+            $nameWordArray = explode(" ", $user->name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+        }
+        $quotations = Userchat::where('rfq_id',$rfqs[0]['id'])->where('factory',true)->get();
+        if(env('APP_ENV') == 'local'){
+            $adminUser = User::Find('5552');
+        }else{
+            $adminUser = User::Find('5771');
+        }
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias','chatdata','business_profile'));
+    }
+
+    public function authUserQuotationsByRFQId(Request $request){
+        $quotations = Userchat::where('rfq_id',$request->rfqId)->where('factory',true)->get();
+        return response()->json(["quotations"=>$quotations],200);
+        
+    }
+
+    public function authUserConversationsByRFQId(Request $request){
+        $user = Auth::user();
+        $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$request->rfqId.'/user/'.$user->sso_reference_id);
+        $data = $response->json();
+        $chats = $data['data']['messages'];
+
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$request->rfqId);
+        $data = $response->json();
+        $rfq = $data['data']['data'];
+        return response()->json(["chats"=>$chats,"rfq"=>$rfq],200);
     }
 
     public function myRfqByPageNumber(Request $request){
@@ -211,10 +263,7 @@ class RfqController extends Controller
 
                 $extension = $product_image->getClientOriginalExtension();
                 if($extension=='pdf' ||$extension=='PDF' ||$extension=='doc'||$extension=='docx'|| $extension=='xlsx' || $extension=='ZIP'||$extension=='zip'|| $extension=='TAR' ||$extension=='tar'||$extension=='rar' ||$extension=='RAR'  ){
-
                     $path=$product_image->store('images','public');
-
-
                 }
                 else{
                     $path=$product_image->store('images','public');

@@ -1518,7 +1518,6 @@ legend {
     border-radius: 5px;
     text-transform: capitalize;
 }
-
 .account_profile_wrapper .factory_imgbox_wrap .top_titleWrap {
     background: none;
     margin-bottom: 20px;
@@ -1528,7 +1527,7 @@ legend {
     background: #fff;
     height: 36px;
     line-height: 35px;
-    min-width: 130px;
+    min-width: 110px;
     border: none;
     border-radius: 8px;
     padding: 0;
@@ -1588,12 +1587,7 @@ legend {
     font-weight: 500;
     text-transform: capitalize;
 }
-.account_profile_wrapper
-    .profile_table_design
-    .manpower_table_wrapper
-    .production-flow-and-manpower-table
-    tr
-    th {
+.account_profile_wrapper .manpower_table_wrapper .production-flow-and-manpower-table tr th {
     text-align: center;
     width: 40% !important;
 }
@@ -1626,9 +1620,8 @@ legend {
 .account_profile_wrapper .profile_table_design table th:last-child {
     width: 10%;
 }
-
-.account_profile_wrapper .profile_table_design .production-flow-and-manpower-table-wrapper table td,
-.account_profile_wrapper .profile_table_design .production-flow-and-manpower-table-wrapper table th {
+.account_profile_wrapper .production-flow-and-manpower-table-wrapper table td,
+.account_profile_wrapper .production-flow-and-manpower-table-wrapper table th {
     width: 100% !important;
 }
 .account_profile_wrapper .overview_table .material-icons {
@@ -5167,6 +5160,9 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 30px;
+}
+.modal .modal-close {
+    text-transform: capitalize;
 }
 .input-field {
     margin-bottom: 20px;
@@ -10194,7 +10190,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     color: #1e1e1e;
 }
 .new_profile_myrfq_details_topbox h6 span {
-    padding-left: 20px;
+    padding-left: 10px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -10294,11 +10290,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .rfq_review_message_box .chat-text span {
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
-    -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 2p6x 8px 0px rgba(0, 0, 0, 0.16);
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 6px;
     display: inline-block;
+    min-width: 50px;
+    min-height: 30px;
 }
 .rfq_review_message_box .rfq_message_box {
     width: 100%;
@@ -10319,20 +10317,30 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .rfq_message_box_bottom .message_type_box {
     width: -webkit-fill-available !important;
-    padding-right: 100px !important;
+    padding: 0 135px 0 0 !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
     margin-bottom: 0 !important;
 }
+.rfq_message_box_bottom .message_icon_box .messageSendButton {
+    margin: 0 0 0 5px !important;
+    min-width: 35px;
+    width: auto;
+    padding: 3px 10px;
+    line-height: 24px;
+    cursor: pointer;
+}
 .rfq_message_box_bottom .message_icon_box {
     position: absolute;
     right: 8px;
-    top: 18px;
+    top: 11px;
 }
 .rfq_message_box_bottom .message_icon_box .material-icons {
     color: #52ab57;
-    font-size: 22px;
+    font-size: 24px;
+    margin-top: 6px;
+    float: left;
 }
 .profile_account_poinfo_innerbox {
     margin-bottom: 15px;
@@ -10710,6 +10718,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .profile_product_list_view table {
     border: 1px solid rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px;
 }
 .profile_product_list_view table thead {
     background: #e6e6e6;
@@ -10722,6 +10731,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .profile_product_list_view .size-lg {
     font-size: 18px;
+}
+#profile-progress-wrapper {
+    margin-bottom: 10px;
 }
 
 /* **************************************/
@@ -11731,7 +11743,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 
 .account_profile_wrapper ul.pagination {
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 /* ******************** Media css style start *********************** */
@@ -11739,6 +11751,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 @media only screen and (min-width: 1500px) {
     .container {
         width: 1440px;
+    }
+    .container.howWeWorkContainer .container .row{
+        margin-left: -50px;
     }
     .profile_container .container {
         padding-left: 15px;
@@ -11875,6 +11890,13 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     }
 }
 
+@media only screen and (max-width: 1899px) {
+    .container.howWeWorkContainer {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 @media only screen and (min-width: 1300px) {
     .account_profile_wrapper .membership_wrap .membership_textBox .imgbox {
         padding: 0 30px;
@@ -11899,6 +11921,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .container {
         width: 92%;
     }
+
     .footer_topWrap {
         font-size: 30px;
         line-height: 40px;
@@ -12576,9 +12599,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         font-size: 18px;
         margin-top: 3px;
     }
-    .account_profile_wrapper .editBox .btn_green_White {
+    /* .account_profile_wrapper .editBox .btn_green_White {
         min-width: 118px;
-    }
+    } */
     .account_profile_wrapper .editBox .btn_green_White .material-icons {
         font-size: 16px;
     }
@@ -13664,6 +13687,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     }
     .user-profile-basic-info-block .my_businesses_wrap .my_businesses_innerbox {
         width: 50%;
+    }
+    .rfq_message_box_bottom .message_icon_box {
+        top: 10px;
     }
 }
 

@@ -28,6 +28,7 @@
         
         <div id="faqCategoryAll" class="tabcontent">
             <div class="faq_collaps_content">
+                <div class="noFaqItemFound" style="display: none;">No Item found.</div>
                 <ul class="collapsible data-title-filter">
                     <!-- What start -->
                     <li data-title="What is Merchant Bay Limited?">
@@ -521,7 +522,7 @@
                             <h4>Can I buy from abroad?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, you can buy from Merchant Bay from anywhere in the world.  </p>
+                            <p>Yes, you can buy from Merchant Bay from anywhere in the world.</p>
                         </div>
                     </li>
                     <li>
@@ -529,7 +530,7 @@
                             <h4>Can I buy one piece?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay offers products based on MOQ (Minimum Order Quantity), however if any supplier offers MOQ of 1 piece then it’s possible to buy one piece. </p>
+                            <p>Merchant Bay offers products based on MOQ (Minimum Order Quantity), however if any supplier offers MOQ of 1 piece then it's possible to buy one piece.</p>
                         </div>
                     </li>
                     <li>
@@ -611,7 +612,7 @@
                             <h4>Are Merchant Bay in-house designers up-to-date with latest fashion trends?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay’s designers constantly stay up-to-date with latest trends in fashion. </p>
+                            <p>Yes, Merchant Bay's designers constantly stay up-to-date with latest trends in fashion. </p>
                         </div>
                     </li>
                     <li>
@@ -736,8 +737,9 @@ $(document).ready(function(){
     $(".collapsible").collapsible({
         accordion:true
     });    
-
+    
     $(".faq_search_input").change(function(){
+        var foundCount = 0;
         var inputText = String($(this).val());
         $(".data-title-filter li").each(function() {
             var listFind = String($(this).data("title"));
@@ -746,6 +748,7 @@ $(document).ready(function(){
                 $(".rfq_tab_item_box .tablinks").removeClass("active");
                 faqCategory(event, 'faqCategoryAll');
                 $(".triggerEvent").addClass("active");
+                $("#faqCategoryAll li").css("display", "none");
                 $(this).css("display", "block");
                 $(".reset_faq_filter").show();
                 //console.log("Found");
@@ -753,11 +756,31 @@ $(document).ready(function(){
             }
             else 
             {
-                $(this).css("display", "none");
+                foundCount++;
+                //$(this).css("display", "none");
                 //console.log("Not Found");
-                return;
+                //return;
             }
         });
+        
+        //console.log(foundCount);
+        if(foundCount == 35) 
+        {
+            $(".rfq_tab_item_box .tablinks").removeClass("active");
+            faqCategory(event, 'faqCategoryAll');
+            $(".triggerEvent").addClass("active");
+            $("#faqCategoryAll li").css("display", "none");
+            $(".noFaqItemFound").show();
+            $(".reset_faq_filter").show();            
+        }
+        else 
+        {
+            $(".rfq_tab_item_box .tablinks").removeClass("active");
+            faqCategory(event, 'faqCategoryAll');
+            $(".triggerEvent").addClass("active");
+            $(".noFaqItemFound").hide();
+            $(".reset_faq_filter").show();
+        }
     });
 
     $(".reset_faq_filter").click(function(){

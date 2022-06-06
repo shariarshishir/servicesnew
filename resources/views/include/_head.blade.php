@@ -64,12 +64,12 @@
 <link href="{{asset('css/animate.css')}}" rel="stylesheet">
 <link rel="shortcut icon" href="{{Storage::disk('s3')->url('public/frontendimages/favicon/favicon.png')}}" type="image/x-icon">
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S7SWXJM7V"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141181864-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-3S7SWXJM7V');
+  gtag('config', 'UA-141181864-1');
 </script>
 
 @yield('css')

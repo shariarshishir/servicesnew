@@ -200,9 +200,18 @@
                                 </div>
                             </div>
                             <div class="supllir_profile_incomplete_field">
+                                @php
+                                    $toolTipMessageForVerification = '';
+                                    if($business_profile->business_type == 'wholesaler') 
+                                    {
+                                        $toolTipMessageForVerification = "You have add all the Company Information from profile section to get verified and it will reflect to the progressbar as well.";
+                                    } else {
+                                        $toolTipMessageForVerification = "You have add all the Company Information, Capacity and Machineries, Certifications, Main Buyers, Export Destinations and Business Terms from profile section to get verified and it will reflect to the progressbar as well.";
+                                    }
+                                @endphp
                                 @if($profileIncompleteValueCount > 0)
                                 <p style="font-style: italic;">*Complete your profile with more information to appear in more RFQ searches.</p>
-                                <p style="color: red; margin-top: 25px;">You have {{$profileIncompleteValueCount}} incomplete fields. Click <a href="{{route('new.profile.edit', $alias)}}">here</a> to see details.</p>
+                                <p style="color: red; margin-top: 25px;"><span  data-toggle="tooltip" title="{{$toolTipMessageForVerification}}"><i class="fas fa-question-circle"></i></span> You have {{$profileIncompleteValueCount}} incomplete fields. Click <a href="{{route('new.profile.edit', $alias)}}">here</a> to see details.</p>
                                 @endif
                                 <ul style="display: none;">
                                     @if($business_profile->businessProfileVerification->company_overview == 0)

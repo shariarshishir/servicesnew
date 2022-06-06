@@ -28,7 +28,13 @@
         
         <div id="faqCategoryAll" class="tabcontent">
             <div class="faq_collaps_content">
-                <div class="noFaqItemFound" style="display: none;">No Item found.</div>
+                <div class="noFaqItemFound" style="display: none;">
+                    <div class="card-alert card cyan lighten-5">
+                        <div class="card-content cyan-text">
+                            <p>No item found.</p>
+                        </div>
+                </div>            
+                </div>
                 <ul class="collapsible data-title-filter">
                     <!-- What start -->
                     <li data-title="What is Merchant Bay Limited?">

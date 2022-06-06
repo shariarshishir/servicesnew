@@ -51,7 +51,8 @@ class RfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/'.$request->search_input.'/page/1/limit/20');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
-        return view('new_business_profile.rfqs',compact('rfqLists','alias'));
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        return view('new_business_profile.rfqs',compact('rfqLists','alias','business_profile'));
     }
 
     public function rfqByPageNumber(Request $request)

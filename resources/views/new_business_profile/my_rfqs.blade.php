@@ -202,9 +202,9 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                @foreach($rfqLists as $rfq)
+                                                @foreach($rfqLists as $key=>$rfq)
                                                 <div class="col s12 m6">
-                                                    <div class="profile_account_myrfq_box active">
+                                                    <div class="profile_account_myrfq_box rfq_box_{{$rfq['id']}} {{$key == 0 ? 'active' : ''}}">
                                                         <h5>{{$rfq['title']}}</h5>
                                                         <span class="posted_time">{{date('Y-m-d', strtotime($rfq['created_at']))}}</span>
                                                         <div class="row">

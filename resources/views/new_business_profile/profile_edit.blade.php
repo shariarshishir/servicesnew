@@ -703,22 +703,22 @@
 </div>
 
 
-    @include('business_profile._edit_company_overview_modal')
-    @include('business_profile._edit_categories_produced')
-    @include('business_profile._edit_machinery_details')
-    @include('business_profile._edit_production_flow_and_manpower_modal')
+    @include('new_business_profile.business_profileinfo_edit._edit_company_overview_modal')
+    @include('new_business_profile.business_profileinfo_edit._edit_categories_produced')
+    @include('new_business_profile.business_profileinfo_edit._edit_machinery_details')
+    @include('new_business_profile.business_profileinfo_edit._edit_production_flow_and_manpower_modal')
     
-    @include('business_profile._upload_certifications_modal')
-    @include('business_profile._upload_main_buyers_modal')
-    @include('business_profile._upload_export_destination_modal')
+    @include('new_business_profile.business_profileinfo_edit._upload_certifications_modal')
+    @include('new_business_profile.business_profileinfo_edit._upload_main_buyers_modal')
+    @include('new_business_profile.business_profileinfo_edit._upload_export_destination_modal')
 
-    @include('business_profile._add_business_terms_modal')
-    @include('business_profile._add_sampling_modal')
-    @include('business_profile._add_special_customization_modal')
-    @include('business_profile._add_sustainability_commitment_modal')
+    @include('new_business_profile.business_profileinfo_edit._add_business_terms_modal')
+    @include('new_business_profile.business_profileinfo_edit._add_sampling_modal')
+    @include('new_business_profile.business_profileinfo_edit._add_special_customization_modal')
+    @include('new_business_profile.business_profileinfo_edit._add_sustainability_commitment_modal')
 
-    @include('business_profile._upload_association_membership_modal')
-    @include('business_profile._upload_press_highlight_modal')
+    @include('new_business_profile.business_profileinfo_edit._upload_association_membership_modal')
+    @include('new_business_profile.business_profileinfo_edit._upload_press_highlight_modal')
 
 @endsection
 

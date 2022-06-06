@@ -36,8 +36,6 @@
 								</ul>
 							</li>
 
-
-							<li itemprop="itemListElement"><a itemprop="RFQ" class="{{ Route::is('rfq.index') ? 'active' : ''}}" href="{{route('rfq.index')}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 
@@ -91,9 +89,6 @@
 										<a class="grey-text text-darken-1" itemprop="Merchantbay Profile" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" itemprop="My Business" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Wishlist" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> Wishlist</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
@@ -124,9 +119,6 @@
 								<ul id="profile-dropdown" class="dropdown-content card" itemscope itemtype="https://schema.org/ListItem">
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Merchantbay Profile" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" itemprop="My Business" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Wishlist" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> Wishlist</a>
@@ -342,7 +334,6 @@
 									<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 								</ul>
 							</li>
-							<li itemprop="itemListElement"><a itemprop="RFQ" class="{{ Route::is('rfq.index') ? 'active' : ''}}" href="{{route('rfq.index')}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links-mobile">More <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 								<!-- Dropdown Structure -->
@@ -414,9 +405,6 @@
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}" itemprop="Profile"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" href="{{route('business.profile')}}" itemprop="My Business"><i class="material-icons">store</i> My Business</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}" itemprop="My favorite"><i class="material-icons">favorite</i> My favorite</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
@@ -449,9 +437,6 @@
 								<ul id="profile-dropdown-mobile" class="dropdown-content card" itemscope itemtype="https://schema.org/ListItem">
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Profile" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" itemprop="My Business" href="{{route('business.profile')}}"><i class="material-icons">store</i> My Business</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="My Favorite" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>

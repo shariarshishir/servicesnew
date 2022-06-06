@@ -202,9 +202,9 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                @foreach($rfqLists as $rfq)
+                                                @foreach($rfqLists as $key=>$rfq)
                                                 <div class="col s12 m6">
-                                                    <div class="profile_account_myrfq_box active">
+                                                    <div class="profile_account_myrfq_box rfq_box_{{$rfq['id']}} {{$key == 0 ? 'active' : ''}}">
                                                         <h5>{{$rfq['title']}}</h5>
                                                         <span class="posted_time">{{date('Y-m-d', strtotime($rfq['created_at']))}}</span>
                                                         <div class="row">
@@ -289,7 +289,7 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="rfq_message_box chat-left left" style="width: 100%">
+                                                                <div class="rfq_message_box chat-left left">
                                                                     <div class="chat-text left-align">
                                                                         <p><span>@php echo html_entity_decode($chat['message']); @endphp</span></p>
                                                                     </div>
@@ -298,16 +298,18 @@
                                                         @endforeach
                                                     @endif
                                                 </div>
-                                                <div class="rfq_message_box_bottom">
-                                                    <input class="message_type_box" type="text" placeholder="Type a message..." />
+                                                <form>
+                                                    <div class="rfq_message_box_bottom">
+                                                        <input class="message_type_box" type="text" placeholder="Type a message..." id="messagebox"/>
 
-                                                    <div class="message_icon_box">
-                                                        <i class="material-icons">sentiment_satisfied</i>
-                                                        <i class="material-icons">attach_file</i>
-                                                        <i class="material-icons">image</i>
-                                                        <i class="material-icons">send</i>
+                                                        <div class="message_icon_box">
+                                                            <i class="material-icons">sentiment_satisfied</i>
+                                                            <i class="material-icons">attach_file</i>
+                                                            <i class="material-icons">image</i>
+                                                            <a class="btn_green send messageSendButton">send</a>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

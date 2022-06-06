@@ -51,7 +51,8 @@ class RfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/'.$request->search_input.'/page/1/limit/20');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
-        return view('new_business_profile.rfqs',compact('rfqLists','alias'));
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        return view('new_business_profile.rfqs',compact('rfqLists','alias','business_profile'));
     }
 
     public function rfqByPageNumber(Request $request)
@@ -106,7 +107,7 @@ class RfqController extends Controller
             $adminUser = User::Find('5771');
         }
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
-        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias','chatdata','business_profile'));
+        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
     }
 
     public function authUserQuotationsByRFQId(Request $request){

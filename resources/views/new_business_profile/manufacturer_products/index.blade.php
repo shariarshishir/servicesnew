@@ -190,14 +190,7 @@
                                         </div>
                                     </div>
                                     <div class="col s12 m12 l3 new_profile_account_rightsidebar_desktop">
-                                        <form action="{{route('new.profile.products',$alias)}}">
-                                            <div class="new_profile_account_filterbar">
-                                                @include('new_business_profile._product_filter')
-                                                <input type="hidden" name="view" value="{{$view}}">
-                                                <input type="submit" class="btn_green btn_clear" value="submit">
-                                                <a class="btn_green btn_clear" href="{{route('new.profile.products',$alias)}}"> Reset </a>
-                                            </div>
-                                        </form>
+                                        @include('new_business_profile._product_filter')
                                     </div>
                                 </div>
 

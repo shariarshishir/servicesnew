@@ -53,21 +53,81 @@ class BusinessProfileController extends Controller
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'manufacturer'){
-                $products=Product::withTrashed()
+                $collection=collect(Product::withTrashed()
                 ->latest()
                 ->with('product_images','product_video')
-                ->where('business_profile_id', $business_profile->id)
-                ->where(function($query) use ($request){
+                ->where(function($query) use ($request, $business_profile){
+                    $query->where('business_profile_id', $business_profile->id)->get();
                     if(isset($request->search)){
                         $query->where('title','like', '%'.$request->search.'%')->get();
                     }
 
                 })
-                ->paginate(8);
+                ->get());
+
+                $controller_max_moq=$collection->max('moq');
+                $controller_min_moq=$collection->min('moq');
+                $controller_max_lead_time=$collection->max('lead_time');
+                $controller_min_lead_time=$collection->min('lead_time');
+
+                if(isset($request->product_tag)){
+                    $ptags=[];
+                    foreach($request->product_tag as $tag){
+                        $product_tag=ProductTag::where('id',$tag)->first();
+                        array_push($ptags,$product_tag->name);
+                    }
+                    $collection= $collection->filter(function($item) use ($ptags){
+                        if(isset($item['product_tag'])){
+                            $check=array_intersect($item['product_tag'], $ptags);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+
+                if(isset($request->product_type_mapping_child_id)){
+                    $collection= $collection->filter(function($item) use ($request){
+                        if(isset($item['product_type_mapping_child_id'])){
+                            $check=array_intersect($item['product_type_mapping_child_id'], $request->product_type_mapping_child_id);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+
+                if(isset($request->min_moq) && isset($request->max_moq)){
+                    $collection = $collection->whereBetween('moq', [$request->min_moq, $request->max_moq]);
+                    $collection->all();
+                }
+
+                if(isset($request->min_lead) && isset($request->max_lead)){
+                    $collection = $collection->whereBetween('lead_time', [$request->min_lead, $request->max_lead]);
+                    $collection->all();
+                }
+
+                $page = Paginator::resolveCurrentPage() ?: 1;
+                $perPage = 8;
+                $products = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $collection->forPage($page, $perPage),
+                    $collection->count(),
+                    $perPage,
+                    $page,
+                    ['path' => Paginator::resolveCurrentPath()],
+                );
+
+
+
+
                 $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
                 $sizes=['S','M','L','XL','XXL','XXXL'];
                 $view=isset($request->view)? $request->view : 'grid';
-                return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes','view'));
+                return view('new_business_profile.manufacturer_products.index',compact('alias','products','business_profile','colors','sizes','view','controller_max_moq','controller_min_moq','controller_max_lead_time','controller_min_lead_time'));
             }
 
 
@@ -109,11 +169,14 @@ class BusinessProfileController extends Controller
                         array_push($ptags,$product_tag->name);
                     }
                     $collection= $collection->filter(function($item) use ($ptags){
-                        $check=array_intersect($item['product_tag'], $ptags);
-                        if(empty($check)){
-                            return false;
+                        if(isset($item['product_tag'])){
+                            $check=array_intersect($item['product_tag'], $ptags);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
                         }
-                        return true;
+                        return false;
 
                     });
                 }

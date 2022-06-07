@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Models\Proforma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
@@ -23,9 +25,23 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
+        // Total RFQs
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
+        $data = $response->json();
+        $rfqs = $data['data'];
+        $rfqsCount = $data['count'];
+
+        // Total Quotations
+        $suggestedSupplierResponse = Http::get(env('RFQ_APP_URL').'/api/supplier/suggested-supplier-count');
+        $suggestedSupplierData = $suggestedSupplierResponse->json();
+        $suggestedSupplierCount = $suggestedSupplierData['count'];
+
+        // Proforma collection
+        $proformaInvoices = Proforma::all();
+        $proformaInvoicesCount = count($proformaInvoices);
 
         //dd($notifications);
-        return view('admin.dashboard.dashboard');
+        return view('admin.dashboard.dashboard',compact('rfqs','rfqsCount','suggestedSupplierCount', 'proformaInvoicesCount'));
     }
 
     public function showLoginForm()

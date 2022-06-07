@@ -35,6 +35,7 @@
                                         <th>Email Address</th>
                                         <th>Phone</th>
                                         <th>Action</th>
+                                        <th>Created At</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
@@ -65,6 +66,7 @@
                 {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
                 {data: 'action', name: 'action'},
+                {data: 'created_at', name:'created_at'},
                 {data: 'edit', name: 'edit',  orderable: false, searchable: false},
             ]
         });

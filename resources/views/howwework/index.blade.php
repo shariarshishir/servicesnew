@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="container" id="brands">
-            <div class="page_title ">
+            <div class="page_title">
                 <div class="title_and_tags">
                     <h2 class="animate_title_and_tags">Start or Scale Your Clothing Brand <br/>
                         with Modern Sourcing Solution</h2>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <div class="features py-70">
+            <div class="features py-50">
                 <div class="row">
                     <div class="col s12 l4 m6 animate_feature_box_left">
                         <div class="feature_box">
@@ -224,7 +224,7 @@
                     </div>
                 </div>
             </div>
-            <div class="why_us py-70">
+            <div class="why_us py-50">
                 <div class="why_us_box">
                     <div class="row">
                         <div class="col l4 s12 animate_box_img_1">
@@ -281,7 +281,7 @@
                     </div>
                 </div>
             </div>
-            <div class="request_quotation py-70">
+            <div class="request_quotation py-50">
                 <div class="animate_request_quotation_title">
                     <h3>We make sure you get Right Product at <br/>
                         the Right Price within the Right Time ....</h3>
@@ -295,7 +295,7 @@
         
         <div id="manufacturers">
             <div class="container">
-                <div class="page_title py-70">
+                <div class="page_title py-50">
                     <div class="title_and_tags">
                         <h2 class="animate_manuf_title_and_tags">Create a Profile, Join MB Pool <br/> Start Growing Business</h2>
                         <ul>
@@ -305,7 +305,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="steps_section py-70">
+                <div class="steps_section py-50">
                     <div class="steps_box">
                         <div class="row">
                             <div class="col l3 animate_icon_box_1">
@@ -428,7 +428,7 @@
                     </div>
                 </div>
             </div>
-            <div class="why_us manufacture py-70">
+            <div class="why_us manufacture py-50">
                 <h2 class="animate_why_us_title">We get you the right queries and support
                     to help you grow your business faster</h2>
                 <div class="manufacture_container">
@@ -526,7 +526,7 @@
                 </div>
             </div>
             <div class="container">
-                <div class="request_quotation py-70">
+                <div class="request_quotation py-50">
                     <div class="animate_menuf_request_quotation">
                         <h3>Be a Merchant Bay manufacturing partner now!</h3>
                     </div>

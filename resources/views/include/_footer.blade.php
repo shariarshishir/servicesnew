@@ -537,6 +537,7 @@
         var password=$('#password_login').val();
         var fcm_token=$('#fcm_token').val();
         var remember =$(this).closest('#login-register-modal').find('input[name="remember"]').prop('checked');
+        var sso_post_url = "{{ env('RFQ_APP_URL') }}/api/token-register";
         $.ajax({
             url: "{{route('users.login')}}",
             type: "POST",
@@ -552,7 +553,7 @@
                        else
                        {
                             $.ajax({
-                                    url: "http://192.168.68.148:8888/api/token-register",
+                                    url: sso_post_url,
                                     type: "POST",
                                     data: {"user_id": data.userObj.sso_reference_id, "fcmtoken":fcm_token},
                                     success: function (response) {

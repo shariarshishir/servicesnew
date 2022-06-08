@@ -104,7 +104,14 @@
                                     <div class="col s12 m6">
                                         <div class="pro_price">
 
-                                            @if($list->flag == 'mb') <span class="price">Lead Time</span> {{$list->lead_time}} days @endif </span>
+                                            @if($list->flag == 'mb')
+                                                <span class="price">Lead Time</span>
+                                                @php
+                                                    $pattern= '/[^0-9\-]/';
+                                                    $preg_replace= preg_replace($pattern, '', $list->lead_time);
+                                                @endphp
+                                                {{ $preg_replace}} days
+                                             @endif
                                             @if($list->flag == 'shop')
                                                 @if($list->product_type == 1)
                                                     @foreach (json_decode($list->attribute) as $k => $v)

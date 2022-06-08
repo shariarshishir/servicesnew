@@ -33,7 +33,6 @@
                         }else{
                             $title=$list->title;
                             $overLayImage = $list->overlay_image ?? NULL;
-                            $img= \Storage::disk('s3')->url('public/images/'.$list->product_images[0]->product_image);
                             if($list->product_images()->exists()){
                                 $img= \Storage::disk('s3')->url('public/'.$list->product_images[0]->product_image);
                             }else{
@@ -104,12 +103,32 @@
                                     </div>
                                     <div class="col s12 m6">
                                         <div class="pro_price">
-                                            <span class="price">Lead Time</span>
-                                            @if($list->flag == 'mb') {{$list->lead_time}} days @endif </span>
+
+                                            @if($list->flag == 'mb') <span class="price">Lead Time</span> {{$list->lead_time}} days @endif </span>
                                             @if($list->flag == 'shop')
                                                 @if($list->product_type == 1)
                                                     @foreach (json_decode($list->attribute) as $k => $v)
-                                                        @if($loop->last)  {{ $v[3] }} days @endif
+                                                        @if($loop->last) <span class="price">Lead Time</span>  {{ $v[3] }} days @endif
+                                                    @endforeach
+                                                @else
+                                                    @php
+                                                    $count= count(json_decode($list->attribute));
+                                                    $count = $count-2;
+                                                    @endphp
+                                                    @foreach (json_decode($list->attribute) as $k => $v)
+                                                        @if($k == 0 && $v[2] == 'Negotiable')
+                                                        <span class="price">Price</span> <span class="price_negotiable">{{ 'Negotiable' }}</span>
+                                                        @endif
+                                                        @if($loop->last && $v[2] != 'Negotiable')
+                                                        <span class="price">Price</span>  ${{ $v[2] }} / {{$list->product_unit}}{{-- $ is the value for price unite --}}
+                                                        @endif
+                                                        @if($loop->last && $v[2] == 'Negotiable')
+                                                            @foreach (json_decode($list->attribute) as $k => $v)
+                                                                    @if($k == $count)
+                                                                    <span class="price">Price</span>  ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
+                                                                    @endif
+                                                            @endforeach
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             @endif

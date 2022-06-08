@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="container" id="brands">
-            <div class="page_title ">
+            <div class="page_title">
                 <div class="title_and_tags">
                     <h2 class="animate_title_and_tags">Start or Scale Your Clothing Brand <br/>
                         with Modern Sourcing Solution</h2>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <div class="features py-70">
+            <div class="features py-50">
                 <div class="row">
                     <div class="col s12 l4 m6 animate_feature_box_left">
                         <div class="feature_box">
@@ -224,7 +224,7 @@
                     </div>
                 </div>
             </div>
-            <div class="why_us py-70">
+            <div class="why_us py-50">
                 <div class="why_us_box">
                     <div class="row">
                         <div class="col l4 s12 animate_box_img_1">
@@ -281,7 +281,7 @@
                     </div>
                 </div>
             </div>
-            <div class="request_quotation py-70">
+            <div class="request_quotation py-50">
                 <div class="animate_request_quotation_title">
                     <h3>We make sure you get Right Product at <br/>
                         the Right Price within the Right Time ....</h3>
@@ -295,7 +295,7 @@
         
         <div id="manufacturers">
             <div class="container">
-                <div class="page_title py-70">
+                <div class="page_title py-50">
                     <div class="title_and_tags">
                         <h2 class="animate_manuf_title_and_tags">Create a Profile, Join MB Pool <br/> Start Growing Business</h2>
                         <ul>
@@ -305,7 +305,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="steps_section py-70">
+                <div class="steps_section py-50">
                     <div class="steps_box">
                         <div class="row">
                             <div class="col l3 animate_icon_box_1">
@@ -428,103 +428,105 @@
                     </div>
                 </div>
             </div>
-            <div class="why_us manufacture py-70">
+            <div class="why_us manufacture py-50">
                 <h2 class="animate_why_us_title">We get you the right queries and support
                     to help you grow your business faster</h2>
                 <div class="manufacture_container">
-                    <div class="row">
-                        <div class="col s12 m2 d-l-none"></div>
-                        <div class="col s12 m6 animate_why_us_box_1">
-                            <div class="why_us_box" style="margin-bottom: 100px;">
-                                <div class="title">
-                                    <div class="icon">
-                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/get-queries.svg')}}" alt="icon" />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m2 d-l-none"></div>
+                            <div class="col s12 m6 animate_why_us_box_1">
+                                <div class="why_us_box" style="margin-bottom: 100px;">
+                                    <div class="title">
+                                        <div class="icon">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/get-queries.svg')}}" alt="icon" />
+                                        </div>
+                                        <h3>Get Queries every day</h3>
                                     </div>
-                                    <h3>Get Queries every day</h3>
+                                    <p>Once you are in MB Pool, you will get queries
+                                        in a priority basis. Whenever a query comes in
+                                        for your category you are notified.</p>
                                 </div>
-                                <p>Once you are in MB Pool, you will get queries
-                                    in a priority basis. Whenever a query comes in
-                                    for your category you are notified.</p>
                             </div>
-                        </div>
-                        <div class="col s12 m4 d-l-none"></div>
-                        <div class="col s12 m4 d-l-none"></div>
-                        <div class="col s12 m6 animate_why_us_box_2">
-                            <div class="why_us_box" style="margin-bottom: 100px;">
-                                <div class="title">
-                                    <div class="icon">
-                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/product-develolpment-2.svg')}}" alt="icon" />
+                            <div class="col s12 m4 d-l-none"></div>
+                            <div class="col s12 m4 d-l-none"></div>
+                            <div class="col s12 m6 animate_why_us_box_2">
+                                <div class="why_us_box" style="margin-bottom: 100px;">
+                                    <div class="title">
+                                        <div class="icon">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/product-develolpment-2.svg')}}" alt="icon" />
+                                        </div>
+                                        <h3>Gain advantage in
+                                            product development</h3>
                                     </div>
-                                    <h3>Gain advantage in
-                                        product development</h3>
+                                    <p>Merchant Bay stays with you during all the
+                                        process in the product development so that
+                                        you are assured to have the order developed
+                                        in the most effective way which will increase
+                                        your production efficiency.</p>
                                 </div>
-                                <p>Merchant Bay stays with you during all the
-                                    process in the product development so that
-                                    you are assured to have the order developed
-                                    in the most effective way which will increase
-                                    your production efficiency.</p>
                             </div>
-                        </div>
-                        <div class="col s12 m2 d-l-none"></div>
-                        <div class="col s12 m4 animate_why_us_box_3" style="align-self: center;">
-                            <div class="middle_text_card" style="margin-bottom: 140px;">
-                                <h3>Pioneering the decentralized
-                                    manufacturing network with
-                                    Merchant Bay</h3>
+                            <div class="col s12 m2 d-l-none"></div>
+                            <div class="col s12 m4 animate_why_us_box_3" style="align-self: center;">
+                                <div class="middle_text_card" style="margin-bottom: 140px;">
+                                    <h3>Pioneering the decentralized
+                                        manufacturing network with
+                                        Merchant Bay</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col s12 m1 d-l-none" style="margin: 0;"></div>
-                        <div class="col s12 m6  animate_why_us_box_4">
-                            <div class="why_us_box" style="margin-bottom: 100px;">
-                                <div class="title">
-                                    <div class="icon">
-                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/empowered-with-tech.svg')}}" alt="icon" />
+                            <div class="col s12 m1 d-l-none" style="margin: 0;"></div>
+                            <div class="col s12 m6  animate_why_us_box_4">
+                                <div class="why_us_box" style="margin-bottom: 100px;">
+                                    <div class="title">
+                                        <div class="icon">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/empowered-with-tech.svg')}}" alt="icon" />
+                                        </div>
+                                        <h3>Get empowered with Tech</h3>
                                     </div>
-                                    <h3>Get empowered with Tech</h3>
+                                    <p>MB Pool factories get privileged access to
+                                        Merchant Bay tools. They never have to go for
+                                        expensive ERP solutions to digitize their factory.
+                                        Merchant Bay ensures they are digitized step by step in the right hierarchy.</p>
                                 </div>
-                                <p>MB Pool factories get privileged access to
-                                    Merchant Bay tools. They never have to go for
-                                    expensive ERP solutions to digitize their factory.
-                                    Merchant Bay ensures they are digitized step by step in the right hierarchy.</p>
                             </div>
-                        </div>
-                        <div class="col s12 m4 d-l-none"></div>
-                        <div class="col s12 m6 l6 animate_why_us_box_5">
-                            <div class="why_us_box" style="margin-bottom: 100px;">
-                                <div class="title">
-                                    <div class="icon">
-                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/global-storefront.svg')}}" alt="icon" />
+                            <div class="col s12 m4 d-l-none"></div>
+                            <div class="col s12 m6 l6 animate_why_us_box_5">
+                                <div class="why_us_box" style="margin-bottom: 100px;">
+                                    <div class="title">
+                                        <div class="icon">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/global-storefront.svg')}}" alt="icon" />
+                                        </div>
+                                        <h3>Global footprint</h3>
                                     </div>
-                                    <h3>Global footprint</h3>
+                                    <p>In Merchant Bay, your profile acts as your
+                                        microsite. We guarantee your MB profile going
+                                        more places than your own website.</p>
                                 </div>
-                                <p>In Merchant Bay, your profile acts as your
-                                    microsite. We guarantee your MB profile going
-                                    more places than your own website.</p>
                             </div>
-                        </div>
-                        <div class="col s12 m2 d-l-none" style="margin: 0;"></div>
-                        <div class="col s12 m2 d-l-none"></div>
-                        <div class="col s12 m6 animate_why_us_box_6">
-                            <div class="why_us_box">
-                                <div class="title">
-                                    <div class="icon">
-                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/manage-easily.svg')}}" alt="icon" />
+                            <div class="col s12 m2 d-l-none" style="margin: 0;"></div>
+                            <div class="col s12 m2 d-l-none"></div>
+                            <div class="col s12 m6 animate_why_us_box_6">
+                                <div class="why_us_box">
+                                    <div class="title">
+                                        <div class="icon">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/work-image/icon/manage-easily.svg')}}" alt="icon" />
+                                        </div>
+                                        <h3>Manage it easily</h3>
                                     </div>
-                                    <h3>Manage it easily</h3>
+                                    <p>We know how hard it is to run a manufacturing
+                                        business. So, we bring our services to your
+                                        pocket. Now you can review a query on the go.
+                                        Also look into key analytics and production
+                                        through OMD app.</p>
                                 </div>
-                                <p>We know how hard it is to run a manufacturing
-                                    business. So, we bring our services to your
-                                    pocket. Now you can review a query on the go.
-                                    Also look into key analytics and production
-                                    through OMD app.</p>
                             </div>
+                            <div class="col s2 m4 d-l-none"></div>
                         </div>
-                        <div class="col s2 m4 d-l-none"></div>
                     </div>
                 </div>
             </div>
             <div class="container">
-                <div class="request_quotation py-70">
+                <div class="request_quotation py-50">
                     <div class="animate_menuf_request_quotation">
                         <h3>Be a Merchant Bay manufacturing partner now!</h3>
                     </div>
@@ -542,22 +544,32 @@
 
 @push('js')
 <script>
-$(document).ready(function(){
-	var maxLength = 150;
-	$(".show-read-more").each(function(){
-		var myStr = $(this).text();
-		if($.trim(myStr).length > maxLength){
-			var newStr = myStr.substring(0, maxLength);
-			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
-			$(this).empty().html(newStr);
-			$(this).append('<a href="javascript:void(0);" class="read-more">Read More...</a>');
-			$(this).append('<span class="more-text">' + removedStr + '</span>');
-		}
-	});
-	$(".read-more").click(function(){
-		$(this).siblings(".more-text").contents().unwrap();
-		$(this).remove();
-	});
-});
+    $(document).ready(function(){
+        var maxLength = 150;
+        $(".show-read-more").each(function(){
+            var myStr = $(this).text();
+            if($.trim(myStr).length > maxLength){
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+                $(this).append('<a href="javascript:void(0);" class="read-more">Read More...</a>');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function(){
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+
+        $('#how_we_work').parent('div.container').addClass('howWeWorkContainer');
+
+
+    });
+
+
+
+
+
+
 </script>
 @endpush

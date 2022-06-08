@@ -27,11 +27,11 @@
                     <!-- widget content -->
                     <div class="widget-body p-0">
                         <div class="row buyerdata_info_top">
-                            <div class="col m6 input-field" id="buyerdata">
+                            <div class="col s6 input-field" id="buyerdata">
                                 <span><b>{{$po->buyer->name}} </b></span><br/>
                                 <span>{{$po->buyer->email}}</span>
                             </div>
-                            <div class="col m6 input-field">
+                            <div class="col s6 input-field">
                                 <div class="form-group has-feedback">
                                     <label style="margin-bottom: 0; left: 0;"><b>Beneficiary</b></label>
                                     <span style="display: block">Merchantbay</span>
@@ -403,9 +403,7 @@
                                         <button type="submit" onclick="work_trigger()" class="btn_green btn-success" id="rejectRfqForm">Yes</button>
                                     </div>
                                 </div>
-
                             </div>
-
                     	</form>
                     </div>
                 </div>

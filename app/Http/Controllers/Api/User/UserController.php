@@ -217,7 +217,7 @@ class UserController extends Controller
 
     }
 
-    
+
 
     public function storeBk(Request $request)
     {
@@ -588,7 +588,7 @@ class UserController extends Controller
             400);
         }
         $checkExistingUser = User::Where('email', $request->email)->first();
-        
+
         if($checkExistingUser){
             return response()->json('user already exists', 403);
         }
@@ -605,7 +605,6 @@ class UserController extends Controller
             'phone'     => $request->phone ?? null,
             'company_name' => $request->company_name,
             'country' => $request->country ?? null,
-            'is_email_verified' => 1,
             'designation'       => $request->designation,
             'business_type'     => $request->business_type,
             'company_website'   => $request->company_website,

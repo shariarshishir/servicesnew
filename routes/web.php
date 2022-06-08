@@ -405,7 +405,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/development-center', [BusinessProfileBusinessProfileController::class, 'developmentCenter'])->name('new.profile.development_center');
     Route::get('profile/{alias}/order-management', [BusinessProfileBusinessProfileController::class, 'orderManagement'])->name('new.profile.order_management');
     Route::get('profile/{alias}/products', [BusinessProfileBusinessProfileController::class, 'products'])->name('new.profile.products');
-    
+
     Route::get('profile/{alias}/insights', [UserProfileController::class, 'profileInsights'])->name('new.profile.insights');
     Route::get('profile/{alias}/home', [UserProfileController::class, 'profileHome'])->name('new.profile.home');
     Route::get('profile/{alias}/profile-edit', [UserProfileController::class, 'profileEdit'])->name('new.profile.edit');
@@ -624,6 +624,7 @@ Route::group(['prefix'=>'/admin'],function (){
         //new users requests
         Route::get('new/user/request/{type}', [NewUserRequestController::class, 'index'])->name('new.user.request');
         Route::get('new/user/request/edit/{id}', [NewUserRequestController::class, 'edit'])->name('new.user.request.edit');
+        Route::put('new/user/request/update/{id}', [NewUserRequestController::class, 'update'])->name('new.user.request.update');
         //business profile
         Route::get('business-profile/{type}',[AdminBusinessProfileController::class, 'index'])->name('admin.business.profile.list.type');
         Route::get('business-profile/details/{business_profile_id}',[AdminBusinessProfileController::class, 'businessProfileDetails'])->name('admin.business.profile.details');

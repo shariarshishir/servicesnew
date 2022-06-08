@@ -37,12 +37,10 @@
 <link href="{{asset('fonts/nexa.css')}}" rel="stylesheet">
 @if(Route::is('front.howwework'))
 <link href="{{asset('css/nexafonts.css')}}" rel="stylesheet" />
-<link href="{{asset('css/work-style.css')}}" rel="stylesheet" />
 @endif
 @if(Route::is('front.aboutus'))
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <link href="{{asset('css/nexafonts.css')}}" rel="stylesheet" />
-<link href="{{asset('css/about-style.css')}}" rel="stylesheet" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 @endif
 {{-- jasny-bootstrap.min --}}
@@ -65,11 +63,13 @@
 <link rel="shortcut icon" href="{{Storage::disk('s3')->url('public/frontendimages/favicon/favicon.png')}}" type="image/x-icon">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3S7SWXJM7V"></script>
+<!--Plugin CSS  rangeSlider file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-3S7SWXJM7V');
+  gtag('config', 'UA-141181864-1');
 </script>
 
 @yield('css')
@@ -134,7 +134,7 @@
 
     function closeProfileAccountNav() {
         document.getElementById("profileAccountRight").style.width = "0";
-    }    
+    }
 
     function toggle_visibility(id) {
         var e = document.getElementById(id);
@@ -144,5 +144,5 @@
         else {
             e.style.display = 'block';
         }
-    }    
+    }
 </script>

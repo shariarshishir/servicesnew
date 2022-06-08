@@ -31,7 +31,7 @@
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
 
                     <div class="new_profile_account_rightsidebar_mobile">
-                        <div class="new_profile_account_myrfq_details">
+                        {{-- <div class="new_profile_account_myrfq_details">
                             <div class="new_profile_myrfq_details_topbox">
                                 <h6>RFQ ID <span>785672990</span></h6>
                                 <h5>Women's Long-Sleeve 100% Cotton Cable Crewn with emb log</h5>
@@ -134,6 +134,82 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div> --}}
+                        <div class="new_profile_account_myrfq_details">
+                            <div class="new_profile_myrfq_details_topbox">
+                                <h6>RFQ ID <span>{{$rfqLists[0]['id']}}</span></h6>
+                                <h5>{{$rfqLists[0]['title']}}</h5>
+                                <span class="posted_time">{{date('Y-m-d', strtotime($rfqLists[0]['created_at']))}}</span>
+
+                                <div class="center-align btn_accountrfq_info">
+                                    <a href="#" onclick="toggle_visibility('accountRfqDetailesInfoMobile');"><i class="material-icons">keyboard_double_arrow_down</i></a>
+                                </div>
+                                <div id="accountRfqDetailesInfoMobile" class="account_rfqDetailes_infoWrap" style="display: none;">
+                                    <div class="row">
+                                        <div class="col s6 m6 l5">
+                                            <p>Quantity <br/> <b>{{$rfqLists[0]['quantity']}} pcs</b></p>
+                                            <p>Target Price <br/> <b>{{$rfqLists[0]['unit_price']}} /pc</b></p>
+                                        </div>
+                                        <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
+                                        <div class="col s6 m6 l5">
+                                            <p>Deliver in <br/> <b>{{ date('F j, Y',strtotime($rfqLists[0]['delivery_time'])) }}</b></p>
+                                            <p>Deliver to <br/> <b>{{$rfqLists[0]['destination']}}</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="account_rfqDetailes_imgWrap">
+                                        <h6>Attachments</h6>
+                                        <img src="./images/account-images/pro-1.png" />
+                                        <img src="./images/account-images/pro-2.png" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rfq_review_results_wrap">
+                                <div class="rfq_review_results_nav">
+                                    <ul>
+                                        <li  class="active message_tab_li"><a href="javascript:void(0);" class="message_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Messages</a></li>
+                                        <li class="quotation_tab_li"><a href="javascript:void(0);" class="quotation_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Quotations</a></li>
+                                    </ul>
+                                </div>
+                                <div class="rfq_quotation_box" style="display:none">
+                                    <div class="rfq_review_results_box">
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="rfq_message_box" >  
+                                    <div class="rfq_review_message_box">
+                                        @if(count($chatdata)>0)
+                                            @foreach($chatdata as $chat)
+                                                @if( $chat['from_id'] == auth()->user()->sso_reference_id )
+                                                    <div class="rfq_message_box chat-right right">
+                                                        <div class="chat-text right-align">
+                                                            <p><span> @php echo html_entity_decode($chat['message']); @endphp</span></p>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="rfq_message_box chat-left left">
+                                                        <div class="chat-text left-align">
+                                                            <p><span>@php echo html_entity_decode($chat['message']); @endphp</span></p>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <form>
+                                        <div class="rfq_message_box_bottom">
+                                            <input class="message_type_box" type="text" placeholder="Type a message..." id="messagebox"/>
+
+                                            <div class="message_icon_box">
+                                                <i class="material-icons">sentiment_satisfied</i>
+                                                <i class="material-icons">attach_file</i>
+                                                <i class="material-icons">image</i>
+                                                <a class="btn_green send messageSendButton">send</a>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

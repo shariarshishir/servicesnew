@@ -37,12 +37,10 @@
 <link href="{{asset('fonts/nexa.css')}}" rel="stylesheet">
 @if(Route::is('front.howwework'))
 <link href="{{asset('css/nexafonts.css')}}" rel="stylesheet" />
-<link href="{{asset('css/work-style.css')}}" rel="stylesheet" />
 @endif
 @if(Route::is('front.aboutus'))
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <link href="{{asset('css/nexafonts.css')}}" rel="stylesheet" />
-<link href="{{asset('css/about-style.css')}}" rel="stylesheet" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 @endif
 {{-- jasny-bootstrap.min --}}

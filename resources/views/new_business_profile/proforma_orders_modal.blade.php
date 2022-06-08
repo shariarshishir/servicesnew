@@ -16,7 +16,7 @@
             <!-- widget content -->
             <div class="widget-body p-0">
                 <div class="row buyerdata_info_top">
-                    <div class="col m6 input-field" id="buyerdata">
+                    <div class="col s6 input-field" id="buyerdata">
                         <span><b> {{$proforma->buyer->name}} </b></span><br>
                         <span> {{$proforma->buyer->email}} </span>
                     </div>

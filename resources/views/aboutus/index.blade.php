@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="why_us py-80 yellow-box">
+      <div class="why_us py-50 yellow-box">
         <div class="why_us_container">
           <div class="section_title">
             <h3>Things are different here at Merchant Bay</h3>
@@ -121,7 +121,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="work_process py-80">
+      <div class="work_process py-50">
         <div class="work_process_container">
           <h3 class="work-process-title">Our work process....</h3>
           <div class="row py-50">
@@ -374,7 +374,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="we_believe py-80">
+      <div class="we_believe py-50">
         <div class="section_title">
           <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/we-believe.png')}}" class="we-believe-img" src="We Believe" />
           <h3 class="py-50 we-believe-title">
@@ -391,7 +391,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </p>
         </div>
       </div>
-      <div class="achivement py-80">
+      <div class="achivement py-50">
         <h3 class="achieved-title">What have we achieved?</h3>
         <div class="achivement_container">
           <div class="row">
@@ -463,7 +463,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="vision_and_mission py-80">
+      <div class="vision_and_mission py-50">
         <div class="vision_and_mission_container">
           <div class="row">
             <div class="col m6 vision-box">
@@ -489,7 +489,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
           </div>
         </div>
       </div>
-      <div class="paths py-80">
+      <div class="paths py-50">
         <div class="paths_container">
           <h3 class="paths-title">Let's get you to</h3>
           <div class="row">

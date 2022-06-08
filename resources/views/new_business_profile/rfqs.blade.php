@@ -65,13 +65,13 @@
                             <div class="account_filter_progress_wrap">
                                 <h4>Lead Time</h4>
                                 <div class="filter_progress_box">
-                                    <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRange">
+                                    <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRangeMobile">
                                     <span id="filterProgressValue"></span>
                                 </div>
 
                                 <h4>MOQ</h4>
                                 <div class="filter_progress_box_moq">
-                                    <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoq">
+                                    <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoqMobile">
                                     <span id="filterProgressValueMoq"></span>
                                 </div>
                             </div>

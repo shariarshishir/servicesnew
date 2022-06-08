@@ -23,7 +23,35 @@
         socket.on('new message', function(data) {
             var authUserId = '{{auth()->user()->sso_reference_id}}';
             var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
-            console.log(data);
+
+            if(data.factory == true){ // message for supplier
+                var quotationClass = '.unseen_quotation_count_'+data.rfq_id;
+                var unseenQuotationCount = $(quotationClass).attr('data-unseen_quotation_count');
+                if(unseenQuotationCount == 0){
+                    $(quotationClass).show();
+                    $(quotationClass).text(parseInt( unseenQuotationCount == '' ? '0' : unseenQuotationCount)+1);
+                    $(quotationClass).attr('data-unseen_quotation_count',parseInt(unseenQuotationCount)+1);
+                }else{
+                    $(quotationClass).show();
+                    $(quotationClass).val(0);
+                    $(quotationClass).text(parseInt(unseenQuotationCount)+1);
+                    $(quotationClass).attr('data-unseen_quotation_count',parseInt(unseenQuotationCount)+1);
+                }
+            }else if(data.factory == false){ // message for buyer
+                var messageClass = '.unseen_message_count_'+data.rfq_id;
+                var unseenMessageCount = $(messageClass).attr('data-unseen_message_count');
+                if(unseenMessageCount == 0){
+                    $(messageClass).show();
+                    $(messageClass).text(parseInt( unseenMessageCount == '' ? '0' : unseenMessageCount)+1);
+                    $(messageClass).attr('data-unseen_message_count', parseInt(unseenMessageCount)+1);
+                }else{
+                    $(messageClass).show();
+                    $(messageClass).val(0);
+                    $(messageClass).text(parseInt(unseenMessageCount)+1);
+                    $(messageClass).attr('data-unseen_message_count', parseInt(unseenMessageCount)+1);
+                }
+            }
+            
             if( data.from_id == authUserId && activeRfqId == data.rfq_id ){
                 var msgHtml = '<div class="rfq_message_box chat-right right">';
                     msgHtml += '<div class="chat-text right-align">';
@@ -411,7 +439,13 @@
                         $('.message_tab_li').addClass("active");
                         $('.rfq_quotation_box').hide();
                         $('.rfq_message_box').show();
-                        $('.rfq_review_message_box').empty()
+                        $('.rfq_review_message_box').empty();
+
+                        var unseenMessageCountClass = '.unseen_message_count_'+rfqId;
+                        $(unseenMessageCountClass).attr('data-unseen_message_count',0);
+                        $(unseenMessageCountClass).text('');
+                        $(unseenMessageCountClass).hide();
+
                         var authUserId = '{{auth()->user()->sso_reference_id}}';
                         for(var i=0;i<response.chats.length;i++){
                             if(response.chats[i].from_id == authUserId){
@@ -453,6 +487,11 @@
                         $('.rfq_quotation_box').hide();
                         $('.rfq_message_box').show();
                         $('.rfq_review_message_box').empty();
+
+                        var unseenMessageCountClass = '.unseen_message_count_'+rfqId;
+                        $(unseenMessageCountClass).attr('data-unseen_message_count',0);
+                        $(unseenMessageCountClass).text('');
+                        $(unseenMessageCountClass).hide();
                         
                         var html='<h6>RFQ ID <span>'+response.rfq.id+'</span></h6>';
                             html+='<h5>'+response.rfq.title+'</h5>';
@@ -502,78 +541,6 @@
             });
 
 
-            // $('.quotation-button').on('click',function(event){
-            //     event.preventDefault();
-            //     let rfqId = $(this).attr("data-rfq_id");
-            //     $.ajax({
-            //         type:'GET',
-            //         url: "{{route('auth_user_quotations.by_rfq_id')}}",
-            //         data:{ rfqId: rfqId},
-            //         success: function (response) {
-            //             $('.quotation_tab').attr("data-rfq_id",rfqId);
-            //             $('.message_tab').attr("data-rfq_id",rfqId);
-            //             $('.quotation_tab_li').addClass("active");
-            //             $('.message_tab_li').removeClass("active");
-            //             $('.rfq_quotation_box').show();
-            //             $('.rfq_message_box').hide();
-            //             $('.rfq_review_message_box').empty();
-
-            //             var html='<h6>RFQ ID <span>'+response.rfq.id+'</span></h6>';
-            //                 html+='<h5>'+response.rfq.title+'</h5>';
-            //                 html+='<span class="posted_time">'+response.rfq.created_at+'</span>';
-            //                 html+='<div class="center-align btn_accountrfq_info">';
-            //                 html+='<a href="#" onclick=""><i class="material-icons">keyboard_double_arrow_down</i></a>';
-            //                 html+='</div>';
-            //                 html+='<div id="accountRfqDetailesInfo" class="account_rfqDetailes_infoWrap" style="display: none;">';
-            //                 html+='<div class="row">';
-            //                 html+='<div class="col s6 m6 l5">';
-            //                 html+='<p>Quantity <br/> <b>'+response.rfq.id+' pcs</b></p>';
-            //                 html+='<p>Target Price <br/> <b>'+response.rfq.unit_price+' /pc</b></p>';
-            //                 html+='</div>';
-            //                 html+='<div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>';
-            //                 html+='<div class="col s6 m6 l5">';
-            //                 html+='<p>Deliver in <br/> <b>'+response.rfq.delivery_time+'</b></p>';
-            //                 html+='<p>Deliver to <br/> <b>'+response.rfq.destination+'</b></p>';
-            //                 html+='</div>';
-            //                 html+='</div>';
-            //                 html+='<div class="account_rfqDetailes_imgWrap">';
-            //                 html+='<h6>Attachments</h6>';
-            //                 html+='<img src="./images/account-images/pro-1.png" />';
-            //                 html+='<img src="./images/account-images/pro-2.png" />';
-            //                 html+='</div>';
-            //                 html+='</div>';
-            //                 $('.new_profile_myrfq_details_topbox').empty().append(html);
-
-            //             for(var i=0;i<response.quotations.length;i++){
-            //                 var html ='<div class="row">';
-            //                 html+='<div class="col s12 xl2 rfq_review_result_leftBox">';
-            //                 html+='<span class="new_rfq_avatar">';
-            //                 html+='<img src="{{ Storage::disk('s3')->url('public/account-images/avatar.jpg') }}" alt="avatar" itemprop="img">';
-            //                 html+='</span>';
-            //                 html+='</div>';
-            //                 html+='<div class="col s12 xl5 rfq_review_result_midBox">';
-            //                 html+='<div class="new_rfq_review">';
-            //                 html+='<p><span>'+response.quotations[i].message+'</span> </p>';
-            //                 html+='<button class="btn_green">Ask for PI</button>';
-            //                 html+='</div>';
-            //                 html+='</div>';
-            //                 html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
-            //                 html+='<div class="new_rfq_review">';
-            //                 html+='<span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>';
-            //                 html+='<span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>';
-            //                 html+='<button class="btn_green">Issue PO</button>';
-            //                 html+='</div>';
-            //                 html+='</div>';
-            //                 html+='</div>';
-            //             }
-                        
-            //             $('.rfq_review_results_box').empty().append(html);
-            //         }
-            //     });
-            // });
-
-            
-
             $('.quotation_tab').on('click',function(event){
                 event.preventDefault();
                 let rfqId = $(this).attr("data-rfq_id");
@@ -608,6 +575,11 @@
                         $('.message_tab_li').removeClass("active");
                         $('.rfq_quotation_box').show();
                         $('.rfq_message_box').hide();
+
+                        var unseenQuotationCountClass = '.unseen_quotation_count_'+rfqId;
+                        $(unseenQuotationCountClass).attr('data-unseen_quotation_count',0);
+                        $(unseenQuotationCountClass).text('');
+                        $(unseenQuotationCountClass).hide();
                         $('.rfq_review_results_box').empty().append(html);
                     }
                 });
@@ -643,8 +615,12 @@
                             html+='</div>';
                             html+='</div>';
                         }
+                        var unseenQuotationCountClass = '.unseen_quotation_count_'+rfqId;
+                        $(unseenQuotationCountClass).attr('data-unseen_quotation_count',0);
+                        $(unseenQuotationCountClass).text('');
+                        $(unseenQuotationCountClass).hide();
+
                         var rfqBoxClass = '.rfq_box_'+rfqId;
-                        console.log(rfqBoxClass);
                         $('.profile_account_myrfq_box').removeClass("active");
                         $(rfqBoxClass).addClass("active");
                         $('.quotation_tab_li').addClass("active");
@@ -652,6 +628,10 @@
                         $('.rfq_quotation_box').show();
                         $('.rfq_message_box').hide();
                         $('.rfq_review_results_box').empty().append(html);
+
+                       
+
+                        
                     }
                 });
             });

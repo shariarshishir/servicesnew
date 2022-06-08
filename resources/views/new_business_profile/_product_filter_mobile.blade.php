@@ -17,7 +17,6 @@
                     <option value={{$ptm->id}} {{ (in_array($ptm->id, $product_type_mapping_child_id))?'selected':'' }}>{{$ptm->title}}</option>
                 @endforeach
             </select>
-
             <label>Product tags</label>
             <select class="select2 dropdownOptions filter-select"  name="product_tag[]" multiple>
                 @foreach ($product_tags as $pt)
@@ -29,14 +28,14 @@
         <div class="account_filter_progress_wrap">
             <h4>Lead Time</h4>
             <div class="filter_progress_box">
-                <div id="myRange"></div>
+                <div id="myRangeMobile"></div>
                 <input type="hidden" name="min_lead" id="min_lead" value="{{$view_min_lead_time}}">
                 <input type="hidden" name="max_lead" id="max_lead" value="{{$view_max_lead_time}}">
             </div>
 
             <h4>MOQ</h4>
             <div class="filter_progress_box_moq">
-                <div id="myRangeMoq"></div>
+                <div id="myRangeMoqMobile"></div>
                 <input type="hidden" name="min_moq" id="min_moq" value="{{$view_min_moq}}">
                 <input type="hidden" name="max_moq" id="max_moq" value="{{$view_max_moq}}">
             </div>
@@ -61,7 +60,7 @@
             var view_max_lead_time='{{$view_max_lead_time??$controller_max_lead_time}}';
             var controller_max_lead_time='{{$controller_max_lead_time}}';
             var controller_min_lead_time='{{$controller_min_lead_time}}';
-            $("#myRange").ionRangeSlider({
+            $("#myRangeMobile").ionRangeSlider({
                 type: "double",
                 grid: true,
                 min: controller_min_lead_time,
@@ -81,7 +80,7 @@
             var view_max_moq='{{$view_max_moq??$controller_max_moq}}';
             var controller_max_moq='{{$controller_max_moq}}';
             var controller_min_moq='{{$controller_min_moq}}';
-            $("#myRangeMoq").ionRangeSlider({
+            $("#myRangeMoqMobile").ionRangeSlider({
                 type: "double",
                 grid: true,
                 min: controller_min_moq,

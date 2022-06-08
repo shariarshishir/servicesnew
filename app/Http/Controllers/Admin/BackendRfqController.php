@@ -80,7 +80,8 @@ class BackendRfqController extends Controller
             $user = "5552";
         }
         $from_user = User::find($user);
-        $to_user = User::where('email',$rfq['user']['email'])->first();
+        $to_user = User::with('businessProfile')->where('email',$rfq['user']['email'])->first();
+        $buyerBusinessProfile = $to_user->businessProfile[0];
         $from_user_image = isset($from_user->image) ? asset($from_user->image) : asset('images/frontendimages/no-image.png');
         if($rfq['user']['user_picture'] !=""){
             $to_user_image = $rfq['user']['user_picture'];
@@ -112,7 +113,7 @@ class BackendRfqController extends Controller
         }
         $proforma_invoice_url_for_buyer =$profromaInvoice ? route('open.proforma.single.html', $profromaInvoice->id) : '';
         $url_exists=$link;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists'));
+        return view('admin.rfq.show', compact('rfq','businessProfiles','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists'));
     }
 
     public function sendFireBasePushNotificationToAdminForNewMessage(Request $request){

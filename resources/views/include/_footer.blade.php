@@ -549,11 +549,19 @@
                         $('#email_login').addClass('invalid');
                         $('#password_login').addClass('invalid');
                        }
-                       else{
-                          //console.log(data);
-                        var url = '{{ route("users.profile") }}';
-                        window.location.href=url;
-                       }
+                       else
+                       {
+                            $.ajax({
+                                    url: "http://192.168.68.148:8888/api/token-register",
+                                    type: "POST",
+                                    data: {"user_id": data.userObj.sso_reference_id, "fcmtoken":fcm_token},
+                                    success: function (response) {
+                                        console.log(response); 
+                                    }
+                                });
+                                var url = '{{ route("users.profile") }}';
+                                window.location.href=url;
+                        }
                     }
                     else{
                         printErrorMsg(data.error);

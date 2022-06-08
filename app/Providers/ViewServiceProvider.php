@@ -40,7 +40,7 @@ class ViewServiceProvider extends ServiceProvider
         });
 
         //product type mapping
-        view()->composer(['new_business_profile._product_filter'], function($view){
+        view()->composer(['new_business_profile._product_filter','new_business_profile._product_filter_mobile'], function($view){
             $product_type_mapping=ProductTypeMapping::where('parent_id', '!=', null)->get(['id','title']);
             $view->with(['product_type_mapping'=>$product_type_mapping]);
         });

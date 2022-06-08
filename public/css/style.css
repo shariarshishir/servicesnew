@@ -9944,6 +9944,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 15px;
     border-radius: 10px;
 }
+.new_profile_account_rightsidebar_mobile .new_profile_account_filterbar {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
 .new_profile_account_filterbar h4 {
     font-family: "nexabold";
     font-size: 16px;
@@ -9951,15 +9956,31 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin-bottom: 15px;
 }
 .new_profile_account_filterbar ul {
-    padding: 20px 0 10px;
-    border-bottom: 1px solid #858585;
+    padding: 8px !important;
+    border: 1px solid #858585;
+    margin-bottom: 15px !important;
+    border-radius: 4px;
+}
+.new_profile_account_filterbar .select2-container--default .select2-selection--multiple,
+.new_profile_account_filterbar .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: none;
 }
 .new_profile_account_filterbar ul:first-child {
     padding-top: 0;
 }
 .new_profile_account_filterbar ul li {
     display: inline-block;
-    padding: 0 5px 8px 0 !important;
+    /* background: none !important;
+    padding: 2px 5px 5px !important; */
+    font-size: 13px;
+    color: #787777;
+    border-radius: 5px !important;
+    line-height: 25px;
+    text-transform: capitalize;
+    margin: 2px 3px !important;
+}
+.new_profile_account_filterbar ul.select2-selection__rendered li {
+    padding-bottom: 0 !important;
 }
 .new_profile_account_filterbar ul li a:link,
 .new_profile_account_filterbar ul li a:active,
@@ -9978,19 +9999,80 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     background: #e8e7e7;
     border: 1px solid #448547;
 }
+
+.new_profile_account_filterbar .irs--flat .irs-from:before, 
+.new_profile_account_filterbar .irs--flat .irs-to:before, 
+.new_profile_account_filterbar .irs--flat .irs-single:before {
+    background: #448547;
+    border-top-color: #448547;
+}
+.account_filter_progress_wrap .irs--flat .irs-line {
+    height: 5px;
+    top: 28px;
+}
+.account_filter_progress_wrap .irs--flat .irs-bar {
+    background: #54a958;
+    height: 5px;
+    top: 28px;
+}
+.new_profile_account_filterbar .irs--flat .irs-from, 
+.new_profile_account_filterbar .irs--flat .irs-to, 
+.new_profile_account_filterbar .irs--flat .irs-single {
+    background: #54a958;
+    width: auto;
+    border-radius: 4px;
+    padding: 0px 5px !important;
+    text-align: center;
+    line-height: 20px;
+    font-size: 10px;
+    top: 21px;
+    z-index: 1;
+    font-family: "nexaregular";
+    font-size: 10px;
+}
+.new_profile_account_filterbar .irs--flat .irs-handle.state_hover>i:first-child, 
+.new_profile_account_filterbar .irs--flat .irs-handle:hover>i:first-child,
+.new_profile_account_filterbar .irs--flat .irs-handle>i:first-child {
+    background: #54a958;
+}
+.new_profile_account_filterbar .irs--flat .irs-handle {
+    width: auto;
+    height: auto;
+}
+
+.new_profile_account_filterbox .select2-container .select2-search--inline .select2-search__field {
+    border: none !important;
+    height: auto;
+    box-shadow: none !important;
+}
 .account_filter_progress_wrap {
     padding: 20px 0 0;
 }
+.new_profile_account_filterbar label,
 .account_filter_progress_wrap h4 {
     font-family: "nexaregular";
     font-size: 14px;
-    margin: 0px;
+    margin: 0px 0 10px;
+    color: #000000;
+}
+.new_profile_account_filterbar label {
+    margin-bottom: 10px;
+    display: block;
 }
 .filter_progress_box {
     border-bottom: 1px solid #858585;
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
+.filter_reset_bottom_bar {
+    padding: 30px 10px 0;
+}
+.filter_reset_bottom_bar .filter-reset {
+    margin: 0;
+    height: 30px;
+    min-width: auto;
+}
+
 #profileAccountPostNew .modal-content {
     padding-top: 0;
 }
@@ -10000,7 +10082,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 #profileAccountPostNew .input-field.col label {
     left: inherit !important;
 }
-
 #create_new_tech_pac .input-field .select2-container--default .select2-selection--single,
 #create_new_design .input-field .select2-container--default .select2-selection--single,
 #profileAccountPostNew .input-field .select2-container--default .select2-selection--single,
@@ -10070,6 +10151,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-transform: capitalize;
 }
 .new_profile_myrfq_details_topbox .posted_time,
 .profile_account_myrfq_innerbox .profile_account_myrfq_box .posted_time {
@@ -10102,7 +10184,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin-left: 0;
 }
 .profile_account_myrfq_innerbox .account_rfq_btn_wrap .rfq_btn_box .rfq_btn {
-    padding: 8px 10px;
+    padding: 8px 10px 6px;
     min-width: inherit;
     margin: 0 0 5px;
 }
@@ -10278,7 +10360,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin: 0 0 0 5px !important;
     min-width: 35px;
     width: auto;
-    padding: 3px 10px;
+    padding: 3px 10px 2px;
     line-height: 24px;
     cursor: pointer;
 }
@@ -14634,6 +14716,9 @@ line-height: 30px;
         .new_profile_account_myrfq_details {
         max-width: 440px;
         margin: 0 auto;
+    }
+    .new_profile_account_rightsidebar_mobile .new_profile_account_filterbar {
+        text-align: left;
     }
     #profileAccountRight .closebtn {
         position: absolute;

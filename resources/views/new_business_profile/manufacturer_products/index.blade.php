@@ -190,50 +190,7 @@
                                         </div>
                                     </div>
                                     <div class="col s12 m12 l3 new_profile_account_rightsidebar_desktop">
-                                        <div class="new_profile_account_filterbar">
-                                            <h4>Filtered by</h4>
-                                            <div class="new_profile_account_filterbox">
-                                                <ul>
-                                                    <li><a href="javascript:void(0);">Designs</a></li>
-                                                    <li class="active"><a href="javascript:void(0);">Production Samples</a></li>
-                                                    <li><a href="javascript:void(0);">Textile</a></li>
-                                                    <li><a href="javascript:void(0);">Yarn</a></li>
-                                                    <li><a href="javascript:void(0);">Ready Stock</a></li>
-                                                    <li><a href="javascript:void(0);">Trims and Accessories</a></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><a href="javascript:void(0);">Knit</a></li>
-                                                    <li><a href="javascript:void(0);">Woven</a></li>
-                                                    <li><a href="javascript:void(0);">Denim</a></li>
-                                                    <li><a href="javascript:void(0);">Woven</a></li>
-                                                    <li><a href="javascript:void(0);">Denim</a></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><a href="javascript:void(0);">Kids</a></li>
-                                                    <li><a href="javascript:void(0);">Male</a></li>
-                                                    <li><a href="javascript:void(0);">Female</a></li>
-                                                    <li><a href="javascript:void(0);">Yarn</a></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><a href="javascript:void(0);">T shirts</a></li>
-                                                    <li><a href="javascript:void(0);">T shirts</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="account_filter_progress_wrap">
-                                                <h4>Lead Time</h4>
-                                                <div class="filter_progress_box">
-                                                    <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRange"><span class="thumb"><span class="value"></span></span>
-                                                    <span id="filterProgressValue">30</span>
-                                                </div>
-
-                                                <h4>MOQ</h4>
-                                                <div class="filter_progress_box_moq">
-                                                    <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoq"><span class="thumb"><span class="value"></span></span>
-                                                    <span id="filterProgressValueMoq">100</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('new_business_profile._product_filter')
                                     </div>
                                 </div>
 

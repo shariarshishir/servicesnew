@@ -62,7 +62,9 @@
 <link href="{{asset('css/animate.css')}}" rel="stylesheet">
 <link rel="shortcut icon" href="{{Storage::disk('s3')->url('public/frontendimages/favicon/favicon.png')}}" type="image/x-icon">
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141181864-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S7SWXJM7V"></script>
+<!--Plugin CSS  rangeSlider file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -132,7 +134,7 @@
 
     function closeProfileAccountNav() {
         document.getElementById("profileAccountRight").style.width = "0";
-    }    
+    }
 
     function toggle_visibility(id) {
         var e = document.getElementById(id);
@@ -142,5 +144,5 @@
         else {
             e.style.display = 'block';
         }
-    }    
+    }
 </script>

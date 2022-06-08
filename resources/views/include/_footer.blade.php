@@ -242,7 +242,8 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
+ <!--Plugin rangeSlider JavaScript file-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('upload-js/vendor/jquery.ui.widget.js')}}"></script>
 <script src="{{asset('upload-js/jquery.iframe-transport.js')}}"></script>
@@ -296,7 +297,7 @@
 
         $('.collapsible').collapsible({
             accordion:true
-        });        
+        });
     })
 
     $(window).on('load', function () {
@@ -917,7 +918,7 @@ $(document).on("keyup",".search_input",function(){
                                     if(key==0){
                                         var url = window.location.origin;
                                         // var image=url+'/storage/'+item.image;
-                                        
+
                                         var image="{{Storage::disk('s3')->url('public/')}}"+item.image;
                                         html += '<div class="product-img"><img src="'+image+'"></div>';
                                     }

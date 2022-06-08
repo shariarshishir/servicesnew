@@ -10,6 +10,7 @@ use Auth;
 use App\Models\Config;
 use App\Models\Manufacture\ProductCategory as ManufactureProductCategory;
 use App\Models\ProductTag;
+use App\Models\ProductTypeMapping;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -33,9 +34,15 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         //product tags
-        view()->composer(['new_business_profile.manufacturer_products.index','new_business_profile.wholesaler_products.index','new_business_profile.create_rfq_modal','business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index','product.details','product.manufactrue_product_details','rfq.create','rfq._create_rfq_form_modal','rfq._edit_rfq_modal'], function($view){
+        view()->composer(['new_business_profile.manufacturer_products.index','new_business_profile.wholesaler_products.index','new_business_profile.create_rfq_modal','business_profile.show','business_profile._edit_modal_data','wholesaler_profile.products.index','product.details','product.manufactrue_product_details','rfq.create','rfq._create_rfq_form_modal','rfq._edit_rfq_modal','new_business_profile._product_filter'], function($view){
             $product_tags=ProductTag::get(['id','name']);
             $view->with(['product_tags'=>$product_tags]);
+        });
+
+        //product type mapping
+        view()->composer(['new_business_profile._product_filter'], function($view){
+            $product_type_mapping=ProductTypeMapping::where('parent_id', '!=', null)->get(['id','title']);
+            $view->with(['product_type_mapping'=>$product_type_mapping]);
         });
 
         view()->composer('include.admin._header', function($view) {

@@ -104,28 +104,14 @@
                                     </div>
                                     <div class="col s12 m6">
                                         <div class="pro_price">
-                                            <span class="price">Price</span>
-                                            @if($list->flag == 'mb') ${{$list->price_per_unit}} / <span class="unit"> {{$list->qty_unit}} @endif </span>
+                                            <span class="price">Lead Time</span>
+                                            @if($list->flag == 'mb') {{$list->lead_time}} days @endif </span>
                                             @if($list->flag == 'shop')
-                                                @php
-                                                    $count= count(json_decode($list->attribute));
-                                                    $count = $count-2;
-                                                @endphp
-                                                @foreach (json_decode($list->attribute) as $k => $v)
-                                                    @if($k == 0 && $v[2] == 'Negotiable')
-                                                        <span class="price_negotiable">$ {{ 'Negotiable' }}</span>
-                                                    @endif
-                                                    @if($loop->last && $v[2] != 'Negotiable')
-                                                        ${{ $v[2] }} / <span class="unit">{{$list->product_unit}}</span> {{-- $ is the value for price unite --}}
-                                                    @endif
-                                                    @if($loop->last && $v[2] == 'Negotiable')
-                                                        @foreach (json_decode($list->attribute) as $k => $v)
-                                                            @if($k == $count)
-                                                                ${{ $v[2]  }} {{ 'Negotiable' }} {{-- $ is the value for price unite --}}
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                @endforeach
+                                                @if($list->product_type == 1)
+                                                    @foreach (json_decode($list->attribute) as $k => $v)
+                                                        @if($loop->last)  {{ $v[3] }} days @endif
+                                                    @endforeach
+                                                @endif
                                             @endif
                                         </div>
                                     </div>

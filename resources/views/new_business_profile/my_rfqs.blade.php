@@ -164,6 +164,12 @@
                                         <h4>My RFQs</h4>
                                     </a>
                                 </li>
+                                <li class="profile_my_rfq {{ Route::is('new.profile.my_queries', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.my_queries', $alias)}}">
+                                        <div class="icon_img">&nbsp;</div>
+                                        <h4>Queries</h4>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -201,6 +207,7 @@
                                                     <span class="rfqView">{{count($rfqLists)}} results</span>
                                                 </div>
                                             </div>
+                                            
                                             <div class="row">
                                                 @foreach($rfqLists as $key=>$rfq)
                                                 <div class="col s12 m6">
@@ -221,11 +228,19 @@
                                                         <div class="account_rfq_btn_wrap" >
                                                             <div class="rfq_btn_box">
                                                                 <button class="btn_white rfq_btn quotation-button" data-rfq_id="{{$rfq['id']}}">Quotations</button>
-                                                                <span>0</span>
+                                                                @if($rfq['unseen_quotation_count'] >0)
+                                                                    <span class="unseen_quotation_count_{{$rfq['id']}}" data-unseen_quotation_count="{{$rfq['unseen_quotation_count']}}">{{$rfq['unseen_quotation_count']}}</span>
+                                                                @else
+                                                                    <span style="display:none" class="unseen_quotation_count_{{$rfq['id']}}" data-unseen_quotation_count="{{$rfq['unseen_quotation_count']}}">{{$rfq['unseen_quotation_count']}}</span>
+                                                                @endif
                                                             </div>
                                                             <div class="rfq_btn_box">
                                                                 <button class="btn_white rfq_btn message-button" data-rfq_id="{{$rfq['id']}}">Messages</button>
-                                                                <span>0</span>
+                                                                @if(($rfq['unseen_count'] - $rfq['unseen_quotation_count']) >0)
+                                                                    <span  class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
+                                                                @else
+                                                                    <span style="display:none" class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>

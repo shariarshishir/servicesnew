@@ -45,7 +45,6 @@ class ViewServiceProvider extends ServiceProvider
                 $messageNotifications = $response->json();
                 $view->with(['notifications'=>$notifications,'messageNotifications'=>$messageNotifications]);
             }
-
         });
 
         view()->composer('include._header', function($view) {
@@ -55,7 +54,8 @@ class ViewServiceProvider extends ServiceProvider
                 //$view->with(['userNotifications'=>$userNotifications]);
 
                 $userNotifications = auth()->user()->unreadNotifications->whereNotIn('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
-                $messageCenterNotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\BuyerWantToContact')->where('read_at',NULL);
+                $response = Http::get(env('RFQ_APP_URL').'/api/notifications/user/'.auth()->user()->sso_reference_id);
+                $messageCenterNotifications = $response->json();
                 $view->with(['userNotifications' => $userNotifications,'messageCenterNotifications' => $messageCenterNotifications]);
             }
 

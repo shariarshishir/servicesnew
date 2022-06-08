@@ -100,7 +100,60 @@ class RfqController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
-        $quotations = Userchat::where('rfq_id',$rfqs[0]['id'])->where('factory',true)->get();
+        $quotations = Userchat::select("*", DB::raw('count(*) as total'))
+        ->groupBy('rfq_id')
+        ->get();
+
+        if(env('APP_ENV') == 'local'){
+            $adminUser = User::Find('5552');
+        }else{
+            $adminUser = User::Find('5771');
+        }
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+    }
+
+    public function myQueries($alias)
+    {
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $user = Auth::user();
+        $token = Cookie::get('sso_token');
+        $response = Http::withToken($token)
+        ->get(env('RFQ_APP_URL').'/api/queries/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
+        $data = $response->json();
+        $rfqLists = $data['data'] ?? [];
+        $rfqsCount = $data['count'];
+        $noOfPages = ceil($data['count']/10);
+        $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
+        $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
+        if(count($rfqs)>0){
+            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
+            $data = $response->json();
+            $chats = $data['data']['messages'];
+            $chatdata = $chats;
+            if($rfqs[0]['user']['user_picture'] !=""){
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $userNameShortForm = "";
+            }else{
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
+                $firstWordFirstLetter = $nameWordArray[0][0];
+                $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+                $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+            }
+        }else{
+            $chatdata = [];
+            $userImage ="";
+            $nameWordArray = explode(" ", $user->name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+        }
+        $quotations = Userchat::select("*", DB::raw('count(*) as total'))
+        ->groupBy('rfq_id')
+        ->get();
+
         if(env('APP_ENV') == 'local'){
             $adminUser = User::Find('5552');
         }else{

@@ -249,25 +249,22 @@
 					<div class="header_message_box" itemscope>
 						<a href="{{route('message.center')}}" itemprop="Message Notification Count" class="message-center-dropdown-trigger" data-target="message-countdown-dropdown">
 							<i class="material-icons">message</i>
-							@if(count($messageCenterNotifications) > 0)
-							<span class="sms_counter">{{ count($messageCenterNotifications) }}</span>
+							@if($messageCenterNotifications['count'] > 0)
+							<span class="sms_counter">{{ $messageCenterNotifications['count'] }}</span>
 							@endif
 						</a>
 
 						<ul id="message-countdown-dropdown" class="dropdown-content card" itemscope itemtype="https://schema.org/ListItem">
-							@if(count($userNotifications)>0)
-								@foreach($userNotifications as $notification)
-									@if($notification->type == 'App\Notifications\BuyerWantToContact')
+							@if($messageCenterNotifications['count'] > 0)
+								@foreach($messageCenterNotifications['data'] as $notification)
 									<li class="notifications-list" itemprop="itemListElement">
-										<a href="{{ url($notification->data['url']) }}" class="dropdown-item" itemprop="Buyer want to contact">
+										<a href="{{route('new.profile.my_rfqs',$notification['business_profile_alias'])}}" class="dropdown-item" itemprop="Buyer want to contact">
 											<i class="fas fa-envelope mr-2"></i>
 											<div class="admin-notification-content" itemscope>
-												<div class="admin-notification-title" itemprop="{{ $notification->data['title'] }}"> {{ $notification->data['title'] }} </div>
-												<div class="text-muted text-sm" itemprop="Create Date" datetime="{{$notification->created_at}}">{{$notification->created_at}}</div>
+												<div class="admin-notification-title" itemprop="{{ $notification['rfq_title'] }}"> {{ $notification['rfq_title'] }} </div>
 											</div>
 										</a>
 									</li>
-									@endif
 								@endforeach
 							@else
 							<li class="no-notifications" itemprop="itemListElement">
@@ -655,8 +652,8 @@
 							<div class="header_message_box mobile_top_icon_box" itemscope>
 								<a href="{{route('message.center')}}" itemprop="Message Center">
 									<i class="material-icons">message</i>
-									@if(count($messageCenterNotifications) > 0)
-									<span class="sms_counter">{{ count($messageCenterNotifications) }}</span>
+									@if($messageCenterNotifications['count'] > 0)
+									<span class="sms_counter">{{ $messageCenterNotifications['count'] }}</span>
 									@endif
 								</a>
 							</div>

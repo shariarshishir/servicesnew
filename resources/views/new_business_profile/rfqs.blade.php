@@ -101,6 +101,12 @@
                                         <h4>My RFQs</h4>
                                     </a>
                                 </li>
+                                <li class="profile_my_rfq {{ Route::is('new.profile.my_queries', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.my_queries', $alias)}}">
+                                        <div class="icon_img">&nbsp;</div>
+                                        <h4>Queries</h4>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

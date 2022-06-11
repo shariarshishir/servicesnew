@@ -24,7 +24,8 @@
             var authUserId = '{{auth()->user()->sso_reference_id}}';
             var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
 
-            if(data.factory == true){ // message for supplier
+            // message for supplier
+            if(data.factory == true && data.to_id == authUserId){ 
                 var quotationClass = '.unseen_quotation_count_'+data.rfq_id;
                 var unseenQuotationCount = $(quotationClass).attr('data-unseen_quotation_count');
                 if(unseenQuotationCount == 0){
@@ -37,7 +38,9 @@
                     $(quotationClass).text(parseInt(unseenQuotationCount)+1);
                     $(quotationClass).attr('data-unseen_quotation_count',parseInt(unseenQuotationCount)+1);
                 }
-            }else if(data.factory == false){ // message for buyer
+            }
+            // message for buyer
+            else if(data.factory == false && data.to_id == authUserId){ 
                 var messageClass = '.unseen_message_count_'+data.rfq_id;
                 var unseenMessageCount = $(messageClass).attr('data-unseen_message_count');
                 if(unseenMessageCount == 0){
@@ -69,12 +72,12 @@
             $('.rfq_review_message_box').append(msgHtml);
         });
 
-        $('#messagebox').keypress(function(event){
+        $('.messagebox').keypress(function(event){
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13'){
                 event.preventDefault();
                 var from_user_image = '{{$userImage}}';
-                let sent_message = $('#messagebox').val();
+                let sent_message = $(this).val();
                 var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
                 let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
                 var envMode = "{{ env('APP_ENV') }}";
@@ -87,7 +90,7 @@
                 let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': activeRfqId,'factory':false,'product': null};
                 socket.emit('new message', message);
                 $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
-                $('#messagebox').val('');
+                $(this).val('');
             }
         });
 
@@ -95,7 +98,7 @@
             event.preventDefault();
             var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
             var from_user_image = '{{$userImage}}';
-            let sent_message = $('#messagebox').val();
+            let sent_message = $(this).closest('.rfq_message_box_bottom').children('.messagebox').val();
             let from_user_sso_reference_id = '{{$user->sso_reference_id}}';
             var envMode = "{{ env('APP_ENV') }}";
             var to_user_id;
@@ -106,7 +109,7 @@
             }
             let message = {'message': sent_message, 'image': "", 'from_id' : from_user_sso_reference_id, 'to_id' : to_user_id, 'rfq_id': activeRfqId,'factory':false,'product': null};
             socket.emit('new message', message);
-            $('#messagebox').val('');
+            $(this).closest('.rfq_message_box_bottom').children('.messagebox').val('');
         });
        
     });

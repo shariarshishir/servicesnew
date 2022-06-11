@@ -77,8 +77,8 @@ class RfqController extends Controller
         $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
         $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
-        if(count($rfqs)>0){
-            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
+        if(count($rfqs)>0){ 
+            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqLists[0]['id'].'/user/'.$user->sso_reference_id);
             $data = $response->json();
             $chats = $data['data']['messages'];
             $chatdata = $chats;

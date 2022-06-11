@@ -24,6 +24,30 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
+
+    public function importBusinessProfiles()
+    {
+        //$usersArr = array('akh@merchantbay.com','maisha@merchantbay.com','fabric@merchantbay.com','classic@merchantbay.com','dalim@merchantbay.com','alamin@merchantbay.com','sonali@merchantbay.com','nadia@merchantbay.com','fahima@merchantbay.com','rabbi@merchantbay.com','mehek@merchantbay.com','shahjalal@merchantbay.com','bestfriend@merchantbay.com','Silver@merchantbay.com','alifa@merchantbay.com','perplex@merchantbay.com','sorif@merchantbay.com','nahar@merchantbay.com','amz@merchantbay.com','handz@merchantbay.com','jalil@merchantbay.com','lithe@merchantbay.com','mamuni@merchantbay.com','ndknit@merchantbay.com','orange@merchantbay.com','pcapparels@merchantbay.com','uturn@merchantbay.com','sawda@merchantbay.com','rafiknit@merchantbay.com','rjfahion@merchantbay.com','gmx@merchanbay.com','union@merchantbay.com','atlanta@merchantbay.com','abapparels@merchantbay.com','orchid@merchantbay.com','sunbird@merchantbay.com');
+        $users = User::whereIn('email', ['akh@merchantbay.com','maisha@merchantbay.com','fabric@merchantbay.com','classic@merchantbay.com','dalim@merchantbay.com','alamin@merchantbay.com','sonali@merchantbay.com','nadia@merchantbay.com','fahima@merchantbay.com','rabbi@merchantbay.com','mehek@merchantbay.com','shahjalal@merchantbay.com','bestfriend@merchantbay.com','Silver@merchantbay.com','alifa@merchantbay.com','perplex@merchantbay.com','sorif@merchantbay.com','nahar@merchantbay.com','amz@merchantbay.com','handz@merchantbay.com','jalil@merchantbay.com','lithe@merchantbay.com','mamuni@merchantbay.com','ndknit@merchantbay.com','orange@merchantbay.com','pcapparels@merchantbay.com','uturn@merchantbay.com','sawda@merchantbay.com','rafiknit@merchantbay.com','rjfahion@merchantbay.com','gmx@merchanbay.com','union@merchantbay.com','atlanta@merchantbay.com','abapparels@merchantbay.com','orchid@merchantbay.com','sunbird@merchantbay.com','jmknitwear@merchantbay.com'])->get();
+
+        foreach($users as $user) {
+            $business_profile_data=[
+                'business_name' => $user->company_name,
+                'alias'   => $this->createAlias($user->company_name),
+                'user_id'       => $user->id,
+                'business_type' => 'manufacturer', // forcefully set Manufacturer type
+                'has_representative'=> 1,
+                'industry_type' => 'apparel',
+            ];
+            $business_profile = BusinessProfile::create($business_profile_data);
+            //$companyOverview = $this->createCompanyOverview($request, $business_profile->id);
+        }
+
+        $usersWithProfiles = User::with('businessProfile')->whereIn('email', ['akh@merchantbay.com','maisha@merchantbay.com','fabric@merchantbay.com','classic@merchantbay.com','dalim@merchantbay.com','alamin@merchantbay.com','sonali@merchantbay.com','nadia@merchantbay.com','fahima@merchantbay.com','rabbi@merchantbay.com','mehek@merchantbay.com','shahjalal@merchantbay.com','bestfriend@merchantbay.com','Silver@merchantbay.com','alifa@merchantbay.com','perplex@merchantbay.com','sorif@merchantbay.com','nahar@merchantbay.com','amz@merchantbay.com','handz@merchantbay.com','jalil@merchantbay.com','lithe@merchantbay.com','mamuni@merchantbay.com','ndknit@merchantbay.com','orange@merchantbay.com','pcapparels@merchantbay.com','uturn@merchantbay.com','sawda@merchantbay.com','rafiknit@merchantbay.com','rjfahion@merchantbay.com','gmx@merchanbay.com','union@merchantbay.com','atlanta@merchantbay.com','abapparels@merchantbay.com','orchid@merchantbay.com','sunbird@merchantbay.com','jmknitwear@merchantbay.com'])->get();
+
+        return response()->json(['usersWithProfiles'=>$usersWithProfiles, 'code'=>'True'],200);
+    }
+
     public function index()
     {
         $users=User::where('is_email_verified',1)->all();

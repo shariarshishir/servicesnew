@@ -32,7 +32,7 @@
                             </div>
                             <div class="invoice_page_header">
                                 <legend>
-                                    <i class="fa fa-table fa-fw "></i> Pro-Forma Invoice
+                                    <i class="fa fa-table fa-fw "></i> Purchase Order
                                 </legend>
                             </div>
 
@@ -365,7 +365,7 @@
             <table class="table">
                 <thead style="background: #ddd;">
                     <tr style="border: none; padding: 0; 0; margin: 0;">
-                        <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="padding: 0; margin: 0; font-size: 16px; line-height: 22px;"><i class="fa fa-table fa-fw "></i> Pro-Forma Invoice</h6></th>
+                        <th style="border: none; padding: 0; margin: 0;" width: 100% ><h6 style="padding: 0; margin: 0; font-size: 16px; line-height: 22px;"><i class="fa fa-table fa-fw "></i> Purchase Order</h6></th>
                     </tr>
                 </thead>
             </table>

@@ -58,6 +58,7 @@ Route::get('raw-materials',[ProductController::class, 'rawMaterials']);
 Route::get('product/details/{flag}/{id}', [ProductController::class,'productDetails']);
 // sso user registation
 Route::post('user/signup',[UserController::class, 'signUp']);
+Route::get('importbusinessprofiles',[UserController::class, 'importBusinessProfiles']);
 
 
 //Auth api

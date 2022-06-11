@@ -106,7 +106,7 @@
     function changeunitprice(el)
     {
         let unitprice = $(el).val() != "" ? parseFloat($(el).val()) : 0;
-        let unit = $(el).closest("tr").find(".unit").val() != "" ? parseInt($(el).closest("tr").find(".unit").val()) : 0;
+        let unit = $(el).closest("tr").find(".unit").val() != "" ? parseFloat($(el).closest("tr").find(".unit").val()) : 0;
         let tax = $(el).closest("tr").find(".taxprice").val() != "" ? parseFloat($(el).closest("tr").find(".taxprice").val()) : 0;
         let total = unit * unitprice;
         let taxtotal = total + (total * (tax / 100));

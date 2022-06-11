@@ -150,7 +150,7 @@
                                                                         <span>{{ $shippingDetails->uom->name }} </span>
                                                                     </td>
                                                                     <td data-title="Per UOM Price ($)">
-                                                                        <span>{{ $shippingDetails->shipping_details_uom }}</span>
+                                                                        <span>{{ $shippingDetails->shipping_details_per_uom_price }}</span>
                                                                     </td>
                                                                     <td data-title="QTY">
                                                                         <span>{{ $shippingDetails->shipping_details_qty }}</span>
@@ -261,25 +261,25 @@
                                                         <div class="col col-sm-6 col-md-4 col-lg-3">
                                                             <div class="has-feedback">
                                                                 <label>Name of the bank</label> <br>
-                                                                <span> {{$po->proFormaAdvisingBank->bank_name}} </span>
+                                                                <span> {{$po->proFormaAdvisingBank->bank_name ?? ""}} </span>
                                                             </div>
                                                         </div>
                                                         <div class="col col-sm-6 col-md-4 col-lg-3">
                                                             <div class="has-feedback">
                                                                 <label>Branch name</label><br>
-                                                                <span>{{ $po->proFormaAdvisingBank->branch_name }}</span>
+                                                                <span>{{ $po->proFormaAdvisingBank->branch_name ?? "" }}</span>
                                                             </div>
                                                         </div>
                                                         <div class="col col-sm-6 col-md-4 col-lg-3">
                                                             <div class="has-feedback">
                                                                 <label>Address of the bank </label><br>
-                                                                <span> {{ $po->proFormaAdvisingBank->bank_address }} </span>
+                                                                <span> {{ $po->proFormaAdvisingBank->bank_address ?? "" }} </span>
                                                             </div>
                                                         </div>
                                                         <div class="col col-sm-6 col-md-4 col-lg-3">
                                                             <div class="has-feedback">
                                                                 <label>Swift code</label><br>
-                                                                <span>{{ $po->proFormaAdvisingBank->swift_code }}</span>
+                                                                <span>{{ $po->proFormaAdvisingBank->swift_code ?? "" }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -517,10 +517,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 5px 10px 5px 0; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{$po->proFormaAdvisingBank->bank_name}} </p></td>
-                        <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{ $po->proFormaAdvisingBank->branch_name }} </p></td>
-                        <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{ $po->proFormaAdvisingBank->bank_address }}</p></td>
-                        <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{ $po->proFormaAdvisingBank->swift_code }}</p></td>
+                        <td style="padding: 5px 10px 5px 0; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{$po->proFormaAdvisingBank->bank_name ?? ""}} </p></td>
+                        <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{ $po->proFormaAdvisingBank->branch_name ?? "" }} </p></td>
+                        <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{ $po->proFormaAdvisingBank->bank_address ?? "" }}</p></td>
+                        <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">{{ $po->proFormaAdvisingBank->swift_code ?? "" }}</p></td>
                     </tr>
                     
                 </tbody>

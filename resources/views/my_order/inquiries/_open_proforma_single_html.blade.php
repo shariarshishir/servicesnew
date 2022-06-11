@@ -136,7 +136,7 @@
                                                 <span>{{ $shippingDetails->uom->name }} </span>
                                             </td>
                                             <td data-title="Per UOM Price ($)">
-                                                <span>{{ $shippingDetails->shipping_details_uom }}</span>
+                                                <span>{{ $shippingDetails->shipping_details_per_uom_price }}</span>
                                             </td>
                                             <td data-title="QTY">
                                                 <span>{{ $shippingDetails->shipping_details_qty }}</span>

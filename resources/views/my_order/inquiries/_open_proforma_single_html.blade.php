@@ -5,11 +5,11 @@
 
     <div class="card">
         <div class="invoice_top_button_wrap">
-           {{-- @if(auth()->id() == $po->buyer_id && $po->status != 1)
+            @if(auth()->id() == $po->buyer_id && $po->status != 1)
             <!-- <button class="btn_green" type="submit" onclick="work_trigger()" id="createRfqForm" >Accept</button> -->
             <a class="waves-effect waves-light btn_green modal-trigger"  href="#acceptOrderDetailsModal">Accept</a>
             <a class="waves-effect waves-light btn_green modal-trigger"  href="#rejectOrderDetailsModal">Reject</a>
-            @endif --}}
+            @endif
             {{-- <button onclick="printDiv('purchase_order_wrap');" id="printPageButtonTrigger" class="btn_green printPageButton">Print</button> --}}
         </div>
 
@@ -41,42 +41,50 @@
 
                         <div class="input-field has_feedback_wrap">
                             <div class="row">
-                                <div class="col s6 m4 l2">
+                                <div class="col s6 m4 l3">
                                     <div class="form-group input-field has-feedback">
                                         <label>Pro-forma ID</label>
                                         <p><span>{{ $po->proforma_id }}</span></p>
                                     </div>
                                 </div>
-                                <div class="col s6 m4 l2">
+                                <div class="col s6 m4 l3">
                                     <div class="form-group input-field has-feedback">
                                         <label>Pro-forma Date</label>
                                         <span>{{ $po->proforma_date }}</span>
                                     </div>
                                 </div>
-                                <div class="col s6 m4 l2">
+                                <div class="col s6 m4 l3">
                                     <div class="form-group input-field has-feedback">
                                         <label>Payment Within</label>
                                         <span>{{ $po->payment_within  }}</span>
                                     </div>
                                 </div>
-                                <div class="col s6 m4 l2">
+                                <div class="col s6 m4 l3">
                                     <div class="form-group input-field has-feedback">
                                         <label>Payment term</label>
                                         <span>{{ $po->paymentTerm->name  }}</span>
                                     </div>
                                 </div>
-                                <div class="col s6 m4 l2">
+                            </div>
+                            <div class="row">
+                                <div class="col s6 m4 l3">
                                     <div class="form-group input-field has-feedback">
                                         <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                         <label>Shipment Term</label>
                                         <span>{{$po->shipmentTerm->name}}</span>
                                     </div>
                                 </div>
-                                <div class="col s6 m4 l2">
+                                <div class="col s6 m4 l3">
                                     <div class="form-group input-field has-feedback">
                                         <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                         <label>Shipping Address</label>
                                         <span> {{$po->shipping_address}} </span>
+                                    </div>
+                                </div>
+                                <div class="col s6 m4 l3">
+                                    <div class="form-group input-field has-feedback">
+                                        <label>Shipping Date</label>
+                                        <span>{{ $po->shipping_date }}</span>
                                     </div>
                                 </div>
                             </div>

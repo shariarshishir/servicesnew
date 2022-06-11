@@ -97,6 +97,12 @@
                                                                 <span> {{$po->shipping_address}} </span>
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-6 col-md-4 col-lg-2">
+                                                            <div class="form-group has-feedback">
+                                                                <label>Shipping Date</label>
+                                                                <span>{{ $po->shipping_date }}</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -394,6 +400,10 @@
                         <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"><b>{{$po->shipping_address}}</b></p></td>
                         <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">Shipping Charge:</p></td>
                         <td style="padding: 5px 10px; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"><b>{{ $po->payable_party}}</b></p></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 10px 5px 0; margin: 0;"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;">Shipping Date:</p></td>
+                        <td style="padding: 5px 10px; margin: 0;" colspan="5"><p style="font-size: 14px; line-height: 22px; margin: 0; padding: 0;"><b>{{ $po->shipping_date  }}</b></p></td>
                     </tr>
                 </tbody>
             </table>

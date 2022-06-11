@@ -108,6 +108,13 @@
                                                     <input type="text" class="form-control" required name="shipping_address"/>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-2 input-field">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Shipping Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="date" class="form-control" required name="shipping_date"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <input type="hidden" name="selected_buyer_id" value="{{$buyer->id}}" />

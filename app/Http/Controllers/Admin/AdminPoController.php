@@ -80,6 +80,7 @@ class AdminPoController extends Controller
             $data->generated_po_from_rfq = $request->input('generated_po_from_rfq');
             $data->proforma_id = $request->input('po_id');
             $data->proforma_date = $request->input('po_date');
+            $data->shipping_date = $request->input('shipping_date');
             $data->payment_within = $request->input('payment_within');
             $data->payment_term_id= $request->input('payment_term');
             $data->shipment_term_id = $request->input('shipment_term');

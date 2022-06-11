@@ -15,7 +15,11 @@
 
         <div class="invoice_page_header">
             <legend>
+                @if($po->po_no)
+                <i class="fa fa-table fa-fw "></i> Purchase Order
+                @else
                 <i class="fa fa-table fa-fw "></i> Pro-Forma Invoice
+                @endif
             </legend>
         </div>
 

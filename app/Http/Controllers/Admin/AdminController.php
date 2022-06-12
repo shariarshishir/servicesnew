@@ -42,11 +42,11 @@ class AdminController extends Controller
        if(Auth::guard('admin')->attempt($request->only('email','password'),$request->filled('remember'))){
             Auth::guard('admin')->user()->update(['fcm_token'=>$request->fcm_token]);
             return redirect()
-                ->intended(route('admin.dashboard'))
+                ->route('admin.dashboard')
                 ->with('status','You are Logged in as Admin!');
         }
         return redirect()
-        ->back()
+        ->route('admin.showLoginForm')
         ->withInput()
         ->withErrors('Login failed, please try again!');
 

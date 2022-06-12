@@ -1,5 +1,10 @@
 @push('js')
     <script>
+        $(document).ready(function(){
+            $('form#po-generate-form').submit(function(){
+                $(this).find('.submit_po_form').prop('disabled', true);
+            });
+        })
         function addShippingDetails()
         {
             var shippingDetailsInputField = '<tr>';
@@ -28,7 +33,7 @@
             shippingDetailsInputField += '</select>';
             shippingDetailsInputField += '</td>';
             shippingDetailsInputField += '<td data-title="Per UOM Price ($)"> ';
-            shippingDetailsInputField += '<input type="number" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  onkeyup="changeunit(this)" required/>';
+            shippingDetailsInputField += '<input type="number" class="form-control unit" step="any" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_per_uom_price[]"  onkeyup="changeunit(this)" required/>';
             shippingDetailsInputField += '</td>';
             shippingDetailsInputField += '<td data-title="QTY">';
             shippingDetailsInputField += '<input type="text" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;" name="shipping_details_qty[]" onkeyup="changeunitprice(this)" required/>';

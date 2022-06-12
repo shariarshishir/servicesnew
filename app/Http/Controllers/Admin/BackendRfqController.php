@@ -27,7 +27,8 @@ class BackendRfqController extends Controller
         $rfqs = $data['data'];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
-        return view('admin.rfq.index',compact('rfqs','rfqsCount','noOfPages'));
+        $proformas = Proforma::select('generated_po_from_rfq')->get();
+        return view('admin.rfq.index',compact('rfqs','rfqsCount','noOfPages','proformas'));
     }
 
     public function fetchRFQsByQueryStringOrPagination(Request $request){

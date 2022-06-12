@@ -27,7 +27,7 @@
                         @include('include.admin._message')
 
                         <div class="widget-body p-0">
-                            <form action="{{ route('proforma_invoices.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('proforma_invoices.store') }}" id="po-generate-form" method="post" enctype="multipart/form-data">
                             @csrf
                                 <!-- <div style="padding-top: 30px;"></div> -->
                                 <div class="row beneficiary_info_wrap">
@@ -165,8 +165,8 @@
                                                         <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
                                                         <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
                                                         <th>UOM <span class="required_star" style="color: red;">*</span></th>
-                                                        <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
-                                                        <th>QTY <span class="required_star" style="color: red;">*</span></th>
+                                                        <th>Per UOM Price ($)</th>
+                                                        <th>QTY</th>
                                                         <!-- <th style="width:15%;">Tax</th> -->
                                                         <th>Total ($)</th>
                                                         <th></th>
@@ -199,7 +199,7 @@
                                                             </select>
                                                         </td>
                                                         <td data-title="Per UOM Price ($)">
-                                                            <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)"/>
+                                                            <input type="number" name="shipping_details_per_uom_price[]" step="any" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)"/>
                                                         </td>
                                                         <td data-title="QTY">
                                                             <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)"/>
@@ -360,19 +360,19 @@
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-3 input-field">
                                             <div class="has-feedback">
-                                                <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <label>Branch name</label>
                                                 <input type="text" name="branch_name" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-3 input-field">
                                             <div class="has-feedback">
-                                                <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <label>Address of the bank</label>
                                                 <input type="text" name="bank_address" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-3 input-field">
                                             <div class="has-feedback">
-                                                <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                <label>Swift code</label>
                                                 <input type="text" name="swift_code" class="form-control" />
                                             </div>
                                         </div>
@@ -420,7 +420,7 @@
                                 </div>
 
                                 <div class="right invoice_submit">
-                                    <button type="submit" class="btn_green btn-success">
+                                    <button type="submit" class="btn_green btn-success submit_po_form">
                                         <i class="fa fa-send"></i> Submit
                                     </button>
                                 </div>

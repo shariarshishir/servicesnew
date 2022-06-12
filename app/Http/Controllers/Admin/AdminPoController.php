@@ -50,7 +50,14 @@ class AdminPoController extends Controller
     public function index ()
     {
         $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
-        $merchantbayUserInfo = User::where("id", 5552)->first();
+        if( env('APP_ENV') == 'production') 
+        {
+            $merchantbayUserInfo = User::where("id", 5771)->first();
+        }
+        else
+        {
+            $merchantbayUserInfo = User::where("id", 5552)->first();
+        }
         //dd($merchantbayUserInfo);
         return view('admin.proforma_invoice.index',compact('proformaInvoices', 'merchantbayUserInfo'));
     }
@@ -61,7 +68,14 @@ class AdminPoController extends Controller
         $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
         $supplierInfo = User::where('id', $po->created_by)->first();
-        $merchantbayUserInfo = User::where("id", 5552)->first();
+        if( env('APP_ENV') == 'production') 
+        {
+            $merchantbayUserInfo = User::where("id", 5771)->first();
+        }
+        else
+        {
+            $merchantbayUserInfo = User::where("id", 5552)->first();
+        }        
         if($po){
             return view('admin.proforma_invoice.show',compact('po','users','supplierInfo','totalInvoice','merchantbayUserInfo'));
         }

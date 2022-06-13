@@ -50,8 +50,8 @@
                             <h4>What are the services Merchant Bay offers?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay offers an easy access point to Bangladesh RMG industry. From design, product development and material sourcing, Merchant Bay has it all in one place so that your sourcing experience become easy, transparent and traceable. </p>
-                            <p>Merchant Bay does this by making Bangladesh's RMG supply chain visible. Supplier profiles are elaborate and made to increase trust and global reach. Manufacturers can also source raw materials and subscribe to Smart Order Management Dashboard to increase their operational efficiency.  </p>
+                            <p>Merchant Bay offers an easy access point to Bangladesh RMG industry. From <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a>, product development and <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">material sourcing</a>, Merchant Bay has it all in one place so that your sourcing experience become easy, transparent and traceable. </p>
+                            <p>Merchant Bay does this by making Bangladesh's RMG supply chain visible. Supplier profiles are elaborate and made to increase trust and global reach. Manufacturers can also source raw materials and subscribe to <a href="https://accounts.merchantbay.com/login">Smart Order Management Dashboard</a> to increase their operational efficiency.</p>
                         </div>
                     </li>
                     <li data-title="What makes Merchant Bay unique?">
@@ -67,7 +67,7 @@
                             <h4>What products can I buy from Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can source anything related to RMG manufacturing from Merchant Bay. We have a diverse product catalog ranging from design, textile, yarn, trims and accessories. </p>
+                            <p>You can source anything related to RMG manufacturing from Merchant Bay. We have a diverse product catalog ranging from <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a>, <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">textile</a>, <a href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}">yarn</a>, <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">trims and accessories</a>.</p>
                         </div>
                     </li>
                     <li data-title="What is the price range for Merchant Bay's products?">
@@ -75,19 +75,7 @@
                             <h4>What is the price range for Merchant Bay's products?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Price largely depends on design and volume. To get the price for your design send us a Request for Quotation.</p>
-                        </div>
-                    </li>
-                    <li data-title="How can I get latest updates from Merchant Bay?">
-                        <div class="collapsible-header">
-                            <h4>How can I get latest updates from Merchant Bay?</h4>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay post its updates in Facebook, Twitter, Linkedin and Instagram.</p>
-                            <p>Facebook: <a target="_blank" href="https://www.facebook.com/merchantbaybd">https://www.facebook.com/merchantbaybd</a></p>
-                            <p>Twitter: <a target="_blank" href="https://twitter.com/merchantbay_com">https://twitter.com/merchantbay_com</a></p>
-                            <p>LinkedIn: <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">https://www.linkedin.com/company/merchantbay/mycompany/</a></p>
-                            <p>Instagram: <a target="_blank" href="https://www.instagram.com/merchant.bay/">https://www.instagram.com/merchant.bay/</a></p>
+                            <p>Price largely depends on <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a> and volume. To get the price for your design send us a <a href="{{route('rfq.create')}}">Request for Quotation</a>.</p>
                         </div>
                     </li>
                     <li data-title="What if I need to modify a product, like I need to attach my logo in design?">
@@ -95,7 +83,7 @@
                             <h4>What if I need to modify a product, like I need to attach my logo in design?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can modify a design to your needs. You can also develop your own design with Merchant Bay Studio.</p>
+                            <p>You can modify a design to your needs. You can also develop your own design with Merchant Bay <a href="{{route('product.type.mapping',['studio', 'design'])}}">Studio</a>.</p>
                         </div>
                     </li>
                     <li data-title="What to do if I don't find what I am looking for?">
@@ -103,7 +91,7 @@
                             <h4>What to do if I don't find what I am looking for?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Post an RFQ specifying your product. Suppliers will develop your concept to design.</p>
+                            <p>Post an <a href="{{route('rfq.create')}}">RFQ</a> specifying your product. <a href="{{route('suppliers')}}">Suppliers</a> will develop your concept to <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a>.</p>
                         </div>
                     </li>
                     <li data-title="What is an RFQ?">
@@ -111,7 +99,7 @@
                             <h4>What is an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Ans: RFQ is the system that enables Merchant Bay users to post the request and get matched suppliers to source anything related to apparel in minimum time. Our matching system is 2x more efficient compared to traditional process. </p>
+                            <p>Ans: <a href="{{route('rfq.create')}}">RFQ</a> is the system that enables Merchant Bay users to post the request and get matched <a href="{{route('suppliers')}}">suppliers</a> to source anything related to apparel in minimum time. Our matching system is 2x more efficient compared to traditional process. </p>
                         </div>
                     </li>
                     <li data-title="What to do if I don't receive any reply on my RFQ?">
@@ -119,7 +107,7 @@
                             <h4>What to do if I don't receive any reply on my RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Report a complaint or Contact Merchant Bay, we will get in touch with you as soon as possible.</p>
+                            <p>Report a complaint or <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Contact</a> Merchant Bay, we will get in touch with you as soon as possible.</p>
                         </div>
                     </li>
                     <li data-title="What is a Smart Order Management Dashboard?">
@@ -127,7 +115,7 @@
                             <h4>What is a Smart Order Management Dashboard?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Smart Order Management Dashboard provides easy actionable data to help ease the burden of maintaining multiple orders. Smart OMD reduces order complexities and increases efficiency. </p>
+                            <p><a href="https://omd.merchantbay.com/">Smart Order Management Dashboard</a> provides easy actionable data to help ease the burden of maintaining multiple orders. Smart OMD reduces order complexities and increases efficiency. </p>
                         </div>
                     </li>
                     <li data-title="What modules Merchant Bay offers in Order Management Dashboard?">
@@ -146,7 +134,7 @@
                             <h4>How can I buy from Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can access the catalog of designs, library of textile, yarn and accessories and/or send us an RFQ. We match your query with the best supplier of your interest within 48 hours. </p>
+                            <p>You can access the catalog of <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, library of <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">textile</a>, <a href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}">yarn</a> and <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">accessories</a> and/or send us an <a href="{{route('rfq.create')}}">RFQ</a>. We match your query with the best supplier of your interest within 48 hours. </p>
                         </div>
                     </li>
                     <li data-title="How can I sell in Merchant Bay?">
@@ -154,7 +142,7 @@
                             <h4>How can I sell in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Sign up to Merchant Bay then open a business profile and list out your designs, production samples and ready stock products. </p>
+                            <p><a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}">Sign up</a> to Merchant Bay then open a business profile and list out your <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, production samples and <a href="{{route('product.type.mapping',['studio', 'ready_stock'])}}">ready stock products</a>. </p>
                         </div>
                     </li>
                     <li data-title="How can I open my business profile in Merchant Bay?">
@@ -162,7 +150,7 @@
                             <h4>How can I open my business profile in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can open a business profile through a business profile builder. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the Join MB Pool Button and start building your Business Profile.</p>
+                            <p>You can open a business profile through a <a href="{{route('business.profile.create')}}">business profile builder</a>. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the <a href="{{route('business.profile.create')}}">Join MB Pool</a> Button and start building your Business Profile.</p>
                         </div>
                     </li>
                     <li data-title="How can I connect with Merchant Bay?">
@@ -170,7 +158,7 @@
                             <h4>How can I connect with Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can connect with Merchant Bay through clicking the Talk to Us button and setting up an appointment.</p>
+                            <p>You can connect with Merchant Bay through clicking the <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a> button and setting up an appointment.</p>
                         </div>
                     </li>
                     <li data-title="How can I verify my business profile?">
@@ -186,7 +174,7 @@
                             <h4>How to post an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Ans: You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
+                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
                         </div>
                     </li>
                     <li data-title="How does RFQ work?">
@@ -194,7 +182,7 @@
                             <h4>How does RFQ work?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>RFQ is designed to handle the complexity of the sourcing. Our algorithm matches your query with suppliers and come back with suggestions instantly. </p>
+                            <p><a href="{{route('rfq.create')}}">RFQ</a> is designed to handle the complexity of the sourcing. Our algorithm matches your query with <a href="{{route('suppliers')}}">suppliers</a> and come back with suggestions instantly. </p>
                         </div>
                     </li>
                     <li data-title="How long does product development take in Merchant Bay?">
@@ -203,6 +191,14 @@
                         </div>
                         <div class="collapsible-body">
                             <p>Product development is subject to product complexity. We promise industry leading development time. </p>
+                        </div>
+                    </li>
+                    <li data-title="How can I get latest updates from Merchant Bay?">
+                        <div class="collapsible-header">
+                            <h4>How can I get latest updates from Merchant Bay?</h4>
+                        </div>
+                        <div class="collapsible-body">
+                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay posts its updates in <a target="_blank" href="https://www.facebook.com/merchantbaybd">Facebook</a>, <a target="_blank" href="https://twitter.com/merchantbay_com">Twitter</a>, <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">Linkedin</a> and <a target="_blank" href="https://www.instagram.com/merchant.bay/">Instagram</a>.</p>
                         </div>
                     </li>
                     <!-- How end -->
@@ -253,7 +249,7 @@
                             <h4>Can Merchant Bay manage the compliance and regulatory aspect of a product?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay suppliers are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
+                            <p>Merchant Bay <a href="{{route('suppliers')}}">suppliers</a> are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
                         </div>
                     </li>
                     <!-- Can End -->
@@ -290,7 +286,7 @@
                             <h4>Does Merchant Bay offer design support?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay has a world class design team for customer design support.</p>
+                            <p>Yes, Merchant Bay has a world class <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a> team for customer design support.</p>
                         </div>
                     </li>
                     <li data-title="Are Merchant Bay in-house designers up-to-date with latest fashion trends?">
@@ -306,7 +302,7 @@
                             <h4>Do Merchant Bay work with start-up brands and small businesses?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay empowers new brands and SME factories to source and operate efficiently. To know more Book a Call. </p>
+                            <p>Yes, Merchant Bay empowers new brands and SME factories to source and operate efficiently. To know more <a href="javascript:void(0);" class="btn_green btn_talk" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Book a Call</a>. </p>
                         </div>
                     </li>
                     <li data-title="Do Merchant Bay have factory support?">
@@ -314,7 +310,7 @@
                             <h4>Do Merchant Bay have factory support?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay has vast suppliers in its supplier pool. </p>
+                            <p>Yes, Merchant Bay has vast <a href="{{route('suppliers')}}">suppliers</a> in its supplier pool. </p>
                         </div>
                     </li>
                     <li data-title="Do Merchant Bay have sample support?">
@@ -353,8 +349,8 @@
                             <h4>What are the services Merchant Bay offers?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay offers an easy access point to Bangladesh RMG industry. From design, product development and material sourcing, Merchant Bay has it all in one place so that your sourcing experience become easy, transparent and traceable. </p>
-                            <p>Merchant Bay does this by making Bangladesh’s RMG supply chain visible. Supplier profiles are elaborate and made to increase trust and global reach. Manufacturers can also source raw materials and subscribe to Smart Order Management Dashboard to increase their operational efficiency.  </p>
+                            <p>Merchant Bay offers an easy access point to Bangladesh RMG industry. From <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a>, product development and <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">material sourcing</a>, Merchant Bay has it all in one place so that your sourcing experience become easy, transparent and traceable.</p>
+                            <p>Merchant Bay does this by making Bangladesh's RMG supply chain visible. Supplier profiles are elaborate and made to increase trust and global reach. Manufacturers can also source raw materials and subscribe to <a href="https://accounts.merchantbay.com/login">Smart Order Management Dashboard</a> to increase their operational efficiency.</p>
                         </div>
                     </li>
                     <li>
@@ -370,43 +366,31 @@
                             <h4>What products can I buy from Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can source anything related to RMG manufacturing from Merchant Bay. We have a diverse product catalog ranging from design, textile, yarn, trims and accessories. </p>
+                            <p>You can source anything related to RMG manufacturing from Merchant Bay. We have a diverse product catalog ranging from <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a>, <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">textile</a>, <a href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}">yarn</a>, <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">trims and accessories</a>. </p>
                         </div>
                     </li>
                     <li>
                         <div class="collapsible-header">
-                            <h4>What is the price range for Merchant Bay’s products?</h4>
+                            <h4>What is the price range for Merchant Bay's products?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Price largely depends on design and volume. To get the price for your design send us a Request for Quotation.</p>
+                            <p>Price largely depends on <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a> and volume. To get the price for your design send us a <a href="{{route('rfq.create')}}">Request for Quotation</a>.</p>
                         </div>
                     </li>
                     <li>
                         <div class="collapsible-header">
-                            <h4>How can I get latest updates from Merchant Bay?</h4>
+                            <h4>What if I need to modify a product, like I need to attach my logo in design?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay post its updates in Facebook, Twitter, Linkedin and Instagram.</p>
-                            <p>Facebook: <a target="_blank" href="https://www.facebook.com/merchantbaybd">https://www.facebook.com/merchantbaybd</a></p>
-                            <p>Twitter: <a target="_blank" href="https://twitter.com/merchantbay_com">https://twitter.com/merchantbay_com</a></p>
-                            <p>LinkedIn: <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">https://www.linkedin.com/company/merchantbay/mycompany/</a></p>
-                            <p>Instagram: <a target="_blank" href="https://www.instagram.com/merchant.bay/">https://www.instagram.com/merchant.bay/</a></p>
+                            <p>You can modify a design to your needs. You can also develop your own design with Merchant Bay <a href="{{route('product.type.mapping',['studio', 'design'])}}">Studio</a>.</p>
                         </div>
                     </li>
                     <li>
                         <div class="collapsible-header">
-                            <h4>What if I need to modify a product, like I need to attach my logo in design? </h4>
+                            <h4>What to do if I don't find what I am looking for?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can modify a design to your needs. You can also develop your own design with Merchant Bay Studio.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">
-                            <h4>What to do if I don’t find what I am looking for?</h4>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>Post an RFQ specifying your product. Suppliers will develop your concept to design.</p>
+                            <p>Post an <a href="{{route('rfq.create')}}">RFQ</a> specifying your product. <a href="{{route('suppliers')}}">Suppliers</a> will develop your concept to <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a>.</p>
                         </div>
                     </li>
                     <li>
@@ -414,7 +398,7 @@
                             <h4>What is an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Ans: RFQ is the system that enables Merchant Bay users to post the request and get matched suppliers to source anything related to apparel in minimum time. Our matching system is 2x more efficient compared to traditional process. </p>
+                            <p>Ans: <a href="{{route('rfq.create')}}">RFQ</a> is the system that enables Merchant Bay users to post the request and get matched <a href="{{route('suppliers')}}">suppliers</a> to source anything related to apparel in minimum time. Our matching system is 2x more efficient compared to traditional process. </p>
                         </div>
                     </li>
                     <li>
@@ -422,7 +406,7 @@
                             <h4>What to do if I don’t receive any reply on my RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Report a complaint or Contact Merchant Bay, we will get in touch with you as soon as possible.</p>
+                            <p>Report a complaint or <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Contact</a> Merchant Bay, we will get in touch with you as soon as possible.</p>
                         </div>
                     </li>
                     <li>
@@ -430,7 +414,7 @@
                             <h4>What is a Smart Order Management Dashboard?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Smart Order Management Dashboard provides easy actionable data to help ease the burden of maintaining multiple orders. Smart OMD reduces order complexities and increases efficiency. </p>
+                            <p><a href="https://omd.merchantbay.com/">Smart Order Management Dashboard</a> provides easy actionable data to help ease the burden of maintaining multiple orders. Smart OMD reduces order complexities and increases efficiency. </p>
                         </div>
                     </li>
                     <li>
@@ -438,7 +422,7 @@
                             <h4>What modules Merchant Bay offers in Order Management Dashboard?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay offers solutions for merchandising, production monitoring, BTB monitoring, and store management. </p>
+                            <p>Merchant Bay offers solutions for merchandising, production monitoring, BTB monitoring, and store management.</p>
                         </div>
                     </li>
                     <!-- What end -->
@@ -455,7 +439,7 @@
                             <h4>How can I buy from Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can access the catalog of designs, library of textile, yarn and accessories and/or send us an RFQ. We match your query with the best supplier of your interest within 48 hours. </p>
+                            <p>You can access the catalog of <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, library of <a href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">textile</a>, <a href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}">yarn</a> and <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">accessories</a> and/or send us an <a href="{{route('rfq.create')}}">RFQ</a>. We match your query with the best supplier of your interest within 48 hours. </p>
                         </div>
                     </li>
                     <li>
@@ -463,7 +447,7 @@
                             <h4>How can I sell in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Sign up to Merchant Bay then open a business profile and list out your designs, production samples and ready stock products. </p>
+                            <p><a href="{{env('SSO_REGISTRATION_URL').'/?flag=global'}}">Sign up</a> to Merchant Bay then open a business profile and list out your <a href="{{route('product.type.mapping',['studio', 'design'])}}">designs</a>, production samples and <a href="{{route('product.type.mapping',['studio', 'ready_stock'])}}">ready stock products</a>.</p>
                         </div>
                     </li>
                     <li>
@@ -471,7 +455,7 @@
                             <h4>How can I open my business profile in Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can open a business profile through a business profile builder. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the Join MB Pool Button and start building your Business Profile.</p>
+                            <p>You can open a business profile through a <a href="{{route('business.profile.create')}}">business profile builder</a>. For that you need to have a supplier account in Merchant Bay. Once your supplier account is created you can click the <a href="{{route('business.profile.create')}}">Join MB Pool</a> Button and start building your Business Profile.</p>
                         </div>
                     </li>
                     <li>
@@ -479,7 +463,7 @@
                             <h4>How can I connect with Merchant Bay?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can connect with Merchant Bay through clicking the Talk to Us button and setting up an appointment.</p>
+                            <p>You can connect with Merchant Bay through clicking the <a href="javascript:void(0);" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Talk to us</a> button and setting up an appointment.</p>
                         </div>
                     </li>
                     <li>
@@ -495,7 +479,7 @@
                             <h4>How to post an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Ans: You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
+                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
                         </div>
                     </li>
                     <li>
@@ -503,7 +487,7 @@
                             <h4>How does RFQ work?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>RFQ is designed to handle the complexity of the sourcing. Our algorithm matches your query with suppliers and come back with suggestions instantly. </p>
+                            <p><a href="{{route('rfq.create')}}">RFQ</a> is designed to handle the complexity of the sourcing. Our algorithm matches your query with <a href="{{route('suppliers')}}">suppliers</a> and come back with suggestions instantly. </p>
                         </div>
                     </li>
                     <li>
@@ -512,6 +496,14 @@
                         </div>
                         <div class="collapsible-body">
                             <p>Product development is subject to product complexity. We promise industry leading development time. </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <h4>How can I get latest updates from Merchant Bay?</h4>
+                        </div>
+                        <div class="collapsible-body">
+                            <p>You can subscribe to our newsletters and follow us on social media networks. Merchant Bay posts its updates in <a target="_blank" href="https://www.facebook.com/merchantbaybd">Facebook</a>, <a target="_blank" href="https://twitter.com/merchantbay_com">Twitter</a>, <a target="_blank" href="https://www.linkedin.com/company/merchantbay/mycompany/">Linkedin</a> and <a target="_blank" href="https://www.instagram.com/merchant.bay/">Instagram</a>.</p>
                         </div>
                     </li>
                     <!-- How end -->
@@ -568,7 +560,7 @@
                             <h4>Can Merchant Bay manage the compliance and regulatory aspect of a product? </h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Merchant Bay suppliers are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
+                            <p>Merchant Bay <a href="{{route('suppliers')}}">suppliers</a> are compliant and they all have the necessary certifications and regulatory standards applicable in their respective sector. Merchant Bay keeps updated information related to compliance and regulatory information in the profile so that you always get the best suggestion. </p>
                         </div>
                     </li>
                     <!-- Can End -->
@@ -610,7 +602,7 @@
                             <h4>Does Merchant Bay offer design support? </h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay has a world class design team for customer design support.</p>
+                            <p>Yes, Merchant Bay has a world class <a href="{{route('product.type.mapping',['studio', 'design'])}}">design</a> team for customer design support.</p>
                         </div>
                     </li>
                     <li>
@@ -626,7 +618,7 @@
                             <h4>Do Merchant Bay work with start-up brands and small businesses?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay empowers new brands and SME factories to source and operate efficiently. To know more Book a Call. </p>
+                            <p>Yes, Merchant Bay empowers new brands and SME factories to source and operate efficiently. To know more <a href="javascript:void(0);" class="btn_green btn_talk" itemprop="Talk to us" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/merchantbay/virtual-meeting'});return false;">Book a Call</a>. </p>
                         </div>
                     </li>
                     <li>
@@ -634,7 +626,7 @@
                             <h4>Do Merchant Bay have factory support?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>Yes, Merchant Bay has vast suppliers in its supplier pool. </p>
+                            <p>Yes, Merchant Bay has vast <a href="{{route('suppliers')}}">suppliers</a> in its supplier pool. </p>
                         </div>
                     </li>
                     <li>

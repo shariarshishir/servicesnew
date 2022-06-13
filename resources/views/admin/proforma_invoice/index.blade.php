@@ -35,7 +35,6 @@
                                     <th>Invoice Title</th>
                                     <th>Date</th>
                                     <th>Buyer Name</th>
-                                    <th>Supplier Name</th>
                                     <th>RFQ ID</th>
                                     <th>PI Status</th>
                                     <th>Created Date</th>
@@ -54,9 +53,6 @@
                                         </td>
                                         <td data-title="buyer_name">
                                             {{$proformaInvoice->buyer->name}}
-                                        </td>
-                                        <td data-title="supplier_name">
-                                            {{$merchantbayUserInfo->name}}
                                         </td>
                                         <td data-title="rfq_id">
                                             {{$proformaInvoice->generated_po_from_rfq}}

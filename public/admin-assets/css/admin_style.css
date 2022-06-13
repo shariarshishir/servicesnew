@@ -1029,6 +1029,11 @@ label:not(.form-check-label):not(.custom-file-label) {
     justify-content: center;
     align-items: center;
 }
+.rfq_admin_chat_topwrap .pro_omg span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4E9C52;    
+}
 .rfq_admin_chat_topwrap .pro_omg img {
     height: 100%;
     width: auto;

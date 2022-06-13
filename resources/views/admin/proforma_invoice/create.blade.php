@@ -27,7 +27,7 @@
                         @include('include.admin._message')
 
                         <div class="widget-body p-0">
-                            <form action="{{ route('proforma_invoices.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('proforma_invoices.store') }}" id="po-generate-form" method="post" enctype="multipart/form-data">
                             @csrf
                                 <!-- <div style="padding-top: 30px;"></div> -->
                                 <div class="row beneficiary_info_wrap">
@@ -74,6 +74,14 @@
                                                         <option value="Within 7 Days">Within 7 Days</option>
                                                         <option value="Within 15 Days">Within 15 Days</option>
                                                         <option value="Within 30 Days">Within 30 Days</option>
+                                                        <option value="Within 90 Days">Within 90 Days</option>
+                                                        <option value="Within 120 Days">Within 120 Days</option>
+                                                        <option value="Within 150 Days">Within 150 Days</option>
+                                                        <option value="Within 180 Days">Within 180 Days</option>
+                                                        <option value="Within 210 Days">Within 210 Days</option>
+                                                        <option value="Within 240 Days">Within 240 Days</option>
+                                                        <option value="Within 270 Days">Within 270 Days</option>
+                                                        <option value="Within 300 Days">Within 300 Days</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -108,6 +116,13 @@
                                                     <input type="text" class="form-control" required name="shipping_address"/>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-2 input-field">
+                                                <div class="form-group has-feedback">
+                                                    <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
+                                                    <label>Shipping Date <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
+                                                    <input type="date" class="form-control" required name="shipping_date"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <input type="hidden" name="selected_buyer_id" value="{{$buyer->id}}" />
@@ -120,20 +135,20 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4 input-field">
                                                 <div class="form-group has-feedback">
                                                     <label>Forwarder name  </label>
-                                                    <input type="text" class="form-control" required name="forwarder_name"/>
+                                                    <input type="text" class="form-control" name="forwarder_name"/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-4 input-field">
                                                 <div class="form-group has-feedback">
                                                     <label>Forwarder Address</label>
-                                                    <input type="text" class="form-control" required name="forwarder_address"/>
+                                                    <input type="text" class="form-control" name="forwarder_address"/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-4 input-field">
                                                 <div class="form-group has-feedback">
                                                     <!-- <div style="height: 25px;width: 0px;border-left: 5px solid rgb(255, 0, 0);position: absolute;top:25px;"></div> -->
                                                     <label>Payable party </label>
-                                                    <select class="form-control select2" required name="payable_party">
+                                                    <select class="form-control select2" name="payable_party">
                                                         <option value="Buyer">Buyer</option>
                                                         <option value="Buyer">Supplier</option>
                                                     </select>
@@ -150,8 +165,8 @@
                                                         <th>Shipping Method <span class="required_star" style="color: red;">*</span></th>
                                                         <th>Shipment Type <span class="required_star" style="color: red;">*</span></th>
                                                         <th>UOM <span class="required_star" style="color: red;">*</span></th>
-                                                        <th>Per UOM Price ($) <span class="required_star" style="color: red;">*</span></th>
-                                                        <th>QTY <span class="required_star" style="color: red;">*</span></th>
+                                                        <th>Per UOM Price ($)</th>
+                                                        <th>QTY</th>
                                                         <!-- <th style="width:15%;">Tax</th> -->
                                                         <th>Total ($)</th>
                                                         <th></th>
@@ -184,10 +199,10 @@
                                                             </select>
                                                         </td>
                                                         <td data-title="Per UOM Price ($)">
-                                                            <input type="number" name="shipping_details_per_uom_price[]" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)" required/>
+                                                            <input type="number" name="shipping_details_per_uom_price[]" step="any" class="form-control unit" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunit(this)"/>
                                                         </td>
                                                         <td data-title="QTY">
-                                                            <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)" required/>
+                                                            <input type="text" name="shipping_details_qty[]" class="form-control unit_price" style="border:1px solid #ccc; margin-bottom:0;"  onkeyup="changeunitprice(this)"/>
                                                         </td>
                                                         <td data-title="Total ($)">
                                                             <input type="text"  name="shipping_details_total[]" class="form-control total_price" style="border:1px solid #ccc; margin-bottom:0;"  readonly/>
@@ -345,20 +360,20 @@
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-3 input-field">
                                             <div class="has-feedback">
-                                                <label>Branch name <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                <input type="text" name="branch_name" class="form-control" required />
+                                                <label>Branch name</label>
+                                                <input type="text" name="branch_name" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-3 input-field">
                                             <div class="has-feedback">
-                                                <label>Address of the bank<span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                <input type="text" name="bank_address" class="form-control" required />
+                                                <label>Address of the bank</label>
+                                                <input type="text" name="bank_address" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-3 input-field">
                                             <div class="has-feedback">
-                                                <label>Swift code <span class="required_star" style="color: rgb(255, 0, 0)" >*</span></label>
-                                                <input type="text" name="swift_code" class="form-control" required />
+                                                <label>Swift code</label>
+                                                <input type="text" name="swift_code" class="form-control" />
                                             </div>
                                         </div>
                                     </div>
@@ -405,7 +420,7 @@
                                 </div>
 
                                 <div class="right invoice_submit">
-                                    <button type="submit" class="btn_green btn-success">
+                                    <button type="submit" class="btn_green btn-success submit_po_form">
                                         <i class="fa fa-send"></i> Submit
                                     </button>
                                 </div>

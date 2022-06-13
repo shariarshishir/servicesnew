@@ -57,7 +57,11 @@
                                     <div class="chat_info_leftWrap">
                                         <div class="chat_info_left">
                                             <div class="pro_omg">
-                                                <img src="{{ $rfq['user']['user_picture'] }}" alt="">
+                                                @if($rfq['user']['user_picture'])
+                                                    <img src="{{ $rfq['user']['user_picture'] }}" alt="">
+                                                @else
+                                                    <span class="no-image-text">{{ $userNameShortForm }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="chat_info_right">
@@ -158,7 +162,7 @@
                                         <div class="suppliers_box">
                                             <div class="suppliers_imgBox">
                                                 <div class="imgBox">
-                                                    <img src="{{ asset('storage/'.$businessProfile['user']['image']) }}" alt="" />
+                                                    <img src="{{Storage::disk('s3')->url('public/'.$businessProfile['user']['image'])}}" alt="" />
                                                 </div>
                                                 <!--h5>MB Pool</h5-->
                                             </div>
@@ -453,7 +457,8 @@
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
                                     html += '<div class="imgBox">';
-                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    //let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    let image = "{{Storage::disk('s3')->url('public')}}"+'/'+item.user.image;
                                     html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
                                     html += '</div>';
@@ -587,7 +592,8 @@
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
                                     html += '<div class="imgBox">';
-                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    //let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    let image = "{{Storage::disk('s3')->url('public')}}"+'/'+item.user.image;
                                     html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
                                     html += '</div>';
@@ -720,7 +726,8 @@
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
                                     html += '<div class="imgBox">';
-                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    //let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    let image = "{{Storage::disk('s3')->url('public')}}"+'/'+item.user.image;
                                     html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
                                     html += '</div>';
@@ -1273,7 +1280,8 @@
                                     html += '<div class="suppliers_box">';
                                     html += '<div class="suppliers_imgBox">';
                                     html += '<div class="imgBox">';
-                                    let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    //let image = "{{asset('storage')}}"+'/'+item.user.image;
+                                    let image = "{{Storage::disk('s3')->url('public')}}"+'/'+item.user.image;
                                     html += '<img src="'+image+'" alt="" />';
                                     html += '</div>';
                                     html += '</div>';

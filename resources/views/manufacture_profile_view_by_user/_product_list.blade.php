@@ -19,7 +19,7 @@
                         <a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >
                             <div class="imgBox">
                                 @foreach($product->product_images as $key=>$image)
-                                    <img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+                                    <img src="{{Storage::disk('s3')->url('public/'.$image->product_image)}}" class="single-product-img" alt="" />
                                     @break
                                 @endforeach
                             </div>

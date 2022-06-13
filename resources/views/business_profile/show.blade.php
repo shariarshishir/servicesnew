@@ -35,9 +35,9 @@
 								    <img itemprop="image" src="{{ Storage::disk('s3')->url('public/'.$business_profile->business_profile_logo) }}" alt="avatar" >
 								@else
 								    @php
-                                    $img=$business_profile->user->image ?Storage::disk('s3')->url('public/'.$business_profile->user->image) : 'images/frontendimages/no-image.png';
+                                    $img = $business_profile->user->image ? Storage::disk('s3')->url('public/'.$business_profile->user->image) : 'asset(images/frontendimages/no-image.png)';
                                     @endphp
-								    <img itemprop="image" src="{{asset($img)}}" alt="avatar" >
+								    <img itemprop="image" src="{{$img}}" alt="avatar" >
 								@endif
 							</div>
                             <div class="change_photo edit_busniess_profile_logo_banner">
@@ -275,7 +275,7 @@
 													<a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >
 														<div class="imgBox">
 															@foreach($product->product_images as $image)
-																<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+																<img src="{{Storage::disk('s3')->url('public/'.$image->product_image)}}" class="single-product-img" alt="" />
 																@break
 															@endforeach
 														</div>

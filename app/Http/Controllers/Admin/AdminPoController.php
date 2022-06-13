@@ -50,7 +50,14 @@ class AdminPoController extends Controller
     public function index ()
     {
         $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
-        $merchantbayUserInfo = User::where("id", 5552)->first();
+        if( env('APP_ENV') == 'production') 
+        {
+            $merchantbayUserInfo = User::where("id", 5771)->first();
+        }
+        else
+        {
+            $merchantbayUserInfo = User::where("id", 5552)->first();
+        }
         //dd($merchantbayUserInfo);
         return view('admin.proforma_invoice.index',compact('proformaInvoices', 'merchantbayUserInfo'));
     }
@@ -61,7 +68,14 @@ class AdminPoController extends Controller
         $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
         $supplierInfo = User::where('id', $po->created_by)->first();
-        $merchantbayUserInfo = User::where("id", 5552)->first();
+        if( env('APP_ENV') == 'production') 
+        {
+            $merchantbayUserInfo = User::where("id", 5771)->first();
+        }
+        else
+        {
+            $merchantbayUserInfo = User::where("id", 5552)->first();
+        }        
         if($po){
             return view('admin.proforma_invoice.show',compact('po','users','supplierInfo','totalInvoice','merchantbayUserInfo'));
         }
@@ -70,7 +84,7 @@ class AdminPoController extends Controller
 
     public function store(Request $request)
 	{
-        // dd($request->all());
+        //dd($request->all());
         //DB::beginTransaction();
 
         // try {
@@ -80,6 +94,7 @@ class AdminPoController extends Controller
             $data->generated_po_from_rfq = $request->input('generated_po_from_rfq');
             $data->proforma_id = $request->input('po_id');
             $data->proforma_date = $request->input('po_date');
+            $data->shipping_date = $request->input('shipping_date');
             $data->payment_within = $request->input('payment_within');
             $data->payment_term_id= $request->input('payment_term');
             $data->shipment_term_id = $request->input('shipment_term');

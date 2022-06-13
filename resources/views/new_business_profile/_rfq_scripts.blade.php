@@ -631,9 +631,6 @@
                         $('.rfq_quotation_box').show();
                         $('.rfq_message_box').hide();
                         $('.rfq_review_results_box').empty().append(html);
-
-                       
-
                         
                     }
                 });
@@ -666,8 +663,5 @@
             $('#share-modal input[name=share_text]').val();
             $('#share-modal input[name=share_text]').val(url);
         }
-
-
-
 </script>
 @endpush

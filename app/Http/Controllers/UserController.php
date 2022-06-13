@@ -296,8 +296,6 @@ class UserController extends Controller
                         $request->session()->forget('sso_password');
                     }
                     $request->session()->put('sso_password', $request->password);
-
-
                 }
                 else{
                     return response()->json(['msg' => 'No active account found with the given credentials or maybe you have provided wrong email or password.']);

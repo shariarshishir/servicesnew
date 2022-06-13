@@ -68,16 +68,20 @@ class RfqController extends Controller
         $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         $user = Auth::user();
         $token = Cookie::get('sso_token');
+        //get all rfqs of auth user
         $response = Http::withToken($token)
         ->get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
+        //all messages of auth user from mongodb messages collection
         $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
         $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        //all rfqs where auth user has messages
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){ 
+            //messages of first rfq of auth user
             $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqLists[0]['id'].'/user/'.$user->sso_reference_id);
             $data = $response->json();
             $chats = $data['data']['messages'];
@@ -87,6 +91,7 @@ class RfqController extends Controller
                 $userNameShortForm = "";
             }else{
                 $userImage = $rfqs[0]['user']['user_picture'];
+                //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
                 $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
                 $firstWordFirstLetter = $nameWordArray[0][0];
                 $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
@@ -95,6 +100,7 @@ class RfqController extends Controller
         }else{
             $chatdata = [];
             $userImage ="";
+            //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
@@ -118,16 +124,20 @@ class RfqController extends Controller
         $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         $user = Auth::user();
         $token = Cookie::get('sso_token');
+        //get all queries of auth user
         $response = Http::withToken($token)
         ->get(env('RFQ_APP_URL').'/api/queries/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
+        //all messages of auth user from mongodb messages collection
         $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
         $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        //all queries where auth user has messages
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){
+            //messages of first queries of auth user
             $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
             $data = $response->json();
             $chats = $data['data']['messages'];
@@ -136,6 +146,7 @@ class RfqController extends Controller
                 $userImage = $rfqs[0]['user']['user_picture'];
                 $userNameShortForm = "";
             }else{
+                //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
                 $userImage = $rfqs[0]['user']['user_picture'];
                 $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
                 $firstWordFirstLetter = $nameWordArray[0][0];
@@ -145,6 +156,7 @@ class RfqController extends Controller
         }else{
             $chatdata = [];
             $userImage ="";
+            //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';

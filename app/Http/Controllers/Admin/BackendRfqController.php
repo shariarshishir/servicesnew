@@ -22,6 +22,7 @@ class BackendRfqController extends Controller
 {
     use PushNotificationTrait;
     public function index(Request $request){
+        //all published or unpublished rfqs
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqs = $data['data'];
@@ -43,6 +44,7 @@ class BackendRfqController extends Controller
     }
 
     public function show($id, $link = false){
+        //rfq details
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
@@ -93,6 +95,7 @@ class BackendRfqController extends Controller
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
             $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
         }
+        //conversation with merchant bay and buyer who created rfq
         $response =   Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfq['id'].'/admin/'.$user.'/user/'.$rfq['created_by']);
         $data = $response->json();
         $chats = $data['data']['messages'];
@@ -104,6 +107,7 @@ class BackendRfqController extends Controller
             array_push($userSsoIds, $profile['user']['sso_reference_id']);
         }
         $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
+        //suppliers who have unseen messages
         $response = Http::get(env('RFQ_APP_URL').'/api/rfq/'.$id.'/users/'.$commaSeparatedStringOfSsoId.'/conversations');
         $data = $response->json();
         $usersWithMessageUnseen = $data['data'] ?? [];
@@ -216,6 +220,7 @@ class BackendRfqController extends Controller
         foreach($businessProfiles as $profile){
             array_push($userSsoIds, $profile['user']['sso_reference_id']);
         }
+        //suppliers with unseen message for a specific rfq
         $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
         $response = Http::get(env('RFQ_APP_URL').'/api/conversations/unseen/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId);
         $data = $response->json();
@@ -240,6 +245,7 @@ class BackendRfqController extends Controller
         foreach($businessProfiles as $profile){
             array_push($userSsoIds, $profile['user']['sso_reference_id']);
         }
+        //suppliers with unseen message for a specific rfq
         $commaSeparatedStringOfSsoId = implode(",",$userSsoIds);
         $response = Http::get(env('RFQ_APP_URL').'/api/conversations/unseen/rfq/'.$request->rfq_id.'/users/'.$commaSeparatedStringOfSsoId);
         $data = $response->json();

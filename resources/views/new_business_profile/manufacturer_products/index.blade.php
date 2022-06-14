@@ -1,3 +1,11 @@
+@php
+    $product_type_mapping_child_id = array_key_exists('product_type_mapping_child_id', app('request')->input())?app('request')->input('product_type_mapping_child_id'): [];
+    $product_tag = array_key_exists('product_tag', app('request')->input())?app('request')->input('product_tag'): [];
+    $view_min_lead_time= array_key_exists('min_lead', app('request')->input())?app('request')->input('min_lead'): null;
+    $view_max_lead_time= array_key_exists('max_lead', app('request')->input())?app('request')->input('max_lead'): null;
+    $view_max_moq = array_key_exists('max_moq', app('request')->input())?app('request')->input('max_moq'): null;
+    $view_min_moq = array_key_exists('min_moq', app('request')->input())?app('request')->input('min_moq'): null;
+@endphp
 @extends('layouts.app_containerless')
 @section('content')
 @include('new_business_profile.manufacturer_products._add_product_modal')

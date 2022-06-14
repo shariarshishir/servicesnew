@@ -1,12 +1,3 @@
-
-@php
-    $product_type_mapping_child_id = array_key_exists('product_type_mapping_child_id', app('request')->input())?app('request')->input('product_type_mapping_child_id'): [];
-    $product_tag = array_key_exists('product_tag', app('request')->input())?app('request')->input('product_tag'): [];
-    $view_min_lead_time= array_key_exists('min_lead', app('request')->input())?app('request')->input('min_lead'): null;
-    $view_max_lead_time= array_key_exists('max_lead', app('request')->input())?app('request')->input('max_lead'): null;
-    $view_max_moq = array_key_exists('max_moq', app('request')->input())?app('request')->input('max_moq'): null;
-    $view_min_moq = array_key_exists('min_moq', app('request')->input())?app('request')->input('min_moq'): null;
-@endphp
 <form action="{{route('new.profile.products',$alias)}}">
     <div class="new_profile_account_filterbar">
         <h4>Filtered by</h4>
@@ -50,7 +41,7 @@
                 <a class="btn_green btn_clear filter-reset" href="{{route('new.profile.products',$alias)}}" style="display: none;"> Reset </a>
             </div>
         </div>
-       
+
     </div>
 </form>
 

@@ -1435,7 +1435,7 @@ class ProductController extends Controller
         }
 
 
-        $items_per_page = 10;
+        $items_per_page = 6;
         $current_page = LengthAwarePaginator::resolveCurrentPage();
         $products = new LengthAwarePaginator(
             collect($merged)->forPage($current_page, $items_per_page)->values(),
@@ -1525,7 +1525,7 @@ class ProductController extends Controller
             });
         }
 
-        $items_per_page = 10;
+        $items_per_page = 6;
         $current_page = LengthAwarePaginator::resolveCurrentPage();
         $products = new LengthAwarePaginator(
             collect($merged)->forPage($current_page, $items_per_page)->values(),

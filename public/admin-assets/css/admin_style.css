@@ -1689,6 +1689,15 @@ label:not(.form-check-label):not(.custom-file-label) {
 .show-suppliers-with-unseen-message i {
     color: #55a860;
 }
+.number-counts-on-dashboard h3 {
+    font-size: 50px;
+    font-weight: 600;
+    color: #000;
+}
+.number-counts-on-dashboard span {
+    font-size: 18px;
+    color: #000;
+}
 /* ************** Media css start ******************* */
 
 @media only screen and (min-width: 1500px) {}

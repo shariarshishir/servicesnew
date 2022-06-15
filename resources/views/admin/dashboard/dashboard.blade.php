@@ -97,6 +97,26 @@
 				</div>
 
 			</div>
+			<div class="card">
+				<div class="row number-counts-on-dashboard" style="text-align: center;">
+					<div class="col-md-3">
+						<h3 class="count">{{$rfqsCount}}</h3>
+						<span>Total RFQ Submitted</span>
+					</div>
+					<div class="col-md-3">
+						<h3 class="count">{{$suggestedSupplierCount}}</h3>
+						<span>Total Quotation sent</span>
+					</div>
+					<div class="col-md-3">
+						<h3 class="count">{{$proformaInvoicesCount}}</h3>
+						<span>Total Proforma Invoice (PI)</span>
+					</div>
+					<div class="col-md-3">
+						<h3 class="count">{{$proformaOrdersCount}}</h3>
+						<span>Total Purchase Orders (PO)</span>
+					</div>
+				</div>				
+			</div>			
 		</section>
 		<!-- /.content -->
 	</div>
@@ -107,6 +127,24 @@
 var area_chart, bar_chart, xhr, xhr2;
 $(document).ready(function () {
 
+	$(".count").each(function () {
+		$(this)
+		.prop("Counter", 0)
+		.animate(
+			{
+				Counter: $(this).text(),
+			},
+			{
+				duration: 4000,
+				easing: "swing",
+				step: function (now) {
+					now = Number(Math.ceil(now)).toLocaleString('en');
+					$(this).text(now);
+				},
+			}
+		);
+  	});	
+	
     area_chart = Highcharts.chart('registered-userschartbar-container', {
 		chart: {
 			type: 'area',

@@ -1580,6 +1580,8 @@ class ProductController extends Controller
                 $newFormatedProduct->id=$product->id;
                 $newFormatedProduct->name=$product->name;
                 $newFormatedProduct->business_profile_id=$product->business_profile_id;
+                $newFormatedProduct->product_mapping=$product->product_mapping;
+                $newFormatedProduct->product_mapping_child_id=$product->product_mapping_child_id;
                 $newFormatedProduct->business_name=$product->businessProfile->business_name;
                 $newFormatedProduct->sku=$product->sku;
                 $newFormatedProduct->copyright_price=$product->copyright_price;

@@ -10785,6 +10785,21 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
 }
+.account_profile_box form input.btn_green {
+    background: #54a958;
+    border: 1px solid #54a958 !important;
+    color: #ffffff;
+    cursor: pointer;
+}
+.account_profile_box form input.btn_green:hover {
+    background: transparent;
+    color: #54a958;
+}
+.account_profile_box form .btn_green.btn_reset_filter {
+    background: #ccc;
+    border: 1px solid #ccc;
+    color: #000;
+}
 .account_profile_box form textarea {
     margin-bottom: 0 !important;
 }

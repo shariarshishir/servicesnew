@@ -35,10 +35,10 @@
         <input type="hidden" name="view" value="{{$view}}">
         <div class="filter_reset_bottom_bar row">
             <div class="left">
-                <input type="submit" class="btn_green btn_clear filter-reset" value="submit" style="display: none;">
+                <a class="btn_green btn_clear btn_reset_filter filter-reset" href="{{route('new.profile.products',$alias)}}" style="display: none;"> Reset </a>
             </div>
             <div class="right">
-                <a class="btn_green btn_clear filter-reset" href="{{route('new.profile.products',$alias)}}" style="display: none;"> Reset </a>
+                <input type="submit" class="btn_green btn_clear filter-reset" value="submit" style="display: none;">
             </div>
         </div>
 

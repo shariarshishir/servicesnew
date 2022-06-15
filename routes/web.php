@@ -612,6 +612,7 @@ Route::group(['prefix'=>'/admin'],function (){
 
         Route::get('admin/rfq/pagination',[AdminRfqController::class, 'fetchRFQsByQueryStringOrPagination'])->name('rfq.pagination');
         Route::get('admin/rfq/send-push-notification-for-new-message-to-admin',[AdminRfqController::class, 'sendFireBasePushNotificationToAdminForNewMessage'])->name('send_firebase_push_notification_to_admin_for_rfq_message');
+        Route::get('admin/rfq/send-push-notification-for-new-message-to-all-admin',[AdminRfqController::class, 'sendFireBasePushNotificationToAllAdminForNewMessage'])->name('send_firebase_push_notification_to_all_admin_for_rfq_message');
         Route::get('admin/rfq/business-profile-with-unseen-message',[AdminRfqController::class, 'businessProfilesWithUnseenMessageCount'])->name('admin_rfq_business_profiles_with_unseen_message');
 
 

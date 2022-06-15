@@ -69,6 +69,18 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
             }
+            
+            // message for all admins
+            if(data.to_id == 5771) {
+                jQuery.ajax({
+                    type : "get",
+                    data : {'rfq_id':data.rfq_id},
+                    url : "{{route('send_firebase_push_notification_to_all_admin_for_rfq_message')}}",
+                    success : function(response){
+                    }
+                });
+            }      
+
             $('.rfq_review_message_box').append(msgHtml);
         });
 

@@ -134,6 +134,21 @@ class BackendRfqController extends Controller
         return response()->json(['message'=>'successfully send push notification'],200);
     }
 
+    public function sendFireBasePushNotificationToAllAdminForNewMessage(Request $request){
+        $allAdmins = Admin::all();
+        foreach($allAdmins as $admin) {
+            $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$request->rfq_id);
+            $data = $response->json();
+            $rfq = $data['data']['data'];
+            $fcmToken = $admin->fcm_token;
+            $title = "New message arrived";
+            $message = "A new message has arrived for rfq:".$rfq['title'];
+            $action_url = route('admin.rfq.show',$request->rfq_id);
+            $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+        }
+        return response()->json(['message'=>'successfully send push notification'],200);
+    }
+
     public function businessProfilesWithUnseenMessageCount(Request $request){
         $response = Http::get(env('RFQ_APP_URL').'/api/conversations/unseen/rfq/'.$request->rfq_id);
         $data = $response->json();

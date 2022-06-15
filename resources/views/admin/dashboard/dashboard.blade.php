@@ -99,17 +99,21 @@
 			</div>
 			<div class="card">
 				<div class="row number-counts-on-dashboard" style="text-align: center;">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<h3 class="count">{{$rfqsCount}}</h3>
-						<span>Total RFQ</span>
+						<span>Total RFQ Submitted</span>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<h3 class="count">{{$suggestedSupplierCount}}</h3>
-						<span>Total Quotation send</span>
+						<span>Total Quotation sent</span>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<h3 class="count">{{$proformaInvoicesCount}}</h3>
-						<span>Total RFQ converted to PO</span>
+						<span>Total Proforma Invoice (PI)</span>
+					</div>
+					<div class="col-md-3">
+						<h3 class="count">{{$proformaOrdersCount}}</h3>
+						<span>Total Purchase Orders (PO)</span>
 					</div>
 				</div>				
 			</div>

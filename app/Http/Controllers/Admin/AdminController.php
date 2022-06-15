@@ -26,7 +26,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         // Total RFQs
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/1/limit/10');
         $data = $response->json();
         $rfqs = $data['data'];
         $rfqsCount = $data['count'];
@@ -37,11 +37,15 @@ class AdminController extends Controller
         $suggestedSupplierCount = $suggestedSupplierData['count'];
 
         // Proforma collection
-        $proformaInvoices = Proforma::all();
+        $proformaInvoices = Proforma::where('status', '=', 0)->get();
         $proformaInvoicesCount = count($proformaInvoices);
 
+        // Purchase order collection
+        $proformaOrders = Proforma::where('status', '=', 1)->get();
+        $proformaOrdersCount = count($proformaOrders);
+
         //dd($notifications);
-        return view('admin.dashboard.dashboard',compact('rfqs','rfqsCount','suggestedSupplierCount', 'proformaInvoicesCount'));
+        return view('admin.dashboard.dashboard',compact('rfqs','rfqsCount','suggestedSupplierCount', 'proformaInvoicesCount', 'proformaOrdersCount'));
     }
 
     public function showLoginForm()

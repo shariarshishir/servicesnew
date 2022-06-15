@@ -9,6 +9,7 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
@@ -35,12 +36,18 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         
-       $request->validate([
+        $request->validate([
         'email'    => 'required|email|exists:admins|min:5|max:191',
         'password' => 'required|string|min:4|max:255',
        ]);
        if(Auth::guard('admin')->attempt($request->only('email','password'),$request->filled('remember'))){
             Auth::guard('admin')->user()->update(['fcm_token'=>$request->fcm_token]);
+            //dd($post_url);
+            Http::post(env('RFQ_APP_URL').'/api/token-register', [
+                'user_id' => 5771,
+                'fcmtoken' => $request->fcm_token,
+            ]);
+
             return redirect()
                 ->route('admin.dashboard')
                 ->with('status','You are Logged in as Admin!');

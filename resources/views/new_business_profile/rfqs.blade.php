@@ -1,3 +1,8 @@
+@php
+    $product_tag = array_key_exists('product_tag', app('request')->input())?app('request')->input('product_tag'): [];
+    $start_date = array_key_exists('start_date', app('request')->input())?app('request')->input('start_date'): '';
+    $end_date = array_key_exists('end_date', app('request')->input())?app('request')->input('end_date'): '';
+@endphp
 @extends('layouts.app_containerless')
 @section('content')
 
@@ -32,50 +37,37 @@
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
 
                     <div class="new_profile_account_rightsidebar_mobile">
-                        <div class="new_profile_account_filterbar">
-                            <h4>Filtered by</h4>
-                            <div class="new_profile_account_filterbox">
-                                <ul>
-                                    <li><a href="javascript:void(0);">Designs</a></li>
-                                    <li class="active"><a href="javascript:void(0);">Production Samples</a></li>
-                                    <li><a href="javascript:void(0);">Textile</a></li>
-                                    <li><a href="javascript:void(0);">Yarn</a></li>
-                                    <li><a href="javascript:void(0);">Ready Stock</a></li>
-                                    <li><a href="javascript:void(0);">Trims and Accessories</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Knit</a></li>
-                                    <li><a href="javascript:void(0);">Woven</a></li>
-                                    <li><a href="javascript:void(0);">Denim</a></li>
-                                    <li><a href="javascript:void(0);">Woven</a></li>
-                                    <li><a href="javascript:void(0);">Denim</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Kids</a></li>
-                                    <li><a href="javascript:void(0);">Male</a></li>
-                                    <li><a href="javascript:void(0);">Female</a></li>
-                                    <li><a href="javascript:void(0);">Yarn</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="javascript:void(0);">T shirts</a></li>
-                                    <li><a href="javascript:void(0);">T shirts</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="account_filter_progress_wrap">
-                                <h4>Lead Time</h4>
-                                <div class="filter_progress_box">
-                                    <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRangeMobile">
-                                    <span id="filterProgressValue"></span>
+                        <form action="{{route('new.profile.rfqs',$alias)}}">
+                            <div class="new_profile_account_filterbar">
+                                <h4>Filtered by</h4>
+                                <div class="new_profile_account_filterbox">
+                                    <label>Product tags</label>
+                                    <select class="select2 dropdownOptions mobile-rfq-filter-select"  name="product_tag[]" multiple>
+                                        @foreach ($product_tags as $pt)
+                                            <option value={{$pt->id}} {{ (in_array($pt->id, $product_tag))?'selected':'' }}>{{$pt->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                                <h4>MOQ</h4>
-                                <div class="filter_progress_box_moq">
-                                    <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoqMobile">
-                                    <span id="filterProgressValueMoq"></span>
+                                <div class="account_filter_progress_wrap">
+                                    <h4>Lead Time</h4>
+                                    <div id="mobile_reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                        <i class="fa fa-calendar"></i>&nbsp;
+                                        <span></span> <i class="fa fa-caret-down"></i>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="start_date" class="mobile_start_date" value="{{$start_date??''}}">
+                                <input type="hidden" name="end_date" class="mobile_end_date" value="{{$end_date??''}}">
+                                <div class="filter_reset_bottom_bar row">
+                                    <div class="left">
+                                        <input type="submit" class="btn_green btn_clear mobile-rfq-filter-reset" value="submit" style="display: none;">
+                                    </div>
+                                    <div class="right">
+                                        <a class="btn_green btn_clear mobile-rfq-filter-reset" href="{{route('new.profile.rfqs',$alias)}}" style="display: none;"> Reset </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -151,12 +143,12 @@
                                                                         <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/pdf-bg.png" class="rfqFileImage" alt="">
                                                                     </div>
                                                                     @break
-                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOC' ||  pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'docx') || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOCX') 
+                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOC' ||  pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'docx') || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOCX')
                                                                     <div class="imgBox rfq_thum_img">
                                                                         <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/doc-bg.png" class="rfqFileImage" alt="">
                                                                     </div>
                                                                     @break
-                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'xlsx' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'XLSX' ) 
+                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'xlsx' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'XLSX' )
                                                                     <div class="imgBox rfq_thum_img">
                                                                         <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/excel-bg.png" class="rfqFileImage" alt="">
                                                                     </div>
@@ -189,50 +181,38 @@
                                     </div>
                                 </div>
                                 <div class="col s12 m12 l3 new_profile_account_rightsidebar_desktop">
-                                    <div class="new_profile_account_filterbar">
-                                        <h4>Filtered by</h4>
-                                        <div class="new_profile_account_filterbox">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Designs</a></li>
-                                                <li class="active"><a href="javascript:void(0);">Production Samples</a></li>
-                                                <li><a href="javascript:void(0);">Textile</a></li>
-                                                <li><a href="javascript:void(0);">Yarn</a></li>
-                                                <li><a href="javascript:void(0);">Ready Stock</a></li>
-                                                <li><a href="javascript:void(0);">Trims and Accessories</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Knit</a></li>
-                                                <li><a href="javascript:void(0);">Woven</a></li>
-                                                <li><a href="javascript:void(0);">Denim</a></li>
-                                                <li><a href="javascript:void(0);">Woven</a></li>
-                                                <li><a href="javascript:void(0);">Denim</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Kids</a></li>
-                                                <li><a href="javascript:void(0);">Male</a></li>
-                                                <li><a href="javascript:void(0);">Female</a></li>
-                                                <li><a href="javascript:void(0);">Yarn</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">T shirts</a></li>
-                                                <li><a href="javascript:void(0);">T shirts</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="account_filter_progress_wrap">
-                                            <h4>Lead Time</h4>
-                                            <div class="filter_progress_box">
-                                                <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRange">
-                                                <span id="filterProgressValue"></span>
+                                    <form action="{{route('new.profile.rfqs',$alias)}}">
+                                        <div class="new_profile_account_filterbar">
+                                            <h4>Filtered by</h4>
+                                            <div class="new_profile_account_filterbox">
+                                                <label>Product tags</label>
+                                                <select class="select2 dropdownOptions rfq-filter-select"  name="product_tag[]" multiple>
+                                                    @foreach ($product_tags as $pt)
+                                                        <option value={{$pt->id}} {{ (in_array($pt->id, $product_tag))?'selected':'' }}>{{$pt->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
-                                            <h4>MOQ</h4>
-                                            <div class="filter_progress_box_moq">
-                                                <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoq">
-                                                <span id="filterProgressValueMoq"></span>
+                                            <div class="account_filter_progress_wrap">
+                                                <h4>Lead Time</h4>
+                                                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span></span> <i class="fa fa-caret-down"></i>
+                                                </div>
                                             </div>
+                                            <input type="hidden" name="start_date" class="start_date" value="{{$start_date??''}}">
+                                            <input type="hidden" name="end_date" class="end_date" value="{{$end_date??''}}">
+                                            <div class="filter_reset_bottom_bar row">
+                                                <div class="left">
+                                                    <input type="submit" class="btn_green btn_clear rfq-filter-reset" value="submit" style="display: none;">
+                                                </div>
+                                                <div class="right">
+                                                    <a class="btn_green btn_clear rfq-filter-reset" href="{{route('new.profile.rfqs',$alias)}}" style="display: none;"> Reset </a>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -247,3 +227,99 @@
 @include('new_business_profile.create_rfq_modal')
 @include('new_business_profile.share_modal')
 @endsection
+
+@push('js')
+<script>
+        $('.rfq-filter-select').on('change', function() {
+            $('.rfq-filter-reset').show();
+        });
+        var check_selected_val =  $( ".rfq-filter-select option:selected" ).val();
+        if(check_selected_val != undefined){
+            $('.rfq-filter-reset').show();
+        }
+
+
+        $(function() {
+
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+            $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+                $('.rfq-filter-reset').show();
+                $('.start_date').val(picker.startDate.format('YYYY-MM-DD'));
+                $('.end_date').val(picker.endDate.format('YYYY-MM-DD'));
+
+            });
+
+
+        });
+
+
+
+        //mobile view
+        $('.mobile-rfq-filter-select').on('change', function() {
+            $('.mobile-rfq-filter-reset').show();
+        });
+        var check_selected_val =  $( ".mobile-rfq-filter-select option:selected" ).val();
+        if(check_selected_val != undefined){
+            $('.mobile-rfq-filter-reset').show();
+        }
+
+
+        $(function() {
+
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#mobile_reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+
+            $('#mobile_reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+            $('#mobile_reportrange').on('apply.daterangepicker', function(ev, picker) {
+                $('.mobile-rfq-filter-reset').show();
+                $('.mobile_start_date').val(picker.startDate.format('YYYY-MM-DD'));
+                $('.mobile_end_date').val(picker.endDate.format('YYYY-MM-DD'));
+
+            });
+
+
+        });
+
+
+
+</script>
+@endpush

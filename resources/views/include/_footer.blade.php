@@ -265,7 +265,10 @@
 {{-- typehead js --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 <!--script src="{{asset('js/bootstrap3-typeahead.min.js')}}"></script-->
-
+{{-- daterangepicker --}}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 @stack('js')
 <script>
     // Prevent jQuery UI dialog from blocking focusin
@@ -557,7 +560,7 @@
                                     type: "POST",
                                     data: {"user_id": data.userObj.sso_reference_id, "fcmtoken":fcm_token},
                                     success: function (response) {
-                                        console.log(response); 
+                                        console.log(response);
                                     }
                                 });
                                 var url = '{{ route("users.profile") }}';

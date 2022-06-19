@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Merchant Bay | Fashion Sourcing Solution | Tech Enabled B2B Platform</title>
+<title>Merchant Bay, B2B fashion e-supply chain platform connecting demand directly to production and empowering SME manufacturers</title>
 {{-- csrf token --}}
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- Site Meta -->

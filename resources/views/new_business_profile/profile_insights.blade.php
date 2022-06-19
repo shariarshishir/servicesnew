@@ -174,7 +174,24 @@
                     <div class="col s12 m9 l10">
                         <div class="profile_supplier_account_insight_wrap">
                             <div class="supplier_account_progress">
-                                <h4>Profile Progress</h4>
+                                <h4>
+                                    Profile Progress 
+                                    @if($business_profile->is_business_profile_verified == 0)
+                                        @if($business_profile->businessProfileVerificationsRequest)
+                                            <a href="#send-verification-request-modal" class="tooltipped send-verification-request-trigger modal-trigger ProfileVerificationResendTrigger" data-position="top" data-tooltip="Your request is awaiting for verification. Click here to re-send verification request.">
+                                                <i class="material-icons" style="color: red;">error</i>
+                                            </a>
+                                        @else
+                                            <a href="#send-verification-request-modal" class="tooltipped send-verification-request-trigger modal-trigger" data-position="top" data-tooltip="Your profile is not verified. Click here to send verification request.">
+                                                <i class="material-icons" style="color: red;">error</i>
+                                            </a>
+                                        @endif
+                                    @else
+                                        <div class="verified_by_merchantbay">
+                                            <span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
+                                        </div>
+                                    @endif
+                                </h4>                           
                                 <div id="profile-progress-wrapper">
                                     <div class="profile-progressbar-total" style="position: relative; width: 100%; background: #ccc; height: 25px; border-radius: 4px;">
                                         <div class="profile-progress-value" style="width: {{$profileProgressValue}}%; background: #54a958; height: 25px; border-radius: 4px; position: absolute; top: 0px; left: 0px;"></div>
@@ -237,4 +254,8 @@
     </div>
 </div>
 
+    @include('new_business_profile.business_profileinfo_edit._create_or_update_business_profile_verification_request')
+
 @endsection
+
+@include('new_business_profile._profilescripts')

@@ -8,6 +8,8 @@ use App\Models\BusinessProfile;
 use App\Models\Manufacture\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
+use App\Models\BusinessProfileVerificationsRequest;
+use App\Events\NewBusinessProfileVerificationRequestEvent;
 use App\Models\Product as WholesalerProduct;
 
 class BusinessProfileController extends Controller
@@ -234,6 +236,34 @@ class BusinessProfileController extends Controller
         abort(401);
 
     }
+
+    public function businessProfileVerificationRequest(Request $request)
+    {
+
+        try
+        {
+            BusinessProfileVerificationsRequest::where('business_profile_id',$request->verificationRequestedBusinessProfileId)->delete();
+            $businessProfileVerificationsRequest = BusinessProfileVerificationsRequest::create([
+                'business_profile_id' => $request->verificationRequestedBusinessProfileId,
+                'business_profile_name' => $request->verificationRequestedBusinessProfileName,
+                'verification_message'=> $request->verificationMsg,
+            ]);
+            event(new NewBusinessProfileVerificationRequestEvent($businessProfileVerificationsRequest));
+            return response()->json([
+                'success' => true,
+                'message' => 'Request sent successfully.'
+            ],200);
+
+        }
+        catch(\Exception $e)
+        {
+            return response()->json([
+                'success' => false,
+                'error'   => ['message' => $e->getMessage()],
+            ],500);
+
+        }
+    }    
 
     public function profileInsights($alias){
         return view('new_business_profile.profile_insights',compact('alias'));

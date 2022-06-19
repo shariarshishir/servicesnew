@@ -387,7 +387,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('alias-existing-check',[BusinessProfileController::class, 'aliasExistingCheck'])->name('alias.existing.check');
     Route::post('alias-update',[BusinessProfileController::class, 'updateAlias'])->name('update.alias');
 
-    Route::post('/send-request-for-profile-verification', [BusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
+    Route::post('/send-request-for-profile-verification', [BusinessProfileBusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
 
     //new business profile template routes
     Route::get('profile/{alias}/general-info', [BusinessProfileBusinessProfileController::class, 'index'])->name('new.profile.index');

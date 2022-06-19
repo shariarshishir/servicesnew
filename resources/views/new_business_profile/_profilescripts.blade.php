@@ -2241,6 +2241,8 @@
                             $('#loadingProgressContainer').hide();
                             $('#send-verification-request-modal').modal('close');
                             swal("Done!", response.message,"success");
+
+                            $(".business_profile_verification_request_text").html('<i class="material-icons verification-info-icon">info_outline</i> Your request is awaiting for verification.');
                         },
                         error: function(xhr, status, error)
                         {

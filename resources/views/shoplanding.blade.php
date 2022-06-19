@@ -8,6 +8,7 @@
 @section('robots', 'index, nofollow')
 
 @section('content')
+    <h1 style="display: none;">Merchant Bay, B2B fashion e-supply chain platform connecting demand directly to production and empowering SME manufacturers</h1>
     <section class="landing_page_wrapper" itemprop="mainContentOfPage">
         <!-- New Landing design start -->
         <div class="landing_intro_wrapper">

@@ -1,3 +1,12 @@
+@php
+    $product_type_mapping_child_id = array_key_exists('product_type_mapping_child_id', app('request')->input())?app('request')->input('product_type_mapping_child_id'): [];
+    $product_tag = array_key_exists('product_tag', app('request')->input())?app('request')->input('product_tag'): [];
+    $view_min_lead_time = array_key_exists('min_lead', app('request')->input())?app('request')->input('min_lead'): null;
+    $view_max_lead_time = array_key_exists('max_lead', app('request')->input())?app('request')->input('max_lead'): null;
+    $view_max_moq = array_key_exists('max_moq', app('request')->input())?app('request')->input('max_moq'): null;
+    $view_min_moq = array_key_exists('min_moq', app('request')->input())?app('request')->input('min_moq'): null;
+@endphp
+
 @extends('layouts.app_containerless')
 @section('content')
 
@@ -30,52 +39,8 @@
 
                 <div id="profileAccountRight">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
-
                     <div class="new_profile_account_rightsidebar_mobile">
-                        <div class="new_profile_account_filterbar">
-                            <h4>Filtered by</h4>
-                            <div class="new_profile_account_filterbox">
-                                <ul>
-                                    <li><a href="javascript:void(0);">Designs</a></li>
-                                    <li class="active"><a href="javascript:void(0);">Production Samples</a></li>
-                                    <li><a href="javascript:void(0);">Textile</a></li>
-                                    <li><a href="javascript:void(0);">Yarn</a></li>
-                                    <li><a href="javascript:void(0);">Ready Stock</a></li>
-                                    <li><a href="javascript:void(0);">Trims and Accessories</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Knit</a></li>
-                                    <li><a href="javascript:void(0);">Woven</a></li>
-                                    <li><a href="javascript:void(0);">Denim</a></li>
-                                    <li><a href="javascript:void(0);">Woven</a></li>
-                                    <li><a href="javascript:void(0);">Denim</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Kids</a></li>
-                                    <li><a href="javascript:void(0);">Male</a></li>
-                                    <li><a href="javascript:void(0);">Female</a></li>
-                                    <li><a href="javascript:void(0);">Yarn</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="javascript:void(0);">T shirts</a></li>
-                                    <li><a href="javascript:void(0);">T shirts</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="account_filter_progress_wrap">
-                                <h4>Lead Time</h4>
-                                <div class="filter_progress_box">
-                                    <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRangeMobile">
-                                    <span id="filterProgressValue"></span>
-                                </div>
-
-                                <h4>MOQ</h4>
-                                <div class="filter_progress_box_moq">
-                                    <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoqMobile">
-                                    <span id="filterProgressValueMoq"></span>
-                                </div>
-                            </div>
-                        </div>
+                        @include('new_business_profile._rfq_filter_mobile')
                     </div>
                 </div>
             </div>
@@ -134,105 +99,108 @@
                                     </div>
                                     <div class="product_design_wrapper profile_account_rfqproduct">
                                         <div class="row">
-                                        @foreach ($rfqLists as $rfqSentList)
-                                            <div class="col s6 m6 l4 product_item_box">
-                                                <div class="productBox">
-                                                    <div class="inner_productBox">
-                                                        <a class="modal-trigger " href="#details-rfq-modal-{{$rfqSentList['id']}}">
-                                                            @if(count($rfqSentList['images']) > 0)
-                                                                @foreach ($rfqSentList['images'] as  $key => $rfqImage )
-                                                                    @if( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'png' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'PNG' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'jpeg' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'JPEG' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'jpg' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'JPG')
-                                                                    <div class="imgBox rfq_thum_img">
-                                                                        <img src="{{ $rfqImage['image'] }}" class="rfqImage" alt="">
-                                                                    </div>
-                                                                    @break
-                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'pdf' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'PDF')
-                                                                    <div class="imgBox rfq_thum_img">
-                                                                        <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/pdf-bg.png" class="rfqFileImage" alt="">
-                                                                    </div>
-                                                                    @break
-                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'doc' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOC' ||  pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'docx') || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'DOCX') 
-                                                                    <div class="imgBox rfq_thum_img">
-                                                                        <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/doc-bg.png" class="rfqFileImage" alt="">
-                                                                    </div>
-                                                                    @break
-                                                                    @elseif( pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'xlsx' || pathinfo($rfqImage['image'], PATHINFO_EXTENSION) == 'XLSX' ) 
-                                                                    <div class="imgBox rfq_thum_img">
-                                                                        <img src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new_layout_images/excel-bg.png" class="rfqFileImage" alt="">
-                                                                    </div>
-                                                                    @break
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                            <div class="products_inner_textbox">
-                                                                <h4><span>{{$rfqSentList['title']}}</span></h4>
-                                                                <div class="row">
-                                                                    <div class="col s12 m6">
-                                                                        <div class="product_moq">
-                                                                            Unit Price: <br/> <span>{{$rfqSentList['unit_price']}}</span>
+                                            
+                                            @if($business_profile->business_type == 'manufacturer')
+                                                <div class="row product-list">
+                                                    @if($products->count() > 0)
+                                                        @foreach ($products  as $product)
+                                                        <div class="col s6 m4 l3 product_item_box">
+                                                            <div class="productBox">
+                                                                <div class="inner_productBox">
+                                                                    <a href="{{route('mix.product.details', [$product->flag, $product->id])}}">
+                                                                        <div class="imgBox">
+                                                                            @foreach($product->product_images as $image)
+                                                                                <img src="{{Storage::disk('s3')->url('public/'.$image->product_image)}}" class="" alt="">
+                                                                                @break
+                                                                            @endforeach
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col s12 m6">
-                                                                        <div class="pro_leadtime">
-                                                                            Lead Time <br/> <span>{{ date('F j, Y',strtotime($rfqSentList['delivery_time'])) }}</span>
+                                                                        <div class="products_inner_textbox">
+                                                                            <h4><span>{{$product->title}}</span></h4>
+                                                                            <div class="row">
+                                                                                <div class="col s12 m6">
+                                                                                    <div class="product_moq">
+                                                                                        MOQ: <br> <span>{{$product->moq}}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col s12 m6">
+                                                                                    <div class="pro_leadtime">
+                                                                                        Lead Time <br> <span>{{$product->lead_time}}</span> days
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                        </a>
-                                                        @include('new_business_profile.rfq_details_modal')
-                                                    </div>
+                                                        </div>
+                                                        @endforeach
+                                                        <div class="pagination-block-wrapper">
+                                                            <div class="col s12 center">
+                                                                {!! $products->withQueryString()->links() !!}
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="card-alert card cyan">
+                                                            <div class="card-content white-text">
+                                                                <p>INFO : No products available.</p>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @else
+                                                <div class="row product-list">
+                                                    @if($products->count() > 0)
+                                                        @foreach ($products  as $product)
+                                                        <div class="col s6 m4 l3 product_item_box">
+                                                            <div class="productBox">
+                                                                <div class="inner_productBox">
+                                                                    <a href="{{route('mix.product.details', [$product->flag, $product->id])}}">
+                                                                        <div class="imgBox">
+                                                                            @foreach($product->images as $image)
+                                                                                <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="" alt="">
+                                                                                @break
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <div class="products_inner_textbox">
+                                                                            <h4><span>{{$product->name}}</span></h4>
+                                                                            <div class="row">
+                                                                                <div class="col s12 m6">
+                                                                                    <div class="product_moq">
+                                                                                        MOQ: <br> <span>{{$product->moq}}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col s12 m6">
+                                                                                    <div class="pro_leadtime">
+                                                                                        Lead Time <br> <span>@include('new_business_profile.wholesaler_products._product_lead_time')</span> days
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                        <div class="pagination-block-wrapper">
+                                                            <div class="col s12 center">
+                                                                {!! $products->appends(request()->query())->links() !!}
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="card-alert card cyan">
+                                                            <div class="card-content white-text">
+                                                                <p>INFO : No products available.</p>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>                                            
+                                            @endif
+                                        
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col s12 m12 l3 new_profile_account_rightsidebar_desktop">
-                                    <div class="new_profile_account_filterbar">
-                                        <h4>Filtered by</h4>
-                                        <div class="new_profile_account_filterbox">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Designs</a></li>
-                                                <li class="active"><a href="javascript:void(0);">Production Samples</a></li>
-                                                <li><a href="javascript:void(0);">Textile</a></li>
-                                                <li><a href="javascript:void(0);">Yarn</a></li>
-                                                <li><a href="javascript:void(0);">Ready Stock</a></li>
-                                                <li><a href="javascript:void(0);">Trims and Accessories</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Knit</a></li>
-                                                <li><a href="javascript:void(0);">Woven</a></li>
-                                                <li><a href="javascript:void(0);">Denim</a></li>
-                                                <li><a href="javascript:void(0);">Woven</a></li>
-                                                <li><a href="javascript:void(0);">Denim</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Kids</a></li>
-                                                <li><a href="javascript:void(0);">Male</a></li>
-                                                <li><a href="javascript:void(0);">Female</a></li>
-                                                <li><a href="javascript:void(0);">Yarn</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">T shirts</a></li>
-                                                <li><a href="javascript:void(0);">T shirts</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="account_filter_progress_wrap">
-                                            <h4>Lead Time</h4>
-                                            <div class="filter_progress_box">
-                                                <input type="range" min="30" max="100" value="30" class="filter_progress" id="myRange">
-                                                <span id="filterProgressValue"></span>
-                                            </div>
-
-                                            <h4>MOQ</h4>
-                                            <div class="filter_progress_box_moq">
-                                                <input type="range" min="100" max="1000" value="100" class="filter_progress_moq" id="myRangeMoq">
-                                                <span id="filterProgressValueMoq"></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('new_business_profile._rfq_filter')
                                 </div>
                             </div>
 

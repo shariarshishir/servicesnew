@@ -25,25 +25,194 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Manufacture\Product as ManufactureProduct;
+use App\Models\Product as WholesalerProduct;
+use App\Models\ProductTag;
 
 
 class RfqController extends Controller
 {
-    public function index($alias)
+    public function index($alias, Request $request)
     {
-        $token = Cookie::get('sso_token');
-        if($token) {
-            $response = Http::withToken($token)->get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
-        } else {
-            $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/null/page/1/limit/10');
+        $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
+        if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
+        {
+            
+            if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'manufacturer'){
+                $collection=collect(ManufactureProduct::withTrashed()
+                ->latest()
+                ->with('product_images','product_video','businessProfile')
+                ->where(function($query) use ($request, $business_profile){
+                    $query->where('business_profile_id', '!=', null)->get();
+                    if(isset($request->search)){
+                        $query->where('title','like', '%'.$request->search.'%')->get();
+                    }
+
+                })
+                ->get());
+
+                $controller_max_moq = $collection->max('moq');
+                $controller_min_moq = $collection->min('moq');
+                $controller_max_lead_time = $collection->max('lead_time');
+                $controller_min_lead_time = $collection->min('lead_time');
+
+                if(isset($request->product_tag)){
+                    $ptags = [];
+                    foreach($request->product_tag as $tag){
+                        $product_tag = ProductTag::where('id',$tag)->first();
+                        array_push($ptags,$product_tag->name);
+                    }
+                    $collection= $collection->filter(function($item) use ($ptags){
+                        if(isset($item['product_tag'])){
+                            $check = array_intersect($item['product_tag'], $ptags);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+
+                if(isset($request->product_type_mapping_child_id)){
+                    $collection = $collection->filter(function($item) use ($request){
+                        if(isset($item['product_type_mapping_child_id'])){
+                            $check = array_intersect($item['product_type_mapping_child_id'], $request->product_type_mapping_child_id);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+
+                if(isset($request->min_moq) && isset($request->max_moq)){
+                    $collection = $collection->whereBetween('moq', [$request->min_moq, $request->max_moq]);
+                    $collection->all();
+                }
+
+                if(isset($request->min_lead) && isset($request->max_lead)){
+                    $collection = $collection->whereBetween('lead_time', [$request->min_lead, $request->max_lead]);
+                    $collection->all();
+                }
+
+                $page = Paginator::resolveCurrentPage() ?: 1;
+                $perPage = 8;
+                $products = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $collection->forPage($page, $perPage),
+                    $collection->count(),
+                    $perPage,
+                    $page,
+                    ['path' => Paginator::resolveCurrentPath()],
+                );
+
+                $colors=['Red','Blue','Green','Black','Brown','Pink','Yellow','Orange','Lightblue','Multicolor'];
+                $sizes=['S','M','L','XL','XXL','XXXL'];
+                $view = isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.rfqs',compact('alias','products','business_profile','view','colors','sizes','controller_max_moq','controller_min_moq','controller_max_lead_time','controller_min_lead_time'));
+            }
+
+
+            if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'wholesaler'){
+
+                $collection=collect(WholesalerProduct::withTrashed()
+                ->where(function($query) use ($request, $business_profile){
+                    $query->where('business_profile_id', '!=', null)->get();
+                    if(isset($request->search)){
+                        $query->where('name','like', '%'.$request->search.'%')->get();
+                    }})
+                ->latest()
+                ->with('images','video')
+                ->get());
+
+                $controller_max_moq = $collection->max('moq');
+                $controller_min_moq = $collection->min('moq');
+                $controller_max_lead_time = 0;
+                $controller_min_lead_time = 0;
+                foreach($collection as $product){
+                    if(isset($product->attribute) && $product->product_type == 1){
+                        foreach(json_decode($product->attribute) as $lead_time)
+                        {
+                            if ($lead_time[3] > $controller_max_lead_time) {
+                                $controller_max_lead_time = $lead_time[3];
+                            }
+
+                            if ($lead_time[3] < $controller_min_lead_time) {
+                                $controller_min_lead_time = $lead_time[3];
+                            }
+                        }
+                    }
+                }
+
+                if(isset($request->product_tag)){
+                    $ptags = [];
+                    foreach($request->product_tag as $tag){
+                        $product_tag = ProductTag::where('id',$tag)->first();
+                        array_push($ptags,$product_tag->name);
+                    }
+                    $collection = $collection->filter(function($item) use ($ptags){
+                        if(isset($item['product_tag'])){
+                            $check = array_intersect($item['product_tag'], $ptags);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+
+                    });
+                }
+
+                if(isset($request->product_type_mapping_child_id)){
+                    $collection = $collection->filter(function($item) use ($request){
+                        if(isset($item['product_type_mapping_child_id'])){
+                            $check = array_intersect($item['product_type_mapping_child_id'], $request->product_type_mapping_child_id);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+
+                if(isset($request->min_lead) && isset($request->max_lead)){
+                    $p_id=[];
+                    foreach($collection as $product){
+                        if(isset($product->attribute) && $product->product_type == 1){
+                            foreach(json_decode($product->attribute) as $lead_time)
+                            {
+                                if ( $lead_time[3] >= $request->min_lead && $lead_time[3] <= $request->max_lead){
+                                    array_push($p_id,$product->id);
+                                }
+                            }
+                        }
+                    }
+
+                    $collection = $collection->whereIn('id', $p_id);
+                    $collection->all();
+                }
+
+                if(isset($request->min_moq) && isset($request->max_moq)){
+                    $collection = $collection->whereBetween('moq', [$request->min_moq, $request->max_moq]);
+                    $collection->all();
+                }
+
+                $page = Paginator::resolveCurrentPage() ?: 1;
+                $perPage = 8;
+                $products = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $collection->forPage($page, $perPage),
+                    $collection->count(),
+                    $perPage,
+                    $page,
+                    ['path' => Paginator::resolveCurrentPath()],
+                );
+                $view = isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.rfqs',compact('alias','products','business_profile','view','controller_max_moq','controller_min_moq','controller_max_lead_time','controller_min_lead_time'));
+            }
+
         }
-        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
-        $data = $response->json();
-        $rfqLists = $data['data'] ?? [];
-        $rfqsCount = $data['count'];
-        
-        $noOfPages = ceil($data['count']/10);
-        return view('new_business_profile.rfqs',compact('rfqLists','noOfPages','alias', 'business_profile'));
+        abort(401);
     }
 
     public function searchRfq(Request $request,$alias)

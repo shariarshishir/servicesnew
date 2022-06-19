@@ -2209,6 +2209,10 @@
             }
     });
 
+    $(".ProfileVerificationResendTrigger").click(function(){
+        $(".verification-status-message").toggle();
+    });
+
     $('.verification_request_trigger').click(function () {
 
         var verificationMsg = $("#verification_message").val();
@@ -2242,7 +2246,7 @@
                             $('#send-verification-request-modal').modal('close');
                             swal("Done!", response.message,"success");
 
-                            $(".business_profile_verification_request_text").html('<i class="material-icons verification-info-icon">info_outline</i> Your request is awaiting for verification.');
+                            $(".verification-status-message").html('Your request is awaiting for verification.');
                         },
                         error: function(xhr, status, error)
                         {

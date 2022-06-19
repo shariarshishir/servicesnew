@@ -10688,6 +10688,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 /***********************************/
 .supplier_account_progress {
     padding-bottom: 30px;
+    position: relative;
 }
 .supplier_account_progress h4 {
     font-family: "nexaregular";
@@ -12672,7 +12673,25 @@ line-height: 30px;
 }
 /* ************* How We Work css end ************* */
 
-
+.profile-not-verified-by-merchantbay {
+    position: relative;
+    display: inline-block;
+}
+.verification-status-message {
+    position: absolute;
+    background: #fff;
+    border: 3px solid #d2e9d4;
+    border-radius: 4px;
+    width: 300px;
+    padding: 10px;
+    z-index: 9;
+}
+.profile-verified-by-merchantbay {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: -20px;
+}
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {

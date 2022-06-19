@@ -175,21 +175,24 @@
                         <div class="profile_supplier_account_insight_wrap">
                             <div class="supplier_account_progress">
                                 <h4>
-                                    Profile Progress 
+                                    <span style="vertical-align: top;">Profile Progress</span> 
                                     @if($business_profile->is_business_profile_verified == 0)
+                                    <div class="profile-not-verified-by-merchantbay">
+                                        <a href="javascript:void(0);" class="ProfileVerificationResendTrigger">
+                                            <i class="material-icons" style="color: red;">error</i>
+                                        </a>
                                         @if($business_profile->businessProfileVerificationsRequest)
-                                            <a href="#send-verification-request-modal" class="tooltipped send-verification-request-trigger modal-trigger ProfileVerificationResendTrigger" data-position="top" data-tooltip="Your request is awaiting for verification. Click here to re-send verification request.">
-                                                <i class="material-icons" style="color: red;">error</i>
-                                            </a>
+                                        <div class="verification-status-message" style="display: none;">Your request is awaiting for verification. Click <a href="#send-verification-request-modal" class="send-verification-request-trigger modal-trigger">here</a> to re-send verification request.</div>
                                         @else
-                                            <a href="#send-verification-request-modal" class="tooltipped send-verification-request-trigger modal-trigger" data-position="top" data-tooltip="Your profile is not verified. Click here to send verification request.">
-                                                <i class="material-icons" style="color: red;">error</i>
-                                            </a>
+                                        <div class="verification-status-message" style="display: none;">Your profile is not verified. Click <a href="#send-verification-request-modal" class="send-verification-request-trigger modal-trigger">here</a> to send verification request.</div>
                                         @endif
+                                    </div>
                                     @else
+                                    <div class="profile-verified-by-merchantbay">
                                         <div class="verified_by_merchantbay">
                                             <span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
                                         </div>
+                                    </div>    
                                     @endif
                                 </h4>                           
                                 <div id="profile-progress-wrapper">

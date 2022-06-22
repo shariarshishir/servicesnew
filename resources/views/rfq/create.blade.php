@@ -36,8 +36,8 @@
                                     <div class="col s12 input-field">
                                         <div class="">
                                             <label>Short Description <span>*</span></label>
-                                            <textarea class="ig-new-rgt prd-txta short_description add_short_description" name="short_description"></textarea>
-                                            <input type="hidden" name="full_specification" value="" />
+                                            <textarea class="ig-new-rgt prd-txta short_description add_short_description" name="full_specification"></textarea>
+                                            <input type="hidden" name="short_description" value="" />
                                         </div>
                                     </div>
                                     <div class="col s12 xl6">
@@ -218,8 +218,7 @@
                 //console.log($(this)[0].files);
                 $.each($(this)[0].files, function()
                 {
-                    console.log(test);
-                    //console.log($(this)[0].name);
+                    console.log($(this)[0].name);
                 })
             });
         });
@@ -453,29 +452,29 @@
                 $('input[name="title"]').removeClass('invalid');
             }
 
-            if ($('input[name="short_description"]').val()=="" || $('input[name="short_description"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="short_description"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="short_description"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="short_description"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="short_description"]').removeClass('invalid');
-            }
-
-            // if ($('input[name="full_specification"]').val()=="" || $('input[name="full_specification"]').val()=="undefined")
+            // if ($('input[name="short_description"]').val()=="" || $('input[name="short_description"]').val()=="undefined")
             // {
             //     errCount++;
-            //     $('input[name="full_specification"]').closest('.input-wrapper').addClass(errorClass);
-            //     $('input[name="full_specification"]').addClass('invalid');
+            //     $('input[name="short_description"]').closest('.input-wrapper').addClass(errorClass);
+            //     $('input[name="short_description"]').addClass('invalid');
             // }
             // else
             // {
-            //     $('input[name="full_specification"]').closest('.input-wrapper').removeClass(errorClass);
-            //     $('input[name="full_specification"]').removeClass('invalid');
+            //     $('input[name="short_description"]').closest('.input-wrapper').removeClass(errorClass);
+            //     $('input[name="short_description"]').removeClass('invalid');
             // }
+
+            if ($('input[name="full_specification"]').val()=="" || $('input[name="full_specification"]').val()=="undefined")
+            {
+                errCount++;
+                $('input[name="full_specification"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="full_specification"]').addClass('invalid');
+            }
+            else
+            {
+                $('input[name="full_specification"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="full_specification"]').removeClass('invalid');
+            }
 
             if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
             {
@@ -641,6 +640,7 @@
                             console.log(response);
                             const rfq_app_url = "{{env('RFQ_APP_URL')}}";
                             var url = rfq_app_url+'/api/quotation';
+                            var alias = response.profileAlias;
                             const sso_token = "Bearer " +response.access_token;
                             var formData = new FormData();
                             var file_data = $('input[name="rfq-documents[]"]')[0].files;
@@ -684,6 +684,10 @@
                                     $('#loadingProgressContainer').hide();
                                     const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
                                     swal("Done!", msg,"success");
+                                    //console.log(response);
+                                    var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                                    redirect_url = redirect_url.replace(':slug', alias);
+                                    window.location.href = redirect_url;
                                     //window.location.href = "{{ route('rfq.my')}}";
                                 },
                                 error: function(xhr, status, error)
@@ -767,7 +771,11 @@
                             $('#loadingProgressContainer').hide();
                             const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
                             swal("Done!", msg,"success");
-                            window.location.reload();
+
+                            var alias = "{{$profileAlias??""}}";
+                            var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                            redirect_url = redirect_url.replace(':slug', alias);
+                            window.location.href = redirect_url;
                         },
                         error: function(xhr, status, error)
                         {

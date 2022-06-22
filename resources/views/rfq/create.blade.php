@@ -12,7 +12,7 @@
                             <div class="col s12 m6 l5">
                                 <div class="rfq_upload_filebox_wrap">
                                     <div class="rfq_upload_filebox center-align">
-                                        <div class="rfq-document-upload"></div>
+                                        <div class="rfq-document-upload" id="rfq-document-upload"></div>
                                         <div class="or"><span>OR</span></div>
                                         <a href="javascript:void(0);" class="btn_green browse_file_trigger">Browse files</a>
                                     </div>
@@ -149,12 +149,12 @@
                                                 </div>
                                             </div>
                                             <div class="col s12 input-field signin_or_signup_info_message">
-                                                <i class="material-icons dp48" style="vertical-align: middle;">info</i> Submit RFQ as a <a href="javascript:void(0)" class="trigger_rfq_register">guest</a>.
+                                                <i class="material-icons dp48" style="vertical-align: middle;">info</i> Submit RFQ as <a href="javascript:void(0)" class="trigger_rfq_register">guest</a>.
                                             </div>
                                         </div>
                                     </div>
                                     <div class="user_registration_info" style="display: none;">
-                                        <h4>Sign up</h4>
+                                        <h4>Guest Submitter</h4>
                                         <div class="row">
                                             <div class="col s12 input-field">
                                                 <label>Name</label>
@@ -228,7 +228,7 @@
             });
 
             $(".browse_file_trigger").click(function(){
-                $(".rfq-document-upload").click();
+                $(".rfq-document-upload").trigger("click");
             });
      
             $('input[name="rfq-documents[]"]').change(function(){

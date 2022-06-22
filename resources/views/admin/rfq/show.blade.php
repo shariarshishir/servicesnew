@@ -81,9 +81,21 @@
                                     @if(isset($rfq['images']))
                                         <div class="rfq_image">
                                             @foreach($rfq['images'] as $image)
-                                                <a href="{{ $image['image'] }}" data-fancybox>
-                                                    <img src="{{ $image['image'] }}" alt="" class="img-responsive" />
-                                                </a>
+                                                @php
+                                                    $imgFullpath = explode('/', $image['image']);
+                                                    $imgExt = end($imgFullpath);
+                                                @endphp
+                                                @if(pathinfo($imgExt, PATHINFO_EXTENSION) == 'pdf' || pathinfo($imgExt, PATHINFO_EXTENSION) == 'PDF')
+                                                    <a href="{{ $image['image'] }}" class="pdf_icon" target="_blank">&nbsp;</a>
+                                                @elseif(pathinfo($imgExt, PATHINFO_EXTENSION) == 'doc' || pathinfo($imgExt, PATHINFO_EXTENSION) == 'docx')
+                                                    <a href="{{ $image['image'] }}" class="doc_icon" target="_blank">&nbsp;</a>
+                                                @elseif(pathinfo($imgExt, PATHINFO_EXTENSION) == 'xlsx' || pathinfo($imgExt, PATHINFO_EXTENSION) == 'xls')
+                                                    <a href="{{ $image['image'] }}" class="xlsx_icon" target="_blank">&nbsp;</a>
+                                                @else
+                                                    <a href="{{ $image['image'] }}" data-fancybox>
+                                                        <img src="{{ $image['image'] }}" alt="" class="img-responsive" />
+                                                    </a>
+                                                @endif                                                
                                             @endforeach
                                         </div>
                                     @endif

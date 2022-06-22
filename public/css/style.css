@@ -12693,6 +12693,337 @@ line-height: 30px;
     top: -20px;
 }
 
+/* ************* New rfq update design css start ************* */
+.rfq_update_design_wrap h2 {
+    font-family: 'nexabold';
+    font-size: 35px;
+    line-height: 45px;
+    margin: 0 auto;
+    color: #285460;
+    margin-bottom: 20px;
+}
+.rfq_update_design_wrap h5 {
+    font-size: 16px;
+    line-height: 20px;
+    color: #285460;
+    margin-bottom: 50px;
+}
+.rfq_update_topbar .btn_post_rfq {
+    line-height: 32px;
+}
+.rfq_update_topbar .btn_post_rfq .material-icons {
+    float: right;
+    line-height: 31px;
+}
+.rfq_update_design_wrap .rfq_update_topbar {
+    padding: 50px 0 100px;
+}
+.rfq_update_design_wrap .rfq_update_topbar h2 {
+    margin-bottom: 10px;
+}
+.rfq_update_question_bar .row  {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+}
+.rfq_update_question_bar .row .col {
+    padding-bottom: 20px;
+}
+.rfq_update_question_bar .rfq_update_question_innerBox {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+    border:1px solid #f8f8f8;
+    height: 100%;
+}
+.rfq_update_question_bar .rfq_update_question_innerBox:hover {
+    border:1px solid #d7df23;
+    cursor: pointer;
+}
+.rfq_update_question_innerBox .rfq_icon_img span {
+    background: #eef0b7;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 92px;
+    margin-bottom: 30px;
+}
+.rfq_update_question_bar .rfq_update_question_innerBox:hover .rfq_icon_img span  {
+    background: #d7df23;
+}
+.rfq_update_question_innerBox h3 {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    height: 45px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: relative;
+}
+.rfq_update_question_innerBox h3 span {
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-align: center;
+    width: 100%;
+}
+
+.new_rfq_paths_boxwrap {
+    padding: 120px 0 50px;
+}
+.new_rfq_paths_boxwrap h3 {
+    font-size: 35px;
+    line-height: 1.3;
+    color: #285460;
+}
+.new_rfq_paths_boxwrap .row .col {
+    padding: 0 16px; 
+}
+.new_rfq_paths_boxwrap .path_box {
+    -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
+    -moz-box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.18);
+    box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
+    border-radius: 0 0 10px 10px;
+    overflow: hidden; 
+    margin-bottom: 30px;
+}
+.new_rfq_paths_boxwrap .path_box .imgbox {
+    padding: 40px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; 
+}
+.new_rfq_paths_boxwrap .path_box .imgbox img {
+    height: 80px;
+    display: block; 
+}
+.new_rfq_paths_boxwrap .path_box a {
+    background-color: #d7df23;
+    height: 40px;
+    text-align: center;
+    color: #285460;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 2px; 
+}
+
+/* ******************************** */
+/* .dropify-wrapper {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    min-height: 200px;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #777;
+    background-color: #FFF;
+    background-image: none;
+    text-align: center;
+    border: 2px solid #E5E5E5;
+    -webkit-transition: border-color .15s linear;
+    transition: border-color .15s linear;
+}
+.dropify-wrapper input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5;
+} */
+.new_rfq_upload_form_wrap {
+    padding: 80px 0;
+}
+.rfq_upload_filebox_wrap {
+    padding-top: 15px;
+}
+.rfq_upload_filebox {
+    max-width: 500px;
+    border: 1px dotted #878787;
+    padding: 30px;
+}
+.rfq_upload_filebox  .material-icons {
+    font-size: 80px;
+    line-height: 60px;
+    color: #9db1b6;
+}
+.rfq_upload_filebox  .dropify-message {
+    max-width: 235px;
+    margin: 0 auto 20px;
+}
+.rfq_upload_filebox  .dropify-message span {
+    display: block;
+    margin-top: 20px;
+}
+.rfq_upload_filebox .btn_green {
+    height: 35px;
+    padding: 5px 35px;
+    line-height: 24px;
+}
+#updateRfqsigninModal .or,
+.rfq_upload_filebox .or {
+    border-bottom: 2px solid #8a8a8a;
+    max-width: 235px;
+    margin: 40px auto;
+    position: relative;
+}
+#updateRfqsigninModal .or {
+    max-width: 100%;
+}
+#updateRfqsigninModal .or span,
+.rfq_upload_filebox .or span {
+    background: #ffffff;
+    padding: 5px 20px;
+    position: absolute;
+    left: 38%;
+    top: -18px;
+}
+#updateRfqsigninModal .or span {
+    left: 45%;
+    background: #fafafa;
+}
+/* ****************************************** */
+.update_rfq_product_upload_form .input-field label {
+    padding-top: 0;
+    left: inherit;
+}
+.update_rfq_product_upload_form .input-field textarea {
+    margin-bottom: 0;
+}
+.update_rfq_product_upload_form .input-field {
+    margin-bottom: 25px;
+}
+.update_rfq_product_upload_form label span {
+    color: red;
+    font-size: 18px;
+}
+.update_rfq_product_upload_form input {
+    float: none !important;
+}
+.update_rfq_product_upload_form .input-field .rfqPrice .price_input,
+.update_rfq_product_upload_form .input-field .rfqQuantity .quantity_input {
+    padding-right: 90px !important;
+}
+.update_rfq_product_upload_form .rfqPrice,
+.update_rfq_product_upload_form .rfqQuantity {
+    position: relative;
+}
+.update_rfq_product_upload_form .rfqPrice span,
+.update_rfq_product_upload_form .rfqQuantity .select2 {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    width: 86px !important;
+    background: #e5e5e5 !important;
+    height: 41px;
+    text-align: center;
+    line-height: 47px;
+    border-radius: 4px;
+}
+.update_rfq_product_upload_form .rfqQuantity .select2-container--default .select2-selection--single {
+    height: 41px;
+    background: #e5e5e5 !important;
+    border:none !important;
+}
+.update_rfq_product_upload_form .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 44px;
+}
+.update_rfq_product_upload_form .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 9px;
+    right: 5px;
+}
+/* ************************************ */
+.updaterfq_button_wrap {
+    padding-top: 50px;
+}
+.updaterfq_button_wrap .btn_green {
+    line-height: 30px;
+}
+.updaterfq_button_wrap .btn_green.right .material-icons,
+.updaterfq_button_wrap .btn_green.left .material-icons {
+    float: left;
+    width: 16px;
+    line-height: 28px;
+}
+.updaterfq_button_wrap .btn_green.right .material-icons {
+    float: right;
+}
+/* ***************************************** */
+#rfq-user-system-entry-modal {
+    max-width: 600px;
+}
+#rfq-user-system-entry-modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#rfq-user-system-entry-modal .modal-content {
+    padding: 20px;
+}
+#rfq-user-system-entry-modal .modal-content label {
+    left: inherit;
+}
+#rfq-user-system-entry-modal .rfq_update_btn {
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px 20px 8px;
+}
+#rfq-user-system-entry-modal .or {
+    border-bottom: 2px solid #8a8a8a;
+    max-width: 235px;
+    margin: 40px auto;
+    position: relative;
+}
+#rfq-user-system-entry-modal .or {
+    max-width: 100%;
+}
+#rfq-user-system-entry-modal .or span {
+    background: #ffffff;
+    padding: 5px 20px;
+    position: absolute;
+    left: 38%;
+    top: -18px;
+}
+#rfq-user-system-entry-modal .or span {
+    left: 45%;
+    background: #fafafa;
+}
+.signin_or_signup_info_message {
+    font-size: 15px;
+    color: #000;
+}
+.image-uploader .uploaded .uploaded-image img {
+    left: 0px;
+    top: 0px;
+}
+/* ************* New rfq update design css end ************* */
+
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {
     .container.howWeWorkContainer .manufacture_container {

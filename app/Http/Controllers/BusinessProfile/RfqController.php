@@ -13,6 +13,7 @@ use App\RfqApp;
 use Illuminate\Support\Str;
 use App\Jobs\NewRfqHasAddedJob;
 use App\Models\BusinessProfile;
+use App\Models\CompanyOverview;
 use App\Events\NewRfqHasAddedEvent;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -827,7 +828,8 @@ class RfqController extends Controller
                 'email' => $request->r_email,
                 'password' => $request->r_password,
                 'name' => $request->name,
-                'company' =>'No Company',
+                'company' => $request->r_company,
+                'phone' => $request->r_phone,
                 'user_type' => 'buyer',
                 'user_flag' => 'rfq',
             ];
@@ -844,7 +846,8 @@ class RfqController extends Controller
                 'email' => $request->r_email,
                 'password' => Hash::make($request->r_password),
                 'name' => $request->name,
-                'company_name' =>'No Company',
+                'company_name' => $request->r_company,
+                'phone' => $request->r_phone,
                 'user_type' => 'buyer',
                 'is_email_verified' => 1,
                 'ip_address' => $request->ip(),
@@ -854,6 +857,20 @@ class RfqController extends Controller
             if(!$new_user){
                 return  response()->json(['error' => 'Somethings went wrong'],403);
             }
+
+            // if user registration successful then we will create a business profile for the new user.
+            $business_profile_data=[
+                'business_name' => $new_user['company_name'],
+                'alias'   => $this->createAlias($new_user['company_name']),
+                'user_id'       => $new_user['id'],
+                'profile_type'       => "buyer",
+                'business_type' => "manufacturer", // forcefully set Manufacturer type
+                'has_representative'=> 1,
+                'industry_type' => 'apparel',
+            ];
+            $business_profile = BusinessProfile::create($business_profile_data);
+            $this->createCompanyOverview($business_profile->id);
+
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->r_email,
                 'password' => $request->r_password,
@@ -900,5 +917,60 @@ class RfqController extends Controller
 
 
     }
+
+    public function removeSpecialCharacterFromAlais($alias)
+    {
+        $lowercase=strtolower($alias);
+        $pattern= '/[^A-Za-z0-9\-]/';
+        $preg_replace= preg_replace($pattern, '-', $lowercase);
+        $single_hypen= preg_replace('/-+/', '-', $preg_replace);
+        $alias= $single_hypen;
+        return $alias;
+    }
+
+
+    public function createAlias($name)
+    {
+        $alias = $this->removeSpecialCharacterFromAlais($name);
+        return $this->checkExistsAlias($alias);
+    }
+
+    public function checkExistsAlias($alias)
+    {
+        $check_exists=BusinessProfile::where('alias', $alias)->first();
+        if($check_exists){
+            $create_array= explode('-',$alias);
+            $last_key=array_slice($create_array,-1,1);
+            $last_key_string=implode(' ',$last_key);
+            if(is_numeric($last_key_string)){
+                $last_key_string++;
+                array_pop($create_array);
+                array_push($create_array,$last_key_string);
+            }else{
+                array_push($create_array,1);
+            }
+            $alias=implode("-",$create_array);
+            return $this->checkExistsAlias($alias);
+
+        }
+        return $alias;
+    }    
+
+    //company overview data
+    public function createCompanyOverview($profile_id)
+    {
+        $name=['annual_revenue','number_of_worker','number_of_female_worker','trade_license_number','year_of_establishment','opertaing_hours','shift_details','main_products'];
+        $value=[null,null,null,null,null,null,null,null,null];
+        $data=[];
+        foreach($name as $key => $value2){
+            array_push($data,['name' => $value2, 'value' => $value[$key], 'status' => 0]);
+        }
+        $companyOverview=CompanyOverview::create([
+            'business_profile_id' => $profile_id,
+            'data'        => json_encode($data),
+        ]);
+        return $companyOverview;
+
+    }    
 
 }

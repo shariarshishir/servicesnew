@@ -211,6 +211,8 @@ Route::get('user/profile/vendor/{vendor}/order/{order}/notification/{notificatio
 Route::get('rfq',[RfqController::class, 'index'])->name('rfq.index');
 Route::get('rfq-by-page-no',[RfqController::class, 'rfqByPageNumber'])->name('rfq.frontend.pagination');
 
+Route::get('rfq-info',[HomeController::class, 'rfqInfoDetails'])->name('new_rfq.index');
+
 Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('/cart',[ProductCartController::class,'index'])->name('cart.index');
     Route::get('/cart-item-delete/{rowId}',[ProductCartController::class,'cartItemDelete'])->name('cart.delete');

@@ -1698,6 +1698,38 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-size: 18px;
     color: #000;
 }
+.rfq_image .doc_icon {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/doc-bg.png")  no-repeat center;
+    background-size: 75px;
+    width: auto;
+    height: 84px;
+    display: block;
+    font-size: 0;
+}
+.rfq_image .xlsx_icon {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/excel-bg.png") no-repeat center;
+    background-size: 75px;
+    width: auto;
+    height: 84px;
+    display: block;
+    font-size: 0;
+}
+.rfq_image .pdf_icon {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/pdf-bg.png") no-repeat center;
+    background-size: 75px;
+    width: auto;
+    height: 84px;
+    display: block;
+    font-size: 0;
+}
+.rfq_image .zip_icon {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/zip-bg.png") no-repeat center;
+    background-size: 75px;
+    width: auto;
+    height: 84px;
+    display: block;
+    font-size: 0;
+}
 /* ************** Media css start ******************* */
 
 @media only screen and (min-width: 1500px) {}

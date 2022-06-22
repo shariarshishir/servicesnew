@@ -36,6 +36,8 @@
 								</ul>
 							</li>
 
+							<li><a href="{{route('new_rfq.index')}}" class="{{ Route::is('new_rfq.index') ? 'active' : ''}}">RFQ</a></li>
+
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links">More<i class="material-icons right">arrow_drop_down</i></a>
 

@@ -1267,6 +1267,10 @@ class HomeController extends Controller
         return view('faq.index');
     }    
 
+    public function rfqInfoDetails(){
+        return view('new_rfq.index');
+    }    
+
     // get supplier location data
     public function getSupplierLocationData(Request $request)
     {

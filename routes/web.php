@@ -67,6 +67,7 @@ use App\Http\Controllers\ProductWishlistController;
 use App\Http\Controllers\SubscribedUserEmailController;
 use App\Http\Controllers\OrderModificationRequestController;
 use App\Http\Controllers\OrderController as UserOrderController;
+use App\Http\Controllers\Product\ProductController as ProductProductController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\TinyMcController;
 use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController;
@@ -134,6 +135,8 @@ fclose($fp);
 });
 
 //test
+Route::get('add-product/{alias}',[ProductProductController::class, 'index'])->name('new.add.product');
+Route::post('store-product',[ProductProductController::class, 'store'])->name('new.store.product');
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');

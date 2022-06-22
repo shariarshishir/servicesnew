@@ -37,6 +37,9 @@ class MoqUnitRule implements Rule
         if($this->product_type == 3 && (!isset($value) && !isset($this->request->non_clothing_full_stock))){
             return false;
         }
+        if($this->product_type == 4 && !isset($value)){
+            return false;
+         }
         return true;
     }
 

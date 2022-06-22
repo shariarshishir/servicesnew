@@ -110,7 +110,6 @@ class ProductController extends Controller
 
    public function store(Request $request)
    {
-
         $validator = Validator::make($request->all(), [
             'business_profile_id' => 'required',
             'images'  => 'required',
@@ -246,9 +245,9 @@ class ProductController extends Controller
             $business_profile=BusinessProfile::withTrashed()->where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
             //tiny mc text editor file upload
-           
+
             $files = Storage::disk('s3')->allFiles('/public/temp/'.$business_profile_name.'/pdf/');
-            
+
             if($files){
                 foreach($files as $path) {
                     $pdfFile = Storage::disk('s3')->get($path);
@@ -309,7 +308,7 @@ class ProductController extends Controller
 
            ]);
 
-      
+
             foreach ($request->images as $image) {
                 $s3 = \Storage::disk('s3');
                 $uniqueStringForSmallImage = generateUniqueString();
@@ -357,7 +356,7 @@ class ProductController extends Controller
                     'video' => $filePathForDB,
                 ]);
             }
-           
+
             DB::commit();
 
             return response()->json(array('success' => true, 'msg' => 'Product Created Successfully'),200);
@@ -588,7 +587,7 @@ class ProductController extends Controller
 
              //tiny mc text editor file upload
             $files = Storage::disk('s3')->allFiles('/public/temp/'.$business_profile_name.'/pdf/');
-            
+
             if($files){
                 foreach($files as $path) {
                     $pdfFile = Storage::disk('s3')->get($path);
@@ -616,7 +615,7 @@ class ProductController extends Controller
             }
             if(isset($request->images))
             {
-                
+
                 foreach ($request->images as $image) {
                     $s3 = \Storage::disk('s3');
                     $uniqueStringForSmallImage = generateUniqueString();
@@ -654,7 +653,7 @@ class ProductController extends Controller
                     }
                }
             }
-           
+
             //upload video
             if($request->hasFile('video')){
                 $uniqueStringForSmallImage = generateUniqueString();

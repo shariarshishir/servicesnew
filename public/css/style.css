@@ -13006,10 +13006,7 @@ line-height: 30px;
     text-align: center;
     animation: moveToRight 1s ease-in-out;
 }
-.requst_for_rfq_icon.requst_for_rfq_icon_home {
-    display: none; 
-}
-.requst_for_rfq_icon_home.fixedHome {
+.requst_for_rfq_icon.fixedHome {
     display: block;
     animation: moveToRight 1s ease-in-out;
 }

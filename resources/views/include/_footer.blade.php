@@ -7,7 +7,7 @@
     </a>
 </div>
 <!-- live_market section end -->
-<div class="requst_for_rfq_icon">
+<div class="requst_for_rfq_icon" style="display: none;">
     <a href="{{route('rfq.create')}}">
         <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-4.png" alt="" />
          <span> Post your RFQ</span>
@@ -1405,16 +1405,16 @@ function askForPrice($sku)
         var pageCUrrentURL = window.location.href;
         var APP_URL = {!! json_encode(url('/')) !!}+"/";
         if(pageCUrrentURL == APP_URL) {
-            $(".requst_for_rfq_icon").addClass("requst_for_rfq_icon_home");
             $(window).scroll(function() {
                 var scroll = $(window).scrollTop();
                 if (scroll >= 450) {
-                    $(".requst_for_rfq_icon_home").addClass("fixedHome");
+                    $(".requst_for_rfq_icon").show().addClass("fixedHome");
                 } else {
-                    $(".requst_for_rfq_icon_home").removeClass("fixedHome");
+                    $(".requst_for_rfq_icon").hide().removeClass("fixedHome");
                 }
             });
         } else {
+            $(".requst_for_rfq_icon").show();
             // alert("I am in inner page");
         }
     })

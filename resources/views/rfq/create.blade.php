@@ -9,7 +9,7 @@
                 <div class="new_rfq_upload_form_wrap">
                     <div class="row">
                         <form class="update_rfq_product_upload_form createRfqForm" method="post" enctype="multipart/form-data" action="">
-                            <div class="col s12 m6">
+                            <div class="col s12 m6 l5">
                                 <div class="rfq_upload_filebox_wrap">
                                     <div class="rfq_upload_filebox center-align">
                                         <div class="rfq-document-upload"></div>
@@ -18,7 +18,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col s12 m6">
+                            <div class="col s12 m6 l7 create_rfq_form_wrap">
                                 <div class="row">
                                     <div class="col s12 input-field">
                                         <label>Select Product Tags <span>*</span></label>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             @else
-                                <a class="btn_green modal-trigger right" href="#rfq-user-system-entry-modal">Next <i class="material-icons">navigate_next</i></a>
+                                <a class="btn_green btn_rfq_post_next btn_rfq_post modal-trigger right" href="#rfq-user-system-entry-modal">Next <i class="material-icons">navigate_next</i></a>
                             @endif
                             
                             <div id="rfq-user-system-entry-modal" class="modal update_rfq_signin_modal">
@@ -128,8 +128,28 @@
                                                 <label>Password</label>
                                                 <input type="password" class="" name="password"  autocomplete="new-password"/>
                                             </div>
+                                            <div class="col s12" style="margin: 20px 0;">
+                                                <div class="row">
+                                                    <div class="col s12 m8">
+                                                        <div class="captchaContent" style="margin-bottom: 15px;">
+                                                            <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
+                                                            <div class="messageContent" style="color: red; text-align: left;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col s12 m4">
+                                                        <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
+                                                            <button type="submit" id="page_button" style="display: none;"></button>
+                                                            <div class="submit_btn_wrap center-align">
+                                                                <button type="button" class="btn_green btn_rfq_post btn-green" onclick="onSubmitValidation();">
+                                                                    Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col s12 input-field signin_or_signup_info_message">
-                                                <i class="material-icons dp48" style="vertical-align: middle;">info</i> Don't have any account? <a href="javascript:void(0)" class="trigger_rfq_register">Sign Up</a>.
+                                                <i class="material-icons dp48" style="vertical-align: middle;">info</i> Submit RFQ as a <a href="javascript:void(0)" class="trigger_rfq_register">guest</a>.
                                             </div>
                                         </div>
                                     </div>
@@ -156,39 +176,36 @@
                                                 <label>Phone Number</label>
                                                 <input type="number" class="" placeholder="+880 XXXXXXXXXX" name="r_phone" autocomplete="false" />
                                             </div>
+                                            <div class="col s12" style="margin: 20px 0;">
+                                                <div class="row">
+                                                    <div class="col s12 m8">
+                                                        <div class="captchaContent" style="margin-bottom: 15px;">
+                                                            <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
+                                                            <div class="messageContent" style="color: red; text-align: left;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col s12 m4">
+                                                        <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
+                                                            <button type="submit" id="page_button" style="display: none;"></button>
+                                                            <div class="submit_btn_wrap center-align">
+                                                                <button type="button" class="btn_green btn_rfq_post btn-green" onclick="onSubmitValidation();">
+                                                                    Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col s12 input-field signin_or_signup_info_message">
                                                 <i class="material-icons dp48" style="vertical-align: middle;">info</i> Already have an account. <a href="javascript:void(0)" class="trigger_rfq_login">Sign In</a>.
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col s12 m2 l3">&nbsp;</div>
-                                        <div class="col s12 m8 l6">
-                                            <div class="captchaContent" style="margin-bottom: 15px;">
-                                                <div class="g-recaptcha" data-sitekey="6Lf_azEaAAAAAK4yET6sP7UU4X3T67delHoZ-T9G" data-callback="getCaptchaResponse"></div>
-                                                <div class="messageContent" style="color: red; text-align: left;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col s12 m2 l3">&nbsp;</div>
-                                    </div>
-
-                                    <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
-                                        <button type="submit" id="page_button" style="display: none;"></button>
-                                        <div class="submit_btn_wrap center-align">
-                                            <button type="button" class="btn_green btn_rfq_post btn-green" onclick="onSubmitValidation();">
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div>                                
-
                                 </div>
                             </div>                            
-
                         </form>
                     </div>
                 </div>            
-
             </div>
         </section>
     </div>

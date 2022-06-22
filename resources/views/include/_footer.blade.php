@@ -3,10 +3,16 @@
     <a href="https://live.merchantbay.com/" target="_blank" itemprop="Live Market">
         <i class="material-icons">live_tv</i>
         <span>Live Market</span>
-        <span class="live-img"> <img src="{{Storage::disk('s3')->url('public/frontendimages/new-home/live-img.gif')}}" /></images> </span>
+        <span class="live-img"> <img src="{{Storage::disk('s3')->url('public/frontendimages/new-home/live-img.gif')}}" /></span>
     </a>
 </div>
 <!-- live_market section end -->
+<div class="requst_for_rfq_icon">
+    <a href="{{route('rfq.create')}}">
+        <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-4.png" alt="" />
+         <span> Post your RFQ</span>
+    </a>
+</div>
 <!-- Footer section start -->
 <footer class="footer_wrap" itemscope>
     @if(request()->route()->getName() == 'home')
@@ -1395,6 +1401,26 @@ function askForPrice($sku)
         //swal(error[0],"Please try again", "error");
     });
 
+    $(document).ready(function(){
+        var pageCUrrentURL = window.location.href;
+        var APP_URL = {!! json_encode(url('/')) !!}+"/";
+        if(pageCUrrentURL == APP_URL) {
+            $(".requst_for_rfq_icon").addClass("requst_for_rfq_icon_home");
+            $(window).scroll(function() {
+                var scroll = $(window).scrollTop();
+                if (scroll >= 450) {
+                    $(".requst_for_rfq_icon_home").addClass("fixedHome");
+                } else {
+                    $(".requst_for_rfq_icon_home").removeClass("fixedHome");
+                }
+            });
+        } else {
+            // alert("I am in inner page");
+        }
+    })
+
+
+
     $('#newsletter_signup_form').on('submit',function(e){
         e.preventDefault();
         let newsletter_email_address = $('#newsletter_email_address').val();
@@ -1673,6 +1699,9 @@ $(document).ready(function() {
         $(".banner_search").toggle();
     });
 });
+
+
+
 
 </script>
 

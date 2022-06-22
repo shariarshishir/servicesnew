@@ -3806,9 +3806,6 @@ div.dataTables_wrapper table.mdc-data-table__table {
 .file_attach img {
     margin: 0 10px;
 }
-.btn_rfq_post {
-    padding: 8px 20px;
-}
 .rfq_from .input-field {
     margin: 0;
 }
@@ -4234,7 +4231,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     min-height: 100px !important;
 }
 .rfq_detail_from_wrap .submit_btn_wrap {
-    padding: 50px 0 0;
+    padding: 15px 0 0;
 }
 #product-edit-modal-block .submit_btn_wrap {
     padding-top: 30px;
@@ -12704,7 +12701,7 @@ line-height: 30px;
 }
 .rfq_update_design_wrap h5 {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 24px;
     color: #285460;
     margin-bottom: 50px;
 }
@@ -12826,37 +12823,6 @@ line-height: 30px;
 }
 
 /* ******************************** */
-/* .dropify-wrapper {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    width: 100%;
-    max-width: 100%;
-    min-height: 200px;
-    padding: 5px 10px;
-    font-size: 14px;
-    line-height: 22px;
-    color: #777;
-    background-color: #FFF;
-    background-image: none;
-    text-align: center;
-    border: 2px solid #E5E5E5;
-    -webkit-transition: border-color .15s linear;
-    transition: border-color .15s linear;
-}
-.dropify-wrapper input {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 5;
-} */
 .new_rfq_upload_form_wrap {
     padding: 80px 0;
 }
@@ -12865,8 +12831,8 @@ line-height: 30px;
 }
 .rfq_upload_filebox {
     max-width: 500px;
-    border: 1px dotted #878787;
-    padding: 30px;
+    border: 2px dashed #878787;
+    padding: 50px;
 }
 .rfq_upload_filebox  .material-icons {
     font-size: 80px;
@@ -12908,6 +12874,7 @@ line-height: 30px;
     left: 45%;
     background: #fafafa;
 }
+
 /* ****************************************** */
 .update_rfq_product_upload_form .input-field label {
     padding-top: 0;
@@ -12958,21 +12925,27 @@ line-height: 30px;
     top: 9px;
     right: 5px;
 }
+
+.create_rfq_form_wrap {
+    padding-left: 70px !important;
+}
 /* ************************************ */
-.updaterfq_button_wrap {
-    padding-top: 50px;
-}
-.updaterfq_button_wrap .btn_green {
+
+.new_rfq_upload_form_wrap .btn_rfq_post {
     line-height: 30px;
+    display: inline-block;
+    margin-top: 30px;
 }
-.updaterfq_button_wrap .btn_green.right .material-icons,
-.updaterfq_button_wrap .btn_green.left .material-icons {
-    float: left;
+.new_rfq_upload_form_wrap .btn_rfq_post_next {
+    padding-right: 30px;
+}
+.new_rfq_upload_form_wrap .modal-content .btn_rfq_post {
+    padding: 5px 20px;
+}
+.new_rfq_upload_form_wrap .btn_rfq_post .material-icons {
+    float: right;
     width: 16px;
     line-height: 28px;
-}
-.updaterfq_button_wrap .btn_green.right .material-icons {
-    float: right;
 }
 /* ***************************************** */
 #rfq-user-system-entry-modal {
@@ -13022,7 +12995,50 @@ line-height: 30px;
     left: 0px;
     top: 0px;
 }
+
+.requst_for_rfq_icon {
+    position: fixed;
+    right: 0;
+    bottom: 200px;
+    background: #d7df23;
+    height: auto;
+    border-radius: 25px 0 0 25px;
+    text-align: center;
+    animation: moveToRight 1s ease-in-out;
+}
+.requst_for_rfq_icon.requst_for_rfq_icon_home {
+    display: none; 
+}
+.requst_for_rfq_icon_home.fixedHome {
+    display: block;
+    animation: moveToRight 1s ease-in-out;
+}
+@keyframes moveToRight {
+    0% {
+        transform: translateX(200px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+.requst_for_rfq_icon a {
+    display: block;
+    padding: 5px 10px;
+    height: 100%;
+    color: #285460;
+    font-size: 10px;
+    line-height: 10px;
+}
+.requst_for_rfq_icon img {
+    width: 16px;
+    line-height: 20px;
+}
+.requst_for_rfq_icon span {
+    display: block;
+}
 /* ************* New rfq update design css end ************* */
+
+
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {
@@ -13104,6 +13120,7 @@ line-height: 30px;
     .account_profile_box .profile_account_dev_design .product_cards .modal {
         width: 70%;
     }
+
 }
 @media only screen and (min-width: 1500px) {
     .container {
@@ -13209,7 +13226,6 @@ line-height: 30px;
         margin-left: 40px;
     }
     /* ************* How We Work css end ************* */
-
 }
 
 @media only screen and (min-width: 1300px) {
@@ -15479,6 +15495,10 @@ line-height: 30px;
         font-size: 16px;
     }
     /* ************* How We Work css end ************* */
+
+    .create_rfq_form_wrap {
+        padding-left: 20px !important;
+    }
 }
 
 @media only screen and (max-width: 900px) {
@@ -17299,6 +17319,65 @@ line-height: 30px;
         padding-right: 18px;
     }
     /* ************* How We work css end ************* */
+
+
+    /* ************* New rfq update design css start ************* */
+    .new_rfq_upload_form_wrap  {
+        padding-top: 0;
+    }
+    .rfq_update_design_wrap .rfq_update_topbar {
+        padding: 0 0 50px;
+    }
+    .rfq_update_design_wrap .rfq_update_topbar br {
+        display: none;
+    }
+    .rfq_upload_filebox {
+        margin-bottom: 50px;
+        padding: 20px;
+        max-width: 100%;
+    }
+    .new_rfq_paths_boxwrap h3,
+    .rfq_update_design_wrap h2 {
+        font-size: 22px;
+    }
+    .new_rfq_paths_boxwrap {
+        padding: 50px 0 0;
+    }
+    .create_rfq_form_wrap {
+        padding-left: 12px !important;
+    }
+    #create-rfq-form .captchaContent div{
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 auto;
+        text-align: center;
+        max-width: 305px;
+    }
+
+    #rfq-user-system-entry-modal .modal-content {
+        padding: 15px 10px;
+    }
+    #create-rfq-form .captchaContent div iframe {
+        width: 100% !important;
+    }
+    #create-rfq-form .modal-content h4 {
+        margin-bottom: 10px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .signin_or_signup_info_message {
+        text-align: center;
+        font-size: 12px;
+    }
+    .signin_or_signup_info_message .material-icons {
+        font-size: 18px;
+        margin-right: 5px;
+    }
+    .rfq_detail_from_wrap .submit_btn_wrap {
+        padding-top: 0;
+    }
+    /* ************* New rfq update design css end ************* */
+
 }
 
 @media only screen and (max-width: 480px) {

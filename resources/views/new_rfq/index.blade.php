@@ -15,7 +15,7 @@
                 <div class="rfq_update_question_innerBox">
                     <div class="rfq_icon_img center-align">
                         <span>
-                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-1.png" alt="" />
+                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-2.png" alt="" />
                         </span>
                     </div>
                     <h3><span>What is RFQ?</span></h3>
@@ -26,7 +26,7 @@
                 <div class="rfq_update_question_innerBox">
                     <div class="rfq_icon_img center-align">
                         <span>
-                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-2.png" alt="" />
+                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-3.png" alt="" />
                         </span>
                     </div>
                     <h3><span>When to post an RFQ?</span></h3>
@@ -37,7 +37,7 @@
                 <div class="rfq_update_question_innerBox">
                     <div class="rfq_icon_img center-align">
                         <span>
-                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-3.png" alt="" />
+                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-4.png" alt="" />
                         </span>
                     </div>
                     <h3><span>What happens after RFQ is posted?</span></h3>
@@ -48,7 +48,7 @@
                 <div class="rfq_update_question_innerBox">
                     <div class="rfq_icon_img center-align">
                         <span>
-                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-4.png" alt="" />
+                            <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-1.png" alt="" />
                         </span>
                     </div>
                     <h3><span>How long does it take to receive a response?</span></h3>

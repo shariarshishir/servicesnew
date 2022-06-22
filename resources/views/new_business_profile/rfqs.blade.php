@@ -82,7 +82,7 @@
                                     <div class="profile_account_searchBar">
                                         <div class="row">
                                             <div class="col s12 m5 l4">
-                                                <a class="modal-trigger open-create-rfq-modal post_new" href="#create-rfq-form">
+                                                <a class="open-create-rfq-modal post_new" href="{{route('rfq.create')}}">
                                                     <i class="material-icons">add</i><span>Post New</span>
                                                 </a>
                                             </div>

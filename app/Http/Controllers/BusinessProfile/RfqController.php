@@ -35,10 +35,11 @@ class RfqController extends Controller
     public function index($alias, Request $request)
     {
         $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
+        
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-            
-            if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'manufacturer'){
+        
+            if($business_profile->business_type == 'manufacturer'){
                 $collection=collect(ManufactureProduct::withTrashed()
                 ->latest()
                 ->with('product_images','product_video','businessProfile')
@@ -114,7 +115,7 @@ class RfqController extends Controller
             }
 
 
-            if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'wholesaler'){
+            if($business_profile->business_type == 'wholesaler'){
 
                 $collection=collect(WholesalerProduct::withTrashed()
                 ->where(function($query) use ($request, $business_profile){
@@ -647,7 +648,27 @@ class RfqController extends Controller
 
     public function create()
     {
-        return view('rfq.create');
+        if(auth()->user()) 
+        {
+            $businessProfiles = BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
+        
+            $profileAlias = "";
+            if(count($businessProfiles) > 0) 
+            {
+                $profileAlias = $businessProfiles[0]['alias'];
+            } 
+            else 
+            {
+                $profileAlias = $businessProfiles['alias'];
+            }
+    
+            return view('rfq.create',compact('profileAlias'));
+        }
+        else 
+        {
+            return view('rfq.create');
+        }
+        
     }
 
     public function storeFromProductDetails(Request $request)
@@ -821,7 +842,20 @@ class RfqController extends Controller
                 return  response()->json(['error' => "Wrong email or password"],401);
             }
 
-            return response()->json(['access_token' =>  $access_token],200);
+            $businessProfiles = BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
+        
+            $profileAlias = "";
+            if(count($businessProfiles) > 0) 
+            {
+                $profileAlias = $businessProfiles[0]['alias'];
+            } 
+            else 
+            {
+                $profileAlias = $businessProfiles['alias'];
+            }            
+
+            
+            return response()->json(['access_token' =>  $access_token, 'profileAlias' => $profileAlias],200);
 
         }else{
             $registration_data = [
@@ -869,7 +903,7 @@ class RfqController extends Controller
                 'industry_type' => 'apparel',
             ];
             $business_profile = BusinessProfile::create($business_profile_data);
-            $this->createCompanyOverview($business_profile->id);
+            $this->createCompanyOverview($business_profile->id);            
 
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->r_email,
@@ -912,7 +946,7 @@ class RfqController extends Controller
                 return  response()->json(['error' =>  "Wrong email or password"],401);
             }
 
-            return response()->json(['access_token' =>  $access_token],200);
+            return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias],200);
         }
 
 

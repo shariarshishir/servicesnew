@@ -10,7 +10,7 @@
 <div class="requst_for_rfq_icon" style="display: none;">
     <a href="{{route('rfq.create')}}">
         <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/images/new-rfq-icon-4.png" alt="" />
-         <span> Post your RFQ</span>
+         <span> Post your <br/> RFQ</span>
     </a>
 </div>
 <!-- Footer section start -->

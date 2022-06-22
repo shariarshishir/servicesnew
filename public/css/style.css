@@ -12832,7 +12832,7 @@ line-height: 30px;
 .rfq_upload_filebox {
     max-width: 500px;
     border: 2px dashed #878787;
-    padding: 50px;
+    padding: 100px 50px;
 }
 .rfq_upload_filebox  .material-icons {
     font-size: 80px;
@@ -12941,6 +12941,7 @@ line-height: 30px;
 }
 .new_rfq_upload_form_wrap .modal-content .btn_rfq_post {
     padding: 5px 20px;
+    margin-top: 0;
 }
 .new_rfq_upload_form_wrap .btn_rfq_post .material-icons {
     float: right;
@@ -13024,7 +13025,7 @@ line-height: 30px;
     height: 100%;
     color: #285460;
     font-size: 10px;
-    line-height: 10px;
+    line-height: 14px;
 }
 .requst_for_rfq_icon img {
     width: 16px;
@@ -16560,6 +16561,10 @@ line-height: 30px;
         line-height: 30px; 
     }
     /* ************* How We Work css end ************* */
+
+    .rfq_upload_filebox {
+        padding: 50px 20px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -17374,7 +17379,11 @@ line-height: 30px;
         padding-top: 0;
     }
     /* ************* New rfq update design css end ************* */
-
+    .requst_for_rfq_icon {
+        height: 60px;
+        border-radius: 52%;
+        right: 5px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -17734,6 +17743,7 @@ line-height: 30px;
     .account_profile_box .profile_account_dev_tech .modal .create_new_tech_pac_modal .select_tech_pack_picture_modal .modal_body ul li {
         width: 100%;
     }
+
 }
 
 @media only screen and (max-width: 380px) {

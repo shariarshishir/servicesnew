@@ -190,7 +190,7 @@
                                     @else
                                     <div class="profile-verified-by-merchantbay">
                                         <div class="verified_by_merchantbay">
-                                            <span class="leftText">erified</span> <span class="rightText">by Merchant Bay</span>
+                                            <span class="leftText">Verified</span> <span class="rightText">by Merchant Bay</span>
                                         </div>
                                     </div>    
                                     @endif

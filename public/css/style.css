@@ -1029,10 +1029,11 @@ legend {
     line-height: 30px;
 }
 .verified_by_merchantbay {
-    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/mark_icon.png") no-repeat left 8px;
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/mark_icon.png") no-repeat left center;
     padding: 18px 10px 18px 35px;
     font-size: 18px;
     line-height: 30px;
+    background-size: 30px;
 }
 .profile_bannerwrap .leftText {
     text-decoration: underline;
@@ -2027,9 +2028,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     width: 100%;
     height: 100%;
 }
-.product_preview_wrap .simpleLens-gallery-container {
+/* .product_preview_wrap .simpleLens-gallery-container {
     padding: 5px;
-}
+} */
 .product_preview_info_wrap .product_preview_wrap img {
     height: auto;
 }
@@ -7475,7 +7476,7 @@ nav .pagination li.active .page-link {
 /* ************************* policy_content_wrap style start ******************************  */
 .about_content_container,
 .policy_content_wrap {
-    padding: 0px 20px 50px;
+    padding: 0px 15px 50px;
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
@@ -13028,10 +13029,12 @@ line-height: 30px;
     color: #ffffff;
     font-size: 18px;
     line-height: 20px;
+    text-align: center;
 }
 .requst_for_rfq_icon img {
     width: 25px;
     line-height: 20px;
+    display: inline-block;
 }
 .requst_for_rfq_icon span {
     display: block;
@@ -13085,6 +13088,12 @@ line-height: 30px;
     top: -5px !important;
     right: -5px !important;
 }
+
+.profile_supplier_account_insight_wrap {
+    padding-left: 30px
+}
+
+
 
 
 
@@ -13277,6 +13286,7 @@ line-height: 30px;
         margin-left: 40px;
     }
     /* ************* How We Work css end ************* */
+
 }
 
 @media only screen and (min-width: 1300px) {
@@ -14005,9 +14015,9 @@ line-height: 30px;
     .manufactrue_product_details_inner .product_preview_wrap {
         padding: 0 !important;
     }
-    .product_preview_wrap .simpleLens-gallery-container {
+    /* .product_preview_wrap .simpleLens-gallery-container {
         padding: 0;
-    }
+    } */
     .mvc_produce_design_wrap .visit_studio {
         padding-top: 15px;
     }
@@ -15572,6 +15582,10 @@ line-height: 30px;
     .requst_for_rfq_icon img {
         width: 16px;
     }
+    .profile_supplier_account_insight_wrap {
+        padding-left: 0;
+        margin-top: 50px;
+    }
 }
 
 @media only screen and (max-width: 900px) {
@@ -16103,9 +16117,9 @@ line-height: 30px;
     .product_details_info_wrap {
         padding-left: 20px !important;
     }
-    .product_preview_wrap .simpleLens-gallery-container {
+    /* .product_preview_wrap .simpleLens-gallery-container {
         padding: 0;
-    }
+    } */
     .single-product-moq span,
     .single-product-price-value .nego_price {
         font-size: 22px;
@@ -17454,6 +17468,29 @@ line-height: 30px;
         padding-top: 0;
     }
     /* ************* New rfq update design css end ************* */
+
+    .supplier_account_progress h4 span {
+        display: block;
+        text-align: center;
+    }
+    .profile-verified-by-merchantbay {
+        position: inherit;
+        right: infinite;
+        top:inherit;
+        display: block;
+    }
+    .verified_by_merchantbay {
+        max-width: 252px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 16px;
+    }
+    .supplier_account_progress h4 .profile-verified-by-merchantbay span {
+        display: inline-block;
+    }
+    .supplier_account_progress .right-align {
+        text-align: center;
+    }
 
 }
 

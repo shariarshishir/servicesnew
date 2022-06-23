@@ -244,8 +244,8 @@
         <div class="landing_request_wrap">
             <div class="container">
                 <div class="request_innter_box center-align" itemscope>
-                    <h3 itemprop="title" class="landing_request_toptitle">Want to start real quick?</h3>
-                    <h5 itemprop="title" class="landing_request_title">Submit a request for quotation enjoy sourcing <br/> from Bangladesh like never before</h5>
+                    <h3 itemprop="title" class="landing_request_toptitle">Want to get started now?</h3>
+                    <h5 itemprop="title" class="landing_request_title">Submit a request for quotation and find the best match for your sourcing need</h5>
                     <div class="landing_request_img animate_landing_request_img" itemscope>
                         <img itemprop="img" src="{{Storage::disk('s3')->url('public/frontendimages/new-home/landing-rfq.png')}}" alt="" />
                     </div>

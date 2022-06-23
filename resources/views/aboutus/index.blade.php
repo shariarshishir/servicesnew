@@ -508,7 +508,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="imgbox">
                   <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/sample-storefront.svg')}}" alt="icon" />
                 </div>
-                <a href="{{route('product.type.mapping',['studio', 'product_sample'])}}">Sample Storefront
+                <a href="{{route('product.type.mapping',['studio', 'product sample'])}}">Sample Storefront
                   <span class="material-icons">navigate_next</span>
                 </a>
               </div>
@@ -538,7 +538,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                 <div class="imgbox">
                   <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/accessories-library.svg')}}" alt="icon" />
                 </div>
-                <a href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}">Accessories Library
+                <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">Accessories Library
                   <span class="material-icons">navigate_next</span>
                 </a>
               </div>

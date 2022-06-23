@@ -74,19 +74,11 @@
                             <div class="col s4 l5 product_menu" itemscope>
                                 <h4 itemprop="title">Products</h4>
                                 <ul itemscope itemtype="https://schema.org/ListItem">
-                                    {{-- <li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}">Designs</a></li>
-                                    <li style="display: none;" itemprop="itemListElement"><a itemprop="New Arrivals" href="javascript:void(0);">New Arrivals</a></li>
-                                    <li itemprop="itemListElement"><a itemprop="Ready to Ship" href="javascript:void(0);">Ready to Ship</a></li>
-                                    <li itemprop="itemListElement"><a itemprop="Low MOQ" href="javascript:void(0);">Low MOQ</a></li>
-                                    <li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('customizable')}}">Customizable</a></li>
-                                    <li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('shortest.lead.time')}}">Shortest Lead Time</a></li> --}}
-                                
                                     <li itemprop="itemListElement"><a itemprop="Designs" href="{{route('product.type.mapping',['studio', 'design'])}}">Design</a></li>
-                                    <li style="display: none;" itemprop="itemListElement"><a itemprop="New Arrivals" href="{{route('product.type.mapping',['studio', 'product_sample'])}}">Product Sample</a></li>
-                                    {{-- <li itemprop="itemListElement"><a itemprop="Ready to Ship" href="javascript:void(0);">Ready Stock</a></li> --}}
+                                    <li itemprop="itemListElement"><a itemprop="New Arrivals" href="{{route('product.type.mapping',['studio', 'product sample'])}}">Product Sample</a></li>
                                     <li itemprop="itemListElement"><a itemprop="Low MOQ" href="{{route('product.type.mapping',['raw_materials', 'textile'])}}">Textile</a></li>
                                     <li itemprop="itemListElement"><a itemprop="Customizable" href="{{route('product.type.mapping',['raw_materials', 'yarn'])}}">Yarn</a></li>
-                                    <li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}">Trims And Accessories</a></li>
+                                    <li itemprop="itemListElement"><a itemprop="Shortest Lead Time" href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">Trims And Accessories</a></li>
                                 </ul>
                             </div>
                             <div class="col s4 l3 info_menu" itemscope>

@@ -50,7 +50,7 @@
                                             <div class="rfqQuantity">
                                                 <input type="number" class="quantity_input" name="quantity" required/>
                                                 <select class="select2 browser-default" name="unit">
-                                                    <option value="">Select an option</option>
+                                                    <option value="">UOM</option>
                                                     @php $units = units(); @endphp
                                                     @foreach($units as $unit=>$value)
                                                         <option value="{{$unit}}">{{ $value }}</option>

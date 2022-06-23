@@ -13003,9 +13003,9 @@ line-height: 30px;
     position: fixed;
     right: 0;
     bottom: 200px;
-    background: #d7df23;
+    background: #54a958;
     height: auto;
-    border-radius: 30px 0 0 30px;
+    border-radius: 50px 0 0 50px;
     text-align: center;
     animation: moveToRight 1s ease-in-out;
 }
@@ -13023,20 +13023,68 @@ line-height: 30px;
 }
 .requst_for_rfq_icon a {
     display: block;
-    padding: 10px 10px 5px;
+    padding: 15px 10px 10px;
     height: 100%;
-    color: #285460;
-    font-size: 10px;
-    line-height: 14px;
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 20px;
 }
 .requst_for_rfq_icon img {
-    width: 16px;
+    width: 25px;
     line-height: 20px;
 }
 .requst_for_rfq_icon span {
     display: block;
 }
 /* ************* New rfq update design css end ************* */
+
+.image-uploader .uploaded .uploaded-image {
+    width: 84px !important;
+    height: 84px !important;
+}
+.uploaded-image.doc_file {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/doc-bg.png")  no-repeat center !important;
+    background-size: 75px !important;
+    width: 84px !important;
+    height: 84px !important;
+    display: inline-block !important;
+    font-size: 0 !important;
+}
+.uploaded-image.xls_file {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/excel-bg.png") no-repeat center !important;
+    background-size: 75px !important;
+    width: 84px !important;
+    height: 84px !important;
+    display: inline-block !important;
+    font-size: 0 !important;
+}
+.uploaded-image.pdf_file {
+    background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/pdf-bg.png") no-repeat center !important;
+    background-size: 75px !important;
+    width: 84px !important;
+    height: 84px !important;
+    display: inline-block !important;
+    font-size: 0 !important;
+}
+.uploaded-image.doc_file img,
+.uploaded-image.xls_file img,
+.uploaded-image.pdf_file img {
+    display: none;
+}
+.image-uploader .uploaded .uploaded-image .delete-image i {
+    font-size: 14px !important;
+    width: auto !important;
+    height: auto !important;
+}
+.image-uploader .uploaded .uploaded-image:hover .delete-image {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 20px;
+    padding: 0;
+    top: -5px !important;
+    right: -5px !important;
+}
 
 
 
@@ -15505,6 +15553,27 @@ line-height: 30px;
     .faq_contentinfo_wrapper .faq_search_wrap {
         padding-top: 0;
     }
+    .image-uploader .uploaded .uploaded-image {
+        padding: inherit !important;
+    }
+
+    .requst_for_rfq_icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        right: 5px;
+    }
+    .requst_for_rfq_icon a {
+        font-size: 9px;
+        line-height: 13px;
+        padding: 7px 5px 10px;
+    }
+    .requst_for_rfq_icon a span {
+        margin-top: -3px;
+    }
+    .requst_for_rfq_icon img {
+        width: 16px;
+    }
 }
 
 @media only screen and (max-width: 900px) {
@@ -17387,14 +17456,7 @@ line-height: 30px;
         padding-top: 0;
     }
     /* ************* New rfq update design css end ************* */
-    .requst_for_rfq_icon {
-        height: 60px;
-        border-radius: 52%;
-        right: 5px;
-    }
-    .requst_for_rfq_icon a {
-        padding-top: 7px;
-    }
+
 }
 
 @media only screen and (max-width: 480px) {

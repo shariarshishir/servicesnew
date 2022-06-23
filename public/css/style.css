@@ -12481,7 +12481,7 @@ line-height: 30px;
     margin-bottom: 0; 
 }
 #how_we_work .why_us .why_us_box {
-    margin-bottom: 100px; 
+    margin-bottom: 50px; 
 }
 #how_we_work .why_us .why_us_box:last-child {
     margin-bottom: 0; 
@@ -13522,9 +13522,7 @@ line-height: 30px;
         font-size: 16px;
         line-height: 25px;
     }
-    #how_we_work .why_us .why_us_box {
-        margin-bottom: 70px; 
-    }
+
     #how_we_work .why_us .why_us_box .box_img {
         height: 250px;
         width: 250px;

@@ -333,13 +333,14 @@
 									<li itemprop="itemListElement"><a itemprop="Suppliers" class="{{ Route::is('suppliers') ? 'active' : ''}}" href="{{route('suppliers')}}">Suppliers</a></li>
 								</ul>
 							</li>
+							<li><a href="{{route('new_rfq.index')}}" class="{{ Route::is('new_rfq.index') ? 'active' : ''}}">RFQ</a></li>
 							<li itemprop="itemListElement">
 								<a class="dropdown-trigger" itemprop="More" href="javascript:void(0);" data-target="more-system-links-mobile">More <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 								<!-- Dropdown Structure -->
 								<ul id="more-system-links-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
 									<li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blog" class="{{ Route::is('industry.blogs') ? 'active' : ''}}">Blogs</a></li>
 									<li itemprop="itemListElement"><a itemprop="Tools" class="{{ Route::is('front.tools') ? 'active' : ''}}" href="{{route('front.tools')}}">Tools</a></li>
-									<li itemprop="itemListElement"><a href="http://insight.merchantbay.com/" itemprop="Insights">Insights</a></li>
+									{{-- <li itemprop="itemListElement"><a href="http://insight.merchantbay.com/" itemprop="Insights">Insights</a></li> --}}
 									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="Helps">Helps</a></li>
 									<li itemprop="itemListElement" style="display: none;"><a href="javascript:void(0);" itemprop="FAQ">FAQ</a></li>
 								</ul>

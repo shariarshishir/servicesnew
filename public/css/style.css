@@ -13024,11 +13024,11 @@ line-height: 30px;
 }
 .requst_for_rfq_icon a {
     display: block;
-    padding: 15px 10px 10px;
+    padding: 10px 15px 5px 20px;
     height: 100%;
     color: #ffffff;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 16px;
     text-align: center;
 }
 .requst_for_rfq_icon img {
@@ -15573,8 +15573,9 @@ line-height: 30px;
     }
     .requst_for_rfq_icon a {
         font-size: 9px;
-        line-height: 13px;
-        padding: 7px 5px 10px;
+        line-height: 14px;
+        padding: 10px 5px 4px;
+    
     }
     .requst_for_rfq_icon a span {
         margin-top: -3px;

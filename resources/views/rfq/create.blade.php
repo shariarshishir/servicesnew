@@ -228,7 +228,7 @@
             });
 
             $(".browse_file_trigger").click(function(){
-                $(".rfq-document-upload").trigger("click");
+                $('.image-uploader input[type="file"]').trigger("click");
             });
      
             $('input[name="rfq-documents[]"]').change(function(){

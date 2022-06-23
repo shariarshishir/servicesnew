@@ -425,11 +425,11 @@
                     return false;
                 }
 
-                if (grecaptcha.getResponse()==""){
-                    jQuery('.messageContent').html('Captcha Required');
-                } else {
+                //if (grecaptcha.getResponse()==""){
+                //    jQuery('.messageContent').html('Captcha Required');
+                //} else {
                     $("#page_button").click();
-                }
+                //}
             }
             else
             {
@@ -606,11 +606,11 @@
                     return false;
                 }
 
-                if (grecaptcha.getResponse()==""){
-                    jQuery('.messageContent').html('Captcha Required');
-                } else {
+                //if (grecaptcha.getResponse()==""){
+                //    jQuery('.messageContent').html('Captcha Required');
+                //} else {
                     $("#page_button").click();
-                }
+                //}
             }
             else
             {

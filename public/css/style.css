@@ -1990,6 +1990,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .single-product-details-block-wrapper {
     padding: 0px;
+    margin-bottom: 50px;
 }
 .product_details_wrapper a ul {
     text-align: center;
@@ -2419,6 +2420,9 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 500;
     border-radius: 5px;
     float: right;
+}
+.profile_information_wrap .business-profile-block {
+    padding-top: 30px;
 }
 .user-profile-basic-info-block .my_businesses_wrap {
     text-transform: capitalize;
@@ -4111,9 +4115,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 
 /* **************** rfq_detail_from_wrap modal start ******************** */
-.rfq_detail_from_wrap {
-    padding: 0 15px;
-}
+
 .create_rfq_detail_from_wrap {
     overflow: hidden;
 }
@@ -9539,9 +9541,9 @@ input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     max-width: 60px;
     max-height: 55px;
 }
-#profile.profile_information_wrap {
+/* #profile.profile_information_wrap {
     padding: 0 20px !important;
-}
+} */
 .invoice_terms_conditions .terms_conditions_list h6 {
     font-size: 16px;
     margin: 23px 0 0;
@@ -10530,7 +10532,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-weight: bold;
 }
 .faq_contentinfo_wrapper .faq_search_wrap {
-    padding-bottom: 50px;
+    padding: 50px 0 80px;
 }
 .faq_contentinfo_wrapper .faq_search_wrap label {
     font-size: 16px;
@@ -13003,7 +13005,7 @@ line-height: 30px;
     bottom: 200px;
     background: #d7df23;
     height: auto;
-    border-radius: 25px 0 0 25px;
+    border-radius: 30px 0 0 30px;
     text-align: center;
     animation: moveToRight 1s ease-in-out;
 }
@@ -13021,7 +13023,7 @@ line-height: 30px;
 }
 .requst_for_rfq_icon a {
     display: block;
-    padding: 5px 10px;
+    padding: 10px 10px 5px;
     height: 100%;
     color: #285460;
     font-size: 10px;
@@ -13204,6 +13206,9 @@ line-height: 30px;
     }
     .rfq_content_box .rfq_profile_detail .responses_box_wrap .row {
         margin: 0 -10px;
+    }
+    .faq_contentinfo_wrapper {
+        padding: 0 10px;
     }
 
     /* ************* About us page css start ************* */
@@ -15497,6 +15502,9 @@ line-height: 30px;
     .create_rfq_form_wrap {
         padding-left: 20px !important;
     }
+    .faq_contentinfo_wrapper .faq_search_wrap {
+        padding-top: 0;
+    }
 }
 
 @media only screen and (max-width: 900px) {
@@ -17383,6 +17391,9 @@ line-height: 30px;
         height: 60px;
         border-radius: 52%;
         right: 5px;
+    }
+    .requst_for_rfq_icon a {
+        padding-top: 7px;
     }
 }
 

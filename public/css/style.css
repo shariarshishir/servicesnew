@@ -12710,6 +12710,7 @@ line-height: 30px;
 }
 .rfq_update_topbar .btn_post_rfq {
     line-height: 32px;
+    text-transform: inherit;
 }
 .rfq_update_topbar .btn_post_rfq .material-icons {
     float: right;
@@ -12827,7 +12828,7 @@ line-height: 30px;
 
 /* ******************************** */
 .new_rfq_upload_form_wrap {
-    padding: 80px 0;
+    padding: 20px 0;
 }
 .rfq_upload_filebox_wrap {
     padding-top: 15px;
@@ -15564,7 +15565,6 @@ line-height: 30px;
     .image-uploader .uploaded .uploaded-image {
         padding: inherit !important;
     }
-
     .requst_for_rfq_icon {
         width: 55px;
         height: 55px;
@@ -15575,7 +15575,6 @@ line-height: 30px;
         font-size: 9px;
         line-height: 14px;
         padding: 10px 5px 4px;
-    
     }
     .requst_for_rfq_icon a span {
         margin-top: -3px;

@@ -8,6 +8,10 @@
 
                 <div class="new_rfq_upload_form_wrap">
                     <div class="row">
+                        <div class="col s12">
+                            <h3 style="margin-bottom:10px;">Request For Quotation</h2>
+                            <p style="margin-bottom: 50px;">Submit an RFQ and find the best match with speed and reliability.</p>
+                        </div>
                         <form class="update_rfq_product_upload_form createRfqForm" method="post" enctype="multipart/form-data" action="">
                             <div class="col s12 m6 l5">
                                 <div class="rfq_upload_filebox_wrap">

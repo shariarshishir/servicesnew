@@ -91,9 +91,6 @@
 										<a class="grey-text text-darken-1" itemprop="Merchantbay Profile" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" itemprop="Wishlist" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> Wishlist</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Settings" href="{{env('SSO_URL').'/profile'}}"><i class="material-icons">settings</i> Settings</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
@@ -121,9 +118,6 @@
 								<ul id="profile-dropdown" class="dropdown-content card" itemscope itemtype="https://schema.org/ListItem">
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Merchantbay Profile" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" itemprop="Wishlist" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> Wishlist</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Settings" href="{{env('SSO_URL').'/profile'}}"><i class="material-icons">settings</i> Settings</a>
@@ -405,9 +399,6 @@
 										<a class="grey-text text-darken-1" href="{{ route('users.profile') }}" itemprop="Profile"><i class="material-icons">person_outline</i> Profile</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" href="{{route('wishlist.index')}}" itemprop="My favorite"><i class="material-icons">favorite</i> My favorite</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" href="{{env('SSO_URL').'/profile'}}" itemprop="Settings"><i class="material-icons">settings</i> Settings</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
@@ -437,9 +428,6 @@
 								<ul id="profile-dropdown-mobile" class="dropdown-content card" itemscope itemtype="https://schema.org/ListItem">
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Profile" href="{{ route('users.profile') }}"><i class="material-icons">person_outline</i> Profile</a>
-									</li>
-									<li tabindex="0" itemprop="itemListElement">
-										<a class="grey-text text-darken-1" itemprop="My Favorite" href="{{route('wishlist.index')}}"><i class="material-icons">favorite</i> My favorite</a>
 									</li>
 									<li tabindex="0" itemprop="itemListElement">
 										<a class="grey-text text-darken-1" itemprop="Settings" href="{{env('SSO_URL').'/profile'}}"><i class="material-icons">settings</i> Settings</a>

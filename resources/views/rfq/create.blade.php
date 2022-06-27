@@ -31,7 +31,7 @@
                                             @foreach($product_tags as $product_tag)
                                                 <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
                                             @endforeach
-                                        </select>                                        
+                                        </select>
                                     </div>
                                     <div class="col s12 input-field">
                                         <label>Title <span>*</span></label>
@@ -55,7 +55,7 @@
                                                     @foreach($units as $unit=>$value)
                                                         <option value="{{$unit}}">{{ $value }}</option>
                                                     @endforeach
-                                                </select>                                                
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                                 <div class="row">
                                     <div class="col s12 xl4">
                                         <div class="input-field">
@@ -82,7 +82,7 @@
                                                 <option value="cheque">Cheque</option>
                                                 <option value="tt">TT</option>
                                                 <option value="Others">Others</option>
-                                            </select>                                            
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col s12 xl4">
@@ -113,7 +113,7 @@
                             @else
                                 <a class="btn_green btn_rfq_post_next btn_rfq_post modal-trigger right" href="#rfq-user-system-entry-modal">Next <i class="material-icons">navigate_next</i></a>
                             @endif
-                            
+
                             <div id="rfq-user-system-entry-modal" class="modal update_rfq_signin_modal">
                                 <div class="close">
                                     <a href="javascript:void(0);" class="modal-action modal-close">
@@ -148,7 +148,7 @@
                                                                     Submit
                                                                 </button>
                                                             </div>
-                                                        </div>  
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,7 +196,7 @@
                                                                     Submit
                                                                 </button>
                                                             </div>
-                                                        </div>  
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,10 +206,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </form>
                     </div>
-                </div>            
+                </div>
             </div>
         </section>
     </div>
@@ -234,7 +234,7 @@
             $(".browse_file_trigger").click(function(){
                 $('.image-uploader input[type="file"]').trigger("click");
             });
-     
+
             $('input[name="rfq-documents[]"]').change(function(){
                 //console.log($(this)[0].files);
                 $.each($(this)[0].files, function()
@@ -440,7 +440,7 @@
                 alert('Please fill all the required fields.');
                 //$("html, body").animate({ scrollTop: 0 }, "slow");
                 return false;
-            }            
+            }
         }
 
         function onSubmitValidation()
@@ -662,6 +662,7 @@
                             const rfq_app_url = "{{env('RFQ_APP_URL')}}";
                             var url = rfq_app_url+'/api/quotation';
                             var alias = response.profileAlias;
+                            var flag =response.flag;
                             const sso_token = "Bearer " +response.access_token;
                             var formData = new FormData();
                             var file_data = $('input[name="rfq-documents[]"]')[0].files;
@@ -705,10 +706,14 @@
                                     $('#loadingProgressContainer').hide();
                                     const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
                                     swal("Done!", msg,"success");
-                                    //console.log(response);
-                                    var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
-                                    redirect_url = redirect_url.replace(':slug', alias);
-                                    window.location.href = redirect_url;
+                                    if(flag == 'registration'){
+                                        var redirect_url = '{{ route("front.contactus") }}';
+                                        window.location.href = redirect_url;
+                                    }else{
+                                        var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                                        redirect_url = redirect_url.replace(':slug', alias);
+                                        window.location.href = redirect_url;
+                                    }
                                     //window.location.href = "{{ route('rfq.my')}}";
                                 },
                                 error: function(xhr, status, error)
@@ -739,7 +744,7 @@
                 });
 
 
-            } 
+            }
             else // this code will perform when user is authenticate. data will post directly to the mongo using user access_token.
             {
                 //console.log(authuser);

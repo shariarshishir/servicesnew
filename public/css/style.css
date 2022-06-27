@@ -3456,19 +3456,26 @@ div.dataTables_wrapper table.mdc-data-table__table {
     color: #54a958;
     margin: 0;
 }
+.blog_single_item_box .blog_imgbox,
 .blog_info_wrap .blog_content_box {
     position: relative;
     height: 235px;
     overflow: hidden;
 }
+.blog_single_item_box .blog_imgbox {
+    height: 140px;
+}
+
 .blog_content_box .blog_imgbox {
     height: 100%;
     text-align: center;
     border: 1px solid #dee2e6;
 }
+.blog_single_item_box .blog_imgbox a,
 .blog_content_box .blog_imgbox a {
     height: 100%;
 }
+.blog_single_item_box .blog_imgbox img,
 .blog_content_box .blog_imgbox img {
     display: inline-block;
     width: 100%;
@@ -3555,7 +3562,6 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
-    padding: 0 10px;
 }
 .blog_detail_info_wrap .mainTitle {
     background: #fff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/home_arrow.png") no-repeat 15px center;
@@ -3606,10 +3612,15 @@ div.dataTables_wrapper table.mdc-data-table__table {
     height: auto !important;
     max-height: 300px;
 }
+.blog_single_item_box_wrap h3 {
+    margin-bottom: 30px;
+    line-height: 20px;
+}
 .blog_detail_info_wrap .feature_img img {
     max-height: inherit;
     width: 100% !important;
 }
+.blog_single_item_box .blog_info_box_wrap,
 .blog_info_wrap .blog_info_box_wrap {
     height: 62px;
     position: relative;
@@ -3620,6 +3631,10 @@ div.dataTables_wrapper table.mdc-data-table__table {
     overflow: hidden;
     padding: 10px 15px;
 }
+.blog_single_item_box .blog_info_box_wrap {
+    height: 48px;
+}
+.blog_single_item_box h4,
 .blog_container .blog_info_box_wrap h3 {
     font-size: 16px;
     line-height: 25px;
@@ -3634,9 +3649,18 @@ div.dataTables_wrapper table.mdc-data-table__table {
     font-weight: 600;
     margin: 0;
 }
+.blog_single_item_box .blog_info_box_wrap h4 {
+    font-size: 14px;
+    line-height: 20px;
+}
 .blog_container .blog_info_box_wrap h3 a {
     font-size: 16px;
     line-height: 25px;
+    color: #484848;
+}
+.blog_single_item_box .blog_info_box_wrap h4 a {
+    font-size: 14px;
+    line-height: 20px;
     color: #484848;
 }
 .blog_detail_info_wrap .mymedia {
@@ -3676,6 +3700,12 @@ div.dataTables_wrapper table.mdc-data-table__table {
     padding: 5px;
     width: 550px;
     height: 315px;
+}
+
+.blog_single_item_box_wrap .btn_all_blogs .material-icons {
+    float: right;
+    line-height: 21px;
+    margin-left: 5px;
 }
 
 /********************* Blog page css End **************************/
@@ -13288,6 +13318,10 @@ line-height: 30px;
     }
     /* ************* How We Work css end ************* */
 
+    .blog_detail_info_wrap {
+        padding-right: 30px;
+    }
+
 }
 
 @media only screen and (min-width: 1300px) {
@@ -17490,6 +17524,16 @@ line-height: 30px;
     }
     .supplier_account_progress .right-align {
         text-align: center;
+    }
+
+    .blog_single_item_box_wrap {
+        padding-top: 70px !important;
+    }
+    .blog_single_item_box_wrap h3 {
+        text-align: center;
+    }
+    .blog_single_item_box .blog_imgbox {
+        height: auto;
     }
 
 }

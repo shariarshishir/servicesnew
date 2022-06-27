@@ -822,10 +822,12 @@ class HomeController extends Controller
     }
     public function blogDetails($slug)
     {
+        $blogList = Blog::latest()->orderBy('created_at', 'DESC')->paginate(5);
+
         $blog = Blog::where('slug',$slug)->firstOrFail();
         $data = [];
 
-        $blogs = $blog->source;
+        $blogs = $blog->source;    
         foreach((array)$blogs as $blo)
         {
             if(!is_null($blo['name']) && $blo['name'] != "")
@@ -836,7 +838,7 @@ class HomeController extends Controller
 
         $blog['sourcedata'] = $data;
 
-        return view('blog.show',compact('blog'));
+        return view('blog.show', compact('blog', 'blogList'));
     }
 
     //suppliers

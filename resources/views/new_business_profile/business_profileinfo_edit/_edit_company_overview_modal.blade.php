@@ -1,3 +1,6 @@
+@php
+    $product_tag = array_key_exists('product_tag', app('request')->input()) ? app('request')->input('product_tag'): [];
+@endphp
 <div id="company-overview-modal" class="modal profile_form_modal">
     <div class="modal-content">
         <legend>
@@ -31,10 +34,24 @@
                 <input type="hidden" name="company_overview_id" value="{{$business_profile->companyOverview->id}}">
                 <div class="row">
                     @foreach (json_decode($business_profile->companyOverview->data) as $company_overview)
+                        @if($company_overview->name == 'main_products')
+                        @php
+                            $insertedValues = explode("," , $company_overview->value);
+                        @endphp
+                        <div class="input-field col s12 m12 l6">
+                            <label for="{{$company_overview->name}}">Main Products</label>
+                            <select class="select2 browser-default" id="{{$company_overview->name}}" name="name[{{$company_overview->name}}][]" multiple>
+                            @foreach ($product_tags as $pt)
+                                <option value="{{$pt->name}}" {{ (in_array($pt->name, $insertedValues)) ? 'selected':'' }}>{{$pt->name}}</option>
+                            @endforeach
+                            <select>
+                        </div>
+                        @else
                         <div class="input-field col s12 m12 l6">
                             <label for="{{$company_overview->name}}">{{str_replace('_', ' ', ucfirst($company_overview->name))}}</label>
                             <input id="{{$company_overview->name}}" type="text" class="validate" name="name[{{$company_overview->name}}]" value="{{$company_overview->value}}">
                         </div>
+                        @endif
                     @endforeach
                 </div>
                 <div class="row">
@@ -70,7 +87,7 @@
 
                 <div class="submit_btn_wrap">
                     <div class="row">
-                        <div class="col s12 m6 l6 left-align"><a href="#!" class="modal-close btn_grBorder">Cancel</a></div>
+                        <div class="col s12 m6 l6 left-align"><a href="javascript:void(0);" class="modal-close btn_grBorder">Cancel</a></div>
                         <div class="col s12 m6 l6 right-align">
                             <button class="btn waves-effect waves-light btn_green" type="submit" name="action">Submit </button>
                         </div>

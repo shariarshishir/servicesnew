@@ -234,15 +234,17 @@ class RfqController extends Controller
         $rfqLists = $data['data'] ?? [];
         return view('rfq.rfq_list',compact('rfqLists'))->render();
     }
-    public function myRfqList($alias)
+    public function myRfqList(Request $request, $alias)
     {
+        $page = isset($request->page) ? $request->page : 1;
         $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         $user = Auth::user();
         $token = Cookie::get('sso_token');
         //get all rfqs of auth user
         $response = Http::withToken($token)
-        ->get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
+        ->get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/null/page/'.$page.'/limit/10');
         $data = $response->json();
+        //dd($data);
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);

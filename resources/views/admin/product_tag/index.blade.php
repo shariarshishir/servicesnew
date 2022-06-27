@@ -35,8 +35,8 @@
 					<table class="table table-bordered" id="datatable-product-tag">
 						<thead class="cf">
 						<tr>
-							<th>Name</th>
-                            <th>Parent</th>
+							<th>Tag Name</th>
+                            <th>Tag Factory Types</th>
 							<th class="text-center">Action</th>
 						</tr>
 						</thead>

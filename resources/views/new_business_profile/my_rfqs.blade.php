@@ -218,6 +218,31 @@
                                                 </div>
                                                 @endforeach
                                             </div>
+
+                                            @if( $noOfPages > 1)
+                                                @php
+                                                    $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+                                                @endphp
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        <li class="page-item">
+                                                            <a class="" href="javascript:void(0);" data-page="0" tabindex="-1">Previous</a>
+                                                        </li>
+                                                        @for( $i=1; $i <= $noOfPages; $i++)
+                                                            @php
+                                                                $r=route('new.profile.my_rfqs', $alias);
+                                                            @endphp
+                                                            <li class="page-item" >
+                                                                <a class="" href="{{ $r.'?page='.$i }}" {{ ($page == $i) ? 'selected="selected"':'' }} data-page="{{$i}}">{{$i}}</a>
+                                                            </li>
+                                                        @endfor
+                                                        <li class="page-item">
+                                                            <a class="" href="javascript:void(0);" data-page="2">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>

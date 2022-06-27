@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <label for="productTag">Name :</label>
+                <label for="productTag">Tag Name :</label>
                 <input type="text" name="name" class="form-control" id="productTag" value="{{old('name', $product_tag->name)}}" placeholder="Enter name">
                 @if($errors->has('name'))
                     <div class="text-danger">{{ $errors->first('name') }}</div>
@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <label for="parent">Parent :</label>
+                <label for="parent">Tag Factory Types :</label>
                 <select class="form-control select2" name="parent[]" multiple aria-label="multiple select example">
                     @foreach ($business_mapping_tree as $first )
                             @foreach ($first->children as $second)

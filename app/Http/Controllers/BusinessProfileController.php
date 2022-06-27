@@ -281,11 +281,23 @@ class BusinessProfileController extends Controller
             $count=0;
             foreach($request->name as $key => $value){
                 foreach(json_decode($company_overview->data) as $data2){
-                    if($data2->name == $key && $value != $data2->value){
-                        array_push($data,['name' => $key, 'value' => $value, 'status' => 0]);
-                    }
-                    if($data2->name == $key && $value == $data2->value){
-                        array_push($data,['name' => $key, 'value' => $value, 'status' =>  $data2->status]);
+                    if($data2->name == "main_products")
+                    {
+                        if($data2->name == $key && $value != $data2->value){
+                            array_push($data,['name' => 'main_products', 'value' => implode(",",$value), 'status' => 0]);
+                        }
+                        if($data2->name == $key && $value == $data2->value){
+                            array_push($data,['name' => 'main_products', 'value' => implode(",",$value), 'status' =>  $data2->status]);
+                        }                        
+                    } 
+                    else 
+                    {
+                        if($data2->name == $key && $value != $data2->value){
+                            array_push($data,['name' => $key, 'value' => $value, 'status' => 0]);
+                        }
+                        if($data2->name == $key && $value == $data2->value){
+                            array_push($data,['name' => $key, 'value' => $value, 'status' =>  $data2->status]);
+                        }
                     }
                 }
 

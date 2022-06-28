@@ -157,15 +157,19 @@ class AdminPoController extends Controller
                 $proFormaShippingDetails->save();
             }
 
-            foreach($request->input('fixed_terms_conditions') as $key => $value)
+            if ($request->input('fixed_terms_conditions'))
             {
-                $supplierCheckedProFormaTermAndCondition = new SupplierCheckedProFormaTermAndCondition;
-                $supplierCheckedProFormaTermAndCondition->proforma_id = $data->id;
-                $supplierCheckedProFormaTermAndCondition->pro_forma_term_and_condition_id = $request->input('fixed_terms_conditions')[$key];
-                $supplierCheckedProFormaTermAndCondition->save();
+                foreach($request->input('fixed_terms_conditions') as $key => $value)
+                {
+                    $supplierCheckedProFormaTermAndCondition = new SupplierCheckedProFormaTermAndCondition;
+                    $supplierCheckedProFormaTermAndCondition->proforma_id = $data->id;
+                    $supplierCheckedProFormaTermAndCondition->pro_forma_term_and_condition_id = $request->input('fixed_terms_conditions')[$key];
+                    $supplierCheckedProFormaTermAndCondition->save();
+                }
             }
 
-            if($request->hasFile('shipping_details_files')){
+            if($request->hasFile('shipping_details_files'))
+            {
 
                 foreach( $request->file('shipping_details_files')  as $key => $file)
                 {

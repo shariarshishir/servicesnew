@@ -53,22 +53,31 @@
                     </div>
                     <div class="no_more_tables">
                         @include('admin.rfq.table')
-                    </div>
-                    @if($noOfPages>1)
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link prev_link" href="#" data-page="1" tabindex="-1">Previous</a>
-                            </li>
-                            @for($i=1; $i<=$noOfPages; $i++)
-                                <li class="page-item page-element"><a class="page-link" href="#" data-page="{{$i}}">{{$i}}</a></li>
-                            @endfor
-                            <li class="page-item">
-                                <a class="page-link next_link" href="#" data-page="2">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    @endif         
+                    </div> 
+
+                    @if( $noOfPages > 1)
+                        @php
+                            $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+                        @endphp
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0);" data-page="0" tabindex="-1">Previous</a>
+                                </li>
+                                @for( $i=1; $i <= $noOfPages; $i++)
+                                    @php
+                                        $r=route('admin.rfq.index');
+                                    @endphp
+                                    <li class="page-item page-element {{ ($page == $i) ? 'active':'' }}">
+                                        <a class="page-link" href="{{ $r.'?page='.$i }}" data-page="{{$i}}">{{$i}}</a>
+                                    </li>
+                                @endfor
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0);" data-page="2">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    @endif                        
 
                                    
                 </div>
@@ -82,7 +91,7 @@
 @push('js')
 <script>
     $(document).ready(function(){
-        $(".pagination").children(".page-element").first().addClass("active");
+        //$(".pagination").children(".page-element").first().addClass("active");
         $(document).on('click', '.rfq-per-page', function(event){
         event.preventDefault(); 
         var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
@@ -106,38 +115,38 @@
             });
         });
 
-        $(document).on('click', '.page-link', function(event){
-            if($(this).data('page') > 1) {
-                $(".pagination").children(".page-element").removeClass("active");
-                $(this).parent(".page-element").addClass("active");
-            }
-        event.preventDefault(); 
-        var page = $(this).data("page");
-        var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
-        var filter_title = $(".filter_title").val();
-        if(page == 1){
-            $('.prev_link').data('page',page);
-        }else{
-            $('.prev_link').data('page',page-1);
-        }
-        $('.next_link').data('page',page+1);
+        // $(document).on('click', '.page-link', function(event){
+        //     if($(this).data('page') > 1) {
+        //         $(".pagination").children(".page-element").removeClass("active");
+        //         $(this).parent(".page-element").addClass("active");
+        //     }
+        // event.preventDefault(); 
+        // var page = $(this).data("page");
+        // var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
+        // var filter_title = $(".filter_title").val();
+        // if(page == 1){
+        //     $('.prev_link').data('page',page);
+        // }else{
+        //     $('.prev_link').data('page',page-1);
+        // }
+        // $('.next_link').data('page',page+1);
         
-        console.log(page);
-        $.ajax({
-                method: 'get',
-                data: { limit:rfqPerPage, filter:filter_title,page:page},
-                url: '{{ route("rfq.pagination") }}',
-                beforeSend: function() {
-                    $('.loading-message').html("Please Wait.");
-                    $('#loadingProgressContainer').show();
-                },
-                success:function(response){
-                    $('.loading-message').html("");
-                    $('#loadingProgressContainer').hide();
-                    $('.no_more_tables').html(response);
-                }
-            });
-        });
+        // console.log(page);
+        // $.ajax({
+        //         method: 'get',
+        //         data: { limit:rfqPerPage, filter:filter_title,page:page},
+        //         url: '{{ route("rfq.pagination") }}',
+        //         beforeSend: function() {
+        //             $('.loading-message').html("Please Wait.");
+        //             $('#loadingProgressContainer').show();
+        //         },
+        //         success:function(response){
+        //             $('.loading-message').html("");
+        //             $('#loadingProgressContainer').hide();
+        //             $('.no_more_tables').html(response);
+        //         }
+        //     });
+        // });
 
         $(document).on('input', '.filter_title', function(event){
         var page = $(this).data("page");

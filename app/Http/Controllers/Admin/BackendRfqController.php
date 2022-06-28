@@ -22,8 +22,9 @@ class BackendRfqController extends Controller
 {
     use PushNotificationTrait;
     public function index(Request $request){
+        $page = isset($request->page) ? $request->page : 1;
         //all published or unpublished rfqs
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/1/limit/10');
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/'.$page.'/limit/10');
         $data = $response->json();
         $rfqs = $data['data'];
         $rfqsCount = $data['count'];

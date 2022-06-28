@@ -33,6 +33,10 @@
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="30">30</option>
+                                            <option value="40">40</option>
+                                            <option value="50">50</option>
+                                            <option value="60">60</option>
+                                            <option value="100">100</option>
                                         </select>
                                     <label>Entries</label>
                                    
@@ -93,13 +97,13 @@
     $(document).ready(function(){
         //$(".pagination").children(".page-element").first().addClass("active");
         $(document).on('click', '.rfq-per-page', function(event){
-        event.preventDefault(); 
-        var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
-        var filter_title = $(".filter_title").val();
-        console.log(rfqPerPage);
-        console.log(filter_title);
+            event.preventDefault(); 
+            var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
+            var filter_title = $(".filter_title").val();
+            console.log(rfqPerPage);
+            console.log(filter_title);
 
-        $.ajax({
+            $.ajax({
                 method: 'get',
                 data: { limit:rfqPerPage, filter:filter_title},
                 url: '{{ route("rfq.pagination") }}',
@@ -110,6 +114,24 @@
                 success:function(response){
                     $('.loading-message').html("");
                     $('#loadingProgressContainer').hide();                    
+                    $('.no_more_tables').html(response);
+                }
+            });
+        });
+
+        $(document).on('input', '.filter_title', function(event){
+            var page = $(this).data("page");
+            var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
+            var filter_title = $(".filter_title").val();
+            $.ajax({
+                method: 'get',
+                data: { limit:rfqPerPage, filter:filter_title,page:page},
+                url: '{{ route("rfq.pagination") }}',
+                beforeSend: function() {
+                    $('.spinner-border').show();
+                },                
+                success:function(response){
+                    $('.spinner-border').hide();
                     $('.no_more_tables').html(response);
                 }
             });
@@ -148,23 +170,6 @@
         //     });
         // });
 
-        $(document).on('input', '.filter_title', function(event){
-        var page = $(this).data("page");
-        var rfqPerPage = $( ".rfq-per-page option:selected" ).val();
-        var filter_title = $(".filter_title").val();
-        $.ajax({
-                method: 'get',
-                data: { limit:rfqPerPage, filter:filter_title,page:page},
-                url: '{{ route("rfq.pagination") }}',
-                beforeSend: function() {
-                    $('.spinner-border').show();
-                },                
-                success:function(response){
-                    $('.spinner-border').hide();
-                    $('.no_more_tables').html(response);
-                }
-            });
-        });
     });
 </script>
 @endpush

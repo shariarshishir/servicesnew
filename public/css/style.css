@@ -12927,9 +12927,21 @@ line-height: 30px;
 .update_rfq_product_upload_form input {
     float: none !important;
 }
+.update_rfq_product_upload_form .input-field .target_price_block {
+    display: flex;
+}
+.update_rfq_product_upload_form .input-field .target_price_block .target_price_negotiable {
+    margin-left: auto;
+}
+.update_rfq_product_upload_form .input-field .target_price_block .target_price_negotiable span {
+    color: #000;
+}
 .update_rfq_product_upload_form .input-field .rfqPrice .price_input,
 .update_rfq_product_upload_form .input-field .rfqQuantity .quantity_input {
     padding-right: 90px !important;
+}
+.update_rfq_product_upload_form .input-field .rfqPrice .price_input.disabled {
+    background-color: #f3f3f3;
 }
 .update_rfq_product_upload_form .rfqPrice,
 .update_rfq_product_upload_form .rfqQuantity {

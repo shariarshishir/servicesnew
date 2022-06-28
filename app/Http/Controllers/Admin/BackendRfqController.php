@@ -34,15 +34,29 @@ class BackendRfqController extends Controller
     }
 
     public function fetchRFQsByQueryStringOrPagination(Request $request){
+        // $limit = $request->limit;
+        // $filter = $request->filter??'null';
+        // $page = $request->page??'1';
+        // $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/'.$filter.'/page/'.$page.'/limit/'.$limit);
+        // $data = $response->json();
+        // $rfqs = $data['data'];
+        // $rfqsCount = $data['count'];
+        // $noOfPages = ceil($data['count']/10);
+        // return view('admin.rfq.table',compact('rfqs'))->render();
+
         $limit = $request->limit;
-        $filter = $request->filter??'null';
-        $page = $request->page??'1';
+        $filter = $request->filter ?? 'null';
+        $page = isset($request->page) ? $request->page : 1;
+        //all published or unpublished rfqs
+        //$response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/null/page/'.$page.'/limit/10');
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/status/all/filter/'.$filter.'/page/'.$page.'/limit/'.$limit);
         $data = $response->json();
         $rfqs = $data['data'];
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
-        return view('admin.rfq.table',compact('rfqs'))->render();
+        $proformas = Proforma::select('generated_po_from_rfq')->get();
+        //return view('admin.rfq.index',compact('rfqs','rfqsCount','noOfPages','proformas'));        
+        return view('admin.rfq.table',compact('rfqs','rfqsCount','noOfPages','proformas'))->render();
     }
 
     public function show($id, $link = false){

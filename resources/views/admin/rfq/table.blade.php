@@ -32,7 +32,11 @@ if(!empty($proformas)) {
                 <td>{{ $rfq['user']['email'] }}</td>
                 <td>{{$rfq['category'][0]['name']}}</td>
                 <td>{{$rfq['quantity']}}</td>
+                @if($rfq['unit_price']==0)
+                <td>Negotiable</td>
+                @else
                 <td>$ {{$rfq['unit_price']}}</td>
+                @endif
                 <td>{{ \Carbon\Carbon::parse($rfq['delivery_time'])->isoFormat('MMMM Do YYYY')}}</td>
                 <td style="text-align: center;">
                     <span style="@php echo($rfq['status'] == 'pending')? 'color:red':'color:green'; @endphp">

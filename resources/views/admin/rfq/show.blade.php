@@ -77,7 +77,7 @@
                                     <h6>{{$rfq['title']}}</h6>
                                     <p><b> Query:</b> For  @foreach($rfq['category'] as $category) {{$category['name']}} @if(!$loop->last) , @endif  @endforeach</p>
                                     <span style="display: flex;"><p><b>Details:</b></p> {!! $rfq['full_specification'] !!}</span>
-                                    <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: $ {{$rfq['unit_price']}}, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
+                                    <p><b>Qty:</b> {{$rfq['quantity']}} {{$rfq['unit']}}, Target Price: @if($rfq['unit_price']==0) Negotiable @else $ {{$rfq['unit_price']}} @endif, Deliver To: {{$rfq['destination']}}, Within: {{\Carbon\Carbon::parse($rfq['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfq['payment_method']}}</p>
                                     @if(isset($rfq['images']))
                                         <div class="rfq_image">
                                             @foreach($rfq['images'] as $image)

@@ -61,10 +61,17 @@
                                     </div>
                                     <div class="col s12 xl6">
                                         <div class="input-field">
-                                            <label>Target Price <span>*</span></label>
+                                            <div class="target_price_block">
+                                                <label>Target Price <span>*</span></label>
+                                                <div class="target_price_negotiable">
+                                                    <label>
+                                                        <input type="checkbox" name="target_price_negotiable" class="target_price_negotiable" /> <span>Negotiable</span>
+                                                    </label>
+                                                </div>
+                                            </div>
                                             <div class="rfqPrice">
                                                 <span>USD</span>
-                                                <input type="text" class="price_input" id="target_price" name="unit_price" required onchange="allowTwoDecimal()" />
+                                                <input type="text" class="price_input" id="target_price" name="unit_price" value="" required onchange="allowTwoDecimal()" />
                                             </div>
                                         </div>
                                     </div>
@@ -221,7 +228,21 @@
 
 @push('js')
      <script type="text/javascript">
-
+        const alertStatus = (e) => {
+            if ($(".target_price_negotiable").is(":checked")) 
+            {
+                $("#target_price").attr("disabled", true);
+                $("#target_price").attr("required", false);
+                $("#target_price").addClass("disabled");
+            } 
+            else 
+            {
+                $("#target_price").attr("disabled", false);
+                $("#target_price").attr("required", true);
+                $("#target_price").removeClass("disabled");
+            }
+        };  
+        $(document).on("click", ".target_price_negotiable", alertStatus);
         //image upload script
         $(function(){
             $('.rfq-document-upload').imageUploader({

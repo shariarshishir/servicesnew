@@ -836,10 +836,11 @@
                                     $('#loadingProgressContainer').hide();
                                     const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
                                     swal("Done!", msg,"success");
-                                    // var alias = "{{$profileAlias??""}}";
-                                    // var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
-                                    // redirect_url = redirect_url.replace(':slug', alias);
-                                    // window.location.href = redirect_url;
+                                    //window.location.reload;
+                                    var alias = "{{$profileAlias??""}}";
+                                    var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                                    redirect_url = redirect_url.replace(':slug', alias);
+                                    window.location.href = redirect_url;
                                 }
                             })
                         },

@@ -4,7 +4,8 @@
 
 <div class="row">
     <div class="col m12">
-        RFQ post successful message.
+        <h2>Congratulations. Your RFQ have been successfully.</h2>
+        <p>Merchantbay will review your RFQ and will get back you within 24 hours.</p>
     </div>
 </div>
 

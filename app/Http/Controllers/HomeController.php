@@ -827,7 +827,7 @@ class HomeController extends Controller
         $blog = Blog::where('slug',$slug)->firstOrFail();
         $data = [];
 
-        $blogs = $blog->source;    
+        $blogs = $blog->source;
         foreach((array)$blogs as $blo)
         {
             if(!is_null($blo['name']) && $blo['name'] != "")
@@ -1262,20 +1262,20 @@ class HomeController extends Controller
     }
 
     public function contactusLandingPage(){
-        return view('rfq_post_success_by_anonymous');
+        return view('contactus.index');
     }
 
     public function rfqPostSuccessfulByAnonymous(){
-        return view('contactus.index');
+        return view('rfq_post_success_by_anonymous');
     }
 
     public function faqLandingPage(){
         return view('faq.index');
-    }    
+    }
 
     public function rfqInfoDetails(){
         return view('new_rfq.index');
-    }    
+    }
 
     // get supplier location data
     public function getSupplierLocationData(Request $request)

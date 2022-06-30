@@ -490,9 +490,9 @@ legend {
 .header_dasktop .mainNav ul li:last-child {
     padding-right: 0;
 }
-.header_dasktop .mainNav ul li.item_whyus {
+/* .header_dasktop .mainNav ul li.item_whyus {
     padding-left: 50px;
-}
+} */
 
 .mainNav ul li a:link,
 .mainNav ul li a:active,
@@ -13255,9 +13255,9 @@ line-height: 30px;
     .product_details_wrapper .product-images a {
         height: 100%;
     }
-    .header_dasktop .mainNav ul li.item_whyus {
+    /* .header_dasktop .mainNav ul li.item_whyus {
         padding-left: 80px;
-    }
+    } */
 
     /* ***************************************** */
     .product_video_box {

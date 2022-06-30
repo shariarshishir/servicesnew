@@ -20,6 +20,11 @@
                         <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Merchantbay will review and send update to you with in 24 hours.</p>
                     </td>
                 </tr>
+                <tr>
+                    <td style="text-align: center; padding: 30px 0 80px; margin: 0px;">
+                        <a href="{{route('new.profile.my_rfqs', $user->businessSingleProfile->alias)}}" target="_blank" style="background: #54A958; width: 92%; padding: 10px 20px; border-radius: 8px; margin: 0 auto; display: block; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff; line-height: 28px; text-decoration: none;" >View Your RFQ</a>
+                    </td>
+                </tr>
             </table>
 
             <table style="background: #fff; max-width:670px; margin:0 auto;" width="100%"  border="0" cellpadding="0" cellspacing="0">

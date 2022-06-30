@@ -16,18 +16,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: left; padding: 0 0 50px; margin: 0;" >
-                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">User type: {{ $user->user_type }}</p>
-                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">From: {{ $user->countryName->name ?? "" }}</p>
-                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Company name: {{ $user->company_name }}</p>
-                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Email: {{ $user->email }} </p>
-                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Phone: {{ $user->phone }}</p>
-                    </td>
-                </tr>
-                <tr>
                     <td style="text-align: center; padding: 30px 0 80px; margin: 0px;">
                         <h2 style="font-family: 'Poppins', sans-serif; font-size: 22px; line-height: 35px; margin: 0; padding: 0px 50px 30px; font-weight: 600; color: #0A0A0A;">Review the RFQ and give a feedback as soon as possible</h2>
-                        <a href="{{route('user.show',$user->id)}}" target="_blank" style="background: #54A958; width: 92%; padding: 10px 20px; border-radius: 8px; margin: 0 auto; display: block; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff; line-height: 28px; text-decoration: none;" >Go to Admin Panel</a>
+                        <a href="{{route('admin.rfq.index')}}" target="_blank" style="background: #54A958; width: 92%; padding: 10px 20px; border-radius: 8px; margin: 0 auto; display: block; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff; line-height: 28px; text-decoration: none;" >Go to Admin Panel</a>
                     </td>
                 </tr>
 

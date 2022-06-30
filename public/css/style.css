@@ -4264,7 +4264,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     min-height: 100px !important;
 }
 .rfq_detail_from_wrap .submit_btn_wrap {
-    padding: 15px 0 0;
+    padding: 0;
 }
 #product-edit-modal-block .submit_btn_wrap {
     padding-top: 30px;

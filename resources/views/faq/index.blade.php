@@ -174,7 +174,7 @@
                             <h4>How to post an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
+                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
                         </div>
                     </li>
                     <li data-title="How does RFQ work?">
@@ -479,7 +479,7 @@
                             <h4>How to post an RFQ?</h4>
                         </div>
                         <div class="collapsible-body">
-                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/global/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
+                            <p>You can post RFQ by clicking on the <a target="_blank" href="https://www.merchantbay.com/rfq/create">Submit a Request for Quotation</a> button. Provide the necessary details and click submit.</p>
                         </div>
                     </li>
                     <li>

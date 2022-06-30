@@ -5,7 +5,7 @@
             <table style="background: #fff; max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
-                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/global/" title="logo" target="_blank">
+                        <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
                             <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
                         </a>
                     </td>

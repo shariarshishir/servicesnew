@@ -1262,6 +1262,10 @@ class HomeController extends Controller
     }
 
     public function contactusLandingPage(){
+        return view('rfq_post_success_by_anonymous');
+    }
+
+    public function rfqPostSuccessfulByAnonymous(){
         return view('contactus.index');
     }
 

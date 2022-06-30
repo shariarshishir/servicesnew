@@ -21,7 +21,7 @@
                 <tr>
                     <td style="text-align: left; padding: 0 0 50px; margin: 0;" >
                         <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">User type: {{ $user->user_type }}</p>
-                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">From: {{ $user->countryName->name}}</p>
+                        <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">From: {{ $user->countryName->name ?? "" }}</p>
                         <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Company name: {{ $user->company_name }}</p>
                         <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Email: {{ $user->email }} </p>
                         <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Phone: {{ $user->phone }}</p>

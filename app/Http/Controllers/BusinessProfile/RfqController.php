@@ -8,6 +8,7 @@ use App\Models\Rfq;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\RfqImage;
+use App\Models\UserVerify;
 use App\Userchat;
 use App\RfqApp;
 use Illuminate\Support\Str;
@@ -28,6 +29,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\Product as WholesalerProduct;
 use App\Models\ProductTag;
+use App\Events\NewUserHasRegisteredEvent;
 
 
 class RfqController extends Controller
@@ -857,7 +859,7 @@ class RfqController extends Controller
             }            
 
             
-            return response()->json(['access_token' =>  $access_token, 'profileAlias' => $profileAlias],200);
+            return response()->json(['access_token' =>  $access_token, 'profileAlias' => $profileAlias, 'flag' => 'login'],200);
 
         }else{
             $registration_data = [
@@ -885,7 +887,7 @@ class RfqController extends Controller
                 'company_name' => $request->r_company,
                 'phone' => $request->r_phone,
                 'user_type' => 'buyer',
-                'is_email_verified' => 1,
+                //'is_email_verified' => 1,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->header('User-Agent'),
             ];
@@ -901,7 +903,7 @@ class RfqController extends Controller
                 'user_id'       => $new_user['id'],
                 'profile_type'       => "buyer",
                 'business_type' => "manufacturer", // forcefully set Manufacturer type
-                'has_representative'=> 1,
+                'has_representative'=> 1, // no representative
                 'industry_type' => 'apparel',
             ];
             $business_profile = BusinessProfile::create($business_profile_data);
@@ -923,15 +925,15 @@ class RfqController extends Controller
                 $totalSecondsDiff = abs($get_time-$current);
                 $totalMinutesDiff = $totalSecondsDiff/60;
 
-                if(Cookie::has('sso_token')){
-                    Cookie::queue(Cookie::forget('sso_token'));
-                }
-                Cookie::queue(Cookie::make('sso_token', $access_token, $totalMinutesDiff));
+                // if(Cookie::has('sso_token')){
+                //     Cookie::queue(Cookie::forget('sso_token'));
+                // }
+                // Cookie::queue(Cookie::make('sso_token', $access_token, $totalMinutesDiff));
 
-                if($request->session()->has('sso_password')){
-                    $request->session()->forget('sso_password');
-                }
-                $request->session()->put('sso_password', $request->r_password);
+                // if($request->session()->has('sso_password')){
+                //     $request->session()->forget('sso_password');
+                // }
+                // $request->session()->put('sso_password', $request->r_password);
 
 
             }
@@ -939,16 +941,27 @@ class RfqController extends Controller
                 return response()->json(['error' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
             }
 
-            $credentials = [
-                'email' => $request->r_email,
-                'password' => $request->r_password,
-            ];
-            if(!Auth::attempt($credentials))
-            {
-                return  response()->json(['error' =>  "Wrong email or password"],401);
-            }
+            // $credentials = [
+            //     'email' => $request->r_email,
+            //     'password' => $request->r_password,
+            // ];
+            // if(!Auth::attempt($credentials))
+            // {
+            //     return  response()->json(['error' =>  "Wrong email or password"],401);
+            // }
 
-            return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias],200);
+            $email_verification_OTP = mt_rand(100000,999999);
+            
+            UserVerify::create([
+                'user_id' => $new_user->id,
+                'token' => $email_verification_OTP
+              ]);
+            
+            event(new NewUserHasRegisteredEvent($new_user, $email_verification_OTP));
+            
+            return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias,'flag'=> 'registration'],200);            
+
+            //return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias],200);
         }
 
 

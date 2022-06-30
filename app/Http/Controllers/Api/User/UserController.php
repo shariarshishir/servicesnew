@@ -622,7 +622,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type' => 'buyer',
+            'user_type' => $request->user_type,
             'sso_reference_id' =>$request->sso_reference_id,
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
@@ -636,18 +636,31 @@ class UserController extends Controller
             'is_supplier'  => $request->user_type == 'supplier' ? 1 : 0,
 
         ]);
-        if($request->user_type == 'buyer'){
-            $business_profile_data=[
-                'business_name' => $request->company_name,
-                'alias'   => $this->createAlias($request->company_name),
-                'user_id'       => $user->id,
-                'business_type' => 2, // forcefully set Manufacturer type
-                'has_representative'=> 1,
-                'industry_type' => 'apparel',
-            ];
-            $business_profile=BusinessProfile::create($business_profile_data);
-            $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
-        }
+        // if($request->user_type == 'buyer'){
+        //     $business_profile_data=[
+        //         'business_name' => $request->company_name,
+        //         'alias'   => $this->createAlias($request->company_name),
+        //         'user_id'       => $user->id,
+        //         'business_type' => 2, // forcefully set Manufacturer type
+        //         'has_representative'=> 1,
+        //         'industry_type' => 'apparel',
+        //     ];
+        //     $business_profile=BusinessProfile::create($business_profile_data);
+        //     $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
+        // }
+
+        // if user registration successful then we will create a business profile for the new user.
+        $business_profile_data=[
+            'business_name' => $user['company_name'],
+            'alias'   => $this->createAlias($user['company_name']),
+            'user_id'       => $user['id'],
+            'profile_type'       => $request->user_type,
+            'business_type' => $request->business_type, // set dynamic user type from sso response data.
+            'has_representative'=> 1, // no representative
+            'industry_type' => 'apparel',
+        ];
+        $business_profile = BusinessProfile::create($business_profile_data);
+        $this->createCompanyOverview($request, $business_profile->id);          
 
         $token = Str::random(64);
         UserVerify::create([

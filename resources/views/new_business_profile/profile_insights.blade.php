@@ -234,16 +234,16 @@
                                 <p style="color: red; margin-top: 25px;"><span  data-toggle="tooltip" title="{{$toolTipMessageForVerification}}"><i class="fas fa-question-circle"></i></span> You have {{$profileIncompleteValueCount}} incomplete fields. Click <a href="{{route('new.profile.edit', $alias)}}">here</a> to see details.</p>
                                 @endif
                                 <ul style="display: none;">
-                                    @if($business_profile->businessProfileVerification->company_overview == 0)
+                                    @if($business_profile->businessProfileVerification()->exists() && $business_profile->businessProfileVerification->company_overview == 0)
                                     <li><a href="javascript:void(0);">Company Profile </a></li>
                                     @endif
-                                    @if($business_profile->businessProfileVerification->machinery_details == 0)
+                                    @if($business_profile->businessProfileVerification()->exists() && $business_profile->businessProfileVerification->machinery_details == 0)
                                     <li><a href="javascript:void(0);">Capacity and Machineries </a></li>
                                     @endif
                                     <!--li><a href="javascript:void(0);">Certifications </a></li-->
                                     <!--li><a href="javascript:void(0);">Main Buyers </a></li-->
                                     <!--li><a href="javascript:void(0);">Export Destinations </a></li-->
-                                    @if($business_profile->businessProfileVerification->business_terms == 0)
+                                    @if($business_profile->businessProfileVerification()->exists() && $business_profile->businessProfileVerification->business_terms == 0)
                                     <li><a href="javascript:void(0);">Business Terms </a></li>
                                     @endif
                                 </ul>

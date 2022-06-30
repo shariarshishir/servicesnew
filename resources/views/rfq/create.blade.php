@@ -64,7 +64,7 @@
                                             <div class="target_price_block">
                                                 <label>Target Price <span>*</span></label>
                                                 <div class="target_price_negotiable">
-                                                    <label>
+                                                    <label class="tooltipped" data-position="top" data-tooltip="Check this if you want to set negotiable price.">
                                                         <input type="checkbox" name="target_price_negotiable" class="target_price_negotiable" /> <span>Negotiable</span>
                                                     </label>
                                                 </div>
@@ -683,6 +683,7 @@
                             const rfq_app_url = "{{env('RFQ_APP_URL')}}";
                             var url = rfq_app_url+'/api/quotation';
                             var alias = response.profileAlias;
+                            var flag =response.flag;
                             const sso_token = "Bearer " +response.access_token;
                             var formData = new FormData();
                             var file_data = $('input[name="rfq-documents[]"]')[0].files;
@@ -727,9 +728,17 @@
                                     const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
                                     swal("Done!", msg,"success");
                                     //console.log(response);
-                                    var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
-                                    redirect_url = redirect_url.replace(':slug', alias);
-                                    window.location.href = redirect_url;
+                                    // var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                                    // redirect_url = redirect_url.replace(':slug', alias);
+                                    // window.location.href = redirect_url;
+                                    if(flag == 'registration'){
+                                        var redirect_url = '{{ route("front.rfqpostsuccessfulbyanonymous") }}';
+                                        window.location.href = redirect_url;
+                                    } else {
+                                        var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                                        redirect_url = redirect_url.replace(':slug', alias);
+                                        window.location.href = redirect_url;
+                                    }                                    
                                     //window.location.href = "{{ route('rfq.my')}}";
                                 },
                                 error: function(xhr, status, error)

@@ -393,6 +393,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('/send-request-for-profile-verification', [BusinessProfileBusinessProfileController::class, 'businessProfileVerificationRequest'])->name('business.profile.verification.request');
 
     //new business profile template routes
+    Route::post('mail-send-to-auth-user', [RfqController::class, 'rfqMailTriggerForAuthUser'])->name('rfq.mailTriggerForAuthUser');
     Route::get('profile/{alias}/general-info', [BusinessProfileBusinessProfileController::class, 'index'])->name('new.profile.index');
     Route::get('profile/{alias}/rfqs', [RfqController::class, 'index'])->name('new.profile.rfqs');
     Route::get('profile/{alias}/my-rfqs', [RfqController::class, 'myRfqList'])->name('new.profile.my_rfqs');

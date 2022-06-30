@@ -30,6 +30,7 @@ use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\Product as WholesalerProduct;
 use App\Models\ProductTag;
 use App\Events\NewUserHasRegisteredEvent;
+use App\Events\NewRFQHasPostedEvent;
 
 
 class RfqController extends Controller
@@ -37,10 +38,10 @@ class RfqController extends Controller
     public function index($alias, Request $request)
     {
         $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
-        
+
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
-        
+
             if($business_profile->business_type == 'manufacturer'){
                 $collection=collect(ManufactureProduct::withTrashed()
                 ->latest()
@@ -255,7 +256,7 @@ class RfqController extends Controller
         $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
         //all rfqs where auth user has messages
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
-        if(count($rfqs)>0){ 
+        if(count($rfqs)>0){
             //messages of first rfq of auth user
             $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqLists[0]['id'].'/user/'.$user->sso_reference_id);
             $data = $response->json();
@@ -266,7 +267,7 @@ class RfqController extends Controller
                 $userNameShortForm = "";
             }else{
                 $userImage = $rfqs[0]['user']['user_picture'];
-                //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
+                //if user picture does not exist then we need to show user name short form insetad of user image in chat box
                 $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
                 $firstWordFirstLetter = $nameWordArray[0][0];
                 $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
@@ -275,7 +276,7 @@ class RfqController extends Controller
         }else{
             $chatdata = [];
             $userImage ="";
-            //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
+            //if user picture does not exist then we need to show user name short form insetad of user image in chat box
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
@@ -321,7 +322,7 @@ class RfqController extends Controller
                 $userImage = $rfqs[0]['user']['user_picture'];
                 $userNameShortForm = "";
             }else{
-                //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
+                //if user picture does not exist then we need to show user name short form insetad of user image in chat box
                 $userImage = $rfqs[0]['user']['user_picture'];
                 $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
                 $firstWordFirstLetter = $nameWordArray[0][0];
@@ -331,7 +332,7 @@ class RfqController extends Controller
         }else{
             $chatdata = [];
             $userImage ="";
-            //if user picture does not exist then we need to show user name short form insetad of user image in chat box 
+            //if user picture does not exist then we need to show user name short form insetad of user image in chat box
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];
             $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
@@ -353,7 +354,7 @@ class RfqController extends Controller
     public function authUserQuotationsByRFQId(Request $request){
         $quotations = Userchat::where('rfq_id',$request->rfqId)->where('factory',true)->get();
         return response()->json(["quotations"=>$quotations],200);
-        
+
     }
 
     public function authUserConversationsByRFQId(Request $request){
@@ -418,7 +419,7 @@ class RfqController extends Controller
             }
         }
         $rfq = Rfq::with('images','category')->where('id',$rfq->id)->first();
-        
+
             $selectedUserToSendMail="success@merchantbay.com";
             event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
 
@@ -427,7 +428,7 @@ class RfqController extends Controller
         return back()->with(['rfq-success'=> $msg]);
 
     }
-    
+
     public function delete($rfq_id)
     {
         $rfq=Rfq::findOrFail($rfq_id);
@@ -652,27 +653,27 @@ class RfqController extends Controller
 
     public function create()
     {
-        if(auth()->user()) 
+        if(auth()->user())
         {
             $businessProfiles = BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
-        
+
             $profileAlias = "";
-            if(count($businessProfiles) > 0) 
+            if(count($businessProfiles) > 0)
             {
                 $profileAlias = $businessProfiles[0]['alias'];
-            } 
-            else 
+            }
+            else
             {
                 $profileAlias = $businessProfiles['alias'];
             }
-    
+
             return view('rfq.create',compact('profileAlias'));
         }
-        else 
+        else
         {
             return view('rfq.create');
         }
-        
+
     }
 
     public function storeFromProductDetails(Request $request)
@@ -847,18 +848,20 @@ class RfqController extends Controller
             }
 
             $businessProfiles = BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
-        
+
             $profileAlias = "";
-            if(count($businessProfiles) > 0) 
+            if(count($businessProfiles) > 0)
             {
                 $profileAlias = $businessProfiles[0]['alias'];
-            } 
-            else 
+            }
+            else
             {
                 $profileAlias = $businessProfiles['alias'];
-            }            
+            }
 
-            
+            $user = User::where('id',auth()->id())->first();
+            event(new NewRFQHasPostedEvent( $user ));
+
             return response()->json(['access_token' =>  $access_token, 'profileAlias' => $profileAlias, 'flag' => 'login'],200);
 
         }else{
@@ -907,7 +910,7 @@ class RfqController extends Controller
                 'industry_type' => 'apparel',
             ];
             $business_profile = BusinessProfile::create($business_profile_data);
-            $this->createCompanyOverview($business_profile->id);            
+            $this->createCompanyOverview($business_profile->id);
 
             $sso=Http::post(env('SSO_URL').'/api/auth/token/',[
                 'email' => $request->r_email,
@@ -951,15 +954,16 @@ class RfqController extends Controller
             // }
 
             $email_verification_OTP = mt_rand(100000,999999);
-            
+
             UserVerify::create([
                 'user_id' => $new_user->id,
                 'token' => $email_verification_OTP
               ]);
-            
+
             event(new NewUserHasRegisteredEvent($new_user, $email_verification_OTP));
-            
-            return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias,'flag'=> 'registration'],200);            
+            event(new NewRFQHasPostedEvent($new_user));
+
+            return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias,'flag'=> 'registration'],200);
 
             //return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias],200);
         }
@@ -1003,7 +1007,7 @@ class RfqController extends Controller
 
         }
         return $alias;
-    }    
+    }
 
     //company overview data
     public function createCompanyOverview($profile_id)
@@ -1020,6 +1024,29 @@ class RfqController extends Controller
         ]);
         return $companyOverview;
 
-    }    
+    }
+
+    public function rfqMailTriggerForAuthUser()
+    {
+        // $product_tag = ProductTag::whereIn('id', $request->category)->select('name')->get()->toArray();
+
+        // $rfqData = [
+        //     $category = $product_tag,
+        //     $title = $request->title,
+        //     $description = $request->full_specification,
+        //     $quantity = $request->quantity,
+        //     $unit = $request->unit,
+        //     $unit_price = $request->unit_price,
+        //     $payment_method = $request->payment_method,
+        //     $destination = $request->destination,
+        //     $delivery_time = $request->delivery_time,
+        // ];
+
+        $user = User::where('id',auth()->id())->first();
+        event(new NewRFQHasPostedEvent( $user ));
+
+        return response()->json(['success' => True], 200);
+
+    }
 
 }

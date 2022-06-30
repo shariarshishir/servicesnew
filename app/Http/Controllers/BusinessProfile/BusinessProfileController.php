@@ -21,7 +21,7 @@ class BusinessProfileController extends Controller
     }
 
     public function index($alias){
-        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $business_profile = BusinessProfile::withTrashed()->with('user')->where('alias',$alias)->firstOrFail();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             return view('new_business_profile.index',compact('alias','business_profile'));
@@ -40,18 +40,18 @@ class BusinessProfileController extends Controller
 
 
     public function developmentCenter($alias){
-        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $business_profile = BusinessProfile::withTrashed()->with('user')->where('alias',$alias)->firstOrFail();
         return view('new_business_profile.development_center',compact('alias', 'business_profile'));
     }
 
     public function orderManagement($alias){
-        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $business_profile = BusinessProfile::withTrashed()->with('user')->where('alias',$alias)->firstOrFail();
         return view('new_business_profile.order_management',compact('alias', 'business_profile'));
     }
 
     public function products($alias,Request $request){
 
-        $business_profile=BusinessProfile::where('alias',$alias)->firstOrFail();
+        $business_profile=BusinessProfile::withTrashed()->where('alias',$alias)->firstOrFail();
         if((auth()->id() == $business_profile->user_id) || (auth()->id() == $business_profile->representative_user_id))
         {
             if($business_profile->profile_type == 'supplier' && $business_profile->business_type == 'manufacturer'){

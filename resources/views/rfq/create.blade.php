@@ -31,7 +31,7 @@
                                             @foreach($product_tags as $product_tag)
                                                 <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
                                             @endforeach
-                                        </select>                                        
+                                        </select>
                                     </div>
                                     <div class="col s12 input-field">
                                         <label>Title <span>*</span></label>
@@ -55,7 +55,7 @@
                                                     @foreach($units as $unit=>$value)
                                                         <option value="{{$unit}}">{{ $value }}</option>
                                                     @endforeach
-                                                </select>                                                
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                                 <div class="row">
                                     <div class="col s12 xl4">
                                         <div class="input-field">
@@ -89,7 +89,7 @@
                                                 <option value="cheque">Cheque</option>
                                                 <option value="tt">TT</option>
                                                 <option value="Others">Others</option>
-                                            </select>                                            
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col s12 xl4">
@@ -120,7 +120,7 @@
                             @else
                                 <a class="btn_green btn_rfq_post_next btn_rfq_post modal-trigger right" href="#rfq-user-system-entry-modal">Next <i class="material-icons">navigate_next</i></a>
                             @endif
-                            
+
                             <div id="rfq-user-system-entry-modal" class="modal update_rfq_signin_modal">
                                 <div class="close">
                                     <a href="javascript:void(0);" class="modal-action modal-close">
@@ -138,7 +138,7 @@
                                             <div class="col s12 input-field">
                                                 <label>Password</label>
                                                 <input type="password" class="" name="password"  autocomplete="new-password"/>
-                                            </div>                                            
+                                            </div>
                                             <div class="col s12">
                                                 <div class="row">
                                                     <!--div class="col s12 m8">
@@ -188,7 +188,7 @@
                                             <div class="col s12 m6 input-field">
                                                 <label>Phone Number</label>
                                                 <input type="number" class="" placeholder="+880 XXXXXXXXXX" name="r_phone" autocomplete="false" />
-                                            </div>                                            
+                                            </div>
                                             <div class="col s12">
                                                 <div class="row">
                                                     <!--div class="col s12 m8">
@@ -204,7 +204,7 @@
                                                                 Submit
                                                             </button>
                                                         </div>
-                                                    </div>                                                    
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col m12">
@@ -215,10 +215,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </form>
                     </div>
-                </div>            
+                </div>
             </div>
         </section>
     </div>
@@ -231,19 +231,19 @@
 @push('js')
      <script type="text/javascript">
         const alertStatus = (e) => {
-            if ($(".target_price_negotiable").is(":checked")) 
+            if ($(".target_price_negotiable").is(":checked"))
             {
                 $("#target_price").attr("disabled", true);
                 $("#target_price").attr("required", false);
                 $("#target_price").addClass("disabled");
-            } 
-            else 
+            }
+            else
             {
                 $("#target_price").attr("disabled", false);
                 $("#target_price").attr("required", true);
                 $("#target_price").removeClass("disabled");
             }
-        };  
+        };
         $(document).on("click", ".target_price_negotiable", alertStatus);
         //image upload script
         $(function(){
@@ -257,7 +257,7 @@
             $(".browse_file_trigger").click(function(){
                 $('.image-uploader input[type="file"]').trigger("click");
             });
-     
+
             $('input[name="rfq-documents[]"]').change(function(){
                 //console.log($(this)[0].files);
                 $.each($(this)[0].files, function()
@@ -463,7 +463,7 @@
                 alert('Please fill all the required fields.');
                 //$("html, body").animate({ scrollTop: 0 }, "slow");
                 return false;
-            }            
+            }
         }
 
         function onSubmitValidation()
@@ -740,7 +740,7 @@
                                         var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
                                         redirect_url = redirect_url.replace(':slug', alias);
                                         window.location.href = redirect_url;
-                                    }                                    
+                                    }
                                     //window.location.href = "{{ route('rfq.my')}}";
                                 },
                                 error: function(xhr, status, error)
@@ -771,7 +771,7 @@
                 });
 
 
-            } 
+            }
             else // this code will perform when user is authenticate. data will post directly to the mongo using user access_token.
             {
                 //console.log(authuser);
@@ -819,16 +819,29 @@
                             $('.loading-message').html("Please Wait.");
                             $('#loadingProgressContainer').show();
                         },
-                        success:function(response){
-                            $('.loading-message').html("");
-                            $('#loadingProgressContainer').hide();
-                            const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
-                            swal("Done!", msg,"success");
-
-                            var alias = "{{$profileAlias??""}}";
-                            var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
-                            redirect_url = redirect_url.replace(':slug', alias);
-                            window.location.href = redirect_url;
+                        success:function(response)
+                        {
+                            var mailTrigger = '{{ route("rfq.mailTriggerForAuthUser") }}';
+                            $.ajax({
+                                method: 'post',
+                                processData: false,
+                                contentType: false,
+                                cache: false,
+                                data: formData,
+                                enctype: 'multipart/form-data',
+                                url: mailTrigger,
+                                beforeSend: function() {},
+                                success:function(response){
+                                    $('.loading-message').html("");
+                                    $('#loadingProgressContainer').hide();
+                                    const msg = "Your RFQ was posted successfully.<br><br>Soon you will receive quotation from <br>Merchant Bay verified relevant suppliers.";
+                                    swal("Done!", msg,"success");
+                                    // var alias = "{{$profileAlias??""}}";
+                                    // var redirect_url = '{{ route("new.profile.my_rfqs", ":slug") }}';
+                                    // redirect_url = redirect_url.replace(':slug', alias);
+                                    // window.location.href = redirect_url;
+                                }
+                            })
                         },
                         error: function(xhr, status, error)
                         {

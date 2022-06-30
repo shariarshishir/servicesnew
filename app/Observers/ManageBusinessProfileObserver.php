@@ -42,7 +42,7 @@ class ManageBusinessProfileObserver
      */
     public function deleted(BusinessProfile $businessProfile)
     {
-        if($businessProfile->business_type == 1) {
+        if($businessProfile->business_type == "manufacturer") {
                 $relations_to_cascade =static::$relations_to_cascade_to_manufacture;
             }else{
                 $relations_to_cascade =static::$relations_to_cascade_to_wholesaler;
@@ -71,7 +71,7 @@ class ManageBusinessProfileObserver
      */
     public function restored(BusinessProfile $businessProfile)
     {
-        if($businessProfile->business_type == 1) {
+        if($businessProfile->business_type == "manufacturer") {
             $relations_to_cascade =static::$relations_to_cascade_to_manufacture_restore;
         }else{
             $relations_to_cascade =static::$relations_to_cascade_to_wholesaler_restore;

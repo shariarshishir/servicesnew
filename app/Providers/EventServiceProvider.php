@@ -19,6 +19,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\NewRfqHasAddedEvent;
 use App\Events\NewRfqHasBidEvent;
+use App\Events\NewRFQHasPostedEvent;
 use App\Models\BusinessProfile;
 use App\Observers\ManageBusinessProfileObserver;
 
@@ -41,6 +42,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewUserHasRegisteredEvent::class => [
             'App\Listeners\NewUserHasRegisteredListener',
+        ],
+        NewRFQHasPostedEvent::class => [
+            'App\Listeners\NewRFQHasPostedListener',
         ],
         NewOrderModificationRequestEvent::class=>[
             'App\Listeners\NewOrderModificationRequestListener',

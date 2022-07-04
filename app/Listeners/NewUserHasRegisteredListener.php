@@ -37,9 +37,9 @@ class NewUserHasRegisteredListener implements ShouldQueue
             });
         }
         else{
-            Mail::to($event->user->email)->send(new NewUserRegistrationMailToUser($event->user, $event->token));
+            Mail::to($event->user->email)->send(new NewUserRegistrationMailToUser($event->user, $event->token, $event->password));
         }
-            
+
 
     }
 }

@@ -177,9 +177,9 @@
                                                 <label>Email</label>
                                                 <input type="email" class="" name="r_email" autocomplete="false"/>
                                             </div>
-                                            <div class="col s12 input-field">
+                                            <div class="col s12 input-field" style="display: none;">
                                                 <label>Password</label>
-                                                <input type="password" class="" name="r_password" autocomplete="new-password"/>
+                                                <input type="password" class="" name="r_password" value="@php echo generateHashPassword(); @endphp" autocomplete="new-password"/>
                                             </div>
                                             <div class="col s12 m6 input-field">
                                                 <label>Company Name</label>
@@ -598,17 +598,17 @@
                 $('input[name="email"]').removeClass('invalid');
             }
 
-            if ($('input[name="password"]').val()=="" && $('input[name="r_password"]').val()=="")
-            {
-                errCount++;
-                $('input[name="password"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="password"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="password"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="password"]').removeClass('invalid');
-            }
+            // if ($('input[name="password"]').val()=="" && $('input[name="r_password"]').val()=="")
+            // {
+            //     errCount++;
+            //     $('input[name="password"]').closest('.input-wrapper').addClass(errorClass);
+            //     $('input[name="password"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="password"]').closest('.input-wrapper').removeClass(errorClass);
+            //     $('input[name="password"]').removeClass('invalid');
+            // }
 
             if ($('input[name="email"]').val()=="" && $('input[name="name"]').val()=="")
             {

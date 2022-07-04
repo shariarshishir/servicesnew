@@ -133,6 +133,31 @@ fclose($fp);
     return response()->json($exportData);
 });
 
+Route::get('jsonDataForBusinessProfilesComapnyOverview', function(){
+
+    $exportData = array();
+    $businessProfiles = BusinessProfile::with('companyOverview')->where('is_business_profile_verified', 1)->get();
+    foreach($businessProfiles as $k => $businessProfile)
+    {
+        $dataArr = array();
+        $dataArr['profile_name'] = $businessProfile->business_name;
+        $data = json_decode($businessProfile->companyOverview->data);
+        if(!empty($data)){
+            foreach($data as $info) {
+                if($info->name == "main_products") {
+                    $dataArr['main_products'] = $info->value;
+                }
+            }
+        }
+        array_push($exportData, $dataArr);
+    }
+
+    //echo "<pre>"; print_r($exportData); echo "</pre>";
+    //die();
+
+    return response()->json($exportData);
+});
+
 //test
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import

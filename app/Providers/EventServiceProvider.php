@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\NewOrderHasApprovedEvent;
 use App\Events\NewUserHasRegisteredEvent;
+use App\Events\NewAnonymousUserHasRegisteredEvent;
 use App\Events\NewOrderHasPlacedEvent;
 use App\Events\NewOrderModificationRequestEvent;
 use App\Events\OrderQueryEvent;
@@ -43,6 +44,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewUserHasRegisteredEvent::class => [
             'App\Listeners\NewUserHasRegisteredListener',
+        ],
+        NewAnonymousUserHasRegisteredEvent::class => [
+            'App\Listeners\NewAnonymousUserHasRegisteredListener',
         ],
         NewRFQHasPostedEvent::class => [
             'App\Listeners\NewRFQHasPostedListener',

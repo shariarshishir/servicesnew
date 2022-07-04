@@ -29,7 +29,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\Product as WholesalerProduct;
 use App\Models\ProductTag;
-use App\Events\NewUserHasRegisteredEvent;
+use App\Events\NewAnonymousUserHasRegisteredEvent;
 use App\Events\NewRFQHasPostedEvent;
 
 
@@ -960,7 +960,7 @@ class RfqController extends Controller
                 'token' => $email_verification_OTP
               ]);
 
-            event(new NewUserHasRegisteredEvent($new_user, $email_verification_OTP, $request->r_password));
+            event(new NewAnonymousUserHasRegisteredEvent($new_user, $email_verification_OTP, $request->r_password));
             event(new NewRFQHasPostedEvent($new_user));
 
             return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias,'flag'=> 'registration'],200);

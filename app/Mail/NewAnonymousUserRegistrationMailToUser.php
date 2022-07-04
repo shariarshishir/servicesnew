@@ -7,16 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewUserRegistrationMailToUser extends Mailable
+class NewAnonymousUserRegistrationMailToUser extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
     public $token;
-    public function __construct($user, $token)
+    public $password;
+    public function __construct($user, $token, $password)
     {
         $this->user = $user;
         $this->token = $token;
+        $this->password = $password;
     }
 
     /**
@@ -26,6 +28,6 @@ class NewUserRegistrationMailToUser extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.emailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token]);
+        return $this->markdown('emails.emailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token, 'password' => $this->password]);
     }
 }

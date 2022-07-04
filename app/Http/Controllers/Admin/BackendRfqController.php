@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Traits\PushNotificationTrait;
 use App\Models\ProductTag;
 use Illuminate\Support\Facades\Auth;
+use App\Events\NewQuotationHasPostedEvent;
 
 class BackendRfqController extends Controller
 {
@@ -55,7 +56,7 @@ class BackendRfqController extends Controller
         $rfqsCount = $data['count'];
         $noOfPages = ceil($data['count']/10);
         $proformas = Proforma::select('generated_po_from_rfq')->get();
-        //return view('admin.rfq.index',compact('rfqs','rfqsCount','noOfPages','proformas'));        
+        //return view('admin.rfq.index',compact('rfqs','rfqsCount','noOfPages','proformas'));
         return view('admin.rfq.table',compact('rfqs','rfqsCount','noOfPages','proformas'))->render();
     }
 
@@ -289,9 +290,11 @@ class BackendRfqController extends Controller
     }
 
     public function supplierQuotationToBuyer(Request $request){
+
         //dd($request->all());
 
         $quotation = supplierQuotationToBuyer::where('business_profile_id',$request->business_profile_id)->where('rfq_id',$request->rfq_id)->where('from_backend',1)->first();
+        $to_user = User::with('businessProfile')->where('email',$request['rfq_owner_email'])->first();
 
         if($quotation)
         {
@@ -307,6 +310,8 @@ class BackendRfqController extends Controller
             $supplierQuotationToBuyer->offer_price_unit = $request->offer_price_unit;
             $supplierQuotationToBuyer->save();
         }
+
+        event(new NewQuotationHasPostedEvent($to_user));
 
         return response()->json(["status" => 1, "message" => "successful"]);
     }

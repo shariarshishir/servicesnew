@@ -95,7 +95,7 @@
                                                     <a href="{{ $image['image'] }}" data-fancybox>
                                                         <img src="{{ $image['image'] }}" alt="" class="img-responsive" />
                                                     </a>
-                                                @endif                                                
+                                                @endif
                                             @endforeach
                                         </div>
                                     @endif
@@ -564,9 +564,9 @@
                     });
                 }
             });
-            
+
             $(document).on('click', '.show-suppliers-with-unseen-message', function(){
-               
+
                 var profile_rating = $( "#profile_rating option:selected" ).val();
                 var rfq_id ="{{$rfq['id']}}";
                     $.ajax({
@@ -932,13 +932,14 @@
                 var offer_price = $(this).closest(".modal-dialog").find(".propose_price").val();
                 var offer_price_unit = $(this).closest(".modal-dialog").find(".propose_uom").val();
                 var rfq_id = $(this).data("rfqid");
+                var rfq_owner_email = "{{$rfq['user']['email']}}";
                 var offerHtml = "<span>Offered to buyer :</span> <span>$"+offer_price+" / "+offer_price_unit+"</span>";
                 $(this).closest(".col-sm-12").find(" .offer_price_block_wrapper ").show();
                 $(this).closest(".col-sm-12").find(" .offer_price_block ").html(offerHtml);
                 $(this).closest(".col-sm-12").removeClass('no-class').addClass("already-sent");
                 $.ajax({
                     method: 'get',
-                    data: {rfq_id:rfq_id, business_profile_id:business_profile_id, offer_price:offer_price, offer_price_unit:offer_price_unit},
+                    data: {rfq_id:rfq_id, rfq_owner_email:rfq_owner_email, business_profile_id:business_profile_id, offer_price:offer_price, offer_price_unit:offer_price_unit},
                     url: '{{ route("admin.rfq.supplier.quotation.to.buyer") }}',
                     success:function(response){
                         console.log(response);
@@ -1099,7 +1100,7 @@
                         $(message_count_span).text(parseInt(no_of_unseen_message)+1);
                         $(message_count_span).data('unseenmessagecount',parseInt(no_of_unseen_message)+1);
                     }
-                    
+
                     if( supplierId  && supplierId == data.from_id ){
 
                         $('.supplier-chats-box').append(msgHtml);

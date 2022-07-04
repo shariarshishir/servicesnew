@@ -10,116 +10,104 @@
                     <div class="row">
                         <div class="col s12">
                             <h3 style="margin-bottom:10px;">Request For Quotation</h2>
-                            <p style="margin-bottom: 50px;">Submit an RFQ and find the best match with speed and reliability.</p>
+                            <p style="margin-bottom: 20px;">Submit an RFQ and find the best match with speed and reliability.</p>
                         </div>
                         <form class="update_rfq_product_upload_form createRfqForm" method="post" enctype="multipart/form-data" action="">
-                            <div class="col s12 m6 l5">
-                                <div class="rfq_upload_filebox_wrap">
-                                    <div class="rfq_upload_filebox center-align">
-                                        <div class="rfq-document-upload" id="rfq-document-upload"></div>
-                                        <div class="or"><span>OR</span></div>
-                                        <a href="javascript:void(0);" class="btn_green browse_file_trigger">Browse files</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m6 l7 create_rfq_form_wrap">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <label>Select Product Tags <span>*</span></label>
-                                        <select class="select2" id="category_id" name="category[]" multiple required >
-                                            <option>Select an option</option>
-                                            @foreach($product_tags as $product_tag)
-                                                <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col s12 input-field">
-                                        <label>Title <span>*</span></label>
-                                        <input type="text" class="" name="title" required/>
-                                    </div>
-                                    <div class="col s12 input-field">
-                                        <div class="">
-                                            <label>Short Description <span>*</span></label>
-                                            <textarea class="ig-new-rgt prd-txta short_description add_short_description" name="full_specification"></textarea>
-                                            <input type="hidden" name="short_description" value="" />
+                            <div class="row createRfqForm_contect_wrap">
+                                <div class="col s12 m6 l5 rfq_upload_filebox_leftBox">
+                                    <div class="rfq_upload_filebox_wrap">
+                                        <div class="rfq_upload_filebox center-align">
+                                            <div class="rfq-document-upload" id="rfq-document-upload"></div>
+                                            <div class="or"><span>OR</span></div>
+                                            <a href="javascript:void(0);" class="btn_green browse_file_trigger">Browse files</a>
                                         </div>
                                     </div>
-                                    <div class="col s12 xl6">
-                                        <div class="input-field">
-                                            <label>Quantity <span>*</span></label>
-                                            <div class="rfqQuantity">
-                                                <input type="number" class="quantity_input" name="quantity" required/>
-                                                <select class="select2 browser-default" name="unit">
-                                                    <option value="">UOM</option>
-                                                    @php $units = units(); @endphp
-                                                    @foreach($units as $unit=>$value)
-                                                        <option value="{{$unit}}">{{ $value }}</option>
-                                                    @endforeach
+                                </div>
+                                <div class="col s12 m6 l7 create_rfq_form_wrap">
+                                    <div class="row">
+                                        <div class="col s12 input-field">
+                                            <label>Select Product Tags <span>*</span></label>
+                                            <select class="select2" id="category_id" name="category[]" multiple required >
+                                                <option>Select an option</option>
+                                                @foreach($product_tags as $product_tag)
+                                                    <option value="{{ $product_tag->id }}">{{ $product_tag->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col s12 input-field">
+                                            <label>Title <span>*</span></label>
+                                            <input type="text" class="" name="title" required/>
+                                        </div>
+                                        <div class="col s12 input-field">
+                                            <div class="">
+                                                <label>Short Description <span>*</span></label>
+                                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" name="full_specification" required></textarea>
+                                                <input type="hidden" name="short_description" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="col s12 xl6">
+                                            <div class="input-field">
+                                                <label>Quantity <span>*</span></label>
+                                                <div class="rfqQuantity">
+                                                    <input type="number" class="quantity_input" name="quantity" required/>
+                                                    <select class="select2 browser-default" name="unit">
+                                                        <option value="">UOM</option>
+                                                        @php $units = units(); @endphp
+                                                        @foreach($units as $unit=>$value)
+                                                            <option value="{{$unit}}">{{ $value }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 xl6">
+                                            <div class="input-field">
+                                                <div class="target_price_block">
+                                                    <label>Target Price <span>*</span></label>
+                                                    <div class="target_price_negotiable">
+                                                        <label class="tooltipped" data-position="top" data-tooltip="Check this if you want to set negotiable price.">
+                                                            <input type="checkbox" name="target_price_negotiable" class="target_price_negotiable" /> <span>Negotiable</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="rfqPrice">
+                                                    <span>USD</span>
+                                                    <input type="text" class="price_input" id="target_price" name="unit_price" value="" required onchange="allowTwoDecimal()" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 xl4">
+                                            <div class="input-field">
+                                                <label>Payment Method <span>*</span></label>
+                                                <select class="select2 browser-default" name="payment_method" required >
+                                                    <option>Select an option</option>
+                                                    <option value="cash">Cash</option>
+                                                    <option value="card">Card</option>
+                                                    <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
+                                                    <option value="pay order">Pay Order</option>
+                                                    <option value="cheque">Cheque</option>
+                                                    <option value="tt">TT</option>
+                                                    <option value="Others">Others</option>
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col s12 xl6">
-                                        <div class="input-field">
-                                            <div class="target_price_block">
-                                                <label>Target Price <span>*</span></label>
-                                                <div class="target_price_negotiable">
-                                                    <label class="tooltipped" data-position="top" data-tooltip="Check this if you want to set negotiable price.">
-                                                        <input type="checkbox" name="target_price_negotiable" class="target_price_negotiable" /> <span>Negotiable</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="rfqPrice">
-                                                <span>USD</span>
-                                                <input type="text" class="price_input" id="target_price" name="unit_price" value="" required onchange="allowTwoDecimal()" />
+                                        <div class="col s12 xl4">
+                                            <div class="input-field">
+                                                <label>Destination <span>*</span></label>
+                                                <input type="text" class="" name="destination" required/>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s12 xl4">
-                                        <div class="input-field">
-                                            <label>Payment Method <span>*</span></label>
-                                            <select class="select2 browser-default" name="payment_method" required>
-                                                <option>Select an option</option>
-                                                <option value="cash">Cash</option>
-                                                <option value="card">Card</option>
-                                                <option value="Letter of Credit ( LC )">Letter of Credit ( LC )</option>
-                                                <option value="pay order">Pay Order</option>
-                                                <option value="cheque">Cheque</option>
-                                                <option value="tt">TT</option>
-                                                <option value="Others">Others</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col s12 xl4">
-                                        <div class="input-field">
-                                            <label>Destination <span>*</span></label>
-                                            <input type="text" class="" name="destination" required/>
-                                        </div>
-                                    </div>
-                                    <div class="col s12 xl4">
-                                        <div class="input-field">
-                                            <label>Expected Delivery Date <span>*</span></label>
-                                            <input type="date" class="" name="delivery_time" required/>
+                                        <div class="col s12 xl4">
+                                            <div class="input-field">
+                                                <label>Expected Delivery Date <span>*</span></label>
+                                                <input type="date" class="" name="delivery_time" required/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <input type="hidden" name="captcha_token" id="captcha_token" value="">
-                            @if(auth()->user())
-                                <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
-                                    <button type="submit" id="page_button" style="display: none;"></button>
-                                    <div class="submit_btn_wrap center-align">
-                                        <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmitWithAuthUserValidation();">
-                                            Submit <i class="material-icons">navigate_next</i>
-                                        </button>
-                                    </div>
-                                </div>
-                            @else
-                                <a class="btn_green btn_rfq_post_next btn_rfq_post modal-trigger right" href="#rfq-user-system-entry-modal">Next <i class="material-icons">navigate_next</i></a>
-                            @endif
 
                             <div id="rfq-user-system-entry-modal" class="modal update_rfq_signin_modal">
                                 <div class="close">
@@ -161,8 +149,10 @@
                                                 <div class="signin_or_signup_info_message" style="padding-bottom: 15px;">
                                                     <i class="material-icons dp48" style="vertical-align: middle;">info</i> Don't have an Account?
                                                 </div>
-                                                <a href="https://accounts.merchantbay.com" class="btn_green registration_account" style="padding: 10px;">Register</a>
-                                                <a href="javascript:void(0)" class="btn_green trigger_rfq_register" style="padding: 10px;">Submit as a Guest</a>
+                                                <div class="new_rfq_upload_form_wrap">
+                                                    <a href="https://accounts.merchantbay.com" class="btn_green registration_account" style="padding: 10px;">Register</a>
+                                                    <a href="javascript:void(0)" class="btn_green trigger_rfq_register" style="padding: 10px;">Submit as a Guest</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -215,6 +205,22 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="btn_rfq_post_bottom">
+                                <input type="hidden" name="captcha_token" id="captcha_token" value="">
+                                @if(auth()->user())
+                                    <div class="ic-form-btn ic-buying-req-btn text-center" style="margin-top: 0px; margin-bottom: 14px;">
+                                        <button type="submit" id="page_button" style="display: none;"></button>
+                                        <div class="submit_btn_wrap center-align">
+                                            <button type="button" class="btn_green btn_rfq_post btn-green right" onclick="onSubmitWithAuthUserValidation();">
+                                                Submit <i class="material-icons">navigate_next</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @else
+                                    <a class="btn_green btn_rfq_post_next btn_rfq_post modal-trigger right" href="#rfq-user-system-entry-modal">Next <i class="material-icons">navigate_next</i></a>
+                                @endif
                             </div>
                         </form>
                     </div>
@@ -471,28 +477,27 @@
             var errCount = 0;
             var errorClass = 'error';
 
-
-            if ($('#category_id').val()==null || $('#category_id').val()=="Select an option")
+            if ($('select[name="category[]"]').val()==null || $('select[name="category[]"]').val()=="Select an option")
             {
                 errCount++;
-                $('#category_id').closest('.input-wrapper').addClass(errorClass);
-                $('#category_id').addClass('invalid');
+                $('select[name="category[]"]').closest('.input-field').addClass(errorClass);
+                $('select[name="category[]"]').addClass('invalid');
             }
             else
             {
-                $('#category_id').closest('.input-wrapper').removeClass(errorClass);
-                $('#category_id').removeClass('invalid');
-            }
+                $('select[name="category[]"]').closest('.input-field').removeClass(errorClass);
+                $('select[name="category[]"]').removeClass('invalid');
+            }            
 
             if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="title"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="title"]').closest('.input-field').addClass(errorClass);
                 $('input[name="title"]').addClass('invalid');
             }
             else
             {
-                $('input[name="title"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="title"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="title"]').removeClass('invalid');
             }
 
@@ -508,93 +513,93 @@
             //     $('input[name="short_description"]').removeClass('invalid');
             // }
 
-            if ($('input[name="full_specification"]').val()=="" || $('input[name="full_specification"]').val()=="undefined")
+            if ($('textarea[name="full_specification"]').val()=="" || $('textarea[name="full_specification"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="full_specification"]').closest('.input-wrapper').addClass(errorClass);
-                $('input[name="full_specification"]').addClass('invalid');
+                $('textarea[name="full_specification"]').closest('.input-field').addClass(errorClass);
+                $('textarea[name="full_specification"]').addClass('invalid');
             }
             else
             {
-                $('input[name="full_specification"]').closest('.input-wrapper').removeClass(errorClass);
-                $('input[name="full_specification"]').removeClass('invalid');
+                $('textarea[name="full_specification"]').closest('.input-field').removeClass(errorClass);
+                $('textarea[name="full_specification"]').removeClass('invalid');
             }
 
             if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="quantity"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="quantity"]').closest('.input-field').addClass(errorClass);
                 $('input[name="quantity"]').addClass('invalid');
             }
             else
             {
-                $('input[name="quantity"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="quantity"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="quantity"]').removeClass('invalid');
             }
 
             if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined" )
             {
                 errCount++;
-                $('input[name="unit_price"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="unit_price"]').closest('.input-field').addClass(errorClass);
                 $('input[name="unit_price"]').addClass('invalid');
             }
             else if($.isNumeric($('input[name="unit_price"]').val()) == false)
             {
                 errCount++;
-                $('input[name="unit_price"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="unit_price"]').closest('.input-field').addClass(errorClass);
                 $('input[name="unit_price"]').addClass('invalid');
             }
             else
             {
-                $('input[name="unit_price"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="unit_price"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="unit_price"]').removeClass('invalid');
             }
 
             if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")
             {
                 errCount++;
-                $('input[name="destination"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="destination"]').closest('.input-field').addClass(errorClass);
                 $('input[name="destination"]').addClass('invalid');
             }
             else
             {
-                $('input[name="destination"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="destination"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="destination"]').removeClass('invalid');
             }
 
             if ($('select[name="payment_method"]').val()==null || $('select[name="payment_method"]').val()=="Select an option")
             {
                 errCount++;
-                $('select[name="payment_method"]').closest('.input-wrapper').addClass(errorClass);
+                $('select[name="payment_method"]').closest('.input-field').addClass(errorClass);
                 $('select[name="payment_method"]').addClass('invalid');
             }
             else
             {
-                $('select[name="payment_method"]').closest('.input-wrapper').removeClass(errorClass);
+                $('select[name="payment_method"]').closest('.input-field').removeClass(errorClass);
                 $('select[name="payment_method"]').removeClass('invalid');
             }
 
             if ($('input[name="delivery_time"]').val()=="" || $('input[name="delivery_time"]').val()=="undefined" || $('input[name="delivery_time"]').val()=="mm/dd/yyyy")
             {
                 errCount++;
-                $('input[name="delivery_time"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="delivery_time"]').closest('.input-field').addClass(errorClass);
                 $('input[name="delivery_time"]').addClass('invalid');
             }
             else
             {
-                $('input[name="delivery_time"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="delivery_time"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="delivery_time"]').removeClass('invalid');
             }
 
             if ($('input[name="email"]').val()=="" && $('input[name="r_email"]').val()=="")
             {
                 errCount++;
-                $('input[name="email"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="email"]').closest('.input-field').addClass(errorClass);
                 $('input[name="email"]').addClass('invalid');
             }
             else
             {
-                $('input[name="email"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="email"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="email"]').removeClass('invalid');
             }
 
@@ -613,12 +618,12 @@
             if ($('input[name="email"]').val()=="" && $('input[name="name"]').val()=="")
             {
                 errCount++;
-                $('input[name="name"]').closest('.input-wrapper').addClass(errorClass);
+                $('input[name="name"]').closest('.input-field').addClass(errorClass);
                 $('input[name="name"]').addClass('invalid');
             }
             else
             {
-                $('input[name="name"]').closest('.input-wrapper').removeClass(errorClass);
+                $('input[name="name"]').closest('.input-field').removeClass(errorClass);
                 $('input[name="name"]').removeClass('invalid');
             }
 

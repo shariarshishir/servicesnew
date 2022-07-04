@@ -5979,13 +5979,13 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 }
 #from-rfq-link-login-register-modal .login-block,
 #login-register-modal .login-block {
-    padding-top: 50px;
+    padding-top: 25px;
 }
 .login-block .input-field {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .login-block .remember-me-block .input-field {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .login-block .password-block-wrap {
     margin-bottom: 20px;
@@ -6003,22 +6003,22 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     color: #54a958;
 }
 .login-block .input-field label {
-    position: absolute;
+    position: inherit;
     width: auto;
     z-index: -1;
-    left: 20px;
+    left: inherit;
 }
 .login-block .input-field .prefix ~ label {
     margin-left: 3.5rem;
-    top: -9px;
+    top: inherit;
     opacity: 0.4;
 }
 .login-block .input-field label.active {
     color: #54a958 !important;
-    margin-left: 4rem;
-    top: -42px;
+    margin-left: 3.5rem;
+    top: inherit;
     opacity: 1;
-    left: 0px;
+    left: inherit;
 }
 .login-block .invalid-feedback,
 .login-block .error-text {
@@ -6036,7 +6036,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .password-block-wrap #show-password,
 .password-block-wrap #from-rfq-link-show-password {
     position: absolute;
-    top: 15px;
+    top: 45px;
     z-index: 99;
     right: 20px;
     color: #818181;
@@ -10252,12 +10252,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-size: 15px;
     color: #1e1e1e;
 }
+.new_profile_account_myrfq_details .accountrfq_btn {
+    color: #1e1e1e;
+    font-size: 14px;
+    padding-bottom: 5px;
+    display: inline-block;
+}
 .new_profile_myrfq_details_topbox {
     padding-bottom: 5px;
 }
 .account_rfqDetailes_infoWrap {
     /* border-bottom: 1px solid #707070; */
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 .new_profile_myrfq_details_topbox h6 {
     font-family: "nexaregular";
@@ -12920,6 +12926,7 @@ line-height: 30px;
 }
 
 /* ****************************************** */
+
 .update_rfq_product_upload_form .input-field label {
     padding-top: 0;
     left: inherit;
@@ -12940,12 +12947,16 @@ line-height: 30px;
     float: none !important;
 }
 
+.update_rfq_product_upload_form .input-field textarea:required:focus,
 .update_rfq_product_upload_form .input-field input:required:focus {
     border: 1px solid red !important;
     outline: none;
 }
-
-
+.update_rfq_product_upload_form .input-field.error input.invalid,
+.update_rfq_product_upload_form .input-field.error textarea.invalid {
+    border: 1px solid red !important;
+    outline: none;
+}
 .update_rfq_product_upload_form .input-field .target_price_block {
     display: flex;
 }
@@ -12987,12 +12998,16 @@ line-height: 30px;
     line-height: 44px;
 }
 .update_rfq_product_upload_form .select2-container--default .select2-selection--single .select2-selection__arrow {
-    top: 9px;
+    top: 10px;
     right: 5px;
 }
 
 .create_rfq_form_wrap {
     padding-left: 70px !important;
+}
+.btn_rfq_post_bottom {
+    display: inline-block;
+    width: 100%;
 }
 /* ************************************ */
 
@@ -13004,6 +13019,7 @@ line-height: 30px;
 .new_rfq_upload_form_wrap .btn_rfq_post_next {
     padding-right: 20px;
     min-width: 110px;
+    margin-right: 0;
 }
 .new_rfq_upload_form_wrap .modal-content .btn_rfq_post {
     padding: 5px 20px;
@@ -13081,6 +13097,7 @@ line-height: 30px;
 .requst_for_rfq_icon.fixedHome {
     display: block;
     animation: moveToRight 1s ease-in-out;
+    z-index: 9;
 }
 @keyframes moveToRight {
     0% {
@@ -15666,6 +15683,8 @@ line-height: 30px;
         padding-left: 0;
         margin-top: 50px;
     }
+
+    .new_rfq_upload_form_wrap .btn_green,
     .new_rfq_upload_form_wrap .btn_rfq_post,
     .new_rfq_upload_form_wrap .modal-content .btn_rfq_post,
     .signin_or_signup_button .btn_green {
@@ -16747,7 +16766,7 @@ line-height: 30px;
         padding: 50px 20px;
     }
     .new_rfq_upload_form_wrap p {
-        margin-bottom: 15px !important;
+        margin-bottom: 35px !important;
     }
 }
 
@@ -17228,7 +17247,7 @@ line-height: 30px;
         text-align: center;
     }
     .create_rfq_detail_from_wrap {
-        padding: 20px 0 0;
+        padding: 0;
     }
     .create_rfq_detail_from_wrap .card {
         padding: 0 !important;
@@ -17551,7 +17570,7 @@ line-height: 30px;
         margin-top: 20px;
     }
     .signin_or_signup_info_message {
-        padding-top: 30px !important;
+        padding-top: 20px !important;
     }
     .signin_or_signup_info_message .material-icons {
         font-size: 18px;
@@ -17598,6 +17617,18 @@ line-height: 30px;
     }
     .blog_single_item_box .blog_imgbox {
         height: auto;
+    }
+
+    .createRfqForm_contect_wrap {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .createRfqForm_contect_wrap .create_rfq_form_wrap {
+        float: none;
+    }
+    .createRfqForm_contect_wrap .rfq_upload_filebox_leftBox {
+        order: 2;
     }
 
 }
@@ -17958,6 +17989,16 @@ line-height: 30px;
     }
     .account_profile_box .profile_account_dev_tech .modal .create_new_tech_pac_modal .select_tech_pack_picture_modal .modal_body ul li {
         width: 100%;
+    }
+
+    .new_rfq_upload_form_wrap .btn_green,
+    .new_rfq_upload_form_wrap .btn_rfq_post,
+    .new_rfq_upload_form_wrap .modal-content .btn_rfq_post,
+    .signin_or_signup_button .btn_green {
+        font-size: 12px;
+    }
+    .signin_or_signup_info_message {
+        font-size: 14px;
     }
 
 }

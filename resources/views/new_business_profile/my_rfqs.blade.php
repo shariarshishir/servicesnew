@@ -269,7 +269,7 @@
                                                         <p>Deliver to <br/> <b>{{$rfqLists[0]['destination']}}</b></p>
                                                     </div>
                                                 </div>
-                                                <div class="account_rfqDetailes_imgWrap">
+                                                <div class="account_rfqDetailes_imgWrap" style="display: none">
                                                     <h6>Attachments</h6>
                                                     <img src="./images/account-images/pro-1.png" />
                                                     <img src="./images/account-images/pro-2.png" />

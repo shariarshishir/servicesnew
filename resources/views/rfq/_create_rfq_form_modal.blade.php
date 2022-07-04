@@ -45,7 +45,7 @@
                                 <label>Short Description <span>*</span></label>
                             </div>
                             <div class=" col s12">
-                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
+                                <textarea required class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description"></textarea>
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">

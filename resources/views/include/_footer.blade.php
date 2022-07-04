@@ -148,8 +148,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input id="email_login" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             <label for="email" class="">{{ __('E-Mail Address') }}</label>
+                            <input id="email_login" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             <span class="text-danger error-text email_err"></span>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -162,8 +162,8 @@
                     <div class="row">
                         <div class="input-field col s12 password-block-wrap">
                             <i class="material-icons prefix">lock_outline</i>
-                            <input id="password_login" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                             <label for="password" class="">{{ __('Password') }}</label>
+                            <input id="password_login" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                             <span class="text-danger error-text password_err"></span>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">

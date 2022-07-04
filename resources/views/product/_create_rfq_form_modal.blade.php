@@ -49,7 +49,7 @@
                                 <label>Short Description <span>*</span></label>
                             </div>
                             <div class=" col s12">
-                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description">@if($product->flag == 'mb') Product Code :mb-{{ $product->id }},Price per Unit : {{$product->price_unit}} {{$product->price_per_unit}}, Lead Time: {{ $product->lead_time }} days, Min Quantity: {{ $product->moq }} {{ $product->qty_unit }} @else Product Code :shop-{{ $product->id }},Moq : {{$product->moq}} @endif</textarea>
+                                <textarea required class="ig-new-rgt prd-txta short_description add_short_description" style="height:88px;" name="short_description">@if($product->flag == 'mb') Product Code :mb-{{ $product->id }},Price per Unit : {{$product->price_unit}} {{$product->price_per_unit}}, Lead Time: {{ $product->lead_time }} days, Min Quantity: {{ $product->moq }} {{ $product->qty_unit }} @else Product Code :shop-{{ $product->id }},Moq : {{$product->moq}} @endif</textarea>
                             </div>
                         </div>
                         <div class="row input-field input-wrapper">

@@ -6,7 +6,7 @@
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
                         <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
+                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" title="logo" alt="logo">
                         </a>
                     </td>
                 </tr>
@@ -18,7 +18,7 @@
                         </p>
                     </td>
                 </tr>
-            
+
                 @foreach ($order->orderItems as $item )
                 <tr>
                     <td style="padding: 20px 0; margin: 0;">
@@ -55,7 +55,7 @@
                         </table>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td style="text-align: center; padding: 0; margin: 0px; width: 100%;">
                         <a href="{{route('business.profile.order.show',['business_profile_id' => $order->business_profile_id, 'order_id' => $order->id ])}}" target="_blank" style="background: #54A958;width: 92%;padding: 10px 20px;border-radius: 8px;margin: 0 auto;display: block;font-family: 'Poppins', sans-serif;font-size: 16px;color: #fff;line-height: 20px;text-decoration: none; text-align: center;">Go to admin panel</a>

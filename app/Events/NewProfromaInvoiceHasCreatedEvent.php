@@ -15,13 +15,15 @@ class NewProfromaInvoiceHasCreatedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $proformaInvoice;
+    public $rfqInfo;
 
-    public function __construct($proformaInvoice)
+    public function __construct($proformaInvoice, $rfqInfo)
     {
         $this->proformaInvoice = $proformaInvoice;
+        $this->rfqInfo = $rfqInfo;
     }
 
-    
+
     public function broadcastOn()
     {
         return new PrivateChannel('channel-name');

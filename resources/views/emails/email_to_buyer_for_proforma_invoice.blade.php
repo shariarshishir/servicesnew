@@ -6,7 +6,7 @@
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
                         <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
+                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" title="logo" alt="logo">
                         </a>
                     </td>
                 </tr>
@@ -14,33 +14,37 @@
                     <td style="padding: 50px 0 0; margin: 0;">
                         <h1 style="font-family: 'Poppins', sans-serif; font-weight: 600; padding: 0px 0px 20px 0px; margin: 0px; font-size:24px; line-height: 35px; color: #0A0A0A; text-align: center;">Thank you for using Merchant Bay</h1>
                         <p style="margin: 0px; padding: 8px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
-                            The following PO is waiting for your review.
+                            You have received a PI request regarding below RFQ.
                         </p>
                     </td>
                 </tr>
-                    
+
                 <tr>
                     <td style="padding: 20px 0; margin: 0;">
                         <table style="max-width:670px; margin:0 auto; padding: 20px; text-align: left;" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td style="text-align: left; padding: 5px; margin: 0px; width: 30%;">&nbsp;</td>
                                 <td style="text-align: left; padding: 0 0 0 20px; margin: 0px; width: 70%;">
-                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>Profroma Id :</b>: {{ $proformaInvoice->proforma_id }}</p>
-                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>Proforma Date:</b>: {{ $proformaInvoice->proforma_date }}</p>
-                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>Payment Within:</b>: {{ $proformaInvoice->payment_within }}</p>
-                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>Supplier Name:</b>: {{ $proformaInvoice->businessProfile->user->name }}</p>
-                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>Business Name:</b>: {{ $proformaInvoice->businessProfile->business_name }}</p>
+                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>RFQ Title:</b> {{ $rfqInfo['title'] }}</p>
+                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b> Query:</b> For  @foreach($rfqInfo['category'] as $category) {{$category['name']}} @if(!$loop->last) , @endif  @endforeach</p>
+                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><b>Details:</b></p>
+                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Qty: {{$rfqInfo['quantity']}} {{$rfqInfo['unit']}}, Target Price: @if($rfqInfo['unit_price']==0) Negotiable @else $ {{$rfqInfo['unit_price']}} @endif, Deliver To: {{$rfqInfo['destination']}}, Within: {{\Carbon\Carbon::parse($rfqInfo['delivery_time'], 'UTC')->isoFormat('MMMM Do YYYY')}}, Payment Method: {{$rfqInfo['payment_method']}}</p>
+                                    <p style="margin: 0; padding: 2px 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
+                                        <span style="text-align: center; display: block;  padding: 30px 0 40px; margin: 0; line-height: 45px;">
+                                            <a target="_blank" href="{{route('open.proforma.single.html',$proformaInvoice->id)}}" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 24px; border-radius: 8px; padding: 10px 20px; margin: 0; color: #fff; text-decoration: none;">Go to profile</a>
+                                        </span>
+                                    </p>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-               
+
 
                 <tr>
                     <td style="text-align: center; padding: 0px 0 30px; margin: 0;">
                         <p style="margin: 0; padding: 0px 0 10px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"> If you have any query please contact us</p>
-                        <p style="margin: 0; padding: 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Email: success@merchantbay.com </p>
+                        <p style="margin: 0; padding: 0px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">Email: success@merchantbay.com</p>
                     </td>
                 </tr>
             </table>
@@ -51,8 +55,8 @@
                         <h2 style="font-family: 'Poppins', sans-serif; font-size: 22px; line-height: 40px; margin: 0; padding: 0px; color: #0A0A0A; font-weight: 600;">Bring the sourcing in your pocket</h2>
                         <h6 style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #0A0A0A; font-weight: 300; margin: 10px 0 20px; padding: 0px;">Download the App</h6>
                         <span>
-                            <a href="https://apps.apple.com/us/app/merchant-bay/id1590720968" target="_blank" style="margin: 0; padding: 0;" ><img width="150" src="{{ asset('storage/images/app_store.png') }}" title="App store" alt="App store"></a>
-                            <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" target="_blank" style="margin: 0; padding: 0;"><img width="150" src="{{ asset('storage/images/google_play.png') }}" title="Google play" alt="Google play"></a>
+                            <a href="https://apps.apple.com/us/app/merchant-bay/id1590720968" target="_blank" style="margin: 0; padding: 0;" ><img width="150" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new-home/app-store.png" title="App store" alt="App store"></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" target="_blank" style="margin: 0; padding: 0;"><img width="150" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new-home/google-play.png" title="Google play" alt="Google play"></a>
                         </span>
                     </td>
                 </tr>

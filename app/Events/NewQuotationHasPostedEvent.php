@@ -10,18 +10,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewUserHasRegisteredEvent
+class NewQuotationHasPostedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public  $user;
-    public  $token;
-    public  $password;
-    public function __construct($user, $token, $password)
+    public function __construct($user)
     {
         $this->user = $user;
-        $this->token = $token;
-        $this->password = $password;
     }
 
     public function broadcastOn()

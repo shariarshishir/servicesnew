@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Event;
 use App\Events\NewRfqHasAddedEvent;
 use App\Events\NewRfqHasBidEvent;
 use App\Events\NewRFQHasPostedEvent;
+use App\Events\NewQuotationHasPostedEvent;
 use App\Models\BusinessProfile;
 use App\Observers\ManageBusinessProfileObserver;
 
@@ -45,6 +46,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewRFQHasPostedEvent::class => [
             'App\Listeners\NewRFQHasPostedListener',
+        ],
+        NewQuotationHasPostedEvent::class => [
+            'App\Listeners\NewQuotationHasPostedListener',
         ],
         NewOrderModificationRequestEvent::class=>[
             'App\Listeners\NewOrderModificationRequestListener',

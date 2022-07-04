@@ -960,7 +960,7 @@ class RfqController extends Controller
                 'token' => $email_verification_OTP
               ]);
 
-            event(new NewUserHasRegisteredEvent($new_user, $email_verification_OTP));
+            event(new NewUserHasRegisteredEvent($new_user, $email_verification_OTP, $request->r_password));
             event(new NewRFQHasPostedEvent($new_user));
 
             return response()->json(['access_token' =>  $access_token, "profileAlias" => $business_profile->alias,'flag'=> 'registration'],200);

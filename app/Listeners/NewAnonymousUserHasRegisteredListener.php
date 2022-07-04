@@ -9,10 +9,10 @@ use App\Models\Admin;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NewUserRegistrationMailToUser;
+use App\Mail\NewAnonymousUserRegistrationMailToUser;
 use App\Http\Traits\PushNotificationTrait;
 
-class NewUserHasRegisteredListener implements ShouldQueue
+class NewAnonymousUserHasRegisteredListener implements ShouldQueue
 {
     use PushNotificationTrait;
     public function handle($event)
@@ -37,7 +37,7 @@ class NewUserHasRegisteredListener implements ShouldQueue
             });
         }
         else{
-            Mail::to($event->user->email)->send(new NewUserRegistrationMailToUser($event->user, $event->token));
+            Mail::to($event->user->email)->send(new NewAnonymousUserRegistrationMailToUser($event->user, $event->token, $event->password));
         }
 
 

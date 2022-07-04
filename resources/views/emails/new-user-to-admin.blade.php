@@ -6,7 +6,7 @@
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
                         <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0;" width="100px" src="{{ asset('storage/images/logo.png') }}" title="logo" alt="logo">
+                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" title="logo" alt="logo">
                         </a>
                     </td>
                 </tr>
@@ -33,7 +33,7 @@
                         <a href="{{route('user.show',$user->id)}}" target="_blank" style="background: #54A958; width: 92%; padding: 10px 20px; border-radius: 8px; margin: 0 auto; display: block; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff; line-height: 28px; text-decoration: none;" >Go to Admin Panel</a>
                     </td>
                 </tr>
-                
+
             </table>
 
             <table style="background: #fff; max-width:670px; margin:0 auto;" width="100%"  border="0" cellpadding="0" cellspacing="0">

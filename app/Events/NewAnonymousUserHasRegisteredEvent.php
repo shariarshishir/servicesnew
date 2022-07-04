@@ -10,19 +10,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewProfromaInvoiceHasCreatedEvent
+class NewAnonymousUserHasRegisteredEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $proformaInvoice;
-    public $rfqInfo;
-
-    public function __construct($proformaInvoice, $rfqInfo)
+    public  $user;
+    public  $token;
+    public  $password;
+    public function __construct($user, $token, $password)
     {
-        $this->proformaInvoice = $proformaInvoice;
-        $this->rfqInfo = $rfqInfo;
+        $this->user = $user;
+        $this->token = $token;
+        $this->password = $password;
     }
-
 
     public function broadcastOn()
     {

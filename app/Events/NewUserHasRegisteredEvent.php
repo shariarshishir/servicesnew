@@ -16,12 +16,10 @@ class NewUserHasRegisteredEvent
 
     public  $user;
     public  $token;
-    public  $password;
-    public function __construct($user, $token, $password)
+    public function __construct($user, $token)
     {
         $this->user = $user;
         $this->token = $token;
-        $this->password = $password;
     }
 
     public function broadcastOn()

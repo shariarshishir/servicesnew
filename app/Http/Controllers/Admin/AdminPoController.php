@@ -50,7 +50,7 @@ class AdminPoController extends Controller
     public function index ()
     {
         $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
-        if( env('APP_ENV') == 'production') 
+        if( env('APP_ENV') == 'production')
         {
             $merchantbayUserInfo = User::where("id", 5771)->first();
         }
@@ -68,14 +68,14 @@ class AdminPoController extends Controller
         $po = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('id', $id)->first();
         $totalInvoice = ProformaProduct::where('performa_id',$id)->sum('tax_total_price');
         $supplierInfo = User::where('id', $po->created_by)->first();
-        if( env('APP_ENV') == 'production') 
+        if( env('APP_ENV') == 'production')
         {
             $merchantbayUserInfo = User::where("id", 5771)->first();
         }
         else
         {
             $merchantbayUserInfo = User::where("id", 5552)->first();
-        }        
+        }
         if($po){
             return view('admin.proforma_invoice.show',compact('po','users','supplierInfo','totalInvoice','merchantbayUserInfo'));
         }
@@ -209,7 +209,12 @@ class AdminPoController extends Controller
             $proFormaAdvisingBank->swift_code = $request->input('swift_code');
             $proFormaAdvisingBank->save();
 
-            //event(new NewProfromaInvoiceHasCreatedEvent($data));
+
+            $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$request->input('generated_po_from_rfq'));
+            $rfqdata = $response->json();
+            $rfqInfo = $rfqdata['data']['data'];
+
+            event(new NewProfromaInvoiceHasCreatedEvent($data, $rfqInfo));
 
 
         // } catch (\Exception $e) {

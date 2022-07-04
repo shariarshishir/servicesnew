@@ -15,13 +15,13 @@ class NewProfromaInvoiceHasCreatedListener implements ShouldQueue
     public function handle($event)
     {
         //send push notification to admin for new order modification request
-        $fcmToken = $event->proformaInvoice->buyer->fcm_token;
-        $title = "New Profroma has received";
-        $message = "A new order profroma invoice is created by ".$event->proformaInvoice->businessProfile->user->name.".Please check the PO details";
-        $action_url = route('open.proforma.single.html', $event->proformaInvoice->id);
-        $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
+        // $fcmToken = $event->proformaInvoice->buyer->fcm_token;
+        // $title = "New Profroma has received";
+        // $message = "A new order profroma invoice is created by ".$event->proformaInvoice->businessProfile->user->name.".Please check the PO details";
+        // $action_url = route('open.proforma.single.html', $event->proformaInvoice->id);
+        // $this->pushNotificationSend($fcmToken,$title,$message,$action_url);
 
-        Mail::to($event->proformaInvoice->buyer->email)->send(new NewProfromaInvoiceHasCreatedMailToBuyer($event->proformaInvoice));
+        Mail::to($event->proformaInvoice->buyer->email)->send(new NewProfromaInvoiceHasCreatedMailToBuyer($event->proformaInvoice, $event->rfqInfo));
 
     }
 }

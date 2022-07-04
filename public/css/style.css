@@ -822,9 +822,13 @@ legend {
 #main {
     padding: 50px 0;
 }
+.account_profile_wrapper {
+    margin-top: -30px;
+}
 #main.mainContainer {
     padding: 0;
 }
+
 .product_innrer_wrap {
     padding: 30px 70px;
     border-radius: 10px;
@@ -4265,6 +4269,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
 }
 .rfq_detail_from_wrap .submit_btn_wrap {
     padding: 0;
+    text-align: right !important;
 }
 #product-edit-modal-block .submit_btn_wrap {
     padding-top: 30px;
@@ -5214,6 +5219,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
     margin-bottom: 0;
     /* border: none !important; */
     border: 1px solid #707070 !important;
+    box-shadow: none !important;
 }
 .input-field input::placeholder {
     color: #000000;
@@ -8366,7 +8372,7 @@ nav .pagination li.active .page-link {
 }
 .landing_intro_wrapper {
     background: #ffffff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/landing-intro-bg.jpg") no-repeat right 30px;
-    padding: 50px 0 130px;
+    padding: 20px 0 130px;
     background-size: contain;
 }
 .home_intro_left {
@@ -9697,7 +9703,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 /* ******************** New Profile Account css style start *********************** */
 .account_profile_menu {
     background: #d2e9d4;
-    padding: 15px 0 10px;
+    padding: 8px 0 5px;
     text-align: center;
 }
 .account_profile_menu ul {
@@ -10198,9 +10204,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin-bottom: 10px;
 }
 .btn_accountrfq_info .material-icons {
-    color: #000;
-    font-size: 30px;
-    line-height: 20px;
+    color: inherit;
+    line-height: 12px;
+    font-size: 24px;
 }
 .profile_account_myrfq_innerbox .account_rfq_btn_wrap {
     text-align: right;
@@ -10247,10 +10253,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     color: #1e1e1e;
 }
 .new_profile_myrfq_details_topbox {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 .account_rfqDetailes_infoWrap {
-    border-bottom: 1px solid #707070;
+    /* border-bottom: 1px solid #707070; */
     padding-bottom: 15px;
 }
 .new_profile_myrfq_details_topbox h6 {
@@ -10260,7 +10266,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .new_profile_myrfq_details_topbox h6 span {
     padding-left: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
 }
 .account_rfqDetailes_imgWrap {
@@ -10275,7 +10281,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     margin: 3px;
 }
 .rfq_review_results_nav {
-    padding-bottom: 10px;
+    background: #e6e6e6;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
 }
 .rfq_review_results_nav ul li {
     display: inline-block;
@@ -10354,7 +10363,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 
 .rfq_review_message_box .chat-text {
-    max-width: 250px;
+    max-width: 265px;
     margin-bottom: 20px;
 }
 .rfq_review_message_box .chat-text span {
@@ -10366,6 +10375,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     display: inline-block;
     min-width: 50px;
     min-height: 30px;
+    font-size: 14px;
 }
 .rfq_review_message_box .rfq_message_box {
     width: 100%;
@@ -10563,7 +10573,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-weight: bold;
 }
 .faq_contentinfo_wrapper .faq_search_wrap {
-    padding: 50px 0 80px;
+    padding: 0px 0 80px;
 }
 .faq_contentinfo_wrapper .faq_search_wrap label {
     font-size: 16px;
@@ -12747,7 +12757,7 @@ line-height: 30px;
     line-height: 31px;
 }
 .rfq_update_design_wrap .rfq_update_topbar {
-    padding: 50px 0 100px;
+    padding: 20px 0 100px;
 }
 .rfq_update_design_wrap .rfq_update_topbar h2 {
     margin-bottom: 10px;
@@ -12916,6 +12926,8 @@ line-height: 30px;
 }
 .update_rfq_product_upload_form .input-field textarea {
     margin-bottom: 0;
+    border: 1px solid #707070 !important;
+    box-shadow: none !important;
 }
 .update_rfq_product_upload_form .input-field {
     margin-bottom: 25px;
@@ -12927,6 +12939,13 @@ line-height: 30px;
 .update_rfq_product_upload_form input {
     float: none !important;
 }
+
+.update_rfq_product_upload_form .input-field input:required:focus {
+    border: 1px solid red !important;
+    outline: none;
+}
+
+
 .update_rfq_product_upload_form .input-field .target_price_block {
     display: flex;
 }
@@ -12983,7 +13002,8 @@ line-height: 30px;
     margin-top: 30px;
 }
 .new_rfq_upload_form_wrap .btn_rfq_post_next {
-    padding-right: 30px;
+    padding-right: 20px;
+    min-width: 110px;
 }
 .new_rfq_upload_form_wrap .modal-content .btn_rfq_post {
     padding: 5px 20px;
@@ -12992,7 +13012,7 @@ line-height: 30px;
 .new_rfq_upload_form_wrap .btn_rfq_post .material-icons {
     float: right;
     width: 16px;
-    line-height: 28px;
+    line-height: 30px;
 }
 /* ***************************************** */
 #rfq-user-system-entry-modal {
@@ -13037,6 +13057,11 @@ line-height: 30px;
 .signin_or_signup_info_message {
     font-size: 15px;
     color: #000;
+}
+.signin_or_signup_button .btn_green {
+    margin-left: 0;
+    height: 39px;
+    min-width: 100px;
 }
 .image-uploader .uploaded .uploaded-image img {
     left: 0px;
@@ -14086,6 +14111,14 @@ line-height: 30px;
     }
     .proinfo_account_blank {
         display: none;
+    }
+
+    .requst_for_rfq_icon img {
+        width: 20px;
+    }
+    .requst_for_rfq_icon a {
+        font-size: 12px;
+        line-height: 14px;
     }
 }
 
@@ -15221,15 +15254,16 @@ line-height: 30px;
     .profile_account_rightbar .material-icons {
         font-size: 30px;
         color: #000000;
-        margin-top: 3px;
+        margin-top: 8px;
         float: left;
     }
     .profile_account_mobile_menu .collapsible .material-icons {
-        top: 0;
+        top: 12px;
         right: 10px;
         position: absolute;
         margin: 0;
         font-size: 35px;
+        line-height: 20px;
     }
     .profile_account_mobile_menu .profile_account_rightbar {
         text-align: left;
@@ -15632,6 +15666,15 @@ line-height: 30px;
         padding-left: 0;
         margin-top: 50px;
     }
+    .new_rfq_upload_form_wrap .btn_rfq_post,
+    .new_rfq_upload_form_wrap .modal-content .btn_rfq_post,
+    .signin_or_signup_button .btn_green {
+        height: 38px;
+        line-height: 28px;
+        min-width: auto;
+        padding: 5px 10px !important;
+    }
+
 }
 
 @media only screen and (max-width: 900px) {
@@ -16195,6 +16238,9 @@ line-height: 30px;
         line-height: 31px;
         font-size: 16px;
     }
+    .mobile_header .header_search_bar .material-icons {
+        font-size: 18px !important;
+    }
     .mobile_top_right .avatar-status {
         width: 35px;
         height: 35px;
@@ -16700,6 +16746,9 @@ line-height: 30px;
     .rfq_upload_filebox {
         padding: 50px 20px;
     }
+    .new_rfq_upload_form_wrap p {
+        margin-bottom: 15px !important;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -17179,7 +17228,7 @@ line-height: 30px;
         text-align: center;
     }
     .create_rfq_detail_from_wrap {
-        padding: 0;
+        padding: 20px 0 0;
     }
     .create_rfq_detail_from_wrap .card {
         padding: 0 !important;
@@ -17490,7 +17539,6 @@ line-height: 30px;
         text-align: center;
         max-width: 305px;
     }
-
     #rfq-user-system-entry-modal .modal-content {
         padding: 15px 10px;
     }
@@ -17503,8 +17551,7 @@ line-height: 30px;
         margin-top: 20px;
     }
     .signin_or_signup_info_message {
-        text-align: center;
-        font-size: 12px;
+        padding-top: 30px !important;
     }
     .signin_or_signup_info_message .material-icons {
         font-size: 18px;
@@ -17513,6 +17560,12 @@ line-height: 30px;
     .rfq_detail_from_wrap .submit_btn_wrap {
         padding-top: 0;
     }
+
+    .new_rfq_upload_form_wrap .btn_rfq_post_next {
+        padding-right: 15px;
+        min-width: auto;
+    }
+
     /* ************* New rfq update design css end ************* */
 
     .supplier_account_progress h4 span {
@@ -17537,7 +17590,6 @@ line-height: 30px;
     .supplier_account_progress .right-align {
         text-align: center;
     }
-
     .blog_single_item_box_wrap {
         padding-top: 70px !important;
     }

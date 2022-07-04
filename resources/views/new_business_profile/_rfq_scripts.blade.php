@@ -435,6 +435,20 @@
                 }
 
             });
+
+            $(".accountrfq_btn").click(function(e){
+                $(this).parent().next(".account_rfqDetailes_infoWrap").slideToggle('slow');
+
+                if($(this).text() == 'Show More')
+                {
+                    $(this).text('Show Less');
+                }
+                else
+                {
+                    $(this).text('Show More');
+                }
+
+            });
         });
 
         $(document).ready(function(){

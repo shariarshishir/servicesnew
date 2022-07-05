@@ -131,8 +131,8 @@
                                             <label>Factory Type</label>
                                             <select class="form-select form-control" name="factory_type" id="factory_type">
                                                 <option value="">Select factory type</option>
-                                                @foreach($productCategories as $productCategory)
-                                                    <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                                                @foreach($product_tag as $productCategory)
+                                                    <option value="{{$productCategory->name}}">{{$productCategory->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

@@ -65,26 +65,34 @@ class BackendRfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
-        $product_tag=ProductTag::with('tagMapping')->whereIn('id',$rfq['category_id'])->get();
-        $factory_type=[];
-        $industry_type=[];
-        foreach($product_tag as $tag){
-            foreach($tag->tagMapping as $mapping){
-                array_push($factory_type,$mapping->name);
-                array_push($industry_type,$mapping->parent->name);
-            }
+
+        $factory_type_value = [];
+        foreach($rfq['category'] as $category) {
+            array_push($factory_type_value, $category['name']);
         }
-        $factroy_unique= array_unique($factory_type);
-        $factory_values= array_values($factroy_unique);
-        $industry_unique= array_unique($industry_type);
-        $industry_values= array_values($industry_unique);
+
+        $product_tag = ProductTag::get();
+
+        // $product_tag=ProductTag::with('tagMapping')->whereIn('id',$rfq['category_id'])->get();
+        // $factory_type=[];
+        // $industry_type=[];
+        // foreach($product_tag as $tag){
+        //     foreach($tag->tagMapping as $mapping){
+        //         array_push($factory_type,$mapping->name);
+        //         array_push($industry_type,$mapping->parent->name);
+        //     }
+        // }
+        // $factroy_unique= array_unique($factory_type);
+        // $factory_values= array_values($factroy_unique);
+        // $industry_unique= array_unique($industry_type);
+        // $industry_values= array_values($industry_unique);
 
         $businessProfiles = BusinessProfile::select('business_profiles.*')
         ->leftJoin('rfq_quotation_sent_supplier_to_buyer_rel', 'rfq_quotation_sent_supplier_to_buyer_rel.business_profile_id', '=', 'business_profiles.id')
         ->with(['user','supplierQuotationToBuyer'=> function($q) use ($id){
             $q->where('rfq_id', $id);}])
-        ->whereIn('factory_type',$factory_values)
-        ->whereIn('industry_type',$industry_values)
+        ->whereIn('factory_type',$factory_type_value)
+        //->whereIn('industry_type',$industry_values)
         ->where('business_type', 'manufacturer')
         ->where('profile_verified_by_admin', '!=', 0)
         ->groupBy('business_profiles.id')
@@ -134,7 +142,7 @@ class BackendRfqController extends Controller
         }
         $proforma_invoice_url_for_buyer =$profromaInvoice ? route('open.proforma.single.html', $profromaInvoice->id) : '';
         $url_exists=$link;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists'));
+        return view('admin.rfq.show', compact('rfq','businessProfiles','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists', 'product_tag'));
     }
 
     public function sendFireBasePushNotificationToAdminForNewMessage(Request $request){
@@ -233,21 +241,26 @@ class BackendRfqController extends Controller
 
     }
     public function businessProfileFilter(Request $request){
-        if($request->category_id && $request->profile_rating !=0)
-        {
-            //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
-            $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
-                $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
-            } ])->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+        // if($request->category_id && $request->profile_rating !=0)
+        // {
+        //     //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_rating',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->get();
+        //     $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+        //         $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
+        //     } ])->where('business_category_id',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
 
-        }
-        elseif($request->category_id && $request->profile_rating ==0)
-        {
-            //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
-            $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
-                $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
-            } ])->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
-        }
+        // }
+        // elseif($request->category_id && $request->profile_rating ==0)
+        // {
+        //     //$businessProfiles = BusinessProfile::select('id','business_name','alias','business_type')->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
+        //     $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+        //         $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
+        //     } ])->where('business_category_id',$request->category_id)->where('profile_verified_by_admin', '!=', 0)->get();
+        // }
+
+        $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
+            $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
+        } ])->where('factory_type',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+
         $userSsoIds = [];
         foreach($businessProfiles as $profile){
             array_push($userSsoIds, $profile['user']['sso_reference_id']);

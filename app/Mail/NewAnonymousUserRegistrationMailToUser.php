@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use stdClass;
 
 class NewAnonymousUserRegistrationMailToUser extends Mailable
 {
@@ -19,6 +20,14 @@ class NewAnonymousUserRegistrationMailToUser extends Mailable
         $this->user = $user;
         $this->token = $token;
         $this->password = $password;
+
+        $authInfo = new stdClass();
+        $authInfo->email = $user->email;
+        $authInfo->password = $password;
+        $encryptedAuthInfo = json_encode($authInfo);
+        $encryptedAuthInfo = base64_encode($encryptedAuthInfo);
+
+        $this->encryptedAuthInfo = $encryptedAuthInfo;
     }
 
     /**
@@ -28,6 +37,6 @@ class NewAnonymousUserRegistrationMailToUser extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.anonymousEmailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token, 'password' => $this->password]);
+        return $this->markdown('emails.anonymousEmailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token, 'password' => $this->password, 'encryptedAuthInfo' => $this->encryptedAuthInfo]);
     }
 }

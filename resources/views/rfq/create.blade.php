@@ -477,29 +477,29 @@
             var errCount = 0;
             var errorClass = 'error';
 
-            if ($('select[name="category[]"]').val()==null || $('select[name="category[]"]').val()=="Select an option")
-            {
-                errCount++;
-                $('select[name="category[]"]').closest('.input-field').addClass(errorClass);
-                $('select[name="category[]"]').addClass('invalid');
-            }
-            else
-            {
-                $('select[name="category[]"]').closest('.input-field').removeClass(errorClass);
-                $('select[name="category[]"]').removeClass('invalid');
-            }            
+            // if ($('select[name="category[]"]').val()==null || $('select[name="category[]"]').val()=="Select an option")
+            // {
+            //     errCount++;
+            //     $('select[name="category[]"]').closest('.input-field').addClass(errorClass);
+            //     $('select[name="category[]"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('select[name="category[]"]').closest('.input-field').removeClass(errorClass);
+            //     $('select[name="category[]"]').removeClass('invalid');
+            // }
 
-            if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="title"]').closest('.input-field').addClass(errorClass);
-                $('input[name="title"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="title"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="title"]').removeClass('invalid');
-            }
+            // if ($('input[name="title"]').val()=="" || $('input[name="title"]').val()=="undefined")
+            // {
+            //     errCount++;
+            //     $('input[name="title"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="title"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="title"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="title"]').removeClass('invalid');
+            // }
 
             // if ($('input[name="short_description"]').val()=="" || $('input[name="short_description"]').val()=="undefined")
             // {
@@ -513,95 +513,95 @@
             //     $('input[name="short_description"]').removeClass('invalid');
             // }
 
-            if ($('textarea[name="full_specification"]').val()=="" || $('textarea[name="full_specification"]').val()=="undefined")
-            {
-                errCount++;
-                $('textarea[name="full_specification"]').closest('.input-field').addClass(errorClass);
-                $('textarea[name="full_specification"]').addClass('invalid');
-            }
-            else
-            {
-                $('textarea[name="full_specification"]').closest('.input-field').removeClass(errorClass);
-                $('textarea[name="full_specification"]').removeClass('invalid');
-            }
+            // if ($('textarea[name="full_specification"]').val()=="" || $('textarea[name="full_specification"]').val()=="undefined")
+            // {
+            //     errCount++;
+            //     $('textarea[name="full_specification"]').closest('.input-field').addClass(errorClass);
+            //     $('textarea[name="full_specification"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('textarea[name="full_specification"]').closest('.input-field').removeClass(errorClass);
+            //     $('textarea[name="full_specification"]').removeClass('invalid');
+            // }
 
-            if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="quantity"]').closest('.input-field').addClass(errorClass);
-                $('input[name="quantity"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="quantity"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="quantity"]').removeClass('invalid');
-            }
+            // if ($('input[name="quantity"]').val()=="" || $('input[name="quantity"]').val()=="undefined")
+            // {
+            //     errCount++;
+            //     $('input[name="quantity"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="quantity"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="quantity"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="quantity"]').removeClass('invalid');
+            // }
 
-            if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined" )
-            {
-                errCount++;
-                $('input[name="unit_price"]').closest('.input-field').addClass(errorClass);
-                $('input[name="unit_price"]').addClass('invalid');
-            }
-            else if($.isNumeric($('input[name="unit_price"]').val()) == false)
-            {
-                errCount++;
-                $('input[name="unit_price"]').closest('.input-field').addClass(errorClass);
-                $('input[name="unit_price"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="unit_price"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="unit_price"]').removeClass('invalid');
-            }
+            // if ($('input[name="unit_price"]').val()=="" || $('input[name="unit_price"]').val()=="undefined" )
+            // {
+            //     errCount++;
+            //     $('input[name="unit_price"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="unit_price"]').addClass('invalid');
+            // }
+            // else if($.isNumeric($('input[name="unit_price"]').val()) == false)
+            // {
+            //     errCount++;
+            //     $('input[name="unit_price"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="unit_price"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="unit_price"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="unit_price"]').removeClass('invalid');
+            // }
 
-            if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")
-            {
-                errCount++;
-                $('input[name="destination"]').closest('.input-field').addClass(errorClass);
-                $('input[name="destination"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="destination"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="destination"]').removeClass('invalid');
-            }
+            // if ($('input[name="destination"]').val()=="" || $('input[name="destination"]').val()=="undefined")
+            // {
+            //     errCount++;
+            //     $('input[name="destination"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="destination"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="destination"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="destination"]').removeClass('invalid');
+            // }
 
-            if ($('select[name="payment_method"]').val()==null || $('select[name="payment_method"]').val()=="Select an option")
-            {
-                errCount++;
-                $('select[name="payment_method"]').closest('.input-field').addClass(errorClass);
-                $('select[name="payment_method"]').addClass('invalid');
-            }
-            else
-            {
-                $('select[name="payment_method"]').closest('.input-field').removeClass(errorClass);
-                $('select[name="payment_method"]').removeClass('invalid');
-            }
+            // if ($('select[name="payment_method"]').val()==null || $('select[name="payment_method"]').val()=="Select an option")
+            // {
+            //     errCount++;
+            //     $('select[name="payment_method"]').closest('.input-field').addClass(errorClass);
+            //     $('select[name="payment_method"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('select[name="payment_method"]').closest('.input-field').removeClass(errorClass);
+            //     $('select[name="payment_method"]').removeClass('invalid');
+            // }
 
-            if ($('input[name="delivery_time"]').val()=="" || $('input[name="delivery_time"]').val()=="undefined" || $('input[name="delivery_time"]').val()=="mm/dd/yyyy")
-            {
-                errCount++;
-                $('input[name="delivery_time"]').closest('.input-field').addClass(errorClass);
-                $('input[name="delivery_time"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="delivery_time"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="delivery_time"]').removeClass('invalid');
-            }
+            // if ($('input[name="delivery_time"]').val()=="" || $('input[name="delivery_time"]').val()=="undefined" || $('input[name="delivery_time"]').val()=="mm/dd/yyyy")
+            // {
+            //     errCount++;
+            //     $('input[name="delivery_time"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="delivery_time"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="delivery_time"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="delivery_time"]').removeClass('invalid');
+            // }
 
-            if ($('input[name="email"]').val()=="" && $('input[name="r_email"]').val()=="")
-            {
-                errCount++;
-                $('input[name="email"]').closest('.input-field').addClass(errorClass);
-                $('input[name="email"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="email"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="email"]').removeClass('invalid');
-            }
+            // if ($('input[name="email"]').val()=="" && $('input[name="r_email"]').val()=="")
+            // {
+            //     errCount++;
+            //     $('input[name="email"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="email"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="email"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="email"]').removeClass('invalid');
+            // }
 
             // if ($('input[name="password"]').val()=="" && $('input[name="r_password"]').val()=="")
             // {
@@ -615,17 +615,17 @@
             //     $('input[name="password"]').removeClass('invalid');
             // }
 
-            if ($('input[name="email"]').val()=="" && $('input[name="name"]').val()=="")
-            {
-                errCount++;
-                $('input[name="name"]').closest('.input-field').addClass(errorClass);
-                $('input[name="name"]').addClass('invalid');
-            }
-            else
-            {
-                $('input[name="name"]').closest('.input-field').removeClass(errorClass);
-                $('input[name="name"]').removeClass('invalid');
-            }
+            // if ($('input[name="email"]').val()=="" && $('input[name="name"]').val()=="")
+            // {
+            //     errCount++;
+            //     $('input[name="name"]').closest('.input-field').addClass(errorClass);
+            //     $('input[name="name"]').addClass('invalid');
+            // }
+            // else
+            // {
+            //     $('input[name="name"]').closest('.input-field').removeClass(errorClass);
+            //     $('input[name="name"]').removeClass('invalid');
+            // }
 
 
 

@@ -463,6 +463,9 @@ Route::group(['prefix'=>'/user'],function (){
     Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
     Route::get('/related/products/{business_profile_id}', [UserController::class, 'relatedProducts'])->name('users.related.products');
 
+    Route::get('/account-verification/{token}/{encryptedAuthInfo}', [UserController::class, 'anonymousUserAccountVerification'])->name('anonymous.user.account.verification');
+    Route::post('/anonymous/password/reset', [UserController::class, 'anonymousPasswordUpdate'])->name('anonymous.password.update');
+    Route::get('/account-verification-successful', [UserController::class, 'anonymousAccountVerificationSuccessful'])->name('anonymous.account.verification.successful');
 
 });
 Route::post('login-rfq-share-link',[RfqController::class, 'loginFromRfqShareLink'])->name('login.from.rfq.share.link');

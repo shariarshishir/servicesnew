@@ -28,6 +28,6 @@ class NewAnonymousUserRegistrationMailToUser extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.emailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token, 'password' => $this->password]);
+        return $this->markdown('emails.anonymousEmailVerificationEmail')->subject('Welcome to merchant Bay Ltd')->with(['user' => $this->user, 'token' => $this->token, 'password' => $this->password]);
     }
 }

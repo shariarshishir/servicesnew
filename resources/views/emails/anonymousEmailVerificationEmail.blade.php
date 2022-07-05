@@ -26,6 +26,7 @@
                         <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
                             Your registration will be reviewed and verified within <strong> 48 hours</strong>. Meanwhile, verify your email by clicking this button
                         </p>
+                        <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><strong>Email:</strong> {{$user->email}} <br /> <strong>Password:</strong> {{$password}}</p>
                         @endif
                         @if((Request::wantsJson()))
                         <span style="text-align: center; display: block;  padding: 20px 0 50px; margin: 0px; line-height: 25px;">

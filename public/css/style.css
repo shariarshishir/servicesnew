@@ -13286,6 +13286,16 @@ line-height: 30px;
     padding: 8px 10px;
     margin-top: 20px;
 }
+.rfq_post_success {
+    text-align: center;
+    padding: 50px 0;
+}
+.rfq_post_success h2 {
+    margin-bottom: 20px;
+}
+.rfq_post_success h2 span {
+    font-size: 35px;
+}
 /* ****************Welcome and loginlanding page css end ******************* */
 
 
@@ -17743,6 +17753,32 @@ line-height: 30px;
         order: 2;
     }
 
+
+    
+    /* ************* 600 screen ********************* */
+    .welcome_wrap .welcome_inner_wrap {
+        padding: 0 15px;
+    }
+    .welcome_inner {
+        width: 100%;
+    }
+    .welcome_wrap .logo-img {
+        max-width: 100%;
+        width: 300px;
+        margin-bottom: 50px;
+    }
+    .login_landing_wrap .login_landing_inner h1,
+    .welcome_wrap h1 {
+        font-size: 28px;
+        line-height: 38px;
+    }
+    .login_landing_inner ul li {
+        font-size: 16px;
+    }
+    .welcome_inner label {
+        padding-top: 0;
+    }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -18111,6 +18147,14 @@ line-height: 30px;
     }
     .signin_or_signup_info_message {
         font-size: 14px;
+    }
+
+    .rfq_post_success h2 {
+        font-size: 22px;
+    }
+    
+    .rfq_post_success h2 span {
+        font-size: 28px;
     }
 
 }

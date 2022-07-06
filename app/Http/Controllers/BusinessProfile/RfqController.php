@@ -216,6 +216,104 @@ class RfqController extends Controller
                 return view('new_business_profile.rfqs',compact('alias','products','business_profile','view','controller_max_moq','controller_min_moq','controller_max_lead_time','controller_min_lead_time'));
             }
 
+            if($business_profile->business_type == 'design_studio'){
+
+                $collection=collect(WholesalerProduct::withTrashed()
+                ->where(function($query) use ($request, $business_profile){
+                    $query->where('business_profile_id', '!=', null)->get();
+                    if(isset($request->search)){
+                        $query->where('name','like', '%'.$request->search.'%')->get();
+                    }})
+                ->latest()
+                ->with('images','video')
+                ->get());
+
+                $controller_max_moq = $collection->max('moq');
+                $controller_min_moq = $collection->min('moq');
+                $controller_max_lead_time = 0;
+                $controller_min_lead_time = 0;
+                foreach($collection as $product){
+                    if(isset($product->attribute) && $product->product_type == 1){
+                        foreach(json_decode($product->attribute) as $lead_time)
+                        {
+                            if ($lead_time[3] > $controller_max_lead_time) {
+                                $controller_max_lead_time = $lead_time[3];
+                            }
+
+                            if ($lead_time[3] < $controller_min_lead_time) {
+                                $controller_min_lead_time = $lead_time[3];
+                            }
+                        }
+                    }
+                }
+
+                if(isset($request->product_tag)){
+                    $ptags = [];
+                    foreach($request->product_tag as $tag){
+                        $product_tag = ProductTag::where('id',$tag)->first();
+                        array_push($ptags,$product_tag->name);
+                    }
+                    $collection = $collection->filter(function($item) use ($ptags){
+                        if(isset($item['product_tag'])){
+                            $check = array_intersect($item['product_tag'], $ptags);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+
+                    });
+                }
+
+                if(isset($request->product_type_mapping_child_id)){
+                    $collection = $collection->filter(function($item) use ($request){
+                        if(isset($item['product_type_mapping_child_id'])){
+                            $check = array_intersect($item['product_type_mapping_child_id'], $request->product_type_mapping_child_id);
+                            if(empty($check)){
+                                return false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+
+                if(isset($request->min_lead) && isset($request->max_lead)){
+                    $p_id=[];
+                    foreach($collection as $product){
+                        if(isset($product->attribute) && $product->product_type == 1){
+                            foreach(json_decode($product->attribute) as $lead_time)
+                            {
+                                if ( $lead_time[3] >= $request->min_lead && $lead_time[3] <= $request->max_lead){
+                                    array_push($p_id,$product->id);
+                                }
+                            }
+                        }
+                    }
+
+                    $collection = $collection->whereIn('id', $p_id);
+                    $collection->all();
+                }
+
+                if(isset($request->min_moq) && isset($request->max_moq)){
+                    $collection = $collection->whereBetween('moq', [$request->min_moq, $request->max_moq]);
+                    $collection->all();
+                }
+
+                $page = Paginator::resolveCurrentPage() ?: 1;
+                $perPage = 8;
+                $products = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $collection->forPage($page, $perPage),
+                    $collection->count(),
+                    $perPage,
+                    $page,
+                    ['path' => Paginator::resolveCurrentPath()],
+                );
+                $view = isset($request->view)? $request->view : 'grid';
+                return view('new_business_profile.rfqs',compact('alias','products','business_profile','view','controller_max_moq','controller_min_moq','controller_max_lead_time','controller_min_lead_time'));
+            }
+
         }
         abort(401);
     }
@@ -292,7 +390,8 @@ class RfqController extends Controller
             $adminUser = User::Find('5771');
         }
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
-        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+        $pageTitle = "My RFQs";
+        return view('new_business_profile.my_rfqs',compact('pageTitle','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
     }
 
     public function myQueries($alias)
@@ -348,7 +447,8 @@ class RfqController extends Controller
             $adminUser = User::Find('5771');
         }
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
-        return view('new_business_profile.my_rfqs',compact('rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+        $pageTitle = "My Queries";
+        return view('new_business_profile.my_rfqs',compact('pageTitle','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
     }
 
     public function authUserQuotationsByRFQId(Request $request){

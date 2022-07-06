@@ -136,7 +136,7 @@ fclose($fp);
 Route::get('jsonDataForBusinessProfilesComapnyOverview', function(){
 
     $exportData = array();
-    $businessProfiles = BusinessProfile::with('companyOverview')->where('is_business_profile_verified', 1)->get();
+    $businessProfiles = BusinessProfile::with('companyOverview')->get();
     foreach($businessProfiles as $k => $businessProfile)
     {
         $dataArr = array();
@@ -154,6 +154,26 @@ Route::get('jsonDataForBusinessProfilesComapnyOverview', function(){
 
     //echo "<pre>"; print_r($exportData); echo "</pre>";
     //die();
+
+    return response()->json($exportData);
+});
+
+Route::get('jsonDataForBusinessProfilesFactoryType', function(){
+
+    $exportData = array();
+    $businessProfiles = BusinessProfile::get();
+
+    foreach($businessProfiles as $k => $businessProfile)
+    {
+        $dataArr = array();
+        $dataArr['id'] = $businessProfile->id;
+        $dataArr['profile_name'] = $businessProfile->business_name;
+        $dataArr['factory_type'] = $businessProfile->factory_type;
+        array_push($exportData, $dataArr);
+    }
+
+    // echo "<pre>"; print_r($exportData); echo "</pre>";
+    // die();
 
     return response()->json($exportData);
 });
@@ -463,6 +483,9 @@ Route::group(['prefix'=>'/user'],function (){
     Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
     Route::get('/related/products/{business_profile_id}', [UserController::class, 'relatedProducts'])->name('users.related.products');
 
+    Route::get('/account-verification/{token}/{encryptedAuthInfo}', [UserController::class, 'anonymousUserAccountVerification'])->name('anonymous.user.account.verification');
+    Route::post('/anonymous/password/reset', [UserController::class, 'anonymousPasswordUpdate'])->name('anonymous.password.update');
+    Route::get('/account-verification-successful', [UserController::class, 'anonymousAccountVerificationSuccessful'])->name('anonymous.account.verification.successful');
 
 });
 Route::post('login-rfq-share-link',[RfqController::class, 'loginFromRfqShareLink'])->name('login.from.rfq.share.link');

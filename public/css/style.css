@@ -9571,7 +9571,7 @@ nav .pagination li.active .page-link {
 .product_upload_boxwrap .switch label input[type="checkbox"]:checked + .lever {
     background: #448547;
 }
-.product_upload_boxwrap input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before, 
+.product_upload_boxwrap input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before,
 input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
     background: none;
     transform: none;
@@ -10068,8 +10068,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border: 1px solid #448547;
 }
 
-.new_profile_account_filterbar .irs--flat .irs-from:before, 
-.new_profile_account_filterbar .irs--flat .irs-to:before, 
+.new_profile_account_filterbar .irs--flat .irs-from:before,
+.new_profile_account_filterbar .irs--flat .irs-to:before,
 .new_profile_account_filterbar .irs--flat .irs-single:before {
     background: #448547;
     border-top-color: #448547;
@@ -10083,8 +10083,8 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     height: 5px;
     top: 28px;
 }
-.new_profile_account_filterbar .irs--flat .irs-from, 
-.new_profile_account_filterbar .irs--flat .irs-to, 
+.new_profile_account_filterbar .irs--flat .irs-from,
+.new_profile_account_filterbar .irs--flat .irs-to,
 .new_profile_account_filterbar .irs--flat .irs-single {
     background: #54a958;
     width: auto;
@@ -10098,7 +10098,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-family: "nexaregular";
     font-size: 10px;
 }
-.new_profile_account_filterbar .irs--flat .irs-handle.state_hover>i:first-child, 
+.new_profile_account_filterbar .irs--flat .irs-handle.state_hover>i:first-child,
 .new_profile_account_filterbar .irs--flat .irs-handle:hover>i:first-child,
 .new_profile_account_filterbar .irs--flat .irs-handle>i:first-child {
     background: #54a958;
@@ -11877,11 +11877,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 /************ About us page css start *************/
 .show-read-more .more-text {
     display: none;
-}  
+}
 #mb_about {
     font-size: 16px;
     color: #000;
-    line-height: 2; 
+    line-height: 2;
 }
 #mb_about h1,
 #mb_about h2,
@@ -11896,23 +11896,23 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     font-size: 35px;
 }
 #mb_about .mb-80 {
-    margin-bottom: 80px; 
+    margin-bottom: 80px;
 }
 #mb_about .px-40 {
     padding-left: 40px;
-    padding-right: 40px; 
+    padding-right: 40px;
 }
 #mb_about .py-70 {
     padding-top: 70px;
-    padding-bottom: 70px; 
+    padding-bottom: 70px;
 }
 #mb_about .py-50 {
     padding-top: 50px;
-    padding-bottom: 50px; 
+    padding-bottom: 50px;
 }
 #mb_about .py-80 {
     padding-top: 80px;
-    padding-bottom: 80px; 
+    padding-bottom: 80px;
 }
 #mb_about .btn {
     display: -webkit-inline-box;
@@ -11923,7 +11923,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     align-items: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 #mb_about .btn.btn_link {
     background: transparent;
@@ -11934,23 +11934,23 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     cursor: pointer;
     display: inline-block;
     -webkit-box-shadow: none;
-    box-shadow: none; 
+    box-shadow: none;
 }
 #mb_about .btn.lg {
     height: 50px;
     padding: 0 32px;
     padding-top: 5px;
-    font-size: 18px; 
+    font-size: 18px;
     margin-top: 50px;
 }
 
 #mb_about .about_us .section_title {
-    padding-bottom: 100px; 
+    padding-bottom: 100px;
     padding-top: 30px;
 }
 #mb_about .about_us .section_title h1 {
     text-align: center;
-    margin-bottom: 32px; 
+    margin-bottom: 32px;
 }
 #mb_about .about_us .section_title .title_bottom {
     display: -webkit-box;
@@ -11958,15 +11958,15 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 #mb_about .about_us .section_title .title_bottom p {
     line-height: 20px;
     margin: 0;
-    padding: 0 32px; 
+    padding: 0 32px;
 }
 #mb_about .about_us .section_title .title_bottom p:first-child {
-    border-right: 2px solid #000; 
+    border-right: 2px solid #000;
 }
 #mb_about .about_us .about_content {
     max-width: 530px;
@@ -11974,17 +11974,17 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 #mb_about .about_us .about_content h4 {
     font-size: 25px;
     font-family: 'nexaregular';
-    margin-bottom: 32px; 
+    margin-bottom: 32px;
 }
 #mb_about .about_us .about_content p a {
     /* font-family: 'nexabold'; */
-    color: #285460; 
+    color: #285460;
     margin-left: 10px;
     font-size: 16px;
     font-weight: bold;
 }
 #mb_about .why_us {
-    background-color: #d7df2310; 
+    background-color: #d7df2310;
     margin: 80px 10px 0;
 }
 #mb_about .why_us .section_title {
@@ -11993,12 +11993,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 #mb_about .why_us .section_title h3 {
     border-top: 2px solid #d7df23;
     border-bottom: 2px solid #d7df23;
-    display: inline-block; 
+    display: inline-block;
     padding: 5px 0;
 }
 #mb_about .why_us .why_us-tab {
@@ -12010,45 +12010,45 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center; 
+    align-items: center;
 }
 #mb_about .why_us .why_us-tab .tab {
-    padding: 0 8px; 
+    padding: 0 8px;
 }
 #mb_about .why_us .why_us-tab .tab a {
     font-size: 18px;
-    color: #000; 
+    color: #000;
 }
 #mb_about .why_us .why_us-tab .tab a.active {
     color: #285460;
     font-weight: 700;
-    border-bottom: 2px solid #285460; 
+    border-bottom: 2px solid #285460;
 }
 #mb_about .why_us .why_us-content h4 {
     font-weight: 300;
     text-align: center;
     color: #000;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
 }
 #mb_about .why_us .why_us-content p {
     text-align: center;
     max-width: 1270px;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 #mb_about .we_believe .section_title img {
     margin: 0 auto;
     display: block;
-    width: 130px; 
+    width: 130px;
 }
 #mb_about .we_believe .section_title h3 {
-    text-align: center; 
+    text-align: center;
 }
 #mb_about .we_believe {
     text-align: center;
 }
 #mb_about .achivement h3 {
     text-align: center;
-    margin-bottom: 70px; 
+    margin-bottom: 70px;
 }
 #mb_about .achivement .row {
     /* margin-bottom: -48px;
@@ -12058,11 +12058,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 #mb_about .achivement .row .col {
     padding: 0 32px;
-    margin-bottom: 35px; 
+    margin-bottom: 35px;
 }
 #mb_about .achivement .row .col .achivement_box {
     display: -webkit-box;
@@ -12071,7 +12071,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 0px 24px 24px 0;
     /* border-top: 2px solid #d7df23; */
     border-bottom: 2px solid #d7df23;
-    height: 100%; 
+    height: 100%;
 }
 #mb_about .achivement .row .col .achivement_box.top_border {
     border-top: 2px solid #d7df23;
@@ -12080,21 +12080,21 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 #mb_about .achivement .row .col .achivement_box .icon {
     -ms-flex-negative: 0;
     flex-shrink: 0;
-    padding: 0 30px; 
+    padding: 0 30px;
 }
 #mb_about .achivement .row .col .achivement_box .icon img {
     margin-top: 5px;
     width: 35px;
-    display: block; 
+    display: block;
 }
 #mb_about .achivement .row .col .achivement_box .description {
 -webkit-box-flex: 1;
 -ms-flex-positive: 1;
 flex-grow: 1;
-line-height: 30px; 
+line-height: 30px;
 }
 #mb_about .work_process {
-    text-align: center; 
+    text-align: center;
 }
 #mb_about .work_process .work_process-box {
     display: -webkit-box;
@@ -12106,7 +12106,7 @@ line-height: 30px;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    position: relative; 
+    position: relative;
 }
 #mb_about .work_process .work_process-box .left_side {
     display: -webkit-inline-box;
@@ -12117,63 +12117,63 @@ line-height: 30px;
     justify-content: center;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    width: 120px; 
+    width: 120px;
 }
 #mb_about .work_process .work_process-box .left_side img {
     width: 100%;
-    margin-bottom: 16px; 
+    margin-bottom: 16px;
 }
 #mb_about .work_process .work_process-box .left_side h6 {
     width: 100%;
     text-align: center;
     font-weight: 800;
-    margin: 0; 
+    margin: 0;
 }
 #mb_about .work_process .work_process-box .arrow {
     position: absolute;
     right: 5px;
-    top: 50px; 
+    top: 50px;
 }
 #mb_about .work_process .btn span {
     margin-left: 16px;
-    margin-top: -5px; 
+    margin-top: -5px;
 }
 #mb_about .vision_and_mission {
     max-width: 1280px;
     margin: 0 auto;
 }
 #mb_about .vision_and_mission .row .col {
-    padding: 0 32px; 
+    padding: 0 32px;
 }
 #mb_about .vision_and_mission .row .col .vision_and_mission_box {
     padding: 50px;
     -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     -moz-box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.18);
     box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
-    text-align: center; 
+    text-align: center;
 }
 #mb_about .vision_and_mission .row .col .vision_and_mission_box img {
-    width: 50px; 
+    width: 50px;
 }
 #mb_about .vision_and_mission .row .col .vision_and_mission_box h4 {
-    margin: 32px 0; 
+    margin: 32px 0;
 }
 #mb_about .vision_and_mission .row .col .vision_and_mission_box p {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 #mb_about .paths h3 {
     margin-bottom: 70px;
-    text-align: center; 
+    text-align: center;
 }
 #mb_about .paths .row .col {
-    padding: 0 16px; 
+    padding: 0 16px;
 }
 #mb_about .paths .row .col .path_box {
     -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     -moz-box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.18);
     box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     border-radius: 0 0 10px 10px;
-    overflow: hidden; 
+    overflow: hidden;
 }
 #mb_about .paths .row .col .path_box .imgbox {
     padding: 40px 0;
@@ -12182,11 +12182,11 @@ line-height: 30px;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 #mb_about .paths .row .col .path_box .imgbox img {
     height: 80px;
-    display: block; 
+    display: block;
 }
 #mb_about .paths .row .col .path_box a {
     background-color: #d7df23;
@@ -12204,17 +12204,17 @@ line-height: 30px;
     justify-content: center;
     font-size: 14px;
     font-weight: bold;
-    padding-top: 2px; 
+    padding-top: 2px;
 }
 #mb_about .features {
-    position: relative; 
+    position: relative;
 }
 #mb_about .features .features_slider {
-    overflow: hidden; 
+    overflow: hidden;
 }
 #mb_about .features .features_slider .feature_left {
     padding: 80px 0 20px;
-    max-width: 500px; 
+    max-width: 500px;
 }
 #mb_about .features .features_slider .feature_left h5 {
     font-family: 'nexaregular';
@@ -12222,10 +12222,10 @@ line-height: 30px;
 }
 #mb_about .features .features_slider .feature_left h3 {
     font-size: 30px;
-    margin-bottom: 40px; 
+    margin-bottom: 40px;
 }
 #mb_about .features .features_slider .feature_left p {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 #mb_about .features .features_slider .feature_right_img {
     text-align: center;
@@ -12252,7 +12252,7 @@ line-height: 30px;
     justify-content: flex-end;
     border-bottom: 1px solid #d7df23;
     margin: 0 0px 5px 10px;
-    padding: 0 0 5px; 
+    padding: 0 0 5px;
 }
 #mb_about .features .navigation .prev_after .features_slider-button-prev,
 #mb_about .features .navigation .prev_after .features_slider-button-next {
@@ -12270,61 +12270,61 @@ line-height: 30px;
     justify-content: center;
     background-color: #285460;
     cursor: pointer;
-    margin: 0 4px 8px; 
+    margin: 0 4px 8px;
 }
 #mb_about .features .navigation .prev_after .features_slider-button-prev span,
 #mb_about .features .navigation .prev_after .features_slider-button-next span {
     font-size: 20px;
-    color: #d7df23; 
+    color: #d7df23;
 }
 #mb_about .features .navigation .prev_after .swiper-button-disabled {
-    display: none; 
+    display: none;
 }
 #mb_about .features .navigation .features_slider-pagination {
     color: #ccc;
-    text-align: right; 
+    text-align: right;
 }
 #mb_about .features .navigation .swiper-pagination-current {
     color: #484848;
 }
 #mb_about .features .navigation .features_slider-pagination .swiper-pagination-current {
-    font-weight: 700; 
+    font-weight: 700;
 }
 #mb_about .testemonial h3 {
     margin-bottom: 50px;
-    text-align: center; 
+    text-align: center;
 }
 #mb_about .ending {
     max-width: 656px;
     text-align: center;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 #mb_about .ending h3 {
     border-top: 2px solid #d7df23;
     border-bottom: 2px solid #d7df23;
-    padding: 10px 0; 
+    padding: 10px 0;
 }
 /************ About us page css end *************/
 
 /* ************* How We Work css start ************* */
 #how_we_work .mb-80 {
-    margin-bottom: 80px; 
+    margin-bottom: 80px;
 }
 #how_we_work .py-70 {
     padding-top: 70px;
-    padding-bottom: 70px; 
+    padding-bottom: 70px;
 }
 #how_we_work .py-50 {
     padding-top: 50px;
-    padding-bottom: 50px; 
+    padding-bottom: 50px;
 }
 #how_we_work .px-20 {
     padding-left: 20px;
-    padding-right: 20px; 
+    padding-right: 20px;
 }
 #how_we_work {
     font-size: 35px;
-    font-weight: 300; 
+    font-weight: 300;
 }
 #how_we_work button.btn_link {
     background: transparent;
@@ -12335,7 +12335,7 @@ line-height: 30px;
     cursor: pointer;
     display: inline-block;
     -webkit-box-shadow: none;
-    box-shadow: none; 
+    box-shadow: none;
 }
 .switch_buttons .switch_button_container {
     display: -webkit-box;
@@ -12343,24 +12343,24 @@ line-height: 30px;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 .switch_buttons .switch_button_wrapper {
     display: inline-block;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 .switch_buttons .switch_button_wrapper p {
     text-align: center;
     font-size: 21px;
     font-weight: 300;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 .switch_buttons .switch_button_wrapper .document_tabs {
     border-width: 2px 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 .switch_buttons .switch_button_wrapper .document_tabs li a {
     height: 45px;
@@ -12385,12 +12385,12 @@ line-height: 30px;
     text-align: center;
     -webkit-transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
     transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
-    float: left; 
+    float: left;
     background-color: #eee;
 }
 .switch_buttons .switch_button_wrapper .document_tabs li a.active {
     background: #54a958;
-    color: #ffffff; 
+    color: #ffffff;
 }
 .switch_buttons .switch_button_wrapper .document_tabs li.animate_document_tab_left a {
     border-radius: 5px 0 0 5px;
@@ -12400,7 +12400,7 @@ line-height: 30px;
 }
 #how_we_work .page_title {
     padding-top: 50px;
-    padding-bottom: 50px; 
+    padding-bottom: 50px;
 }
 #how_we_work .page_title .title_and_tags h2 {
     font-family: 'nexabold';
@@ -12410,7 +12410,7 @@ line-height: 30px;
     max-width: 1200px;
     margin: 0 auto;
     color: #285460;
-    margin-bottom: 40px; 
+    margin-bottom: 40px;
 }
 #how_we_work .page_title .title_and_tags ul {
     display: -webkit-box;
@@ -12418,17 +12418,17 @@ line-height: 30px;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 #how_we_work .page_title .title_and_tags ul li {
     font-size: 20px;
     line-height: 20px;
     border-right: 3px solid #285460;
     color: #285460;
-    padding: 0 20px; 
+    padding: 0 20px;
 }
 #how_we_work .page_title .title_and_tags ul li:last-child {
-    border-right: none; 
+    border-right: none;
 }
 #how_we_work .steps_section {
     padding-top: 80px;
@@ -12449,21 +12449,21 @@ line-height: 30px;
     align-items: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 .steps_section .steps_box .icon_box img {
-    width: 90px; 
+    width: 90px;
 }
 .steps_section .steps_box .count_and_details {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     min-height: 180px;
-    margin-bottom: 16px; 
+    margin-bottom: 16px;
 }
 .steps_section .steps_box .count_and_details .count {
     -ms-flex-negative: 0;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 .steps_section .steps_box .count_and_details .count .count_number {
     height: 55px;
@@ -12482,18 +12482,18 @@ line-height: 30px;
     justify-content: center;
     font-size: 45px;
     font-weight: bold;
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
 }
 .steps_section .steps_box .count_and_details .count .count_number span {
     margin-top: 5px;
-    font-size: 20px; 
+    font-size: 20px;
 }
 .steps_section .steps_box .count_and_details .count .line {
     background-image: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/work-image/single_line.png");
     background-size: 30px 30px;
     background-position-x: center;
     background-repeat: repeat-y;
-    height: calc(100% - 100px); 
+    height: calc(100% - 100px);
 }
 .steps_section .steps_box .count_and_details .details {
     font-size: 16px;
@@ -12501,26 +12501,26 @@ line-height: 30px;
     /* padding-top: 10px; */
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 .steps_section .steps_box .count_and_details .details h3 {
     font-family: 'nexabold';
     font-size: 20px;
     color: #285460;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 .steps_section .steps_box .count_and_details .details p a {
     color: #285460;
     font-weight: bold;
     font-size: 14px;
-    padding-left: 5px; 
+    padding-left: 5px;
 }
 .steps_section .steps_box:last-child .count_and_details .count .line {
-    display: none; 
+    display: none;
 }
 #how_we_work .features .col {
     padding-left: 30px;
-    padding-right: 30px; 
+    padding-right: 30px;
 }
 #how_we_work .features .feature_box {
     background: #fff;
@@ -12528,7 +12528,7 @@ line-height: 30px;
     -moz-box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.18);
     box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     border-radius: 10px;
-    padding: 60px 30px; 
+    padding: 60px 30px;
 }
 #how_we_work .features .feature_box .icon {
     height: 100px;
@@ -12545,19 +12545,19 @@ line-height: 30px;
     -ms-flex-pack: center;
     justify-content: center;
     margin: 0 auto;
-    margin-bottom: 60px; 
+    margin-bottom: 60px;
 }
 #how_we_work .features .col .feature_box h5 {
     font-size: 20px;
     text-align: center;
     font-weight: 300;
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 #how_we_work .why_us .why_us_box {
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
 }
 #how_we_work .why_us .why_us_box:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 #how_we_work .why_us .why_us_box .row {
     display: -webkit-box;
@@ -12567,14 +12567,14 @@ line-height: 30px;
     -ms-flex-align: stretch;
     align-items: stretch;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 #how_we_work .why_us .why_us_box .row .col {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 #how_we_work .why_us .why_us_box .box_img {
     height: 320px;
@@ -12585,14 +12585,14 @@ line-height: 30px;
     overflow: hidden;
     padding: 28px;
     -ms-flex-negative: 0;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 #how_we_work .why_us .why_us_box .box_img img {
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
     object-fit: cover;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 #how_we_work .why_us .why_us_box .box_description {
     font-size: 18px;
@@ -12604,7 +12604,7 @@ line-height: 30px;
     font-family: 'nexabold';
     font-size: 20px;
     margin-bottom: 30px;
-    color: #285460; 
+    color: #285460;
 }
 .why_us.manufacture {
     padding: 0;
@@ -12617,7 +12617,7 @@ line-height: 30px;
     margin: 0 auto;
     color: #285460;
     text-align: center;
-    margin-bottom: 80px; 
+    margin-bottom: 80px;
 }
 .why_us.manufacture .manufacture_container {
     background-image: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/work-image/large-background.png");
@@ -12626,7 +12626,7 @@ line-height: 30px;
     /* background-size: 1380px; */
     /* padding-top: 200px;
     padding-bottom: 200px; */
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     /* margin-left: -4%; */
 }
 .why_us.manufacture .manufacture_container .row {
@@ -12634,14 +12634,14 @@ line-height: 30px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 .why_us.manufacture .manufacture_container .why_us_box {
     max-width: 500px;
     border-radius: 10px;
     background: #fff;
     border: 1px solid #d7df23;
-    padding: 20px; 
+    padding: 20px;
 }
 .why_us.manufacture .manufacture_container .why_us_box .title {
     display: -webkit-box;
@@ -12650,7 +12650,7 @@ line-height: 30px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 .why_us.manufacture .manufacture_container .why_us_box .title .icon {
     height: 70px;
@@ -12668,17 +12668,17 @@ line-height: 30px;
     justify-content: center;
     background-color: #285460;
     border-radius: 50%;
-    margin-right: 20px; 
+    margin-right: 20px;
 }
 .why_us.manufacture .manufacture_container .why_us_box .title h3 {
     margin-bottom: 0;
     color: #285460;
     font-family: 'nexabold';
-    font-size: 20px; 
+    font-size: 20px;
 }
 .why_us.manufacture .manufacture_container .why_us_box p {
     font-size: 16px;
-    font-weight: 300; 
+    font-weight: 300;
 }
 .why_us.manufacture .manufacture_container .middle_text_card {
     -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 12%);
@@ -12687,7 +12687,7 @@ line-height: 30px;
     border-radius: 10px;
     background: #fff;
     padding: 40px;
-    width: 450px; 
+    width: 450px;
     margin-left: 20px;
 }
 .why_us.manufacture .manufacture_container .middle_text_card h3 {
@@ -12697,7 +12697,7 @@ line-height: 30px;
     line-height: 35px;
     text-align: left;
     color: #285460;
-    margin: 0; 
+    margin: 0;
 }
 #how_we_work .request_quotation {
     display: -webkit-box;
@@ -12707,10 +12707,10 @@ line-height: 30px;
     -ms-flex-pack: center;
     justify-content: center;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 #how_we_work .request_quotation div {
-    width: 100%; 
+    width: 100%;
 }
 #how_we_work .request_quotation div h3 {
     max-width: 870px;
@@ -12719,7 +12719,7 @@ line-height: 30px;
     line-height: 50px;
     color: #285460;
     text-align: center;
-    margin: 0 auto 50px; 
+    margin: 0 auto 50px;
 }
 #how_we_work .animate_menuf_btn_green,
 #how_we_work .animate_request_btn_green {
@@ -12741,7 +12741,7 @@ line-height: 30px;
     letter-spacing: 2px;
     margin: 0 auto;
     padding-left: 30px;
-    padding-right: 30px; 
+    padding-right: 30px;
 }
 /* ************* How We Work css end ************* */
 
@@ -12856,14 +12856,14 @@ line-height: 30px;
     color: #285460;
 }
 .new_rfq_paths_boxwrap .row .col {
-    padding: 0 16px; 
+    padding: 0 16px;
 }
 .new_rfq_paths_boxwrap .path_box {
     -webkit-box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     -moz-box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.18);
     box-shadow: 0px 2px 12px 0px rgb(0 0 0 / 18%);
     border-radius: 0 0 10px 10px;
-    overflow: hidden; 
+    overflow: hidden;
     margin-bottom: 30px;
 }
 .new_rfq_paths_boxwrap .path_box .imgbox {
@@ -12873,11 +12873,11 @@ line-height: 30px;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; 
+    justify-content: center;
 }
 .new_rfq_paths_boxwrap .path_box .imgbox img {
     height: 80px;
-    display: block; 
+    display: block;
 }
 .new_rfq_paths_boxwrap .path_box a {
     background-color: #d7df23;
@@ -12895,7 +12895,7 @@ line-height: 30px;
     justify-content: center;
     font-size: 14px;
     font-weight: bold;
-    padding-top: 2px; 
+    padding-top: 2px;
 }
 
 /* ******************************** */
@@ -13210,7 +13210,83 @@ line-height: 30px;
 }
 
 
+/* ****************Welcome and loginlanding page css start ******************* */
+.login_landing_wrap .login_landing_inner{
+    margin: 0 auto;
+    padding: 80px 0 100px;
+}
+.login_landing_wrap .login_landing_inner h1 {
+    font-family: "nexabold";
+    font-size: 35px;
+    line-height: 40px;
+    color: #285460;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+.login_landing_inner ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.login_landing_inner ul li {
+    font-size: 20px;
+    line-height: 20px;
+    color: #285460;
+    padding: 0 20px;
+}
+.login_landing_inner ul li a {
+    font-weight: 600;
+}
 
+/* ********************************** */
+.welcome_wrap {
+    height: 100vh;
+}
+.welcome_wrap .welcome_inner_wrap {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.welcome_wrap .logo-img {
+    max-width: 400px;
+    margin: 0 auto 70px;
+}
+.welcome_wrap h1 {
+    font-family: "nexabold";
+    font-size: 40px;
+    line-height: 45px;
+    color: #285460;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.welcome_wrap h5 {
+    font-size: 18px;
+    line-height: 32px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+.welcome_inner {
+   width: 600px;
+   margin: 0 auto;
+   min-height: 300px;
+}
+.welcome_inner input:focus {
+    border: 1px solid #54a958 !important;
+}
+.welcome_inner label {
+    text-align: left;
+    width: 100%;
+}
+.welcome_inner .btn_submit {
+    padding: 8px 10px;
+    margin-top: 20px;
+}
+/* ****************Welcome and loginlanding page css end ******************* */
 
 
 /* ******************** Media css style start *********************** */
@@ -13230,8 +13306,8 @@ line-height: 30px;
     .why_us.manufacture .manufacture_container {
         background-size: contain;
         padding-top: 0;
-        padding-bottom: 0; 
-    } 
+        padding-bottom: 0;
+    }
     #manufacturers .request_quotation {
         padding-top: 100px;
     }
@@ -13393,7 +13469,7 @@ line-height: 30px;
 
     /* ************* How We Work css start ************* */
     .why_us.manufacture .manufacture_container .row .col {
-        margin: 0; 
+        margin: 0;
     }
     .why_us.manufacture .manufacture_container .row .col.animate_why_us_box_3 {
         margin-top: 20px;
@@ -13585,32 +13661,32 @@ line-height: 30px;
 
     /* ************* How We Work css start ************* */
     #how_we_work {
-        font-size: 28px; 
-    } 
+        font-size: 28px;
+    }
     .switch_buttons .switch_button_wrapper p {
-        font-size: 16px; 
-    } 
+        font-size: 16px;
+    }
     .switch_buttons .switch_button_wrapper .document_tabs li a {
         font-size: 14px;
         width: inherit;
         padding-left: 20px;
-        padding-right: 20px; 
-    } 
+        padding-right: 20px;
+    }
     #how_we_work .page_title {
         padding-top: 35px;
-        padding-bottom: 35px; 
+        padding-bottom: 35px;
     }
     #how_we_work .page_title .title_and_tags h2 {
         font-size: 30px;
         line-height: 40px;
-    } 
+    }
     #how_we_work .page_title .title_and_tags ul li {
         font-size: 16px;
         padding-right: 16px;
-        padding-left: 16px;  
+        padding-left: 16px;
     }
     #how_we_work .steps_section {
-        padding-bottom: 0; 
+        padding-bottom: 0;
     }
     .steps_section .steps_box .count_and_details {
         min-height: 200px;
@@ -13618,11 +13694,11 @@ line-height: 30px;
     .steps_section .steps_box .count_and_details .count .count_number {
         height: 60px;
         width: 60px;
-        font-size: 38px; 
+        font-size: 38px;
     }
     .steps_section .steps_box .count_and_details .count .line {
-        background-size: 25px 25px; 
-    } 
+        background-size: 25px 25px;
+    }
     .steps_section .steps_box .count_and_details .details {
         font-size: 16px;
         line-height: 1.5;
@@ -13631,23 +13707,23 @@ line-height: 30px;
         font-size: 14px;
     }
     .steps_section .steps_box .count_and_details .details h3 {
-        margin-bottom: 15px; 
+        margin-bottom: 15px;
     }
     #how_we_work .features {
         padding-top: 50px;
-        padding-bottom: 50px; 
+        padding-bottom: 50px;
     }
     #how_we_work .features .feature_box {
-        padding: 40px 20px; 
-    } 
+        padding: 40px 20px;
+    }
     #how_we_work .features .feature_box .icon {
         margin-bottom: 40px;
         height: 80px;
-        width: 80px; 
+        width: 80px;
     }
     #how_we_work .features .feature_box .icon img {
-        width: 40px; 
-    } 
+        width: 40px;
+    }
     #how_we_work .features .feature_box h5 {
         font-size: 16px;
         line-height: 25px;
@@ -13656,7 +13732,7 @@ line-height: 30px;
     #how_we_work .why_us .why_us_box .box_img {
         height: 250px;
         width: 250px;
-        padding: 20px; 
+        padding: 20px;
     }
     .why_us.manufacture h2 {
         font-size: 30px;
@@ -13668,27 +13744,27 @@ line-height: 30px;
     }
     .why_us.manufacture .manufacture_container .why_us_box {
         padding: 25px;
-        margin-bottom: 70px !important; 
+        margin-bottom: 70px !important;
     }
     .why_us.manufacture .manufacture_container .why_us_box .title {
-        margin-bottom: 15px; 
-    } 
+        margin-bottom: 15px;
+    }
     .why_us.manufacture .manufacture_container .middle_text_card {
         width: 360px;
         padding: 20px;
     }
     .why_us.manufacture .manufacture_container .middle_text_card h3 {
         font-size: 20px;
-        line-height: 30px; 
+        line-height: 30px;
     }
     #how_we_work .request_quotation div h3 {
         font-size: 25px;
-        line-height: 35px; 
+        line-height: 35px;
     }
     #how_we_work .why_us {
         padding-top: 50px;
-        padding-bottom: 50px; 
-    } 
+        padding-bottom: 50px;
+    }
     /* ************* How We Work css end ************* */
 }
 
@@ -14184,55 +14260,55 @@ line-height: 30px;
     /* ************* About us page css start ************* */
     #mb_about .why_us .why_us-tab {
         -ms-flex-wrap: wrap;
-        flex-wrap: wrap; 
-    } 
+        flex-wrap: wrap;
+    }
     #mb_about .achivement .row .col {
-        padding: 0 12px; 
-    } 
+        padding: 0 12px;
+    }
     #mb_about .achivement .row .col .achivement_box {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-        padding: 0px 0 15px; 
-    } 
+        padding: 0px 0 15px;
+    }
     #mb_about .achivement .row .col .achivement_box .icon {
         width: 100%;
         padding: 0;
-        margin-bottom: 20px; 
-    } 
+        margin-bottom: 20px;
+    }
     #mb_about .achivement .row .col .achivement_box .icon img {
-        margin: 0 auto; 
-    } 
+        margin: 0 auto;
+    }
     #mb_about .achivement .row .col .achivement_box .description {
-        text-align: center; 
-    } 
+        text-align: center;
+    }
     #mb_about .work_process .work_process-box {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
-        margin-bottom: 32px; 
-    } 
+        margin-bottom: 32px;
+    }
     #mb_about .work_process .work_process-box .arrow {
-        display: none; 
-    } 
+        display: none;
+    }
     #mb_about .vision_and_mission .row {
-        margin: 0; 
-    } 
+        margin: 0;
+    }
     #mb_about .vision_and_mission .row .col {
-        padding: 0 12px; 
-    } 
+        padding: 0 12px;
+    }
     #mb_about .vision_and_mission .row .col .vision_and_mission_box {
-        margin-bottom: 24px; 
-    } 
+        margin-bottom: 24px;
+    }
     #mb_about .achivement .row {
-        margin: 0; 
-    } 
+        margin: 0;
+    }
     #mb_about .paths .row {
-        margin: -12px; 
-    } 
+        margin: -12px;
+    }
     #mb_about .paths .row .col {
         margin-bottom: 24px;
-        padding: 0 12px; 
-    } 
+        padding: 0 12px;
+    }
     /* ************* About us page css end ************* */
 }
 
@@ -15446,12 +15522,12 @@ line-height: 30px;
     #mb_about .achivement h3,
     #mb_about .paths h3,
     #mb_about .achivement h3 {
-        margin-bottom: 50px;  
+        margin-bottom: 50px;
         margin-top: 30px;
     }
     #mb_about .d-l-none {
-        display: none !important; 
-    } 
+        display: none !important;
+    }
     #mb_about .btn.lg {
         height: 40px;
         padding: 0 15px;
@@ -15471,10 +15547,10 @@ line-height: 30px;
     }
     #mb_about .why_us .section_title h3 {
         text-align: center;
-    } 
+    }
     #mb_about .why_us .why_us-tab {
         padding: 30px 0 40px;
-    } 
+    }
     #mb_about .why_us .why_us-tab .tab a {
         font-size: 16px;
     }
@@ -15514,7 +15590,7 @@ line-height: 30px;
     }
     #mb_about .features .navigation {
         width: 50%;
-    } 
+    }
     #mb_about .ending {
         padding-bottom: 0;
         padding-top: 50px;
@@ -15533,31 +15609,31 @@ line-height: 30px;
     /* ************* How We Work css start ************* */
     #how_we_work .d-l-none {
         display: none !important;
-    } 
+    }
     #how_we_work {
-        font-size: 21px; 
-    } 
+        font-size: 21px;
+    }
     #how_we_work .page_title {
         padding-top: 30px;
-        padding-bottom: 30px; 
-    } 
+        padding-bottom: 30px;
+    }
     #how_we_work .page_title .title_and_tags h2 {
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
     }
     .steps_section .steps_box .icon_box {
         margin-bottom: 32px;
-        display: none; 
-    } 
+        display: none;
+    }
     .steps_section .steps_box .icon_box img {
-        width: 90px; 
+        width: 90px;
     }
     .steps_section .steps_box .count_and_details .count .line {
-        background-image: none; 
-    } 
+        background-image: none;
+    }
     .steps_section .steps_box .count_and_details .details {
-        padding-left: 32px; 
+        padding-left: 32px;
         font-size: 14px;
-    } 
+    }
     .steps_section .steps_box .count_and_details .details p a {
         font-size: 13px;
     }
@@ -15567,16 +15643,16 @@ line-height: 30px;
     }
     .steps_section .steps_box .count_and_details .details p {
         line-height: 1.5;
-        margin-bottom: 48px; 
-    } 
+        margin-bottom: 48px;
+    }
     #how_we_work .features .col {
         margin-bottom: 32px;
         padding-left: 16px;
-        padding-right: 16px; 
-    } 
+        padding-right: 16px;
+    }
     #how_we_work .why_us .why_us_box .row .col .box_img {
         margin: 0 auto 25px;
-        padding: 16px; 
+        padding: 16px;
     }
     .why_us.manufacture .manufacture_container .middle_text_card {
         margin-left: 0;
@@ -15608,13 +15684,13 @@ line-height: 30px;
     }
     #how_we_work .why_us .why_us_box .row .col .box_description h3 {
         margin-bottom: 16px;
-        text-align: center; 
+        text-align: center;
         font-size: 17px;
-    } 
+    }
     #how_we_work .why_us .why_us_box.right_img .row .col {
         -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
-        order: 1; 
+        order: 1;
     }
     #how_we_work .why_us .why_us_box.right_img .row .col:last-child {
         -webkit-box-ordinal-group: 1;
@@ -15622,7 +15698,7 @@ line-height: 30px;
         order: 0;
         -webkit-box-pack: unset !important;
         -ms-flex-pack: unset !important;
-        justify-content: unset !important; 
+        justify-content: unset !important;
     }
     .why_us.manufacture h2 {
         font-size: 25px;
@@ -15632,30 +15708,30 @@ line-height: 30px;
     .why_us.manufacture .manufacture_container {
         background-image: none;
         padding-top: 30px;
-        padding-bottom: 0; 
+        padding-bottom: 0;
         margin-left: 0;
     }
     .why_us.manufacture .manufacture_container .row {
         -webkit-box-align: stretch;
         -ms-flex-align: stretch;
-        align-items: stretch; 
+        align-items: stretch;
     }
     .why_us.manufacture .manufacture_container .row .col {
         -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
         order: 1;
-        margin-bottom: 24px; 
+        margin-bottom: 24px;
         width: 100%;
     }
     .why_us.manufacture .manufacture_container .row .col:nth-child(7) {
         -webkit-box-ordinal-group: 1;
         -ms-flex-order: 0;
-        order: 0; 
+        order: 0;
         margin: 0 0 15px;
     }
     .why_us.manufacture .manufacture_container .why_us_box {
         height: 100%;
-        padding: 16px; 
+        padding: 16px;
         max-width: inherit;
     }
     .why_us.manufacture .manufacture_container .middle_text_card {
@@ -15666,7 +15742,7 @@ line-height: 30px;
     .why_us.manufacture .manufacture_container .middle_text_card h3 {
         text-align: center;
         font-size: 18px;
-        line-height: 30px; 
+        line-height: 30px;
     }
     #how_we_work .request_quotation {
         padding: 0;
@@ -16367,7 +16443,7 @@ line-height: 30px;
         font-size: 14px;
         line-height: 20px;
     }
-    .account_profile_wrapper table.production-flow-and-manpower-table td, 
+    .account_profile_wrapper table.production-flow-and-manpower-table td,
     .account_profile_wrapper table.production-flow-and-manpower-table th {
         font-size: 12px;
         line-height: 18px;
@@ -16465,7 +16541,7 @@ line-height: 30px;
     .product_slider .slick-prev {
         display: none !important;
     }
-    
+
     /* *************************************** */
     .landing_provide_wrap {
         padding-bottom: 10px;
@@ -16751,7 +16827,7 @@ line-height: 30px;
     }
     #mb_about .about_us .about_content h4 {
         font-size: 20px;
-        margin-bottom: 15px; 
+        margin-bottom: 15px;
         text-align: center;
     }
     #mb_about .vision_and_mission .row .col .vision_and_mission_box {
@@ -16775,28 +16851,28 @@ line-height: 30px;
     #how_we_work .page_title .title_and_tags h2 {
         margin-bottom: 20px;
         font-size: 25px;
-        line-height: 32px; 
-    } 
+        line-height: 32px;
+    }
     #how_we_work .steps_section {
         padding-top: 30px;
-        padding-bottom: 0; 
-    } 
+        padding-bottom: 0;
+    }
     #how_we_work .steps_section .steps_box .count_and_details {
-        min-height: unset; 
+        min-height: unset;
     }
     #how_we_work .features {
         padding-top: 30px;
-        padding-bottom: 30px; 
-    } 
+        padding-bottom: 30px;
+    }
     #how_we_work .why_us {
         padding-top: 30px;
-    } 
+    }
     #how_we_work .request_quotation div h3 br {
-        display: none; 
-    } 
+        display: none;
+    }
     #how_we_work .request_quotation div h3 {
         font-size: 20px;
-        line-height: 30px; 
+        line-height: 30px;
     }
     /* ************* How We Work css end ************* */
 
@@ -17421,36 +17497,36 @@ line-height: 30px;
     }
     .user-profile-basic-info-block .my_businesses_wrap .my_businesses_innerbox {
         width: 100%;
-    } 
-    
+    }
+
     /* ************* About us page css start ************* */
     #mb_about h3 {
         font-size: 24px;
-        line-height: 30px;  
+        line-height: 30px;
     }
     #mb_about .py-70 {
         padding-top: 30px;
-        padding-bottom: 30px; 
-    } 
+        padding-bottom: 30px;
+    }
     #mb_about .about_us .section_title h1 {
         font-size: 22px;
     }
     #mb_about .about_us .section_title .title_bottom p {
-        padding: 0 15px; 
-        font-size: 13px; 
+        padding: 0 15px;
+        font-size: 13px;
         text-align: center;
         line-height: 16px;
-    } 
+    }
     #mb_about .why_us {
         margin-top: 0;
         padding: 30px 0 0;
     }
     #mb_about .why_us .section_title h3 {
         margin-bottom: 40px;
-    } 
+    }
     #mb_about .why_us .why_us-tab {
         display: none;
-    } 
+    }
     #mb_about .why_us .why_us-content {
         display: block !important;
         padding: 30px;
@@ -17474,7 +17550,7 @@ line-height: 30px;
         line-height: 26px;
     }
     #mb_about .paths .row {
-        margin: 0; 
+        margin: 0;
     }
     #mb_about .features {
         text-align: center;
@@ -17492,52 +17568,52 @@ line-height: 30px;
         font-size: 20px;
     }
     #mb_about .features .navigation {
-        width: 100%; 
+        width: 100%;
         margin-top: 0;
-    } 
+    }
     #mb_about .features .navigation .prev_after {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
         border-bottom: none;
-    } 
+    }
     #mb_about .features .navigation .features_slider-pagination {
-        text-align: center; 
+        text-align: center;
     }
     /* ************* About us page css end ************* */
 
     /* ************* How We work css start ************* */
     #how_we_work {
-        font-size: 18px; 
-    } 
+        font-size: 18px;
+    }
     .switch_buttons .switch_button_wrapper p {
-        font-size: 14px; 
-    } 
+        font-size: 14px;
+    }
     .switch_buttons .switch_button_wrapper .document_tabs li a {
         height: 35px;
         font-size: 13px;
         padding-top: 5px;
-        letter-spacing: 1px; 
-    } 
+        letter-spacing: 1px;
+    }
     #how_we_work .page_title .title_and_tags ul {
         text-align: center;
     }
     .steps_section .steps_box .count_and_details .count .count_number {
         height: 40px;
         width: 40px;
-        font-size: 25px; 
-    } 
+        font-size: 25px;
+    }
     .steps_section .steps_box .count_and_details .details {
         padding-left: 15px;
-        padding-top: 0; 
-    } 
+        padding-top: 0;
+    }
     .steps_section .steps_box .count_and_details .details p {
-        margin-bottom: 10px; 
-    } 
+        margin-bottom: 10px;
+    }
     #how_we_work .why_us .why_us_box .row .col .box_img {
         height: 150px;
         width: 150px;
-        padding: 8px; 
+        padding: 8px;
     }
     #how_we_work .request_quotation a {
         font-size: 14px;

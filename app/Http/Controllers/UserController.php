@@ -232,6 +232,99 @@ class UserController extends Controller
       return view('auth.verify')->with('message', $message);
     }
 
+    public function anonymousUserAccountVerification(Request $request, $token, $encryptedAuthInfo) {
+
+        $decryptAuthInfo = base64_decode($encryptedAuthInfo);
+        $decryptAuthInfo = json_decode($decryptAuthInfo);
+
+        $sso = Http::post(env('SSO_URL').'/api/auth/token/',[
+            'email' => $decryptAuthInfo->email,
+            'password' => $decryptAuthInfo->password,
+        ]);
+
+        if($sso->successful()){
+            $access_token = $sso['access'];
+            $explode = explode(".",$access_token);
+            $time = base64_decode($explode[1]);
+            $decode_time = json_decode($time);
+            $get_time = $decode_time->exp;
+            $get_time = strtotime(date('d.m.Y H:i:s')) + strtotime(date('d.m.Y H:i:s'));
+            $current = strtotime(date('d.m.Y H:i:s'));
+            $totalSecondsDiff = abs($get_time-$current);
+            $totalMinutesDiff = $totalSecondsDiff/60;
+
+            if(Cookie::has('sso_token')){
+                Cookie::queue(Cookie::forget('sso_token'));
+            }
+            Cookie::queue(Cookie::make('sso_token', $access_token, $totalMinutesDiff));
+
+            if($request->session()->has('sso_password')){
+                $request->session()->forget('sso_password');
+            }
+            $request->session()->put('sso_password', $decryptAuthInfo->password);
+        }
+        else
+        {
+            return response()->json(['error' => 'No active account found with the given credentials or maybe you have provided wrong email or password.'],401);
+        }
+
+        $credentials = [
+            'email' => $decryptAuthInfo->email,
+            'password' => $decryptAuthInfo->password,
+        ];
+
+        if(!Auth::attempt($credentials))
+        {
+            return  response()->json(['error' => "Wrong email or password"],401);
+        }
+
+        //return view('auth.anonymousverify')->with('message', $message);
+        return view('auth.anonymousverify', compact('decryptAuthInfo'));
+    }
+
+    public function anonymousPasswordUpdate( Request $request )
+    {
+        //dd($request->all());
+        //dd($token);
+        $token = Cookie::get('sso_token');
+        $ssoPasswordReset = Http::withToken($token)->post(env('SSO_URL').'/api/auth/passwordreset/',[
+            'password' => $request->newpassword,
+        ]);
+
+        if($ssoPasswordReset->successful())
+        {
+
+            $verifyUser = User::where('email', $request->email)->first();
+            //dd($verifyUser);
+            if(!is_null($verifyUser) )
+            {
+                if(!$verifyUser->is_email_verified) {
+                    $verifyUser->is_email_verified = 1;
+                    $verifyUser->password = Hash::make($request->newpassword);
+                    $verifyUser->save();
+                    //Auth::login($user);
+                } else {
+                    return response()->json(['error' => 'Verification Process faild.'],401);
+                }
+            }
+
+            if(Cookie::has('sso_token')){
+                Cookie::queue(Cookie::forget('sso_token'));
+            }
+            if(session()->has('sso_password')){
+                session()->forget('sso_password');
+            }
+            Auth::guard('web')->logout();
+
+            return redirect()->route('anonymous.account.verification.successful');
+
+        }
+    }
+
+    public function anonymousAccountVerificationSuccessful(){
+        return view('auth.anonymousAccountVerificationSuccessful');
+    }
+
     public function unverifiedAccount(){
         return view('auth.unverified');
     }

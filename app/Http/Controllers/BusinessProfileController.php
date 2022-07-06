@@ -105,7 +105,7 @@ class BusinessProfileController extends Controller
                     'number_of_factories' => $request->number_of_factories,
                     'industry_type' => $request->industry_type,
                     'factory_type' => $request->factory_type,
-                    'profile_type' =>'supplier',
+                    'profile_type' =>'supplier', // by defaule set supplier when user create business profile from join mb pool
 
                 ];
 
@@ -288,9 +288,9 @@ class BusinessProfileController extends Controller
                         }
                         if($data2->name == $key && $value == $data2->value){
                             array_push($data,['name' => 'main_products', 'value' => implode(",",$value), 'status' =>  $data2->status]);
-                        }                        
-                    } 
-                    else 
+                        }
+                    }
+                    else
                     {
                         if($data2->name == $key && $value != $data2->value){
                             array_push($data,['name' => $key, 'value' => $value, 'status' => 0]);

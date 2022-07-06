@@ -7,7 +7,7 @@
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
                         <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" title="logo" alt="logo">
+                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/logo.png" title="logo" alt="logo">
                         </a>
                     </td>
                 </tr>
@@ -26,7 +26,7 @@
                         <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;">
                             Your registration will be reviewed and verified within <strong> 48 hours</strong>. Meanwhile, verify your email by clicking this button
                         </p>
-                        <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><strong>Email:</strong> {{$user->email}} <br /> <strong>Password:</strong> {{$password}}</p>
+                        <p style="margin: 0px; padding: 0px 0 20px; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 24px; color: #0A0A0A;"><strong>Email:</strong> {{$user->email}}</p>
                         @endif
                         @if((Request::wantsJson()))
                         <span style="text-align: center; display: block;  padding: 20px 0 50px; margin: 0px; line-height: 25px;">
@@ -34,7 +34,7 @@
                         </span>
                         @else
                         <span style="text-align: center; display: block;  padding: 20px 0 50px; margin: 0px; line-height: 25px;">
-                            <a href="{{ route('user.verify',$token) }}" target="_blank" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; border-radius: 8px; padding: 10px 20px; display: inline-block; color: #fff; text-decoration: none;">Verify your account</a>
+                            <a href="{{ route('anonymous.user.account.verification', [$token, $encryptedAuthInfo]) }}" target="_blank" style="background: #54A958; font-family: 'Poppins', sans-serif; font-size: 16px; border-radius: 8px; padding: 10px 20px; display: inline-block; color: #fff; text-decoration: none;">Verify your account</a>
                         </span>
                         @endif
                     </td>

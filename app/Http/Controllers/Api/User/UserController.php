@@ -209,18 +209,18 @@ class UserController extends Controller
             'linkedin_profile'  => $request->linkedin_profile,
             'is_supplier'  => $request->user_type == 'supplier' ? 1 : 0,
         ]);
-        if($request->user_type == 'buyer'){
+        //if($request->user_type == 'buyer'){
             $business_profile_data=[
                 'business_name' => $request->company_name,
                 'alias'   => $this->createAlias($request->company_name),
                 'user_id'       => $user->id,
-                'business_type' => 2, // forcefully set Manufacturer type
+                'business_type' => $request->business_type, // forcefully set Manufacturer type
                 'has_representative'=> 1,
                 'industry_type' => 'apparel',
             ];
             $business_profile=BusinessProfile::create($business_profile_data);
             $companyOverview=$this->createCompanyOverview($request,$business_profile->id);
-        }
+        //}
 
         $email_verification_OTP = mt_rand(100000,999999);
         UserVerify::create([
@@ -660,7 +660,7 @@ class UserController extends Controller
             'industry_type' => 'apparel',
         ];
         $business_profile = BusinessProfile::create($business_profile_data);
-        $this->createCompanyOverview($request, $business_profile->id);          
+        $this->createCompanyOverview($request, $business_profile->id);
 
         $token = Str::random(64);
         UserVerify::create([

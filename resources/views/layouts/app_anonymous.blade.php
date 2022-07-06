@@ -14,7 +14,7 @@
 </div>
 {{-- end loader --}}
 <!-- Header -->
-@include('include._headeranonymous')
+
 <!-- /.Header -->
 
 <!-- Content Wrapper. Contains page content -->
@@ -28,7 +28,7 @@
 <!-- /.content-wrapper -->
 
 <!-- Header -->
-@include('include._footer')
+
 <!-- /.Header -->
 <script type=“text/javascript”>
 _linkedin_partner_id = “3577772";

@@ -31,7 +31,7 @@
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
 
                     <div class="new_profile_account_rightsidebar_mobile">
-                        
+                        @if($rfqLists)
                         <div class="new_profile_account_myrfq_details">
                             <div class="new_profile_myrfq_details_topbox">
                                 <h6>RFQ ID <span>{{$rfqLists[0]['id']}}</span></h6>
@@ -69,11 +69,11 @@
                                 </div>
                                 <div class="rfq_quotation_box" style="display:none">
                                     <div class="rfq_review_results_box">
-                                        
+
                                     </div>
                                 </div>
 
-                                <div class="rfq_message_box" >  
+                                <div class="rfq_message_box" >
                                     <div class="rfq_review_message_box">
                                         @if(count($chatdata)>0)
                                             @foreach($chatdata as $chat)
@@ -108,6 +108,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -172,13 +173,13 @@
 
                                             <div class="row rfq_account_title_bar">
                                                 <div class="col s8">
-                                                    <h4>My RFQs</h4>
+                                                    <h4>{{$pageTitle}}</h4>
                                                 </div>
                                                 <div class="col s4 right-align">
                                                     <span class="rfqView">{{count($rfqLists)}} results</span>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row">
                                                 @foreach($rfqLists as $key=>$rfq)
                                                 <div class="col s12 m6">
@@ -247,6 +248,7 @@
                                     </div>
                                 </div>
 
+                                @if($rfqLists)
                                 <div class="col s12 m12 l5 new_profile_account_rightsidebar_desktop">
                                     <div class="new_profile_account_myrfq_details">
                                         <div class="new_profile_myrfq_details_topbox">
@@ -285,11 +287,11 @@
                                             </div>
                                             <div class="rfq_quotation_box" style="display:none">
                                                 <div class="rfq_review_results_box">
-                                                    
+
                                                 </div>
                                             </div>
 
-                                            <div class="rfq_message_box" >  
+                                            <div class="rfq_message_box" >
                                                 <div class="rfq_review_message_box">
                                                     @if(count($chatdata)>0)
                                                         @foreach($chatdata as $chat)
@@ -325,6 +327,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

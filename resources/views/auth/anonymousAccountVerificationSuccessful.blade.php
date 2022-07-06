@@ -1,4 +1,13 @@
-@extends('layouts.app_anonymous')
+@extends('layouts.app')
 @section('content')
-<h3>You have successfully set your password.</h3>
+<div class="login_landing_wrap center-align">
+    <div class="container">
+        <div class="login_landing_inner">
+            <h1>You have successfully set your password</h1>
+            <ul>
+                <li>You can <a href="{{route('users.showLoginForm')}}">Login </a>to your account</li>
+            </ul>
+        </div>
+    </div>
+</div>
 @endsection

@@ -8248,14 +8248,9 @@ nav .pagination li.active .page-link {
     position: relative;
     z-index: 1;
 }
-<<<<<<< HEAD
 .rfq_post_success,
 .login_landing_inner,
 .footer_topWrap_inner {
-=======
-.footer_topWrap_inner,
-.login_landing_inner {
->>>>>>> 853b32dea314579a6c55aa3bbc3d0c415e08ff68
     background: #ffffff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-right.png") no-repeat -2px center;
     background-size: 165px;
     padding: 50px 30px 30px;
@@ -18172,10 +18167,6 @@ line-height: 30px;
         line-height: 32px;
         margin-bottom: 10px;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 853b32dea314579a6c55aa3bbc3d0c415e08ff68
     .rfq_post_success h2 span {
         font-size: 25px;
     }

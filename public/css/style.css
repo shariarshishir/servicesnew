@@ -8248,7 +8248,8 @@ nav .pagination li.active .page-link {
     position: relative;
     z-index: 1;
 }
-.footer_topWrap_inner {
+.footer_topWrap_inner,
+.login_landing_inner {
     background: #ffffff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-right.png") no-repeat -2px center;
     background-size: 165px;
     padding: 50px 30px 30px;
@@ -8263,7 +8264,8 @@ nav .pagination li.active .page-link {
     z-index: 1;
 }
 
-.footer_topWrap_inner .footer_topWrap_inner_right_bg {
+.footer_topWrap_inner .footer_topWrap_inner_right_bg,
+.login_landing_inner .login_landing_inner_right {
     background: #ffffff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-left.png") no-repeat right center;
     background-size: 165px;
     position: absolute;
@@ -13214,6 +13216,7 @@ line-height: 30px;
 .login_landing_wrap .login_landing_inner{
     margin: 0 auto;
     padding: 80px 0 100px;
+    margin-bottom: -162px;
 }
 .login_landing_wrap .login_landing_inner h1 {
     font-family: "nexabold";
@@ -17754,7 +17757,7 @@ line-height: 30px;
     }
 
 
-    
+
     /* ************* 600 screen ********************* */
     .welcome_wrap .welcome_inner_wrap {
         padding: 0 15px;
@@ -18152,7 +18155,7 @@ line-height: 30px;
     .rfq_post_success h2 {
         font-size: 22px;
     }
-    
+
     .rfq_post_success h2 span {
         font-size: 28px;
     }

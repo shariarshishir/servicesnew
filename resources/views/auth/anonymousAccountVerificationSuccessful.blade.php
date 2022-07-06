@@ -7,6 +7,7 @@
             <ul>
                 <li>You can <a href="{{route('users.showLoginForm')}}">Login </a>to your account</li>
             </ul>
+            <div class="login_landing_inner_right">&nbsp;</div>
         </div>
     </div>
 </div>

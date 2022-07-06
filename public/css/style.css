@@ -8264,7 +8264,7 @@ nav .pagination li.active .page-link {
     position: relative;
     z-index: 1;
 }
-
+.rfq_post_success .rfq_post_success_inner_right,
 .footer_topWrap_inner .footer_topWrap_inner_right_bg,
 .login_landing_inner .login_landing_inner_right {
     background: #ffffff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-left.png") no-repeat right center;
@@ -13216,8 +13216,12 @@ line-height: 30px;
 /* ****************Welcome and loginlanding page css start ******************* */
 .login_landing_wrap .login_landing_inner{
     margin: 0 auto;
-    padding: 80px 0 100px;
+    padding: 80px 20px;
     margin-bottom: -162px;
+}
+.login_landing_wrap .login_landing_inner p {
+    position: relative;
+    z-index: 9;
 }
 .login_landing_wrap .login_landing_inner h1 {
     font-family: "nexabold";
@@ -13226,6 +13230,8 @@ line-height: 30px;
     color: #285460;
     font-weight: 500;
     margin-bottom: 40px;
+    position: relative;
+    z-index: 9;
 }
 .login_landing_inner ul {
     display: -webkit-box;
@@ -13234,6 +13240,8 @@ line-height: 30px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    position: relative;
+    z-index: 9;
 }
 .login_landing_inner ul li {
     font-size: 20px;
@@ -13292,8 +13300,13 @@ line-height: 30px;
 }
 .rfq_post_success {
     text-align: center;
-    padding: 50px 0;
+    padding: 65px 20px 50px;
     font-size: 18px;
+    margin-bottom: -155px;
+}
+.rfq_post_success p {
+    position: relative;
+    z-index: 9;
 }
 .rfq_post_success h2 {
     font-family: "nexabold";
@@ -13302,6 +13315,8 @@ line-height: 30px;
     color: #285460;
     font-weight: 500;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 9;
 }
 .rfq_post_success h2 span {
     font-size: 40px;
@@ -15828,6 +15843,7 @@ line-height: 30px;
     .new_rfq_upload_form_wrap  {
         padding-top: 0;
     }
+    
 }
 
 @media only screen and (max-width: 900px) {
@@ -16902,6 +16918,20 @@ line-height: 30px;
     .new_rfq_upload_form_wrap p {
         margin-bottom: 35px !important;
     }
+
+    .login_landing_wrap .login_landing_inner,
+    .rfq_post_success {
+        margin-bottom: 0;
+        padding: 45px 20px;
+        background: none;
+    }
+    .login_landing_wrap .login_landing_inner h1 {
+        margin-bottom: 20px;
+    }
+    .rfq_post_success .rfq_post_success_inner_right, 
+    .login_landing_inner .login_landing_inner_right {
+        background: none;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -17777,10 +17807,14 @@ line-height: 30px;
         width: 300px;
         margin-bottom: 50px;
     }
+    .rfq_post_success h2,
     .login_landing_wrap .login_landing_inner h1,
     .welcome_wrap h1 {
         font-size: 28px;
         line-height: 38px;
+    }
+    .rfq_post_success h2 span {
+        font-size: 35px;
     }
     .login_landing_inner ul li {
         font-size: 16px;

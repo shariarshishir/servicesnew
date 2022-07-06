@@ -136,7 +136,7 @@ fclose($fp);
 Route::get('jsonDataForBusinessProfilesComapnyOverview', function(){
 
     $exportData = array();
-    $businessProfiles = BusinessProfile::with('companyOverview')->where('is_business_profile_verified', 1)->get();
+    $businessProfiles = BusinessProfile::with('companyOverview')->get();
     foreach($businessProfiles as $k => $businessProfile)
     {
         $dataArr = array();

@@ -8248,6 +8248,8 @@ nav .pagination li.active .page-link {
     position: relative;
     z-index: 1;
 }
+.rfq_post_success,
+.login_landing_inner,
 .footer_topWrap_inner {
     background: #ffffff url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/footer-half-logo-right.png") no-repeat -2px center;
     background-size: 165px;
@@ -13289,12 +13291,18 @@ line-height: 30px;
 .rfq_post_success {
     text-align: center;
     padding: 50px 0;
+    font-size: 18px;
 }
 .rfq_post_success h2 {
+    font-family: "nexabold";
+    font-size: 35px;
+    line-height: 45px;
+    color: #285460;
+    font-weight: 500;
     margin-bottom: 20px;
 }
 .rfq_post_success h2 span {
-    font-size: 35px;
+    font-size: 40px;
 }
 /* ****************Welcome and loginlanding page css end ******************* */
 
@@ -18149,12 +18157,16 @@ line-height: 30px;
         font-size: 14px;
     }
 
+    .rfq_post_success {
+        font-size: 14px;
+    }
     .rfq_post_success h2 {
         font-size: 22px;
+        line-height: 32px;
+        margin-bottom: 10px;
     }
-    
     .rfq_post_success h2 span {
-        font-size: 28px;
+        font-size: 25px;
     }
 
 }

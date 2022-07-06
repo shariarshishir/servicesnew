@@ -158,6 +158,26 @@ Route::get('jsonDataForBusinessProfilesComapnyOverview', function(){
     return response()->json($exportData);
 });
 
+Route::get('jsonDataForBusinessProfilesFactoryType', function(){
+
+    $exportData = array();
+    $businessProfiles = BusinessProfile::get();
+
+    foreach($businessProfiles as $k => $businessProfile)
+    {
+        $dataArr = array();
+        $dataArr['id'] = $businessProfile->id;
+        $dataArr['profile_name'] = $businessProfile->business_name;
+        $dataArr['factory_type'] = $businessProfile->factory_type;
+        array_push($exportData, $dataArr);
+    }
+
+    // echo "<pre>"; print_r($exportData); echo "</pre>";
+    // die();
+
+    return response()->json($exportData);
+});
+
 //test
 Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('generate.alias');
 //excel,csv user import

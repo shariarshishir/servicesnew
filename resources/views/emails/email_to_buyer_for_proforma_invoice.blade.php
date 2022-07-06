@@ -6,7 +6,7 @@
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
                         <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" title="logo" alt="logo">
+                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/logo.png" title="logo" alt="logo">
                         </a>
                     </td>
                 </tr>
@@ -55,8 +55,8 @@
                         <h2 style="font-family: 'Poppins', sans-serif; font-size: 22px; line-height: 40px; margin: 0; padding: 0px; color: #0A0A0A; font-weight: 600;">Bring the sourcing in your pocket</h2>
                         <h6 style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #0A0A0A; font-weight: 300; margin: 10px 0 20px; padding: 0px;">Download the App</h6>
                         <span>
-                            <a href="https://apps.apple.com/us/app/merchant-bay/id1590720968" target="_blank" style="margin: 0; padding: 0;" ><img width="150" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new-home/app-store.png" title="App store" alt="App store"></a>
-                            <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" target="_blank" style="margin: 0; padding: 0;"><img width="150" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/new-home/google-play.png" title="Google play" alt="Google play"></a>
+                            <a href="https://apps.apple.com/us/app/merchant-bay/id1590720968" target="_blank" style="margin: 0; padding: 0;" ><img width="150" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/app-store.png" title="App store" alt="App store"></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.sayemgroup.merchantbay" target="_blank" style="margin: 0; padding: 0;"><img width="150" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new-home/google-play.png" title="Google play" alt="Google play"></a>
                         </span>
                     </td>
                 </tr>

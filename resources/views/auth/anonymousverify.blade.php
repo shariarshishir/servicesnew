@@ -2,7 +2,7 @@
 @section('content')
 <div class="welcome_wrap center-align">
     <div class="welcome_inner_wrap">
-        <img class="logo-img" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" />
+        <img class="logo-img" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/logo.png" />
         <div class="welcome_inner">
             <h1>Welcome to the Merchant Bay</h1>
             <h5>Set your password to access your account</h5>

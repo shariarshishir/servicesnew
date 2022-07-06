@@ -7,7 +7,7 @@
                 <tr>
                     <td style="text-align:center; padding:0; margin: 0;">
                         <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/development.service.products/public/frontendimages/logo.png" title="logo" alt="logo">
+                            <img style="padding: 0; margin: 0;" width="250px" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/logo.png" title="logo" alt="logo">
                         </a>
                     </td>
                 </tr>
@@ -24,7 +24,7 @@
                         <div style="position: relative; display: flex; align-items: center; justify-content: center; height: 120px; padding: 0; margin: 0;">
                             <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; height: 120px; width: 100%; padding: 0; margin: 0;">
                                 <a style="margin: 0; padding: 0;" href="https://www.merchantbay.com/" title="logo" target="_blank">
-                                    <img style="padding: 0; margin: 0; border-radius: 8px;" width="100%" height="100%" src="{{ asset('storage/images/cover_img.png') }}" title="" alt="">
+                                    <img style="padding: 0; margin: 0; border-radius: 8px;" width="100%" height="100%" src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/cover_img.png" title="" alt="">
                                 </a>
                             </div>
                             <div style="font-family: 'Poppins', sans-serif; color: #fff; font-size: 22px; line-height: 28px; font-weight: 600; padding: 0; margin: 0; z-index: 9;">

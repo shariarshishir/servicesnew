@@ -95,7 +95,7 @@ $searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : 
                                                     @elseif($status == 1)
                                                         <h4>Ongoing PIs</h4>
                                                     @elseif($status == 4)
-                                                        <h4>All PIs</h4>    
+                                                        <h4>All PIs</h4>
                                                     @else
                                                         <h4>Shipped PIs</h4>
                                                     @endif
@@ -124,7 +124,12 @@ $searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : 
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            @foreach($proforma->performa_items as $item)
+                                                            @php
+                                                                $i = 0;
+                                                                $proformaCount = count($proforma->performa_items);
+                                                                foreach($proforma->performa_items as $item)
+                                                                {
+                                                            @endphp
                                                             <div class="col s6 m6 xl5">
                                                                 <p>Quantity <br/> <b>{{$item->unit}}</b></p>
                                                                 <p>Unit Price <br/> <b>{{$item->unit_price}} {{$item->price_unit}}</b></p>
@@ -134,7 +139,16 @@ $searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : 
                                                                 <p>Shipping Date <br/> <b>{{$proforma->proforma_date}}</b></p>
                                                                 <p>Total Price <br/> <b>{{$item->tax_total_price}}</b></p>
                                                             </div>
-                                                            @endforeach
+                                                            @if($proformaCount > 1)
+                                                            <p style="position:absolute;bottom:28px;right:35px;color:#54a958;">+ has more line item</p>
+                                                            @endif
+                                                            @php
+                                                                if($i == 0) {
+                                                                    break;
+                                                                }
+                                                                $i++;
+                                                                }
+                                                            @endphp
 
                                                         </div>
 
@@ -155,7 +169,7 @@ $searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : 
                                                             <div class="modal-footer">
                                                                 <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                                                             </div>
-                                                        </div>                                                        
+                                                        </div>
                                                     </div>
 
                                                     <div id="po_reject_modal" class="modal modal-fixed-footer">
@@ -168,14 +182,14 @@ $searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : 
                                                                         <label for="reject_message_box">Message</label>
                                                                         <textarea id="reject_message_box" name="reject_message" class="materialize-textarea"></textarea>
                                                                     </div>
-                                                                </div> 
-                                                                <button class="reject_message_submit waves-effect waves-light btn_green" type="submit">Submit</button>                                
+                                                                </div>
+                                                                <button class="reject_message_submit waves-effect waves-light btn_green" type="submit">Submit</button>
                                                             </form>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
                                                         </div>
-                                                    </div>                                                    
+                                                    </div>
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -198,15 +212,15 @@ $searchInput = isset($_REQUEST['poSearchInput']) ? $_REQUEST['poSearchInput'] : 
 @push('js')
 <script>
 $(document).ready(function(){
-    
+
     $(".reset_po_filter").click(function(){
         location.href = "{{route('new.profile.profoma_orders.pending', $alias)}}";
-    });    
+    });
 
     $(".po_reject_trigger").click(function(){
         $(".po_block_modal").modal("close");
         $(this).closest(".po_block").children("#po_reject_modal").modal("open");
-    })    
+    })
 
 })
 </script>

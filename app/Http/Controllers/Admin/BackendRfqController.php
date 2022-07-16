@@ -259,7 +259,7 @@ class BackendRfqController extends Controller
 
         $businessProfiles = BusinessProfile::with(['user','supplierQuotationToBuyer' => function ($q) use ($request){
             $q->where('rfq_id', 'LIKE',"%$request->rfq_id%");
-        } ])->where('factory_type',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->orderBy('profile_rating', 'DESC')->get();
+        } ])->where('factory_type',$request->category_id)->where('profile_rating','<=',$request->profile_rating)->where('profile_verified_by_admin', '!=', 0)->where('business_type', 'manufacturer')->orderBy('profile_rating', 'DESC')->get();
 
         $userSsoIds = [];
         foreach($businessProfiles as $profile){

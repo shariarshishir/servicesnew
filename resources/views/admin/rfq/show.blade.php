@@ -180,7 +180,7 @@
                                             </div>
                                             <div class="suppliers_textBox">
                                                 <div class="title_box">
-                                                    <h3>{{$businessProfile['business_name']}}</h3>
+                                                    <h3><a href="/{{$businessProfile['alias']}}" target="_blank">{{$businessProfile['business_name']}}</a></h3>
                                                     <div class="sms_img">
                                                         @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
                                                             <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span data-unseenmessagecount="{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }}" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
@@ -476,7 +476,7 @@
                                     html += '</div>';
                                     html += '<div class="suppliers_textBox">';
                                     html += '<div class="title_box">';
-                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<h3><a target="_blank" href=/'+item.alias+'>'+item.business_name+'</a></h3>';
                                     html += '<div class="sms_img">';
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
                                         html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'" data-businessprofilealias="'+item.alias+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
@@ -611,7 +611,7 @@
                                     html += '</div>';
                                     html += '<div class="suppliers_textBox">';
                                     html += '<div class="title_box">';
-                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<h3><a target="_blank" href=/'+item.alias+'>'+item.business_name+'</a></h3>';
                                     html += '<div class="sms_img">';
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
                                         html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'" data-businessprofilealias="'+item.alias+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
@@ -745,7 +745,7 @@
                                     html += '</div>';
                                     html += '<div class="suppliers_textBox">';
                                     html += '<div class="title_box">';
-                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<h3><a target="_blank" href=/'+item.alias+'>'+item.business_name+'</a></h3>';
                                     html += '<div class="sms_img">';
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
                                         html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'" data-businessprofilealias="'+item.alias+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';
@@ -1300,7 +1300,7 @@
                                     html += '</div>';
                                     html += '<div class="suppliers_textBox">';
                                     html += '<div class="title_box">';
-                                    html += '<h3>'+item.business_name+'</h3>';
+                                    html += '<h3><a target="_blank" href=/'+item.alias+'>'+item.business_name+'</a></h3>';
                                     html += '<div class="sms_img">';
                                     if(response.associativeArrayUsingIDandCount[item.user.sso_reference_id]){
                                         html += '<a href="javascript:void(0);" class="sms_trigger" data-business_name ="'+item.business_name+'" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="'+item.user.sso_reference_id+'" data-businessprofileid="'+item.id+'" data-businessprofilealias="'+item.alias+'"><i class="fa fa-envelope"></i><span data-unseenmessagecount="'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'" class="sso_id_'+item.user.sso_reference_id+'">'+response.associativeArrayUsingIDandCount[item.user.sso_reference_id]['count']+'</span></a>';

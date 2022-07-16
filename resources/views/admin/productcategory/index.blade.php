@@ -38,7 +38,7 @@
 							<th>Image</th>
 							<th>Product Category Name</th>
 							<th>Status</th>
-							<th class="text-center">Action</th>
+							<th class="text-center" style="display: none;">Action</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -52,7 +52,7 @@
 										@else
 										<img id="preview-image" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
 											alt="preview image">
-										@endif									
+										@endif
 									</td>
 									<td data-title="Product Category">
 										<a href="{{ route('product-categories.edit', $categoryitem['id']) }}">{{$categoryitem['name']}}</a>
@@ -64,7 +64,7 @@
 											<span class="badge badge-danger">Unpublished</span>
 										@endif
 									</td>
-									<td data-title="Action" class="text-center">
+									<td data-title="Action" class="text-center" style="display: none;">
 										<form action="{{ route('product-categories.destroy', $categoryitem['id']) }}" method="POST">
 											@csrf
 											@method('DELETE')
@@ -84,7 +84,7 @@
 										@else
 										<img id="preview-image" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
 											alt="preview image" >
-										@endif									
+										@endif
 										</td>
 										<td data-title="Product Category" class="sub-cat-item">
 											<a href="{{ route('product-categories.edit', $childcategoryitem['id']) }}">- {{$childcategoryitem['name']}}</a>
@@ -96,7 +96,7 @@
 												<span class="badge badge-danger">Unpublished</span>
 											@endif
 										</td>
-										<td data-title="Action" class="text-center">
+										<td data-title="Action" class="text-center" style="display: none;">
 											<form action="{{ route('product-categories.destroy', $childcategoryitem['id']) }}" method="POST">
 												@csrf
 												@method('DELETE')
@@ -119,7 +119,7 @@
 														<span class="badge badge-danger">Unpublished</span>
 													@endif
 												</td>
-												<td data-title="Action" class="text-center">
+												<td data-title="Action" class="text-center" style="display: none;">
 													<form action="{{ route('product-categories.destroy', $subchildcategoryitem['id']) }}" method="POST">
 														@csrf
 														@method('DELETE')
@@ -138,7 +138,7 @@
 						</tbody>
 					</table>
 				</div>
-                
+
 
            </div>
           </div>

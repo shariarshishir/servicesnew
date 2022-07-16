@@ -25,7 +25,7 @@
             var activeRfqId = $('.quotation_tab').attr("data-rfq_id");
 
             // message for supplier
-            if(data.factory == true && data.to_id == authUserId){ 
+            if(data.factory == true && data.to_id == authUserId){
                 var quotationClass = '.unseen_quotation_count_'+data.rfq_id;
                 var unseenQuotationCount = $(quotationClass).attr('data-unseen_quotation_count');
                 if(unseenQuotationCount == 0){
@@ -40,7 +40,7 @@
                 }
             }
             // message for buyer
-            else if(data.factory == false && data.to_id == authUserId){ 
+            else if(data.factory == false && data.to_id == authUserId){
                 var messageClass = '.unseen_message_count_'+data.rfq_id;
                 var unseenMessageCount = $(messageClass).attr('data-unseen_message_count');
                 if(unseenMessageCount == 0){
@@ -54,7 +54,7 @@
                     $(messageClass).attr('data-unseen_message_count', parseInt(unseenMessageCount)+1);
                 }
             }
-            
+
             if( data.from_id == authUserId && activeRfqId == data.rfq_id ){
                 var msgHtml = '<div class="rfq_message_box chat-right right">';
                     msgHtml += '<div class="chat-text right-align">';
@@ -69,7 +69,7 @@
                     msgHtml += '</div>';
                     msgHtml += '</div>';
             }
-            
+
             // message for all admins
             if(data.to_id == 5771) {
                 jQuery.ajax({
@@ -79,7 +79,7 @@
                     success : function(response){
                     }
                 });
-            }      
+            }
 
             $('.rfq_review_message_box').append(msgHtml);
         });
@@ -123,7 +123,7 @@
             socket.emit('new message', message);
             $(this).closest('.rfq_message_box_bottom').children('.messagebox').val('');
         });
-       
+
     });
 
 </script>
@@ -493,7 +493,7 @@
                             $('.rfq_review_message_box').append(html);
 
                         }
-                        
+
                     }
                 });
             });
@@ -521,7 +521,7 @@
                         $(unseenMessageCountClass).attr('data-unseen_message_count',0);
                         $(unseenMessageCountClass).text('');
                         $(unseenMessageCountClass).hide();
-                        
+
                         var html='<h6>RFQ ID <span>'+response.rfq.id+'</span></h6>';
                             html+='<h5>'+response.rfq.title+'</h5>';
                             html+='<span class="posted_time">'+response.rfq.created_at+'</span>';
@@ -572,6 +572,7 @@
 
             $('.quotation_tab').on('click',function(event){
                 event.preventDefault();
+                $('.rfq_review_results_box').empty();
                 let rfqId = $(this).attr("data-rfq_id");
                 $.ajax({
                     type:'GET',
@@ -591,14 +592,15 @@
                             //html+='<button class="btn_green">Ask for PI</button>';
                             html+='</div>';
                             html+='</div>';
-                            html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
-                            html+='<div class="new_rfq_review">';
+                            //html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
+                            //html+='<div class="new_rfq_review">';
                             //html+='<span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>';
                             //html+='<span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>';
                             //html+='<button class="btn_green">Issue PO</button>';
+                            //html+='</div>';
+                            //html+='</div>';
                             html+='</div>';
-                            html+='</div>';
-                            html+='</div>';
+                            $('.rfq_review_results_box').append(html);
                         }
                         $('.quotation_tab_li').addClass("active");
                         $('.message_tab_li').removeClass("active");
@@ -609,13 +611,14 @@
                         $(unseenQuotationCountClass).attr('data-unseen_quotation_count',0);
                         $(unseenQuotationCountClass).text('');
                         $(unseenQuotationCountClass).hide();
-                        $('.rfq_review_results_box').empty().append(html);
+                        //$('.rfq_review_results_box').empty().append(html);
                     }
                 });
             });
 
             $('.quotation-button').on('click',function(event){
                 event.preventDefault();
+                $('.rfq_review_results_box').empty();
                 let rfqId = $(this).attr("data-rfq_id");
                 $.ajax({
                     type:'GET',
@@ -635,14 +638,15 @@
                             //html+='<button class="btn_green">Ask for PI</button>';
                             html+='</div>';
                             html+='</div>';
-                            html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
-                            html+='<div class="new_rfq_review">';
+                            //html+='<div class="col s12 xl5 rfq_review_result_rightBox">';
+                            //html+='<div class="new_rfq_review">';
                             //html+='<span class="rfqEatting"><i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i> <i class="material-icons">star_border</i></span>';
                             //html+='<span class="rqf_verified"><img src="./images/account-images/rfq-verified.png" alt=""> Verified</span>';
                             //html+='<button class="btn_green">Issue PO</button>';
+                            //html+='</div>';
+                            //html+='</div>';
                             html+='</div>';
-                            html+='</div>';
-                            html+='</div>';
+                            $('.rfq_review_results_box').append(html);
                         }
                         var unseenQuotationCountClass = '.unseen_quotation_count_'+rfqId;
                         $(unseenQuotationCountClass).attr('data-unseen_quotation_count',0);
@@ -656,8 +660,8 @@
                         $('.message_tab_li').removeClass("active");
                         $('.rfq_quotation_box').show();
                         $('.rfq_message_box').hide();
-                        $('.rfq_review_results_box').empty().append(html);
-                        
+                        //$('.rfq_review_results_box').empty().append(html);
+
                     }
                 });
             });

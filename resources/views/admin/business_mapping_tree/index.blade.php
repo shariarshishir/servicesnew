@@ -36,7 +36,7 @@
 						<thead class="cf">
 						<tr>
 							<th>Name</th>
-							<th class="text-center">Action</th>
+							<th class="text-center" style="display: none;">Action</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -46,7 +46,7 @@
 									<td data-title="Product Category">
 										<a href="{{ route('admin.business-mapping-tree.edit', $categoryitem['id']) }}">{{$categoryitem['name']}}</a>
 									</td>
-									<td data-title="Action" class="text-center">
+									<td data-title="Action" class="text-center" style="display: none;">
 										<form action="{{ route('admin.business-mapping-tree.destroy', $categoryitem['id']) }}" method="POST">
 											@csrf
 											@method('DELETE')
@@ -62,7 +62,7 @@
 										<td data-title="Product Category" class="sub-cat-item">
 											<a href="{{ route('admin.business-mapping-tree.edit', $childcategoryitem['id']) }}">- {{$childcategoryitem['name']}}</a>
 										</td>
-										<td data-title="Action" class="text-center">
+										<td data-title="Action" class="text-center" style="display: none;">
 											<form action="{{ route('admin.business-mapping-tree.destroy', $childcategoryitem['id']) }}" method="POST">
 												@csrf
 												@method('DELETE')
@@ -78,7 +78,7 @@
 												<td data-title="ID" class="second-sub-cat-item">
 													<a href="{{ route('admin.business-mapping-tree.edit', $subchildcategoryitem['id']) }}">-- {{$subchildcategoryitem['name']}}</a>
 												</td>
-												<td data-title="Action" class="text-center">
+												<td data-title="Action" class="text-center" style="display: none;">
 													<form action="{{ route('admin.business-mapping-tree.destroy', $subchildcategoryitem['id']) }}" method="POST">
 														@csrf
 														@method('DELETE')

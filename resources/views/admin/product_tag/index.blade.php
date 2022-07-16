@@ -37,7 +37,7 @@
 						<tr>
 							<th>Tag Name</th>
                             <th>Tag Factory Types</th>
-							<th class="text-center">Action</th>
+							<th class="text-center" style="display: none;">Action</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -48,7 +48,7 @@
 										<a href="{{ route('admin.product-tag.edit', $item->id) }}">{{$item->name}}</a>
 									</td>
                                     <td>@if($item->tagMapping) @foreach ($item->tagMapping as $tag){{$tag->name}} @if(!$loop->last) , @endif @endforeach @endif</td>
-									<td data-title="Action" class="text-center">
+									<td data-title="Action" class="text-center" style="display: none;">
 										<form action="{{ route('admin.product-tag.destroy', $item->id) }}" method="POST">
 											@csrf
 											@method('DELETE')

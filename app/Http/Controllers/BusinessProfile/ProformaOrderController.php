@@ -32,7 +32,7 @@ class ProformaOrderController extends Controller
         $status = 2;
         return view('new_business_profile.proforma_orders',compact('proformas','alias','status','business_profile'));
     }
-    
+
     public function acceptProformaOrder($alias,$proformaId)
     {
         $proformaOrder = Proforma::where('id',$proformaId)->first();
@@ -50,10 +50,11 @@ class ProformaOrderController extends Controller
         return redirect()->route('new.profile.profoma_orders.pending',$alias);
     }
 
-    public function proformaSearchByTitle(Request $request, $alias) 
+    public function proformaSearchByTitle(Request $request, $alias)
     {
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
         $proformas = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('buyer_id',auth()->id())->where('proforma_id', 'like', '%'.$request->poSearchInput.'%')->get();
         $status = 4;
-        return view('new_business_profile.proforma_orders',compact('proformas','alias', 'status'));
+        return view('new_business_profile.proforma_orders',compact('proformas','alias', 'status', 'business_profile'));
     }
 }

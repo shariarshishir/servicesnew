@@ -53,7 +53,7 @@ p {
 .main-header {
     padding: 10px;
 }
-.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, 
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
 .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
     background-color: #55a860;
 }
@@ -110,7 +110,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     -ms-user-select: none;
     user-select: none;
 }
-[type="checkbox"]:not(:checked), 
+[type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
     position: absolute;
     opacity: 0;
@@ -119,7 +119,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
     width: auto !important;
 }
-[type="checkbox"]+span:not(.lever):before, 
+[type="checkbox"]+span:not(.lever):before,
 [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
     content: '';
     position: absolute;
@@ -140,7 +140,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     -webkit-transform: scale(0);
     transform: scale(0);
 }
-[type="checkbox"]+span:not(.lever):before, 
+[type="checkbox"]+span:not(.lever):before,
 [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
     content: '';
     position: absolute;
@@ -345,7 +345,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-size: 20px;
     margin-top: 7px;
 }
-.admin-notification-dropdown .dropdown-menu .dropdown-item.active, 
+.admin-notification-dropdown .dropdown-menu .dropdown-item.active,
 .admin-notification-dropdown .dropdown-menu .dropdown-item:active {
     background-color: #eee;
     color: #16181b;
@@ -505,7 +505,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     padding: 0 10px 1px;
 }
 .admin_blog_form .form-control {
-    height: inherit; 
+    height: inherit;
 }
 .admin_blog_form .btn-group .fas {
     font-size: 12px;
@@ -543,7 +543,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .admin_order_query_table thead th,
 .admin_order_create_form thead th {
-    padding: 10px;    
+    padding: 10px;
 }
 .admin_order_create_form .ord-mod-color-sizes td {
     padding: 3px;
@@ -651,7 +651,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 .data-filter-bar .btn_green {
     font-size: 14px;
     margin-right: 0;
-} 
+}
 .table.table-striped a.colorSizeModal {
     display: block;
 }
@@ -714,14 +714,14 @@ label:not(.form-check-label):not(.custom-file-label) {
     margin-bottom: 0;
 }
 .purchase_order_wrap label{
-    font-weight: 600;    
+    font-weight: 600;
     font-size: 14px;
 }
 .has_feedback_wrap .has-feedback label {
     display: block;
 }
 .invoice_terms_conditions .list-group-item label {
-    font-weight: 400 !important;  
+    font-weight: 400 !important;
     font-size: 16px;
 }
 .invoice_terms_conditions .list-group-item {
@@ -1032,7 +1032,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 .rfq_admin_chat_topwrap .pro_omg span {
     font-size: 20px;
     font-weight: 600;
-    color: #4E9C52;    
+    color: #4E9C52;
 }
 .rfq_admin_chat_topwrap .pro_omg img {
     height: 100%;
@@ -1047,7 +1047,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-size: 18px;
     color: #000000;
     line-height: 20px;
-} 
+}
 .rfq_admin_chat_topwrap .chat_info_rightWrap {
     font-size: 14px;
     color: #000000;
@@ -1138,6 +1138,9 @@ label:not(.form-check-label):not(.custom-file-label) {
     -webkit-box-orient: vertical;
     max-height: 30px;
     width: 80%;
+}
+.matched_suppliers_wrap .suppliers_textBox .title_box h3 a {
+    color: #000;
 }
 .matched_suppliers_wrap .sms_img {
     float: right;
@@ -1588,7 +1591,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 .proforma_invoices_wrap label:not(.form-check-label):not(.custom-file-label) {
     font-weight: 500;
 }
-.shipping_details_table #shipping-details-table-body .select2, 
+.shipping_details_table #shipping-details-table-body .select2,
 .shipping_details_table table #shipping-details-table-body input {
     width: 178px !important;
 }
@@ -1627,8 +1630,8 @@ label:not(.form-check-label):not(.custom-file-label) {
 .invoice_terms_conditions .add_more_condi a:hover {
     color: #73D578;
 }
-.invoice_terms_conditions .btn-danger:not(:disabled):not(.disabled), 
-.invoice_terms_conditions .btn-danger:not(:disabled):not(.disabled), 
+.invoice_terms_conditions .btn-danger:not(:disabled):not(.disabled),
+.invoice_terms_conditions .btn-danger:not(:disabled):not(.disabled),
 .invoice_terms_conditions .show>.btn-danger.dropdown-toggle {
     background: none !important;
     border: none !important;
@@ -1738,47 +1741,47 @@ label:not(.form-check-label):not(.custom-file-label) {
     .no_more_tables {
         padding: 10px 5px;
     }
-	
+
 	/* Force table to not be like tables anymore */
-	.no_more_tables table, 
-	.no_more_tables thead, 
-	.no_more_tables tbody, 
-	.no_more_tables th, 
-	.no_more_tables td, 
-	.no_more_tables tr { 
-		display: block; 
+	.no_more_tables table,
+	.no_more_tables thead,
+	.no_more_tables tbody,
+	.no_more_tables th,
+	.no_more_tables td,
+	.no_more_tables tr {
+		display: block;
 	}
     .no_more_tables tr {
         margin-bottom: 1admin_products_list_wrap5px;
     }
 	/* Hide table headers (but not display: none;, for accessibility) */
-	.no_more_tables thead tr { 
+	.no_more_tables thead tr {
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
-	.no_more_tables tr { 
-        border: 1px solid #ccc !important; 
+	.no_more_tables tr {
+        border: 1px solid #ccc !important;
     }
-	.no_more_tables td { 
+	.no_more_tables td {
 		/* Behave  like a "row" */
 		border: none;
-		border-bottom: 1px solid #eee; 
+		border-bottom: 1px solid #eee;
 		position: relative;
-		padding-left: 50% !important; 
+		padding-left: 50% !important;
 		white-space: normal;
 		text-align:left;
         text-align: left !important;
         min-height: 25px;
 	}
-	.no_more_tables td:before { 
+	.no_more_tables td:before {
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
 		top: 7px;
 		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
+		width: 45%;
+		padding-right: 10px;
 		white-space: inherit;
 		text-align:left;
 		font-weight: bold;
@@ -1834,7 +1837,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     legend {
         font-size: 16px;
     }
-    .dataTables_wrapper .dataTables_filter, 
+    .dataTables_wrapper .dataTables_filter,
     .dataTables_wrapper .dataTables_length {
         padding: 0;
     }
@@ -1847,10 +1850,10 @@ label:not(.form-check-label):not(.custom-file-label) {
     .admin_products_list_wrap .filter_by span {
         font-size: 9px;
         line-height: 12px;
-    } 
+    }
     .admin_products_list_wrap .product_filter_button .fa-filter {
         font-size: 14px;
-    }   
+    }
 }
 
 @media only screen and (max-width: 420px) {

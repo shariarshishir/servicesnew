@@ -36,7 +36,7 @@
 						<thead class="cf">
 						<tr>
 							<th>Title</th>
-							<th class="text-center">Action</th>
+							<th class="text-center" style="display: none;">Action</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -46,7 +46,7 @@
 									<td data-title="Product Category">
 										<a href="{{ route('admin.product-type-mapping.edit', $categoryitem['id']) }}">{{$categoryitem['title']}}</a>
 									</td>
-                                    <td data-title="Action" class="text-center">
+                                    <td data-title="Action" class="text-center" style="display: none;">
                                         <form action="{{ route('admin.product-type-mapping.destroy', $categoryitem['id']) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -62,7 +62,7 @@
 										<td data-title="Product Category" class="sub-cat-item">
 											<a href="{{ route('admin.product-type-mapping.edit', $childcategoryitem['id']) }}">- {{$childcategoryitem['title']}}</a>
 										</td>
-										<td data-title="Action" class="text-center">
+										<td data-title="Action" class="text-center" style="display: none;">
 											<form action="{{ route('admin.product-type-mapping.destroy', $childcategoryitem['id']) }}" method="POST">
 												@csrf
 												@method('DELETE')
@@ -79,7 +79,7 @@
 													<a href="{{ route('admin.product-type-mapping.edit', $subchildcategoryitem['id']) }}">-- {{$subchildcategoryitem['title']}}</a>
 												</td>
 
-												<td data-title="Action" class="text-center">
+												<td data-title="Action" class="text-center" style="display: none;">
 													<form action="{{ route('admin.product-type-mapping.destroy', $subchildcategoryitem['id']) }}" method="POST">
 														@csrf
 														@method('DELETE')

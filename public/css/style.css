@@ -10760,6 +10760,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border-bottom: none;
     padding-bottom: 0;
 }
+.rfq_review_results_box .row {
+    padding-bottom: 15px;
+}
+.rfq_review_results_box .row:last-child {
+    padding-bottom: 0px;
+}
 .rfq_review_results_box .new_rfq_avatar {
     width: 50px;
     height: 50px;
@@ -17077,14 +17083,14 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         border: none;
     }
 
-    .profile_tabNav_wrap .profile_table_design table td, 
+    .profile_tabNav_wrap .profile_table_design table td,
     .profile_tabNav_wrap .profile_table_design table th {
         width: 100%;
         padding: 5px;
     }
-    .profile_tabNav_wrap table td, 
-    .profile_tabNav_wrap table th, 
-    .account_profile_wrapper table td, 
+    .profile_tabNav_wrap table td,
+    .profile_tabNav_wrap table th,
+    .account_profile_wrapper table td,
     .account_profile_wrapper table th {
         padding: 5px;
     }

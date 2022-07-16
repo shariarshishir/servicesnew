@@ -463,7 +463,14 @@
                     type:'GET',
                     url: "{{route('auth_user_conversations.by_rfq_id')}}",
                     data:{ rfqId: rfqId},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
                     success: function (response) {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+
                         $('.quotation_tab_li').removeClass("active");
                         $('.message_tab_li').addClass("active");
                         $('.rfq_quotation_box').hide();
@@ -505,7 +512,14 @@
                     type:'GET',
                     url: "{{route('auth_user_conversations.by_rfq_id')}}",
                     data:{ rfqId: rfqId},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
                     success: function (response) {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+
                         $('.quotation_tab').attr("data-rfq_id",rfqId);
                         $('.message_tab').attr("data-rfq_id",rfqId);
                         var rfqBoxClass = '.rfq_box_'+rfqId;
@@ -578,7 +592,14 @@
                     type:'GET',
                     url: "{{route('auth_user_quotations.by_rfq_id')}}",
                     data:{ rfqId: rfqId},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
                     success: function (response) {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+
                         for(var i=0;i<response.quotations.length;i++){
                             var html ='<div class="row">';
                             html+='<div class="col s12 xl2 rfq_review_result_leftBox">';
@@ -624,7 +645,14 @@
                     type:'GET',
                     url: "{{route('auth_user_quotations.by_rfq_id')}}",
                     data:{ rfqId: rfqId},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
                     success: function (response) {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+
                         for(var i=0;i<response.quotations.length;i++){
                             var html ='<div class="row">';
                             html+='<div class="col s12 xl2 rfq_review_result_leftBox">';

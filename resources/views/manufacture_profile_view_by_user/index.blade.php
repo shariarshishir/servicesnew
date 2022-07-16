@@ -39,7 +39,7 @@
 						<div class="col s8 m6 l12 profile_left_address_wrap">
 							<div class="office_address center-align ">
 								<h3>{{$business_profile->business_name}}</h3>
-								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
+								<p>@php echo ($business_profile->business_type=='manufacturer')?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->businessCategory->name}}</p>
 								<h4><span class="material-icons">pin_drop</span> <span class="pro_location"> {{$business_profile->location}} </span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 							</div>
 						</div>
@@ -151,7 +151,7 @@
                                 </div>
                                 @endif
                                 @if($company_overview->name=='production_capacity')
-                                <div class="col s6 m3 l3">
+                                <div class="col s6 m3 l2">
                                     <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/production.png')}}" alt="" />
                                     <div class="title">Production Capacity</div>
                                     <div class="quantity {{$company_overview->name}}_value">{{$company_overview->value}}pcs</div>
@@ -170,7 +170,7 @@
                                 @endif
                                 @if($company_overview->name=='number_of_female_worker')
                                     @if(isset($company_overview->value))
-                                    <div class="col s6 m3 l3">
+                                    <div class="col s6 m3 l2">
                                         <div class="company_stuff_img">
                                             <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/human.png')}}" alt="" />
                                         </div>
@@ -249,7 +249,7 @@
 														<a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >
 															<div class="imgBox">
 																@foreach($product->product_images as $image)
-																	<img src="{{asset('storage/'.$image->product_image)}}" class="single-product-img" alt="" />
+																	<img src="{{Storage::disk('s3')->url('public/'.$image->product_image)}}" class="single-product-img" alt="" />
 																	@break
 																@endforeach
 															</div>
@@ -1053,7 +1053,9 @@
                                         <div class="col s6 m4 l2 paper_img press-highlight-img">
                                             <a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
                                             <div class="press_img">
-                                                <img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
+												<div class="press_img_box">
+													<img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
+												</div>
                                             </div>
                                         </div>
                                     @endforeach

@@ -1324,7 +1324,9 @@
                 html +='<div class="col s6 m4 l2 paper_img press-highlight-img">';
                 html +='<a style="display: none;" href="javascript:void(0)" data-id="'+pressHighlights[i].id+'" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>';
                 html +='<div class="press_img">';
+                html +='<div class="press_img_box">';
                 html +='<img src="'+image+'" alt="">';
+                html +='</div>';
                 html +='</div>';
                 html +='</div>';
 
@@ -1412,7 +1414,9 @@
                                         html +='<div class="col s6 m4 l2 paper_img press-highlight-img">';
                                         html +='<a style="display: none;" href="javascript:void(0)" data-id="'+pressHighlights[i].id+'" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>';
                                         html +='<div class="press_img">';
+                                        html +='<div class="press_img_box">';
                                         html +='<img src="'+image+'" alt="">';
+                                        html +='</div>';
                                         html +='</div>';
                                         html +='</div>';
                                         $('.press-highlight-block').append(html);

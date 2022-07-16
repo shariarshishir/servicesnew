@@ -102,7 +102,9 @@ $profileEditMode = Request::get('editmode');
 				<div class="col s6 m4 l2 paper_img press-highlight-img">
 					<a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
 					<div class="press_img">
-						<img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
+						<div class="press_img_box">
+							<img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
+						</div>
 					</div>
 				</div>
 			@endforeach

@@ -39,7 +39,7 @@
 						<div class="col s8 m6 l12 profile_left_address_wrap">
 							<div class="office_address center-align ">
 								<h3>{{$business_profile->business_name}}</h3>
-								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
+								<p>@php echo ($business_profile->business_type=='manufacturer')?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 								<h4><span class="material-icons">pin_drop</span> <span class="pro_location"> {{$business_profile->location}}</span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" alt="" style="display: none;" /> </h4>
 							</div>
 						</div>
@@ -269,7 +269,9 @@
                                                 <div class="col s6 m4 l2 paper_img press-highlight-img">
                                                     <a href="javascript:void(0)" style="display: none;"data-id="{{$pressHighlight->id}}" class="remove-press-highlight"><i class="material-icons dp48">remove_circle_outline</i></a>
                                                     <div class="press_img">
-                                                        <img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
+														<div class="press_img_box">
+															<img src="{{ Storage::disk('s3')->url('public/'.$pressHighlight->image) }}" alt="" />
+														</div>
                                                     </div>
                                                 </div>
                                             @endforeach

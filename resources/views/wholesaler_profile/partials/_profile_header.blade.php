@@ -45,7 +45,7 @@ $profileEditMode = Request::get('editmode');
 						<div class="col s8 m6 l12 profile_left_address_wrap">
 							<div class="office_address center-align ">
 								<h3 itemprop="legalName">{{$business_profile->business_name}}</h3>
-								<p>@php echo ($business_profile->business_type==1)?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
+								<p>@php echo ($business_profile->business_type=='manufacturer')?'Manufacturer':'Wholesaler'; @endphp, {{$business_profile->industry_type}}</p>
 								<h4><span class="material-icons">pin_drop</span><span class="pro_location" itemprop="location" itemscope itemtype="https://schema.org/Place"> {{$business_profile->location}} </span> <img src="{{asset('images/frontendimages/new_layout_images/bd_flg.png')}}" style="display: none;" alt="" /> </h4>
 							</div>
 						</div>

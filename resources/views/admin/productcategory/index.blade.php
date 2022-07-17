@@ -25,7 +25,7 @@
           <div class="col-md-12">
 		  	<div class="row" style="padding-bottom: 20px;">
 				<div class="col-lg-12">
-					<a href="{{route('product-categories.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New productCategory</a>
+					<a href="{{route('product-categories.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New product Category</a>
 				</div>
 			</div>
             <div class="card admin_categories_list">

@@ -3740,7 +3740,7 @@ div.dataTables_wrapper table.mdc-data-table__table {
     border: 1px solid #b5b5b5;
     border-top: none;
     overflow: hidden;
-    padding: 10px 15px;
+    padding: 10px;
 }
 .blog_single_item_box .blog_info_box_wrap {
     height: 48px;
@@ -13617,6 +13617,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    font-family: 'nexabold';
     font-size: 14px;
     font-weight: bold;
     padding-top: 2px;
@@ -15647,7 +15648,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         background: #e4e4e4;
         margin-top: 0;
         border-radius: 10px;
-        padding: 10px 10px 5px;
+        padding: 10px 10px 0;
     }
     .profile_wholesaler_tab_menu {
         padding-bottom: 10px;
@@ -17087,6 +17088,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_tabNav_wrap .profile_table_design table th {
         width: 100%;
         padding: 5px;
+    }
+    .profile_tabNav_wrap .profile_table_design .overview_table_first_table td {
+        width: 50%;
     }
     .profile_tabNav_wrap table td,
     .profile_tabNav_wrap table th,
@@ -18944,31 +18948,11 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .chatting_app_wrapper .content-area .card {
         padding-top: 45px !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user {
         display: block !important;
     }
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .info-section,
-    .chat-application
-        .app-chat
-        .chat-content
-        .sidebar
-        .sidebar-chat
-        .chat-list
-        .chat-user
-        .user-section {
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .info-section,
+    .chat-application .app-chat .chat-content .sidebar .sidebar-chat .chat-list .chat-user .user-section {
         width: 100% !important;
     }
     .profile_not_updated {
@@ -19216,17 +19200,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .rfq_content_box .rfq_profile_detail .responses_wrap .btn_responses {
         margin-left: 5px;
     }
-    .account_profile_box
-        .profile_account_dev_tech
-        .modal
-        .create_new_tech_pac_modal
-        .select_tech_pack_picture_modal
-        .modal_body
-        ul
-        li {
+    .account_profile_box .profile_account_dev_tech .modal .create_new_tech_pac_modal .select_tech_pack_picture_modal .modal_body ul li {
         width: 100%;
     }
-
     .new_rfq_upload_form_wrap .btn_green,
     .new_rfq_upload_form_wrap .btn_rfq_post,
     .new_rfq_upload_form_wrap .modal-content .btn_rfq_post,
@@ -19248,9 +19224,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .rfq_post_success h2 span {
         font-size: 25px;
     }
-
+    .factory_imgbox_wrap .col.s6.m4, 
+    .factory_imgbox_wrap .factory_image_gallery .col.s6.m4,
     .certifications .certificate_img_wrap {
-        width: 50%;
+        width: 50% !important;
     }
 }
 

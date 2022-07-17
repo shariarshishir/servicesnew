@@ -351,7 +351,7 @@
 								</div>
 
 							</div>
-							<div class="overview_table box_shadow">
+							<div class="overview_table box_shadow overview_table_first_table">
 								<table>
 									<tbody>
 										@foreach (json_decode($business_profile->companyOverview->data) as $company_overview)

@@ -204,7 +204,7 @@
 									<h3>Company Overview</h3>
 								</div>
 							</div>
-							<div class="overview_table box_shadow">
+							<div class="overview_table box_shadow overview_table_first_table">
 								<table>
 									<tbody>
 										@if(count(json_decode($business_profile->companyOverview->data))>0)

@@ -608,7 +608,7 @@ label:not(.form-check-label):not(.custom-file-label) {
     max-height: 30px;
 }
 .admin_categories_list tr td .btn-success {
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     display: inline-block;
 }
 .no_more_tables table {
@@ -1733,6 +1733,46 @@ label:not(.form-check-label):not(.custom-file-label) {
     display: block;
     font-size: 0;
 }
+.blog_meta_image_wrap .meta_image img {
+    height: 120px;
+    width: auto;
+    min-height: 100px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.admin_business_profile_details .radio-inline input[type=radio] {
+    margin-top: 1px;
+}
+.admin_business_profile_details #company_overview .shift_details_status,
+.admin_business_profile_details .categories-produced-table-block td:last-child,
+.admin_business_profile_details .machinaries-details-table-block td:last-child,
+.admin_business_profile_details .categories-produced-table-block th:last-child,
+.admin_business_profile_details .machinaries-details-table-block th:last-child {
+    width: 220px;
+    text-align: center;
+}
+.admin_order_list_table_wrap .orders-table tr th,
+.admin_order_list_table_wrap .orders-table tr td:first-child,
+.admin_order_list_table_wrap .orders-table tr td:nth-child(2),
+.certification_list_wrap .certification_table thead th,
+.admin_categories_list .blog_list_table tr td:first-child,
+.admin_categories_list .blog_list_table tr td:last-child,
+.admin_categories_list .blog_list_table tr th:first-child,
+.admin_categories_list .blog_list_table tr th:last-child {
+    white-space: nowrap;
+}
+.admin_business_profile_details .table tr td:last-child,
+.admin_business_profile_details .table tr th:last-child,
+.dataTables_wrapper .users-table tr th:last-child,
+.dataTables_wrapper .users-table tr td:last-child,
+.admin_order_list_table_wrap .orders-table tr td:first-child,
+.admin_order_list_table_wrap .orders-table tr td:nth-child(2),
+.admin_order_list_table_wrap .orders-table tr td:last-child,
+.admin_order_list_table_wrap .orders-table tr th,
+#DataTables_Table_0_wrapper .admin-proforma-table tr td:first-child {
+    text-align: center;
+}
+
 /* ************** Media css start ******************* */
 
 @media only screen and (min-width: 1500px) {}

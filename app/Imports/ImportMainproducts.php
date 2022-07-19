@@ -41,14 +41,20 @@ WithValidation
     public function collection(Collection $rows)
     {
 
-        $businessProfilesIdFromCsv = [];
+        // $businessProfilesIdFromCsv = [];
+        // foreach ($rows as $row)
+        // {
+        //     array_push($businessProfilesIdFromCsv, $row['id']);
+        //     $company_overview = CompanyOverview::whereIn('business_profile_id',$businessProfilesIdFromCsv)->get()->toArray();
+        // }
+
+        // return response()->json(['companyOverview' => $company_overview], 200);
+
         foreach ($rows as $row)
         {
-            array_push($businessProfilesIdFromCsv, $row['id']);
-            $company_overview = CompanyOverview::whereIn('business_profile_id',$businessProfilesIdFromCsv)->get()->toArray();
+            BusinessProfile::where('id', $row['id'])->update(['factory_type' => $row['factory_type']]);
         }
 
-        return response()->json(['companyOverview' => $company_overview], 200);
     }
 
     public function rules(): array

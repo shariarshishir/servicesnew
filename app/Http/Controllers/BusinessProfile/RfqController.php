@@ -751,10 +751,20 @@ class RfqController extends Controller
 
     }
 
-    public function create()
+    public function create($flag = false, $product_id = NULL)
     {
         if(auth()->user())
         {
+            if($flag == 'mb' && $product_id != NULL)
+            {
+                $product = ManufactureProduct::with('product_images')->where('id', $product_id)->first();
+            }
+
+            if($flag == 'shop' && $product_id != NULL)
+            {
+                $product = WholesalerProduct::with('images')->where('id', $product_id)->first();
+            }
+
             $businessProfiles = BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
 
             $profileAlias = "";
@@ -767,7 +777,7 @@ class RfqController extends Controller
                 $profileAlias = $businessProfiles['alias'];
             }
 
-            return view('rfq.create',compact('profileAlias'));
+            return view('rfq.create',compact('profileAlias', 'flag', 'product'));
         }
         else
         {

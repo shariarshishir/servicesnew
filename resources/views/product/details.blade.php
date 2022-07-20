@@ -787,7 +787,7 @@ $reviewsCount = count($productReviews);
                                     @endif
 
                                     @if(Auth::guard('web')->check())
-                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#create-rfq-form">Request for Quotation</button>
+                                        <a type="button" class="btn waves-effect waves-light green btn_grBorder request_quotation" href="{{route('rfq.create',[$product->flag, $product->id])}}">Request for Quotation</a>
                                     @else
                                         <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#login-register-modal">Request for Quotation</button>
                                     @endif

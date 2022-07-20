@@ -9,12 +9,9 @@
         <form action="" method="POST" class="signup-form" id='alias-submit-form' enctype="multipart/form-data">
             <input type="hidden" name="business_profile_id" value="{{$business_profile->id}}">
             <div class="row input-field" style="margin-bottom: 20px;">
-                <div class="col s12" style="position: relative;">
+                <div class="col s12 m12 l6" style="position: relative;">
                     <label style="margin: 0 0 10px 0; padding:0;">Customize Your Profile Url</label>
-                    <input type="text" class="form-control"
-                        style="box-shadow: none !important;
-                        border-bottom: 1px solid #9e9e9e !important;
-                        border-radius: 0;"   name="alias" value="{{$business_profile->alias}}">
+                    <input type="text" class="form-control input_profile_url"  name="alias" value="{{$business_profile->alias}}">
                     <button
                         style="position: absolute;
                         right: 15px;

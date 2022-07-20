@@ -183,6 +183,8 @@ Route::get('generate-alias', [ImportController::class, 'generateAlias'])->name('
 //excel,csv user import
 Route::get('import',[ImportController::class, 'importView'])->name('import.view');
 Route::post('import',[ImportController::class, 'import'])->name('import');
+Route::get('import-mainproducts',[ImportController::class, 'importMainproductsView'])->name('import.main.products.view');
+Route::post('import-mainproducts',[ImportController::class, 'importMainproducts'])->name('import.main.products');
 Route::fallback(function () {
     return view('404');
 });

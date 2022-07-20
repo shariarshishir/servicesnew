@@ -116,7 +116,7 @@ class BusinessProfileController extends Controller
                     event(new NewBusinessProfileHasCreatedEvent($business_profile));
                     return response()->json([
                         'success' => true,
-                        'redirect_url' => route('business.profile'),
+                        'redirect_url' => route('users.profile'),
                         'msg' => 'Profile Created Successfully',
                     ],200);
                 }
@@ -169,7 +169,7 @@ class BusinessProfileController extends Controller
 
                     return response()->json([
                         'success' => true,
-                        'redirect_url' => route('business.profile'),
+                        'redirect_url' => route('users.profile'),
                         'msg' => 'Profile Created Successfully',
                     ],200);
                 }

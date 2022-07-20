@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportUser;
+use App\Imports\ImportMainproducts;
 use App\Models\BusinessMappingTree;
 use App\Models\BusinessProfile;
 use App\Models\Manufacture\Product as ManufactureProduct;
@@ -27,6 +28,41 @@ class ImportController extends Controller
         $file = $request->file('import_file');
 
         $import = new ImportUser;
+        $import->import($file);
+
+        // $import=Excel::import(new ImportUser, $request->file('import_file') );
+
+
+        // if ($import->failures()->isNotEmpty()) {
+        //     return back()->withFailures($import->failures());
+        // }
+        return back()->withStatus('Import successfull.');
+
+
+        // try{
+
+        //     $import=Excel::import(new ImportUser, $request->file('import_file') );
+        //     return $import;
+        //     return redirect()->back()->with('success', 'file inserted successfully');
+
+        // }catch(\Exception $e) {
+        //     return redirect()->back()->with('error', $e->getMessage());
+        // }
+    }
+
+    public function importMainproductsView()
+    {
+        return view('import.mainproductsindex');
+    }
+
+    public function importMainproducts(Request $request)
+    {
+        $request->validate([
+            'import_file' => 'required',
+        ]);
+        $file = $request->file('import_file');
+
+        $import = new ImportMainproducts;
         $import->import($file);
 
         // $import=Excel::import(new ImportUser, $request->file('import_file') );

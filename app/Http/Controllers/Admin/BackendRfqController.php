@@ -87,18 +87,51 @@ class BackendRfqController extends Controller
         // $industry_unique= array_unique($industry_type);
         // $industry_values= array_values($industry_unique);
 
+        $product_tag_for_parent_id = ProductTag::with('tagMapping')->whereIn('id',$rfq['category_id'])->get();
+        $factory_type_as_tag_parent = [];
+        foreach($product_tag_for_parent_id as $tag){
+            foreach($tag->tagMapping as $mapping){
+                array_push($factory_type_as_tag_parent,$mapping->name);
+            }
+        }
+
         $businessProfiles = BusinessProfile::select('business_profiles.*')
         ->leftJoin('rfq_quotation_sent_supplier_to_buyer_rel', 'rfq_quotation_sent_supplier_to_buyer_rel.business_profile_id', '=', 'business_profiles.id')
         ->with(['user','supplierQuotationToBuyer'=> function($q) use ($id){
             $q->where('rfq_id', $id);}])
         ->whereIn('factory_type',$factory_type_value)
+        ->orWhereIn('factory_type',$factory_type_as_tag_parent)
         //->whereIn('industry_type',$industry_values)
-        ->where('business_type', 'manufacturer')
+        //->where('business_type', 'manufacturer')
         ->where('profile_verified_by_admin', '!=', 0)
         ->groupBy('business_profiles.id')
         ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
         ->get()
         ->toArray();
+
+        // Data fetching for tags parents start
+        /*
+        $product_tag_for_parent_id = ProductTag::with('tagMapping')->whereIn('id',$rfq['category_id'])->get();
+        $factory_type_as_tag_parent = [];
+        foreach($product_tag_for_parent_id as $tag){
+            foreach($tag->tagMapping as $mapping){
+                array_push($factory_type_as_tag_parent,$mapping->name);
+            }
+        }
+
+        $businessProfilesForTagsParent = BusinessProfile::select('business_profiles.*')
+        ->leftJoin('rfq_quotation_sent_supplier_to_buyer_rel', 'rfq_quotation_sent_supplier_to_buyer_rel.business_profile_id', '=', 'business_profiles.id')
+        ->with(['user','supplierQuotationToBuyer'=> function($q) use ($id){
+            $q->where('rfq_id', $id);}])
+        ->whereIn('factory_type',$factory_type_as_tag_parent)
+        ->where('profile_verified_by_admin', '!=', 0)
+        ->groupBy('business_profiles.id')
+        ->orderBy('rfq_quotation_sent_supplier_to_buyer_rel.created_at', 'desc')
+        ->get()
+        ->toArray();
+        */
+        // Data fetching for tags parents end
+
         $productCategories = ProductCategory::all('id','name');
         if( env('APP_ENV') == 'production') {
             $user = "5771";

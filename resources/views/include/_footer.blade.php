@@ -305,6 +305,19 @@
         });
     })
 
+    $(document).ready(function(){
+        var screenWidth = $(window).width();
+        var productFilterEmptyArea = screenWidth;
+        $(".mainNav_mobile_wrap_overlay").css({"width": productFilterEmptyArea, "height": "100%"});
+        $(".mainNav_mobile_wrap_overlay").click(function(){
+            $(this).closest(".mySidenav").css({"width":"0px"});
+        });
+
+        $('.collapsible').collapsible({
+            accordion:true
+        });
+    })
+
     $(window).on('load', function () {
         $('.pre-loading-image-gallery').hide();
     })
@@ -1453,7 +1466,7 @@ function askForPrice($sku)
 
 <script>
     function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "100%";
     }
 
     function closeNav() {

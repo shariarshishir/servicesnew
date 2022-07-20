@@ -5323,7 +5323,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 .new_profile_account_filterbox .select2-container .select2-search--inline .select2-search__field,
 #create-rfq-form .input-field .select2-container--default .select2-search--inline input.select2-search__field {
     display: block;
-    width: 10px !important;
+    min-width: 10px !important;
     line-height: 10px;
     height: 23px;
     padding: 0 !important;
@@ -6658,7 +6658,7 @@ nav .pagination li.active .page-link {
 
 /* ******************** business_profile_login style start*********************** */
 .business_profile_login {
-    padding: 80px 0;
+    padding: 20px 0;
     max-width: 770px;
     margin: 0 auto;
 }
@@ -7676,14 +7676,26 @@ nav .pagination li.active .page-link {
     z-index: 999;
     top: 0px;
     left: 0;
-    background: #ffffff;
+    transition: 0.9s;
     overflow-x: hidden;
+}
+.mainNav_mobile_wrap_inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #fff;
+    font-size: 16px;
+    line-height: 25px;
+    text-transform: capitalize;
+    padding: 58px 18px 20px;
+    word-break: inherit;
     transition: 0.5s;
-    padding-top: 60px;
     -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
     -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
     box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
-    border-radius: 10px;
+    width: 300px;
+    height: 100%;
+    overflow: auto;
 }
 .mainNav_mobile_wrap .mySidenav ul {
     padding: 0;
@@ -7692,7 +7704,7 @@ nav .pagination li.active .page-link {
 .mainNav_mobile_wrap .mySidenav ul ul {
     padding: 0 0 10px 10px;
 }
-.mainNav_mobile_wrap .mySidenav a {
+.mainNav_mobile_wrap .mySidenav ul li a {
     font-family: 'nexabold';
     font-size: 17px;
     color: #000000;
@@ -7702,11 +7714,11 @@ nav .pagination li.active .page-link {
     position: relative;
     word-break: initial;
 }
-.mainNav_mobile_wrap .mySidenav a:hover {
+.mainNav_mobile_wrap .mySidenav ul li a:hover {
     background: rgba(0, 0, 0, 0.1);
 }
 .mainNav_mobile_wrap .mySidenav ul .subNav {
-    padding: 0 0 0 20px;
+    padding: 0 0 0 15px;
     position: inherit;
     box-shadow: none;
     background: none;
@@ -7718,23 +7730,32 @@ nav .pagination li.active .page-link {
 }
 .mainNav_mobile_wrap .mySidenav ul .subNav li {
     min-height: inherit;
-    background-color: transparent;
+    background: none !important;
+}
+.mainNav_mobile_wrap .mySidenav ul .subNav li:focus {
+    background: none !important;
 }
 .mainNav_mobile_wrap .mySidenav ul .subNav li a {
     padding: 8px 10px;
+    font-family: 'nexaregular';
     color: #000000;
-    font-size: 15px;
-    background: none !important;
 }
-.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:active,
-.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:hover,
-.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:focus {
+.mainNav_mobile_wrap .mySidenav ul ul.dropdown-subNav-mobile li a {
+    background: none !important;
+    padding: 5px;
+    font-size: 16px;
+}
+.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:active a,
+.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li a:hover {
     background: #eee !important;
 }
 .mainNav_mobile_wrap .mySidenav ul .subNav li a:active,
-.mainNav_mobile_wrap .mySidenav ul .subNav li a:focus,
 .mainNav_mobile_wrap .mySidenav ul .subNav li a:hover {
     background: #eee !important;
+}
+.mainNav_mobile_wrap .mySidenav ul .subNav li a:focus,
+.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li a:focus {
+    background: none !important;
 }
 .mainNav_mobile_wrap .mySidenav .closebtn {
     position: absolute;
@@ -7763,6 +7784,9 @@ nav .pagination li.active .page-link {
     line-height: 10px;
     margin: 5px 0 0;
     border-radius: inherit;
+}
+.mainNav_mobile_wrap .mySidenav ul .subNav li .material-icons {
+    margin-top: 0;
 }
 .mainNav_mobile_wrap .mySidenav .subnev_arrow.active {
     top: 14px;
@@ -13013,7 +13037,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 #company-overview-update-form .select2-container--default .select2-selection--multiple input.select2-search__field {
     height: 22px;
     margin: 0;
-    width: 10px !important;
+    min-width: 10px !important;
     padding: 0 !important;
 }
 #company-overview-update-form .select2-container--default .select2-selection--multiple ul.select2-selection__rendered {
@@ -13292,7 +13316,33 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .login_landing_inner ul li a {
     font-family: 'nexabold';
 }
+/* ****************Welcome and loginlanding page css end ******************* */
 
+#login-register-modal .modal-footer {
+    top: 8px;
+    right: 14px;
+    width: 25px;
+    height: 20px !important;
+    padding: 0;
+    border: none;
+    bottom: initial;
+}
+#login-register-modal .modal-close {
+    height: 14px;
+    line-height: 10px;
+    width: 25px;
+    padding: 0;
+    margin: 0;
+    background: none !important;
+}
+#login-register-modal .modal-close:focus {
+    background: none !important;
+}
+#login-register-modal .modal-close .material-icons {
+    height: 14px;
+    line-height: 14px;
+    font-size: 25px;
+}
 /* ********************************** */
 .welcome_wrap {
     height: 100vh;
@@ -13344,7 +13394,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 }
 .rfq_post_success p {
     position: relative;
-    z-index: 9;
+    z-index: 1;
 }
 .rfq_post_success h2 {
     font-family: "nexabold";
@@ -13353,7 +13403,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     color: #285460;
     margin-bottom: 20px;
     position: relative;
-    z-index: 9;
+    z-index: 1;
 }
 .rfq_post_success h2 span {
     font-size: 40px;
@@ -13393,8 +13443,6 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     float: left;
     width: 100%;
 }
-
-/* ****************Welcome and loginlanding page css end ******************* */
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {
@@ -17912,6 +17960,77 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         height: 27px;
         overflow: hidden;
     }
+
+    /* **************************** */
+    .registration-block .company-logo {
+        margin-top: 0;
+    }
+    .registration-block .company-logo img {
+        width: 65px;
+    }
+    .registration-block .company-logo {
+        margin-bottom: 5px;
+    }
+    .registration-content {
+        padding-bottom: 10px;
+    }
+    .registration-content p {
+        margin-bottom: 5px;
+    }
+    .business_profile_login {
+        padding-top: 0;
+    }
+    .business_login_inner .login-block .input-field {
+        margin-bottom: 10px;
+    }
+    .business_login_inner .remember-me-block .input-field {
+        margin-bottom: 0;
+    }
+    .business_login_inner .login-block .remember-me-block .input-field label {
+        padding: 0;
+    }
+    .business_login_inner .remember-me-block .input-field input {
+        height: auto;
+    }
+    #login-register-modal .modal-content {
+        padding: 15px 15px 8px;
+        height: 100%;
+    }
+    #login-register-modal .login-block {
+        padding: 0;
+    }
+    #login-register-modal .login-block .input-field {
+        margin-bottom: 10px;
+    }
+    #login-register-modal .login-block .input-field label {
+        margin-bottom: 5px;
+    }
+    .password-block-wrap #hide-password,
+    .password-block-wrap #show-password {
+        top: 38px;
+    }
+    .password-block-wrap #hide-password .material-icons,
+    .password-block-wrap #show-password .material-icons {
+        font-size: 20px;
+    }
+    #login-register-modal .login-block .input-field input {
+        height: 38px;
+    }
+    .login-block .signin {
+        height: 35px;
+        line-height: 36px;
+        font-size: 14px;
+    }
+    .login-block .signin .material-icons {
+        margin-top: 0;
+    }
+    #login-register-modal {
+        top: 12% !important;
+        height: auto;
+        min-height: 385px;
+    }
+
+    
 }
 
 @media only screen and (max-width: 480px) {

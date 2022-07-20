@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 Use DB;
+use stdClass;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
@@ -753,18 +754,37 @@ class RfqController extends Controller
 
     public function create($flag = false, $product_id = NULL)
     {
+
+        $product = "";
+        $preloaded_image = [];
+        if($flag == 'mb' && $product_id != NULL)
+        {
+            $product = ManufactureProduct::with('product_images')->where('id', $product_id)->first();
+
+            //$preloaded_image = array();
+            foreach($product->product_images as $key => $image){
+                $obj[$key] = new stdClass;
+                $obj[$key]->id = $image->id;
+                $obj[$key]->src = Storage::disk('s3')->url('public/'.$image->product_image);
+                $preloaded_image[] = $obj[$key];
+            }
+        }
+
+        if($flag == 'shop' && $product_id != NULL)
+        {
+            $product = WholesalerProduct::with('images')->where('id', $product_id)->first();
+
+            //$preloaded_image = array();
+            foreach($product->images as $key => $image){
+                $obj[$key] = new stdClass;
+                $obj[$key]->id = $image->id;
+                $obj[$key]->src = Storage::disk('s3')->url('public/'.$image->image);
+                $preloaded_image[] = $obj[$key];
+            }
+        }
+
         if(auth()->user())
         {
-            if($flag == 'mb' && $product_id != NULL)
-            {
-                $product = ManufactureProduct::with('product_images')->where('id', $product_id)->first();
-            }
-
-            if($flag == 'shop' && $product_id != NULL)
-            {
-                $product = WholesalerProduct::with('images')->where('id', $product_id)->first();
-            }
-
             $businessProfiles = BusinessProfile::withTrashed()->where('user_id',auth()->id())->get();
 
             $profileAlias = "";
@@ -776,12 +796,20 @@ class RfqController extends Controller
             {
                 $profileAlias = $businessProfiles['alias'];
             }
+            if($flag) {
+                return view('rfq.create_from_product',compact('profileAlias', 'flag', 'product', 'preloaded_image'));
+            } else {
+                return view('rfq.create',compact('profileAlias'));
+            }
 
-            return view('rfq.create',compact('profileAlias', 'flag', 'product'));
         }
         else
         {
-            return view('rfq.create');
+            if($flag) {
+                return view('rfq.create_from_product',compact('flag', 'product', 'preloaded_image'));
+            } else {
+                return view('rfq.create');
+            }
         }
 
     }

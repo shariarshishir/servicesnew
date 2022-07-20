@@ -786,11 +786,7 @@ $reviewsCount = count($productReviews);
                                     <a href="#login-register-modal" id="add_to_cart" data-id="{{$product->sku}}"class="btn waves-effect waves-light green addToCart modal-trigger btn_grBorder" disabled="disabled" style="display: none;">Add to cart</a>
                                     @endif
 
-                                    @if(Auth::guard('web')->check())
-                                        <a type="button" class="btn waves-effect waves-light green btn_grBorder request_quotation" href="{{route('rfq.create',[$product->flag, $product->id])}}">Request for Quotation</a>
-                                    @else
-                                        <button type="button" class="btn waves-effect waves-light green btn_grBorder modal-trigger request_quotation" href="#login-register-modal">Request for Quotation</button>
-                                    @endif
+                                    <a type="button" class="btn waves-effect waves-light green btn_grBorder request_quotation" href="{{route('rfq.create',[$product->flag, $product->id])}}">Request for Quotation</a>
                                 </div>
                             </div>
 

@@ -1,5 +1,18 @@
 @extends('layouts.app')
-
+@php
+    if($flag)
+    {   // first param from mb and second from shop
+        $product_title = $product->title ?? $product->name;
+        $product_description = $product->product_specification ?? $product->description;
+        $preloaded_image = $preloaded_image;
+    }
+    else
+    {
+        $product_title = "";
+        $product_description = "";
+        $preloaded_image = [];
+    }
+@endphp
 @section('content')
 <div id="create-rfq-form" class="rfq_detail_from_wrap create_rfq_detail_from_wrap">
     <div class="modal-content">
@@ -36,12 +49,12 @@
                                         </div>
                                         <div class="col s12 input-field">
                                             <label>Title <span>*</span></label>
-                                            <input type="text" class="" name="title" required/>
+                                            <input type="text" class="" name="title" value="{{$product_title}}" required/>
                                         </div>
                                         <div class="col s12 input-field">
                                             <div class="">
                                                 <label>Short Description <span>*</span></label>
-                                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" name="full_specification" required></textarea>
+                                                <textarea class="ig-new-rgt prd-txta short_description add_short_description" name="full_specification" required>{{ strip_tags($product_description) }}</textarea>
                                                 <input type="hidden" name="short_description" value="" />
                                             </div>
                                         </div>
@@ -253,7 +266,9 @@
         $(document).on("click", ".target_price_negotiable", alertStatus);
         //image upload script
         $(function(){
+            let preloaded = {!! json_encode($preloaded_image) !!};
             $('.rfq-document-upload').imageUploader({
+                preloaded: preloaded,
                 extensions: ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.gif', '.GIF', '.svg', '.SVG', '.doc', '.DOC', '.docx', '.DOCX', '.xls', '.XLS', '.xlsx', '.XLSX', '.pdf', '.PDF'],
                 mimes : ['image/jpg', 'image/jpeg', 'image/JPG', 'image/JPEG', 'image/png', 'image/PNG', 'image/gif', 'image/GIF', 'image/svg+xml', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
                 imagesInputName: 'rfq-documents',
@@ -666,6 +681,7 @@
 
         $(document).ready(function(){
             var authuser = "{{auth()->user()}}";
+            let flag = "{{$flag}}";
             if(!authuser) // this code will perform when user is not authenticate. user have to input sign-in or sign-up data.
             {
                 //console.log("I am hacker");
@@ -693,13 +709,23 @@
                             var flag =response.flag;
                             const sso_token = "Bearer " +response.access_token;
                             var formData = new FormData();
+                            // if RFQ post from web start
                             var file_data = $('input[name="rfq-documents[]"]')[0].files;
                             var files = [];
                             for (let i = 0; i < file_data.length; i++) {
                                 //formData.append("files", file_data[i].files[0]);
                                 formData.append("files", file_data[i]);
                             }
-                            formData.append("rfq_from", 'service');
+                            // if RFQ post from web end
+
+                            // if RFQ post from product start
+                            var images = {!! str_replace("'", "\'", json_encode($product->images ?? $product->product_images)) !!};
+                            var images_array = [];
+                            $.each(images, function(index, value){
+                                let obj = {'product_image' :  "https://s3.ap-southeast-1.amazonaws.com/service.products/public/"+value.product_image ? "https://s3.ap-southeast-1.amazonaws.com/service.products/public/"+value.product_image : "https://s3.ap-southeast-1.amazonaws.com/service.products/public/"+value.image , 'created_at' : value.created_at, 'updated_at' : value.updated_at };
+                                formData.append(`images[]`, JSON.stringify(obj));
+                            });
+                            // if RFQ post from product end
 
                             // var formData = new FormData();
                             // var file_data = $('input[name="rfq-documents[]"]')[0].files; // for multiple files
@@ -707,6 +733,15 @@
                             // for (let i = 0; i < $('input[name="rfq-documents[]"]').length; i++) {
                             //     formData.append("files", $('input[name="rfq-documents[]"]')[i].files[0]);
                             // }
+
+                            if(flag)
+                            {
+                                formData.append("rfq_from", 'product');
+                            }
+                            else
+                            {
+                                formData.append("rfq_from", 'service');
+                            }
 
                             var other_data = $('.createRfqForm').serializeArray();
                             var category_id=[];
@@ -789,14 +824,31 @@
                     const sso_token = "Bearer " +"{{ Cookie::get('sso_token') }}";
 
                     var formData = new FormData();
+                    // if RFQ post from web start
                     var file_data = $('input[name="rfq-documents[]"]')[0].files;
                     var files = [];
                     for (let i = 0; i < file_data.length; i++) {
                         formData.append("files", file_data[i]);
                     }
+                    // if RFQ post from web end
 
-                    formData.append("rfq_from", 'service');
+                    // if RFQ post from product start
+                    var images = {!! str_replace("'", "\'", json_encode($product->images ?? $product->product_images)) !!};
+                    var images_array = [];
+                    $.each(images, function(index, value){
+                        let obj = {'product_image' :  "https://s3.ap-southeast-1.amazonaws.com/service.products/public/"+value.product_image ? "https://s3.ap-southeast-1.amazonaws.com/service.products/public/"+value.product_image : "https://s3.ap-southeast-1.amazonaws.com/service.products/public/"+value.image , 'created_at' : value.created_at, 'updated_at' : value.updated_at };
+                        formData.append(`images[]`, JSON.stringify(obj));
+                    });
+                    // if RFQ post from product end
 
+                    if(flag)
+                    {
+                        formData.append("rfq_from", 'product');
+                    }
+                    else
+                    {
+                        formData.append("rfq_from", 'service');
+                    }
 
                     var other_data = $('.createRfqForm').serializeArray();
                     var category_id=[];

@@ -150,7 +150,7 @@
                                 @foreach ($product->product_images as $key => $wpimg)
                                     <div class="col rfq_thumbnail_box">
                                         <div class="thumbnail_img">
-                                            <img src="{{asset('storage/'.$wpimg->product_image)}}" class="img-thumbnail">
+                                            <img src="{{Storage::disk('s3')->url('public/'.$wpimg->product_image)}}" class="img-thumbnail">
                                         </div>
                                     </div>
                                 @endforeach
@@ -158,7 +158,7 @@
                                 @foreach ($product->images as $key => $image)
                                     <div class="col rfq_thumbnail_box">
                                         <div class="thumbnail_img">
-                                            <img src="{{asset('storage/'.$image->image)}}" class="img-thumbnail">
+                                            <img src="{{Storage::disk('s3')->url('public/'.$image->image)}}" class="img-thumbnail">
                                         </div>
                                     </div>
                                 @endforeach

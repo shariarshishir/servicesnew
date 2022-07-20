@@ -244,7 +244,6 @@
 															<i class="material-icons dp48">favorite</i>
 														</a>
 													</div>
-
 													<div class="inner_productBox">
 														<a href="{{ route("mix.product.details", [$product->flag, $product->id]) }}" >
 															<div class="imgBox">
@@ -253,7 +252,6 @@
 																	@break
 																@endforeach
 															</div>
-
 															<div class="products_inner_textbox">
 																<div class="row">
 																	<div class="col s6">
@@ -268,7 +266,6 @@
 															</div>
 														</a>
 													</div>
-												
 												</div>
 											</div>
 										@endforeach
@@ -285,7 +282,6 @@
                                         <h3>Factory Images</h3>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     @if(count($companyFactoryTour->companyFactoryTourImages)>0)
                                         @foreach($companyFactoryTour->companyFactoryTourImages as $image)
@@ -327,14 +323,14 @@
                                 <div class="row flag_wrap center-align export-destination-block">
 									@foreach($business_profile->exportDestinations as $exportDestination)
 										<div class="col s6 m4 l2">
-											<ddiv class="flag_innerBox">
+											<div class="flag_innerBox">
 												<div class="flag_img export-destination-img">
 													<img  src="{{Storage::disk('s3')->url('public/frontendimages/flags/'.strtolower($exportDestination->country->code).'.png')}}" alt="">
 												</div>
 												<div class="flag_infoBox">
 													<h5>{{$exportDestination->country->name}}</h5>
 												</div>
-											</ddiv>
+											</div>
 										</div>
 									@endforeach
                                 </div>
@@ -349,7 +345,6 @@
 								<div class="col s6 m6">
 									<h3>Company Overview</h3>
 								</div>
-
 							</div>
 							<div class="overview_table box_shadow overview_table_first_table">
 								<table>

@@ -39,7 +39,7 @@
                                 <span class="posted_time">{{date('Y-m-d', strtotime($rfqLists[0]['created_at']))}}</span>
 
                                 <div class="center-align btn_accountrfq_info">
-                                    <a href="#" onclick="toggle_visibility('accountRfqDetailesInfoMobile');"><i class="material-icons">keyboard_double_arrow_down</i></a>
+                                    <a class="accountrfq_btn" href="javascript:void(0);" onclick="">Show More</a>
                                 </div>
                                 <div id="accountRfqDetailesInfoMobile" class="account_rfqDetailes_infoWrap" style="display: none;">
                                     <div class="row">

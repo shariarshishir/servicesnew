@@ -13,12 +13,12 @@
                     <div class="product-item card search_results_itembox">
                         <a href="{{ route('mix.product.details', [$item->flag, $item->id]) }}" class="overlay_hover">&nbsp;</a>
                         <div class="row">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12 m2">
                                 <div class="product-img center-align search_results_left">
-                                    <img src="{{asset('storage').'/'.$item->images[0]->image}}">
+                                    <img src="{{Storage::disk('s3')->url('public/'.$item->images[0]->image)}}">
                                 </div>
                             </div>
-                            <div class="col s12 m8 l9">
+                            <div class="col s12 m10">
                                 <div class="product-short-intro search_results_right">
                                     <h4>{{$item->name}}</h4>
                                     <div class="details">
@@ -32,14 +32,14 @@
                     <div class="product-item card search_results_itembox">
                         <a href="{{ route('mix.product.details', [$item->flag, $item->id]) }}" class="overlay_hover">&nbsp;</a>
                         <div class="row">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12 m2">
                                 <div class="product-img center-align search_results_left">
                                     @if($item->product_images()->exists())
-                                        <img src="{{asset('storage').'/'.$item->product_images[0]->product_image}}">
+                                        <img src="{{Storage::disk('s3')->url('public/'.$item->product_images[0]->product_image)}}">
                                     @endif
                                 </div>
                             </div>
-                            <div class="col s12 m8 l9">
+                            <div class="col s12 m10">
                                 <div class="product-short-intro search_results_right">
                                     <h4>{{$item->title}}</h4>
                                     <div class="details">
@@ -53,12 +53,12 @@
                     <div class="blog-item card search_results_itembox">
                         <a href="{{route('blogs.details',$item->slug)}}" class="overlay_hover">&nbsp;</a>
                         <div class="row">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12 m2">
                                 <div class="blog-img center-align search_results_left">
-                                    <img src="{{ asset('storage/'.$item->feature_image) }}">
+                                    <img src="{{Storage::disk('s3')->url('public/'.$item->feature_image)}}">
                                 </div>
                             </div>
-                            <div class="col s12 m8 l9">
+                            <div class="col s12 m10">
                                 <div class="blog-short-intro search_results_right">
                                     <h4>{{$item->title}}</h4>
                                     <div class="details">
@@ -72,12 +72,13 @@
                     <div class="business-profile-item card search_results_itembox">
                         <a href="{{route('supplier.profile',$item->alias)}}" class="overlay_hover">&nbsp;</a>
                         <div class="row">
-                            <div class="col s12 m4 l3">
+                            <div class="col s12 m2">
                                 <div class="business-profile-img center-align search_results_left">
-                                    <img src="{{ asset('storage/'.$item->feature_image) }}">
+                                    {{-- <img src="{{ asset('storage/'.$item->feature_image) }}"> --}}
+                                    <img src="{{Storage::disk('s3')->url('public/'.$item->feature_image)}}">
                                 </div>
                             </div>
-                            <div class="col s12 m8 l9">
+                            <div class="col s12 m10">
                                 <div class="business-profile-short-intro search_results_right">
                                     <h4>{{$item->business_name}}</h4>
                                     <div class="details">

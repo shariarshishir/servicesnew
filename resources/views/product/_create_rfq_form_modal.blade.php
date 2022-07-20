@@ -118,7 +118,7 @@
                                         <div class="col s12">
                                             <label>Select Payment Method <span>*</span></label>
                                         </div>
-                                        <div class="col s12 m8 l7">
+                                        <div class="col s12">
                                             <select class="select2" name="payment_method" required>
                                                 <option value="">Select an option</option>
                                                 <option value="cash">Cash</option>

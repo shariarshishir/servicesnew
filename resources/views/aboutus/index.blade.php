@@ -539,7 +539,7 @@ manufacturers through LC or you may pay in deferred terms as our retained custom
                   <img src="{{Storage::disk('s3')->url('public/frontendimages/about-image/icons/accessories-library.svg')}}" alt="icon" />
                 </div>
                 <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">Accessories Library
-                  <span class="material-icons">navigate_next</span>
+                  <i class="material-icons">navigate_next</i>
                 </a>
               </div>
             </div>

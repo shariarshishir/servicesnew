@@ -62,7 +62,7 @@
             <h3 class="paths-title">Explore</h3>
             <h5>You can also send RFQ from our Libraries</h5>
             <div class="row">
-                <div class="col s12 m6 l4 xl2">
+                <div class="col s12 m6 l4 xl2 new_rfq_paths_box">
                     <div class="path_box">
                         <div class="imgbox">
                             <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/design-studio.svg" alt="icon">
@@ -72,7 +72,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col s12 m6 l4 xl2">
+                <div class="col s12 m6 l4 xl2 new_rfq_paths_box">
                     <div class="path_box">
                         <div class="imgbox">
                             <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/sample-storefront.svg" alt="icon">
@@ -82,7 +82,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col s12 m6 l4 xl2">
+                <div class="col s12 m6 l4 xl2 new_rfq_paths_box">
                     <div class="path_box">
                         <div class="imgbox">
                             <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/fabric-library.svg" alt="icon">
@@ -92,7 +92,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col s12 m6 l4 xl2">
+                <div class="col s12 m6 l4 xl2 new_rfq_paths_box">
                     <div class="path_box">
                         <div class="imgbox">
                             <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/yarn-library.svg" alt="icon">
@@ -102,17 +102,17 @@
                         </a>
                     </div>
                 </div>
-                <div class="col s12 m6 l4 xl2">
+                <div class="col s12 m6 l4 xl2 new_rfq_paths_box">
                     <div class="path_box">
                         <div class="imgbox">
                             <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/accessories-library.svg" alt="icon">
                         </div>
-                        <a href="{{route('product.type.mapping',['raw_materials', 'trims_and_accessories'])}}">Accessories Library
+                        <a href="{{route('product.type.mapping',['raw_materials', 'trims and accessories'])}}">Accessories Library
                             <i class="material-icons">navigate_next</i>
                         </a>
                     </div>
                 </div>
-                <div class="col s12 m6 l4 xl2">
+                {{-- <div class="col s12 m6 l4 xl2">
                     <div class="path_box">
                         <div class="imgbox">
                             <img src="https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/about-image/icons/industry-isights.svg" alt="icon">
@@ -121,7 +121,7 @@
                             <i class="material-icons">navigate_next</i>
                         </a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

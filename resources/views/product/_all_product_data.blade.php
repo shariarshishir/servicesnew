@@ -110,12 +110,12 @@
                                                     $pattern= '/[^0-9\-]/';
                                                     $preg_replace= preg_replace($pattern, '', $list->lead_time);
                                                 @endphp
-                                                {{ $preg_replace}} days
+                                                {{ $preg_replace}} <span class="days">days</span>
                                              @endif
                                             @if($list->flag == 'shop')
                                                 @if($list->product_type == 1)
                                                     @foreach (json_decode($list->attribute) as $k => $v)
-                                                        @if($loop->last) <span class="price">Lead Time</span>  {{ $v[3] }} days @endif
+                                                        @if($loop->last) <span class="price">Lead Time</span>  {{ $v[3] }} <span class="days">days</span> @endif
                                                     @endforeach
                                                 @else
                                                     @php

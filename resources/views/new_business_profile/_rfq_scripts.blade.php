@@ -433,7 +433,6 @@
                 {
                     $(this).text('Show More');
                 }
-
             });
 
             $(".accountrfq_btn").click(function(e){
@@ -447,7 +446,6 @@
                 {
                     $(this).text('Show More');
                 }
-
             });
         });
 
@@ -540,7 +538,7 @@
                             html+='<h5>'+response.rfq.title+'</h5>';
                             html+='<span class="posted_time">'+response.rfq.created_at+'</span>';
                             html+='<div class="center-align btn_accountrfq_info">';
-                            html+='<a href="#" onclick=""><i class="material-icons">keyboard_double_arrow_down</i></a>';
+                            html+='<a class="accountrfq_btn" href="javascript:void(0);" onclick="">Show More</a>';
                             html+='</div>';
                             html+='<div id="accountRfqDetailesInfo" class="account_rfqDetailes_infoWrap" style="display: none;">';
                             html+='<div class="row">';

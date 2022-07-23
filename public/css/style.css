@@ -7740,7 +7740,7 @@ nav .pagination li.active .page-link {
 
 .mainNav_mobile_wrap .mySidenav ul li ul:focus li,
 .mainNav_mobile_wrap .mySidenav ul li ul li:focus,
-.mainNav_mobile_wrap .mySidenav ul li ul li:hover, 
+.mainNav_mobile_wrap .mySidenav ul li ul li:hover,
 .mainNav_mobile_wrap .mySidenav ul li ul li.active {
     background: none !important;
     background-color: transparent !important;
@@ -7759,9 +7759,9 @@ nav .pagination li.active .page-link {
     font-size: 16px;
 }
 .mainNav_mobile_wrap .mySidenav ul li ul li ul li a:hover,
-.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:focus, 
+.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:focus,
 .mainNav_mobile_wrap .mySidenav ul li ul li:focus a,
-.mainNav_mobile_wrap .mySidenav ul li ul li:hover a, 
+.mainNav_mobile_wrap .mySidenav ul li ul li:hover a,
 .mainNav_mobile_wrap .mySidenav ul li ul li.active a {
     background: rgba(0, 0, 0, 0.1) !important;
 }
@@ -13491,7 +13491,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
   .order_management_inner_left ul li {
     background: url("https://s3.ap-southeast-1.amazonaws.com/service.products/public/frontendimages/new_layout_images/check_mark.png") no-repeat left center;
     background-size: 18px;
-    padding: 5px 10px 10px 30px; 
+    padding: 5px 10px 10px 30px;
     font-size: 16px;
   }
   .order_management_inner_wrap .order_management_inner_left .btn_lounch {
@@ -13536,6 +13536,23 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     text-align: center;
   }
   /* order_management_inner_wrap css end */
+
+.profile_account_myrfq_innerbox h4 {
+    display: inline-block;
+    margin-right: 25px;
+}
+.queires_type_list {
+    display: inline-block;
+}
+.queires_type_list li {
+    display: inline-block;
+}
+.queires_type_list li.queires_type_list_separator {
+    padding: 0px 5px;
+}
+.queires_type_list li.active a {
+    color: #000;
+}
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {
@@ -14020,7 +14037,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         padding-bottom: 50px;
     }
     /* ************* How We Work css end ************* */
-    
+
     .overview_table_wrap table {
         font-size: 14px;
     }
@@ -14488,7 +14505,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         font-size: 12px;
         line-height: 14px;
     }
-    #mb_about .ending, 
+    #mb_about .ending,
     #mb_about .vision_and_mission {
         padding: 20px 0;
     }
@@ -15403,7 +15420,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .business_list_itembox .list_box .switch .enable_disable_label {
         font-size: 9px;
     }
-    .my_businesses_wrap .my_businesses_box .switch label input[type="checkbox"]:checked + .lever, 
+    .my_businesses_wrap .my_businesses_box .switch label input[type="checkbox"]:checked + .lever,
     .business_list_itembox .list_box .switch label input[type="checkbox"]:checked + .lever {
         margin: 0;
     }
@@ -16085,7 +16102,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .order_management_inner_left ul {
         padding: 0 0px 20px;
     }
-    
+
 }
 
 @media only screen and (max-width: 900px) {
@@ -18535,7 +18552,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .rfq_post_success h2 span {
         font-size: 25px;
     }
-    .factory_imgbox_wrap .col.s6.m4, 
+    .factory_imgbox_wrap .col.s6.m4,
     .factory_imgbox_wrap .factory_image_gallery .col.s6.m4,
     .certifications .certificate_img_wrap {
         width: 50% !important;

@@ -175,7 +175,7 @@ class BackendRfqController extends Controller
         }
         $proforma_invoice_url_for_buyer =$profromaInvoice ? route('open.proforma.single.html', $profromaInvoice->id) : '';
         $url_exists=$link;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists', 'product_tag'));
+        return view('admin.rfq.show', compact('rfq','businessProfiles','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists', 'product_tag', 'factory_type_as_tag_parent'));
     }
 
     public function sendFireBasePushNotificationToAdminForNewMessage(Request $request){
@@ -263,8 +263,17 @@ class BackendRfqController extends Controller
 
     public function status(Request $request,$id){
 
+        if($request->publish_type == "only_on_tags") {
+            $publisheType = $request->publish_type.','.$request->rfq_selected_tag_type;
+        } elseif($request->publish_type == "only_on_factories") {
+            $publisheType = $request->publish_type.','.$request->rfq_selected_factory_type;
+        } else {
+            $publisheType = $request->publish_type.','.$request->rfq_selected_tag_type.','.$request->rfq_selected_factory_type;
+        }
+
         $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$id, [
             'status' => ( $request->status == 'pending' ) ? 'approved' : 'pending',
+            'publish_type' => $publisheType,
         ]);
         if( $response->status()  == 200){
             return redirect()->back()->withSuccess('Rfq status updated successfully');

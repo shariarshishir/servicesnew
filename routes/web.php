@@ -445,6 +445,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/rfqs', [RfqController::class, 'index'])->name('new.profile.rfqs');
     Route::get('profile/{alias}/my-rfqs', [RfqController::class, 'myRfqList'])->name('new.profile.my_rfqs');
     Route::get('profile/{alias}/my-queries', [RfqController::class, 'myQueries'])->name('new.profile.my_queries');
+    Route::get('profile/{alias}/all-queries', [RfqController::class, 'allQueries'])->name('new.profile.all_queries');
     Route::get('profile/{alias}/search-rfq', [RfqController::class, 'searchRfq'])->name('new.profile.search_rfqs');
     Route::get('profile/{alias}/proforma-pending-orders', [ProformaOrderController::class, 'profomaPendingOrders'])->name('new.profile.profoma_orders.pending');
     Route::get('profile/{alias}/proforma-ongoing-orders', [ProformaOrderController::class, 'profomaOngoingOrders'])->name('new.profile.profoma_orders.ongoing');

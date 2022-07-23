@@ -42,11 +42,52 @@
                                         <li class="active"><a href="{{ route('proforma_invoices.create',['buyerId' => $buyer->id,'rfqId'=>$rfq['id']]) }}" class="btn_grBorder">Generate PI</a></li>
                                         @endif
                                         <li>
-                                            <form method="POST" action="{{route('admin.rfq.status', $rfq['id'])}}">
+                                            <form method="POST" id="rfq_status_form" action="{{route('admin.rfq.status', $rfq['id'])}}">
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="status" value="{{$rfq['status']}}">
-                                                <button  class="{{ ($rfq['status'] == 'pending') ? 'btn_grBorder' : 'btn_grBorder'; }} rfq-status-trigger"  type="submit"> {{ ($rfq['status'] == 'pending') ? 'Make it Published' : 'Make it Unpublished' }}</button>
+                                                <input type="hidden" name="rfq_selected_tag_type" value="@foreach($rfq['category'] as $tag) {{$tag['name']}} @if(!$loop->last) , @endif  @endforeach" />
+                                                <input type="hidden" name="rfq_selected_factory_type" value="@foreach(array_unique($factory_type_as_tag_parent) as $factorytype) {{$factorytype}} @if(!$loop->last) , @endif  @endforeach" />
+
+                                                <div class="modal fade" id="rfq-published-type-modal" tabindex="-1" role="dialog" aria-labelledby="rfq-published-type-modalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Please Select</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body" style="text-align: left;">
+                                                            <h6>Published this RFQ :</h6>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="publish_type" id="publish_type1" value="only_on_tags">
+                                                                <label class="form-check-label" for="exampleRadios1">
+                                                                    Tags - <span style="color: #4E9C52;">@foreach($rfq['category'] as $category) {{$category['name']}} @if(!$loop->last) , @endif  @endforeach</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="publish_type" id="publish_type2" value="only_on_factories">
+                                                                <label class="form-check-label" for="exampleRadios1">
+                                                                    Factories - <span style="color: #4E9C52;">@foreach(array_unique($factory_type_as_tag_parent) as $factorytype) {{$factorytype}} @if(!$loop->last) , @endif  @endforeach</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="publish_type" id="publish_type3" value="on_both_type">
+                                                                <label class="form-check-label" for="exampleRadios1">
+                                                                    Both
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary rfq-status-form-submit-trigger">Submit</button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button data-toggle="modal" data-target="#rfq-published-type-modal" class="{{ ($rfq['status'] == 'pending') ? 'btn_grBorder' : 'btn_grBorder'; }} rfq-status-trigger"  type="button" {{ ($rfq['status'] == 'pending') ? '' : 'disabled'; }}> {{ ($rfq['status'] == 'pending') ? 'Make it Published' : 'Make it Unpublished' }}</button>
                                             </form>
                                         </li>
                                     </ul>
@@ -406,6 +447,15 @@
             } else{
                 fromId = '5552';
             }
+
+            $(".rfq-status-form-submit-trigger").click(function(){
+                var cnfrm = confirm('Are you sure?');
+                if(cnfrm != true)
+                {
+                    return false;
+                }
+                $('#rfq_status_form').submit();
+            })
 
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});
             var selectedValues = [];

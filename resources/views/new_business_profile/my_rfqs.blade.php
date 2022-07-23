@@ -136,8 +136,8 @@
                                         <h4>My RFQs</h4>
                                     </a>
                                 </li>
-                                <li class="profile_my_rfq {{ Route::is('new.profile.my_queries', $alias) ? 'active' : ''}}">
-                                    <a href="{{route('new.profile.my_queries', $alias)}}">
+                                <li class="profile_my_rfq {{ Route::is('new.profile.all_queries', $alias) ? 'active' : ''}}">
+                                    <a href="{{route('new.profile.all_queries', $alias)}}">
                                         <div class="icon_img">&nbsp;</div>
                                         <h4>Queries</h4>
                                     </a>
@@ -149,7 +149,7 @@
 
                         <div class="profile_account_myrfq_info">
                             <div class="row">
-                                <div class="col s12 m12 l7">
+                                <div class="@php echo($rfqLists) ? "col s12 m12 l7" : "col s12 m12 l12" @endphp">
                                     <div class="product_design_wrapper">
                                         <div class="profile_account_searchBar">
                                             <div class="row">
@@ -174,6 +174,17 @@
                                             <div class="row rfq_account_title_bar">
                                                 <div class="col s8">
                                                     <h4>{{$pageTitle}}</h4>
+                                                    @if($pageTitle == "My Queries")
+                                                    <ul class="queires_type_list">
+                                                        <li class="profile_my_rfq {{ Route::is('new.profile.all_queries', $alias) ? 'active' : ''}}">
+                                                            <a href="{{route('new.profile.all_queries', $alias)}}">All</a>
+                                                        </li>
+                                                        <li class="queires_type_list_separator">/</li>
+                                                        <li class="profile_my_rfq {{ Route::is('new.profile.my_queries', $alias) ? 'active' : ''}}">
+                                                            <a href="{{route('new.profile.my_queries', $alias)}}">Inbox</a>
+                                                        </li>
+                                                    </ul>
+                                                    @endif
                                                 </div>
                                                 <div class="col s4 right-align">
                                                     <span class="rfqView">{{count($rfqLists)}} results</span>
@@ -181,43 +192,51 @@
                                             </div>
 
                                             <div class="row">
-                                                @foreach($rfqLists as $key=>$rfq)
-                                                <div class="col s12 m6">
-                                                    <div class="profile_account_myrfq_box rfq_box_{{$rfq['id']}} {{$key == 0 ? 'active' : ''}}">
-                                                        <h5>{{$rfq['title']}}</h5>
-                                                        <span class="posted_time">{{date('Y-m-d', strtotime($rfq['created_at']))}}</span>
-                                                        <div class="row">
-                                                            <div class="col s6 m6 l5">
-                                                                <p>Quantity <br/> <b>{{$rfq['quantity']}} pcs</b></p>
-                                                                <p>Target Price <br/> <b>{{$rfq['unit_price']}} /pc</b></p>
+                                                @if($rfqLists)
+                                                    @foreach($rfqLists as $key=>$rfq)
+                                                    <div class="col s12 m6">
+                                                        <div class="profile_account_myrfq_box rfq_box_{{$rfq['id']}} {{$key == 0 ? 'active' : ''}}">
+                                                            <h5>{{$rfq['title']}}</h5>
+                                                            <span class="posted_time">{{date('Y-m-d', strtotime($rfq['created_at']))}}</span>
+                                                            <div class="row">
+                                                                <div class="col s6 m6 l5">
+                                                                    <p>Quantity <br/> <b>{{$rfq['quantity']}} pcs</b></p>
+                                                                    <p>Target Price <br/> <b>{{$rfq['unit_price']}} /pc</b></p>
+                                                                </div>
+                                                                <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
+                                                                <div class="col s6 m6 l5">
+                                                                    <p>Deliver in <br/> <b>{{ date('F j, Y',strtotime($rfq['delivery_time'])) }}</b></p>
+                                                                    <p>Deliver to <br/> <b>{{$rfq['destination']}}</b></p>
+                                                                </div>
                                                             </div>
-                                                            <div class="col s6 m6 l2 proinfo_account_blank">&nbsp;</div>
-                                                            <div class="col s6 m6 l5">
-                                                                <p>Deliver in <br/> <b>{{ date('F j, Y',strtotime($rfq['delivery_time'])) }}</b></p>
-                                                                <p>Deliver to <br/> <b>{{$rfq['destination']}}</b></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="account_rfq_btn_wrap" >
-                                                            <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn quotation-button" data-rfq_id="{{$rfq['id']}}">Quotations</button>
-                                                                @if($rfq['unseen_quotation_count'] >0)
-                                                                    <span class="unseen_quotation_count_{{$rfq['id']}}" data-unseen_quotation_count="{{$rfq['unseen_quotation_count']}}">{{$rfq['unseen_quotation_count']}}</span>
-                                                                @else
-                                                                    <span style="display:none" class="unseen_quotation_count_{{$rfq['id']}}" data-unseen_quotation_count="{{$rfq['unseen_quotation_count']}}">{{$rfq['unseen_quotation_count']}}</span>
-                                                                @endif
-                                                            </div>
-                                                            <div class="rfq_btn_box">
-                                                                <button class="btn_white rfq_btn message-button" data-rfq_id="{{$rfq['id']}}">Messages</button>
-                                                                @if(($rfq['unseen_count'] - $rfq['unseen_quotation_count']) >0)
-                                                                    <span  class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
-                                                                @else
-                                                                    <span style="display:none" class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
-                                                                @endif
+                                                            <div class="account_rfq_btn_wrap" >
+                                                                <div class="rfq_btn_box">
+                                                                    <button class="btn_white rfq_btn quotation-button" data-rfq_id="{{$rfq['id']}}">Quotations</button>
+                                                                    @if($rfq['unseen_quotation_count'] >0)
+                                                                        <span class="unseen_quotation_count_{{$rfq['id']}}" data-unseen_quotation_count="{{$rfq['unseen_quotation_count']}}">{{$rfq['unseen_quotation_count']}}</span>
+                                                                    @else
+                                                                        <span style="display:none" class="unseen_quotation_count_{{$rfq['id']}}" data-unseen_quotation_count="{{$rfq['unseen_quotation_count']}}">{{$rfq['unseen_quotation_count']}}</span>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="rfq_btn_box">
+                                                                    <button class="btn_white rfq_btn message-button" data-rfq_id="{{$rfq['id']}}">Messages</button>
+                                                                    @if(($rfq['unseen_count'] - $rfq['unseen_quotation_count']) >0)
+                                                                        <span  class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
+                                                                    @else
+                                                                        <span style="display:none" class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endforeach
+                                                @else
+                                                <div class="card-alert card cyan">
+                                                    <div class="card-content white-text">
+                                                        <p>No Queries are available.</p>
+                                                    </div>
                                                 </div>
-                                                @endforeach
+                                                @endif
                                             </div>
 
                                             @if( $noOfPages > 1)
@@ -229,14 +248,34 @@
                                                         <li class="page-item">
                                                             <a class="" href="javascript:void(0);" data-page="0" tabindex="-1">Previous</a>
                                                         </li>
-                                                        @for( $i=1; $i <= $noOfPages; $i++)
-                                                            @php
-                                                                $r=route('new.profile.my_rfqs', $alias);
-                                                            @endphp
-                                                            <li class="page-item" >
-                                                                <a class="" href="{{ $r.'?page='.$i }}" {{ ($page == $i) ? 'selected="selected"':'' }} data-page="{{$i}}">{{$i}}</a>
-                                                            </li>
-                                                        @endfor
+                                                        @if($pageTitle == "My RFQs" && $pageActive == "RFQ")
+                                                            @for( $i=1; $i <= $noOfPages; $i++)
+                                                                @php
+                                                                    $r=route('new.profile.my_rfqs', $alias);
+                                                                @endphp
+                                                                <li class="page-item" >
+                                                                    <a class="" href="{{ $r.'?page='.$i }}" {{ ($page == $i) ? 'selected="selected"':'' }} data-page="{{$i}}">{{$i}}</a>
+                                                                </li>
+                                                            @endfor
+                                                        @elseif ($pageTitle == "My Queries" && $pageActive == "Inbox")
+                                                            @for( $i=1; $i <= $noOfPages; $i++)
+                                                                @php
+                                                                    $r=route('new.profile.my_queries', $alias);
+                                                                @endphp
+                                                                <li class="page-item" >
+                                                                    <a class="" href="{{ $r.'?page='.$i }}" {{ ($page == $i) ? 'selected="selected"':'' }} data-page="{{$i}}">{{$i}}</a>
+                                                                </li>
+                                                            @endfor
+                                                        @else
+                                                            @for( $i=1; $i <= $noOfPages; $i++)
+                                                                @php
+                                                                    $r=route('new.profile.all_queries', $alias);
+                                                                @endphp
+                                                                <li class="page-item" >
+                                                                    <a class="" href="{{ $r.'?page='.$i }}" {{ ($page == $i) ? 'selected="selected"':'' }} data-page="{{$i}}">{{$i}}</a>
+                                                                </li>
+                                                            @endfor
+                                                        @endif
                                                         <li class="page-item">
                                                             <a class="" href="javascript:void(0);" data-page="2">Next</a>
                                                         </li>

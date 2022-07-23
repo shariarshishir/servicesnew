@@ -4,7 +4,7 @@
 <div class="account_profile_wrapper">
     <div class="account_profile_menu">
         <div class="container">
-            
+
             <div class="profile_account_desktop_menu">
                 @include('new_business_profile.profile_menu')
             </div>
@@ -26,7 +26,7 @@
                             </ul>
                     </div>
                 </div>
-                
+
                 <!-- <div id="profileAccountRight">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeProfileAccountNav()"><i class="material-icons">clear</i></a>
                     test
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    
+
     <div class="profile_account_innerinfo_wrap">
         <div class="container">
             <div class="account_profile_box">
@@ -47,18 +47,18 @@
                                 <div class="col s12 m5 l4">
                                     <div class="order_management_inner_left">
                                         <div class="order_manag_icon">
-                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-m-factory.png')}}" alt="" /> 
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-m-factory.png')}}" alt="" />
 
                                         </div>
                                         <h3>M Factory</h3>
                                         <ul>
-                                            <li>Unlimited Ord ers</li>
+                                            <li>Unlimited Orders</li>
                                             <li>Unlimited Messages, Notes, Tasks & RFQs.</li>
-                                            <li>Acti onable Rich Reporting</li>
-                                            <li>Producti on and Quality Tra cking</li>
+                                            <li>Actionable Rich Reporting</li>
+                                            <li>Production and Quality Tracking</li>
                                         </ul>
                                         <div class="center-align">
-                                            <a href="javascript:void(0);" class="btn_green btn_lounch" >Lounch</a>
+                                            <a href="https://app.merchantbay.com/" class="btn_green btn_lounch" >Lounch</a>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                             <div class="row">
                                                 <div class="col s12 m3">
                                                     <div class="order_icon_image">
-                                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-store-management.png')}}" alt="" /> 
+                                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-store-management.png')}}" alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="col s12 m9">
@@ -113,12 +113,12 @@
                                 </div>
                             </div>
                         </div> <!-- order_management_inner_wrap end-->
-                        
+
 
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

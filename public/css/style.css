@@ -5151,6 +5151,7 @@ ul.stepper.horizontal .step .step-content .step_content_inner .step-actions {
 
 /* Modal css  */
 .modal {
+    background: #ffffff;
     border-radius: 20px;
     width: 60%;
 }
@@ -7701,66 +7702,78 @@ nav .pagination li.active .page-link {
     padding: 0;
     word-break: initial;
 }
-.mainNav_mobile_wrap .mySidenav ul ul {
-    padding: 0 0 10px 10px;
+.mainNav_mobile_wrap .mySidenav ul li {
+    min-height: inherit;
 }
-.mainNav_mobile_wrap .mySidenav ul li a {
+
+.mainNav_mobile_wrap .mySidenav ul li a:link,
+.mainNav_mobile_wrap .mySidenav ul li a:active,
+.mainNav_mobile_wrap .mySidenav ul li a:visited {
     font-family: 'nexabold';
     font-size: 17px;
     color: #000000;
     display: block;
     line-height: 22px;
-    padding: 14px 10px 10px 15px;
+    padding: 14px 10px 10px 10px;
     position: relative;
     word-break: initial;
+    cursor: pointer;
 }
 .mainNav_mobile_wrap .mySidenav ul li a:hover {
     background: rgba(0, 0, 0, 0.1);
 }
-.mainNav_mobile_wrap .mySidenav ul .subNav {
-    padding: 0 0 0 15px;
+.mainNav_mobile_wrap .mySidenav ul li ul {
+    padding: 5px 0 10px 10px;
     position: inherit;
     box-shadow: none;
-    background: none;
-    -moz-transition: all 0.4s ease-out;
-    -o-transition: all 0.4s ease-out;
-    -webkit-transition: all 0.4s ease-out;
-    -ms-transition: all 0.4s ease-out;
-    transition: all 0.4s ease-out;
 }
-.mainNav_mobile_wrap .mySidenav ul .subNav li {
-    min-height: inherit;
-    background: none !important;
-}
-.mainNav_mobile_wrap .mySidenav ul .subNav li:focus {
-    background: none !important;
-}
-.mainNav_mobile_wrap .mySidenav ul .subNav li a {
-    padding: 8px 10px;
-    font-family: 'nexaregular';
+
+.mainNav_mobile_wrap .mySidenav ul li ul li a:link,
+.mainNav_mobile_wrap .mySidenav ul li ul li a:active,
+.mainNav_mobile_wrap .mySidenav ul li ul li a:visited {
+    padding: 8px 10px 8px 10px;
     color: #000000;
-}
-.mainNav_mobile_wrap .mySidenav ul ul.dropdown-subNav-mobile li a {
     background: none !important;
-    padding: 5px;
+    background-color: transparent !important;
+    font-size: 15px;
+}
+
+.mainNav_mobile_wrap .mySidenav ul li ul:focus li,
+.mainNav_mobile_wrap .mySidenav ul li ul li:focus,
+.mainNav_mobile_wrap .mySidenav ul li ul li:hover, 
+.mainNav_mobile_wrap .mySidenav ul li ul li.active {
+    background: none !important;
+    background-color: transparent !important;
+    transition: inherit;
+}
+.mainNav_mobile_wrap .mySidenav ul li ul li ul {
+    padding-left: 0;
+}
+.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:link,
+.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:active,
+.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:visited {
+    background: none !important;
+    background-color: transparent !important;
+    padding: 5px 5px 5px 20px;
+    font-family: 'nexaregular';
     font-size: 16px;
 }
-.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li:active a,
-.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li a:hover {
-    background: #eee !important;
+.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:hover,
+.mainNav_mobile_wrap .mySidenav ul li ul li ul li a:focus, 
+.mainNav_mobile_wrap .mySidenav ul li ul li:focus a,
+.mainNav_mobile_wrap .mySidenav ul li ul li:hover a, 
+.mainNav_mobile_wrap .mySidenav ul li ul li.active a {
+    background: rgba(0, 0, 0, 0.1) !important;
 }
-.mainNav_mobile_wrap .mySidenav ul .subNav li a:active,
-.mainNav_mobile_wrap .mySidenav ul .subNav li a:hover {
-    background: #eee !important;
-}
-.mainNav_mobile_wrap .mySidenav ul .subNav li a:focus,
-.mainNav_mobile_wrap .mySidenav ul .subNav.dropdown-content li a:focus {
+.mainNav_mobile_wrap .mySidenav ul li ul.dropdown-content li:focus {
     background: none !important;
+    background-color: transparent !important;
 }
+
 .mainNav_mobile_wrap .mySidenav .closebtn {
     position: absolute;
-    top: 5px;
-    left: 0;
+    top: 15px;
+    left: 20px;
     font-size: 36px;
 }
 .mainNav_mobile_wrap .mySidenav .closebtn:hover {
@@ -18527,6 +18540,12 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .mobile_header .material-icons,
     .mobile_header .mobile_top_right .material-icons {
         margin-top: 3px !important;
+    }
+    .mainNav_mobile_wrap .mySidenav ul li a .material-icons {
+        margin-top: 5px !important;
+    }
+    .mainNav_mobile_wrap .mySidenav ul li ul li a .material-icons {
+        margin-top: 0 !important;
     }
     .mobile_header #cart-dropdown-mobile .material-icons {
         margin-top: 0px !important;

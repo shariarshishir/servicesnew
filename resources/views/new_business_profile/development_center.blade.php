@@ -41,7 +41,11 @@
             <div class="account_profile_box">
                 <div class="row">
                     <div class="col s12 m12 l9" style="margin: 0 auto; float: none;">
-                        Coming Soon.
+
+                        <div class="dev_coming_soon_imgBox" style="text-align: center;">
+                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/development-img.png')}}" alt="" /> 
+                        </div><!-- dev_coming_soon_imgBo endx -->
+
                     </div>
                 </div>
             </div>

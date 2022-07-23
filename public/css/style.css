@@ -13478,7 +13478,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border-radius: 50%;
     padding: 16px;
     overflow: hidden;
-    margin: 0 auto 20px;
+    margin: 0 auto 35px;
   }
   .order_management_inner_left h3 {
     font-size: 25px;
@@ -13494,7 +13494,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     padding: 5px 10px 10px 30px; 
     font-size: 16px;
   }
-  .order_management_inner_wrap .order_management_inner_leftc .btn_lounch {
+  .order_management_inner_wrap .order_management_inner_left .btn_lounch {
     height: 35px;
     line-height: 24px;
   }
@@ -13503,9 +13503,9 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
   }
   .order_management_inner_right .order_manage_right_infobox_wrap {
     border: 1px solid #d9d9d9;
-    padding: 30px 20px;
+    padding: 20px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   .order_management_inner_right .order_manage_right_infobox_wrap:hover,
   .order_management_inner_right .order_manage_right_infobox_wrap:focus {
@@ -13519,7 +13519,7 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     border-radius: 50%;
     padding: 16px;
     overflow: hidden;
-    margin: 0 auto 20px;
+    margin: 15px auto 15px;
   }
   .order_management_inner_right .order_icon_infobox h4 {
     font-size: 20px;
@@ -13620,6 +13620,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     .profile_account_myrfq_box p b,
     .profile_account_poinfo_box p b {
         font-size: 13px;
+    }
+
+    .order_management_inner_left ul {
+        padding: 0 30px 20px;
     }
 }
 @media only screen and (min-width: 1201px) {
@@ -16068,9 +16072,20 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
         padding-left: 0;
     }
 
+    /* **************************** */
+    .order_management_inner_wrap .order_management_inner_left {
+        padding: 20px;
+    }
+    .order_management_inner_left .order_manag_icon {
+        padding-bottom: 0;
+    }
     .order_management_inner_right {
         padding-left: 0;
-      }
+    }
+    .order_management_inner_left ul {
+        padding: 0 0px 20px;
+    }
+    
 }
 
 @media only screen and (max-width: 900px) {

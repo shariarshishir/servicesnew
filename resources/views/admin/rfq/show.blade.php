@@ -50,7 +50,7 @@
                                                 <input type="hidden" name="rfq_selected_factory_type" value="@foreach(array_unique($factory_type_as_tag_parent) as $factorytype) {{$factorytype}} @if(!$loop->last) , @endif  @endforeach" />
 
                                                 <div class="modal fade" id="rfq-published-type-modal" tabindex="-1" role="dialog" aria-labelledby="rfq-published-type-modalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 30%;">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Please Select</h5>
@@ -449,12 +449,22 @@
             }
 
             $(".rfq-status-form-submit-trigger").click(function(){
-                var cnfrm = confirm('Are you sure?');
-                if(cnfrm != true)
+
+                if( $('input[name="publish_type"]').is(':checked') )
                 {
-                    return false;
+                    var cnfrm = confirm('Are you sure?');
+                    if(cnfrm != true)
+                    {
+                        return false;
+                    }
+                    //alert("Radio Button Is checked!");
+                    $('#rfq_status_form').submit();
                 }
-                $('#rfq_status_form').submit();
+                else
+                {
+                    alert("Please Select an option where you want to publish this RFQ.");
+                }
+
             })
 
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});

@@ -40,8 +40,81 @@
         <div class="container">
             <div class="account_profile_box">
                 <div class="row">
-                    <div class="col s12 m12 l9" style="margin: 0 auto; float: none;">
-                        Coming Soon.
+                    <div class="col s12 m12 xl9" style="margin: 0 auto; float: none;">
+
+                        <div class="order_management_inner_wrap">
+                            <div class="row">
+                                <div class="col s12 m5 l4">
+                                    <div class="order_management_inner_left">
+                                        <div class="order_manag_icon">
+                                            <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-m-factory.png')}}" alt="" /> 
+
+                                        </div>
+                                        <h3>M Factory</h3>
+                                        <ul>
+                                            <li>Unlimited Ord ers</li>
+                                            <li>Unlimited Messages, Notes, Tasks & RFQs.</li>
+                                            <li>Acti onable Rich Reporting</li>
+                                            <li>Producti on and Quality Tra cking</li>
+                                        </ul>
+                                        <div class="center-align">
+                                            <a href="javascript:void(0);" class="btn_green btn_lounch" >Lounch</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s12 m7 l8">
+                                    <div class="order_management_inner_right">
+                                        <div class="order_manage_right_infobox_wrap">
+                                            <div class="row">
+                                                <div class="col s12 m3">
+                                                    <div class="order_icon_image">
+                                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-store-management.png')}}" alt="" /> 
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m9">
+                                                    <div class="order_icon_infobox">
+                                                        <h4>Store Management</h4>
+                                                        <p class="comingSoon">Coming Soon...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="order_manage_right_infobox_wrap">
+                                            <div class="row">
+                                                <div class="col s12 m3">
+                                                    <div class="order_icon_image">
+                                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-planning-board.png')}}" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m9">
+                                                    <div class="order_icon_infobox">
+                                                        <h4>Planning Board</h4>
+                                                        <p class="comingSoon">Coming Soon...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="order_manage_right_infobox_wrap">
+                                            <div class="row">
+                                                <div class="col s12 m3">
+                                                    <div class="order_icon_image">
+                                                        <img src="{{Storage::disk('s3')->url('public/frontendimages/new_layout_images/icon-qc-module.png')}}" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m9">
+                                                    <div class="order_icon_infobox">
+                                                        <h4>QC Module</h4>
+                                                        <p class="comingSoon">Coming Soon...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- order_management_inner_wrap end-->
+                        
+
                     </div>
                 </div>
             </div>

@@ -1696,24 +1696,53 @@ function addToWishList(flag, id, obj){
     })
 }
 
-//negetive or text not allowed
-$(document).on('keyup', '.negitive-or-text-not-allowed', function(){
-    //if(this.value<0 ){this.value= this.value * -1;}
-    if($.isNumeric(this.value ) == false || this.value<0){
-        this.value= '';
-    }
-});
-
-
-
-$(document).ready(function() {
-        $(".header_search_bar").click(function () {
-        $(".banner_search").toggle();
+    //negetive or text not allowed
+    $(document).on('keyup', '.negitive-or-text-not-allowed', function(){
+        //if(this.value<0 ){this.value= this.value * -1;}
+        if($.isNumeric(this.value ) == false || this.value<0){
+            this.value= '';
+        }
     });
-});
 
 
 
-
+    $(document).ready(function() {
+            $(".header_search_bar").click(function () {
+            $(".banner_search").toggle();
+        });
+    });
 </script>
-
+<script>
+    function mobileNavExplore() {
+        var x = document.getElementById("explore-products-mobile");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+    function mobileNavWhyUs() {
+        var x = document.getElementById("whyus-system-links-mobile");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+    function mobileNavStudio() {
+        var x = document.getElementById("studio-system-links-mobile");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+    function mobileNavRawMaterials() {
+        var x = document.getElementById("rawMaterials-system-links-mobile");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>

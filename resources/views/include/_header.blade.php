@@ -295,22 +295,21 @@
 							<a href="javascript:void(0)" class="closebtn" itemprop="Close Nav" onclick="closeNav()"><i class="material-icons right">keyboard_backspace</i></a>
 							<ul itemscope itemtype="https://schema.org/ListItem">
 								<li>
-									<a class="dropdown-trigger" itemprop="Products" href="javascript:void(0);" data-target="explore-products-mobile">Explore<i class="material-icons right">keyboard_arrow_down</i></a>
-									<ul id="explore-products-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
+									<a class="" itemprop="Explore" onclick="mobileNavExplore()" href="javascript:void(0);">Explore <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
+									<ul id="explore-products-mobile" class="subNav" itemscope itemtype="https://schema.org/ListItem" style="display: none">
 										<li itemprop="itemListElement">
-											<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Studio <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
-	
+											<a class="" itemprop="Studio" onclick="mobileNavStudio()" href="javascript:void(0);">Studio <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 											<!-- Dropdown Structure -->
-											<ul id="" class="dropdown-subNav-mobile" itemscope itemtype="https://schema.org/ListItem">
+											<ul id="studio-system-links-mobile" class="dropdown-subNav-mobile" itemscope itemtype="https://schema.org/ListItem" style="display: none;">
 												@foreach ($studio_child as $id => $title)
 													<li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['studio', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
 												@endforeach
 											</ul>
 										</li>
 										<li itemprop="itemListElement">
-											<a class="" itemprop="Products" href="javascript:void(0);" data-target="">Raw Materials <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
+											<a class="" itemprop="Products" onclick="mobileNavRawMaterials()" href="javascript:void(0);">Raw Material <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
 											<!-- Dropdown Structure -->
-											<ul id="" class="" itemscope itemtype="https://schema.org/ListItem">
+											<ul id="rawMaterials-system-links-mobile" class="dropdown-subNav-mobile" itemscope itemtype="https://schema.org/ListItem" style="display: none;">
 												@foreach ($raw_materials_child as $id => $title)
 													<li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['raw_materials', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
 												@endforeach
@@ -322,12 +321,11 @@
 								<li><a href="{{route('new_rfq.index')}}" class="{{ Route::is('new_rfq.index') ? 'active' : ''}}">RFQ</a></li>
 								<li itemprop="itemListElement"><a href="https://app.merchantbay.com/">M Factory</a></li>
 								<li itemprop="itemListElement">
-									<a class="dropdown-trigger" itemprop="Why Us" href="javascript:void(0);" data-target="whyus-system-links-mobile">Why Us <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
-	
-									<ul id="whyus-system-links-mobile" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
+									<a onclick="mobileNavWhyUs()" itemprop="Why Us" href="javascript:void(0);">Why Us <span class="subnev_arrow"><i class="material-icons right">keyboard_arrow_down</i></span></a>
+									<ul id="whyus-system-links-mobile" class="subNav" itemscope itemtype="https://schema.org/ListItem" style="display: none;">
 										<li itemprop="itemListElement"><a href="{{route('front.howwework')}}" itemprop="How we work" class="{{ Route::is('front.howwework') ? 'active' : ''}}">How we work</a></li>
 										<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.aboutus')}}">About us</a></li>
-										<li itemprop="itemListElement"><a itemprop="About Us" href="{{route('front.faq')}}">FAQ</a></li>
+										<li itemprop="itemListElement"><a itemprop="FAQ" href="{{route('front.faq')}}">FAQ</a></li>
 										<li itemprop="itemListElement"><a href="{{route('industry.blogs')}}" itemprop="Blog" class="{{ Route::is('industry.blogs') ? 'active' : ''}}">Blogs</a></li>
 									</ul>
 								</li>

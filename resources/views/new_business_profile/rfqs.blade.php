@@ -5,6 +5,7 @@
     $view_max_lead_time = array_key_exists('max_lead', app('request')->input())?app('request')->input('max_lead'): null;
     $view_max_moq = array_key_exists('max_moq', app('request')->input())?app('request')->input('max_moq'): null;
     $view_min_moq = array_key_exists('min_moq', app('request')->input())?app('request')->input('min_moq'): null;
+    $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : '';
 @endphp
 
 @extends('layouts.app_containerless')
@@ -91,7 +92,8 @@
                                                     @csrf
                                                     <div class="profile_account_search">
                                                         <i class="material-icons">search</i>
-                                                        <input class="profile_filter_search" type="search" name="search_input" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                        <input class="profile_filter_search" type="search" name="search_input" value="{{$searchInput}}" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                        <a href="javascript:void(0);" class="reset_rfq_filter" style="@php echo isset($_REQUEST['search_input']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
                                                     </div>
                                                 </form>
                                             </div>
@@ -211,3 +213,14 @@
 @include('new_business_profile.create_rfq_modal')
 @include('new_business_profile.share_modal')
 @endsection
+@push('js')
+<script>
+$(document).ready(function(){
+
+    $(".reset_rfq_filter").click(function(){
+        location.href = "{{route('new.profile.rfqs', $alias)}}";
+    });
+
+})
+</script>
+@endpush

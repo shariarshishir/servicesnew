@@ -103,7 +103,7 @@ class RfqController extends Controller
                 }
 
                 $page = Paginator::resolveCurrentPage() ?: 1;
-                $perPage = 8;
+                $perPage = 9;
                 $products = new \Illuminate\Pagination\LengthAwarePaginator(
                     $collection->forPage($page, $perPage),
                     $collection->count(),
@@ -205,7 +205,7 @@ class RfqController extends Controller
                 }
 
                 $page = Paginator::resolveCurrentPage() ?: 1;
-                $perPage = 8;
+                $perPage = 9;
                 $products = new \Illuminate\Pagination\LengthAwarePaginator(
                     $collection->forPage($page, $perPage),
                     $collection->count(),
@@ -303,7 +303,7 @@ class RfqController extends Controller
                 }
 
                 $page = Paginator::resolveCurrentPage() ?: 1;
-                $perPage = 8;
+                $perPage = 9;
                 $products = new \Illuminate\Pagination\LengthAwarePaginator(
                     $collection->forPage($page, $perPage),
                     $collection->count(),
@@ -423,7 +423,7 @@ class RfqController extends Controller
                 }
 
                 $page = Paginator::resolveCurrentPage() ?: 1;
-                $perPage = 8;
+                $perPage = 9;
                 $products = new \Illuminate\Pagination\LengthAwarePaginator(
                     $collection->forPage($page, $perPage),
                     $collection->count(),
@@ -441,13 +441,128 @@ class RfqController extends Controller
         abort(401);
     }
 
-    public function searchRfq(Request $request,$alias)
+    public function searchRfq(Request $request, $alias)
     {
-        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/'.$request->search_input.'/page/1/limit/20');
-        $data = $response->json();
-        $rfqLists = $data['data'] ?? [];
-        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
-        return view('new_business_profile.rfqs',compact('rfqLists','alias','business_profile'));
+        // $response = Http::get(env('RFQ_APP_URL').'/api/quotation/filter/'.$request->search_input.'/page/1/limit/20');
+        // $data = $response->json();
+        // $rfqLists = $data['data'] ?? [];
+        // $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        // return view('new_business_profile.rfqs',compact('rfqLists','alias','business_profile'));
+
+
+        // this merged collection will show at buyer business profile > explore menu
+        $business_profile = BusinessProfile::where('alias',$alias)->firstOrFail();
+        //dd($business_profile->profile_type);
+        $wholesaler_products = collect(WholesalerProduct::withTrashed()
+        ->latest()
+        ->with('images','video')
+        ->where(function($query) use ($request, $business_profile){
+            $query->where('business_profile_id', '!=', null)->get();
+            $query->where(['state' => 1])->get();
+            $query->where('name','like', '%'.$request->search_input.'%')->get();
+        })
+        ->get());
+
+        $manufacture_products = collect(ManufactureProduct::withTrashed()
+        ->latest()
+        ->with('product_images','product_video','businessProfile')
+        ->where(function($query) use ($request, $business_profile){
+            $query->where('business_profile_id', '!=', null)->get();
+            $query->where('title','like', '%'.$request->search_input.'%')->get();
+        })
+        ->get());
+
+        $collection = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['created_at', 'desc'] ])->values();
+
+        //dd($collection);
+
+        $controller_max_moq = $collection->max('moq');
+        $controller_min_moq = $collection->min('moq');
+        $controller_max_lead_time = 0;
+        $controller_min_lead_time = 0;
+        foreach($collection as $product){
+            if(isset($product->attribute) && $product->product_type == 1){
+                foreach(json_decode($product->attribute) as $lead_time)
+                {
+                    if ($lead_time[3] > $controller_max_lead_time) {
+                        $controller_max_lead_time = $lead_time[3];
+                    }
+
+                    if ($lead_time[3] < $controller_min_lead_time) {
+                        $controller_min_lead_time = $lead_time[3];
+                    }
+                }
+            }
+        }
+
+        if(isset($request->product_tag)){
+            $ptags = [];
+            foreach($request->product_tag as $tag){
+                $product_tag = ProductTag::where('id',$tag)->first();
+                array_push($ptags,$product_tag->name);
+            }
+            $collection = $collection->filter(function($item) use ($ptags){
+                if(isset($item['product_tag'])){
+                    $check = array_intersect($item['product_tag'], $ptags);
+                    if(empty($check)){
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+
+            });
+        }
+
+        if(isset($request->product_type_mapping_child_id)){
+            $collection = $collection->filter(function($item) use ($request){
+                if(isset($item['product_type_mapping_child_id'])){
+                    $check = array_intersect($item['product_type_mapping_child_id'], $request->product_type_mapping_child_id);
+                    if(empty($check)){
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        if(isset($request->min_lead) && isset($request->max_lead)){
+            $p_id=[];
+            foreach($collection as $product){
+                if(isset($product->attribute) && $product->product_type == 1){
+                    foreach(json_decode($product->attribute) as $lead_time)
+                    {
+                        if ( $lead_time[3] >= $request->min_lead && $lead_time[3] <= $request->max_lead){
+                            array_push($p_id,$product->id);
+                        }
+                    }
+                }
+            }
+
+            $collection = $collection->whereIn('id', $p_id);
+            $collection->all();
+        }
+
+        if(isset($request->min_moq) && isset($request->max_moq)){
+            $collection = $collection->whereBetween('moq', [$request->min_moq, $request->max_moq]);
+            $collection->all();
+        }
+
+        $page = Paginator::resolveCurrentPage() ?: 1;
+        $perPage = 9;
+        $products = new \Illuminate\Pagination\LengthAwarePaginator(
+            $collection->forPage($page, $perPage),
+            $collection->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
+
+        $view = isset($request->view)? $request->view : 'grid';
+
+        return view('new_business_profile.rfqs',compact('alias','products','business_profile','view','controller_max_moq','controller_min_moq','controller_max_lead_time','controller_min_lead_time'));
+
     }
 
     public function rfqByPageNumber(Request $request)
@@ -518,6 +633,66 @@ class RfqController extends Controller
         return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
     }
 
+    public function searchMyRfqList(Request $request, $alias)
+    {
+        $page = isset($request->page) ? $request->page : 1;
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $user = Auth::user();
+        $token = Cookie::get('sso_token');
+        //get requested rfqs of auth user
+        $response = Http::get(env('RFQ_APP_URL').'/api/quotation/user/'.$user->sso_reference_id.'/filter/'.$request->search_input.'/page/1/limit/20');
+
+        $data = $response->json();
+        //dd($data);
+        $rfqLists = $data['data'] ?? [];
+        $rfqsCount = $data['count'];
+        $noOfPages = ceil($data['count']/10);
+        //all messages of auth user from mongodb messages collection
+        $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
+        $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        //all rfqs where auth user has messages
+        $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
+        if(count($rfqs)>0){
+            //messages of first rfq of auth user
+            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqLists[0]['id'].'/user/'.$user->sso_reference_id);
+            $data = $response->json();
+            $chats = $data['data']['messages'];
+            $chatdata = $chats;
+            if($rfqs[0]['user']['user_picture'] !=""){
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $userNameShortForm = "";
+            }else{
+                $userImage = $rfqs[0]['user']['user_picture'];
+                //if user picture does not exist then we need to show user name short form insetad of user image in chat box
+                $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
+                $firstWordFirstLetter = $nameWordArray[0][0];
+                $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+                $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+            }
+        }else{
+            $chatdata = [];
+            $userImage ="";
+            //if user picture does not exist then we need to show user name short form insetad of user image in chat box
+            $nameWordArray = explode(" ", $user->name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+        }
+        $quotations = Userchat::select("*", DB::raw('count(*) as total'))
+        ->groupBy('rfq_id')
+        ->get();
+
+        if(env('APP_ENV') == 'local'){
+            $adminUser = User::Find('5552');
+        }else{
+            $adminUser = User::Find('5771');
+        }
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        $pageTitle = "My RFQs";
+        $pageActive = "RFQ";
+        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+    }
+
     public function myQueries($alias)
     {
         $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
@@ -526,6 +701,64 @@ class RfqController extends Controller
         //get all queries of auth user
         $response = Http::withToken($token)
         ->get(env('RFQ_APP_URL').'/api/queries/user/'.$user->sso_reference_id.'/filter/null/page/1/limit/10');
+        $data = $response->json();
+        $rfqLists = $data['data'] ?? [];
+        $rfqsCount = $data['count'];
+        $noOfPages = ceil($data['count']/10);
+        //all messages of auth user from mongodb messages collection
+        $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
+        $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
+        //all queries where auth user has messages
+        $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
+        if(count($rfqs)>0){
+            //messages of first queries of auth user
+            $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
+            $data = $response->json();
+            $chats = $data['data']['messages'];
+            $chatdata = $chats;
+            if($rfqs[0]['user']['user_picture'] !=""){
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $userNameShortForm = "";
+            }else{
+                //if user picture does not exist then we need to show user name short form insetad of user image in chat box
+                $userImage = $rfqs[0]['user']['user_picture'];
+                $nameWordArray = explode(" ", $rfqs[0]['user']['user_name']);
+                $firstWordFirstLetter = $nameWordArray[0][0];
+                $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+                $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+            }
+        }else{
+            $chatdata = [];
+            $userImage ="";
+            //if user picture does not exist then we need to show user name short form insetad of user image in chat box
+            $nameWordArray = explode(" ", $user->name);
+            $firstWordFirstLetter = $nameWordArray[0][0];
+            $secorndWordFirstLetter = $nameWordArray[1][0] ??'';
+            $userNameShortForm = $firstWordFirstLetter.$secorndWordFirstLetter;
+        }
+        $quotations = Userchat::select("*", DB::raw('count(*) as total'))
+        ->groupBy('rfq_id')
+        ->get();
+
+        if(env('APP_ENV') == 'local'){
+            $adminUser = User::Find('5552');
+        }else{
+            $adminUser = User::Find('5771');
+        }
+        $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
+        $pageTitle = "My Queries";
+        $pageActive = "Inbox";
+        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+    }
+
+    public function searchMyQueries(Request $request, $alias)
+    {
+        $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
+        $user = Auth::user();
+        $token = Cookie::get('sso_token');
+        //get requested queries of auth user
+        $response = Http::withToken($token)
+        ->get(env('RFQ_APP_URL').'/api/queries/user/'.$user->sso_reference_id.'/filter/'.$request->search_input.'/page/1/limit/10');
         $data = $response->json();
         $rfqLists = $data['data'] ?? [];
         $rfqsCount = $data['count'];

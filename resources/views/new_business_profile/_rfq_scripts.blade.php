@@ -124,6 +124,14 @@
             $(this).closest('.rfq_message_box_bottom').children('.messagebox').val('');
         });
 
+        $(".reset_myrfq_filter").click(function(){
+            location.href = "{{route('new.profile.my_rfqs', $alias)}}";
+        });
+
+        $(".reset_myquery_filter").click(function(){
+            location.href = "{{route('new.profile.my_queries', $alias)}}";
+        });
+
     });
 
 </script>

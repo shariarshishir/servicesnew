@@ -10782,7 +10782,10 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .faq_search_box .reset_faq_filter {
     position: absolute;
 }
-.profile_account_search .reset_po_filter {
+.profile_account_search .reset_po_filter,
+.profile_account_search .reset_rfq_filter,
+.profile_account_search .reset_myrfq_filter,
+.profile_account_search .reset_myquery_filter {
     position: absolute;
     right: 40px;
     top: 18px;

@@ -276,6 +276,31 @@ class BackendRfqController extends Controller
             'publish_type' => $publisheType,
         ]);
         if( $response->status()  == 200){
+
+            // if(env('APP_ENV') == 'production')
+            // {
+                /* code using redis-cli
+
+                $selectedUsersToSendMail = User::where('id','<>',auth()->id())->get();
+                foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                    NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
+                }
+
+                $selectedUserToSendMail="success@merchantbay.com";
+                NewRfqHasAddedJob::dispatch($selectedUserToSendMail, $rfq);
+
+                */
+                // $selectedUsersToSendMail = User::where('id','<>',auth()->id())->take(10)->get();
+                // foreach($selectedUsersToSendMail as $selectedUserToSendMail) {
+                //     event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+                // }
+
+                //$selectedUserToSendMail="success@merchantbay.com";
+                //event(new NewRfqHasAddedEvent($selectedUserToSendMail,$rfq));
+
+            // }
+
+
             return redirect()->back()->withSuccess('Rfq status updated successfully');
         }else{
             return redirect()->back()->withSuccess('Something went wrong!!');

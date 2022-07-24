@@ -1,6 +1,8 @@
 @extends('layouts.app_containerless')
 @section('content')
-
+@php
+$searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : '';
+@endphp
 <div class="account_profile_wrapper">
     <div class="account_profile_menu">
         <div class="container">
@@ -159,13 +161,25 @@
                                                     </a>
                                                 </div>
                                                 <div class="col s12 m7 l8">
-                                                    <form action="{{route('new.profile.search_rfqs',$alias)}}">
-                                                    @csrf
-                                                        <div class="profile_account_search">
-                                                            <i class="material-icons">search</i>
-                                                            <input class="profile_filter_search"  type="search" name="search_input" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
-                                                        </div>
-                                                    </form>
+                                                    @if($pageTitle == "My RFQs")
+                                                        <form action="{{route('new.profile.search_my_rfqs',$alias)}}">
+                                                            @csrf
+                                                            <div class="profile_account_search">
+                                                                <i class="material-icons">search</i>
+                                                                <input class="profile_filter_search"  type="search" name="search_input" value="{{$searchInput}}" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                                <a href="javascript:void(0);" class="reset_myrfq_filter" style="@php echo isset($_REQUEST['search_input']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
+                                                            </div>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{route('new.profile.search_my_queries',$alias)}}">
+                                                            @csrf
+                                                            <div class="profile_account_search">
+                                                                <i class="material-icons">search</i>
+                                                                <input class="profile_filter_search"  type="search" name="search_input" value="{{$searchInput}}" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                                <a href="javascript:void(0);" class="reset_myquery_filter" style="@php echo isset($_REQUEST['search_input']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
+                                                            </div>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

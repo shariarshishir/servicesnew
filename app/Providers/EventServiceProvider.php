@@ -19,6 +19,7 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\NewRfqHasAddedEvent;
+use App\Events\NewRfqHasPublishedEvent;
 use App\Events\NewRfqHasBidEvent;
 use App\Events\NewRFQHasPostedEvent;
 use App\Events\NewQuotationHasPostedEvent;
@@ -71,6 +72,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewRfqHasAddedEvent::class => [
             'App\Listeners\NewRfqInvitationListener',
+        ],
+        NewRfqHasPublishedEvent::class => [
+            'App\Listeners\NewRfqHasPublishedListener',
         ],
         NewRfqHasBidEvent::class => [
             'App\Listeners\NewRfqHasBidListener',

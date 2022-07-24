@@ -198,6 +198,24 @@
                     <span class="sample_availability_error text-danger error-rm"></span>
                 </div>
 
+                <div class="row input-field ">
+                    <div class="col s12 m3 l3">
+                        <label for="free_to_show">Free To Show</label>
+                    </div>
+                    <div class="col s12 m9 l9">
+                        <div class="radio-block">
+                            <label class="radio_box">
+                                <input class="with-gap" name="free_to_show" type="radio" value="1" checked />
+                                <span>Yes</span>
+                            </label>
+                            <label class="radio_box">
+                                <input class="with-gap" name="free_to_show" type="radio" value="0" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="row input-field ">
                     <div class="col s12 m3 l3">

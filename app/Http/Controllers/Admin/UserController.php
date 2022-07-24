@@ -54,5 +54,26 @@ class UserController extends Controller
         return view('admin.users.business_profile_details', compact('business_profile'));
     }
 
+    public function verifiedUserRequestList()
+    {
+        $users = User::where('is_request_verified', 0)->get();
+        //dd($users);
+
+        return view('admin.users.verification_user', compact('users'));
+    }
+
+    public function updateUserVerificationRequest(Request $request)
+    {
+
+        $user = User::where("id", $request->id)->first();
+        $user->is_request_verified = 1;
+        $user->save();
+
+        //$users = User::where('is_request_verified', 0)->get();
+
+        //return view('admin.users.verification_user', compact('users'));
+        return response()->json(["status" => 1, "message" => "successful"]);
+    }
+
 
 }

@@ -227,6 +227,34 @@
             $('#product_filter_form').submit();
         });
 
+        $(".trigger_to_sent_user_verification_request").click(function(){
+            var user_id = $(this).data('userid');
+            var url = "{{route('get.request.from.user.for.verification')}}";
+            //alert(url);
+            swal({
+                title: "Thanks for your interest. Soon, Merchant Bay will contact with you.",
+                type: "info",
+                confirmButtonText: "Ok",
+            }).then(function (e) {
+                if (e.value === true) {
+                    $.ajax({
+                        type:'POST',
+                        url: url,
+                        dataType:'json',
+                        data:{id : user_id },
+                        success: function(data){
+                            swal(data.message);
+                        }
+                    });
+                }
+                else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+        });
+
         /*$(document).ready(function(){
             var $pagination = $('#pagination'),
                 totalRecords = 0,

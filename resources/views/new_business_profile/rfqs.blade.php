@@ -8,6 +8,9 @@
     $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : '';
 @endphp
 
+@php $studio_child= productTypeMapping(1); @endphp
+@php $raw_materials_child= productTypeMapping(2); @endphp
+
 @extends('layouts.app_containerless')
 @section('content')
 
@@ -88,14 +91,39 @@
                                                 </a>
                                             </div>
                                             <div class="col s12 m7 l8">
-                                                <form action="{{route('new.profile.search_rfqs',$alias)}}">
-                                                    @csrf
-                                                    <div class="profile_account_search">
-                                                        <i class="material-icons">search</i>
-                                                        <input class="profile_filter_search" type="search" name="search_input" value="{{$searchInput}}" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
-                                                        <a href="javascript:void(0);" class="reset_rfq_filter" style="@php echo isset($_REQUEST['search_input']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
-                                                    </div>
-                                                </form>
+                                                <div class="col s12 m10">
+                                                    <form action="{{route('new.profile.search_rfqs',$alias)}}">
+                                                        @csrf
+                                                        <div class="profile_account_search">
+                                                            <i class="material-icons">search</i>
+                                                            <input class="profile_filter_search" type="search" name="search_input" value="{{$searchInput}}" placeholder="Search Merchant Bay Studio/Raw Material Libraries" />
+                                                            <a href="javascript:void(0);" class="reset_rfq_filter" style="@php echo isset($_REQUEST['search_input']) ? 'display: block;' : 'display: none;' @endphp"><i class="material-icons">restart_alt</i></a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col s12 m2 explore-rfq-products-menu">
+                                                    <a class="dropdown-trigger explore-rfq-products-menu-trigger" itemprop="Products" href="javascript:void(0);" data-target="explore-rfq-products">
+                                                        <i class="material-icons right">filter_alt</i> <span>Explore More</span>
+                                                    </a>
+                                                    <ul id="explore-rfq-products" class="dropdown-content subNav" itemscope itemtype="https://schema.org/ListItem">
+                                                        <li itemprop="itemListElement">
+                                                            <a class="" itemprop="Products" href="javascript:void(0);" data-target="">Studio<i class="material-icons right">arrow_drop_down</i></a>
+                                                            <ul id="" class="sub_dropdown" itemscope itemtype="https://schema.org/ListItem">
+                                                                @foreach ($studio_child as $id => $title)
+                                                                    <li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['studio', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                        <li itemprop="itemListElement">
+                                                            <a class="" itemprop="Products" href="javascript:void(0);" data-target="">Raw Materials<i class="material-icons right">arrow_drop_down</i></a>
+                                                            <ul id="" class="sub_dropdown" itemscope itemtype="https://schema.org/ListItem">
+                                                                @foreach ($raw_materials_child as $id => $title)
+                                                                    <li itemprop="itemListElement"><a itemprop={{ucwords(str_replace("_", " ",$title))}} href="{{route('product.type.mapping',['raw_materials', $title])}}" >{{ucwords(str_replace("_", " ",$title))}}</a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

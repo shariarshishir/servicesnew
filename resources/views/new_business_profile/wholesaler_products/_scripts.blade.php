@@ -260,6 +260,12 @@
                             $('#product-edit-modal-block #sample_availability_no').prop('checked', true);
                         }
 
+                        if(data.product.free_to_show == 1){
+                            $('#product-edit-modal-block #free_to_show_yes').prop('checked', true);
+                        }else{
+                            $('#product-edit-modal-block #free_to_show_no').prop('checked', true);
+                        }
+
                         if(data.product.is_new_arrival==1){
                             $('#product-edit-modal-block .edit_is_new_arrival').prop('checked', true);
                         }

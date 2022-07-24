@@ -184,6 +184,7 @@
                     $('#product-edit-modal-block input[name=lead_time]').val(data.product.lead_time);
                     $("#product-edit-modal-block input[name=gender][value=" + data.product.gender + "]").prop('checked', true);
                     $("#product-edit-modal-block input[name=sample_availability][value=" + data.product.sample_availability + "]").prop('checked', true);
+                    $("#product-edit-modal-block input[name=free_to_show][value=" + data.product.free_to_show + "]").prop('checked', true);
                     $('.media-list').empty();
                     $.each(data.product.product_images,function(key, item){
                         var html='<div class="col s6 m2 l2 center-align">';

@@ -92,6 +92,7 @@ class ProductController extends Controller
                 'created_by' => auth()->id(),
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
+                'free_to_show' =>$request->free_to_show,
                 'overlay_image' => $overlay_image_file_name ?? NULL,
                 'product_type_mapping_id' => $request->product_type_mapping,
                 'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
@@ -241,6 +242,7 @@ public function update(Request $request, $product_id)
     $product->lead_time=$request->lead_time;
     $product->gender=$request->gender;
     $product->sample_availability=$request->sample_availability;
+    $product->free_to_show=$request->free_to_show;
     $product->overlay_image = $overlay_image_file_name ?? $product->overlay_image;
     $product->product_type_mapping_id = $request->product_type_mapping;
     $product->product_type_mapping_child_id = $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id;

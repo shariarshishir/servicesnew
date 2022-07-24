@@ -222,4 +222,10 @@
         </div>
     @endif
 
-
+@if($user)
+    @if($user->is_request_verified != 1)
+        <div class="explore_more_product">(To explore more <a href="javascript:void(0);" class="trigger_to_sent_user_verification_request" data-userid="{{$user->id}}">Click here</a> to become a verified user)</div>
+    @endif
+@else
+    <div class="explore_more_product">(To explore more <a href="{{env('SSO_REGISTRATION_URL').'/register'}}">Click here</a> to become a verified user)</div>
+@endif

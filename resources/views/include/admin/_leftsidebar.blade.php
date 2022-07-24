@@ -163,6 +163,12 @@
 						<p>Users</p>
 					</a>
 				</li>
+                <li class="nav-item">
+					<a href="{{ Route('verified.user.request.list')}}" class="nav-link {{ Route::is('verified.user.request.list.*')? 'active' : ''}}">
+						<i class="fa fa-user nav-icon"></i>
+						<p>Users Verification Request</p>
+					</a>
+				</li>
 
 				{{-- business profile --}}
 				<li style="display: none;" class="nav-item has-treeview {{ Route::is('admin.business.profile.list.type*')  ? 'menu-open' : ''}}">

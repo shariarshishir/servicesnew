@@ -13556,6 +13556,97 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
 .queires_type_list li.active a {
     color: #000;
 }
+.explore_more_product {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 50px;
+    display: block;
+}
+.explore-rfq-products-menu {
+    background: #e6e6e6;
+    border: 1px solid #707070;
+    border-radius: 10px;
+    padding: 10px !important;
+    position: relative;
+}
+.explore-rfq-products-menu-trigger {
+    text-align: center;
+}
+.explore-rfq-products-menu-trigger i {
+    font-size: 30px !important;
+    margin: 0px;
+    display: block;
+    float: none !important;
+}
+.explore-rfq-products-menu-trigger span {
+    font-size: 11px;
+}
+.explore-rfq-products-menu .subNav {
+    width: 275px;
+    background: #fff;
+    -webkit-box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 2px 8px 0px rgb(0 0 0 / 16%);
+    border-radius: 10px;
+    border: 1px solid #54a958;
+    padding: 15px 5px;
+    top: 77px !important;
+    left: 0px !important;
+}
+.explore-rfq-products-menu .subNav li a:link,
+.explore-rfq-products-menu .subNav li a:active,
+.explore-rfq-products-menu .subNav li a:visited {
+    padding: 8px 15px;
+    background: none !important;
+    font-family: "nexabold";
+    font-size: 16px;
+}
+.explore-rfq-products-menu .subNav li,
+.explore-rfq-products-menu .subNav li:focus,
+.explore-rfq-products-menu .subNav li:hover,
+.explore-rfq-products-menu .subNav li.active {
+    background-color: inherit !important;
+}
+.explore-rfq-products-menu .subNav li a:link,
+.explore-rfq-products-menu .subNav li a:active,
+.explore-rfq-products-menu .subNav li a:visited {
+    padding: 8px 15px;
+    background: none !important;
+    font-family: "nexabold";
+    font-size: 16px;
+    color: #54a958;
+}
+.explore-rfq-products-menu .subNav li a.active,
+.explore-rfq-products-menu .subNav li a:hover {
+    background: #d2cfcf !important;
+    border-radius: 5px;
+    color: #484848;
+}
+.explore-rfq-products-menu .subNav li li a:link,
+.explore-rfq-products-menu .subNav li li a:active,
+.explore-rfq-products-menu .subNav li li a:visited {
+    font-family: "nexaregular";
+    padding: 7px 15px 5px;
+    font-size: 16px;
+    color: #54a958;
+}
+.explore-rfq-products-menu .subNav .sub_dropdown {
+    padding: 5px 0 3px 10px !important;
+    display: inline-block;
+    width: 100%;
+}
+.explore-rfq-products-menu .subNav .sub_dropdown li {
+    min-height: inherit;
+}
+.explore-rfq-products-menu .subNav .material-icons {
+    font-size: 25px;
+    line-height: 22px;
+    line-height: initial;
+    height: auto;
+    margin-left: 0;
+    width: 10px;
+    line-height: 20px;
+}
 
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {

@@ -246,9 +246,9 @@ class ProductController extends Controller
             $business_profile=BusinessProfile::withTrashed()->where('id', $request->business_profile_id)->first();
             $business_profile_name=$business_profile->business_name;
             //tiny mc text editor file upload
-           
+
             $files = Storage::disk('s3')->allFiles('/public/temp/'.$business_profile_name.'/pdf/');
-            
+
             if($files){
                 foreach($files as $path) {
                     $pdfFile = Storage::disk('s3')->get($path);
@@ -301,6 +301,7 @@ class ProductController extends Controller
                 'customize'      => isset($request->customize) ? true : false,
                 'gender'     => $request->gender,
                 'sample_availability' =>$request->sample_availability,
+                'free_to_show' =>$request->free_to_show,
                 'overlay_small_image' => $small_overlay_image_file_unique_name_with_database_path ?? null,
                 'overlay_original_image' => $original_overlay_image_file_unique_name_with_database_path ?? null,
                 'created_by'  => auth()->id(),
@@ -309,7 +310,7 @@ class ProductController extends Controller
 
            ]);
 
-      
+
             foreach ($request->images as $image) {
                 $s3 = \Storage::disk('s3');
                 $uniqueStringForSmallImage = generateUniqueString();
@@ -357,7 +358,7 @@ class ProductController extends Controller
                     'video' => $filePathForDB,
                 ]);
             }
-           
+
             DB::commit();
 
             return response()->json(array('success' => true, 'msg' => 'Product Created Successfully'),200);
@@ -581,6 +582,7 @@ class ProductController extends Controller
                     'updated_by'  => auth()->id(),
                     'gender'     => $request->gender,
                     'sample_availability' =>$request->sample_availability,
+                    'free_to_show' =>$request->free_to_show,
                     'product_type_mapping_id' => $request->product_type_mapping,
                     'product_type_mapping_child_id' => $request->product_type_mapping == 1 ? $request->studio_id : $request->raw_materials_id,
             ]);
@@ -588,7 +590,7 @@ class ProductController extends Controller
 
              //tiny mc text editor file upload
             $files = Storage::disk('s3')->allFiles('/public/temp/'.$business_profile_name.'/pdf/');
-            
+
             if($files){
                 foreach($files as $path) {
                     $pdfFile = Storage::disk('s3')->get($path);
@@ -616,7 +618,7 @@ class ProductController extends Controller
             }
             if(isset($request->images))
             {
-                
+
                 foreach ($request->images as $image) {
                     $s3 = \Storage::disk('s3');
                     $uniqueStringForSmallImage = generateUniqueString();
@@ -654,7 +656,7 @@ class ProductController extends Controller
                     }
                }
             }
-           
+
             //upload video
             if($request->hasFile('video')){
                 $uniqueStringForSmallImage = generateUniqueString();

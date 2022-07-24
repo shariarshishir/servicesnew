@@ -625,6 +625,8 @@ Route::group(['prefix'=>'/admin'],function (){
         Route::get('user/{id}',[AdminUserController::class, 'show'])->name('user.show');
         Route::get('user/business/profile/details/{profile_id}',[AdminUserController::class, 'businessProfileDetails'])->name('business.profile.details');
         Route::post('user/company/overview/varifie/{company_overview_id}',[AdminBusinessProfileController::class, 'companyOverviewVarifie'])->name('company.overview.varifie');
+        Route::get('users/verification/list',[AdminUserController::class, 'verifiedUserRequestList'])->name('verified.user.request.list');
+        Route::get('update/user/verification/request',[AdminUserController::class, 'updateUserVerificationRequest'])->name('update.user.verification.request');
         // Route::post('user/business/profile/capacity-machineries/verify',[AdminBusinessProfileController::class, 'capacityAndMachineriesInformationVerify'])->name('capacity.machineries.verify');
 
         Route::post('user/business/profile/ctegories-produced/verify',[AdminBusinessProfileController::class, 'ctegoriesProducedInformationVerify'])->name('ctegories.produced.verify');
@@ -702,6 +704,7 @@ Route::group(['prefix'=>'/admin'],function (){
 Route::get('/{alias}',[HomeController::class, 'supplierProfile'])->name('supplier.profile')->middleware('auth');
 // product type mapping
 Route::get('/{product_type_mapping}/{child}',[HomeController::class, 'productTypeMapping'])->name('product.type.mapping');
+Route::post('/get-request-from-user-for-verification',[HomeController::class, 'getRequestFromUserForVerification'])->name('get.request.from.user.for.verification');
 
 
 

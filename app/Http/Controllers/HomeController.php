@@ -1308,7 +1308,7 @@ class HomeController extends Controller
             default:
                 $product_type_mapping_id=null;
         }
-
+        $user = auth()->user();
 
         $product_type_mapping_child_id=ProductTypeMapping::select('id')->where('title',$child)->first();
 
@@ -1318,10 +1318,18 @@ class HomeController extends Controller
 
         $product_type_mapping_child_id =  $product_type_mapping_child_id->id;
 
-
-        $wholesaler_products=Product::with(['images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
-        $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where('business_profile_id', '!=', null)->get();
-        $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
+        if($user && $user->is_request_verified == 1) // show all products for verified user.
+        {
+            $wholesaler_products=Product::with(['images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where(['state' => 1])->where('business_profile_id', '!=', null)->get();
+            $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where('business_profile_id', '!=', null)->get();
+            $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
+        }
+        else
+        {
+            $wholesaler_products=Product::with(['images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where(['state' => 1])->where(['free_to_show' => 1])->where('business_profile_id', '!=', null)->get();
+            $manufacture_products=ManufactureProduct::with(['product_images','businessProfile'])->where('product_type_mapping_id', $product_type_mapping_id)->where(['free_to_show' => 1])->where('business_profile_id', '!=', null)->get();
+            $merged = $wholesaler_products->mergeRecursive($manufacture_products)->sortBy([ ['priority_level', 'asc'], ['created_at', 'desc'] ])->values();
+        }
 
         $merged = $merged->filter(function($item) use ($product_type_mapping_child_id) {
                     $result=array_intersect($item->product_type_mapping_child_id,(array)$product_type_mapping_child_id);
@@ -1421,7 +1429,17 @@ class HomeController extends Controller
             $wishListShopProductsIds=[];
             $wishListMfProductsIds=[];
         }
-        return view('product.all_products',compact('products','wishListShopProductsIds','wishListMfProductsIds'));
+        return view('product.all_products',compact('products','wishListShopProductsIds','wishListMfProductsIds', 'user'));
+
+    }
+
+    public function getRequestFromUserForVerification(Request $request) {
+
+        $user = User::where("id", $request->id)->first();
+        $user->is_request_verified = 0;
+        $user->save();
+
+        return response()->json(["status"=>1, "message"=>"successful"]);
 
     }
 

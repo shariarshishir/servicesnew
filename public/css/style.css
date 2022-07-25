@@ -13648,6 +13648,18 @@ button.mdc-button.mdc-button--colored.mdc-button--raised {
     line-height: 20px;
 }
 
+#rfq-quotation-modal {
+    max-width: 50%;
+    height: 350px;
+}
+.quotation_html {
+    padding: 10px 0px;
+    display: block;
+}
+.quotation_label {
+    color: #54a958;
+}
+
 /* ******************** Media css style start *********************** */
 @media only screen and (min-width: 1900px) {
     .container.howWeWorkContainer .manufacture_container {

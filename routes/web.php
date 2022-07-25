@@ -73,6 +73,7 @@ use App\Http\Controllers\Wholesaler\OrderController as WholesalerOrderController
 use App\Http\Controllers\Wholesaler\ProductController as WholesalerProductController;
 use App\Http\Controllers\Wholesaler\ProfileInfoController;
 use App\Http\Controllers\RfqBidController;
+use App\Http\Controllers\BusinessProfile\QuerybidController;
 
 
 use App\Models\BusinessProfile;
@@ -417,6 +418,8 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::post('rfq/bid/store',[RfqBidController::class, 'store'])->name('rfq.bid.store');
     Route::get('/rfq-bid-notification-mark-as-read',[RfqBidController::class,'notificationMarkAsRead'])->name('bid-notification-mark-as-read');
 
+    Route::post('query/bid/store',[QuerybidController::class, 'store'])->name('query.bid.store');
+
     //poforma
     Route::get('/po/add/toid={id}', [PoController::class, 'add'])->name('po.add');
     Route::get('/po/edit', [PoController::class, 'edit'])->name('po.edit');
@@ -465,6 +468,7 @@ Route::group(['middleware'=>['sso.verified','auth']],function (){
     Route::get('profile/{alias}/profile-edit', [UserProfileController::class, 'profileEdit'])->name('new.profile.edit');
     //new message center template routes
     Route::get('rfq/quotations', [RfqController::class, 'authUserQuotationsByRFQId'])->name('auth_user_quotations.by_rfq_id');
+    Route::get('rfq/my-quotations', [RfqController::class, 'myQuotationsByRFQId'])->name('my_quotation.by_rfq_id');
     Route::get('rfq/conversations', [RfqController::class, 'authUserConversationsByRFQId'])->name('auth_user_conversations.by_rfq_id');
 
 });

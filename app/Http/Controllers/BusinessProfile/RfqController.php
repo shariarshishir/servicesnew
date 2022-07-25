@@ -30,6 +30,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Manufacture\Product as ManufactureProduct;
 use App\Models\Product as WholesalerProduct;
 use App\Models\ProductTag;
+use App\Models\supplierQuotationToBuyer;
 use App\Events\NewAnonymousUserHasRegisteredEvent;
 use App\Events\NewRFQHasPostedEvent;
 
@@ -813,6 +814,8 @@ class RfqController extends Controller
     {
         $page = isset($request->page) ? $request->page : 1;
         $business_profile = BusinessProfile::with('user', 'companyOverview')->where('alias',$alias)->firstOrFail();
+        //dd($business_profile);
+        //$supplierQuotations = supplierQuotationToBuyer::where('business_profile_id',$business_profile->id)->get();
 
         //dd($business_profile->companyOverview->data);
         $mainProductValuesData = json_decode($business_profile->companyOverview->data);
@@ -840,6 +843,16 @@ class RfqController extends Controller
         {
             //dd($rfqsCount);
             $noOfPages = ceil($data['count']/10);
+
+            $quotation = supplierQuotationToBuyer::where('rfq_id', $rfqLists[0]['id'])->first();
+            $quotationOffer = "";
+            $quotationOfferunit = "";
+            if( isset($quotation['offer_price']) && isset($quotation['offer_price_unit']) ) {
+                //$quotationHtml = "Your offcer price on this RFQ: $".$quotation['offer_price']." / ".$quotation['offer_price_unit'];
+                $quotationOffer = $quotation['offer_price'];
+                $quotationOfferunit = $quotation['offer_price_unit'];
+            }
+
             //all messages of auth user from mongodb messages collection
             $chatdataRfqIds = Userchat::where('to_id',$user->sso_reference_id)->orWhere('from_id',$user->sso_reference_id)->pluck('rfq_id')->toArray();
             $uniqueRfqIdsWithChatdata = array_unique($chatdataRfqIds);
@@ -896,12 +909,28 @@ class RfqController extends Controller
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
         $pageTitle = "My Queries";
         $pageActive = "All";
-        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user', 'quotationOffer', 'quotationOfferunit'));
     }
 
     public function authUserQuotationsByRFQId(Request $request){
         $quotations = Userchat::where('rfq_id',$request->rfqId)->where('factory',true)->get();
         return response()->json(["quotations"=>$quotations],200);
+
+    }
+
+    public function myQuotationsByRFQId(Request $request){
+
+        $quotation = supplierQuotationToBuyer::where('rfq_id', $request->rfqId)->first();
+        $html = "";
+        if( isset($quotation['offer_price']) && isset($quotation['offer_price_unit']) ) {
+            $html = "Your offcer price on this RFQ: $".$quotation['offer_price']." / ".$quotation['offer_price_unit'];
+        } else {
+            $html = "No quotation submitted";
+        }
+        //$offer_price = $quotation['offer_price'] ?? NULL;
+        //$offer_price_unit = $quotation['offer_price_unit'] ?? NULL;
+        // $quotations = Userchat::where('rfq_id',$request->rfqId)->where('factory',true)->get();
+        return response()->json(["quotation" => $quotation, "html" => $html],200);
 
     }
 
@@ -914,7 +943,25 @@ class RfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$request->rfqId);
         $data = $response->json();
         $rfq = $data['data']['data'];
-        return response()->json(["chats"=>$chats,"rfq"=>$rfq],200);
+
+        // $quotation = supplierQuotationToBuyer::where('rfq_id', $request->rfqId)->first();
+        // $quotationHtml = "";
+        // if( isset($quotation['offer_price']) && isset($quotation['offer_price_unit']) ) {
+        //     $quotationHtml = "Your offcer price on this RFQ: $".$quotation['offer_price']." / ".$quotation['offer_price_unit'];
+        // } else {
+        //     $quotationHtml = "No quotation submitted";
+        // }
+
+        $quotation = supplierQuotationToBuyer::where('rfq_id', $request->rfqId)->first();
+        $quotationOffer = "";
+        $quotationOfferunit = "";
+        if( isset($quotation['offer_price']) && isset($quotation['offer_price_unit']) ) {
+            //$quotationHtml = "Your offcer price on this RFQ: $".$quotation['offer_price']." / ".$quotation['offer_price_unit'];
+            $quotationOffer = $quotation['offer_price'];
+            $quotationOfferunit = $quotation['offer_price_unit'];
+        }
+
+        return response()->json(["chats"=>$chats, "rfq"=>$rfq, "quotationOffer"=>$quotationOffer, "quotationOfferunit"=>$quotationOfferunit],200);
     }
 
     public function myRfqByPageNumber(Request $request){

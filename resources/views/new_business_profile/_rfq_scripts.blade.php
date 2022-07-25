@@ -132,6 +132,29 @@
             location.href = "{{route('new.profile.my_queries', $alias)}}";
         });
 
+        $(".rfq-bid-send-trigger").click(function(){
+            var business_profile_id = $(this).closest("#rfq-quotation-modal").find('input[name="bid_businessprofileid"]').val();
+            var business_profile_name = $(this).closest("#rfq-quotation-modal").find('input[name="bid_businessprofilename"]').val();
+            var rfq_id = $(this).closest("#rfq-quotation-modal").find('input[name="bid_rfqid"]').val();
+            var offer_price = $(this).closest("#rfq-quotation-modal").find('input[name="offer_price"]').val();
+            var offer_price_unit = $(this).closest("#rfq-quotation-modal").find('select[name="offer_price_unit"]').val();
+            var url = "{{route('query.bid.store')}}";
+            $.ajax({
+                type:'post',
+                url: url,
+                dataType:'json',
+                data:{business_profile_id: business_profile_id, business_profile_name: business_profile_name, rfq_id: rfq_id, offer_price: offer_price, offer_price_unit: offer_price_unit},
+                beforeSend: function() {
+                    $('.loading-message').html("Please Wait.");
+                    $('#loadingProgressContainer').show();
+                },
+                success:function(data)
+                {
+                    window.location.reload();
+                }
+            });
+        })
+
     });
 
 </script>
@@ -482,6 +505,7 @@
                         $('.rfq_quotation_box').hide();
                         $('.rfq_message_box').show();
                         $('.rfq_review_message_box').empty();
+                        $('.my_rfq_quotation_box').hide();
 
                         var unseenMessageCountClass = '.unseen_message_count_'+rfqId;
                         $(unseenMessageCountClass).attr('data-unseen_message_count',0);
@@ -514,6 +538,8 @@
             $('.message-button').on('click',function(event){
                 event.preventDefault();
                 let rfqId = $(this).attr("data-rfq_id");
+                let pageTitle = "{{$pageTitle}}";
+                console.log(pageTitle);
                 $.ajax({
                     type:'GET',
                     url: "{{route('auth_user_conversations.by_rfq_id')}}",
@@ -527,6 +553,7 @@
                         $('#loadingProgressContainer').hide();
 
                         $('.quotation_tab').attr("data-rfq_id",rfqId);
+                        $('.my_quotation_tab').attr("data-rfq_id",rfqId);
                         $('.message_tab').attr("data-rfq_id",rfqId);
                         var rfqBoxClass = '.rfq_box_'+rfqId;
                         $('.profile_account_myrfq_box').removeClass("active");
@@ -536,6 +563,7 @@
                         $('.rfq_quotation_box').hide();
                         $('.rfq_message_box').show();
                         $('.rfq_review_message_box').empty();
+                        $('.my_rfq_quotation_box').hide();
 
                         var unseenMessageCountClass = '.unseen_message_count_'+rfqId;
                         $(unseenMessageCountClass).attr('data-unseen_message_count',0);
@@ -545,6 +573,13 @@
                         var html='<h6>RFQ ID <span>'+response.rfq.id+'</span></h6>';
                             html+='<h5>'+response.rfq.title+'</h5>';
                             html+='<span class="posted_time">'+response.rfq.created_at+'</span>';
+                            if(pageTitle=="My Queries"){
+                                if(response.quotationOffer) {
+                                    html+='<span class="quotation_html"><span class="quotation_label">Your submitted quotation on this RFQ:</span> $ '+response.quotationOffer+' / '+response.quotationOfferunit+'</span>';
+                                } else {
+                                    html+='<span class="quotation_html"><span class="quotation_label">No quotation submitted.</span></span>';
+                                }
+                            }
                             html+='<div class="center-align btn_accountrfq_info">';
                             html+='<a class="accountrfq_btn" href="javascript:void(0);" onclick="">Show More</a>';
                             html+='</div>';
@@ -589,6 +624,40 @@
                 });
             });
 
+            $('.my_quotation_tab').on('click',function(event){
+                // $('.quotation_tab_li').addClass("active");
+                // $('.message_tab_li').removeClass("active");
+                // $('.my_rfq_quotation_box').show();
+                // $('.rfq_message_box').hide();
+
+                event.preventDefault();
+                $('.my_rfq_review_results_box').empty();
+                let rfqId = $(this).attr("data-rfq_id");
+                $.ajax({
+                    type:'GET',
+                    url: "{{route('my_quotation.by_rfq_id')}}",
+                    data:{ rfqId: rfqId},
+                    beforeSend: function() {
+                        $('.loading-message').html("Please Wait.");
+                        $('#loadingProgressContainer').show();
+                    },
+                    success: function (response) {
+                        $('.loading-message').html("");
+                        $('#loadingProgressContainer').hide();
+                        $('.my_rfq_review_results_box').append(response.html);
+                        $('.quotation_tab_li').addClass("active");
+                        $('.message_tab_li').removeClass("active");
+                        $('.my_rfq_quotation_box').show();
+                        $('.rfq_message_box').hide();
+
+                        // var unseenQuotationCountClass = '.unseen_quotation_count_'+rfqId;
+                        // $(unseenQuotationCountClass).attr('data-unseen_quotation_count',0);
+                        // $(unseenQuotationCountClass).text('');
+                        // $(unseenQuotationCountClass).hide();
+                        //$('.rfq_review_results_box').empty().append(html);
+                    }
+                });
+            })
 
             $('.quotation_tab').on('click',function(event){
                 event.preventDefault();

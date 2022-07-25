@@ -223,6 +223,60 @@ $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : ''
                                                                     <p>Deliver to <br/> <b>{{$rfq['destination']}}</b></p>
                                                                 </div>
                                                             </div>
+                                                            @if($pageTitle == "My Queries")
+                                                            <div class="account_rfq_btn_wrap" >
+                                                                <div class="rfq_btn_box">
+                                                                    <a href="#rfq-quotation-modal" class="btn_white rfq_btn send-quotation-button modal-trigger" data-rfq_id="{{$rfq['id']}}" style="display: inline;">Quotations</a>
+                                                                    <div id="rfq-quotation-modal" class="modal modal-fixed-footer">
+                                                                        <div class="modal-content" style="text-align: left;">
+                                                                            <legend>{{$rfq['id']}}</legend>
+                                                                            <div class="propose_price_block">
+                                                                                <div class="row">
+                                                                                    <div class="col s12 m6 input-field">
+                                                                                        <div class="print_block">
+                                                                                            <label>Offer Price ($)</label>
+                                                                                            <div class="propose_price_input_block">
+                                                                                                <input type="number" value="" name="offer_price" class="propose_price">
+                                                                                                <input type="hidden" name="bid_businessprofilename" value="{{$business_profile->business_name}}" />
+                                                                                                <input type="hidden" name="bid_businessprofileid" value="{{$business_profile->id}}" />
+                                                                                                <input type="hidden" name="bid_rfqid" value="{{$rfq['id']}}" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col s12 m6 input-field">
+                                                                                        <div class="uom_block">
+                                                                                            <label>Price Unit</label>
+                                                                                                <select name="offer_price_unit" class="propose_uom form-select form-control">
+                                                                                                <option value="" selected="true" disabled="">Choose your option</option>
+                                                                                                <option value="Pcs">Pcs</option>
+                                                                                                <option value="Lbs">Lbs</option>
+                                                                                                <option value="Gauge">Gauge</option>
+                                                                                                <option value="Yard">Yards</option>
+                                                                                                <option value="Kg">Kg</option>
+                                                                                                <option value="Meter">Meter</option>
+                                                                                                <option value="Dozens">Dozens</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a href="javascript:void(0);" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+                                                                            <a href="javascript:void(0);" class="waves-effect waves-green btn-flat rfq-bid-send-trigger">Submit</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rfq_btn_box">
+                                                                    <button class="btn_white rfq_btn message-button" data-rfq_id="{{$rfq['id']}}">Messages</button>
+                                                                    @if(($rfq['unseen_count'] - $rfq['unseen_quotation_count']) >0)
+                                                                        <span  class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
+                                                                    @else
+                                                                        <span style="display:none" class="unseen_message_count_{{$rfq['id']}}" data-unseen_message_count="{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}">{{$rfq['unseen_count'] - $rfq['unseen_quotation_count']}}</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            @else
                                                             <div class="account_rfq_btn_wrap" >
                                                                 <div class="rfq_btn_box">
                                                                     <button class="btn_white rfq_btn quotation-button" data-rfq_id="{{$rfq['id']}}">Quotations</button>
@@ -241,6 +295,7 @@ $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : ''
                                                                     @endif
                                                                 </div>
                                                             </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     @endforeach
@@ -308,6 +363,9 @@ $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : ''
                                             <h6>RFQ ID <span>{{$rfqLists[0]['id']}}</span></h6>
                                             <h5>{{$rfqLists[0]['title']}}</h5>
                                             <span class="posted_time">{{date('Y-m-d', strtotime($rfqLists[0]['created_at']))}}</span>
+                                            @if($pageTitle == "My Queries")
+                                            <span class="quotation_html"><span class="quotation_label">Your submitted quotation on this RFQ:</span> $ {{$quotationOffer}} / {{$quotationOfferunit}}</span>
+                                            @endif
 
                                             <div class="center-align btn_accountrfq_info">
                                                 <a class="accountrfq_btn" href="javascript:void(0);" onclick="">Show More</a>
@@ -335,9 +393,20 @@ $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : ''
                                             <div class="rfq_review_results_nav">
                                                 <ul>
                                                     <li  class="active message_tab_li"><a href="javascript:void(0);" class="message_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Messages</a></li>
+                                                    @if($pageTitle == "My Queries")
+                                                    <li class="quotation_tab_li" style="display: none;"><a href="javascript:void(0);" class="my_quotation_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Quotations</a></li>
+                                                    @else
                                                     <li class="quotation_tab_li"><a href="javascript:void(0);" class="quotation_tab" data-rfq_id="{{$rfqLists[0]['id']}}">Quotations</a></li>
+                                                    @endif
                                                 </ul>
                                             </div>
+
+                                            <div class="my_rfq_quotation_box" style="display:none">
+                                                <div class="my_rfq_review_results_box">
+                                                    My Quotation will show here.
+                                                </div>
+                                            </div>
+
                                             <div class="rfq_quotation_box" style="display:none">
                                                 <div class="rfq_review_results_box">
 

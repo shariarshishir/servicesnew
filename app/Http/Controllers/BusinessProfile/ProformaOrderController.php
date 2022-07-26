@@ -38,7 +38,7 @@ class ProformaOrderController extends Controller
         $proformaOrder = Proforma::where('id',$proformaId)->first();
         $proformaOrder->status = 1;
         $proformaOrder->save();
-        return redirect()->route('new.profile.profoma_orders.pending',$alias);
+        return redirect()->route('new.profile.profoma_orders.ongoing',$alias);
     }
 
     public function rejectProformaOrder(Request $request,$alias,$proformaId)

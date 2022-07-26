@@ -319,18 +319,34 @@ class PoController extends Controller
 
     public function acceptProformaInvoice(Request $request)
     {
-        Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id,'total_invoice_amount_with_merchant_assistant'=>$request->total_invoice_amount_with_merchant_assistant,'status' => 1]);
-        if($request->merchant_assistances){
-            foreach($request->merchant_assistances as $checkedMerchantAssistance){
-                $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
-                $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
-                $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
-                $proformaCheckedMerchantAssistance->save();
-            }
-
+        $businessProfiles = BusinessProfile::withTrashed()->where('user_id', auth()->id())->get();
+        if(count($businessProfiles) > 0) {
+            $alias = $businessProfiles[0]->alias;
+        } else {
+            $alias = $businessProfiles->alias;
         }
 
-        return redirect()->route('po.index');
+        $proformaOrder = Proforma::where('id', $request->po_id)->first();
+        $proformaOrder->status = 1;
+        $proformaOrder->save();
+
+        return redirect()->route('new.profile.profoma_orders.ongoing',$alias);
+
+        // Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id,'total_invoice_amount_with_merchant_assistant'=>$request->total_invoice_amount_with_merchant_assistant,'status' => 1]);
+        // if($request->merchant_assistances){
+        //     foreach($request->merchant_assistances as $checkedMerchantAssistance){
+        //         $proformaCheckedMerchantAssistance = new ProformaCheckedMerchantAssistance();
+        //         $proformaCheckedMerchantAssistance->proforma_id = $request->po_id;
+        //         $proformaCheckedMerchantAssistance->merchant_assistance_id = $checkedMerchantAssistance;
+        //         $proformaCheckedMerchantAssistance->save();
+        //     }
+
+        // }
+
+        // return redirect()->route('po.index');
+
+
+
         //Performa::where('id', $request->input('proforma_id'))->update(['po_no' => $request->input('po_id'), 'status' => 1]);
         //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');
         //return redirect()->action('RFQController@proformainvoices');
@@ -360,8 +376,20 @@ class PoController extends Controller
 
     public function rejectProformaInvoice(Request $request)
     {
-         Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'reject_message' => $request->reject_message, 'status' => -1]);
-         return redirect()->route("po.index");
+        // Proforma::where(['proforma_id' => $request->proforma_id, 'id' => $request->po_id ])->update(['po_no' => $request->po_id, 'reject_message' => $request->reject_message, 'status' => -1]);
+        // return redirect()->route("po.index");
+        $businessProfiles = BusinessProfile::withTrashed()->where('user_id', auth()->id())->get();
+        if(count($businessProfiles) > 0) {
+            $alias = $businessProfiles[0]->alias;
+        } else {
+            $alias = $businessProfiles->alias;
+        }
+
+        $proformaOrder = Proforma::where('id', $request->po_id)->first();
+        $proformaOrder->reject_message = $request->reject_message;
+        $proformaOrder->status = -1;
+        $proformaOrder->save();
+        return redirect()->route('new.profile.profoma_orders.pending',$alias);
 
          //session()->flash('success_message', 'Pro-Forma Invoice accepted successfully.');
          //return redirect()->action('RFQController@proformainvoices');

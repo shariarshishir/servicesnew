@@ -1776,6 +1776,9 @@ label:not(.form-check-label):not(.custom-file-label) {
     text-align: center;
 }
 
+.add_to_short_list_element input[type="checkbox"] {
+    opacity: 1 !important;
+}
 /* ************** Media css start ******************* */
 
 @media only screen and (min-width: 1500px) {}

@@ -39,6 +39,9 @@ $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : ''
                                 <h6>RFQ ID <span>{{$rfqLists[0]['id']}}</span></h6>
                                 <h5>{{$rfqLists[0]['title']}}</h5>
                                 <span class="posted_time">{{date('Y-m-d', strtotime($rfqLists[0]['created_at']))}}</span>
+                                @if($pageTitle == "My Queries")
+                                <span class="quotation_html"><span class="quotation_label">Your submitted quotation on this RFQ:</span> $ {{$quotationOffer}} / {{$quotationOfferunit}}</span>
+                                @endif
 
                                 <div class="center-align btn_accountrfq_info">
                                     <a class="accountrfq_btn" href="javascript:void(0);" onclick="">Show More</a>

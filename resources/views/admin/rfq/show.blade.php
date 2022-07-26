@@ -258,6 +258,50 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
+                                                <div class="add_to_short_list_element">
+                                                    @php
+                                                    $classActive = '';
+                                                    if($rfq['short_listed_profiles'])
+                                                    {
+                                                        $shortlistVar = explode(",", $rfq['short_listed_profiles']);
+                                                        foreach($shortlistVar as $rfqshortlistid)
+                                                        {
+                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                            {
+                                                                $classActive = 'checked="checked"';
+                                                            }
+                                                        }
+                                                    }
+                                                    @endphp
+                                                    <div class="form-check">
+                                                        <input type="checkbox" {{$classActive}} name="add_to_short_list_check" class="form-check-input add_to_short_list_trigger" id="add_to_short_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                        <label class="form-check-label" for="add_to_short_list_trigger_{{$businessProfile['id']}}">Add to short list</label>
+                                                    </div>
+                                                    <input type="hidden" name="short_list[]" class="existing_short_list_ids" value="{{ $rfq['short_listed_profiles'] }}" />
+                                                </div>
+
+                                                <div class="add_to_short_list_element">
+                                                    @php
+                                                    $classSelectedActive = '';
+                                                    if($rfq['selected_profile'])
+                                                    {
+                                                        $shortlistVar = explode(",", $rfq['selected_profile']);
+                                                        foreach($shortlistVar as $rfqshortlistid)
+                                                        {
+                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                            {
+                                                                $classSelectedActive = 'checked="checked"';
+                                                            }
+                                                        }
+                                                    }
+                                                    @endphp
+                                                    <div class="form-check">
+                                                        <input type="checkbox" {{$classSelectedActive}} name="add_to_selected_list_check" class="form-check-input add_to_selected_list_trigger" id="add_to_selected_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                        <label class="form-check-label" for="add_to_selected_list_trigger_{{$businessProfile['id']}}">Make it selected</label>
+                                                    </div>
+                                                    <input type="hidden" name="selected_list[]" class="existing_selected_list_ids" value="{{ $rfq['selected_profile'] }}" />
+                                                </div>
+
                                                 <div class="send_box">
                                                     <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
                                                 </div>
@@ -465,6 +509,79 @@
                     alert("Please Select an option where you want to publish this RFQ.");
                 }
 
+            })
+
+            //var shortListedIds= new Array();
+            $(".add_to_short_list_trigger").click(function(){
+                var businessProfileId = $(this).data("businessprofileid");
+                var rfqId = $(this).data("rfqid");
+                var from_short_list = "from_short";
+
+                if ($(this).is(':checked')) {
+                    var existing_list = $(".existing_short_list_ids").val();
+                    existing_list = existing_list.concat(',' + businessProfileId);
+                    $(".existing_short_list_ids").val(existing_list);
+                } else {
+                    var existing_list = $(".existing_short_list_ids").val();
+                    existing_list = existing_list.replace(businessProfileId, '');
+                    $(".existing_short_list_ids").val(existing_list);
+                }
+
+                var url = "{{route('admin.rfq.profile.shortlist')}}";
+                $.ajax({
+                    method: 'get',
+                    dataType: 'json',
+                    data: {rfqId:rfqId, shortList: existing_list, requestForm: from_short_list},
+                    enctype: 'multipart/form-data',
+                    url: url,
+                    beforeSend: function() {
+                        // $('.loading-message').html("Please Wait.");
+                        // $('#loadingProgressContainer').show();
+                    },
+                    success:function(data)
+                    {
+                        // $('.loading-message').html("");
+                        // $('#loadingProgressContainer').hide();
+                        //window.location.reload();
+                    }
+                });
+            })
+
+            //var selectedListedIds= new Array();
+            $(".add_to_selected_list_trigger").click(function(){
+                var businessProfileId = $(this).data("businessprofileid");
+                var rfqId = $(this).data("rfqid");
+                var from_selected_list = "from_selected";
+
+                if ($(this).is(':checked')) {
+                    var existing_selected_list = $(".existing_selected_list_ids").val();
+                    existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
+                    $(".existing_selected_list_ids").val(existing_selected_list);
+                } else {
+                    var existing_selected_list = $(".existing_selected_list_ids").val();
+                    //existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
+                    existing_selected_list = existing_selected_list.replace(businessProfileId, '');
+                    $(".existing_selected_list_ids").val(existing_selected_list);
+                }
+
+                var url = "{{route('admin.rfq.profile.shortlist')}}";
+                $.ajax({
+                    method: 'get',
+                    dataType: 'json',
+                    data: {rfqId:rfqId, selectedList: existing_selected_list, requestForm: from_selected_list},
+                    enctype: 'multipart/form-data',
+                    url: url,
+                    beforeSend: function() {
+                        // $('.loading-message').html("Please Wait.");
+                        // $('#loadingProgressContainer').show();
+                    },
+                    success:function(data)
+                    {
+                        // $('.loading-message').html("");
+                        // $('#loadingProgressContainer').hide();
+                        //window.location.reload();
+                    }
+                });
             })
 
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});

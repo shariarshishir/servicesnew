@@ -66,6 +66,21 @@ class BackendRfqController extends Controller
         $data = $response->json();
         $rfq = $data['data']['data'];
 
+        if( isset($rfq['short_listed_profiles']) ) {
+            $rfq['short_listed_profiles'] = $rfq['short_listed_profiles'];
+            $rfq['short_listed_profiles'] = implode("," , $rfq['short_listed_profiles']);
+        } else {
+            $rfq['short_listed_profiles'] = "";
+        }
+
+        if( isset($rfq['selected_profile']) ) {
+            $rfq['selected_profile'] = $rfq['selected_profile'];
+            $rfq['selected_profile'] = implode("," , $rfq['selected_profile']);
+        } else {
+            $rfq['selected_profile'] = "";
+        }
+        //dd($rfq['short_listed_profiles']);
+
         $factory_type_value = [];
         foreach($rfq['category'] as $category) {
             array_push($factory_type_value, $category['name']);
@@ -307,6 +322,36 @@ class BackendRfqController extends Controller
         }
 
     }
+
+    public function profileShortList( Request $request )
+    {
+        //dd($request->all());
+        $rfqId = $request->rfqId;
+        $requestForm = $request->requestForm;
+//dd($shortList);
+
+        if($requestForm == "from_selected") {
+            $selectedList = explode("," , $request->selectedList);
+            $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$rfqId, [
+                'selected_profile' => $selectedList,
+            ]);
+        } else {
+            $shortList = explode("," , $request->shortList);
+            $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$rfqId, [
+                'short_listed_profiles' => $shortList,
+            ]);
+        }
+
+
+        if( $response->status()  == 200){
+            return response()->json([
+                'msg' => "Profile added in short list successfully.",
+            ],200);
+        } else {
+            return redirect()->back()->withSuccess('Something went wrong!!');
+        }
+    }
+
     public function businessProfileFilter(Request $request){
         // if($request->category_id && $request->profile_rating !=0)
         // {

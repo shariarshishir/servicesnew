@@ -199,8 +199,8 @@
                                 <div class="row">
                                     <ul class="supplier-selection-menu">
                                         <li class="@php echo ($requestUrl == $rfq['id'] || $requestUrl == 'all') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'all']) }}">All</a></li>
-                                        <li class="@php echo ($requestUrl == 'short-list') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'short-list']) }}">Short listed</a></li>
-                                        <li class="@php echo ($requestUrl == 'selected') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'selected']) }}">Selected</a></li>
+                                        <li class="short-list-li @php echo ($requestUrl == 'short-list') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'short-list']) }}">Short listed</a> <span class="short-list-count">{{$businessProfilesShortListed}}</span></li>
+                                        <li class="selected-list-li @php echo ($requestUrl == 'selected') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'selected']) }}">Selected</a> <span class="selected-list-count">{{$businessProfilesSelectedListed}}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -380,7 +380,7 @@
 
                                     @if($requestUrl == 'short-list')
                                         @foreach($businessProfiles as $key=>$businessProfile)
-                                            @if($businessProfile['profile_shortlisted']==1)
+                                            @if($businessProfile['profile_shortlisted']==1 && $businessProfile['profile_selected']==0)
                                                 @php
                                                     $className = 'no-class';
                                                     if(isset($businessProfile['supplier_quotation_to_buyer']))
@@ -905,6 +905,7 @@
                     if (confirm('Are you sure? You want to add this profile in short list'))
                     {
                         var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+                        var shortListCount = $(".short-list-count").text();
 
                         var existing_list = $(".existing_short_list_ids").val();
                         existing_list = existing_list.concat(',' + businessProfileId);
@@ -928,6 +929,8 @@
                             success:function(data)
                             {
                                 boxHtml.remove();
+                                shortListCount = parseInt(shortListCount)+1;
+                                $(".short-list-count").text(shortListCount);
                                 // $('.loading-message').html("");
                                 // $('#loadingProgressContainer').hide();
                                 //window.location.reload();
@@ -940,6 +943,7 @@
                     if (confirm('Are you sure? You want to remove this profile in short list'))
                     {
                         var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+                        var shortListCount = $(".short-list-count").text();
 
                         var existing_list = $(".existing_short_list_ids").val();
                         existing_list = existing_list.replace(businessProfileId, '');
@@ -963,6 +967,8 @@
                             success:function(data)
                             {
                                 boxHtml.remove();
+                                shortListCount = parseInt(shortListCount)-1;
+                                $(".short-list-count").text(shortListCount);
                                 // $('.loading-message').html("");
                                 // $('#loadingProgressContainer').hide();
                                 //window.location.reload();
@@ -990,6 +996,7 @@
                     if (confirm('Are you sure? You want to add this profile in selected list'))
                     {
                         var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+                        var selectedListCount = $(".selected-list-count").text();
 
                         var existing_selected_list = $(".existing_selected_list_ids").val();
                         existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
@@ -1013,6 +1020,8 @@
                             success:function(data)
                             {
                                 boxHtml.remove();
+                                selectedListCount = parseInt(selectedListCount)+1;
+                                $(".selected-list-count").text(selectedListCount);
                                 // $('.loading-message').html("");
                                 // $('#loadingProgressContainer').hide();
                                 //window.location.reload();
@@ -1025,6 +1034,7 @@
                     if (confirm('Are you sure? You want to remove this profile in selected list'))
                     {
                         var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+                        var selectedListCount = $(".selected-list-count").text();
 
                         var existing_selected_list = $(".existing_selected_list_ids").val();
                         //existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
@@ -1049,6 +1059,8 @@
                             success:function(data)
                             {
                                 boxHtml.remove();
+                                selectedListCount = parseInt(selectedListCount)-1;
+                                $(".selected-list-count").text(selectedListCount);
                                 // $('.loading-message').html("");
                                 // $('#loadingProgressContainer').hide();
                                 //window.location.reload();

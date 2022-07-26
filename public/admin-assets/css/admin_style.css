@@ -1801,6 +1801,23 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .supplier-selection-menu li {
     display: inline-block;
+    position: relative;
+}
+.supplier-selection-menu li .short-list-count,
+.supplier-selection-menu li .selected-list-count {
+    position: absolute;
+    top: -5px;
+    right: -3px;
+    background-color: #ff0000;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 11px;
+    line-height: 20px;
+    display: none;
+
 }
 .supplier-selection-menu li a:link,
 .supplier-selection-menu li a:visited,

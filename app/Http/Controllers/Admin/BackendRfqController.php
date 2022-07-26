@@ -65,8 +65,8 @@ class BackendRfqController extends Controller
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
-        // $businessProfilesShortListed = 0;
-        // $businessProfilesSelectedListed = 0;
+        $businessProfilesShortListed = 0;
+        $businessProfilesSelectedListed = 0;
 
         if( isset($rfq['short_listed_profiles']) ) {
 
@@ -213,7 +213,7 @@ class BackendRfqController extends Controller
         }
         $proforma_invoice_url_for_buyer =$profromaInvoice ? route('open.proforma.single.html', $profromaInvoice->id) : '';
         $url_exists=$link;
-        return view('admin.rfq.show', compact('rfq','businessProfiles','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists', 'product_tag', 'factory_type_as_tag_parent'));
+        return view('admin.rfq.show', compact('rfq','businessProfiles','businessProfilesShortListed','businessProfilesSelectedListed','buyerBusinessProfile','chatdata','from_user_image','to_user_image','user','buyer','productCategories','userNameShortForm','profromaInvoice','associativeArrayUsingIDandCount','proforma_invoice_url_for_buyer','url_exists', 'product_tag', 'factory_type_as_tag_parent'));
     }
 
     public function sendFireBasePushNotificationToAdminForNewMessage(Request $request){

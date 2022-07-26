@@ -1778,17 +1778,50 @@ label:not(.form-check-label):not(.custom-file-label) {
 
 .add_to_short_list_element {
     position: absolute;
-    bottom: 10px;
+    bottom: 25px;
     left: 10px;
 }
 .add_to_short_list_element.selected_element {
     position: absolute;
-    bottom: 10px;
-    left: 138px;
+    bottom: 5px;
+    left: 10px;
 }
 
 .add_to_short_list_element input[type="checkbox"] {
     opacity: 1 !important;
+}
+.filter_block {
+    padding-top: 10px;
+}
+.supplier-selection-menu {
+    list-style: none;
+    margin: -35px 0px 0px 10px;
+    padding: 0px;
+    position: relative;
+}
+.supplier-selection-menu li {
+    display: inline-block;
+}
+.supplier-selection-menu li a:link,
+.supplier-selection-menu li a:visited,
+.supplier-selection-menu li a:active {
+    font-size: 14px;
+    color: #73D578;
+    border: 2px solid #73D578;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 18px;
+    font-weight: 500;
+    background: none;
+    min-width: 65px;
+    display: inline-block;
+}
+.supplier-selection-menu li.active a:link,
+.supplier-selection-menu li.active a:visited,
+.supplier-selection-menu li.active a:active {
+    background: #73D578;
+    color: #fff;
 }
 /* ************** Media css start ******************* */
 

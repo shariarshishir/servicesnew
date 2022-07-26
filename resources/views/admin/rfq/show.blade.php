@@ -10,6 +10,12 @@
         @endif
     @endforeach
 @endif
+
+@php
+    $requestUrl = Request::url();
+    $requestUrl = explode("/", $requestUrl);
+    $requestUrl = end($requestUrl);
+@endphp
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -190,171 +196,548 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <ul class="supplier-selection-menu">
+                                        <li class="@php echo ($requestUrl == $rfq['id'] || $requestUrl == 'all') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'all']) }}">All</a></li>
+                                        <li class="@php echo ($requestUrl == 'short-list') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'short-list']) }}">Short listed</a></li>
+                                        <li class="@php echo ($requestUrl == 'selected') ? "active" : ""; @endphp"><a href="{{ route('admin.rfq.show', [$rfq['id'], 'selected']) }}">Selected</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="matched_suppliers_wrap">
                             <div class="rfq_business_profile_list row">
                                 @if($businessProfiles)
-                                @foreach($businessProfiles as $key=>$businessProfile)
-                                @php
-                                    $className = 'no-class';
-                                    if(isset($businessProfile['supplier_quotation_to_buyer']))
-                                    {
-                                        foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
-                                            if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
-                                                if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
-                                                    $className = 'already-sent';
+
+                                    @if($requestUrl == $rfq['id'] || $requestUrl == 'all')
+                                        @foreach($businessProfiles as $key=>$businessProfile)
+                                        @php
+                                            $activeClassName = "";
+                                            if($businessProfile['profile_shortlisted'] == 1 || $businessProfile['profile_selected'] == 1) {
+                                                $activeClassName = "display:none";
+                                            }
+                                            $className = 'no-class';
+                                            if(isset($businessProfile['supplier_quotation_to_buyer']))
+                                            {
+                                                foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
+                                                    if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
+                                                        if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
+                                                            $className = 'already-sent';
+                                                        }
+                                                    }
                                                 }
                                             }
-                                        }
-                                    }
 
-                                @endphp
-                                <div class="col-sm-12 col-md-6 col-lg-4 {{$className}}">
-                                    <div class="suppliersBoxWrap">
-                                        <div class="suppliers_box">
-                                            <div class="suppliers_imgBox">
-                                                <div class="imgBox">
-                                                    <img src="{{Storage::disk('s3')->url('public/'.$businessProfile['user']['image'])}}" alt="" />
-                                                </div>
-                                                <!--h5>MB Pool</h5-->
-                                            </div>
-                                            <div class="suppliers_textBox">
-                                                <div class="title_box">
-                                                    <h3><a href="/{{$businessProfile['alias']}}" target="_blank">{{$businessProfile['business_name']}}</a></h3>
-                                                    <div class="sms_img">
-                                                        @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
-                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span data-unseenmessagecount="{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }}" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
-                                                        @else
-                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
-                                                        @endif
+                                        @endphp
+                                        <div class="col-sm-12 col-md-6 col-lg-4 suppliersBoxWrapOuter {{$className}}" style="{{$activeClassName}}">
+                                            <div class="suppliersBoxWrap">
+                                                <div class="suppliers_box">
+                                                    <div class="suppliers_imgBox">
+                                                        <div class="imgBox">
+                                                            <img src="{{Storage::disk('s3')->url('public/'.$businessProfile['user']['image'])}}" alt="" />
+                                                        </div>
+                                                        <!--h5>MB Pool</h5-->
                                                     </div>
-                                                </div>
-                                                <div class="sms_details_box">
-                                                    <div class="sms_details">
-                                                        Contact Person <br/>
-                                                        <span>{{$businessProfile['user']['name']}}</span>
-                                                    </div>
-                                                    <div class="sms_details">
-                                                        Contact Number <br/>
-                                                        <span>{{$businessProfile['user']['phone']}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="offer_price_block_wrapper" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
-                                                    <div class="offer_price_block">
-                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
-                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == true)
-                                                                    <span> Offered to buyer :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  /  {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
-                                                                    @break
+                                                    <div class="suppliers_textBox">
+                                                        <div class="title_box">
+                                                            <h3><a href="/{{$businessProfile['alias']}}" target="_blank">{{$businessProfile['business_name']}}</a></h3>
+                                                            <div class="sms_img">
+                                                                @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
+                                                                    <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span data-unseenmessagecount="{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }}" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
+                                                                @else
+                                                                    <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
                                                                 @endif
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="deal_price_block">
-                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
-                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == false)
-                                                                    <span> Quoted by supplier :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  / {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
-                                                                    @break
-                                                                @endif
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                                <div class="add_to_short_list_element">
-                                                    @php
-                                                    $classActive = '';
-                                                    if($rfq['short_listed_profiles'])
-                                                    {
-                                                        $shortlistVar = explode(",", $rfq['short_listed_profiles']);
-                                                        foreach($shortlistVar as $rfqshortlistid)
-                                                        {
-                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                            </div>
+                                                        </div>
+                                                        <div class="sms_details_box">
+                                                            <div class="sms_details">
+                                                                Contact Person <br/>
+                                                                <span>{{$businessProfile['user']['name']}}</span>
+                                                            </div>
+                                                            <div class="sms_details">
+                                                                Contact Number <br/>
+                                                                <span>{{$businessProfile['user']['phone']}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="offer_price_block_wrapper" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
+                                                            <div class="offer_price_block">
+                                                                @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                        @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == true)
+                                                                            <span> Offered to buyer :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  /  {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                            @break
+                                                                        @endif
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="deal_price_block">
+                                                                @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                        @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == false)
+                                                                            <span> Quoted by supplier :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  / {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                            @break
+                                                                        @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="add_to_short_list_element">
+                                                            @php
+                                                            $classActive = '';
+                                                            if($rfq['short_listed_profiles'])
                                                             {
-                                                                $classActive = 'checked="checked"';
+                                                                $shortlistVar = explode(",", $rfq['short_listed_profiles']);
+                                                                foreach($shortlistVar as $rfqshortlistid)
+                                                                {
+                                                                    if($rfqshortlistid == $businessProfile['id'])
+                                                                    {
+                                                                        $classActive = 'checked="checked"';
+                                                                    }
+                                                                }
                                                             }
-                                                        }
-                                                    }
-                                                    @endphp
-                                                    <div class="form-check">
-                                                        <input type="checkbox" {{$classActive}} name="add_to_short_list_check" class="form-check-input add_to_short_list_trigger" id="add_to_short_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
-                                                        <label class="form-check-label" for="add_to_short_list_trigger_{{$businessProfile['id']}}">Add to short list</label>
-                                                    </div>
-                                                    <input type="hidden" name="short_list[]" class="existing_short_list_ids" value="{{ $rfq['short_listed_profiles'] }}" />
-                                                </div>
+                                                            @endphp
+                                                            <div class="form-check">
+                                                                <input type="checkbox" {{$classActive}} name="add_to_short_list_check" class="form-check-input add_to_short_list_trigger" id="add_to_short_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                                <label class="form-check-label" for="add_to_short_list_trigger_{{$businessProfile['id']}}">Add to short list</label>
+                                                            </div>
+                                                            <input type="hidden" name="short_list[]" class="existing_short_list_ids" value="{{ $rfq['short_listed_profiles'] }}" />
+                                                            <input type="hidden" name="remove_short_list[]" class="remove_existing_short_list_ids" value="" />
+                                                        </div>
 
-                                                <div class="add_to_short_list_element selected_element">
-                                                    @php
-                                                    $classSelectedActive = '';
-                                                    if($rfq['selected_profile'])
-                                                    {
-                                                        $shortlistVar = explode(",", $rfq['selected_profile']);
-                                                        foreach($shortlistVar as $rfqshortlistid)
-                                                        {
-                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                        <div class="add_to_short_list_element selected_element">
+                                                            @php
+                                                            $classSelectedActive = '';
+                                                            if($rfq['selected_profile'])
                                                             {
-                                                                $classSelectedActive = 'checked="checked"';
+                                                                $shortlistVar = explode(",", $rfq['selected_profile']);
+                                                                foreach($shortlistVar as $rfqshortlistid)
+                                                                {
+                                                                    if($rfqshortlistid == $businessProfile['id'])
+                                                                    {
+                                                                        $classSelectedActive = 'checked="checked"';
+                                                                    }
+                                                                }
                                                             }
-                                                        }
-                                                    }
-                                                    @endphp
-                                                    <div class="form-check">
-                                                        <input type="checkbox" {{$classSelectedActive}} name="add_to_selected_list_check" class="form-check-input add_to_selected_list_trigger" id="add_to_selected_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
-                                                        <label class="form-check-label" for="add_to_selected_list_trigger_{{$businessProfile['id']}}">Make it selected</label>
-                                                    </div>
-                                                    <input type="hidden" name="selected_list[]" class="existing_selected_list_ids" value="{{ $rfq['selected_profile'] }}" />
-                                                </div>
+                                                            @endphp
+                                                            <div class="form-check">
+                                                                <input type="checkbox" {{$classSelectedActive}} name="add_to_selected_list_check" class="form-check-input add_to_selected_list_trigger" id="add_to_selected_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                                <label class="form-check-label" for="add_to_selected_list_trigger_{{$businessProfile['id']}}">Make it selected</label>
+                                                            </div>
+                                                            <input type="hidden" name="selected_list[]" class="existing_selected_list_ids" value="{{ $rfq['selected_profile'] }}" />
+                                                            <input type="hidden" name="remove_selected_list[]" class="remove_existing_selected_list_ids" value="" />
+                                                        </div>
 
-                                                <div class="send_box">
-                                                    <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
+                                                        <div class="send_box">
+                                                            <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                            <div class="modal fade businessProfileModal" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <legend>{{$businessProfile['business_name']}}</legend>
+                                                            <div class="propose_price_block">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="print_block">
+                                                                        <label>Offer Price ($)</label>
+                                                                        <div class="propose_price_input_block">
+                                                                            <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="uom_block">
+                                                                        <label>Price Unit</label>
+                                                                        <select name="propose_uom" class="propose_uom form-select form-control">
+                                                                            <option value="" selected="true" disabled="">Choose your option</option>
+                                                                            <option value="Pcs">Pcs</option>
+                                                                            <option value="Lbs">Lbs</option>
+                                                                            <option value="Gauge">Gauge</option>
+                                                                            <option value="Yard">Yards</option>
+                                                                            <option value="Kg">Kg</option>
+                                                                            <option value="Meter">Meter</option>
+                                                                            <option value="Dozens">Dozens</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- <div class="separator_block"> / </div> -->
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" data-businessprofilealias="{{$businessProfile['alias']}}" data-businessprofilename="{{$businessProfile['business_name']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
+                                        @endforeach
+                                    @endif
 
-                                    <div class="modal fade businessProfileModal" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <legend>{{$businessProfile['business_name']}}</legend>
-                                                    <div class="propose_price_block">
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-md-6">
-                                                            <div class="print_block">
-                                                                <label>Offer Price ($)</label>
-                                                                <div class="propose_price_input_block">
-                                                                    <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                    @if($requestUrl == 'short-list')
+                                        @foreach($businessProfiles as $key=>$businessProfile)
+                                            @if($businessProfile['profile_shortlisted']==1)
+                                                @php
+                                                    $className = 'no-class';
+                                                    if(isset($businessProfile['supplier_quotation_to_buyer']))
+                                                    {
+                                                        foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
+                                                            if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
+                                                                if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
+                                                                    $className = 'already-sent';
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                @endphp
+                                                <div class="col-sm-12 col-md-6 col-lg-4 suppliersBoxWrapOuter {{$className}}">
+                                                    <div class="suppliersBoxWrap">
+                                                        <div class="suppliers_box">
+                                                            <div class="suppliers_imgBox">
+                                                                <div class="imgBox">
+                                                                    <img src="{{Storage::disk('s3')->url('public/'.$businessProfile['user']['image'])}}" alt="" />
+                                                                </div>
+                                                                <!--h5>MB Pool</h5-->
+                                                            </div>
+                                                            <div class="suppliers_textBox">
+                                                                <div class="title_box">
+                                                                    <h3><a href="/{{$businessProfile['alias']}}" target="_blank">{{$businessProfile['business_name']}}</a></h3>
+                                                                    <div class="sms_img">
+                                                                        @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
+                                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span data-unseenmessagecount="{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }}" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
+                                                                        @else
+                                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="sms_details_box">
+                                                                    <div class="sms_details">
+                                                                        Contact Person <br/>
+                                                                        <span>{{$businessProfile['user']['name']}}</span>
+                                                                    </div>
+                                                                    <div class="sms_details">
+                                                                        Contact Number <br/>
+                                                                        <span>{{$businessProfile['user']['phone']}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="offer_price_block_wrapper" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
+                                                                    <div class="offer_price_block">
+                                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == true)
+                                                                                    <span> Offered to buyer :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  /  {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                                    @break
+                                                                                @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <div class="deal_price_block">
+                                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == false)
+                                                                                    <span> Quoted by supplier :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  / {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                                    @break
+                                                                                @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                                <div class="add_to_short_list_element">
+                                                                    @php
+                                                                    $classActive = '';
+                                                                    if($rfq['short_listed_profiles'])
+                                                                    {
+                                                                        $shortlistVar = explode(",", $rfq['short_listed_profiles']);
+                                                                        foreach($shortlistVar as $rfqshortlistid)
+                                                                        {
+                                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                                            {
+                                                                                $classActive = 'checked="checked"';
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    @endphp
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" {{$classActive}} name="add_to_short_list_check" class="form-check-input add_to_short_list_trigger" id="add_to_short_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                                        <label class="form-check-label" for="add_to_short_list_trigger_{{$businessProfile['id']}}">
+                                                                            @if($businessProfile['profile_shortlisted'])
+                                                                            Remove from short list
+                                                                            @else
+                                                                            Add to short list
+                                                                            @endif
+                                                                        </label>
+                                                                    </div>
+                                                                    <input type="hidden" name="short_list[]" class="existing_short_list_ids" value="{{ $rfq['short_listed_profiles'] }}" />
+                                                                    <input type="hidden" name="remove_short_list[]" class="remove_existing_short_list_ids" value="" />
+                                                                </div>
+
+                                                                <div class="add_to_short_list_element selected_element">
+                                                                    @php
+                                                                    $classSelectedActive = '';
+                                                                    if($rfq['selected_profile'])
+                                                                    {
+                                                                        $shortlistVar = explode(",", $rfq['selected_profile']);
+                                                                        foreach($shortlistVar as $rfqshortlistid)
+                                                                        {
+                                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                                            {
+                                                                                $classSelectedActive = 'checked="checked"';
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    @endphp
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" {{$classSelectedActive}} name="add_to_selected_list_check" class="form-check-input add_to_selected_list_trigger" id="add_to_selected_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                                        <label class="form-check-label" for="add_to_selected_list_trigger_{{$businessProfile['id']}}">
+                                                                            @if($businessProfile['profile_selected'])
+                                                                            Remove from selected list
+                                                                            @else
+                                                                            Make it selected
+                                                                            @endif
+                                                                        </label>
+                                                                    </div>
+                                                                    <input type="hidden" name="selected_list[]" class="existing_selected_list_ids" value="{{ $rfq['selected_profile'] }}" />
+                                                                    <input type="hidden" name="remove_selected_list[]" class="remove_existing_selected_list_ids" value="" />
+                                                                </div>
+
+                                                                <div class="send_box">
+                                                                    <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12 col-md-6">
-                                                            <div class="uom_block">
-                                                                <label>Price Unit</label>
-                                                                <select name="propose_uom" class="propose_uom form-select form-control">
-                                                                    <option value="" selected="true" disabled="">Choose your option</option>
-                                                                    <option value="Pcs">Pcs</option>
-                                                                    <option value="Lbs">Lbs</option>
-                                                                    <option value="Gauge">Gauge</option>
-                                                                    <option value="Yard">Yards</option>
-                                                                    <option value="Kg">Kg</option>
-                                                                    <option value="Meter">Meter</option>
-                                                                    <option value="Dozens">Dozens</option>
-                                                                </select>
+                                                    </div>
+
+                                                    <div class="modal fade businessProfileModal" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <legend>{{$businessProfile['business_name']}}</legend>
+                                                                    <div class="propose_price_block">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 col-md-6">
+                                                                            <div class="print_block">
+                                                                                <label>Offer Price ($)</label>
+                                                                                <div class="propose_price_input_block">
+                                                                                    <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-6">
+                                                                            <div class="uom_block">
+                                                                                <label>Price Unit</label>
+                                                                                <select name="propose_uom" class="propose_uom form-select form-control">
+                                                                                    <option value="" selected="true" disabled="">Choose your option</option>
+                                                                                    <option value="Pcs">Pcs</option>
+                                                                                    <option value="Lbs">Lbs</option>
+                                                                                    <option value="Gauge">Gauge</option>
+                                                                                    <option value="Yard">Yards</option>
+                                                                                    <option value="Kg">Kg</option>
+                                                                                    <option value="Meter">Meter</option>
+                                                                                    <option value="Dozens">Dozens</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- <div class="separator_block"> / </div> -->
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" data-businessprofilealias="{{$businessProfile['alias']}}" data-businessprofilename="{{$businessProfile['business_name']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <!-- <div class="separator_block"> / </div> -->
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
 
+                                    @if($requestUrl == 'selected')
+                                        @foreach($businessProfiles as $key=>$businessProfile)
+                                            @if($businessProfile['profile_selected']==1)
+                                                @php
+                                                    $className = 'no-class';
+                                                    if(isset($businessProfile['supplier_quotation_to_buyer']))
+                                                    {
+                                                        foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer) {
+                                                            if($supplierQuotationToBuyer['rfq_id'] == $rfq['id']) {
+                                                                if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id']) {
+                                                                    $className = 'already-sent';
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                @endphp
+                                                <div class="col-sm-12 col-md-6 col-lg-4 suppliersBoxWrapOuter {{$className}}">
+                                                    <div class="suppliersBoxWrap">
+                                                        <div class="suppliers_box">
+                                                            <div class="suppliers_imgBox">
+                                                                <div class="imgBox">
+                                                                    <img src="{{Storage::disk('s3')->url('public/'.$businessProfile['user']['image'])}}" alt="" />
+                                                                </div>
+                                                                <!--h5>MB Pool</h5-->
+                                                            </div>
+                                                            <div class="suppliers_textBox">
+                                                                <div class="title_box">
+                                                                    <h3><a href="/{{$businessProfile['alias']}}" target="_blank">{{$businessProfile['business_name']}}</a></h3>
+                                                                    <div class="sms_img">
+                                                                        @if(isset($associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]))
+                                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span data-unseenmessagecount="{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }}" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}">{{ $associativeArrayUsingIDandCount[$businessProfile['user']['sso_reference_id']]['count'] }} </span></a>
+                                                                        @else
+                                                                            <a href="javascript:void(0);" class="sms_trigger"  data-business_name ="{{$businessProfile['business_name']}}" data-rfqid="{{$rfq['id']}}" data-sso_reference_id="{{$businessProfile['user']['sso_reference_id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-businessprofilealias="{{$businessProfile['alias']}}"><i class="fa fa-envelope"></i><span style="display:none" data-unseenmessagecount="0" class="sso_id_{{$businessProfile['user']['sso_reference_id']}}"></span></a>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="sms_details_box">
+                                                                    <div class="sms_details">
+                                                                        Contact Person <br/>
+                                                                        <span>{{$businessProfile['user']['name']}}</span>
+                                                                    </div>
+                                                                    <div class="sms_details">
+                                                                        Contact Number <br/>
+                                                                        <span>{{$businessProfile['user']['phone']}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="offer_price_block_wrapper" style="@php echo ($businessProfile['supplier_quotation_to_buyer']) ? 'display: block': 'display: none'; @endphp">
+                                                                    <div class="offer_price_block">
+                                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == true)
+                                                                                    <span> Offered to buyer :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  /  {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                                    @break
+                                                                                @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <div class="deal_price_block">
+                                                                        @foreach($businessProfile['supplier_quotation_to_buyer'] as $supplierQuotationToBuyer)
+                                                                                @if($supplierQuotationToBuyer['business_profile_id'] == $businessProfile['id'] && $supplierQuotationToBuyer['from_backend'] == false)
+                                                                                    <span> Quoted by supplier :</span> <span>$ {{$supplierQuotationToBuyer['offer_price']}}  / {{$supplierQuotationToBuyer['offer_price_unit']}}</span>
+                                                                                    @break
+                                                                                @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                                @if($businessProfile['profile_selected'] == 0)
+                                                                <div class="add_to_short_list_element">
+                                                                    @php
+                                                                    $classActive = '';
+                                                                    if($rfq['short_listed_profiles'])
+                                                                    {
+                                                                        $shortlistVar = explode(",", $rfq['short_listed_profiles']);
+                                                                        foreach($shortlistVar as $rfqshortlistid)
+                                                                        {
+                                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                                            {
+                                                                                $classActive = 'checked="checked"';
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    @endphp
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" {{$classActive}} name="add_to_short_list_check" class="form-check-input add_to_short_list_trigger" id="add_to_short_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                                        <label class="form-check-label" for="add_to_short_list_trigger_{{$businessProfile['id']}}">
+                                                                            @if($businessProfile['profile_shortlisted'])
+                                                                            Remove from short list
+                                                                            @else
+                                                                            Add to short list
+                                                                            @endif
+                                                                        </label>
+                                                                    </div>
+                                                                    <input type="hidden" name="short_list[]" class="existing_short_list_ids" value="{{ $rfq['short_listed_profiles'] }}" />
+                                                                    <input type="hidden" name="remove_short_list[]" class="remove_existing_short_list_ids" value="" />
+                                                                </div>
+                                                                @endif
+
+                                                                <div class="add_to_short_list_element selected_element">
+                                                                    @php
+                                                                    $classSelectedActive = '';
+                                                                    if($rfq['selected_profile'])
+                                                                    {
+                                                                        $shortlistVar = explode(",", $rfq['selected_profile']);
+                                                                        foreach($shortlistVar as $rfqshortlistid)
+                                                                        {
+                                                                            if($rfqshortlistid == $businessProfile['id'])
+                                                                            {
+                                                                                $classSelectedActive = 'checked="checked"';
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    @endphp
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" {{$classSelectedActive}} name="add_to_selected_list_check" class="form-check-input add_to_selected_list_trigger" id="add_to_selected_list_trigger_{{$businessProfile['id']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}">
+                                                                        <label class="form-check-label" for="add_to_selected_list_trigger_{{$businessProfile['id']}}">
+                                                                            @if($businessProfile['profile_selected'])
+                                                                            Remove from selected list
+                                                                            @else
+                                                                            Make it selected
+                                                                            @endif
+                                                                        </label>
+                                                                    </div>
+                                                                    <input type="hidden" name="selected_list[]" class="existing_selected_list_ids" value="{{ $rfq['selected_profile'] }}" />
+                                                                    <input type="hidden" name="remove_selected_list[]" class="remove_existing_selected_list_ids" value="" />
+                                                                </div>
+
+                                                                <div class="send_box">
+                                                                    <a href="javascript:void(0);" class="businessProfileModal{{$businessProfile['id']}}" data-toggle="modal" data-target="#businessProfileModal{{$businessProfile['id']}}">Send <i class="fa fa-chevron-circle-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" data-businessprofilealias="{{$businessProfile['alias']}}" data-businessprofilename="{{$businessProfile['business_name']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div>
-                                @endforeach
+                                                    <div class="modal fade businessProfileModal" id="businessProfileModal{{$businessProfile['id']}}" tabindex="-1" role="dialog" aria-labelledby="businessProfileModal{{$businessProfile['id']}}Label" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <legend>{{$businessProfile['business_name']}}</legend>
+                                                                    <div class="propose_price_block">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 col-md-6">
+                                                                            <div class="print_block">
+                                                                                <label>Offer Price ($)</label>
+                                                                                <div class="propose_price_input_block">
+                                                                                    <input data-businessprofilename="{{$businessProfile['business_name']}}" type="number" value="" name="propose_price" class="propose_price" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-6">
+                                                                            <div class="uom_block">
+                                                                                <label>Price Unit</label>
+                                                                                <select name="propose_uom" class="propose_uom form-select form-control">
+                                                                                    <option value="" selected="true" disabled="">Choose your option</option>
+                                                                                    <option value="Pcs">Pcs</option>
+                                                                                    <option value="Lbs">Lbs</option>
+                                                                                    <option value="Gauge">Gauge</option>
+                                                                                    <option value="Yard">Yards</option>
+                                                                                    <option value="Kg">Kg</option>
+                                                                                    <option value="Meter">Meter</option>
+                                                                                    <option value="Dozens">Dozens</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- <div class="separator_block"> / </div> -->
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" data-businessprofilealias="{{$businessProfile['alias']}}" data-businessprofilename="{{$businessProfile['business_name']}}" data-businessprofileid="{{$businessProfile['id']}}" data-rfqid="{{$rfq['id']}}" class="btn btn-primary send_offer_price_trigger">Send</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+
                                 @else
                                     <div class="alert alert-info" style="width: 100%;"><p>No profile found</p></div>
                                 @endif
@@ -518,33 +901,82 @@
                 var from_short_list = "from_short";
 
                 if ($(this).is(':checked')) {
-                    var existing_list = $(".existing_short_list_ids").val();
-                    existing_list = existing_list.concat(',' + businessProfileId);
-                    $(".existing_short_list_ids").val(existing_list);
+
+                    if (confirm('Are you sure? You want to add this profile in short list'))
+                    {
+                        var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+
+                        var existing_list = $(".existing_short_list_ids").val();
+                        existing_list = existing_list.concat(',' + businessProfileId);
+                        $(".existing_short_list_ids").val(existing_list);
+
+                        var remove_existing_list = $(".remove_existing_short_list_ids").val();
+                        remove_existing_list = remove_existing_list.replace(businessProfileId, '');
+                        $(".remove_existing_short_list_ids").val(remove_existing_list);
+
+                        var url = "{{route('admin.rfq.profile.shortlist')}}";
+                        $.ajax({
+                            method: 'get',
+                            dataType: 'json',
+                            data: {rfqId:rfqId, shortList: existing_list, removeShortList: remove_existing_list, requestForm: from_short_list},
+                            enctype: 'multipart/form-data',
+                            url: url,
+                            beforeSend: function() {
+                                // $('.loading-message').html("Please Wait.");
+                                // $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                            {
+                                boxHtml.remove();
+                                // $('.loading-message').html("");
+                                // $('#loadingProgressContainer').hide();
+                                //window.location.reload();
+                            }
+                        });
+                    }
+
                 } else {
-                    var existing_list = $(".existing_short_list_ids").val();
-                    existing_list = existing_list.replace(businessProfileId, '');
-                    $(".existing_short_list_ids").val(existing_list);
+
+                    if (confirm('Are you sure? You want to remove this profile in short list'))
+                    {
+                        var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+
+                        var existing_list = $(".existing_short_list_ids").val();
+                        existing_list = existing_list.replace(businessProfileId, '');
+                        $(".existing_short_list_ids").val(existing_list);
+
+                        var remove_existing_list = $(".remove_existing_short_list_ids").val();
+                        remove_existing_list = remove_existing_list.concat(',' + businessProfileId);
+                        $(".remove_existing_short_list_ids").val(remove_existing_list);
+
+                        var url = "{{route('admin.rfq.profile.shortlist')}}";
+                        $.ajax({
+                            method: 'get',
+                            dataType: 'json',
+                            data: {rfqId:rfqId, shortList: existing_list, removeShortList: remove_existing_list, requestForm: from_short_list},
+                            enctype: 'multipart/form-data',
+                            url: url,
+                            beforeSend: function() {
+                                // $('.loading-message').html("Please Wait.");
+                                // $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                            {
+                                boxHtml.remove();
+                                // $('.loading-message').html("");
+                                // $('#loadingProgressContainer').hide();
+                                //window.location.reload();
+                            }
+                        });
+                    }
+
                 }
 
-                var url = "{{route('admin.rfq.profile.shortlist')}}";
-                $.ajax({
-                    method: 'get',
-                    dataType: 'json',
-                    data: {rfqId:rfqId, shortList: existing_list, requestForm: from_short_list},
-                    enctype: 'multipart/form-data',
-                    url: url,
-                    beforeSend: function() {
-                        // $('.loading-message').html("Please Wait.");
-                        // $('#loadingProgressContainer').show();
-                    },
-                    success:function(data)
-                    {
-                        // $('.loading-message').html("");
-                        // $('#loadingProgressContainer').hide();
-                        //window.location.reload();
-                    }
-                });
+                // var boxHtml = $(this).closest(".suppliersBoxWrapOuter").html();
+                // $(".selected-profile-card-outer").show();
+                // $(".selected-profile-wrap-inside").append('<div class="col-sm-12 col-md-6 col-lg-4 suppliersBoxWrapOuter no-class">'+boxHtml+'</div>');
+
+
             })
 
             //var selectedListedIds= new Array();
@@ -554,34 +986,76 @@
                 var from_selected_list = "from_selected";
 
                 if ($(this).is(':checked')) {
-                    var existing_selected_list = $(".existing_selected_list_ids").val();
-                    existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
-                    $(".existing_selected_list_ids").val(existing_selected_list);
-                } else {
-                    var existing_selected_list = $(".existing_selected_list_ids").val();
-                    //existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
-                    existing_selected_list = existing_selected_list.replace(businessProfileId, '');
-                    $(".existing_selected_list_ids").val(existing_selected_list);
-                }
 
-                var url = "{{route('admin.rfq.profile.shortlist')}}";
-                $.ajax({
-                    method: 'get',
-                    dataType: 'json',
-                    data: {rfqId:rfqId, selectedList: existing_selected_list, requestForm: from_selected_list},
-                    enctype: 'multipart/form-data',
-                    url: url,
-                    beforeSend: function() {
-                        // $('.loading-message').html("Please Wait.");
-                        // $('#loadingProgressContainer').show();
-                    },
-                    success:function(data)
+                    if (confirm('Are you sure? You want to add this profile in selected list'))
                     {
-                        // $('.loading-message').html("");
-                        // $('#loadingProgressContainer').hide();
-                        //window.location.reload();
+                        var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+
+                        var existing_selected_list = $(".existing_selected_list_ids").val();
+                        existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
+                        $(".existing_selected_list_ids").val(existing_selected_list);
+
+                        var remove_existing_selected_list = $(".remove_existing_selected_list_ids").val();
+                        remove_existing_selected_list = remove_existing_selected_list.replace(businessProfileId, '');
+                        $(".remove_existing_selected_list_ids").val(remove_existing_selected_list);
+
+                        var url = "{{route('admin.rfq.profile.shortlist')}}";
+                        $.ajax({
+                            method: 'get',
+                            dataType: 'json',
+                            data: {rfqId:rfqId, selectedList: existing_selected_list, removeSelectedList: remove_existing_selected_list, requestForm: from_selected_list},
+                            enctype: 'multipart/form-data',
+                            url: url,
+                            beforeSend: function() {
+                                // $('.loading-message').html("Please Wait.");
+                                // $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                            {
+                                boxHtml.remove();
+                                // $('.loading-message').html("");
+                                // $('#loadingProgressContainer').hide();
+                                //window.location.reload();
+                            }
+                        });
                     }
-                });
+
+                } else {
+
+                    if (confirm('Are you sure? You want to remove this profile in selected list'))
+                    {
+                        var boxHtml = $(this).closest(".suppliersBoxWrapOuter");
+
+                        var existing_selected_list = $(".existing_selected_list_ids").val();
+                        //existing_selected_list = existing_selected_list.concat(',' + businessProfileId);
+                        existing_selected_list = existing_selected_list.replace(businessProfileId, '');
+                        $(".existing_selected_list_ids").val(existing_selected_list);
+
+                        var remove_existing_selected_list = $(".remove_existing_selected_list_ids").val();
+                        remove_existing_selected_list = remove_existing_selected_list.concat(',' + businessProfileId);
+                        $(".remove_existing_selected_list_ids").val(remove_existing_selected_list);
+
+                        var url = "{{route('admin.rfq.profile.shortlist')}}";
+                        $.ajax({
+                            method: 'get',
+                            dataType: 'json',
+                            data: {rfqId:rfqId, selectedList: existing_selected_list, removeSelectedList: remove_existing_selected_list, requestForm: from_selected_list},
+                            enctype: 'multipart/form-data',
+                            url: url,
+                            beforeSend: function() {
+                                // $('.loading-message').html("Please Wait.");
+                                // $('#loadingProgressContainer').show();
+                            },
+                            success:function(data)
+                            {
+                                boxHtml.remove();
+                                // $('.loading-message').html("");
+                                // $('#loadingProgressContainer').hide();
+                                //window.location.reload();
+                            }
+                        });
+                    }
+                }
             })
 
             $(".chat-area").animate({ scrollTop:$('#messagedata').prop("scrollHeight")});

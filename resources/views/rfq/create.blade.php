@@ -116,7 +116,7 @@
                                     </a>
                                 </div>
                                 <div class="modal-content">
-                                    <div class="user_login_info">
+                                    <div class="user_login_info" style="display: none;">
                                         <h4>Sign in</h4>
                                         <div class="row">
                                             <div class="col s12 input-field">
@@ -156,8 +156,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="user_registration_info" style="display: none;">
-                                        <h4>Guest Submitter</h4>
+                                    <div class="user_registration_info">
+                                        <h4>Submit as a Guest</h4>
                                         <div class="row">
                                             <div class="col s12 input-field">
                                                 <label>Name</label>

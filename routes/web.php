@@ -668,7 +668,7 @@ Route::group(['prefix'=>'/admin'],function (){
         //rfq
         Route::put('rfq/status/{id}',[AdminRfqController::class, 'status'])->name('admin.rfq.status');
         Route::get('rfq/profile/shortlist',[AdminRfqController::class, 'profileShortList'])->name('admin.rfq.profile.shortlist');
-        Route::get('rfq/show/{id}/{link?}', [AdminRfqController::class, 'show'])->name('admin.rfq.show');
+        Route::get('rfq/show/{id}/{link?}/{type?}', [AdminRfqController::class, 'show'])->name('admin.rfq.show');
         Route::resource('rfq',AdminRfqController::class, ['as' => 'admin'])->except([
             'show'
         ]);

@@ -60,20 +60,43 @@ class BackendRfqController extends Controller
         return view('admin.rfq.table',compact('rfqs','rfqsCount','noOfPages','proformas'))->render();
     }
 
-    public function show($id, $link = false){
+    public function show($id, $link = false, $type = false){
         //rfq details
         $response = Http::get(env('RFQ_APP_URL').'/api/quotation/'.$id);
         $data = $response->json();
         $rfq = $data['data']['data'];
+        // $businessProfilesShortListed = 0;
+        // $businessProfilesSelectedListed = 0;
 
         if( isset($rfq['short_listed_profiles']) ) {
+
+            // $shortListedProfiles = [];
+            // foreach($rfq['short_listed_profiles'] as $bid) {
+            //     if($bid) {
+            //         array_push($shortListedProfiles, $bid);
+            //     }
+            // }
+            // $businessProfilesShortListed = BusinessProfile::whereIn('id', $shortListedProfiles)->get();
+            // $businessProfilesShortListed = count($businessProfilesShortListed);
+
             $rfq['short_listed_profiles'] = $rfq['short_listed_profiles'];
             $rfq['short_listed_profiles'] = implode("," , $rfq['short_listed_profiles']);
+
         } else {
             $rfq['short_listed_profiles'] = "";
         }
 
         if( isset($rfq['selected_profile']) ) {
+
+            // $selectedListedProfiles = [];
+            // foreach($rfq['selected_profile'] as $bid) {
+            //     if($bid) {
+            //         array_push($selectedListedProfiles, $bid);
+            //     }
+            // }
+            // $businessProfilesSelectedListed = BusinessProfile::whereIn('id', $selectedListedProfiles)->get();
+            // $businessProfilesSelectedListed = count($businessProfilesSelectedListed);
+
             $rfq['selected_profile'] = $rfq['selected_profile'];
             $rfq['selected_profile'] = implode("," , $rfq['selected_profile']);
         } else {
@@ -332,14 +355,40 @@ class BackendRfqController extends Controller
 
         if($requestForm == "from_selected") {
             $selectedList = explode("," , $request->selectedList);
+            $removeSelectedList = explode("," , $request->removeSelectedList);
+
             $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$rfqId, [
                 'selected_profile' => $selectedList,
             ]);
+
+            foreach($selectedList as $id) {
+                if($id) {
+                    $business_profile = BusinessProfile::where('id', $id)->update(['profile_selected' => 1]);
+                }
+            }
+            foreach($removeSelectedList as $id) {
+                if($id) {
+                    $business_profile = BusinessProfile::where('id', $id)->update(['profile_selected' => 0]);
+                }
+            }
+
         } else {
             $shortList = explode("," , $request->shortList);
+            $removeShortList = explode("," , $request->removeShortList);
             $response = Http::put(env('RFQ_APP_URL').'/api/quotation/'.$rfqId, [
                 'short_listed_profiles' => $shortList,
             ]);
+
+            foreach($shortList as $id) {
+                if($id) {
+                    $business_profile = BusinessProfile::where('id', $id)->update(['profile_shortlisted' => 1]);
+                }
+            }
+            foreach($removeShortList as $id) {
+                if($id) {
+                    $business_profile = BusinessProfile::where('id', $id)->update(['profile_shortlisted' => 0]);
+                }
+            }
         }
 
 

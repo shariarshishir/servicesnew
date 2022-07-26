@@ -899,6 +899,8 @@ class RfqController extends Controller
             $chatdata = [];
             $userImage ="";
             $noOfPages = "";
+            $quotationOffer = "";
+            $quotationOfferunit = "";
             //if user picture does not exist then we need to show user name short form insetad of user image in chat box
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];

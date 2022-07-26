@@ -367,7 +367,11 @@ $searchInput = isset($_REQUEST['search_input']) ? $_REQUEST['search_input'] : ''
                                             <h5>{{$rfqLists[0]['title']}}</h5>
                                             <span class="posted_time">{{date('Y-m-d', strtotime($rfqLists[0]['created_at']))}}</span>
                                             @if($pageTitle == "My Queries")
-                                            <span class="quotation_html"><span class="quotation_label">Your submitted quotation on this RFQ:</span> $ {{$quotationOffer}} / {{$quotationOfferunit}}</span>
+                                                @if($quotationOffer)
+                                                <span class="quotation_html"><span class="quotation_label">Your submitted quotation on this RFQ:</span> $ {{$quotationOffer}} / {{$quotationOfferunit}}</span>
+                                                @else
+                                                <span class="quotation_html"><span class="quotation_label">No quotation submitted.</span></span>
+                                                @endif
                                             @endif
 
                                             <div class="center-align btn_accountrfq_info">

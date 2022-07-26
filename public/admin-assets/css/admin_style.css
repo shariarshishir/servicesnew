@@ -1776,6 +1776,17 @@ label:not(.form-check-label):not(.custom-file-label) {
     text-align: center;
 }
 
+.add_to_short_list_element {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.add_to_short_list_element.selected_element {
+    position: absolute;
+    bottom: 10px;
+    left: 138px;
+}
+
 .add_to_short_list_element input[type="checkbox"] {
     opacity: 1 !important;
 }

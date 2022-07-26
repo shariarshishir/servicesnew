@@ -280,7 +280,7 @@
                                                     <input type="hidden" name="short_list[]" class="existing_short_list_ids" value="{{ $rfq['short_listed_profiles'] }}" />
                                                 </div>
 
-                                                <div class="add_to_short_list_element">
+                                                <div class="add_to_short_list_element selected_element">
                                                     @php
                                                     $classSelectedActive = '';
                                                     if($rfq['selected_profile'])

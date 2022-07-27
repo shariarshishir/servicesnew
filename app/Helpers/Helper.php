@@ -3,9 +3,19 @@
 use App\Models\BusinessProfile;
 use App\Models\Vendor;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\ProductReview;
 use App\Models\RelatedProduct;
 use App\Models\ProductTypeMapping;
+
+if (!function_exists('getUserInfoById')) {
+
+    function getUserInfoById($id)
+    {
+        $user = User::where('id', $id)->first();
+        return $user;
+    }
+}
 
 if (!function_exists('vendorInformation')) {
 

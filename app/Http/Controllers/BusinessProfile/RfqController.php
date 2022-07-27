@@ -712,6 +712,16 @@ class RfqController extends Controller
         //all queries where auth user has messages
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){
+
+            $quotation = supplierQuotationToBuyer::where('rfq_id', $rfqLists[0]['id'])->first();
+            $quotationOffer = "";
+            $quotationOfferunit = "";
+            if( isset($quotation['offer_price']) && isset($quotation['offer_price_unit']) ) {
+                //$quotationHtml = "Your offcer price on this RFQ: $".$quotation['offer_price']." / ".$quotation['offer_price_unit'];
+                $quotationOffer = $quotation['offer_price'];
+                $quotationOfferunit = $quotation['offer_price_unit'];
+            }
+
             //messages of first queries of auth user
             $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
             $data = $response->json();
@@ -731,6 +741,8 @@ class RfqController extends Controller
         }else{
             $chatdata = [];
             $userImage ="";
+            $quotationOffer = "";
+            $quotationOfferunit = "";
             //if user picture does not exist then we need to show user name short form insetad of user image in chat box
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];
@@ -749,7 +761,7 @@ class RfqController extends Controller
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
         $pageTitle = "My Queries";
         $pageActive = "Inbox";
-        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user','quotationOffer','quotationOfferunit'));
     }
 
     public function searchMyQueries(Request $request, $alias)
@@ -770,6 +782,16 @@ class RfqController extends Controller
         //all queries where auth user has messages
         $rfqs = RfqApp::whereIn('id',$uniqueRfqIdsWithChatdata)->latest()->get();
         if(count($rfqs)>0){
+
+            $quotation = supplierQuotationToBuyer::where('rfq_id', $rfqLists[0]['id'])->first();
+            $quotationOffer = "";
+            $quotationOfferunit = "";
+            if( isset($quotation['offer_price']) && isset($quotation['offer_price_unit']) ) {
+                //$quotationHtml = "Your offcer price on this RFQ: $".$quotation['offer_price']." / ".$quotation['offer_price_unit'];
+                $quotationOffer = $quotation['offer_price'];
+                $quotationOfferunit = $quotation['offer_price_unit'];
+            }
+
             //messages of first queries of auth user
             $response = Http::get(env('RFQ_APP_URL').'/api/messages/'.$rfqs[0]['id'].'/user/'.$user->sso_reference_id);
             $data = $response->json();
@@ -789,6 +811,8 @@ class RfqController extends Controller
         }else{
             $chatdata = [];
             $userImage ="";
+            $quotationOffer = "";
+            $quotationOfferunit = "";
             //if user picture does not exist then we need to show user name short form insetad of user image in chat box
             $nameWordArray = explode(" ", $user->name);
             $firstWordFirstLetter = $nameWordArray[0][0];
@@ -807,7 +831,7 @@ class RfqController extends Controller
         $adminUserImage = isset($adminUser->image) ? asset($adminUser->image) : asset('images/frontendimages/no-image.png');
         $pageTitle = "My Queries";
         $pageActive = "Inbox";
-        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user'));
+        return view('new_business_profile.my_rfqs',compact('pageTitle','pageActive','rfqLists','noOfPages','alias','chatdata','business_profile','adminUserImage','userImage','userNameShortForm','user','quotationOffer','quotationOfferunit'));
     }
 
     public function allQueries($alias)

@@ -1840,6 +1840,35 @@ label:not(.form-check-label):not(.custom-file-label) {
     background: #73D578;
     color: #fff;
 }
+.proforma-row .proforma-row-header button {
+    width: 100%;
+    color: #000;
+    /* border-bottom: 1px solid #dee2e6; */
+    font-size: 14px;
+}
+.proforma-row .proforma-row-header button span {
+    width: 33%;
+    display: inline-block;
+    text-align: left;
+}
+table.proforma-table tr th {
+    border-bottom: 1px solid #dee2e6;
+    border-top: none;
+}
+table.proforma-table tr td {
+    border-bottom: 1px solid #dee2e6;
+    border-top: none;
+}
+table.proforma-table tr.hiddenRow-Parent td {
+    border-bottom: none;
+    border-top: none;
+}
+.hiddenRow .table.table-striped {
+    margin-bottom: 0px;
+}
+.hiddenRow {
+    padding: 0 !important;
+}
 /* ************** Media css start ******************* */
 
 @media only screen and (min-width: 1500px) {}

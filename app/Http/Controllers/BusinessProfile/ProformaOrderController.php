@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BusinessProfile;
 
+//use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proforma;
@@ -12,7 +13,7 @@ class ProformaOrderController extends Controller
     public function profomaPendingOrders($alias)
     {
         $business_profile = BusinessProfile::with('user')->where('alias',$alias)->firstOrFail();
-        $proformas = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('buyer_id',auth()->id())->where('status',0)->orWhere('status',-1)->get();
+        $proformas = Proforma::with('performa_items','checkedMerchantAssistances','proFormaShippingDetails','proFormaAdvisingBank','proFormaShippingFiles','proFormaSignature','paymentTerm','shipmentTerm','businessProfile','supplierCheckedProFormaTermAndConditions')->where('buyer_id',auth()->id())->whereIn('status',[0, -1])->get();
         $status = 0;
         return view('new_business_profile.proforma_orders',compact('proformas','alias','status','business_profile'));
     }

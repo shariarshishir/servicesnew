@@ -49,7 +49,8 @@ class AdminPoController extends Controller
     }
     public function index ()
     {
-        $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
+        //$proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get();
+        $proformaInvoices = Proforma::with('performa_items','buyer','businessProfile')->latest()->get()->groupBy('buyer_id');
         if( env('APP_ENV') == 'production')
         {
             $merchantbayUserInfo = User::where("id", 5771)->first();
